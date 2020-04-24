@@ -50,7 +50,4 @@ Route::group(['prefix' => 'line'], function(){
     Route::get('linesend', 'LineSubScribeController@LineSend')->name('line.send');           
 }); 
 
-Route::group(['prefix' => 'otp'], function(){
-    Route::get('','OtpController@Index')->name('otp');          
-});         
 
