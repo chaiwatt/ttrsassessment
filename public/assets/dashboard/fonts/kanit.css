@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Kanit';
+    src: url('Kanit-Light.eot.eot');
+    src: url('Kanit-Light.eot?#iefix') format('embedded-opentype'),
+         url('Kanit-Light.woff') format('woff'),
+         url('Kanit-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.kanit{
+   font-family: 'Kanit', sans-serif;
+}

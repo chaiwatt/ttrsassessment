@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../fonts/thsarabunnew-webfont.eot');
+    src: url('../fonts/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/thsarabunnew-webfont.woff') format('woff'),
+         url('../fonts/thsarabunnew-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    
+}
+
+@font-face {
+    font-family: 'Kanit';
+    src: url('../fonts/Kanit-Light.eot');
+    src: url('../fonts/Kanit-Light.woff') format('woff'),
+         url('../fonts/Kanit-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body{
+    font-family: "Kanit"; 
+    font-size:14px;
+}
+
+.ml-menu li{
+    font-family: "Kanit";
+}
+
+.ml-menu li a{
+    font-family: "Kanit";
+}
+
+.list li{
+    font-family: "Kanit";
+}
+
+select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
+    font-family: "Kanit";
+}
+
