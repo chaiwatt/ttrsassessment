@@ -12,7 +12,7 @@
         </div>
     @endif
         <div class="text-center mb-2">
-            {{$otp}}
+            {{-- {{$otp}} --}}
             <h5 class="mb-2">กรุณายืนยันตัวตน</h5>
             <span class="d-block text-muted mb-2">กรุณากรอกรหัส OTP ที่ได้รับทางโทรศัพท์</span>
             <form method="POST" action="{{ route('sms.verify') }}">
