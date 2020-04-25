@@ -33,13 +33,22 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'company'], function(){
             Route::get('','DashboardCompanyController@Index')->name('dashboard.company')->middleware('verified');           
         }); 
+        Route::group(['prefix' => 'setting'], function(){
+            Route::group(['prefix' => 'prefix'], function(){
+                Route::get('','DashboardSettingPrefixController@Index')->name('dashboard.setting.prefix');           
+                Route::get('create','DashboardSettingPrefixController@Create')->name('dashboard.setting.prefix.create'); 
+                Route::post('createsave','DashboardSettingPrefixController@CreateSave')->name('dashboard.setting.prefix.createsave'); 
+                Route::get('edit/{id}','DashboardSettingPrefixController@Edit')->name('dashboard.setting.prefix.edit'); 
+                Route::post('editsave/{id}','DashboardSettingPrefixController@EditSave')->name('dashboard.setting.prefix.editsave'); 
+                Route::get('delete/{id}','DashboardSettingPrefixController@Delete')->name('dashboard.setting.prefix.delete'); 
+            }); 
+        }); 
     });   
     Route::group(['prefix' => 'sms'], function(){
         Route::get('','SmsController@Index')->name('sms');  
         Route::get('send','SmsController@Send')->name('sms.send');           
         Route::get('credit','SmsController@Credit')->name('sms.credit');  
         Route::post('verify','SmsController@Verify')->name('sms.verify');
-
     });      
 });  
 

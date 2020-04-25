@@ -314,6 +314,13 @@
 								<li class="nav-item"><a href="" class="nav-link">ป้ายกำกับ</a></li>	
 								<li class="nav-item"><a href="" class="nav-link">ทั่วไป</a></li>									
 								<li class="nav-item"><a href="" class="nav-link">ผู้ใช้งาน</a></li>	
+								<li class="nav-item nav-item-submenu">
+									<a href="#" class="nav-link"><span>ทั่วไป</span></a>
+									<ul class="nav nav-group-sub" data-submenu-title="ทั่วไป">
+										<li class="nav-item"><a href="{{route('dashboard.setting.prefix')}}" class="nav-link">คำนำหน้าชื่อ</a></li>	
+										<li class="nav-item"><a href="" class="nav-link">รายการผ่านประเมิน</a></li>										
+									</ul>
+								</li>
 							</ul>	
 						</li>
 					</ul>
