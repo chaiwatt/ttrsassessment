@@ -318,7 +318,7 @@
 									<a href="#" class="nav-link"><span>ทั่วไป</span></a>
 									<ul class="nav nav-group-sub" data-submenu-title="ทั่วไป">
 										<li class="nav-item"><a href="{{route('dashboard.setting.prefix')}}" class="nav-link">คำนำหน้าชื่อ</a></li>	
-										<li class="nav-item"><a href="" class="nav-link">รายการผ่านประเมิน</a></li>										
+										<li class="nav-item"><a href="{{route('dashboard.setting.religion')}}" class="nav-link">ศาสนา</a></li>										
 									</ul>
 								</li>
 							</ul>	

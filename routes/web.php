@@ -42,7 +42,16 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','DashboardSettingPrefixController@EditSave')->name('dashboard.setting.prefix.editsave'); 
                 Route::get('delete/{id}','DashboardSettingPrefixController@Delete')->name('dashboard.setting.prefix.delete'); 
             }); 
+            Route::group(['prefix' => 'religion'], function(){
+                Route::get('','DashboardSettingReligionController@Index')->name('dashboard.setting.religion');           
+                Route::get('create','DashboardSettingReligionController@Create')->name('dashboard.setting.religion.create'); 
+                Route::post('createsave','DashboardSettingReligionController@CreateSave')->name('dashboard.setting.religion.createsave'); 
+                Route::get('edit/{id}','DashboardSettingReligionController@Edit')->name('dashboard.setting.religion.edit'); 
+                Route::post('editsave/{id}','DashboardSettingReligionController@EditSave')->name('dashboard.setting.religion.editsave'); 
+                Route::get('delete/{id}','DashboardSettingReligionController@Delete')->name('dashboard.setting.religion.delete'); 
+            });
         }); 
+
     });   
     Route::group(['prefix' => 'sms'], function(){
         Route::get('','SmsController@Index')->name('sms');  
