@@ -69,6 +69,38 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','SettingDashboardCountryController@EditSave')->name('setting.dashboard.country.editsave'); 
                 Route::get('delete/{id}','SettingDashboardCountryController@Delete')->name('setting.dashboard.country.delete'); 
             });
+            Route::group(['prefix' => 'educationbranch'], function(){
+                Route::get('','SettingDashboardEducationBranchController@Index')->name('setting.dashboard.educationbranch');           
+                Route::get('create','SettingDashboardEducationBranchController@Create')->name('setting.dashboard.educationbranch.create'); 
+                Route::post('createsave','SettingDashboardEducationBranchController@CreateSave')->name('setting.dashboard.educationbranch.createsave'); 
+                Route::get('edit/{id}','SettingDashboardEducationBranchController@Edit')->name('setting.dashboard.educationbranch.edit'); 
+                Route::post('editsave/{id}','SettingDashboardEducationBranchController@EditSave')->name('setting.dashboard.educationbranch.editsave'); 
+                Route::get('delete/{id}','SettingDashboardEducationBranchController@Delete')->name('setting.dashboard.educationbranch.delete'); 
+            });
+            Route::group(['prefix' => 'educationlevel'], function(){
+                Route::get('','SettingDashboardEducationLevelController@Index')->name('setting.dashboard.educationlevel');           
+                Route::get('create','SettingDashboardEducationLevelController@Create')->name('setting.dashboard.educationlevel.create'); 
+                Route::post('createsave','SettingDashboardEducationLevelController@CreateSave')->name('setting.dashboard.educationlevel.createsave'); 
+                Route::get('edit/{id}','SettingDashboardEducationLevelController@Edit')->name('setting.dashboard.educationlevel.edit'); 
+                Route::post('editsave/{id}','SettingDashboardEducationLevelController@EditSave')->name('setting.dashboard.educationlevel.editsave'); 
+                Route::get('delete/{id}','SettingDashboardEducationLevelController@Delete')->name('setting.dashboard.educationlevel.delete'); 
+            });
+            Route::group(['prefix' => 'businesstype'], function(){
+                Route::get('','SettingDashboardBusinessTypeController@Index')->name('setting.dashboard.businesstype');           
+                Route::get('create','SettingDashboardBusinessTypeController@Create')->name('setting.dashboard.businesstype.create'); 
+                Route::post('createsave','SettingDashboardBusinessTypeController@CreateSave')->name('setting.dashboard.businesstype.createsave'); 
+                Route::get('edit/{id}','SettingDashboardBusinessTypeController@Edit')->name('setting.dashboard.businesstype.edit'); 
+                Route::post('editsave/{id}','SettingDashboardBusinessTypeController@EditSave')->name('setting.dashboard.businesstype.editsave'); 
+                Route::get('delete/{id}','SettingDashboardBusinessTypeController@Delete')->name('setting.dashboard.businesstype.delete'); 
+            });
+            Route::group(['prefix' => 'industrygroup'], function(){
+                Route::get('','SettingDashboardIndustryGroupController@Index')->name('setting.dashboard.industrygroup');           
+                Route::get('create','SettingDashboardIndustryGroupController@Create')->name('setting.dashboard.industrygroup.create'); 
+                Route::post('createsave','SettingDashboardIndustryGroupController@CreateSave')->name('setting.dashboard.industrygroup.createsave'); 
+                Route::get('edit/{id}','SettingDashboardIndustryGroupController@Edit')->name('setting.dashboard.industrygroup.edit'); 
+                Route::post('editsave/{id}','SettingDashboardIndustryGroupController@EditSave')->name('setting.dashboard.industrygroup.editsave'); 
+                Route::get('delete/{id}','SettingDashboardIndustryGroupController@Delete')->name('setting.dashboard.industrygroup.delete'); 
+            });
         }); 
         Route::group(['prefix' => 'website'], function(){
            //setting ของ website

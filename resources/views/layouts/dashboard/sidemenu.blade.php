@@ -24,6 +24,10 @@
                 <li class="nav-item"><a href="{{route('setting.dashboard.prefix')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.prefix') ? 'active' : '' }}">คำนำหน้าชื่อ</a></li>	
                 <li class="nav-item"><a href="{{route('setting.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.religion') ? 'active' : '' }}">ศาสนา</a></li>										
                 <li class="nav-item"><a href="{{route('setting.dashboard.country')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.country') ? 'active' : '' }}">ประเทศ</a></li>
+                <li class="nav-item"><a href="{{route('setting.dashboard.educationbranch')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.educationbranch') ? 'active' : '' }}">สาขาการศึกษา</a></li>
+                <li class="nav-item"><a href="{{route('setting.dashboard.educationlevel')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.educationlevel') ? 'active' : '' }}">ระดับการศึกษา</a></li>
+                <li class="nav-item"><a href="{{route('setting.dashboard.businesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.businesstype') ? 'active' : '' }}">ประเภทธุรกิจ</a></li>
+                <li class="nav-item"><a href="{{route('setting.dashboard.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.industrygroup') ? 'active' : '' }}">กลุ่มอุตสาหกรรม</a></li>
             </ul>
         </li>
     </ul>	
