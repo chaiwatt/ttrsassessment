@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegisteredCapitalType extends Model
 {
-    protected $fillable = [];
-    protected $guarded = [];
+    protected $fillable = ['name','detail','min','max'];
+    // protected $guarded = [];
 }

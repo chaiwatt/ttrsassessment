@@ -112,6 +112,14 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','SettingDashboardIndustryGroupController@EditSave')->name('setting.dashboard.industrygroup.editsave'); 
                 Route::get('delete/{id}','SettingDashboardIndustryGroupController@Delete')->name('setting.dashboard.industrygroup.delete'); 
             });
+            Route::group(['prefix' => 'registeredcapitaltype'], function(){
+                Route::get('','SettingDashboardRegisteredCapitalTypeController@Index')->name('setting.dashboard.registeredcapitaltype');           
+                Route::get('create','SettingDashboardRegisteredCapitalTypeController@Create')->name('setting.dashboard.registeredcapitaltype.create'); 
+                Route::post('createsave','SettingDashboardRegisteredCapitalTypeController@CreateSave')->name('setting.dashboard.registeredcapitaltype.createsave'); 
+                Route::get('edit/{id}','SettingDashboardRegisteredCapitalTypeController@Edit')->name('setting.dashboard.registeredcapitaltype.edit'); 
+                Route::post('editsave/{id}','SettingDashboardRegisteredCapitalTypeController@EditSave')->name('setting.dashboard.registeredcapitaltype.editsave'); 
+                Route::get('delete/{id}','SettingDashboardRegisteredCapitalTypeController@Delete')->name('setting.dashboard.registeredcapitaltype.delete'); 
+            });
         }); 
         Route::group(['prefix' => 'website'], function(){
            //setting ของ website
