@@ -77,7 +77,7 @@
                                         <td> {{$prefix->name}} </td>                                         
                                         <td> 
                                             <a href="{{route('setting.dashboard.prefix.edit',['id' => $prefix->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.dashboard.prefix.delete',['id' => $prefix->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach
@@ -94,4 +94,12 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+    <script>
+        var route = {
+            url: "{{ url('/') }}",
+            token: $('meta[name="csrf-token"]').attr('content'),
+            branchid: "{{Auth::user()->branch_id}}"
+        };
+    </script>
 @stop

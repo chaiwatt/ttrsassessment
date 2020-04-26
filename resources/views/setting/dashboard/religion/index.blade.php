@@ -76,7 +76,7 @@
                                         <td> {{$religion->name}} </td>                                         
                                         <td> 
                                             <a href="{{route('setting.dashboard.religion.edit',['id' => $religion->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.dashboard.religion.delete',['id' => $religion->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach
@@ -93,4 +93,12 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+    <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+    <script>
+        var route = {
+            url: "{{ url('/') }}",
+            token: $('meta[name="csrf-token"]').attr('content'),
+            branchid: "{{Auth::user()->branch_id}}"
+        };
+    </script>
 @stop

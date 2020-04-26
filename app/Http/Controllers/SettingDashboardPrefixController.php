@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Prefix;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePrefixRequest;
 
 class SettingDashboardPrefixController extends Controller
 {
@@ -35,5 +36,9 @@ class SettingDashboardPrefixController extends Controller
             'name' => $request->prefix
         ]);
         return redirect()->route('setting.dashboard.prefix')->withSuccess('แก้ไขคำนำหน้าสำเร็จ');
+    }
+    public function Delete($id){
+        Prefix::find($id)->delete();
+        return redirect()->route('setting.dashboard.prefix')->withSuccess('ลบรายการสำเร็จ');
     }
 }

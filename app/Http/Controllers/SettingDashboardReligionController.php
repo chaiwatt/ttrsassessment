@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Religion;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateReligionRequest;
 
 class SettingDashboardReligionController extends Controller
 {
@@ -36,5 +37,9 @@ class SettingDashboardReligionController extends Controller
             'name' => $request->religion
         ]);
         return redirect()->route('setting.dashboard.religion')->withSuccess('แก้ไขศาสนาสำเร็จ');
+    }
+    public function Delete($id){
+        Religion::find($id)->delete();
+        return redirect()->route('setting.dashboard.religion')->withSuccess('ลบรายการสำเร็จ');
     }
 }
