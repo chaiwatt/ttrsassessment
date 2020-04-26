@@ -17,7 +17,7 @@ class CreateSocialAccountsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('provider');
-            $table->string('provider_user_id');   
+            $table->string('provider_user_id');  
             $table->timestamps();
         });
     }

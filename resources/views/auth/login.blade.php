@@ -40,7 +40,7 @@
                     <span class="px-2">เข้าสู่ระบบด้วยบัญชี</span>
                 </div> --}}
                 <div class="form-group text-center">
-                    <a href="{{route('login.provider',['provider' => 'facebook'])}}" class="btn btn-outline bg-indigo border-indigo text-indigo btn-icon rounded-round border-2"><i class="icon-facebook"></i></a>
+                    <a href="{{ route('social.provider.login',['provider' => 'facebook']) }}" class="btn btn-outline bg-indigo border-indigo text-indigo btn-icon rounded-round border-2"><i class="icon-facebook"></i></a>
                     <button type="button" class="btn btn-outline bg-pink-300 border-pink-300 text-pink-300 btn-icon rounded-round border-2 ml-2"><i class="icon-google"></i></button>
                 </div>
                 <div class="form-group text-center text-muted content-divider">
