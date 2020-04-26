@@ -17,10 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/term', function () {
+    return view('welcome');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('dashboard', 'HomeController@Index')->name('dashboard');
+
+Route::prefix('login')->group(function () {
+    Route::get('/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.provider');
+    Route::get('/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.provider.callback');
+});
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'dashboard'], function(){
