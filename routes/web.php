@@ -33,24 +33,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'company'], function(){
             Route::get('','DashboardCompanyController@Index')->name('dashboard.company')->middleware('verified');           
         }); 
-        Route::group(['prefix' => 'setting'], function(){
-            Route::group(['prefix' => 'prefix'], function(){
-                Route::get('','DashboardSettingPrefixController@Index')->name('dashboard.setting.prefix');           
-                Route::get('create','DashboardSettingPrefixController@Create')->name('dashboard.setting.prefix.create'); 
-                Route::post('createsave','DashboardSettingPrefixController@CreateSave')->name('dashboard.setting.prefix.createsave'); 
-                Route::get('edit/{id}','DashboardSettingPrefixController@Edit')->name('dashboard.setting.prefix.edit'); 
-                Route::post('editsave/{id}','DashboardSettingPrefixController@EditSave')->name('dashboard.setting.prefix.editsave'); 
-                Route::get('delete/{id}','DashboardSettingPrefixController@Delete')->name('dashboard.setting.prefix.delete'); 
-            }); 
-            Route::group(['prefix' => 'religion'], function(){
-                Route::get('','DashboardSettingReligionController@Index')->name('dashboard.setting.religion');           
-                Route::get('create','DashboardSettingReligionController@Create')->name('dashboard.setting.religion.create'); 
-                Route::post('createsave','DashboardSettingReligionController@CreateSave')->name('dashboard.setting.religion.createsave'); 
-                Route::get('edit/{id}','DashboardSettingReligionController@Edit')->name('dashboard.setting.religion.edit'); 
-                Route::post('editsave/{id}','DashboardSettingReligionController@EditSave')->name('dashboard.setting.religion.editsave'); 
-                Route::get('delete/{id}','DashboardSettingReligionController@Delete')->name('dashboard.setting.religion.delete'); 
-            });
-        }); 
+    
 
     });   
     Route::group(['prefix' => 'sms'], function(){
@@ -58,7 +41,31 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('send','SmsController@Send')->name('sms.send');           
         Route::get('credit','SmsController@Credit')->name('sms.credit');  
         Route::post('verify','SmsController@Verify')->name('sms.verify');
-    });      
+    });    
+    Route::group(['prefix' => 'setting'], function(){
+        Route::group(['prefix' => 'dashboard'], function(){
+            //setting ของ dashboard
+            Route::group(['prefix' => 'prefix'], function(){
+                Route::get('','SettingDashboardPrefixController@Index')->name('setting.dashboard.prefix');           
+                Route::get('create','SettingDashboardPrefixController@Create')->name('setting.dashboard.prefix.create'); 
+                Route::post('createsave','SettingDashboardPrefixController@CreateSave')->name('setting.dashboard.prefix.createsave'); 
+                Route::get('edit/{id}','SettingDashboardPrefixController@Edit')->name('setting.dashboard.prefix.edit'); 
+                Route::post('editsave/{id}','SettingDashboardPrefixController@EditSave')->name('setting.dashboard.prefix.editsave'); 
+                Route::get('delete/{id}','SettingDashboardPrefixController@Delete')->name('setting.dashboard.prefix.delete'); 
+            }); 
+            Route::group(['prefix' => 'religion'], function(){
+                Route::get('','SettingDashboardReligionController@Index')->name('setting.dashboard.religion');           
+                Route::get('create','SettingDashboardReligionController@Create')->name('setting.dashboard.religion.create'); 
+                Route::post('createsave','SettingDashboardReligionController@CreateSave')->name('setting.dashboard.religion.createsave'); 
+                Route::get('edit/{id}','SettingDashboardReligionController@Edit')->name('setting.dashboard.religion.edit'); 
+                Route::post('editsave/{id}','SettingDashboardReligionController@EditSave')->name('setting.dashboard.religion.editsave'); 
+                Route::get('delete/{id}','SettingDashboardReligionController@Delete')->name('setting.dashboard.religion.delete'); 
+            });
+        }); 
+        Route::group(['prefix' => 'website'], function(){
+           //setting ของ website
+        }); 
+    });   
 });  
 
 Route::group(['prefix' => 'line'], function(){

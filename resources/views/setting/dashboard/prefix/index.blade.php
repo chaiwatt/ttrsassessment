@@ -7,20 +7,20 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ศาสนา</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">คำนำหน้าชื่อ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('dashboard.setting.religion.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มศาสนา <b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.dashboard.prefix.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มคำนำหน้า <b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ทั่วไป</a>
-                    <span class="breadcrumb-item active">ศาสนา</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
+                    <span class="breadcrumb-item active">คำนำหน้าชื่อ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ศาสนา</h6>
+                        <h6 class="card-title">คำนำหน้า</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -66,17 +66,17 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>ศาสนา</th>                               
+                                        <th>คำนำหน้า</th>                               
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($religions as $key => $religion)
+                                    @foreach ($prefixes as $key => $prefix)
                                     <tr>    
                                         <td> {{$key+1}} </td>
-                                        <td> {{$religion->name}} </td>                                         
+                                        <td> {{$prefix->name}} </td>                                         
                                         <td> 
-                                            <a href="{{route('dashboard.setting.religion.edit',['id' => $religion->id])}}" class=" badge bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.dashboard.prefix.edit',['id' => $prefix->id])}}" class=" badge bg-primary">แก้ไข</a>
                                             <a href="" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>

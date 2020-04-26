@@ -294,35 +294,7 @@
 							<span>แดชบอร์ด</span>
 							</a>
 						</li>
-						<li class="nav-item nav-item-submenu nav-item-expanded nav-item-open">
-							<a href="#" class="nav-link"><i class="icon-stack"></i> <span>รายงาน</span></a>
-							<ul class="nav nav-group-sub" data-submenu-title="รายงาน">
-								<li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
-							</ul>
-						</li>
-						<li class="nav-item nav-item-submenu">
-							<a href="#" class="nav-link"><i class="icon-stack"></i> <span>การประเมิน</span></a>
-							<ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
-                                <li class="nav-item"><a href="" class="nav-link">รายการรอประเมิน</a></li>	
-                                <li class="nav-item"><a href="" class="nav-link">รายการผ่านประเมิน</a></li>										
-							</ul>
-						</li>
-						<li class="nav-item nav-item-submenu">
-							<a href="#" class="nav-link"><i class="icon-stack"></i> <span>ตั้งค่า</span></a>
-							<ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">
-								<li class="nav-item"><a href="" class="nav-link">หมวดข่าว</a></li>
-								<li class="nav-item"><a href="" class="nav-link">ป้ายกำกับ</a></li>	
-								<li class="nav-item"><a href="" class="nav-link">ทั่วไป</a></li>									
-								<li class="nav-item"><a href="" class="nav-link">ผู้ใช้งาน</a></li>	
-								<li class="nav-item nav-item-submenu">
-									<a href="#" class="nav-link"><span>ทั่วไป</span></a>
-									<ul class="nav nav-group-sub" data-submenu-title="ทั่วไป">
-										<li class="nav-item"><a href="{{route('dashboard.setting.prefix')}}" class="nav-link">คำนำหน้าชื่อ</a></li>	
-										<li class="nav-item"><a href="{{route('dashboard.setting.religion')}}" class="nav-link">ศาสนา</a></li>										
-									</ul>
-								</li>
-							</ul>	
-						</li>
+						@include('layouts.dashboard.sidemenu')
 					</ul>
 				</div>
 			</div>			
@@ -347,18 +319,11 @@
 						&copy;สงวนลิขสิทธิ์ {{date('Y')}} {{$generalinfo->company}} <a href="{{url('')}}">
 					</span>
 
-					{{-- <ul class="navbar-nav ml-lg-auto">
-						<li class="nav-item">
-							<a href="http://npcsolution.com" class="navbar-nav-link">บริษัท เอ็นพีซีโซลูชั่นแอนด์เซอร์วิส จำกัด</a>
-						</li>
-					</ul> --}}
 				</div>
 			</div>
 			<!-- /footer -->
-
 		</div>
 		<!-- /main content -->
-
 	</div>
 	<!-- /page content -->
 	<!-- Core JS files -->

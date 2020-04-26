@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ศาสนา</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขคำนำหน้าชื่อ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -15,9 +15,10 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ทั่วไป</a>
-                    <span class="breadcrumb-item active">คำนำหน้าชื่อ</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
+                    <a href="{{route('setting.dashboard.prefix')}}" class="breadcrumb-item"> คำนำหน้าชื่อ</a>
+                    <span class="breadcrumb-item active">แก้ไขคำนำหน้าชื่อ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -48,24 +49,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เพิ่มศาสนา</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('dashboard.setting.religion.editsave',['id' => $religion->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.dashboard.prefix.editsave',['id' => $prefix->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ศาสนา</label>
-                                            <input type="text"  name="religion" value="{{$religion->name}}"  placeholder="ศาสนา" class="form-control">
+                                            <label>คำนำหน้า</label>
+                                            <input type="text"  name="prefix" value="{{$prefix->name}}"  placeholder="คำนำหน้า เช่น นาย นาง นางสาว" class="form-control">
                                         </div>
                                     </fieldset>
                                 </div>

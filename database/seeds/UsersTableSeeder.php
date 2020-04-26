@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
                 'prefix_id' => 1,
                 'user_type_id' => 1,
                 'name' => 'admin',
-                'email' => 'admin@test.com',           
+                'email' => 'admin@npctestserver.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString()
             ],
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'prefix_id' => 1,
                 'user_type_id' => 2,
                 'name' => 'expert',
-                'email' => 'expert@test.com',           
+                'email' => 'expert@npctestserver.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString()
             ],
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
                 'prefix_id' => 1,
                 'user_type_id' => 3,
                 'name' => 'company',
-                'email' => 'company@test.com',           
+                'email' => 'company@npctestserver.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString()
             ],
