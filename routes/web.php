@@ -61,6 +61,14 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','SettingDashboardReligionController@EditSave')->name('setting.dashboard.religion.editsave'); 
                 Route::get('delete/{id}','SettingDashboardReligionController@Delete')->name('setting.dashboard.religion.delete'); 
             });
+            Route::group(['prefix' => 'country'], function(){
+                Route::get('','SettingDashboardCountryController@Index')->name('setting.dashboard.country');           
+                Route::get('create','SettingDashboardCountryController@Create')->name('setting.dashboard.country.create'); 
+                Route::post('createsave','SettingDashboardCountryController@CreateSave')->name('setting.dashboard.country.createsave'); 
+                Route::get('edit/{id}','SettingDashboardCountryController@Edit')->name('setting.dashboard.country.edit'); 
+                Route::post('editsave/{id}','SettingDashboardCountryController@EditSave')->name('setting.dashboard.country.editsave'); 
+                Route::get('delete/{id}','SettingDashboardCountryController@Delete')->name('setting.dashboard.country.delete'); 
+            });
         }); 
         Route::group(['prefix' => 'website'], function(){
            //setting ของ website

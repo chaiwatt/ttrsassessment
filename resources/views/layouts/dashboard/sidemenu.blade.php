@@ -23,6 +23,7 @@
             <ul class="nav nav-group-sub" data-submenu-title="ทั่วไป">
                 <li class="nav-item"><a href="{{route('setting.dashboard.prefix')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.prefix') ? 'active' : '' }}">คำนำหน้าชื่อ</a></li>	
                 <li class="nav-item"><a href="{{route('setting.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.religion') ? 'active' : '' }}">ศาสนา</a></li>										
+                <li class="nav-item"><a href="{{route('setting.dashboard.country')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.country') ? 'active' : '' }}">ประเทศ</a></li>
             </ul>
         </li>
     </ul>	
