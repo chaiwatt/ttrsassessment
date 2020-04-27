@@ -45,7 +45,6 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('','DashboardCompanyController@Index')->name('dashboard.company');           
         }); 
     
-
     });   
     Route::group(['prefix' => 'sms'], function(){
         Route::get('','SmsController@Index')->name('sms');  
@@ -133,12 +132,21 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'website'], function(){
            //setting ของ website
             Route::group(['prefix' => 'pagestatus'], function(){
+<<<<<<< HEAD
                 Route::get('','SettingWebsitePageStatusController@Index')->name('setting.website.pagestatus');           
                 Route::get('create','SettingWebsitePageStatusController@Create')->name('setting.website.pagestatus.create'); 
                 Route::post('createsave','SettingWebsitePageStatusController@CreateSave')->name('setting.website.pagestatus.createsave'); 
                 Route::get('edit/{id}','SettingWebsitePageStatusController@Edit')->name('setting.website.pagestatus.edit'); 
                 Route::post('editsave/{id}','SettingWebsitePageStatusController@EditSave')->name('setting.website.pagestatus.editsave'); 
                 Route::get('delete/{id}','SettingWebsitePageStatusController@Delete')->name('setting.website.pagestatus.delete'); 
+=======
+                Route::get('','SettingPageStatusController@Index')->name('setting.website.pagestatus');           
+                Route::get('create','SettingPageStatusController@Create')->name('setting.website.pagestatus.create'); 
+                Route::post('createsave','SettingPageStatusController@CreateSave')->name('setting.website.pagestatus.createsave'); 
+                Route::get('edit/{id}','SettingPageStatusController@Edit')->name('setting.website.pagestatus.edit'); 
+                Route::post('editsave/{id}','SettingPageStatusController@EditSave')->name('setting.website.pagestatus.editsave'); 
+                Route::get('delete/{id}','SettingPageStatusController@Delete')->name('setting.website.pagestatus.delete'); 
+>>>>>>> b5e072f1d43da089b3206c08c6df558b339a99b4
             });
         }); 
     });   
