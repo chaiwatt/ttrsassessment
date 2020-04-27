@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class LineSubScribeController extends Controller
 {
     public function Index(){
-        return view('dashboard.line.index');
+        return view('line.index');
     }
     public function LineSubcribe($id){
         $url = "https://notify-bot.line.me/oauth/authorize?".

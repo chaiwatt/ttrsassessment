@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
     use RegistersUsers;
-    protected $redirectTo = 'sms';//'dashboard/company';// '/line'; //RouteServiceProvider::HOME;
+    protected $redirectTo = 'line';//'dashboard/company';// '/sms'; //RouteServiceProvider::HOME;
 
     public function __construct()
     {

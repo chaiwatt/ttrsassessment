@@ -34,7 +34,7 @@
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.website') ? 'nav-item-expanded' : '' }}">
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
-                <li class="nav-item"><a href="{{route('setting.website')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.pagestatus') ? 'active' : '' }}">สถานะเพจ</a></li>	
+                <li class="nav-item"><a href="{{route('setting.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.pagestatus') ? 'active' : '' }}">สถานะเพจ</a></li>	
                 
             </ul>
         </li>
