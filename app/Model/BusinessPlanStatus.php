@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class BusinessPlanStatus extends Model
 {
-    //
+    protected $fillable = [];
+    protected $guarded = [];
 }

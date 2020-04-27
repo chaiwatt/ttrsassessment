@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขประเภทธุรกิจ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มสถานะการวางแผนธุรกิจ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,10 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.dashboard.businesstype')}}" class="breadcrumb-item"> ประเภทธุรกิจ</a>
-                    <span class="breadcrumb-item active">แก้ไขประเภทธุรกิจ</span>
+                    <a href="{{route('setting.dashboard.businessplanstatus')}}" class="breadcrumb-item"> สถานะการวางแผนธุรกิจ</a>
+                    <span class="breadcrumb-item active">เพิ่มสถานะการวางแผนธุรกิจ</span>
                 </div>
-
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -50,14 +49,14 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.dashboard.businesstype.editsave',['id' => $businesstype->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.dashboard.businessplanstatus.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ประเภทธุรกิจ</label>
-                                            <input type="text"  name="businesstype" value="{{$businesstype->name}}"  placeholder="ประเภทธุรกิจ" class="form-control">
+                                            <label>สถานะการวางแผนธุรกิจ</label>
+                                            <input type="text"  name="businessplanstatus" value="{{old('businessplanstatus')}}"  placeholder="สถานะการวางแผนธุรกิจ" class="form-control">
                                         </div>
                                     </fieldset>
                                 </div>

@@ -120,17 +120,26 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','SettingDashboardRegisteredCapitalTypeController@EditSave')->name('setting.dashboard.registeredcapitaltype.editsave'); 
                 Route::get('delete/{id}','SettingDashboardRegisteredCapitalTypeController@Delete')->name('setting.dashboard.registeredcapitaltype.delete'); 
             });
+            Route::group(['prefix' => 'businessplanstatus'], function(){
+                Route::get('','SettingDashboardBusinessPlanStatusController@Index')->name('setting.dashboard.businessplanstatus');           
+                Route::get('create','SettingDashboardBusinessPlanStatusController@Create')->name('setting.dashboard.businessplanstatus.create'); 
+                Route::post('createsave','SettingDashboardBusinessPlanStatusController@CreateSave')->name('setting.dashboard.businessplanstatus.createsave'); 
+                Route::get('edit/{id}','SettingDashboardBusinessPlanStatusController@Edit')->name('setting.dashboard.businessplanstatus.edit'); 
+                Route::post('editsave/{id}','SettingDashboardBusinessPlanStatusController@EditSave')->name('setting.dashboard.businessplanstatus.editsave'); 
+                Route::get('delete/{id}','SettingDashboardBusinessPlanStatusController@Delete')->name('setting.dashboard.businessplanstatus.delete'); 
+            });
+
         }); 
         Route::group(['prefix' => 'website'], function(){
            //setting ของ website
-           Route::group(['prefix' => 'pagestatus'], function(){
-            Route::get('','SettingPageStatusController@Index')->name('setting.pagestatus');           
-            Route::get('create','SettingPageStatusController@Create')->name('setting.pagestatus.create'); 
-            Route::post('createsave','SettingPageStatusController@CreateSave')->name('setting.pagestatus.createsave'); 
-            Route::get('edit/{id}','SettingPageStatusController@Edit')->name('setting.pagestatus.edit'); 
-            Route::post('editsave/{id}','SettingPageStatusController@EditSave')->name('setting.pagestatus.editsave'); 
-            Route::get('delete/{id}','SettingPageStatusController@Delete')->name('setting.pagestatus.delete'); 
-        });
+            Route::group(['prefix' => 'pagestatus'], function(){
+                Route::get('','SettingWebsitePageStatusController@Index')->name('setting.website.pagestatus');           
+                Route::get('create','SettingWebsitePageStatusController@Create')->name('setting.website.pagestatus.create'); 
+                Route::post('createsave','SettingWebsitePageStatusController@CreateSave')->name('setting.website.pagestatus.createsave'); 
+                Route::get('edit/{id}','SettingWebsitePageStatusController@Edit')->name('setting.website.pagestatus.edit'); 
+                Route::post('editsave/{id}','SettingWebsitePageStatusController@EditSave')->name('setting.website.pagestatus.editsave'); 
+                Route::get('delete/{id}','SettingWebsitePageStatusController@Delete')->name('setting.website.pagestatus.delete'); 
+            });
         }); 
     });   
 });  

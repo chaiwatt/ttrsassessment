@@ -55,7 +55,7 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ระดับการศึกษา</label>
+                                            <label>ประเภทธุรกิจ</label>
                                             <input type="text"  name="businesstype" value="{{old('businesstype')}}"  placeholder="ประเภทธุรกิจ" class="form-control">
                                         </div>
                                     </fieldset>
