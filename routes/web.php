@@ -123,6 +123,14 @@ Route::group(['middleware' => 'auth'], function(){
         }); 
         Route::group(['prefix' => 'website'], function(){
            //setting ของ website
+           Route::group(['prefix' => 'pagestatus'], function(){
+            Route::get('','SettingPageStatusController@Index')->name('setting.pagestatus');           
+            Route::get('create','SettingPageStatusController@Create')->name('setting.pagestatus.create'); 
+            Route::post('createsave','SettingPageStatusController@CreateSave')->name('setting.pagestatus.createsave'); 
+            Route::get('edit/{id}','SettingPageStatusController@Edit')->name('setting.pagestatus.edit'); 
+            Route::post('editsave/{id}','SettingPageStatusController@EditSave')->name('setting.pagestatus.editsave'); 
+            Route::get('delete/{id}','SettingPageStatusController@Delete')->name('setting.pagestatus.delete'); 
+        });
         }); 
     });   
 });  
