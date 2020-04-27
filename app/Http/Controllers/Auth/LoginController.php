@@ -1,18 +1,22 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
+use App\User;
+use Carbon\Carbon;
+use App\Model\SocialAccount;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
     protected $redirectTo = '/home';
-
-
 
     public function __construct()
     {
@@ -30,10 +34,8 @@ class LoginController extends Controller
             }else{
                 return redirect()->route('dashboard.company'); 
             }
-            
         }
     }
-
 
     public function Redirect($provider)
     {
@@ -42,39 +44,23 @@ class LoginController extends Controller
     public function Callback($provider)
     {
        $providerUser = Socialite::driver($provider)->user();
-       dd($providerUser);
        $user = $this->createOrGetUser($provider, $providerUser);
        auth()->login($user);
-       return redirect()->to('/home');
+       return redirect()->route('dashboard.company');
     }
 
     public function createOrGetUser($provider, $providerUser)
     {
-        $account = SocialAccount::whereProvider($provider)
-                                ->whereProviderUserId($providerUser->getId())
-                                ->first();
-        if(!Empty($account)){
-            return $account->user;
-        }else{
-            $user = User::whereEmail($providerUser->getEmail())->first();
-          
-            if (!Empty($user)) {
-                $user = User::create([
-                  'email' => $providerUser->getEmail(),
-                  'name' => $providerUser->getName(),
-                  'password' => md5(rand(1,10000)),
-                ]);
-            }
-            $account = new SocialAccount([
-                'provider_user_id' => $providerUser->getId(),
-                'provider' => $provider
-            ]);
-            $account->user()->associate($user);
-            $account->save();
-            return $user;
+        $user = User::where('email',$providerUser->getEmail())->first();
+        if (Empty($user)) {
+            $user = new User();
+            $user->user_type_id = 3;
+            $user->name = $providerUser->getName();
+            $user->email = $providerUser->getEmail();
+            $user->password = Hash::make('11111111');
+            $user->email_verified_at = Carbon::now()->toDateString();
+            $user->save();
         }
+        return $user;
     }
-
-
-
 }

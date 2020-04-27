@@ -27,9 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('dashboard', 'HomeController@Index')->name('dashboard');
 
 
-Route::group(['prefix' => 'provider'], function(){       
-    Route::get('/{provider}', 'Auth\LoginController@Redirect')->name('social.provider.login');
-    Route::get('callback/{provider}', 'Auth\LoginController@Callback')->name('social.provider.callback');
+Route::group(['prefix' => 'social'], function(){       
+    Route::get('/{provider}', 'Auth\LoginController@Redirect')->name('social.login');
+    Route::get('callback/{provider}', 'Auth\LoginController@Callback')->name('social.callback');
 });
 
 
@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('','DashboardExpertController@Index')->name('dashboard.expert');           
         }); 
         Route::group(['prefix' => 'company'], function(){
-            Route::get('','DashboardCompanyController@Index')->name('dashboard.company')->middleware('verified');           
+            Route::get('','DashboardCompanyController@Index')->name('dashboard.company');           
         }); 
     
 

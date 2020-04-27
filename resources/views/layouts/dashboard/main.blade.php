@@ -246,7 +246,7 @@
 								{{-- @if (!Empty(Auth::user()->picture))
 								<img src="{{asset(Auth::user()->picture)}}" class="rounded-circle mr-2" height="34" alt="">
 								@endif								 --}}
-								<span>ss bb</span>
+								<span>{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
 							</a>
 		
 							<div class="dropdown-menu dropdown-menu-right">
