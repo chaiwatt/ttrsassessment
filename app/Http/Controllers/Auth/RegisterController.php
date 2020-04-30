@@ -15,10 +15,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 class RegisterController extends Controller
 {
     use RegistersUsers;
-    protected $redirectTo = 'line';//'dashboard/company';// '/sms'; //RouteServiceProvider::HOME;
+    // protected $redirectTo = 'line';//'dashboard/company';// '/sms'; //RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-        $auth = Auth::user(); 
+         $auth = Auth::user(); 
         if($auth->verify_type == 1){
             return 'dashboard/company';
         }else if($auth->verify_type == 2){
