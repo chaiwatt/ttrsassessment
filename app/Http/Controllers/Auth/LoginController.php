@@ -29,9 +29,12 @@ class LoginController extends Controller
         }else if($user->user_type_id == 2){
             return redirect()->route('dashboard.expert'); 
         }else if($user->user_type_id == 3){
-            if(Empty($user->linetoken)){
-                return redirect()->route('line');
-            }else{
+            // if(Empty($user->linetoken)){
+            //     return redirect()->route('line');
+            // }else{
+            //     return redirect()->route('dashboard.company'); 
+            // }
+            if($user->verify_type == 1){
                 return redirect()->route('dashboard.company'); 
             }
         }

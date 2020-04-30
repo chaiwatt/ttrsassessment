@@ -15,7 +15,8 @@ class UsersTableSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@npctestserver.com',           
                 'password' => Hash::make('11111111'), 
-                'email_verified_at' => Carbon::now()->toDateString()
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
             ],
             [
                 'prefix_id' => 1,
@@ -23,7 +24,8 @@ class UsersTableSeeder extends Seeder
                 'name' => 'expert',
                 'email' => 'expert@npctestserver.com',           
                 'password' => Hash::make('11111111'), 
-                'email_verified_at' => Carbon::now()->toDateString()
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
             ],
             [
                 'prefix_id' => 1,
@@ -31,7 +33,8 @@ class UsersTableSeeder extends Seeder
                 'name' => 'company',
                 'email' => 'company@npctestserver.com',           
                 'password' => Hash::make('11111111'), 
-                'email_verified_at' => Carbon::now()->toDateString()
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
             ],
         ]);
     }

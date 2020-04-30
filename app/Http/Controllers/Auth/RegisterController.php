@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Model\Company;
+use App\Model\GeneralInfo;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
     protected $redirectTo = 'line';//'dashboard/company';// '/sms'; //RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        $auth = Auth::user(); 
+        if($auth->verify_type == 1){
+            return 'dashboard/company';
+        }else if($auth->verify_type == 2){
+            return 'line';
+        }else if($auth->verify_type == 3){
+            return 'email';
+        }else if($auth->verify_type == 4){
+            return 'sms';
+        }
+    }
 
     public function __construct()
     {
@@ -31,13 +47,19 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'prefix_id' => 1,
             'user_type_id' => 1,
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'verify_type' => GeneralInfo::first()->verify_status_id,
         ]);
+        Company::create([
+            'name' => 'บริษัท'.$data['name'],
+            'user_id' => $user->id
+        ]);
+        return $user ; 
     }
 }

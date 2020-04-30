@@ -15,10 +15,12 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('registered_capital_type_id');
-            $table->unsignedBigInteger('industry_group_id');      
-            $table->unsignedBigInteger('business_type_id'); 
-            $table->string('name',150)->comment('ชื่อบริษัท')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('registered_capital_type_id')->nullable();
+            $table->unsignedBigInteger('industry_group_id')->nullable();   
+            $table->unsignedBigInteger('business_type_id')->nullable();
+            $table->string('name',150)->nullable();
             $table->string('phone',15)->nullable();
             $table->string('fax',15)->nullable();
             $table->string('email',200)->nullable();
@@ -26,7 +28,7 @@ class CreateCompaniesTable extends Migration
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

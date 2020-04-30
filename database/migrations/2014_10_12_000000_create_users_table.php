@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('linetoken')->nullable();
             $table->string('phone')->nullable();
             $table->string('picture')->nullable();
+            $table->unsignedBigInteger('verify_type')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

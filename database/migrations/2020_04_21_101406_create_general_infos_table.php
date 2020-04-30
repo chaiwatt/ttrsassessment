@@ -30,6 +30,7 @@ class CreateGeneralInfosTable extends Migration
             $table->string('client_secret');
             $table->string('thsmsuser')->nullable();
             $table->string('thsmspass')->nullable();
+            $table->unsignedBigInteger('verify_status_id')->default(1);
             $table->timestamps();
         });
     }
