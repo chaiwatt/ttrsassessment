@@ -36,7 +36,9 @@
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.pagestatus') ? 'active' : '' }}">สถานะเพจ</a></li>	
-                
+                <li class="nav-item"><a href="{{route('setting.website.pagecategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.pagecategory') ? 'active' : '' }}">หมวดหมู่เพจ</a></li>
+                <li class="nav-item"><a href="{{route('setting.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.faqcategory') ? 'active' : '' }}">หมวดหมู่ faq</a></li>
+                <li class="nav-item"><a href="{{route('setting.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.tag') ? 'active' : '' }}">ป้ายชื่อกำกับเพจ</a></li>		             
             </ul>
         </li>
     </ul>	

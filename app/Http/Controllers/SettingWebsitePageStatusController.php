@@ -25,7 +25,7 @@ class SettingWebsitePageStatusController extends Controller
         $pagestatus = new PageStatus();
         $pagestatus->name = $request->pagestatus;
         $pagestatus->save();
-        return redirect()->route('setting.website.pagestatus')->withSuccess('เพิ่มสถานะเพจสำเร็จ');
+        return redirect()->route('setting.website.pagestatus')->withSuccess('เพิ่มสถานะการแสดงเพจสำเร็จ');
     }
     public function Edit($id){
         $pagestatus  = PageStatus::find($id);
@@ -35,10 +35,10 @@ class SettingWebsitePageStatusController extends Controller
         $pagestatus = PageStatus::find($id)->update([
             'name' => $request->pagestatus
         ]);
-        return redirect()->route('setting.website.pagestatus')->withSuccess('แก้ไขสถานะเพจสำเร็จ');
+        return redirect()->route('setting.website.pagestatus')->withSuccess('แก้ไขสถานะการแสดงเพจสำเร็จ');
     }
     public function Delete($id){
         PageStatus::find($id)->delete();
-        return redirect()->route('setting.website.pagestatus')->withSuccess('ลบสถานะเพจสำเร็จ');
+        return redirect()->route('setting.website.pagestatus')->withSuccess('ลบสถานะการแสดงเพจสำเร็จ');
     }
 }

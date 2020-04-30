@@ -132,21 +132,36 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'website'], function(){
            //setting ของ website
             Route::group(['prefix' => 'pagestatus'], function(){
-<<<<<<< HEAD
                 Route::get('','SettingWebsitePageStatusController@Index')->name('setting.website.pagestatus');           
                 Route::get('create','SettingWebsitePageStatusController@Create')->name('setting.website.pagestatus.create'); 
                 Route::post('createsave','SettingWebsitePageStatusController@CreateSave')->name('setting.website.pagestatus.createsave'); 
                 Route::get('edit/{id}','SettingWebsitePageStatusController@Edit')->name('setting.website.pagestatus.edit'); 
                 Route::post('editsave/{id}','SettingWebsitePageStatusController@EditSave')->name('setting.website.pagestatus.editsave'); 
                 Route::get('delete/{id}','SettingWebsitePageStatusController@Delete')->name('setting.website.pagestatus.delete'); 
-=======
-                Route::get('','SettingPageStatusController@Index')->name('setting.website.pagestatus');           
-                Route::get('create','SettingPageStatusController@Create')->name('setting.website.pagestatus.create'); 
-                Route::post('createsave','SettingPageStatusController@CreateSave')->name('setting.website.pagestatus.createsave'); 
-                Route::get('edit/{id}','SettingPageStatusController@Edit')->name('setting.website.pagestatus.edit'); 
-                Route::post('editsave/{id}','SettingPageStatusController@EditSave')->name('setting.website.pagestatus.editsave'); 
-                Route::get('delete/{id}','SettingPageStatusController@Delete')->name('setting.website.pagestatus.delete'); 
->>>>>>> b5e072f1d43da089b3206c08c6df558b339a99b4
+            });
+            Route::group(['prefix' => 'pagecategory'], function(){
+                Route::get('','SettingWebsitePageCategoryController@Index')->name('setting.website.pagecategory');           
+                Route::get('create','SettingWebsitePageCategoryController@Create')->name('setting.website.pagecategory.create'); 
+                Route::post('createsave','SettingWebsitePageCategoryController@CreateSave')->name('setting.website.pagecategory.createsave'); 
+                Route::get('edit/{id}','SettingWebsitePageCategoryController@Edit')->name('setting.website.pagecategory.edit'); 
+                Route::post('editsave/{id}','SettingWebsitePageCategoryController@EditSave')->name('setting.website.pagecategory.editsave'); 
+                Route::get('delete/{id}','SettingWebsitePageCategoryController@Delete')->name('setting.website.pagecategory.delete'); 
+            });
+            Route::group(['prefix' => 'faqcategory'], function(){
+                Route::get('','SettingWebsiteFaqCategoryController@Index')->name('setting.website.faqcategory');           
+                Route::get('create','SettingWebsiteFaqCategoryController@Create')->name('setting.website.faqcategory.create'); 
+                Route::post('createsave','SettingWebsiteFaqCategoryController@CreateSave')->name('setting.website.faqcategory.createsave'); 
+                Route::get('edit/{id}','SettingWebsiteFaqCategoryController@Edit')->name('setting.website.faqcategory.edit'); 
+                Route::post('editsave/{id}','SettingWebsiteFaqCategoryController@EditSave')->name('setting.website.faqcategory.editsave'); 
+                Route::get('delete/{id}','SettingWebsiteFaqCategoryController@Delete')->name('setting.website.faqcategory.delete'); 
+            });
+            Route::group(['prefix' => 'tag'], function(){
+                Route::get('','SettingWebsiteTagController@Index')->name('setting.website.tag');           
+                Route::get('create','SettingWebsiteTagController@Create')->name('setting.website.tag.create'); 
+                Route::post('createsave','SettingWebsiteTagController@CreateSave')->name('setting.website.tag.createsave'); 
+                Route::get('edit/{id}','SettingWebsiteTagController@Edit')->name('setting.website.tag.edit'); 
+                Route::post('editsave/{id}','SettingWebsiteTagController@EditSave')->name('setting.website.tag.editsave'); 
+                Route::get('delete/{id}','SettingWebsiteTagController@Delete')->name('setting.website.tag.delete'); 
             });
         }); 
     });   
