@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มหมวดหมู่ faq</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ข้อมูลบริษัท</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -15,10 +15,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.website.faqcategory')}}" class="breadcrumb-item"> หมวดหมู่ faq</a>
-                    <span class="breadcrumb-item active">เพิ่มหมวดหมู่ faq</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ข้อมูลบริษัท</a>
+                    <span class="breadcrumb-item active">ข้อมูลบริษัท</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -56,7 +54,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>บริษัท</label>
-                                            <input type="text"  name="company" value="{{$company->name}}"  placeholder="หมวดหมู่ faq" class="form-control">
+                                            <input type="text"  name="company" value="{{$company->name}}"  placeholder="บริษัท" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>ประเภทธุรกิจ<span class="text-danger">*</span></label>
@@ -112,21 +110,23 @@
                                         </div>
                                         <div class="form-group">
                                             <label>อำเภอ<span class="text-danger">*</span></label>
-                                            <select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2"></select>
-                                            @foreach ($amphurs as $amphur)                                                                
-                                                <option value="{{$amphur->id}}" @if ($amphur->id == $company->amphur_id) selected @endif> {{$amphur->name}} </option>
-                                            @endforeach   
+                                            <select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+                                                @foreach ($amphurs as $amphur)                                                                
+                                                    <option value="{{$amphur->id}}" @if ($amphur->id == $company->amphur_id) selected @endif> {{$amphur->name}} </option>
+                                                @endforeach   
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>ตำบล<span class="text-danger">*</span></label>
-                                            <select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2"></select>
-                                            @foreach ($tambols as $tambol)                                                                
-                                                <option value="{{$tambol->id}}" @if ($tambol->id == $company->tambol_id) selected @endif> {{$tambol->name}} </option>
-                                            @endforeach    
+                                            <select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2">
+                                                @foreach ($tambols as $tambol)                                                                
+                                                    <option value="{{$tambol->id}}" @if ($tambol->id == $company->tambol_id) selected @endif> {{$tambol->name}} </option>
+                                                @endforeach    
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>รหัสไปรษณีย์</label>
-                                            <input type="text"  name="postalcode" value="{{old('postalcode')}}"  placeholder="โทรศัพท์" class="form-control">
+                                            <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="โทรศัพท์" class="form-control">
                                         </div>
                                     </fieldset>
                                 </div>

@@ -36,7 +36,7 @@ class SettingCompanyController extends Controller
 
     public function EditSave(EditCompanyRequest $request, $id){
         Company::find($id)->update([
-            'name' => $request->name,
+            'name' => $request->company,
             'registered_capital_type_id' => $request->registeredcapitaltype,
             'industry_group_id' => $request->industrygroup,
             'business_type_id' => $request->businesstype,

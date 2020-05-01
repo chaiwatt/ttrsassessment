@@ -135,6 +135,14 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','SettingDashboardBusinessPlanStatusController@EditSave')->name('setting.dashboard.businessplanstatus.editsave'); 
                 Route::get('delete/{id}','SettingDashboardBusinessPlanStatusController@Delete')->name('setting.dashboard.businessplanstatus.delete'); 
             });
+            Route::group(['prefix' => 'userposition'], function(){
+                Route::get('','SettingDashboardUserPositionController@Index')->name('setting.dashboard.userposition');           
+                Route::get('create','SettingDashboardUserPositionController@Create')->name('setting.dashboard.userposition.create'); 
+                Route::post('createsave','SettingDashboardUserPositionController@CreateSave')->name('setting.dashboard.userposition.createsave'); 
+                Route::get('edit/{id}','SettingDashboardUserPositionController@Edit')->name('setting.dashboard.userposition.edit'); 
+                Route::post('editsave/{id}','SettingDashboardUserPositionController@EditSave')->name('setting.dashboard.userposition.editsave'); 
+                Route::get('delete/{id}','SettingDashboardUserPositionController@Delete')->name('setting.dashboard.userposition.delete'); 
+            });
 
         }); 
         Route::group(['prefix' => 'website'], function(){
@@ -171,10 +179,20 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','SettingWebsiteTagController@EditSave')->name('setting.website.tag.editsave'); 
                 Route::get('delete/{id}','SettingWebsiteTagController@Delete')->name('setting.website.tag.delete'); 
             });
+            
         }); 
         Route::group(['prefix' => 'company'], function(){
             Route::get('edit/{userid}','SettingCompanyController@Edit')->name('setting.company.edit');           
             Route::post('editsave/{id}','SettingCompanyController@EditSave')->name('setting.company.editsave'); 
+        });
+        Route::group(['prefix' => 'user'], function(){
+            Route::get('','SettingUserController@Index')->name('setting.user');           
+            Route::get('create','SettingUserController@Create')->name('setting.user.create'); 
+            Route::post('createsave','SettingUserController@CreateSave')->name('setting.user.createsave'); 
+            Route::get('edit/{id}','SettingUserController@Edit')->name('setting.user.edit'); 
+            Route::post('editsave/{id}','SettingUserController@EditSave')->name('setting.user.editsave'); 
+            Route::get('delete/{id}','SettingUserController@Delete')->name('setting.user.delete'); 
+            Route::get('profile/{userid}','SettingUserController@Profile')->name('setting.user.profile'); 
         });
     });   
 });  

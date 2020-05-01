@@ -30,6 +30,7 @@
                 <li class="nav-item"><a href="{{route('setting.dashboard.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.industrygroup') ? 'active' : '' }}">กลุ่มอุตสาหกรรม</a></li>
                 <li class="nav-item"><a href="{{route('setting.dashboard.registeredcapitaltype')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.registeredcapitaltype') ? 'active' : '' }}">การจดทะเบียน</a></li>
                 <li class="nav-item"><a href="{{route('setting.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.businessplanstatus') ? 'active' : '' }}">สถานะการวางแผนธุรกิจ</a></li>
+                <li class="nav-item"><a href="{{route('setting.dashboard.userposition')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.dashboard.userposition') ? 'active' : '' }}">ตำแหน่งผู้ใช้งาน</a></li>
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.website') ? 'nav-item-expanded' : '' }}">
@@ -42,9 +43,15 @@
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.company') ? 'nav-item-expanded' : '' }}">
-            <a href="#" class="nav-link"><span>ข้อมูลบริษัท</span></a>
+            <a href="#" class="nav-link"><span>บริษัท</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
-                <li class="nav-item"><a href="{{route('setting.company.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.company.edit') ? 'active' : '' }}">บริษัท</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.company.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.company.edit') ? 'active' : '' }}">ข้อมูลบริษัท</a></li>		             
+            </ul>
+        </li>
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.user') ? 'nav-item-expanded' : '' }}">
+            <a href="#" class="nav-link"><span>ผู้ใช้งานระบบ</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
+                <li class="nav-item"><a href="{{route('setting.user')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.user') ? 'active' : '' }}">ผู้ใช้งาน</a></li>		             
             </ul>
         </li>
     </ul>	

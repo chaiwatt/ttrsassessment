@@ -13,7 +13,7 @@ class PrefixsTableSeeder extends Seeder
     {
         DB::table('prefixes')->insert([
             [
-                'name' => 'นาง'
+                'name' => 'นาย'
             ],
             [
                 'name' => 'นาง'
