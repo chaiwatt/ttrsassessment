@@ -24,7 +24,11 @@ class CreateCompaniesTable extends Migration
             $table->string('phone',15)->nullable();
             $table->string('fax',15)->nullable();
             $table->string('email',200)->nullable();
-            $table->text('address')->nullable();
+            $table->string('address',150)->nullable();
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->unsignedBigInteger('amphur_id')->nullable();
+            $table->unsignedBigInteger('tambol_id')->nullable();
+            $table->string('postalcode',10)->nullable();
             $table->timestamps();
         });
     }

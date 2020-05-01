@@ -41,5 +41,11 @@
                 <li class="nav-item"><a href="{{route('setting.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.tag') ? 'active' : '' }}">ป้ายชื่อกำกับเพจ</a></li>		             
             </ul>
         </li>
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.company') ? 'nav-item-expanded' : '' }}">
+            <a href="#" class="nav-link"><span>ข้อมูลบริษัท</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
+                <li class="nav-item"><a href="{{route('setting.company.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.company.edit') ? 'active' : '' }}">บริษัท</a></li>		             
+            </ul>
+        </li>
     </ul>	
 </li>

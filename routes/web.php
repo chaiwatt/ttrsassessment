@@ -33,6 +33,14 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 
+Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'location'], function(){
+        Route::post('province','Api\LocationController@Province')->name('api.location.province');           
+        Route::post('amphur','Api\LocationController@Amphur')->name('api.location.amphur'); 
+        Route::post('tambol','Api\LocationController@Tambol')->name('api.location.tambol'); 
+    });  
+}); 
+
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
@@ -164,6 +172,10 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('delete/{id}','SettingWebsiteTagController@Delete')->name('setting.website.tag.delete'); 
             });
         }); 
+        Route::group(['prefix' => 'company'], function(){
+            Route::get('edit/{userid}','SettingCompanyController@Edit')->name('setting.company.edit');           
+            Route::post('editsave/{id}','SettingCompanyController@EditSave')->name('setting.company.editsave'); 
+        });
     });   
 });  
 
