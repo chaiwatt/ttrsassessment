@@ -21,7 +21,9 @@ class SettingUserController extends Controller
         $this->middleware('role:1'); 
     }
     public function Index(){
-        $users = User::where('id','!=',Auth::user()->id)->get();
+        // $users = User::where('id','!=',Auth::user()->id)->get();
+        $users = User::get();
+        // return $users;
         return view('setting.user.index')->withUsers($users);
     }
     public function Create(){

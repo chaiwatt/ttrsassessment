@@ -6,10 +6,11 @@ use App\Helper\LogAction;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+
 class IndustryGroup extends Model
 {
+   
     use LogsActivity;
-    
     protected $fillable = [];
     protected $guarded = [];
 

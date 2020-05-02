@@ -6,6 +6,7 @@ use App\Model\Prefix;
 use App\Model\UserType;
 use App\Model\UserStatus;
 use App\Model\UserPosition;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -27,18 +28,10 @@ class User extends Authenticatable
     protected static $logAttributes = ['prefix_id', 'name', 'lastname', 'user_type_id', 'user_status_id', 'email', 'password'];
     protected static $logName = 'ผู้ใช้งาน';
     protected static $logOnlyDirty = true;
+
     public function getDescriptionForEvent(string $eventName): string
     {
-        $name = 'ผู้ใช้งาน';
-        $action_name = '';
-        if($eventName == 'created'){
-            $action_name = 'เพิ่ม';
-        }elseif ($eventName == 'updated'){
-            $action_name = 'แก้ไข';
-        }elseif ($eventName == 'deleted'){
-            $action_name = 'ลบ';
-        }
-        return "โมเดลมีการ {$action_name} {$name}";
+        return LogAction::logAction('ผู้ใช้งาน',$eventName);
     }
 
     protected $hidden = [
@@ -64,5 +57,9 @@ class User extends Authenticatable
     public function getUserPositionAttribute()
     {
         return UserPosition::find($this->user_position_id);
+    }
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 }

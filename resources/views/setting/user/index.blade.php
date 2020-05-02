@@ -66,7 +66,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>ชื่อ-สกุล</th> 
-                                        <th>กลุ่ม</th>       
+                                        <th>กลุ่ม</th>    
+                                        <th>ออนไลน์</th>     
                                         <th>สถานะ</th>                          
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
@@ -76,9 +77,15 @@
                                     <tr>    
                                         <td> {{$key+1}} </td>
                                         <td> {{$user->prefix->name}}{{$user->name}}   {{$user->lastname}} </td>    
-                                        <td> {{$user->usertype->name}} </td>   
+                                        <td> {{$user->usertype->name}} </td> 
+                                        @if ($user->isonline() == 1)
+                                            <td> <span class="badge badge-mark border-success mr-1"></span> <span class="badge badge-flat border-success text-info-600">ออนไลน์</span> </td>  
+                                            @else
+                                            <td> <span class="badge badge-mark border-danger mr-1"></span> {{$user->isonline()}} </td>  
+                                        @endif  
+                                        
                                         @if ($user->user_status_id == 1)
-                                                <td><span class="badge badge-flat border-success text-success-600 rounded-0">{{$user->userstatus->name}}</span></td> 
+                                                <td><span class="badge badge-flat border-info text-info-600 rounded-0">{{$user->userstatus->name}}</span></td> 
                                            @else 
                                                 <td><span class="badge badge-flat border-danger text-danger-600 rounded-0">{{$user->userstatus->name}}</span></td> 
                                         @endif                                     
