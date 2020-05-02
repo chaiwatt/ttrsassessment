@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Helper\LogAction;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -15,17 +16,9 @@ class EducationLevel extends Model
     protected static $logAttributes = ['name'];
     protected static $logName = 'ระดับการศึกษา';
     protected static $logOnlyDirty = true;
+    
     public function getDescriptionForEvent(string $eventName): string
     {
-        $name = 'ระดับการศึกษา';
-        $action_name = '';
-        if($eventName == 'created'){
-            $action_name = 'เพิ่ม';
-        }elseif ($eventName == 'updated'){
-            $action_name = 'แก้ไข';
-        }elseif ($eventName == 'deleted'){
-            $action_name = 'ลบ';
-        }
-        return "โมเดลมีการ {$action_name} {$name}";
+        return LogAction::logAction('ระดับการศึกษา',$eventName);
     }
 }

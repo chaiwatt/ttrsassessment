@@ -37,8 +37,8 @@
 
 						<div class="ml-md-3 mt-2 mt-md-0">
 							<ul class="list-inline list-inline-condensed mb-0">
-								<li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> Cover image</a></li>
-								<li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-stats mr-2"></i> Statistics</a></li>
+								<li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</a></li>
+								{{-- <li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-stats mr-2"></i> Statistics</a></li> --}}
 							</ul>
 						</div>
 					</div>
@@ -58,59 +58,54 @@
 					<div class="navbar-collapse collapse" id="navbar-second">
 						<ul class="nav navbar-nav">
 							<li class="nav-item">
-								<a href="#activity" class="navbar-nav-link active" data-toggle="tab">
-									<i class="icon-menu7 mr-2"></i>
-									Activity
+								<a href="#messagebox" class="navbar-nav-link active" data-toggle="tab">
+									<i class="icon-mail5 mr-2"></i>
+									กล่องข้อความ
+									<span class="badge badge-pill bg-success position-static ml-auto ml-lg-2">2</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="#schedule" class="navbar-nav-link" data-toggle="tab">
-									<i class="icon-calendar3 mr-2"></i>
-									Schedule
-									<span class="badge badge-pill bg-success position-static ml-auto ml-lg-2">32</span>
+								<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab">
+									<i class="icon-user mr-2"></i>
+									ข้อมูลส่วนตัว			
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="#settings" class="navbar-nav-link" data-toggle="tab">
+								<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab">
+									<i class="icon-medal-star mr-2"></i>
+									ข้อมูลผู้เชี่ยวชาญ
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="#organizationinfo" class="navbar-nav-link" data-toggle="tab">
 									<i class="icon-cog3 mr-2"></i>
-									Settings
+									ข้อมูลหน่วยงาน
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="#activitylog" class="navbar-nav-link" data-toggle="tab">
+									<i class="icon-stack-text mr-2"></i>
+									ข้อมูล Log
 								</a>
 							</li>
 						</ul>
 
 						<ul class="navbar-nav ml-lg-auto">
 							<li class="nav-item">
-								<a href="#" class="navbar-nav-link">
-									<i class="icon-stack-text mr-2"></i>
-									Notes
+								<a href="#photos" class="nav-link" data-toggle="tab">
+									<i class="icon-images2 mr-2"></i>
+									รูป
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="#" class="navbar-nav-link">
-									<i class="icon-collaboration mr-2"></i>
-									Friends
+								<a href="#friends" class="nav-link" data-toggle="tab">
+									
+									<span class="badge badge-flat border-grey-400 text-default">15</span>
+									<i class="icon-users mr-2"></i>
+									
+									เพื่อน
+									<span class="badge badge-pill bg-warning-400 " >2</span>
 								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#" class="navbar-nav-link">
-									<i class="icon-images3 mr-2"></i>
-									Photos
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-gear"></i>
-									<span class="d-lg-none ml-2">Settings</span>
-								</a>
-
-								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item"><i class="icon-image2"></i> Update cover</a>
-									<a href="#" class="dropdown-item"><i class="icon-clippy"></i> Update info</a>
-									<a href="#" class="dropdown-item"><i class="icon-make-group"></i> Manage sections</a>
-									<div class="dropdown-divider"></div>
-									<a href="#" class="dropdown-item"><i class="icon-three-bars"></i> Activity log</a>
-									<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Profile settings</a>
-								</div>
 							</li>
 						</ul>
 					</div>
@@ -124,7 +119,7 @@
 
 					<!-- Left content -->
 					<div class="tab-content w-100 order-2 order-md-1">
-						<div class="tab-pane fade active show" id="activity">
+						<div class="tab-pane fade active show" id="messagebox">
 
 							<!-- Sales stats -->
 							<div class="card">
@@ -149,7 +144,7 @@
 
 					    </div>
 
-					    <div class="tab-pane fade" id="schedule">
+					    <div class="tab-pane fade" id="personalinfo">
 
 				    		<!-- Available hours -->
 							<div class="card">
@@ -176,12 +171,432 @@
 
 				    	</div>
 
-					    <div class="tab-pane fade" id="settings">
+					    <div class="tab-pane fade" id="expertinfo">
 
 							<!-- Profile info -->
 							<div class="card">
 								<div class="card-header header-elements-inline">
-									<h5 class="card-title">Profile information</h5>
+									<h5 class="card-title">ข้อมูลผู้เชียวชาญ</h5>
+									<div class="header-elements">
+										<div class="list-icons">
+					                		<a class="list-icons-item" data-action="collapse"></a>
+					                		<a class="list-icons-item" data-action="reload"></a>
+					                		<a class="list-icons-item" data-action="remove"></a>
+					                	</div>
+				                	</div>
+								</div>
+
+								<div class="card-body">
+									<form action="#">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Username</label>
+													<input type="text" value="Eugene" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Full name</label>
+													<input type="text" value="Kopyov" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Address line 1</label>
+													<input type="text" value="Ring street 12" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Address line 2</label>
+													<input type="text" value="building D, flat #67" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-4">
+													<label>City</label>
+													<input type="text" value="Munich" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>State/Province</label>
+													<input type="text" value="Bayern" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>ZIP code</label>
+													<input type="text" value="1031" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Email</label>
+													<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
+												</div>
+												<div class="col-md-6">
+						                            <label>Your country</label>
+						                            <select class="form-control form-control-select2" data-fouc>
+						                                <option value="germany" selected>Germany</option> 
+						                                <option value="france">France</option> 
+						                                <option value="spain">Spain</option> 
+						                                <option value="netherlands">Netherlands</option> 
+						                                <option value="other">...</option> 
+						                                <option value="uk">United Kingdom</option> 
+						                            </select>
+												</div>
+											</div>
+										</div>
+
+				                        <div class="form-group">
+				                        	<div class="row">
+				                        		<div class="col-md-6">
+													<label>Phone #</label>
+													<input type="text" value="+99-99-9999-9999" class="form-control">
+													<span class="form-text text-muted">+99-99-9999-9999</span>
+				                        		</div>
+
+												<div class="col-md-6">
+													<label>Upload profile image</label>
+				                                    <input type="file" class="form-input-styled" data-fouc>
+				                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+												</div>
+				                        	</div>
+				                        </div>
+
+				                        <div class="text-right">
+				                        	<button type="submit" class="btn btn-primary">Save changes</button>
+				                        </div>
+									</form>
+								</div>
+							</div>
+							<!-- /profile info -->
+
+						</div>
+						<div class="tab-pane fade" id="organizationinfo">
+
+							<!-- Profile info -->
+							<div class="card">
+								<div class="card-header header-elements-inline">
+									<h5 class="card-title">ข้อมูลหน่วยงาน</h5>
+									<div class="header-elements">
+										<div class="list-icons">
+					                		<a class="list-icons-item" data-action="collapse"></a>
+					                		<a class="list-icons-item" data-action="reload"></a>
+					                		<a class="list-icons-item" data-action="remove"></a>
+					                	</div>
+				                	</div>
+								</div>
+
+								<div class="card-body">
+									<form action="#">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Username</label>
+													<input type="text" value="Eugene" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Full name</label>
+													<input type="text" value="Kopyov" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Address line 1</label>
+													<input type="text" value="Ring street 12" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Address line 2</label>
+													<input type="text" value="building D, flat #67" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-4">
+													<label>City</label>
+													<input type="text" value="Munich" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>State/Province</label>
+													<input type="text" value="Bayern" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>ZIP code</label>
+													<input type="text" value="1031" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Email</label>
+													<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
+												</div>
+												<div class="col-md-6">
+						                            <label>Your country</label>
+						                            <select class="form-control form-control-select2" data-fouc>
+						                                <option value="germany" selected>Germany</option> 
+						                                <option value="france">France</option> 
+						                                <option value="spain">Spain</option> 
+						                                <option value="netherlands">Netherlands</option> 
+						                                <option value="other">...</option> 
+						                                <option value="uk">United Kingdom</option> 
+						                            </select>
+												</div>
+											</div>
+										</div>
+
+				                        <div class="form-group">
+				                        	<div class="row">
+				                        		<div class="col-md-6">
+													<label>Phone #</label>
+													<input type="text" value="+99-99-9999-9999" class="form-control">
+													<span class="form-text text-muted">+99-99-9999-9999</span>
+				                        		</div>
+
+												<div class="col-md-6">
+													<label>Upload profile image</label>
+				                                    <input type="file" class="form-input-styled" data-fouc>
+				                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+												</div>
+				                        	</div>
+				                        </div>
+
+				                        <div class="text-right">
+				                        	<button type="submit" class="btn btn-primary">Save changes</button>
+				                        </div>
+									</form>
+								</div>
+							</div>
+							<!-- /profile info -->
+
+						</div>
+						<div class="tab-pane fade" id="activitylog">
+
+							<!-- Profile info -->
+							<div class="card">
+								<div class="card-header header-elements-inline">
+									<h5 class="card-title">ข้อมูล Log</h5>
+									<div class="header-elements">
+										<div class="list-icons">
+					                		<a class="list-icons-item" data-action="collapse"></a>
+					                		<a class="list-icons-item" data-action="reload"></a>
+					                		<a class="list-icons-item" data-action="remove"></a>
+					                	</div>
+				                	</div>
+								</div>
+
+								<div class="card-body">
+									<form action="#">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Username</label>
+													<input type="text" value="Eugene" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Full name</label>
+													<input type="text" value="Kopyov" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Address line 1</label>
+													<input type="text" value="Ring street 12" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Address line 2</label>
+													<input type="text" value="building D, flat #67" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-4">
+													<label>City</label>
+													<input type="text" value="Munich" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>State/Province</label>
+													<input type="text" value="Bayern" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>ZIP code</label>
+													<input type="text" value="1031" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Email</label>
+													<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
+												</div>
+												<div class="col-md-6">
+						                            <label>Your country</label>
+						                            <select class="form-control form-control-select2" data-fouc>
+						                                <option value="germany" selected>Germany</option> 
+						                                <option value="france">France</option> 
+						                                <option value="spain">Spain</option> 
+						                                <option value="netherlands">Netherlands</option> 
+						                                <option value="other">...</option> 
+						                                <option value="uk">United Kingdom</option> 
+						                            </select>
+												</div>
+											</div>
+										</div>
+
+				                        <div class="form-group">
+				                        	<div class="row">
+				                        		<div class="col-md-6">
+													<label>Phone #</label>
+													<input type="text" value="+99-99-9999-9999" class="form-control">
+													<span class="form-text text-muted">+99-99-9999-9999</span>
+				                        		</div>
+
+												<div class="col-md-6">
+													<label>Upload profile image</label>
+				                                    <input type="file" class="form-input-styled" data-fouc>
+				                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+												</div>
+				                        	</div>
+				                        </div>
+
+				                        <div class="text-right">
+				                        	<button type="submit" class="btn btn-primary">Save changes</button>
+				                        </div>
+									</form>
+								</div>
+							</div>
+							<!-- /profile info -->
+
+						</div>
+						<div class="tab-pane fade" id="photos">
+
+							<!-- Profile info -->
+							<div class="card">
+								<div class="card-header header-elements-inline">
+									<h5 class="card-title">รูป</h5>
+									<div class="header-elements">
+										<div class="list-icons">
+					                		<a class="list-icons-item" data-action="collapse"></a>
+					                		<a class="list-icons-item" data-action="reload"></a>
+					                		<a class="list-icons-item" data-action="remove"></a>
+					                	</div>
+				                	</div>
+								</div>
+
+								<div class="card-body">
+									<form action="#">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Username</label>
+													<input type="text" value="Eugene" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Full name</label>
+													<input type="text" value="Kopyov" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Address line 1</label>
+													<input type="text" value="Ring street 12" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Address line 2</label>
+													<input type="text" value="building D, flat #67" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-4">
+													<label>City</label>
+													<input type="text" value="Munich" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>State/Province</label>
+													<input type="text" value="Bayern" class="form-control">
+												</div>
+												<div class="col-md-4">
+													<label>ZIP code</label>
+													<input type="text" value="1031" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Email</label>
+													<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
+												</div>
+												<div class="col-md-6">
+						                            <label>Your country</label>
+						                            <select class="form-control form-control-select2" data-fouc>
+						                                <option value="germany" selected>Germany</option> 
+						                                <option value="france">France</option> 
+						                                <option value="spain">Spain</option> 
+						                                <option value="netherlands">Netherlands</option> 
+						                                <option value="other">...</option> 
+						                                <option value="uk">United Kingdom</option> 
+						                            </select>
+												</div>
+											</div>
+										</div>
+
+				                        <div class="form-group">
+				                        	<div class="row">
+				                        		<div class="col-md-6">
+													<label>Phone #</label>
+													<input type="text" value="+99-99-9999-9999" class="form-control">
+													<span class="form-text text-muted">+99-99-9999-9999</span>
+				                        		</div>
+
+												<div class="col-md-6">
+													<label>Upload profile image</label>
+				                                    <input type="file" class="form-input-styled" data-fouc>
+				                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+												</div>
+				                        	</div>
+				                        </div>
+
+				                        <div class="text-right">
+				                        	<button type="submit" class="btn btn-primary">Save changes</button>
+				                        </div>
+									</form>
+								</div>
+							</div>
+							<!-- /profile info -->
+
+						</div>
+						<div class="tab-pane fade" id="friends">
+
+							<!-- Profile info -->
+							<div class="card">
+								<div class="card-header header-elements-inline">
+									<h5 class="card-title">เพื่อน</h5>
 									<div class="header-elements">
 										<div class="list-icons">
 					                		<a class="list-icons-item" data-action="collapse"></a>
@@ -292,7 +707,7 @@
 						<div class="sidebar-content">
 
 							<!-- Navigation -->
-							<div class="card">
+							{{-- <div class="card">
 								<div class="card-header bg-transparent header-elements-inline">
 									<span class="card-title font-weight-semibold">Navigation</span>
 									<div class="header-elements">
@@ -305,7 +720,7 @@
 								<div class="card-body p-0">
 									<ul class="nav nav-sidebar my-2">
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="#personalinfo" class="nav-link" data-toggle="tab">
 												<i class="icon-user"></i>
 												 My profile
 											</a>
@@ -348,14 +763,14 @@
 										</li>
 									</ul>
 								</div>
-							</div>
+							</div> --}}
 							<!-- /navigation -->
 
 
 							<!-- Share your thoughts -->
 							<div class="card">
 								<div class="card-header bg-transparent header-elements-inline">
-									<span class="card-title font-weight-semibold">Share your thoughts</span>
+									<span class="card-title font-weight-semibold">ส่งข้อความ</span>
 									<div class="header-elements">
 										<div class="list-icons">
 					                		<a class="list-icons-item" data-action="collapse"></a>
@@ -365,16 +780,20 @@
 
 								<div class="card-body">
 									<form action="#">
-				                    	<textarea name="enter-message" class="form-control mb-3" rows="3" cols="1" placeholder="Enter your message..."></textarea>
+										<div class="form-group">
+											<label>เพื่อน</label>
+											<input type="text" placeholder="เลือกเพื่อน" class="form-control">
+										</div>
+				                    	<textarea name="enter-message" class="form-control mb-3" rows="12" cols="1" placeholder="ข้อความ"></textarea>
 
 				                    	<div class="d-flex align-items-center">
-				                    		<div class="list-icons list-icons-extended">
+				                    		{{-- <div class="list-icons list-icons-extended">
 				                                <a href="#" class="list-icons-item" data-popup="tooltip" title="Add photo" data-container="body"><i class="icon-images2"></i></a>
 				                            	<a href="#" class="list-icons-item" data-popup="tooltip" title="Add video" data-container="body"><i class="icon-film2"></i></a>
 				                                <a href="#" class="list-icons-item" data-popup="tooltip" title="Add event" data-container="body"><i class="icon-calendar2"></i></a>
-				                    		</div>
+				                    		</div> --}}
 
-				                    		<button type="button" class="btn bg-blue btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> Share</button>
+				                    		<button type="button" class="btn bg-blue btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> ส่งข้อความ</button>
 				                    	</div>
 									</form>
 								</div>

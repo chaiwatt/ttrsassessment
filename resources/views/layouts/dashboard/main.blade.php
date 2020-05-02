@@ -65,7 +65,7 @@
 							
 							<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-300">
 								<div class="dropdown-content-header">
-									<span class="font-weight-semibold">Users online</span>
+									<span class="font-weight-semibold">ผู้ใช้ออนไลน์</span>
 									<a href="#" class="text-default"><i class="icon-search4 font-size-base"></i></a>
 								</div>
 		
@@ -250,10 +250,10 @@
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
-								<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-								<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
+								{{-- <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a> --}}
+								<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ <span class="badge badge-pill bg-blue ml-auto">2</span></a>
 								<div class="dropdown-divider"></div>
-								<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
+								{{-- <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a> --}}
 								<a data-placement="bottom" class="dropdown-item" title="ออกจากระบบ" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-switch2"></i>ออกจากระบบ</a>
 							</div>
 							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
