@@ -14,6 +14,12 @@ use App\Http\Requests\CreateUserRequest;
 
 class SettingUserController extends Controller
 {
+    public function __construct() 
+    { 
+        $this->middleware('auth'); 
+        // 1=admin, 2=expert, 3=company 
+        $this->middleware('role:1'); 
+    }
     public function Index(){
         $users = User::where('id','!=',Auth::user()->id)->get();
         return view('setting.user.index')->withUsers($users);
