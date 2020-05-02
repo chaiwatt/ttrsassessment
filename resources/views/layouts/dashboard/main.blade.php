@@ -24,7 +24,7 @@
     @show
 </head>
 
-<body >
+<body @isset($mini) class="sidebar-xs" @endisset>
 	<!-- Main navbar -->
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
@@ -249,7 +249,7 @@
 								<span>{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a href="{{route('setting.user.profile',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
+								<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
 								<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
 								<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
 								<div class="dropdown-divider"></div>

@@ -80,7 +80,5 @@ class SettingUserController extends Controller
         return redirect()->route('setting.user')->withSuccess('ลบผู้ใช้งานสำเร็จ');
     }
 
-    public function Profile(){
-        return view('setting.user.profile');
-    }
+
 }

@@ -194,6 +194,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('delete/{id}','SettingUserController@Delete')->name('setting.user.delete'); 
             Route::get('profile/{userid}','SettingUserController@Profile')->name('setting.user.profile'); 
         });
+        Route::group(['prefix' => 'profile'], function(){
+            Route::get('edit/{userid}','SettingProfileController@Edit')->name('setting.profile.edit'); 
+        });
     });   
 });  
 

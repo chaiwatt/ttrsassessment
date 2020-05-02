@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.main')
+@extends('layouts.dashboard.main', ['mini' => '1'])
 @section('pageCss')
 @stop
 @section('content')
