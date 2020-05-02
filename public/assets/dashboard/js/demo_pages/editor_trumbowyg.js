@@ -25,7 +25,7 @@ var Trumbowyg = function() {
         }
 
         // Set custom icons path
-        $.trumbowyg.svgPath = 'http://demo.interface.club/limitless/demo/Template/global_assets/js/plugins/editors/trumbowyg/ui/icons.svg';
+        $.trumbowyg.svgPath = '../../../../global_assets/js/plugins/editors/trumbowyg/ui/icons.svg';
 
         // Default initialization
         $('#trumbowyg_default').trumbowyg();

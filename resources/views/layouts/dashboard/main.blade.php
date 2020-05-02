@@ -29,7 +29,7 @@
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
 			<a href="{{url('/')}}" class="d-inline-block">
-				<img src="{{asset('assets/dashboard/images/logo.png')}}" alt="">
+				<img src="{{asset('assets/dashboard/images/user.jpg')}}" alt="">
 			</a>
 		</div>
 
@@ -73,7 +73,7 @@
 									<ul class="media-list">
 										<li class="media">
 											<div class="mr-3">
-												<img src="{{asset('assets/dashboard/images/demo/users/face18.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
+												<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
 											</div>
 											<div class="media-body">
 												<a href="#" class="media-title font-weight-semibold">Jordana Ansley</a>
@@ -84,46 +84,13 @@
 		
 										<li class="media">
 											<div class="mr-3">
-												<img src="{{asset('assets/dashboard/images/demo/users/face24.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
+												<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
 											</div>
 											<div class="media-body">
 												<a href="#" class="media-title font-weight-semibold">Will Brason</a>
 												<span class="d-block text-muted font-size-sm">Marketing manager</span>
 											</div>
 											<div class="ml-3 align-self-center"><span class="badge badge-mark border-danger"></span></div>
-										</li>
-		
-										<li class="media">
-											<div class="mr-3">
-												<img src="{{asset('assets/dashboard/images/demo/users/face17.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-											</div>
-											<div class="media-body">
-												<a href="#" class="media-title font-weight-semibold">Hanna Walden</a>
-												<span class="d-block text-muted font-size-sm">Project manager</span>
-											</div>
-											<div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
-										</li>
-		
-										<li class="media">
-											<div class="mr-3">
-												<img src="{{asset('assets/dashboard/images/demo/users/face19.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-											</div>
-											<div class="media-body">
-												<a href="#" class="media-title font-weight-semibold">Dori Laperriere</a>
-												<span class="d-block text-muted font-size-sm">Business developer</span>
-											</div>
-											<div class="ml-3 align-self-center"><span class="badge badge-mark border-warning-300"></span></div>
-										</li>
-		
-										<li class="media">
-											<div class="mr-3">
-												<img src="{{asset('assets/dashboard/images/demo/users/face16.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-											</div>
-											<div class="media-body">
-												<a href="#" class="media-title font-weight-semibold">Vanessa Aurelius</a>
-												<span class="d-block text-muted font-size-sm">UX expert</span>
-											</div>
-											<div class="ml-3 align-self-center"><span class="badge badge-mark border-grey-400"></span></div>
 										</li>
 									</ul>
 								</div>
@@ -153,7 +120,7 @@
 								<ul class="media-list">
 									<li class="media">
 										<div class="mr-3 position-relative">
-											<img src="{{asset('assets/dashboard/images/demo/users/face10.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
+											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
 										</div>
 	
 										<div class="media-body">
@@ -170,7 +137,7 @@
 	
 									<li class="media">
 										<div class="mr-3 position-relative">
-											<img src="{{asset('assets/dashboard/images/demo/users/face3.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
+											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
 										</div>
 	
 										<div class="media-body">
@@ -187,7 +154,7 @@
 	
 									<li class="media">
 										<div class="mr-3">
-											<img src="{{asset('assets/dashboard/images/demo/users/face24.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
+											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
 										</div>
 										<div class="media-body">
 											<div class="media-title">
@@ -203,7 +170,7 @@
 	
 									<li class="media">
 										<div class="mr-3">
-											<img src="{{asset('assets/dashboard/images/demo/users/face4.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
+											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
 										</div>
 										<div class="media-body">
 											<div class="media-title">
@@ -219,7 +186,7 @@
 	
 									<li class="media">
 										<div class="mr-3">
-											<img src="{{asset('assets/dashboard/images/demo/users/face25.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
+											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
 										</div>
 										<div class="media-body">
 											<div class="media-title">
