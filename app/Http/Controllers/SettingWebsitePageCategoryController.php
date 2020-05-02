@@ -38,6 +38,6 @@ class SettingWebsitePageCategoryController extends Controller
             'name' => $request->pagecategory,
             'slug' => CreateSlug::createslug($request->pagecategory)
         ]);
-        return redirect()->route('setting.website.pagecategory')->withSuccess('แก้ไขหมวดหมู่เพจสำเร็จ');
+        return redirect()->route('setting.website.pagecategory')->withSuccess('ลบหมวดหมู่เพจสำเร็จ');
     }
 }

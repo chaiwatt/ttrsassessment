@@ -30,3 +30,4 @@ class RegisteredCapitalType extends Model
     }
 
 }
+
