@@ -6,8 +6,8 @@
 		<!-- Basic -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
-
-		<title>Porto - Responsive HTML5 Template 7.4.0</title>	
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+		<title>TTRS | ศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศ</title>
 
 		<meta name="keywords" content="HTML5 Template" />
 		<meta name="description" content="Porto - Responsive HTML5 Template">
@@ -70,10 +70,10 @@
 										<nav class="header-nav-top">
 											<ul class="nav nav-pills text-uppercase text-2">
 												<li class="nav-item nav-item-anim-icon">
-													<a class="nav-link pl-0" href="{{route('login')}}"><i class="fas fa-angle-right"></i> เข้าสู่ระบบ</a>
+													<a class="nav-link pl-0" href="{{route('login')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> เข้าสู่ระบบ</a>
 												</li>
 												<li class="nav-item nav-item-anim-icon">
-													<a class="nav-link" href="{{route('register')}}"><i class="fas fa-angle-right"></i> ลงทะเบียน</a>
+													<a class="nav-link" href="{{route('register')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> ลงทะเบียน</a>
 												</li>
 											</ul>
 										</nav>
@@ -83,8 +83,7 @@
 									<div class="header-row">
 										<ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
 											<li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-											<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-											<li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+											<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-youtube"></i></a></li>											
 										</ul>
 									</div>
 								</div>
