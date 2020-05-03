@@ -13,18 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/term', function () {
-    return view('welcome');
-});
+// Route::get('/term', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('dashboard', 'HomeController@Index')->name('dashboard');
+Route::get('', 'HomeController@Index')->name('landing.index');
 
 
 Route::group(['prefix' => 'social'], function(){       

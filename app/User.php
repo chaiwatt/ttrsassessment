@@ -4,6 +4,7 @@ namespace App;
 
 use App\Model\Prefix;
 use App\Model\UserType;
+use App\Helper\LogAction;
 use App\Model\UserStatus;
 use App\Model\UserPosition;
 use Illuminate\Support\Facades\Cache;

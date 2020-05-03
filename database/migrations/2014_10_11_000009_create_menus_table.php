@@ -15,13 +15,13 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
+            $table->integer('parent_id')->default(0);
             $table->string('name',250)->comment('ชื่อเมนูเว็บไซต์ ภาษาไทย');
             $table->string('slug');
             $table->string('engname',250)->comment('ชื่อเมนูเว็บไซต์ ภาษาอังกฤษ')->nullable();
             $table->string('engslug',250)->nullable();
             $table->text('url')->comment('ลิงค์ของหน้าเพจ')->nullable();
-            $table->integer('parent_id')->default(0);
-            $table->char('hide')->default(0)->comment('ซ่อน/แสดงเมนู');
+            $table->char('hide')->default(1)->comment('ซ่อน/แสดงเมนู');
             $table->timestamps();
         });
     }
