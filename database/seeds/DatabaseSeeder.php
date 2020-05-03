@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPositionsTableSeeder::class);
         $this->call(ReligionsTableSeeder::class);
         $this->call(BusinessTypesTableSeeder::class);
+        $this->call(MenusTableSeeder::class);
         $this->call(UserStatusesTableSeeder::class);
         $this->call(BusinessPlanStatusSeeder::class);
         $this->call(PageStatusesTableSeeder::class);

@@ -21,5 +21,9 @@ class Menu extends Model
     {
         return LogAction::logAction('เมนูเว็บไซต์',$eventName);
     }
+    
+    public function childs() {
+        return $this->hasMany('App\Model\Menu','parent_id','id') ;
+    }
 }
 

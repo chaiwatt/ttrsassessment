@@ -131,72 +131,18 @@
 											<div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
 												<nav class="collapse">
 													<ul class="nav nav-pills" id="mainNav">
-														<li class="dropdown-full-color dropdown-light">
-															<a class="dropdown-item active" href="index.html" style="font-weight: 100;font-size:16px">
-																หน้าแรก
-															</a>
-															<ul class="dropdown-menu">
-															
-
-															</ul>
-														</li>
-
-														<li class="dropdown dropdown-full-color dropdown-light">
-															<a class="dropdown-item dropdown-toggle" href="#" style="font-weight: 100;font-size:16px">
-																เมนู1
-															</a>
-															<ul class="dropdown-menu">
-                                                                <li>
-																	<a class="dropdown-item" href="index.html">
-																		Landinsssg Page
-																	</a>
-																</li>
-																<li class="dropdown-submenu">
-																	<a class="dropdown-item" href="#">Headers</a>
-																	<ul class="dropdown-menu">
-																		<li><a class="dropdown-item" href="feature-headers-overview.html">Overview</a></li>
-																		<li class="dropdown-submenu">
-																			<a class="dropdown-item" href="#">Classic</a>
-																			<ul class="dropdown-menu">
-																				<li><a class="dropdown-item" href="feature-headers-classic.html">Classic</a></li>
-																				<li><a class="dropdown-item" href="feature-headers-classic-language-dropdown.html">Classic + Language Dropdown</a></li>
-																				<li><a class="dropdown-item" href="feature-headers-classic-big-logo.html">Classic + Big Logo</a></li>
-																			</ul>
-																		</li>
-																	</ul>
-																</li>
-												
-												
-															</ul>
-                                                        </li>
-                                                        <li class="dropdown dropdown-full-color dropdown-light">
-															<a class="dropdown-item dropdown-toggle" href="#" style="font-weight: 100;font-size:16px">
-																เมนู2
-															</a>
-															<ul class="dropdown-menu">
-                                                                <li>
-																	<a class="dropdown-item" href="index.html">
-																		Landinsssg Page
-																	</a>
-																</li>
-																<li class="dropdown-submenu">
-																	<a class="dropdown-item" href="#">Headers</a>
-																	<ul class="dropdown-menu">
-																		<li><a class="dropdown-item" href="feature-headers-overview.html">Overview</a></li>
-																		<li class="dropdown-submenu">
-																			<a class="dropdown-item" href="#">Classic</a>
-																			<ul class="dropdown-menu">
-																				<li><a class="dropdown-item" href="feature-headers-classic.html">Classic</a></li>
-																				<li><a class="dropdown-item" href="feature-headers-classic-language-dropdown.html">Classic + Language Dropdown</a></li>
-																				<li><a class="dropdown-item" href="feature-headers-classic-big-logo.html">Classic + Big Logo</a></li>
-																			</ul>
-																		</li>
-																	</ul>
-																</li>
-												
-												
-															</ul>
-														</li>
+                                                        @foreach($menus as $menu)
+                                                            <li class="{{ $menu->childs->count() ? 'dropdown' :'' }} dropdown-full-color dropdown-light">
+                                                                <a href="{{$menu->url}}" class="dropdown-item {{$menu->childs->count() ? 'dropdown-toggle' :'' }}" style="font-weight: 100;font-size:16px">
+                                                                    {{ $menu->name }}
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    @if($menu->childs->count())
+                                                                    @include('layouts.landing.menu.menusub',['childs' => $menu->childs])
+                                                                    @endif
+                                                                </ul>
+                                                            </li>
+                                                        @endforeach
 													</ul>
 												</nav>
 											</div>
