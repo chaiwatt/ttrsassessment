@@ -164,6 +164,7 @@ return [
         App\Providers\ComposerServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        'Intervention\Image\ImageServiceProvider',
         /*
          * Package Service Providers...
          */
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Image' => 'Intervention\Image\Facades\Image',
     ],
 
 ];
