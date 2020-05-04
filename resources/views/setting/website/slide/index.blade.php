@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขป้ายกำกับ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มหมวดหมู่ faq</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,10 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.website.tag')}}" class="breadcrumb-item"> ป้ายป้ายกำกับ</a>
-                    <span class="breadcrumb-item active">แก้ไขป้ายกำกับ</span>
+                    <a href="{{route('setting.website.faqcategory')}}" class="breadcrumb-item"> หมวดหมู่ faq</a>
+                    <span class="breadcrumb-item active">เพิ่มหมวดหมู่ faq</span>
                 </div>
-
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -50,14 +49,14 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.website.tag.editsave',['id' => $tag ->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.website.faqcategory.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ป้ายชื่อกำกับเพจ</label>
-                                            <input type="text"  name="tag" value="{{$tag ->name}}"  placeholder="ป้ายชื่อกำกับเพจ" class="form-control">
+                                            <label>เพิ่มหมวดหมู่ faq</label>
+                                            <input type="text"  name="faqcategory" value="{{old('faqcategory')}}"  placeholder="หมวดหมู่ faq" class="form-control">
                                         </div>
                                     </fieldset>
                                 </div>

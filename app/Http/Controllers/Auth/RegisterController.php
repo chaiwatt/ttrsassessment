@@ -58,7 +58,10 @@ class RegisterController extends Controller
         ]);
         Company::create([
             'name' => 'บริษัท'.$data['name'],
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'province_id' => 4,
+            'amphur_id' => 67,
+            'tambol_id' => 367,
         ]);
         return $user ; 
     }

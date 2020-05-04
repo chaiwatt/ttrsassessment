@@ -170,13 +170,6 @@
 									data-bgrepeat="no-repeat" 
 									class="rev-slidebg">
 				
-								<div class="tp-caption"
-									data-x="['left','left','center','center']" data-hoffset="['145','145','-150','-240']"
-									data-y="center" data-voffset="['-50','-50','-50','-75']"
-									data-start="1000"
-									data-transform_in="x:[-300%];opacity:0;s:500;"
-									data-transform_idle="opacity:0.5;s:500;"><img src="{{asset('assets/landing/img/slides/slide-title-border-light.png')}}" alt=""></div>
-				
 								<div class="tp-caption text-color-dark font-weight-normal"
 									data-x="['left','left','center','center']" data-hoffset="['200','200','0','0']"
 									data-y="center" data-voffset="['-50','-50','-50','-75']"
@@ -184,18 +177,6 @@
 									data-fontsize="['22','22','22','40']"
 									data-lineheight="['25','25','25','45']"
 									data-transform_in="y:[-50%];opacity:0;s:500;">DO YOU NEED A NEW</div>
-				
-								<div class="tp-caption d-none d-md-block"
-									data-frames='[{"delay":3800,"speed":500,"frame":"0","from":"opacity:0;x:10%;","to":"opacity:1;x:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
-									data-x="['left','left','center','center']" data-hoffset="['365','365','80','135']"
-									data-y="center" data-voffset="['-33','-33','-33','-55']"><img src="{{asset('assets/landing/img/slides/slide-blue-line.png')}}" alt=""></div>
-				
-								<div class="tp-caption"
-									data-x="['left','left','center','center']" data-hoffset="['440','440','150','240']"
-									data-y="center" data-voffset="['-50','-50','-50','-75']"
-									data-start="1000"
-									data-transform_in="x:[300%];opacity:0;s:500;"
-									data-transform_idle="opacity:0.5;s:500;"><img src="{{asset('assets/landing/img/slides/slide-title-border-light.png')}}" alt=""></div>
 				
 								<h1 class="tp-caption font-weight-extra-bold text-color-dark negative-ls-2"
 									data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'

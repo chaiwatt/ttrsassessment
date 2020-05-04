@@ -1,18 +1,18 @@
 <li class="nav-item nav-item-submenu ">
-    <a href="#" class="nav-link"><i class="icon-stack"></i> <span>รายงาน</span></a>
+    <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
         <li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
     </ul>
 </li>
 <li class="nav-item nav-item-submenu">
-    <a href="#" class="nav-link"><i class="icon-stack"></i> <span>การประเมิน</span></a>
+    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
         <li class="nav-item"><a href="" class="nav-link">รายการรอประเมิน</a></li>	
         <li class="nav-item"><a href="" class="nav-link">รายการผ่านประเมิน</a></li>										
     </ul>
 </li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.') ? 'nav-item-expanded nav-item-open' : '' }}">
-    <a href="#" class="nav-link"><i class="icon-stack"></i> <span>ตั้งค่า</span></a>
+    <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">
         <li class="nav-item"><a href="" class="nav-link">หมวดข่าว</a></li>
         <li class="nav-item"><a href="" class="nav-link">ป้ายกำกับ</a></li>	
@@ -38,8 +38,8 @@
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.pagestatus') ? 'active' : '' }}">สถานะเพจ</a></li>	
                 <li class="nav-item"><a href="{{route('setting.website.pagecategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.pagecategory') ? 'active' : '' }}">หมวดหมู่เพจ</a></li>
-                <li class="nav-item"><a href="{{route('setting.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.faqcategory') ? 'active' : '' }}">หมวดหมู่ faq</a></li>
-                <li class="nav-item"><a href="{{route('setting.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.tag') ? 'active' : '' }}">ป้ายชื่อกำกับเพจ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.faqcategory') ? 'active' : '' }}">หมวดหมู่ Faq</a></li>
+                <li class="nav-item"><a href="{{route('setting.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.tag') ? 'active' : '' }}">ป้ายกำกับ</a></li>		             
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.company') ? 'nav-item-expanded' : '' }}">

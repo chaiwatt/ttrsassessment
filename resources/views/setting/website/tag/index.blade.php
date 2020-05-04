@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">หมวดหมู่ faq</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">หมวดหมู่ Faq</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.website.tag.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มป้ายชื่อกำกับเพจ<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.website.tag.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มป้ายกำกับ<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <span class="breadcrumb-item active">ป้ายชื่อกำกับเพจ</span>
+                    <span class="breadcrumb-item active">ป้ายกำกับ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
