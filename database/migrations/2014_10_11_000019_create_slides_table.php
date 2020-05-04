@@ -15,8 +15,8 @@ class CreateSlidesTable extends Migration
     {
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
-            $table->char('usestyle')->default(1);
-            $table->char('style')->default(1);
+            $table->char('usestyle')->default(1)->comment('1=ใช้ 2=ไม่ใช้'); 
+            $table->char('style')->default(1)->comment('1=style1 2=style2');
             $table->string('style1_text1');
             $table->string('style1_text2');
             $table->string('style1_text3');
