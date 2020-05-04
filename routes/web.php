@@ -180,13 +180,14 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','SettingWebsiteTagController@EditSave')->name('setting.website.tag.editsave'); 
                 Route::get('delete/{id}','SettingWebsiteTagController@Delete')->name('setting.website.tag.delete'); 
             });
-            Route::group(['prefix' => 'home'], function(){
-                Route::get('','SettingWebsiteHomeController@Index')->name('setting.website.tag');           
-                Route::get('create','SettingWebsiteHomeController@Create')->name('setting.website.tag.create'); 
-                Route::post('createsave','SettingWebsiteHomeController@CreateSave')->name('setting.website.tag.createsave'); 
-                Route::get('edit/{id}','SettingWebsiteHomeController@Edit')->name('setting.website.tag.edit'); 
-                Route::post('editsave/{id}','SettingWebsiteHomeController@EditSave')->name('setting.website.tag.editsave'); 
-                Route::get('delete/{id}','SettingWebsiteHomeController@Delete')->name('setting.website.tag.delete'); 
+
+            Route::group(['prefix' => 'slide'], function(){
+                Route::get('','SettingWebsiteSlideController@Index')->name('setting.website.slide');           
+                Route::get('create','SettingWebsiteSlideController@Create')->name('setting.website.slide.create'); 
+                Route::post('createsave','SettingWebsiteSlideController@CreateSave')->name('setting.website.slide.createsave'); 
+                Route::get('edit/{id}','SettingWebsiteSlideController@Edit')->name('setting.website.slide.edit'); 
+                Route::post('editsave/{id}','SettingWebsiteSlideController@EditSave')->name('setting.website.slide.editsave'); 
+                Route::get('delete/{id}','SettingWebsiteSlideController@Delete')->name('setting.website.slide.delete'); 
             });
         }); 
         Route::group(['prefix' => 'company'], function(){

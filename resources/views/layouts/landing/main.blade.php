@@ -69,12 +69,21 @@
 									<div class="header-row">
 										<nav class="header-nav-top">
 											<ul class="nav nav-pills text-uppercase text-2">
-												<li class="nav-item nav-item-anim-icon">
-													<a class="nav-link pl-0" href="{{route('login')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> เข้าสู่ระบบ</a>
-												</li>
-												<li class="nav-item nav-item-anim-icon">
-													<a class="nav-link" href="{{route('register')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> ลงทะเบียน</a>
-												</li>
+												@if (!Auth::check())
+													<li class="nav-item nav-item-anim-icon">
+														<a class="nav-link pl-0" href="{{route('login')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> เข้าสู่ระบบ</a>
+													</li>
+													<li class="nav-item nav-item-anim-icon">
+														<a class="nav-link" href="{{route('register')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> ลงทะเบียน</a>
+													</li>
+												@else
+													<li class="nav-item nav-item-anim-icon">
+														<a class="dropdown-item" href="{{route('logout')}}" style="font-size: 14px" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-angle-right"></i>ออกจากระบบ</a>
+														<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+															@csrf
+														</form>
+													</li>
+												@endif
 											</ul>
 										</nav>
 									</div>

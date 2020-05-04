@@ -12,7 +12,6 @@ class LogAction
         }elseif ($action == 'deleted'){
             $action_name = 'ลบ';
         }
-
       return "โมเดลมีการ {$action_name} {$name}";
     } 
 }

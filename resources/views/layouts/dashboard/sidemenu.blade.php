@@ -40,6 +40,7 @@
                 <li class="nav-item"><a href="{{route('setting.website.pagecategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.pagecategory') ? 'active' : '' }}">หมวดหมู่เพจ</a></li>
                 <li class="nav-item"><a href="{{route('setting.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.faqcategory') ? 'active' : '' }}">หมวดหมู่ Faq</a></li>
                 <li class="nav-item"><a href="{{route('setting.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.tag') ? 'active' : '' }}">ป้ายกำกับ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.website.slide') ? 'active' : '' }}">ภาพสไลด์</a></li>		             
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.company') ? 'nav-item-expanded' : '' }}">

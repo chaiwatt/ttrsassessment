@@ -7,8 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มหมวดหมู่ faq</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ภาพสไลด์</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+            <div class="header-elements d-none">
+                <a href="{{route('setting.website.slide.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มภาพสไลด์<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -16,10 +19,9 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.website.faqcategory')}}" class="breadcrumb-item"> หมวดหมู่ faq</a>
-                    <span class="breadcrumb-item active">เพิ่มหมวดหมู่ faq</span>
+                    <span class="breadcrumb-item active">ภาพสไลด์</span>
                 </div>
+
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -33,13 +35,13 @@
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                 {{ Session::get('success') }}
             </div>
-        @elseif( Session::has('error') )
+            @elseif( Session::has('error') )
             <div class="alert alert-warning alert-styled-left alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                 {{ Session::get('error') }}
             </div>
-        @endif
-        @if ($errors->count() > 0)
+            @endif
+            @if ($errors->count() > 0)
             <div class="alert alert-warning alert-styled-left alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                 {{ $errors->first() }}
@@ -48,24 +50,43 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">ภาพสไลด์</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.website.faqcategory.createsave')}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">	
-                                <div class="col-md-12">
-                                    <fieldset>	
-                                        <div class="form-group">
-                                            <label>เพิ่มหมวดหมู่ faq</label>
-                                            <input type="text"  name="faqcategory" value="{{old('faqcategory')}}"  placeholder="หมวดหมู่ faq" class="form-control">
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                            </div>
-                        </form>
-
+                        <div class="table-responsive">
+                            <table class="table table-striped" >
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>ชื่อภาพสไลด์</th>     
+                                        <th>สไตล์</th>      
+                                        <th>สถานะ</th>                        
+                                        <th style="width:150px">เพิ่มเติม</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($slides as $key => $slide)
+                                    <tr>    
+                                        <td> {{$key+1}} </td>
+                                        <td> {{$slide->name}} </td>     
+                                        <td> {{$slide->slide_style_id}} </td>                                     
+                                        <td> {{$slide->slide_status_id}} </td>  
+                                        <td> 
+                                            <a href="{{route('setting.website.slide.edit',['id' => $slide->id])}}" class=" badge bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.website.slide.delete',['id' => $slide->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>      
+                        </div>
                     </div>
                 </div>
             <!-- /striped rows -->
@@ -76,4 +97,12 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+    <script>
+        var route = {
+            url: "{{ url('/') }}",
+            token: $('meta[name="csrf-token"]').attr('content'),
+            branchid: "{{Auth::user()->branch_id}}"
+        };
+    </script>
 @stop

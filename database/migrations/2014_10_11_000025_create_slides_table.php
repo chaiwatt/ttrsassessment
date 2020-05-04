@@ -15,17 +15,14 @@ class CreateSlidesTable extends Migration
     {
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
-            $table->char('usestyle')->default(1)->comment('1=ใช้ 2=ไม่ใช้'); 
-            $table->char('style')->default(1)->comment('1=style1 2=style2');
-            $table->string('style1_text1');
-            $table->string('style1_text2');
-            $table->string('style1_text3');
-            $table->string('style1_slide');
-            $table->string('style1_link');
-            $table->string('style2_text1');
-            $table->string('style2_text2');
-            $table->string('style2_text3');
-            $table->string('style2_slide');
+            $table->unsignedBigInteger('slide_status_id')->comment('1=ใช้ 2=ไม่ใช้');
+            $table->unsignedBigInteger('slide_style_id')->comment('1=style1 2=style2');
+            $table->string('textone',250)->nullable();
+            $table->string('texttwo',250)->nullable();
+            $table->string('texthree',250)->nullable();
+            $table->string('url',250)->nullable();
+            $table->string('name',250);
+            $table->string('file',250);
             $table->timestamps();
         });
     }
