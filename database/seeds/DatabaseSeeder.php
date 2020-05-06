@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SlideStylesTableSeeder::class);
         $this->call(SlideStatusesTableSeeder::class);
         $this->call(UserPositionsTableSeeder::class);
+        $this->call(CriteriasTableSeeder::class);
         $this->call(ReligionsTableSeeder::class);
         $this->call(BusinessTypesTableSeeder::class);
         $this->call(MenusTableSeeder::class);
@@ -36,5 +37,8 @@ class DatabaseSeeder extends Seeder
         $this->call(IndustryGroupsTableSeeder::class);
         $this->call(RegisteredCapitalTypesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(CriteriaGroupsTableSeeder::class);
+        $this->call(CriteriaGroupTransactionsTableSeeder::class);
+        
     }
 }

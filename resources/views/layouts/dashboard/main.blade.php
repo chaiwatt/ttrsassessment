@@ -316,9 +316,10 @@
 	<!-- Theme JS files -->
 	<script src="{{asset('assets/dashboard/js/plugins/forms/selects/select2.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/forms/styling/uniform.min.js')}}"></script>
-	
+	{{-- <script src="{{asset('assets/dashboard/js/plugins/forms/inputs/duallistbox/duallistbox.min.js')}}"></script> --}}
 	<script src="{{asset('assets/dashboard/js/app.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/demo_pages/form_layouts.js')}}"></script>
+	{{-- <script src="{{asset('assets/dashboard/js/demo_pages/form_dual_listboxes.js')}}"></script> --}}
 	{{-- <script src="{{asset('assets/dashboard/js/app/checkregister.js')}}"></script> --}}
 
 	@section('pageScript')
