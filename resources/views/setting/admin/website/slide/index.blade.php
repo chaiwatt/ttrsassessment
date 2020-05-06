@@ -76,8 +76,15 @@
                                     <tr>    
                                         <td> {{$key+1}} </td>
                                         <td> {{$slide->name}} </td>     
-                                        <td> {{$slide->slide_style_id}} </td>                                     
-                                        <td> {{$slide->slide_status_id}} </td>  
+                                        <td> {{$slide->slidestyle->name}} </td>                                     
+                                        <td>
+                                            @if ($slide->slide_status_id == 1)
+                                                    <span class="badge badge-flat border-success text-success-600">{{$slide->slidestatus->name}}</span>
+                                                @else
+                                                    <span class="badge badge-flat border-warning text-warning-600">{{$slide->slidestatus->name}}</span>
+                                            @endif
+                                            
+                                         </td>  
                                         <td> 
                                             <a href="{{route('setting.admin.website.slide.edit',['id' => $slide->id])}}" class=" badge bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.website.slide.delete',['id' => $slide->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
