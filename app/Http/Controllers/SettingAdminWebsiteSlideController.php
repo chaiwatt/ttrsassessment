@@ -71,5 +71,13 @@ class SettingAdminWebsiteSlideController extends Controller
         return redirect()->route('setting.admin.website.slide')->withSuccess('แก้ไขสไลด์สำเร็จ');
     }
 
+    public function Delete($id){
+        $slide = Slide::find($id);
+        if(!Empty($slide->file)){
+            unlink($slide->file);  
+        }
+        Slide::find($id)->delete();
+        return redirect()->route('setting.admin.website.slide')->withSuccess('ลบสไลด์สำเร็จ');
+    }
 }
 

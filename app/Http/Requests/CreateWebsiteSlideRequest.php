@@ -21,8 +21,7 @@ class CreateWebsiteSlideRequest extends FormRequest
         return [
             'slidestatus' => 'required',
             'slidestyle' => 'required',
-            'picture' => 'required',
-            'picture' => 'image|mimes:jpeg,png,jpg|max:1024'  //1024 = 1MB
+            'picture' => 'required|image|mimes:jpeg,png,jpg|max:1024'  //1024 = 1MB
         ];
     }
     public function messages()
