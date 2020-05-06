@@ -21,6 +21,11 @@ class SettingAdminWebsiteSlideController extends Controller
                                             ->withSlidestyles($slidestyles);
     }
     public function CreateSave(CreateWebsiteSlideRequest $request){
+        $imgpath = public_path("storage/uploads/slide/");
+        if (!file_exists($imgpath)) {
+            mkdir($imgpath, 0777, true);
+        }
+        return 'ok';
         $filelocation = '';
         $file = $request->file('picture');
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
@@ -55,7 +60,7 @@ class SettingAdminWebsiteSlideController extends Controller
             unlink($slide->file);   
         }
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-        $file->move("storage/uploads/slide" , $new_name);   //แล้วอัพโหลดไฟล์ใหม่เข้าไป
+        $file->move("storage/uploads/slide" , $new_name);   
         $filelocation = "storage/uploads/slide/".$new_name;
 
         $slide = Slide::find($id)->update([
