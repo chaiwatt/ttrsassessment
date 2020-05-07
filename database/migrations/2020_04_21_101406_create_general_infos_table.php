@@ -17,19 +17,17 @@ class CreateGeneralInfosTable extends Migration
             $table->id();
             $table->string('company',150)->comment('ชื่อหน่วยงาน เช่น สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ');
             $table->string('logo',250)->nullable();
-            $table->string('phone',50);
-            $table->string('fax',50);
-            $table->string('email',200);
-            $table->text('address');
-            $table->string('lat',100)->nullable();
-            $table->string('lng',100)->nullable();
-            $table->string('facebookpage',150)->nullable();
-            $table->string('youtube',150)->nullable();
-            $table->string('twitter',150)->nullable();
-            $table->string('client_id');
-            $table->string('client_secret');
-            $table->string('thsmsuser')->nullable();
-            $table->string('thsmspass')->nullable();
+            $table->string('phone',50)->nullable();
+            $table->string('fax',50)->nullable();
+            $table->string('email',200)->nullable();
+            $table->string('address',150)->nullable();
+            $table->unsignedBigInteger('province_id')->default(4);  //ปทุมธานี
+            $table->unsignedBigInteger('amphur_id')->default(67);   //คลองหลวง
+            $table->unsignedBigInteger('tambol_id')->default(367);  //คลองหนึ่ง
+            $table->string('client_id',250);
+            $table->string('client_secret',250);
+            $table->string('thsmsuser',250)->nullable();
+            $table->string('thsmspass',250)->nullable();
             $table->unsignedBigInteger('verify_status_id')->default(1);
             $table->timestamps();
         });
