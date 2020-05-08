@@ -3,114 +3,297 @@
 @stop
 @section('content')
     <!-- Page header -->
-    {{-- <div class="page-header page-header-light">
-        
- 
-
-        <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-            <div class="d-flex">
-                <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ผู้ใช้งานระบบ</a>
-                    <span class="breadcrumb-item active">ผู้ใช้งาน</span>
-                </div>
-
-                <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-            </div>
-        </div>
-    </div> --}}
-    <!-- /page header -->
- 
-				<!-- Cover area -->
-				<div class="profile-cover">
-					<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
-					<div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
-						<div class="mr-md-3 mb-2 mb-md-0">
-							<a href="#" class="profile-thumb">
-								<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
-							</a>
-						</div>
-
-						<div class="media-body text-white">
-				    		<h1 class="mb-0">{{Auth::user()->name}} {{Auth::user()->lastname}}</h1>
-				    		<span class="d-block">{{Auth::user()->userposition->name}}</span>
-						</div>
-
-						<div class="ml-md-3 mt-2 mt-md-0">
-							<ul class="list-inline list-inline-condensed mb-0">
-								<li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</a></li>
-								{{-- <li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-stats mr-2"></i> Statistics</a></li> --}}
-							</ul>
-						</div>
-					</div>
+	{{-- modal expertexpience --}}
+	<div id="modal_expertexpience" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการประสบการณ์</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-				<!-- /cover area -->
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ตำแหน่ง</label><span class="text-danger">*</span>
+								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>หน่วยงาน/บริษัท</label><span class="text-danger">*</span>
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>รายละเอียดของประสบการณ์</label>
+								<textarea  id="expertexpiencedetail" rows="3"  placeholder="รายละเอียดของประสบการณ์" class="form-control"></textarea>
+							</div>
+						</div>
 
-
-				<!-- Profile navigation -->
-				<div class="navbar navbar-expand-lg navbar-light bg-light">
-					<div class="text-center d-lg-none w-100">
-						<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-second">
-							<i class="icon-menu7 mr-2"></i>
-							Profile navigation
-						</button>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ปีที่เริ่ม</label><span class="text-danger">*</span>
+								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ปี่ที่สิ้นสุด</label><span class="text-danger">*</span>
+								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+							</div>
+						</div>
 					</div>
-
-					<div class="navbar-collapse collapse" id="navbar-second">
-						<ul class="nav navbar-nav">
-							<li class="nav-item">
-								<a href="#messagebox" class="navbar-nav-link active" data-toggle="tab">
-									<i class="icon-mail5 mr-2"></i>
-									กล่องข้อความ
-									<span class="badge badge-pill bg-success position-static ml-auto ml-lg-2">2</span>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab">
-									<i class="icon-user mr-2"></i>
-									ข้อมูลส่วนตัว			
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab">
-									<i class="icon-medal-star mr-2"></i>
-									ข้อมูลผู้เชี่ยวชาญ
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#organizationinfo" class="navbar-nav-link" data-toggle="tab">
-									<i class="icon-cog3 mr-2"></i>
-									ข้อมูลหน่วยงาน
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#activitylog" class="navbar-nav-link" data-toggle="tab">
-									<i class="icon-stack-text mr-2"></i>
-									ข้อมูล Log
-								</a>
-							</li>
-						</ul>
-
-						<ul class="navbar-nav ml-lg-auto">
-							<li class="nav-item">
-								<a href="#photos" class="nav-link" data-toggle="tab">
-									<i class="icon-images2 mr-2"></i>
-									รูป
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="#friends" class="nav-link" data-toggle="tab">
-									
-									<span class="badge badge-flat border-grey-400 text-default">15</span>
-									<i class="icon-users mr-2"></i>
-									
-									เพื่อน
-									<span class="badge badge-pill bg-warning-400 " >2</span>
-								</a>
-							</li>
-						</ul>
-					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_expertexpience" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
 				</div>
-				<!-- /profile navigation -->
+			</div>
+		</div>
+	</div>
+	{{-- modal edit expertexpience --}}
+	<div id="modal_edit_expertexpience" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการประสบการณ์</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ตำแหน่ง</label><span class="text-danger">*</span>
+								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>หน่วยงาน/บริษัท</label><span class="text-danger">*</span>
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>รายละเอียดของประสบการณ์</label>
+								<textarea  id="expertexpiencedetail" rows="3"  placeholder="รายละเอียดของประสบการณ์" class="form-control"></textarea>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ปีที่เริ่ม</label><span class="text-danger">*</span>
+								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ปี่ที่สิ้นสุด</label><span class="text-danger">*</span>
+								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_expertexpience" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{-- modal experteducation --}}
+	<div id="modal_experteducation" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการประวัติการศึกษา</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ระดับการศึกษา</label><span class="text-danger">*</span>
+								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>สาขาวิชา/วิชาเอก</label><span class="text-danger">*</span>
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>สถาบันการศึกษา</label>
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ประเทศ</label><span class="text-danger">*</span>
+								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ปีที่จบการศึกษา</label><span class="text-danger">*</span>
+								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_experteducation" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+				</div>
+			</div>
+		</div>
+	</div>
+ 	{{-- modal edit experteducation --}}
+	 <div id="modal_edit_experteducation" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการประวัติการศึกษา</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ระดับการศึกษา</label><span class="text-danger">*</span>
+								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>สาขาวิชา/วิชาเอก</label><span class="text-danger">*</span>
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>สถาบันการศึกษา</label>
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ประเทศ</label><span class="text-danger">*</span>
+								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ปีที่จบการศึกษา</label><span class="text-danger">*</span>
+								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_experteducation" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Cover area -->
+	<div class="profile-cover">
+		<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
+		<div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
+			<div class="mr-md-3 mb-2 mb-md-0">
+				<a href="#" class="profile-thumb">
+					<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
+				</a>
+			</div>
+
+			<div class="media-body text-white">
+				<h1 class="mb-0">{{Auth::user()->name}} {{Auth::user()->lastname}}</h1>
+				<span class="d-block">{{Auth::user()->userposition->name}}</span>
+			</div>
+
+			<div class="ml-md-3 mt-2 mt-md-0">
+				<ul class="list-inline list-inline-condensed mb-0">
+					<li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</a></li>
+					{{-- <li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-stats mr-2"></i> Statistics</a></li> --}}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /cover area -->
+
+
+	<!-- Profile navigation -->
+	<div class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="text-center d-lg-none w-100">
+			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-second">
+				<i class="icon-menu7 mr-2"></i>
+				Profile navigation
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-second">
+			<ul class="nav navbar-nav">
+				<li class="nav-item">
+					<a href="#messagebox" class="navbar-nav-link active" data-toggle="tab">
+						<i class="icon-mail5 mr-2"></i>
+						กล่องข้อความ
+						<span class="badge badge-pill bg-success position-static ml-auto ml-lg-2">2</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab">
+						<i class="icon-user mr-2"></i>
+						ข้อมูลส่วนตัว			
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab">
+						<i class="icon-medal-star mr-2"></i>
+						ข้อมูลผู้เชี่ยวชาญ
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#organizationinfo" class="navbar-nav-link" data-toggle="tab">
+						<i class="icon-cog3 mr-2"></i>
+						ข้อมูลหน่วยงาน
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#activitylog" class="navbar-nav-link" data-toggle="tab">
+						<i class="icon-stack-text mr-2"></i>
+						ข้อมูล Log
+					</a>
+				</li>
+			</ul>
+
+			<ul class="navbar-nav ml-lg-auto">
+				<li class="nav-item">
+					<a href="#photos" class="nav-link" data-toggle="tab">
+						<i class="icon-images2 mr-2"></i>
+						รูป
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#friends" class="nav-link" data-toggle="tab">
+						
+						<span class="badge badge-flat border-grey-400 text-default">15</span>
+						<i class="icon-users mr-2"></i>
+						
+						เพื่อน
+						<span class="badge badge-pill bg-warning-400 " >2</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /profile navigation -->
 
     <!-- Content area -->
     <div class="content">
@@ -257,102 +440,78 @@
 					    <div class="tab-pane fade" id="expertinfo">
 							<!-- expertinfo -->
 							<div class="card">
-								<div class="card-header header-elements-inline">
-									<h5 class="card-title">ข้อมูลผู้เชียวชาญ</h5>
-									<div class="header-elements">
-										<div class="list-icons">
-					                		<a class="list-icons-item" data-action="collapse"></a>
-					                		<a class="list-icons-item" data-action="reload"></a>
-					                		<a class="list-icons-item" data-action="remove"></a>
-					                	</div>
-				                	</div>
-								</div>
-
 								<div class="card-body">
-									<form action="#">
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Username</label>
-													<input type="text" value="Eugene" class="form-control">
+									<div class="card-body">
+										<ul class="nav nav-tabs nav-tabs-highlight">
+											<li class="nav-item"><a href="#left-icon-expertexpience" class="nav-link active" data-toggle="tab"><i class="icon-stack-star mr-2"></i> ประสบการณ์การทำงาน</a></li>
+											<li class="nav-item"><a href="#left-icon-experteducation" class="nav-link" data-toggle="tab"><i class="icon-medal mr-2"></i> ประวัติการศึกษา</a></li>
+										</ul>
+		
+										<div class="tab-content">
+											<div class="tab-pane fade show active" id="left-icon-expertexpience">
+												<div class="row">
+													<div class="col-md-12">	
+													<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_expertexpience"><i class="icon-add"></i></a>
+													</div>
+												</div>																								
+												<div class="row">	
+													<div class="col-md-12" id="expertexpience_wrapper" >	
+													</div>
 												</div>
-												<div class="col-md-6">
-													<label>Full name</label>
-													<input type="text" value="Kopyov" class="form-control">
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="table-responsive">
+															<table class="table table-striped">
+																<thead>
+																	<tr>
+																		<th>หน่วยงาน/บริษัท</th>
+																		<th>ตำแหน่ง</th>
+																		<th>ปีที่เริ่ม</th>      
+																		<th>ปีที่สิ้นสุด</th>                                                                             
+																		<th style="width:120px">เพิ่มเติม</th>
+																	</tr>
+																</thead>
+																<tbody id="expertexpience_wrapper_tr">                                
+																</tbody>
+															</table>
+														</div>
+													</div>      
+												</div>
+											</div>
+		
+											<div class="tab-pane fade" id="left-icon-experteducation">
+												<div class="row">
+													<div class="col-md-12">	
+													<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_experteducation"><i class="icon-add"></i></a>
+													</div>
+												</div>																								
+												<div class="row">	
+													<div class="col-md-12" id="experteducation_wrapper" >	
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="table-responsive">
+															<table class="table table-striped">
+																<thead>
+																	<tr>
+																		<th>ระดับการศึกษา</th>
+																		<th>สาขาวิชา/วิชาเอก</th>
+																		<th>สถาบัน</th>      
+																		{{-- <th>ประเทศ</th>   
+																		<th>ปีที่จบ</th>                                                                          --}}
+																		<th style="width:120px">เพิ่มเติม</th>
+																	</tr>
+																</thead>
+																<tbody id="experteducation_wrapper_tr">                                
+																</tbody>
+															</table>
+														</div>
+													</div>      
 												</div>
 											</div>
 										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Address line 1</label>
-													<input type="text" value="Ring street 12" class="form-control">
-												</div>
-												<div class="col-md-6">
-													<label>Address line 2</label>
-													<input type="text" value="building D, flat #67" class="form-control">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-4">
-													<label>City</label>
-													<input type="text" value="Munich" class="form-control">
-												</div>
-												<div class="col-md-4">
-													<label>State/Province</label>
-													<input type="text" value="Bayern" class="form-control">
-												</div>
-												<div class="col-md-4">
-													<label>ZIP code</label>
-													<input type="text" value="1031" class="form-control">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Email</label>
-													<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
-												</div>
-												<div class="col-md-6">
-						                            <label>Your country</label>
-						                            <select class="form-control form-control-select2" data-fouc>
-						                                <option value="germany" selected>Germany</option> 
-						                                <option value="france">France</option> 
-						                                <option value="spain">Spain</option> 
-						                                <option value="netherlands">Netherlands</option> 
-						                                <option value="other">...</option> 
-						                                <option value="uk">United Kingdom</option> 
-						                            </select>
-												</div>
-											</div>
-										</div>
-
-				                        <div class="form-group">
-				                        	<div class="row">
-				                        		<div class="col-md-6">
-													<label>Phone #</label>
-													<input type="text" value="+99-99-9999-9999" class="form-control">
-													<span class="form-text text-muted">+99-99-9999-9999</span>
-				                        		</div>
-
-												<div class="col-md-6">
-													<label>Upload profile image</label>
-				                                    <input type="file" class="form-input-styled" data-fouc>
-				                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-												</div>
-				                        	</div>
-				                        </div>
-
-				                        <div class="text-right">
-				                        	<button type="submit" class="btn btn-primary">Save changes</button>
-				                        </div>
-									</form>
+									</div>
 								</div>
 							</div>
 							<!-- /expertinfo -->
@@ -438,7 +597,7 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-6">
-												<label>lineclint</label>
+												<label>lineclint <a href="https://notify-bot.line.me/en/" target="_blank">ลิงค์</a></label>
 												<input type="text" name="lineclint" data-placeholder="lineclint" class="form-control">
 											</div>
 											<div class="col-md-6">
@@ -888,7 +1047,6 @@
 
 					</div>
 					<!-- /right sidebar component -->
-
 				</div>
 				<!-- /inner container -->
     </div>
@@ -896,6 +1054,7 @@
 @endsection
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js')}}"></script>
     <script>
 		var route = {
 			url: "{{ url('/') }}",
