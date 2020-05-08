@@ -1,6 +1,9 @@
 
 var a=0;
 $(document).on("click","#btn_modal_expertexpience",function(e){
+    if($("#expertexpienceposition").val() == '' || $("#expertexpiencecompany").val() == '' || $("#expertexpiencedetail").val() == '' || $("#fromyear").val() == '' || $("#toyear").val() == ''){
+        return;
+    }
     a++;
      var html = `
      <div class="row expertexpienceclass${a}" >							
@@ -43,41 +46,43 @@ $(document).on("click","#btn_modal_expertexpience",function(e){
 
 var b=0;
 $(document).on("click","#btn_modal_experteducation",function(e){
+    if($("#institute").val() == '' || $("#graduatedyear").val() == '' ){
+        return;
+    }
     b++;
      var html = `
      <div class="row experteducationclass${b}" >							
         <div class="col-md-1">
             <div class="form-group">
-                <input type="text" name="expertexpienceposition[${b}]" id="expertexpienceposition${b}" value="${$("#expertexpienceposition").val()}" class="form-control" >
+                <input type="text" name="educationlevel[${b}]" id="educationlevel${b}" value="${$("#educationlevel").val()}" class="form-control" >
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="expertexpiencecompany[${b}]" id="expertexpiencecompany${b}" value="${$("#expertexpiencecompany").val()}" class="form-control" >
+                <input type="text" name="educationbranch[${b}]" id="educationbranch${b}" value="${$("#educationbranch").val()}" class="form-control" >
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="expertexpiencedetail[${b}]" id="expertexpiencedetail${b}" value="${$("#expertexpiencedetail").val()}" class="form-control" >
+                <input type="text" name="institute[${b}]" id="institute${b}" value="${$("#institute").val()}" class="form-control" >
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="fromyear[${b}]" id="fromyear${b}" value="${$("#fromyear").val()}" class="form-control" >
+                <input type="text" name="country[${b}]" id="country${b}" value="${$("#country").val()}" class="form-control" >
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="toyear[${b}]" id="toyear${b}" value="${$("#toyear").val()}" class="form-control" >
+                <input type="text" name="graduatedyear[${b}]" id="graduatedyear${b}" value="${$("#graduatedyear").val()}" class="form-control" >
             </div>
         </div>
     </div>`;
      $('#experteducation_wrapper').append(html);
-    var tr = `<tr class="expertexpienceclass${b}">	
-    <td> ${$('#expertexpiencecompany').val()}</td>                                     
-    <td> ${$('#expertexpienceposition').val()}</td>  
-    <td> ${$('#fromyear').val()}</td>  
-    <td> ${$('#toyear').val()}</td>    
+    var tr = `<tr class="experteducationclass${b}">	
+    <td> ${$('#educationlevel').find(':selected').data('name')}</td>                                     
+    <td> ${$('#educationbranch').find(':selected').data('name')}</td>  
+    <td> ${$('#institute').val()}</td>  
     <td> <a type="button" data-id="experteducationclass${b}"  class="btn btn-danger-400 btn-sm deleteexperteducationclass" ><i class="icon-trash danger"></i></a></td>
     </tr>`;
     $('#experteducation_wrapper_tr').append(tr);

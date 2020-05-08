@@ -35,13 +35,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปีที่เริ่ม</label><span class="text-danger">*</span>
-								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+								<input type="number" maxlength="4" id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปี่ที่สิ้นสุด</label><span class="text-danger">*</span>
-								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+								<input type="number" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
 							</div>
 						</div>
 					</div>
@@ -85,13 +85,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปีที่เริ่ม</label><span class="text-danger">*</span>
-								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+								<input type="number" maxlength="4" id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปี่ที่สิ้นสุด</label><span class="text-danger">*</span>
-								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+								<input type="number" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
 							</div>
 						</div>
 					</div>
@@ -116,32 +116,44 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ระดับการศึกษา</label><span class="text-danger">*</span>
-								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+								<select id="educationlevel" data-placeholder="สาขาวิชา/วิชาเอก" class="form-control form-control-select2">
+									@foreach ($educationlevels as $educationlevel)
+										<option value="{{$educationlevel->id}}" data-name="{{$educationlevel->name}}">{{$educationlevel->name}}</option> 
+									@endforeach
+								</select>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>สาขาวิชา/วิชาเอก</label><span class="text-danger">*</span>
-								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+								<select id="educationbranch" data-placeholder="สาขาวิชา/วิชาเอก" class="form-control form-control-select2">
+									@foreach ($educationbranches as $educationbranch)
+										<option value="{{$educationbranch->id}}" data-name="{{$educationbranch->name}}">{{$educationbranch->name}}</option> 
+									@endforeach
+								</select>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>สถาบันการศึกษา</label>
-								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+								<input type="text" id="institute" placeholder="หน่วยงาน/บริษัท" class="form-control" >
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ประเทศ</label><span class="text-danger">*</span>
-								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+								<select id="country" data-placeholder="ประเทศ" class="form-control form-control-select2">
+									@foreach ($countries as $country)
+										<option value="{{$country->id}}" data-name="{{$country->name}}">{{$country->name}}</option> 
+									@endforeach
+								</select>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>ปีที่จบการศึกษา</label><span class="text-danger">*</span>
-								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+								<label>ปีพ.ศ.ที่จบการศึกษา</label><span class="text-danger">*</span>
+								<input type="number" maxlength="4" id="graduatedyear" placeholder="ปีที่จบการศึกษา" class="form-control" >
 							</div>
 						</div>
 					</div>
@@ -190,8 +202,8 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>ปีที่จบการศึกษา</label><span class="text-danger">*</span>
-								<input type="text" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+								<label>ปีพ.ศ.ที่จบการศึกษา</label><span class="text-danger">*</span>
+								<input type="text" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
 							</div>
 						</div>
 					</div>
@@ -212,12 +224,10 @@
 					<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
 				</a>
 			</div>
-
 			<div class="media-body text-white">
 				<h1 class="mb-0">{{Auth::user()->name}} {{Auth::user()->lastname}}</h1>
 				<span class="d-block">{{Auth::user()->userposition->name}}</span>
 			</div>
-
 			<div class="ml-md-3 mt-2 mt-md-0">
 				<ul class="list-inline list-inline-condensed mb-0">
 					<li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</a></li>

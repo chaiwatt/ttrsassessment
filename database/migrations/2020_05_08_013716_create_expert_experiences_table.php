@@ -20,8 +20,8 @@ class CreateExpertExperiencesTable extends Migration
             $table->string('position',250)->nullable();
             $table->string('jobdetail')->nullable();
             $table->string('company',250)->nullable();
-            $table->date('fromyear')->nullable();
-            $table->date('toyear')->nullable();
+            $table->char('fromyear',4)->nullable();
+            $table->char('toyear',4)->nullable();
             $table->timestamps();
         });
     }

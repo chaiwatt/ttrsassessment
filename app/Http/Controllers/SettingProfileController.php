@@ -7,8 +7,13 @@ use App\Model\Amphur;
 use App\Model\Prefix;
 use App\Model\Tambol;
 use App\UserPosition;
+use App\Model\Country;
 use App\Model\Province;
 use Illuminate\Http\Request;
+use App\Model\EducationLevel;
+use App\Model\EducationBranch;
+use App\Model\ExpertEducation;
+use App\Model\ExpertExperience;
 use Illuminate\Support\Facades\Auth;
 
 class SettingProfileController extends Controller
@@ -20,6 +25,9 @@ class SettingProfileController extends Controller
         $this->middleware('role:1,2,3'); 
     }
     public function Edit($userid){
+        $educationlevels = EducationLevel::get();
+        $educationbranches = EducationBranch::get();
+        $countries = Country::get();
         $auth = Auth::user();
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$auth->province_id)->get();
@@ -32,6 +40,9 @@ class SettingProfileController extends Controller
                                         ->withProvinces($provinces)
                                         ->withAmphurs($amphurs)
                                         ->withTambols($tambols)
-                                        ->withUserpositions($userpositions);
+                                        ->withUserpositions($userpositions)
+                                        ->withEducationlevels($educationlevels)
+                                        ->withEducationbranches($educationbranches)
+                                        ->withCountries($countries);
     }
 }
