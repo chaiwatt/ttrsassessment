@@ -2,27 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\IntroSection;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function Index()
     {
-        return view('landing.index');
+        $introsections = IntroSection::get();
+        return view('landing.index')->withIntrosections($introsections);
     }
 }

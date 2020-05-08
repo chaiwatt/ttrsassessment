@@ -52,7 +52,7 @@ class SettingAdminWebsiteSlideController extends Controller
         $file = $request->picture; 
         $slide = Slide::find($id);
         if(!Empty($file)){    
-            unlink($slide->file);   
+            @unlink($slide->file);   
         }
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
         $file->move("storage/uploads/slide" , $new_name);   
@@ -74,7 +74,7 @@ class SettingAdminWebsiteSlideController extends Controller
     public function Delete($id){
         $slide = Slide::find($id);
         if(!Empty($slide->file)){
-            unlink($slide->file);  
+            @unlink($slide->file);  
         }
         Slide::find($id)->delete();
         return redirect()->route('setting.admin.website.slide')->withSuccess('ลบสไลด์สำเร็จ');

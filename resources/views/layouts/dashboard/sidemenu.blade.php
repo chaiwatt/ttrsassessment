@@ -28,6 +28,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.registeredcapitaltype')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.registeredcapitaltype') ? 'active' : '' }}">การจดทะเบียน</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.businessplanstatus') ? 'active' : '' }}">สถานะการวางแผนธุรกิจ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.userposition')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.userposition') ? 'active' : '' }}">ตำแหน่งผู้ใช้งาน</a></li>
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.expertposition')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.expertposition') ? 'active' : '' }}">ตำแหน่ง Expert</a></li>
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.admin.website') ? 'nav-item-expanded' : '' }}">
@@ -38,6 +39,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.faqcategory') ? 'active' : '' }}">หมวดหมู่ Faq</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.tag') ? 'active' : '' }}">ป้ายกำกับ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.slide') ? 'active' : '' }}">ภาพสไลด์</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.introsection') ? 'active' : '' }}">Intro section</a></li>		             
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.admin.user') ? 'nav-item-expanded' : '' }}">

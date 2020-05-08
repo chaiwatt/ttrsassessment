@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ภาพสไลด์</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Intro section</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="{{route('setting.admin.website.slide')}}" class="breadcrumb-item"> ภาพสไลด์</a>
-                    <span class="breadcrumb-item active">เพิ่มภาพสไลด์</span>
+                    <a href="{{route('setting.admin.website.introsection')}}" class="breadcrumb-item"> Intro section</a>
+                    <span class="breadcrumb-item active">เพิ่ม Intro section</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -49,55 +49,39 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.slide.createsave')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.introsection.editsave',['id' => $introsection->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>สถานะการแสดง<span class="text-danger">*</span></label>
-                                            <select name="slidestatus" data-placeholder="คำนำหน้า" class="form-control form-control-select2">
-                                                @foreach ($slidestatuses as $slidestatus)
-                                                    <option value="{{$slidestatus->id}}" >{{$slidestatus->name}}</option> 
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>สไตล์<span class="text-danger">*</span></label>
-                                            <select name="slidestyle" data-placeholder="คำนำหน้า" class="form-control form-control-select2">
-                                                @foreach ($slidestyles as $slidestyle)
-                                                    <option value="{{$slidestyle->id}}" >{{$slidestyle->name}}</option> 
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
                                             <label>ข้อความที่1</label>
-                                            <input type="text"  name="textone" value="{{old('textone')}}"  placeholder="ข้อความที่1" class="form-control">
+                                            <input type="text"  name="textone" value="{{$introsection->text1}}"  placeholder="ข้อความที่1" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่2</label>
-                                            <input type="text"  name="texttwo" value="{{old('texttwo')}}"  placeholder="ข้อความที่1" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ข้อความที่3</label>
-                                            <input type="text"  name="textthree" value="{{old('textthree')}}"  placeholder="ข้อความที่1" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ลิงค์ URL</label>
-                                            <input type="text"  name="url" value="{{old('url')}}"  placeholder="ลิงค์ URL" class="form-control">
+                                            <input type="text"  name="texttwo" value="{{$introsection->text2}}"  placeholder="ข้อความที่2" class="form-control">
                                         </div>
 										<div class="form-group">
-											<label>รูปสไลด์<span class="text-danger">*</span></label>
+											<label>รูปไอคอน<span class="text-danger">*</span></label>
 											<div class="input-group">													
-												<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปสไลด์" disabled>
+												<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปไอคอน" disabled>
 												<span class="input-group-append">
 													<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
 												</span>
 											</div>
 											<input type="file" style="display:none;" id="file" name="picture"/>
-										</div>
+                                        </div>
+                                        <div class="row">	
+                                            <div class="col-md-12">
+                                                <img class="img-responsive" src="{{asset($introsection->icon)}}" >
+                                            </div>
+                                        </div>
+                                        <br>
                                     </fieldset>
+                                    
                                 </div>
+                                
                             </div>
                             <div class="text-right">
                                 <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
