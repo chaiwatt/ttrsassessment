@@ -1,3 +1,4 @@
+import * as Message from './message.js'
 
 var a=0;
 $(document).on("click","#btn_modal_expertexpience",function(e){
@@ -87,3 +88,42 @@ $(document).on("click","#btn_modal_experteducation",function(e){
     </tr>`;
     $('#experteducation_wrapper_tr').append(tr);
 });
+
+$(document).on("click","#maillink",function(e){
+    // alert($(this).data('id'));
+    Message.getMessage($(this).data('id')).then(data => {
+        // console.log(data.message.messagebox.title);
+        console.log(data.attachment);
+        let html= '';
+        if(data.attachment.length > 0){
+            html=`<hr><div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ไฟล์</th>                                                                           
+                        <th style="width:120px">ดาวน์โหลด</th>
+                    </tr>
+                </thead>
+                <tbody id="expertexpience_wrapper_tr">` ;
+                data.attachment.forEach((item,index) => 
+                        html += `<tr><td>${item.name}</td><td><a href="${route.url}/${item.attachment}" class="btn btn-info btn-icon rounded-round"><i class="icon-download4"></i></a></td></tr>`
+                    )
+                    html +=`</tbody>
+                            </table>
+                            </div>`
+                
+        }
+        $("#tablemessage").html(html);
+        
+        $("#messagetitle").html(data.message.messagebox.title);
+        $("#messagebody").html(data.message.messagebox.body);
+        $('#modal_message').modal('show');
+    })
+    .catch(error => {
+        //console.log(error)
+    })
+    // 
+});
+
+
+                             

@@ -18,6 +18,7 @@ class CreateMessageReceivesTable extends Migration
             $table->unsignedBigInteger('message_box_id');
             $table->foreign('message_box_id')->references('id')->on('message_boxes')->onDelete('cascade');
             $table->unsignedBigInteger('receiver_id')->comment('ID ผู้รับ');
+            $table->unsignedBigInteger('message_read_status_id')->default(1);
             $table->timestamps();
         });
     }

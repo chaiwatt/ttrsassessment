@@ -14,30 +14,27 @@ class MessageBoxesTableSeeder extends Seeder
     {
         DB::table('message_boxes')->insert([
             [
-                'title' => 'หัวข้อ1',
-                'body' => 'บทความ1',
+                'title' => 'สอบถามข้อมูลครับ',
+                'body' => 'สอบถามข้อมูลครับ....',
                 'message_priority_id' => 1,
                 'sender_id' => 9,
-                'message_read_status_id' => 1,
                 'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
                 'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
 
             ],
             [
-                'title' => 'หัวข้อ2',
-                'body' => 'บทความ2',
+                'title' => 'สอบถามข้อมูลค่ะ',
+                'body' => 'สอบถามข้อมูลค่ะ....',
                 'message_priority_id' => 1,
                 'sender_id' => 10,
-                'message_read_status_id' => 1,
                 'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
                 'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ],
             [
-                'title' => 'หัวข้อ3',
-                'body' => 'บทความ3',
+                'title' => 'สอบถามสถานะ',
+                'body' => 'สอบถามสถานะ....',
                 'message_priority_id' => 1,
                 'sender_id' => 11,
-                'message_read_status_id' => 1,
                 'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
                 'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ]

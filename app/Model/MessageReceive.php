@@ -10,6 +10,8 @@ class MessageReceive extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
+
+    protected $appends = ['messagebox'];
     //message_box
     public function getMessageBoxAttribute()
     {

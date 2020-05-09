@@ -17,6 +17,7 @@ class CreateMessageBoxAttachmentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('message_box_id');
             $table->foreign('message_box_id')->references('id')->on('message_boxes')->onDelete('cascade');
+            $table->string('name',150)->nullable();
             $table->string('attachment',250)->nullable();
             $table->timestamps();
         });

@@ -107,7 +107,10 @@
 						<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 							<i class="icon-bubbles4"></i>
 							<span class="d-md-none ml-2">Messages</span>
-							<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0">2</span>
+							@if ($shareunreadmessages->count() > 0)
+								<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0">{{$shareunreadmessages->count()}}</span>
+							@endif
+							
 						</a>
 						
 						<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
@@ -218,7 +221,8 @@
 							<div class="dropdown-menu dropdown-menu-right">
 								<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
 								{{-- <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a> --}}
-								<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ <span class="badge badge-pill bg-blue ml-auto">2</span></a>
+								<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ @if ($shareunreadmessages->count() > 0) <span class="badge badge-pill bg-blue ml-auto">{{$shareunreadmessages->count()}}</span> @endif
+								</a>
 								<div class="dropdown-divider"></div>
 								{{-- <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a> --}}
 								<a data-placement="bottom" class="dropdown-item" title="ออกจากระบบ" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-switch2"></i>ออกจากระบบ</a>

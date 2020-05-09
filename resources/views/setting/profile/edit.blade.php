@@ -247,6 +247,30 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal with subtitle -->
+	<div id="modal_message" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="messagetitle"></h5>
+				
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<div class="modal-body">
+				<p id="messagebody"></p>
+				<div id="tablemessage"></div>
+			</div>
+
+			<div class="modal-footer">
+				{{-- <button type="button" class="btn btn-link" data-dismiss="modal">Close</button> --}}
+				<button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /modal with subtitle -->
 	<!-- Cover area -->
 	<div class="profile-cover">
 		<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
@@ -284,7 +308,7 @@
 			<ul class="nav navbar-nav">
 				<li class="nav-item">
 					<a href="#messagebox" class="navbar-nav-link active" data-toggle="tab">
-						<i class="icon-mail5 mr-2"></i>กล่องข้อความ @if ($messagereceives->count()>0) <span class="badge badge-pill bg-success-400 ">{{$messagereceives->count()}}</span>@endif
+						<i class="icon-mail5 mr-2"></i>กล่องข้อความ @if ($unreadmessages->count()>0) <span class="badge badge-pill bg-success-400 ">{{$unreadmessages->count()}}</span>@endif
 					</a>
 				</li>
 				<li class="nav-item">
@@ -326,28 +350,13 @@
 					<!-- Left content -->
 					<div class="tab-content w-100 order-2 order-md-1">
 						<div class="tab-pane fade active show" id="messagebox">
-							<!-- Sales stats -->
-							{{-- <div class="card">
-								<div class="card-header header-elements-sm-inline">
-									<h6 class="card-title">Weekly statistics</h6>
-									<div class="header-elements">
-										<span><i class="icon-history mr-2 text-success"></i> Updated 3 hours ago</span>
-
-										<div class="list-icons ml-3">
-					                		<a class="list-icons-item" data-action="reload"></a>
-					                	</div>
-				                	</div>
-								</div> --}}
-
-								{{-- <div class="card-body"> --}}
-									<!-- Single line -->
 									<div class="card">
 										<div class="card-header bg-transparent header-elements-inline">
 											<h6 class="card-title">กล่องข้อความ</h6>
 
 											<div class="header-elements">
 												@if ($messagereceives->count()>0)
-												<span class="badge bg-teal">{{$messagereceives->count()}} ข้อความใหม่</span>
+												<span class="badge bg-teal">{{$unreadmessages->count()}} ข้อความใหม่</span>
 												@endif
 											</div>
 										</div>
@@ -381,18 +390,9 @@
 														<div class="btn-group ml-3 mr-lg-3">
 															<button type="button" class="btn btn-light"><i class="icon-pencil7"></i> <span class="d-none d-lg-inline-block ml-2">ทำเครื่องหมายอ่านแล้ว</span></button>
 															<button type="button" class="btn btn-light"><i class="icon-bin"></i> <span class="d-none d-lg-inline-block ml-2">ลบที่เลือก</span></button>
-															
 														</div>
 													</div>
-
 													<div class="navbar-text ml-lg-auto"><span class="font-weight-semibold">{{ $messagereceives->links() }}</span>   </div>
-
-													{{-- <div class="ml-lg-3 mb-3 mb-lg-0">
-														<div class="btn-group">
-															<button type="button" class="btn btn-light btn-icon disabled"><i class="icon-arrow-left12"></i></button>
-															<button type="button" class="btn btn-light btn-icon"><i class="icon-arrow-right13"></i></button>
-														</div>
-													</div> --}}
 												</div>
 											</div>
 										</div>
@@ -400,13 +400,13 @@
 										<!-- Table -->
 										<div class="table-responsive">
 											<table class="table table-inbox">
-												<tbody data-link="row" class="rowlink">
+												<tbody  >
 													@foreach ($messagereceives as $messagereceive)
-														<tr @if ($messagereceive->messagebox->message_read_status_id==1) class="unread" @endif >
-															<td class="table-inbox-checkbox rowlink-skip">
+														<tr @if ($messagereceive->message_read_status_id==1) class="unread" @endif >
+															<td class="table-inbox-checkbox ">
 																<input type="checkbox" class="form-input-styled" data-fouc>
 															</td>
-															<td class="table-inbox-star rowlink-skip">
+															<td class="table-inbox-star">
 																<a href="#">
 																	@if ($messagereceive->message_priority_id == 2 )
 																			<i class="icon-star-full2 text-warning-300"></i>
@@ -416,7 +416,7 @@
 																</a>
 															</td>
 															<td class="table-inbox-name">
-																<a href="mail_read.html">
+																<a href="#" id="maillink" data-id="{{$messagereceive->id}} ">
 																	<div class="letter-icon-title text-default">{{$messagereceive->messagebox->sender->name}} {{$messagereceive->messagebox->sender->lastname}}</div>
 																</a>
 															</td>

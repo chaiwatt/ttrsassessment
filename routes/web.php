@@ -32,6 +32,11 @@ Route::group(['prefix' => 'api'], function(){
 }); 
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::group(['prefix' => 'api'], function(){
+        Route::group(['prefix' => 'message'], function(){
+            Route::post('getmessage','APi\MessageController@GetMessage')->name('api.message.getmessage');           
+        });
+    }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
             Route::get('','DashboardAdminController@Index')->name('dashboard.admin');           

@@ -19,7 +19,6 @@ class CreateMessageBoxesTable extends Migration
             $table->string('body');
             $table->unsignedBigInteger('message_priority_id')->comment('ระดับความสำคัญ');
             $table->unsignedBigInteger('sender_id')->comment('ID ผู้ส่ง');
-            $table->unsignedBigInteger('message_read_status_id')->default(1);
             $table->timestamps();
         });
     }

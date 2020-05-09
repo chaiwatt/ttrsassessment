@@ -48,7 +48,8 @@ class DatabaseSeeder extends Seeder
         $this->call(FriendsTableSeeder::class);
         $this->call(MessageBoxesTableSeeder::class);
         $this->call(MessageReceivesTableSeeder::class);
-
+        $this->call(MessageBoxAttachmentsTableSeeder::class);
+        
     }
 }
 
