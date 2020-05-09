@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\MessageReceive;
 use App\Model\MessageBoxAttachment;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
