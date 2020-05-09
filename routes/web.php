@@ -34,7 +34,7 @@ Route::group(['prefix' => 'api'], function(){
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'api'], function(){
         Route::group(['prefix' => 'message'], function(){
-            Route::post('getmessage','APi\MessageController@GetMessage')->name('api.message.getmessage');           
+            Route::post('getmessage','Api\MessageController@GetMessage')->name('api.message.getmessage');           
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
