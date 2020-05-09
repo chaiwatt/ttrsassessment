@@ -215,6 +215,38 @@
 			</div>
 		</div>
 	</div>
+
+	{{-- modal user list --}}
+	<div id="modal_user" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มขอเป็นเพื่อน</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="form-group">
+									<label>ผู้ใช้งานระบบ<span class="text-danger">*</span></label>
+									<select name="user[]" multiple="multiple" placeholder="ผู้ใช้งานระบบ"  class="form-control form-control-select2">
+										@foreach ($users as $user)
+										<option value="{{$user->id}}" > {{$user->name}} {{$user->lastname}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_user" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> ส่งคำร้อง</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Cover area -->
 	<div class="profile-cover">
 		<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
@@ -252,54 +284,35 @@
 			<ul class="nav navbar-nav">
 				<li class="nav-item">
 					<a href="#messagebox" class="navbar-nav-link active" data-toggle="tab">
-						<i class="icon-mail5 mr-2"></i>
-						กล่องข้อความ
-						<span class="badge badge-pill bg-success position-static ml-auto ml-lg-2">2</span>
+						<i class="icon-mail5 mr-2"></i>กล่องข้อความ @if ($messagereceives->count()>0) <span class="badge badge-pill bg-success-400 ">{{$messagereceives->count()}}</span>@endif
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab">
-						<i class="icon-user mr-2"></i>
-						ข้อมูลส่วนตัว			
+					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-user mr-2"></i>ข้อมูลส่วนตัว			
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab">
-						<i class="icon-medal-star mr-2"></i>
-						ข้อมูลผู้เชี่ยวชาญ
+					<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-medal-star mr-2"></i>ข้อมูลผู้เชี่ยวชาญ
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#organizationinfo" class="navbar-nav-link" data-toggle="tab">
-						<i class="icon-cog3 mr-2"></i>
-						ข้อมูลหน่วยงาน
+					<a href="#organizationinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-cog3 mr-2"></i>ข้อมูลหน่วยงาน
 					</a>
 				</li>
 				<li class="nav-item">
 					<a href="#activitylog" class="navbar-nav-link" data-toggle="tab">
-						<i class="icon-stack-text mr-2"></i>
-						ข้อมูล Log
+						<i class="icon-stack-text mr-2"></i>ข้อมูล Log
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#friends" class="navbar-nav-link" data-toggle="tab">
+						<i class="icon-users mr-2"></i>เพื่อน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2">{{$friendrequestcomings->count()}}</span> @endif
 					</a>
 				</li>
 			</ul>
 
-			<ul class="navbar-nav ml-lg-auto">
-				<li class="nav-item">
-					<a href="#photos" class="nav-link" data-toggle="tab">
-						<i class="icon-images2 mr-2"></i>
-						รูป
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="#friends" class="nav-link" data-toggle="tab">
-						
-						<span class="badge badge-flat border-grey-400 text-default">15</span>
-						<i class="icon-users mr-2"></i>
-						
-						เพื่อน
-						<span class="badge badge-pill bg-warning-400 " >2</span>
-					</a>
-				</li>
+			<ul class="navbar-nav">
+			
 			</ul>
 		</div>
 	</div>
@@ -313,9 +326,8 @@
 					<!-- Left content -->
 					<div class="tab-content w-100 order-2 order-md-1">
 						<div class="tab-pane fade active show" id="messagebox">
-
 							<!-- Sales stats -->
-							<div class="card">
+							{{-- <div class="card">
 								<div class="card-header header-elements-sm-inline">
 									<h6 class="card-title">Weekly statistics</h6>
 									<div class="header-elements">
@@ -325,16 +337,180 @@
 					                		<a class="list-icons-item" data-action="reload"></a>
 					                	</div>
 				                	</div>
-								</div>
+								</div> --}}
 
-								<div class="card-body">
-									<div class="chart-container">
-										<div class="chart has-fixed-height" id="tornado_negative_stack"></div>
+								{{-- <div class="card-body"> --}}
+									<!-- Single line -->
+									<div class="card">
+										<div class="card-header bg-transparent header-elements-inline">
+											<h6 class="card-title">กล่องข้อความ</h6>
+
+											<div class="header-elements">
+												@if ($messagereceives->count()>0)
+												<span class="badge bg-blue">{{$messagereceives->count()}} ข้อความใหม่</span>
+												@endif
+											</div>
+										</div>
+
+										<!-- Action toolbar -->
+										<div class="bg-light">
+											<div class="navbar navbar-light bg-light navbar-expand-lg py-lg-2">
+												<div class="text-center d-lg-none w-100">
+													<button type="button" class="navbar-toggler w-100" data-toggle="collapse" data-target="#inbox-toolbar-toggle-single">
+														<i class="icon-circle-down2"></i>
+													</button>
+												</div>
+
+												<div class="navbar-collapse text-center text-lg-left flex-wrap collapse" id="inbox-toolbar-toggle-single">
+													<div class="mt-3 mt-lg-0">
+														<div class="btn-group">
+															<button type="button" class="btn btn-light btn-icon btn-checkbox-all">
+																<input type="checkbox" class="form-input-styled" data-fouc>
+															</button>
+
+															<button type="button" class="btn btn-light btn-icon dropdown-toggle" data-toggle="dropdown"></button>
+															<div class="dropdown-menu">
+																<a href="#" class="dropdown-item">เลือกทั้งหมด</a>
+																<a href="#" class="dropdown-item">อ่านอ่านแล้ว</a>
+																<a href="#" class="dropdown-item">เลือกไม่ได้อ่าน</a>
+																<div class="dropdown-divider"></div>
+																<a href="#" class="dropdown-item">เคลียร์</a>
+															</div>
+														</div>
+
+														<div class="btn-group ml-3 mr-lg-3">
+															<button type="button" class="btn btn-light"><i class="icon-pencil7"></i> <span class="d-none d-lg-inline-block ml-2">ทำเครื่องหมายอ่านแล้ว</span></button>
+															<button type="button" class="btn btn-light"><i class="icon-bin"></i> <span class="d-none d-lg-inline-block ml-2">ลบที่เลือก</span></button>
+															
+														</div>
+													</div>
+
+													<div class="navbar-text ml-lg-auto"><span class="font-weight-semibold">1-50</span> of <span class="font-weight-semibold">528</span></div>
+
+													<div class="ml-lg-3 mb-3 mb-lg-0">
+														<div class="btn-group">
+															<button type="button" class="btn btn-light btn-icon disabled"><i class="icon-arrow-left12"></i></button>
+															<button type="button" class="btn btn-light btn-icon"><i class="icon-arrow-right13"></i></button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /action toolbar -->
+
+
+										<!-- Table -->
+										<div class="table-responsive">
+											<table class="table table-inbox">
+												<tbody data-link="row" class="rowlink">
+													<tr class="unread">
+														<td class="table-inbox-checkbox rowlink-skip">
+															<input type="checkbox" class="form-input-styled" data-fouc>
+														</td>
+														<td class="table-inbox-star rowlink-skip">
+															<a href="#">
+																<i class="icon-star-empty3 text-muted"></i>
+															</a>
+														</td>
+														<td class="table-inbox-name">
+															<a href="mail_read.html">
+																<div class="letter-icon-title text-default">James Alexander</div>
+															</a>
+														</td>
+														<td class="table-inbox-message">
+															<span class="table-inbox-subject"><span class="badge bg-success mr-2">Promo</span> There are three whales and three boats &nbsp;-&nbsp;</span>
+															<span class="text-muted font-weight-normal">And one of the boats (presumed to contain the missing leg in all its original integrity) is being crunched by the jaws of the foremost whale</span>
+														</td>
+														<td class="table-inbox-attachment">
+															<i class="icon-attachment text-muted"></i>
+														</td>
+														<td class="table-inbox-time">
+															10:21 pm
+														</td>
+													</tr>
+
+													<tr class="unread">
+														<td class="table-inbox-checkbox rowlink-skip">
+															<input type="checkbox" class="form-input-styled" data-fouc>
+														</td>
+														<td class="table-inbox-star rowlink-skip">
+															<a href="#">
+																<i class="icon-star-full2 text-warning-300"></i>
+															</a>
+														</td>
+														<td class="table-inbox-name">
+															<a href="mail_read.html">
+																<div class="letter-icon-title text-default">Nathan Jacobson</div>
+															</a>
+														</td>
+														<td class="table-inbox-message">
+															<span class="table-inbox-subject">Any time these ten years, they tell me, has that man held up &nbsp;-&nbsp;</span>
+															<span class="text-muted font-weight-normal">That picture, and exhibited that stump to an incredulous world. But the time of his justification has now come. His three whales are as good whales as were ever published in Wapping, at any rate; and his stump</span>
+														</td>
+														<td class="table-inbox-attachment"></td>
+														<td class="table-inbox-time">
+															8:37 pm
+														</td>
+													</tr>
+
+													<tr>
+														<td class="table-inbox-checkbox rowlink-skip">
+															<input type="checkbox" class="form-input-styled" data-fouc>
+														</td>
+														<td class="table-inbox-star rowlink-skip">
+															<a href="#">
+																<i class="icon-star-full2 text-warning-300"></i>
+															</a>
+														</td>
+														<td class="table-inbox-name">
+															<a href="mail_read.html">
+																<div class="letter-icon-title text-default">Margo Baker</div>
+															</a>
+														</td>
+														<td class="table-inbox-message">
+															<span class="table-inbox-subject">Throughout the Pacific, and also in Nantucket, and New Bedford &nbsp;-&nbsp;</span>
+															<span class="text-muted font-weight-normal">and Sag Harbor, you will come across lively sketches of whales and whaling-scenes, graven by the fishermen themselves on Sperm Whale-teeth, or ladies' busks wrought out of the Right Whale-bone</span>
+														</td>
+														<td class="table-inbox-attachment"></td>
+														<td class="table-inbox-time">
+															4:28 am
+														</td>
+													</tr>
+
+													<tr>
+														<td class="table-inbox-checkbox rowlink-skip">
+															<input type="checkbox" class="form-input-styled" data-fouc>
+														</td>
+														<td class="table-inbox-star rowlink-skip">
+															<a href="#">
+																<i class="icon-star-empty3 text-muted"></i>
+															</a>
+														</td>
+														<td class="table-inbox-name">
+															<a href="mail_read.html">
+																<div class="letter-icon-title text-default">Dribbble</div>
+															</a>
+														</td>
+														<td class="table-inbox-message">
+															<span class="table-inbox-subject">The whalemen call the numerous little ingenious contrivances &nbsp;-&nbsp;</span>
+															<span class="text-muted font-weight-normal">They elaborately carve out of the rough material, in their hours of ocean leisure. Some of them have little boxes of dentistical-looking implements</span>
+														</td>
+														<td class="table-inbox-attachment"></td>
+														<td class="table-inbox-time">
+															Dec 5
+														</td>
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+										<!-- /table -->
+
 									</div>
-								</div>
-							</div>
+									<!-- /single line -->
+								{{-- </div> --}}
+							{{-- </div> --}}
 							<!-- /sales stats -->
-
 					    </div>
 
 					    <div class="tab-pane fade" id="personalinfo">
@@ -451,183 +627,210 @@
 							<!-- expertinfo -->
 							<div class="card">
 								<div class="card-body">
-									<div class="card-body">
-										<ul class="nav nav-tabs nav-tabs-highlight">
-											<li class="nav-item"><a href="#left-icon-expertexpience" class="nav-link active" data-toggle="tab"><i class="icon-stack-star mr-2"></i> ประสบการณ์การทำงาน</a></li>
-											<li class="nav-item"><a href="#left-icon-experteducation" class="nav-link" data-toggle="tab"><i class="icon-medal mr-2"></i> ประวัติการศึกษา</a></li>
-										</ul>
-		
-										<div class="tab-content">
-											<div class="tab-pane fade show active" id="left-icon-expertexpience">
-												<div class="row">
-													<div class="col-md-12">	
-													<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_expertexpience"><i class="icon-add"></i></a>
-													</div>
-												</div>																								
-												<div class="row">	
-													<div class="col-md-12" id="expertexpience_wrapper" >	
-													</div>
+									<ul class="nav nav-tabs nav-tabs-highlight">
+										<li class="nav-item"><a href="#left-icon-expertexpience" class="nav-link active" data-toggle="tab"><i class="icon-stack-star mr-2"></i> ประสบการณ์การทำงาน</a></li>
+										<li class="nav-item"><a href="#left-icon-experteducation" class="nav-link" data-toggle="tab"><i class="icon-medal mr-2"></i> ประวัติการศึกษา</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade show active" id="left-icon-expertexpience">
+											<div class="row">
+												<div class="col-md-12">	
+												<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_expertexpience"><i class="icon-add"></i></a>
 												</div>
-												<div class="row">
-													<div class="col-md-12">	
-														<div class="table-responsive">
-															<table class="table table-striped">
-																<thead>
-																	<tr>
-																		<th>หน่วยงาน/บริษัท</th>
-																		<th>ตำแหน่ง</th>
-																		<th>ปีที่เริ่ม</th>      
-																		<th>ปีที่สิ้นสุด</th>                                                                             
-																		<th style="width:120px">เพิ่มเติม</th>
-																	</tr>
-																</thead>
-																<tbody id="expertexpience_wrapper_tr">                                
-																</tbody>
-															</table>
-														</div>
-													</div>      
+											</div>																								
+											<div class="row">	
+												<div class="col-md-12" id="expertexpience_wrapper" >	
 												</div>
 											</div>
-		
-											<div class="tab-pane fade" id="left-icon-experteducation">
-												<div class="row">
-													<div class="col-md-12">	
-													<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_experteducation"><i class="icon-add"></i></a>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="table-responsive">
+														<table class="table table-striped">
+															<thead>
+																<tr>
+																	<th>หน่วยงาน/บริษัท</th>
+																	<th>ตำแหน่ง</th>
+																	<th>ปีที่เริ่ม</th>      
+																	<th>ปีที่สิ้นสุด</th>                                                                             
+																	<th style="width:120px">เพิ่มเติม</th>
+																</tr>
+															</thead>
+															<tbody id="expertexpience_wrapper_tr">                                
+															</tbody>
+														</table>
 													</div>
-												</div>																								
-												<div class="row">	
-													<div class="col-md-12" id="experteducation_wrapper" >	
+												</div>      
+											</div>
+										</div>
+	
+										<div class="tab-pane fade" id="left-icon-experteducation">
+											<div class="row">
+												<div class="col-md-12">	
+												<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_experteducation"><i class="icon-add"></i></a>
+												</div>
+											</div>																								
+											<div class="row">	
+												<div class="col-md-12" id="experteducation_wrapper" >	
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="table-responsive">
+														<table class="table table-striped">
+															<thead>
+																<tr>
+																	<th>ระดับการศึกษา</th>
+																	<th>สาขาวิชา/วิชาเอก</th>
+																	<th>สถาบัน</th>      
+																	{{-- <th>ประเทศ</th>   
+																	<th>ปีที่จบ</th>                                                                          --}}
+																	<th style="width:120px">เพิ่มเติม</th>
+																</tr>
+															</thead>
+															<tbody id="experteducation_wrapper_tr">                                
+															</tbody>
+														</table>
 													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12">	
-														<div class="table-responsive">
-															<table class="table table-striped">
-																<thead>
-																	<tr>
-																		<th>ระดับการศึกษา</th>
-																		<th>สาขาวิชา/วิชาเอก</th>
-																		<th>สถาบัน</th>      
-																		{{-- <th>ประเทศ</th>   
-																		<th>ปีที่จบ</th>                                                                          --}}
-																		<th style="width:120px">เพิ่มเติม</th>
-																	</tr>
-																</thead>
-																<tbody id="experteducation_wrapper_tr">                                
-																</tbody>
-															</table>
-														</div>
-													</div>      
-												</div>
+												</div>      
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!-- /expertinfo -->
-
+							<!--/expertinfo -->
 						</div>
 						<div class="tab-pane fade" id="organizationinfo">
 							<!-- organizationinfo info -->
 							<div class="card">
-								<div class="card-body">										
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-6">
-												<label>สำนักงาน</label>
-												<input type="text" name="organizationname" data-placeholder="ชื่อ"class="form-control">
-											</div>
-											<div class="col-md-6">
-												<label>ที่อยู่</label>
-												<input type="text" name="organizationaddress" data-placeholder="นามสกุล" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-6">
-												<label>อีเมล์</label>
-												<input type="email" name="organizationemail" data-placeholder="อีเมล์" class="form-control">
-											</div>
-											<div class="col-md-6">
-												<label>โทรศัพท์มือถือ</label>
-												<input type="text" name="organizationphone" data-placeholder="โทรศัพท์มือถือ" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-6">
-												<label>ที่อยู่</label>
-												<input type="text" name="organizationaddress" data-placeholder="คำนำหน้า" class="form-control">
-											</div>
-											<div class="col-md-6">
-												<label>จังหวัด<span class="text-danger">*</span></label>
-												<select name="organizationprovince" id="organizationprovince" data-placeholder="จังหวัด" class="form-control form-control-select2">
-													<option value=""></option>
-													@foreach ($provinces as $province)
-														<option value="{{$province->id}}" @if($user->province_id == $province->id) selected @endif>{{$province->name}}</option> 
-													@endforeach
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-6">
-												<label>อำเภอ<span class="text-danger">*</span></label>
-												<select name="organizationamphur" id="organizationamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
-													@foreach ($amphurs as $amphur)                                                                
-														<option value="{{$amphur->id}}" @if ($amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
-													@endforeach   
-												</select>
-											</div>
-											<div class="col-md-6">
-												<label>ตำบล<span class="text-danger">*</span></label>
-												<select name="organizationtambol" id="organizationtambol" data-placeholder="ตำบล" class="form-control form-control-select2">
-													@foreach ($tambols as $tambol)                                                                
-														<option value="{{$tambol->id}}" @if ($tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
-													@endforeach    
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-6">
-												<label>รหัสไปรษณีย์</label>
-												<input type="text" name="organizationpostalcode" data-placeholder="รหัสไปรษณีย์" class="form-control">
-											</div>
-											<div class="col-md-6">
-												<label>แฟกซ์</label>
-												<input type="text" name="organizationfax" data-placeholder="แฟกซ์" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-6">
-												<label>lineclint <a href="https://notify-bot.line.me/en/" target="_blank">ลิงค์</a></label>
-												<input type="text" name="lineclint" data-placeholder="lineclint" class="form-control">
-											</div>
-											<div class="col-md-6">
-												<label>linesecret</label>
-												<input type="text" name="linesecret" data-placeholder="linesecret" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-6">
-												<label>thaisms (sms คงเหลือ xx)</label>
-												<input type="text" name="thaisms" data-placeholder="thaisms" class="form-control">
-											</div>
-											<div class="col-md-6">
-												<label>รหัสผ่าน thaisms</label>
-												<input type="password" name="thaismspassword" data-placeholder="รหัสผ่าน thaisms" class="form-control">
+								<div class="card-body">	
+									<ul class="nav nav-tabs nav-tabs-highlight">
+										<li class="nav-item"><a href="#left-icon-oganizationinfo" class="nav-link active" data-toggle="tab"><i class="icon-home2 mr-2"></i> ข้อมูลทั่วไป</a></li>
+										<li class="nav-item"><a href="#left-icon-oganizationsetup" class="nav-link" data-toggle="tab"><i class="icon-gear mr-2"></i> ตั้งค่า</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade show active" id="left-icon-oganizationinfo">
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>สำนักงาน</label>
+																<input type="text" name="organizationname" data-placeholder="ชื่อ"class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>ที่อยู่</label>
+																<input type="text" name="organizationaddress" data-placeholder="นามสกุล" class="form-control">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>อีเมล์</label>
+																<input type="email" name="organizationemail" data-placeholder="อีเมล์" class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>โทรศัพท์มือถือ</label>
+																<input type="text" name="organizationphone" data-placeholder="โทรศัพท์มือถือ" class="form-control">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>ที่อยู่</label>
+																<input type="text" name="organizationaddress" data-placeholder="คำนำหน้า" class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>จังหวัด<span class="text-danger">*</span></label>
+																<select name="organizationprovince" id="organizationprovince" data-placeholder="จังหวัด" class="form-control form-control-select2">
+																	<option value=""></option>
+																	@foreach ($provinces as $province)
+																		<option value="{{$province->id}}" @if($user->province_id == $province->id) selected @endif>{{$province->name}}</option> 
+																	@endforeach
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>อำเภอ<span class="text-danger">*</span></label>
+																<select name="organizationamphur" id="organizationamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+																	@foreach ($amphurs as $amphur)                                                                
+																		<option value="{{$amphur->id}}" @if ($amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
+																	@endforeach   
+																</select>
+															</div>
+															<div class="col-md-6">
+																<label>ตำบล<span class="text-danger">*</span></label>
+																<select name="organizationtambol" id="organizationtambol" data-placeholder="ตำบล" class="form-control form-control-select2">
+																	@foreach ($tambols as $tambol)                                                                
+																		<option value="{{$tambol->id}}" @if ($tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
+																	@endforeach    
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>รหัสไปรษณีย์</label>
+																<input type="text" name="organizationpostalcode" data-placeholder="รหัสไปรษณีย์" class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>แฟกซ์</label>
+																<input type="text" name="organizationfax" data-placeholder="แฟกซ์" class="form-control">
+															</div>
+														</div>
+													</div>
+												</div>      
 											</div>
 										</div>
-									</div>
+	
+										<div class="tab-pane fade" id="left-icon-oganizationsetup">																							
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>lineclint <a href="https://notify-bot.line.me/en/" target="_blank">ลิงค์</a></label>
+																<input type="text" name="lineclint" data-placeholder="lineclint" class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>linesecret</label>
+																<input type="text" name="linesecret" data-placeholder="linesecret" class="form-control">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>thaisms (sms คงเหลือ xx)</label>
+																<input type="text" name="thaisms" data-placeholder="thaisms" class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>รหัสผ่าน thaisms</label>
+																<input type="password" name="thaismspassword" data-placeholder="รหัสผ่าน thaisms" class="form-control">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>การ verify ผู้สมัคร<span class="text-danger">*</span></label>
+																<select name="organizationamphur" id="organizationamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+																	@foreach ($verifystatuses as $verifystatus)                                                                
+																		<option value="{{$verifystatus->id}}" > {{$verifystatus->name}} </option>
+																	@endforeach   
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>      
+											</div>
+										</div>
+									</div>									
 								</div>
 							</div>
 							<!-- /organizationinfo info -->
@@ -738,211 +941,116 @@
 							<!-- /profile info -->
 
 						</div>
-						<div class="tab-pane fade" id="photos">
 
-							<!-- Profile info -->
-							<div class="card">
-								<div class="card-header header-elements-inline">
-									<h5 class="card-title">รูป</h5>
-									<div class="header-elements">
-										<div class="list-icons">
-					                		<a class="list-icons-item" data-action="collapse"></a>
-					                		<a class="list-icons-item" data-action="reload"></a>
-					                		<a class="list-icons-item" data-action="remove"></a>
-					                	</div>
-				                	</div>
-								</div>
-
-								<div class="card-body">
-									<form action="#">
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Username</label>
-													<input type="text" value="Eugene" class="form-control">
-												</div>
-												<div class="col-md-6">
-													<label>Full name</label>
-													<input type="text" value="Kopyov" class="form-control">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Address line 1</label>
-													<input type="text" value="Ring street 12" class="form-control">
-												</div>
-												<div class="col-md-6">
-													<label>Address line 2</label>
-													<input type="text" value="building D, flat #67" class="form-control">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-4">
-													<label>City</label>
-													<input type="text" value="Munich" class="form-control">
-												</div>
-												<div class="col-md-4">
-													<label>State/Province</label>
-													<input type="text" value="Bayern" class="form-control">
-												</div>
-												<div class="col-md-4">
-													<label>ZIP code</label>
-													<input type="text" value="1031" class="form-control">
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Email</label>
-													<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
-												</div>
-												<div class="col-md-6">
-						                            <label>Your country</label>
-						                            <select class="form-control form-control-select2" data-fouc>
-						                                <option value="germany" selected>Germany</option> 
-						                                <option value="france">France</option> 
-						                                <option value="spain">Spain</option> 
-						                                <option value="netherlands">Netherlands</option> 
-						                                <option value="other">...</option> 
-						                                <option value="uk">United Kingdom</option> 
-						                            </select>
-												</div>
-											</div>
-										</div>
-
-				                        <div class="form-group">
-				                        	<div class="row">
-				                        		<div class="col-md-6">
-													<label>Phone #</label>
-													<input type="text" value="+99-99-9999-9999" class="form-control">
-													<span class="form-text text-muted">+99-99-9999-9999</span>
-				                        		</div>
-
-												<div class="col-md-6">
-													<label>Upload profile image</label>
-				                                    <input type="file" class="form-input-styled" data-fouc>
-				                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-												</div>
-				                        	</div>
-				                        </div>
-
-				                        <div class="text-right">
-				                        	<button type="submit" class="btn btn-primary">Save changes</button>
-				                        </div>
-									</form>
-								</div>
-							</div>
-							<!-- /profile info -->
-
-						</div>
 						<div class="tab-pane fade" id="friends">
 
 							<!-- Profile info -->
 							<div class="card">
-								<div class="card-header header-elements-inline">
-									<h5 class="card-title">เพื่อน</h5>
-									<div class="header-elements">
-										<div class="list-icons">
-					                		<a class="list-icons-item" data-action="collapse"></a>
-					                		<a class="list-icons-item" data-action="reload"></a>
-					                		<a class="list-icons-item" data-action="remove"></a>
-					                	</div>
-				                	</div>
-								</div>
-
 								<div class="card-body">
-									<form action="#">
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Username</label>
-													<input type="text" value="Eugene" class="form-control">
-												</div>
-												<div class="col-md-6">
-													<label>Full name</label>
-													<input type="text" value="Kopyov" class="form-control">
-												</div>
+									<ul class="nav nav-tabs nav-tabs-highlight">
+										<li class="nav-item"><a href="#left-icon-friend" class="nav-link active" data-toggle="tab"><i class="icon-user-check mr-2"></i> เพื่อนของฉัน</a></li>
+										<li class="nav-item"><a href="#left-icon-friendrequest" class="nav-link" data-toggle="tab"><i class="icon-paperplane mr-2"></i> คำขอของฉัน</a></li>
+										<li class="nav-item"><a href="#left-icon-friendrequestcomming" class="nav-link" data-toggle="tab"><i class="icon-new mr-2"></i> ขอเป็นเพื่อนฉัน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2">{{$friendrequestcomings->count()}}</span> @endif </a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade show active" id="left-icon-friend">
+											<div class="table-responsive">
+												<table class="table table-striped">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>ชื่อ-สกุล</th>    
+															<th>ประเภท</th>                         
+															<th style="width:150px">เพิ่มเติม</th>
+														</tr>
+													</thead>
+													<tbody>
+														@foreach ($friends as $key => $friend)
+														<tr>    
+															<td> {{$key+1}} </td>
+															<td> {{$friend->user->name}}   {{$friend->user->lastname}} </td>    
+															<td> {{$friend->user->usertype->name}} </td> 
+															<td> 
+																<a href="{{route('setting.admin.user.delete',['id' => $friend->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+															</td>
+														</tr>
+														@endforeach
+													</tbody>
+												</table>      
 											</div>
 										</div>
-
-										<div class="form-group">
+	
+										<div class="tab-pane fade" id="left-icon-friendrequest">																							
 											<div class="row">
-												<div class="col-md-6">
-													<label>Address line 1</label>
-													<input type="text" value="Ring street 12" class="form-control">
-												</div>
-												<div class="col-md-6">
-													<label>Address line 2</label>
-													<input type="text" value="building D, flat #67" class="form-control">
-												</div>
+												<div class="col-md-12">	
+							
+													<div class="table-responsive">
+														<table class="table table-striped">
+															<thead>
+																<tr>
+																	<th>#</th>
+																	<th>ชื่อ-สกุล</th>    
+																	<th>ประเภท</th>  
+																	<th>สถานะ</th>                          
+																	<th style="width:150px">เพิ่มเติม</th>
+																</tr>
+															</thead>
+															<tbody>
+																@foreach ($friendrequests as $key => $friendrequest)
+																	<tr>    
+																		<td> {{$key+1}} </td>
+																		<td> {{$friendrequest->request->name}}   {{$friendrequest->request->lastname}} </td>    
+																		<td> {{$friendrequest->request->usertype->name}} </td> 
+																		<td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td> 
+																		<td> 
+																			<a href="{{route('setting.admin.user.delete',['id' => $friendrequest->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+																		</td>
+																	</tr>
+																@endforeach
+															</tbody>
+														</table>      
+													</div>
+					
+												</div>      
 											</div>
 										</div>
-
-										<div class="form-group">
+										<div class="tab-pane fade" id="left-icon-friendrequestcomming">																							
 											<div class="row">
-												<div class="col-md-4">
-													<label>City</label>
-													<input type="text" value="Munich" class="form-control">
-												</div>
-												<div class="col-md-4">
-													<label>State/Province</label>
-													<input type="text" value="Bayern" class="form-control">
-												</div>
-												<div class="col-md-4">
-													<label>ZIP code</label>
-													<input type="text" value="1031" class="form-control">
-												</div>
+												<div class="col-md-12">	
+							
+													<div class="table-responsive">
+														<table class="table table-striped">
+															<thead>
+																<tr>
+																	<th>#</th>
+																	<th>ชื่อ-สกุล</th>    
+																	<th>ประเภท</th>  
+																	<th>สถานะ</th>                          
+																	<th style="width:180px">เพิ่มเติม</th>
+																</tr>
+															</thead>
+															<tbody>
+																@foreach ($friendrequestcomings as $key => $friendrequestcoming)
+																	<tr>    
+																		<td> {{$key+1}} </td>
+																		<td> {{$friendrequestcoming->Requestcoming->name}}   {{$friendrequest->requestcoming->lastname}} </td>    
+																		<td> {{$friendrequestcoming->requestcoming->usertype->name}} </td> 
+																		<td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td> 
+																		<td> 
+																			<a href="{{route('setting.admin.user.delete',['id' => $friendrequestcoming->id])}}" class=" badge bg-teal">ยืนยันตอบรับ</a>                                       
+																			<a href="{{route('setting.admin.user.delete',['id' => $friendrequestcoming->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ไม่รับ</a>                                       
+																		</td>
+																	</tr>
+																@endforeach
+															</tbody>
+														</table>      
+													</div>
+					
+												</div>      
 											</div>
 										</div>
+									</div>	
 
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<label>Email</label>
-													<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
-												</div>
-												<div class="col-md-6">
-						                            <label>Your country</label>
-						                            <select class="form-control form-control-select2" data-fouc>
-						                                <option value="germany" selected>Germany</option> 
-						                                <option value="france">France</option> 
-						                                <option value="spain">Spain</option> 
-						                                <option value="netherlands">Netherlands</option> 
-						                                <option value="other">...</option> 
-						                                <option value="uk">United Kingdom</option> 
-						                            </select>
-												</div>
-											</div>
-										</div>
-
-				                        <div class="form-group">
-				                        	<div class="row">
-				                        		<div class="col-md-6">
-													<label>Phone #</label>
-													<input type="text" value="+99-99-9999-9999" class="form-control">
-													<span class="form-text text-muted">+99-99-9999-9999</span>
-				                        		</div>
-
-												<div class="col-md-6">
-													<label>Upload profile image</label>
-				                                    <input type="file" class="form-input-styled" data-fouc>
-				                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-												</div>
-				                        	</div>
-				                        </div>
-
-				                        <div class="text-right">
-				                        	<button type="submit" class="btn btn-primary">Save changes</button>
-				                        </div>
-									</form>
 								</div>
 							</div>
 							<!-- /profile info -->
@@ -957,69 +1065,6 @@
 
 						<!-- Sidebar content -->
 						<div class="sidebar-content">
-
-							<!-- Navigation -->
-							{{-- <div class="card">
-								<div class="card-header bg-transparent header-elements-inline">
-									<span class="card-title font-weight-semibold">Navigation</span>
-									<div class="header-elements">
-										<div class="list-icons">
-					                		<a class="list-icons-item" data-action="collapse"></a>
-				                		</div>
-			                		</div>
-								</div>
-
-								<div class="card-body p-0">
-									<ul class="nav nav-sidebar my-2">
-										<li class="nav-item">
-											<a href="#personalinfo" class="nav-link" data-toggle="tab">
-												<i class="icon-user"></i>
-												 My profile
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="#" class="nav-link">
-												<i class="icon-cash3"></i>
-												Balance
-												<span class="text-muted font-size-sm font-weight-normal ml-auto">$1,430</span>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="#" class="nav-link">
-												<i class="icon-tree7"></i>
-												Connections
-												<span class="badge bg-danger badge-pill ml-auto">29</span>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="#" class="nav-link">
-												<i class="icon-users"></i>
-												Friends
-											</a>
-										</li>
-
-										<li class="nav-item-divider"></li>
-
-										<li class="nav-item">
-											<a href="#" class="nav-link">
-												<i class="icon-calendar3"></i>
-												Events
-												<span class="badge bg-teal-400 badge-pill ml-auto">48</span>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="#" class="nav-link">
-												<i class="icon-cog3"></i>
-												Account settings
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div> --}}
-							<!-- /navigation -->
-
-
-							<!-- Share your thoughts -->
 							<div class="card">
 								<div class="card-header bg-transparent header-elements-inline">
 									<span class="card-title font-weight-semibold">ส่งข้อความ</span>
@@ -1033,20 +1078,44 @@
 								<div class="card-body">
 									<form action="#">
 										<div class="form-group">
-											<label>เพื่อน</label>
-											<input type="text" placeholder="เลือกเพื่อน" class="form-control">
+											{{-- <label>เพื่อน<span class="text-danger">*</span></label> --}}
+											{{-- <input type="text" placeholder="เลือกเพื่อน" class="form-control"> --}}
+											<div class="form-group">
+												<div class="form-group">
+													<label>เพื่อน<span class="text-danger">*</span> <a href="" class="float-right" data-toggle="modal" data-target="#modal_user">&nbsp<i class="icon-add small" style="color:grey"></i></a></label>
+													<select name="criterialist[]" multiple="multiple" placeholder="เลือกเกณฑ์"  class="form-control form-control-select2">
+														@foreach ($friends as $friend)
+														<option value="{{$friend->id}}" > {{$friend->user->name}} </option>
+														@endforeach
+													</select>
+												</div>
+											</div>
 										</div>
-				                    	<textarea name="enter-message" class="form-control mb-3" rows="12" cols="1" placeholder="ข้อความ"></textarea>
-
-				                    	<div class="d-flex align-items-center">
-				                    		{{-- <div class="list-icons list-icons-extended">
-				                                <a href="#" class="list-icons-item" data-popup="tooltip" title="Add photo" data-container="body"><i class="icon-images2"></i></a>
-				                            	<a href="#" class="list-icons-item" data-popup="tooltip" title="Add video" data-container="body"><i class="icon-film2"></i></a>
-				                                <a href="#" class="list-icons-item" data-popup="tooltip" title="Add event" data-container="body"><i class="icon-calendar2"></i></a>
-				                    		</div> --}}
-
-				                    		<button type="button" class="btn bg-blue btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> ส่งข้อความ</button>
-				                    	</div>
+									
+										<div class="form-group">
+											<label>เร่งด่วน<span class="text-danger">*</span></label>
+											<select name="messagepriority" id="organizationamphur" data-placeholder="เร่งด่วน" class="form-control form-control-select2">
+												@foreach ($messagepriorities as $messagepriority)                                                                
+													<option value="{{$messagepriority->id}}" > {{$messagepriority->name}} </option>
+												@endforeach   
+											</select>
+										</div>
+										<div class="form-group">
+											<textarea name="enter-message" class="form-control mb-3" rows="7" cols="1" placeholder="ข้อความ"></textarea>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<div class="input-group">													
+														<button id="btnuploadattachment"  class="btn bg-grey-300" type="button" onclick="document.getElementById('attachment').click();">ไฟล์แนบ</button>													
+													</div>
+													<input type="file" style="display:none;" id="attachment" name="attachment[]" multiple/>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<button type="button" class="btn bg-blue btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> ส่งข้อความ</button>
+											</div>
+										</div>
 									</form>
 								</div>
 							</div>
@@ -1073,6 +1142,13 @@
 		$("#file").on('change', function() {
             $("#filename").val(this.value);
         });
+		// $("#attachment").on('change', function() {
+        //     $("#attachmentname").val(this.value);
+        // });
+		$("#attachment").on('change', function() {
+			var files = $(this)[0].files;
+			$("#btnuploadattachment").text(`ไฟล์แนบ (${files.length})`);
+		});
     </script>	
 @stop
 

@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SlideStylesTableSeeder::class);
         $this->call(SlideStatusesTableSeeder::class);
         $this->call(UserPositionsTableSeeder::class);
+        $this->call(MessagePrioritiesTableSeeder::class);
+        $this->call(MessageReadStatusesTableSeeder::class);
+        $this->call(FriendStatusesTableSeeder::class);
         $this->call(CriteriasTableSeeder::class);
         $this->call(ReligionsTableSeeder::class);
         $this->call(ExpertPositionsTableSeeder::class);
@@ -41,6 +44,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(CriteriaGroupsTableSeeder::class);
         $this->call(CriteriaGroupTransactionsTableSeeder::class);
-        
+        $this->call(FriendRequestsTableSeeder::class);
+        $this->call(FriendsTableSeeder::class);
+        $this->call(MessageBoxesTableSeeder::class);
+        $this->call(MessageReceivesTableSeeder::class);
+
     }
 }
+
