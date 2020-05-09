@@ -47,7 +47,7 @@ class SettingProfileController extends Controller
         $friends = Friend::where('user_id',$auth->id)->get();
         $friendrequests = FriendRequest::where('from_id',$auth->id)->get();
         $friendrequestcomings = FriendRequest::where('to_id',$auth->id)->get();
-        $messagereceives = MessageReceive::where('receiver_id',$auth->id)->get();
+        $messagereceives = MessageReceive::where('receiver_id',$auth->id)->paginate(10);
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)

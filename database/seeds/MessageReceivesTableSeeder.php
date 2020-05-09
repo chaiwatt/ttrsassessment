@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class MessageReceivesTableSeeder extends Seeder
@@ -14,15 +15,21 @@ class MessageReceivesTableSeeder extends Seeder
         DB::table('message_receives')->insert([
             [
                 'message_box_id' => 1,
-                'receiver_id' => 1
+                'receiver_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ],
             [
                 'message_box_id' => 2,
-                'receiver_id' => 1
+                'receiver_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ],
             [
                 'message_box_id' => 3,
-                'receiver_id' => 1
+                'receiver_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ]
         ]);
     }

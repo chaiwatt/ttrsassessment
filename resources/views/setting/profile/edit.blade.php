@@ -347,7 +347,7 @@
 
 											<div class="header-elements">
 												@if ($messagereceives->count()>0)
-												<span class="badge bg-blue">{{$messagereceives->count()}} ข้อความใหม่</span>
+												<span class="badge bg-teal">{{$messagereceives->count()}} ข้อความใหม่</span>
 												@endif
 											</div>
 										</div>
@@ -385,127 +385,59 @@
 														</div>
 													</div>
 
-													<div class="navbar-text ml-lg-auto"><span class="font-weight-semibold">1-50</span> of <span class="font-weight-semibold">528</span></div>
+													<div class="navbar-text ml-lg-auto"><span class="font-weight-semibold">{{ $messagereceives->links() }}</span>   </div>
 
-													<div class="ml-lg-3 mb-3 mb-lg-0">
+													{{-- <div class="ml-lg-3 mb-3 mb-lg-0">
 														<div class="btn-group">
 															<button type="button" class="btn btn-light btn-icon disabled"><i class="icon-arrow-left12"></i></button>
 															<button type="button" class="btn btn-light btn-icon"><i class="icon-arrow-right13"></i></button>
 														</div>
-													</div>
+													</div> --}}
 												</div>
 											</div>
 										</div>
 										<!-- /action toolbar -->
-
-
 										<!-- Table -->
 										<div class="table-responsive">
 											<table class="table table-inbox">
 												<tbody data-link="row" class="rowlink">
-													<tr class="unread">
-														<td class="table-inbox-checkbox rowlink-skip">
-															<input type="checkbox" class="form-input-styled" data-fouc>
-														</td>
-														<td class="table-inbox-star rowlink-skip">
-															<a href="#">
-																<i class="icon-star-empty3 text-muted"></i>
-															</a>
-														</td>
-														<td class="table-inbox-name">
-															<a href="mail_read.html">
-																<div class="letter-icon-title text-default">James Alexander</div>
-															</a>
-														</td>
-														<td class="table-inbox-message">
-															<span class="table-inbox-subject"><span class="badge bg-success mr-2">Promo</span> There are three whales and three boats &nbsp;-&nbsp;</span>
-															<span class="text-muted font-weight-normal">And one of the boats (presumed to contain the missing leg in all its original integrity) is being crunched by the jaws of the foremost whale</span>
-														</td>
-														<td class="table-inbox-attachment">
-															<i class="icon-attachment text-muted"></i>
-														</td>
-														<td class="table-inbox-time">
-															10:21 pm
-														</td>
-													</tr>
-
-													<tr class="unread">
-														<td class="table-inbox-checkbox rowlink-skip">
-															<input type="checkbox" class="form-input-styled" data-fouc>
-														</td>
-														<td class="table-inbox-star rowlink-skip">
-															<a href="#">
-																<i class="icon-star-full2 text-warning-300"></i>
-															</a>
-														</td>
-														<td class="table-inbox-name">
-															<a href="mail_read.html">
-																<div class="letter-icon-title text-default">Nathan Jacobson</div>
-															</a>
-														</td>
-														<td class="table-inbox-message">
-															<span class="table-inbox-subject">Any time these ten years, they tell me, has that man held up &nbsp;-&nbsp;</span>
-															<span class="text-muted font-weight-normal">That picture, and exhibited that stump to an incredulous world. But the time of his justification has now come. His three whales are as good whales as were ever published in Wapping, at any rate; and his stump</span>
-														</td>
-														<td class="table-inbox-attachment"></td>
-														<td class="table-inbox-time">
-															8:37 pm
-														</td>
-													</tr>
-
-													<tr>
-														<td class="table-inbox-checkbox rowlink-skip">
-															<input type="checkbox" class="form-input-styled" data-fouc>
-														</td>
-														<td class="table-inbox-star rowlink-skip">
-															<a href="#">
-																<i class="icon-star-full2 text-warning-300"></i>
-															</a>
-														</td>
-														<td class="table-inbox-name">
-															<a href="mail_read.html">
-																<div class="letter-icon-title text-default">Margo Baker</div>
-															</a>
-														</td>
-														<td class="table-inbox-message">
-															<span class="table-inbox-subject">Throughout the Pacific, and also in Nantucket, and New Bedford &nbsp;-&nbsp;</span>
-															<span class="text-muted font-weight-normal">and Sag Harbor, you will come across lively sketches of whales and whaling-scenes, graven by the fishermen themselves on Sperm Whale-teeth, or ladies' busks wrought out of the Right Whale-bone</span>
-														</td>
-														<td class="table-inbox-attachment"></td>
-														<td class="table-inbox-time">
-															4:28 am
-														</td>
-													</tr>
-
-													<tr>
-														<td class="table-inbox-checkbox rowlink-skip">
-															<input type="checkbox" class="form-input-styled" data-fouc>
-														</td>
-														<td class="table-inbox-star rowlink-skip">
-															<a href="#">
-																<i class="icon-star-empty3 text-muted"></i>
-															</a>
-														</td>
-														<td class="table-inbox-name">
-															<a href="mail_read.html">
-																<div class="letter-icon-title text-default">Dribbble</div>
-															</a>
-														</td>
-														<td class="table-inbox-message">
-															<span class="table-inbox-subject">The whalemen call the numerous little ingenious contrivances &nbsp;-&nbsp;</span>
-															<span class="text-muted font-weight-normal">They elaborately carve out of the rough material, in their hours of ocean leisure. Some of them have little boxes of dentistical-looking implements</span>
-														</td>
-														<td class="table-inbox-attachment"></td>
-														<td class="table-inbox-time">
-															Dec 5
-														</td>
-													</tr>
-
+													@foreach ($messagereceives as $messagereceive)
+														<tr @if ($messagereceive->messagebox->message_read_status_id==1) class="unread" @endif >
+															<td class="table-inbox-checkbox rowlink-skip">
+																<input type="checkbox" class="form-input-styled" data-fouc>
+															</td>
+															<td class="table-inbox-star rowlink-skip">
+																<a href="#">
+																	@if ($messagereceive->message_priority_id == 2 )
+																			<i class="icon-star-full2 text-warning-300"></i>
+																		@else
+																			<i class="icon-star-empty3 text-muted"></i>
+																	@endif
+																</a>
+															</td>
+															<td class="table-inbox-name">
+																<a href="mail_read.html">
+																	<div class="letter-icon-title text-default">{{$messagereceive->messagebox->sender->name}} {{$messagereceive->messagebox->sender->lastname}}</div>
+																</a>
+															</td>
+															<td class="table-inbox-message">
+																<span class="table-inbox-subject">{{$messagereceive->messagebox->title}} &nbsp;-&nbsp;</span>
+																<span class="text-muted font-weight-normal">{{$messagereceive->messagebox->body}}</span>
+															</td>
+															<td class="table-inbox-attachment">
+																@if ($messagereceive->messagebox->messageboxattachment->count() > 0)
+																	<i class="icon-attachment text-muted"></i>
+																@endif
+															</td>
+															<td class="table-inbox-time">
+																{{$messagereceive->timeago}}
+															</td>
+														</tr>
+													@endforeach
 												</tbody>
 											</table>
 										</div>
 										<!-- /table -->
-
 									</div>
 									<!-- /single line -->
 								{{-- </div> --}}

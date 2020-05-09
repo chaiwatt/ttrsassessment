@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class MessageBoxesTableSeeder extends Seeder
@@ -18,6 +19,9 @@ class MessageBoxesTableSeeder extends Seeder
                 'message_priority_id' => 1,
                 'sender_id' => 9,
                 'message_read_status_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
+
             ],
             [
                 'title' => 'หัวข้อ2',
@@ -25,6 +29,8 @@ class MessageBoxesTableSeeder extends Seeder
                 'message_priority_id' => 1,
                 'sender_id' => 10,
                 'message_read_status_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ],
             [
                 'title' => 'หัวข้อ3',
@@ -32,6 +38,8 @@ class MessageBoxesTableSeeder extends Seeder
                 'message_priority_id' => 1,
                 'sender_id' => 11,
                 'message_read_status_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ]
         ]);
     }
