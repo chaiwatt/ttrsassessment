@@ -16,6 +16,5 @@ class TimeAgo
 			$diff = round($diff);
 			return $diff . " " . $strTime[$i];
 		}
-      return "โมเดลมีการ {$action_name} {$name}";
     } 
 }
