@@ -16,7 +16,7 @@ class CreateMessageBoxesTable extends Migration
         Schema::create('message_boxes', function (Blueprint $table) {
             $table->id();
             $table->string('title',150);
-            $table->string('body');
+            $table->text('body');
             $table->unsignedBigInteger('message_priority_id')->comment('ระดับความสำคัญ');
             $table->unsignedBigInteger('sender_id')->comment('ID ผู้ส่ง');
             $table->timestamps();
