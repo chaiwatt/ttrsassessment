@@ -96,11 +96,16 @@
                                             @foreach($menus as $menu)
                                                 <li class="{{ $menu->childs->count() ? 'dropdown' :'' }} dropdown-full-color dropdown-light">
                                                     <a href="{{$menu->url}}" class="dropdown-item {{$menu->childs->count() ? 'dropdown-toggle' :'' }}" style="font-weight: 100;font-size:16px">
-                                                        {{ $menu->name }}
+                                                        @if (Config::get('app.locale') == 'th')
+                                                            {{ $menu->name }}
+                                                        @else
+                                                            {{ $menu->engname }}
+                                                        @endif
+                                                        
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         @if($menu->childs->count())
-                                                        @include('layouts.landing.menu.menusub',['childs' => $menu->childs])
+                                                            @include('layouts.landing.menu.menusub',['childs' => $menu->childs])
                                                         @endif
                                                     </ul>
                                                 </li>
