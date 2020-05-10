@@ -15,8 +15,10 @@ class CreateIntroSectionsTable extends Migration
     {
         Schema::create('intro_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('text1',250)->comment('title intro');
+            $table->string('text1',150)->comment('title intro');
             $table->string('text2',250)->comment('ข้อความ intro');
+            $table->string('texteng1',150)->comment('title intro ภาษาอังกฤษ');
+            $table->string('texteng2',250)->comment('ข้อความ intro ภาษาอังกฤษ');
             $table->string('icon',250)->comment('รูปไอคอน')->nullable();
             $table->timestamps();
         });

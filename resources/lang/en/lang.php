@@ -6,4 +6,5 @@ return [
     'login' => 'Log In',
     'forgotpassword' => 'Forgot Password',
     'noaccount' => 'No account yet',
+    'signout' => 'Sign Out',
 ];

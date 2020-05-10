@@ -12,8 +12,20 @@
                             @endif
                         </div>
                         <div class="col-lg-8">
-                        <h2 class="font-weight-bold text-5 line-height-5 mb-1">{{$introsection->text1}}</h2>
-                            <p class="mb-0">{{$introsection->text2}}</p>
+                        <h2 class="font-weight-bold text-5 line-height-5 mb-1">
+                            @if (Config::get('app.locale') == 'th')
+                                {{ $introsection->text1 }}
+                            @else
+                                {{ $introsection->texteng1 }}
+                            @endif
+                        </h2>
+                            <p class="mb-0">
+                                @if (Config::get('app.locale') == 'th')
+                                    {{ $introsection->text2 }}
+                                @else
+                                    {{ $introsection->texteng2 }}
+                                @endif
+                            </p>
                         </div>
                     </div>
                 </div>

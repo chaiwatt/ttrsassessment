@@ -16,7 +16,7 @@
                                         </li>
                                     @else
                                         <li class="nav-item nav-item-anim-icon">
-                                            <a class="dropdown-item" href="{{route('logout')}}" style="font-size: 14px" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-angle-right"></i>ออกจากระบบ</a>
+                                            <a class="dropdown-item" href="{{route('logout')}}" style="font-size: 14px" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-angle-right"></i>{{trans('lang.signout')}}</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
