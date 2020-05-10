@@ -36,6 +36,16 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'message'], function(){
             Route::post('getmessage','Api\MessageController@GetMessage')->name('api.message.getmessage');           
         });
+        Route::group(['prefix' => 'pagecategory'], function(){
+            Route::post('add','Api\PageCategoryController@Add')->name('api.pagecategory.add');           
+            Route::post('edit','Api\PageCategoryController@Edit')->name('api.pagecategory.edit');  
+            Route::post('delete','Api\PageCategoryController@Delete')->name('api.pagecategory.delete');  
+        });
+        Route::group(['prefix' => 'pagetag'], function(){
+            Route::post('add','Api\PageTagController@Add')->name('api.pagetag.add');           
+            Route::post('edit','Api\PageTagController@Edit')->name('api.pagetag.edit');  
+            Route::post('delete','Api\PageTagController@Delete')->name('api.pagetag.delete');  
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
@@ -195,6 +205,14 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('edit/{id}','SettingAdminWebsiteIntroSectionController@Edit')->name('setting.admin.website.introsection.edit'); 
                     Route::post('editsave/{id}','SettingAdminWebsiteIntroSectionController@EditSave')->name('setting.admin.website.introsection.editsave'); 
                     Route::get('delete/{id}','SettingAdminWebsiteIntroSectionController@Delete')->name('setting.admin.website.introsection.delete'); 
+                });
+                Route::group(['prefix' => 'page'], function(){
+                    Route::get('','SettingAdminWebsitePageController@Index')->name('setting.admin.website.page');           
+                    Route::get('create','SettingAdminWebsitePageController@Create')->name('setting.admin.website.page.create'); 
+                    Route::post('createsave','SettingAdminWebsitePageController@CreateSave')->name('setting.admin.website.page.createsave'); 
+                    Route::get('edit/{id}','SettingAdminWebsitePageController@Edit')->name('setting.admin.website.page.edit'); 
+                    Route::post('editsave/{id}','SettingAdminWebsitePageController@EditSave')->name('setting.admin.website.page.editsave'); 
+                    Route::get('delete/{id}','SettingAdminWebsitePageController@Delete')->name('setting.admin.website.page.delete'); 
                 });
             }); 
             Route::group(['prefix' => 'user'], function(){

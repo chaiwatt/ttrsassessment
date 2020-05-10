@@ -408,12 +408,18 @@
 															</td>
 															<td class="table-inbox-star">
 																<a href="#">
-																	@if ($messagereceive->message_priority_id == 2 )
+																	@if ($messagereceive->messagebox->message_priority_id == 2 )
 																			<i class="icon-star-full2 text-warning-300"></i>
 																		@else
 																			<i class="icon-star-empty3 text-muted"></i>
 																	@endif
 																</a>
+															</td>
+															<td class="table-inbox-image">
+																{{-- <img src="{{asset('assets/dashboard/images/user.jpg')}}" class="rounded-circle" width="32" height="32" alt=""> --}}
+																<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
+																	<span class="letter-icon">J</span>
+																</span>
 															</td>
 															<td class="table-inbox-name">
 																<a href="#" id="maillink" data-id="{{$messagereceive->id}} ">

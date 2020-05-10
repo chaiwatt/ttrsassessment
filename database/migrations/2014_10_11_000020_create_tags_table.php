@@ -16,6 +16,7 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name',250)->comment('ชื่อป้ายกำกับเพจ');
+            $table->string('slug',250)->comment('slug ป้ายกำกับเพจ');
             $table->timestamps();
         });
     }

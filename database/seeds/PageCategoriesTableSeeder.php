@@ -13,13 +13,13 @@ class PageCategoriesTableSeeder extends Seeder
     {
         DB::table('page_categories')->insert([
             [
-                'name' => 'อุตสาหกรรรม อาหาร',
-                'slug' => 'อุตสาหกรรรม-อาหาร'
+                'name' => 'หมวดหมู่ที่1',
+                'slug' => 'หมวดหมู่ที่1'
 
             ],
             [
-                'name' => 'อุตสาหกรรรม เชื้อเพลิง',
-                'slug' => 'อุตสาหกรรรม-เชื้อเพลิง'
+                'name' => 'หมวดหมู่ที่2',
+                'slug' => 'หมวดหมู่ที่2'
             ]
         ]);
     }
