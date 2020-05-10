@@ -42,9 +42,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('delete','Api\PageCategoryController@Delete')->name('api.pagecategory.delete');  
         });
         Route::group(['prefix' => 'pagetag'], function(){
-            Route::post('add','Api\PageTagController@Add')->name('api.pagetag.add');           
-            Route::post('edit','Api\PageTagController@Edit')->name('api.pagetag.edit');  
-            Route::post('delete','Api\PageTagController@Delete')->name('api.pagetag.delete');  
+            Route::post('add','Api\PagetagController@Add')->name('api.pagetag.add');           
+            Route::post('edit','Api\PagetagController@Edit')->name('api.pagetag.edit');  
+            Route::post('delete','Api\PagetagController@Delete')->name('api.pagetag.delete');  
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
