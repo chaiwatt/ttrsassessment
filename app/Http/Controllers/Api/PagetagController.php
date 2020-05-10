@@ -14,7 +14,6 @@ class PagetagController extends Controller
         $tag->name = $request->tag;
         $tag->slug = CreateSlug::createSlug($request->tag);
         $tag->save();
-
         return response()->json(Tag::get());  
     }
     public function Edit(Request $request){

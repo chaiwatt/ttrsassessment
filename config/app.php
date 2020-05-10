@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'th',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +165,7 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
+        Jenssegers\Agent\AgentServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,6 +233,7 @@ return [
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => 'Intervention\Image\Facades\Image',
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];

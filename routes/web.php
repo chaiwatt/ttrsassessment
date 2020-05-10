@@ -16,6 +16,8 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('', 'HomeController@Index')->name('landing.index');
+Route::get('/{slug}', 'HomeController@Page')->name('landing.page');
+Route::get('change/{locale}', 'LanguageController@Change')->name('change');
 
 Route::group(['prefix' => 'social'], function(){       
     Route::get('/{provider}', 'Auth\LoginController@Redirect')->name('social.login');

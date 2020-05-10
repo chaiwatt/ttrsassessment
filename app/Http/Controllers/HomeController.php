@@ -12,4 +12,9 @@ class HomeController extends Controller
         $introsections = IntroSection::get();
         return view('landing.index')->withIntrosections($introsections);
     }
+
+    public function Page()
+    {
+        return view('landing.page');
+    }
 }
