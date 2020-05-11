@@ -155,6 +155,15 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
+                                            <label>เมนู</label><span class="text-danger">*</span>
+                                                <select name="menu" placeholder="เมนู" class="form-control form-control-select2">
+                                                    <option value="" >เลือกรายการเมนู</option>
+                                                    @foreach ($menus as $menu)
+                                                        <option value="{{$menu->id}}" >{{$menu->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>หัวเรื่อง<span class="text-danger">*</span></label>
                                             <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control">
                                         </div>

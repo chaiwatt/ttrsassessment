@@ -41,6 +41,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.slide') ? 'active' : '' }}">ภาพสไลด์</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.introsection') ? 'active' : '' }}">Intro section</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.page') ? 'active' : '' }}">หน้าเพจ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.menu.create') ? 'active' : '' }}">เมนู</a></li>	
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.admin.user') ? 'nav-item-expanded' : '' }}">

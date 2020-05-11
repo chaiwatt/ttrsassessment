@@ -13,7 +13,7 @@ class ShareComposer
         $auth = Auth::user();
         $shareunreadmessages = MessageReceive::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::get()->first();
-        $menus = Menu::where('parent_id', '=', 0)->get();
+        $menus = Menu::where('parent_id', 0)->get();
         $view->withGeneralinfo($generalinfo)
             ->withMenus($menus)
             ->withShareunreadmessages($shareunreadmessages);

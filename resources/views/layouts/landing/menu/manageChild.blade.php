@@ -1,7 +1,7 @@
 <ul>
     @foreach($childs as $child)
        <li>
-           {{ $child->title }}
+           {{ $child->name }}
        @if(count($child->childs))
                 @include('layouts.landing.menu.managechild',['childs' => $child->childs])
             @endif

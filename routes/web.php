@@ -216,6 +216,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','SettingAdminWebsitePageController@EditSave')->name('setting.admin.website.page.editsave'); 
                     Route::get('delete/{id}','SettingAdminWebsitePageController@Delete')->name('setting.admin.website.page.delete'); 
                 });
+                Route::group(['prefix' => 'menu'], function(){     
+                    Route::get('create','SettingAdminWebsiteMenuController@Create')->name('setting.admin.website.menu.create'); 
+                });
             }); 
             Route::group(['prefix' => 'user'], function(){
                 Route::get('','SettingAdminUserController@Index')->name('setting.admin.user');           

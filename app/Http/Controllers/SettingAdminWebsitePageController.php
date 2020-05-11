@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Tag;
+use App\Model\Menu;
 use App\Model\Page;
 use App\Model\PageStatus;
 use App\Model\PageCategory;
@@ -25,8 +26,10 @@ class SettingAdminWebsitePageController extends Controller
         $pagecategories = PageCategory::get();
         $pagestatuses = PageStatus::get();
         $tags = Tag::get();
+        $menus = Menu::get();
         return view('setting.admin.website.page.create')->withPagecategories($pagecategories)
                                                     ->withPagestatuses($pagestatuses)
-                                                    ->withTags($tags);
+                                                    ->withTags($tags)
+                                                    ->withMenus($menus);
     }
 }

@@ -100,8 +100,7 @@
                                                             {{ $menu->name }}
                                                         @else
                                                             {{ $menu->engname }}
-                                                        @endif
-                                                        
+                                                        @endif   
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         @if($menu->childs->count())

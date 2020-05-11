@@ -53,6 +53,27 @@ class MenusTableSeeder extends Seeder
                 'slug' => 'ติดต่อเรา',
                 'engname' => 'Contact us',
                 'engslug' => 'contactus',
+            ],
+            [
+                'parent_id' => 6,
+                'name' => 'test',
+                'slug' => 'test',
+                'engname' => 'Contact us',
+                'engslug' => 'contactus',
+            ],
+            [
+                'parent_id' => 6,
+                'name' => 'tests',
+                'slug' => 'tests',
+                'engname' => 'Contact us',
+                'engslug' => 'contactus',
+            ],
+            [
+                'parent_id' => 8,
+                'name' => 'eeee',
+                'slug' => 'eeee',
+                'engname' => 'Contact us',
+                'engslug' => 'contactus',
             ]
         ]);
     }
