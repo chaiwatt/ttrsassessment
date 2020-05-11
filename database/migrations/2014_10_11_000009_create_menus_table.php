@@ -20,7 +20,7 @@ class CreateMenusTable extends Migration
             $table->string('slug');
             $table->string('engname',250)->comment('ชื่อเมนูเว็บไซต์ ภาษาอังกฤษ');
             $table->string('engslug',250);
-            $table->text('url')->comment('ลิงค์ของหน้าเพจ')->nullable();
+            $table->unsignedBigInteger('page_id')->nullable();
             $table->char('hide')->default(1)->comment('ซ่อน/แสดงเมนู');
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\IntroSection;
 use Illuminate\Http\Request;
+use App\Http\Requests\EditIntroSectionRequest;
 use App\Http\Requests\CreateIntroSectionRequest;
 
 class SettingAdminWebsiteIntroSectionController extends Controller
@@ -42,16 +43,17 @@ class SettingAdminWebsiteIntroSectionController extends Controller
         return view('setting.admin.website.introsection.edit')->withIntrosection($introsection);
 
     }
-    public function EditSave(CreateIntroSectionRequest $request,$id){
-        $file = $request->picture; 
+    public function EditSave(EditIntroSectionRequest $request,$id){
         $introsection = IntroSection::find($id);
-        if(!Empty($file)){    
-            @unlink($introsection->icon);   
-        }
-        $new_name = str_random(10).".".$file->getClientOriginalExtension();
-        $file->move("storage/uploads/introsection" , $new_name);   
-        $filelocation = "storage/uploads/introsection/".$new_name;
+        $filelocation = $introsection->icon; //พาร์ธไฟล์รูปเดิม
+        $file = $request->file('picture'); //รูปใหม่
 
+        if(!Empty($file)){
+            @unlink($introsection->icon); //ถ้ามีไฟล์แนบมา ลบไฟล์เดิมทิ้ง
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/introsection" , $new_name);   
+            $filelocation = "storage/uploads/introsection/".$new_name;
+        }
         $introsection = IntroSection::find($id)->update([
             'text1' => $request->textone,
             'texteng1' => $request->textoneeng,

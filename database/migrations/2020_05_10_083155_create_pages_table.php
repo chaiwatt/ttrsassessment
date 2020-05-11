@@ -17,11 +17,12 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('page_category_id');
             $table->unsignedBigInteger('page_status_id');
-            $table->string('name',150)->nullable();
-            $table->string('slug',150)->unique();
-            $table->string('header',250)->nullable();
-            $table->longText('content')->nullable();
-            $table->string('featureimg',250)->nullable(); 
+            $table->string('name',150);
+            $table->string('slug',150);
+            $table->string('header',250);
+            $table->longText('content');
+            $table->string('featureimg',250); 
+            $table->string('featurethumbnail',250); 
             $table->timestamps();
         });
     }

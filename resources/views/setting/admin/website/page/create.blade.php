@@ -155,7 +155,7 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>เมนู</label><span class="text-danger">*</span>
+                                            <label>เมนู</label>
                                                 <select name="menu" placeholder="เมนู" class="form-control form-control-select2">
                                                     <option value="" >เลือกรายการเมนู</option>
                                                     @foreach ($menus as $menu)
@@ -209,9 +209,17 @@
                                                     <hr>
                                                     <a data-toggle="modal" href="#"  class="dropdown-item" id="deletetag"><i class="icon-trash"></i> ลบป้ายกำกับ</a>
                                                 </div>
-                                                <select name="pagetag" id="pagetag" multiple placeholder="ป้ายกำกับ" class="form-control form-control-select2">
+                                                <select name="pagetag[]" id="pagetag" multiple placeholder="ป้ายกำกับ" class="form-control form-control-select2">
                                                     @foreach ($tags as $tag)
                                                     <option value="{{$tag->id}}" >{{$tag->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>สถานะการแสดง</label>
+                                                <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                                    @foreach ($pagestatuses as $pagestatus)
+                                                        <option value="{{$pagestatus->id}}" >{{$pagestatus->name}}</option>
                                                     @endforeach
                                                 </select>
                                         </div>
