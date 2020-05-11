@@ -30,7 +30,9 @@ class SettingAdminWebsiteIntroSectionController extends Controller
         $filelocation = "storage/uploads/introsection/".$new_name;
         $introsection = new IntroSection();
         $introsection->text1 = $request->textone;
+        $introsection->texteng1 = $request->textoneeng;
         $introsection->text2 = $request->texttwo;
+        $introsection->texteng2 = $request->texttwoeng;
         $introsection->icon = $filelocation;
         $introsection->save();
         return redirect()->route('setting.admin.website.introsection')->withSuccess('เพิ่ม Intro section สำเร็จ');
@@ -52,7 +54,9 @@ class SettingAdminWebsiteIntroSectionController extends Controller
 
         $introsection = IntroSection::find($id)->update([
             'text1' => $request->textone,
+            'texteng1' => $request->textoneeng,
             'text2' => $request->texttwo,
+            'texteng2' => $request->texttwoeng,       
             'icon' => $filelocation
         ]);
         return redirect()->route('setting.admin.website.introsection')->withSuccess('แก้ไข intro section สำเร็จ');

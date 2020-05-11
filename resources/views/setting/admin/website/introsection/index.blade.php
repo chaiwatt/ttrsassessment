@@ -66,8 +66,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>ข้อความ1</th>     
-                                        <th>ข้อความ2</th>                            
+                                        <th>ข้อความ1 (ภาษาไทย)</th>
+                                        <th>ข้อความ1 (ภาษาอังกฤษ)</th>       
+                                        <th>ข้อความ2 (ภาษาไทย)</th>
+                                        <th>ข้อความ2 (ภาษาอังกฤษ)</th>                          
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -75,8 +77,10 @@
                                     @foreach ($introsections as $key => $introsection)
                                     <tr>    
                                         <td> {{$key+1}} </td>
-                                        <td> {{$introsection->text1}} </td>     
-                                        <td> {{$introsection->text2}} </td>                                     
+                                        <td> {{$introsection->text1}} </td>   
+                                        <td> {{$introsection->texteng1}} </td>  
+                                        <td> {{$introsection->text2}} </td>
+                                        <td> {{$introsection->texteng2}} </td>                                      
                                         <td> 
                                             <a href="{{route('setting.admin.website.introsection.edit',['id' => $introsection->id])}}" class=" badge bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.website.introsection.delete',['id' => $introsection->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       

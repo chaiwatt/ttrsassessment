@@ -55,12 +55,20 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ข้อความที่1</label>
-                                            <input type="text"  name="textone" value="{{$introsection->text1}}"  placeholder="ข้อความที่1" class="form-control">
+                                            <label>ข้อความที่1 (ภาษาไทย)</label>
+                                            <input type="text"  name="textone" value="{{$introsection->text1}}"  placeholder="ข้อความที่1 (ภาษาไทย)" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่2</label>
-                                            <input type="text"  name="texttwo" value="{{$introsection->text2}}"  placeholder="ข้อความที่2" class="form-control">
+                                            <label>ข้อความที่1 (ภาษาอังกฤษ)</label>
+                                            <input type="text"  name="textoneeng" value="{{$introsection->texteng1}}"  placeholder="ข้อความที่1 (ภาษาอังกฤษ)" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ข้อความที่2 (ภาษาไทย)</label>
+                                            <input type="text"  name="texttwo" value="{{$introsection->text2}}"  placeholder="ข้อความที่2 (ภาษาไทย)" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ข้อความที่2 (ภาษาอังกฤษ)</label>
+                                            <input type="text"  name="texttwoeng" value="{{$introsection->texteng2}}"  placeholder="ข้อความที่2 (ภาษาอังกฤษ)" class="form-control">
                                         </div>
 										<div class="form-group">
 											<label>รูปไอคอน<span class="text-danger">*</span></label>
