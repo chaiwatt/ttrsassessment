@@ -67,53 +67,88 @@
                                     </div>
                                     <h5 class="text-center" style="margin-bottom: 0px">ลำดับการแสดงผลหน้าแรก</h5>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0">
-                                            <div class="card-body" style="width: 500px">
-                                                <span id="title[]">ส่วนแสดงภาพสไลด์</span>
+                                        <div class="card mb-0 form-check-inline">
+                                            <div class="card-body " style="width: 500px">
+                                                <div class="form-check form-check-right form-check-switchery">
+                                                    <label class="form-check-label">
+                                                        <span id="title[]">ส่วนการแสดงภาพสไลด์</span>
+                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>   
+                                        </div> 
                                     </div>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0">
-                                            <div class="card-body" style="width: 500px">
-                                                <span id="title[]">ส่วนIntro</span>
+                                        <div class="card mb-0 form-check-inline">
+                                            <div class="card-body " style="width: 500px">
+                                                <div class="form-check form-check-right form-check-switchery">
+                                                    <label class="form-check-label">
+                                                        <span id="title[]">ส่วนIntro</span>
+                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>   
+                                        </div> 
                                     </div>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0">
-                                            <div class="card-body" style="width: 500px">
-                                                <span id="title[]">ส่วนแสดงบทความ</span>
+                                        <div class="card mb-0 form-check-inline">
+                                            <div class="card-body " style="width: 500px">
+                                                <div class="form-check form-check-right form-check-switchery">
+                                                    <label class="form-check-label">
+                                                        <span id="title[]">ส่วนแสดงบทความ</span>
+                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>   
+                                        </div> 
                                     </div>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0">
-                                            <div class="card-body" style="width: 500px">
-                                                <span id="title[]">ส่วนแสดงท้าย</span>
+                                        <div class="card mb-0 form-check-inline">
+                                            <div class="card-body " style="width: 500px">
+                                                <div class="form-check form-check-right form-check-switchery">
+                                                    <label class="form-check-label">
+                                                        <span id="title[]">ส่วนแสดงท้าย</span>
+                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>   
+                                        </div> 
                                     </div>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0">
-                                            <div class="card-body" style="width: 500px">
-                                                <span id="title[]">เพิ่มเติม1</span>
+                                        <div class="card mb-0 form-check-inline">
+                                            <div class="card-body " style="width: 500px">
+                                                <div class="form-check form-check-right form-check-switchery">
+                                                    <label class="form-check-label">
+                                                        <span id="title[]">เพิ่มเติม1</span>
+                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>   
+                                        </div> 
                                     </div>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0">
-                                            <div class="card-body" style="width: 500px">
-                                                <span id="title[]">เพิ่มเติม2</span>
+                                        <div class="card mb-0 form-check-inline">
+                                            <div class="card-body " style="width: 500px">
+                                                <div class="form-check form-check-right form-check-switchery">
+                                                    <label class="form-check-label">
+                                                        <span id="title[]">เพิ่มเติม2</span>
+                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>   
+                                        </div> 
                                     </div>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0">
-                                            <div class="card-body" style="width: 500px">
-                                                <span id="title[]">เพิ่มเติม3</span>
+                                        <div class="card mb-0 form-check-inline">
+                                            <div class="card-body " style="width: 500px">
+                                                <div class="form-check form-check-right form-check-switchery">
+                                                    <label class="form-check-label">
+                                                        <span id="title[]">เพิ่มเติม3</span>
+                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>   
+                                        </div> 
                                     </div>
                                 </div>
                                 <br>
