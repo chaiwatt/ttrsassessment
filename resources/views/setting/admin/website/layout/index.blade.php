@@ -68,11 +68,11 @@
                                     <h5 class="text-center" style="margin-bottom: 0px">ลำดับการแสดงผลหน้าแรก</h5>
                                     <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
                                         <div class="card mb-0 form-check-inline">
-                                            <div class="card-body " style="width: 500px">
+                                            <div class="card-body" style="width: 500px">
                                                 <div class="form-check form-check-right form-check-switchery">
                                                     <label class="form-check-label">
-                                                        <span id="title[]">ส่วนการแสดงภาพสไลด์</span>
-                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                        <span id="title[]" data-id="1">ส่วนการแสดงภาพสไลด์</span>
+                                                        <input type="checkbox" data-id="1" class="form-check-input-switchery" checked >
                                                     </label>
                                                 </div>
                                             </div>
@@ -83,8 +83,8 @@
                                             <div class="card-body " style="width: 500px">
                                                 <div class="form-check form-check-right form-check-switchery">
                                                     <label class="form-check-label">
-                                                        <span id="title[]">ส่วนIntro</span>
-                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                        <span id="title[]" data-id="2">ส่วนIntro</span>
+                                                        <input type="checkbox" data-id="2" class="form-check-input-switchery" checked >
                                                     </label>
                                                 </div>
                                             </div>
@@ -95,8 +95,8 @@
                                             <div class="card-body " style="width: 500px">
                                                 <div class="form-check form-check-right form-check-switchery">
                                                     <label class="form-check-label">
-                                                        <span id="title[]">ส่วนแสดงบทความ</span>
-                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                        <span id="title[]" data-id="3">ส่วนแสดงบทความ</span>
+                                                        <input type="checkbox" data-id="3" class="form-check-input-switchery" checked >
                                                     </label>
                                                 </div>
                                             </div>
@@ -107,8 +107,8 @@
                                             <div class="card-body " style="width: 500px">
                                                 <div class="form-check form-check-right form-check-switchery">
                                                     <label class="form-check-label">
-                                                        <span id="title[]">ส่วนแสดงท้าย</span>
-                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                        <span id="title[]" data-id="4">ส่วนแสดงท้าย</span>
+                                                        <input type="checkbox" data-id="4" class="form-check-input-switchery" checked >
                                                     </label>
                                                 </div>
                                             </div>
@@ -119,8 +119,8 @@
                                             <div class="card-body " style="width: 500px">
                                                 <div class="form-check form-check-right form-check-switchery">
                                                     <label class="form-check-label">
-                                                        <span id="title[]">เพิ่มเติม1</span>
-                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                        <span id="title[]" data-id="5">เพิ่มเติม1</span>
+                                                        <input type="checkbox" data-id="5" class="form-check-input-switchery" checked >
                                                     </label>
                                                 </div>
                                             </div>
@@ -131,8 +131,8 @@
                                             <div class="card-body " style="width: 500px">
                                                 <div class="form-check form-check-right form-check-switchery">
                                                     <label class="form-check-label">
-                                                        <span id="title[]">เพิ่มเติม2</span>
-                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                        <span id="title[]" data-id="6">เพิ่มเติม2</span>
+                                                        <input type="checkbox" data-id="6" class="form-check-input-switchery" checked >
                                                     </label>
                                                 </div>
                                             </div>
@@ -143,8 +143,8 @@
                                             <div class="card-body " style="width: 500px">
                                                 <div class="form-check form-check-right form-check-switchery">
                                                     <label class="form-check-label">
-                                                        <span id="title[]">เพิ่มเติม3</span>
-                                                        <input type="checkbox" class="form-check-input-switchery" checked data-fouc>
+                                                        <span id="title[]" data-id="7">เพิ่มเติม3</span>
+                                                        <input type="checkbox" data-id="7" class="form-check-input-switchery" checked >
                                                     </label>
                                                 </div>
                                             </div>
@@ -171,6 +171,9 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/plugins/forms/styling/switchery.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/Sortable.js')}}"></script>
     <script>
 
@@ -180,17 +183,22 @@
         });
         $('#generateJSON').click(function() {
 
-        let data = {};
+            var favorite = [];
+            $.each($("input:checked"), function(){            
+                favorite.push($(this).data('id'));
+            });
+            alert("My favourite sports are: " + favorite.join(", "));
 
-        var titles = $('span[id^=title]').map(function(idx, elem) {
-        return $(elem).text();
-        }).get();
+            // let data = {};
 
-        data['products'] = titles;
+            // var titles = $('span[id^=title]').map(function(idx, elem) {
+            //     return $(elem).data('id');// $('elem').data('id');//  $(elem).text();
+            // }).get();
 
-        // encode to JSON format
-        var products_json = JSON.stringify(data,null,'\t');
-            $('#printCode').html(products_json);
+            // data['id'] = titles;
+
+            // var products_json = JSON.stringify(data,null,'\t');
+            //     $('#printCode').html(products_json);
         });
     </script>
 @stop

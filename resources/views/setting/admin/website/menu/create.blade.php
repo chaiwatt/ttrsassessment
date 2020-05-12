@@ -127,8 +127,6 @@
                     </div>   
                 </div>
             </div>
-        </div>
-        <!-- /form layouts -->
     </div>
     <!-- /content area -->
 @endsection
