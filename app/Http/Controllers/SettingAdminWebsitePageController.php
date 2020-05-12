@@ -40,10 +40,9 @@ class SettingAdminWebsitePageController extends Controller
         $dom->loadHtml('<?xml encoding="UTF-8">'.$request->content);
         $images = $dom->getelementsbytagname('img');
         $detail = $dom->savehtml();
-
         $file = $request->file('feature'); 
+        
         $img = Image::make($file);   
-
         $fname=str_random(10);
         $feature = "storage/uploads/feature/".$fname;
         $this->crop(true,public_path("storage/uploads/feature/"),$fname.".".$file->getClientOriginalExtension(),Image::make($file),1200,500,1);

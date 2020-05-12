@@ -246,9 +246,9 @@
 
 <script  type="text/javascript">
 	var route = {
-			url: "{{ url('/') }}",
-			token: $('meta[name="csrf-token"]').attr('content')
-		};
+        url: "{{ url('/') }}",
+        token: $('meta[name="csrf-token"]').attr('content')
+    };
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 300,

@@ -38,6 +38,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'message'], function(){
             Route::post('getmessage','Api\MessageController@GetMessage')->name('api.message.getmessage');           
         });
+        Route::group(['prefix' => 'menu'], function(){
+            Route::post('getmenu','Api\MenuController@GetMenu')->name('api.menu.getmenu');           
+        });
         Route::group(['prefix' => 'pagecategory'], function(){
             Route::post('add','Api\PageCategoryController@Add')->name('api.pagecategory.add');           
             Route::post('edit','Api\PageCategoryController@Edit')->name('api.pagecategory.edit');  
@@ -218,6 +221,7 @@ Route::group(['middleware' => 'auth'], function(){
                 });
                 Route::group(['prefix' => 'menu'], function(){     
                     Route::get('create','SettingAdminWebsiteMenuController@Create')->name('setting.admin.website.menu.create'); 
+                    Route::post('crud','SettingAdminWebsiteMenuController@Crud')->name('setting.admin.website.menu.crud');
                 });
             }); 
             Route::group(['prefix' => 'user'], function(){

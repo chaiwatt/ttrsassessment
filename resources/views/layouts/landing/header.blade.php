@@ -1,4 +1,4 @@
-<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 148, 'stickySetTop': '-148px', 'stickyChangeLogo': true}">
+<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 200, 'stickySetTop': '-200px', 'stickyChangeLogo': true}">
     <div class="header-body border-color-primary border-top-0 box-shadow-none">
         <div class="header-top header-top-default border-bottom-0 border-top-0">
             <div class="container">
@@ -58,8 +58,8 @@
                     <div class="header-row">
                         <div class="header-logo header-logo-sticky-change">
                             <a href="index.html">
-                                <img class="header-logo-sticky opacity-0" alt="Porto" width="170" height="88" data-sticky-width="89" data-sticky-height="43" data-sticky-top="120" src="{{asset('assets/landing/img/logo-dark.png')}}">
-                                <img class="header-logo-non-sticky opacity-0" alt="Porto" width="170" height="88" src="{{asset('assets/landing/img/logo.png')}}">
+                                <img class="header-logo-sticky opacity-0" style="padding-bottom:-20px" alt="Porto" width="479" height="99" data-sticky-width="100" data-sticky-height="43" data-sticky-top="140" src="{{asset('assets/landing/img/logo-dark.png')}}">
+                                <img class="header-logo-non-sticky opacity-0" alt="Porto" width="479" height="99" src="{{asset('assets/landing/img/ttrs.png')}}">
                             </a>
                         </div>
                     </div>

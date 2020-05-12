@@ -46,43 +46,21 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <div class="card">
-                   
                     <div class="card-body">
                         <div class="row">
-                           <div class="col-md-6">
-                              <form action="" method="post">
+                           <div class="col-md-12">
+                              <form action="{{route('setting.admin.website.menu.crud')}}" method="post">
                                  @csrf
-                                  @if(count($errors) > 0)
-                                      <div class="alert alert-danger  alert-dismissible">
-                                         <button type="button" class="close" data-dismiss="alert">×</button>
-                                         @foreach($errors->all() as $error)
-                                                  {{ $error }}<br>
-                                         @endforeach
-                                      </div>
-                                   @endif
-                                   @if ($message = Session::get('success'))
-                                    <div class="alert alert-success  alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert">×</button>   
-                                            <strong>{{ $message }}</strong>
-                                    </div>
-                                 @endif
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="form-group">
-                                          <label>ชื่อเมนู</label>
-                                          <input type="text" name="title" class="form-control">   
-                                       </div>
-                                    </div>
-                                 </div>
+                                 <input type="text" id="menuid" name="menuid" hidden>
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
                                           <label>เมนูหลัก</label>
-                                          <select name="menu" placeholder="เมนู" class="form-control form-control-select2">
+                                          <select name="parentmenu" id="parentmenu" placeholder="เมนู" class="form-control form-control-select2">
                                             <option value="" >เลือกเมนูหลัก</option>
-                                            @foreach($allMenus as $key => $menu)
+                                            @foreach($allmenus as $key => $menu)
                                                 <option value="{{$key}}" >{{$menu}}</option>
                                             @endforeach
                                         </select>
@@ -91,18 +69,53 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                                        <a href="" class="btn bg-info">แก้ไข <i class="icon-pencil ml-2"></i></a>
-                                        <a href="" class="btn bg-danger">ลบ <i class="icon-trash-alt ml-2"></i></a>
+                                       <div class="form-group">
+                                          <label>เมนูภาษาไทย<span class="text-danger">*</span></label>
+                                          <input type="text" name="menuthai" id="menuthai" class="form-control">   
+                                       </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                           <label>เมนูภาษาอังกฤษ<span class="text-danger">*</span></label>
+                                           <input type="text" name="menuenglish" id="menuenglish" class="form-control">   
+                                        </div>
+                                     </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="form-group">
+                                          <label>ลิงค์เพจ</label>
+                                          <select name="page" id="page" placeholder="ลิงค์เพจ" class="form-control form-control-select2">
+                                            <option value="">เลือกลิงค์เพจ</option>
+                                            @foreach($pages as $key => $page)
+                                                <option value="{{$page->id}}" >{{$page->name}}</option>
+                                            @endforeach
+                                        </select>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" name="action" value="create" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                        <button type="submit" name="action" value="edit" class="btn bg-info">แก้ไข <i class="icon-pencil ml-2"></i></button>
+                                        <button type="submit" name="action" value="delete" class="btn bg-danger">ลบ <i class="icon-trash-alt ml-2"></i></button>
                                     </div>
                                  </div>
                               </form>
                            </div>
-                           <div class="col-md-6">
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                           <div class="col-md-12">
                                <ul id="tree1">
                                   @foreach($menus as $menu)
                                      <li>
-                                       <strong class="text-teal">{{$menu->name}}</strong>  
+                                       <strong class="text-teal" style="line-height:24px">{{$menu->name}}({{$menu->engname}})</strong>  
                                          @if(count($menu->childs))
                                              @include('layouts.landing.menu.managechild',['childs' => $menu->childs])
                                          @endif
@@ -111,10 +124,8 @@
                                  </ul>
                            </div>
                         </div>
-                    </div>
-                     
+                    </div>   
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
         <!-- /form layouts -->
@@ -122,9 +133,12 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-{{-- <script src="{{asset('assets/dashboard/js/treeview.js')}}"></script> --}}
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/menuhelper.js')}}"></script>
 
 <script  type="text/javascript">
-
+	var route = {
+        url: "{{ url('/') }}",
+        token: $('meta[name="csrf-token"]').attr('content')
+    };
 </script>
 @stop

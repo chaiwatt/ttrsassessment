@@ -2649,7 +2649,8 @@ window.theme.fn = {
 	        	if( $(window).width() < 992 ) {
 		        	if( $(e.target).closest('.section-scroll-dots-navigation').get(0) || $(e.target).closest('.header-body').get(0) || $(e.target).closest('.owl-carousel').get(0) ) {
 		        		return;
-		        	}
+					}
+					
 		        }
 
 		        // Side Header Overlay Full Screen
@@ -4447,7 +4448,8 @@ window.theme.fn = {
 						var height = ( $header.hasClass('header-effect-shrink') && $html.hasClass('sticky-header-active') ) ? theme.StickyHeader.options.stickyHeaderContainerHeight : headerBodyHeight;
 						$('.header-body').animate({
 					 		height: ($('.header-nav-main nav').outerHeight(true) + height) + 10
-					 	}, 0);
+						 }, 0);
+						 
 					}
 				});
 
@@ -4551,11 +4553,11 @@ window.theme.fn = {
 			 		$('.header-body').animate({
 				 		height: ($('.header-body').outerHeight() + $('.header-nav-main nav').outerHeight(true)) + 10
 				 	});
-
 				 	// Header Below Slider / Header Bottom Slider - Scroll to menu position
 				 	if( $('#header').is('.header-bottom-slider, .header-below-slider') && !$('html').hasClass('sticky-header-active') ) {
 				 		self.scrollToTarget( $('#header'), 0 );
-				 	}
+					 }
+					 
 				});
 
 				// Set Header Body Height when collapse mobile menu
@@ -4569,7 +4571,8 @@ window.theme.fn = {
 				 		height: ($('.header-body').outerHeight() - $('.header-nav-main nav').outerHeight(true))
 				 	}, function(){
 				 		$(this).height('auto');
-				 	});
+					 });
+					 
 				});
 
 				// Header Effect Shrink - Adjust header body height on mobile
@@ -4578,7 +4581,8 @@ window.theme.fn = {
 						if( $('.header-btn-collapse-nav').attr('aria-expanded') == 'true' ) {
 							$('.header-body').animate({
 						 		height: ( $('.header-nav-main nav').outerHeight(true) + theme.StickyHeader.options.stickyHeaderContainerHeight ) + ( ($('.header-nav-bar').get(0)) ? $('.header-nav-bar').outerHeight() : 0 ) 
-						 	});
+							 });
+							 
 						}
 					}
 				});
@@ -4588,7 +4592,8 @@ window.theme.fn = {
 						if( $('.header-btn-collapse-nav').attr('aria-expanded') == 'true' ) {
 							$('.header-body').animate({
 						 		height: headerBodyHeight + $('.header-nav-main nav').outerHeight(true) + 10
-						 	});
+							 });
+							 
 						}
 					}
 				});
@@ -4607,6 +4612,7 @@ window.theme.fn = {
 									flag = false;
 								}, 500);
 							}
+							
 						});
 					}
 				});
@@ -4617,6 +4623,7 @@ window.theme.fn = {
 						$header.css({
 							height: $('.header-body .header-container').outerHeight() + (parseInt( $('.header-body').css('border-top-width') ) + parseInt( $('.header-body').css('border-bottom-width') ))
 						});
+						
 					}
 
 					$(document).ready(function(){
@@ -4625,10 +4632,12 @@ window.theme.fn = {
 								$header.css({
 									height: $('.header-body .header-container').outerHeight() + (parseInt( $('.header-body').css('border-top-width') ) + parseInt( $('.header-body').css('border-bottom-width') ))
 								});
+								
 							} else {
 								$header.css({
 									height: ''
 								});
+								
 							}
 						});
 					});

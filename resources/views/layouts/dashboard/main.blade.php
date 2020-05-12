@@ -295,8 +295,7 @@
 		</div>
 		<!-- /main content -->
 	</div>
-	<!-- /page content -->
-	<!-- Core JS files -->
+
 	<script src="{{asset('assets/dashboard/js/main/jquery.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/main/jquery-ui.min.js')}}"></script>	
 	<script src="{{asset('assets/dashboard/js/main/bootstrap.bundle.min.js')}}"></script>
@@ -313,18 +312,12 @@
 	<script src="{{asset('assets/dashboard/js/plugins/datatable/buttons/buttons.colVis.min.js')}}"></script>
 	<script src="{{ asset('assets/dashboard/js/plugins/momentjs/moment.js') }}"></script> <!-- Moment Plugin Js -->
 	<script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
-	{{-- <script src="{{asset('assets/dashboard/js/plugins/bootstrap-filestyle/bootstrap-filestyle.min.js')}}"></script> --}}
 	<script src="{{ asset('assets/dashboard/js/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-	<!-- /core JS files -->
 
-	<!-- Theme JS files -->
 	<script src="{{asset('assets/dashboard/js/plugins/forms/selects/select2.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/forms/styling/uniform.min.js')}}"></script>
-	{{-- <script src="{{asset('assets/dashboard/js/plugins/forms/inputs/duallistbox/duallistbox.min.js')}}"></script> --}}
 	<script src="{{asset('assets/dashboard/js/app.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/demo_pages/form_layouts.js')}}"></script>
-	{{-- <script src="{{asset('assets/dashboard/js/demo_pages/form_dual_listboxes.js')}}"></script> --}}
-	{{-- <script src="{{asset('assets/dashboard/js/app/checkregister.js')}}"></script> --}}
 
 	@section('pageScript')
 	
