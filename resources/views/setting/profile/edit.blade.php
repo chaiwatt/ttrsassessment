@@ -763,6 +763,34 @@
 																	@endforeach   
 																</select>
 															</div>
+															<div class="col-md-6">
+																<label>เวลาทำการ จันทร์-ศุกร์</label>
+																<input type="text" name="workdaytime" data-placeholder="เวลาทำการ จันทร์-ศุกร์" class="form-control">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>เวลาทำการ วันเสาร์</label>
+																<input type="text" name="saturdaytime" data-placeholder="เวลาทำการ วันเสาร์" class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>เวลาทำการ วันอาทิตย์</label>
+																<input type="text" name="sundaytime" data-placeholder="เวลาทำการ วันอาทิตย์" class="form-control">
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-md-6">
+																<label>Youtube</label>
+																<input type="text" name="youtube" data-placeholder="Youtube" class="form-control">
+															</div>
+															<div class="col-md-6">
+																<label>Facebook</label>
+																<input type="text" name="facebook" data-placeholder="Facebook" class="form-control">
+															</div>
 														</div>
 													</div>
 												</div>      

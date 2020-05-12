@@ -20,7 +20,10 @@
 		<div class="body">
 			@include('layouts.landing.header')
 			<div role="main" class="main">
-				@include('layouts.landing.slide')
+				@php
+					$layoutname = 'layouts.landing.slide';
+				@endphp
+				@include($layoutname)
 				@include('layouts.landing.introsection')
 				@include('layouts.landing.blog')
 				@include('layouts.landing.bottom_one')

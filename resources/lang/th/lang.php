@@ -7,4 +7,9 @@ return [
     'forgotpassword' => 'ลืมรหัสผ่าน',
     'noaccount' => 'ยังไม่มีบัญชี',
     'signout' => 'ออกจากระบบ',
+    'emailus' => 'อีเมล์',
+    'callus' => 'โทรศัพท์',
+    'contactdetail' => 'ข้อมูลติดต่อ',
+    'openhour' => 'เวลาทำการ',
+    'copyright' => 'สงวนลิขสิทธิ์',
 ];

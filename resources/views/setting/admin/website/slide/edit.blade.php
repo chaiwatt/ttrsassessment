@@ -71,16 +71,28 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่1</label>
-                                            <input type="text"  name="textone" value="{{$slide->textone}}"  placeholder="ข้อความที่1" class="form-control">
+                                            <label>ข้อความที่1 ภาษาไทย</label>
+                                            <input type="text"  name="textone" value="{{$slide->textone}}"  placeholder="ข้อความที่1 ภาษาไทย" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่3</label>
-                                            <input type="text"  name="texttwo" value="{{$slide->texttwo}}"  placeholder="ข้อความที่1" class="form-control">
+                                            <label>ข้อความที่1 ภาษาอังกฤษ</label>
+                                            <input type="text"  name="textengone" value="{{$slide->textengone}}"  placeholder="ข้อความที่1 ภาษาอังกฤษ" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่3</label>
-                                            <input type="text"  name="textthree" value="{{$slide->textthree}}"  placeholder="ข้อความที่1" class="form-control">
+                                            <label>ข้อความที่2 ภาษาไทย</label>
+                                            <input type="text"  name="texttwo" value="{{$slide->texttwo}}"  placeholder="ข้อความที่2 ภาษาไทย" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ข้อความที่2 ภาษาอังกฤษ</label>
+                                            <input type="text"  name="textengtwo" value="{{$slide->textengtwo}}"  placeholder="ข้อความที่2 ภาษาอังกฤษ" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ข้อความที่3 ภาษาไทย</label>
+                                            <input type="text"  name="textthree" value="{{$slide->textthree}}"  placeholder="ข้อความที่3 ภาษาไทย" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ข้อความที่3 ภาษาอังกฤษ</label>
+                                            <input type="text"  name="textengthree" value="{{$slide->textengthree}}"  placeholder="ข้อความที่3 ภาษาอังกฤษ" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>ลิงค์ URL</label>

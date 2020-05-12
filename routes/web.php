@@ -223,6 +223,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('create','SettingAdminWebsiteMenuController@Create')->name('setting.admin.website.menu.create'); 
                     Route::post('crud','SettingAdminWebsiteMenuController@Crud')->name('setting.admin.website.menu.crud');
                 });
+                Route::group(['prefix' => 'layout'], function(){     
+                    Route::get('','SettingAdminWebsiteLayoutController@Index')->name('setting.admin.website.layout'); 
+                });
             }); 
             Route::group(['prefix' => 'user'], function(){
                 Route::get('','SettingAdminUserController@Index')->name('setting.admin.user');           

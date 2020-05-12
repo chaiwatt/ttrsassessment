@@ -14,9 +14,15 @@ class GeneralInfosTableSeeder extends Seeder
         DB::table('general_infos')->insert([
             [
                 'company' => 'สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ',
-                'phone' => '0-2564-7000, 0-2564-8000',
+                'phone1' => '0-2564-7000',
+                'phone2' => '0-2564-8000',
                 'fax' => '0-2564-7001-5',
                 'email' => 'info@nstda.or.th',
+                'youtube' => 'https://youtube.com',
+                'facebook' => 'https://facebook.com',
+                'workdaytime' => '08.00-16.00',
+                'saturdaytime' => '08.00-17.00',
+                'sundaytime' => 'ปิดทำการ',
                 'address' => '111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120',
                 'client_id' => 'zL7j0KX0S7YKYVPnRPgWFw',
                 'client_secret' => 'OgolHFr9C8B4NiMsry2tZFjxAUdK9vzuzOFbifyfPzr',

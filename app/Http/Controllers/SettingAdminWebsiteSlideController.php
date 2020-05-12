@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Image;
 use App\Model\Slide;
 use App\Model\SlideStyle;
 use App\Model\SlideStatus;
@@ -28,17 +28,22 @@ class SettingAdminWebsiteSlideController extends Controller
     }
     public function CreateSave(CreateWebsiteSlideRequest $request){
         $filelocation = '';
-        $file = $request->file('picture');
-        $new_name = str_random(10).".".$file->getClientOriginalExtension();
-        $file->move("storage/uploads/slide" , $new_name);
-        $filelocation = "storage/uploads/slide/".$new_name;
+        $file = $request->picture;
+        $img = Image::make($file);  
+        $fname=str_random(10).".".$file->getClientOriginalExtension();
+        $filelocation = "storage/uploads/slide/".$fname;
+        $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
+
         $slide = new Slide();
         $slide->name = $file->getClientOriginalName();
         $slide->slide_status_id = $request->slidestatus;
         $slide->slide_style_id = $request->slidestyle;
         $slide->textone = $request->textone;
+        $slide->textengone = $request->textengone;
         $slide->texttwo = $request->texttwo;
+        $slide->textengtwo = $request->textengtwo;
         $slide->textthree = $request->textthree;
+        $slide->textengthree = $request->textengthree;
         $slide->url = $request->url;
         $slide->file = $filelocation;
         $slide->save();
@@ -60,16 +65,22 @@ class SettingAdminWebsiteSlideController extends Controller
         if(!Empty($file)){    
             @unlink($slide->file);   
         }
-        $new_name = str_random(10).".".$file->getClientOriginalExtension();
-        $file->move("storage/uploads/slide" , $new_name);   
-        $filelocation = "storage/uploads/slide/".$new_name;
+        
+        $file = $request->picture;
+        $img = Image::make($file);  
+        $fname=str_random(10).".".$file->getClientOriginalExtension();
+        $filelocation = "storage/uploads/slide/".$fname;
+        $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
 
         $slide = Slide::find($id)->update([
             'slide_status_id' => $request->slidestatus,
             'slide_style_id' => $request->slidestyle,
+            'textone' => $request->textone,
+            'textengone' => $request->textengone,
             'texttwo' => $request->texttwo,
-            'texttwo' => $request->texttwo,
+            'textengtwo' => $request->textengtwo,
             'textthree' => $request->textthree,
+            'textengthree' => $request->textengthree,
             'url' => $request->url,
             'name' => $file->getClientOriginalName(),
             'file' => $filelocation
@@ -84,6 +95,27 @@ class SettingAdminWebsiteSlideController extends Controller
         }
         Slide::find($id)->delete();
         return redirect()->route('setting.admin.website.slide')->withSuccess('ลบสไลด์สำเร็จ');
+    }
+
+    public function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
+        if (!file_exists($path)) {
+            mkdir($path, 0666, true);
+        }
+        if($isvertical == true){
+            $_width = $width*$offset; 
+            $_height = $height*$offset; 
+            $img->height() > $img->width() ? $_width=null : $_height=null;
+            $img->resize($_width, $_height, function ($constraint) {
+                $constraint->aspectRatio();
+            })->crop($width, $height)->save($path.$fname);
+        }else{
+            $_width = $width*$offset; 
+            $_height = $height*$offset; 
+            $img->resize(null, $_height, function ($constraint) {
+                $constraint->aspectRatio();
+            })->crop($width, $height)->save($path.$fname);
+        }
+        return;
     }
 }
 

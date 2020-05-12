@@ -21,7 +21,7 @@ class CreateWebsiteSlideRequest extends FormRequest
         return [
             'slidestatus' => 'required',
             'slidestyle' => 'required',
-            'picture' => 'required|image|mimes:jpeg,png,jpg|max:1024'  //1024 = 1MB
+            'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=2300,min_height=1000' //2048 = 2MB
         ];
     }
     public function messages()
@@ -32,7 +32,8 @@ class CreateWebsiteSlideRequest extends FormRequest
             'picture.required' => 'ยังไม่ได้เลือกรูป',
             'picture.image' => 'กรุณาเลือกไฟล์รูป',
             'picture.mimes' => 'รองรับเฉพาะไฟล์ jpeg png หรือ jpg เท่านั้น',
-            'picture.max' => 'ขนาดไฟล์มากกว่า 1 MB'
+            'picture.max' => 'ขนาดไฟล์มากกว่า 2 MB',
+            'picture.dimensions' => 'ขนาดไฟล์รูปขั้นต่ำ 2300 x 1000px',
       ]; 
     }
 }
