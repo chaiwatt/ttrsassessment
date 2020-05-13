@@ -51,6 +51,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('edit','Api\PagetagController@Edit')->name('api.pagetag.edit');  
             Route::post('delete','Api\PagetagController@Delete')->name('api.pagetag.delete');  
         });
+        Route::group(['prefix' => 'layout'], function(){
+            Route::post('edit','Api\LayoutController@Edit')->name('api.layout.edit');           
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){

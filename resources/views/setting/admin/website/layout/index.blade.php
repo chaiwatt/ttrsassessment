@@ -58,115 +58,42 @@
                                     <div class="content d-flex justify-content-center align-items-center">
                                         <div class="form-group" style="width: 500px;margin-bottom: 10px">
                                             <label>รูปแบบเลย์เอาท์</label>
-                                            <select name="menu" placeholder="เมนู" class="form-control form-control-select2">
+                                            <select id="layout" placeholder="เมนู" class="form-control ">
                                                 @foreach ($layoutstyles as $layoutstyle)
-                                                    <option value="{{$layoutstyle->id}}" >{{$layoutstyle->name}}</option>
+                                                    <option value="{{$layoutstyle->id}}" @if ($generalinfo->layout_style_id == $layoutstyle->id) selected @endif >{{$layoutstyle->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <h5 class="text-center" style="margin-bottom: 0px">ลำดับการแสดงผลหน้าแรก</h5>
-                                    <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0 form-check-inline">
-                                            <div class="card-body" style="width: 500px">
-                                                <div class="form-check form-check-right form-check-switchery">
-                                                    <label class="form-check-label">
-                                                        <span id="title[]" data-id="1">ส่วนการแสดงภาพสไลด์</span>
-                                                        <input type="checkbox" data-id="1" class="form-check-input-switchery" checked >
-                                                    </label>
+
+                                    @foreach ($websitelayouts->sortBy('order') as $websitelayout)
+                                        <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
+                                            <div class="card mb-0 form-check-inline">
+                                                <div class="card-body" style="width: 500px">
+                                                    <div class="form-check form-check-right form-check-switchery">
+                                                        <label class="form-check-label">
+                                                            <span id="title[]" data-id="1">{{$websitelayout->name}}</span>
+                                                            <input type="checkbox" data-id="{{$websitelayout->id}}" data-order="{{$websitelayout->order}}" class="form-check-input-switchery" @if ($websitelayout->status == 1) checked @endif >
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0 form-check-inline">
-                                            <div class="card-body " style="width: 500px">
-                                                <div class="form-check form-check-right form-check-switchery">
-                                                    <label class="form-check-label">
-                                                        <span id="title[]" data-id="2">ส่วนIntro</span>
-                                                        <input type="checkbox" data-id="2" class="form-check-input-switchery" checked >
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0 form-check-inline">
-                                            <div class="card-body " style="width: 500px">
-                                                <div class="form-check form-check-right form-check-switchery">
-                                                    <label class="form-check-label">
-                                                        <span id="title[]" data-id="3">ส่วนแสดงบทความ</span>
-                                                        <input type="checkbox" data-id="3" class="form-check-input-switchery" checked >
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0 form-check-inline">
-                                            <div class="card-body " style="width: 500px">
-                                                <div class="form-check form-check-right form-check-switchery">
-                                                    <label class="form-check-label">
-                                                        <span id="title[]" data-id="4">ส่วนแสดงท้าย</span>
-                                                        <input type="checkbox" data-id="4" class="form-check-input-switchery" checked >
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0 form-check-inline">
-                                            <div class="card-body " style="width: 500px">
-                                                <div class="form-check form-check-right form-check-switchery">
-                                                    <label class="form-check-label">
-                                                        <span id="title[]" data-id="5">เพิ่มเติม1</span>
-                                                        <input type="checkbox" data-id="5" class="form-check-input-switchery" checked >
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0 form-check-inline">
-                                            <div class="card-body " style="width: 500px">
-                                                <div class="form-check form-check-right form-check-switchery">
-                                                    <label class="form-check-label">
-                                                        <span id="title[]" data-id="6">เพิ่มเติม2</span>
-                                                        <input type="checkbox" data-id="6" class="form-check-input-switchery" checked >
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="content d-flex justify-content-center align-items-center" style="margin-bottom: -30px">
-                                        <div class="card mb-0 form-check-inline">
-                                            <div class="card-body " style="width: 500px">
-                                                <div class="form-check form-check-right form-check-switchery">
-                                                    <label class="form-check-label">
-                                                        <span id="title[]" data-id="7">เพิ่มเติม3</span>
-                                                        <input type="checkbox" data-id="7" class="form-check-input-switchery" checked >
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
+                                            </div> 
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <br>
                                 <div class="text-center">
-                                    <button type="button" id="generateJSON" class="btn btn-info">Generate JSON</button>
+                                    <button type="button"  id="btnsave" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <h4 class="text-center">JSON</h4>
-                                <pre id="printCode"></pre>
                             </div>
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
+     
             </div>
         </div>
-        <!-- /form layouts -->
+     
     </div>
     <!-- /content area -->
 @endsection
@@ -175,30 +102,11 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/Sortable.js')}}"></script>
-    <script>
-
-        Sortable.create(productList, {
-            group: "sorting",
-            sort: true
-        });
-        $('#generateJSON').click(function() {
-
-            var favorite = [];
-            $.each($("input:checked"), function(){            
-                favorite.push($(this).data('id'));
-            });
-            alert("My favourite sports are: " + favorite.join(", "));
-
-            // let data = {};
-
-            // var titles = $('span[id^=title]').map(function(idx, elem) {
-            //     return $(elem).data('id');// $('elem').data('id');//  $(elem).text();
-            // }).get();
-
-            // data['id'] = titles;
-
-            // var products_json = JSON.stringify(data,null,'\t');
-            //     $('#printCode').html(products_json);
-        });
-    </script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/layouthelper.js')}}"></script>
+<script>
+	var route = {
+        url: "{{ url('/') }}",
+        token: $('meta[name="csrf-token"]').attr('content')
+    };
+</script>
 @stop

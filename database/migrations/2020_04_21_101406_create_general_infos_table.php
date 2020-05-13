@@ -28,6 +28,7 @@ class CreateGeneralInfosTable extends Migration
             $table->string('client_id',250);
             $table->string('youtube',250);
             $table->string('facebook',250);
+            $table->unsignedBigInteger('layout_style_id')->default(1);  //คลองหนึ่ง
             $table->string('workdaytime',250);
             $table->string('saturdaytime',250);
             $table->string('sundaytime',250);

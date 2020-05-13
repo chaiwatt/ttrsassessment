@@ -15,6 +15,10 @@ class CreateWebsiteLayoutsTable extends Migration
     {
         Schema::create('website_layouts', function (Blueprint $table) {
             $table->id();
+            $table->char("order",2);
+            $table->string("layout",250);
+            $table->string("name",250);
+            $table->char("status",1);
             $table->timestamps();
         });
     }

@@ -113,11 +113,11 @@ $(document).on("click","#deletetag",function(e){
     var count = $("#pagetag :selected").length;
     if(count == 0 || count > 1){
                Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เลือกรายการไม่ถูกต้อง!',
-            }).then((result) => {
-                // alert(createhospitallink);
-            })
+                title: 'ผิดพลาด...',
+                text: 'เลือกรายการไม่ถูกต้อง!',
+                }).then((result) => {
+                    // alert(createhospitallink);
+                })
         return;
     }
     Swal.fire({

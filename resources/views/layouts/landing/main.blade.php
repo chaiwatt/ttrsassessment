@@ -16,21 +16,16 @@
 		@include('layouts.landing.css')
 		
 	</head>
-	<body class="boxed">
+	<body @if ($generalinfo->layout_style_id == 1) class="boxed" @endif>
 		<div class="body">
 			@include('layouts.landing.header')
 			<div role="main" class="main">
-				@php
-					$layoutname = 'layouts.landing.slide';
-				@endphp
-				@include($layoutname)
-				@include('layouts.landing.introsection')
-				@include('layouts.landing.blog')
-				@include('layouts.landing.bottom_one')
+				@foreach ($websitelayouts->sortBy('order') as $websitelayout)
+					@include($websitelayout->layout)
+				@endforeach
 			</div>
 			@include('layouts.landing.footer')
 		</div>
-
 		@include('layouts.landing.js')
 		
 	</body>
