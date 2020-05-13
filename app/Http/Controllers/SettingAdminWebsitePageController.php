@@ -40,15 +40,16 @@ class SettingAdminWebsitePageController extends Controller
         $dom->loadHtml('<?xml encoding="UTF-8">'.$request->content);
         $images = $dom->getelementsbytagname('img');
         $detail = $dom->savehtml();
-        $file = $request->file('feature'); 
-        
-        $img = Image::make($file);   
-        $fname=str_random(10);
+
+        $file = $request->feature;
+        $img = Image::make($file);  
+        $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/feature/".$fname;
-        $this->crop(true,public_path("storage/uploads/feature/"),$fname.".".$file->getClientOriginalExtension(),Image::make($file),1200,500,1);
-        $fname=str_random(10);
+        $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
+
+        $fname=str_random(10).".".$file->getClientOriginalExtension();
         $featurethumbnail = "storage/uploads/feature/".$fname;
-        $this->crop(true,public_path("storage/uploads/feature/"),$fname.".".$file->getClientOriginalExtension(),Image::make($file),550,412,2);
+        $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
 
         $page = new Page();
         $page->page_category_id = $request->pagecategory;
@@ -93,6 +94,31 @@ class SettingAdminWebsitePageController extends Controller
             })->crop($width, $height)->save($path.$fname);
         }
         return;
+    }
+    public function Edit($id){
+        $page = Page::find($id);
+        $pagecategories = PageCategory::get();
+        $pagestatuses = PageStatus::get();
+        $tags = Tag::get();
+        $menus = Menu::get();
+        return view('setting.admin.website.page.edit')->withPage($page)
+                                                    ->withPagecategories($pagecategories)
+                                                    ->withPagestatuses($pagestatuses)
+                                                    ->withTags($tags)
+                                                    ->withMenus($menus);
+    }
+    public function EditSave(CreatePageRequest $request,$id){
+        $page = Page::find($id)->update([
+            'page_category_id' => $request->pagecategory,
+            'page_status_id' => $request->status,
+            'name' => $request->title,
+            'slug' => CreateSlug::createSlug($request->title),
+            'header' => $request->description, 
+            'content' => $request->$detail, 
+            'featureimg' => $feature, 
+            'featurethumbnail' => $featurethumbnail
+        ]);
+            return redirect()->route('setting.admin.website.page.editsave')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
 
 }
