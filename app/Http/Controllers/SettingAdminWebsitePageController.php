@@ -10,6 +10,7 @@ use App\Model\PageStatus;
 use App\Helper\CreateSlug;
 use App\Model\PageCategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\EditPageRequest;
 use App\Http\Requests\CreatePageRequest;
 
 class SettingAdminWebsitePageController extends Controller
@@ -75,6 +76,74 @@ class SettingAdminWebsitePageController extends Controller
         }
         return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มหน้าเพจสำเร็จ');
     }
+
+    public function Edit($id){
+        $page = Page::find($id);
+        $pagecategories = PageCategory::get();
+        $pagestatuses = PageStatus::get();
+        $tags = Tag::get();
+        $menus = Menu::get();
+        $pagetags = PageTag::where('page_id',$page->id)->get();
+        return view('setting.admin.website.page.edit')->withPage($page)
+                                                    ->withPagecategories($pagecategories)
+                                                    ->withPagestatuses($pagestatuses)
+                                                    ->withTags($tags)
+                                                    ->withMenus($menus)
+                                                    ->withPagetags($pagetags);
+    }
+    public function EditSave(EditPageRequest $request,$id){
+        
+        $file = $request->feature; 
+        $page = Page::find($id);
+        $feature = $page->featureimg;
+        $featurethumbnail = $page->featurethumbnail;
+
+        if(!Empty($file)){   
+            @unlink($page->featureimg);   
+            @unlink($page->featurethumbnail);  
+            $img = Image::make($file);  
+
+            $fname=str_random(10).".".$file->getClientOriginalExtension();
+            $feature = "storage/uploads/feature/".$fname;
+            $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
+    
+            $fname=str_random(10).".".$file->getClientOriginalExtension();
+            $featurethumbnail = "storage/uploads/feature/".$fname;
+            $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
+        }
+
+        $page->update([
+            'page_category_id' => $request->pagecategory,
+            'page_status_id' => $request->status,
+            'name' => $request->title,
+            'slug' => CreateSlug::createSlug($request->title),
+            'header' => $request->description, 
+            'content' => $request->content, 
+            'featureimg' => $feature, 
+            'featurethumbnail' => $featurethumbnail
+        ]);
+
+        $comming_array  = Array();
+        $existing_array  = Array();
+        $unique_array  = Array();
+        foreach( $request->pagetag as $key => $tag ){
+            $comming_array[] = $tag;
+        }
+
+        PageTag::where('page_id',$id)->whereNotIn('tag',$comming_array)->delete();
+        $existing_array = PageTag::where('page_id',$id)->pluck('tag')->toArray();
+        $unique_array = array_diff($comming_array, $existing_array);
+        // return $unique_array ; // array ที่เพิ่มเข้ามา
+
+        foreach( $unique_array as $_tag ){
+            $pagetag = new PageTag();
+            $pagetag->page_id = $id;
+            $pagetag->tag = $_tag;
+            $pagetag->save(); 
+        }
+
+        return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
+    }
     public function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
         if (!file_exists($path)) {
             mkdir($path, 0666, true);
@@ -94,31 +163,6 @@ class SettingAdminWebsitePageController extends Controller
             })->crop($width, $height)->save($path.$fname);
         }
         return;
-    }
-    public function Edit($id){
-        $page = Page::find($id);
-        $pagecategories = PageCategory::get();
-        $pagestatuses = PageStatus::get();
-        $tags = Tag::get();
-        $menus = Menu::get();
-        return view('setting.admin.website.page.edit')->withPage($page)
-                                                    ->withPagecategories($pagecategories)
-                                                    ->withPagestatuses($pagestatuses)
-                                                    ->withTags($tags)
-                                                    ->withMenus($menus);
-    }
-    public function EditSave(CreatePageRequest $request,$id){
-        $page = Page::find($id)->update([
-            'page_category_id' => $request->pagecategory,
-            'page_status_id' => $request->status,
-            'name' => $request->title,
-            'slug' => CreateSlug::createSlug($request->title),
-            'header' => $request->description, 
-            'content' => $request->$detail, 
-            'featureimg' => $feature, 
-            'featurethumbnail' => $featurethumbnail
-        ]);
-            return redirect()->route('setting.admin.website.page.editsave')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
 
 }

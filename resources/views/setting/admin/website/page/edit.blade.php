@@ -149,7 +149,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.page.editsave')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.page.editsave',['id' => $page->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
@@ -159,17 +159,17 @@
                                                 <select name="menu" placeholder="เมนู" class="form-control form-control-select2">
                                                     <option value="" >เลือกรายการเมนู</option>                                                     
                                                     @foreach ($menus as $menu)
-                                                        <option value="{{$menu->id}}"@if ($menu->page_id == $page->id) selected @endif >{{$menu->name}}</option>
+                                                        <option value="{{$menu->id}}" @if ($menu->page_id == $page->id) selected @endif >{{$menu->name}}</option>
                                                     @endforeach
                                                 </select>
                                         </div>
                                         <div class="form-group">
                                             <label>หัวเรื่อง<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control">
+                                            <input type="text"  name="title" value="{{$page->name}}"  placeholder="หัวเรื่อง" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
-                                            <textarea type="text"  name="description" value="{{old('description')}}"  rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control"></textarea>
+                                            <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control">{{$page->header}}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-group">                                                
@@ -182,7 +182,7 @@
                                                 </div>
                                                 <select name="pagecategory" id="pagecategory" placeholder="หมวดหมู่" class="form-control form-control-select2">
                                                     @foreach ($pagecategories as $pagecategory)
-                                                    <option value="{{$pagecategory->id}}" >{{$pagecategory->name}}</option>
+                                                    <option value="{{$pagecategory->id}}" @if ($pagecategory->id == $page->page_category_id) selected @endif >{{$pagecategory->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -199,7 +199,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>บทความ<span class="text-danger">*</span></label>
-											<textarea name="content" id="summernote" class="form-control mb-3" rows="7" cols="1" placeholder="บทความ"></textarea>
+											<textarea name="content" id="summernote" class="form-control mb-3" rows="7" cols="1" placeholder="บทความ">{{$page->content}}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>ป้ายกำกับ</label><span class="text-danger">*</span> <a href="" class="icon-cog5 text-info" data-toggle="dropdown"></a>
@@ -211,17 +211,20 @@
                                                 </div>
                                                 <select name="pagetag[]" id="pagetag" multiple placeholder="ป้ายกำกับ" class="form-control form-control-select2">
                                                     @foreach ($tags as $tag)
-                                                    <option value="{{$tag->id}}" >{{$tag->name}}</option>
+                                                        @php
+                                                            $check = $pagetags->where('tag',$tag->id)->first();
+                                                        @endphp
+                                                        <option value="{{$tag->id}}"  @if (!Empty($check)) selected @endif >{{$tag->name}}</option>
                                                     @endforeach
                                                 </select>
                                         </div>
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
-                                                <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
-                                                    @foreach ($pagestatuses as $pagestatus)
-                                                        <option value="{{$pagestatus->id}}" >{{$pagestatus->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                                @foreach ($pagestatuses as $pagestatus)
+                                                    <option value="{{$pagestatus->id}}" @if ($pagestatus->id == $page->page_status_id) selected @endif >{{$pagestatus->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </fieldset>
                                 </div>
