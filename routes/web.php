@@ -260,6 +260,7 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::group(['prefix' => 'profile'], function(){
             Route::get('edit/{userid}','SettingProfileController@Edit')->name('setting.profile.edit'); 
+            Route::post('editsave/{userid}','SettingProfileController@EditSave')->name('setting.profile.editsave'); 
         });
     });   
 });  

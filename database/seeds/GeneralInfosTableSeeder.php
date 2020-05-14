@@ -23,7 +23,7 @@ class GeneralInfosTableSeeder extends Seeder
                 'workdaytime' => '08.00-16.00',
                 'saturdaytime' => '08.00-17.00',
                 'sundaytime' => 'ปิดทำการ',
-                'address' => '111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120',
+                'address' => '111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน',
                 'client_id' => 'zL7j0KX0S7YKYVPnRPgWFw',
                 'client_secret' => 'OgolHFr9C8B4NiMsry2tZFjxAUdK9vzuzOFbifyfPzr',
                 'thsmsuser' => 'karn6944',

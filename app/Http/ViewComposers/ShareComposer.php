@@ -2,6 +2,7 @@
 namespace App\Http\ViewComposers; 
 use Auth; 
 use App\Model\Menu;
+use App\Model\Slide;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
 use App\Model\WebsiteLayout;
@@ -16,9 +17,11 @@ class ShareComposer
         $generalinfo = GeneralInfo::get()->first();
         $menus = Menu::where('parent_id', 0)->get();
         $websitelayouts = WebsiteLayout::where('status', 1)->get();
+        $slides = Slide::where('slide_status_id', 1)->get();
         $view->withGeneralinfo($generalinfo)
             ->withMenus($menus)
             ->withShareunreadmessages($shareunreadmessages)
-            ->withWebsitelayouts($websitelayouts);
+            ->withWebsitelayouts($websitelayouts)
+            ->withSlides($slides);
     }
 }

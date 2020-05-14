@@ -2,6 +2,9 @@
 
 namespace App\Model;
 
+use App\Model\Amphur;
+use App\Model\Tambol;
+use App\Model\Province;
 use App\Helper\LogAction;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -22,5 +25,18 @@ class GeneralInfo extends Model
     {
         return LogAction::logAction('ข้อมูลหน่วยงาน',$eventName);
     }
+
+    
+    public function getProvinceAttribute(){
+        return Province::find($this->province_id);
+    } 
+
+    public function getAmphurAttribute(){
+        return Amphur::find($this->amphur_id);
+    } 
+
+    public function getTambolAttribute(){
+        return Tambol::find($this->tambol_id);
+    } 
 }
 

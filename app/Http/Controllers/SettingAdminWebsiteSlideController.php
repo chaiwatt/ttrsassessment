@@ -6,6 +6,7 @@ use App\Model\Slide;
 use App\Model\SlideStyle;
 use App\Model\SlideStatus;
 use Illuminate\Http\Request;
+use App\Http\Requests\EditWebsiteSlideRequest;
 use App\Http\Requests\CreateWebsiteSlideRequest;
 
 class SettingAdminWebsiteSlideController extends Controller
@@ -59,19 +60,20 @@ class SettingAdminWebsiteSlideController extends Controller
                                                     ->withSlidestyles($slidestyles);
     }
 
-    public function EditSave(CreateWebsiteSlideRequest $request,$id){
+    public function EditSave(EditWebsiteSlideRequest $request,$id){
         $file = $request->picture; 
         $slide = Slide::find($id);
-        if(!Empty($file)){    
+        $filelocation = $slide->file;
+        $name = $slide->name;
+        if(!Empty($file)){   
             @unlink($slide->file);   
+            $name = $file->getClientOriginalName();
+            $file = $request->picture;
+            $img = Image::make($file);  
+            $fname=str_random(10).".".$file->getClientOriginalExtension();
+            $filelocation = "storage/uploads/slide/".$fname;
+            $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
         }
-        
-        $file = $request->picture;
-        $img = Image::make($file);  
-        $fname=str_random(10).".".$file->getClientOriginalExtension();
-        $filelocation = "storage/uploads/slide/".$fname;
-        $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
-
         $slide = Slide::find($id)->update([
             'slide_status_id' => $request->slidestatus,
             'slide_style_id' => $request->slidestyle,
@@ -82,7 +84,7 @@ class SettingAdminWebsiteSlideController extends Controller
             'textthree' => $request->textthree,
             'textengthree' => $request->textengthree,
             'url' => $request->url,
-            'name' => $file->getClientOriginalName(),
+            'name' => $name,
             'file' => $filelocation
         ]);
         return redirect()->route('setting.admin.website.slide')->withSuccess('แก้ไขสไลด์สำเร็จ');
