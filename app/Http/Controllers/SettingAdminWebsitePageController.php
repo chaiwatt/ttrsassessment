@@ -163,7 +163,7 @@ class SettingAdminWebsitePageController extends Controller
     }
     public function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
         if (!file_exists($path)) {
-            mkdir($path, 0666, true);
+            mkdir($path, 0777, true);
         }
         if($isvertical == true){
             $_width = $width*$offset; 
