@@ -171,21 +171,19 @@
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
                                             <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control">{{$page->header}}</textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="form-group">                                                
-                                                <label>หมวดหมู่</label><span class="text-danger">*</span> <a href="" class="icon-cog5 text-info" data-toggle="dropdown"></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a data-toggle="modal" href="#modal_create_category"  class="dropdown-item" ><i class="icon-folder-plus2"></i> เพิ่มหมวดหมู่</a>
-                                                    <a data-toggle="modal"  class="dropdown-item" id="editcategory"><i class="icon-pencil"></i> แก้ไขหมวดหมู่</a>
-                                                    <hr>
-                                                    <a data-toggle="modal" href="#"  class="dropdown-item" id="deletecategory"><i class="icon-trash"></i> ลบหมวดหมู่</a>
-                                                </div>
-                                                <select name="pagecategory" id="pagecategory" placeholder="หมวดหมู่" class="form-control form-control-select2">
-                                                    @foreach ($pagecategories as $pagecategory)
-                                                    <option value="{{$pagecategory->id}}" @if ($pagecategory->id == $page->page_category_id) selected @endif >{{$pagecategory->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                        <div class="form-group">                                                
+                                            <label>หมวดหมู่</label><span class="text-danger">*</span> <a href="" class="icon-cog5 text-info" data-toggle="dropdown"></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a data-toggle="modal" href="#modal_create_category"  class="dropdown-item" ><i class="icon-folder-plus2"></i> เพิ่มหมวดหมู่</a>
+                                                <a data-toggle="modal"  class="dropdown-item" id="editcategory"><i class="icon-pencil"></i> แก้ไขหมวดหมู่</a>
+                                                <hr>
+                                                <a data-toggle="modal" href="#"  class="dropdown-item" id="deletecategory"><i class="icon-trash"></i> ลบหมวดหมู่</a>
                                             </div>
+                                            <select name="pagecategory" id="pagecategory" placeholder="หมวดหมู่" class="form-control form-control-select2">
+                                                @foreach ($pagecategories as $pagecategory)
+                                                <option value="{{$pagecategory->id}}" @if ($pagecategory->id == $page->page_category_id) selected @endif >{{$pagecategory->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>รูป Feature<span class="text-danger">*</span></label>
@@ -196,6 +194,24 @@
                                                 </span>
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature"/>
+                                        </div>
+                                        <div class="form-group"> 
+                                            <div class="card-img-actions mx-1 mt-1">
+                                                <img class="card-img img-fluid" src="{{asset($page->featureimg)}}" alt="">
+                                                <div class="card-img-actions-overlay card-img">
+                                                    <a href="{{asset($page->featureimg)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+                                                        <i class="icon-plus3"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-img-actions-overlay card-img">
+                                            <a href="{{asset($page->featureimg)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+                                                <i class="icon-plus3"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
+                                                <i class="icon-link"></i>
+                                            </a>
                                         </div>
                                         <div class="form-group">
                                             <label>บทความ<span class="text-danger">*</span></label>
@@ -218,6 +234,41 @@
                                                     @endforeach
                                                 </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
+                                            <div class="input-group">													
+                                                <button id="btnuploadgallery"  class="btn bg-info" type="button" onclick="document.getElementById('gallery').click();">อัพโหลด</button>													
+                                            </div>
+                                            <input type="file" style="display:none;" id="gallery" name="gallery[]" multiple/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                @foreach ($pageimages as $pageimage)
+                                                <div class="col-sm-6 col-xl-3">
+                                                    <div class="card">
+                                                        <div class="card-img-actions mx-1 mt-1">
+                                                            <img class="card-img img-fluid" src="{{asset($pageimage->image)}}" alt="">
+                                                            <div class="card-img-actions-overlay card-img">
+                                                                <a href="{{asset($pageimage->image)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+                                                                    <i class="icon-plus3"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                            
+                                                        <div class="card-body">
+                                                            <div class="d-flex align-items-start flex-nowrap">
+                                                                <div class="list-icons list-icons-extended ml-auto">
+                                                                    <a href="{{asset($pageimage->image)}}" class="list-icons-item"><i class="icon-download top-0"></i></a>
+                                                                    <a href="{{route('setting.admin.dashboard.pageimage.delete',['id' => $pageimage->id])}}" class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
                                             <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
@@ -246,6 +297,8 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js')}}"></script>
+<script src="{{ asset('assets/dashboard/js/plugins/media/fancybox.min.js') }}"></script>
+<script src="{{ asset('assets/dashboard/js/demo_pages/gallery.js') }}"></script>
 
 <script  type="text/javascript">
 	var route = {

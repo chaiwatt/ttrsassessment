@@ -22,8 +22,9 @@ class CreatePageRequest extends FormRequest
             'title' => 'required',
             'description' => 'required',
             'pagecategory' => 'required',
-            'feature' => 'required|image|mimes:jpeg,png,jpg|max:1024',  //1024 = 1MB
+            'feature' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:min_width=1200,min_height=500',  //1024 = 1MB
             'content' => 'required',
+            'gallery.*' => 'image|mimes:jpeg,png,jpg|max:1024|dimensions:min_width=1000,min_height=1000' //1024 = 1MB
             
         ];
     }
@@ -37,7 +38,12 @@ class CreatePageRequest extends FormRequest
         'feature.image' => 'กรุณาเลือกไฟล์รูป', 
         'feature.mimes' => 'รองรับเฉพาะไฟล์รูปเท่านั้น',
         'feature.max' => 'ขนาดไฟล์มากกว่า 1 MB',
+        'feature.dimensions' => 'ขนาดไฟล์รูป Feature ขั้นต่ำ 1200px x 500px',
         'content.required' => 'ยังไม่ได้กรอกข้อความที่2 (ภาษาอังกฤษ)',
+        'gallery.image' => 'กรุณาเลือกไฟล์รูปแกลลอรี่', 
+        'gallery.mimes' => 'แกลลอรี่รองรับเฉพาะไฟล์รูปเท่านั้น',
+        'gallery.max' => 'ขนาดไฟล์แกลลอรี่มากกว่า 1 MB',
+        'gallery.dimensions' => 'ขนาดไฟล์รูปแกลลอรี่ขั้นต่ำ 1000px x 1000px',
       ]; 
     }
 }

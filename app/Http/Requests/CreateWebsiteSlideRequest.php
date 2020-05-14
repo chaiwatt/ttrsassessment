@@ -33,7 +33,7 @@ class CreateWebsiteSlideRequest extends FormRequest
             'picture.image' => 'กรุณาเลือกไฟล์รูป',
             'picture.mimes' => 'รองรับเฉพาะไฟล์ jpeg png หรือ jpg เท่านั้น',
             'picture.max' => 'ขนาดไฟล์มากกว่า 2 MB',
-            'picture.dimensions' => 'ขนาดไฟล์รูปขั้นต่ำ 2300 x 1000px',
+            'picture.dimensions' => 'ขนาดไฟล์รูปขั้นต่ำ 2300px x 1000px',
       ]; 
     }
 }

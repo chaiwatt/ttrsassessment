@@ -163,6 +163,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','SettingAdminDashboardExpertPositionController@EditSave')->name('setting.admin.dashboard.expertposition.editsave'); 
                     Route::get('delete/{id}','SettingAdminDashboardExpertPositionController@Delete')->name('setting.admin.dashboard.expertposition.delete'); 
                 });
+                Route::group(['prefix' => 'pageimage'], function(){
+                    Route::get('delete/{id}','SettingAdminDashboardPageImageController@Delete')->name('setting.admin.dashboard.pageimage.delete');           
+                });
             }); 
             Route::group(['prefix' => 'website'], function(){
                 Route::group(['prefix' => 'pagestatus'], function(){

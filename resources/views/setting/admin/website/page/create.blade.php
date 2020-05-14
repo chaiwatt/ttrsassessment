@@ -192,7 +192,7 @@
                                             <div class="input-group">													
                                                 <input type="text" id="filename" class="form-control border-right-0" placeholder="รูป Feature" disabled>
                                                 <span class="input-group-append">
-                                                    <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
+                                                    <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
                                                 </span>
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature"/>
@@ -215,6 +215,25 @@
                                                     @endforeach
                                                 </select>
                                         </div>
+                                        {{-- <div class="form-group">
+                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
+                                            <div class="input-group">													
+                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="รูปแกลอรี่" disabled>
+                                                <span class="input-group-append">
+                                                    <button class="btn bg-info" id="btnuploadgallery" type="button" onclick="document.getElementById('file').click();">อัพโหลด Gallery</button>													
+                                                </span>
+                                            </div>
+                                            <input type="file" style="display:none;"  id="gallery" name="gallery[]" multiple/>
+                                        </div> --}}
+                                       
+                                        <div class="form-group">
+                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
+                                            <div class="input-group">													
+                                                <button id="btnuploadgallery"  class="btn bg-info" type="button" onclick="document.getElementById('gallery').click();">อัพโหลด</button>													
+                                            </div>
+                                            <input type="file" style="display:none;" id="gallery" name="gallery[]" multiple/>
+                                        </div>
+
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
                                                 <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
@@ -258,5 +277,9 @@
         $("#filename").val(this.value);
     });
 
+    $("#gallery").on('change', function() {
+			var files = $(this)[0].files;
+			$("#btnuploadgallery").text(`อัพโหลด (${files.length})`);
+		});
 </script>
 @stop

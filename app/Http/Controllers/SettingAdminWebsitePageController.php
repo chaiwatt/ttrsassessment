@@ -6,6 +6,7 @@ use App\Model\Tag;
 use App\Model\Menu;
 use App\Model\Page;
 use App\Model\PageTag;
+use App\Model\PageImage;
 use App\Model\PageStatus;
 use App\Helper\CreateSlug;
 use App\Model\PageCategory;
@@ -74,6 +75,20 @@ class SettingAdminWebsitePageController extends Controller
                 'page_id' => $page->id
             ]);
         }
+        if(!Empty($request->gallery)){
+            foreach($request->gallery as $gallery){
+                $file = $gallery;
+                $img = Image::make($file);  
+                $fname=str_random(10).".".$file->getClientOriginalExtension();
+                $_gallery = "storage/uploads/gallery/".$fname;
+                $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+                $pageimage = new PageImage();
+                $pageimage->page_id = $page->id;
+                $pageimage->image = $_gallery;
+                $pageimage->save();
+            }
+        }
+
         return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มหน้าเพจสำเร็จ');
     }
 
@@ -83,13 +98,15 @@ class SettingAdminWebsitePageController extends Controller
         $pagestatuses = PageStatus::get();
         $tags = Tag::get();
         $menus = Menu::get();
-        $pagetags = PageTag::where('page_id',$page->id)->get();
+        $pagetags = PageTag::where('page_id',$id)->get();
+        $pageimages = PageImage::where('page_id',$id)->get();
         return view('setting.admin.website.page.edit')->withPage($page)
                                                     ->withPagecategories($pagecategories)
                                                     ->withPagestatuses($pagestatuses)
                                                     ->withTags($tags)
                                                     ->withMenus($menus)
-                                                    ->withPagetags($pagetags);
+                                                    ->withPagetags($pagetags)
+                                                    ->withPageimages($pageimages);
     }
     public function EditSave(EditPageRequest $request,$id){
         
