@@ -4,7 +4,7 @@
             @foreach ($slides as $slide)
                 @if ($slide->slide_style_id == 1)                  
                     <li data-transition="fade">
-                        <img src="{{asset('assets/landing/img/slides/slide-corporate-3-2.jpg')}}"  
+                        <img src="{{asset($slide->file)}}"  
                             alt=""
                             data-bgposition="right center"
                             data-bgpositionend="center center"
@@ -69,7 +69,7 @@
                     </li>
                 @else
                     <li data-transition="fade">
-                        <img src="{{asset('assets/landing/img/slides/slide-corporate-3-1.jpg')}}"  
+                        <img src="{{asset($slide->file)}}"  
                             alt=""
                             data-bgposition="center center" 
                             data-bgfit="cover" 

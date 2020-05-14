@@ -3,7 +3,7 @@
         <div class="row py-5">
             <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <h5 class="text-5 text-transform-none font-weight-light text-color-light mb-4">{{trans('lang.contactdetail')}}</h5>
-                <p class="text-4 mb-0">{{$generalinfo->address}} ตำบล{{$generalinfo->tambol->name}} อำเภอ{{$generalinfo->amphur->name}} จังหวัด{{$generalinfo->province->name}} รหัสไปรษณีย์{{$generalinfo->postalcode}}</p>
+                <p class="text-4 mb-0">{{$generalinfo->address}} ตำบล{{$generalinfo->tambol->name}} อำเภอ{{$generalinfo->amphur->name}} จังหวัด{{$generalinfo->province->name}} {{$generalinfo->postalcode}}</p>
             </div>
             <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
                 <h5 class="text-5 text-transform-none font-weight-light text-color-light mb-4">{{trans('lang.openhour')}}</h5>
