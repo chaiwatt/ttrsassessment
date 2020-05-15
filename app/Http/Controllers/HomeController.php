@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Page;
+use App\Model\PageTag;
+use App\Model\PageImage;
 use App\Model\IntroSection;
 use Illuminate\Http\Request;
 
@@ -13,8 +16,13 @@ class HomeController extends Controller
         return view('landing.index')->withIntrosections($introsections);
     }
 
-    public function Page()
+    public function Page($slug)
     {
-        return view('landing.page');
+        $page = Page::where('slug',$slug)->first();
+        $pagetags = PageTag::where('page_id',$page->id)->get();
+        $pageimages = PageImage::where('page_id',$page->id)->get();
+        return view('landing.page')->withPage($page)
+                                ->withPagetags($pagetags)
+                                ->withPageimages($pageimages);
     }
 }

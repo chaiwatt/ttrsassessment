@@ -67,8 +67,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>ชื่อ</th>                               
-                                        <th>slug</th>
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        <th>หมวด</th>
+                                        <th style="width:180px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,8 +76,9 @@
                                     <tr>    
                                         <td> {{$key+1}} </td>
                                         <td> {{$page->name}} </td>                                         
-                                        <td> {{$page->slug}} </td>  
+                                        <td> {{$page->pagecategory->name}} </td>  
                                         <td> 
+                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class=" badge bg-info">หน้าเพจ</a>
                                             <a href="{{route('setting.admin.website.page.edit',['id' => $page->id])}}" class=" badge bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.website.page.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>

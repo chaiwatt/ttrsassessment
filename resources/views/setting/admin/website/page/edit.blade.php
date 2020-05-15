@@ -228,7 +228,7 @@
                                                 <select name="pagetag[]" id="pagetag" multiple placeholder="ป้ายกำกับ" class="form-control form-control-select2">
                                                     @foreach ($tags as $tag)
                                                         @php
-                                                            $check = $pagetags->where('tag',$tag->id)->first();
+                                                            $check = $pagetags->where('tag_id',$tag->id)->first();
                                                         @endphp
                                                         <option value="{{$tag->id}}"  @if (!Empty($check)) selected @endif >{{$tag->name}}</option>
                                                     @endforeach

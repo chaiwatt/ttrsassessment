@@ -17,7 +17,8 @@ class CreatePageTagsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('page_id');
             $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
-            $table->string('tag',50)->nullable();
+            // $table->string('tag',50)->nullable();
+            $table->unsignedBigInteger('tag_id');
             $table->timestamps();
         });
     }

@@ -21,4 +21,9 @@ class Tag extends Model
     {
         return LogAction::logAction('ป้ายกำกับเพจ',$eventName);
     }
+
+    public function getTagAttribute()
+    {
+        return User::find($this->user_id);
+    }
 }

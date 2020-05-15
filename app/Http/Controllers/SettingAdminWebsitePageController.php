@@ -12,6 +12,7 @@ use App\Model\PageStatus;
 use App\Helper\CreateSlug;
 use App\Model\PageCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditPageRequest;
 use App\Http\Requests\CreatePageRequest;
 
@@ -65,12 +66,13 @@ class SettingAdminWebsitePageController extends Controller
         $page->content = $detail;
         $page->featureimg = $feature;
         $page->featurethumbnail = $featurethumbnail;
+        $page->user_id = Auth::user()->id;
         $page->save();
 
         foreach ($request->pagetag as $key => $tag) {
             $pagetag = new PageTag();
             $pagetag->page_id = $page->id;
-            $pagetag->tag = $tag;
+            $pagetag->tag_id = $tag;
             $pagetag->save(); 
         }
         if(!Empty($request->menu)){
@@ -125,11 +127,9 @@ class SettingAdminWebsitePageController extends Controller
 
             $fname=str_random(10).".".$file->getClientOriginalExtension();
             $feature = "storage/uploads/feature/".$fname;
-            // $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
             Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
             $fname=str_random(10).".".$file->getClientOriginalExtension();
             $featurethumbnail = "storage/uploads/feature/".$fname;
-            // $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
             Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
         }
 
@@ -151,14 +151,14 @@ class SettingAdminWebsitePageController extends Controller
             $comming_array[] = $tag;
         }
 
-        PageTag::where('page_id',$id)->whereNotIn('tag',$comming_array)->delete();
-        $existing_array = PageTag::where('page_id',$id)->pluck('tag')->toArray();
+        PageTag::where('page_id',$id)->whereNotIn('tag_id',$comming_array)->delete();
+        $existing_array = PageTag::where('page_id',$id)->pluck('tag_id')->toArray();
         $unique_array = array_diff($comming_array, $existing_array);
 
         foreach( $unique_array as $_tag ){
             $pagetag = new PageTag();
             $pagetag->page_id = $id;
-            $pagetag->tag = $_tag;
+            $pagetag->tag_id = $_tag;
             $pagetag->save(); 
         }
 
@@ -178,25 +178,17 @@ class SettingAdminWebsitePageController extends Controller
 
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
-    public function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
+ 
+    public function Delete($id){
+        $page = Page::find($id);
+        if(!Empty($page->featureimg)){
+            @unlink($page->featureimg);   
         }
-        if($isvertical == true){
-            $_width = $width*$offset; 
-            $_height = $height*$offset; 
-            $img->height() > $img->width() ? $_width=null : $_height=null;
-            $img->resize($_width, $_height, function ($constraint) {
-                $constraint->aspectRatio();
-            })->crop($width, $height)->save($path.$fname);
-        }else{
-            $_width = $width*$offset; 
-            $_height = $height*$offset; 
-            $img->resize(null, $_height, function ($constraint) {
-                $constraint->aspectRatio();
-            })->crop($width, $height)->save($path.$fname);
+        if(!Empty($page->featurethumbnail)){
+            @unlink($page->featurethumbnail); 
         }
-        return;
+        $page->delete();
+        return redirect()->route('setting.admin.website.page')->withSuccess('ลบหน้าเพจสำเร็จ');
     }
 
 }

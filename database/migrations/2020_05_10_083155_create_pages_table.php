@@ -23,6 +23,7 @@ class CreatePagesTable extends Migration
             $table->longText('content');
             $table->string('featureimg',250); 
             $table->string('featurethumbnail',250); 
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
