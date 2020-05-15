@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Image;
 use App\User;
+use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Friend;
 use App\Model\Prefix;
@@ -97,7 +98,8 @@ class SettingProfileController extends Controller
                 $img = Image::make($file);  
                 $fname=str_random(10).".".$file->getClientOriginalExtension();
                 $filelocation = "storage/uploads/profile/".$fname;
-                $this->crop(true,public_path("storage/uploads/profile/"),$fname,Image::make($file),500,500,1);
+                // $this->crop(true,public_path("storage/uploads/profile/"),$fname,Image::make($file),500,500,1);
+                Crop::crop(true,public_path("storage/uploads/profile/"),$fname,Image::make($file),500,500,1);
             }
             $user->update([
                 'prefix_id' => $request->prefix,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Image;
+use App\Helper\Crop;
 use App\Model\Slide;
 use App\Model\SlideStyle;
 use App\Model\SlideStatus;
@@ -33,7 +34,8 @@ class SettingAdminWebsiteSlideController extends Controller
         $img = Image::make($file);  
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $filelocation = "storage/uploads/slide/".$fname;
-        $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
+        // $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
+        Crop::crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
 
         $slide = new Slide();
         $slide->name = $file->getClientOriginalName();
@@ -72,7 +74,8 @@ class SettingAdminWebsiteSlideController extends Controller
             $img = Image::make($file);  
             $fname=str_random(10).".".$file->getClientOriginalExtension();
             $filelocation = "storage/uploads/slide/".$fname;
-            $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
+            // $this->crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
+            Crop::crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
         }
         $slide = Slide::find($id)->update([
             'slide_status_id' => $request->slidestatus,
