@@ -17,7 +17,7 @@ class GeneralInfo extends Model
     protected $guarded = [];
 
     protected static $logAttributes = ['company','logo','phone','fax','email','address','lat','lng','facebookpage',
-    'youtube','twitter','client_id','client_secret','thsmsuser','thsmspass','verify_status_id'];
+    'youtube','twitter','client_id','client_secret','thsmsuser','thsmspass','verify_type_id'];
     protected static $logName = 'ข้อมูลหน่วยงาน';
     protected static $logOnlyDirty = true;
     

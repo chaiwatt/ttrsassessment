@@ -18,14 +18,14 @@ class RegisterController extends Controller
     // protected $redirectTo = 'line';//'dashboard/company';// '/sms'; //RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-         $auth = Auth::user(); 
-        if($auth->verify_type == 1){
+         $generalinfo = GeneralInfo::first(); 
+        if($generalinfo->verify_type_id == 1){
             return 'dashboard/company';
-        }else if($auth->verify_type == 2){
+        }else if($generalinfo->verify_type_id == 2){
             return 'line';
-        }else if($auth->verify_type == 3){
+        }else if($generalinfo->verify_type_id == 3){
             return 'email';
-        }else if($auth->verify_type == 4){
+        }else if($generalinfo->verify_type_id == 4){
             return 'sms';
         }
     }
@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
-            'verify_type' => GeneralInfo::first()->verify_status_id,
+            'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
         Company::create([
             'name' => 'บริษัท'.$data['name'],

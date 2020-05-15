@@ -774,7 +774,7 @@
 															<label>การ verify ผู้สมัคร<span class="text-danger">*</span></label>
 															<select name="organizationamphur" id="organizationamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
 																@foreach ($verifystatuses as $verifystatus)                                                                
-																	<option value="{{$verifystatus->id}}" @if ($generalinfo->verify_status_id == $verifystatus->id) selected @endif> {{$verifystatus->name}} </option>
+																	<option value="{{$verifystatus->id}}" @if ($generalinfo->verify_type_id == $verifystatus->id) selected @endif> {{$verifystatus->name}} </option>
 																@endforeach   
 															</select>
 														</div>

@@ -5,10 +5,6 @@ use Illuminate\Support\Facades\DB;
 
 class Crop
 {
-    // public static function crop($string){
-    //     return preg_replace('/[^A-Za-z0-9ก-๙\-]/u', '-',str_replace('&', '-and-', $string));
-    // } 
-
     public static function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
         if (!file_exists($path)) {
             mkdir($path, 0777, true);

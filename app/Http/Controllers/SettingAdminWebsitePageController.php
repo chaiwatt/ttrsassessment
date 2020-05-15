@@ -113,7 +113,6 @@ class SettingAdminWebsitePageController extends Controller
                                                     ->withPageimages($pageimages);
     }
     public function EditSave(EditPageRequest $request,$id){
-        
         $file = $request->feature; 
         $page = Page::find($id);
         $feature = $page->featureimg;
@@ -155,13 +154,26 @@ class SettingAdminWebsitePageController extends Controller
         PageTag::where('page_id',$id)->whereNotIn('tag',$comming_array)->delete();
         $existing_array = PageTag::where('page_id',$id)->pluck('tag')->toArray();
         $unique_array = array_diff($comming_array, $existing_array);
-        // return $unique_array ; // array ที่เพิ่มเข้ามา
 
         foreach( $unique_array as $_tag ){
             $pagetag = new PageTag();
             $pagetag->page_id = $id;
             $pagetag->tag = $_tag;
             $pagetag->save(); 
+        }
+
+        if(!Empty($request->gallery)){
+            foreach($request->gallery as $gallery){
+                $file = $gallery;
+                $img = Image::make($file);  
+                $fname=str_random(10).".".$file->getClientOriginalExtension();
+                $_gallery = "storage/uploads/gallery/".$fname;
+                Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+                $pageimage = new PageImage();
+                $pageimage->page_id = $page->id;
+                $pageimage->image = $_gallery;
+                $pageimage->save();
+            }
         }
 
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
