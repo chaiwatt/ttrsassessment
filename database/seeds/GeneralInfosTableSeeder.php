@@ -28,7 +28,7 @@ class GeneralInfosTableSeeder extends Seeder
                 'client_secret' => 'OgolHFr9C8B4NiMsry2tZFjxAUdK9vzuzOFbifyfPzr',
                 'thsmsuser' => 'karn6944',
                 'thsmspass' => '8891e6',
-                'verify_type_id' => 1
+                'verify_type_id' => 2
             ],
         ]);
     }
