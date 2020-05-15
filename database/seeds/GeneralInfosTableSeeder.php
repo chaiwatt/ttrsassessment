@@ -24,8 +24,8 @@ class GeneralInfosTableSeeder extends Seeder
                 'saturdaytime' => '08.00-17.00',
                 'sundaytime' => 'ปิดทำการ',
                 'address' => '111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน',
-                'client_id' => 'zL7j0KX0S7YKYVPnRPgWFw',
-                'client_secret' => 'OgolHFr9C8B4NiMsry2tZFjxAUdK9vzuzOFbifyfPzr',
+                'client_id' => 'j7GPSrVYdCTx8DYFR7hj1g',
+                'client_secret' => 'OQp6hut4pyeLxWnUa1STegdZ1b4QqGtgK6AIN4V8qn0',
                 'thsmsuser' => 'karn6944',
                 'thsmspass' => '8891e6',
                 'verify_type_id' => 2
