@@ -68,6 +68,8 @@
                                         <th>#</th>
                                         <th>ชื่อ</th>                               
                                         <th>หมวด</th>
+                                        <th>จำนวนวิว</th>
+                                        <th>Unique IP</th>
                                         <th style="width:180px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -77,8 +79,12 @@
                                         <td> {{$key+1}} </td>
                                         <td> {{$page->name}} </td>                                         
                                         <td> {{$page->pagecategory->name}} </td>  
+                                        <td> {{$page->pageview->count()}} </td> 
+                                        <td> {{$page->pageviewunique->count()}} </td> 
+                                         
+                                        
                                         <td> 
-                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class=" badge bg-info">หน้าเพจ</a>
+                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class=" badge bg-info" target="_blank">หน้าเพจ</a>
                                             <a href="{{route('setting.admin.website.page.edit',['id' => $page->id])}}" class=" badge bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.website.page.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>

@@ -1,14 +1,9 @@
 @foreach($childs as $child)
- <li class="{{ $child->childs->count() ? 'dropdown-submenu' :'' }}"><a class="dropdown-item" href="{{$child->url}}">
-    @if (Config::get('app.locale') == 'th')
-        {{ $child->name }}
-    @else
-        {{ $child->engname }}
-    @endif
-</a>
+ <li class="nav-item">
+   <a href="">{{ $child->name }}</a>
        @if($child->childs->count())
-          <ul class="dropdown-menu">
-                <li>
+          <ul>
+                <li class="nav-item">
                     @include('layouts.landing.menu.menusub',['childs' => $child->childs])
                 </a>
                 </li>

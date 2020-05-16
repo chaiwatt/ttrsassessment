@@ -21,4 +21,8 @@ class PageCategory extends Model
     {
         return LogAction::logAction('หมวดหมู่เพจ',$eventName);
     }
+
+    public function childs() {
+        return $this->hasMany('App\Model\PageCategory','parent_id','id') ;
+    }
 }

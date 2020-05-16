@@ -18,13 +18,13 @@ class CreatePageCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'pagecategory' => 'required'
+            'category' => 'required'
         ];
     }
     public function messages()
     {
       return  [
-            'pagecategory.required' => 'ยังไม่ได้กรอกหมวดหมู่'
+            'category.required' => 'ยังไม่ได้กรอกหมวดหมู่'
       ]; 
     }
 }

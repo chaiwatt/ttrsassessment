@@ -1,10 +1,12 @@
 <?php 
 namespace App\Http\ViewComposers; 
 use Auth; 
+use App\Model\Tag;
 use App\Model\Menu;
 use App\Model\Slide;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
+use App\Model\PageCategory;
 use App\Model\WebsiteLayout;
 use App\Model\MessageReceive;
 
@@ -18,10 +20,14 @@ class ShareComposer
         $menus = Menu::where('parent_id', 0)->get();
         $websitelayouts = WebsiteLayout::where('status', 1)->get();
         $slides = Slide::where('slide_status_id', 1)->get();
+        $tags = Tag::get();
+        $sharepagecategories = PageCategory::where('parent_id',0)->get();
         $view->withGeneralinfo($generalinfo)
             ->withMenus($menus)
             ->withShareunreadmessages($shareunreadmessages)
             ->withWebsitelayouts($websitelayouts)
-            ->withSlides($slides);
+            ->withSlides($slides)
+            ->withTags($tags)
+            ->withSharepagecategories($sharepagecategories);
     }
 }

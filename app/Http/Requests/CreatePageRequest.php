@@ -24,7 +24,8 @@ class CreatePageRequest extends FormRequest
             'pagecategory' => 'required',
             'feature' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:min_width=1200,min_height=500',  //1024 = 1MB
             'content' => 'required',
-            'gallery.*' => 'image|mimes:jpeg,png,jpg|max:1024|dimensions:min_width=1000,min_height=1000' //1024 = 1MB
+            'gallery.*' => 'image|mimes:jpeg,png,jpg|max:1024|dimensions:min_width=1000,min_height=1000', //1024 = 1MB
+            'gallery' => 'max:6'
             
         ];
     }
@@ -44,6 +45,7 @@ class CreatePageRequest extends FormRequest
         'gallery.mimes' => 'แกลลอรี่รองรับเฉพาะไฟล์รูปเท่านั้น',
         'gallery.max' => 'ขนาดไฟล์แกลลอรี่มากกว่า 1 MB',
         'gallery.dimensions' => 'ขนาดไฟล์รูปแกลลอรี่ขั้นต่ำ 1000px x 1000px',
+        'gallery.max' => 'ไฟล์รูปแกลลอรี่อัพโหลดสูงสุด 6 ไฟล์',
       ]; 
     }
 }

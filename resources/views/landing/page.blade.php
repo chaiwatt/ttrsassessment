@@ -18,6 +18,7 @@
                 <h2 ><a href="blog-post.html" >{{$page->name}}</a></h2>
                 <div class="post-meta">
                     <span><i class="far fa-user"></i> โดย <a href="#">{{$page->user->name}}</a> </span>
+                    <span><i class="far fa-eye"></i>{{$page->pageview->count()}}</span>
                     <span><i class="far fa-folder"></i> 
                         @foreach ($pagetags as $tag)
                             <a href="#">{{$tag->tag->name}}</a>&nbsp;

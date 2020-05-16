@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'menu'], function(){
             Route::post('getmenu','Api\MenuController@GetMenu')->name('api.menu.getmenu');           
         });
+        Route::group(['prefix' => 'category'], function(){
+            Route::post('getcategory','Api\CategoryController@GetCategory')->name('api.category.getcategory');           
+        });
         Route::group(['prefix' => 'pagecategory'], function(){
             Route::post('add','Api\PageCategoryController@Add')->name('api.pagecategory.add');           
             Route::post('edit','Api\PageCategoryController@Edit')->name('api.pagecategory.edit');  
@@ -177,12 +180,14 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('delete/{id}','SettingAdminWebsitePageStatusController@Delete')->name('setting.admin.website.pagestatus.delete'); 
                 });
                 Route::group(['prefix' => 'pagecategory'], function(){
-                    Route::get('','SettingAdminWebsitePageCategoryController@Index')->name('setting.admin.website.pagecategory');           
                     Route::get('create','SettingAdminWebsitePageCategoryController@Create')->name('setting.admin.website.pagecategory.create'); 
-                    Route::post('createsave','SettingAdminWebsitePageCategoryController@CreateSave')->name('setting.admin.website.pagecategory.createsave'); 
-                    Route::get('edit/{id}','SettingAdminWebsitePageCategoryController@Edit')->name('setting.admin.website.pagecategory.edit'); 
-                    Route::post('editsave/{id}','SettingAdminWebsitePageCategoryController@EditSave')->name('setting.admin.website.pagecategory.editsave'); 
-                    Route::get('delete/{id}','SettingAdminWebsitePageCategoryController@Delete')->name('setting.admin.website.pagecategory.delete'); 
+                    Route::post('crud','SettingAdminWebsitePageCategoryController@Crud')->name('setting.admin.website.pagecategory.crud');
+                    // Route::get('','SettingAdminWebsitePageCategoryController@Index')->name('setting.admin.website.pagecategory');           
+                    // Route::get('create','SettingAdminWebsitePageCategoryController@Create')->name('setting.admin.website.pagecategory.create'); 
+                    // Route::post('createsave','SettingAdminWebsitePageCategoryController@CreateSave')->name('setting.admin.website.pagecategory.createsave'); 
+                    // Route::get('edit/{id}','SettingAdminWebsitePageCategoryController@Edit')->name('setting.admin.website.pagecategory.edit'); 
+                    // Route::post('editsave/{id}','SettingAdminWebsitePageCategoryController@EditSave')->name('setting.admin.website.pagecategory.editsave'); 
+                    // Route::get('delete/{id}','SettingAdminWebsitePageCategoryController@Delete')->name('setting.admin.website.pagecategory.delete'); 
                 });
                 Route::group(['prefix' => 'faqcategory'], function(){
                     Route::get('','SettingAdminWebsiteFaqCategoryController@Index')->name('setting.admin.website.faqcategory');           

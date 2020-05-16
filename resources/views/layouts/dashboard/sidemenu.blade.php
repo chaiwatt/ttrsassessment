@@ -35,7 +35,7 @@
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.pagestatus') ? 'active' : '' }}">สถานะเพจ</a></li>	
-                <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.pagecategory') ? 'active' : '' }}">หมวดหมู่เพจ</a></li>
+                <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory.create')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.pagecategory') ? 'active' : '' }}">หมวดหมู่เพจ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.faqcategory') ? 'active' : '' }}">หมวดหมู่ Faq</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.tag') ? 'active' : '' }}">ป้ายกำกับ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.slide') ? 'active' : '' }}">ภาพสไลด์</a></li>		             

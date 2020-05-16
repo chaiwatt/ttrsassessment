@@ -9,19 +9,14 @@
     </form>
     <h5 class="font-weight-bold pt-4">หมวดหมู่</h5>
     <ul class="nav nav-list flex-column mb-5">
-        <li class="nav-item"><a class="nav-link" href="#">Design (2)</a></li>
-        <li class="nav-item">
-            <a class="nav-link active" href="#">Photos (4)</a>
-            <ul>
-                <li class="nav-item"><a class="nav-link" href="#">Animals</a></li>
-                <li class="nav-item"><a class="nav-link active" href="#">Business</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Sports</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">People</a></li>
-            </ul>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="#">Videos (3)</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Lifestyle (2)</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Technology (1)</a></li>
+        @foreach($sharepagecategories as $sharepagecategory)
+            <li class="nav-item">
+            <a class="nav-link" href="#" style="font-size: 14px">{{$sharepagecategory->name}}@if (count($sharepagecategory->childs)>0) ({{count($sharepagecategory->childs)}}) @endif </a>
+                @if(count($sharepagecategory->childs))
+                    @include('layouts.landing.category.managechild',['childs' => $sharepagecategory->childs])
+                @endif
+            </li>
+        @endforeach
     </ul>
     <div class="tabs tabs-dark mb-4 pb-2">
         <ul class="nav nav-tabs">
@@ -132,11 +127,9 @@
 
     <h5 class="font-weight-bold pt-2 mb-2">ป้ายกำกับ</h5>
     <div class="mb-3 pb-1">
-        <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">design</span></a>
-        <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">brands</span></a>
-        <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">video</span></a>
-        <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">business</span></a>
-        <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">travel</span></a>
+        @foreach ($tags as $tag)
+            <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">{{$tag->name}}</span></a>&nbsp;
+        @endforeach
     </div>
     <h5 class="font-weight-bold pt-4">Find us on Facebook</h5>
     <div class="fb-page" data-href="https://www.facebook.com/OklerThemes/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><blockquote cite="https://www.facebook.com/OklerThemes/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/OklerThemes/">Okler Themes</a></blockquote></div>
