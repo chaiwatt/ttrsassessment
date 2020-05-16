@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Tag;
 use App\Model\Page;
 use App\Model\PageTag;
 use App\Model\PageView;
@@ -9,8 +10,10 @@ use App\Model\PageImage;
 use App\Model\IntroSection;
 use App\Model\PageCategory;
 use Jenssegers\Agent\Agent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Input;
+
 
 class HomeController extends Controller
 {
@@ -47,5 +50,17 @@ class HomeController extends Controller
         return view('landing.page')->withPage($page)
                                 ->withPagetags($pagetags)
                                 ->withPageimages($pageimages);
+    }
+    public function Tag($slug)
+    {
+        $tag = Tag::where('slug',$slug)->first();
+        $pagearray = PageTag::where('tag_id',$tag->id)->pluck('page_id')->toArray();
+        $pages = Page::whereIn('id',$pagearray)->paginate(10);
+        return view('landing.search')->withPages($pages);
+    }
+    public function Search(Request $request)
+    {
+        $pages = Page::where('name','LIKE','%' . $request->search . '%')->paginate(10);
+        return view('landing.search')->withPages($pages);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\User;
+use App\Model\PageTag;
 use App\Model\PageView;
 use App\Model\PageCategory;
 use App\Helper\DateConversion;
@@ -37,6 +38,10 @@ class Page extends Model
     public function getPageViewUniqueAttribute()
     {
         return PageView::where('page_id',$this->id)->select('ipaddress')->distinct()->get();
+    }
+    public function getPageTagAttribute()
+    {
+        return PageTag::where('page_id',$this->id)->get();
     }
 }
 

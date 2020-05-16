@@ -17,6 +17,9 @@ Auth::routes();
 
 Route::get('', 'HomeController@Index')->name('landing.index');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
+Route::get('tag/{slug}', 'HomeController@Tag')->name('landing.tag');
+Route::get('cate/{slug}', 'HomeController@Category')->name('landing.cate');
+Route::get('search', 'HomeController@Search')->name('landing.search');
 Route::get('change/{locale}', 'LanguageController@Change')->name('change');
 
 Route::group(['prefix' => 'social'], function(){       

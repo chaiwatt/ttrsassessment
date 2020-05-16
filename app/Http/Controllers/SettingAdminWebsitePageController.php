@@ -49,13 +49,11 @@ class SettingAdminWebsitePageController extends Controller
         $img = Image::make($file);  
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/feature/".$fname;
-        // $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
         Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
 
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $featurethumbnail = "storage/uploads/feature/".$fname;
-        // $this->crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
-        Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
+        Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,2);
 
         $page = new Page();
         $page->page_category_id = $request->pagecategory;

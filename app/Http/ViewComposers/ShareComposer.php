@@ -3,6 +3,7 @@ namespace App\Http\ViewComposers;
 use Auth; 
 use App\Model\Tag;
 use App\Model\Menu;
+use App\Model\Page;
 use App\Model\Slide;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
@@ -22,12 +23,14 @@ class ShareComposer
         $slides = Slide::where('slide_status_id', 1)->get();
         $tags = Tag::get();
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
+        $sharepages = Page::paginate(6);
         $view->withGeneralinfo($generalinfo)
             ->withMenus($menus)
             ->withShareunreadmessages($shareunreadmessages)
             ->withWebsitelayouts($websitelayouts)
             ->withSlides($slides)
             ->withTags($tags)
-            ->withSharepagecategories($sharepagecategories);
+            ->withSharepagecategories($sharepagecategories)
+            ->withSharepages($sharepages);
     }
 }

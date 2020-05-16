@@ -5,7 +5,7 @@
     <div class="blog-posts single-post">
         <article class="post post-large blog-single-post border-0 m-0 p-0">
             <div class="post-image ml-0">
-                <a href="blog-post.html">
+                <a href="{{route('landing.page',['slug' => $page->slug])}}">
                     <img src="{{asset($page->featureimg)}}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
                 </a>
             </div>							
@@ -15,13 +15,13 @@
             </div>
 
             <div class="post-content ml-0">
-                <h2 ><a href="blog-post.html" >{{$page->name}}</a></h2>
+                <h2 ><a href="{{route('landing.page',['slug' => $page->slug])}}" >{{$page->name}}</a></h2>
                 <div class="post-meta">
                     <span><i class="far fa-user"></i> โดย <a href="#">{{$page->user->name}}</a> </span>
                     <span><i class="far fa-eye"></i>{{$page->pageview->count()}}</span>
                     <span><i class="far fa-folder"></i> 
                         @foreach ($pagetags as $tag)
-                            <a href="#">{{$tag->tag->name}}</a>&nbsp;
+                            <a href="{{route('landing.tag',['slug' => $tag->tag->slug])}}">{{$tag->tag->name}}</a>&nbsp;
                         @endforeach
                     </span>
                 </div>

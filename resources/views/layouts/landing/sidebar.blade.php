@@ -1,7 +1,7 @@
 <aside class="sidebar">
-    <form action="page-search-results.html" method="get">
+    <form method="GET" action="{{route('landing.search')}}" >
         <div class="input-group mb-3 pb-1">
-            <input class="form-control text-1" placeholder="ค้นหา..." name="s" id="s" type="text">
+            <input class="form-control" name = "search" placeholder="ค้นหา..." id="s" type="text">
             <span class="input-group-append">
                 <button type="submit" class="btn btn-dark text-1 p-2"><i class="fas fa-search m-2"></i></button>
             </span>
@@ -128,7 +128,7 @@
     <h5 class="font-weight-bold pt-2 mb-2">ป้ายกำกับ</h5>
     <div class="mb-3 pb-1">
         @foreach ($tags as $tag)
-            <a href="#"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">{{$tag->name}}</span></a>&nbsp;
+            <a href="{{route('landing.tag',['slug' => $tag->slug])}}"><span class="badge badge-dark badge-sm badge-pill text-uppercase px-2 py-1 mr-1">{{$tag->name}}</span></a>&nbsp;
         @endforeach
     </div>
     <h5 class="font-weight-bold pt-4">Find us on Facebook</h5>
