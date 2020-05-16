@@ -12,7 +12,7 @@
                                     </a>
                                 </div>
                                 <div class="post-content">
-                                    <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a href="#">{{$page->name}}</a></h2>
+                                    <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a href="{{route('landing.page',['slug' => $page->slug])}}">{{$page->name}}</a></h2>
                                     <p>{{$page->header}}</p>
                                     <div class="post-meta">
                                         <span><i class="far fa-user"></i> โดย <a href="#">{{$page->user->name}}</a> </span>
