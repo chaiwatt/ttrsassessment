@@ -21,6 +21,7 @@ class CreatePageViewsTable extends Migration
             $table->string("device");
             $table->string("platform");
             $table->string("browser");
+            $table->string("ipaddress");
             $table->timestamps();
         });
     }
