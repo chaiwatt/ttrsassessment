@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'layout'], function(){
             Route::post('edit','Api\LayoutController@Edit')->name('api.layout.edit');           
         });
+        Route::group(['prefix' => 'upload'], function(){
+            Route::post('upload','Api\ImageUploadController@Upload')->name('api.upload');           
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
