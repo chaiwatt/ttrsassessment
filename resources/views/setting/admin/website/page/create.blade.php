@@ -220,19 +220,19 @@
                                         <div class="col-md-12" id="gallery_wrapper" >	
                                         </div>                        
                                         <div class="form-group">
-                                            <label>รูป Feature<span class="text-danger">*</span></label>
+                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลด Feature</button>													
                                             </div>
-                                            <input type="file" style="display:none;" id="singlefile" name="feature"/>
+                                            <input type="file" style="display:none;" id="singlefile" />
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>รูปแกลอรี่<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button id="btnuploadgallery"  class="btn bg-info" type="button" onclick="document.getElementById('gallery').click();">อัพโหลด</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="gallery" name="gallery[]" multiple/>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>

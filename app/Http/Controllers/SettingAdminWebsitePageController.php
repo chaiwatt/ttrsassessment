@@ -78,20 +78,20 @@ class SettingAdminWebsitePageController extends Controller
                 'page_id' => $page->id
             ]);
         }
-        if(!Empty($request->gallery)){
-            foreach($request->gallery as $gallery){
-                $file = $gallery;
-                $img = Image::make($file);  
-                $fname=str_random(10).".".$file->getClientOriginalExtension();
-                $_gallery = "storage/uploads/gallery/".$fname;
-                // $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                $pageimage = new PageImage();
-                $pageimage->page_id = $page->id;
-                $pageimage->image = $_gallery;
-                $pageimage->save();
-            }
-        }
+        // if(!Empty($request->gallery)){
+        //     foreach($request->gallery as $gallery){
+        //         $file = $gallery;
+        //         $img = Image::make($file);  
+        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //         $_gallery = "storage/uploads/gallery/".$fname;
+        //         // $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+        //         Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+        //         $pageimage = new PageImage();
+        //         $pageimage->page_id = $page->id;
+        //         $pageimage->image = $_gallery;
+        //         $pageimage->save();
+        //     }
+        // }
 
         return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มหน้าเพจสำเร็จ');
     }
@@ -163,19 +163,19 @@ class SettingAdminWebsitePageController extends Controller
             $pagetag->save(); 
         }
 
-        if(!Empty($request->gallery)){
-            foreach($request->gallery as $gallery){
-                $file = $gallery;
-                $img = Image::make($file);  
-                $fname=str_random(10).".".$file->getClientOriginalExtension();
-                $_gallery = "storage/uploads/gallery/".$fname;
-                Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                $pageimage = new PageImage();
-                $pageimage->page_id = $page->id;
-                $pageimage->image = $_gallery;
-                $pageimage->save();
-            }
-        }
+        // if(!Empty($request->gallery)){
+        //     foreach($request->gallery as $gallery){
+        //         $file = $gallery;
+        //         $img = Image::make($file);  
+        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //         $_gallery = "storage/uploads/gallery/".$fname;
+        //         Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+        //         $pageimage = new PageImage();
+        //         $pageimage->page_id = $page->id;
+        //         $pageimage->image = $_gallery;
+        //         $pageimage->save();
+        //     }
+        // }
 
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
