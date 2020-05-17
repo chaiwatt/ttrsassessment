@@ -30,4 +30,20 @@ class ImageUploadController extends Controller
         $gallerry = PageImage::whereIn('id', $comming_array)->get();
         return response()->json(array("image" =>  $pageimage,"gallergy" => $gallerry));  
     }
+
+    public function Delete(Request $request){
+        $comming_array  = Array();
+        if(count(json_decode($request->galleries))>0){
+            foreach( json_decode($request->galleries) as $key => $tag ){
+                if($tag != $request->id){
+                    $comming_array[] = $tag;
+                }  
+            } 
+        }
+        $pageiamge = PageImage::find($request->id);
+        @unlink($pageiamge->image);  
+        $pageiamge->delete();
+        $gallerry = PageImage::whereIn('id', $comming_array)->get();
+        return response()->json(array("id" => $request->id,"gallergy" => $gallerry));  
+    }
 }

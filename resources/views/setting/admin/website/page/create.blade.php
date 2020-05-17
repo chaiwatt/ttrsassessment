@@ -216,17 +216,16 @@
                                                 </select>
                                         </div>
                                         <div id="images_wrapper"></div>
-                                        {{-- <div class="form-group">
-                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
+
+                                        <div class="col-md-12" id="gallery_wrapper" >	
+                                        </div>                        
+                                        <div class="form-group">
+                                            <label>รูป Feature<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="รูปแกลอรี่" disabled>
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-info" id="btnuploadgallery" type="button" onclick="document.getElementById('file').click();">อัพโหลด Gallery</button>													
-                                                </span>
+                                                <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลด Feature</button>													
                                             </div>
-                                            <input type="file" style="display:none;"  id="gallery" name="gallery[]" multiple/>
-                                        </div> --}}
-                                       
+                                            <input type="file" style="display:none;" id="singlefile" name="feature"/>
+                                        </div>
                                         <div class="form-group">
                                             <label>รูปแกลอรี่<span class="text-danger">*</span></label>
                                             <div class="input-group">													
@@ -237,11 +236,11 @@
 
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
-                                                <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
-                                                    @foreach ($pagestatuses as $pagestatus)
-                                                        <option value="{{$pagestatus->id}}" >{{$pagestatus->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                                @foreach ($pagestatuses as $pagestatus)
+                                                    <option value="{{$pagestatus->id}}" >{{$pagestatus->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </fieldset>
                                 </div>
@@ -249,26 +248,9 @@
                             <div class="text-right">
                                 <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                             </div>
-                            <div class="col-md-12" id="gallery_wrapper" >	
-                            </div>
                         </form>
-                        <div class="form-group">
-                            <label>รูป Feature<span class="text-danger">*</span></label>
-                            <div class="input-group">													
-                                {{-- <input type="text" id="filename" class="form-control border-right-0" placeholder="รูป Feature" disabled> --}}
-                                {{-- <span class="input-group-append"> --}}
-                                    <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลด Feature</button>													
-                                {{-- </span> --}}
-                            </div>
-                            <input type="file" style="display:none;" id="singlefile" name="feature"/>
-                        </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
-
-
-
-
             </div>
         </div>
         <!-- /form layouts -->
