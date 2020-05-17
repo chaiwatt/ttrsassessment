@@ -40,9 +40,6 @@ class SettingAdminWebsitePageController extends Controller
                                                     ->withMenus($menus);
     }
     public function CreateSave(CreatePageRequest $request){
-        ini_set('memory_limit', '256M');
-        ini_set('upload_max_filesize','40M');
-        ini_set('post_max_size','40M');
         $dom = new \DomDocument();
         $dom->loadHtml('<?xml encoding="UTF-8">'.$request->content);
         $images = $dom->getelementsbytagname('img');
@@ -88,7 +85,7 @@ class SettingAdminWebsitePageController extends Controller
                 $fname=str_random(10).".".$file->getClientOriginalExtension();
                 $_gallery = "storage/uploads/gallery/".$fname;
                 // $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+                //Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
                 $pageimage = new PageImage();
                 $pageimage->page_id = $page->id;
                 $pageimage->image = $_gallery;
