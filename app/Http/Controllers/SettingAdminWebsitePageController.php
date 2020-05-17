@@ -40,6 +40,9 @@ class SettingAdminWebsitePageController extends Controller
                                                     ->withMenus($menus);
     }
     public function CreateSave(CreatePageRequest $request){
+        ini_set('memory_limit', '256M');
+        ini_set('upload_max_filesize','40M');
+        ini_set('post_max_size','40M');
         $dom = new \DomDocument();
         $dom->loadHtml('<?xml encoding="UTF-8">'.$request->content);
         $images = $dom->getelementsbytagname('img');
@@ -113,6 +116,9 @@ class SettingAdminWebsitePageController extends Controller
                                                     ->withPageimages($pageimages);
     }
     public function EditSave(EditPageRequest $request,$id){
+        ini_set('memory_limit', '256M');
+        ini_set('upload_max_filesize','40M');
+        ini_set('post_max_size','40M'); 
         $file = $request->feature; 
         $page = Page::find($id);
         $feature = $page->featureimg;
