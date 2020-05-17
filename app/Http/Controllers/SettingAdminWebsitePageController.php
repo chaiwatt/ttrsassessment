@@ -85,7 +85,7 @@ class SettingAdminWebsitePageController extends Controller
                 $fname=str_random(10).".".$file->getClientOriginalExtension();
                 $_gallery = "storage/uploads/gallery/".$fname;
                 // $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                //Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+                Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
                 $pageimage = new PageImage();
                 $pageimage->page_id = $page->id;
                 $pageimage->image = $_gallery;
