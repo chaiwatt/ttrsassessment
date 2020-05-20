@@ -12,6 +12,7 @@ use App\Model\PageStatus;
 use App\Helper\CreateSlug;
 use App\Model\PageCategory;
 use Illuminate\Http\Request;
+use App\Helper\CreateDirectory;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditPageRequest;
 use App\Http\Requests\CreatePageRequest;
@@ -42,18 +43,30 @@ class SettingAdminWebsitePageController extends Controller
     public function CreateSave(CreatePageRequest $request){
         $dom = new \DomDocument();
         $dom->loadHtml('<?xml encoding="UTF-8">'.$request->content);
+        CreateDirectory::CreateDirectory(public_path("storage/uploads/page/images/"));
         $images = $dom->getelementsbytagname('img');
+        foreach($images as $img){
+            $data = $img->getattribute('src');
+            list($type, $data) = explode(';', $data);
+            list(, $data)= explode(',', $data);
+            $data = base64_decode($data);
+            $image_name= str_random(10).'.png';
+            $path = public_path() .'/storage/uploads/page/images/'. $image_name;
+            file_put_contents($path, $data);
+            $img->removeattribute('src');
+            $img->setattribute('src', "../storage/uploads/page/images/".$image_name);
+        }
         $detail = $dom->savehtml();
 
         $file = $request->feature;
         $img = Image::make($file);  
         $fname=str_random(10).".".$file->getClientOriginalExtension();
-        $feature = "storage/uploads/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
+        $feature = "storage/uploads/page/feature/".$fname;
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1200,500,1);
 
         $fname=str_random(10).".".$file->getClientOriginalExtension();
-        $featurethumbnail = "storage/uploads/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,2);
+        $featurethumbnail = "storage/uploads/page/feature/".$fname;
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),550,412,2);
 
         $page = new Page();
         $page->page_category_id = $request->pagecategory;
