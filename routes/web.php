@@ -60,9 +60,13 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'layout'], function(){
             Route::post('edit','Api\LayoutController@Edit')->name('api.layout.edit');           
         });
-        Route::group(['prefix' => 'upload'], function(){
-            Route::post('upload','Api\ImageUploadController@Upload')->name('api.upload');    
-            Route::post('delete','Api\ImageUploadController@Delete')->name('api.delete');         
+        Route::group(['prefix' => 'gallery'], function(){
+            Route::post('upload','Api\GalleryController@Upload')->name('api.gallery.upload');    
+            Route::post('delete','Api\GalleryController@Delete')->name('api.gallery.delete');         
+        });
+        Route::group(['prefix' => 'feature'], function(){
+            Route::post('upload','Api\FeatureController@Upload')->name('api.feature.upload');    
+            Route::post('delete','Api\FeatureController@Delete')->name('api.feature.delete');         
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

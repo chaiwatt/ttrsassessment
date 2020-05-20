@@ -157,7 +157,7 @@ $("#singlefile").on('change', function() {
     formData.append('file',file);
     formData.append('galleries',JSON.stringify(galleries));
         $.ajax({
-            url: `${route.url}/api/upload/upload`,  //Server script to process data
+            url: `${route.url}/api/gallery/upload`,  //Server script to process data
             type: 'POST',
             headers: {"X-CSRF-TOKEN":route.token},
             data: formData,
@@ -179,7 +179,7 @@ $("#singlefile").on('change', function() {
                                 <div class="card-body">
                                     <div class="d-flex align-items-start flex-nowrap">
                                         <div class="list-icons list-icons-extended ml-auto">
-                                            <a href="#" id="deleteme" data-id="${gallergy.id}" class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                            <a href="#" id="deletegallery" data-id="${gallergy.id}" class="list-icons-item"><i class="icon-bin top-0"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -192,8 +192,8 @@ $("#singlefile").on('change', function() {
     });
 });
 
-// $('#deleteme').click(function() {
-$(document).on('click', '#deleteme', function (e) {
+// $('#deletegallery').click(function() {
+$(document).on('click', '#deletegallery', function (e) {
     e.preventDefault();
     var galleries = $('.gal').map(function() {
         return $(this).val();
@@ -204,7 +204,7 @@ $(document).on('click', '#deleteme', function (e) {
     formData.append('galleries',JSON.stringify(galleries));
 
     $.ajax({
-        url: `${route.url}/api/upload/delete`,  //Server script to process data
+        url: `${route.url}/api/gallery/delete`,  //Server script to process data
         type: 'POST',
         headers: {"X-CSRF-TOKEN":route.token},
         data: formData,
@@ -212,7 +212,7 @@ $(document).on('click', '#deleteme', function (e) {
         processData: false,
         success: function(data){
             console.log(data.id);
-            $("input[data-id='" + data.id + "']").remove();
+            $("input[name='gal[]'][data-id='" + data.id + "']").remove();
             var html = `<div class="form-group">
                         <div class="row">`;
             data.gallergy.forEach(function (gallergy,index) {
@@ -226,7 +226,7 @@ $(document).on('click', '#deleteme', function (e) {
                             <div class="card-body">
                                 <div class="d-flex align-items-start flex-nowrap">
                                     <div class="list-icons list-icons-extended ml-auto">
-                                        <a href="#" id="deleteme" data-id="${gallergy.id}" class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                        <a href="#" id="deletegallery" data-id="${gallergy.id}" class="list-icons-item"><i class="icon-bin top-0"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -240,3 +240,67 @@ $(document).on('click', '#deleteme', function (e) {
 
 });
 
+$("#file").on('change', function() {
+    if($('.featureinp').length>0){
+        return ;
+    }
+    var formData = new FormData();
+    var file = this.files[0];
+    formData.append('file',file);
+        $.ajax({
+            url: `${route.url}/api/feature/upload`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+
+                var inp = `<input name="feature" value="${data.feature.id}" data-id="${data.feature.id}" class="featureinp"> </input>                                     `;
+                $('#feature_input_wrapper').append(inp);
+                var inp2 = `<input name="featurethumbnail" value="${data.thumbnail.id}" data-id="${data.thumbnail.id}" class="featurethumbnailinp"> </input>                                     `;
+                $('#featurethumbnail_input_wrapper').append(inp2);
+                var html = `<div class="form-group" id="featurediv" >
+                            <div class="row"><div class="col-sm-6 col-xl-6">
+                            <div class="card">
+                                <div class="card-img-actions mx-1 mt-1">
+                                    <img class="card-img img-fluid" src="${route.url}/${data.feature.name}" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start flex-nowrap">
+                                        <div class="list-icons list-icons-extended ml-auto">
+                                            <a href="#" id="deletefeature" data-id="${data.feature.id}" data-thumbnail="${data.thumbnail.id}"  class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    html +=`</div></div>`;
+                 $("#featurethumbnail_wrapper").html(html);
+        }
+    });
+});
+
+$(document).on('click', '#deletefeature', function (e) {
+    e.preventDefault();
+    var formData = new FormData();
+    formData.append('featureid',$(this).data('id'));
+    formData.append('thumbnailid',$(this).data('thumbnail'));
+    $.ajax({
+        url: `${route.url}/api/feature/delete`,  //Server script to process data
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            console.log(data);
+            $("input[name='feature'][data-id='" + data.feature + "']").remove();
+            $("input[name='featurethumbnail'][data-id='" + data.thumbnail + "']").remove();
+            $("div[id='featurediv']").remove();
+        }
+    });
+
+});

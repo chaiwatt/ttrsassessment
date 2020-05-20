@@ -21,8 +21,8 @@ class CreatePagesTable extends Migration
             $table->string('slug',150);
             $table->string('header',250);
             $table->longText('content');
-            $table->string('featureimg',250); 
-            $table->string('featurethumbnail',250); 
+            $table->unsignedBigInteger('feature_image_id')->nullable();
+            $table->unsignedBigInteger('feature_image_thumbnail_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

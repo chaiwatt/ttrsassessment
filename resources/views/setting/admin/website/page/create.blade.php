@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-<link href="{{asset('assets/dashboard/plugins/summernote/summernote-bs4.min.css')}}" rel="stylesheet">
+<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
     {{-- modal create category --}}
@@ -190,12 +190,16 @@
                                         <div class="form-group">
                                             <label>รูป Feature<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="รูป Feature" disabled>
-                                                <span class="input-group-append">
+                                                {{-- <input type="text" id="filename" class="form-control border-right-0" placeholder="รูป Feature" disabled> --}}
+                                                {{-- <span class="input-group-append"> --}}
                                                     <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
-                                                </span>
+                                                {{-- </span> --}}
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature"/>
+                                            <div class="col-md-12" id="feature_input_wrapper" >	</div>
+                                            <div class="col-md-12" id="featurethumbnail_input_wrapper" ></div>
+                                            <div id="featurethumbnail_wrapper"></div>
+                                                
                                         </div>
                                         <div class="form-group">
                                             <label>บทความ<span class="text-danger">*</span></label>
@@ -222,17 +226,17 @@
                                         <div class="form-group">
                                             <label>รูปแกลอรี่<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลด Feature</button>													
+                                                <button class="btn bg-info" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลดรูป</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="singlefile" />
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>รูปแกลอรี่<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button id="btnuploadgallery"  class="btn bg-info" type="button" onclick="document.getElementById('gallery').click();">อัพโหลด</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="gallery" name="gallery[]" multiple/>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
@@ -258,7 +262,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js')}}"></script>
 
 <script  type="text/javascript">
@@ -275,10 +279,10 @@
         $("#filename").val(this.value);
     });
 
-    $("#gallery").on('change', function() {
-        var files = $(this)[0].files;
-        $("#btnuploadgallery").text(`อัพโหลด (${files.length})`);
-    });
+    // $("#gallery").on('change', function() {
+    //     var files = $(this)[0].files;
+    //     $("#btnuploadgallery").text(`อัพโหลด (${files.length})`);
+    // });
 
 
 

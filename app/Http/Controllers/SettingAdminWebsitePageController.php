@@ -12,6 +12,7 @@ use App\Model\PageStatus;
 use App\Helper\CreateSlug;
 use App\Model\PageCategory;
 use Illuminate\Http\Request;
+use App\Model\SummernoteImage;
 use App\Helper\CreateDirectory;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditPageRequest;
@@ -45,28 +46,30 @@ class SettingAdminWebsitePageController extends Controller
         $dom->loadHtml('<?xml encoding="UTF-8">'.$request->content);
         CreateDirectory::CreateDirectory(public_path("storage/uploads/page/images/"));
         $images = $dom->getelementsbytagname('img');
+        $imgarray = array();
         foreach($images as $img){
             $data = $img->getattribute('src');
             list($type, $data) = explode(';', $data);
             list(, $data)= explode(',', $data);
             $data = base64_decode($data);
             $image_name= str_random(10).'.png';
+            $imgarray[] = URL('')."/storage/uploads/page/images/".$image_name;
             $path = public_path() .'/storage/uploads/page/images/'. $image_name;
             file_put_contents($path, $data);
             $img->removeattribute('src');
-            $img->setattribute('src', "../storage/uploads/page/images/".$image_name);
+            $img->setattribute('src', URL('')."/storage/uploads/page/images/".$image_name);
         }
         $detail = $dom->savehtml();
 
-        $file = $request->feature;
-        $img = Image::make($file);  
-        $fname=str_random(10).".".$file->getClientOriginalExtension();
-        $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1200,500,1);
+        // $file = $request->feature;
+        // $img = Image::make($file);  
+        // $fname=str_random(10).".".$file->getClientOriginalExtension();
+        // $feature = "storage/uploads/page/feature/".$fname;
+        // Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1200,500,1);
 
-        $fname=str_random(10).".".$file->getClientOriginalExtension();
-        $featurethumbnail = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),550,412,2);
+        // $fname=str_random(10).".".$file->getClientOriginalExtension();
+        // $featurethumbnail = "storage/uploads/page/feature/".$fname;
+        // Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),550,412,2);
 
         $page = new Page();
         $page->page_category_id = $request->pagecategory;
@@ -75,10 +78,17 @@ class SettingAdminWebsitePageController extends Controller
         $page->slug = CreateSlug::createSlug($request->title);
         $page->header = $request->description;
         $page->content = $detail;
-        $page->featureimg = $feature;
-        $page->featurethumbnail = $featurethumbnail;
+        // $page->featureimg = $feature;
+        // $page->featurethumbnail = $featurethumbnail;
         $page->user_id = Auth::user()->id;
         $page->save();
+
+        foreach($imgarray as $item){
+            $summernoteimage = new SummernoteImage();
+            $summernoteimage->page_id = $page->id;
+            $summernoteimage->file = $item;
+            $summernoteimage->save();
+        }
 
         foreach ($request->pagetag as $key => $tag) {
             $pagetag = new PageTag();
@@ -91,20 +101,20 @@ class SettingAdminWebsitePageController extends Controller
                 'page_id' => $page->id
             ]);
         }
-        if(!Empty($request->gallery)){
-            foreach($request->gallery as $gallery){
-                $file = $gallery;
-                $img = Image::make($file);  
-                $fname=str_random(10).".".$file->getClientOriginalExtension();
-                $_gallery = "storage/uploads/gallery/".$fname;
-                // $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                $pageimage = new PageImage();
-                $pageimage->page_id = $page->id;
-                $pageimage->image = $_gallery;
-                $pageimage->save();
-            }
-        }
+        // if(!Empty($request->gallery)){
+        //     foreach($request->gallery as $gallery){
+        //         $file = $gallery;
+        //         $img = Image::make($file);  
+        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //         $_gallery = "storage/uploads/gallery/".$fname;
+        //         // $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+        //         Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+        //         $pageimage = new PageImage();
+        //         $pageimage->page_id = $page->id;
+        //         $pageimage->image = $_gallery;
+        //         $pageimage->save();
+        //     }
+        // }
 
         return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มหน้าเพจสำเร็จ');
     }
@@ -126,36 +136,74 @@ class SettingAdminWebsitePageController extends Controller
                                                     ->withPageimages($pageimages);
     }
     public function EditSave(EditPageRequest $request,$id){
-        ini_set('memory_limit', '256M');
-        ini_set('upload_max_filesize','40M');
-        ini_set('post_max_size','40M'); 
-        $file = $request->feature; 
-        $page = Page::find($id);
-        $feature = $page->featureimg;
-        $featurethumbnail = $page->featurethumbnail;
+        $detail=$request->content;
+        $dom = new \domdocument();
+        $dom->loadHtml('<?xml encoding="UTF-8">'.$detail);
+        $images = $dom->getelementsbytagname('img');
+        $comming_array  = Array();
+        foreach($images as $k => $img){
+            $data = $img->getattribute('src');
+            if(strpos($data, "data:image") !== false){
+                list($type, $data) = explode(';', $data);
+                list(, $data)= explode(',', $data);
+                $data = base64_decode($data);
+                $image_name= time().$k.'.png';
+                $path = public_path() .'/page/images/'. $image_name;
+                $comming_array[] = URL('')."/page/images/".$image_name;
+                file_put_contents($path, $data);
+                $img->removeattribute('src');
+                $img->setattribute('src', URL('')."/page/images/".$image_name);
+            }else{
+                $comming_array[] =  $data ;
+            }
+        }
+// return $comming_array;
+        $summerimgs = SummernoteImage::where('page_id',$id)->whereNotIn('file',$comming_array)->get();
+        if ($summerimgs->count() > 0 ){
+            foreach ($summerimgs as $summerimg){
+             $url = str_replace(URL('').'/' , '' , $summerimg->file);
+                unlink($url);
+            }
+            $summerimgs = SummernoteImage::where('page_id',$id)->whereNotIn('file',$comming_array)->delete();
+        }
+        
+        $existing_array = SummernoteImage::where('page_id',$id)->pluck('file')->toArray();
+        $unique_array = array_diff($comming_array, $existing_array);
 
-        if(!Empty($file)){   
-            @unlink($page->featureimg);   
-            @unlink($page->featurethumbnail);  
-            $img = Image::make($file);  
-
-            $fname=str_random(10).".".$file->getClientOriginalExtension();
-            $feature = "storage/uploads/feature/".$fname;
-            Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
-            $fname=str_random(10).".".$file->getClientOriginalExtension();
-            $featurethumbnail = "storage/uploads/feature/".$fname;
-            Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
+        foreach($unique_array as $item){
+            $summernoteimage = new SummernoteImage();
+            $summernoteimage->post_id = $id;
+            $summernoteimage->file = $item;
+            $summernoteimage->save();
         }
 
+        $file = $request->feature; 
+        $page = Page::find($id);
+        // $feature = $page->featureimg;
+        // $featurethumbnail = $page->featurethumbnail;
+
+        // if(!Empty($file)){   
+        //     @unlink($page->featureimg);   
+        //     @unlink($page->featurethumbnail);  
+        //     $img = Image::make($file);  
+
+        //     $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //     $feature = "storage/uploads/feature/".$fname;
+        //     Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
+        //     $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //     $featurethumbnail = "storage/uploads/feature/".$fname;
+        //     Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
+        // }
+        $detail = $dom->savehtml();
         $page->update([
             'page_category_id' => $request->pagecategory,
             'page_status_id' => $request->status,
             'name' => $request->title,
             'slug' => CreateSlug::createSlug($request->title),
             'header' => $request->description, 
-            'content' => $request->content, 
-            'featureimg' => $feature, 
-            'featurethumbnail' => $featurethumbnail
+            'content' => $detail, 
+            // 'featureimg' => $feature, 
+            // 'featurethumbnail' => $featurethumbnail
         ]);
 
         $comming_array  = Array();
@@ -176,19 +224,19 @@ class SettingAdminWebsitePageController extends Controller
             $pagetag->save(); 
         }
 
-        if(!Empty($request->gallery)){
-            foreach($request->gallery as $gallery){
-                $file = $gallery;
-                $img = Image::make($file);  
-                $fname=str_random(10).".".$file->getClientOriginalExtension();
-                $_gallery = "storage/uploads/gallery/".$fname;
-                Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-                $pageimage = new PageImage();
-                $pageimage->page_id = $page->id;
-                $pageimage->image = $_gallery;
-                $pageimage->save();
-            }
-        }
+        // if(!Empty($request->gallery)){
+        //     foreach($request->gallery as $gallery){
+        //         $file = $gallery;
+        //         $img = Image::make($file);  
+        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //         $_gallery = "storage/uploads/gallery/".$fname;
+        //         Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
+        //         $pageimage = new PageImage();
+        //         $pageimage->page_id = $page->id;
+        //         $pageimage->image = $_gallery;
+        //         $pageimage->save();
+        //     }
+        // }
 
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
