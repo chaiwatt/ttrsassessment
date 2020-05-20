@@ -172,7 +172,7 @@ class SettingAdminWebsitePageController extends Controller
 
         foreach($unique_array as $item){
             $summernoteimage = new SummernoteImage();
-            $summernoteimage->post_id = $id;
+            $summernoteimage->page_id = $id;
             $summernoteimage->file = $item;
             $summernoteimage->save();
         }
