@@ -148,11 +148,11 @@ class SettingAdminWebsitePageController extends Controller
                 list(, $data)= explode(',', $data);
                 $data = base64_decode($data);
                 $image_name= time().$k.'.png';
-                $path = public_path() .'/page/images/'. $image_name;
-                $comming_array[] = URL('')."/page/images/".$image_name;
+                $path = public_path() .'/storage/uploads/page/images/'. $image_name;
+                $comming_array[] = URL('')."/storage/uploads/page/images/".$image_name;
                 file_put_contents($path, $data);
                 $img->removeattribute('src');
-                $img->setattribute('src', URL('')."/page/images/".$image_name);
+                $img->setattribute('src', URL('')."/storage/uploads/page/images/".$image_name);
             }else{
                 $comming_array[] =  $data ;
             }
