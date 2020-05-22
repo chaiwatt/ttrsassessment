@@ -11,27 +11,27 @@ $(document).on("click","#btn_modal_expertexpience",function(e){
      <div class="row expertexpienceclass${a}" >							
         <div class="col-md-1">
             <div class="form-group">
-                <input type="text" name="expertexpienceposition[${a}]" id="expertexpienceposition${a}" value="${$("#expertexpienceposition").val()}" class="form-control" >
+                <input type="text" name="expertexpienceposition[${a}]" id="expertexpienceposition${a}" value="${$("#expertexpienceposition").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="expertexpiencecompany[${a}]" id="expertexpiencecompany${a}" value="${$("#expertexpiencecompany").val()}" class="form-control" >
+                <input type="text" name="expertexpiencecompany[${a}]" id="expertexpiencecompany${a}" value="${$("#expertexpiencecompany").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="expertexpiencedetail[${a}]" id="expertexpiencedetail${a}" value="${$("#expertexpiencedetail").val()}" class="form-control" >
+                <input type="text" name="expertexpiencedetail[${a}]" id="expertexpiencedetail${a}" value="${$("#expertexpiencedetail").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="fromyear[${a}]" id="fromyear${a}" value="${$("#fromyear").val()}" class="form-control" >
+                <input type="text" name="fromyear[${a}]" id="fromyear${a}" value="${$("#fromyear").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="toyear[${a}]" id="toyear${a}" value="${$("#toyear").val()}" class="form-control" >
+                <input type="text" name="toyear[${a}]" id="toyear${a}" value="${$("#toyear").val()}" class="form-control" hidden>
             </div>
         </div>
     </div>`;
@@ -60,27 +60,27 @@ $(document).on("click","#btn_modal_experteducation",function(e){
      <div class="row experteducationclass${b}" >							
         <div class="col-md-1">
             <div class="form-group">
-                <input type="text" name="educationlevel[${b}]" id="educationlevel${b}" value="${$("#educationlevel").val()}" class="form-control" >
+                <input type="text" name="educationlevel[${b}]" id="educationlevel${b}" value="${$("#educationlevel").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="educationbranch[${b}]" id="educationbranch${b}" value="${$("#educationbranch").val()}" class="form-control" >
+                <input type="text" name="educationbranch[${b}]" id="educationbranch${b}" value="${$("#educationbranch").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="institute[${b}]" id="institute${b}" value="${$("#institute").val()}" class="form-control" >
+                <input type="text" name="institute[${b}]" id="institute${b}" value="${$("#institute").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="country[${b}]" id="country${b}" value="${$("#country").val()}" class="form-control" >
+                <input type="text" name="country[${b}]" id="country${b}" value="${$("#country").val()}" class="form-control" hidden>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <input type="text" name="graduatedyear[${b}]" id="graduatedyear${b}" value="${$("#graduatedyear").val()}" class="form-control" >
+                <input type="text" name="graduatedyear[${b}]" id="graduatedyear${b}" value="${$("#graduatedyear").val()}" class="form-control" hidden>
             </div>
         </div>
     </div>`;
