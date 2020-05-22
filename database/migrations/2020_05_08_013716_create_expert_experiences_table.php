@@ -15,8 +15,8 @@ class CreateExpertExperiencesTable extends Migration
     {
         Schema::create('expert_experiences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('expert_id')->comment('ID ผู้เชี่ยวชาญ');
-            $table->foreign('expert_id')->references('id')->on('experts')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->comment('ID ผู้เชี่ยวชาญ');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('position',250)->nullable();
             $table->string('jobdetail')->nullable();
             $table->string('company',250)->nullable();

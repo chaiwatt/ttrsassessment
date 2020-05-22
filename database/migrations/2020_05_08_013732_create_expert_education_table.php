@@ -15,8 +15,8 @@ class CreateExpertEducationTable extends Migration
     {
         Schema::create('expert_education', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('expert_id')->comment('ID ผู้เชี่ยวชาญ');
-            $table->foreign('expert_id')->references('id')->on('experts')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->comment('ID ผู้เชี่ยวชาญ');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('education_level_id');
             $table->unsignedBigInteger('education_branch_id');
             $table->string('institute',150);

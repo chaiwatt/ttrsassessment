@@ -608,7 +608,16 @@
 																<th style="width:120px">เพิ่มเติม</th>
 															</tr>
 														</thead>
-														<tbody id="expertexpience_wrapper_tr">                                
+														<tbody id="expertexpience_wrapper_tr">      
+															@foreach ($expertexperiences as $expertexperience)
+																<tr>
+																	<td>{{$expertexperience->company}}</td>
+																	<td>{{$expertexperience->position}}</td>		
+																	<td>{{$expertexperience->fromyear}}</td>
+																	<td>{{$expertexperience->toyear}}</td>
+																	<td><a type="button" data-id="{{$expertexperience->id}}" class="btn btn-danger-400 btn-sm deleteexpertexpienceclass" id="deleteexpertexpienceclass_editview"><i class="icon-trash danger"></i></a></td>
+																</tr>
+															@endforeach                             
 														</tbody>
 													</table>
 												</div>
@@ -619,7 +628,7 @@
 									<div class="tab-pane fade" id="left-icon-experteducation">
 										<div class="row">
 											<div class="col-md-12">	
-											<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_experteducation"><i class="icon-add"></i></a>
+											<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_experteducation" ><i class="icon-add"></i></a>
 											</div>
 										</div>																								
 										<div class="row">	
@@ -640,13 +649,24 @@
 																<th style="width:120px">เพิ่มเติม</th>
 															</tr>
 														</thead>
-														<tbody id="experteducation_wrapper_tr">                                
+														<tbody id="experteducation_wrapper_tr">        
+															@foreach ($experteducations as $experteducation)
+																<tr>
+																	<td>{{$experteducation->educationlevel->name}}</td>
+																	<td>{{$experteducation->educationbranch->name}}</td>		
+																	<td>{{$experteducation->institute}}</td>
+																	<td><a type="button" data-id="{{$experteducation->id}}" class="btn btn-danger-400 btn-sm deleteexperteducationclass" id="deleteexperteducationclass_editview"><i class="icon-trash danger"></i></a></td>
+																</tr>
+															@endforeach                          
 														</tbody>
 													</table>
 												</div>
 											</div>      
 										</div>
 									</div>
+								</div>
+								<div class="text-right">
+									<button type="submit" name="action" value="expert" class="btn bg-teal">บันทึกข้อมูลผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
 								</div>
 							</div>
 						</div>
@@ -717,7 +737,7 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>โทรศัพท์1</label>
-															<input type="email" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล์" class="form-control">
+															<input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล์" class="form-control">
 														</div>
 														<div class="col-md-6">
 															<label>โทรศัพท์2</label>

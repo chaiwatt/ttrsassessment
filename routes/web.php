@@ -68,6 +68,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('upload','Api\FeatureController@Upload')->name('api.feature.upload');    
             Route::post('delete','Api\FeatureController@Delete')->name('api.feature.delete');         
         });
+        Route::group(['prefix' => 'expert'], function(){
+            Route::post('deleteexperience','Api\ExpertController@DeleteExperience')->name('api.expert.deleteexperience');    
+            Route::post('deleteeducation','Api\ExpertController@DeleteEducation')->name('api.expert.deleteeducation');         
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){

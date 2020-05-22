@@ -21,11 +21,6 @@
                     <div class="post-meta">
                         <span><i class="far fa-user"></i> โดย <a href="#">{{$page->user->name}}</a> </span>
                         <span><i class="far fa-eye"></i>{{$page->pageview->count()}}</span>
-                        {{-- <span><i class="far fa-folder"></i> 
-                            @foreach ($page->pagetag as $tag)
-                                <a href="{{route('landing.tag',['slug' => $tag->tag->slug])}}">{{$tag->tag->name}}</a>&nbsp;
-                            @endforeach
-                        </span> --}}
                         <span class="d-block mt-2"><a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-xs btn-light text-1 text-uppercase">เพิ่มเติม...</a></span>
                     </div>
                 </div>
@@ -33,13 +28,11 @@
         </div>
         @endforeach
     </div>
-
     <div class="row">
         <div class="col">
             {{$pages->links()}} 
         </div>
     </div>
-
 </div>
 @endsection
 @section('pageScript')

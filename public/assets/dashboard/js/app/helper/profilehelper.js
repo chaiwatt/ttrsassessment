@@ -1,4 +1,5 @@
 import * as Message from './message.js'
+import * as Expert from './expert.js'
 
 var a=0;
 $(document).on("click","#btn_modal_expertexpience",function(e){
@@ -45,6 +46,10 @@ $(document).on("click","#btn_modal_expertexpience",function(e){
     $('#expertexpience_wrapper_tr').append(tr);
 });
 
+$(document).on("click",".deleteexpertexpienceclass",function(e){
+    $("."+$(this).data('id')).remove();
+}); 
+
 var b=0;
 $(document).on("click","#btn_modal_experteducation",function(e){
     if($("#institute").val() == '' || $("#graduatedyear").val() == '' ){
@@ -89,6 +94,10 @@ $(document).on("click","#btn_modal_experteducation",function(e){
     $('#experteducation_wrapper_tr').append(tr);
 });
 
+$(document).on("click",".deleteexperteducationclass",function(e){
+    $("."+$(this).data('id')).remove();
+}); 
+
 $(document).on("click","#maillink",function(e){
     // alert($(this).data('id'));
     Message.getMessage($(this).data('id')).then(data => {
@@ -124,6 +133,77 @@ $(document).on("click","#maillink",function(e){
     })
     // 
 });
+
+$(document).on("click","#deleteexpertexpienceclass_editview",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Expert.deleteExpereince($(this).data('id')).then(data => {
+                var html='';
+                console.log(data);
+                data.forEach(function (expereince,index) {
+                    html += `<tr>
+                                <td>${expereince.company} </td>
+                                <td>${expereince.position}</td>
+                                <td>${expereince.fromyear}</td>                   
+                                <td>${expereince.toyear}</td> 
+                                <td>                                                                                                      
+                                <a type="button" data-id="${expereince['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexpertexpienceclass_editview" ><i class="icon-trash danger"></i></a>
+                                </td>
+                            <tr>`
+                    });
+                 $("#expertexpience_wrapper_tr").html(html);
+           })
+           .catch(error => {
+               // console.log(error)
+           })
+        }
+    });
+});
+
+$(document).on("click","#deleteexperteducationclass_editview",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Expert.deleteEducation($(this).data('id')).then(data => {
+                var html='';
+                data.forEach(function (education,index) {
+                    html += `<tr>
+                                <td>${education.educationlevel['name']} </td>
+                                <td>${education.educationbranch['name']}</td>
+                                <td>${education.institute}</td>          
+                                <td>                                                                                                      
+                                <a type="button" data-id="${education['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexperteducationclass_editview" ><i class="icon-trash danger"></i></a>
+                                </td>
+                            <tr>`
+                    });
+                 $("#experteducation_wrapper_tr").html(html);
+           })
+           .catch(error => {
+               // console.log(error)
+           })
+        }
+    });
+});
+
 
 
                              

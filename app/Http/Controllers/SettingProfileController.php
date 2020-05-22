@@ -54,6 +54,8 @@ class SettingProfileController extends Controller
         $messagereceives = MessageReceive::where('receiver_id',$auth->id)->paginate(10);
         $unreadmessages = MessageReceive::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::first();
+        $experteducations = ExpertEducation::where('user_id',$auth->id)->get();
+        $expertexperiences = ExpertExperience::where('user_id',$auth->id)->get();
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -71,7 +73,9 @@ class SettingProfileController extends Controller
                                         ->withFriendrequestcomings($friendrequestcomings)
                                         ->withMessagereceives($messagereceives)
                                         ->withUnreadmessages($unreadmessages)
-                                        ->withGeneralinfo($generalinfo);
+                                        ->withGeneralinfo($generalinfo)
+                                        ->withExperteducations($experteducations)
+                                        ->withExpertexperiences($expertexperiences);
     }
     public function EditSave(EditProfileRequest $request, $userid){
         if($request->action == 'personal'){
@@ -110,6 +114,34 @@ class SettingProfileController extends Controller
                 'phone' => $request->phone,
                 'picture' => $filelocation,
             ]);
+            return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
+        }else if($request->action == 'expert'){
+            if(!Empty($request->expertexpienceposition) && !Empty($request->expertexpiencecompany) 
+            && !Empty($request->expertexpiencedetail) && !Empty($request->fromyear) && !Empty($request->toyear)){
+                foreach( $request->expertexpienceposition as $key => $expertexpienceposition ){
+                    $expertexperience = new ExpertExperience();
+                    $expertexperience->user_id = Auth::user()->id;
+                    $expertexperience->position = $request->expertexpienceposition[$key];
+                    $expertexperience->company = $request->expertexpiencecompany[$key];
+                    $expertexperience->jobdetail = $request->expertexpiencedetail[$key];
+                    $expertexperience->fromyear = $request->fromyear[$key];
+                    $expertexperience->toyear = $request->toyear[$key];
+                    $expertexperience->save();                
+                }
+            }
+            if(!Empty($request->educationlevel) && !Empty($request->educationbranch) 
+            && !Empty($request->institute) && !Empty($request->country) && !Empty($request->graduatedyear)){
+                foreach( $request->educationlevel as $key => $educationlevel ){
+                    $experteducation = new ExpertEducation();
+                    $experteducation->user_id = Auth::user()->id;
+                    $experteducation->education_level_id = $request->educationlevel[$key];
+                    $experteducation->education_branch_id = $request->educationbranch[$key];
+                    $experteducation->institute = $request->institute[$key];
+                    $experteducation->country_id = $request->country[$key];
+                    $experteducation->graduatedyear = $request->graduatedyear[$key];
+                    $experteducation->save();                
+                }
+            }
             return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
         }
     }
