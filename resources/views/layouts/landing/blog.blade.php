@@ -6,11 +6,13 @@
                     @foreach ($sharepages as $page)
                         <div class="col-md-4">
                             <article class="post post-medium border-0 pb-0 mb-5">
-                                <div class="post-image">
-                                    <a href="{{route('landing.page',['slug' => $page->slug])}}">
-                                        <img src="{{asset($page->featurethumbnail)}}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
-                                    </a>
-                                </div>
+                                @if (!Empty($page->feature_image_thumbnail_id))
+                                    <div class="post-image">
+                                        <a href="{{route('landing.page',['slug' => $page->slug])}}">
+                                            <img src="{{asset($page->featureimagethumbnail->name)}}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
+                                        </a>
+                                    </div>
+                                @endif
                                 <div class="post-content">
                                     <h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"><a href="{{route('landing.page',['slug' => $page->slug])}}">{{$page->name}}</a></h2>
                                     <p>{{$page->header}}</p>

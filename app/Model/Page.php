@@ -8,6 +8,7 @@ use App\Model\PageView;
 use App\Model\FeatureImage;
 use App\Model\PageCategory;
 use App\Helper\DateConversion;
+use App\Model\FeatureImageThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
@@ -48,7 +49,10 @@ class Page extends Model
     {
         return FeatureImage::find($this->feature_image_id);
     }
-    
+    public function getFeatureImageThumbnailAttribute()
+    {
+        return FeatureImageThumbnail::find($this->feature_image_thumbnail_id);
+    }
 }
 
 
