@@ -148,12 +148,20 @@ $(document).on("click","#deletetag",function(e){
 });
 
 $("#singlefile").on('change', function() {
+    var file = this.files[0];
+    if (this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/) == null ){
+        return ;
+    }
+    if (this.files[0].size/1024/1024*1000 > 250 ){
+        alert('ไฟล์ขนาดมากกว่า 250 KB');
+        return ;
+    }
+
     var galleries = $('.gal').map(function() {
         return $(this).val();
     }).toArray();
 
     var formData = new FormData();
-    var file = this.files[0];
     formData.append('file',file);
     formData.append('galleries',JSON.stringify(galleries));
         $.ajax({
@@ -242,11 +250,19 @@ console.log($(this).data('id'));
 });
 
 $("#file").on('change', function() {
+    var file = this.files[0];
+    if (this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/) == null ){
+        return ;
+    }
+    if (this.files[0].size/1024/1024*1000 > 250 ){
+        alert('ไฟล์ขนาดมากกว่า 250 KB');
+        return ;
+    }
     if($('.featureinp').length>0){
         return ;
     }
     var formData = new FormData();
-    var file = this.files[0];
+    // var file = this.files[0];
     formData.append('file',file);
         $.ajax({
             url: `${route.url}/api/feature/upload`,  //Server script to process data

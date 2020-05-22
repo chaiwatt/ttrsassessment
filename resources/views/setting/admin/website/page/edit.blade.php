@@ -186,7 +186,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>รูป Feature<span class="text-danger">*</span></label>
+                                            <label>รูป Feature (ขนาด 1200x500 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
                                             </div>
@@ -279,7 +279,7 @@
                                         </div>    
 
                                         <div class="form-group">
-                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
+                                            <label>รูปแกลอรี่ (ขนาด 500x500 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลดรูป</button>													
                                             </div>

@@ -10,10 +10,12 @@ use App\Model\PageTag;
 use App\Model\PageImage;
 use App\Model\PageStatus;
 use App\Helper\CreateSlug;
+use App\Model\FeatureImage;
 use App\Model\PageCategory;
 use Illuminate\Http\Request;
 use App\Model\SummernoteImage;
 use App\Helper\CreateDirectory;
+use App\Model\FeatureImageThumbnail;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditPageRequest;
 use App\Http\Requests\CreatePageRequest;
@@ -61,16 +63,6 @@ class SettingAdminWebsitePageController extends Controller
         }
         $detail = $dom->savehtml();
 
-        // $file = $request->feature;
-        // $img = Image::make($file);  
-        // $fname=str_random(10).".".$file->getClientOriginalExtension();
-        // $feature = "storage/uploads/page/feature/".$fname;
-        // Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1200,500,1);
-
-        // $fname=str_random(10).".".$file->getClientOriginalExtension();
-        // $featurethumbnail = "storage/uploads/page/feature/".$fname;
-        // Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),550,412,2);
-
         $page = new Page();
         $page->page_category_id = $request->pagecategory;
         $page->page_status_id = $request->status;
@@ -107,20 +99,6 @@ class SettingAdminWebsitePageController extends Controller
                 'page_id' => $page->id
             ]);
         }
-        // if(!Empty($request->gallery)){
-        //     foreach($request->gallery as $gallery){
-        //         $file = $gallery;
-        //         $img = Image::make($file);  
-        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
-        //         $_gallery = "storage/uploads/gallery/".$fname;
-        //         // $this->crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-        //         Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-        //         $pageimage = new PageImage();
-        //         $pageimage->page_id = $page->id;
-        //         $pageimage->image = $_gallery;
-        //         $pageimage->save();
-        //     }
-        // }
 
         return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มหน้าเพจสำเร็จ');
     }
@@ -185,21 +163,6 @@ class SettingAdminWebsitePageController extends Controller
 
         $file = $request->feature; 
         $page = Page::find($id);
-        // $feature = $page->featureimg;
-        // $featurethumbnail = $page->featurethumbnail;
-
-        // if(!Empty($file)){   
-        //     @unlink($page->featureimg);   
-        //     @unlink($page->featurethumbnail);  
-        //     $img = Image::make($file);  
-
-        //     $fname=str_random(10).".".$file->getClientOriginalExtension();
-        //     $feature = "storage/uploads/feature/".$fname;
-        //     Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),1200,500,1);
-        //     $fname=str_random(10).".".$file->getClientOriginalExtension();
-        //     $featurethumbnail = "storage/uploads/feature/".$fname;
-        //     Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
-        // }
         $detail = $dom->savehtml();
 
         $exist_feature_image_id = $page->feature_image_id;
@@ -244,32 +207,26 @@ class SettingAdminWebsitePageController extends Controller
                 'page_id' => $page->id
             ]);
         }
-
-        // if(!Empty($request->gallery)){
-        //     foreach($request->gallery as $gallery){
-        //         $file = $gallery;
-        //         $img = Image::make($file);  
-        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
-        //         $_gallery = "storage/uploads/gallery/".$fname;
-        //         Crop::crop(true,public_path("storage/uploads/gallery/"),$fname,Image::make($file),1000,1000,1);
-        //         $pageimage = new PageImage();
-        //         $pageimage->page_id = $page->id;
-        //         $pageimage->image = $_gallery;
-        //         $pageimage->save();
-        //     }
-        // }
-
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
  
     public function Delete($id){
         $page = Page::find($id);
-        if(!Empty($page->featureimg)){
-            @unlink($page->featureimg);   
+        if(!Empty($page->feature_image_id)){
+            $featureimage = FeatureImage::find($page->feature_image_id);
+            @unlink($featureimage->name);  
+            $featureimage->delete(); 
         }
-        if(!Empty($page->featurethumbnail)){
-            @unlink($page->featurethumbnail); 
+        if(!Empty($page->feature_image_thumbnail_id)){
+            $featureimagethumbnail = FeatureImageThumbnail::find($page->feature_image_thumbnail_id);
+            @unlink($featureimagethumbnail->name); 
+            $featureimagethumbnail->delete(); 
         }
+        $pageimages = PageImage::where('page_id',$page->id)->get();
+        foreach ($pageimages as $pageimage) {
+            @unlink($pageimage->image);
+        }
+        PageImage::where('page_id',$page->id)->delete();
         $page->delete();
         return redirect()->route('setting.admin.website.page')->withSuccess('ลบหน้าเพจสำเร็จ');
     }
