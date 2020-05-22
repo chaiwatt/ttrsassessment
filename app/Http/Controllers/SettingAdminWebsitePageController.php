@@ -78,10 +78,16 @@ class SettingAdminWebsitePageController extends Controller
         $page->slug = CreateSlug::createSlug($request->title);
         $page->header = $request->description;
         $page->content = $detail;
-        // $page->featureimg = $feature;
-        // $page->featurethumbnail = $featurethumbnail;
+        $page->feature_image_id = $request->featureinp;
+        $page->feature_image_thumbnail_id =  $request->featurethumbnailinp;
         $page->user_id = Auth::user()->id;
         $page->save();
+
+        foreach ($request->gal as $key => $gal) {
+            PageImage::find($gal)->update([
+                'page_id' => $page->id
+            ]);
+        }
 
         foreach($imgarray as $item){
             $summernoteimage = new SummernoteImage();
@@ -157,7 +163,7 @@ class SettingAdminWebsitePageController extends Controller
                 $comming_array[] =  $data ;
             }
         }
-// return $comming_array;
+
         $summerimgs = SummernoteImage::where('page_id',$id)->whereNotIn('file',$comming_array)->get();
         if ($summerimgs->count() > 0 ){
             foreach ($summerimgs as $summerimg){
@@ -195,6 +201,15 @@ class SettingAdminWebsitePageController extends Controller
         //     Crop::crop(true,public_path("storage/uploads/feature/"),$fname,Image::make($file),550,412,1);
         // }
         $detail = $dom->savehtml();
+
+        $exist_feature_image_id = $page->feature_image_id;
+        $exist_feature_image_thumbnail_id = $page->feature_image_thumbnail_id;
+
+        if(!Empty($page->feature_image_id)){
+            $exist_feature_image_id = $request->featureinp;
+            $exist_feature_image_thumbnail_id =  $request->featurethumbnailinp;
+        }
+
         $page->update([
             'page_category_id' => $request->pagecategory,
             'page_status_id' => $request->status,
@@ -202,8 +217,8 @@ class SettingAdminWebsitePageController extends Controller
             'slug' => CreateSlug::createSlug($request->title),
             'header' => $request->description, 
             'content' => $detail, 
-            // 'featureimg' => $feature, 
-            // 'featurethumbnail' => $featurethumbnail
+            'feature_image_id' => $exist_feature_image_id, 
+            'feature_image_thumbnail_id' => $exist_feature_image_thumbnail_id
         ]);
 
         $comming_array  = Array();
@@ -222,6 +237,12 @@ class SettingAdminWebsitePageController extends Controller
             $pagetag->page_id = $id;
             $pagetag->tag_id = $_tag;
             $pagetag->save(); 
+        }
+
+        foreach ($request->gal as $key => $gal) {
+            PageImage::find($gal)->update([
+                'page_id' => $page->id
+            ]);
         }
 
         // if(!Empty($request->gallery)){

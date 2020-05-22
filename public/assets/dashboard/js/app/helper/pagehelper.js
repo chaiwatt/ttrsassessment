@@ -165,7 +165,7 @@ $("#singlefile").on('change', function() {
             processData: false,
             success: function(data){
                 console.log(data.gallergy)
-                var inp = `<input name="gal[]" value="${data.image.id}" data-id="${data.image.id}" class="gal"> </input>                                     `;
+                var inp = `<input name="gal[]" value="${data.image.id}" data-id="${data.image.id}" class="gal" hidden>`;
                 $('#gallery_wrapper').append(inp);
                 var html = `<div class="form-group">
                             <div class="row">`;
@@ -198,6 +198,7 @@ $(document).on('click', '#deletegallery', function (e) {
     var galleries = $('.gal').map(function() {
         return $(this).val();
     }).toArray();
+console.log($(this).data('id'));
 
     var formData = new FormData();
     formData.append('id',$(this).data('id'));
@@ -257,9 +258,9 @@ $("#file").on('change', function() {
             success: function(data){
                 console.log(data)
 
-                var inp = `<input name="feature" value="${data.feature.id}" data-id="${data.feature.id}" class="featureinp"> </input>                                     `;
+                var inp = `<input name="featureinp" value="${data.feature.id}" data-id="${data.feature.id}" class="featureinp" hidden>`;
                 $('#feature_input_wrapper').append(inp);
-                var inp2 = `<input name="featurethumbnail" value="${data.thumbnail.id}" data-id="${data.thumbnail.id}" class="featurethumbnailinp"> </input>                                     `;
+                var inp2 = `<input name="featurethumbnailinp" value="${data.thumbnail.id}" data-id="${data.thumbnail.id}" class="featurethumbnailinp" hidden>                                     `;
                 $('#featurethumbnail_input_wrapper').append(inp2);
                 var html = `<div class="form-group" id="featurediv" >
                             <div class="row"><div class="col-sm-6 col-xl-6">
@@ -297,8 +298,8 @@ $(document).on('click', '#deletefeature', function (e) {
         processData: false,
         success: function(data){
             console.log(data);
-            $("input[name='feature'][data-id='" + data.feature + "']").remove();
-            $("input[name='featurethumbnail'][data-id='" + data.thumbnail + "']").remove();
+            $("input[name='featureinp'][data-id='" + data.feature + "']").remove();
+            $("input[name='featurethumbnailinp'][data-id='" + data.thumbnail + "']").remove();
             $("div[id='featurediv']").remove();
         }
     });

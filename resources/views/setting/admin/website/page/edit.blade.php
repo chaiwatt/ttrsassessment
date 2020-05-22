@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-<link href="{{asset('assets/dashboard/plugins/summernote/summernote-bs4.min.css')}}" rel="stylesheet">
+<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
     {{-- modal create category --}}
@@ -188,23 +188,38 @@
                                         <div class="form-group">
                                             <label>รูป Feature<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="รูป Feature" disabled>
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
-                                                </span>
+                                                <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature"/>
-                                        </div>
-                                        <div class="form-group"> 
-                                            <div class="card-img-actions mx-1 mt-1">
-                                                <img class="card-img img-fluid" src="{{asset($page->featureimg)}}" alt="">
-                                                <div class="card-img-actions-overlay card-img">
-                                                    <a href="{{asset($page->featureimg)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
-                                                        <i class="icon-plus3"></i>
-                                                    </a>
+                                            <br>
+                                            @if (!Empty($page->feature_image_id))
+                                                <div class="col-md-12" id="feature_input_wrapper">
+                                                    <input name="featureinp" value="{{$page->feature_image_id}}" data-id="{{$page->feature_image_id}}" class="featureinp" hidden> 
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="col-md-12" id="featurethumbnail_input_wrapper" >
+                                                    <input name="featurethumbnailinp" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden> 
+                                                </div>
+                                                <div id="featurethumbnail_wrapper">
+                                                    <div class="form-group" id="featurediv" >
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-xl-6">
+                                                                <div class="card">
+                                                                    <div class="card-img-actions mx-1 mt-1">
+                                                                        <img class="card-img img-fluid" src="{{asset($page->featureimage->name)}}" alt="">
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="d-flex align-items-start flex-nowrap">
+                                                                            <div class="list-icons list-icons-extended ml-auto">
+                                                                                <a href="#" id="deletefeature" data-id="{{$page->feature_image_id}}" data-thumbnail="{{$page->feature_image_thumbnail_id}}"  class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         <div class="card-img-actions-overlay card-img">
                                             <a href="{{asset($page->featureimg)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
                                                 <i class="icon-plus3"></i>
@@ -234,41 +249,42 @@
                                                     @endforeach
                                                 </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
-                                            <div class="input-group">													
-                                                <button id="btnuploadgallery"  class="btn bg-info" type="button" onclick="document.getElementById('gallery').click();">อัพโหลด</button>													
-                                            </div>
-                                            <input type="file" style="display:none;" id="gallery" name="gallery[]" multiple/>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                @foreach ($pageimages as $pageimage)
-                                                <div class="col-sm-6 col-xl-3">
-                                                    <div class="card">
-                                                        <div class="card-img-actions mx-1 mt-1">
-                                                            <img class="card-img img-fluid" src="{{asset($pageimage->image)}}" alt="">
-                                                            <div class="card-img-actions-overlay card-img">
-                                                                <a href="{{asset($pageimage->image)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
-                                                                    <i class="icon-plus3"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                            
-                                                        <div class="card-body">
-                                                            <div class="d-flex align-items-start flex-nowrap">
-                                                                <div class="list-icons list-icons-extended ml-auto">
-                                                                    <a href="{{asset($pageimage->image)}}" class="list-icons-item"><i class="icon-download top-0"></i></a>
-                                                                    <a href="{{route('setting.admin.dashboard.pageimage.delete',['id' => $pageimage->id])}}" class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                        <div id="images_wrapper">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    @foreach ($pageimages as $pageimage)
+                                                        <div class="col-sm-6 col-xl-3">
+                                                            <div class="card">
+                                                                <div class="card-img-actions mx-1 mt-1">
+                                                                    <img class="card-img img-fluid" src="{{asset($pageimage->image)}}" alt="">
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-start flex-nowrap">
+                                                                        <div class="list-icons list-icons-extended ml-auto">
+                                                                            <a href="#" id="deletegallery" data-id="{{$pageimage->id}}" class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
-                                                @endforeach
                                             </div>
                                         </div>
-                                        
+
+                                        <div class="col-md-12" id="gallery_wrapper" >	
+                                            @foreach ($pageimages as $pageimage)
+                                                <input name="gal[]" value="{{$pageimage->id}}" data-id="{{$pageimage->id}}" class="gal" hidden>
+                                            @endforeach
+                                        </div>    
+
+                                        <div class="form-group">
+                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
+                                            <div class="input-group">													
+                                                <button class="btn bg-info" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลดรูป</button>													
+                                            </div>
+                                            <input type="file" style="display:none;" id="singlefile" />
+                                        </div>                                       
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
                                             <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
@@ -295,7 +311,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js')}}"></script>
 <script src="{{ asset('assets/dashboard/js/plugins/media/fancybox.min.js') }}"></script>
 <script src="{{ asset('assets/dashboard/js/demo_pages/gallery.js') }}"></script>
@@ -305,6 +321,7 @@
         url: "{{ url('/') }}",
         token: $('meta[name="csrf-token"]').attr('content')
     };
+
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 300,
@@ -313,10 +330,5 @@
     $("#file").on('change', function() {
         $("#filename").val(this.value);
     });
-
-    $("#gallery").on('change', function() {
-			var files = $(this)[0].files;
-			$("#btnuploadgallery").text(`อัพโหลด (${files.length})`);
-		});
 </script>
 @stop

@@ -5,6 +5,7 @@ namespace App\Model;
 use App\User;
 use App\Model\PageTag;
 use App\Model\PageView;
+use App\Model\FeatureImage;
 use App\Model\PageCategory;
 use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
@@ -43,6 +44,11 @@ class Page extends Model
     {
         return PageTag::where('page_id',$this->id)->get();
     }
+    public function getFeatureImageAttribute()
+    {
+        return FeatureImage::find($this->feature_image_id);
+    }
+    
 }
 
 

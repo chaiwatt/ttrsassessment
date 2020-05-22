@@ -190,12 +190,10 @@
                                         <div class="form-group">
                                             <label>รูป Feature<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                {{-- <input type="text" id="filename" class="form-control border-right-0" placeholder="รูป Feature" disabled> --}}
-                                                {{-- <span class="input-group-append"> --}}
-                                                    <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
-                                                {{-- </span> --}}
+                                                <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature"/>
+                                            <br>
                                             <div class="col-md-12" id="feature_input_wrapper" >	</div>
                                             <div class="col-md-12" id="featurethumbnail_input_wrapper" ></div>
                                             <div id="featurethumbnail_wrapper"></div>
@@ -220,9 +218,7 @@
                                                 </select>
                                         </div>
                                         <div id="images_wrapper"></div>
-
-                                        <div class="col-md-12" id="gallery_wrapper" >	
-                                        </div>                        
+                                        <div class="col-md-12" id="gallery_wrapper" ></div>                        
                                         <div class="form-group">
                                             <label>รูปแกลอรี่<span class="text-danger">*</span></label>
                                             <div class="input-group">													
@@ -230,14 +226,6 @@
                                             </div>
                                             <input type="file" style="display:none;" id="singlefile" />
                                         </div>
-                                        {{-- <div class="form-group">
-                                            <label>รูปแกลอรี่<span class="text-danger">*</span></label>
-                                            <div class="input-group">													
-                                                <button id="btnuploadgallery"  class="btn bg-info" type="button" onclick="document.getElementById('gallery').click();">อัพโหลด</button>													
-                                            </div>
-                                            <input type="file" style="display:none;" id="gallery" name="gallery[]" multiple/>
-                                        </div> --}}
-
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
                                             <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">

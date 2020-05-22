@@ -7,6 +7,7 @@ use App\Model\Page;
 use App\Model\PageTag;
 use App\Model\PageView;
 use App\Model\PageImage;
+use App\Model\FeatureImage;
 use App\Model\IntroSection;
 use App\Model\PageCategory;
 use Jenssegers\Agent\Agent;

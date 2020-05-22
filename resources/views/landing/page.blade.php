@@ -4,11 +4,13 @@
 @section('content')
     <div class="blog-posts single-post">
         <article class="post post-large blog-single-post border-0 m-0 p-0">
-            <div class="post-image ml-0">
-                <a href="{{route('landing.page',['slug' => $page->slug])}}">
-                    <img src="{{asset($page->featureimg)}}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
-                </a>
-            </div>							
+            @if (!Empty($page->feature_image_id))
+                <div class="post-image ml-0">
+                    <a href="{{route('landing.page',['slug' => $page->slug])}}">
+                        <img src="{{asset($page->featureimage->name)}}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
+                    </a>
+                </div>
+            @endif			
             <div class="post-date ml-0">
                 <span class="day">{{$page->day}}</span>
                 <span class="month">{{$page->month}}</span>
@@ -30,8 +32,8 @@
                 
                 @if ($pageimages->count() > 0)
                 <div class="row">
-                     <strong>รูปแกลอรี่</strong>
-                     <hr>
+                     {{-- <strong>รูปแกลอรี่</strong>
+                     <hr> --}}
                     <div class="col">
                         <div class="lightbox" data-plugin-options="{'delegate': 'a', 'type': 'image', 'gallery': {'enabled': true}, 'mainClass': 'mfp-with-zoom', 'zoom': {'enabled': true, 'duration': 300}}">
                             <div class="owl-carousel owl-theme stage-margin" data-plugin-options="{'items': 3, 'margin': 10, 'loop': false, 'nav': true, 'dots': false, 'stagePadding': 40}">
