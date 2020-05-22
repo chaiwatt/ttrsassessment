@@ -143,6 +143,8 @@ class SettingProfileController extends Controller
                 }
             }
             return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
+        }else if($request->action == 'organization'){
+            return 'ข้อมูลหน่วยงาน';
         }
     }
     public function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
