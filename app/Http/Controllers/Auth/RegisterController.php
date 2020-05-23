@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Model\Company;
 use App\Model\GeneralInfo;
+use App\Model\BusinessPlan;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +50,7 @@ class RegisterController extends Controller
     {
         $user = User::create([
             'prefix_id' => 1,
-            'user_type_id' => 1,
+            'user_type_id' => 3,
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
@@ -62,6 +63,10 @@ class RegisterController extends Controller
             'province_id' => 4,
             'amphur_id' => 67,
             'tambol_id' => 367,
+        ]);
+
+        BusinessPlan::create([
+            'company_id' => Company::latest()->first()->id
         ]);
         return $user ; 
     }

@@ -72,6 +72,12 @@
                 <li class="nav-item"><a href="{{route('setting.user.company.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.user.company.edit') ? 'active' : '' }}">ข้อมูลบริษัท</a></li>		             
             </ul>
         </li>
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.user.businessplan') ? 'nav-item-expanded' : '' }}">
+            <a href="#" class="nav-link"><span>แผนธุรกิจ</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
+                <li class="nav-item"><a href="{{route('setting.user.businessplan.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.user.businessplan.edit') ? 'active' : '' }}">แผนธุรกิจ</a></li>		             
+            </ul>
+        </li>
     </ul>	
 </li>
 @endif
