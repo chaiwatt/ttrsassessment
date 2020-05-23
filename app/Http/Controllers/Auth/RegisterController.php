@@ -6,6 +6,7 @@ use App\User;
 use App\Model\Company;
 use App\Model\GeneralInfo;
 use App\Model\BusinessPlan;
+use App\Helper\CreateCompany;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -57,17 +58,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
-        Company::create([
-            'name' => 'บริษัท'.$data['name'],
-            'user_id' => $user->id,
-            'province_id' => 4,
-            'amphur_id' => 67,
-            'tambol_id' => 367,
-        ]);
-
-        BusinessPlan::create([
-            'company_id' => Company::latest()->first()->id
-        ]);
+        CreateCompany::createCompany($user,$data['name']);
         return $user ; 
     }
 }

@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class BusinessPlanHistory extends Model
 {
-    //
+    protected $fillable = [];
+    protected $guarded = [];
 }
