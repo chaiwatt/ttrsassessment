@@ -175,7 +175,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
+{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script> --}}
     <script>
     		var route = {
 			url: "{{ url('/') }}",

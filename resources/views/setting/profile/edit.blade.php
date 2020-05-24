@@ -703,7 +703,7 @@
 															<select name="organizationprovince" id="organizationprovince" data-placeholder="จังหวัด" class="form-control form-control-select2">
 																<option value=""></option>
 																@foreach ($provinces as $province)
-																	<option value="{{$province->id}}" @if($user->province_id == $province->id) selected @endif>{{$province->name}}</option> 
+																	<option value="{{$province->id}}" @if($generalinfo->province_id == $province->id) selected @endif>{{$province->name}}</option> 
 																@endforeach
 															</select>
 														</div>
@@ -711,7 +711,7 @@
 															<label>อำเภอ<span class="text-danger">*</span></label>
 															<select name="organizationamphur" id="organizationamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
 																@foreach ($amphurs as $amphur)                                                                
-																	<option value="{{$amphur->id}}" @if ($amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
+																	<option value="{{$amphur->id}}" @if ($amphur->id == $generalinfo->amphur_id) selected @endif> {{$amphur->name}} </option>
 																@endforeach   
 															</select>
 														</div>
@@ -723,7 +723,7 @@
 															<label>ตำบล<span class="text-danger">*</span></label>
 															<select name="organizationtambol" id="organizationtambol" data-placeholder="ตำบล" class="form-control form-control-select2">
 																@foreach ($tambols as $tambol)                                                                
-																	<option value="{{$tambol->id}}" @if ($tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
+																	<option value="{{$tambol->id}}" @if ($tambol->id == $generalinfo->tambol_id) selected @endif> {{$tambol->name}} </option>
 																@endforeach    
 															</select>
 														</div>
@@ -749,7 +749,7 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>แฟ๊กซ์</label>
-															<input type="text" name="fax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control">
+															<input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control">
 														</div>
 														<div class="col-md-6">
 															<label>อีเมล์</label>
@@ -792,7 +792,7 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>การ verify ผู้สมัคร<span class="text-danger">*</span></label>
-															<select name="organizationamphur" id="organizationamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+															<select name="verifyuser" id="verifyuser" data-placeholder="อำเภอ" class="form-control form-control-select2">
 																@foreach ($verifystatuses as $verifystatus)                                                                
 																	<option value="{{$verifystatus->id}}" @if ($generalinfo->verify_type_id == $verifystatus->id) selected @endif> {{$verifystatus->name}} </option>
 																@endforeach   
@@ -844,98 +844,34 @@
 
 						<!-- Profile info -->
 						<div class="card">
-							<div class="card-header header-elements-inline">
-								<h5 class="card-title">ข้อมูล Log</h5>
-								<div class="header-elements">
-									<div class="list-icons">
-										<a class="list-icons-item" data-action="collapse"></a>
-										<a class="list-icons-item" data-action="reload"></a>
-										<a class="list-icons-item" data-action="remove"></a>
-									</div>
-								</div>
-							</div>
 							<div class="card-body">
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-6">
-											<label>Username</label>
-											<input type="text" value="Eugene" class="form-control">
-										</div>
-										<div class="col-md-6">
-											<label>Full name</label>
-											<input type="text" value="Kopyov" class="form-control">
-										</div>
-									</div>
-								</div>
+								<div class="table-responsive">
+									<table class="table table-striped" id="testtopictable">
+										<thead>
+											<tr>
+												<th>ชื่อ</th>
+												{{-- <th >คำอธิบาย</th>                                --}}
+												<th >ค่าเดิม</th> 
+												<th >ค่าเปลี่ยนแปลง</th> 
+												<th >วันที่</th> 
+											</tr>
+										</thead>
+										<tbody>
 
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-6">
-											<label>Address line 1</label>
-											<input type="text" value="Ring street 12" class="form-control">
-										</div>
-										<div class="col-md-6">
-											<label>Address line 2</label>
-											<input type="text" value="building D, flat #67" class="form-control">
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-4">
-											<label>City</label>
-											<input type="text" value="Munich" class="form-control">
-										</div>
-										<div class="col-md-4">
-											<label>State/Province</label>
-											<input type="text" value="Bayern" class="form-control">
-										</div>
-										<div class="col-md-4">
-											<label>ZIP code</label>
-											<input type="text" value="1031" class="form-control">
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-6">
-											<label>Email</label>
-											<input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
-										</div>
-										<div class="col-md-6">
-											<label>Your country</label>
-											<select class="form-control form-control-select2" data-fouc>
-												<option value="germany" selected>Germany</option> 
-												<option value="france">France</option> 
-												<option value="spain">Spain</option> 
-												<option value="netherlands">Netherlands</option> 
-												<option value="other">...</option> 
-												<option value="uk">United Kingdom</option> 
-											</select>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-6">
-											<label>Phone #</label>
-											<input type="text" value="+99-99-9999-9999" class="form-control">
-											<span class="form-text text-muted">+99-99-9999-9999</span>
-										</div>
-
-										<div class="col-md-6">
-											<label>Upload profile image</label>
-											<input type="file" class="form-input-styled" data-fouc>
-											<span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="text-right">
-									<button type="submit" class="btn btn-primary">Save changes</button>
+											@foreach ($activitylogs as $activitylog)
+											<tr>    
+												<td> {{$activitylog->log_name}} </td>
+												{{-- <td> {{$activitylog->description}} </td>        --}}
+													@foreach ($activitylog->properties as $item)
+														@foreach ($item as $key => $_item)
+														<td>{{$key}}: {{$_item}}</td> 
+														@endforeach
+													@endforeach
+												<td> {{$activitylog->created_at}} </td>
+											</tr>
+											@endforeach
+										</tbody>
+									</table>      
 								</div>
 							</div>
 						</div>

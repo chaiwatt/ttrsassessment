@@ -23,6 +23,7 @@ use App\Model\MessagePriority;
 use App\Model\ExpertExperience;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Activitylog\Models\Activity;
 use App\Http\Requests\EditProfileRequest;
 
 class SettingProfileController extends Controller
@@ -56,6 +57,7 @@ class SettingProfileController extends Controller
         $generalinfo = GeneralInfo::first();
         $experteducations = ExpertEducation::where('user_id',$auth->id)->get();
         $expertexperiences = ExpertExperience::where('user_id',$auth->id)->get();
+        $activitylogs = Activity::causedBy($auth)->get();
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -75,7 +77,8 @@ class SettingProfileController extends Controller
                                         ->withUnreadmessages($unreadmessages)
                                         ->withGeneralinfo($generalinfo)
                                         ->withExperteducations($experteducations)
-                                        ->withExpertexperiences($expertexperiences);
+                                        ->withExpertexperiences($expertexperiences)
+                                        ->withActivitylogs($activitylogs);
     }
     public function EditSave(EditProfileRequest $request, $userid){
         if($request->action == 'personal'){
@@ -144,7 +147,29 @@ class SettingProfileController extends Controller
             }
             return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
         }else if($request->action == 'organization'){
-            return 'ข้อมูลหน่วยงาน';
+            GeneralInfo::get()->first()->update([
+                'company' => $request->organizationname,
+                'address' => $request->organizationaddress,
+                'province_id' => $request->organizationprovince,
+                'amphur_id' => $request->organizationamphur,
+                'tambol_id' => $request->organizationtambol,
+                'postalcode' => $request->organizationpostalcode,
+                'phone1' => $request->phone1,
+                'phone2' => $request->phone2,
+                'fax' => $request->organizationfax,
+                'email' => $request->organizationemail,
+                'client_id' => $request->lineclint,
+                'client_secret' => $request->linesecret,
+                'thsmsuser' => $request->thaisms,
+                'thsmspass' => $request->thaismspassword,
+                'verify_type_id' => $request->verifyuser,
+                'workdaytime' => $request->workdaytime,
+                'saturdaytime' => $request->saturdaytime,
+                'sundaytime' => $request->sundaytime,
+                'youtube' => $request->youtube,
+                'facebook' => $request->facebook,
+            ]);
+            return redirect()->back()->withSuccess('แก้ไขข้อมูลหน่วยงานสำเร็จ');
         }
     }
     public function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
