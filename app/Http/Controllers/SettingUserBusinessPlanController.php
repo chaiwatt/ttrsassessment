@@ -7,6 +7,7 @@ use App\Model\Company;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Model\BusinessPlanHistory;
+use App\Model\BusinessPlanPerformance;
 use App\Model\BusinessPlanMarketAnalyse;
 use App\Model\BusinessPlanMarketOpponent;
 
@@ -17,10 +18,12 @@ class SettingUserBusinessPlanController extends Controller
         $businessplanhistory = BusinessPlanHistory::where('business_plan_id',$businessplan->id)->first();
         $businessplanmarketanalyse = BusinessPlanMarketAnalyse::where('business_plan_id',$businessplan->id)->first();
         $businessplanmarketopponent = BusinessPlanMarketOpponent::where('business_plan_id',$businessplan->id)->first();
+        $businessplanperformances = BusinessPlanPerformance::where('business_plan_id',$businessplan->id)->get();
         return view('setting.user.businessplan.edit')->withBusinessplan($businessplan)
                                                     ->withBusinessplanhistory($businessplanhistory)
                                                     ->withBusinessplanmarketanalyse($businessplanmarketanalyse)
-                                                    ->withBusinessplanmarketopponent($businessplanmarketopponent);
+                                                    ->withBusinessplanmarketopponent($businessplanmarketopponent)
+                                                    ->withBusinessplanperformances($businessplanperformances);
     }
     public function EditSave(Request $request,$id){
         $businessplan = BusinessPlan::find($id);

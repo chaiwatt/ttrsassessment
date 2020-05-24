@@ -72,6 +72,11 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('deleteexperience','Api\ExpertController@DeleteExperience')->name('api.expert.deleteexperience');    
             Route::post('deleteeducation','Api\ExpertController@DeleteEducation')->name('api.expert.deleteeducation');         
         });
+        Route::group(['prefix' => 'businessplan'], function(){
+            Route::group(['prefix' => 'performance'], function(){
+                Route::post('add','Api\BusinessplanPerformanceController@Add')->name('api.businessplan.performance.add');             
+            });
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
