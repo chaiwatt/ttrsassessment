@@ -23,7 +23,8 @@ class User extends Authenticatable
 
     protected $fillable = [];
     protected $guarded = [];
-    
+    protected $appends = ['usertype'];
+
     protected static $ignoreChangedAttributes = ['password'];
     protected static $logAttributesToIgnore = [ 'password'];
     protected static $logAttributes = ['prefix_id', 'name', 'lastname', 'user_type_id', 'user_status_id', 'email', 'password'];

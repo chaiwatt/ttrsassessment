@@ -77,6 +77,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\BusinessplanPerformanceController@Add')->name('api.businessplan.performance.add');             
             });
         });
+        Route::group(['prefix' => 'friend'], function(){
+            Route::post('friendrequest','Api\FriendController@FriendRequest')->name('api.friend.friendrequest');            
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){

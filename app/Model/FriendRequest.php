@@ -9,7 +9,8 @@ class FriendRequest extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
-    
+    protected $appends = ['request','requestcoming'];
+
     public function getRequestAttribute()
     {
         return User::find($this->to_id);

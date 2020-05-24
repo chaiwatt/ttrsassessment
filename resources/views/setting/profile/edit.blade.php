@@ -230,7 +230,7 @@
 							<div class="form-group">
 								<div class="form-group">
 									<label>ผู้ใช้งานระบบ<span class="text-danger">*</span></label>
-									<select name="user[]" multiple="multiple" placeholder="ผู้ใช้งานระบบ"  class="form-control form-control-select2">
+									<select name="userrequest[]" id="userrequest" multiple="multiple" placeholder="ผู้ใช้งานระบบ"  class="form-control form-control-select2">
 										@foreach ($users as $_user)
 										<option value="{{$_user->id}}" > {{$_user->name}} {{$_user->lastname}}</option>
 										@endforeach
@@ -242,7 +242,7 @@
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_user" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> ส่งคำร้อง</button>
+					<button id="btn_modal_user" class="btn bg-primary" data-dismiss="modal" data-id="{{$user->id}}" ><i class="icon-checkmark3 font-size-base mr-1"></i> ส่งคำร้อง</button>
 				</div>
 			</div>
 		</div>
@@ -932,7 +932,7 @@
 																<th style="width:150px">เพิ่มเติม</th>
 															</tr>
 														</thead>
-														<tbody>
+														<tbody id="requestfriend_wrapper_tr"> 
 															@foreach ($friendrequests as $key => $friendrequest)
 																<tr>    
 																	<td> {{$key+1}} </td>
@@ -940,7 +940,7 @@
 																	<td> {{$friendrequest->request->usertype->name}} </td> 
 																	<td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td> 
 																	<td> 
-																		<a href="{{route('setting.admin.user.delete',['id' => $friendrequest->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+																		<a type="button" data-id="{{$friendrequest->id}}" class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview"><i class="icon-trash danger"></i></a>
 																	</td>
 																</tr>
 															@endforeach

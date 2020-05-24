@@ -1,5 +1,6 @@
 import * as Message from './message.js'
 import * as Expert from './expert.js'
+import * as Friend from './friend.js'
 
 var a=0;
 $(document).on("click","#btn_modal_expertexpience",function(e){
@@ -99,9 +100,7 @@ $(document).on("click",".deleteexperteducationclass",function(e){
 }); 
 
 $(document).on("click","#maillink",function(e){
-    // alert($(this).data('id'));
     Message.getMessage($(this).data('id')).then(data => {
-        // console.log(data.message.messagebox.title);
         console.log(data.attachment);
         let html= '';
         if(data.attachment.length > 0){
@@ -205,5 +204,32 @@ $(document).on("click","#deleteexperteducationclass_editview",function(e){
 });
 
 
+$(document).on("click","#btn_modal_user",function(e){
+    var requests = []; 
+     $("#userrequest :selected").each(function(){
+        requests.push($(this).val()); 
+    });
 
+    if(requests.length == 0) return ;
+
+    Friend.addRequest($(this).data('id'),requests).then(data => {
+        var html='';
+        data.forEach(function (friendrequest,index) {
+            html += `<tr>
+                        <td>${index+1}</td>
+                        <td>${friendrequest.request['name']}  ${(friendrequest.request['lastname'] == null) ? "" : friendrequest.request['lastname']}</td>
+                        <td>${friendrequest.request.usertype['name']}</td>   
+                        <td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td>                 
+                        <td>                                                                                                      
+                        <a type="button" data-id="${friendrequest['id']}"  class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview" ><i class="icon-trash danger"></i></a>
+                        </td>
+                    <tr>`
+            });
+         $("#requestfriend_wrapper_tr").html(html);
+   })
+   .catch(error => {
+       // console.log(error)
+   })
+    return ;
+});
                              
