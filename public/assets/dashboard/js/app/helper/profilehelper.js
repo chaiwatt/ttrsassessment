@@ -291,7 +291,7 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
                             <td>${friend.user['name']}  ${(friend.user['lastname'] == null) ? "" : friend.user['lastname']}</td>
                             <td>${friend.user.usertype['name']}</td>                 
                             <td>                                                                                                      
-                                <a href="${route.url}/setting/admin/user/delete/${friend.id}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                            
+                                <a type="button" data-id="${friend['id']}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a>                                           
                             </td>
                         <tr>`
                 });
@@ -307,30 +307,123 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
     })
 });
 
-$(document).on("click","#rejectfriendclass_editview",function(e){
-    Friend.rejectRequest($(this).data('id')).then(data => {
-        var html='';
-        data.forEach(function (friendrequest,index) {
-            html += `<tr>
-                        <td>${index+1}</td>
-                        <td>${friendrequest.requestcoming['name']}  ${(friendrequest.requestcoming['lastname'] == null) ? "" : friendrequest.requestcoming['lastname']}</td>
-                        <td>${friendrequest.requestcoming.usertype['name']}</td>   
-                        <td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td>                 
-                        <td>                                                                                                      
-                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                                                        
-                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a> 
-                        </td>
-                    <tr>`
-            });
-            if(data.length >= 0){
-                $("#friendrequestcomingcount").html(data.length);
-                $("#_friendrequestcomingcount").html(data.length);
-                $("#_newmessagecount").html(10);
-            }
-            $("#comingrequestfriend_wrapper_tr").html(html);
-    })
-    .catch(error => {
-        // console.log(error)
-    })
+$(document).on("click","#deletefriendclass_editview",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Friend.deleteFriend($(this).data('id')).then(data => {
+                var html='';
+                data.forEach(function (friend,index) {
+                    html += `<tr>
+                                <td>${index+1}</td>
+                                <td>${friend.user['name']}  ${(friend.user['lastname'] == null) ? "" : friend.user['lastname']}</td>
+                                <td>${friend.user.usertype['name']}</td>                 
+                                <td>                                                                                                                                                                             
+                                    <a type="button" data-id="${friend['id']}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
+                                </td>
+                            <tr>`
+                    });
+                    $("#friend_wrapper_tr").html(html);
+            })
+            .catch(error => {
+                // console.log(error)
+            })
+        }
+    });
+
 });
 
+$("#attachment").on('change', function() {
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    
+    var inpattachments = $('.input_attachment').map(function() {
+        return $(this).val();
+    }).toArray();
+
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('inpattachments',JSON.stringify(inpattachments));
+
+        $.ajax({
+            url: `${route.url}/api/message/uploadattachment`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var inp = `<input name="input_attachment[]" value="${data.file.id}" data-id="${data.file.id}" class="input_attachment" hidden>`;
+                $('#input_attachment_wrapper').append(inp);
+                var html = `<ul class="media-list">`;
+                data.messageboxattachments.forEach(function (messageboxattachment,index) {
+                    html += 
+                        `<li class="media">	
+                            <div class="media-body">
+                                <div class="text-muted">${messageboxattachment.name}</div>
+                            </div>
+                            <div class="ml-3 align-self-center">
+                                <a href="#" class="list-icons-item" id="deleteattachment" data-id="${messageboxattachment.id}"><i class="icon-trash text-muted"></i></a>
+                            </div>
+                        </li>`
+                    });
+                    html +=`</ul>`;
+                 $("#attachment_wrapper").html(html);
+        }
+    });
+
+});
+
+
+$(document).on('click', '#deleteattachment', function (e) {
+    e.preventDefault();
+    var inpattachments = $('.input_attachment').map(function() {
+        return $(this).val();
+    }).toArray();
+
+    var formData = new FormData();
+    formData.append('id',$(this).data('id'));
+    formData.append('inpattachments',JSON.stringify(inpattachments));
+
+    $.ajax({
+        url: `${route.url}/api/message/deleteattachment`,  //Server script to process data
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            console.log(data.id);
+            $("input[name='input_attachment[]'][data-id='" + data.id + "']").remove();
+            var html = `<ul class="media-list">`;
+            data.messageboxattachments.forEach(function (messageboxattachment,index) {
+                html += 
+                    `<li class="media">	
+                        <div class="media-body">
+                            <div class="text-muted">${messageboxattachment.name}</div>
+                        </div>
+                        <div class="ml-3 align-self-center">
+                            <a href="#" class="list-icons-item" id="deleteattachment" data-id="${messageboxattachment.id}"><i class="icon-trash text-muted"></i></a>
+                        </div>
+                    </li>`
+                });
+                html +=`</ul>`;
+             $("#attachment_wrapper").html(html);
+        }
+    });
+
+});

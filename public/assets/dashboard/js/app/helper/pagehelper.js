@@ -200,13 +200,11 @@ $("#singlefile").on('change', function() {
     });
 });
 
-// $('#deletegallery').click(function() {
 $(document).on('click', '#deletegallery', function (e) {
     e.preventDefault();
     var galleries = $('.gal').map(function() {
         return $(this).val();
     }).toArray();
-console.log($(this).data('id'));
 
     var formData = new FormData();
     formData.append('id',$(this).data('id'));

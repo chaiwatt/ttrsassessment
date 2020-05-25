@@ -39,7 +39,9 @@ Route::group(['prefix' => 'api'], function(){
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'api'], function(){
         Route::group(['prefix' => 'message'], function(){
-            Route::post('getmessage','Api\MessageController@GetMessage')->name('api.message.getmessage');           
+            Route::post('getmessage','Api\MessageController@GetMessage')->name('api.message.getmessage');   
+            Route::post('uploadattachment','Api\MessageController@UploadAttachment')->name('api.message.uploadattachment');   
+            Route::post('deleteattachment','Api\MessageController@DeleteAttachment')->name('api.message.deleteattachment');       
         });
         Route::group(['prefix' => 'menu'], function(){
             Route::post('getmenu','Api\MenuController@GetMenu')->name('api.menu.getmenu');           
@@ -82,6 +84,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('deleterequest','Api\FriendController@DeleteRequest')->name('api.friend.deleterequest');        
             Route::post('acceptrequest','Api\FriendController@AcceptRequest')->name('api.friend.acceptrequest'); 
             Route::post('rejectrequest','Api\FriendController@RejectRequest')->name('api.friend.rejectrequest'); 
+            Route::post('deletefriend','Api\FriendController@DeleteFriend')->name('api.friend.deletefriend'); 
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

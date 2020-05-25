@@ -908,7 +908,7 @@
 															<td> {{$friend->user->name}}  {{$friend->user->lastname}} </td>    
 															<td> {{$friend->user->usertype->name}} </td> 
 															<td> 
-																<a href="{{route('setting.admin.user.delete',['id' => $friend->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+																<a type="button" data-id="{{$friend->id}}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
 															</td>
 														</tr>
 													@endforeach
@@ -1017,9 +1017,9 @@
 									<div class="form-group">
 										<div class="form-group">
 											<label>เพื่อน<span class="text-danger">*</span> <a href="" class="float-right" data-toggle="modal" data-target="#modal_user">&nbsp<i class="icon-add small" style="color:grey"></i></a></label>
-											<select name="criterialist[]" multiple="multiple" placeholder="เลือกเกณฑ์"  class="form-control form-control-select2">
+											<select name="friends[]" multiple="multiple" placeholder="เพื่อน"  class="form-control form-control-select2">
 												@foreach ($friends as $friend)
-												<option value="{{$friend->id}}" > {{$friend->user->name}} </option>
+												<option value="{{$friend->friend_id}}" > {{$friend->user->name}} </option>
 												@endforeach
 											</select>
 										</div>
@@ -1035,19 +1035,22 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<textarea name="enter-message" class="form-control mb-3" rows="7" cols="1" placeholder="ข้อความ"></textarea>
+									<textarea name="messagetosend" class="form-control mb-3" rows="7" cols="1" placeholder="ข้อความ"></textarea>
+								</div>
+								<div id="input_attachment_wrapper"></div>
+								<div class="form-group" id="attachment_wrapper">
 								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="input-group">													
-												<button id="btnuploadattachment"  class="btn bg-grey-300" type="button" onclick="document.getElementById('attachment').click();">ไฟล์แนบ</button>													
+												<button id="btnuploadattachment" class="btn bg-grey-300" type="button" onclick="document.getElementById('attachment').click();">ไฟล์แนบ</button>													
 											</div>
-											<input type="file" style="display:none;" id="attachment" name="attachment[]" multiple/>
+											<input type="file" style="display:none;" id="attachment" name="attachment"/>
 										</div>
 									</div>
 									<div class="col-md-6">
-										<button type="button" class="btn bg-blue btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> ส่งข้อความ</button>
+										<button type="submit" name="action" value="message" class="btn bg-blue btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> ส่งข้อความ</button>
 									</div>
 								</div>
 							</div>
@@ -1070,13 +1073,6 @@
 		$("#file").on('change', function() {
             $("#filename").val(this.value);
         });
-		// $("#attachment").on('change', function() {
-        //     $("#attachmentname").val(this.value);
-        // });
-		$("#attachment").on('change', function() {
-			var files = $(this)[0].files;
-			$("#btnuploadattachment").text(`ไฟล์แนบ (${files.length})`);
-		});
     </script>	
 @stop
 

@@ -53,4 +53,10 @@ class FriendController extends Controller
         $friendrequests = FriendRequest::where('to_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
         return response()->json($friendrequests);  
     }
+    public function DeleteFriend(Request $request){
+        $auth = Auth::user();
+        Friend::find($request->id)->delete();
+        $friends = Friend::where('user_id',$auth->id)->get();
+        return response()->json($friends); 
+    }
 }

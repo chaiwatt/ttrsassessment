@@ -15,8 +15,7 @@ class CreateMessageBoxAttachmentsTable extends Migration
     {
         Schema::create('message_box_attachments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('message_box_id');
-            $table->foreign('message_box_id')->references('id')->on('message_boxes')->onDelete('cascade');
+            $table->unsignedBigInteger('message_box_id')->nullable();
             $table->string('name',150)->nullable();
             $table->string('attachment',250)->nullable();
             $table->timestamps();

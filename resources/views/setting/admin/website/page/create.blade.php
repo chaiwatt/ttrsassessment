@@ -267,12 +267,5 @@
         $("#filename").val(this.value);
     });
 
-    // $("#gallery").on('change', function() {
-    //     var files = $(this)[0].files;
-    //     $("#btnuploadgallery").text(`อัพโหลด (${files.length})`);
-    // });
-
-
-
 </script>
 @stop

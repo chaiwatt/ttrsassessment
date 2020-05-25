@@ -11,6 +11,7 @@ use App\Model\Tambol;
 use App\UserPosition;
 use App\Model\Country;
 use App\Model\Province;
+use App\Model\MessageBox;
 use App\Model\GeneralInfo;
 use App\Model\VerifyStatus;
 use App\Model\FriendRequest;
@@ -21,6 +22,7 @@ use App\Model\EducationBranch;
 use App\Model\ExpertEducation;
 use App\Model\MessagePriority;
 use App\Model\ExpertExperience;
+use App\Model\MessageBoxAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Activitylog\Models\Activity;
@@ -49,7 +51,6 @@ class SettingProfileController extends Controller
         $verifystatuses = VerifyStatus::get();
         $messagepriorities = MessagePriority::get();
         $users = User::get();
-        // $friends = FriendRequest::where('from_id',$auth->id)->orWhere('to_id',$auth->id)->where('friend_status_id',1)->get();
         $friends = Friend::where('user_id',$auth->id)->get();
         $friendrequests = FriendRequest::where('from_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
         $friendrequestcomings = FriendRequest::where('to_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
@@ -82,6 +83,7 @@ class SettingProfileController extends Controller
                                         ->withActivitylogs($activitylogs);
     }
     public function EditSave(EditProfileRequest $request, $userid){
+        $auth = Auth::user();
         if($request->action == 'personal'){
             $user = User::find($userid);
             if(!Empty($request->password)){
@@ -106,7 +108,6 @@ class SettingProfileController extends Controller
                 $img = Image::make($file);  
                 $fname=str_random(10).".".$file->getClientOriginalExtension();
                 $filelocation = "storage/uploads/profile/".$fname;
-                // $this->crop(true,public_path("storage/uploads/profile/"),$fname,Image::make($file),500,500,1);
                 Crop::crop(true,public_path("storage/uploads/profile/"),$fname,Image::make($file),500,500,1);
             }
             $user->update([
@@ -124,7 +125,7 @@ class SettingProfileController extends Controller
             && !Empty($request->expertexpiencedetail) && !Empty($request->fromyear) && !Empty($request->toyear)){
                 foreach( $request->expertexpienceposition as $key => $expertexpienceposition ){
                     $expertexperience = new ExpertExperience();
-                    $expertexperience->user_id = Auth::user()->id;
+                    $expertexperience->user_id = $auth->id;
                     $expertexperience->position = $request->expertexpienceposition[$key];
                     $expertexperience->company = $request->expertexpiencecompany[$key];
                     $expertexperience->jobdetail = $request->expertexpiencedetail[$key];
@@ -137,7 +138,7 @@ class SettingProfileController extends Controller
             && !Empty($request->institute) && !Empty($request->country) && !Empty($request->graduatedyear)){
                 foreach( $request->educationlevel as $key => $educationlevel ){
                     $experteducation = new ExpertEducation();
-                    $experteducation->user_id = Auth::user()->id;
+                    $experteducation->user_id = $auth->id;
                     $experteducation->education_level_id = $request->educationlevel[$key];
                     $experteducation->education_branch_id = $request->educationbranch[$key];
                     $experteducation->institute = $request->institute[$key];
@@ -171,6 +172,38 @@ class SettingProfileController extends Controller
                 'facebook' => $request->facebook,
             ]);
             return redirect()->back()->withSuccess('แก้ไขข้อมูลหน่วยงานสำเร็จ');
+        }else if($request->action == 'message'){
+            if(!Empty($request->friends) && !Empty($request->messagetosend)){
+                foreach($request->friends as $friend){
+                    $messagebox = new MessageBox();
+                    $messagebox->title = 'ข้อความจาก ' . $auth->name . '  ' . $auth->lastname;
+                    $messagebox->message_priority_id = $request->messagepriority;
+                    $messagebox->body = $request->messagetosend;
+                    $messagebox->sender_id = $auth->id;
+                    $messagebox->save();
+
+                    $messagereceive = new MessageReceive();
+                    $messagereceive->message_box_id = $messagebox->id;
+                    $messagereceive->receiver_id = $friend;
+                    $messagereceive->message_read_status_id = 1;
+                    $messagereceive->save();
+                }
+
+                if(!Empty($request->input_attachment)){
+                    foreach ($request->input_attachment as $attachment) {
+                        MessageBoxAttachment::find($attachment)->update([
+                            'message_box_id' => $messagebox->id
+                        ]);
+                    }
+                }
+                
+                
+
+                return redirect()->back()->withSuccess('ส่งข้อความสำเร็จ');
+            }else{
+                return redirect()->back()->withError('ไม่สามารถส่งข้อความได้');
+            }
+            
         }
     }
     public function crop($isvertical,$path,$fname,$img,$width,$height,$offset){
