@@ -78,7 +78,10 @@ Route::group(['middleware' => 'auth'], function(){
             });
         });
         Route::group(['prefix' => 'friend'], function(){
-            Route::post('friendrequest','Api\FriendController@FriendRequest')->name('api.friend.friendrequest');            
+            Route::post('addrequest','Api\FriendController@AddRequest')->name('api.friend.addrequest');   
+            Route::post('deleterequest','Api\FriendController@DeleteRequest')->name('api.friend.deleterequest');        
+            Route::post('acceptrequest','Api\FriendController@AcceptRequest')->name('api.friend.acceptrequest'); 
+            Route::post('rejectrequest','Api\FriendController@RejectRequest')->name('api.friend.rejectrequest'); 
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

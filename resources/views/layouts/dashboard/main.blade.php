@@ -108,7 +108,7 @@
 							<i class="icon-bubbles4"></i>
 							<span class="d-md-none ml-2">Messages</span>
 							@if ($shareunreadmessages->count() > 0)
-								<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0">{{$shareunreadmessages->count()}}</span>
+								<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" id="_newmessagecount">{{$shareunreadmessages->count()}}</span>
 							@endif
 							
 						</a>

@@ -20,6 +20,9 @@ class FriendStatusesTableSeeder extends Seeder
             ],
             [
                 'name' => 'เพื่อน'
+            ],
+            [
+                'name' => 'คำขอถูกปฎิเสธ'
             ]
         ]);
     }

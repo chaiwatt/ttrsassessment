@@ -233,3 +233,104 @@ $(document).on("click","#btn_modal_user",function(e){
     return ;
 });
                              
+$(document).on("click","#deleterequestfriendclass_editview",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Friend.deleteRequest($(this).data('id')).then(data => {
+                var html='';
+                data.forEach(function (friendrequest,index) {
+                    html += `<tr>
+                                <td>${index+1}</td>
+                                <td>${friendrequest.request['name']}  ${(friendrequest.request['lastname'] == null) ? "" : friendrequest.request['lastname']}</td>
+                                <td>${friendrequest.request.usertype['name']}</td>   
+                                <td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td>                 
+                                <td>                                                                                                      
+                                <a type="button" data-id="${friendrequest['id']}"  class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview" ><i class="icon-trash danger"></i></a>
+                                </td>
+                            <tr>`
+                    });
+                 $("#requestfriend_wrapper_tr").html(html);
+           })
+           .catch(error => {
+               // console.log(error)
+           })
+        }
+    });
+});
+
+$(document).on("click","#acceptfriendclass_editview",function(e){
+    Friend.acceptRequest($(this).data('id')).then(data => {
+        var html='';
+        data.comming.forEach(function (friendrequest,index) {
+            html += `<tr>
+                        <td>${index+1}</td>
+                        <td>${friendrequest.requestcoming['name']}  ${(friendrequest.requestcoming['lastname'] == null) ? "" : friendrequest.requestcoming['lastname']}</td>
+                        <td>${friendrequest.requestcoming.usertype['name']}</td>   
+                        <td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td>                 
+                        <td>                                                                                                      
+                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                                                        
+                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a> 
+                        </td>
+                    <tr>`
+            });
+            $("#comingrequestfriend_wrapper_tr").html(html);
+            html='';
+            data.friends.forEach(function (friend,index) {
+                html += `<tr>
+                            <td>${index+1}</td>
+                            <td>${friend.user['name']}  ${(friend.user['lastname'] == null) ? "" : friend.user['lastname']}</td>
+                            <td>${friend.user.usertype['name']}</td>                 
+                            <td>                                                                                                      
+                                <a href="${route.url}/setting/admin/user/delete/${friend.id}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                            
+                            </td>
+                        <tr>`
+                });
+                if(data.comming.length >= 0){
+                    $("#friendrequestcomingcount").html(data.comming.length);
+                    $("#_friendrequestcomingcount").html(data.comming.length);
+                    $("#_newmessagecount").html(10);
+                }
+                $("#friend_wrapper_tr").html(html);
+    })
+    .catch(error => {
+        // console.log(error)
+    })
+});
+
+$(document).on("click","#rejectfriendclass_editview",function(e){
+    Friend.rejectRequest($(this).data('id')).then(data => {
+        var html='';
+        data.forEach(function (friendrequest,index) {
+            html += `<tr>
+                        <td>${index+1}</td>
+                        <td>${friendrequest.requestcoming['name']}  ${(friendrequest.requestcoming['lastname'] == null) ? "" : friendrequest.requestcoming['lastname']}</td>
+                        <td>${friendrequest.requestcoming.usertype['name']}</td>   
+                        <td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td>                 
+                        <td>                                                                                                      
+                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                                                        
+                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a> 
+                        </td>
+                    <tr>`
+            });
+            if(data.length >= 0){
+                $("#friendrequestcomingcount").html(data.length);
+                $("#_friendrequestcomingcount").html(data.length);
+                $("#_newmessagecount").html(10);
+            }
+            $("#comingrequestfriend_wrapper_tr").html(html);
+    })
+    .catch(error => {
+        // console.log(error)
+    })
+});
+

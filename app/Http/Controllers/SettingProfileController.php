@@ -49,9 +49,10 @@ class SettingProfileController extends Controller
         $verifystatuses = VerifyStatus::get();
         $messagepriorities = MessagePriority::get();
         $users = User::get();
+        // $friends = FriendRequest::where('from_id',$auth->id)->orWhere('to_id',$auth->id)->where('friend_status_id',1)->get();
         $friends = Friend::where('user_id',$auth->id)->get();
-        $friendrequests = FriendRequest::where('from_id',$auth->id)->get();
-        $friendrequestcomings = FriendRequest::where('to_id',$auth->id)->get();
+        $friendrequests = FriendRequest::where('from_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
+        $friendrequestcomings = FriendRequest::where('to_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
         $messagereceives = MessageReceive::where('receiver_id',$auth->id)->paginate(10);
         $unreadmessages = MessageReceive::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::first();

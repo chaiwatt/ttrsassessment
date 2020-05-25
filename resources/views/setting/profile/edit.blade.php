@@ -334,7 +334,7 @@
 				</li>
 				<li class="nav-item">
 					<a href="#friends" class="navbar-nav-link" data-toggle="tab">
-						<i class="icon-users mr-2"></i>เพื่อน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2">{{$friendrequestcomings->count()}}</span> @endif
+						<i class="icon-users mr-2"></i>เพื่อน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2" id="_friendrequestcomingcount">{{$friendrequestcomings->count()}}</span> @endif
 					</a>
 				</li>
 			</ul>
@@ -887,7 +887,7 @@
 								<ul class="nav nav-tabs nav-tabs-highlight">
 									<li class="nav-item"><a href="#left-icon-friend" class="nav-link active" data-toggle="tab"><i class="icon-user-check mr-2"></i> เพื่อนของฉัน</a></li>
 									<li class="nav-item"><a href="#left-icon-friendrequest" class="nav-link" data-toggle="tab"><i class="icon-paperplane mr-2"></i> คำขอของฉัน</a></li>
-									<li class="nav-item"><a href="#left-icon-friendrequestcomming" class="nav-link" data-toggle="tab"><i class="icon-new mr-2"></i> ขอเป็นเพื่อนฉัน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2">{{$friendrequestcomings->count()}}</span> @endif </a></li>
+									<li class="nav-item"><a href="#left-icon-friendrequestcomming" class="nav-link" data-toggle="tab"><i class="icon-new mr-2"></i> ขอเป็นเพื่อนฉัน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2" id="friendrequestcomingcount">{{$friendrequestcomings->count()}}</span> @endif </a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane fade show active" id="left-icon-friend">
@@ -901,16 +901,16 @@
 														<th style="width:150px">เพิ่มเติม</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody id="friend_wrapper_tr"> 
 													@foreach ($friends as $key => $friend)
-													<tr>    
-														<td> {{$key+1}} </td>
-														<td> {{$friend->user->name}}   {{$friend->user->lastname}} </td>    
-														<td> {{$friend->user->usertype->name}} </td> 
-														<td> 
-															<a href="{{route('setting.admin.user.delete',['id' => $friend->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
-														</td>
-													</tr>
+														<tr>    
+															<td> {{$key+1}} </td>
+															<td> {{$friend->user->name}}  {{$friend->user->lastname}} </td>    
+															<td> {{$friend->user->usertype->name}} </td> 
+															<td> 
+																<a href="{{route('setting.admin.user.delete',['id' => $friend->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+															</td>
+														</tr>
 													@endforeach
 												</tbody>
 											</table>      
@@ -966,16 +966,16 @@
 																<th style="width:180px">เพิ่มเติม</th>
 															</tr>
 														</thead>
-														<tbody>
+														<tbody id="comingrequestfriend_wrapper_tr"> 
 															@foreach ($friendrequestcomings as $key => $friendrequestcoming)
 																<tr>    
 																	<td> {{$key+1}} </td>
-																	<td> {{$friendrequestcoming->Requestcoming->name}}   {{$friendrequest->requestcoming->lastname}} </td>    
+																	<td> {{$friendrequestcoming->requestcoming->name}}   {{$friendrequestcoming->requestcoming->lastname}} </td>    
 																	<td> {{$friendrequestcoming->requestcoming->usertype->name}} </td> 
 																	<td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td> 
 																	<td> 
-																		<a href="{{route('setting.admin.user.delete',['id' => $friendrequestcoming->id])}}" class=" badge bg-teal">ยืนยันตอบรับ</a>                                       
-																		<a href="{{route('setting.admin.user.delete',['id' => $friendrequestcoming->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ไม่รับ</a>                                       
+																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                       
+																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a>                                       
 																	</td>
 																</tr>
 															@endforeach
