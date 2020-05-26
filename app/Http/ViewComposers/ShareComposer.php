@@ -23,7 +23,7 @@ class ShareComposer
         $slides = Slide::where('slide_status_id', 1)->get();
         $tags = Tag::get();
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
-        $shareunreadmessages = MessageReceive::where('receiver_id',$auth->id)->where('message_read_status_id',1)->take(5)->get();
+        $shareunreadmessages = MessageReceive::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
         $sharepages = Page::paginate(6);
         $view->withGeneralinfo($generalinfo)
             ->withMenus($menus)
