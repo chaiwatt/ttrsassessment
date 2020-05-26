@@ -99,9 +99,9 @@ $(document).on("click",".deleteexperteducationclass",function(e){
     $("."+$(this).data('id')).remove();
 }); 
 
-$(document).on("click","#maillink",function(e){
+$(document).on("click",".messagelink",function(e){
+    $(this).removeClass("unread")
     Message.getMessage($(this).data('id')).then(data => {
-        console.log(data.attachment);
         let html= '';
         if(data.attachment.length > 0){
             html=`<hr><div class="table-responsive">
@@ -116,13 +116,16 @@ $(document).on("click","#maillink",function(e){
                 data.attachment.forEach((item,index) => 
                         html += `<tr><td>${item.name}</td><td><a href="${route.url}/${item.attachment}" class="btn btn-info btn-icon rounded-round"><i class="icon-download4"></i></a></td></tr>`
                     )
-                    html +=`</tbody>
-                            </table>
-                            </div>`
-                
+                    html +=`</tbody></table></div>`
         }
+
+        if(data.unreadmessages.length >= 0){
+            $("#_newmessagecount").html(data.unreadmessages.length);
+            $("#newmessagecount1").html(data.unreadmessages.length);
+            $("#newmessagecount2").html(data.unreadmessages.length + ' ข้อความใหม่');
+        }
+
         $("#tablemessage").html(html);
-        
         $("#messagetitle").html(data.message.messagebox.title);
         $("#messagebody").html(data.message.messagebox.body);
         $('#modal_message').modal('show');
@@ -298,7 +301,6 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
                 if(data.comming.length >= 0){
                     $("#friendrequestcomingcount").html(data.comming.length);
                     $("#_friendrequestcomingcount").html(data.comming.length);
-                    $("#_newmessagecount").html(10);
                 }
                 $("#friend_wrapper_tr").html(html);
     })

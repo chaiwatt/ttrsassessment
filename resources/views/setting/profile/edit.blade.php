@@ -312,7 +312,7 @@
 			<ul class="nav navbar-nav">
 				<li class="nav-item">
 					<a href="#messagebox" class="navbar-nav-link active" data-toggle="tab">
-						<i class="icon-mail5 mr-2"></i>กล่องข้อความ @if ($unreadmessages->count()>0) <span class="badge badge-pill bg-success-400 ">{{$unreadmessages->count()}}</span>@endif
+						<i class="icon-mail5 mr-2"></i>กล่องข้อความ @if ($unreadmessages->count()>0) <span class="badge badge-pill bg-success-400" id="newmessagecount1" >{{$unreadmessages->count()}}</span>@endif
 					</a>
 				</li>
 				<li class="nav-item">
@@ -376,54 +376,44 @@
 								<h6 class="card-title">กล่องข้อความ</h6>
 								<div class="header-elements">
 									@if ($messagereceives->count()>0)
-									<span class="badge bg-teal">{{$unreadmessages->count()}} ข้อความใหม่</span>
+									<span class="badge bg-teal" id="newmessagecount2">{{$unreadmessages->count()}} ข้อความใหม่</span>
 									@endif
 								</div>
 							</div>
 
 							<!-- Action toolbar -->
 							<div class="bg-light">
-								<div class="navbar navbar-light bg-light navbar-expand-lg py-lg-2">
+								<div class="navbar navbar-light bg-light navbar-expand-lg ">
 									<div class="text-center d-lg-none w-100">
 										<button type="button" class="navbar-toggler w-100" data-toggle="collapse" data-target="#inbox-toolbar-toggle-single">
 											<i class="icon-circle-down2"></i>
 										</button>
 									</div>
 									<div class="navbar-collapse text-center text-lg-left flex-wrap collapse" id="inbox-toolbar-toggle-single">
-										<div class="mt-3 mt-lg-0">
-											<div class="btn-group">
-												<button type="button" class="btn btn-light btn-icon btn-checkbox-all">
-													<input type="checkbox" class="form-input-styled" data-fouc>
-												</button>
-
-												<button type="button" class="btn btn-light btn-icon dropdown-toggle" data-toggle="dropdown"></button>
-												<div class="dropdown-menu">
-													<a href="#" class="dropdown-item">เลือกทั้งหมด</a>
-													<a href="#" class="dropdown-item">อ่านอ่านแล้ว</a>
-													<a href="#" class="dropdown-item">เลือกไม่ได้อ่าน</a>
-													<div class="dropdown-divider"></div>
-													<a href="#" class="dropdown-item">เคลียร์</a>
-												</div>
-											</div>
-
+										{{-- <div class="mt-3 mt-lg-0">
 											<div class="btn-group ml-3 mr-lg-3">
 												<button type="button" class="btn btn-light"><i class="icon-pencil7"></i> <span class="d-none d-lg-inline-block ml-2">ทำเครื่องหมายอ่านแล้ว</span></button>
 												<button type="button" class="btn btn-light"><i class="icon-bin"></i> <span class="d-none d-lg-inline-block ml-2">ลบที่เลือก</span></button>
+												
 											</div>
-										</div>
-										<div class="navbar-text ml-lg-auto"><span class="font-weight-semibold">{{ $messagereceives->links() }}</span>   </div>
+										</div> --}}
+										
 									</div>
 								</div>
 							</div>
 							<div class="table-responsive">
 								<table class="table table-inbox">
-									<tbody >
+									<tbody >										
 										@foreach ($messagereceives as $messagereceive)
-											<tr @if ($messagereceive->message_read_status_id==1) class="unread" @endif >
+										@php
+											$status = "";
+											if($messagereceive->message_read_status_id==1){
+												$status = "unread";
+											}
+										@endphp
+											<tr class="{{$status}} messagelink" data-id="{{$messagereceive->id}}">
 												<td class="table-inbox-checkbox ">
-													<input type="checkbox" class="form-input-styled" data-fouc>
-												</td>
-												<td class="table-inbox-star">
+													{{-- <input type="checkbox" class="form-input-styled" data-fouc> --}}
 													<a href="#">
 														@if ($messagereceive->messagebox->message_priority_id == 2 )
 																<i class="icon-star-full2 text-warning-300"></i>
@@ -432,14 +422,22 @@
 														@endif
 													</a>
 												</td>
+												{{-- <td class="table-inbox-star">
+													<a href="#">
+														@if ($messagereceive->messagebox->message_priority_id == 2 )
+																<i class="icon-star-full2 text-warning-300"></i>
+															@else
+																<i class="icon-star-empty3 text-muted"></i>
+														@endif
+													</a>
+												</td> --}}
 												<td class="table-inbox-image">
-													{{-- <img src="{{asset('assets/dashboard/images/user.jpg')}}" class="rounded-circle" width="32" height="32" alt=""> --}}
 													<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
 														<span class="letter-icon">J</span>
 													</span>
 												</td>
 												<td class="table-inbox-name">
-													<a href="#" id="maillink" data-id="{{$messagereceive->id}} ">
+													<a href="#" data-id="{{$messagereceive->id}} ">
 														<div class="letter-icon-title text-default">{{$messagereceive->messagebox->sender->name}} {{$messagereceive->messagebox->sender->lastname}}</div>
 													</a>
 												</td>
@@ -452,14 +450,13 @@
 														<i class="icon-attachment text-muted"></i>
 													@endif
 												</td>
-												<td class="table-inbox-time">
-													{{$messagereceive->timeago}}
-												</td>
+												
 											</tr>
 										@endforeach
 									</tbody>
 								</table>
 							</div>
+							<div class="navbar-text ml-lg-auto" style="margin-right:10px"><span class="font-weight-semibold">{{$messagereceives->links()}}</span></div>
 						</div>
 					</div>
 

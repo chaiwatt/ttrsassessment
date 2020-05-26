@@ -12,9 +12,14 @@ class MessageController extends Controller
 {
     public function GetMessage(Request $request){
         $auth = Auth::user();
+        MessageReceive::find($request->messageid)->update([
+            'message_read_status_id' => 2
+        ]);
+        
         $messagereceive = MessageReceive::find($request->messageid);
+        $unreadmessages = MessageReceive::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
         $attachment = MessageBoxAttachment::where('message_box_id',$messagereceive->message_box_id)->get();
-        return response()->json(array("message" => $messagereceive,"attachment" => $attachment));  
+        return response()->json(array("message" => $messagereceive,"attachment" => $attachment,"unreadmessages" => $unreadmessages));  
     }
 
     public function UploadAttachment(Request $request){

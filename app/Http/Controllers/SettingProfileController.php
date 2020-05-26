@@ -60,6 +60,7 @@ class SettingProfileController extends Controller
         $experteducations = ExpertEducation::where('user_id',$auth->id)->get();
         $expertexperiences = ExpertExperience::where('user_id',$auth->id)->get();
         $activitylogs = Activity::causedBy($auth)->get();
+        
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
