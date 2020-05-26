@@ -57,7 +57,7 @@
 
 			<ul class="navbar-nav ml-auto">
 
-					<li class="nav-item dropdown">
+						{{-- <li class="nav-item dropdown">
 							<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 								<i class="icon-people"></i>
 								<span class="d-md-none ml-2">Users</span>
@@ -100,7 +100,7 @@
 									<a href="#" class="text-grey"><i class="icon-gear"></i></a>
 								</div>
 							</div>
-						</li>
+						</li> --}}
 
 						
 				<li class="nav-item dropdown">
@@ -115,99 +115,36 @@
 						
 						<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
 							<div class="dropdown-content-header">
-								<span class="font-weight-semibold">Messages</span>
-								<a href="#" class="text-default"><i class="icon-compose"></i></a>
+								<span class="font-weight-semibold">ข้อความใหม่</span>
+								{{-- <a href="#" class="text-default"><i class="icon-compose"></i></a> --}}
 							</div>
 	
 							<div class="dropdown-content-body dropdown-scrollable">
-								<ul class="media-list">
-									<li class="media">
-										<div class="mr-3 position-relative">
-											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-										</div>
-	
-										<div class="media-body">
-											<div class="media-title">
-												<a href="#">
-													<span class="font-weight-semibold">James Alexander</span>
-													<span class="text-muted float-right font-size-sm">04:58</span>
-												</a>
+								<ul class="media-list" id="unreadmessages">
+									@foreach ($shareunreadmessages as $unreadmessage)
+										<li class="media">
+											<div class="mr-3 position-relative">
+												<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
+													<span class="letter-icon">J</span>
+												</span>
 											</div>
-	
-											<span class="text-muted">who knows, maybe that would be the best thing for me...</span>
-										</div>
-									</li>
-	
-									<li class="media">
-										<div class="mr-3 position-relative">
-											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-										</div>
-	
-										<div class="media-body">
-											<div class="media-title">
-												<a href="#">
-													<span class="font-weight-semibold">Margo Baker</span>
-													<span class="text-muted float-right font-size-sm">12:16</span>
-												</a>
+											<div class="media-body">
+												<div class="media-title">
+													{{-- <a href="#"> --}}
+														<span class="font-weight-semibold">{{$unreadmessage->messagebox->sender->name}} {{$unreadmessage->messagebox->sender->lastname}}</span>
+														<span class="text-muted float-right font-size-sm">{{$unreadmessage->timeago}}</span>
+													{{-- </a> --}}
+												</div>
+		
+												<span class="text-muted">{{substr($unreadmessage->messagebox->title,0,50)}}...</span>
 											</div>
-	
-											<span class="text-muted">That was something he was unable to do because...</span>
-										</div>
-									</li>
-	
-									<li class="media">
-										<div class="mr-3">
-											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-										</div>
-										<div class="media-body">
-											<div class="media-title">
-												<a href="#">
-													<span class="font-weight-semibold">Jeremy Victorino</span>
-													<span class="text-muted float-right font-size-sm">22:48</span>
-												</a>
-											</div>
-	
-											<span class="text-muted">But that would be extremely strained and suspicious...</span>
-										</div>
-									</li>
-	
-									<li class="media">
-										<div class="mr-3">
-											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-										</div>
-										<div class="media-body">
-											<div class="media-title">
-												<a href="#">
-													<span class="font-weight-semibold">Beatrix Diaz</span>
-													<span class="text-muted float-right font-size-sm">Tue</span>
-												</a>
-											</div>
-	
-											<span class="text-muted">What a strenuous career it is that I've chosen...</span>
-										</div>
-									</li>
-	
-									<li class="media">
-										<div class="mr-3">
-											<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-										</div>
-										<div class="media-body">
-											<div class="media-title">
-												<a href="#">
-													<span class="font-weight-semibold">Richard Vango</span>
-													<span class="text-muted float-right font-size-sm">Mon</span>
-												</a>
-											</div>
-											
-											<span class="text-muted">Other travelling salesmen live a life of luxury...</span>
-										</div>
-									</li>
+										</li>
+									@endforeach
 								</ul>
 							</div>
-	
-							<div class="dropdown-content-footer justify-content-center p-0">
+							{{-- <div class="dropdown-content-footer justify-content-center p-0">
 								<a href="#" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="Load more"><i class="icon-menu7 d-block top-0"></i></a>
-							</div>
+							</div> --}}
 						</div>
 					</li>
 
@@ -221,7 +158,7 @@
 							<div class="dropdown-menu dropdown-menu-right">
 								<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
 								{{-- <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a> --}}
-								<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ @if ($shareunreadmessages->count() > 0) <span class="badge badge-pill bg-blue ml-auto">{{$shareunreadmessages->count()}}</span> @endif
+								<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ @if ($shareunreadmessages->count() > 0) <span class="badge badge-pill bg-blue ml-auto">{{$shareunreadmessages->count()}}</span> @endif
 								</a>
 								<div class="dropdown-divider"></div>
 								{{-- <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a> --}}

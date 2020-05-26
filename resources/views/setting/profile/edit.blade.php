@@ -450,7 +450,9 @@
 														<i class="icon-attachment text-muted"></i>
 													@endif
 												</td>
-												
+												<td class="table-inbox-time">
+													{{$messagereceive->timeago}}
+												</td>
 											</tr>
 										@endforeach
 									</tbody>

@@ -11,7 +11,7 @@ class MessageReceive extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected $appends = ['messagebox'];
+    protected $appends = ['messagebox','timeago'];
     //message_box
     public function getMessageBoxAttribute()
     {

@@ -11,7 +11,7 @@ class MessageBox extends Model
     //
     protected $fillable = [];
     protected $guarded = [];
-
+    protected $appends = ['sender'];
     public function getSenderAttribute()
     {
         return User::find($this->sender_id);

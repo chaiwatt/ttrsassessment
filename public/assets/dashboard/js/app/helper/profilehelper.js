@@ -103,6 +103,7 @@ $(document).on("click",".messagelink",function(e){
     $(this).removeClass("unread")
     Message.getMessage($(this).data('id')).then(data => {
         let html= '';
+        let html2= '';
         if(data.attachment.length > 0){
             html=`<hr><div class="table-responsive">
             <table class="table table-striped">
@@ -125,7 +126,28 @@ $(document).on("click",".messagelink",function(e){
             $("#newmessagecount2").html(data.unreadmessages.length + ' ข้อความใหม่');
         }
 
+        data.unreadmessages.forEach((unreadmsg,index) => 
+        html2 += `<li class="media">
+                    <div class="mr-3 position-relative">
+                        <span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
+                            <span class="letter-icon">J</span>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <div class="media-title">
+                            <span class="font-weight-semibold">${unreadmsg.messagebox.sender['name']}  ${(unreadmsg.messagebox.sender['lastname'] == null) ? "" : unreadmsg.messagebox.sender['lastname']} </span>
+                            <span class="text-muted float-right font-size-sm">${unreadmsg.timeago}</span>
+                        </div>
+
+                        <span class="text-muted">${unreadmsg.messagebox['title']}</span>
+                    </div>
+                </li>`
+            )
+
+        console.log(data.unreadmessages);
+        
         $("#tablemessage").html(html);
+        $("#unreadmessages").html(html2);
         $("#messagetitle").html(data.message.messagebox.title);
         $("#messagebody").html(data.message.messagebox.body);
         $('#modal_message').modal('show');
