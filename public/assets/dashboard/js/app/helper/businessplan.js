@@ -22,4 +22,23 @@ function addPerformance(id,performanceyear,performanceincome,performancenetprofi
       })
 }
 
-export {addPerformance}
+function deletePerformance(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/businessplan/performance/delete`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+            id : id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {addPerformance,deletePerformance}

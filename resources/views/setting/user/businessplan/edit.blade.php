@@ -103,9 +103,9 @@
 									<li class="nav-item"><a href="#left-icon-history" class="nav-link active" data-toggle="tab"><i class="icon-home2 mr-2"></i> ประวัติกิจการ</a></li>
                                     <li class="nav-item"><a href="#left-icon-market" class="nav-link" data-toggle="tab"><i class="icon-magic-wand mr-2"></i> การตลาด</a></li>
                                     <li class="nav-item"><a href="#left-icon-marketopponent" class="nav-link" data-toggle="tab"><i class="icon-meter-fast mr-2"></i> คู่แข่งในธุรกิจ</a></li>
-                                    <li class="nav-item"><a href="#left-icon-performance" class="nav-link" data-toggle="tab"><i class="icon-meter-fast mr-2"></i> ทรัพย์สิน</a></li>
-                                    <li class="nav-item"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab"><i class="icon-meter-fast mr-2"></i> ไฟล์เอกสาร</a></li>
-                                    <li class="nav-item"><a href="#left-icon-gallery" class="nav-link" data-toggle="tab"><i class="icon-meter-fast mr-2"></i> ไฟล์รูป</a></li>
+                                    <li class="nav-item"><a href="#left-icon-performance" class="nav-link" data-toggle="tab"><i class="icon-cash3 mr-2"></i> ทรัพย์สิน</a></li>
+                                    <li class="nav-item"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab"><i class="icon-attachment mr-2"></i> ไฟล์เอกสาร</a></li>
+                                    <li class="nav-item"><a href="#left-icon-gallery" class="nav-link" data-toggle="tab"><i class="icon-images2 mr-2"></i> ไฟล์รูป</a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane fade show active" id="left-icon-history">
@@ -237,7 +237,7 @@
 																	<td>{{$businessplanperformance->netprofit}}</td>
                                                                     <td>{{$businessplanperformance->totalasset}}</td>
                                                                     <td>{{$businessplanperformance->totalliability}}</td>
-																	<td><a type="button" data-id="{{$businessplanperformance->id}}" class="btn btn-danger-400 btn-sm deleteexpertexpienceclass" id="deleteexpertexpienceclass_editview"><i class="icon-trash danger"></i></a></td>
+																	<td><a type="button" data-id="{{$businessplanperformance->id}}" class="btn btn-danger-400 btn-sm" id="deleteperformance"><i class="icon-trash danger"></i></a></td>
 																</tr>
                                                             @endforeach                         
 														</tbody>

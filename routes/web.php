@@ -77,6 +77,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'businessplan'], function(){
             Route::group(['prefix' => 'performance'], function(){
                 Route::post('add','Api\BusinessplanPerformanceController@Add')->name('api.businessplan.performance.add');             
+                Route::post('delete','Api\BusinessplanPerformanceController@Delete')->name('api.businessplan.performance.delete');             
             });
         });
         Route::group(['prefix' => 'friend'], function(){

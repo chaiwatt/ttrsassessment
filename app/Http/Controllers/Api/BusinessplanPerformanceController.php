@@ -18,8 +18,15 @@ class BusinessplanPerformanceController extends Controller
         $businessplanperformance->totalasset = $request->performancetotalasset;
         $businessplanperformance->totalliability = $request->performancetotalliability;
         $businessplanperformance->save();
-
         $businessplanperformances = BusinessPlanPerformance::where('business_plan_id',$request->id)->get();
+        return response()->json($businessplanperformances);  
+    }
+
+    public function Delete(Request $request){
+        $businessplanperformance = BusinessPlanPerformance::find($request->id);
+        $businessplanid = $businessplanperformance->business_plan_id;
+        $businessplanperformance->delete();
+        $businessplanperformances = BusinessPlanPerformance::where('business_plan_id',$businessplanid)->get();
         return response()->json($businessplanperformances);  
     }
 }
