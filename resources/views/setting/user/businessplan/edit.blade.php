@@ -245,13 +245,51 @@
 												</div>
 											</div>      
 										</div>
+                                    </div>
+                                    <div class="tab-pane fade" id="left-icon-attachment">
+										<div class="row">
+											<div class="col-md-12">	
+                                                <a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></a>
+                                                <input type="file" style="display:none;" id="attachment" name="attachment"/>
+											</div>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="attachment_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>#</th>
+																<th>ชื่อไฟล์</th>
+                                                                <th>เพิ่มเติม</th> 
+															</tr>
+														</thead>
+														<tbody id="attachment_wrapper_tr">      
+															{{-- @foreach ($businessplanperformances as $businessplanperformance)
+																<tr>
+																	<td>{{$businessplanperformance->year}}</td>
+																	<td>{{$businessplanperformance->income}}</td>		
+																	<td>{{$businessplanperformance->netprofit}}</td>
+                                                                    <td>{{$businessplanperformance->totalasset}}</td>
+                                                                    <td>{{$businessplanperformance->totalliability}}</td>
+																	<td><a type="button" data-id="{{$businessplanperformance->id}}" class="btn btn-danger-400 btn-sm" id="deleteperformance"><i class="icon-trash danger"></i></a></td>
+																</tr>
+                                                            @endforeach                          --}}
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
+                                    </div>
+                                    <div class="tab-pane fade" id="left-icon-gallery">
+										test
 									</div>
 								</div>
-							</div>
-
-
-
-                          
+							</div> 
                             <div class="text-right">
                                 <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                             </div>
