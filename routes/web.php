@@ -80,6 +80,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('delete','Api\BusinessplanPerformanceController@Delete')->name('api.businessplan.performance.delete');             
             });
         });
+        Route::group(['prefix' => 'coverimage'], function(){
+            Route::post('add','Api\CoverImageController@Add')->name('api.coverimage.add');          
+        });
         Route::group(['prefix' => 'friend'], function(){
             Route::post('addrequest','Api\FriendController@AddRequest')->name('api.friend.addrequest');   
             Route::post('deleterequest','Api\FriendController@DeleteRequest')->name('api.friend.deleterequest');        

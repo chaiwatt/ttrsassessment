@@ -273,7 +273,13 @@
 <!-- /modal with subtitle -->
 	<!-- Cover area -->
 	<div class="profile-cover">
-		<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
+		<div id="bgcover">
+			@if (!Empty($user->cover))
+				<div class="profile-cover-img" style="background-image: url({{asset($user->cover)}})"></div>
+			@else
+				<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
+			@endif
+		</div>
 		<div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
 			<div class="mr-md-3 mb-2 mb-md-0">
 				<a href="#" class="profile-thumb">
@@ -290,8 +296,14 @@
 			</div>
 			<div class="ml-md-3 mt-2 mt-md-0">
 				<ul class="list-inline list-inline-condensed mb-0">
-					<li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</a></li>
+					{{-- <li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</a></li> --}}
 					{{-- <li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-stats mr-2"></i> Statistics</a></li> --}}
+					<div class="form-group">
+						<div class="input-group">													
+							<button id="btnuploadcoverimg" class="btn btn-light border-transparent" type="button" onclick="document.getElementById('coverimg').click();"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</button>													
+						</div>
+						<input type="file" style="display:none;" id="coverimg" name="coverimg"/>
+					</div>
 				</ul>
 			</div>
 		</div>
