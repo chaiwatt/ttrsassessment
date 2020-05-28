@@ -34,6 +34,9 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('amphur','Api\LocationController@Amphur')->name('api.location.amphur'); 
         Route::post('tambol','Api\LocationController@Tambol')->name('api.location.tambol'); 
     });  
+    Route::group(['prefix' => 'tinpin'], function(){
+        Route::get('companyinfo/{pin}','Api\TinPinController@CompanyInfo')->name('api.tinpin.companyinfo');           
+    });  
 }); 
 
 Route::group(['middleware' => 'auth'], function(){

@@ -459,11 +459,6 @@ $("#coverimg").on('change', function() {
         alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;
     }
-    // return ;
-    // var inpattachments = $('.input_attachment').map(function() {
-    //     return $(this).val();
-    // }).toArray();
-
     var formData = new FormData();
     formData.append('file',file);
 
@@ -475,7 +470,6 @@ $("#coverimg").on('change', function() {
         contentType: false,
         processData: false,
         success: function(data){
-            // console.log(data)
             var html = `<div class="profile-cover-img" style="background-image: url(${route.url}/${data.cover})"></div>`;
             $("#bgcover").html(html);
     }
