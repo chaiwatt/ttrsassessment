@@ -28,10 +28,10 @@ class TinPinController extends Controller
            
             $data = $result['ServiceResult'];
             if(Empty($data['vmsgerr'])){
-                $titlename = $data['vtitleName']['anyType'];
                 $vatid = $data['vNID']['anyType'];
                 $registerdate = $data['vBusinessFirstDate']['anyType'];
-                $companyname = $data['vName']['anyType'];
+                $titlename = $data['vtitleName']['anyType'];
+                $name = $data['vName']['anyType'];
                 $housenumber = $data['vHouseNumber']['anyType'];
                 $moo = $data['vMooNumber']['anyType'];
                 $soi = $data['vSoiName']['anyType'];
@@ -45,7 +45,7 @@ class TinPinController extends Controller
                     $vat =false;
                 }
                 
-                $_companyinfo[] = array('titlename' => $titlename, 'vatid' => $vatid, 'registerdate' => $registerdate,'companyname' => $companyname,'housenumber' => $housenumber
+                $_companyinfo[] = array('titlename' => $titlename, 'vatid' => $vatid, 'registerdate' => $registerdate,'name' => $name,'housenumber' => $housenumber
                 ,'moo' => $moo,'soi' => $soi,'street' => $street,'tambolname' => $tambolname,'amphurname' => $amphurname
                 ,'provincename' => $provincename,'postalcode' => $postalcode,'vat' => $vat);
                 $companyinfo = collect($_companyinfo);
