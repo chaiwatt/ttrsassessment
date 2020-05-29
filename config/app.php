@@ -166,6 +166,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
         Jenssegers\Agent\AgentServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        
         /*
          * Package Service Providers...
          */
@@ -178,6 +180,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
 
     ],
 
@@ -234,6 +237,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => 'Intervention\Image\Facades\Image',
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
     ],
 
 ];

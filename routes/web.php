@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
-// Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('generate','PDFController@Generate')->name('generate');
 
 Route::get('', 'HomeController@Index')->name('landing.index');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
