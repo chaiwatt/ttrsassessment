@@ -8,7 +8,7 @@ return [
 	'keywords'              => '',
 	'creator'               => 'Laravel Pdf',
 	'display_mode'          => 'fullpage',
-	'tempDir'               => base_path('public/temp'),
+	'tempDir'               => base_path('public/storage'),
 	'font_path' => base_path('public/assets/dashboard/fonts/'),
 	'font_data' => [
 		'thsarabunnew' => [
