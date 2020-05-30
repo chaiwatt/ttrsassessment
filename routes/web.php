@@ -35,7 +35,7 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('tambol','Api\LocationController@Tambol')->name('api.location.tambol'); 
     });  
     Route::group(['prefix' => 'tinpin'], function(){
-        Route::get('companyinfo/{pin}','Api\TinPinController@CompanyInfo')->name('api.tinpin.companyinfo');           
+        Route::post('companyinfo','Api\TinPinController@CompanyInfo')->name('api.tinpin.companyinfo');           
     });  
 }); 
 

@@ -33,10 +33,12 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('amphur_id')->default(67);   //คลองหลวง
             $table->unsignedBigInteger('tambol_id')->default(367);  //คลองหนึ่ง
             $table->unsignedBigInteger('verify_type')->default(1);
+            $table->unsignedBigInteger('allow_assessment')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

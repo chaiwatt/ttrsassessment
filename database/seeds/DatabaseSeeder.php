@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SlideStatusesTableSeeder::class);
         $this->call(LayoutstylesTableSeeder::class);
         $this->call(UserPositionsTableSeeder::class);
+        $this->call(UserGroupsTableSeeder::class);
         $this->call(MessagePrioritiesTableSeeder::class);
+        $this->call(AllowAssessmentsTableSeeder::class);
         $this->call(MessageReadStatusesTableSeeder::class);
         $this->call(FriendStatusesTableSeeder::class);
         $this->call(CriteriasTableSeeder::class);

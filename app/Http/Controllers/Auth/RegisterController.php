@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Model\Company;
+use App\Model\UserGroup;
 use App\Model\GeneralInfo;
 use App\Model\BusinessPlan;
 use App\Helper\CreateCompany;
@@ -60,5 +61,11 @@ class RegisterController extends Controller
         ]);
         CreateCompany::createCompany($user,$data['name']);
         return $user ; 
+    }
+
+    public function showRegistrationForm()
+    {
+        $usergroups = UserGroup::get();
+        return view('auth.register')->withUsergroups($usergroups);
     }
 }

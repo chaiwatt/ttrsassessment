@@ -16,12 +16,24 @@
                     {{-- <h5 class="mb-0">เข้าสู่ระบบ</h5> --}}
                 </div>
 
+                <div class="form-group form-group-feedback form-group-feedback-left">                    
+                    <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-select2">
+                        @foreach ($usergroups as $usergroup)
+                            <option value="{{$usergroup->id}}" >{{$usergroup->name}}</option> 
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group" id="vatwrapper" hidden>
+                    <input id="vatno" type="number" max ="13" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" required placeholder="เลขประจำตัวผู้เสียภาษีนิติบุคคล" autofocus>
+                    <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
+                </div>
                 <div class="form-group form-group-feedback form-group-feedback-left">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="ชื่อ" autofocus>
                     <div class="form-control-feedback">
                         <i class="icon-user text-muted"></i>
                     </div>
-                </div>
+                </div>             
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="อีเมล์">
@@ -66,6 +78,16 @@
             </form>
         </div>
     </div>
+    @section('pageScript')
+    <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
+        <script>
+                var route = {
+                url: "{{ url('/') }}",
+                token: $('meta[name="csrf-token"]').attr('content'),
+            };
+        </script>	
+    @stop
+
 @endsection
 
 

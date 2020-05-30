@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class TinPinController extends Controller
 {
-    public function CompanyInfo($pin){
+    public function CompanyInfo(Request $request){
         $companyinfo = collect();
         $wsdl = 'https://rdws.rd.go.th/serviceRD3/vatserviceRD3.asmx?wsdl';
         $soapclient = new \nusoap_client($wsdl, true);
@@ -20,7 +20,7 @@ class TinPinController extends Controller
         $var_name = array(
                 'username' => 'anonymous',
                 'password' => 'anonymous',
-                'TIN'   => $pin,
+                'TIN'   => $request->vatid,
                 'skip'   => 0
         );
         $result = $soapclient->call('Service', $var_name);

@@ -13,13 +13,44 @@ class UseTypesTableSeeder extends Seeder
     {
         DB::table('user_types')->insert([
             [
-                'name' => 'ผู้ใช้งาน'
+                'name' => 'ผู้ใช้งานทั่วไป',
+                'group' => 'A'
             ],
             [
-                'name' => 'ผู้เชี่ยวชาญ'
+                'name' => 'ผู้ใช้งานนิติบุคคล',
+                'group' => 'A'
             ],
             [
-                'name' => 'admin'
+                'name' => 'เจ้าหน้าที่ TTRS',
+                'group' => 'B'
+            ],
+            [
+                'name' => 'ผู้เชี่ยวชาญ',
+                'group' => 'B'
+            ],
+            [
+                'name' => 'admin1',
+                'group' => 'B'
+            ],
+            [
+                'name' => 'admin2',
+                'group' => 'B'
+            ],
+            [
+                'name' => 'admin3',
+                'group' => 'B'
+            ],
+            [
+                'name' => 'admin4',
+                'group' => 'B'
+            ],
+            [
+                'name' => 'master',
+                'group' => 'C'
+            ],
+            [
+                'name' => 'director',
+                'group' => 'C'
             ]
         ]);
     }
