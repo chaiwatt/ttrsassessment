@@ -13,8 +13,9 @@ $("#usergroup").on('change', function() {
 
 $("#vatno").change(function(){
     var vatid = $(this).val();
-    $("#vatnomessage").addClass("validation-invalid-label")
     if(vatid.length != 13){     
+        $("#vatnomessage").removeClass("validation-valid-label")
+        $("#vatnomessage").addClass("validation-invalid-label")
         $('#msg').html("หมายเลขผู้เสียภาษีไม่ถูกต้อง")
         $("#vatnomessage").attr("hidden",false);
         return ;
