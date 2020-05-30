@@ -26,7 +26,7 @@
 
                 <div class="form-group" id="vatwrapper" hidden>
                     <input id="vatno" type="number" max ="13" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" required placeholder="เลขประจำตัวผู้เสียภาษีนิติบุคคล" autofocus>
-                    <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg">message</small></label>
+                    <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
                 </div>
                 <div class="form-group form-group-feedback form-group-feedback-left">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="ชื่อ" autofocus>
