@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Model\Company;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TinPinController extends Controller
 {
@@ -44,10 +45,16 @@ class TinPinController extends Controller
                 if(Empty($data['vName']['anyType'])){
                     $vat =false;
                 }
+
+                $company = Company::where('vatno',$request->vatid)->first();
+                $exist = 'n';
+                if(!Empty($company)){
+                    $exist ='y';
+                }
                 
                 $_companyinfo[] = array('vatid' => $vatid, 'registerdate' => $registerdate,'title' => $title,'name' => $name,'housenumber' => $housenumber
                 ,'moo' => $moo,'soi' => $soi,'street' => $street,'tambolname' => $tambolname,'amphurname' => $amphurname
-                ,'provincename' => $provincename,'postalcode' => $postalcode,'vat' => $vat);
+                ,'provincename' => $provincename,'postalcode' => $postalcode,'vat' => $vat,'exist' => $exist);
                 $companyinfo = collect($_companyinfo);
                 return response()->json($companyinfo);
             }else{

@@ -502,6 +502,24 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
+												<label>ประเภท<span class="text-danger">*</span></label>
+												<select name="usergroup" id= "usergroup" data-placeholder="ประเภท" class="form-control form-control-select2">
+													@foreach ($usergroups as $usergroup)
+														<option value="{{$usergroup->id}}" @if($user->user_group_id == $usergroup->id) selected @endif >{{$usergroup->name}}</option> 
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<label>หมายเลขผู้เสียภาษีนิติบุคคล</label> <span id="msg" class="text-success"></span>
+											<input type="number" name="vatno" id="vatno" value="{{$user->companyvatid}}" data-placeholder="หมายเลขผู้เสียภาษีนิติบุคคล" class="form-control" @if ($user->user_group_id == 1) readonly @endif>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
 												<label>ตำแหน่ง<span class="text-danger">*</span></label>
 												<select name="userposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
 													@foreach ($userpositions as $userposition)

@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('tambol_id')->default(367);  //คลองหนึ่ง
             $table->unsignedBigInteger('verify_type')->default(1);
             $table->unsignedBigInteger('allow_assessment')->default(1);
+            $table->unsignedBigInteger('user_group_id')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -9,13 +9,16 @@ use App\Model\Friend;
 use App\Model\Prefix;
 use App\Model\Tambol;
 use App\UserPosition;
+use App\Model\Company;
 use App\Model\Country;
 use App\Model\Province;
+use App\Model\UserGroup;
 use App\Model\MessageBox;
 use App\Model\GeneralInfo;
 use App\Model\VerifyStatus;
 use App\Model\FriendRequest;
 use Illuminate\Http\Request;
+use App\Helper\CreateCompany;
 use App\Model\EducationLevel;
 use App\Model\MessageReceive;
 use App\Model\EducationBranch;
@@ -60,7 +63,7 @@ class SettingProfileController extends Controller
         $experteducations = ExpertEducation::where('user_id',$auth->id)->get();
         $expertexperiences = ExpertExperience::where('user_id',$auth->id)->get();
         $activitylogs = Activity::causedBy($auth)->get();
-        
+        $usergroups = UserGroup::get();
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -81,7 +84,8 @@ class SettingProfileController extends Controller
                                         ->withGeneralinfo($generalinfo)
                                         ->withExperteducations($experteducations)
                                         ->withExpertexperiences($expertexperiences)
-                                        ->withActivitylogs($activitylogs);
+                                        ->withActivitylogs($activitylogs)
+                                        ->withUsergroups($usergroups);
     }
     public function EditSave(EditProfileRequest $request, $userid){
         $auth = Auth::user();
@@ -111,6 +115,18 @@ class SettingProfileController extends Controller
                 $filelocation = "storage/uploads/profile/".$fname;
                 Crop::crop(true,public_path("storage/uploads/profile/"),$fname,Image::make($file),500,500,1);
             }
+            $usergroup = 1;
+            if($request->usergroup == 2 && $request->vatno != ''){
+                $usergroup = 2;
+                $company = Company::where('vatno',$request->vatno)->first();
+                if(Empty($check)){
+                    CreateCompany::createCompany($auth,$auth->name,$request->vatno);
+                }else{
+                    $company->update([
+                        'vatno' => $request->vatno
+                    ]);
+                }
+            }
             $user->update([
                 'prefix_id' => $request->prefix,
                 'name' => $request->name,
@@ -119,6 +135,7 @@ class SettingProfileController extends Controller
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'picture' => $filelocation,
+                'user_group_id' => $usergroup,
             ]);
             return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
         }else if($request->action == 'expert'){

@@ -45,21 +45,30 @@ class RegisterController extends Controller
             'phone' => 'required|numeric|digits_between:10,13',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'usergroup' => 'required',
+            'vatno' => 'required_if:usergroup,==,2',
         ]);
     }
 
     protected function create(array $data)
     {
+        $group = 1;
+       if(!Empty($data['vatno'])){
+            $group =2;
+       }
         $user = User::create([
             'prefix_id' => 1,
             'user_type_id' => 3,
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'user_group_id' => $group,
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
-        CreateCompany::createCompany($user,$data['name']);
+        if($group == 2){
+            CreateCompany::createCompany($user,$data['companyname'],$data['vatno']);
+        }
         return $user ; 
     }
 

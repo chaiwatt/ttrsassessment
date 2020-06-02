@@ -17,6 +17,9 @@ class CreateBusinessPlansTable extends Migration
             $table->id();
             $table->unsignedBigInteger('company_id')->comment('ID บริษัทที่ยื่นแผนธุรกิจ');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('business_plan_status_id')->default(1);
+            $table->unsignedBigInteger('business_plan_active_status_id')->default(1);
+            $table->char('progress',5)->default('0');
             $table->timestamps();
         });
     }

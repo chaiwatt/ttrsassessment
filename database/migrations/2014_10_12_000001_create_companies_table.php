@@ -16,7 +16,7 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->char('vatno',5)->index()->nullable();
+            $table->char('vatno',13)->unique()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('registered_capital_type_id')->nullable();
             $table->unsignedBigInteger('industry_group_id')->nullable();   

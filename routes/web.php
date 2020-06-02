@@ -95,16 +95,30 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('rejectrequest','Api\FriendController@RejectRequest')->name('api.friend.rejectrequest'); 
             Route::post('deletefriend','Api\FriendController@DeleteFriend')->name('api.friend.deletefriend'); 
         });
+        Route::group(['prefix' => 'assessment'], function(){
+            Route::post('add','Api\AssessmentController@Add')->name('api.assessment.add');          
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
-            Route::get('','DashboardAdminController@Index')->name('dashboard.admin');           
+            Route::get('','DashboardAdminController@Index')->name('dashboard.admin');  
+            Route::group(['prefix' => 'fee'], function(){
+                Route::get('','DashboardAdminFeeController@Index')->name('dashboard.admin.fee');           
+            });          
         }); 
         Route::group(['prefix' => 'expert'], function(){
             Route::get('','DashboardExpertController@Index')->name('dashboard.expert');           
         }); 
         Route::group(['prefix' => 'company'], function(){
             Route::get('','DashboardCompanyController@Index')->name('dashboard.company');           
+            Route::group(['prefix' => 'assessment'], function(){
+                Route::get('','DashboardCompanyAssessmentController@Index')->name('dashboard.company.assessment');           
+            }); 
+            Route::group(['prefix' => 'fee'], function(){
+                Route::get('','DashboardCompanyFeeController@Index')->name('dashboard.company.fee');           
+                Route::get('invoice/{id}','DashboardCompanyFeeController@Invoice')->name('dashboard.company.fee.invoice');  
+                Route::get('payment/{id}','DashboardCompanyFeeController@Payment')->name('dashboard.company.fee.payment'); 
+            });  
         }); 
     });   
     Route::group(['prefix' => 'sms'], function(){

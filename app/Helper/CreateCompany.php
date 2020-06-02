@@ -7,17 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class CreateCompany
 {
-    public static function createCompany($user,$companyname){
+    public static function createCompany($user,$companyname,$vatno){
         Company::create([
-            'name' => 'บริษัท'.$companyname,
+            'name' => $companyname,
             'user_id' => $user->id,
+            'vatno' => $vatno,
             'province_id' => 4,
             'amphur_id' => 67,
             'tambol_id' => 367,
-        ]);
-
-        BusinessPlan::create([
-            'company_id' => Company::latest()->first()->id
         ]);
         return ;
     } 

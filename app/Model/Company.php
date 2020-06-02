@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\User;
 use App\Helper\LogAction;
+use App\Model\BusinessPlan;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -26,5 +27,10 @@ class Company extends Model
     public function getUserAttribute()
     {
         return User::find($this->user_id);
+    }
+
+    public function getBusinessPlanAttribute()
+    {
+        return BusinessPlan::where('company_id',$this->id)->where('business_plan_active_status_id',1)->first();
     }
 }

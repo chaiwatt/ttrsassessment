@@ -476,3 +476,62 @@ $("#coverimg").on('change', function() {
 });
 
 });
+
+$("#usergroup").on('change', function() {
+    if($(this).val() == 1) {
+        $('#vatno').attr('readonly', true);
+        $('#vatno').val('');
+    } else { 
+        $('#vatno').attr('readonly', false);
+    }
+});
+
+
+$("#vatno").change(function(){
+    $('#msg').removeClass();
+    var vatid = $(this).val();
+    if(vatid.length != 13){ 
+        $('#msg').addClass('text-danger');    
+        $('#msg').html(" หมายเลขผู้เสียภาษีไม่ถูกต้อง")
+        $('#vatno').val('');
+        return ;
+    }
+    checkTinPin($(this).val()).then(data => {
+        $('#msg').removeClass();
+        if(data.length != 0 ){ 
+            if(data[0].exist == 'n'){
+                $('#msg').addClass('text-success'); 
+                $('#msg').html( data[0].title + data[0].name)
+            }else if(data[0].exist == 'y') {
+                $('#msg').addClass('text-danger');   
+                $('#msg').html(" นิติบุคคลนี้ลงทะเบียนแล้ว");
+            }
+        }else{
+            $('#msg').addClass('text-danger');   
+            $('#msg').html(" ไม่พบนิติบุคคล");
+            $('#vatno').val('');
+        }
+    })
+    .catch(error => {
+        console.log(error)
+    })
+});
+
+function checkTinPin(vatid){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/tinpin/companyinfo`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            vatid : vatid
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+}

@@ -25,18 +25,19 @@
                 </div>
 
                 <div class="form-group" id="vatwrapper" hidden>
-                    <input id="vatno" type="number" max ="13" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" required placeholder="เลขประจำตัวผู้เสียภาษีนิติบุคคล" autofocus>
+                    <input id="vatno" type="number" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีนิติบุคคล" >
                     <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
+                    <input type="text" name="companyname" id="companyname" hidden>
                 </div>
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="ชื่อ" autofocus>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
                     <div class="form-control-feedback">
                         <i class="icon-user text-muted"></i>
                     </div>
                 </div>             
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="อีเมล์">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล์">
                     <div class="form-control-feedback">
                         <i class="icon-mention text-muted"></i>
                     </div>
@@ -46,7 +47,7 @@
                 </div>
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required placeholder="เบอร์มือถือ">
+                    <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์มือถือ">
                     <div class="form-control-feedback">
                         <i class="icon-phone2 text-muted"></i>
                     </div>
@@ -56,7 +57,7 @@
                 </div>
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="รหัสผ่าน">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="รหัสผ่าน">
                     <div class="form-control-feedback">
                         <i class="icon-lock2 text-muted"></i>
                     </div>
@@ -66,7 +67,7 @@
                 </div>
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="ยืนยันรหัสผ่าน">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="ยืนยันรหัสผ่าน">
                     <div class="form-control-feedback">
                         <i class="icon-lock2 text-muted"></i>
                     </div>

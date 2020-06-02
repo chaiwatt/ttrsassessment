@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model\Prefix;
+use App\Model\Company;
 use App\Model\UserType;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
@@ -64,4 +65,14 @@ class User extends Authenticatable
     {
         return Cache::has('user-is-online-' . $this->id);
     }
+    public function getCompanyVatidAttribute()
+    {
+        $vatid = '';
+        $company = Company::where('user_id',$this->id)->first();
+        if(!Empty($company)){
+            $vatid = $company->vatno;
+        }
+        return $vatid;
+    }
+    
 }

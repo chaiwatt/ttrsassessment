@@ -61,6 +61,7 @@ var InputsCheckboxesRadios = function () {
         $('.form-check-input-styled-custom').uniform({
             wrapperClass: 'border-indigo-400 text-indigo-400'
         });
+        
     };
 
     // Switchery
@@ -101,7 +102,6 @@ var InputsCheckboxesRadios = function () {
         $('.form-check-input-switch').bootstrapSwitch();
     };
 
-
     //
     // Return objects assigned to module
     //
@@ -113,6 +113,7 @@ var InputsCheckboxesRadios = function () {
             _componentBootstrapSwitch();
         }
     }
+    
 }();
 
 
@@ -122,3 +123,5 @@ var InputsCheckboxesRadios = function () {
 document.addEventListener('DOMContentLoaded', function() {
     InputsCheckboxesRadios.initComponents();
 });
+
+

@@ -13,6 +13,9 @@ class BusinessPlanStatusSeeder extends Seeder
     {
         DB::table('business_plan_statuses')->insert([
             [
+                'name' => 'รอการชำระเงินค่าธรรมเนียม'
+            ],
+            [
                 'name' => 'รอการยืนยันการรับการประเมิน'
             ],
             [

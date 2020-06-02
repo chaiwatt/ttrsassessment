@@ -18,29 +18,33 @@ $("#vatno").change(function(){
         $("#vatnomessage").addClass("validation-invalid-label")
         $('#msg').html("หมายเลขผู้เสียภาษีไม่ถูกต้อง")
         $("#vatnomessage").attr("hidden",false);
+        $('#vatno').val('');
         return ;
     }else{
         $("#vatnomessage").attr("hidden",true);
     }
     checkTinPin($(this).val()).then(data => {
-        let  html = "";
-        console.log(data[0]);
         if(data.length != 0 ){
-            $("#vatnomessage").removeClass("validation-invalid-label")
-            $("#vatnomessage").addClass("validation-valid-label")
-            $('#msg').html(data[0].title + data[0].name)
-            $("#vatnomessage").attr("hidden",false); 
+            if(data[0].exist == 'n'){
+                $("#vatnomessage").removeClass("validation-invalid-label")
+                $("#vatnomessage").addClass("validation-valid-label")
+                $('#msg').html(data[0].title + data[0].name)
+                $('#companyname').val(data[0].title + data[0].name);
+                $("#vatnomessage").attr("hidden",false); 
+            }else if(data[0].exist == 'y') {
+                $("#vatnomessage").removeClass("validation-valid-label")
+                $("#vatnomessage").addClass("validation-invalid-label")
+                $('#msg').html("นิติบุคคลนี้ลงทะเบียนแล้ว");
+                $('#vatno').val('');
+                $("#vatnomessage").attr("hidden",false); 
+            }
         }else{
             $("#vatnomessage").removeClass("validation-valid-label")
             $("#vatnomessage").addClass("validation-invalid-label")
             $('#msg').html("ไม่พบนิติบุคคล");
+            $('#vatno').val('');
             $("#vatnomessage").attr("hidden",false); 
         }
-        // data.forEach((tambol,index) => 
-        //     html += `<option value='${tambol.id}'>${tambol.name}</option>`
-        // )
-        // $("#tambol").html(html);
-
     })
     .catch(error => {
         console.log(error)

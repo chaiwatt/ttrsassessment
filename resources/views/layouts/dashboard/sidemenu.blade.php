@@ -4,13 +4,23 @@
         <li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
     </ul>
 </li>
+@if (Auth::user()->user_type_id == 1)
 <li class="nav-item nav-item-submenu">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
-        <li class="nav-item"><a href="" class="nav-link">รายการรอประเมิน</a></li>	
-        <li class="nav-item"><a href="" class="nav-link">รายการผ่านประเมิน</a></li>										
+        <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link">ค่าธรรมเนียม</a></li>	
     </ul>
 </li>
+@endif
+@if (Auth::user()->user_type_id == 3)
+<li class="nav-item nav-item-submenu">
+    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
+    <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
+        <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link">รายการประเมิน</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้</a></li>      
+    </ul>
+</li>
+@endif
 @if (Auth::user()->user_type_id == 1)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.') ? 'nav-item-expanded nav-item-open' : '' }}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
@@ -62,7 +72,7 @@
 </li>
 @endif
 
-@if (Auth::user()->user_type_id == 3)
+@if (Auth::user()->user_type_id == 3 && Auth::user()->user_group_id == 2)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.') ? 'nav-item-expanded nav-item-open' : '' }}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">
@@ -72,12 +82,14 @@
                 <li class="nav-item"><a href="{{route('setting.user.company.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.user.company.edit') ? 'active' : '' }}">ข้อมูลบริษัท</a></li>		             
             </ul>
         </li>
-        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.user.businessplan') ? 'nav-item-expanded' : '' }}">
-            <a href="#" class="nav-link"><span>แผนธุรกิจ</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
-                <li class="nav-item"><a href="{{route('setting.user.businessplan.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.user.businessplan.edit') ? 'active' : '' }}">แผนธุรกิจ</a></li>		             
-            </ul>
-        </li>
+        @if (Auth::user()->allow_assessment == 2)
+            <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.user.businessplan') ? 'nav-item-expanded' : '' }}">
+                <a href="#" class="nav-link"><span>แผนธุรกิจ</span></a>
+                <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
+                    <li class="nav-item"><a href="{{route('setting.user.businessplan.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.user.businessplan.edit') ? 'active' : '' }}">แผนธุรกิจ</a></li>		             
+                </ul>
+            </li>
+        @endif
     </ul>	
 </li>
 @endif

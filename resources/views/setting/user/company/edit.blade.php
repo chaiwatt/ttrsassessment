@@ -1,14 +1,21 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+
 @stop
 @section('content')
     <!-- Page header -->
     <div class="page-header page-header-light">
-        
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ข้อมูลบริษัท</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+            <div class="header-elements d-none">
+                <div class="d-flex justify-content-center">
+                    <div class="form-check ">
+                        <input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ประเมิน" data-off-text="ไม่ประเมิน" class="form-check-input-switch" @if (!Empty($company->businessplan)) checked @endif >
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -55,6 +62,10 @@
                                         <div class="form-group">
                                             <label>บริษัท</label>
                                             <input type="text"  name="company" value="{{$company->name}}"  placeholder="บริษัท" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>หมายเลขประจำตัวผู้เสียภาษี</label>
+                                            <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="หมายเลขผู้เสียภาษี" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>ประเภทธุรกิจ<span class="text-danger">*</span></label>
@@ -145,7 +156,10 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/companyhelper.js')}}"></script>
     <script>
     		var route = {
 			url: "{{ url('/') }}",
