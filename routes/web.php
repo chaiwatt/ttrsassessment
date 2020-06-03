@@ -221,6 +221,22 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'pageimage'], function(){
                     Route::get('delete/{id}','SettingAdminDashboardPageImageController@Delete')->name('setting.admin.dashboard.pageimage.delete');           
                 });
+                Route::group(['prefix' => 'banktype'], function(){
+                    Route::get('','SettingAdminDashboardBankTypeController@Index')->name('setting.admin.dashboard.banktype');           
+                    Route::get('create','SettingAdminDashboardBankTypeController@Create')->name('setting.admin.dashboard.banktype.create'); 
+                    Route::post('createsave','SettingAdminDashboardBankTypeController@CreateSave')->name('setting.admin.dashboard.banktype.createsave'); 
+                    Route::get('edit/{id}','SettingAdminDashboardBankTypeController@Edit')->name('setting.admin.dashboard.banktype.edit'); 
+                    Route::post('editsave/{id}','SettingAdminDashboardBankTypeController@EditSave')->name('setting.admin.dashboard.banktype.editsave'); 
+                    Route::get('delete/{id}','SettingAdminDashboardBankTypeController@Delete')->name('setting.admin.dashboard.banktype.delete'); 
+                });
+                Route::group(['prefix' => 'bankaccount'], function(){
+                    Route::get('','SettingAdminDashboardBankAccountController@Index')->name('setting.admin.dashboard.bankaccount');           
+                    Route::get('create','SettingAdminDashboardBankAccountController@Create')->name('setting.admin.dashboard.bankaccount.create'); 
+                    Route::post('createsave','SettingAdminDashboardBankAccountController@CreateSave')->name('setting.admin.dashboard.bankaccount.createsave'); 
+                    Route::get('edit/{id}','SettingAdminDashboardBankAccountController@Edit')->name('setting.admin.dashboard.bankaccount.edit'); 
+                    Route::post('editsave/{id}','SettingAdminDashboardBankAccountController@EditSave')->name('setting.admin.dashboard.bankaccount.editsave'); 
+                    Route::get('delete/{id}','SettingAdminDashboardBankAccountController@Delete')->name('setting.admin.dashboard.bankaccount.delete'); 
+                });
             }); 
             Route::group(['prefix' => 'website'], function(){
                 Route::group(['prefix' => 'pagestatus'], function(){

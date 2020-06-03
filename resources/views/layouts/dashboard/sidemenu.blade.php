@@ -39,6 +39,8 @@
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.businessplanstatus') ? 'active' : '' }}">สถานะการวางแผนธุรกิจ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.userposition')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.userposition') ? 'active' : '' }}">ตำแหน่งผู้ใช้งาน</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.expertposition')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.expertposition') ? 'active' : '' }}">ตำแหน่ง Expert</a></li>
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.banktype')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.banktype') ? 'active' : '' }}">ประเภทบัญชีเงินฝาก</a></li>
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.bankaccount')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.dashboard.bankaccount') ? 'active' : '' }}">บัญชีเงินฝาก</a></li>
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.admin.website') ? 'nav-item-expanded' : '' }}">
