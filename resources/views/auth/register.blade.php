@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer pt-3">
                     <button type="button" class="btn btn-link" data-dismiss="modal">ปิด</button>
-                    <button type="button" class="btn bg-primary" data-dismiss="modal">ยินยอม</button>
+                    <button type="button" class="btn bg-primary" data-dismiss="modal">ยอมรับ</button>
                 </div>
             </div>
         </div>
