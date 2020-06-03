@@ -55,6 +55,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.page') ? 'active' : '' }}">หน้าเพจ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.menu.create') ? 'active' : '' }}">เมนู</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.layout') ? 'active' : '' }}">เลย์เอาท์</a></li>	
+                <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'setting.admin.website.frontpage') ? 'active' : '' }}">ฟร้อนท์เพจ</a></li>	
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.admin.user') ? 'nav-item-expanded' : '' }}">

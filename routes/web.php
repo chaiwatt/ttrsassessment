@@ -251,12 +251,6 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'pagecategory'], function(){
                     Route::get('create','SettingAdminWebsitePageCategoryController@Create')->name('setting.admin.website.pagecategory.create'); 
                     Route::post('crud','SettingAdminWebsitePageCategoryController@Crud')->name('setting.admin.website.pagecategory.crud');
-                    // Route::get('','SettingAdminWebsitePageCategoryController@Index')->name('setting.admin.website.pagecategory');           
-                    // Route::get('create','SettingAdminWebsitePageCategoryController@Create')->name('setting.admin.website.pagecategory.create'); 
-                    // Route::post('createsave','SettingAdminWebsitePageCategoryController@CreateSave')->name('setting.admin.website.pagecategory.createsave'); 
-                    // Route::get('edit/{id}','SettingAdminWebsitePageCategoryController@Edit')->name('setting.admin.website.pagecategory.edit'); 
-                    // Route::post('editsave/{id}','SettingAdminWebsitePageCategoryController@EditSave')->name('setting.admin.website.pagecategory.editsave'); 
-                    // Route::get('delete/{id}','SettingAdminWebsitePageCategoryController@Delete')->name('setting.admin.website.pagecategory.delete'); 
                 });
                 Route::group(['prefix' => 'faqcategory'], function(){
                     Route::get('','SettingAdminWebsiteFaqCategoryController@Index')->name('setting.admin.website.faqcategory');           
@@ -305,6 +299,10 @@ Route::group(['middleware' => 'auth'], function(){
                 });
                 Route::group(['prefix' => 'layout'], function(){     
                     Route::get('','SettingAdminWebsiteLayoutController@Index')->name('setting.admin.website.layout'); 
+                });
+                Route::group(['prefix' => 'frontpage'], function(){     
+                    Route::get('','SettingAdminWebsiteFrontPageController@Index')->name('setting.admin.website.frontpage'); 
+                    Route::post('save','SettingAdminWebsiteFrontPageController@Save')->name('setting.admin.website.frontpage.save'); 
                 });
             }); 
             Route::group(['prefix' => 'user'], function(){
