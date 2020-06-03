@@ -434,15 +434,6 @@
 														@endif
 													</a>
 												</td>
-												{{-- <td class="table-inbox-star">
-													<a href="#">
-														@if ($messagereceive->messagebox->message_priority_id == 2 )
-																<i class="icon-star-full2 text-warning-300"></i>
-															@else
-																<i class="icon-star-empty3 text-muted"></i>
-														@endif
-													</a>
-												</td> --}}
 												<td class="table-inbox-image">
 													<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
 														<span class="letter-icon">J</span>
@@ -856,6 +847,14 @@
 															<input type="text" name="facebook" value="{{$generalinfo->facebook}}" data-placeholder="Facebook" class="form-control">
 														</div>
 													</div>
+												</div>
+												<div class="form-group">
+													<label>Front page<span class="text-danger">*</span></label>
+													<select name="frontpage" data-placeholder="อำเภอ" class="form-control form-control-select2">
+														@foreach ($frontpagestatuses as $frontpagestatus)                                                                
+															<option value="{{$frontpagestatus->id}}" @if ($generalinfo->front_page_status_id == $frontpagestatus->id) selected @endif> {{$frontpagestatus->name}} </option>
+														@endforeach   
+													</select>
 												</div>
 											</div>      
 										</div>

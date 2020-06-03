@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AllowAssessmentsTableSeeder::class);
         $this->call(MessageReadStatusesTableSeeder::class);
         $this->call(FriendStatusesTableSeeder::class);
+        $this->call(FrontPagStatusesTableSeeder::class);
+        $this->call(FrontPagesTableSeeder::class);
         $this->call(PaymentTypesTableSeeder::class);
         $this->call(CriteriasTableSeeder::class);
         $this->call(ReligionsTableSeeder::class);

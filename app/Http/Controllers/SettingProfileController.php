@@ -12,6 +12,7 @@ use App\UserPosition;
 use App\Model\Company;
 use App\Model\Country;
 use App\Model\Province;
+use App\Model\FrontPage;
 use App\Model\UserGroup;
 use App\Model\MessageBox;
 use App\Model\GeneralInfo;
@@ -23,6 +24,7 @@ use App\Model\EducationLevel;
 use App\Model\MessageReceive;
 use App\Model\EducationBranch;
 use App\Model\ExpertEducation;
+use App\Model\FrontPageStatus;
 use App\Model\MessagePriority;
 use App\Model\ExpertExperience;
 use App\Model\MessageBoxAttachment;
@@ -64,6 +66,7 @@ class SettingProfileController extends Controller
         $expertexperiences = ExpertExperience::where('user_id',$auth->id)->get();
         $activitylogs = Activity::causedBy($auth)->get();
         $usergroups = UserGroup::get();
+        $frontpagestatuses = FrontPageStatus::get();
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -85,7 +88,8 @@ class SettingProfileController extends Controller
                                         ->withExperteducations($experteducations)
                                         ->withExpertexperiences($expertexperiences)
                                         ->withActivitylogs($activitylogs)
-                                        ->withUsergroups($usergroups);
+                                        ->withUsergroups($usergroups)
+                                        ->withFrontpagestatuses($frontpagestatuses);
     }
     public function EditSave(EditProfileRequest $request, $userid){
         $auth = Auth::user();
@@ -188,6 +192,7 @@ class SettingProfileController extends Controller
                 'sundaytime' => $request->sundaytime,
                 'youtube' => $request->youtube,
                 'facebook' => $request->facebook,
+                'front_page_status_id' => $request->frontpage
             ]);
             return redirect()->back()->withSuccess('แก้ไขข้อมูลหน่วยงานสำเร็จ');
         }else if($request->action == 'message'){

@@ -5,6 +5,7 @@ use App\Model\Tag;
 use App\Model\Menu;
 use App\Model\Page;
 use App\Model\Slide;
+use App\Model\FrontPage;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
 use App\Model\PageCategory;
@@ -25,6 +26,7 @@ class ShareComposer
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
         $shareunreadmessages = MessageReceive::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
         $sharepages = Page::paginate(6);
+        $sharefrontpage = FrontPage::first();
         $view->withGeneralinfo($generalinfo)
             ->withMenus($menus)
             ->withShareunreadmessages($shareunreadmessages)
@@ -33,6 +35,7 @@ class ShareComposer
             ->withTags($tags)
             ->withSharepagecategories($sharepagecategories)
             ->withSharepages($sharepages)
-            ->withShareunreadmessages($shareunreadmessages);
+            ->withShareunreadmessages($shareunreadmessages)
+            ->withSharefrontpage($sharefrontpage);
     }
 }

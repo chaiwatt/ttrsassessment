@@ -7,6 +7,7 @@ use App\Model\Page;
 use App\Model\PageTag;
 use App\Model\PageView;
 use App\Model\PageImage;
+use App\Model\GeneralInfo;
 use App\Model\FeatureImage;
 use App\Model\IntroSection;
 use App\Model\PageCategory;
@@ -14,15 +15,22 @@ use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 
 class HomeController extends Controller
 {
     public function Index()
     {
-        $pages = Page::get();
-        $introsections = IntroSection::get();
-        return view('landing.index')->withIntrosections($introsections);
+        $generalinfo = GeneralInfo::first();
+        if(Session::get('front') == 'active'){
+            return $this->Front();
+        }else if($generalinfo->front_page_status_id == 2){
+            Session::put('front', 'active');
+            return view('front');
+        }else{
+            return $this->Front();
+        }
     }
 
     public function Page($slug)
@@ -63,5 +71,10 @@ class HomeController extends Controller
     {
         $pages = Page::where('name','LIKE','%' . $request->search . '%')->paginate(10);
         return view('landing.search')->withPages($pages);
+    }
+    public function Front()
+    {
+        $introsections = IntroSection::get();
+        return view('landing.index')->withIntrosections($introsections);
     }
 }

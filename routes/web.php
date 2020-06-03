@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('generate','PDFController@Generate')->name('generate');
 
 Route::get('', 'HomeController@Index')->name('landing.index');
+Route::get('front', 'HomeController@Front')->name('landing.front');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
 Route::get('tag/{slug}', 'HomeController@Tag')->name('landing.tag');
 Route::get('cate/{slug}', 'HomeController@Category')->name('landing.cate');

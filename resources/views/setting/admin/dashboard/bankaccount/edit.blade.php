@@ -68,12 +68,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ประเภทบัญชีเงินฝาก</label>
-                                                <select name="banktypeid" placeholder="ประเภทบัญชีเงินฝาก" class="form-control form-control-select2">
-                                                    <option value="" >เลือกประเภทบัญชีเงินฝาก</option>
-                                                    @foreach ($banktypes as $banktype)
-                                                        <option value="{{$banktype->id}}" @if ($bankaccount->bank_type_id == $banktype->id) selected @endif>{{$banktype->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <select name="banktypeid" placeholder="ประเภทบัญชีเงินฝาก" class="form-control form-control-select2">
+                                                @foreach ($banktypes as $banktype)
+                                                    <option value="{{$banktype->id}}" @if ($bankaccount->bank_type_id == $banktype->id) selected @endif>{{$banktype->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </fieldset>
                                 </div>
