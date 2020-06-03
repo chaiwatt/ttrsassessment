@@ -20,6 +20,9 @@ class CreateBusinessPlanFeeTransactionsTable extends Migration
             $table->char('invoiceno',20);
             $table->unsignedBigInteger('fee_type_id')->default(1);
             $table->unsignedBigInteger('payment_status_id')->default(1);
+            $table->date('transferdate')->nullable();
+            $table->char('transfertime',20)->nullable();
+            $table->string('note',250)->nullable();
             $table->timestamps();
         });
     }

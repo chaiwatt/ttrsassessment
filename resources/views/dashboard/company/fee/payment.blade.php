@@ -84,16 +84,39 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>วันที่ชำระเงิน<span class="text-danger">*</span></label>
+                                                    <input type="text"  name="name" value=""  placeholder="วันที่ชำระเงิน" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>เวลา<span class="text-danger">*</span></label>
+                                                    <input type="text"  name="name" value=""  placeholder="เวลา" class="form-control" >
+                                                </div>
+                                            </div>
+                                        </div>    
                                         <div class="form-group">
-                                            <label>เอกสารแนบ<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{old('email')}}"  placeholder="อีเมล์" class="form-control">
+                                            <label class="font-weight-semibold">แนบเอกสาร</label>
+                                            <div class="input-group">													
+                                                <button id="btnattach" class="btn btn-info" type="button" onclick="document.getElementById('attachment').click();"> เอกสารแนบ</button>													
+                                            </div>
+                                            <input type="file" style="display:none;" id="attachment" name="attachment"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-semibold">เพิ่มเติม</label>
+                                            <div class="input-group">	
+                                                <textarea name="note" id="" cols="30" rows="5" class="form-control"></textarea>											
+                                            </div>
                                         </div>
                                         
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                <button type="submit" class="btn bg-teal">แจ้งการชำระเงิน <i class="icon-paperplane ml-2"></i></button>
                             </div>
                         </form>
                     </div>
@@ -108,4 +131,10 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
+<script>
+    $("#attachment").on('change', function() {
+        // console.log('sss');
+        $('#btnattach').html('เอกสารแนบ(1)');
+    });
+</script>
 @stop
