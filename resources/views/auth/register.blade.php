@@ -10,7 +10,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header pb-3">
-                    <h5 class="modal-title">ยินยอมข้อตกลง</h5>
+                    <h5 class="modal-title">นโยบายและข้อกำหนด</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body py-0">
@@ -109,9 +109,9 @@
                     <div class="form-check mb-0">
                         <label class="form-check-label">
                             <input type="checkbox" name="term" class="form-input-styled" data-fouc>     
-                            <a data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยินยอมข้อตกลง</u></a>  
+                            <a data-toggle="modal" data-target="#modal_term" class="text-primary"><u>นโยบายและข้อกำหนด</u></a>  
                         </label>
-                        @error('term') <span class="validation-invalid-label">กรุณายินยอมข้อตกลง</span> @enderror
+                        @error('term') <span class="validation-invalid-label">กรุณายอมรับนโยบายและข้อกำหนด</span> @enderror
                     </div>
                 </div>
                 <div class="form-group">
