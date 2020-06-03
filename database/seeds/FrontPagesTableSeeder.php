@@ -13,8 +13,8 @@ class FrontPagesTableSeeder extends Seeder
     {
         DB::table('front_pages')->insert([
             [
-                'file' => '/assets/landing/img/front/front.jpg',
-                'entersitebtn' => '/assets/landing/img/front/button.png',
+                'file' => '/assets/landing/img/front/front.png',
+                'entersitebtn' => '/assets/landing/img/front/btn.png',
                 'bgcolor' => '60276b',
                 'percentimg' => '60'
             ]

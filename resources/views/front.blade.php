@@ -39,9 +39,9 @@
 </head>
 <body >
     
-    <img class="center fit" src="{{asset($sharefrontpage->file)}}" alt="Paris" class="center">
+    <img class="center fit" src="{{asset($sharefrontpage->file)}}" alt="Front Image" class="center">
     <br>
-    <a href="{{ route('landing.front') }}"><img class="center" src="http://www.singburi.go.th/enter_website.png" style="max-width: 15%;max-height: 15%" alt="Paris" class="center"></a>
+    <a href="{{ route('landing.front') }}"><img class="center" src="{{asset($sharefrontpage->entersitebtn)}}" style="max-width: 12%;max-height: 12%" alt="Paris" class="center"></a>
    
 </body>
 </html>
