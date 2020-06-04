@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\MessageBox;
+
 use Illuminate\Http\Request;
-use App\Model\MessageReceive;
 use App\Model\MessageBoxAttachment;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,13 +13,13 @@ class MessageController extends Controller
 {
     public function GetMessage(Request $request){
         $auth = Auth::user();
-        MessageReceive::find($request->messageid)->update([
+        MessageBox::find($request->messageid)->update([
             'message_read_status_id' => 2
         ]);
         
-        $messagereceive = MessageReceive::find($request->messageid);
-        $unreadmessages = MessageReceive::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
-        $attachment = MessageBoxAttachment::where('message_box_id',$messagereceive->message_box_id)->get();
+        $messagereceive = MessageBox::find($request->messageid);
+        $unreadmessages = MessageBox::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
+        $attachment = MessageBoxAttachment::where('message_box_id',$request->messageid)->get();
         return response()->json(array("message" => $messagereceive,"attachment" => $attachment,"unreadmessages" => $unreadmessages));  
     }
 

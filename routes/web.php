@@ -119,6 +119,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('','DashboardCompanyFeeController@Index')->name('dashboard.company.fee');           
                 Route::get('invoice/{id}','DashboardCompanyFeeController@Invoice')->name('dashboard.company.fee.invoice');  
                 Route::get('payment/{id}','DashboardCompanyFeeController@Payment')->name('dashboard.company.fee.payment'); 
+                Route::post('paymentsave/{id}','DashboardCompanyFeeController@PaymentSave')->name('dashboard.company.fee.paymentsave'); 
             });  
         }); 
     });   

@@ -48,25 +48,25 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.user.createsave')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('dashboard.company.fee.paymentsave',['id' => $businessplanfeetransaction->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>หมายเลขแจ้งหนี้<span class="text-danger">*</span></label>
-                                            <input type="text"  name="name" value="{{$businessplanfeetransaction->invoiceno}}"  placeholder="ชื่อ" class="form-control" readonly>
+                                            <input type="text"  name="invoice" value="{{$businessplanfeetransaction->invoiceno}}"  placeholder="ชื่อ" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>จำนวนที่ชำระ<span class="text-danger">*</span></label>
-                                            <input type="text"  name="lastname" value="{{$businessplanfeetransaction->feetype->price}}"  placeholder="นามสกุล" class="form-control" readonly>
+                                            <input type="text"  name="payment" value="{{$businessplanfeetransaction->feetype->price}}"  placeholder="นามสกุล" class="form-control" readonly>
                                         </div>
                                         <label class="d-block font-weight-semibold">เลือกวิธีการชำระเงิน<span class="text-danger">*</span></label>
                                         <div class="form-group mb-3 mb-md-2">     
                                             @foreach ($paymenttypes as $paymenttype)
                                                 <div class="form-check form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="radio" data-id="{{$paymenttype->id}}" class="form-check-input-styled" name="radio-inline-left" data-fouc>
+                                                        <input type="radio" name="paymenttype" value="{{$paymenttype->id}}" data-id="{{$paymenttype->id}}" class="form-check-input-styled" name="radio-inline-left" data-fouc >
                                                         {{$paymenttype->name}}
                                                     </label>
                                                 </div>   
@@ -78,7 +78,7 @@
                                             @foreach ($bankaccounts as $bankaccount)
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="radio" data-id="{{$bankaccount->id}}" class="form-check-input-styled" name="stacked-radio-left" data-fouc>
+                                                        <input type="radio" name="bankaccount" value="{{$bankaccount->id}}" data-id="{{$bankaccount->id}}" class="form-check-input-styled" name="stacked-radio-left" data-fouc >
                                                         {{$bankaccount->bank}} ชื่อบัญชี {{$bankaccount->name}}
                                                     </label>
                                                 </div>
@@ -88,13 +88,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>วันที่ชำระเงิน<span class="text-danger">*</span></label>
-                                                    <input type="text"  name="name" value=""  placeholder="วันที่ชำระเงิน" class="form-control" >
+                                                    <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่ชำระเงิน" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>เวลา<span class="text-danger">*</span></label>
-                                                    <input type="text"  name="name" value=""  placeholder="เวลา" class="form-control" >
+                                                    <input type="text"  name="paymenttime" value=""  placeholder="เวลา" class="form-control" >
                                                 </div>
                                             </div>
                                         </div>    
@@ -111,7 +111,6 @@
                                                 <textarea name="note" id="" cols="30" rows="5" class="form-control"></textarea>											
                                             </div>
                                         </div>
-                                        
                                     </fieldset>
                                 </div>
                             </div>
@@ -133,8 +132,18 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script>
     $("#attachment").on('change', function() {
-        // console.log('sss');
         $('#btnattach').html('เอกสารแนบ(1)');
     });
+    $(function () {
+    $('#paymentdate').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        clearButton: true,
+        weekStart: 1,
+        cancelText: "ยกเลิก",
+        okText: "ตกลง",
+        clearText: "เคลียร์",
+        time: false
+    });
+});
 </script>
 @stop

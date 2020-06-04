@@ -14,9 +14,11 @@
 @endif
 @if (Auth::user()->user_type_id == 3)
 <li class="nav-item nav-item-submenu">
+    {{-- <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span><span class="badge badge-warning badge-pill align-self-center ml-auto">1</span></a> --}}
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
         <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link">รายการประเมิน</a></li>	
+        {{-- <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้<span class="badge badge-warning badge-pill align-self-center ml-auto">1</span></a></li>       --}}
         <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้</a></li>      
     </ul>
 </li>

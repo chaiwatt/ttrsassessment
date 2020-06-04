@@ -16,6 +16,9 @@ class PaymentStatusesSeeder extends Seeder
                 'name' => 'ค้างชำระ',
             ],
             [
+                'name' => 'แจ้งการชำระ',
+            ],
+            [
                 'name' => 'ชำระเงินแล้ว',
             ]
         ]);

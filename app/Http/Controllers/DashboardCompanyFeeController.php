@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\User;
 use App\Model\Company;
+use App\Model\MessageBox;
 use App\Model\BankAccount;
 use App\Model\PaymentType;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use Illuminate\Support\Facades\Auth;
 use App\Model\BusinessPlanFeeTransaction;
+use App\Http\Requests\SaveDashboardCompanyFeeRequest;
 
 class DashboardCompanyFeeController extends Controller
 {
@@ -40,5 +44,35 @@ class DashboardCompanyFeeController extends Controller
         return view('dashboard.company.fee.payment')->withBusinessplanfeetransaction($businessplanfeetransaction)
                                                                                 ->withBankaccounts($bankaccounts)
                                                                                 ->withPaymenttypes($paymenttypes);
+    }
+    public function PaymentSave(SaveDashboardCompanyFeeRequest $request,$id){
+        $filelocation ="";
+        $file = $request->attachment;
+        if(!Empty($file)){
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/fee" , $new_name);
+            $filelocation = "storage/uploads/fee/".$new_name;
+        }
+
+        BusinessPlanFeeTransaction::find($id)->update([
+            'payment_status_id' => 2,
+            'transferdate' => DateConversion::thaiToEngDate($request->paymentdate),
+            'transfertime' => $request->paymenttime,
+            'bank_account_id' => $request->bankaccount,
+            'payment_type_id' => $request->paymenttype,
+            'attachment' => $filelocation,
+            'note' => $request->note
+        ]);
+
+        $messagebox = new MessageBox();
+        $messagebox->title = 'แจ้งการชำระเงินค่าธรรมเนียม';
+        $messagebox->message_priority_id = 1;
+        $messagebox->body = "<h2>โปรดตรวสอบ</h2><a href=''>คลิกเพื่อไปยังลิงค์</a>";
+        $messagebox->sender_id = Auth::user()->id;
+        $messagebox->receiver_id = User::where('user_type_id',1)->first()->id;
+        $messagebox->message_read_status_id = 1;
+        $messagebox->save();
+
+        return redirect()->back()->withSuccess('แจ้งการชำระเงินเรียบร้อยแล้ว');
     }
 }

@@ -104,6 +104,7 @@ $(document).on("click",".messagelink",function(e){
     Message.getMessage($(this).data('id')).then(data => {
         let html= '';
         let html2= '';
+        // console.log(data);
         if(data.attachment.length > 0){
             html=`<hr><div class="table-responsive">
             <table class="table table-striped">
@@ -135,11 +136,11 @@ $(document).on("click",".messagelink",function(e){
                     </div>
                     <div class="media-body">
                         <div class="media-title">
-                            <span class="font-weight-semibold">${unreadmsg.messagebox.sender['name']}  ${(unreadmsg.messagebox.sender['lastname'] == null) ? "" : unreadmsg.messagebox.sender['lastname']} </span>
+                            <span class="font-weight-semibold">${unreadmsg.sender['name']}  ${(unreadmsg.sender['lastname'] == null) ? "" : unreadmsg.sender['lastname']} </span>
                             <span class="text-muted float-right font-size-sm">${unreadmsg.timeago}</span>
                         </div>
 
-                        <span class="text-muted">${unreadmsg.messagebox['title']}</span>
+                        <span class="text-muted">${unreadmsg['title']}</span>
                     </div>
                 </li>`
             )
@@ -148,8 +149,8 @@ $(document).on("click",".messagelink",function(e){
         
         $("#tablemessage").html(html);
         $("#unreadmessages").html(html2);
-        $("#messagetitle").html(data.message.messagebox.title);
-        $("#messagebody").html(data.message.messagebox.body);
+        $("#messagetitle").html(data.message.title);
+        $("#messagebody").html(data.message.body);
         $('#modal_message').modal('show');
     })
     .catch(error => {

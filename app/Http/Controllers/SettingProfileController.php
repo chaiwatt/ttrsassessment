@@ -21,7 +21,7 @@ use App\Model\FriendRequest;
 use Illuminate\Http\Request;
 use App\Helper\CreateCompany;
 use App\Model\EducationLevel;
-use App\Model\MessageReceive;
+
 use App\Model\EducationBranch;
 use App\Model\ExpertEducation;
 use App\Model\FrontPageStatus;
@@ -59,8 +59,8 @@ class SettingProfileController extends Controller
         $friends = Friend::where('user_id',$auth->id)->get();
         $friendrequests = FriendRequest::where('from_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
         $friendrequestcomings = FriendRequest::where('to_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
-        $messagereceives = MessageReceive::where('receiver_id',$auth->id)->paginate(10);
-        $unreadmessages = MessageReceive::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
+        $messagereceives = MessageBox::where('receiver_id',$auth->id)->paginate(10);
+        $unreadmessages = MessageBox::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::first();
         $experteducations = ExpertEducation::where('user_id',$auth->id)->get();
         $expertexperiences = ExpertExperience::where('user_id',$auth->id)->get();
@@ -203,13 +203,15 @@ class SettingProfileController extends Controller
                     $messagebox->message_priority_id = $request->messagepriority;
                     $messagebox->body = $request->messagetosend;
                     $messagebox->sender_id = $auth->id;
+                    $messagebox->receiver_id = $friend;
+                    $messagebox->message_read_status_id = 1;
                     $messagebox->save();
 
-                    $messagereceive = new MessageReceive();
-                    $messagereceive->message_box_id = $messagebox->id;
-                    $messagereceive->receiver_id = $friend;
-                    $messagereceive->message_read_status_id = 1;
-                    $messagereceive->save();
+                    // $messagereceive = new MessageReceive();
+                    // $messagereceive->message_box_id = $messagebox->id;
+                    // $messagereceive->receiver_id = $friend;
+                    // $messagereceive->message_read_status_id = 1;
+                    // $messagereceive->save();
                 }
 
                 if(!Empty($request->input_attachment)){

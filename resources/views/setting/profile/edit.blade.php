@@ -427,7 +427,7 @@
 												<td class="table-inbox-checkbox ">
 													{{-- <input type="checkbox" class="form-input-styled" data-fouc> --}}
 													<a href="#">
-														@if ($messagereceive->messagebox->message_priority_id == 2 )
+														@if ($messagereceive->message_priority_id == 2 )
 																<i class="icon-star-full2 text-warning-300"></i>
 															@else
 																<i class="icon-star-empty3 text-muted"></i>
@@ -441,15 +441,15 @@
 												</td>
 												<td class="table-inbox-name">
 													<a href="#" data-id="{{$messagereceive->id}} ">
-														<div class="letter-icon-title text-default">{{$messagereceive->messagebox->sender->name}} {{$messagereceive->messagebox->sender->lastname}}</div>
+														<div class="letter-icon-title text-default">{{$messagereceive->sender->name}} {{$messagereceive->sender->lastname}}</div>
 													</a>
 												</td>
 												<td class="table-inbox-message">
-													<span class="table-inbox-subject">{{$messagereceive->messagebox->title}} &nbsp;-&nbsp;</span>
-													<span class="text-muted font-weight-normal">{{$messagereceive->messagebox->body}}</span>
+													<span class="table-inbox-subject">{{$messagereceive->title}} &nbsp;-&nbsp;</span>
+													<span class="text-muted font-weight-normal">{{ strip_tags($messagereceive->body)}}</span>
 												</td>
 												<td class="table-inbox-attachment">
-													@if ($messagereceive->messagebox->messageboxattachment->count() > 0)
+													@if ($messagereceive->messageboxattachment->count() > 0)
 														<i class="icon-attachment text-muted"></i>
 													@endif
 												</td>

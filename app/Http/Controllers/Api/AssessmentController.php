@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use Carbon\Carbon;
+use App\Model\MessageBox;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Model\BusinessPlanFeeTransaction;
 
 class AssessmentController extends Controller
@@ -21,6 +24,15 @@ class AssessmentController extends Controller
                 $businessplanfeetransaction->invoiceno = Carbon::now()->timestamp;
                 $businessplanfeetransaction->business_plan_id = $businessplan->id;
                 $businessplanfeetransaction->save();
+
+                $messagebox = new MessageBox();
+                $messagebox->title = 'แจ้งการชำระเงินค่าธรรมเนียม';
+                $messagebox->message_priority_id = 1;
+                $messagebox->body = "<h2>โปรดตรวสอบ</h2><a href=".route('dashboard.company.fee').">คลิกเพื่อไปยังลิงค์</a>";
+                $messagebox->sender_id = User::where('user_type_id',1)->first()->id;
+                $messagebox->receiver_id = Auth::user()->id;
+                $messagebox->message_read_status_id = 1;
+                $messagebox->save();
             }
         }else{
             if($request->status == 1){

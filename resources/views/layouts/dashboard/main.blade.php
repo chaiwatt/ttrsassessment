@@ -131,12 +131,12 @@
 											<div class="media-body">
 												<div class="media-title">
 													{{-- <a href="#"> --}}
-														<span class="font-weight-semibold">{{$unreadmessage->messagebox->sender->name}} {{$unreadmessage->messagebox->sender->lastname}}</span>
+														<span class="font-weight-semibold">{{$unreadmessage->sender->name}} {{$unreadmessage->sender->lastname}} {{$unreadmessage->sender->name}}:  {{$unreadmessage->title}}</span>
 														<span class="text-muted float-right font-size-sm">{{$unreadmessage->timeago}}</span>
 													{{-- </a> --}}
 												</div>
 		
-												<span class="text-muted">{{substr($unreadmessage->messagebox->title,0,50)}}...</span>
+												<span class="text-muted">{{substr($unreadmessage->title,0,50)}}...</span>
 											</div>
 										</li>
 									@endforeach
