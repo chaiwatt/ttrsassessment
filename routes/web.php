@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('generate','PDFController@Generate')->name('generate');
 
@@ -23,13 +23,14 @@ Route::get('cate/{slug}', 'HomeController@Category')->name('landing.cate');
 Route::get('search', 'HomeController@Search')->name('landing.search');
 Route::get('change/{locale}', 'LanguageController@Change')->name('change');
 
-Route::get('sendmail', 'MailController@Send')->name('sendmail');
+Route::group(['prefix' => 'email'], function(){
+    Route::get('send','MailController@Send')->name('mail.send');
+});
 
 Route::group(['prefix' => 'social'], function(){       
     Route::get('/{provider}', 'Auth\LoginController@Redirect')->name('social.login');
     Route::get('callback/{provider}', 'Auth\LoginController@Callback')->name('social.callback');
 });
-
 
 Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => 'location'], function(){

@@ -39,7 +39,6 @@
 								<i class="icon-checkmark3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
 							</div>
 
-
 							@yield('content')
 
 						</div>

@@ -30,7 +30,12 @@
                     </div>
                 </div>
                 <div class="form-group d-flex align-items-center">
-                    <a href="login_password_recover.html" class="ml-auto">{{trans('lang.forgotpassword')}}</a>
+                    {{-- <a href="login_password_recover.html" class="ml-auto">{{trans('lang.forgotpassword')}}</a> --}}
+                    @if (Route::has('password.request'))
+                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                        {{trans('lang.forgotpassword')}}
+                    </a>
+                @endif
                 </div>
 
                 <div class="form-group">

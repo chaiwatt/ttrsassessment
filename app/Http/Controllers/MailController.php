@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EmailSystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
     public function Send(){
-        Mail::send('mail', array('key' => 'value'), function($message){
-            $message->to('joerocknpc@gmail.com','me')->from('noreply@npctestserver.com')->subject('test');
-        });
+        $data = [
+        'sendermail' => 'noreply@npctestserver.com',
+        'sendername' => 'Admin',
+        'title' => 'ทดสอบการส่งเมล์',
+        'message' => 'นี่คือการทดสอบส่งอีเมล์'
+        ];
+        Mail::to('joerocknpc@gmail.com')->send(new EmailSystem($data));
+        // return redirect()->back();
     }
 }
