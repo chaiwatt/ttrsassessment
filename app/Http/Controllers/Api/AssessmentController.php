@@ -22,6 +22,7 @@ class AssessmentController extends Controller
             if($request->status == 1){
                 $businessplan = new BusinessPlan();
                 $businessplan->company_id = $request->companyid;
+                $businessplan->business_plan_status_id = 2;
                 $businessplan->save();
 
                 // $businessplanfeetransaction = new BusinessPlanFeeTransaction();
