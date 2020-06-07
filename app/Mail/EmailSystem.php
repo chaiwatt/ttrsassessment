@@ -32,7 +32,7 @@ class EmailSystem extends Mailable
         // ->replyTo($address, $name)
         ->subject($this->data['title'])
         ->with([
-        'test_message' => $this->data['message']
+        'message' => $this->data['message']
         ]);;
     }
 }

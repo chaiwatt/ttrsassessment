@@ -11,7 +11,7 @@ class MailController extends Controller
     public function Send(){
         $data = [
         'sendermail' => 'noreply@npctestserver.com',
-        'sendername' => 'Admin',
+        'sendername' => 'TTRS',
         'title' => 'ทดสอบการส่งเมล์',
         'message' => 'นี่คือการทดสอบส่งอีเมล์'
         ];

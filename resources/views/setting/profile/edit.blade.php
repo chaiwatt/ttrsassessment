@@ -905,12 +905,16 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label>Front page<span class="text-danger">*</span></label>
-													<select name="frontpage" data-placeholder="อำเภอ" class="form-control form-control-select2">
-														@foreach ($frontpagestatuses as $frontpagestatus)                                                                
-															<option value="{{$frontpagestatus->id}}" @if ($generalinfo->front_page_status_id == $frontpagestatus->id) selected @endif> {{$frontpagestatus->name}} </option>
-														@endforeach   
-													</select>
+													<div class="row">
+														<div class="col-md-6">
+															<label>Front page<span class="text-danger">*</span></label>
+															<select name="frontpage" data-placeholder="อำเภอ" class="form-control form-control-select2">
+																@foreach ($frontpagestatuses as $frontpagestatus)                                                                
+																	<option value="{{$frontpagestatus->id}}" @if ($generalinfo->front_page_status_id == $frontpagestatus->id) selected @endif> {{$frontpagestatus->name}} </option>
+																@endforeach   
+															</select>
+														</div>
+													</div>
 												</div>
 											</div>      
 										</div>
