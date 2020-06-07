@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Image;
 use App\User;
+use App\Helper\SMS;
 use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Friend;
@@ -20,8 +21,8 @@ use App\Model\VerifyStatus;
 use App\Model\FriendRequest;
 use Illuminate\Http\Request;
 use App\Helper\CreateCompany;
-use App\Model\EducationLevel;
 
+use App\Model\EducationLevel;
 use App\Model\EducationBranch;
 use App\Model\ExpertEducation;
 use App\Model\FrontPageStatus;
@@ -70,6 +71,8 @@ class SettingProfileController extends Controller
         $usergroups = UserGroup::get();
         $frontpagestatuses = FrontPageStatus::get();
         $useralertstatuses = UserAlertStatus::get();
+        $smscredit = SMS::credit()[1];
+        // return $smscredit[1];
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -93,7 +96,8 @@ class SettingProfileController extends Controller
                                         ->withActivitylogs($activitylogs)
                                         ->withUsergroups($usergroups)
                                         ->withFrontpagestatuses($frontpagestatuses)
-                                        ->withUseralertstatuses($useralertstatuses);
+                                        ->withUseralertstatuses($useralertstatuses)
+                                        ->withSmscredit($smscredit);
     }
     public function EditSave(EditProfileRequest $request, $userid){
         $auth = Auth::user();

@@ -855,7 +855,7 @@
 												<div class="form-group">
 													<div class="row">
 														<div class="col-md-6">
-															<label>thaisms (sms คงเหลือ xx)</label>
+															<label>thaisms (sms คงเหลือ <span class="text-success">{{$smscredit}}</span> )</label>
 															<input type="text" name="thaisms" value="{{$generalinfo->thsmsuser}}" data-placeholder="thaisms" class="form-control">
 														</div>
 														<div class="col-md-6">

@@ -27,8 +27,8 @@ class GeneralInfosTableSeeder extends Seeder
                 'address' => '111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน',
                 'client_id' => 'j7GPSrVYdCTx8DYFR7hj1g',
                 'client_secret' => 'OQp6hut4pyeLxWnUa1STegdZ1b4QqGtgK6AIN4V8qn0',
-                'thsmsuser' => 'karn6944',
-                'thsmspass' => Crypt::encrypt('8891e6'),
+                'thsmsuser' => 'program6944',
+                'thsmspass' => Crypt::encrypt('dd9039'),
                 'verify_type_id' => 1,
                 'front_page_status_id' => 2
             ],
