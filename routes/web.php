@@ -110,7 +110,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('','DashboardAdminController@Index')->name('dashboard.admin');  
             Route::group(['prefix' => 'fee'], function(){
                 Route::get('','DashboardAdminFeeController@Index')->name('dashboard.admin.fee');           
-            });          
+            });       
+            Route::group(['prefix' => 'businessplan'], function(){
+                Route::get('','DashboardAdminBusinessPlanController@Index')->name('dashboard.admin.businessplan');           
+            });     
         }); 
         Route::group(['prefix' => 'expert'], function(){
             Route::get('','DashboardExpertController@Index')->name('dashboard.expert');           

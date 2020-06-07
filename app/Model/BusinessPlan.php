@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Company;
+use App\Helper\DateConversion;
 use App\Model\BusinessPlanStatus;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,10 @@ class BusinessPlan extends Model
     } 
     public function getBusinessPlanStatusAttribute(){
         return BusinessPlanStatus::find($this->business_plan_status_id);
+    } 
+
+    public function getCreateddateTHAttribute(){
+        return DateConversion::engToThaiDate($this->created_at->toDateString());
     } 
     
 }

@@ -21,6 +21,7 @@ class AssessmentController extends Controller
         if(Empty($businessplan)){
             if($request->status == 1){
                 $businessplan = new BusinessPlan();
+                $businessplan->code = Carbon::now()->timestamp;
                 $businessplan->company_id = $request->companyid;
                 $businessplan->business_plan_status_id = 2;
                 $businessplan->save();

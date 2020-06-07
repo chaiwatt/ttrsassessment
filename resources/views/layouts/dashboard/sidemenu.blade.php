@@ -5,10 +5,12 @@
     </ul>
 </li>
 @if (Auth::user()->user_type_id == 1)
-<li class="nav-item nav-item-submenu">
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'dashboard.admin.') ? 'nav-item-expanded nav-item-open' : '' }}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link">ค่าธรรมเนียม</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'dashboard.admin.fee') ? 'active' : '' }}">ค่าธรรมเนียม</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'dashboard.admin.businessplan') ? 'active' : '' }}">ขอรับการประเมิน</a></li>     
+        {{-- <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'dashboard.admin.fee') ? 'active' : '' }}">แบบขอการประเมิน mini TBP</a></li>  --}}
     </ul>
 </li>
 @endif
@@ -19,7 +21,7 @@
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
         <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link">รายการประเมิน</a></li>	
         {{-- <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้<span class="badge badge-warning badge-pill align-self-center ml-auto">1</span></a></li>       --}}
-        <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้</a></li>      
+        <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้</a></li>  
     </ul>
 </li>
 @endif

@@ -15,6 +15,7 @@ class CreateBusinessPlansTable extends Migration
     {
         Schema::create('business_plans', function (Blueprint $table) {
             $table->id();
+            $table->char('code',15);
             $table->unsignedBigInteger('company_id')->comment('ID บริษัทที่ยื่นแผนธุรกิจ');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->unsignedBigInteger('business_plan_status_id')->default(1);
