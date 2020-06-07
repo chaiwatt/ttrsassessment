@@ -26,10 +26,12 @@ use App\Model\EducationBranch;
 use App\Model\ExpertEducation;
 use App\Model\FrontPageStatus;
 use App\Model\MessagePriority;
+use App\Model\UserAlertStatus;
 use App\Model\ExpertExperience;
 use App\Model\MessageBoxAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\Activitylog\Models\Activity;
 use App\Http\Requests\EditProfileRequest;
 
@@ -67,6 +69,7 @@ class SettingProfileController extends Controller
         $activitylogs = Activity::causedBy($auth)->get();
         $usergroups = UserGroup::get();
         $frontpagestatuses = FrontPageStatus::get();
+        $useralertstatuses = UserAlertStatus::get();
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -89,7 +92,8 @@ class SettingProfileController extends Controller
                                         ->withExpertexperiences($expertexperiences)
                                         ->withActivitylogs($activitylogs)
                                         ->withUsergroups($usergroups)
-                                        ->withFrontpagestatuses($frontpagestatuses);
+                                        ->withFrontpagestatuses($frontpagestatuses)
+                                        ->withUseralertstatuses($useralertstatuses);
     }
     public function EditSave(EditProfileRequest $request, $userid){
         $auth = Auth::user();
@@ -140,6 +144,7 @@ class SettingProfileController extends Controller
                 'phone' => $request->phone,
                 'picture' => $filelocation,
                 'user_group_id' => $usergroup,
+                'user_alert_status_id' => $request->alert
             ]);
             return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
         }else if($request->action == 'expert'){
@@ -171,6 +176,11 @@ class SettingProfileController extends Controller
             }
             return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
         }else if($request->action == 'organization'){
+            $_generalinfo = GeneralInfo::get()->first();
+            $thsmspass = $_generalinfo->thsmspass;
+            if(!Empty($request->thaismspassword)){
+                $thsmspass = Crypt::encrypt($request->thaismspassword);
+            }
             GeneralInfo::get()->first()->update([
                 'company' => $request->organizationname,
                 'address' => $request->organizationaddress,
@@ -185,7 +195,7 @@ class SettingProfileController extends Controller
                 'client_id' => $request->lineclint,
                 'client_secret' => $request->linesecret,
                 'thsmsuser' => $request->thaisms,
-                'thsmspass' => $request->thaismspassword,
+                'thsmspass' => $thsmspass,
                 'verify_type_id' => $request->verifyuser,
                 'workdaytime' => $request->workdaytime,
                 'saturdaytime' => $request->saturdaytime,

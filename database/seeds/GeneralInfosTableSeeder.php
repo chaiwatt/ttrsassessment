@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 
 class GeneralInfosTableSeeder extends Seeder
 {
@@ -27,7 +28,7 @@ class GeneralInfosTableSeeder extends Seeder
                 'client_id' => 'j7GPSrVYdCTx8DYFR7hj1g',
                 'client_secret' => 'OQp6hut4pyeLxWnUa1STegdZ1b4QqGtgK6AIN4V8qn0',
                 'thsmsuser' => 'karn6944',
-                'thsmspass' => '8891e6',
+                'thsmspass' => Crypt::encrypt('8891e6'),
                 'verify_type_id' => 1,
                 'front_page_status_id' => 2
             ],

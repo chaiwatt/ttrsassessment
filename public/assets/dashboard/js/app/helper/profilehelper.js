@@ -1,6 +1,7 @@
 import * as Message from './message.js'
 import * as Expert from './expert.js'
 import * as Friend from './friend.js'
+import * as SMS from './sms.js'
 
 var a=0;
 $(document).on("click","#btn_modal_expertexpience",function(e){
@@ -536,3 +537,92 @@ function checkTinPin(vatid){
         })
       })
 }
+
+$(document).on("click","#getotp",function(e){
+    // console.log($('#phone').val());
+    if($('#phone').val() == ''){
+        return ;
+    }
+    var tmpotp =';'
+    Swal.fire({
+        title: 'ยืนยันเบอร์โทรศัพท์!',
+        text: `ต้องการยืนยันเบอร์โทรศัพท์ หรือไม่`,
+        type: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: 'โปรดรับรหัส OTP',
+                // input: 'text',
+                text: 'รหัส OTP จะส่งไปยังโทรศัพท์หมายเลข ' + $('#phone').val() ,
+                inputAttributes: {
+                  autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'ต่อไป',
+                cancelButtonText: 'ยกเลิก',
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                    SMS.sendSMS($('#phone').val()).then(data => {
+                        console.log(data);
+                        tmpotp = data;
+                    })
+                    .catch(error => {
+                        // console.log(error)
+                    })
+                },
+                allowOutsideClick: false
+              }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        title: 'กรอกรหัส OTP',
+                        input: 'text',
+                        text: 'โปรดกรอกสอบรหัส OTP' ,
+                        inputAttributes: {
+                          autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText: 'ยกเลิก',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (inp) => {
+                          SMS.saveOTP(tmpotp,inp).then(data => {
+                                console.log('my otp: ' + data);
+                                location.reload();
+                            })
+                            .catch(error => {
+                                // console.log(error)
+                            })
+                        },
+                        allowOutsideClick: false
+                      })
+                }
+              })
+
+        //     Expert.deleteExpereince($(this).data('id')).then(data => {
+        //         var html='';
+        //         console.log(data);
+        //         data.forEach(function (expereince,index) {
+        //             html += `<tr>
+        //                         <td>${expereince.company} </td>
+        //                         <td>${expereince.position}</td>
+        //                         <td>${expereince.fromyear}</td>                   
+        //                         <td>${expereince.toyear}</td> 
+        //                         <td>                                                                                                      
+        //                         <a type="button" data-id="${expereince['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexpertexpienceclass_editview" ><i class="icon-trash danger"></i></a>
+        //                         </td>
+        //                     <tr>`
+        //             });
+        //          $("#expertexpience_wrapper_tr").html(html);
+        //    })
+        //    .catch(error => {
+        //        // console.log(error)
+        //    })
+        }
+    });
+});

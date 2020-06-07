@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FrontPagStatusesTableSeeder::class);
         $this->call(FrontPagesTableSeeder::class);
         $this->call(PaymentTypesTableSeeder::class);
+        $this->call(UserAlertStatusesTableSeeder::class);
         $this->call(CriteriasTableSeeder::class);
         $this->call(ReligionsTableSeeder::class);
         $this->call(ExpertPositionsTableSeeder::class);

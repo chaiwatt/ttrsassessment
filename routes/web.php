@@ -41,6 +41,10 @@ Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => 'tinpin'], function(){
         Route::post('companyinfo','Api\TinPinController@CompanyInfo')->name('api.tinpin.companyinfo');           
     });  
+    Route::group(['prefix' => 'sms'], function(){
+        Route::post('send','Api\SMSController@Send')->name('api.sms.send');           
+        Route::post('saveotp','Api\SMSController@SaveOtp')->name('api.sms.saveotp'); 
+    }); 
 }); 
 
 Route::group(['middleware' => 'auth'], function(){

@@ -2,6 +2,7 @@
 namespace App\Helper;
 
 use App\Model\GeneralInfo;
+use Illuminate\Support\Facades\Crypt;
 
 class SMS
 {
@@ -11,7 +12,7 @@ class SMS
         $sms = new thsms();
         $generalinfo = GeneralInfo::first();
         $sms->username   = $generalinfo->thsmsuser;
-        $sms->password   = $generalinfo->thsmspass;
+        $sms->password   = Crypt::decrypt($generalinfo->thsmspass); 
         return $sms->getCredit();
     }
 
@@ -19,7 +20,7 @@ class SMS
         $sms = new thsms();
         $generalinfo = GeneralInfo::first();
         $sms->username   = $generalinfo->thsmsuser;
-        $sms->password   = $generalinfo->thsmspass;
+        $sms->password   = Crypt::decrypt($generalinfo->thsmspass); 
         return $sms->send( 'OTP', $phone, $message);
     }
 
