@@ -13,20 +13,33 @@ class BusinessPlanStatusSeeder extends Seeder
     {
         DB::table('business_plan_statuses')->insert([
             [
-                'name' => 'รอการชำระเงินค่าธรรมเนียม'
+                'name' => 'รอการยืนยันให้การประเมิน',
+                'progress' => 5
             ],
             [
-                'name' => 'รอการยืนยันการรับการประเมิน'
+                'name' => 'ให้ส่ง mini TBP',
+                'progress' => 10
             ],
             [
-                'name' => 'รอผลการประเมิน'
+                'name' => 'ให้ส่ง FUll TBP',
+                'progress' => 15
             ],
             [
-                'name' => 'ไม่ผ่านการประเมิน'
+                'name' => 'อยู่ระหว่างการประเมิน',
+                'progress' => 20
             ],
             [
-                'name' => 'ผ่านการประเมิน'
-            ]
+                'name' => 'รอผลการประเมิน',
+                'progress' => 80
+            ],
+            [
+                'name' => 'รอการชำระเงินค่าธรรมเนียม',
+                'progress' => 90
+            ],
+            [
+                'name' => 'ผ่านการประเมิน',
+                'progress' => 100
+            ],
         ]);
     }
 }

@@ -90,6 +90,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\BusinessplanPerformanceController@Add')->name('api.businessplan.performance.add');             
                 Route::post('delete','Api\BusinessplanPerformanceController@Delete')->name('api.businessplan.performance.delete');             
             });
+            Route::group(['prefix' => 'status'], function(){
+                Route::post('update','Api\BusinessPlanController@Update')->name('api.businessplan.update');          
+            });
         });
         Route::group(['prefix' => 'coverimage'], function(){
             Route::post('add','Api\CoverImageController@Add')->name('api.coverimage.add');          
@@ -104,6 +107,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'assessment'], function(){
             Route::post('add','Api\AssessmentController@Add')->name('api.assessment.add');          
         });
+
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
@@ -113,6 +117,8 @@ Route::group(['middleware' => 'auth'], function(){
             });       
             Route::group(['prefix' => 'businessplan'], function(){
                 Route::get('','DashboardAdminBusinessPlanController@Index')->name('dashboard.admin.businessplan');           
+                Route::get('view/{id}','DashboardAdminBusinessPlanController@View')->name('dashboard.admin.businessplan.view'); 
+                Route::get('delete/{id}','DashboardAdminBusinessPlanController@Delete')->name('dashboard.admin.businessplan.delete'); 
             });     
         }); 
         Route::group(['prefix' => 'expert'], function(){

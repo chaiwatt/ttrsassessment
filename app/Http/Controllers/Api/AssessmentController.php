@@ -23,7 +23,7 @@ class AssessmentController extends Controller
                 $businessplan = new BusinessPlan();
                 $businessplan->code = Carbon::now()->timestamp;
                 $businessplan->company_id = $request->companyid;
-                $businessplan->business_plan_status_id = 2;
+                $businessplan->business_plan_status_id = 1;
                 $businessplan->save();
 
                 // $businessplanfeetransaction = new BusinessPlanFeeTransaction();

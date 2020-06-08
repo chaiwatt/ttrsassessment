@@ -77,8 +77,8 @@
                                         <td> {{$businessplan->code}} </td> 
                                         <td> {{$businessplan->company->name}} </td>  
                                         <td> 
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $businessplan->id])}}" class=" badge bg-primary">รายละเอียด</a>
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $businessplan->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('dashboard.admin.businessplan.view',['id' => $businessplan->id])}}" class=" badge bg-primary">รายละเอียด</a>
+                                            <a href="{{route('dashboard.admin.businessplan.delete',['id' => $businessplan->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>                                
                                     </tr>
                                     @endforeach

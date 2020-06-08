@@ -33,6 +33,7 @@ class CreateCompaniesTable extends Migration
             $table->unsignedBigInteger('amphur_id')->nullable();
             $table->unsignedBigInteger('tambol_id')->nullable();
             $table->string('postalcode',10)->nullable();
+            $table->string('logo',250)->nullable();
             $table->timestamps();
         });
     }

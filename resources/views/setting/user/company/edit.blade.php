@@ -60,21 +60,21 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>บริษัท</label>
-                                            <input type="text"  name="company" value="{{$company->name}}"  placeholder="บริษัท" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>หมายเลขประจำตัวผู้เสียภาษี</label>
-                                            <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="หมายเลขผู้เสียภาษี" class="form-control" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ประเภทธุรกิจ<span class="text-danger">*</span></label>
-                                            <select name="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-select2">
+                                            <label>การจดทะเบียน<span class="text-danger">*</span></label>
+                                            <select name="businesstype" data-placeholder="ประเภทการจดทะเบียน" class="form-control form-control-select2">
                                                 <option value=""></option>
                                                     @foreach ($businesstypes as $businesstype)
                                                         <option value="{{$businesstype->id}}" @if($company->registered_capital_type_id == $businesstype->id) selected @endif>{{$businesstype->name}}</option> 
                                                     @endforeach
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ชื่อกิจการ/บริษัท<span class="text-danger">*</span></label>
+                                            <input type="text"  name="company" value="{{$company->name}}"  placeholder="ชื่อกิจการ/บริษัท" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>หมายเลขประจำตัวผู้เสียภาษี</label>
+                                            <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="หมายเลขผู้เสียภาษี" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>กลุ่มธุรกิจ<span class="text-danger">*</span></label>
@@ -86,28 +86,28 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>ประเภทการจดทะเบียน<span class="text-danger">*</span></label>
-                                            <select name="registeredcapitaltype" data-placeholder="ประเภทการจดทะเบียน" class="form-control form-control-select2">
+                                            <label>ประเภททุนจดทะเบียน<span class="text-danger">*</span></label>
+                                            <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-select2">
                                                 <option value=""></option>
                                                     @foreach ($registeredcapitaltypes as $registeredcapitaltype)
-                                                        <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}</option> 
+                                                        <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}: {{$registeredcapitaltype->detail}}</option> 
                                                     @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>โทรศัพท์</label>
+                                            <label>โทรศัพท์<span class="text-danger">*</span></label>
                                             <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>แฟ็กซ์</label>
+                                            <label>แฟ็กซ์<span class="text-danger">*</span></label>
                                             <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="แฟ็กซ์" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>อีเมล์</label>
+                                            <label>อีเมล์<span class="text-danger">*</span></label>
                                             <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล์" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ที่อยู่</label>
+                                            <label>ที่อยู่<span class="text-danger">*</span></label>
                                             <input type="text"  name="address" value="{{$company->address}}"  placeholder="ที่อยู่" class="form-control">
                                         </div>
                                         <div class="form-group">
@@ -136,9 +136,23 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>รหัสไปรษณีย์</label>
-                                            <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="โทรศัพท์" class="form-control">
+                                            <label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
+                                            <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
                                         </div>
+                                        <div class="form-group">
+                                            <label>โลโก้ (ขนาด 500x500) px</label>
+                                            <div class="input-group">													
+                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้" >
+                                                <span class="input-group-append">
+                                                    <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+                                                </span>
+                                            </div>
+                                            <input type="file" style="display:none;" id="file" name="picture"/>
+                                            @if (!Empty($company->logo))
+                                            <br>
+                                                <img src="{{asset($company->logo)}}" width="300" height="300" alt="">
+                                            @endif
+										</div>
                                     </fieldset>
                                 </div>
                             </div>
@@ -161,9 +175,12 @@
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/companyhelper.js')}}"></script>
     <script>
-    		var route = {
+    	var route = {
 			url: "{{ url('/') }}",
 			token: $('meta[name="csrf-token"]').attr('content'),
         };
+        $("#file").on('change', function() {
+            $("#filename").val(this.value);
+        });
     </script>	
 @stop

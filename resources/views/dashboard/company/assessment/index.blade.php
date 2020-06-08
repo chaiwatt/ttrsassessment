@@ -63,8 +63,8 @@
                                     <tr>
                                         <th style="width:50px">#</th>
                                         <th>บริษัท</th>
-                                        <th style="width:350px">ความคืบหน้า</th>    
-                                        <th style="width:100px">สถานะ</th> 
+                                        <th >ความคืบหน้า</th>    
+                                        <th class="text-right">สถานะ</th> 
                                                                   
                                     </tr>
                                 </thead>
@@ -75,12 +75,12 @@
                                         <td> {{$businessplan->company->name}} </td>  
                                         <td>
                                             <div class="progress" style="height: 1.375rem;">
-                                                <div class="progress-bar bg-success" style="width: {{$businessplan->progress}}%">
+                                                <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
                                                     <span class="sr-only"></span>
                                                 </div>
                                             </div>
                                         </td> 
-                                        <td> <span class="badge badge-info">{{$businessplan->businessplanstatus->name}}</span></td>                                       
+                                        <td class="text-right"> <span class="badge badge-flat border-warning text-warning-400 rounded-0">{{$businessplan->businessplanstatus->name}}</span></td>                                       
                                     </tr>
                                     @endforeach
                                 </tbody>

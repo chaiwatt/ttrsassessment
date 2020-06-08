@@ -16,6 +16,7 @@ class CreateBusinessPlanStatusesTable extends Migration
         Schema::create('business_plan_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name',250)->comment('ชื่อสถานะการยื่นแผนธุรกิจ/ประเมิน เช่น รอการยืนยันการรับการประเมิน รอผลการประเมิน ไม่ผ่านการประเมิน ผ่านการประเมิน');
+            $table->char('progress',5);
             $table->timestamps();
         });
     }

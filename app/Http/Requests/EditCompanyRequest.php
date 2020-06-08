@@ -36,10 +36,10 @@ class EditCompanyRequest extends FormRequest
     public function messages()
     {
       return  [
-            'company.required' => 'ยังไม่ได้กรอกชื่อบริษัท',
-            'businesstype.required' => 'ยังไม่ได้เลือกประเภทธุรกิจ',
+            'company.required' => 'ยังไม่ได้กรอกชื่อชื่อกิจการ/บริษัท',
+            'businesstype.required' => 'ยังไม่ได้เลือกประเภทการจดทะเบียน',
             'industrygroup.required' => 'ยังไม่ได้เลือกกลุ่มธุรกิจ',
-            'registeredcapitaltype.required' => 'ยังไม่ได้เลือกประเภทการจดทะเบียน',
+            'registeredcapitaltype.required' => 'ยังไม่ได้เลือกประเภททุนจดทะเบียน',
             'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
             'fax.required' => 'ยังไม่ได้กรอกแฟ็กซ์',
             'email.required' => 'ยังไม่ได้กรอกอีเมล์',

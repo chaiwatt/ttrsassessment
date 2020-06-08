@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\User;
+use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Tambol;
 use App\Model\Company;
@@ -34,7 +36,21 @@ class SettingUserCompanyController extends Controller
     }
 
     public function EditSave(EditCompanyRequest $request, $id){
-        Company::find($id)->update([
+        $company = Company::find($id);
+        $file = $request->picture; 
+        $filelocation = $company->logo;
+        if(!Empty($file)){         
+            if(!Empty($company->logo)){
+                @unlink($company->logo);
+            }
+            $name = $file->getClientOriginalName();
+            $file = $request->picture;
+            $img = Image::make($file);  
+            $fname=str_random(10).".".$file->getClientOriginalExtension();
+            $filelocation = "storage/uploads/company/".$fname;
+            Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+        }
+        $company->update([
             'name' => $request->company,
             'registered_capital_type_id' => $request->registeredcapitaltype,
             'industry_group_id' => $request->industrygroup,
@@ -46,7 +62,8 @@ class SettingUserCompanyController extends Controller
             'province_id' => $request->province,
             'amphur_id' => $request->amphur,
             'tambol_id' => $request->tambol,
-            'postalcode' => $request->postalcode
+            'postalcode' => $request->postalcode,
+            'logo' => $filelocation
         ]);
         return redirect()->back()->withSuccess('แก้ไขข้อมูลบริษัทสำเร็จ');
         
