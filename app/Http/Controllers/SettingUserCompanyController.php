@@ -63,6 +63,8 @@ class SettingUserCompanyController extends Controller
             'amphur_id' => $request->amphur,
             'tambol_id' => $request->tambol,
             'postalcode' => $request->postalcode,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
             'logo' => $filelocation
         ]);
         return redirect()->back()->withSuccess('แก้ไขข้อมูลบริษัทสำเร็จ');

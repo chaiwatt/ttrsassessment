@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MessageReadStatusesTableSeeder::class);
         $this->call(FriendStatusesTableSeeder::class);
         $this->call(FrontPagStatusesTableSeeder::class);
+        $this->call(ThaiBanksTableSeeder::class);
         $this->call(FrontPagesTableSeeder::class);
         $this->call(PaymentTypesTableSeeder::class);
         $this->call(UserAlertStatusesTableSeeder::class);

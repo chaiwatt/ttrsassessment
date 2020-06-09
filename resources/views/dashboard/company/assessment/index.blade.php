@@ -61,8 +61,9 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px">#</th>
-                                        <th>บริษัท</th>
+                                        <th>วันที่ขอประเมิน</th> 
+                                        <th>เลขที่โครงการ</th> 
+                                        <th>ชื่อโครงการ</th> 
                                         <th >ความคืบหน้า</th>    
                                         <th class="text-right">สถานะ</th> 
                                                                   
@@ -71,8 +72,9 @@
                                 <tbody>
                                     @foreach ($businessplans as $key => $businessplan)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
-                                        <td> {{$businessplan->company->name}} </td>  
+                                        <td> {{$businessplan->createddateth}} </td> 
+                                        <td> {{$businessplan->code}} </td> 
+                                        <td>  </td> 
                                         <td>
                                             <div class="progress" style="height: 1.375rem;">
                                                 <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">

@@ -30,7 +30,9 @@ class EditCompanyRequest extends FormRequest
             'province' => 'required',
             'amphur' => 'required',
             'tambol' => 'required',
-            'postalcode' => 'required'
+            'postalcode' => 'required',
+            'lat' => 'required',
+            'lng' => 'required'
         ];
     }
     public function messages()
@@ -48,6 +50,8 @@ class EditCompanyRequest extends FormRequest
             'amphur.required' => 'ยังไม่ได้เลือกอำเภอ',
             'tambol.required' => 'ยังไม่ได้เลือกตำบล',
             'postalcode.required' => 'ยังไม่ได้กรอกรหีสไปรษณีย์',
+            'lat.required' => 'ยังไม่ได้กรอกพิกัดละติจูด',
+            'lng.required' => 'ยังไม่ได้กรอกพิกัดลองติจูด'
       ]; 
     }
 }

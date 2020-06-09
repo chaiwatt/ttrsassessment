@@ -1,6 +1,10 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-
+<style>
+    #map {
+        height: 100%;
+      }
+</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -140,6 +144,14 @@
                                             <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
                                         </div>
                                         <div class="form-group">
+                                            <label>ละติจูด<span class="text-danger">*</span></label>
+                                            <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="ละติจูด" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ลองติจูด<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer">เปิดแผนที่</a> </label>
+                                            <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองติจูด" class="form-control">
+                                        </div>
+                                        <div class="form-group">
                                             <label>โลโก้ (ขนาด 500x500) px</label>
                                             <div class="input-group">													
                                                 <input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้" >
@@ -152,7 +164,8 @@
                                             <br>
                                                 <img src="{{asset($company->logo)}}" width="300" height="300" alt="">
                                             @endif
-										</div>
+                                        </div>
+                                       
                                     </fieldset>
                                 </div>
                             </div>
@@ -174,6 +187,7 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/companyhelper.js')}}"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZDFx6AlDgtC7WuS2Cs6gAi-4edWe1H8&callback=initMap"></script>
     <script>
     	var route = {
 			url: "{{ url('/') }}",

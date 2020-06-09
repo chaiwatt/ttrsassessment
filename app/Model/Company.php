@@ -31,6 +31,7 @@ class Company extends Model
 
     public function getBusinessPlanAttribute()
     {
-        return BusinessPlan::where('company_id',$this->id)->where('business_plan_active_status_id',1)->first();
+        // return BusinessPlan::where('company_id',$this->id)->where('business_plan_active_status_id',1)->first();
+        return BusinessPlan::where('company_id',$this->id)->first();
     }
 }

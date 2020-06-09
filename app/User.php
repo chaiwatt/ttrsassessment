@@ -74,5 +74,9 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return $vatid;
     }
+    public function getCompanyAttribute()
+    {
+        return Company::where('user_id',$this->id)->first();
+    }
     
 }

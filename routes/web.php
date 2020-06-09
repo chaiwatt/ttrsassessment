@@ -129,6 +129,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'assessment'], function(){
                 Route::get('','DashboardCompanyAssessmentController@Index')->name('dashboard.company.assessment');           
             }); 
+            Route::group(['prefix' => 'minitbp'], function(){
+                Route::get('edit','DashboardCompanyMiniTBPController@Edit')->name('dashboard.company.minitbp.edit');           
+                Route::get('editsave','DashboardCompanyMiniTBPController@EditSave')->name('dashboard.company.minitbp.editsave');   
+            }); 
             Route::group(['prefix' => 'fee'], function(){
                 Route::get('','DashboardCompanyFeeController@Index')->name('dashboard.company.fee');           
                 Route::get('invoice/{id}','DashboardCompanyFeeController@Invoice')->name('dashboard.company.fee.invoice');  

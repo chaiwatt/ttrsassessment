@@ -15,16 +15,20 @@
     </ul>
 </li>
 @endif
-@if (Auth::user()->user_type_id == 3)
-<li class="nav-item nav-item-submenu">
-    {{-- <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span><span class="badge badge-warning badge-pill align-self-center ml-auto">1</span></a> --}}
-    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
-    <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
-        <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link">รายการประเมิน</a></li>	
-        {{-- <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้<span class="badge badge-warning badge-pill align-self-center ml-auto">1</span></a></li>       --}}
-        <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้</a></li>  
-    </ul>
-</li>
+@if (Auth::user()->user_type_id == 3 && !Empty(Auth::user()->company))
+    @if (!Empty(Auth::user()->company->businessplan))
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'dashboard.company.') ? 'nav-item-expanded nav-item-open' : '' }}">
+            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
+                <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'dashboard.company.assessment') ? 'active' : '' }}">รายการประเมิน</a></li>	
+                {{-- <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้<span class="badge badge-warning badge-pill align-self-center ml-auto">1</span></a></li>       --}}
+                @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
+                    <li class="nav-item"><a href="{{route('dashboard.company.minitbp.edit')}}" class="nav-link">mini TBP</a></li>  
+                    <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'dashboard.company.fee') ? 'active' : '' }}">รายการแจ้งหนี้</a></li>  
+                @endif
+            </ul>
+        </li>
+    @endif
 @endif
 @if (Auth::user()->user_type_id == 1)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(), 'setting.') ? 'nav-item-expanded nav-item-open' : '' }}">
