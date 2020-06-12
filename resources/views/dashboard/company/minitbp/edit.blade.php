@@ -78,71 +78,76 @@
 									<div class="form-group mb-3 mb-md-2">
 										<label class="font-weight-semibold">สิทธิประโยชน์ทางการเงิน (Finance)</label>
 										<div class="row">
-											<div class="col-md-4">
+											<div class="col-md-6">
+												<div class="form-group">
+													<div class="form-check">
+														<label class="form-check-label">
+															<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+															ขอสินเชื่อกับธนาคาร
+														</label>
+														<div class="row" id="financediv1" style="margin-top: 5px">
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="">เลือกธนาคาร</label>
+																	<select name="" id="" class="form-control form-control-select2">
+																		<option value="">sss</option>
+																		<option value="">sss</option>
+																		<option value="">sss</option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="">วงเงินสินเชื่อที่ต้องการ</label>
+																	<input type="text" class="form-control" value="1000">
+																</div>
+															</div>
+														</div>	
+													</div>
+												</div>
+
 												<div class="form-check">
 													<label class="form-check-label">
 														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
-														Primary checkbox
+														ขอรับการค้ำประกันสินเชื่อฯบสย(บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)
 													</label>
+													
 												</div>
 
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-danger" checked data-fouc>
-														Danger checkbox
-													</label>
-												</div>
-
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-success" checked data-fouc>
-														Success checkbox
+														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+														โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)
 													</label>
 												</div>
 											</div>
 
-											<div class="col-md-4">
+											<div class="col-md-6">
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-warning" checked data-fouc>
-														Warning checkbox
+														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+														บริษัทร่วมทุน (สวทช.)
 													</label>
-												</div>
-
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-info" checked data-fouc>
-														Info checkbox
-													</label>
-												</div>
-
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-custom" checked data-fouc>
-														Custom color
-													</label>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-warning" checked data-fouc>
-														Warning checkbox
-													</label>
-												</div>
-
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-info" checked data-fouc>
-														Info checkbox
-													</label>
-												</div>
-
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-custom" checked data-fouc>
-														Custom color
-													</label>
+													<div class="row" id="financediv2" style="margin-top: 5px">
+														<div class="col-md-4">
+															<div class="form-group">
+																<label for="">วงเงินสินเชื่อที่ต้องการ</label>
+																<input type="text" class="form-control" value="1000">
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="form-group">
+																<label for="">สัดส่วนลงทุน บริษัท</label>
+																<input type="text" class="form-control" value="1000">
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="form-group">
+																<label for="">: สวทช</label>
+																<input type="text" class="form-control" value="1000">
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -155,71 +160,65 @@
 									<div class="form-group mb-3 mb-md-2">
 										<label class="font-weight-semibold">สิทธิประโยชน์ที่ไม่ใช่การเงิน (Non-Finance)</label>
 										<div class="row">
-											<div class="col-md-4">
+											<div class="col-md-6">
 												<div class="form-check">
 													<label class="form-check-label">
 														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
-														Primary checkbox
+														โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย
 													</label>
 												</div>
 
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-danger" checked data-fouc>
-														Danger checkbox
+														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+														รับรองสิทะฺประโยชน์ทางภาษี
 													</label>
 												</div>
 
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-success" checked data-fouc>
-														Success checkbox
+														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+														โครงการ spin-off
 													</label>
 												</div>
 											</div>
 
-											<div class="col-md-4">
+											<div class="col-md-6">
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-warning" checked data-fouc>
-														Warning checkbox
+														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+														ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ
 													</label>
 												</div>
 
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-info" checked data-fouc>
-														Info checkbox
+														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+														โครงการสนับสนุนผู้ประกอบการภาครัฐ
 													</label>
+													<div class="row" id="nonefinancediv1" style="margin-top: 5px">
+														<div class="col-md-12">
+															<div class="form-group">
+																<label for="">โปรดระบุ</label>
+																<input type="text" class="form-control" value="1000">
+															</div>
+														</div>
+													</div>
 												</div>
 
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-custom" checked data-fouc>
-														Custom color
+														<input type="checkbox" class="form-check-input-styled-primary" checked data-fouc>
+														อื่น ๆ
 													</label>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-warning" checked data-fouc>
-														Warning checkbox
-													</label>
-												</div>
-
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-info" checked data-fouc>
-														Info checkbox
-													</label>
-												</div>
-
-												<div class="form-check">
-													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-custom" checked data-fouc>
-														Custom color
-													</label>
+													<div class="row" id="nonefinancediv2" style="margin-top: 5px">
+														<div class="col-md-12">
+															<div class="form-group">
+																<label for="">โปรดระบุ</label>
+																<input type="text" class="form-control" value="1000">
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
