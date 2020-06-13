@@ -8,6 +8,13 @@
             <div class="page-title d-flex">
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มรายการบัญชี</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+			</div>
+			<div class="header-elements d-none">
+                <div class="d-flex justify-content-center">
+                    <div class="form-check ">
+                        <input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ประเมิน" data-off-text="ไม่ประเมิน" class="form-check-input-switch" @if (!Empty($company->businessplan)) checked @endif >
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -48,20 +55,13 @@
             <div class="col-md-12">
 				<!-- Colors -->
             	<div class="card">
-					<div class="card-header header-elements-inline">
-						<h5 class="card-title">Color options</h5>
-						<div class="header-elements">
-							{{-- <div class="list-icons">
-		                		<a class="list-icons-item" data-action="collapse"></a>
-		                		<a class="list-icons-item" data-action="reload"></a>
-		                		<a class="list-icons-item" data-action="remove"></a>
-		                	</div> --}}
-	                	</div>
-					</div>
+					{{-- <div class="card-header header-elements-inline">
+					
+					</div> --}}
 
                 	<div class="card-body">
 						<form method="POST" action="{{route('dashboard.company.minitbp.editsave',['id'=>$minitbp->id])}}" enctype="multipart/form-data">
-                            @csrf'
+                            @csrf
 							<div class="row">	
 								<div class="col-md-12">
 									<fieldset>	

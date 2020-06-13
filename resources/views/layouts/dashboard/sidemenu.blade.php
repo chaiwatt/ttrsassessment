@@ -23,7 +23,7 @@
                 <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'dashboard.company.assessment') ? 'active' : '' }}">รายการประเมิน</a></li>	
                 {{-- <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link">รายการแจ้งหนี้<span class="badge badge-warning badge-pill align-self-center ml-auto">1</span></a></li>       --}}
                 @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
-                    <li class="nav-item"><a href="{{route('dashboard.company.minitbp.edit')}}" class="nav-link">mini TBP</a></li>  
+                    <li class="nav-item"><a href="{{route('dashboard.company.minitbp')}}" class="nav-link">mini TBP</a></li>  
                     <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(), 'dashboard.company.fee') ? 'active' : '' }}">รายการแจ้งหนี้</a></li>  
                 @endif
             </ul>

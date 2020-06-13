@@ -36,6 +36,7 @@ class CreateMiniTBPSTable extends Migration
             $table->string('nonefinance5_detail',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบบ');
             $table->string('nonefinance6',250)->nullable()->comment('อื่น ๆ โปรดระบบ');
             $table->string('nonefinance6_detail',250)->nullable()->comment('อื่น ๆ โปรดระบบ');
+            $table->char('submit',1)->default('1');
             $table->timestamps();
         });
     }
