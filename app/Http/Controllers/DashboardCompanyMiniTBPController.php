@@ -84,10 +84,10 @@ class DashboardCompanyMiniTBPController extends Controller
             ]),
             'fontdata' => $fontData + [
                 'kanit' => [
-                    'R'  => 'Kanit-Light.ttf',    
-                    'B'  => 'Kanit-Bold.ttf',       
-                    'I'  => 'Kanit-Italic.ttf',    
-                    'BI' => 'Kanit-Bold-Italic.ttf' 
+                    'R'  => 'thsarabunnew-webfont.ttf',    
+                    'B'  => 'thsarabunnew_bold-webfont.ttf',       
+                    'I'  => 'thsarabunnew_italic-webfont.ttf',    
+                    'BI' => 'thsarabunnew_bolditalic-webfont.ttf' 
                 ]
             ],
             'default_font' => 'kanit',
