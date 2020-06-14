@@ -21,12 +21,16 @@ class BusinessPlanStatusSeeder extends Seeder
                 'progress' => 10
             ],
             [
-                'name' => 'ให้ส่ง FUll TBP',
+                'name' => 'อยู่ระหว่างพิจารณา mini TBP',
                 'progress' => 15
             ],
             [
-                'name' => 'อยู่ระหว่างการประเมิน',
+                'name' => 'ให้ส่ง FUll TBP',
                 'progress' => 20
+            ],
+            [
+                'name' => 'อยู่ระหว่างพิจารณา Full TBP',
+                'progress' => 25
             ],
             [
                 'name' => 'รอผลการประเมิน',

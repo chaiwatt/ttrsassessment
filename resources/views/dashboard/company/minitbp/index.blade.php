@@ -67,7 +67,7 @@
                                     <tr>
                                         <th>เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>                               
-                                        <th style="width:350px">เพิ่มเติม</th>
+                                        <th style="text-align: right">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,8 +75,11 @@
                                     <tr>    
                                         <td> {{$minitbp->businessplan->code}} </td> 
                                         <td> {{$minitbp->project}} </td>                                        
-                                        <td> 
-                                            <a href="{{route('dashboard.company.minitbp.edit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-primary">แก้ไข</a>
+                                        <td style="text-align: right"> 
+                                            @if (!Empty($minitbp->attachment))
+                                            <a href="{{asset($minitbp->attachment)}}" class=" btn btn-sm bg-primary">ดาวน์โหลดไฟล์</a> 
+                                            @endif
+                                            <a href="{{route('dashboard.company.minitbp.edit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-warning">แก้ไข</a>
                                             <a href="{{route('dashboard.company.minitbp.downloadpdf',['id' => $minitbp->id])}}" class=" btn btn-sm bg-teal">ดาวน์โหลด PDF</a>
                                             <a href="{{route('dashboard.company.minitbp.submit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-info">ส่ง mini TBP</a>
                                         </td>

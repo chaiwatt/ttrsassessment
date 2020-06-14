@@ -74,7 +74,7 @@
                                     <tr>    
                                         <td> {{$businessplan->createddateth}} </td> 
                                         <td> {{$businessplan->code}} </td> 
-                                        <td>  </td> 
+                                        <td> {{$businessplan->minitbp->project}} </td> 
                                         <td>
                                             <div class="progress" style="height: 1.375rem;">
                                                 <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">

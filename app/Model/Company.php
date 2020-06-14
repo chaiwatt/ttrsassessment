@@ -3,6 +3,9 @@
 namespace App\Model;
 
 use App\User;
+use App\Model\Amphur;
+use App\Model\Tambol;
+use App\Model\Province;
 use App\Helper\LogAction;
 use App\Model\BusinessPlan;
 use Illuminate\Database\Eloquent\Model;
@@ -33,5 +36,20 @@ class Company extends Model
     {
         // return BusinessPlan::where('company_id',$this->id)->where('business_plan_active_status_id',1)->first();
         return BusinessPlan::where('company_id',$this->id)->first();
+    }
+
+    public function getTambolAttribute()
+    {
+        return Tambol::find($this->tambol_id);
+    }
+
+    public function getAmphurAttribute()
+    {
+        return Amphur::find($this->amphur_id);
+    }
+
+    public function getProvinceAttribute()
+    {
+        return Province::find($this->province_id);
     }
 }

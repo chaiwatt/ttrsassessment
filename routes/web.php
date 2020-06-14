@@ -135,6 +135,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editsave/{id}','DashboardCompanyMiniTBPController@EditSave')->name('dashboard.company.minitbp.editsave');   
                 Route::get('downloadpdf/{id}','DashboardCompanyMiniTBPController@DownloadPDF')->name('dashboard.company.minitbp.downloadpdf'); 
                 Route::get('submit/{id}','DashboardCompanyMiniTBPController@Submit')->name('dashboard.company.minitbp.submit'); 
+                Route::post('submitsave/{id}','DashboardCompanyMiniTBPController@SubmitSave')->name('dashboard.company.minitbp.submitsave'); 
             }); 
             Route::group(['prefix' => 'fee'], function(){
                 Route::get('','DashboardCompanyFeeController@Index')->name('dashboard.company.fee');           

@@ -9,6 +9,7 @@ use App\Model\ThaiBank;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use Illuminate\Support\Facades\Auth;
 use setasign\Fpdi\PdfParser\StreamReader;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
@@ -96,7 +97,6 @@ class DashboardCompanyMiniTBPController extends Controller
         $auth = Auth::user();
         $company = Company::where('user_id',$auth->id)->first();
         $minitpb = MiniTBP::find($id); 
-        // return $minitpb;
         $finance1_text = (!Empty($minitpb->finance1))?'x':'';
         $finance1_bank = (!Empty($minitpb->finance1) && !Empty($minitpb->thai_bank_id))?$minitpb->bank->name:'' ;
         $finance1_loan = (!Empty($minitpb->finance1) && !Empty($minitpb->finance1_loan))?number_format($minitpb->finance1_loan,2):'' ;
@@ -120,22 +120,21 @@ class DashboardCompanyMiniTBPController extends Controller
         $tplId = $mpdf->ImportPage($pagecount); 
         
         $segment = new \Segment();
-        $body = $minitpb->project;
-        $words = $segment->get_segment_array($body);
-        $text = implode("|",$words);
+        $words = $segment->get_segment_array($minitpb->project);
         $firstparagraph = '';
         foreach($words as $word){
             $firstparagraph .= $word;
             if(strlen($firstparagraph) > 180 )break;
         }
-        // return  strlen($firstparagraph);
-        $projectname = substr_replace( $minitpb->project, '<br>', strlen($firstparagraph)+1, 0 );
+        $post = strlen($firstparagraph) ;
+        $projectname = substr_replace( $minitpb->project, '<br>', strlen($firstparagraph), 0 );
         $mpdf->UseTemplate($tplId);
-        
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->prefix->name.'</span>', 69, 79, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactname.'</span>', 75, 79, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactlastname.'</span>', 90, 79, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->prefix->name . $minitpb->contactname . ' ' .$minitpb->contactlastname .'</span>', 69, 79, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'d').'</span>',172, 34.8, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'m').'</span>',180, 34.8, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'y').'</span>',187, 34.8, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company->name.'</span>', 69, 86.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company->address. ' ตำบล'. $company->tambol->name .' อำเภอ'. $company->amphur->name .' จังหวัด'. $company->province->name. ' ' .$company->postalcode.'</span>', 69, 94.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactphone.'</span>', 69, 102.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactemail.'</span>', 69, 110.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 118.4, 150, 90, 'auto');
@@ -159,5 +158,28 @@ class DashboardCompanyMiniTBPController extends Controller
         $mpdf->Output();
     }
     
+    public function Submit($id){
+        $minitbp = MiniTBP::find($id);
+        return view('dashboard.company.minitbp.submit')->withMinitbp($minitbp);
+    }
+    public function SubmitSave(Request $request, $id){
+        $minitbp = MiniTBP::find($id);
+        if(!Empty($minitbp->attachment)){
+            @unlink($minitbp->attachment);
+        }
+        $file = $request->attachment;
+        $new_name = str_random(10).".".$file->getClientOriginalExtension();
+        $file->move("storage/uploads/minitbp/attachment" , $new_name);
+        $filelocation = "storage/uploads/minitbp/attachment/".$new_name;
+        $minitbp->update([
+            'attachment' => $filelocation
+        ]);
+
+        BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
+            'business_plan_status_id' => 3
+        ]);
+
+        return redirect()->route('dashboard.company.minitbp')->withSuccess('ส่งเอกสาร mini TBP สำเร็จ');
+    }
 }
 // 

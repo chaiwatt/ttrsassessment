@@ -24,7 +24,7 @@ class DateConversion
 		$strHour= date("H",strtotime($strDate));
 		$strMinute= date("i",strtotime($strDate));
 		$strSeconds= date("s",strtotime($strDate));
-		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน.","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
         $strMonthThai=$strMonthCut[$strMonth];
         if($case == 'full'){
             return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
@@ -37,5 +37,28 @@ class DateConversion
         }else if ($case == 'y'){
             return $strYear;
         }
-	}
+    }
+    public static function shortThaiDate($engdate,$case)
+	{
+        $strDate = $engdate;
+		$strYear = date("Y",strtotime($strDate))+543;
+		$strMonth= date("n",strtotime($strDate));
+		$strDay= date("j",strtotime($strDate));
+		$strHour= date("H",strtotime($strDate));
+		$strMinute= date("i",strtotime($strDate));
+		$strSeconds= date("s",strtotime($strDate));
+		$strMonthCut = Array("","01","02","03","04","05","06","07","08","09","10","11","12");
+        $strMonthThai=$strMonthCut[$strMonth];
+        if($case == 'full'){
+            return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
+        }else if ($case == 'dmy'){
+            return "$strDay $strMonthThai $strYear";
+        }else if ($case == 'd'){
+            return $strDay;
+        }else if ($case == 'm'){
+            return $strMonthThai;
+        }else if ($case == 'y'){
+            return $strYear;
+        }
+    }
 }

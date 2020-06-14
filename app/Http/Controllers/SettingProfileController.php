@@ -235,9 +235,6 @@ class SettingProfileController extends Controller
                         ]);
                     }
                 }
-                
-                
-
                 return redirect()->back()->withSuccess('ส่งข้อความสำเร็จ');
             }else{
                 return redirect()->back()->withError('ไม่สามารถส่งข้อความได้');

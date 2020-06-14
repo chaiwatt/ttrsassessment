@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MessagePrioritiesTableSeeder::class);
         $this->call(FeeTypesTableSeeder::class);
         $this->call(AllowAssessmentsTableSeeder::class);
-        $this->call(MiniTbpSubmitStatusesTableSeeder::class);
+        // $this->call(MiniTbpSubmitStatusesTableSeeder::class);
         $this->call(MessageReadStatusesTableSeeder::class);
         $this->call(FriendStatusesTableSeeder::class);
         $this->call(FrontPagStatusesTableSeeder::class);
