@@ -21,5 +21,8 @@ class MiniTBP extends Model
     public function getBankAttribute(){
         return ThaiBank::find($this->thai_bank_id)->first();
     } 
+    public function getUserPositionAttribute(){
+        return UserPosition::find($this->contactposition_id)->first();
+    }
 
 }

@@ -74,6 +74,7 @@ class DashboardCompanyMiniTBPController extends Controller
     }
 
     public function DownloadPDF($id){
+        require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
         $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
@@ -95,7 +96,7 @@ class DashboardCompanyMiniTBPController extends Controller
         $auth = Auth::user();
         $company = Company::where('user_id',$auth->id)->first();
         $minitpb = MiniTBP::find($id); 
-        // return $minitpb->businessplan;
+        // return $minitpb;
         $finance1_text = (!Empty($minitpb->finance1))?'x':'';
         $finance1_bank = (!Empty($minitpb->finance1) && !Empty($minitpb->thai_bank_id))?$minitpb->bank->name:'' ;
         $finance1_loan = (!Empty($minitpb->finance1) && !Empty($minitpb->finance1_loan))?number_format($minitpb->finance1_loan,2):'' ;
@@ -116,30 +117,45 @@ class DashboardCompanyMiniTBPController extends Controller
         
         $fileContent = file_get_contents(asset("assets/dashboard/template/minitbp.pdf"),'rb');
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
-        $tplId = $mpdf->ImportPage($pagecount);    
-        $mpdf->UseTemplate($tplId);
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$minitpb->prefix->name.'</span>', 68, 74, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($company->name, 68, 83, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$minitpb->contactname.'</span>', 75, 74, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$minitpb->contactlastname.'</span>', 90, 74, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($finance1_text, 20, 152.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$finance1_bank.'</span>', 57, 153, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$finance1_loan.'</span>', 60, 159, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($finance2_text, 20, 165.2, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($finance3_text, 20, 177.8, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($finance4_text, 20, 184, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$finance4_joint.'</span>', 62, 190.8, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$finance4_joint_min.'</span>', 78, 197.2, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$finance4_joint_max.'</span>', 92, 197.2, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($nonefinance1_text, 105.2, 152.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($nonefinance2_text, 105.2, 158.8, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($nonefinance3_text, 105.2, 165.1, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($nonefinance4_text, 105.2, 171.4, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($nonefinance5_text, 105.2, 177.6, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$nonefinance5_detail.'</span>', 111, 184.1, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML($nonefinance6_text, 105.2, 190.3, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 10pt;">'.$nonefinance6_detail.'</span>', 111, 197, 150, 90, 'auto');
+        $tplId = $mpdf->ImportPage($pagecount); 
         
+        $segment = new \Segment();
+        $body = $minitpb->project;
+        $words = $segment->get_segment_array($body);
+        $text = implode("|",$words);
+        $firstparagraph = '';
+        foreach($words as $word){
+            $firstparagraph .= $word;
+            if(strlen($firstparagraph) > 180 )break;
+        }
+        // return  strlen($firstparagraph);
+        $projectname = substr_replace( $minitpb->project, '<br>', strlen($firstparagraph)+1, 0 );
+        $mpdf->UseTemplate($tplId);
+        
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->prefix->name.'</span>', 69, 79, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactname.'</span>', 75, 79, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactlastname.'</span>', 90, 79, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company->name.'</span>', 69, 86.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactphone.'</span>', 69, 102.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactemail.'</span>', 69, 110.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 118.4, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($finance1_text, 20.8, 150.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance1_bank.'</span>', 57, 151.8, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance1_loan.'</span>', 60, 158, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($finance2_text, 20.8, 163.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($finance3_text, 20.8, 177, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($finance4_text, 20.8, 183.2, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance4_joint.'</span>', 62, 191, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance4_joint_min.'</span>', 75, 197.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance4_joint_max.'</span>', 92, 197.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($nonefinance1_text, 105.8, 150.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($nonefinance2_text, 105.8, 157, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($nonefinance3_text, 105.8, 163.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($nonefinance4_text, 105.8, 170, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($nonefinance5_text, 105.8, 177, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance5_detail.'</span>', 111, 184.6, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML($nonefinance6_text, 105.8, 189.8, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 111, 197.5, 150, 90, 'auto');
         $mpdf->Output();
     }
     
