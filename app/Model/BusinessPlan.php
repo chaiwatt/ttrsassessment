@@ -24,6 +24,10 @@ class BusinessPlan extends Model
         return DateConversion::engToThaiDate($this->created_at->toDateString());
     } 
 
+    public function getUpdatedAtThAttribute(){
+        return DateConversion::engToThaiDate($this->updated_at->toDateString());
+    } 
+
     public function getMiniTBPAttribute(){
         return MiniTBP::where('business_plan_id',$this->id)->first();
     } 

@@ -120,6 +120,12 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('view/{id}','DashboardAdminBusinessPlanController@View')->name('dashboard.admin.businessplan.view'); 
                 Route::get('delete/{id}','DashboardAdminBusinessPlanController@Delete')->name('dashboard.admin.businessplan.delete'); 
             });     
+            Route::group(['prefix' => 'minitbp'], function(){
+                Route::get('','DashboardAdminMiniTbpController@Index')->name('dashboard.admin.minitbp');           
+                Route::get('view/{id}','DashboardAdminMiniTbpController@View')->name('dashboard.admin.minitbp.view');  
+                Route::get('approve/{id}','DashboardAdminMiniTbpController@Approve')->name('dashboard.admin.minitbp.approve');    
+                Route::get('delete/{id}','DashboardAdminMiniTbpController@Delete')->name('dashboard.admin.minitbp.delete');  
+            });  
         }); 
         Route::group(['prefix' => 'expert'], function(){
             Route::get('','DashboardExpertController@Index')->name('dashboard.expert');           
@@ -143,6 +149,10 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('payment/{id}','DashboardCompanyFeeController@Payment')->name('dashboard.company.fee.payment'); 
                 Route::post('paymentsave/{id}','DashboardCompanyFeeController@PaymentSave')->name('dashboard.company.fee.paymentsave'); 
             });  
+            Route::group(['prefix' => 'fulltbp'], function(){
+                Route::get('','DashboardCompanyFullTbpController@Index')->name('dashboard.company.fulltbp');  
+                Route::get('edit/{id}','DashboardCompanyFullTbpController@Edit')->name('dashboard.company.fulltbp.edit');          
+            }); 
         }); 
     });   
     Route::group(['prefix' => 'sms'], function(){

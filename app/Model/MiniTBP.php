@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Model\Prefix;
 use App\Model\ThaiBank;
 use App\Model\BusinessPlan;
+use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
 
 class MiniTBP extends Model
@@ -25,4 +26,7 @@ class MiniTBP extends Model
         return UserPosition::find($this->contactposition_id)->first();
     }
 
+    public function getUpdatedAtThAttribute(){
+        return DateConversion::engToThaiDate($this->updated_at->toDateString());
+    } 
 }
