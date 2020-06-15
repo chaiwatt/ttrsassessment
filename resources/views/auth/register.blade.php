@@ -57,7 +57,7 @@
                     </select>
                 </div>
 
-                <div class="form-group" id="vatwrapper" hidden>
+                <div class="form-group" id="vatwrapper" >
                     <input id="vatno" type="number" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีนิติบุคคล" >
                     <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
                     <input type="text" name="companyname" id="companyname" hidden>

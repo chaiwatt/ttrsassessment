@@ -13,10 +13,10 @@ class UserGroupsTableSeeder extends Seeder
     {
         DB::table('user_groups')->insert([
             [
-                'name' => 'บุคลธรรมดา'
+                'name' => 'นิติบุคคล'
             ],
             [
-                'name' => 'นิติบุคคล'
+                'name' => 'บุคลธรรมดา'
             ]
         ]);
     }

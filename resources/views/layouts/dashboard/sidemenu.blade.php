@@ -23,7 +23,7 @@
                 <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment')?'active':''}}">รายการประเมิน</a></li>
                 @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
                     <li class="nav-item"><a href="{{route('dashboard.company.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.minitbp')?'active':''}}">mini TBP</a></li>  
-                    @if (Auth::user()->company->businessplan->business_plan_status_id > 2)
+                    @if (Auth::user()->company->businessplan->business_plan_status_id > 3)
                         <li class="nav-item"><a href="{{route('dashboard.company.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.fulltbp')?'active':''}}">Full TBP</a></li>
                     @endif
                     <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.fee')?'active':''}}">รายการแจ้งหนี้</a></li>  
@@ -86,7 +86,7 @@
 </li>
 @endif
 
-@if (Auth::user()->user_type_id == 3 && Auth::user()->user_group_id == 2)
+@if (Auth::user()->user_type_id == 3 && Auth::user()->user_group_id == 1)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">

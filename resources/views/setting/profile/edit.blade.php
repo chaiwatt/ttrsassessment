@@ -522,7 +522,7 @@
 												</div>
 												<div class="col-md-6">
 													<label>หมายเลขผู้เสียภาษีนิติบุคคล</label> <span id="msg" class="text-success"></span>
-													<input type="number" name="vatno" id="vatno" value="{{$user->companyvatid}}" data-placeholder="หมายเลขผู้เสียภาษีนิติบุคคล" class="form-control" @if ($user->user_group_id == 1) readonly @endif>
+													<input type="number" name="vatno" id="vatno" value="{{$user->companyvatid}}" data-placeholder="หมายเลขผู้เสียภาษีนิติบุคคล" class="form-control" @if ($user->user_group_id == 2) readonly @endif>
 												</div>
 											</div>
 										</div>

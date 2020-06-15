@@ -5,9 +5,9 @@ $("#usergroup").on('change', function() {
     $("#vatnomessage").attr("hidden",true);
     $("#vatnomessage").addClass("validation-invalid-label")
     if($(this).val() == 1) {
-        $("#vatwrapper").attr("hidden",true);
-    } else { 
         $("#vatwrapper").attr("hidden",false);
+    } else { 
+        $("#vatwrapper").attr("hidden",true);
     }
 });
 

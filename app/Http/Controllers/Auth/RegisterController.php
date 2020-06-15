@@ -46,16 +46,16 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'usergroup' => 'required',
-            'vatno' => 'required_if:usergroup,==,2',
+            'vatno' => 'required_if:usergroup,==,1',
             'term' => 'required',
         ]);
     }
 
     protected function create(array $data)
     {
-        $group = 1;
+        $group = 2;
        if(!Empty($data['vatno'])){
-            $group =2;
+            $group =1;
        }
         $user = User::create([
             'prefix_id' => 1,
@@ -67,7 +67,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
-        if($group == 2){
+        if($group == 1){
             CreateCompany::createCompany($user,$data['companyname'],$data['vatno']);
         }
         return $user ; 
