@@ -19,8 +19,12 @@ class CreateCompaniesTable extends Migration
             $table->char('vatno',13)->unique()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('registered_capital_type_id')->nullable();
+            $table->char('registeredyear',4)->nullable();
+            $table->double('registeredcapital',10,2)->nullable();
+            $table->double('paidupcapital',10,2)->nullable();
+            $table->date('paidupcapitaldate')->nullable();
             $table->unsignedBigInteger('industry_group_id')->nullable();   
-            $table->unsignedBigInteger('business_type_id')->nullable();
+            $table->unsignedBigInteger('business_type_id')->default(1);
             $table->string('name',150)->nullable();
             $table->string('phone',15)->nullable();
             $table->string('fax',15)->nullable();

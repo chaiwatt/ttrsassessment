@@ -269,6 +269,10 @@
 									<label for="">อีเมล์</label>
 									<input type="text" name ="contactemail" value="{{$minitbp->contactemail}}" class="form-control" >
 								</div>
+								<div class="form-group">
+									<label for="">เว็บไซต์</label>
+									<input type="text" name ="website" value="{{$minitbp->website}}" class="form-control" >
+								</div>
 							</div>
 						</div>
 							<div class="text-right">

@@ -42,6 +42,7 @@ class CreateMiniTBPSTable extends Migration
             $table->unsignedBigInteger('contactposition_id')->nullable();
             $table->string('contactphone',15)->nullable();
             $table->string('contactemail',50)->nullable();
+            $table->string('website',150)->nullable();
             $table->string('attachment',250)->nullable();
             $table->char('submit',1)->default('1');
             $table->timestamps();

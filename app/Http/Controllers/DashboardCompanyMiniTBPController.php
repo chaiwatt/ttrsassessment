@@ -70,6 +70,7 @@ class DashboardCompanyMiniTBPController extends Controller
             'contactposition_id' => $request->contactposition,
             'contactphone' => $request->contactphone,
             'contactemail' => $request->contactemail,
+            'website' => $request->website,
         ]);
         return  redirect()->back()->withSuccess('แก้ไขรายการสำเร็จ');
     }

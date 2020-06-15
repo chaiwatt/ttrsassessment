@@ -20,6 +20,9 @@ class BusinessTypesTableSeeder extends Seeder
             ],
             [
                 'name' => 'บริษัทมหาชน'
+            ],
+            [
+                'name' => 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ'
             ]
         ]);
     }
