@@ -12,6 +12,7 @@ use App\Model\Province;
 use App\Model\BusinessType;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use App\Model\RegisteredCapitalType;
 use App\Http\Requests\EditCompanyRequest;
 
@@ -53,6 +54,10 @@ class SettingUserCompanyController extends Controller
         $company->update([
             'name' => $request->company,
             'registered_capital_type_id' => $request->registeredcapitaltype,
+            'registeredyear' => $request->registeredyear,
+            'registeredcapital' => $request->registeredcapital,
+            'paidupcapital' => $request->paidupcapital,
+            'paidupcapitaldate' => DateConversion::thaiToEngDate($request->paidupcapitaldate),
             'industry_group_id' => $request->industrygroup,
             'business_type_id' => $request->businesstype,
             'phone' => $request->phone,

@@ -8,6 +8,7 @@ use App\Model\Tambol;
 use App\Model\Province;
 use App\Helper\LogAction;
 use App\Model\BusinessPlan;
+use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -51,5 +52,9 @@ class Company extends Model
     public function getProvinceAttribute()
     {
         return Province::find($this->province_id);
+    }
+    public function getPaidupcapitaldateThAttribute()
+    {
+        return DateConversion::engToThaiDate($this->paidupcapitaldate);
     }
 }

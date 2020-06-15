@@ -66,7 +66,6 @@
                                         <div class="form-group">
                                             <label>การจดทะเบียน<span class="text-danger">*</span></label>
                                             <select name="businesstype" data-placeholder="ประเภทการจดทะเบียน" class="form-control form-control-select2">
-                                                <option value=""></option>
                                                     @foreach ($businesstypes as $businesstype)
                                                         <option value="{{$businesstype->id}}" @if($company->registered_capital_type_id == $businesstype->id) selected @endif>{{$businesstype->name}}</option> 
                                                     @endforeach
@@ -83,21 +82,43 @@
                                         <div class="form-group">
                                             <label>กลุ่มธุรกิจ<span class="text-danger">*</span></label>
                                             <select name="industrygroup" data-placeholder="กลุ่มธุรกิจ" class="form-control form-control-select2">
-                                                <option value=""></option>
-                                                    @foreach ($industrygroups as $industrygroup)
-                                                        <option value="{{$industrygroup->id}}" @if($company->industry_group_id == $industrygroup->id) selected @endif>{{$industrygroup->name}}</option> 
-                                                    @endforeach
+                                                @foreach ($industrygroups as $industrygroup)
+                                                    <option value="{{$industrygroup->id}}" @if($company->industry_group_id == $industrygroup->id) selected @endif>{{$industrygroup->name}}</option> 
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>ประเภททุนจดทะเบียน<span class="text-danger">*</span></label>
                                             <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-select2">
-                                                <option value=""></option>
-                                                    @foreach ($registeredcapitaltypes as $registeredcapitaltype)
-                                                        <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}: {{$registeredcapitaltype->detail}}</option> 
-                                                    @endforeach
+                                                @foreach ($registeredcapitaltypes as $registeredcapitaltype)
+                                                    <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}: {{$registeredcapitaltype->detail}}</option> 
+                                                @endforeach
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>ปีที่จดทะเบียน</label>
+                                            <input type="number"  name="registeredyear" value="{{$company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ทุนจดทะเบียน</label>
+                                            <input type="number"  name="registeredcapital" value="{{$company->registeredcapital}}"  placeholder="ทุนจดทะเบียน" class="form-control" >
+                                        </div>
+                                        <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
+                                                    <input type="number"  name="paidupcapital" value="{{$company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>เมื่อวันที่</label>
+                                                    <input type="text"  name="paidupcapitaldate" id="paidupcapitaldate" value="{{$company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                         <div class="form-group">
                                             <label>โทรศัพท์<span class="text-danger">*</span></label>
                                             <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control">
@@ -195,6 +216,15 @@
         };
         $("#file").on('change', function() {
             $("#filename").val(this.value);
+        });
+        $('#paidupcapitaldate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY',
+            clearButton: true,
+            weekStart: 1,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
         });
     </script>	
 @stop
