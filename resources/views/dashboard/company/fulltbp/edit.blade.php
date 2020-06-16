@@ -6,7 +6,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Mini TBP</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Full TBP</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			<div class="header-elements d-none">
@@ -22,8 +22,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> การประเมิน</a>
-                    <a href="{{route('dashboard.company.minitbp')}}" class="breadcrumb-item"> รายการ Mini TBP</a>
-                    <span class="breadcrumb-item active">Mini TBP</span>
+                    <a href="{{route('dashboard.company.fulltbp')}}" class="breadcrumb-item"> รายการ Full TBP</a>
+                    <span class="breadcrumb-item active">Full TBP</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -53,9 +53,6 @@
         <div class="row">
             <div class="col-md-12">
 				<!-- Colors -->
-
-
-				
             	<div class="card">
 					{{-- <div class="card-header header-elements-inline">
 					
@@ -63,10 +60,10 @@
 
                 	<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-highlight">
-							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini TBP</a></li>
-							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ติดต่อ</a></li>
+							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลทั่วไป</a></li>
+							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แผนผังองค์กร</a></li>
 						</ul>
-						<form method="POST" action="{{route('dashboard.company.minitbp.editsave',['id'=>$minitbp->id])}}" enctype="multipart/form-data">
+						<form method="POST" action="{{route('dashboard.company.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
 							@csrf
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="left-icon-minitbp">
@@ -75,7 +72,7 @@
 									<div class="col-md-12">
 										<fieldset>	
 											<div class="form-group">
-												<label>โครงการ<span class="text-danger">*</span></label>
+												<label>โครงการ</label>
 												<input type="text"  name="project" value="{{$minitbp->project}}"  placeholder="โครงการ" class="form-control">
 											</div>
 										</fieldset>
@@ -237,7 +234,7 @@
 							</div>
 							<div class="tab-pane fade" id="left-icon-contact">
 								<div class="form-group">
-									<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+									<label for="">คำนำหน้าชื่อ</label>
 									<select name="contactprefix" id="" class="form-control form-control-select2">
 										@foreach ($contactprefixes as $contactprefix)
 											<option value="{{$contactprefix->id}}" @if($minitbp->contactprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
@@ -245,15 +242,15 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="">ชื่อ<span class="text-danger">*</span></label>
+									<label for="">ชื่อ</label>
 									<input type="text" name ="contactname" value="{{$minitbp->contactname}}" class="form-control" >
 								</div>
 								<div class="form-group">
-									<label for="">นามสกุล<span class="text-danger">*</span></label>
+									<label for="">นามสกุล</label>
 									<input type="text" name ="contactlastname" value="{{$minitbp->contactlastname}}" class="form-control" >
 								</div>
 								<div class="form-group">
-									<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
+									<label for="">ตำแหน่ง</label>
 									<select name="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2">
 										@foreach ($contactpositions as $contactposition)
 											<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
@@ -261,11 +258,11 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="">เบอร์โทร<span class="text-danger">*</span></label>
+									<label for="">เบอร์โทร</label>
 									<input type="text" name ="contactphone" value="{{$minitbp->contactphone}}" class="form-control" >
 								</div>
 								<div class="form-group">
-									<label for="">อีเมล์<span class="text-danger">*</span></label>
+									<label for="">อีเมล์</label>
 									<input type="text" name ="contactemail" value="{{$minitbp->contactemail}}" class="form-control" >
 								</div>
 								<div class="form-group">

@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Mini TBP</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             {{-- <div class="header-elements d-none">
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการ Mini TBP</span>
+                    <span class="breadcrumb-item active">รายการ Full TBP</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -66,33 +66,19 @@
                                 <thead>
                                     <tr>
                                         <th>เลขที่โครงการ</th>
-                                        <th>ชื่อโครงการ</th>    
-                                        <th>สถานะ</th>                               
+                                        <th>ชื่อโครงการ</th>                               
                                         <th style="text-align: right">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($minitbps as $key => $minitbp)
+                                    @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
-                                        <td> {{$minitbp->businessplan->code}} </td> 
-                                        <td> {{$minitbp->project}} </td>      
-                                        <td> 
-                                            @if ($minitbp->businessplan->business_plan_status_id < 3)
-                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
-                                                @else
-                                                <span class="badge badge-flat border-success text-success-600">ส่งแล้ว</span>
-                                            @endif
-                                        </td>                                     
+                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        <td> {{$fulltbp->minitbp->project}} </td>                                        
                                         <td style="text-align: right"> 
-                                            @if (!Empty($minitbp->attachment))
-                                            <a href="{{asset($minitbp->attachment)}}" class=" btn btn-sm bg-primary">ดาวน์โหลดไฟล์</a> 
-                                            @endif
-                                            <a href="{{route('dashboard.company.minitbp.edit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-warning">แก้ไข</a>
-                                            
-                                            @if (!Empty($minitbp->project))
-                                                <a href="{{route('dashboard.company.minitbp.downloadpdf',['id' => $minitbp->id])}}" class=" btn btn-sm bg-teal">ดาวน์โหลด PDF</a>
-                                                <a href="{{route('dashboard.company.minitbp.submit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-info">ส่ง mini TBP</a>
-                                            @endif
+                                            <a href="{{route('dashboard.company.fulltbp.edit',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-warning">แก้ไข</a>
+                                            <a href="{{route('dashboard.company.fulltbp.downloadpdf',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-teal">ดาวน์โหลด PDF</a>
+                                            <a href="{{route('dashboard.company.fulltbp.submit',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-info">ส่ง Full TBP</a>
                                         </td>
                                     </tr>
                                     @endforeach

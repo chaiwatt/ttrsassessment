@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ปีที่จดทะเบียน</label>
-                                            <input type="number"  name="registeredyear" value="{{$company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" >
+                                            <input type="number"  name="registeredyear" value="{{$registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>ทุนจดทะเบียน</label>

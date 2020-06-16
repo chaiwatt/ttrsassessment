@@ -1,15 +1,12 @@
 <?php
-
-namespace App\Http\Controllers\Api;
+namespace App\Helper;
 
 use App\Model\Company;
-use Illuminate\Http\Request;
 use App\Helper\DateConversion;
-use App\Http\Controllers\Controller;
 
-class TinPinController extends Controller
+class TinPin
 {
-    public function CompanyInfo(Request $request){
+    public static function tinpin($_vatid){
         $companyinfo = collect();
         $wsdl = 'https://rdws.rd.go.th/serviceRD3/vatserviceRD3.asmx?wsdl';
         $soapclient = new \nusoap_client($wsdl, true);
@@ -22,7 +19,7 @@ class TinPinController extends Controller
         $var_name = array(
                 'username' => 'anonymous',
                 'password' => 'anonymous',
-                'TIN'   => $request->vatid,
+                'TIN'   => $_vatid,
                 'skip'   => 0
         );
         $result = $soapclient->call('Service', $var_name);
@@ -48,13 +45,13 @@ class TinPinController extends Controller
                     $vat =false;
                 }
 
-                $company = Company::where('vatno',$request->vatid)->first();
+                $company = Company::where('vatno',$_vatid)->first();
                 $exist = 'n';
                 if(!Empty($company)){
                     $exist ='y';
                 }
                 
-                $_companyinfo[] = array('vatid' => $vatid, 'registerdate' => $registerdate, 'registerdateth' => $registerdateth,'title' => $title,'name' => $name,'housenumber' => $housenumber
+                $_companyinfo[] = array('vatid' => $vatid, 'registerdate' => $registerdate,'registerdateth' => $registerdateth,'title' => $title,'name' => $name,'housenumber' => $housenumber
                 ,'moo' => $moo,'soi' => $soi,'street' => $street,'tambolname' => $tambolname,'amphurname' => $amphurname
                 ,'provincename' => $provincename,'postalcode' => $postalcode,'vat' => $vat,'exist' => $exist);
                 $companyinfo = collect($_companyinfo);
@@ -63,5 +60,6 @@ class TinPinController extends Controller
                 return response()->json($companyinfo);
             }
         }
-    }
+    } 
 }
+

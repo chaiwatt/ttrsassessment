@@ -7,6 +7,7 @@ use App\User;
 use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Tambol;
+use App\Helper\TinPin;
 use App\Model\Company;
 use App\Model\Province;
 use App\Model\BusinessType;
@@ -24,16 +25,19 @@ class SettingUserCompanyController extends Controller
         $industrygroups = IndustryGroup::get();
         $businesstypes = BusinessType::get();
         $company = Company::where('user_id',$user->id)->first();
+        $companyinfo = TinPin::tinpin($company->vatno);
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$company->province_id)->get();
         $tambols = Tambol::where('amphur_id',$company->amphur_id)->get();
+        $registeredyear = substr(json_decode($companyinfo->getContent(), true)[0]['registerdateth'], -4);
         return view('setting.user.company.edit')->withCompany($company)
                                         ->withRegisteredcapitaltypes($registeredcapitaltypes)
                                         ->withIndustrygroups($industrygroups)
                                         ->withBusinesstypes($businesstypes)
                                         ->withAmphurs($amphurs)
                                         ->withTambols($tambols)
-                                        ->withProvinces($provinces);
+                                        ->withProvinces($provinces)
+                                        ->withRegisteredyear($registeredyear);
     }
 
     public function EditSave(EditCompanyRequest $request, $id){
@@ -72,8 +76,7 @@ class SettingUserCompanyController extends Controller
             'lng' => $request->lng,
             'logo' => $filelocation
         ]);
-        return redirect()->back()->withSuccess('แก้ไขข้อมูลบริษัทสำเร็จ');
-        
+        return redirect()->back()->withSuccess('แก้ไขข้อมูลบริษัทสำเร็จ'); 
     }
 }
 

@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 
 use App\Model\Company;
+use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
@@ -30,6 +31,10 @@ class AssessmentController extends Controller
                 $minitbp = new MiniTBP();
                 $minitbp->business_plan_id = $businessplan->id;
                 $minitbp->save();
+
+                $fulltbp = new FullTbp();
+                $fulltbp->mini_tbp_id = $minitbp->id;
+                $fulltbp->save();
 
                 // $businessplanfeetransaction = new BusinessPlanFeeTransaction();
                 // $businessplanfeetransaction->invoiceno = Carbon::now()->timestamp;

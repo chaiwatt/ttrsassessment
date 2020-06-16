@@ -11,6 +11,7 @@ use App\Model\UserPosition;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EditMiniTbpRequest;
 use setasign\Fpdi\PdfParser\StreamReader;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
@@ -44,7 +45,7 @@ class DashboardCompanyMiniTBPController extends Controller
         $pdf = Pdf::loadView('dashboard.company.minitbp.pdf',$data);
         return $pdf->stream('document.pdf');
     }
-    public function EditSave(Request $request,$id){
+    public function EditSave(EditMiniTbpRequest $request,$id){
         MiniTBP::find($id)->update([
             'project' => $request->project,
             'finance1' => $request->finance1,
@@ -72,7 +73,7 @@ class DashboardCompanyMiniTBPController extends Controller
             'contactemail' => $request->contactemail,
             'website' => $request->website,
         ]);
-        return  redirect()->back()->withSuccess('แก้ไขรายการสำเร็จ');
+        return  redirect()->route('dashboard.company.minitbp')->withSuccess('แก้ไขรายการสำเร็จ');
     }
 
     public function DownloadPDF($id){

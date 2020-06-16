@@ -18,8 +18,11 @@ class CreateFullTbpEmployeesTable extends Migration
             $table->unsignedBigInteger('business_plan_id');
             $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
             $table->unsignedBigInteger('mini_tbp_id');
-            $table->string('department',150)->nullable();
-            $table->char('quantity',2)->nullable();
+            $table->char('department1_qty',2)->default(0)->comment('ฝ่ายบริหาร');
+            $table->char('department2_qty',2)->default(0)->comment('ฝ่ายวิจัยและพัฒนา');
+            $table->char('department3_qty',2)->default(0)->comment('ฝ่ายผลิต/วิศวกรรม');
+            $table->char('department4_qty',2)->default(0)->comment('ฝ่ายการตลาด');
+            $table->char('department5_qty',2)->default(0)->comment('พนักงานทั่วไป');
             $table->timestamps();
         });
     }

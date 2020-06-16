@@ -55,6 +55,7 @@ class Company extends Model
     }
     public function getPaidupcapitaldateThAttribute()
     {
+        if(Empty($this->paidupcapitaldate)) return ;
         return DateConversion::engToThaiDate($this->paidupcapitaldate);
     }
 }

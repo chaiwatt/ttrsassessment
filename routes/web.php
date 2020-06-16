@@ -39,7 +39,7 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('tambol','Api\LocationController@Tambol')->name('api.location.tambol'); 
     });  
     Route::group(['prefix' => 'tinpin'], function(){
-        Route::post('companyinfo','Api\TinPinController@CompanyInfo')->name('api.tinpin.companyinfo');           
+        Route::post('companyinfo','Api\TinPinController@CompanyInfo')->name('api.tinpin.companyinfo');            
     });  
     Route::group(['prefix' => 'sms'], function(){
         Route::post('send','Api\SMSController@Send')->name('api.sms.send');           
@@ -151,7 +151,11 @@ Route::group(['middleware' => 'auth'], function(){
             });  
             Route::group(['prefix' => 'fulltbp'], function(){
                 Route::get('','DashboardCompanyFullTbpController@Index')->name('dashboard.company.fulltbp');  
-                Route::get('edit/{id}','DashboardCompanyFullTbpController@Edit')->name('dashboard.company.fulltbp.edit');          
+                Route::get('edit/{id}','DashboardCompanyFullTbpController@Edit')->name('dashboard.company.fulltbp.edit');   
+                Route::post('editsave/{id}','DashboardCompanyFullTbpController@EditSave')->name('dashboard.company.fulltbp.editsave');   
+                Route::get('downloadpdf/{id}','DashboardCompanyFullTbpController@DownloadPDF')->name('dashboard.company.fulltbp.downloadpdf'); 
+                Route::get('submit/{id}','DashboardCompanyFullTbpController@Submit')->name('dashboard.company.fulltbp.submit'); 
+                Route::post('submitsave/{id}','DashboardCompanyFullTbpController@SubmitSave')->name('dashboard.company.fulltbp.submitsave');        
             }); 
         }); 
     });   
