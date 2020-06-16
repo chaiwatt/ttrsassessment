@@ -369,10 +369,10 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('edit/{userid}','SettingUserCompanyController@Edit')->name('setting.user.company.edit');           
                 Route::post('editsave/{id}','SettingUserCompanyController@EditSave')->name('setting.user.company.editsave'); 
             });
-            Route::group(['prefix' => 'businessplan'], function(){
-                Route::get('edit/{userid}','SettingUserBusinessPlanController@Edit')->name('setting.user.businessplan.edit');           
-                Route::post('editsave/{id}','SettingUserBusinessPlanController@EditSave')->name('setting.user.businessplan.editsave'); 
-            });
+            // Route::group(['prefix' => 'businessplan'], function(){
+            //     Route::get('edit/{userid}','SettingUserBusinessPlanController@Edit')->name('setting.user.businessplan.edit');           
+            //     Route::post('editsave/{id}','SettingUserBusinessPlanController@EditSave')->name('setting.user.businessplan.editsave'); 
+            // });
         });
         Route::group(['prefix' => 'profile'], function(){
             Route::get('edit/{userid}','SettingProfileController@Edit')->name('setting.profile.edit'); 

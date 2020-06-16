@@ -15,9 +15,8 @@ class CreateFullTbpEmployeesTable extends Migration
     {
         Schema::create('full_tbp_employees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('business_plan_id');
-            $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
-            $table->unsignedBigInteger('mini_tbp_id');
+            $table->unsignedBigInteger('full_tbp_id');
+            $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
             $table->char('department1_qty',2)->default(0)->comment('ฝ่ายบริหาร');
             $table->char('department2_qty',2)->default(0)->comment('ฝ่ายวิจัยและพัฒนา');
             $table->char('department3_qty',2)->default(0)->comment('ฝ่ายผลิต/วิศวกรรม');

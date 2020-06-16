@@ -9,13 +9,7 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Full TBP</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
-			<div class="header-elements d-none">
-                <div class="d-flex justify-content-center">
-                    <div class="form-check ">
-                        <input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ประเมิน" data-off-text="ไม่ประเมิน" class="form-check-input-switch" @if (!Empty($company->businessplan)) checked @endif >
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -62,6 +56,10 @@
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลทั่วไป</a></li>
 							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แผนผังองค์กร</a></li>
+							<li class="nav-item"><a href="#left-icon-employee" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> บุคลากร</a></li>
+							<li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แทบ2</a></li>
+							<li class="nav-item"><a href="#left-icon-tab3" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แทบ3</a></li>
+							<li class="nav-item"><a href="#left-icon-tab4" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แทบ4</a></li>
 						</ul>
 						<form method="POST" action="{{route('dashboard.company.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
 							@csrf
@@ -72,204 +70,81 @@
 									<div class="col-md-12">
 										<fieldset>	
 											<div class="form-group">
-												<label>โครงการ</label>
-												<input type="text"  name="project" value="{{$minitbp->project}}"  placeholder="โครงการ" class="form-control">
+												<label>ชื่อนิติบุคคล</label>
+												<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control" readonly>
+											</div>
+											<div class="form-group">
+												<label>เลขทะเบียนนิติบุคคล</label>
+												<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control" readonly>
+											</div>
+											<div class="form-group">
+												<label>ปีที่จดทะเบียน</label>
+												<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
+											</div>
+											<div class="form-group">
+												<label>ทุนที่จดทะเบียน</label>
+												<input type="number" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control" readonly>
+											</div>
+											<div class="form-group">
+												<label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
+												<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+											</div>
+											<div class="form-group">
+												<label>ทุนจดทะเบียนที่เรียกชำระแล้ว เมื่อวันที่</label>
+												<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
 											</div>
 										</fieldset>
 									</div>
 								</div>
 	
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group mb-3 mb-md-2">
-											<label class="font-weight-semibold">สิทธิประโยชน์ทางการเงิน (Finance)</label>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<div class="form-check">
-															<label class="form-check-label">
-																<input type="checkbox" name="finance1"  id="finance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance1)) checked @endif data-fouc>
-																ขอสินเชื่อกับธนาคาร
-															</label>
-															<div class="row" id="financediv1" style="margin-top: 5px" @if (Empty($minitbp->thai_bank_id) || Empty($minitbp->finance1)) hidden @endif >
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label for="">เลือกธนาคาร</label>
-																		<select name="bank" id="" class="form-control form-control-select2">
-																			@foreach ($banks as $bank)
-																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_id == $bank->id) selected @endif >{{$bank->name}}</option>
-																			@endforeach
-																		</select>
-																	</div>
-																</div>
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																		<input type="number" name="finance1loan" value="{{$minitbp->finance1_loan}}" class="form-control" >
-																	</div>
-																</div>
-															</div>	
-														</div>
-													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="finance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance2)) checked @endif  data-fouc>
-															ขอรับการค้ำประกันสินเชื่อฯบสย(บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)
-														</label>
-														
-													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="finance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance3)) checked @endif data-fouc>
-															โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)
-														</label>
-													</div>
-												</div>
-	
-												<div class="col-md-6">
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="finance4" id="finance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance4)) checked @endif data-fouc>
-															บริษัทร่วมทุน (สวทช.)
-														</label>
-														<div class="row" id="financediv2" style="margin-top: 5px" @if (Empty($minitbp->finance4_joint_min) || Empty($minitbp->finance4)) hidden @endif >
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																	<input type="text" name ="finance4joint" class="form-control" value="{{$minitbp->finance4_joint}}">
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="">สัดส่วนลงทุน บริษัท</label>
-																	<input type="number" name="finance4jointmin" class="form-control" value="{{$minitbp->finance4_joint_min}}">
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="">: สวทช</label>
-																	<input type="number" name="finance4jointmax" class="form-control" value="{{$minitbp->finance4_joint_max}}">
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<hr>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group mb-3 mb-md-2">
-											<label class="font-weight-semibold">สิทธิประโยชน์ที่ไม่ใช่การเงิน (Non-Finance)</label>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc>
-															โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย
-														</label>
-													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance2)) checked @endif data-fouc>
-															รับรองสิทะฺประโยชน์ทางภาษี
-														</label>
-													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc>
-															โครงการ spin-off
-														</label>
-													</div>
-												</div>
-	
-												<div class="col-md-6">
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc>
-															ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ
-														</label>
-													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox"id="nonefinance4" name="nonefinance5" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance5)) checked @endif data-fouc >
-															โครงการสนับสนุนผู้ประกอบการภาครัฐ
-														</label>
-														<div class="row" id="nonefinancediv1" style="margin-top: 5px" @if (Empty($minitbp->nonefinance5_detail) || Empty($minitbp->nonefinance5)) hidden @endif>
-															<div class="col-md-12">
-																<div class="form-group">
-																	<label for="">โปรดระบุ</label>
-																	<input type="text" name ="nonefinance5detail" class="form-control" value="{{$minitbp->nonefinance5_detail}}">
-																</div>
-															</div>
-														</div>
-													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" id="nonefinance5" name="nonefinance6" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance6)) checked @endif data-fouc>
-															อื่น ๆ
-														</label>
-														<div class="row" id="nonefinancediv2" style="margin-top: 5px"  @if (Empty($minitbp->nonefinance6_detail) || Empty($minitbp->nonefinance6) ) hidden @endif>
-															<div class="col-md-12">
-																<div class="form-group">
-																	<label for="">โปรดระบุ</label>
-																	<input type="text" name="nonefinance6detail" class="form-control" value="{{$minitbp->nonefinance6_detail}}">
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
 							<div class="tab-pane fade" id="left-icon-contact">
 								<div class="form-group">
-									<label for="">คำนำหน้าชื่อ</label>
-									<select name="contactprefix" id="" class="form-control form-control-select2">
-										@foreach ($contactprefixes as $contactprefix)
-											<option value="{{$contactprefix->id}}" @if($minitbp->contactprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
-										@endforeach
-									</select>
-								</div>
-								<div class="form-group">
 									<label for="">ชื่อ</label>
-									<input type="text" name ="contactname" value="{{$minitbp->contactname}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">นามสกุล</label>
-									<input type="text" name ="contactlastname" value="{{$minitbp->contactlastname}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">ตำแหน่ง</label>
-									<select name="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2">
-										@foreach ($contactpositions as $contactposition)
-											<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
-										@endforeach
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="">เบอร์โทร</label>
-									<input type="text" name ="contactphone" value="{{$minitbp->contactphone}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">อีเมล์</label>
-									<input type="text" name ="contactemail" value="{{$minitbp->contactemail}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">เว็บไซต์</label>
-									<input type="text" name ="website" value="{{$minitbp->website}}" class="form-control" >
+									<input type="text" name ="contactname" value="" class="form-control" >
 								</div>
 							</div>
+							<div class="tab-pane fade" id="left-icon-employee">
+								<div class="form-group">
+									<label for="">ฝ่ายบริหาร</label>
+									<input type="number" name ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="">ฝ่ายวิจัยและพัฒนา</label>
+									<input type="number" name ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="">ฝ่ายผลิต/วิศวกรรม</label>
+									<input type="number" name ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="">ฝ่ายการตลาด</label>
+									<input type="number" name ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="">พนักงานทั่วไป </label>
+									<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-tab2">
+								<div class="form-group">
+									<label for="">2</label>
+									<input type="text" name ="contactname" value="" class="form-control" >
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-tab3">
+								<div class="form-group">
+									<label for="">3</label>
+									<input type="text" name ="contactname" value="" class="form-control" >
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-tab4">
+								<div class="form-group">
+									<label for="">4</label>
+									<input type="text" name ="contactname" value="" class="form-control" >
+								</div>
+							</div>
+
 						</div>
 							<div class="text-right">
 								<button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -287,6 +162,5 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/minitbphelper.js')}}"></script>
 
 @stop
