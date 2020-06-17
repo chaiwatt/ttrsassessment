@@ -98,7 +98,10 @@ class DashboardCompanyMiniTBPController extends Controller
         ]);
         $auth = Auth::user();
         $company = Company::where('user_id',$auth->id)->first();
-        $minitpb = MiniTBP::find($id); 
+        $minitpb = MiniTBP::find($id);
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $company_address = (!Empty($company->address))?$company->address:'';
+
         $finance1_text = (!Empty($minitpb->finance1))?'x':'';
         $finance1_bank = (!Empty($minitpb->finance1) && !Empty($minitpb->thai_bank_id))?$minitpb->bank->name:'' ;
         $finance1_loan = (!Empty($minitpb->finance1) && !Empty($minitpb->finance1_loan))?number_format($minitpb->finance1_loan,2):'' ;
@@ -138,8 +141,8 @@ class DashboardCompanyMiniTBPController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'d').'</span>',172, 34.8, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'m').'</span>',180, 34.8, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'y').'</span>',187, 34.8, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company->name.'</span>', 69, 86.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company->address. ' ตำบล'. $company->tambol->name .' อำเภอ'. $company->amphur->name .' จังหวัด'. $company->province->name. ' ' .$company->postalcode.'</span>', 69, 94.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company_name.'</span>', 69, 86.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company_address. ' ตำบล'. $company->tambol->name .' อำเภอ'. $company->amphur->name .' จังหวัด'. $company->province->name. ' ' .$company->postalcode.'</span>', 69, 94.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactphone.'</span>', 69, 102.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactemail.'</span>', 69, 110.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 118.4, 150, 90, 'auto');

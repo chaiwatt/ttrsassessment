@@ -2,6 +2,7 @@ import * as Message from './message.js'
 import * as Expert from './expert.js'
 import * as Friend from './friend.js'
 import * as SMS from './sms.js'
+import * as Hid from './hid.js'
 
 var a=0;
 $(document).on("click","#btn_modal_expertexpience",function(e){
@@ -480,7 +481,7 @@ $("#coverimg").on('change', function() {
 });
 
 $("#usergroup").on('change', function() {
-    if($(this).val() == 1) {
+    if($(this).val() == 2) {
         $('#vatno').attr('readonly', true);
         $('#vatno').val('');
     } else { 
@@ -603,26 +604,31 @@ $(document).on("click","#getotp",function(e){
                       })
                 }
               })
-
-        //     Expert.deleteExpereince($(this).data('id')).then(data => {
-        //         var html='';
-        //         console.log(data);
-        //         data.forEach(function (expereince,index) {
-        //             html += `<tr>
-        //                         <td>${expereince.company} </td>
-        //                         <td>${expereince.position}</td>
-        //                         <td>${expereince.fromyear}</td>                   
-        //                         <td>${expereince.toyear}</td> 
-        //                         <td>                                                                                                      
-        //                         <a type="button" data-id="${expereince['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexpertexpienceclass_editview" ><i class="icon-trash danger"></i></a>
-        //                         </td>
-        //                     <tr>`
-        //             });
-        //          $("#expertexpience_wrapper_tr").html(html);
-        //    })
-        //    .catch(error => {
-        //        // console.log(error)
-        //    })
         }
     });
 });
+
+$("#hid").change(function(){
+     if($(this).val() == ""){
+         if($(this).hasClass("border-danger")){
+             $("#hidinvalid").attr("hidden",true);
+             $(this).removeClass('border-danger');            
+             $("#hidinvalid").text('');
+         }
+         return ;
+     }
+     Hid.check($(this).val()).then(data => {
+         if(data[0].success){
+             $("#hidinvalid").attr("hidden",true);
+             $(this).removeClass('border-danger');
+         }else{
+             $("#hidinvalid").attr("hidden",false);
+             $("#hidinvalid").text(data[0].message);            
+             $(this).addClass('border-danger');
+             $(this).val('');
+         }
+     })
+     .catch(error => {
+         console.log(error)
+     })
+ });

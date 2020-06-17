@@ -9,7 +9,7 @@ use App\Model\Amphur;
 use App\Model\Friend;
 use App\Model\Prefix;
 use App\Model\Tambol;
-use App\UserPosition;
+use App\Model\UserPosition;
 use App\Model\Company;
 use App\Model\Country;
 use App\Model\Province;
@@ -143,6 +143,7 @@ class SettingProfileController extends Controller
                 'prefix_id' => $request->prefix,
                 'name' => $request->name,
                 'lastname' => $request->lastname,
+                'hid' => $request->hid,
                 'user_position_id' => $request->userposition,
                 'address' => $request->address,
                 'phone' => $request->phone,

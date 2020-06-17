@@ -62,7 +62,7 @@
                                         <select name="businesstype" data-placeholder="การจดทะเบียน" class="form-control form-control-select2" disabled>
                                             <option value=""></option>
                                                 @foreach ($businesstypes as $businesstype)
-                                                    <option value="{{$businesstype->id}}" @if($company->registered_capital_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
+                                                    <option value="{{$businesstype->id}}" @if($company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
                                                 @endforeach
                                         </select>
                                     </div>

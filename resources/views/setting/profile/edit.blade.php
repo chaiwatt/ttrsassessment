@@ -490,7 +490,7 @@
 																							
 										<div class="form-group">
 											<div class="row">
-												<div class="col-md-2">
+												<div class="col-md-6">
 													<label>คำนำหน้า<span class="text-danger">*</span></label>
 													<select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2">
 														@foreach ($prefixes as $prefix)
@@ -498,16 +498,28 @@
 														@endforeach
 													</select>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<label>ชื่อ</label>
 													<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control">
 												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
 												<div class="col-md-6">
 													<label>นามสกุล</label>
 													<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control">
 												</div>
+												<div class="col-md-6">
+													<label>เลขประจำตัวประชาชน</label> <span id="msg" class="text-success"></span>
+													<input type="number" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขประจำตัวประชาชน" class="form-control">
+													<small id="hidinvalid" class="form-text text-danger" hidden></small>
+												</div>
 											</div>
 										</div>
+
+
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-6">

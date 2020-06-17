@@ -13,16 +13,28 @@ class BusinessTypesTableSeeder extends Seeder
     {
         DB::table('business_types')->insert([
             [
-                'name' => 'ห้างหุ้นส่วนจำกัด'
+                'name' => 'ห้างหุ้นส่วนจำกัด',
+                'user_group_id' => 1
             ],
             [
-                'name' => 'บริษัทจำกัด'
+                'name' => 'บริษัทจำกัด',
+                'user_group_id' => 1
             ],
             [
-                'name' => 'บริษัทมหาชน'
+                'name' => 'บริษัทมหาชน',
+                'user_group_id' => 1
             ],
             [
-                'name' => 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ'
+                'name' => 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ',
+                'user_group_id' => 1
+            ],
+            [
+                'name' => 'กิจการเจ้าของคนเดียว',
+                'user_group_id' => 2
+            ],
+            [
+                'name' => 'การจัดตั้งห้างหุ้นส่วนสามัญ',
+                'user_group_id' => 2
             ]
         ]);
     }

@@ -56,10 +56,10 @@
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลทั่วไป</a></li>
 							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แผนผังองค์กร</a></li>
-							<li class="nav-item"><a href="#left-icon-employee" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> บุคลากร</a></li>
-							<li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แทบ2</a></li>
-							<li class="nav-item"><a href="#left-icon-tab3" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แทบ3</a></li>
-							<li class="nav-item"><a href="#left-icon-tab4" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แทบ4</a></li>
+							<li class="nav-item"><a href="#left-icon-oganization" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลองค์กร</a></li>
+							<li class="nav-item"><a href="#left-icon-tab3" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> โครงการ</a></li>
+							<li class="nav-item"><a href="#left-icon-tab4" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การตลาด</a></li>
+							<li class="nav-item"><a href="#left-icon-financial" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การเงิน</a></li>
 						</ul>
 						<form method="POST" action="{{route('dashboard.company.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
 							@csrf
@@ -70,8 +70,17 @@
 									<div class="col-md-12">
 										<fieldset>	
 											<div class="form-group">
-												<label>ชื่อนิติบุคคล</label>
+												<label>ชื่อกิจการ</label>
 												<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control" readonly>
+											</div>
+											 <div class="form-group">
+												<label>การจดทะเบียน<span class="text-danger">*</span></label>
+												<select name="businesstype" data-placeholder="การจดทะเบียน" class="form-control form-control-select2" disabled>
+													<option value=""></option>
+														@foreach ($businesstypes as $businesstype)
+															<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
+														@endforeach
+												</select>
 											</div>
 											<div class="form-group">
 												<label>เลขทะเบียนนิติบุคคล</label>
@@ -96,40 +105,136 @@
 										</fieldset>
 									</div>
 								</div>
-	
 							</div>
 							<div class="tab-pane fade" id="left-icon-contact">
-								<div class="form-group">
-									<label for="">ชื่อ</label>
-									<input type="text" name ="contactname" value="" class="form-control" >
+								<div class="row">	
+									<div class="col-md-12"  >	
+										<div class="d-md-flex" >
+											<ul class="nav nav-tabs nav-tabs-vertical flex-column mr-md-2 wmin-md-200 mb-md-0 border-bottom-0">
+												<li class="nav-item"><a href="#vertical-left-employee" class="nav-link active" data-toggle="tab"><i class="icon-arrow-right5"></i> บุคลากร</a></li>
+												<li class="nav-item"><a href="#vertical-left-organizelist" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> แผนผังองค์กร</a></li>
+											</ul>
+											<div class="tab-content" style="word-break:break-all;width:100%" >
+												<div class="tab-pane fade" id="vertical-left-employee">
+													<div class="form-group">
+														<label for="">ฝ่ายบริหาร</label>
+														<input type="number" name ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label for="">ฝ่ายวิจัยและพัฒนา</label>
+														<input type="number" name ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label for="">ฝ่ายผลิต/วิศวกรรม</label>
+														<input type="number" name ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label for="">ฝ่ายการตลาด</label>
+														<input type="number" name ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label for="">พนักงานทั่วไป </label>
+														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													</div>
+												</div>
+												<div class="tab-pane fade" id="vertical-left-organizelist">
+													<div class="form-group">
+														<label for="">organizelist </label>
+														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade" id="left-icon-employee">
-								<div class="form-group">
-									<label for="">ฝ่ายบริหาร</label>
-									<input type="number" name ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">ฝ่ายวิจัยและพัฒนา</label>
-									<input type="number" name ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">ฝ่ายผลิต/วิศวกรรม</label>
-									<input type="number" name ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">ฝ่ายการตลาด</label>
-									<input type="number" name ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
-								</div>
-								<div class="form-group">
-									<label for="">พนักงานทั่วไป </label>
-									<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
-								</div>
-							</div>
-							<div class="tab-pane fade" id="left-icon-tab2">
-								<div class="form-group">
-									<label for="">2</label>
-									<input type="text" name ="contactname" value="" class="form-control" >
+							<div class="tab-pane fade" id="left-icon-oganization">
+								<div class="row">	
+									<div class="col-md-12"  >	
+										<div class="d-md-flex" >
+											<ul class="nav nav-tabs nav-tabs-vertical flex-column mr-md-2 wmin-md-200 mb-md-0 border-bottom-0">
+												<li class="nav-item"><a href="#vertical-left-companyprofile" class="nav-link active" data-toggle="tab"><i class="icon-arrow-right5"></i> ประวัติของบริษัท</a></li>
+												<li class="nav-item"><a href="#vertical-left-boardhistory" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ข้อมูลผู้บริหารระดับสูง</a></li>
+												<li class="nav-item"><a href="#vertical-left-teamhistory" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ข้อมูลทีมบริหาร</a></li>															
+												<li class="nav-item"><a href="#vertical-left-stockholder" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> บัญชีรายชื่อผู้ถือหุ้น</a></li>							
+												<li class="nav-item"><a href="#vertical-left-researcher" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ข้อมูลพนักงาน</a></li>							
+												<li class="nav-item"><a href="#vertical-left-takeowner" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ผู้รับผิดชอบโครงการ</a></li>							
+											</ul>
+											<div class="tab-content" style="word-break:break-all;width:100%" >
+												<div class="tab-pane fade show active" id="vertical-left-companyprofile" >	
+													<div class="form-group">
+														<label for="">ประวัติของบริษัท (Company Profile)</label>
+														<textarea name="" id="" cols="30" rows="7" placeholder="รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ)" class="form-control"></textarea>
+													</div>
+													<hr>	
+													<div class="row">
+														<div class="col-md-12">	
+															<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-left" ><i class="icon-add"></i></a>
+														</div>
+													</div>																								
+													<div class="row">	
+														<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-12">	
+															<div class="table-responsive">
+																<table class="table table-striped">
+																	<thead>
+																		<tr>
+																			<th>เอกสารแนบ</th>                                                                                  
+																			<th style="width:120px">ดาวน์โหลด</th>
+																		</tr>
+																	</thead>
+																	<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
+																		{{-- @foreach ($patientfoodallergies as $patientfoodallergy)
+																			<tr >                                        
+																				<td> {{$patientfoodallergy->name}} </td>                                            
+																				<td> <a type="button" data-id="{{$patientfoodallergy->id}}"  class="btn btn-danger-400 btn-sm" id="deletefoodallergy" ><i class="icon-trash danger"></i></a> </td>
+																			</tr>
+																		@endforeach                             --}}
+																	</tbody>
+																</table>
+															</div>
+														</div>      
+													</div>
+												</div>
+		
+												<div class="tab-pane fade" id="vertical-left-boardhistory">
+													<div class="form-group">
+														<label for="">rrrr </label>
+														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													</div>
+												</div>
+												<div class="tab-pane fade" id="vertical-left-teamhistory">
+													<div class="form-group">
+														<label for="">dfdsfsdf </label>
+														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													</div>
+												</div>
+												<div class="tab-pane fade" id="vertical-left-stockholder">
+													<div class="form-group">
+														<label for="">rrrrrrrrrrrrss </label>
+														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													</div>
+												</div>
+	
+												<div class="tab-pane fade" id="vertical-left-researcher">
+													<div class="form-group">
+														<label for="">ข้อมูลพนักงาน </label>
+														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													</div>
+												</div>
+												<div class="tab-pane fade" id="vertical-left-takeowner">
+													<div class="form-group">
+														<label for="">sdfsdf </label>
+														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="tab-pane fade" id="left-icon-tab3">

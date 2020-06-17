@@ -16,6 +16,7 @@ class CreateBusinessTypesTable extends Migration
         Schema::create('business_types', function (Blueprint $table) {
             $table->id();
             $table->string('name',150)->comment('ประเภทธุรกิจ หจก บมจ');
+            $table->unsignedBigInteger('user_group_id')->default(1);  //ปทุมธานี
             $table->timestamps();
         });
     }

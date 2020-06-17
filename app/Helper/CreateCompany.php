@@ -15,6 +15,7 @@ class CreateCompany
             'province_id' => 4,
             'amphur_id' => 67,
             'tambol_id' => 367,
+            'postalcode' => '12120',
         ]);
         return ;
     } 

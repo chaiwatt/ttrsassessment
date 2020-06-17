@@ -15,6 +15,7 @@
     </ul>
 </li>
 @endif
+
 @if (Auth::user()->user_type_id == 3 && !Empty(Auth::user()->company))
     @if (!Empty(Auth::user()->company->businessplan))
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
@@ -86,14 +87,14 @@
 </li>
 @endif
 
-@if (Auth::user()->user_type_id == 3 && Auth::user()->user_group_id == 1)
+@if (Auth::user()->user_type_id == 3 && !Empty(Auth::user()->company))
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.user.company')?'nav-item-expanded':''}}">
-            <a href="#" class="nav-link"><span>บริษัท</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
-                <li class="nav-item"><a href="{{route('setting.user.company.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.user.company.edit')?'active':''}}">ข้อมูลบริษัท</a></li>		             
+            <a href="#" class="nav-link"><span>ข้อมูลกิจการ</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="ข้อมูลกิจการ">
+                <li class="nav-item"><a href="{{route('setting.user.company.edit',['userid' => Auth::user()->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.user.company.edit')?'active':''}}">ข้อมูลกิจการ</a></li>		             
             </ul>
         </li>
     </ul>	

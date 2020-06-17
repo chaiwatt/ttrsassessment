@@ -67,9 +67,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
+        $companyname= '';
+        $vatno = '';
         if($group == 1){
-            CreateCompany::createCompany($user,$data['companyname'],$data['vatno']);
+            $companyname = $data['companyname'];
+            $vatno = $data['vatno'];
         }
+        CreateCompany::createCompany($user,$companyname,$vatno);
         return $user ; 
     }
 

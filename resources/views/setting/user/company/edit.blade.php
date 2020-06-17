@@ -66,9 +66,11 @@
                                         <div class="form-group">
                                             <label>การจดทะเบียน<span class="text-danger">*</span></label>
                                             <select name="businesstype" data-placeholder="ประเภทการจดทะเบียน" class="form-control form-control-select2">
-                                                    @foreach ($businesstypes as $businesstype)
+                                                @foreach ($businesstypes as $businesstype)
+                                                    @if (Auth::user()->user_group_id == $businesstype->user_group_id)
                                                         <option value="{{$businesstype->id}}" @if($company->registered_capital_type_id == $businesstype->id) selected @endif>{{$businesstype->name}}</option> 
-                                                    @endforeach
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">

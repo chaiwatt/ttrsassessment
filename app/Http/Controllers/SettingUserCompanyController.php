@@ -29,7 +29,10 @@ class SettingUserCompanyController extends Controller
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$company->province_id)->get();
         $tambols = Tambol::where('amphur_id',$company->amphur_id)->get();
-        $registeredyear = substr(json_decode($companyinfo->getContent(), true)[0]['registerdateth'], -4);
+        $registeredyear='';
+        if(!Empty($companyinfo)){
+            $registeredyear = substr(json_decode($companyinfo->getContent(), true)[0]['registerdateth'], -4);
+        }
         return view('setting.user.company.edit')->withCompany($company)
                                         ->withRegisteredcapitaltypes($registeredcapitaltypes)
                                         ->withIndustrygroups($industrygroups)
@@ -55,13 +58,17 @@ class SettingUserCompanyController extends Controller
             $filelocation = "storage/uploads/company/".$fname;
             Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
         }
+        $paidupcapitaldate=null;
+        if(!Empty($request->paidupcapitaldate)){
+            $paidupcapitaldate=DateConversion::thaiToEngDate($request->paidupcapitaldate);
+        }
         $company->update([
             'name' => $request->company,
             'registered_capital_type_id' => $request->registeredcapitaltype,
             'registeredyear' => $request->registeredyear,
             'registeredcapital' => $request->registeredcapital,
             'paidupcapital' => $request->paidupcapital,
-            'paidupcapitaldate' => DateConversion::thaiToEngDate($request->paidupcapitaldate),
+            'paidupcapitaldate' => $paidupcapitaldate,
             'industry_group_id' => $request->industrygroup,
             'business_type_id' => $request->businesstype,
             'phone' => $request->phone,
