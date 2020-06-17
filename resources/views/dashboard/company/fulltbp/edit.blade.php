@@ -115,7 +115,7 @@
 												<li class="nav-item"><a href="#vertical-left-organizelist" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> แผนผังองค์กร</a></li>
 											</ul>
 											<div class="tab-content" style="word-break:break-all;width:100%" >
-												<div class="tab-pane fade" id="vertical-left-employee">
+												<div class="tab-pane fade show active" id="vertical-left-employee">
 													<div class="form-group">
 														<label for="">ฝ่ายบริหาร</label>
 														<input type="number" name ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
@@ -164,7 +164,7 @@
 												<div class="tab-pane fade show active" id="vertical-left-companyprofile" >	
 													<div class="form-group">
 														<label for="">ประวัติของบริษัท (Company Profile)</label>
-														<textarea name="" id="" cols="30" rows="7" placeholder="รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ)" class="form-control"></textarea>
+														<textarea name="companyprofile" cols="30" rows="7" placeholder="รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ)" class="form-control">{{$fulltbpcompanyprofile->profile}}</textarea>
 													</div>
 													<hr>	
 													<div class="row">

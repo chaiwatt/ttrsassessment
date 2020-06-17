@@ -13,6 +13,7 @@ use App\Model\MessageBox;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Model\FullTbpEmployee;
+use App\Model\FullTbpCompanyProfile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Model\BusinessPlanFeeTransaction;
@@ -40,6 +41,10 @@ class AssessmentController extends Controller
                 $fulltbpemployee = new FullTbpEmployee();
                 $fulltbpemployee->full_tbp_id = $fulltbp->id;
                 $fulltbpemployee->save();
+
+                $fulltbpcompanyprofile = new FullTbpCompanyProfile();
+                $fulltbpcompanyprofile->full_tbp_id = $fulltbp->id;
+                $fulltbpcompanyprofile->save();
 
                 // $businessplanfeetransaction = new BusinessPlanFeeTransaction();
                 // $businessplanfeetransaction->invoiceno = Carbon::now()->timestamp;

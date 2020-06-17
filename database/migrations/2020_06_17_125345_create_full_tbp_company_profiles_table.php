@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFullTbpCompanyHistoriesTable extends Migration
+class CreateFullTbpCompanyProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateFullTbpCompanyHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('full_tbp_company_histories', function (Blueprint $table) {
+        Schema::create('full_tbp_company_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
-            $table->text('history')->nullable();
+            $table->text('profile')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateFullTbpCompanyHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('full_tbp_company_histories');
+        Schema::dropIfExists('full_tbp_company_profiles');
     }
 }

@@ -9,6 +9,7 @@ use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use Illuminate\Http\Request;
 use App\Model\FullTbpEmployee;
+use App\Model\FullTbpCompanyProfile;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardCompanyFullTbpController extends Controller
@@ -23,12 +24,15 @@ class DashboardCompanyFullTbpController extends Controller
     }
 
     public function Edit($id){
+        
         $businesstypes = BusinessType::get();
         $fulltbp = FullTbp::find($id);
+        $fulltbpcompanyprofile = FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first();
         $fulltbpemployee = FullTbpEmployee::where('full_tbp_id', $fulltbp->id)->first();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
-                                                ->withBusinesstypes($businesstypes);
+                                                ->withBusinesstypes($businesstypes)
+                                                ->withFulltbpcompanyprofile($fulltbpcompanyprofile);
     }
 
     public function EditSave(Request $request,$id){
@@ -40,6 +44,11 @@ class DashboardCompanyFullTbpController extends Controller
             'department4_qty' => $request->department4_qty,
             'department5_qty' => $request->department5_qty,
         ]); 
+        $fulltbp = FullTbp::find($id); 
+        FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first()->update([
+               'profile' => $request->companyprofile
+            ]);
+
         return redirect()->back()->withSuccess('แก้ไข Full TBP สำเร็จ');
     }
 
