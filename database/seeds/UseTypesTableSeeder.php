@@ -13,7 +13,7 @@ class UseTypesTableSeeder extends Seeder
     {
         DB::table('user_types')->insert([
             [
-                'name' => 'ผู้ใช้งานทั่วไป',
+                'name' => 'ผู้ใช้งานทั่วไป',   
                 'group' => 'A'
             ],
             [
@@ -21,11 +21,11 @@ class UseTypesTableSeeder extends Seeder
                 'group' => 'A'
             ],
             [
-                'name' => 'เจ้าหน้าที่ TTRS',
+                'name' => 'ผู้เชี่ยวชาญ',
                 'group' => 'B'
             ],
             [
-                'name' => 'ผู้เชี่ยวชาญ',
+                'name' => 'เจ้าหน้าที่ TTRS',
                 'group' => 'B'
             ],
             [

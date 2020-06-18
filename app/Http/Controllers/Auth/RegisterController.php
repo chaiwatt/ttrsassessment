@@ -59,7 +59,7 @@ class RegisterController extends Controller
        }
         $user = User::create([
             'prefix_id' => 1,
-            'user_type_id' => 3,
+            'user_type_id' => 2,
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],

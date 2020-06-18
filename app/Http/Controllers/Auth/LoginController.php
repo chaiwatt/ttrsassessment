@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 use App\Model\SocialAccount;
 use Illuminate\Http\Request;
+use App\Helper\CreateCompany;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -24,14 +25,14 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user) { 
-        if($user->user_type_id == 1){
+        if($user->user_type_id >= 4){
             return redirect()->route('dashboard.admin'); 
-        }else if($user->user_type_id == 2){
-            return redirect()->route('dashboard.expert'); 
         }else if($user->user_type_id == 3){
-            if($user->verify_type == 1){
+            return redirect()->route('dashboard.expert'); 
+        }else if($user->user_type_id <= 2){
+            // if($user->verify_type == 1){
                 return redirect()->route('dashboard.company'); 
-            }
+            // }
         }
     }
 
@@ -52,12 +53,13 @@ class LoginController extends Controller
         $user = User::where('email',$providerUser->getEmail())->first();
         if (Empty($user)) {
             $user = new User();
-            $user->user_type_id = 3;
+            $user->user_type_id = 2;
             $user->name = $providerUser->getName();
             $user->email = $providerUser->getEmail();
             $user->password = Hash::make('11111111');
             $user->email_verified_at = Carbon::now()->toDateString();
             $user->save();
+            CreateCompany::createCompany($user,'','');
         }
         return $user;
     }

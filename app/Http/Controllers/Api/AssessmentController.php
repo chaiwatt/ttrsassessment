@@ -65,11 +65,11 @@ class AssessmentController extends Controller
                 $messagebox->message_priority_id = 1;
                 $messagebox->body = Company::where('user_id',Auth::user()->id)->first()->name . 'ขอรับการประเมินใหม่';
                 $messagebox->sender_id = Auth::user()->id;
-                $messagebox->receiver_id = User::where('user_type_id',1)->first()->id;
+                $messagebox->receiver_id = User::where('user_type_id',4)->first()->id;
                 $messagebox->message_read_status_id = 1;
                 $messagebox->save();
 
-                EmailBox::send(User::where('user_type_id',1)->first()->email,'ขอรับการประเมินใหม่',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้สร้างรายการขอการประเมิน');
+                EmailBox::send(User::where('user_type_id',4)->first()->email,'ขอรับการประเมินใหม่',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้สร้างรายการขอการประเมิน');
 
             }
         }else{

@@ -4,7 +4,7 @@
         <li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
     </ul>
 </li>
-@if (Auth::user()->user_type_id == 1)
+@if (Auth::user()->user_type_id >=4 )
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
@@ -16,7 +16,7 @@
 </li>
 @endif
 
-@if (Auth::user()->user_type_id == 3 && !Empty(Auth::user()->company))
+@if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
     @if (!Empty(Auth::user()->company->businessplan))
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
             <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
@@ -33,7 +33,7 @@
         </li>
     @endif
 @endif
-@if (Auth::user()->user_type_id == 1)
+@if (Auth::user()->user_type_id >= 4)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">
@@ -87,7 +87,7 @@
 </li>
 @endif
 
-@if (Auth::user()->user_type_id == 3 && !Empty(Auth::user()->company))
+@if (Auth::user()->user_type_id <= 2 && !Empty(Auth::user()->company))
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">

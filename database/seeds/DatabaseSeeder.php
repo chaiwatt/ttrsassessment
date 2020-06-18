@@ -61,8 +61,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(CriteriaGroupsTableSeeder::class);
         $this->call(CriteriaGroupTransactionsTableSeeder::class);
-        $this->call(FriendRequestsTableSeeder::class);
-        $this->call(FriendsTableSeeder::class);
+        // $this->call(FriendRequestsTableSeeder::class);
+        // $this->call(FriendsTableSeeder::class);
         // $this->call(MessageBoxesTableSeeder::class);
         // $this->call(MessageReceivesTableSeeder::class);
         // $this->call(MessageBoxAttachmentsTableSeeder::class);

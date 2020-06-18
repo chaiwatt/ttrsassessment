@@ -331,14 +331,18 @@
 					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-user mr-2"></i>ข้อมูลส่วนตัว			
 					</a>
 				</li>
-				<li class="nav-item">
-					<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-medal-star mr-2"></i>ข้อมูลผู้เชี่ยวชาญ
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="#organizationinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-cog3 mr-2"></i>ข้อมูลหน่วยงาน
-					</a>
-				</li>
+				@if (Auth::user()->user_type_id == 2)
+					<li class="nav-item">
+						<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-medal-star mr-2"></i>ข้อมูลผู้เชี่ยวชาญ
+						</a>
+					</li>
+				@endif
+				@if (Auth::user()->user_type_id >= 4)
+					<li class="nav-item">
+						<a href="#organizationinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-cog3 mr-2"></i>ข้อมูลหน่วยงาน
+						</a>
+					</li>
+				@endif	
 				<li class="nav-item">
 					<a href="#activitylog" class="navbar-nav-link" data-toggle="tab">
 						<i class="icon-stack-text mr-2"></i>ข้อมูล Log
@@ -482,7 +486,7 @@
 									</div>
 								@endif								
 								<ul class="nav nav-tabs nav-tabs-highlight">
-									<li class="nav-item"><a href="#left-icon-personal" class="nav-link active" data-toggle="tab"><i class="icon-stack-star mr-2"></i> ประสบการณ์การทำงาน</a></li>
+									<li class="nav-item"><a href="#left-icon-personal" class="nav-link active" data-toggle="tab"><i class="icon-stack-star mr-2"></i> ทั่วไป</a></li>
 									<li class="nav-item"><a href="#left-icon-subscribe" class="nav-link" data-toggle="tab"><i class="icon-medal mr-2"></i> Subscribe</a></li>
 								</ul>
 								<div class="tab-content">
@@ -512,32 +516,32 @@
 													<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control">
 												</div>
 												<div class="col-md-6">
-													<label>เลขประจำตัวประชาชน</label> <span id="msg" class="text-success"></span>
+													<label>เลขประจำตัวประชาชน</label></span>
 													<input type="number" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขประจำตัวประชาชน" class="form-control">
 													<small id="hidinvalid" class="form-text text-danger" hidden></small>
 												</div>
 											</div>
 										</div>
-
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label>ประเภท<span class="text-danger">*</span></label>
-														<select name="usergroup" id= "usergroup" data-placeholder="ประเภท" class="form-control form-control-select2">
-															@foreach ($usergroups as $usergroup)
-																<option value="{{$usergroup->id}}" @if($user->user_group_id == $usergroup->id) selected @endif >{{$usergroup->name}}</option> 
-															@endforeach
-														</select>
+										@if (Auth::user()->user_type_id <=2)
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>ประเภท<span class="text-danger">*</span></label>
+															<select name="usergroup" id= "usergroup" data-placeholder="ประเภท" class="form-control form-control-select2">
+																@foreach ($usergroups as $usergroup)
+																	<option value="{{$usergroup->id}}" @if($user->user_group_id == $usergroup->id) selected @endif >{{$usergroup->name}}</option> 
+																@endforeach
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<label>หมายเลขผู้เสียภาษีนิติบุคคล</label> <span id="msg" class="text-success"></span>
+														<input type="number" name="vatno" id="vatno" value="{{$user->companyvatid}}" data-placeholder="หมายเลขผู้เสียภาษีนิติบุคคล" class="form-control" @if ($user->user_group_id == 2) readonly @endif>
 													</div>
 												</div>
-												<div class="col-md-6">
-													<label>หมายเลขผู้เสียภาษีนิติบุคคล</label> <span id="msg" class="text-success"></span>
-													<input type="number" name="vatno" id="vatno" value="{{$user->companyvatid}}" data-placeholder="หมายเลขผู้เสียภาษีนิติบุคคล" class="form-control" @if ($user->user_group_id == 2) readonly @endif>
-												</div>
 											</div>
-										</div>
+										@endif
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-6">
