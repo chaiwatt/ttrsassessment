@@ -163,8 +163,16 @@
 											<div class="tab-content" style="word-break:break-all;width:100%" >
 												<div class="tab-pane fade show active" id="vertical-left-companyprofile" >	
 													<div class="form-group">
-														<label for="">ประวัติของบริษัท (Company Profile)</label>
-														<textarea name="companyprofile" cols="30" rows="7" placeholder="รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ)" class="form-control">{{$fulltbpcompanyprofile->profile}}</textarea>
+														<div class="form-group">
+															<label for="">พิมพ์ไม่เกิน xxx ต่อบรรทัด </label>
+															<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+														</div>
+														<div style="border: dashed 1px #999999">
+															<input type="text" name ="companyprofile[]" value="dfsdfsdfsdf" class="form-control" style="border: 0" >
+															<input type="text" name ="companyprofile[]" value="sdfsdfsdfsdf" class="form-control" style="border: 0">
+															<input type="text" name ="companyprofile[]" value="sdfsdfsdfsfd" class="form-control" style="border: 0">
+															<input type="text" name ="companyprofile[]" value="ssssssssssssssssssssssss" class="form-control" style="border: 0">
+														</div>
 													</div>
 													<hr>	
 													<div class="row">
@@ -267,5 +275,6 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
 
 @stop

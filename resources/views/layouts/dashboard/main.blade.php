@@ -11,6 +11,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/icons/icomoon/styles.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/dashboard/css/step2.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/bootstrap_limitless.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/js/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>  
 	<link href="{{asset('assets/dashboard/js/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"/>  
@@ -250,8 +251,8 @@
 	<script src="{{ asset('assets/dashboard/js/plugins/momentjs/moment.js') }}"></script> <!-- Moment Plugin Js -->
 	<script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
 	<script src="{{ asset('assets/dashboard/js/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-
 	<script src="{{asset('assets/dashboard/js/plugins/forms/selects/select2.min.js')}}"></script>
+	<script src="{{asset('assets/dashboard/js/handsontable.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/forms/styling/uniform.min.js')}}"></script>
 
 	<script src="{{asset('assets/dashboard/js/app.js')}}"></script>

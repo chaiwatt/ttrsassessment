@@ -166,9 +166,9 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
         Jenssegers\Agent\AgentServiceProvider::class,
-        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-        
+        // Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -238,8 +238,10 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => 'Intervention\Image\Facades\Image',
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
-        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        // 'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];

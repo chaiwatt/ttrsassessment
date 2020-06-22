@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Model\FullTbpEmployee;
 use App\Model\FullTbpCompanyProfile;
 use Illuminate\Support\Facades\Auth;
-
+use PDF;
 class DashboardCompanyFullTbpController extends Controller
 {
     public function Index(){
@@ -52,6 +52,16 @@ class DashboardCompanyFullTbpController extends Controller
         return redirect()->back()->withSuccess('แก้ไข Full TBP สำเร็จ');
     }
 
-
+    public function DownloadPDF($id){
+        // require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
+        // $segment = new \Segment();
+        // $body = 'หาดทรายละเอียดสีขาวตัดกับท้องฟ้าและน้ำทะเลสีครามใสคือบรรยากาศของท้องทะเลไทยในช่วงของการแพร่ ระบาดไวรัสโควิด-19ส่งผลให้ประเทศไทยมีการประกาศพ.ร.ก.ฉุกเฉินและปิดบริการสถานที่ท่องเที่ยวทางธรรมชาติทั่วประเทศเสมือนกำลังสร้างความสมดุลของ ระบบนิเวศให้กลับคืนสู่ธรรมชาติอีกครั้ง ส่วนการเปิดโรงเรียน ที่ประชุม ศบค.มีความเห็นว่า เนื่องจากโรงเรียนมีขนาดต่างกันและมีจำนวนมากจึงสั่งให้ประเมินความพร้อมเป็นรายแห่ง ให้กระทรวงศึกษาประเมินอีกครั้งภายในวันที่ 15 มิ.ย.';
+        // $words = $segment->get_segment_array($body);
+        // $text = implode("|",$words);
+        $text ='test';
+        $data = ['title' => 'ทดสอบ', 'body' => $text];
+        $pdf = PDF::loadView('dashboard.company.fulltbp.pdf', $data);
+        return $pdf->stream('document.pdf');
+    }
 
 }

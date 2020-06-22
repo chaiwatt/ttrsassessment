@@ -1,0 +1,46 @@
+.lock_cell {
+	background-color: #e4dddd !important;
+	text-align: center !important;
+}
+.header_cell {
+		    background-color: #f5f5f5 !important;
+			text-align: center !important;
+			color:#000 !important;
+}
+.fix_cell {
+	background-color: #999999 !important;
+	text-align: center !important;
+}
+
+.error_cell {
+	background-color: #fc5353 !important;
+	text-align: center !important;
+}
+
+.correct_cell {
+	background-color: #79e549 !important;
+	text-align: center !important;
+}
+
+.valid{
+	background-color:green;
+}
+.invalid{
+	background-color:red;
+}
+		
+#span1{
+	 
+}
+#span2{
+	color:red;
+	font-size:14px;
+	font-weight:bold;
+}
+#span3{
+	 
+}
+.handsontable td.htInvalid{
+	background-color: #fc5353 !important;
+	text-align: center !important;
+}
