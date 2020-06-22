@@ -168,10 +168,7 @@
 															<input type="text" id="companyprofile_input" class="form-control" >
 														</div>
 														<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
-															<input type="text" name ="companyprofile[]" value="dfsdfsdfsdf" class="form-control" style="border: 0" >
-															<input type="text" name ="companyprofile[]" value="sdfsdfsdfsdf" class="form-control" style="border: 0">
-															<input type="text" name ="companyprofile[]" value="sdfsdfsdfsfd" class="form-control" style="border: 0">
-															<input type="text" name ="companyprofile[]" value="ssssssssssssssssssssssss" class="form-control" style="border: 0">
+														
 														</div>
 													</div>
 													<hr>	
@@ -275,6 +272,15 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
-
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
+<script>
+	$(document).ready(function() {
+    $(window).keydown(function(event){
+        if((event.keyCode == 13)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+  });
+</script>
 @stop

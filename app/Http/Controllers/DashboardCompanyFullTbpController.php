@@ -36,6 +36,7 @@ class DashboardCompanyFullTbpController extends Controller
     }
 
     public function EditSave(Request $request,$id){
+        return 'od';
         // return $request->department1_qty;
         FullTbpEmployee::find($id)->update([
             'department1_qty' => $request->department1_qty,
