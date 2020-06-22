@@ -165,9 +165,9 @@
 													<div class="form-group">
 														<div class="form-group">
 															<label for="">พิมพ์ไม่เกิน xxx ต่อบรรทัด </label>
-															<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+															<input type="text" id="companyprofile_input" class="form-control" >
 														</div>
-														<div style="border: dashed 1px #999999">
+														<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
 															<input type="text" name ="companyprofile[]" value="dfsdfsdfsdf" class="form-control" style="border: 0" >
 															<input type="text" name ="companyprofile[]" value="sdfsdfsdfsdf" class="form-control" style="border: 0">
 															<input type="text" name ="companyprofile[]" value="sdfsdfsdfsfd" class="form-control" style="border: 0">
