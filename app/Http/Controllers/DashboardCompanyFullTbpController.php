@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
@@ -11,7 +12,8 @@ use Illuminate\Http\Request;
 use App\Model\FullTbpEmployee;
 use App\Model\FullTbpCompanyProfile;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+use App\Model\FullTbpCompanyProfileDetail;
+
 class DashboardCompanyFullTbpController extends Controller
 {
     public function Index(){
@@ -29,14 +31,15 @@ class DashboardCompanyFullTbpController extends Controller
         $fulltbp = FullTbp::find($id);
         $fulltbpcompanyprofile = FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first();
         $fulltbpemployee = FullTbpEmployee::where('full_tbp_id', $fulltbp->id)->first();
+        $fulltbpcompanyprofiledetails = FullTbpCompanyProfileDetail::where('full_tbp_id',$fulltbp->id)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
-                                                ->withFulltbpcompanyprofile($fulltbpcompanyprofile);
+                                                ->withFulltbpcompanyprofile($fulltbpcompanyprofile)
+                                                ->withFulltbpcompanyprofiledetails($fulltbpcompanyprofiledetails);
     }
 
     public function EditSave(Request $request,$id){
-        return 'od';
         // return $request->department1_qty;
         FullTbpEmployee::find($id)->update([
             'department1_qty' => $request->department1_qty,
@@ -49,6 +52,14 @@ class DashboardCompanyFullTbpController extends Controller
         FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first()->update([
                'profile' => $request->companyprofile
             ]);
+
+        FullTbpCompanyProfileDetail::where('full_tbp_id',$fulltbp->id)->delete();
+        foreach( $request->companyprofile as $companyprofile ){
+            $fulltbpcompanyprofiledetail = new FullTbpCompanyProfileDetail();
+            $fulltbpcompanyprofiledetail->full_tbp_id = $fulltbp->id;
+            $fulltbpcompanyprofiledetail->line = $companyprofile;
+            $fulltbpcompanyprofiledetail->save();
+        }
 
         return redirect()->back()->withSuccess('แก้ไข Full TBP สำเร็จ');
     }

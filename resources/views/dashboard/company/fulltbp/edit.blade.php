@@ -168,7 +168,9 @@
 															<input type="text" id="companyprofile_input" class="form-control companyprofileclass" >
 														</div>
 														<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
-														
+														@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
+															<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
+														@endforeach
 														</div>
 													</div>
 													<hr>	

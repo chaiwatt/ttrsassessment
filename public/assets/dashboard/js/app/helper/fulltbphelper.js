@@ -5,7 +5,7 @@ $(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
         console.log(ThaiWord.countCharTh('สวัสดี จ๊ะ'));
 
-        var html = `<input type="text" name ="companyprofile[]" id="xx" value="${$(this).val()}" class="form-control companyprofileclass" style="border: 0" >`;
+        var html = `<input type="text" name ="companyprofile[]" value="${$(this).val()}" class="form-control companyprofileclass" style="border: 0" >`;
         $(this).val('');
         $('#fulltbp_companyprofile_wrapper').append(html);
     }
