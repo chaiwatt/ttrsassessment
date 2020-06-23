@@ -10,51 +10,53 @@
                 font-family:  'THSarabunNew';
                 font-style: normal;
                 font-weight: normal;
-                src: url("{{ asset('assets/dashboard/fonts/thsarabunnew-webfont.ttf') }}") format('truetype');
+                src: url("{{ asset('assets/dashboard/fonts/pdf/thsarabunnew-webfont.ttf') }}") format('truetype');
             }
             @font-face{
                 font-family:  'THSarabunNew';
                 font-style: normal;
                 font-weight: bold;
-                src: url("{{ asset('assets/dashboard/fonts/thsarabunnew_bold-webfont.ttf') }}") format('truetype');
+                src: url("{{ asset('assets/dashboard/fonts/pdf/thsarabunnew_bold-webfont.ttf') }}") format('truetype');
             }
             @font-face{
                 font-family:  'THSarabunNew';
                 font-style: italic;
                 font-weight: normal;
-                src: url("{{ asset('assets/dashboard/fonts/thsarabunnew_italic-webfont.ttf') }}") format('truetype');
+                src: url("{{ asset('assets/dashboard/fonts/pdf/thsarabunnew_italic-webfont.ttf') }}") format('truetype');
             }
             @font-face{
                 font-family:  'THSarabunNew';
                 font-style: italic;
                 font-weight: bold;
-                src: url("{{ asset('assets/dashboard/fonts/thsarabunnew_bolditalic-webfont.ttf') }}") format('truetype');
+                src: url("{{ asset('assets/dashboard/fonts/pdf/thsarabunnew_bolditalic-webfont.ttf') }}") format('truetype');
             }
 
             body {
+                margin-top: -10px;
+			    padding: 0;
                 font-family: "THSarabunNew";
-                padding: 0;
-                line-height: normal;
-                background: #fff;
-                font-size: 14px
+                /* padding: 0; */
+                /* line-height: normal; */
+                /* background: #fff; */
+                /* font-size: 14px; */
+                /* border: dashed 2px; */
+                /* position: relative; */
             }
             .wrapper {
                 position: relative;
                 width: 100%;
-                top: 0;
                 padding: 0;
             }
             .container{
+                margin-left: 30px;
                 position: relative;
-                max-width: 1000px;
+                max-width: 820px;
 			    max-height: 960px;
-                margin: 0 auto;
 			    padding: 0; 
 			    overflow: hidden;
             }
             .box{
                 position: relative;
-                padding-left: 25px;
             }
             /* .box span{
                 text-align: justify;
@@ -79,58 +81,13 @@
             }
             .box span{
                 position: absolute; 
-                top:-5px; 
-                left:30px;
+                top:-3px; 
+                left:10px;
                 text-align: justify;
                 word-break:break-all;
                 word-wrap:break-word
             }
-            /* .justifycenter {
-                text-align: justify;
-                text-justify: inter-word;
-            }
 
-
-
-
-            .box p{
-                
-            }
-            .clear{
-                clear: both;
-            }
-            .page-break {
-                page-break-after: always;
-            }
-            .underlinedot{
-                border-bottom: 1px dotted;
-                width: 100%;
-                display: block;
-            }
-            .lineheight1_6{
-                line-height: 1.6;
-            }
-
-            p {
-                border-bottom: 1px dotted black hidden;
-                line-height: 30px;
-                text-align: justify;
-                /* text-indent: 50px; */
-                word-break:break-all; 
-                word-wrap:break-word;
-                font-family: "thsarabunnew";
-            }
-            /* span {
-                line-height: 30px;
-                text-align: justify;
-                word-break:break-all; 
-                word-wrap:break-word;
-                font-family: "thsarabunnew";
-            } */
-            /* p>span {
-                padding-bottom: 0px;
-                vertical-align: top;
-            } */
             .page-break {
                 page-break-after: always;
             } */
@@ -138,28 +95,46 @@
         </style>
     </head>
     <body>
-        
         <div class="wrapper">
-            <div class="box" style="height:50px">
-                <img src="{{asset('assets/dashboard/images/ttrs.png')}}" class="left" alt="">
-                <img src="{{asset('assets/dashboard/images/nstda.png')}}" class="right" alt="">
-            </div>
+
             <div class="container" >
+                <div class="box"  >
+                    <img src="{{asset('assets/dashboard/images/ttrs.png')}}" style="width:175px;width:145px" alt="">
+                    <img src="{{asset('assets/dashboard/images/nstda.png')}}" style="width:200px;width:180px" class="right"  alt="">
+                </div>
+
                 <div class="box center">
-                    <p>
-                        <h1 style="line-height:40px;font-size:40px">แผนธุรกิจเทคโนโลยี</h1>
-                        <h1 style="line-height:35px;font-size:35px">(Technology Business Plan: TBP)</h1>
-                        <h2 style="line-height:30px;font-size:30px">ชื่อโครงการ</h2>
-                        <div class="box" style="margin-top:35px;">
-                        ......................................................................................................................................................................................................................
-                        <span style="position: absolute; top:-5px; left:0;right:0;margin-left: auto;margin-right: auto;">dsfsdfsdf</span>
-                        </div>
-                    </p>
+                    <h1 style="line-height:40px;font-size:40px">แผนธุรกิจเทคโนโลยี</h1>
+                    <h1 style="line-height:35px;font-size:35px">(Technology Business Plan: TBP)</h1>
+                    <h2 style="line-height:30px;font-size:30px">ชื่อโครงการ</h2>
+                    <div class="box" style="margin-top:35px;">
+                    ..................................................................................................................................................................................................
+                    <p style="position: absolute; top:-20px; left:0;right:0;margin-left: auto;margin-right: auto;">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ</p>
+                    </div>
                 </div>
                 <div class="box">
-                    
                     ......................................................................................................................................................................................................................................................................................
-                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะยังคงประชันขันนั่น</span>
+                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะ</span>
+                </div>
+                <div class="box">
+                    ......................................................................................................................................................................................................................................................................................
+                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะ</span>
+                </div>
+                <div class="box">
+                    ......................................................................................................................................................................................................................................................................................
+                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะ</span>
+                </div>
+                <div class="box">
+                    ......................................................................................................................................................................................................................................................................................
+                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะ</span>
+                </div>
+                <div class="box">
+                    ......................................................................................................................................................................................................................................................................................
+                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะ</span>
+                </div>
+                <div class="box">
+                    ......................................................................................................................................................................................................................................................................................
+                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะ</span>
                 </div>
             </div>
         </div>
