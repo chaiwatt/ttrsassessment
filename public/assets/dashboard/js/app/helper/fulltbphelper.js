@@ -15,5 +15,5 @@ $(document).on('keyup', '#companyprofile_input', function(e) {
 
 $(document).on('keyup', '.companyprofileclass', function(e) {
     console.log(ThaiWord.countCharTh($(this).val()));
-    $('#companyprofiletextlength').html((105-ThaiWord.countCharTh($(this).val())));
+    $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
