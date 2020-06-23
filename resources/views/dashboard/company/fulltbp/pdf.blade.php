@@ -147,9 +147,9 @@
             <div class="container" >
                 <div class="box center">
                     <p>
-                        <h1 style="line-height:40px;font-size:3em">แผนธุรกิจเทคโนโลยี</h1>
-                        <h1 style="line-height:35px;font-size:2.5em">(Technology Business Plan: TBP)</h1>
-                        <h2 style="line-height:30px;font-size:2em">ชื่อโครงการ</h2>
+                        <h1 style="line-height:40px;font-size:40px">แผนธุรกิจเทคโนโลยี</h1>
+                        <h1 style="line-height:35px;font-size:35px">(Technology Business Plan: TBP)</h1>
+                        <h2 style="line-height:30px;font-size:30px">ชื่อโครงการ</h2>
                         <div class="box" style="margin-top:35px;">
                         ......................................................................................................................................................................................................................
                         <span style="position: absolute; top:-5px; left:0;right:0;margin-left: auto;margin-right: auto;">dsfsdfsdf</span>
