@@ -54,7 +54,13 @@
             }
             .box{
                 position: relative;
+                padding-left: 25px;
             }
+            /* .box span{
+                text-align: justify;
+                word-break:break-all; 
+                word-wrap:break-word;
+            } */
             .left {
                 float:left;
             }
@@ -62,7 +68,7 @@
                 float:right;
             }
             div.center {
-                width: 800px;
+                width: 750px;
                 height: 250px;
                 display: block;
                 margin-top: 20px;
@@ -70,6 +76,14 @@
                 margin-right: auto;
                 border: 1px solid black;
                 text-align:center
+            }
+            .box span{
+                position: absolute; 
+                top:-5px; 
+                left:30px;
+                text-align: justify;
+                word-break:break-all;
+                word-wrap:break-word
             }
             /* .justifycenter {
                 text-align: justify;
@@ -106,17 +120,17 @@
                 word-wrap:break-word;
                 font-family: "thsarabunnew";
             }
-            span {
+            /* span {
                 line-height: 30px;
                 text-align: justify;
                 word-break:break-all; 
                 word-wrap:break-word;
                 font-family: "thsarabunnew";
-            }
-            p>span {
+            } */
+            /* p>span {
                 padding-bottom: 0px;
                 vertical-align: top;
-            }
+            } */
             .page-break {
                 page-break-after: always;
             } */
@@ -141,6 +155,11 @@
                         <span style="position: absolute; top:-5px; left:0;right:0;margin-left: auto;margin-right: auto;">dsfsdfsdf</span>
                         </div>
                     </p>
+                </div>
+                <div class="box">
+                    
+                    ......................................................................................................................................................................................................................................................................................
+                    <span style="">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ แบ่งปันมุมมองต่อสายสัมพันธ์จีน-สหรัฐฯ ว่าแม้มหาอำนาจทั้งสองจะยังคงประชันขันแ</span>
                 </div>
             </div>
         </div>

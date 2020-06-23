@@ -1,17 +1,19 @@
 import * as ThaiWord from './thaiword.js';
 
-$("#companyprofile_input").on('keyup', function (e) {
+
+$(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
         console.log(ThaiWord.countCharTh('สวัสดี จ๊ะ'));
 
-        var html = `<input type="text" name ="companyprofile[]" id="" value="${$(this).val()}" class="form-control" style="border: 0" >`;
+        var html = `<input type="text" name ="companyprofile[]" id="xx" value="${$(this).val()}" class="form-control companyprofileclass" style="border: 0" >`;
         $(this).val('');
         $('#fulltbp_companyprofile_wrapper').append(html);
     }
 });
 
-$('#companyprofile_input').keyup(function(){   
+
+
+$(document).on('keyup', '.companyprofileclass', function(e) {
     console.log(ThaiWord.countCharTh($(this).val()));
-
+    $('#companyprofiletextlength').html((105-ThaiWord.countCharTh($(this).val())));
 });
-

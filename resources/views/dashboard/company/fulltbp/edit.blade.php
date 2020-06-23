@@ -164,8 +164,8 @@
 												<div class="tab-pane fade show active" id="vertical-left-companyprofile" >	
 													<div class="form-group">
 														<div class="form-group">
-															<label for="">พิมพ์ไม่เกิน xxx ต่อบรรทัด </label>
-															<input type="text" id="companyprofile_input" class="form-control" >
+															<label for="">ข้อความ </label> <span class="text-primary" id="companyprofiletextlength"></span>
+															<input type="text" id="companyprofile_input" class="form-control companyprofileclass" >
 														</div>
 														<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
 														
