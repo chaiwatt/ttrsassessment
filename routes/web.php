@@ -86,10 +86,6 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('deleteeducation','Api\ExpertController@DeleteEducation')->name('api.expert.deleteeducation');         
         });
         Route::group(['prefix' => 'businessplan'], function(){
-            // Route::group(['prefix' => 'performance'], function(){
-            //     Route::post('add','Api\BusinessplanPerformanceController@Add')->name('api.businessplan.performance.add');             
-            //     Route::post('delete','Api\BusinessplanPerformanceController@Delete')->name('api.businessplan.performance.delete');             
-            // });
             Route::group(['prefix' => 'status'], function(){
                 Route::post('update','Api\BusinessPlanController@Update')->name('api.businessplan.update');          
             });
@@ -109,6 +105,11 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::group(['prefix' => 'hid'], function(){
             Route::post('check','Api\HidController@Check')->name('api.hid.check');           
+        }); 
+        Route::group(['prefix' => 'fulltbp'], function(){
+            Route::group(['prefix' => 'companyprofile'], function(){
+                Route::post('add','Api\FullTbpController@CompanyprofileAdd')->name('api.fulltbp.companyprofile.add');           
+            });           
         }); 
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

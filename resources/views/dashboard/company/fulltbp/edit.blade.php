@@ -168,9 +168,9 @@
 															<input type="text" id="companyprofile_input" class="form-control companyprofileclass" >
 														</div>
 														<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
-														@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
-															<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
-														@endforeach
+															@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
+																<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
+															@endforeach
 														</div>
 													</div>
 													<hr>	
@@ -238,7 +238,7 @@
 														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
 													</div>
 												</div>
-												
+												<button type="button" id="btnaddcompanyprofile" class="btn btn-success" >บันทึกประวัติบริษัท</button>
 											</div>
 										</div>
 									</div>
@@ -276,7 +276,13 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
 <script>
+	var route = {
+		url: "{{ url('/') }}",
+		token: $('meta[name="csrf-token"]').attr('content'),
+		branchid: "{{Auth::user()->branch_id}}"
+	};
 	$(document).ready(function() {
+
     $(window).keydown(function(event){
         if((event.keyCode == 13)) {
             event.preventDefault();

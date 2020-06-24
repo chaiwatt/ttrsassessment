@@ -1,5 +1,5 @@
 import * as ThaiWord from './thaiword.js';
-
+import * as CompanyProfile from './companyprofile.js';
 
 $(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
@@ -11,9 +11,20 @@ $(document).on('keyup', '#companyprofile_input', function(e) {
     }
 });
 
-
-
 $(document).on('keyup', '.companyprofileclass', function(e) {
-    console.log(ThaiWord.countCharTh($(this).val()));
+    // console.log(ThaiWord.countCharTh($(this).val()));
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('click', '#btnaddcompanyprofile', function(e) {
+    var lines = $('input[name="companyprofile[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+
+    CompanyProfile.addCompanyProfile(lines).then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        //console.log(error)
+    })
 });
