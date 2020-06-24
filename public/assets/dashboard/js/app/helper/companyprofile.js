@@ -1,4 +1,4 @@
-function addCompanyProfile(lines){
+function addCompanyProfile(lines,id){
     console.log(route.url);
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -7,6 +7,7 @@ function addCompanyProfile(lines){
           headers: {"X-CSRF-TOKEN":route.token},
           data: {
             'lines': lines,
+            'id': id,
           },
           success: function(data) {
             resolve(data)

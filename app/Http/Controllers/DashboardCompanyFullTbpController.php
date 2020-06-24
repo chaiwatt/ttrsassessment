@@ -13,6 +13,7 @@ use App\Model\FullTbpEmployee;
 use App\Model\FullTbpCompanyProfile;
 use Illuminate\Support\Facades\Auth;
 use App\Model\FullTbpCompanyProfileDetail;
+use App\Model\FullTbpCompanyProfileAttachment;
 
 class DashboardCompanyFullTbpController extends Controller
 {
@@ -26,17 +27,19 @@ class DashboardCompanyFullTbpController extends Controller
     }
 
     public function Edit($id){
-        
         $businesstypes = BusinessType::get();
         $fulltbp = FullTbp::find($id);
         $fulltbpcompanyprofile = FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first();
         $fulltbpemployee = FullTbpEmployee::where('full_tbp_id', $fulltbp->id)->first();
         $fulltbpcompanyprofiledetails = FullTbpCompanyProfileDetail::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbp->id)->get();
+        
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
                                                 ->withFulltbpcompanyprofile($fulltbpcompanyprofile)
-                                                ->withFulltbpcompanyprofiledetails($fulltbpcompanyprofiledetails);
+                                                ->withFulltbpcompanyprofiledetails($fulltbpcompanyprofiledetails)
+                                                ->withFulltbpcompanyprofileattachments($fulltbpcompanyprofileattachments);
     }
 
     public function EditSave(Request $request,$id){

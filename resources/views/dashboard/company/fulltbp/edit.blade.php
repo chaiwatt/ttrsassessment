@@ -176,11 +176,16 @@
 													<hr>	
 													<div class="row">
 														<div class="col-md-12">	
-															<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-left" ><i class="icon-add"></i></a>
+															{{-- <a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-left" ><i class="icon-add"></i></a> --}}
+															<div class="input-group">													
+																<button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													
+															</div>
+															<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/>
 														</div>
 													</div>																								
 													<div class="row">	
 														<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
+
 														</div>
 													</div>
 													<div class="row">
@@ -190,16 +195,19 @@
 																	<thead>
 																		<tr>
 																			<th>เอกสารแนบ</th>                                                                                  
-																			<th style="width:120px">ดาวน์โหลด</th>
+																			<th style="width:150px">ดาวน์โหลด</th>
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
-																		{{-- @foreach ($patientfoodallergies as $patientfoodallergy)
+																		@foreach ($fulltbpcompanyprofileattachments as $fulltbpcompanyprofileattachment)
 																			<tr >                                        
-																				<td> {{$patientfoodallergy->name}} </td>                                            
-																				<td> <a type="button" data-id="{{$patientfoodallergy->id}}"  class="btn btn-danger-400 btn-sm" id="deletefoodallergy" ><i class="icon-trash danger"></i></a> </td>
+																				<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
+																				<td> 
+																					<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																					<a data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+																				</td>
 																			</tr>
-																		@endforeach                             --}}
+																		@endforeach                            
 																	</tbody>
 																</table>
 															</div>
@@ -238,7 +246,10 @@
 														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
 													</div>
 												</div>
-												<button type="button" id="btnaddcompanyprofile" class="btn btn-success" >บันทึกประวัติบริษัท</button>
+												<div class="form-group">
+													<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn btn-success" >บันทึกประวัติบริษัท</button>
+												</div>
+												
 											</div>
 										</div>
 									</div>

@@ -108,7 +108,11 @@ Route::group(['middleware' => 'auth'], function(){
         }); 
         Route::group(['prefix' => 'fulltbp'], function(){
             Route::group(['prefix' => 'companyprofile'], function(){
-                Route::post('add','Api\FullTbpController@CompanyprofileAdd')->name('api.fulltbp.companyprofile.add');           
+                Route::post('add','Api\FullTbpCompanyProfileController@CompanyprofileAdd')->name('api.fulltbp.companyprofile.add');           
+                Route::group(['prefix' => 'attachement'], function(){
+                    Route::post('add','Api\FullTbpCompanyProfileAttachmentController@Add')->name('api.fulltbp.companyprofile.attachement.add');           
+    
+                });  
             });           
         }); 
     }); 
