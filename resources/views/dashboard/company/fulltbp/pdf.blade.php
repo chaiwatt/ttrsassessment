@@ -104,9 +104,9 @@
                 </div>
 
                 <div class="box center">
-                    <h1 style="line-height:40px;font-size:40px">แผนธุรกิจเทคโนโลยี</h1>
-                    <h1 style="line-height:35px;font-size:35px">(Technology Business Plan: TBP)</h1>
-                    <h2 style="line-height:30px;font-size:30px">ชื่อโครงการ</h2>
+                    <h1 style="line-height:35px;font-size:35px">แผนธุรกิจเทคโนโลยี</h1>
+                    <h1 style="line-height:30px;font-size:30px">(Technology Business Plan: TBP)</h1>
+                    <h2 style="line-height:25px;font-size:25px">ชื่อโครงการ</h2>
                     <div class="box" style="margin-top:35px;">
                     ..................................................................................................................................................................................................
                     <p style="position: absolute; top:-20px; left:0;right:0;margin-left: auto;margin-right: auto;">ดร. เกรแฮม อัลลิสัน จากมหาวิทยาลัยฮาร์วาร์ดของสหรัฐฯ</p>
