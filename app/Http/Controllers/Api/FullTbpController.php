@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class FullTbpController extends Controller
 {
     public function CompanyprofileAdd(Request $request){
-        $tmp = '';
+        $tmpline = '';
         foreach($request->lines as $line){
-            $tmp .= ' '. $line;
+            $tmpline .= ' '. $line;
         }
-        dd($tmp);
+        dd($tmpline);
     }
 }
