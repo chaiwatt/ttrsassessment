@@ -133,6 +133,11 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('approve/{id}','DashboardAdminMiniTbpController@Approve')->name('dashboard.admin.minitbp.approve');    
                 Route::get('delete/{id}','DashboardAdminMiniTbpController@Delete')->name('dashboard.admin.minitbp.delete');  
             });  
+            Route::group(['prefix' => 'projectassignment'], function(){
+                Route::get('','DashboardAdminProjectAssignmentController@Index')->name('dashboard.admin.projectassignment');           
+                Route::get('edit/{id}','DashboardAdminProjectAssignmentController@Edit')->name('dashboard.admin.projectassignment.edit');  
+                Route::post('editsave/{id}','DashboardAdminProjectAssignmentController@EditSave')->name('dashboard.admin.projectassignment.editsave');    
+            });  
         }); 
         Route::group(['prefix' => 'expert'], function(){
             Route::get('','DashboardExpertController@Index')->name('dashboard.expert');           

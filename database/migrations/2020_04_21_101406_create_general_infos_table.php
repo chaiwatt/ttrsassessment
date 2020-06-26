@@ -36,6 +36,7 @@ class CreateGeneralInfosTable extends Migration
             $table->string('sundaytime',250);
             $table->string('thsmsuser',250)->nullable();
             $table->text('thsmspass')->nullable();
+            $table->unsignedBigInteger('social_login_status')->default(1);  //ปิด
             $table->unsignedBigInteger('verify_type_id')->default(1);
             $table->unsignedBigInteger('front_page_status_id')->default(1);
             $table->timestamps();

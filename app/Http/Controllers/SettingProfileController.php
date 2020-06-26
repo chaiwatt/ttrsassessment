@@ -9,7 +9,6 @@ use App\Model\Amphur;
 use App\Model\Friend;
 use App\Model\Prefix;
 use App\Model\Tambol;
-use App\Model\UserPosition;
 use App\Model\Company;
 use App\Model\Country;
 use App\Model\Province;
@@ -17,6 +16,7 @@ use App\Model\FrontPage;
 use App\Model\UserGroup;
 use App\Model\MessageBox;
 use App\Model\GeneralInfo;
+use App\Model\UserPosition;
 use App\Model\VerifyStatus;
 use App\Model\FriendRequest;
 use Illuminate\Http\Request;
@@ -29,6 +29,7 @@ use App\Model\FrontPageStatus;
 use App\Model\MessagePriority;
 use App\Model\UserAlertStatus;
 use App\Model\ExpertExperience;
+use App\Model\SocialLoginStatus;
 use App\Model\MessageBoxAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -72,6 +73,7 @@ class SettingProfileController extends Controller
         $frontpagestatuses = FrontPageStatus::get();
         $useralertstatuses = UserAlertStatus::get();
         $smscredit = SMS::credit()[1];
+        $socialloginstatuses = SocialLoginStatus::get();
         // return $smscredit[1];
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
@@ -97,7 +99,8 @@ class SettingProfileController extends Controller
                                         ->withUsergroups($usergroups)
                                         ->withFrontpagestatuses($frontpagestatuses)
                                         ->withUseralertstatuses($useralertstatuses)
-                                        ->withSmscredit($smscredit);
+                                        ->withSmscredit($smscredit)
+                                        ->withSocialloginstatuses($socialloginstatuses);
     }
     public function EditSave(EditProfileRequest $request, $userid){
         $auth = Auth::user();
@@ -207,7 +210,8 @@ class SettingProfileController extends Controller
                 'sundaytime' => $request->sundaytime,
                 'youtube' => $request->youtube,
                 'facebook' => $request->facebook,
-                'front_page_status_id' => $request->frontpage
+                'front_page_status_id' => $request->frontpage,
+                'social_login_status' => $request->sociallogin
             ]);
             return redirect()->back()->withSuccess('แก้ไขข้อมูลหน่วยงานสำเร็จ');
         }else if($request->action == 'message'){

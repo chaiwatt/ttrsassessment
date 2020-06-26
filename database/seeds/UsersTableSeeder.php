@@ -12,8 +12,26 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 4,
-                'name' => 'admin',
+                'name' => 'master',
                 'email' => 'joerocknpc@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 4,
+                'name' => 'coleader',
+                'email' => 'programprc@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 5,
+                'name' => 'leader',
+                'email' => 'ttrsassessment@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1

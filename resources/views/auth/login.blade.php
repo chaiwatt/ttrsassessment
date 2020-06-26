@@ -41,13 +41,12 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">{{trans('lang.login')}} <i class="icon-circle-right2 ml-2"></i></button>
                 </div>
-                {{-- <div class="form-group text-center text-muted content-divider">
-                    <span class="px-2">เข้าสู่ระบบด้วยบัญชี</span>
-                </div> --}}
-                <div class="form-group text-center">
-                    <a href="{{route('social.login',['provider' => 'facebook'])}}" class="btn btn-outline bg-indigo border-indigo text-indigo btn-icon rounded-round border-2"><i class="icon-facebook"></i></a>
-                    <a href="{{route('social.login',['provider' => 'google'])}}" class="btn btn-outline bg-pink-300 border-pink-300 text-pink-300 btn-icon rounded-round border-2 ml-2"><i class="icon-google"></i></a>
-                </div>
+                @if ($generalinfo->social_login_status == 2)
+                    <div class="form-group text-center">
+                        <a href="{{route('social.login',['provider' => 'facebook'])}}" class="btn btn-outline bg-indigo border-indigo text-indigo btn-icon rounded-round border-2"><i class="icon-facebook"></i></a>
+                        <a href="{{route('social.login',['provider' => 'google'])}}" class="btn btn-outline bg-pink-300 border-pink-300 text-pink-300 btn-icon rounded-round border-2 ml-2"><i class="icon-google"></i></a>
+                    </div>
+                @endif
                 <div class="form-group text-center text-muted content-divider">
                     <span class="px-2">{{trans('lang.noaccount')}}</span>
                 </div>
@@ -55,9 +54,6 @@
                 <div class="form-group">
                     <a href="{{ route('register') }}" class="btn btn-light btn-block">{{trans('lang.register')}}</a>
                 </div>
-                {{-- <div class="form-group text-center">
-                        <a href="{{url('/')}}" class="ml-auto">เว็บไซต์</a>
-                    </div> --}}
             </form>
         </div>
     </div>

@@ -39,6 +39,16 @@ class CreateCompaniesTable extends Migration
             $table->string('postalcode',10)->nullable();
             $table->string('lat',50)->nullable();
             $table->string('lng',50)->nullable();
+            $table->char('factoryhousenumber',5)->nullable();
+            $table->string('factoryaddress',150)->nullable();
+            $table->char('factorysoi',5)->nullable();
+            $table->string('factorystreet',100)->nullable();
+            $table->unsignedBigInteger('factoryprovince_id')->nullable();
+            $table->unsignedBigInteger('factoryamphur_id')->nullable();
+            $table->unsignedBigInteger('factorytambol_id')->nullable();
+            $table->string('factorypostalcode',10)->nullable();
+            $table->string('factorylat',50)->nullable();
+            $table->string('factorylng',50)->nullable();
             $table->string('logo',250)->nullable();
             $table->timestamps();
         });

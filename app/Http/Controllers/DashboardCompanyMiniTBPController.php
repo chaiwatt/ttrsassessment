@@ -10,6 +10,7 @@ use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
+use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditMiniTbpRequest;
 use setasign\Fpdi\PdfParser\StreamReader;
@@ -186,6 +187,10 @@ class DashboardCompanyMiniTBPController extends Controller
         BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
             'business_plan_status_id' => 3
         ]);
+
+        $projectassignment = new ProjectAssignment();
+        $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+        $projectassignment->save();
 
         return redirect()->route('dashboard.company.minitbp')->withSuccess('ส่งเอกสาร mini TBP สำเร็จ');
     }

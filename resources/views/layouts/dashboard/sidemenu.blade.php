@@ -8,6 +8,7 @@
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
+        <li class="nav-item"><a href="{{route('dashboard.admin.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.projectassignment')?'active':''}}">Assignment</a></li>     
         <li class="nav-item"><a href="{{route('dashboard.admin.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.businessplan')?'active':''}}">ขอรับการประเมิน</a></li>     
         <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.minitbp')?'active':''}}">mini TBP</a></li>	

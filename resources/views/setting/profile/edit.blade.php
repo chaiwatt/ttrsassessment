@@ -646,7 +646,6 @@
 									</div>
 
 									<div class="tab-pane fade" id="left-icon-subscribe">
-										{{-- <label>สแกนด้วยกล้องสมาร์ทโฟน</label>	 --}}
 										<label>Subscribe Line Notification
 											@if (!Empty($user->linetoken))
 													<span class="text-success"><i class="icon-checkmark3 text-success"></i> ยืนยัน subcribe แล้ว</span>
@@ -930,7 +929,16 @@
 																@endforeach   
 															</select>
 														</div>
+														<div class="col-md-6">
+															<label>Social login</label>
+															<select name="sociallogin" data-placeholder="Social login" class="form-control form-control-select2">
+																@foreach ($socialloginstatuses as $socialloginstatus)                                                                
+																	<option value="{{$socialloginstatus->id}}" @if ($generalinfo->social_login_status == $socialloginstatus->id) selected @endif> {{$socialloginstatus->name}} </option>
+																@endforeach   
+															</select>
+														</div>
 													</div>
+													
 												</div>
 											</div>      
 										</div>
