@@ -12,8 +12,8 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 4,
-                'name' => 'master',
-                'email' => 'joerocknpc@gmail.com',           
+                'name' => 'leader1',
+                'email' => 'leader1@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
@@ -21,17 +21,35 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 4,
-                'name' => 'leader',
-                'email' => 'programprc@gmail.com',           
+                'name' => 'coleader1',
+                'email' => 'coleader1@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
             ],
             [
                 'prefix_id' => 1,
-                'user_type_id' => 5,
-                'name' => 'coleader',
-                'email' => 'ttrsassessment@gmail.com',           
+                'user_type_id' => 4,
+                'name' => 'leader2',
+                'email' => 'leader2@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 4,
+                'name' => 'coleader2',
+                'email' => 'coleader2@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 7,
+                'name' => 'master',
+                'email' => 'joerocknpc@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
