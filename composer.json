@@ -22,6 +22,7 @@
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "mpdf/mpdf": "^8.0",
         "notyes/thsplitlib": "^0.1.0",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "spatie/laravel-activitylog": "^3.14"

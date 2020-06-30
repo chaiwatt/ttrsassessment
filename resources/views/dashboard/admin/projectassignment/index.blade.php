@@ -79,11 +79,22 @@
                                         <td> {{$projectassignment->businessplan->code}} </td> 
                                         <td> {{$projectassignment->businessplan->minitbp->project}} </td> 
                                         <td> {{$projectassignment->businessplan->company->name}} </td> 
-                                        <td> {{$projectassignment->leader_id}} </td>  
-                                        <td> {{$projectassignment->coleader_id}} </td> 
+                                        <td> 
+                                            @if (!Empty($projectassignment->leader))
+                                                {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
+                                            @endif
+                                        </td>  
+                                        <td> 
+                                            @if (!Empty($projectassignment->coleader))
+                                                {{$projectassignment->coleader->prefix->name}}{{$projectassignment->coleader->name}} {{$projectassignment->coleader->lastname}}
+                                            @endif
+                                           
+                                        </td> 
                                         <td>
                                             @if ($projectassignment->leader_id == null)
                                                 <span class="badge bg-warning">ยังไม่ได้ Assign</span>
+                                                @else
+                                                <span class="badge bg-success">Assign แล้ว</span>
                                             @endif
                                         </td>
                                         <td> 

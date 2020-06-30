@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('linetoken')->nullable();
             $table->string('phone')->nullable();
             $table->string('picture')->nullable();
+            $table->string('signature')->nullable();
             $table->string('cover')->nullable();
             $table->string('address',150)->nullable();
             $table->unsignedBigInteger('province_id')->default(4);  //ปทุมธานี

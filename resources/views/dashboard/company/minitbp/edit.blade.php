@@ -53,18 +53,13 @@
         <div class="row">
             <div class="col-md-12">
 				<!-- Colors -->
-
-
-				
             	<div class="card">
-					{{-- <div class="card-header header-elements-inline">
-					
-					</div> --}}
 
                 	<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini TBP</a></li>
 							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ติดต่อ</a></li>
+							<li class="nav-item"><a href="#left-icon-manager" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ลงนาม</a></li>
 						</ul>
 						<form method="POST" action="{{route('dashboard.company.minitbp.editsave',['id'=>$minitbp->id])}}" enctype="multipart/form-data">
 							@csrf
@@ -119,8 +114,7 @@
 														<label class="form-check-label">
 															<input type="checkbox" name="finance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance2)) checked @endif  data-fouc>
 															ขอรับการค้ำประกันสินเชื่อฯบสย(บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)
-														</label>
-														
+														</label>														
 													</div>
 	
 													<div class="form-check">
@@ -176,7 +170,6 @@
 															โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย
 														</label>
 													</div>
-	
 													<div class="form-check">
 														<label class="form-check-label">
 															<input type="checkbox" name="nonefinance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance2)) checked @endif data-fouc>
@@ -271,6 +264,40 @@
 								<div class="form-group">
 									<label for="">เว็บไซต์</label>
 									<input type="text" name ="website" value="{{$minitbp->website}}" class="form-control" >
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-manager">
+								<div class="form-group">
+									<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+									<select name="managerprefix" id="" class="form-control form-control-select2">
+										@foreach ($contactprefixes as $contactprefix)
+											<option value="{{$contactprefix->id}}" @if($minitbp->managerprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="">ชื่อ<span class="text-danger">*</span></label>
+									<input type="text" name ="managername" value="{{$minitbp->managername}}" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="">นามสกุล<span class="text-danger">*</span></label>
+									<input type="text" name ="managerlastname" value="{{$minitbp->managerlastname}}" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
+									<select name="managerposition" value="{{$minitbp->managerposition}}" id="" class="form-control form-control-select2">
+										@foreach ($contactpositions as $contactposition)
+											<option value="{{$contactposition->id}}" @if($minitbp->managerposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
+										@endforeach
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="">ใช้ลายเซนต์<span class="text-danger">*</span></label>
+									<select name="signature" value="{{$minitbp->signature_status_id}}" id="" class="form-control form-control-select2">
+										@foreach ($signaturestatuses as $signaturestatus)
+											<option value="{{$signaturestatus->id}}" @if($minitbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
+										@endforeach
+									</select>
 								</div>
 							</div>
 						</div>

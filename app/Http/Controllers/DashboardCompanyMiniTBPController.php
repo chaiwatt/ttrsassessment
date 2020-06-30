@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DateTimeZone;
+use Carbon\Carbon;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\MiniTBP;
@@ -10,6 +12,7 @@ use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
+use App\Model\SignatureStatus;
 use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditMiniTbpRequest;
@@ -30,11 +33,13 @@ class DashboardCompanyMiniTBPController extends Controller
         $minitbp = MiniTBP::find($id);
         $contactprefixes = Prefix::get();
         $contactpositions = UserPosition::get();
+        $signaturestatuses = SignatureStatus::get();
         return view('dashboard.company.minitbp.edit')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withCompany($company)
                                                 ->withContactprefixes($contactprefixes)
-                                                ->withContactpositions($contactpositions);
+                                                ->withContactpositions($contactpositions)
+                                                ->withSignaturestatuses($signaturestatuses);
     }
     public function Pdf(){
         require_once(base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
@@ -72,7 +77,12 @@ class DashboardCompanyMiniTBPController extends Controller
             'contactposition_id' => $request->contactposition,
             'contactphone' => $request->contactphone,
             'contactemail' => $request->contactemail,
+            'managerprefix' => $request->managerprefix,
+            'managername' => $request->managername,
+            'managerlastname' => $request->managerlastname,
+            'managerposition_id' => $request->managerposition,
             'website' => $request->website,
+            'signature_status_id' => $request->signature
         ]);
         return  redirect()->route('dashboard.company.minitbp')->withSuccess('แก้ไขรายการสำเร็จ');
     }
@@ -120,7 +130,11 @@ class DashboardCompanyMiniTBPController extends Controller
         $nonefinance5_detail = (!Empty($minitpb->nonefinance5) && !Empty($minitpb->nonefinance5_detail))?$minitpb->nonefinance5_detail:'' ;
         $nonefinance6_text = (!Empty($minitpb->nonefinance6))?'x':'';
         $nonefinance6_detail = (!Empty($minitpb->nonefinance6) && !Empty($minitpb->nonefinance6_detail))?$minitpb->nonefinance6_detail:'' ;
-        
+        $signature = (!Empty($minitpb->signature_status_id) && !Empty(Auth::user()->signature))?Auth::user()->signature:'';
+        $managerprefix = (!Empty($minitpb->managerprefix))?Prefix::find($minitpb->managerprefix)->name:'';
+        $managername = (!Empty($minitpb->managername))?$minitpb->managername:'';
+        $managerlastname = (!Empty($minitpb->managerlastname))?$minitpb->managerlastname:'';
+        $managerposition = (!Empty($minitpb->managerposition_id))?UserPosition::find($minitpb->managerposition_id)->name:'';
         $fileContent = file_get_contents(asset("assets/dashboard/template/minitbp.pdf"),'rb');
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
@@ -164,6 +178,12 @@ class DashboardCompanyMiniTBPController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance5_detail.'</span>', 111, 184.6, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML($nonefinance6_text, 105.8, 189.8, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 111, 197.5, 150, 90, 'auto');
+        if (!Empty($signature)) {
+            $mpdf->WriteFixedPosHTML('<img src="'.asset($signature).'" width="120" height="30" alt="">', 125, 232, 150, 90, 'auto');
+        } 
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$managerprefix.$managername . ' ' . $managerlastname. '</span>', 127,244.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$managerposition. '</span>', 130,253.3, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 142,261.7, 150, 90, 'auto');
         $mpdf->Output();
     }
     

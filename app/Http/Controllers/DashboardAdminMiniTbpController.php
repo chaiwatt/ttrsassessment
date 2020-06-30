@@ -9,12 +9,14 @@ use App\Model\ThaiBank;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
+use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminMiniTbpController extends Controller
 {
     public function Index(){
         $businessplans = BusinessPlan::where('business_plan_status_id',3)->pluck('id')->toArray();
+        $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->get();
         $minitbps = MiniTBP::whereIn('business_plan_id',$businessplans)->get();
         return view('dashboard.admin.minitbp.index')->withMinitbps($minitbps);
     }

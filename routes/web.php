@@ -45,6 +45,10 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('send','Api\SMSController@Send')->name('api.sms.send');           
         Route::post('saveotp','Api\SMSController@SaveOtp')->name('api.sms.saveotp'); 
     }); 
+    Route::group(['prefix' => 'profile'], function(){
+        Route::post('uploadcanvassignature','Api\ProfileController@UploadCanvasSignature')->name('api.profile.uploadcanvassignature');           
+        Route::post('uploadsignature','Api\ProfileController@UploadSignature')->name('api.profile.uploadsignature');           
+    }); 
 }); 
 
 Route::group(['middleware' => 'auth'], function(){

@@ -1,6 +1,8 @@
 @extends('layouts.dashboard.main', ['mini' => '1'])
 @section('pageCss')
+
 @stop
+
 @section('content')
     <!-- Page header -->
 	{{-- modal expertexpience --}}
@@ -271,6 +273,52 @@
 	</div>
 </div>
 <!-- /modal with subtitle -->
+
+
+	<!-- Modal with subtitle -->
+	<div id="modal_signature" class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="messagetitle">เซนต์ลายมือชื่อ</h5>		
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+	
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<div id="signature-pad" class="signature-pad" style="text-align: center">
+										<canvas width="400" height="100" style="border: dashed 1px"></canvas>
+										<div class="signature-pad--footer">
+										  {{-- <div class="description" ></div> --}}
+									<p>เซนต์ลายมือชื่อ</p>
+										  <div class="signature-pad--actions">
+											<div>
+											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัพโหลด</button>
+											  <button type="button" class="btn bg-primary clear" data-action="clear">เคลียร์</button>
+											  <button type="button" class="btn bg-primary" data-action="undo">Undo</button>
+											  <button type="button" class="btn bg-success save" data-action="save-png">บันทึก</button>								
+											</div>
+											<input type="file" style="display:none;" id="signature" name="picture"/>
+										  </div>
+										</div>
+									  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button> --}}
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Cover area -->
 	<div class="profile-cover">
 		<div id="bgcover">
@@ -639,6 +687,25 @@
 												</div>
 											</div>
 										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<a href="" class="btn btn-primary btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_signature">ลายเซนต์</a>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div id='sigdiv'>
+														@if (!Empty($user->signature))
+														<br>
+														<img src="{{asset($user->signature)}}" style="width: 150px;height:75px" alt="">
+														@endif
+													</div>
+												</div>
+											</div>
+										
+										</div>
+							
 										<div class="text-right">
 											<button type="submit" name="action" value="personal" class="btn bg-teal">บันทึกข้อมูลส่วนตัว <i class="icon-paperplane ml-2"></i></button>
 										</div>
@@ -648,10 +715,10 @@
 									<div class="tab-pane fade" id="left-icon-subscribe">
 										<label>Subscribe Line Notification
 											@if (!Empty($user->linetoken))
-													<span class="text-success"><i class="icon-checkmark3 text-success"></i> ยืนยัน subcribe แล้ว</span>
-												@else
-													<span class="text-danger"><i class="icon-cross3 text-danger"></i> ยังไม่ได้ subcribe</span>
-												@endif
+												<span class="text-success"><i class="icon-checkmark3 text-success"></i> ยืนยัน subcribe แล้ว</span>
+											@else
+												<span class="text-danger"><i class="icon-cross3 text-danger"></i> ยังไม่ได้ subcribe</span>
+											@endif
 										</label>
 										<div class="col-md-6">
 											
@@ -1171,12 +1238,15 @@
 				</div>
 			</div>
 		</form>
+
     </div>
     <!-- /content area -->
 @endsection
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
     <script>
 		var route = {
 			url: "{{ url('/') }}",
