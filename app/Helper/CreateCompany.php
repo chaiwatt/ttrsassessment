@@ -16,8 +16,11 @@ class CreateCompany
             'amphur_id' => 67,
             'tambol_id' => 367,
             'postalcode' => '12120',
+            'factoryprovince_id' => 4,
+            'factoryamphur_id' => 67,
+            'factorytambol_id' => 367,
+            'factorypostalcode' => '12120',
         ]);
         return ;
     } 
 }
-

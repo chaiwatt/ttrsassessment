@@ -81,9 +81,15 @@ class SettingUserCompanyController extends Controller
             'postalcode' => $request->postalcode,
             'lat' => $request->lat,
             'lng' => $request->lng,
-            'logo' => $filelocation
+            'logo' => $filelocation,
+            'factoryaddress' => $request->factoryaddress,
+            'factoryprovince_id' => $request->factoryprovince,
+            'factoryamphur_id' => $request->factoryamphur,
+            'factorytambol_id' => $request->factorytambol,
+            'factorypostalcode' => $request->factorypostalcode,
+            'factorylat' => $request->factorylat,
+            'factorylng' => $request->factorylng
         ]);
         return redirect()->back()->withSuccess('แก้ไขข้อมูลบริษัทสำเร็จ'); 
     }
 }
-
