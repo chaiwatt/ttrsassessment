@@ -25,6 +25,7 @@ class DashboardCompanyMiniTBPController extends Controller
         $company = Company::where('user_id',Auth::user()->id)->first();
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         $minitbps = MiniTBP::where('business_plan_id',$businessplan->id)->get();
+        // return $businessplan;
         return view('dashboard.company.minitbp.index')->withMinitbps($minitbps);
     }
     public function Edit($id){

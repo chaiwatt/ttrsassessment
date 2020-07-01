@@ -14,16 +14,16 @@ class MiniTBP extends Model
     protected $guarded = [];
 
     public function getBusinessPlanAttribute(){
-        return BusinessPlan::find($this->business_plan_id)->first();
+        return BusinessPlan::find($this->business_plan_id);
     } 
     public function getPrefixAttribute(){
-        return Prefix::find($this->contactprefix)->first();
+        return Prefix::find($this->contactprefix);
     } 
     public function getBankAttribute(){
-        return ThaiBank::find($this->thai_bank_id)->first();
+        return ThaiBank::find($this->thai_bank_id);
     } 
     public function getUserPositionAttribute(){
-        return UserPosition::find($this->contactposition_id)->first();
+        return UserPosition::find($this->contactposition_id);
     }
 
     public function getUpdatedAtThAttribute(){

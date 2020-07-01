@@ -135,8 +135,8 @@
                                         </div>
                                         <div class="form-group">
                                             <ul class="nav nav-tabs nav-tabs-highlight">
-                                                <li class="nav-item"><a href="#left-icon-company" class="nav-link active" data-toggle="tab"><i class="icon-stack-star mr-2"></i> ที่อยู่บริษัท</a></li>
-                                                <li class="nav-item"><a href="#left-icon-factory" class="nav-link" data-toggle="tab"><i class="icon-medal mr-2"></i> ที่อยู่โรงงาน</a></li>
+                                                <li class="nav-item"><a href="#left-icon-company" class="nav-link active" data-toggle="tab"><i class="icon-home2 mr-2"></i> ที่อยู่บริษัท</a></li>
+                                                <li class="nav-item"><a href="#left-icon-factory" class="nav-link" data-toggle="tab"><i class="icon-office mr-2"></i> ที่อยู่โรงงาน</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane fade show active" id="left-icon-company">

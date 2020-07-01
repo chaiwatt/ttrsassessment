@@ -32,10 +32,10 @@ class CreateMiniTBPSTable extends Migration
             $table->char('nonefinance2',5)->nullable()->comment('รับรองขอรับสิทธิประโยชน์ทางภาษี');
             $table->char('nonefinance3',5)->nullable()->comment('โครงการ spin off');
             $table->char('nonefinance4',5)->nullable()->comment('ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ');
-            $table->string('nonefinance5',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบบ');
-            $table->string('nonefinance5_detail',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบบ');
-            $table->string('nonefinance6',250)->nullable()->comment('อื่น ๆ โปรดระบบ');
-            $table->string('nonefinance6_detail',250)->nullable()->comment('อื่น ๆ โปรดระบบ');
+            $table->string('nonefinance5',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบุ');
+            $table->string('nonefinance5_detail',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบุ');
+            $table->string('nonefinance6',250)->nullable()->comment('อื่น ๆ โปรดระบุ');
+            $table->string('nonefinance6_detail',250)->nullable()->comment('อื่น ๆ โปรดระบุ');
             $table->unsignedBigInteger('contactprefix')->nullable();
             $table->string('contactname',10)->nullable();
             $table->string('contactlastname',10)->nullable();

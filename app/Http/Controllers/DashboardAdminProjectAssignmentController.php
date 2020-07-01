@@ -7,11 +7,18 @@ use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Model\ProjectAssignment;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminProjectAssignmentController extends Controller
 {
     public function Index(){
-        $projectassignments = ProjectAssignment::get();
+        $auth = Auth::user();
+        $projectassignments = ProjectAssignment::where('leader_id',$auth->id)
+                                            ->orWhere('coleader_id',$auth->id)
+                                            ->get();
+        if($auth->user_type_id >= 7){
+            $projectassignments = ProjectAssignment::get();
+        }
         return view('dashboard.admin.projectassignment.index')->withProjectassignments($projectassignments);
     }
     public function Edit($id){

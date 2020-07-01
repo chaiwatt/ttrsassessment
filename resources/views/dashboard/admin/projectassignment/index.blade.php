@@ -68,8 +68,9 @@
                                         <th>Leader</th>
                                         <th>Co-Leader</th>
                                         <th>สถานะ</th>
-                                        <th>เพิ่มเติม</th> 
-                                                                  
+                                        @if (Auth::user()->user_type_id>=7)
+                                            <th>เพิ่มเติม</th> 
+                                        @endif                             
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,10 +98,12 @@
                                                 <span class="badge bg-success">Assign แล้ว</span>
                                             @endif
                                         </td>
-                                        <td> 
-                                            <a href="{{route('dashboard.admin.projectassignment.edit',['id' => $projectassignment->id])}}" class=" badge bg-primary">รายละเอียด</a>
-                                            {{-- <a href="{{route('dashboard.admin.projectassignment.delete',['id' => $projectassignment->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                        --}}
-                                        </td>                                
+                                        @if (Auth::user()->user_type_id>=7)
+                                            <td> 
+                                                <a href="{{route('dashboard.admin.projectassignment.edit',['id' => $projectassignment->id])}}" class=" badge bg-primary">รายละเอียด</a>
+                                            </td>    
+                                        @endif
+                               
                                     </tr>
                                     @endforeach
                                 </tbody>
