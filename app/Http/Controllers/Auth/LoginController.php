@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Model\SocialAccount;
 use Illuminate\Http\Request;
 use App\Helper\CreateCompany;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -25,15 +26,20 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user) { 
-        if($user->user_type_id >= 4){
-            return redirect()->route('dashboard.admin'); 
-        }else if($user->user_type_id == 3){
-            return redirect()->route('dashboard.expert'); 
-        }else if($user->user_type_id <= 2){
-            // if($user->verify_type == 1){
+         $baseurl =URL::to('/');
+         $intendurl = redirect()->intended()->getTargetUrl();
+         if(strcmp($intendurl,$baseurl) == 0){
+            if($user->user_type_id >= 4){
+                return redirect()->route('dashboard.admin'); 
+            }else if($user->user_type_id == 3){
+                return redirect()->route('dashboard.expert'); 
+            }else if($user->user_type_id <= 2){
                 return redirect()->route('dashboard.company'); 
-            // }
-        }
+            }
+         }else{
+            return redirect($intendurl);
+         }
+
     }
 
     public function Redirect($provider)

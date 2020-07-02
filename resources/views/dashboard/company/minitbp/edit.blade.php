@@ -255,11 +255,11 @@
 								</div>
 								<div class="form-group">
 									<label for="">เบอร์โทร<span class="text-danger">*</span></label>
-									<input type="text" name ="contactphone" value="{{$minitbp->contactphone}}" class="form-control" >
+									<input type="text" name ="contactphone" value="{{Auth::user()->phone}}" class="form-control" readonly>
 								</div>
 								<div class="form-group">
 									<label for="">อีเมล์<span class="text-danger">*</span></label>
-									<input type="text" name ="contactemail" value="{{$minitbp->contactemail}}" class="form-control" >
+									<input type="text" name ="contactemail" value="{{Auth::user()->email}}" class="form-control" readonly>
 								</div>
 								<div class="form-group">
 									<label for="">เว็บไซต์</label>

@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
                 'prefix_id' => 1,
                 'user_type_id' => 4,
                 'name' => 'leader1',
-                'email' => 'leader1@gmail.com',           
+                'email' => 'programprc@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1

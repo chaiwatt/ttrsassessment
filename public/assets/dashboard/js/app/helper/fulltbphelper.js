@@ -12,7 +12,6 @@ $(document).on('keyup', '#companyprofile_input', function(e) {
 });
 
 $(document).on('keyup', '.companyprofileclass', function(e) {
-    // console.log(ThaiWord.countCharTh($(this).val()));
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
@@ -20,7 +19,6 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
     var lines = $('input[name="companyprofile[]"]').map(function(){ 
         return this.value; 
     }).get();
-    // console.log(lines);
     CompanyProfile.addCompanyProfile(lines,$(this).data('id')).then(data => {
         console.log(data);
         Swal.fire({
@@ -28,9 +26,7 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
             text: 'เพิ่มประวัติบริษัทสำเร็จ!',
             });
     })
-    .catch(error => {
-        //console.log(error)
-    })
+    .catch(error => {})
 });
 
 $("#attachment").on('change', function() {
@@ -42,15 +38,9 @@ $("#attachment").on('change', function() {
         alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;
     }
-    
-    // var inpattachments = $('.input_attachment').map(function() {
-    //     return $(this).val();
-    // }).toArray();
-
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
-
         $.ajax({
             url: `${route.url}/api/fulltbp/companyprofile/attachement/add`,  //Server script to process data
             type: 'POST',
@@ -66,7 +56,7 @@ $("#attachment").on('change', function() {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class=" badge bg-primary">แก้ไข</a>
-                            <a data-id="${attachment.id}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -75,3 +65,39 @@ $("#attachment").on('change', function() {
     });
 
 });
+
+$(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+        //     Patient.deleteDrugAllergy(route.patientid,$(this).data('id')).then(data => {
+                
+        //        let html='';
+        //        data.forEach(function (drugallergy,index) {
+        //            let status ='';
+        //            html += `<tr>
+        //                        <td>${drugallergy.drug['name']}</td>
+        //                        <td>${drugallergy['note']}</td>                   
+        //                        <td>                                                                                                      
+        //                        <a type="button" data-id="${drugallergy['id']}"  class="btn btn-danger-400 btn-sm" id="deletedrug" ><i class="icon-trash danger"></i></a>
+        //                        </td>
+        //                    <tr>`
+        //            });
+        //         $("#drug_allergy_wrapper_tr").html(html);
+        //    })
+        //    .catch(error => {
+        //        // console.log(error)
+        //    })
+        }
+    });
+
+}); 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\MiniTBP;
 use App\Model\ThaiBank;
+use App\Helper\EmailBox;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
@@ -39,6 +41,11 @@ class DashboardAdminMiniTbpController extends Controller
         $businessplan = BusinessPlan::find($minitbp->business_plan_id)->update([
             'business_plan_status_id' => 4
         ]);
+        
+        $_businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $_company = Company::find($_businessplan->company_id);
+        $_user = User::find($_company->user_id);
+        EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Mini TBP ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full TBP ได้ที่ <a href='.route('dashboard.company.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
         return redirect()->back()->withSuccess('ยืนยัน mini TBP สำเร็จ');
     }
 }

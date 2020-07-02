@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use DateTimeZone;
 use Carbon\Carbon;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\MiniTBP;
 use App\Model\ThaiBank;
+use App\Helper\EmailBox;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
@@ -76,8 +78,6 @@ class DashboardCompanyMiniTBPController extends Controller
             'contactname' => $request->contactname,
             'contactlastname' => $request->contactlastname,
             'contactposition_id' => $request->contactposition,
-            'contactphone' => $request->contactphone,
-            'contactemail' => $request->contactemail,
             'managerprefix' => $request->managerprefix,
             'managername' => $request->managername,
             'managerlastname' => $request->managerlastname,
@@ -212,7 +212,7 @@ class DashboardCompanyMiniTBPController extends Controller
         $projectassignment = new ProjectAssignment();
         $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
         $projectassignment->save();
-
+        EmailBox::send(User::where('user_type_id',7)->first()->email,'TTRS:ส่งเอกสาร Mini TBP','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TPB โปรดตรวจสอบ/Assign ผู้รับผิดชอบ ได้ที่ <a href='.route('dashboard.admin.projectassignment').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
         return redirect()->route('dashboard.company.minitbp')->withSuccess('ส่งเอกสาร mini TBP สำเร็จ');
     }
 }

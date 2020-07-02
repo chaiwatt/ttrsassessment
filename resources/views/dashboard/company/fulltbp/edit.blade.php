@@ -204,7 +204,7 @@
 																				<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
 																				<td> 
 																					<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
-																					<a href="" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+																					<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
 																				</td>
 																			</tr>
 																		@endforeach                            

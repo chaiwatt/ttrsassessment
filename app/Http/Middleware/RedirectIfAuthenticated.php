@@ -26,10 +26,11 @@ class RedirectIfAuthenticated
             }else if($user->user_type_id == 2){
                 return redirect()->route('dashboard.expert'); 
             }else if($user->user_type_id <= 2){
-                // if($user->verify_type == 1){
+                if($user->verify_type == 1){
                     return redirect()->route('dashboard.company'); 
-                // }
+                }
             }
+            // return redirect()->intended();
         }
 
         return $next($request);

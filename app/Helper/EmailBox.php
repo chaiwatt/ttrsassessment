@@ -9,7 +9,7 @@ class EmailBox
     public static function send($mailto,$title,$message){
         $data = [
             'sendermail' => 'noreply@npctestserver.com',
-            'sendername' => 'Admin',
+            'sendername' => 'TTRS',
             'title' => $title,
             'message' => $message
             ];

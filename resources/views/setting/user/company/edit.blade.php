@@ -263,7 +263,7 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/companyhelper.js')}}"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZDFx6AlDgtC7WuS2Cs6gAi-4edWe1H8&callback=initMap"></script>
+
     <script>
     	var route = {
 			url: "{{ url('/') }}",
