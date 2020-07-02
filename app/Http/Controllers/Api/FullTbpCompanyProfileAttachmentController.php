@@ -21,4 +21,13 @@ class FullTbpCompanyProfileAttachmentController extends Controller
         $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$request->id)->get();
         return response()->json($fulltbpcompanyprofileattachments); 
     }
+    public function Delete(Request $request){
+        
+        $fulltbpcompanyprofileattachment = FullTbpCompanyProfileAttachment::find($request->id);
+        $fulltbpid = $fulltbpcompanyprofileattachment->full_tbp_id;
+        @unlink($fulltbpcompanyprofileattachment->path);
+        $fulltbpcompanyprofileattachment->delete();
+        $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbpid)->get();
+        return response()->json($fulltbpcompanyprofileattachments); 
+    }
 }

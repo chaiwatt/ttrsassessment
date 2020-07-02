@@ -115,8 +115,12 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\FullTbpCompanyProfileController@CompanyprofileAdd')->name('api.fulltbp.companyprofile.add');           
                 Route::group(['prefix' => 'attachement'], function(){
                     Route::post('add','Api\FullTbpCompanyProfileAttachmentController@Add')->name('api.fulltbp.companyprofile.attachement.add');           
-    
+                    Route::post('delete','Api\FullTbpCompanyProfileAttachmentController@Delete')->name('api.fulltbp.companyprofile.attachement.delete');           
                 });  
+            }); 
+            Route::group(['prefix' => 'ceo'], function(){
+                Route::post('add','Api\FullTbpCompanyCEOController@Add')->name('api.fulltbp.ceo.add');           
+                
             });           
         }); 
     }); 

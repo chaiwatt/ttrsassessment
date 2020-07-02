@@ -213,12 +213,22 @@
 															</div>
 														</div>      
 													</div>
+													<div class="form-group">
+														<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn btn-success float-right" >บันทึกประวัติบริษัท</button>
+													</div>
 												</div>
 		
 												<div class="tab-pane fade" id="vertical-left-boardhistory">
 													<div class="form-group">
-														<label for="">rrrr </label>
-														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+														<label for="">ชื่อ </label>
+														<input type="text" name ="ceoname" id ="ceoname" value="" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label for="">นามสกุล </label>
+														<input type="text" name ="ceolastname" id ="ceolastname" value="" class="form-control" >
+													</div>
+													<div class="form-group">
+														<button type="button" id="btnaddcompanyceo" data-id="{{$fulltbp->id}}" class="btn btn-success float-right" >บันทึกผู้บริหารระดับสูง</button>
 													</div>
 												</div>
 												<div class="tab-pane fade" id="vertical-left-teamhistory">
@@ -246,9 +256,7 @@
 														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
 													</div>
 												</div>
-												<div class="form-group">
-													<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn btn-success" >บันทึกประวัติบริษัท</button>
-												</div>
+
 												
 											</div>
 										</div>

@@ -1,5 +1,7 @@
 import * as ThaiWord from './thaiword.js';
 import * as CompanyProfile from './companyprofile.js';
+import * as CompanyProfileAttachment from './companyprofileattachment.js';
+import * as Ceo from './ceo.js';
 
 $(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
@@ -55,7 +57,7 @@ $("#attachment").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">แก้ไข</a>
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -79,25 +81,36 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
         closeOnCancel: false
         }).then((result) => {
         if (result.value) {
-        //     Patient.deleteDrugAllergy(route.patientid,$(this).data('id')).then(data => {
-                
-        //        let html='';
-        //        data.forEach(function (drugallergy,index) {
-        //            let status ='';
-        //            html += `<tr>
-        //                        <td>${drugallergy.drug['name']}</td>
-        //                        <td>${drugallergy['note']}</td>                   
-        //                        <td>                                                                                                      
-        //                        <a type="button" data-id="${drugallergy['id']}"  class="btn btn-danger-400 btn-sm" id="deletedrug" ><i class="icon-trash danger"></i></a>
-        //                        </td>
-        //                    <tr>`
-        //            });
-        //         $("#drug_allergy_wrapper_tr").html(html);
-        //    })
-        //    .catch(error => {
-        //        // console.log(error)
-        //    })
+            CompanyProfileAttachment.deleteAttachement($(this).data('id')).then(data => {
+                var html = ``;
+                // console.log(data);
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_companyprofile_attachment_wrapper_tr").html(html);
+           })
+           .catch(error => {})
         }
     });
 
 }); 
+
+$(document).on('click', '#btnaddcompanyceo', function(e) {
+    console.log('checked');
+
+    Ceo.saveCEO($('#ceoname').val(),$('#ceolastname').val()).then(data => {
+        console.log(data);
+        
+        // Swal.fire({
+        //     title: 'สำเร็จ...',
+        //     text: 'เพิ่มประวัติบริษัทสำเร็จ!',
+        //     });
+    })
+    .catch(error => {})
+});
