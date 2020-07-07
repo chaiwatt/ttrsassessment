@@ -120,8 +120,36 @@ Route::group(['middleware' => 'auth'], function(){
             }); 
             Route::group(['prefix' => 'ceo'], function(){
                 Route::post('add','Api\FullTbpCompanyCEOController@Add')->name('api.fulltbp.ceo.add');           
-                
-            });           
+                Route::post('get','Api\FullTbpCompanyCEOController@Get')->name('api.fulltbp.ceo.get');  
+                Route::post('edit','Api\FullTbpCompanyCEOController@Edit')->name('api.fulltbp.ceo.edit');  
+
+            });
+            Route::group(['prefix' => 'employ'], function(){
+                Route::post('add','Api\FullTbpCompanyEmployController@Add')->name('api.fulltbp.employ.add');    
+                Route::post('delete','Api\FullTbpCompanyEmployController@Delete')->name('api.fulltbp.employ.delete');       
+                Route::post('get','Api\FullTbpCompanyEmployController@Get')->name('api.fulltbp.employ.get');  
+                Route::post('edit','Api\FullTbpCompanyEmployController@Edit')->name('api.fulltbp.employ.edit'); 
+                Route::post('getlist','Api\FullTbpCompanyEmployController@GetList')->name('api.fulltbp.employ.getlist'); 
+
+                Route::group(['prefix' => 'education'], function(){
+                    Route::post('add','Api\FullTbpCompanyEmployEducationController@Add')->name('api.fulltbp.employ.education.add');           
+                    Route::post('delete','Api\FullTbpCompanyEmployEducationController@Delete')->name('api.fulltbp.employ.education.delete'); 
+                }); 
+                Route::group(['prefix' => 'experience'], function(){
+                    Route::post('add','Api\FullTbpCompanyEmployExperienceController@Add')->name('api.fulltbp.employ.experience.add');           
+                    Route::post('delete','Api\FullTbpCompanyEmployExperienceController@Delete')->name('api.fulltbp.employ.experience.delete'); 
+                }); 
+                Route::group(['prefix' => 'training'], function(){
+                    Route::post('add','Api\FullTbpCompanyEmployTrainingController@Add')->name('api.fulltbp.employ.training.add');  
+                    Route::post('delete','Api\FullTbpCompanyEmployTrainingController@Delete')->name('api.fulltbp.employ.training.delete');          
+                });
+            }); 
+            
+            Route::group(['prefix' => 'stockholder'], function(){
+                Route::post('add','Api\FullTbpCompanyStockHolderController@Add')->name('api.fulltbp.stockholder.add');           
+                Route::post('delete','Api\FullTbpCompanyStockHolderController@Delete')->name('api.fulltbp.stockholder.delete');  
+            });
+
         }); 
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

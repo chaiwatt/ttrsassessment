@@ -2,6 +2,342 @@
 @section('pageCss')
 @stop
 @section('content')
+{{-- modal_add_employ --}}
+<div id="modal_add_employ" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+							<select id="employprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+								@foreach ($prefixes as $prefix)
+									<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group">
+							<label>ชื่อ</label><span class="text-danger">*</span>
+							<input type="text" id="employname" placeholder="ชื่อ" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label>นามสกุล</label><span class="text-danger">*</span>
+							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>ตำแหน่ง<span class="text-danger">*</span></label>
+							<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
+								@foreach ($employpositions as $employposition)
+									<option value="{{$employposition->id}}" >{{$employposition->name}}</option> 
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group">
+							<label>โทรศัพท์</label><span class="text-danger">*</span>
+							<input type="text" id="employphone" placeholder="เบอร์โทรศัพท์" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
+							<input type="text" id="employworkphone" placeholder="โทรศัพท์มือถือ" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_employ" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- modal_edit_employ --}}
+<div id="modal_edit_employ" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+						<div class="card-body">
+							<ul class="nav nav-tabs nav-tabs-highlight">
+								<li class="nav-item"><a href="#left-icon-employinfo" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลส่วนตัว</a></li>
+								<li class="nav-item"><a href="#left-icon-employeducation" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการศึกษา</a></li>
+								<li class="nav-item"><a href="#left-icon-employexpereince" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการทำงาน</a></li>
+								<li class="nav-item"><a href="#left-icon-employtraining" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการฝึกอบรม</a></li>								
+							</ul>
+
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="left-icon-employinfo">
+									<input type="text" id="employid" value="" hidden>
+									<div class="form-group">
+										<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+										<div id="employprefix_wrapper"></div>
+									</div>
+
+									<div class="form-group">
+										<label>ชื่อ</label><span class="text-danger">*</span>
+										<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>นามสกุล</label><span class="text-danger">*</span>
+										<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>ตำแหน่ง<span class="text-danger">*</span></label>
+										<div id="employposition_wrapper"></div>
+									</div>
+									<div class="form-group">
+										<label>โทรศัพท์</label><span class="text-danger">*</span>
+										<input type="text" id="employphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
+										<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
+									</div>
+									<div class="form-group">
+										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล employ</button>
+									</div>
+									
+								</div>
+
+								<div class="tab-pane fade" id="left-icon-employeducation">
+									<div class="form-group">	
+										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>ระดับ</th>  
+													<th>ชื่อสถานศึกษา</th>                                                                                    
+													<th>สาขาวิชาเอก</th>       
+													<th>ปีที่ศึกษา</th>  
+													<th>เพิ่มเติม</th>    
+												</tr>
+											</thead>
+											<tbody id="fulltbp_companyemployeducation_wrapper_tr">    
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+								<div class="tab-pane fade" id="left-icon-employexpereince">
+									<div class="form-group">	
+										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add"></i></a>
+									</div>
+
+									<div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>เริ่มต้น-สิ้นสุด</th>  
+													<th>บริษัท</th>                                                                                    
+													<th>ประเภทธุรกิจ</th>       
+													<th>ตำแหน่งแรกเข้า</th>  
+													<th>ตำแหน่งล่าสุด</th> 
+													<th>เพิ่มเติม</th>    
+												</tr>
+											</thead>
+											<tbody id="fulltbp_companyemployexperience_wrapper_tr">    
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="left-icon-employtraining">
+									<div class="form-group">	
+										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a>
+									</div>
+
+									<div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>วัน เดือน ปี</th>  
+													<th>หลักสูตร</th>                                                                                    
+													<th>หน่วยงานผู้จัด</th>       
+													<th>เพิ่มเติม</th>    
+												</tr>
+											</thead>
+											<tbody id="fulltbp_companyemploytraining_wrapper_tr">    
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+							</div>
+						</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				{{-- <button id="btn_modal_edit_employ" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_add_employeducation" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการศึกษา</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>ระดับ</label><span class="text-danger">*</span>
+							<input type="text" id="employeducationlevel" placeholder="ชื่อ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>ชื่อสถานศึกษา</label><span class="text-danger">*</span>
+							<input type="text" id="employeducationinstitute" placeholder="นามสกุล" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>สาขาวิชาเอก</label><span class="text-danger">*</span>
+							<input type="text" id="employeducationmajor" placeholder="ตำแหน่ง" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)</label><span class="text-danger">*</span>
+							<input type="text" id="employeducationyear" placeholder="เบอร์โทรศัพท์" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_employeducation" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- modal_add_employexperience --}}
+<div id="modal_add_employexperience" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>ช่วงเวลาการทำงานเริ่มต้น</label><span class="text-danger">*</span>
+							<input type="text" id="employexperiencestartdate" placeholder="ช่วงเวลาการทำงานเริ่มต้น" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label>ช่วงเวลาการทำงานสิ้นสุด</label><span class="text-danger">*</span>
+							<input type="text" id="employexperienceenddate" placeholder="ช่วงเวลาการทำงานสิ้นสุด" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>บริษัท</label><span class="text-danger">*</span>
+							<input type="text" id="employexperiencecompany" placeholder="บริษัท" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>ประเภทธุรกิจ</label><span class="text-danger">*</span>
+							<input type="text" id="employexperiencebusinesstype" placeholder="ประเภทธุรกิจ" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>ตำแหน่งแรกเข้า</label><span class="text-danger">*</span>
+							<input type="text" id="employexperiencestartposition" placeholder="ตำแหน่งแรกเข้า" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>ตำแหน่งล่าสุด</label><span class="text-danger">*</span>
+							<input type="text" id="employexperienceendposition" placeholder="ตำแหน่งล่าสุด" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_employexperience" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- modal_add_employtraining --}}
+<div id="modal_add_employtraining" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>วัน เดือน ปี</label><span class="text-danger">*</span>
+							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label>หลักสูตร</label><span class="text-danger">*</span>
+							<input type="text" id="employtrainingcourse" placeholder="หลักสูตร" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>บริษัท</label><span class="text-danger">*</span>
+							<input type="text" id="employtrainingowner" placeholder="บริษัท" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_employtraining" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- modal_add_stockholder --}}
+<div id="modal_add_stockholder" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มผู้ถือหุ้น</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div id="stockholderselect_wrapper"></div>
+						</div>
+						<div class="form-group">
+							<label>ความสัมพันธ์กับ CEO</label><span class="text-danger">*</span>
+							<input type="text" id="relationwithceo" placeholder="ความสัมพันธ์กับ CEO" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_stockholder" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
@@ -48,14 +384,10 @@
             <div class="col-md-12">
 				<!-- Colors -->
             	<div class="card">
-					{{-- <div class="card-header header-elements-inline">
-					
-					</div> --}}
-
                 	<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลทั่วไป</a></li>
-							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แผนผังองค์กร</a></li>
+							{{-- <li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แผนผังองค์กร</a></li> --}}
 							<li class="nav-item"><a href="#left-icon-oganization" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลองค์กร</a></li>
 							<li class="nav-item"><a href="#left-icon-tab3" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> โครงการ</a></li>
 							<li class="nav-item"><a href="#left-icon-tab4" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การตลาด</a></li>
@@ -106,59 +438,15 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade" id="left-icon-contact">
-								<div class="row">	
-									<div class="col-md-12"  >	
-										<div class="d-md-flex" >
-											<ul class="nav nav-tabs nav-tabs-vertical flex-column mr-md-2 wmin-md-200 mb-md-0 border-bottom-0">
-												<li class="nav-item"><a href="#vertical-left-employee" class="nav-link active" data-toggle="tab"><i class="icon-arrow-right5"></i> บุคลากร</a></li>
-												<li class="nav-item"><a href="#vertical-left-organizelist" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> แผนผังองค์กร</a></li>
-											</ul>
-											<div class="tab-content" style="word-break:break-all;width:100%" >
-												<div class="tab-pane fade show active" id="vertical-left-employee">
-													<div class="form-group">
-														<label for="">ฝ่ายบริหาร</label>
-														<input type="number" name ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
-													</div>
-													<div class="form-group">
-														<label for="">ฝ่ายวิจัยและพัฒนา</label>
-														<input type="number" name ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
-													</div>
-													<div class="form-group">
-														<label for="">ฝ่ายผลิต/วิศวกรรม</label>
-														<input type="number" name ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
-													</div>
-													<div class="form-group">
-														<label for="">ฝ่ายการตลาด</label>
-														<input type="number" name ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
-													</div>
-													<div class="form-group">
-														<label for="">พนักงานทั่วไป </label>
-														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
-													</div>
-												</div>
-												<div class="tab-pane fade" id="vertical-left-organizelist">
-													<div class="form-group">
-														<label for="">organizelist </label>
-														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 							<div class="tab-pane fade" id="left-icon-oganization">
 								<div class="row">	
 									<div class="col-md-12"  >	
 										<div class="d-md-flex" >
 											<ul class="nav nav-tabs nav-tabs-vertical flex-column mr-md-2 wmin-md-200 mb-md-0 border-bottom-0">
 												<li class="nav-item"><a href="#vertical-left-companyprofile" class="nav-link active" data-toggle="tab"><i class="icon-arrow-right5"></i> ประวัติของบริษัท</a></li>
-												<li class="nav-item"><a href="#vertical-left-boardhistory" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ข้อมูลผู้บริหารระดับสูง</a></li>
-												<li class="nav-item"><a href="#vertical-left-teamhistory" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ข้อมูลทีมบริหาร</a></li>															
-												<li class="nav-item"><a href="#vertical-left-stockholder" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> บัญชีรายชื่อผู้ถือหุ้น</a></li>							
-												<li class="nav-item"><a href="#vertical-left-researcher" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ข้อมูลพนักงาน</a></li>							
-												<li class="nav-item"><a href="#vertical-left-takeowner" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ผู้รับผิดชอบโครงการ</a></li>							
+												<li class="nav-item"><a href="#vertical-left-quantityemploy" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> จำนวนบุคลากร</a></li>
+												<li class="nav-item"><a href="#vertical-left-employhistory" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> ข้อมูลบุคลากร</a></li>
+												<li class="nav-item"><a href="#vertical-left-stockholder" class="nav-link" data-toggle="tab"><i class="icon-arrow-right5"></i> บัญชีรายชื่อผู้ถือหุ้น</a></li>
 											</ul>
 											<div class="tab-content" style="word-break:break-all;width:100%" >
 												<div class="tab-pane fade show active" id="vertical-left-companyprofile" >	
@@ -176,7 +464,6 @@
 													<hr>	
 													<div class="row">
 														<div class="col-md-12">	
-															{{-- <a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-left" ><i class="icon-add"></i></a> --}}
 															<div class="input-group">													
 																<button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													
 															</div>
@@ -185,7 +472,6 @@
 													</div>																								
 													<div class="row">	
 														<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
-
 														</div>
 													</div>
 													<div class="row">
@@ -217,47 +503,87 @@
 														<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn btn-success float-right" >บันทึกประวัติบริษัท</button>
 													</div>
 												</div>
-		
-												<div class="tab-pane fade" id="vertical-left-boardhistory">
+												<div class="tab-pane fade" id="vertical-left-quantityemploy">
 													<div class="form-group">
-														<label for="">ชื่อ </label>
-														<input type="text" name ="ceoname" id ="ceoname" value="" class="form-control" >
+														<label for="">ฝ่ายบริหาร</label>
+														<input type="number" name ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
 													</div>
 													<div class="form-group">
-														<label for="">นามสกุล </label>
-														<input type="text" name ="ceolastname" id ="ceolastname" value="" class="form-control" >
+														<label for="">ฝ่ายวิจัยและพัฒนา</label>
+														<input type="number" name ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
 													</div>
 													<div class="form-group">
-														<button type="button" id="btnaddcompanyceo" data-id="{{$fulltbp->id}}" class="btn btn-success float-right" >บันทึกผู้บริหารระดับสูง</button>
+														<label for="">ฝ่ายผลิต/วิศวกรรม</label>
+														<input type="number" name ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
 													</div>
-												</div>
-												<div class="tab-pane fade" id="vertical-left-teamhistory">
 													<div class="form-group">
-														<label for="">dfdsfsdf </label>
+														<label for="">ฝ่ายการตลาด</label>
+														<input type="number" name ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label for="">พนักงานทั่วไป </label>
 														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
 													</div>
 												</div>
+												<div class="tab-pane fade" id="vertical-left-employhistory">
+													<div class="form-group">	
+														<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" id="btnaddemploy" data-toggle="modal" data-target="#modal_add_employ"><i class="icon-add"></i></a>
+													</div>
+													<div class="table-responsive">
+														<table class="table table-striped">
+															<thead>
+																<tr>
+																	<th>ชื่อ-สกุล</th>  
+																	<th>ตำแหน่ง</th>                                                                                    
+																	<th>โทรศัพท์</th>       
+																	<th>โทรศัพท์มือถือ</th>  
+																	<th>เพิ่มเติม</th>    
+																</tr>
+															</thead>
+															<tbody id="fulltbp_companyemploy_wrapper_tr">    
+																@foreach ($companyemploys as $companyemploy)
+																	<tr >                                        
+																		<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
+																		<td> {{$companyemploy->employposition->name}} </td> 
+																		<td> {{$companyemploy->phone}} </td>                                            
+																		<td> {{$companyemploy->workphone}} </td> 
+																		<td> 
+																			<a type="button" data-id="{{$companyemploy->id}}" class="btn badge bg-info editEmployinfo">แก้ไข</a>
+																			<a type="button" data-id="{{$companyemploy->id}}" class="btn badge bg-warning deletecompanyemploy">ลบ</a> 
+																		</td> 
+																	</tr>
+																@endforeach                            
+															</tbody>
+														</table>
+													</div>
+													
+												</div>
+											
 												<div class="tab-pane fade" id="vertical-left-stockholder">
-													<div class="form-group">
-														<label for="">rrrrrrrrrrrrss </label>
-														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+													<div class="form-group">	
+														<button type="button" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-id="{{$company->id}}" id="btnstckholder" ><i class="icon-add"></i></button>
+													</div>
+													<div class="table-responsive">
+														<table class="table table-striped">
+															<thead>
+																<tr>
+																	<th>ชื่อ-สกุล</th>  
+																	<th>ความสัมพันธ์กับ CEO</th>
+																	<th>เพิ่มเติม</th>    
+																</tr>
+															</thead>
+															<tbody id="fulltbp_companystockholder_wrapper_tr">    
+																@foreach ($companystockholders as $companystockholder)
+																	<tr >                                        
+																		<td> {{$companystockholder->companyemploy->name}} {{$companystockholder->companyemploy->lastname}}</td> 
+																		<td> {{$companystockholder->relationwithceo}} </td> 
+																		<td> <a type="button" data-id="{{$companystockholder->id}}" class="btn badge bg-warning deletestockholder">ลบ</a> </td> 
+																	</tr>
+																@endforeach                            
+															</tbody>
+														</table>
 													</div>
 												</div>
-	
-												<div class="tab-pane fade" id="vertical-left-researcher">
-													<div class="form-group">
-														<label for="">ข้อมูลพนักงาน </label>
-														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
-													</div>
-												</div>
-												<div class="tab-pane fade" id="vertical-left-takeowner">
-													<div class="form-group">
-														<label for="">sdfsdf </label>
-														<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
-													</div>
-												</div>
-
-												
 											</div>
 										</div>
 									</div>

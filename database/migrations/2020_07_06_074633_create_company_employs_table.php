@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyCeosTable extends Migration
+class CreateCompanyEmploysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateCompanyCeosTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_ceos', function (Blueprint $table) {
+        Schema::create('company_employs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-            $table->unsignedBigInteger('prefix')->nullable();
+            $table->unsignedBigInteger('prefix_id')->nullable();
             $table->string('name',120)->nullable();
             $table->string('lastname',120)->nullable();
+            $table->unsignedBigInteger('employ_position_id');
             $table->string('phone',12)->nullable();
             $table->string('workphone',12)->nullable();
             $table->string('email',120)->nullable();
+            $table->unsignedBigInteger('stockholder_id')->defualt(1);
             $table->timestamps();
         });
     }
@@ -34,6 +36,6 @@ class CreateCompanyCeosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_ceos');
+        Schema::dropIfExists('company_employs');
     }
 }

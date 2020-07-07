@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
+use App\Model\CompanyBoard;
+use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
+use App\Model\EmployPosition;
+use App\Model\EmployTraining;
+use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
+use App\Model\EmployExperience;
+use App\Model\CompanyStockHolder;
 use App\Model\FullTbpCompanyProfile;
 use Illuminate\Support\Facades\Auth;
 use App\Model\FullTbpCompanyProfileDetail;
@@ -22,7 +30,7 @@ class DashboardCompanyFullTbpController extends Controller
         $company = Company::where('user_id',Auth::user()->id)->first();
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
-        $fulltpbs = FullTbp::where('mini_tbp_id',$minitbp->id)->get();
+        $fulltpbs = FullTbp::where('mini_tbp_id',$minitbp->id)->get();   
         return view('dashboard.company.fulltbp.index')->withFulltbps($fulltpbs);
     }
 
@@ -33,13 +41,23 @@ class DashboardCompanyFullTbpController extends Controller
         $fulltbpemployee = FullTbpEmployee::where('full_tbp_id', $fulltbp->id)->first();
         $fulltbpcompanyprofiledetails = FullTbpCompanyProfileDetail::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbp->id)->get();
-        
+        $company = Company::where('user_id',Auth::user()->id)->first();
+        $prefixes = Prefix::get();
+        $employpositions = EmployPosition::get();
+        $companyemploys = CompanyEmploy::where('company_id',$company->id)->get();
+        $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();
+
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
                                                 ->withFulltbpcompanyprofile($fulltbpcompanyprofile)
                                                 ->withFulltbpcompanyprofiledetails($fulltbpcompanyprofiledetails)
-                                                ->withFulltbpcompanyprofileattachments($fulltbpcompanyprofileattachments);
+                                                ->withFulltbpcompanyprofileattachments($fulltbpcompanyprofileattachments)
+                                                ->withCompanyemploys($companyemploys)
+                                                ->withPrefixes($prefixes)
+                                                ->withEmploypositions($employpositions)
+                                                ->withCompanystockholders($companystockholders)
+                                                ->withCompany($company);
     }
 
     public function EditSave(Request $request,$id){

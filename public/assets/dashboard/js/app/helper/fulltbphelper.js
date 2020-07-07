@@ -1,7 +1,8 @@
 import * as ThaiWord from './thaiword.js';
 import * as CompanyProfile from './companyprofile.js';
 import * as CompanyProfileAttachment from './companyprofileattachment.js';
-import * as Ceo from './ceo.js';
+import * as Employ from './employ.js';
+import * as StockHolder from './stockholder.js';
 
 $(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
@@ -98,19 +99,409 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
            .catch(error => {})
         }
     });
-
 }); 
 
-$(document).on('click', '#btnaddcompanyceo', function(e) {
-    console.log('checked');
 
-    Ceo.saveCEO($('#ceoname').val(),$('#ceolastname').val()).then(data => {
+$(document).on('click', '#btn_modal_add_employ', function(e) {
+    Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val()).then(data => {
         console.log(data);
-        
-        // Swal.fire({
-        //     title: 'สำเร็จ...',
-        //     text: 'เพิ่มประวัติบริษัทสำเร็จ!',
-        //     });
+        var html = ``;
+        data.forEach(function (employ,index) {
+            html += `<tr >                                        
+                <td> ${employ.name}${employ.lastname} </td>                                            
+                <td> ${employ.employposition['name']} </td> 
+                <td> ${employ.phone} </td>                                            
+                <td> ${employ.workphone} </td> 
+                <td> <a type="button" data-id="${employ.id}" class="btn badge bg-info editEmployinfo">แก้ไข</a> 
+                <a type="button" data-id="${employ.id}" class="btn badge bg-warning deletecompanyemploy">ลบ</a>  </td> 
+            </tr>`
+            });
+         $("#fulltbp_companyemploy_wrapper_tr").html(html);
+        //  $("#btnaddemploy").hide();
     })
     .catch(error => {})
 });
+
+$(document).on('click', '.editEmployinfo', function(e) {
+    Employ.getEmploy($(this).data('id')).then(data => {
+        var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        data.prefixes.forEach(function (prefix,index) {
+            var selected = '';
+            if(data.employ['prefix_id'] == prefix['id']){
+                selected = 'selected';
+            }
+            selectprefix += `<option value="${prefix['id']}" ${selected} >${prefix['name']}</option>`
+            });
+            selectprefix += `</select>`;
+        $("#employprefix_wrapper").html(selectprefix);
+
+        var selectemployposition = `<select id="employposition_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        data.employpositions.forEach(function (position,index) {
+            var selected = '';
+            if(data.employ['employ_position_id'] == position['id']){
+                selected = 'selected';
+            }
+            selectemployposition += `<option value="${position['id']}" ${selected} >${position['name']}</option>`
+            });
+            selectemployposition += `</select>`;
+
+        var employeducationtable = '';
+        data.employeducations.forEach(function (education,index) {
+            employeducationtable += `<tr >                                        
+                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${education.employeducationinstitute} </td> 
+                <td> ${education.employeducationmajor} </td>                                            
+                <td> ${education.employeducationyear} </td> 
+                <td> <a type="button" data-id="${education.id}" class="btn badge bg-danger deleteemployeducation">ลบ</a> </td> 
+            </tr>`
+            });
+        $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
+
+        var experiencetable = '';
+        data.employexperiences.forEach(function (experience,index) {
+            experiencetable += `<tr >                                        
+                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                <td> ${experience.company} </td> 
+                <td> ${experience.businesstype} </td>                                            
+                <td> ${experience.startposition} </td> 
+                <td> ${experience.endposition} </td> 
+                <td> <a type="button" data-id="${experience.id}" class="btn badge bg-danger deleteemployexperience">ลบ</a> </td> 
+            </tr>`
+            });
+         $("#fulltbp_companyemployexperience_wrapper_tr").html(experiencetable);
+
+         var trainingtable = '';
+         data.employtrainings.forEach(function (training,index) {
+            trainingtable += `<tr >                                        
+                 <td> ${training.trainingdateth}</td>                                            
+                 <td> ${training.course} </td> 
+                 <td> ${training.owner} </td>                                            
+                 <td> <a type="button" data-id="${training.id}" class="btn badge bg-danger deleteemploytraining">ลบ</a> </td> 
+             </tr>`
+             });
+          $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
+
+        $("#employposition_wrapper").html(selectemployposition);
+        $('#employid').val(data.employ['id'])
+        $('#employname_edit').val(data.employ['name'])
+        $('#employlastname_edit').val(data.employ['lastname'])
+        $('#employphone_edit').val(data.employ['phone'])
+        $('#employworkphone_edit').val(data.employ['workphone']) 
+    })
+    .catch(error => {})
+    $('#modal_edit_employ').modal('show');
+});
+
+$(document).on('click', '#btn_edit_employ', function(e) {
+    console.log($(this).data('id'));
+    Employ.editEmploy($('#employid').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val()).then(data => {
+        console.log(data);
+        var html = ``;
+        data.forEach(function (employ,index) {
+            html += `<tr >                                        
+                <td> ${employ.name}${employ.lastname} </td>                                            
+                <td> ${employ.employposition['name']} </td> 
+                <td> ${employ.phone} </td>                                            
+                <td> ${employ.workphone} </td> 
+                <td> <a type="button" data-id="${employ.id}" class="btn badge bg-info editEmployinfo">แก้ไข</a> 
+                <a type="button" data-id="${employ.id}" class="btn badge bg-warning deletecompanyemploy">ลบ</a>  </td>  
+            </tr>`
+            });
+         $("#fulltbp_companyemploy_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+    $('#modal_edit_employ').modal('show');
+});
+
+
+$(document).on("click",".deletecompanyemploy",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteEmployInfo($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (employ,index) {
+                    html += `<tr >                                        
+                        <td> ${employ.name}${employ.lastname} </td>                                            
+                        <td> ${employ.employposition['name']} </td> 
+                        <td> ${employ.phone} </td>                                            
+                        <td> ${employ.workphone} </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn badge bg-info editEmployinfo">แก้ไข</a> 
+                        <a type="button" data-id="${employ.id}" class="btn badge bg-warning deletecompanyemploy">ลบ</a>  </td>  
+                    </tr>`
+                    });
+                 $("#fulltbp_companyemploy_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+
+}); 
+
+$(document).on('click', '#btn_modal_add_employeducation', function(e) {
+    Employ.addEmployEducation($('#employid').val(),$('#employeducationlevel').val(),$('#employeducationinstitute').val(),$('#employeducationmajor').val(),$('#employeducationyear').val()).then(data => {
+        console.log(data);
+        var html = '';
+        data.forEach(function (education,index) {
+            html += `<tr >                                        
+                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${education.employeducationinstitute} </td> 
+                <td> ${education.employeducationmajor} </td>                                            
+                <td> ${education.employeducationyear} </td> 
+                <td> <a type="button" data-id="${education.id}" class="btn badge bg-danger deleteemployeducation">ลบ</a> </td> 
+            </tr>`
+            });
+         $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
+    })
+    // .catch(error => {})
+});
+
+$(function () {
+    $('#employexperiencestartdate').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        clearButton: true,
+        weekStart: 1,
+        cancelText: "ยกเลิก",
+        okText: "ตกลง",
+        clearText: "เคลียร์",
+        time: false
+    });
+});
+
+$(function () {
+    $('#employexperienceenddate').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        clearButton: true,
+        weekStart: 1,
+        cancelText: "ยกเลิก",
+        okText: "ตกลง",
+        clearText: "เคลียร์",
+        time: false
+    });
+});
+
+$(document).on('click', '#btn_modal_add_employexperience', function(e) {
+    console.log($('#employid').val());
+    Employ.addEmployExperience($('#employid').val(),$('#employexperiencestartdate').val(),$('#employexperienceenddate').val(),$('#employexperiencecompany').val(),$('#employexperiencebusinesstype').val(),$('#employexperiencestartposition').val(),$('#employexperienceendposition').val()).then(data => {
+        console.log(data);
+        var html = '';
+        data.forEach(function (experience,index) {
+            html += `<tr >                                        
+                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                <td> ${experience.company} </td> 
+                <td> ${experience.businesstype} </td>                                            
+                <td> ${experience.startposition} </td> 
+                <td> ${experience.endposition} </td> 
+                <td> <a type="button" data-id="${experience.id}" class="btn badge bg-danger deleteemployexperience">ลบ</a> </td> 
+            </tr>`
+            });
+         $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_add_employtraining', function(e) {
+    console.log($('#employid').val());
+    Employ.addEmployTraining($('#employid').val(),$('#employtrainingdate').val(),$('#employtrainingcourse').val(),$('#employtrainingowner').val()).then(data => {
+        console.log(data);
+        var html = '';
+        data.forEach(function (training,index) {
+            html += `<tr >                                        
+                <td> ${training.trainingdateth}</td>                                            
+                <td> ${training.course} </td> 
+                <td> ${training.owner} </td>                                            
+                <td> <a type="button" data-id="${training.id}" class="btn badge bg-danger deleteemploytraining">ลบ</a> </td> 
+            </tr>`
+            });
+         $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(function () {
+    $('#employtrainingdate').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        clearButton: true,
+        weekStart: 1,
+        cancelText: "ยกเลิก",
+        okText: "ตกลง",
+        clearText: "เคลียร์",
+        time: false
+    });
+});
+
+$(document).on("click",".deleteemployeducation",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteEmployEducation($(this).data('id')).then(data => {
+                var html = ``;
+                console.log(data);
+            data.forEach(function (education,index) {
+            html += `<tr >                                        
+                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${education.employeducationinstitute} </td> 
+                    <td> ${education.employeducationmajor} </td>                                            
+                    <td> ${education.employeducationmajor} </td> 
+                    <td> <a type="button" data-id="${education.id}" class="btn badge bg-danger deleteemployeducation">ลบ</a> </td> 
+                </tr>`
+                });
+            $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+
+}); 
+
+$(document).on("click",".deleteemployexperience",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteEmployExperience($(this).data('id')).then(data => {
+                var html = ``;
+                console.log(data);
+                data.forEach(function (experience,index) {
+                    html += `<tr >                                        
+                        <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                        <td> ${experience.company} </td> 
+                        <td> ${experience.businesstype} </td>                                            
+                        <td> ${experience.startposition} </td> 
+                        <td> ${experience.endposition} </td> 
+                        <td> <a type="button" data-id="${experience.id}" class="btn badge bg-danger deleteemployexperience">ลบ</a> </td> 
+                    </tr>`
+                    });
+                 $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+
+}); 
+
+$(document).on("click",".deleteemploytraining",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteEmployTraining($(this).data('id')).then(data => {
+                var html = ``;
+                console.log(data);
+                data.forEach(function (training,index) {
+                    html += `<tr >                                        
+                        <td> ${training.trainingdateth}</td>                                            
+                        <td> ${training.course} </td> 
+                        <td> ${training.owner} </td>                                            
+                        <td> <a type="button" data-id="${training.id}" class="btn badge bg-danger deleteemploytraining">ลบ</a> </td> 
+                    </tr>`
+                    });
+                 $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+
+}); 
+
+$(document).on('click', '#btnstckholder', function(e) {
+    Employ.getEmploys($(this).data('id')).then(data => {
+        console.log(data);
+        var html = ``;
+        var selectstockholder = `<label>รายชื่อพนักงาน</label><span class="text-danger">*</span><select id="selectstockholder_edit" data-placeholder="รายชื่อพนักงาน" class="form-control form-control-select2">`;
+        data.forEach(function (stock,index) {
+            selectstockholder += `<option value="${stock['id']}" >${stock['name']}</option>`
+            });
+            selectstockholder += `</select>`;
+        $("#stockholderselect_wrapper").html(selectstockholder);
+    })
+    .catch(error => {})
+    $('#modal_add_stockholder').modal('show');
+});
+
+$(document).on('click', '#btn_modal_add_stockholder', function(e) {
+    StockHolder.addStockHolder($('#selectstockholder_edit').val(),$('#relationwithceo').val()).then(data => {
+        console.log(data);
+        var html = ``;
+        data.forEach(function (stockholder,index) {
+            html += `<tr >                                        
+                <td> ${stockholder.companyemploy['name']} ${stockholder.companyemploy['lastname']}</td>                                            
+                <td> ${stockholder.relationwithceo} </td>                                           
+                <td> <a type="button" data-id="${stockholder.id}" class="btn badge bg-warning deletestockholder">ลบ</a> </td> 
+            </tr>`
+            });
+            console.log(html);
+        $("#fulltbp_companystockholder_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on("click",".deletestockholder",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            StockHolder.deleteStockHolder($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (stockholder,index) {
+                    html += `<tr >                                        
+                        <td> ${stockholder.companyemploy['name']} ${stockholder.companyemploy['lastname']}</td>                                            
+                        <td> ${stockholder.relationwithceo} </td>                                           
+                        <td> <a type="button" data-id="${stockholder.id}" class="btn badge bg-warning deletestockholder">ลบ</a> </td> 
+                    </tr>`
+                    });
+                    console.log(html);
+                $("#fulltbp_companystockholder_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+
+}); 

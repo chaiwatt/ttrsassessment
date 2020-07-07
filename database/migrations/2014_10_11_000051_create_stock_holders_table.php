@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCriteriasTable extends Migration
+class CreateStockHoldersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateCriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('criterias', function (Blueprint $table) {
+        Schema::create('stock_holders', function (Blueprint $table) {
             $table->id();
-            $table->string('name',250)->comment('เกณฑ์การประเมิน');
-            $table->double('weight',10,4)->comment('น้ำหนักการประเมิน');
+            $table->string('name',150);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateCriteriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criterias');
+        Schema::dropIfExists('stock_holders');
     }
 }

@@ -30,7 +30,7 @@ class GeneralInfosTableSeeder extends Seeder
                 'thsmsuser' => 'program6944',
                 'thsmspass' => Crypt::encrypt('dd9039'),
                 'verify_type_id' => 1,
-                'front_page_status_id' => 2
+                'front_page_status_id' => 1
             ],
         ]);
     }
