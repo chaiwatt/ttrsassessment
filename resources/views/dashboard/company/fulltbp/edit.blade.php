@@ -345,7 +345,9 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Full TBP</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
-
+			<div class="text-right">
+				<button type="button" class="btn bg-teal">บันทึกกก <i class="icon-paperplane ml-2"></i></button>
+			</div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -387,15 +389,15 @@
                 	<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลทั่วไป</a></li>
-							{{-- <li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> แผนผังองค์กร</a></li> --}}
+
 							<li class="nav-item"><a href="#left-icon-oganization" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลองค์กร</a></li>
 							<li class="nav-item"><a href="#left-icon-project" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> โครงการ</a></li>
 							<li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> เทคโนโลยี</a></li>
 							<li class="nav-item"><a href="#left-icon-tab4" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การตลาด</a></li>
 							<li class="nav-item"><a href="#left-icon-financial" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การเงิน</a></li>
 						</ul>
-						<form method="POST" action="{{route('dashboard.company.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
-							@csrf
+						{{-- <form method="POST" action="{{route('dashboard.company.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
+							@csrf --}}
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="left-icon-minitbp">
 								@csrf
@@ -500,9 +502,14 @@
 														</div>
 													</div>      
 												</div>
-												<div class="form-group">
-													<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn btn-success float-right" >บันทึกประวัติบริษัท</button>
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="form-group">
+															<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn btn-success float-right" >บันทึกประวัติบริษัท</button>
+														</div>
+													</div>
 												</div>
+												
 											</div>
 											<div class="tab-pane fade" id="vertical-left-quantityemploy">
 												<div class="form-group">
@@ -649,10 +656,8 @@
 							</div>
 
 						</div>
-							<div class="text-right">
-								<button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-							</div>
-						</form>
+
+						{{-- </form> --}}
 					</div>
 				</div>
 				<!-- /colors -->
