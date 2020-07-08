@@ -58,7 +58,7 @@
                 	<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini TBP</a></li>
-							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ติดต่อ</a></li>
+							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ผู้รับผิดชอบ</a></li>
 							<li class="nav-item"><a href="#left-icon-manager" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ลงนาม</a></li>
 						</ul>
 						<form method="POST" action="{{route('dashboard.company.minitbp.editsave',['id'=>$minitbp->id])}}" enctype="multipart/form-data">
@@ -70,8 +70,16 @@
 									<div class="col-md-12">
 										<fieldset>	
 											<div class="form-group">
-												<label>โครงการ<span class="text-danger">*</span></label>
-												<input type="text"  name="project" value="{{$minitbp->project}}"  placeholder="โครงการ" class="form-control">
+												<label>โครงการภาษาไทย<span class="text-danger">*</span></label>
+												<input type="text"  name="project" value="{{$minitbp->project}}"  placeholder="โครงการภาษาไทย" class="form-control">
+											</div>
+										</fieldset>
+									</div>
+									<div class="col-md-12">
+										<fieldset>	
+											<div class="form-group">
+												<label>โครงการภาษาอังกฤษ<span class="text-danger">*</span></label>
+												<input type="text"  name="projecteng" value="{{$minitbp->projecteng}}"  placeholder="โครงการภาษาอังกฤษ" class="form-control">
 											</div>
 										</fieldset>
 									</div>

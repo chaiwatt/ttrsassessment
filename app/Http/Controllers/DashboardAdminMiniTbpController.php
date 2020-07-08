@@ -11,6 +11,7 @@ use App\Helper\EmailBox;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
+use App\Model\SignatureStatus;
 use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,10 +32,12 @@ class DashboardAdminMiniTbpController extends Controller
         $minitbp = MiniTBP::find($id);
         $contactprefixes = Prefix::get();
         $contactpositions = UserPosition::get();
+        $signaturestatuses = SignatureStatus::get();
         return view('dashboard.admin.minitbp.view')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withContactprefixes($contactprefixes)
-                                                ->withContactpositions($contactpositions);
+                                                ->withContactpositions($contactpositions)
+                                                ->withSignaturestatuses($signaturestatuses);
     }
     public function Approve($id){
         $minitbp = MiniTBP::find($id);

@@ -122,7 +122,6 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\FullTbpCompanyCEOController@Add')->name('api.fulltbp.ceo.add');           
                 Route::post('get','Api\FullTbpCompanyCEOController@Get')->name('api.fulltbp.ceo.get');  
                 Route::post('edit','Api\FullTbpCompanyCEOController@Edit')->name('api.fulltbp.ceo.edit');  
-
             });
             Route::group(['prefix' => 'employ'], function(){
                 Route::post('add','Api\FullTbpCompanyEmployController@Add')->name('api.fulltbp.employ.add');    
@@ -149,7 +148,28 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\FullTbpCompanyStockHolderController@Add')->name('api.fulltbp.stockholder.add');           
                 Route::post('delete','Api\FullTbpCompanyStockHolderController@Delete')->name('api.fulltbp.stockholder.delete');  
             });
-
+            Route::group(['prefix' => 'project'], function(){
+                Route::group(['prefix' => 'abtract'], function(){
+                    Route::post('add','Api\FullTbpProjectAbtractController@Add')->name('api.fulltbp.project.abtract.add');           
+                });
+                Route::group(['prefix' => 'product'], function(){
+                    Route::post('add','Api\FullTbpProjectProductController@Add')->name('api.fulltbp.project.product.add');           
+                });
+                Route::group(['prefix' => 'productdetail'], function(){
+                    Route::post('add','Api\FullTbpProductDetailController@Add')->name('api.fulltbp.project.productdetail.add');           
+                });
+                Route::group(['prefix' => 'techdev'], function(){
+                    Route::post('add','Api\FullTbpProjectTechDevController@Add')->name('api.fulltbp.project.techdev.add');           
+                });
+                Route::group(['prefix' => 'techdevlevel'], function(){
+                    Route::post('add','Api\FullTbpProjectTechDevLevelController@Add')->name('api.fulltbp.project.techdevlevel.add');           
+                    Route::post('delete','Api\FullTbpProjectTechDevLevelController@Delete')->name('api.fulltbp.project.techdevlevel.delete');           
+                });
+                Route::group(['prefix' => 'techdevproblem'], function(){
+                    Route::post('add','Api\FullTbpProjectTechDevProblemController@Add')->name('api.fulltbp.project.techdevproblem.add');           
+                });
+            });
+            
         }); 
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

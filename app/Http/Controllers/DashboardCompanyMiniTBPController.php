@@ -57,6 +57,7 @@ class DashboardCompanyMiniTBPController extends Controller
     public function EditSave(EditMiniTbpRequest $request,$id){
         MiniTBP::find($id)->update([
             'project' => $request->project,
+            'projecteng' => $request->projecteng,
             'finance1' => $request->finance1,
             'thai_bank_id' => $request->bank,
             'finance1_loan' => $request->finance1loan,

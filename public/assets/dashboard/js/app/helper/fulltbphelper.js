@@ -3,11 +3,10 @@ import * as CompanyProfile from './companyprofile.js';
 import * as CompanyProfileAttachment from './companyprofileattachment.js';
 import * as Employ from './employ.js';
 import * as StockHolder from './stockholder.js';
+import * as Project from './project.js';
 
 $(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
-        console.log(ThaiWord.countCharTh('สวัสดี จ๊ะ'));
-
         var html = `<input type="text" name ="companyprofile[]" value="${$(this).val()}" class="form-control companyprofileclass" style="border: 0" >`;
         $(this).val('');
         $('#fulltbp_companyprofile_wrapper').append(html);
@@ -503,5 +502,185 @@ $(document).on("click",".deletestockholder",function(e){
            .catch(error => {})
         }
     });
-
 }); 
+
+$(document).on('keyup', '.projectabtractclass', function(e) {
+    $('#projectabtracttextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#projectabtract_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="projectabtract[]" value="${$(this).val()}" class="form-control projectabtractclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_projectabtract_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddprojectabtract', function(e) {
+    var lines = $('input[name="projectabtract[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Project.addAbtract(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่มบทคัดย่อสำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$(document).on('keyup', '.mainproductclass', function(e) {
+    $('#mainproducttextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#mainproduct_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="mainproduct[]" value="${$(this).val()}" class="form-control mainproductclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_mainproduct_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddmainproduct', function(e) {
+    var lines = $('input[name="mainproduct[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Project.addProduct(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่มรายละเอียดผลิตภัณฑ์สำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$(document).on('keyup', '.productdetailsclass', function(e) {
+    $('#productdetailstextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#productdetails_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="productdetails[]" value="${$(this).val()}" class="form-control productdetailsclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_productdetails_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddproductdetails', function(e) {
+    var lines = $('input[name="productdetails[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Project.addProductDetail(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่มจุดเด่นผลิตภัณฑ์สำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$(document).on('keyup', '.projectechdevclass', function(e) {
+    $('#projectechdevtextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#projectechdev_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="projectechdev[]" value="${$(this).val()}" class="form-control projectechdevclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_projectechdev_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddprojectechdev', function(e) {
+    var lines = $('input[name="projectechdev[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Project.addTechDev(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่มการพัฒนาเทคโนโลยีสำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
+    console.log($(this).data('id'));
+    Project.addTechDevLevel($(this).data('id'),$('#tectdevleveltechnology').val(),$('#tectdevleveltechnologypresent').val(),$('#tectdevleveltechnologyproject').val()).then(data => {
+        console.log(data);
+        var html = ``;
+        data.forEach(function (techdevlevel,index) {
+            html += `<tr >                                        
+                <td> ${techdevlevel.technology} </td>                                            
+                <td> ${techdevlevel.presenttechnology} </td> 
+                <td> ${techdevlevel.projecttechnology} </td>                                            
+                <td> 
+                <a type="button" data-id="${techdevlevel.id}" class="btn badge bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
+            </tr>`
+            });
+         $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on("click",".deleteprojectechdevlevel",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deleteTechDevLevel($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (techdevlevel,index) {
+                    html += `<tr >                                        
+                        <td> ${techdevlevel.technology} </td>                                            
+                        <td> ${techdevlevel.presenttechnology} </td> 
+                        <td> ${techdevlevel.projecttechnology} </td>                                            
+                        <td> 
+                        <a type="button" data-id="${techdevlevel.id}" class="btn badge bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
+                    </tr>`
+                    });
+                 $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+}); 
+
+$(document).on('keyup', '.projectechdevproblemclass', function(e) {
+    $('#projectechdevproblemtextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#projectechdevproblem_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="projectechdevproblem[]" value="${$(this).val()}" class="form-control projectechdevproblemclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_projectechdevproblem_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddprojectechdevproblem', function(e) {
+    var lines = $('input[name="projectechdevproblem[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Project.addTechDevProblem(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่มปัญหาและอุปสรรคสำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});

@@ -19,6 +19,7 @@ class CreateMiniTBPSTable extends Migration
             $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
             $table->char('ref_doc',15)->nullable();
             $table->string('project',150)->nullable();
+            $table->string('projecteng',150)->nullable();
             $table->char('finance1',5)->nullable()->comment('ขอสินเชื่อ)');
             $table->unsignedBigInteger('thai_bank_id')->nullable();
             $table->double('finance1_loan',10,2)->nullable();

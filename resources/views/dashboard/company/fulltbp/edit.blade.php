@@ -338,6 +338,40 @@
 	</div>
 </div>
 
+{{-- modal_add_tectdevlevel --}}
+<div id="modal_add_tectdevlevel" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มระดับเทคโนโลยี</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>รายการ</label><span class="text-danger">*</span>
+							<input type="text" id="tectdevleveltechnology" placeholder="รายการ" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>เทคโนโลยีที่มีอยู่ในปัจจุบัน</label><span class="text-danger">*</span>
+							<input type="text" id="tectdevleveltechnologypresent" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>เทคโนโลยีในโครงการ</label><span class="text-danger">*</span>
+							<input type="text" id="tectdevleveltechnologyproject" placeholder="เทคโนโลยีในโครงการ" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_tectdevlevel" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
@@ -346,7 +380,7 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			<div class="text-right">
-				<button type="button" class="btn bg-teal">บันทึกกก <i class="icon-paperplane ml-2"></i></button>
+				<button type="button" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
 			</div>
         </div>
 
@@ -505,7 +539,8 @@
 												<div class="row">
 													<div class="col-md-12">	
 														<div class="form-group">
-															<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn btn-success float-right" >บันทึกประวัติบริษัท</button>
+															<br>
+															<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกประวัติบริษัท</button>
 														</div>
 													</div>
 												</div>
@@ -598,52 +633,326 @@
 							</div>
 							<div class="tab-pane fade" id="left-icon-project">
 								<ul class="nav nav-tabs">
-									<li class="nav-item"><a href="#highlight-tab1" class="nav-link active" data-toggle="tab">บทคัดย่อโครงการ</a></li>
-									<li class="nav-item"><a href="#highlighted-tab2" class="nav-link" data-toggle="tab">ผลิตภัณฑ์หลัก</a></li>
-									<li class="nav-item"><a href="#highlighted-tab3" class="nav-link" data-toggle="tab">จุดเด่นผลิตภัณฑ์หลัก</a></li>
+									<li class="nav-item"><a href="#responsibleperson-tab" class="nav-link active" data-toggle="tab">ผู้รับผิดชอบโครงการ</a></li>
+									<li class="nav-item"><a href="#projectabtract-tab" class="nav-link" data-toggle="tab">รายละเอียดโครงการ</a></li>
+									<li class="nav-item"><a href="#mainproduct-tab" class="nav-link" data-toggle="tab">ผลิตภัณฑ์หลัก</a></li>
+									<li class="nav-item"><a href="#productdetails-tab" class="nav-link" data-toggle="tab">จุดเด่นผลิตภัณฑ์หลัก</a></li>
 								</ul>
 
 								<div class="tab-content">
-									<div class="tab-pane fade show active" id="highlighted-tab1">
-										Highlight top border of the active tab by adding <code>.nav-tabs-highlight</code> class.
+									<div class="tab-pane fade show active" id="responsibleperson-tab">
+										<div class="form-group">
+											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+											<select name="contactprefix" id="" class="form-control form-control-select2" disabled>
+												@foreach ($contactprefixes as $contactprefix)
+													<option value="{{$contactprefix->id}}" @if($minitbp->contactprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="">ชื่อ<span class="text-danger">*</span></label>
+											<input type="text" name ="contactname" value="{{$minitbp->contactname}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<label for="">นามสกุล<span class="text-danger">*</span></label>
+											<input type="text" name ="contactlastname" value="{{$minitbp->contactlastname}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
+											<select name="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2" disabled>
+												@foreach ($contactpositions as $contactposition)
+													<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="">เบอร์โทร<span class="text-danger">*</span></label>
+											<input type="text" name ="contactphone" value="{{Auth::user()->phone}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<label for="">อีเมล์<span class="text-danger">*</span></label>
+											<input type="text" name ="contactemail" value="{{Auth::user()->email}}" class="form-control" disabled>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectabtract-tab">
+										<div class="form-group">
+											<label for="">ชื่อภาษาไทย<span class="text-danger">*</span></label>
+											<input type="text"  value="{{$minitbp->project}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<label for="">ชื่อภาษาอังกฤษ<span class="text-danger">*</span></label>
+											<input type="text" value="{{$minitbp->projecteng}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">บทคัดย่อ </label> <span class="text-primary" id="projectabtracttextlength"></span>
+												<p><small><i>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือ
+													ตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและ
+													สังคม</i> </small></p>
+												
+												<input type="text" id="projectabtract_input" class="form-control projectabtractclass" >
+											</div>
+											<div id="fulltbp_projectabtract_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpprojectabtractdetails as $fulltbpprojectabtractdetail)
+													<input type="text" name ="projectabtract[]" value="{{$fulltbpprojectabtractdetail->line}}" class="form-control projectabtractclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddprojectabtract" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกบทคัดย่อ</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 
-									<div class="tab-pane fade" id="highlighted-tab2">
-										Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid laeggin.
+									<div class="tab-pane fade" id="mainproduct-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ผลิตภัณฑ์หลัก(สินค้าและบริการ)ของโครงการ </label> <span class="text-primary" id="mainproducttextlength"></span>
+												<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
+												<input type="text" id="mainproduct_input" class="form-control mainproductclass" >
+											</div>
+											<div id="fulltbp_mainproduct_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpMainproductdetails as $fulltbpMainproductdetail)
+													<input type="text" name ="mainproduct[]" value="{{$fulltbpMainproductdetail->line}}" class="form-control mainproductclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmainproduct" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกผลิตภัณฑ์หลัก</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="tab-pane fade" id="highlighted-tab3">
-										Highlight top border of the active tab by adding <code>.nav-tabs-highlight</code> class.
+									<div class="tab-pane fade" id="productdetails-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">จุดเด่นผลิตภัณฑ์หลัก(สินค้าและบริการ)ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
+												<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
+												<input type="text" id="productdetails_input" class="form-control productdetailsclass" >
+											</div>
+											<div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpproductdetails as $fulltbpproductdetail)
+													<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control productdetailsclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddproductdetails" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกจุดเด่นผลิตภัณฑ์หลัก</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div class="tab-pane fade" id="left-icon-technology">
 								<ul class="nav nav-tabs">
-									<li class="nav-item"><a href="#highlight-abstract" class="nav-link active" data-toggle="tab">บทคัดย่อโครงการ</a></li>
-									<li class="nav-item"><a href="#highlighted-product" class="nav-link" data-toggle="tab">ผลิตภัณฑ์หลัก</a></li>
-									<li class="nav-item"><a href="#highlighted-distinctive" class="nav-link" data-toggle="tab">จุดเด่นผลิตภัณฑ์หลัก</a></li>
-									<li class="nav-item"><a href="#highlighted-right" class="nav-link" data-toggle="tab">สิทธิบัตรที่ได้รับ</a></li>
-									<li class="nav-item"><a href="#highlighted-award" class="nav-link" data-toggle="tab">รางวัลเทคโนโลยี</a></li>
-									<li class="nav-item"><a href="#highlighted-certificate" class="nav-link" data-toggle="tab">ใบรับรองมาตรฐาน</a></li>
+									<li class="nav-item"><a href="#projectechdev-tab" class="nav-link active" data-toggle="tab">การพัฒนาเทคโนโลยี</a></li>
+									<li class="nav-item"><a href="#projectechdevlevel-tab" class="nav-link " data-toggle="tab">ระดับเทคโนโลยี</a></li>
+									<li class="nav-item"><a href="#projectechdevproblem-tab" class="nav-link " data-toggle="tab">อุปสรรค ความเสี่ยง</a></li>
+									<li class="nav-item"><a href="#projectright-tab" class="nav-link " data-toggle="tab">สิทธิบัตรที่ได้รับ</a></li>
+									<li class="nav-item"><a href="#projectaward-tab" class="nav-link" data-toggle="tab">รางวัลเทคโนโลยี</a></li>
+									<li class="nav-item"><a href="#projectcertificate-tab" class="nav-link" data-toggle="tab">ใบรับรองมาตรฐาน</a></li>
 								</ul>
 
 								<div class="tab-content">
-									<div class="tab-pane fade show active" id="highlighted-abstract">
-										aaa
+									<div class="tab-pane fade  show active" id="projectechdev-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">การพัฒนาเทคโนโลยี</label> <span class="text-primary" id="projectechdevtextlength"></span>
+												<p><small><i>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</i> </small></p>
+												<input type="text" id="projectechdev_input" class="form-control projectechdevclass" >
+											</div>
+											<div id="fulltbp_projectechdev_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpprojecttechdevs as $fulltbpprojecttechdev)
+													<input type="text" name ="projectechdev[]" value="{{$fulltbpprojecttechdev->line}}" class="form-control projectechdevclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddprojectechdev" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกการพัฒนาเทคโนโลยี</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
+									<div class="tab-pane fade" id="projectechdevlevel-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add"></i></a>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายการ</th>  
+														<th>เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
+														<th>เทคโนโลยีในโครงการ</th>
+														<th>เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
+													@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
+														<tr >                                        
+															<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
+															<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
+															<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
+															<td> <a type="button" data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn badge bg-warning deleteprojectechdevlevel">ลบ</a> </td> 
+														</tr>
+													@endforeach                            
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectechdevproblem-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
+												<input type="text" id="projectechdevproblem_input" class="form-control projectechdevproblemclass" >
+											</div>
+											<div id="fulltbp_projectechdevproblem_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpprojecttechdevproblems as $fulltbpprojecttechdevproblem)
+													<input type="text" name ="projectechdevproblem[]" value="{{$fulltbpprojecttechdevproblem->line}}" class="form-control projectechdevproblemclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddprojectechdevproblem" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกอุปสรรคความเสี่ยง</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectright-tab">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group mb-3 mb-md-2">
+													<label class="font-weight-semibold">สิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</label>
+													<div class="row">
+														<div class="col-md-4">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer1" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc >
+																	ได้รับการจดสิทธิบัตรการประดิษฐ์
+																</label>
+																<div class="row" id="cer1qtydiv" style="margin-top: 5px" >
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" name="cer1qty" placeholder="จำนวน" class="form-control" value="{{$minitbp->nonefinance6_detail}}">
+																		</div>
+																	</div>
+																</div>
+															</div>
+			
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer2" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc >
+																	ยื่นจดสิทธิบัตรการประดิษฐ์
+																</label>
+															</div>
+														</div>
+			
+														<div class="col-md-4">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer3" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	ได้รับการจดสิทธิบัตรการออกแบบ
+																</label>
+															</div>
+			
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer4" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	ยื่นจดสิทธิบัตรการออกแบบ
+																</label>
+															</div>
+														</div>
 
-									<div class="tab-pane fade" id="highlighted-product">
-										bbb
+														<div class="col-md-4">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer5" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	ได้รับการจดอนุสิทธิบัตร
+																</label>
+															</div>
+			
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer6" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	ยื่นจดอนุสิทธิบัตร
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="col-md-12">
+												<hr>
+												<div class="form-group mb-3 mb-md-2">
+													<label class="font-weight-semibold">ลิขสิทธิ์/เครื่องหมายการค้า</label>
+													<div class="row">
+														<div class="col-md-4">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer7" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc >
+																	ลิขสิทธิ์
+																</label>
+															</div>
+			
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer8" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc >
+																	เครื่องหมายการค้า
+																</label>
+															</div>
+														</div>
+			
+														<div class="col-md-4">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer9" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	ความลับทางการค้า
+																</label>
+															</div>
+			
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer10" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	ซื้อหรือต่อยอดทรัพย์สินทางปัญญา
+																</label>
+															</div>
+														</div>
+
+														<div class="col-md-4">
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input type="checkbox" name="cer11" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	อื่น ๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI)ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="tab-pane fade" id="highlighted-distinctive">
-										ccc
-									</div>
-									<div class="tab-pane fade" id="highlighted-right">
-										ddd.
-									</div>
-									<div class="tab-pane fade" id="highlighted-award">
+									<div class="tab-pane fade" id="projectaward-tab">
 										eee
 									</div>
-									<div class="tab-pane fade" id="highlighted-certificate">
+									<div class="tab-pane fade" id="projectcertificate-tab">
 										fff
 									</div>
 								</div>

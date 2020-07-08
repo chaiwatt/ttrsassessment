@@ -10,6 +10,7 @@ use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\CompanyBoard;
+use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
 use App\Model\EmployPosition;
@@ -18,9 +19,15 @@ use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
 use App\Model\EmployExperience;
 use App\Model\CompanyStockHolder;
+use App\Model\FullTbpProductDetail;
 use App\Model\FullTbpCompanyProfile;
+use App\Model\FullTbpProjectTechDev;
 use Illuminate\Support\Facades\Auth;
+use App\Model\FullTbpMainProductDetail;
+use App\Model\FullTbpProjectTechDevLevel;
 use App\Model\FullTbpCompanyProfileDetail;
+use App\Model\FullTbpProjectAbtractDetail;
+use App\Model\FullTbpProjectTechDevProblem;
 use App\Model\FullTbpCompanyProfileAttachment;
 
 class DashboardCompanyFullTbpController extends Controller
@@ -46,7 +53,15 @@ class DashboardCompanyFullTbpController extends Controller
         $employpositions = EmployPosition::get();
         $companyemploys = CompanyEmploy::where('company_id',$company->id)->get();
         $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();
-
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $contactprefixes = Prefix::get();
+        $contactpositions = UserPosition::get();
+        $fulltbpprojectabtractdetails = FullTbpProjectAbtractDetail::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpMainproductdetails = FullTbpMainProductDetail::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpproductdetails = FullTbpProductDetail::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpprojecttechdevs = FullTbpProjectTechDev::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpprojecttechdevlevels = FullTbpProjectTechDevLevel::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpprojecttechdevproblems = FullTbpProjectTechDevProblem::where('full_tbp_id',$fulltbp->id)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -57,7 +72,16 @@ class DashboardCompanyFullTbpController extends Controller
                                                 ->withPrefixes($prefixes)
                                                 ->withEmploypositions($employpositions)
                                                 ->withCompanystockholders($companystockholders)
-                                                ->withCompany($company);
+                                                ->withCompany($company)
+                                                ->withMinitbp($minitbp)
+                                                ->withContactprefixes($contactprefixes)
+                                                ->withContactpositions($contactpositions)
+                                                ->withFulltbpprojectabtractdetails($fulltbpprojectabtractdetails)
+                                                ->withFulltbpMainproductdetails($fulltbpMainproductdetails)
+                                                ->withFulltbpproductdetails($fulltbpproductdetails)
+                                                ->withFulltbpprojecttechdevs($fulltbpprojecttechdevs)
+                                                ->withFulltbpprojecttechdevlevels($fulltbpprojecttechdevlevels)
+                                                ->withFulltbpprojecttechdevproblems($fulltbpprojecttechdevproblems);
     }
 
     public function EditSave(Request $request,$id){
