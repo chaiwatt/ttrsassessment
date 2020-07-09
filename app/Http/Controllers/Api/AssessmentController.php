@@ -16,6 +16,7 @@ use App\Model\FullTbpEmployee;
 use App\Model\ProjectAssignment;
 use App\Http\Controllers\Controller;
 use App\Model\FullTbpCompanyProfile;
+use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
 use App\Model\BusinessPlanFeeTransaction;
 
@@ -46,6 +47,10 @@ class AssessmentController extends Controller
                 $fulltbpcompanyprofile = new FullTbpCompanyProfile();
                 $fulltbpcompanyprofile->full_tbp_id = $fulltbp->id;
                 $fulltbpcompanyprofile->save();
+
+                $fulltbpprojectcertify = new FullTbpProjectCertify();
+                $fulltbpprojectcertify->full_tbp_id = $fulltbp->id;
+                $fulltbpprojectcertify->save();
 
                 // $businessplanfeetransaction = new BusinessPlanFeeTransaction();
                 // $businessplanfeetransaction->invoiceno = Carbon::now()->timestamp;

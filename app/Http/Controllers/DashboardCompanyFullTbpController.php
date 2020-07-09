@@ -21,14 +21,18 @@ use App\Model\EmployExperience;
 use App\Model\CompanyStockHolder;
 use App\Model\FullTbpProductDetail;
 use App\Model\FullTbpCompanyProfile;
+use App\Model\FullTbpProjectCertify;
 use App\Model\FullTbpProjectTechDev;
 use Illuminate\Support\Facades\Auth;
+use App\Model\FullTbpProjectStandard;
 use App\Model\FullTbpMainProductDetail;
 use App\Model\FullTbpProjectTechDevLevel;
 use App\Model\FullTbpCompanyProfileDetail;
 use App\Model\FullTbpProjectAbtractDetail;
 use App\Model\FullTbpProjectTechDevProblem;
+use App\Model\FullTbpProjectAwardAttachment;
 use App\Model\FullTbpCompanyProfileAttachment;
+use App\Model\FullTbpProjectCertifyAttachment;
 
 class DashboardCompanyFullTbpController extends Controller
 {
@@ -62,6 +66,10 @@ class DashboardCompanyFullTbpController extends Controller
         $fulltbpprojecttechdevs = FullTbpProjectTechDev::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpprojecttechdevlevels = FullTbpProjectTechDevLevel::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpprojecttechdevproblems = FullTbpProjectTechDevProblem::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpprojectcertify = FullTbpProjectCertify::where('full_tbp_id',$fulltbp->id)->first();
+        $fulltbpprojectcertifyattachments = FullTbpProjectCertifyAttachment::where('project_certify_id',$fulltbpprojectcertify->id)->get();
+        $fulltbpprojectawardattachments = FullTbpProjectAwardAttachment::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpprojectstandards = FullTbpProjectStandard::where('full_tbp_id',$fulltbp->id)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -81,7 +89,11 @@ class DashboardCompanyFullTbpController extends Controller
                                                 ->withFulltbpproductdetails($fulltbpproductdetails)
                                                 ->withFulltbpprojecttechdevs($fulltbpprojecttechdevs)
                                                 ->withFulltbpprojecttechdevlevels($fulltbpprojecttechdevlevels)
-                                                ->withFulltbpprojecttechdevproblems($fulltbpprojecttechdevproblems);
+                                                ->withFulltbpprojecttechdevproblems($fulltbpprojecttechdevproblems)
+                                                ->withFulltbpprojectcertify($fulltbpprojectcertify)
+                                                ->withFulltbpprojectcertifyattachments($fulltbpprojectcertifyattachments)
+                                                ->withFulltbpprojectawardattachments($fulltbpprojectawardattachments)
+                                                ->withFulltbpprojectstandards($fulltbpprojectstandards);
     }
 
     public function EditSave(Request $request,$id){

@@ -116,7 +116,6 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
             </tr>`
             });
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
-        //  $("#btnaddemploy").hide();
     })
     .catch(error => {})
 });
@@ -684,3 +683,284 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     })
     .catch(error => {})
 });
+
+$("#cer1").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer1qtydiv").attr("hidden",false);
+    }else{
+        $("#cer1qtydiv").attr("hidden",true);
+    }
+});
+$("#cer2").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer2qtydiv").attr("hidden",false);
+    }else{
+        $("#cer2qtydiv").attr("hidden",true);
+    }
+});
+$("#cer3").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer3qtydiv").attr("hidden",false);
+    }else{
+        $("#cer3qtydiv").attr("hidden",true);
+    }
+});
+$("#cer4").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer4qtydiv").attr("hidden",false);
+    }else{
+        $("#cer4qtydiv").attr("hidden",true);
+    }
+});
+$("#cer5").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer5qtydiv").attr("hidden",false);
+    }else{
+        $("#cer5qtydiv").attr("hidden",true);
+    }
+});
+$("#cer6").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer6qtydiv").attr("hidden",false);
+    }else{
+        $("#cer6qtydiv").attr("hidden",true);
+    }
+});
+$("#cer7").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer7qtydiv").attr("hidden",false);
+    }else{
+        $("#cer7qtydiv").attr("hidden",true);
+    }
+});
+$("#cer8").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer8qtydiv").attr("hidden",false);
+    }else{
+        $("#cer8qtydiv").attr("hidden",true);
+    }
+});
+$("#cer9").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer9qtydiv").attr("hidden",false);
+    }else{
+        $("#cer9qtydiv").attr("hidden",true);
+    }
+});
+$("#cer11").on('change', function() {
+    if($(this).is(":checked")){
+        $("#cer11qtydiv").attr("hidden",false);
+    }else{
+        $("#cer11qtydiv").attr("hidden",true);
+    }
+});
+
+
+
+$(document).on('click', '#btnaddprojectcertify', function(e) {
+    Project.editProjectCertify($(this).data('id'),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'อัพเดทสำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$("#certify").on('change', function() {
+    var file = this.files[0];
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+        $.ajax({
+            url: `${route.url}/api/fulltbp/project/projectcertify/upload/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_certify_wrapper_tr").html(html);
+        }
+    });
+});
+
+$(document).on("click",".deletefulltbpcertifyattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deleteCertifyAttachement($(this).data('id')).then(data => {
+                var html = ``;
+                // console.log(data);
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_certify_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+}); 
+
+$("#award").on('change', function() {
+    var file = this.files[0];
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+    formData.append('awardname',$('#awardname').val());
+        $.ajax({
+            url: `${route.url}/api/fulltbp/project/projectaward/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_award_wrapper_tr").html(html);
+                 $('#modal_add_award').modal('hide');
+        }
+    });
+});
+
+$(document).on("click",".deletefulltbpawardattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deleteAwardAttachement($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_award_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+}); 
+
+$("#standard").on('change', function() {
+    var file = this.files[0];
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+    formData.append('standardname',$('#standardname').val());
+        $.ajax({
+            url: `${route.url}/api/fulltbp/project/standard/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_standard_wrapper_tr").html(html);
+                 $('#modal_add_standard').modal('hide');
+        }
+    });
+});
+
+$(document).on("click",".deletefulltbpstandardattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deleteStandardAttachement($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_standard_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+}); 

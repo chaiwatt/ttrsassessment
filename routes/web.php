@@ -168,8 +168,23 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'techdevproblem'], function(){
                     Route::post('add','Api\FullTbpProjectTechDevProblemController@Add')->name('api.fulltbp.project.techdevproblem.add');           
                 });
-            });
-            
+                Route::group(['prefix' => 'projectcertify'], function(){
+                    Route::post('edit','Api\FullTbpProjectCertifyController@Edit')->name('api.fulltbp.project.projectcertify.edit');           
+                    Route::group(['prefix' => 'upload'], function(){
+                        Route::post('add','Api\FullTbpProjectCertifyUploadController@Add')->name('api.fulltbp.project.projectcertify.upload.add');           
+                        Route::post('delete','Api\FullTbpProjectCertifyUploadController@Delete')->name('api.fulltbp.project.projectcertify.upload.delete');  
+                    });
+                });
+                Route::group(['prefix' => 'projectaward'], function(){
+                    Route::post('add','Api\FullTbpProjectAwardController@Add')->name('api.fulltbp.project.projectaward.add');           
+                    Route::post('delete','Api\FullTbpProjectAwardController@Delete')->name('api.fulltbp.project.projectaward.delete');
+                });
+                Route::group(['prefix' => 'standard'], function(){
+                    Route::post('add','Api\FullTbpProjectStandardController@Add')->name('api.fulltbp.project.standard.add');
+                    Route::post('edit','Api\FullTbpProjectStandardController@Edit')->name('api.fulltbp.project.standard.edit');           
+                    Route::post('delete','Api\FullTbpProjectStandardController@Delete')->name('api.fulltbp.project.standard.delete');
+                });
+            }); 
         }); 
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

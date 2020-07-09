@@ -372,6 +372,70 @@
 	</div>
 </div>
 
+{{-- modal_add_award --}}
+<div id="modal_add_award" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการศึกษา</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>ชื่อรางวัล</label><span class="text-danger">*</span>
+							<input type="text" id="awardname" placeholder="ชื่อ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-12">	
+						<div class="input-group">													
+							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >แนบเอกสาร</button>													
+						</div>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_award" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- modal_add_standard --}}
+<div id="modal_add_standard" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการศึกษา</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>ใบรับรองมาตรฐาน</label><span class="text-danger">*</span>
+							<input type="text" id="standardname" placeholder="ชื่อ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-12">	
+						<div class="input-group">													
+							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >แนบเอกสาร</button>													
+						</div>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_standard" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
@@ -759,7 +823,7 @@
 									<li class="nav-item"><a href="#projectechdev-tab" class="nav-link active" data-toggle="tab">การพัฒนาเทคโนโลยี</a></li>
 									<li class="nav-item"><a href="#projectechdevlevel-tab" class="nav-link " data-toggle="tab">ระดับเทคโนโลยี</a></li>
 									<li class="nav-item"><a href="#projectechdevproblem-tab" class="nav-link " data-toggle="tab">อุปสรรค ความเสี่ยง</a></li>
-									<li class="nav-item"><a href="#projectright-tab" class="nav-link " data-toggle="tab">สิทธิบัตรที่ได้รับ</a></li>
+									<li class="nav-item"><a href="#projectcertify-tab" class="nav-link " data-toggle="tab">สิทธิบัตรที่ได้รับ</a></li>
 									<li class="nav-item"><a href="#projectaward-tab" class="nav-link" data-toggle="tab">รางวัลเทคโนโลยี</a></li>
 									<li class="nav-item"><a href="#projectcertificate-tab" class="nav-link" data-toggle="tab">ใบรับรองมาตรฐาน</a></li>
 								</ul>
@@ -835,7 +899,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane fade" id="projectright-tab">
+									<div class="tab-pane fade" id="projectcertify-tab">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group mb-3 mb-md-2">
@@ -844,13 +908,13 @@
 														<div class="col-md-4">
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer1" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer1" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer1)) checked @endif data-fouc >
 																	ได้รับการจดสิทธิบัตรการประดิษฐ์
 																</label>
-																<div class="row" id="cer1qtydiv" style="margin-top: 5px" >
+																<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
 																	<div class="col-md-9">
 																		<div class="form-group">
-																			<input type="text" name="cer1qty" placeholder="จำนวน" class="form-control" value="{{$minitbp->nonefinance6_detail}}">
+																			<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer1_qty}}">
 																		</div>
 																	</div>
 																</div>
@@ -858,41 +922,76 @@
 			
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer2" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer2" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer2)) checked @endif data-fouc >
 																	ยื่นจดสิทธิบัตรการประดิษฐ์
 																</label>
+																<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer2_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 			
 														<div class="col-md-4">
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer3" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer3" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer3)) checked @endif data-fouc >
 																	ได้รับการจดสิทธิบัตรการออกแบบ
 																</label>
+																<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer3_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 			
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer4" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer4" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer4)) checked @endif data-fouc >
 																	ยื่นจดสิทธิบัตรการออกแบบ
 																</label>
+																<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer4_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 
 														<div class="col-md-4">
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer5" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer5" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer5)) checked @endif data-fouc >
 																	ได้รับการจดอนุสิทธิบัตร
 																</label>
+																<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer5_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 			
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer6" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer6" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer6)) checked @endif data-fouc >
 																	ยื่นจดอนุสิทธิบัตร
 																</label>
+																<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer6_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -900,37 +999,59 @@
 											</div>
 											
 											<div class="col-md-12">
-												<hr>
+												<br>
+												{{-- <hr> --}}
 												<div class="form-group mb-3 mb-md-2">
-													<label class="font-weight-semibold">ลิขสิทธิ์/เครื่องหมายการค้า</label>
+													<label class="font-weight-semibold"> ลิขสิทธิ์/เครื่องหมายการค้า</label>
 													<div class="row">
 														<div class="col-md-4">
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer7" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer7" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer7)) checked @endif data-fouc >
 																	ลิขสิทธิ์
 																</label>
+																<div class="row" id="cer7qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer7) || Empty(@$fulltbpprojectcertify->cer7_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer7_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 			
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer8" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer8" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer8)) checked @endif data-fouc >
 																	เครื่องหมายการค้า
 																</label>
+																<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer8_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 			
 														<div class="col-md-4">
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer9" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer9" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer9)) checked @endif data-fouc >
 																	ความลับทางการค้า
 																</label>
+																<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer9_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 			
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer10" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer10" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer10)) checked @endif data-fouc >
 																	ซื้อหรือต่อยอดทรัพย์สินทางปัญญา
 																</label>
 															</div>
@@ -939,21 +1060,146 @@
 														<div class="col-md-4">
 															<div class="form-check">
 																<label class="form-check-label">
-																	<input type="checkbox" name="cer11" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc >
+																	<input type="checkbox" id="cer11" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer11)) checked @endif data-fouc >
 																	อื่น ๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI)ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม
 																</label>
+																<div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
+																	<div class="col-md-9">
+																		<div class="form-group">
+																			<input type="text" name="cer11qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer11_qty}}">
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
+										<hr>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('certify').click();"><i class="icon-add"></i></button>													
+												</div>
+												<input type="file" style="display:none;" data-id="{{$fulltbpprojectcertify->id}}" id="certify" name="certify"/>
+											</div>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_certify_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:150px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_certify_wrapper_tr">    
+															@foreach ($fulltbpprojectcertifyattachments as $fulltbpprojectcertifyattachment)
+																<tr >                                        
+																	<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn badge bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="form-group">
+													<br>
+													<button type="button" id="btnaddprojectcertify" data-id="{{$fulltbpprojectcertify->id}}" class="btn bg-teal float-right" >บันทึกข้อมูลสิทธิบัตร</button>
+												</div>
+											</div>
+										</div>
 									</div>
 									<div class="tab-pane fade" id="projectaward-tab">
-										eee
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadaward" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add"></i></button>
+												</div>
+												<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
+											</div>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_award_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:150px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_award_wrapper_tr">    
+															@foreach ($fulltbpprojectawardattachments as $fulltbpprojectawardattachment)
+																<tr >                                        
+																	<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fulltbpprojectawardattachment->id}}" data-name=""  class="btn badge bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
 									</div>
 									<div class="tab-pane fade" id="projectcertificate-tab">
-										fff
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add"></i></button>
+												</div>
+												<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
+											</div>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_standard_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:150px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_standard_wrapper_tr">    
+															@foreach ($fulltbpprojectstandards as $fulltbpprojectstandard)
+																<tr >                                        
+																	<td> {{$fulltbpprojectstandard->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fulltbpprojectstandard->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fulltbpprojectstandard->id}}" data-name=""  class="btn badge bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
 									</div>
 								</div>
 							</div>
