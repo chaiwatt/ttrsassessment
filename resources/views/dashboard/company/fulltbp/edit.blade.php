@@ -436,6 +436,217 @@
 	</div>
 </div>
 
+
+{{-- modal_add_projectplan --}}
+<div id="modal_add_projectplan" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มแผนการดำเนินงาน</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
+							<input type="text" id="plan" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+							<div class="col-md-2">
+								<label class="form-check-label">
+									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+										1
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{{-- <div class="row">
+					<div class="col-md-6">
+						<div class="form-group mb-3 mb-md-2">
+							<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
+							<div class="row">
+								<div class="col-md-2">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
+											1
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm2" class="form-check-input-styled-primary"  data-fouc>
+											2
+										</label>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm3" class="form-check-input-styled-primary"  data-fouc>
+											3
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm4" class="form-check-input-styled-primary"  data-fouc>
+											4
+										</label>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm5" class="form-check-input-styled-primary"  data-fouc>
+											5
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm6" class="form-check-input-styled-primary"  data-fouc>
+											6
+										</label>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm7" class="form-check-input-styled-primary"  data-fouc>
+											7
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm8" class="form-check-input-styled-primary"  data-fouc>
+											8
+										</label>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm9" class="form-check-input-styled-primary"  data-fouc>
+											9
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm10" class="form-check-input-styled-primary"  data-fouc>
+											10
+										</label>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm11" class="form-check-input-styled-primary"  data-fouc>
+											11
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="planm12" class="form-check-input-styled-primary"  data-fouc>
+											12
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> --}}
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_projectplan" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
@@ -698,6 +909,7 @@
 							<div class="tab-pane fade" id="left-icon-project">
 								<ul class="nav nav-tabs">
 									<li class="nav-item"><a href="#responsibleperson-tab" class="nav-link active" data-toggle="tab">ผู้รับผิดชอบโครงการ</a></li>
+									<li class="nav-item"><a href="#projectplan-tab" class="nav-link" data-toggle="tab">แผนการดำเนินงาน</a></li>
 									<li class="nav-item"><a href="#projectabtract-tab" class="nav-link" data-toggle="tab">รายละเอียดโครงการ</a></li>
 									<li class="nav-item"><a href="#mainproduct-tab" class="nav-link" data-toggle="tab">ผลิตภัณฑ์หลัก</a></li>
 									<li class="nav-item"><a href="#productdetails-tab" class="nav-link" data-toggle="tab">จุดเด่นผลิตภัณฑ์หลัก</a></li>
@@ -736,6 +948,11 @@
 										<div class="form-group">
 											<label for="">อีเมล์<span class="text-danger">*</span></label>
 											<input type="text" name ="contactemail" value="{{Auth::user()->email}}" class="form-control" disabled>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectplan-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_projectplan"><i class="icon-add"></i></a>
 										</div>
 									</div>
 									<div class="tab-pane fade" id="projectabtract-tab">
