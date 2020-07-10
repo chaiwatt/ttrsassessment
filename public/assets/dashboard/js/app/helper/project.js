@@ -1,5 +1,4 @@
 function addAbtract(lines,id){
-    console.log(route.url);
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/fulltbp/project/abtract/add`,
@@ -20,7 +19,6 @@ function addAbtract(lines,id){
 }
 
 function addProduct(lines,id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/product/add`,
@@ -40,7 +38,6 @@ function addProduct(lines,id){
     })
 }
 function addProductDetail(lines,id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/productdetail/add`,
@@ -60,7 +57,6 @@ function addProductDetail(lines,id){
     })
 }
 function addTechDev(lines,id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/techdev/add`,
@@ -81,7 +77,6 @@ function addTechDev(lines,id){
 }
 
 function addTechDevLevel(id,technology,presenttechnology,projecttechnology){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/techdevlevel/add`,
@@ -104,7 +99,6 @@ function addTechDevLevel(id,technology,presenttechnology,projecttechnology){
 }
 
 function deleteTechDevLevel(id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/techdevlevel/delete`,
@@ -124,7 +118,6 @@ function deleteTechDevLevel(id){
 }
 
 function addTechDevProblem(lines,id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/techdevproblem/add`,
@@ -185,7 +178,6 @@ function editProjectCertify(id,cer1,cer1qty,cer2,cer2qty,cer3,cer3qty,cer4,cer4q
 }
 
 function deleteCertifyAttachement(id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/projectcertify/upload/delete`,
@@ -205,7 +197,6 @@ function deleteCertifyAttachement(id){
 }
 
 function deleteAwardAttachement(id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/projectaward/delete`,
@@ -225,7 +216,6 @@ function deleteAwardAttachement(id){
 }
 
 function deleteStandardAttachement(id){
-  console.log(route.url);
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/standard/delete`,
@@ -244,4 +234,85 @@ function deleteStandardAttachement(id){
     })
 }
 
-export {addAbtract,addProduct,addProductDetail,addTechDev,addTechDevLevel,deleteTechDevLevel,addTechDevProblem,editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement}
+function addPlan(id,detail,month){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/plan/add`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id,
+          'detail': detail,
+          'months': month,
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function getPlan(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/plan/get`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function editPlan(id,detail,month){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/plan/edit`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id,
+          'detail': detail,
+          'months': month,
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function deletePlan(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/plan/delete`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {addAbtract,addProduct,addProductDetail,addTechDev,addTechDevLevel,deleteTechDevLevel,addTechDevProblem,
+  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan}

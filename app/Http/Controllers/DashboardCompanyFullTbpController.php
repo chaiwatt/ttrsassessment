@@ -18,7 +18,9 @@ use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
 use App\Model\EmployExperience;
+use App\Model\FullTbpMarketNeed;
 use App\Model\CompanyStockHolder;
+use App\Model\FullTbpProjectPlan;
 use App\Model\FullTbpProductDetail;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
@@ -70,6 +72,8 @@ class DashboardCompanyFullTbpController extends Controller
         $fulltbpprojectcertifyattachments = FullTbpProjectCertifyAttachment::where('project_certify_id',$fulltbpprojectcertify->id)->get();
         $fulltbpprojectawardattachments = FullTbpProjectAwardAttachment::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpprojectstandards = FullTbpProjectStandard::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpprojectplans =  FullTbpProjectPlan::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpmarketneeds = FullTbpMarketNeed::where('full_tbp_id',$fulltbp->id)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -93,7 +97,9 @@ class DashboardCompanyFullTbpController extends Controller
                                                 ->withFulltbpprojectcertify($fulltbpprojectcertify)
                                                 ->withFulltbpprojectcertifyattachments($fulltbpprojectcertifyattachments)
                                                 ->withFulltbpprojectawardattachments($fulltbpprojectawardattachments)
-                                                ->withFulltbpprojectstandards($fulltbpprojectstandards);
+                                                ->withFulltbpprojectstandards($fulltbpprojectstandards)
+                                                ->withFulltbpprojectplans($fulltbpprojectplans)
+                                                ->withFulltbpmarketneeds($fulltbpmarketneeds);
     }
 
     public function EditSave(Request $request,$id){

@@ -439,7 +439,7 @@
 
 {{-- modal_add_projectplan --}}
 <div id="modal_add_projectplan" class="modal fade" style="overflow:hidden;">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มแผนการดำเนินงาน</h5>
@@ -450,202 +450,79 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
-							<input type="text" id="plan" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
+							<input type="text" id="plandetail" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
 						</div>
 					</div>
 				</div>
 
 				<div class="row">
-					<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
+					
+					<div class="col-md-12">
+						<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
+						<div class="form-group">
+							@for ($i = 1; $i <= 12; $i++)
+							<div class="custom-control custom-checkbox custom-control-inline">
+								<input type="checkbox" name="plans[]" value="{{$i}}" class="custom-control-input checkboxplan" id="checkbox{{$i}}" >
+								<label class="custom-control-label" for="checkbox{{$i}}">{{$i}}</label>
 							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
+							@endfor
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-							<div class="col-md-2">
-								<label class="form-check-label">
-									<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-										1
-								</label>
-							</div>
-						</div>
-					</div>
+					
 				</div>
-
-				{{-- <div class="row">
-					<div class="col-md-6">
-						<div class="form-group mb-3 mb-md-2">
-							<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
-							<div class="row">
-								<div class="col-md-2">
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm1" class="form-check-input-styled-primary"  data-fouc>
-											1
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm2" class="form-check-input-styled-primary"  data-fouc>
-											2
-										</label>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm3" class="form-check-input-styled-primary"  data-fouc>
-											3
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm4" class="form-check-input-styled-primary"  data-fouc>
-											4
-										</label>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm5" class="form-check-input-styled-primary"  data-fouc>
-											5
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm6" class="form-check-input-styled-primary"  data-fouc>
-											6
-										</label>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm7" class="form-check-input-styled-primary"  data-fouc>
-											7
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm8" class="form-check-input-styled-primary"  data-fouc>
-											8
-										</label>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm9" class="form-check-input-styled-primary"  data-fouc>
-											9
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm10" class="form-check-input-styled-primary"  data-fouc>
-											10
-										</label>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm11" class="form-check-input-styled-primary"  data-fouc>
-											11
-										</label>
-									</div>
-
-									<div class="form-check">
-										<label class="form-check-label">
-											<input type="checkbox" id="planm12" class="form-check-input-styled-primary"  data-fouc>
-											12
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> --}}
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_projectplan" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				<button id="btn_modal_add_projectplan" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+{{-- modal_edit_projectplan --}}
+<div id="modal_edit_projectplan" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มแผนการดำเนินงาน</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<input type="text" id="projectplan" value="" hidden >
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
+							<input type="text" id="plandetail_edit" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					
+					<div class="col-md-12">
+						<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
+						<div class="form-group" id="monthplan">
+							@for ($i = 1; $i <= 12; $i++)
+							<div class="custom-control custom-checkbox custom-control-inline">
+								<input type="checkbox" name="plans[]" value="{{$i}}" class="custom-control-input checkboxplane_dit" id="checkbox{{$i}}" >
+								<label class="custom-control-label" for="checkbox{{$i}}">{{$i}}</label>
+							</div>
+							@endfor
+						</div>
+					</div>
+					
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_edit_projectplan" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- </div> --}}
 
     <!-- Page header -->
     <div class="page-header page-header-light">
@@ -702,7 +579,7 @@
 							<li class="nav-item"><a href="#left-icon-oganization" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลองค์กร</a></li>
 							<li class="nav-item"><a href="#left-icon-project" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> โครงการ</a></li>
 							<li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> เทคโนโลยี</a></li>
-							<li class="nav-item"><a href="#left-icon-tab4" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การตลาด</a></li>
+							<li class="nav-item"><a href="#left-icon-marketanalysis" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การตลาด</a></li>
 							<li class="nav-item"><a href="#left-icon-financial" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การเงิน</a></li>
 						</ul>
 						{{-- <form method="POST" action="{{route('dashboard.company.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
@@ -909,10 +786,10 @@
 							<div class="tab-pane fade" id="left-icon-project">
 								<ul class="nav nav-tabs">
 									<li class="nav-item"><a href="#responsibleperson-tab" class="nav-link active" data-toggle="tab">ผู้รับผิดชอบโครงการ</a></li>
-									<li class="nav-item"><a href="#projectplan-tab" class="nav-link" data-toggle="tab">แผนการดำเนินงาน</a></li>
 									<li class="nav-item"><a href="#projectabtract-tab" class="nav-link" data-toggle="tab">รายละเอียดโครงการ</a></li>
 									<li class="nav-item"><a href="#mainproduct-tab" class="nav-link" data-toggle="tab">ผลิตภัณฑ์หลัก</a></li>
 									<li class="nav-item"><a href="#productdetails-tab" class="nav-link" data-toggle="tab">จุดเด่นผลิตภัณฑ์หลัก</a></li>
+									<li class="nav-item"><a href="#projectplan-tab" class="nav-link" data-toggle="tab">แผนการดำเนินงาน</a></li>
 								</ul>
 
 								<div class="tab-content">
@@ -948,11 +825,6 @@
 										<div class="form-group">
 											<label for="">อีเมล์<span class="text-danger">*</span></label>
 											<input type="text" name ="contactemail" value="{{Auth::user()->email}}" class="form-control" disabled>
-										</div>
-									</div>
-									<div class="tab-pane fade" id="projectplan-tab">
-										<div class="form-group">	
-											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_projectplan"><i class="icon-add"></i></a>
 										</div>
 									</div>
 									<div class="tab-pane fade" id="projectabtract-tab">
@@ -1031,6 +903,61 @@
 													</div>
 												</div>
 											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectplan-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_projectplan"><i class="icon-add"></i></a>
+											<br>
+										</div>
+										
+										<div class="table-responsive" style="width: 100%">
+											<table class="table table-bordered" style="width: 99.8%">
+												<thead>
+													<tr>
+														<tr>
+															<th rowspan="2">รายละเอียดการดำเนินงาน</th> 
+															<th colspan="12" class="text-center">เดือนที่</th> 
+															<th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+														</tr>
+														<tr >
+															<th style="width: 30px">1</th>
+															<th style="width: 30px">2</th>
+															<th style="width: 30px">3</th>
+															<th style="width: 30px">4</th>
+															<th style="width: 30px">5</th>
+															<th style="width: 30px">6</th>
+															<th style="width: 30px">7</th>
+															<th style="width: 30px">8</th>  
+															<th style="width: 30px">9</th>
+															<th style="width: 30px">10</th>
+															<th style="width: 30px">11</th>
+															<th style="width: 30px">12</th>
+														</tr>
+													</tr>
+												</thead>
+												<tbody id="fulltbp_projectplan_wrapper_tr">    
+													@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+														<tr >                                        
+															<td> {{$fulltbpprojectplan->name}} </td> 
+															@for ($i = 1; $i <= 12; $i++)
+																@php
+																	$color = 'white';
+																	$check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+																	if (!Empty($check)) {
+																		$color = 'grey';
+																	}
+																@endphp
+																<td style="background-color:{{$color}}"> </td> 
+															@endfor															
+															<td> 
+																<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn badge bg-info editprojectplan">แก้ไข</a>
+																<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn badge bg-warning deleteprojectplan">ลบ</a> 
+															</td> 
+														</tr>
+													@endforeach                            
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>
@@ -1420,11 +1347,58 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade" id="left-icon-tab4">
-								<div class="form-group">
-									<label for="">4</label>
-									<input type="text" name ="contactname" value="" class="form-control" >
+							<div class="tab-pane fade" id="left-icon-marketanalysis">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#marketneed-tab" class="nav-link active" data-toggle="tab">Market need</a></li>
+									<li class="nav-item"><a href="#marketsize-tab" class="nav-link " data-toggle="tab">Market size</a></li>
+									<li class="nav-item"><a href="#marketshare-tab" class="nav-link " data-toggle="tab">Market share</a></li>
+									<li class="nav-item"><a href="#competitive-tab" class="nav-link " data-toggle="tab">Competitive</a></li>
+									<li class="nav-item"><a href="#businessmodelcanvas-tab" class="nav-link" data-toggle="tab">Business model canvas</a></li>
+									<li class="nav-item"><a href="#swot-tab" class="nav-link" data-toggle="tab">SWOT</a></li>
+									<li class="nav-item"><a href="#financialplan-tab" class="nav-link" data-toggle="tab">Finalcial plan</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="marketneed-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs/ Market requirements) </label> <span class="text-primary" id="marketneedtextlength"></span>
+												<input type="text" id="marketneed_input" class="form-control marketneedclass" >
+											</div>
+											<div id="fulltbp_marketneed_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpmarketneeds as $fulltbpmarketneed)
+													<input type="text" name ="marketneed[]" value="{{$fulltbpmarketneed->line}}" class="form-control marketneedclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmarketneed" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกอุปสรรคความเสี่ยง</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="marketsize-tab">
+										bb
+									</div>
+									<div class="tab-pane fade" id="marketshare-tab">
+										cc
+									</div>
+									<div class="tab-pane fade" id="competitive-tab">
+										dd
+									</div>
+									<div class="tab-pane fade" id="businessmodelcanvas-tab">
+										ee
+									</div>
+									<div class="tab-pane fade" id="swot-tab">
+										ff
+									</div>
+									<div class="tab-pane fade" id="financialplan-tab">
+										gg
+									</div>
 								</div>
+
 							</div>
 
 						</div>

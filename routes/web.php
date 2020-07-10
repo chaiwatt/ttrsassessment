@@ -184,7 +184,18 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('edit','Api\FullTbpProjectStandardController@Edit')->name('api.fulltbp.project.standard.edit');           
                     Route::post('delete','Api\FullTbpProjectStandardController@Delete')->name('api.fulltbp.project.standard.delete');
                 });
+                Route::group(['prefix' => 'plan'], function(){
+                    Route::post('add','Api\FullTbpProjectPlanController@Add')->name('api.fulltbp.project.plan.add');
+                    Route::post('get','Api\FullTbpProjectPlanController@Get')->name('api.fulltbp.project.plan.get'); 
+                    Route::post('edit','Api\FullTbpProjectPlanController@Edit')->name('api.fulltbp.project.plan.edit');           
+                    Route::post('delete','Api\FullTbpProjectPlanController@Delete')->name('api.fulltbp.project.plan.delete');
+                });
             }); 
+            Route::group(['prefix' => 'market'], function(){
+                Route::group(['prefix' => 'need'], function(){
+                    Route::post('add','Api\FullTbpMarketNeedController@Add')->name('api.fulltbp.market.need.add');           
+                });
+            });
         }); 
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

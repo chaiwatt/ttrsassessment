@@ -4,6 +4,7 @@ import * as CompanyProfileAttachment from './companyprofileattachment.js';
 import * as Employ from './employ.js';
 import * as StockHolder from './stockholder.js';
 import * as Project from './project.js';
+import * as Market from './market.js';
 
 $(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
@@ -83,7 +84,6 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
         if (result.value) {
             CompanyProfileAttachment.deleteAttachement($(this).data('id')).then(data => {
                 var html = ``;
-                // console.log(data);
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
@@ -964,3 +964,152 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
         }
     });
 }); 
+
+$(document).on('click', '#btn_modal_add_projectplan', function(e) {
+    var data = [];
+    $('.checkboxplan:checked').each(function(){
+        data.push($(this).val());
+      })
+      Project.addPlan($(this).data('id'),$('#plandetail').val(),data).then(data => {
+        var html = ``;
+        data.fulltbpprojecplans.forEach(function (plan,index) {
+            var tdbody =``;
+            for (var k = 1; k <= 12; k++) {
+                if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
+                    tdbody += `<td style="background-color:grey"></td>`;
+                }else{
+                    tdbody += `<td style="background-color:white"></td>`;
+                } 
+            }
+            html += `<tr >                                        
+                <td> ${plan.name} </td>                                            
+                    ${tdbody}
+                <td> 
+                <a type="button" data-id="${plan.id}" class="btn badge bg-info editprojectplan">แก้ไข</a>
+                    <a type="button" data-id="${plan.id}" data-name="" class="btn badge bg-warning deleteprojectplan">ลบ</a>                                       
+                </td>
+            </tr>`
+            });
+         $("#fulltbp_projectplan_wrapper_tr").html(html);
+   })
+});
+
+$(document).on('click', '.editprojectplan', function(e) {
+    $('#projectplan').val($(this).data('id'));
+    Project.getPlan($(this).data('id')).then(data => {
+        $('#plandetail_edit').val(data.fulltbpprojecplan['name']);
+        var html = ``;
+        for (var k = 1; k <= 12; k++) {
+            var check = ``;
+            if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k) != -1){
+                var check = `checked`;
+            }
+                html += `<div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="plans[]" value="${k}" class="custom-control-input checkboxplane_dit" id="checkboxedit${k}" ${check} >
+                        <label class="custom-control-label" for="checkboxedit${k}">${k}</label>
+                    </div>`
+        }
+         $("#monthplan").html(html);
+    })
+    .catch(error => {})
+    $('#modal_edit_projectplan').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_projectplan', function(e) {
+    var data = [];
+    $('.checkboxplane_dit:checked').each(function(){
+        data.push($(this).val());
+      })
+    Project.editPlan($('#projectplan').val(),$('#plandetail_edit').val(),data).then(data => {
+        console.log(data);
+        var html = ``;
+        data.fulltbpprojecplans.forEach(function (plan,index) {
+            var tdbody =``;
+            for (var k = 1; k <= 12; k++) {
+                if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
+                    tdbody += `<td style="background-color:grey"></td>`;
+                }else{
+                    tdbody += `<td style="background-color:white"></td>`;
+                } 
+            }
+            html += `<tr >                                        
+                <td> ${plan.name} </td>                                            
+                    ${tdbody}
+                <td> 
+                <a type="button" data-id="${plan.id}" class="btn badge bg-info editprojectplan">แก้ไข</a>
+                    <a type="button" data-id="${plan.id}" data-name="" class="btn badge bg-warning deleteprojectplan">ลบ</a>                                       
+                </td>
+            </tr>`
+            });
+         $("#fulltbp_projectplan_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+            
+$(document).on("click",".deleteprojectplan",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deletePlan($(this).data('id')).then(data => {
+                
+                var html = ``;
+                data.fulltbpprojecplans.forEach(function (plan,index) {
+                    var tdbody =``;
+                    for (var k = 1; k <= 12; k++) {
+                        if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
+                            tdbody += `<td style="background-color:grey"></td>`;
+                        }else{
+                            tdbody += `<td style="background-color:white"></td>`;
+                        } 
+                    }
+                    html += `<tr >                                        
+                        <td> ${plan.name} </td>                                            
+                            ${tdbody}
+                        <td> 
+                        <a type="button" data-id="${plan.id}" class="btn badge bg-info editprojectplan">แก้ไข</a>
+                            <a type="button" data-id="${plan.id}" data-name="" class="btn badge bg-warning deleteprojectplan">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_projectplan_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+}); 
+
+$(document).on('keyup', '.marketneedclass', function(e) {
+    $('#marketneedtextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#marketneed_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="marketneed[]" value="${$(this).val()}" class="form-control marketneedclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_marketneed_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddmarketneed', function(e) {
+    var lines = $('input[name="marketneed[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Market.addNeed(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่ม Market need สำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
