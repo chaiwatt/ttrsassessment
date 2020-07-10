@@ -19,6 +19,7 @@ use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
 use App\Model\EmployExperience;
 use App\Model\FullTbpMarketNeed;
+use App\Model\FullTbpMarketSize;
 use App\Model\CompanyStockHolder;
 use App\Model\FullTbpProjectPlan;
 use App\Model\FullTbpProductDetail;
@@ -74,6 +75,7 @@ class DashboardCompanyFullTbpController extends Controller
         $fulltbpprojectstandards = FullTbpProjectStandard::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpprojectplans =  FullTbpProjectPlan::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpmarketneeds = FullTbpMarketNeed::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpmarketsizes = FullTbpMarketSize::where('full_tbp_id',$fulltbp->id)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -99,7 +101,8 @@ class DashboardCompanyFullTbpController extends Controller
                                                 ->withFulltbpprojectawardattachments($fulltbpprojectawardattachments)
                                                 ->withFulltbpprojectstandards($fulltbpprojectstandards)
                                                 ->withFulltbpprojectplans($fulltbpprojectplans)
-                                                ->withFulltbpmarketneeds($fulltbpmarketneeds);
+                                                ->withFulltbpmarketneeds($fulltbpmarketneeds)
+                                                ->withFulltbpmarketsizes($fulltbpmarketsizes);
     }
 
     public function EditSave(Request $request,$id){

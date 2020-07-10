@@ -1113,3 +1113,29 @@ $(document).on('click', '#btnaddmarketneed', function(e) {
     .catch(error => {})
 });
 
+$(document).on('keyup', '.marketsizeclass', function(e) {
+    $('#marketsizetextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#marketsize_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="marketsize[]" value="${$(this).val()}" class="form-control marketsizeclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_marketsize_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddmarketsize', function(e) {
+    var lines = $('input[name="marketsize[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Market.addSize(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่ม Market size สำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+

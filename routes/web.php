@@ -195,6 +195,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'need'], function(){
                     Route::post('add','Api\FullTbpMarketNeedController@Add')->name('api.fulltbp.market.need.add');           
                 });
+                Route::group(['prefix' => 'size'], function(){
+                    Route::post('add','Api\FullTbpMarketSizeController@Add')->name('api.fulltbp.market.size.add');           
+                });
             });
         }); 
     }); 

@@ -1373,14 +1373,32 @@
 												<div class="col-md-12">	
 													<div class="form-group">
 														<br>
-														<button type="button" id="btnaddmarketneed" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกอุปสรรคความเสี่ยง</button>
+														<button type="button" id="btnaddmarketneed" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market need</button>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="tab-pane fade" id="marketsize-tab">
-										bb
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ระบุและให้รายละเอียดเกี่ยวกับตลาดภายในและนอกประเทศ (Market size)</label> <span class="text-primary" id="marketsizetextlength"></span>
+												<input type="text" id="marketsize_input" class="form-control marketsizeclass" >
+											</div>
+											<div id="fulltbp_marketsize_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpmarketsizes as $fulltbpmarketsize)
+													<input type="text" name ="marketsize[]" value="{{$fulltbpmarketsize->line}}" class="form-control marketsizeclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmarketsize" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market size</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 									<div class="tab-pane fade" id="marketshare-tab">
 										cc
