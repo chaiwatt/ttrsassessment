@@ -198,6 +198,12 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'size'], function(){
                     Route::post('add','Api\FullTbpMarketSizeController@Add')->name('api.fulltbp.market.size.add');           
                 });
+                Route::group(['prefix' => 'share'], function(){
+                    Route::post('add','Api\FullTbpMarketShareController@Add')->name('api.fulltbp.market.share.add');           
+                });
+                Route::group(['prefix' => 'competitive'], function(){
+                    Route::post('add','Api\FullTbpMarketCompetitiveController@Add')->name('api.fulltbp.market.competitive.add');           
+                });
             });
         }); 
     }); 

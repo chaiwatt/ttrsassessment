@@ -21,6 +21,7 @@ use App\Model\EmployExperience;
 use App\Model\FullTbpMarketNeed;
 use App\Model\FullTbpMarketSize;
 use App\Model\CompanyStockHolder;
+use App\Model\FullTbpMarketShare;
 use App\Model\FullTbpProjectPlan;
 use App\Model\FullTbpProductDetail;
 use App\Model\FullTbpCompanyProfile;
@@ -29,6 +30,7 @@ use App\Model\FullTbpProjectTechDev;
 use Illuminate\Support\Facades\Auth;
 use App\Model\FullTbpProjectStandard;
 use App\Model\FullTbpMainProductDetail;
+use App\Model\FullTbpMarketCompetitive;
 use App\Model\FullTbpProjectTechDevLevel;
 use App\Model\FullTbpCompanyProfileDetail;
 use App\Model\FullTbpProjectAbtractDetail;
@@ -76,6 +78,8 @@ class DashboardCompanyFullTbpController extends Controller
         $fulltbpprojectplans =  FullTbpProjectPlan::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpmarketneeds = FullTbpMarketNeed::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpmarketsizes = FullTbpMarketSize::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpmarketshares = FullTbpMarketShare::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpmarketcompetitives = FullTbpMarketCompetitive::where('full_tbp_id',$fulltbp->id)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -102,7 +106,9 @@ class DashboardCompanyFullTbpController extends Controller
                                                 ->withFulltbpprojectstandards($fulltbpprojectstandards)
                                                 ->withFulltbpprojectplans($fulltbpprojectplans)
                                                 ->withFulltbpmarketneeds($fulltbpmarketneeds)
-                                                ->withFulltbpmarketsizes($fulltbpmarketsizes);
+                                                ->withFulltbpmarketsizes($fulltbpmarketsizes)
+                                                ->withFulltbpmarketshares($fulltbpmarketshares)
+                                                ->withFulltbpmarketcompetitives($fulltbpmarketcompetitives);
     }
 
     public function EditSave(Request $request,$id){

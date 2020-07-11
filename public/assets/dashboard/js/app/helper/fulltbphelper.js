@@ -1139,3 +1139,55 @@ $(document).on('click', '#btnaddmarketsize', function(e) {
     .catch(error => {})
 });
 
+$(document).on('keyup', '.marketshareclass', function(e) {
+    $('#marketsharetextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#marketshare_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="marketshare[]" value="${$(this).val()}" class="form-control marketshareclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_marketshare_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddmarketshare', function(e) {
+    var lines = $('input[name="marketshare[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Market.addShare(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่ม Market share สำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$(document).on('keyup', '.marketcompetitiveclass', function(e) {
+    $('#marketcompetitivetextlength').html((90-ThaiWord.countCharTh($(this).val())));
+});
+
+$(document).on('keyup', '#marketcompetitive_input', function(e) {
+    if (e.keyCode === 13) {
+        var html = `<input type="text" name ="marketcompetitive[]" value="${$(this).val()}" class="form-control marketcompetitiveclass" style="border: 0" >`;
+        $(this).val('');
+        $('#fulltbp_marketcompetitive_wrapper').append(html);
+    }
+});
+
+$(document).on('click', '#btnaddmarketcompetitive', function(e) {
+    var lines = $('input[name="marketcompetitive[]"]').map(function(){ 
+        return this.value; 
+    }).get();
+    Market.addCompetitive(lines,$(this).data('id')).then(data => {
+        console.log(data);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'เพิ่ม Market competitive สำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+

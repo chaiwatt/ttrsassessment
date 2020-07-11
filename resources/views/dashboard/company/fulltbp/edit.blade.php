@@ -1401,10 +1401,46 @@
 										</div>
 									</div>
 									<div class="tab-pane fade" id="marketshare-tab">
-										cc
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ส่วนแบ่งของตลาดที่คาดว่าผลิตภัณฑ์จะครอบครอง (Market share)</label> <span class="text-primary" id="marketsharetextlength"></span>
+												<input type="text" id="marketshare_input" class="form-control marketshareclass" >
+											</div>
+											<div id="fulltbp_marketshare_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpmarketshares as $fulltbpmarketshare)
+													<input type="text" name ="marketshare[]" value="{{$fulltbpmarketshare->line}}" class="form-control marketshareclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmarketshare" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market share</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 									<div class="tab-pane fade" id="competitive-tab">
-										dd
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการ โดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</label> <span class="text-primary" id="marketcompetitivetextlength"></span>
+												<input type="text" id="marketcompetitive_input" class="form-control marketcompetitiveclass" >
+											</div>
+											<div id="fulltbp_marketcompetitive_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpmarketcompetitives as $fulltbpmarketcompetitive)
+													<input type="text" name ="marketcompetitive[]" value="{{$fulltbpmarketcompetitive->line}}" class="form-control marketcompetitiveclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmarketcompetitive" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market competitive</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 									<div class="tab-pane fade" id="businessmodelcanvas-tab">
 										ee
