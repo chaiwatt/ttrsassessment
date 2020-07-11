@@ -1443,13 +1443,120 @@
 										</div>
 									</div>
 									<div class="tab-pane fade" id="businessmodelcanvas-tab">
-										ee
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadbusinessmodelcanvas" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('businessmodelcanvas').click();"><i class="icon-add"></i></button>													
+												</div>
+												<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="businessmodelcanvas" name="businessmodelcanvas"/>
+											</div>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_businessmodelcanvas_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:150px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_businessmodelcanvas_wrapper_tr">    
+															@foreach ($fullTbpmarketattachmentmodelcanvases as $fullTbpmarketattachmentmodelcanvas)
+																<tr >                                        
+																	<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn badge bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
 									</div>
 									<div class="tab-pane fade" id="swot-tab">
-										ff
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadswot" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('swot').click();"><i class="icon-add"></i></button>													
+												</div>
+												<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="swot" name="swot"/>
+											</div>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_swot_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:150px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_swot_wrapper_tr">    
+															@foreach ($fullTbpmarketattachmentswots as $fullTbpmarketattachmentswot)
+																<tr >                                        
+																	<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fullTbpmarketattachmentswot->id}}" data-name=""  class="btn badge bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
 									</div>
 									<div class="tab-pane fade" id="financialplan-tab">
-										gg
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadfinancialplan" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('financialplan').click();"><i class="icon-add"></i></button>													
+												</div>
+												<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="financialplan" name="financialplan"/>
+											</div>
+										</div>
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_financialplan_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:150px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_financialplan_wrapper_tr">    
+															@foreach ($fullTbpmarketattachmentfinancialplans as $fullTbpmarketattachmentfinancialplan)
+																<tr >                                        
+																	<td> {{$fullTbpmarketattachmentfinancialplan->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fullTbpmarketattachmentfinancialplan->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fullTbpmarketattachmentfinancialplan->id}}" data-name=""  class="btn badge bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      	
 									</div>
 								</div>
 

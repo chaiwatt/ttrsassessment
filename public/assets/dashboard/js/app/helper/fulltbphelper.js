@@ -1191,3 +1191,213 @@ $(document).on('click', '#btnaddmarketcompetitive', function(e) {
     .catch(error => {})
 });
 
+$("#businessmodelcanvas").on('change', function() {
+    console.log($(this).data('id'));
+
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+    formData.append('attachmenttype','1');
+        $.ajax({
+            url: `${route.url}/api/fulltbp/market/attachment/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_businessmodelcanvas_wrapper_tr").html(html);
+        }
+    });
+
+});
+
+
+$(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Market.deleteMarketAttachment($(this).data('id'),'1').then(data => {
+                console.log(data);
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_businessmodelcanvas_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+}); 
+
+$("#swot").on('change', function() {
+    console.log($(this).data('id'));
+
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+    formData.append('attachmenttype','2');
+        $.ajax({
+            url: `${route.url}/api/fulltbp/market/attachment/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_swot_wrapper_tr").html(html);
+        }
+    });
+
+});
+
+$(document).on("click",".deletefulltbpswotattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Market.deleteMarketAttachment($(this).data('id'),'2').then(data => {
+                console.log(data);
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_swot_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$("#financialplan").on('change', function() {
+    console.log($(this).data('id'));
+
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+    formData.append('attachmenttype','3');
+        $.ajax({
+            url: `${route.url}/api/fulltbp/market/attachment/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_financialplan_wrapper_tr").html(html);
+        }
+    });
+
+});
+
+$(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Market.deleteMarketAttachment($(this).data('id'),'3').then(data => {
+                console.log(data);
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_financialplan_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});

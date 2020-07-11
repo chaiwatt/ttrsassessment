@@ -29,6 +29,7 @@ use App\Model\FullTbpProjectCertify;
 use App\Model\FullTbpProjectTechDev;
 use Illuminate\Support\Facades\Auth;
 use App\Model\FullTbpProjectStandard;
+use App\Model\FullTbpMarketAttachment;
 use App\Model\FullTbpMainProductDetail;
 use App\Model\FullTbpMarketCompetitive;
 use App\Model\FullTbpProjectTechDevLevel;
@@ -80,6 +81,9 @@ class DashboardCompanyFullTbpController extends Controller
         $fulltbpmarketsizes = FullTbpMarketSize::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpmarketshares = FullTbpMarketShare::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpmarketcompetitives = FullTbpMarketCompetitive::where('full_tbp_id',$fulltbp->id)->get();
+        $fullTbpmarketattachmentmodelcanvases = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',1)->get();
+        $fullTbpmarketattachmentswots = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',2)->get();
+        $fullTbpmarketattachmentfinancialplans = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',3)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -108,7 +112,10 @@ class DashboardCompanyFullTbpController extends Controller
                                                 ->withFulltbpmarketneeds($fulltbpmarketneeds)
                                                 ->withFulltbpmarketsizes($fulltbpmarketsizes)
                                                 ->withFulltbpmarketshares($fulltbpmarketshares)
-                                                ->withFulltbpmarketcompetitives($fulltbpmarketcompetitives);
+                                                ->withFulltbpmarketcompetitives($fulltbpmarketcompetitives)
+                                                ->withFullTbpmarketattachmentmodelcanvases($fullTbpmarketattachmentmodelcanvases)
+                                                ->withFullTbpmarketattachmentswots($fullTbpmarketattachmentswots)
+                                                ->withFullTbpmarketattachmentfinancialplans($fullTbpmarketattachmentfinancialplans);
     }
 
     public function EditSave(Request $request,$id){

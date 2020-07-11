@@ -76,4 +76,24 @@ function addCompetitive(lines,id){
     })
 }
 
-export {addNeed,addSize,addShare,addCompetitive}
+function deleteMarketAttachment(id,attachmenttype){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/market/attachment/delete`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id,
+          'attachmenttype': attachmenttype,
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {addNeed,addSize,addShare,addCompetitive,deleteMarketAttachment}

@@ -204,6 +204,10 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'competitive'], function(){
                     Route::post('add','Api\FullTbpMarketCompetitiveController@Add')->name('api.fulltbp.market.competitive.add');           
                 });
+                Route::group(['prefix' => 'attachment'], function(){
+                    Route::post('add','Api\FullTbpMarketAttachmentController@Add')->name('api.fulltbp.market.attachment.add');           
+                    Route::post('delete','Api\FullTbpMarketAttachmentController@Delete')->name('api.fulltbp.market.attachment.delete');            
+                });
             });
         }); 
     }); 
