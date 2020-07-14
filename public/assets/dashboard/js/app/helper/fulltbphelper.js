@@ -1885,3 +1885,18 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
         }
     });
 });
+
+$(document).on('click', '#btneditquantityemploy', function(e) {
+    Employ.editEmployQuantity($(this).data('id'),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val()).then(data => {
+        $('#department1_qty').val(data.department1_qty);
+        $('#department2_qty').val(data.department2_qty);
+        $('#department3_qty').val(data.department3_qty);
+        $('#department4_qty').val(data.department4_qty);
+        $('#department5_qty').val(data.department5_qty);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'แก้ไขจำนวนบุคลากรสำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});

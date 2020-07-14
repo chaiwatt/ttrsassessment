@@ -1136,7 +1136,7 @@
 										<ul class="nav nav-tabs">
 											<li class="nav-item"><a href="#vertical-left-companyprofile" class="nav-link active" data-toggle="tab"> ประวัติของบริษัท</a></li>
 											<li class="nav-item"><a href="#vertical-left-quantityemploy" class="nav-link" data-toggle="tab"> จำนวนบุคลากร</a></li>
-											<li class="nav-item"><a href="#vertical-left-employhistory" class="nav-link" data-toggle="tab"> ข้อมูลบุคลากร</a></li>
+											<li class="nav-item"><a href="#vertical-left-employhistory" class="nav-link" data-toggle="tab"> ข้อมูลบุคลากรที่สำคัญ</a></li>
 											<li class="nav-item"><a href="#vertical-left-stockholder" class="nav-link" data-toggle="tab"> บัญชีรายชื่อผู้ถือหุ้น</a></li>
 										</ul>
 		
@@ -1202,25 +1202,37 @@
 												
 											</div>
 											<div class="tab-pane fade" id="vertical-left-quantityemploy">
-												<div class="form-group">
-													<label for="">ฝ่ายบริหาร</label>
-													<input type="number" name ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="form-group">
+															<label for="">ฝ่ายบริหาร</label>
+															<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">ฝ่ายวิจัยและพัฒนา</label>
+															<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">ฝ่ายผลิต/วิศวกรรม</label>
+															<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">ฝ่ายการตลาด</label>
+															<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">พนักงานทั่วไป </label>
+															<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+														</div>
+													</div>
 												</div>
-												<div class="form-group">
-													<label for="">ฝ่ายวิจัยและพัฒนา</label>
-													<input type="number" name ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
-												</div>
-												<div class="form-group">
-													<label for="">ฝ่ายผลิต/วิศวกรรม</label>
-													<input type="number" name ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
-												</div>
-												<div class="form-group">
-													<label for="">ฝ่ายการตลาด</label>
-													<input type="number" name ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
-												</div>
-												<div class="form-group">
-													<label for="">พนักงานทั่วไป </label>
-													<input type="number" name ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="form-group">
+															<br>
+															<button type="button" id="btneditquantityemploy" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกจำนวนบุคลากร</button>
+														</div>
+													</div>
 												</div>
 											</div>
 											<div class="tab-pane fade" id="vertical-left-employhistory">

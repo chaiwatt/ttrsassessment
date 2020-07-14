@@ -231,4 +231,29 @@ function getEmploys(companayid){
     })
 }
 
-export {saveEmploy,getEmploy,editEmploy,addEmployEducation,addEmployExperience,addEmployTraining,deleteEmployEducation,deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo}
+function editEmployQuantity(id,department1_qty,department2_qty,department3_qty,department4_qty,department5_qty){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/employ/quantity/edit`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id:id,
+          department1_qty :department1_qty,
+          department2_qty :department2_qty,
+          department3_qty :department3_qty,
+          department4_qty :department4_qty,
+          department5_qty :department5_qty,
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {saveEmploy,getEmploy,editEmploy,addEmployEducation,addEmployExperience,addEmployTraining,deleteEmployEducation,
+  deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo,editEmployQuantity}

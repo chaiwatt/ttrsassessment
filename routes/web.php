@@ -142,6 +142,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('add','Api\FullTbpCompanyEmployTrainingController@Add')->name('api.fulltbp.employ.training.add');  
                     Route::post('delete','Api\FullTbpCompanyEmployTrainingController@Delete')->name('api.fulltbp.employ.training.delete');          
                 });
+                Route::group(['prefix' => 'quantity'], function(){
+                    Route::post('edit','Api\FullTbpCompanyEmployQuantityController@Edit')->name('api.fulltbp.employ.quantity.edit');  
+                });
             }); 
             
             Route::group(['prefix' => 'stockholder'], function(){
