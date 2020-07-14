@@ -5,6 +5,7 @@ import * as Employ from './employ.js';
 import * as StockHolder from './stockholder.js';
 import * as Project from './project.js';
 import * as Market from './market.js';
+import * as Sell from './sell.js';
 
 $(document).on('keyup', '#companyprofile_input', function(e) {
     if (e.keyCode === 13) {
@@ -1396,6 +1397,489 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
                     </tr>`
                     });
                  $("#fulltbp_financialplan_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on('click', '#btn_modal_add_sell', function(e) {
+    Sell.addSell($(this).data('id'),$('#productname').val(),$('#sellpresent').val(),$('#sellpast1').val(),$('#sellpast2').val(),$('#sellpast3').val()).then(data => {
+        var html = ``;
+        data.forEach(function (sell,index) {
+            html += `<tr >                                        
+                <td> ${sell.name} </td>                            
+                <td> ${sell.present} </td>                         
+                <td> ${sell.past1} </td> 
+                <td> ${sell.past2} </td> 
+                <td> ${sell.past3} </td> 
+                <td> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editsell">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletesell">ลบ</a>
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_sell_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on("click",".deletesell",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Sell.deleteSell($(this).data('id')).then(data => {
+             
+                var html = ``;
+                data.forEach(function (sell,index) {
+                    html += `<tr >                                        
+                        <td> ${sell.name} </td>                            
+                        <td> ${sell.present} </td>                         
+                        <td> ${sell.past1} </td> 
+                        <td> ${sell.past2} </td> 
+                        <td> ${sell.past3} </td> 
+                        <td> 
+                            <a type="button" data-id="${sell.id}" class="btn badge bg-info editsell">แก้ไข</a> 
+                            <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletesell">ลบ</a>
+                        </td> 
+                    </tr>`
+                    });
+                 $("#fulltbp_sell_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on('click', '.editsell', function(e) {
+    Sell.getSell($(this).data('id')).then(data => {
+        $('#sellid').val(data.id);
+        $('#productnameedit').val(data.name);
+        $('#sellpresentedit').val(data.present);
+        $('#sellpastedit1').val(data.past1);
+        $('#sellpastedit2').val(data.past2);
+        $('#sellpastedit3').val(data.past3);
+    })
+    .catch(error => {})
+    $('#modal_edit_sell').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_sell', function(e) {
+    Sell.editSell($('#sellid').val(),$('#productnameedit').val(),$('#sellpresentedit').val(),$('#sellpastedit1').val(),$('#sellpastedit2').val(),$('#sellpastedit3').val()).then(data => {
+        var html = ``;
+        data.forEach(function (sell,index) {
+            html += `<tr >                                        
+                <td> ${sell.name} </td>    
+                <td> ${sell.present} </td>                         
+                <td> ${sell.past1} </td> 
+                <td> ${sell.past2} </td> 
+                <td> ${sell.past3} </td>                                            
+                <td> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editsell">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletesell">ลบ</a>
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_sell_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '.editsellstatus', function(e) {
+    Sell.getSellStatus($(this).data('id')).then(data => {
+        $('#sellstatusid').val(data.id);
+        $('#sellstatus').val(data.name);
+        $('#sellstatuspresentedit').val(data.present);
+        $('#sellstatuspastedit1').val(data.past1);
+        $('#sellstatuspastedit2').val(data.past2);
+        $('#sellstatuspastedit3').val(data.past3);
+    })
+    .catch(error => {})
+    $('#modal_edit_sellstatus').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
+    Sell.editSellStatus($('#sellstatusid').val(),$('#sellstatuspresentedit').val(),$('#sellstatuspastedit1').val(),$('#sellstatuspastedit2').val(),$('#sellstatuspastedit3').val()).then(data => {
+        var html = ``;
+        data.forEach(function (sell,index) {
+            html += `<tr >                                        
+                <td> ${sell.name} </td>    
+                <td> ${sell.present} </td>                         
+                <td> ${sell.past1} </td> 
+                <td> ${sell.past2} </td> 
+                <td> ${sell.past3} </td>                                            
+                <td> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editsellstatus">แก้ไข</a> 
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_sellstatus_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_add_debtpartner', function(e) {
+    Sell.addDebtPartner($(this).data('id'),$('#debtpartner').val(),$('#numproject').val(),$('#debtpartnertaxid').val(),$('#debttotalyearsell').val(),$('#debtpercenttosale').val(),$('#debtpartneryear').val()).then(data => {
+        var html = ``;
+        data.forEach(function (sell,index) {
+            html += `<tr >                                        
+                <td> ${sell.debtpartner} </td>                            
+                <td> ${sell.numproject} </td>  
+                <td> ${sell.partnertaxid} </td>                         
+                <td> ${sell.totalyearsell} </td> 
+                <td> ${sell.percenttosale} </td> 
+                <td> ${sell.businessyear} </td> 
+                <td> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editdebtpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletedebtpartner">ลบ</a>
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_debtpartner_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '.editdebtpartner', function(e) {
+    Sell.getDebtPartner($(this).data('id')).then(data => {
+        $('#debtpartnerid').val(data.id);
+        $('#debtpartneredit').val(data.debtpartner);
+        $('#numprojectedit').val(data.numproject);
+        $('#debtpartnertaxidedit').val(data.partnertaxid);
+        $('#debttotalyearselledit').val(data.totalyearsell);
+        $('#debtpercenttosaleedit').val(data.percenttosale);
+        $('#debtpartneryearedit').val(data.businessyear);
+    })
+    .catch(error => {})
+    $('#modal_edit_debtpartner').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
+    Sell.editDebtPartner($('#debtpartnerid').val(),$('#debtpartneredit').val(),$('#numprojectedit').val(),$('#debtpartnertaxidedit').val(),$('#debttotalyearselledit').val(),$('#debtpercenttosaleedit').val(),$('#debtpartneryearedit').val()).then(data => {
+        var html = ``;
+        data.forEach(function (sell,index) {
+            html += `<tr >                                        
+                <td> ${sell.debtpartner} </td>                            
+                <td> ${sell.numproject} </td>  
+                <td> ${sell.partnertaxid} </td>                         
+                <td> ${sell.totalyearsell} </td> 
+                <td> ${sell.percenttosale} </td> 
+                <td> ${sell.businessyear} </td> 
+                <td> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editdebtpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletedebtpartner">ลบ</a>
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_debtpartner_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on("click",".deletedebtpartner",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Sell.deleteDebtPartner($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (sell,index) {
+                    html += `<tr >                                        
+                        <td> ${sell.debtpartner} </td>
+                        <td> ${sell.numproject} </td>
+                        <td> ${sell.partnertaxid} </td>
+                        <td> ${sell.totalyearsell} </td>
+                        <td> ${sell.percenttosale} </td>
+                        <td> ${sell.businessyear} </td>
+                        <td> 
+                            <a type="button" data-id="${sell.id}" class="btn badge bg-info editdebtpartner">แก้ไข</a> 
+                            <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletedebtpartner">ลบ</a>
+                        </td> 
+                    </tr>`
+                    });
+                 $("#fulltbp_debtpartner_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on('click', '#btn_modal_add_creditpartner', function(e) {
+    Sell.addCreditPartner($(this).data('id'),$('#creditpartner').val(),$('#creditpartnertaxid').val(),$('#credittotalyearsell').val(),$('#creditpercenttosale').val(),$('#creditpartneryear').val()).then(data => {
+        var html = ``;
+        data.forEach(function (sell,index) {
+            html += `<tr >                                        
+                <td> ${sell.creditpartner} </td>                            
+                <td> ${sell.partnertaxid} </td>  
+                <td> ${sell.totalyearpurchase} </td>                         
+                <td> ${sell.percenttopurchase} </td> 
+                <td> ${sell.businessyear} </td> 
+                <td> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editcreditpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletecreditpartner">ลบ</a>
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_creditpartner_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '.editcreditpartner', function(e) {
+    Sell.getCreditPartner($(this).data('id')).then(data => {
+        $('#creditpartnerid').val(data.id);
+        $('#creditpartneredit').val(data.creditpartner);
+        $('#creditpartnertaxidedit').val(data.partnertaxid);
+        $('#credittotalyearselledit').val(data.totalyearpurchase);
+        $('#creditpercenttosaleedit').val(data.percenttopurchase);
+        $('#creditpartneryearedit').val(data.businessyear);
+    })
+    .catch(error => {})
+    $('#modal_edit_creditpartner').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
+    Sell.editCreditPartner($('#creditpartnerid').val(),$('#creditpartneredit').val(),$('#creditpartnertaxidedit').val(),$('#credittotalyearselledit').val(),$('#creditpercenttosaleedit').val(),$('#creditpartneryearedit').val()).then(data => {
+        var html = ``;
+        data.forEach(function (sell,index) {
+            html += `<tr >                                        
+                <td> ${sell.creditpartner} </td>                            
+                <td> ${sell.partnertaxid} </td>  
+                <td> ${sell.totalyearpurchase} </td>                         
+                <td> ${sell.percenttopurchase} </td> 
+                <td> ${sell.businessyear} </td> 
+                <td> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editcreditpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletecreditpartner">ลบ</a>
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_creditpartner_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on("click",".deletecreditpartner",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Sell.deleteCreditPartner($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (sell,index) {
+                    html += `<tr >                                        
+                        <td> ${sell.creditpartner} </td>                            
+                        <td> ${sell.partnertaxid} </td>  
+                        <td> ${sell.totalyearpurchase} </td>                         
+                        <td> ${sell.percenttopurchase} </td> 
+                        <td> ${sell.businessyear} </td> 
+                        <td> 
+                            <a type="button" data-id="${sell.id}" class="btn badge bg-info editcreditpartner">แก้ไข</a> 
+                            <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletecreditpartner">ลบ</a>
+                        </td> 
+                    </tr>`
+                    });
+                 $("#fulltbp_creditpartner_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on('click', '.editasset', function(e) {
+    Sell.getAsset($(this).data('id')).then(data => {
+        $('#assetid').val(data.id);
+        $('#asset').val(data.asset);
+        $('#assetcostedit').val(data.cost);
+        $('#assetquantityedit').val(data.quantity);
+        $('#assetpriceedit').val(data.price);
+        $('#assetspecificationedit').val(data.specification);
+    })
+    .catch(error => {})
+    $('#modal_edit_asset').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_asset', function(e) {
+    Sell.editAsset($('#assetid').val(),$('#assetcostedit').val(),$('#assetquantityedit').val(),$('#assetpriceedit').val(),$('#assetspecificationedit').val()).then(data => {
+        var html = ``;
+        data.forEach(function (asset,index) {
+            html += `<tr >                                        
+                <td> ${asset.asset} </td>                            
+                <td> ${asset.cost} </td>  
+                <td> ${asset.quantity} </td>                         
+                <td> ${asset.price} </td> 
+                <td> ${asset.specification} </td> 
+                <td> 
+                    <a type="button" data-id="${asset.id}" class="btn badge bg-info editasset">แก้ไข</a> 
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_asset_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '.editinvestment', function(e) {
+    Sell.getInvestment($(this).data('id')).then(data => {
+        $('#investmentid').val(data.id);
+        $('#investment').val(data.investment);
+        $('#investmentcostedit').val(data.cost);
+    })
+    .catch(error => {})
+    $('#modal_edit_investment').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_investment', function(e) {
+    Sell.editInvestment($('#investmentid').val(),$('#investmentcostedit').val()).then(data => {
+        var html = ``;
+        data.forEach(function (invesment,index) {
+            html += `<tr >                                        
+                <td> ${invesment.investment} </td>                            
+                <td> ${invesment.cost} </td>  
+                <td> 
+                    <a type="button" data-id="${invesment.id}" class="btn badge bg-info editinvestment">แก้ไข</a> 
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_investment_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '.editcost', function(e) {
+    Sell.getCost($(this).data('id')).then(data => {
+        $('#costid').val(data.id);
+        $('#costnameedit').val(data.costname);
+        $('#costexistingedit').val(data.existing);
+        $('#costneededit').val(data.need);
+        $('#costapprovededit').val(data.approved);
+        $('#costplanedit').val(data.plan);
+    })
+    .catch(error => {})
+    $('#modal_edit_cost').modal('show');
+});
+
+$(document).on('click', '#btn_modal_edit_cost', function(e) {
+    Sell.editCost($('#costid').val(),$('#costexistingedit').val(),$('#costneededit').val(),$('#costapprovededit').val(),$('#costplanedit').val()).then(data => {
+        var html = ``;
+        console.log(data);
+        data.forEach(function (cost,index) {
+            html += `<tr >                                        
+                <td> ${cost.costname} </td>                            
+                <td> ${cost.existing} </td>  
+                <td> ${cost.need} </td>  
+                <td> ${cost.approved} </td>  
+                <td> ${cost.plan} </td>
+                <td> 
+                    <a type="button" data-id="${cost.id}" class="btn badge bg-info editcost">แก้ไข</a> 
+                </td> 
+            </tr>`
+            });
+         $("#fulltbp_cost_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '#btnaddreturnofinvestment', function(e) {
+    Sell.editROI($(this).data('id'),$('#income').val(),$('#profit').val(),$('#reduce').val()).then(data => {
+        $('#income').val(data.income);
+        $('#profit').val(data.profit);
+        $('#reduce').val(data.reduce);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'แก้ไขประมาณการผลตอบแทนจากการลงทุนสำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$("#companydoc").on('change', function() {
+    var file = this.files[0];
+    console.log(file);
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+    formData.append('companydocname',$('#companydocname').val());
+        $.ajax({
+            url: `${route.url}/api/fulltbp/companydoc/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_companydoc_wrapper_tr").html(html);
+                 $('#modal_add_companydoc').modal('hide');
+        }
+    });
+});
+
+
+$(document).on("click",".deletefulltbpcompanydocattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deleteCompanydoc($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_companydoc_wrapper_tr").html(html);
            })
            .catch(error => {})
         }

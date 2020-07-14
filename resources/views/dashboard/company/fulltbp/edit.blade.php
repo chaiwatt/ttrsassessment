@@ -522,7 +522,462 @@
 	</div>
 </div>
 
-{{-- </div> --}}
+	{{-- modal_add_tectdevlevel --}}
+	<div id="modal_add_sell" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มยอดขาย</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
+								<input type="text" id="productname" placeholder="รายการ" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellpresent" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpast1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpast2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpast3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_add_sell" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{-- modal_edit_sell --}}
+	<div id="modal_edit_sell" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มยอดขาย</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="text" id="sellid" value="" hidden >
+							<div class="form-group">
+								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
+								<input type="text" id="productnameedit" placeholder="รายการ" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellpresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_sell" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{-- modal_edit_sellstatus --}}
+	<div id="modal_edit_sellstatus" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มยอดขาย</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="text" id="sellstatusid" value="" hidden >
+							<div class="form-group">
+								<label>รายการ</label><span class="text-danger">*</span>
+								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control" readonly>
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_sellstatus" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{-- modal_add_debtpartner --}}
+	<div id="modal_add_debtpartner" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มลูกหนี้การค้า</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
+								<input type="text" id="debtpartner" placeholder="ลูกหนี้การค้า" class="form-control" >
+							</div>
+							<div class="form-group">
+								<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
+								<input type="number" id="numproject" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
+								<input type="number" id="debtpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดขายต่อปี(บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="debttotalyearsell" placeholder="ยอดขายต่อปี(บาท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
+								<input type="number" id="debtpercenttosale" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
+								<input type="number" id="debtpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_add_debtpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		{{-- modal_edit_debtpartner --}}
+		<div id="modal_edit_debtpartner" class="modal fade" style="overflow:hidden;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มลูกหนี้การค้า</h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<input type="text" id="debtpartnerid" value="" hidden >
+								<div class="form-group">
+									<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
+									<input type="text" id="debtpartneredit" placeholder="ลูกหนี้การค้า" class="form-control" >
+								</div>
+								<div class="form-group">
+									<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
+									<input type="number" id="numprojectedit" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
+									<input type="number" id="debtpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>ยอดขายต่อปี(บาท)</label><span class="text-danger">*</span>
+									<input type="number" id="debttotalyearselledit" placeholder="ยอดขายต่อปี(บาท)" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
+									<input type="number" id="debtpercenttosaleedit" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
+									<input type="number" id="debtpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+								</div>
+							</div>
+						</div>
+					</div>           
+					<div class="modal-footer">
+						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+						<button id="btn_modal_edit_debtpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{{-- modal_add_creditpartner --}}
+	<div id="modal_add_creditpartner" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเจ้าหนี้การค้า</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
+								<input type="text" id="creditpartner" placeholder="เจ้าหนี้การค้า" class="form-control" >
+							</div>
+							<div class="form-group">
+								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดซื้อต่อปี(บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="credittotalyearsell" placeholder="ยอดซื้อต่อปี(บาท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpercenttosale" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_add_creditpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{-- modal_edit_creditpartner --}}
+	<div id="modal_edit_creditpartner" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเจ้าหนี้การค้า</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<input type="text" id="creditpartnerid" value="" hidden >
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
+								<input type="text" id="creditpartneredit" placeholder="เจ้าหนี้การค้า" class="form-control" >
+							</div>
+							<div class="form-group">
+								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ยอดซื้อต่อปี(บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="credittotalyearselledit" placeholder="ยอดซื้อต่อปี(บาท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpercenttosaleedit" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_creditpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	{{-- modal_edit_asset --}}
+	<div id="modal_edit_asset" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเจ้าหนี้การค้า</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="text" id="assetid" value="" hidden >
+							<div class="form-group">
+								<label>รายการ</label><span class="text-danger">*</span>
+								<input type="text" id="asset" placeholder="รายการ" class="form-control" readonly >
+							</div>
+							<div class="form-group">
+								<label>จำนวนเงิน(บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="assetcostedit" placeholder="จำนวนเงิน(บาท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>จำนวน(ชิ้น)</label><span class="text-danger">*</span>
+								<input type="number" id="assetquantityedit" placeholder="จำนวน(ชิ้น)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ราคาต่อเครื่อง (บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="assetpriceedit" placeholder="ราคาต่อเครื่อง (บาท)" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
+								<input type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_asset" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{-- modal_edit_investment --}}
+	<div id="modal_edit_investment" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เงินลงทุนสำหรับการดำเนินการโครงการ</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="text" id="investmentid" value="" hidden >
+							<div class="form-group">
+								<label>รายการ</label><span class="text-danger">*</span>
+								<input type="text" id="investment" placeholder="รายการ" class="form-control" readonly >
+							</div>
+							<div class="form-group">
+								<label>จำนวนเงิน(บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="investmentcostedit" placeholder="จำนวนเงิน(บาท)" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_investment" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{-- modal_edit_cost --}}
+	<div id="modal_edit_cost" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เงินลงทุนสำหรับการดำเนินการโครงการ</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="text" id="costid" value="" hidden >
+							<div class="form-group">
+								<label>แหล่งเงินทุน</label><span class="text-danger">*</span>
+								<input type="text" id="costnameedit" placeholder="แหล่งเงินทุน" class="form-control" readonly >
+							</div>
+							<div class="form-group">
+								<label>เงินทุนที่มีอยู่แล้ว</label><span class="text-danger">*</span>
+								<input type="number" id="costexistingedit" placeholder="เงินทุนที่มีอยู่แล้ว" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>เงินทุนที่เสนอขออนุมัติ</label><span class="text-danger">*</span>
+								<input type="number" id="costneededit" placeholder="เงินทุนที่เสนอขออนุมัติ" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>เงินทุนที่ได้รับการอนุมัติแล้ว</label><span class="text-danger">*</span>
+								<input type="number" id="costapprovededit" placeholder="เงินทุนที่ได้รับการอนุมัติแล้ว" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>แผนการหาเงินทุนเพิ่ม</label><span class="text-danger">*</span>
+								<input type="text" id="costplanedit" placeholder="แผนการหาเงินทุนเพิ่ม" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_edit_cost" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{{-- modal_add_companydoc --}}
+<div id="modal_add_companydoc" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการศึกษา</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>ชื่อเอกสาร</label><span class="text-danger">*</span>
+							<input type="text" id="companydocname" placeholder="ชื่อเอกสาร" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-12">	
+						<div class="input-group">													
+							<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >แนบเอกสาร</button>													
+						</div>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="companydoc" name="companydoc"/>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_companydoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
     <!-- Page header -->
     <div class="page-header page-header-light">
@@ -575,57 +1030,105 @@
                 	<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลทั่วไป</a></li>
-
-							<li class="nav-item"><a href="#left-icon-oganization" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลองค์กร</a></li>
-							<li class="nav-item"><a href="#left-icon-project" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> โครงการ</a></li>
-							<li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> เทคโนโลยี</a></li>
-							<li class="nav-item"><a href="#left-icon-marketanalysis" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การตลาด</a></li>
-							<li class="nav-item"><a href="#left-icon-financial" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> การเงิน</a></li>
+							<li class="nav-item"><a href="#left-icon-oganization" class="nav-link" data-toggle="tab"><i class="icon-archive mr-2"></i> ข้อมูลองค์กร</a></li>
+							<li class="nav-item"><a href="#left-icon-project" class="nav-link" data-toggle="tab"><i class="icon-box mr-2"></i> โครงการ</a></li>
+							<li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-cog2 mr-2"></i> เทคโนโลยี</a></li>
+							<li class="nav-item"><a href="#left-icon-marketanalysis" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i> การตลาด</a></li>
+							<li class="nav-item"><a href="#left-icon-sell" class="nav-link" data-toggle="tab"><i class="icon-clipboard3 mr-2"></i> ยอดซื้อ/ขาย</a></li>
+							<li class="nav-item"><a href="#left-icon-financial" class="nav-link" data-toggle="tab"><i class="icon-cash3 mr-2"></i> การเงิน</a></li>
 						</ul>
 						{{-- <form method="POST" action="{{route('dashboard.company.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
 							@csrf --}}
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="left-icon-minitbp">
-								@csrf
-								<div class="row">	
-									<div class="col-md-12">
-										<fieldset>	
-											<div class="form-group">
-												<label>ชื่อกิจการ</label>
-												<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control" readonly>
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#left-icon-companyinfo" class="nav-link active" data-toggle="tab"> ข้อมูลกิจการ</a></li>
+									<li class="nav-item"><a href="#left-icon-companydoc" class="nav-link" data-toggle="tab"> เอกสารสำคัญ</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="left-icon-companyinfo" >	
+										<div class="row">	
+											<div class="col-md-12">
+												<fieldset>	
+													<div class="form-group">
+														<label>ชื่อกิจการ</label>
+														<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control" readonly>
+													</div>
+													 <div class="form-group">
+														<label>การจดทะเบียน<span class="text-danger">*</span></label>
+														<select name="businesstype" data-placeholder="การจดทะเบียน" class="form-control form-control-select2" disabled>
+															<option value=""></option>
+																@foreach ($businesstypes as $businesstype)
+																	<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
+																@endforeach
+														</select>
+													</div>
+													<div class="form-group">
+														<label>เลขทะเบียนนิติบุคคล</label>
+														<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control" readonly>
+													</div>
+													<div class="form-group">
+														<label>ปีที่จดทะเบียน</label>
+														<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
+													</div>
+													<div class="form-group">
+														<label>ทุนที่จดทะเบียน</label>
+														<input type="number" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control" readonly>
+													</div>
+													<div class="form-group">
+														<label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
+														<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+													</div>
+													<div class="form-group">
+														<label>ทุนจดทะเบียนที่เรียกชำระแล้ว เมื่อวันที่</label>
+														<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+													</div>
+												</fieldset>
 											</div>
-											 <div class="form-group">
-												<label>การจดทะเบียน<span class="text-danger">*</span></label>
-												<select name="businesstype" data-placeholder="การจดทะเบียน" class="form-control form-control-select2" disabled>
-													<option value=""></option>
-														@foreach ($businesstypes as $businesstype)
-															<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
-														@endforeach
-												</select>
+										</div>
+									</div>
+									<div class="tab-pane fade show active" id="left-icon-companydoc" >	
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add"></i></button>
+												</div>
+												
 											</div>
-											<div class="form-group">
-												<label>เลขทะเบียนนิติบุคคล</label>
-												<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control" readonly>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_companydoc_wrapper" >	
 											</div>
-											<div class="form-group">
-												<label>ปีที่จดทะเบียน</label>
-												<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
-											</div>
-											<div class="form-group">
-												<label>ทุนที่จดทะเบียน</label>
-												<input type="number" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control" readonly>
-											</div>
-											<div class="form-group">
-												<label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
-												<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
-											</div>
-											<div class="form-group">
-												<label>ทุนจดทะเบียนที่เรียกชำระแล้ว เมื่อวันที่</label>
-												<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
-											</div>
-										</fieldset>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:150px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_companydoc_wrapper_tr">    
+															@foreach ($fulltbpcompanydocs as $fulltbpcompanydoc)
+																<tr >                                        
+																	<td> {{$fulltbpcompanydoc->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fulltbpcompanydoc->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fulltbpcompanydoc->id}}" data-name=""  class="btn badge bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
 									</div>
 								</div>
+
+							
 							</div>
 							<div class="tab-pane fade" id="left-icon-oganization">
 								<div class="row">	
@@ -1557,11 +2060,280 @@
 													</table>
 												</div>
 											</div>      	
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="left-icon-sell">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#sell-tab" class="nav-link active" data-toggle="tab">มูลค่ายอดขาย</a></li>
+									<li class="nav-item"><a href="#sellstatus-tab" class="nav-link " data-toggle="tab">สถานะยอดขาย</a></li>
+									<li class="nav-item"><a href="#buyin-tab" class="nav-link " data-toggle="tab">คู่ค้าหลัก(ยอดซื้อ)</a></li>
+									<li class="nav-item"><a href="#sellout-tab" class="nav-link " data-toggle="tab">คู่ค้าหลัก(ยอดขาย)</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="sell-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" id="btnaddsell" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add"></i></a>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
+														<th>ยอดขายปีปัจจุบัน</th> 
+														<th>{{$fulltbp->past1}}</th>                                                                                    
+														<th>{{$fulltbp->past2}}</th>       
+														<th>{{$fulltbp->past3}}</th>  
+														<th>เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_sell_wrapper_tr">    
+													@foreach ($fulltbpsells as $fulltbpsell)
+														<tr >                                        
+															<td> {{$fulltbpsell->name}}</td> 
+															<td> {{$fulltbpsell->present}} </td> 
+															<td> {{$fulltbpsell->past1}} </td> 
+															<td> {{$fulltbpsell->past2}} </td>                                            															
+															<td> {{$fulltbpsell->past3}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpsell->id}}" class="btn badge bg-info editsell">แก้ไข</a>
+																<a type="button" data-id="{{$fulltbpsell->id}}" class="btn badge bg-warning deletesell">ลบ</a> 
+															</td> 
+														</tr>
+													@endforeach                            
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="sellstatus-tab">
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
+														<th>ยอดขายปีปัจจุบัน</th> 
+														<th>{{$fulltbp->past1}}</th>                                                                                    
+														<th>{{$fulltbp->past2}}</th>       
+														<th>{{$fulltbp->past3}}</th>  
+														<th>เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_sellstatus_wrapper_tr">    
+													@foreach ($fulltbpsellstatuses as $fulltbpsellstatus)
+														<tr >                                        
+															<td> {{$fulltbpsellstatus->name}}</td> 
+															<td> {{$fulltbpsellstatus->present}} </td> 
+															<td> {{$fulltbpsellstatus->past1}} </td> 
+															<td> {{$fulltbpsellstatus->past2}} </td>                                            															
+															<td> {{$fulltbpsellstatus->past3}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpsellstatus->id}}" class="btn badge bg-info editsellstatus">แก้ไข</a> 
+															</td> 
+														</tr>
+													@endforeach                            
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="buyin-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add"></i></a>
+											<br>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
+														<th>จำนวนผลิตภัณฑ์หรือโครงการ</th> 
+														<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
+														<th>ยอดขายต่อปี(บาท)</th>       
+														<th>เปรียบเทียบกับยอดขาย (%)</th>  
+														<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
+														<th style="width:120px">เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_debtpartner_wrapper_tr">    
+													@foreach ($fulltbpdebtpartners as $fulltbpdebtpartner)
+														<tr >
+															<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
+															<td> {{$fulltbpdebtpartner->numproject}} </td> 
+															<td> {{$fulltbpdebtpartner->partnertaxid}} </td> 
+															<td> {{$fulltbpdebtpartner->totalyearsell}} </td>                                            															
+															<td> {{$fulltbpdebtpartner->percenttosale}} </td> 
+															<td> {{$fulltbpdebtpartner->businessyear}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn badge bg-info editdebtpartner">แก้ไข</a>
+																<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn badge bg-warning deletedebtpartner">ลบ</a> 
+															</td> 
+														</tr>
+													@endforeach              
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="sellout-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add"></i></a>
+											<br>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
+														<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
+														<th>ยอดซื้อต่อปี(บาท)</th>       
+														<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
+														<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
+														<th style="width:120px">เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_creditpartner_wrapper_tr">    
+													@foreach ($fulltbpcreditpartners as $fulltbpcreditpartner)
+														<tr >
+															<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
+															<td> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+															<td> {{$fulltbpcreditpartner->totalyearpurchase}} </td>                                            															
+															<td> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
+															<td> {{$fulltbpcreditpartner->businessyear}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn badge bg-info editcreditpartner">แก้ไข</a>
+																<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn badge bg-warning deletecreditpartner">ลบ</a> 
+															</td> 
+														</tr>
+													@endforeach              
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 
 							</div>
-
+							<div class="tab-pane fade" id="left-icon-financial">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#asset-tab" class="nav-link active" data-toggle="tab">การจัดหาแหล่งเงินลงทุน</a></li>
+									<li class="nav-item"><a href="#investment-tab" class="nav-link " data-toggle="tab">เงินลงทุนสำหรับดำเนินการของโครงการ</a></li>
+									<li class="nav-item"><a href="#cost-tab" class="nav-link " data-toggle="tab">แหล่งเงินทุนของโครงการ</a></li>
+									<li class="nav-item"><a href="#returnofinvestment-tab" class="nav-link " data-toggle="tab">ประมาณการผลตอบแทน</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="asset-tab">
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายการ</th>  
+														<th>จำนวนเงิน (บาท)</th>                                                                                    
+														<th>จำนวน(ชิ้น)</th>       
+														<th>ราคาต่อเครื่อง(บาท)</th>  
+														<th>ข้อมูลจำเพาะทางเทคนิค</th> 
+														<th style="width:120px">เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_asset_wrapper_tr">    
+													@foreach ($fulltbpassets as $fulltbpasset)
+														<tr >
+															<td> {{$fulltbpasset->asset}}</td> 
+															<td> {{$fulltbpasset->cost}} </td> 
+															<td> {{$fulltbpasset->quantity}} </td>                                            															
+															<td> {{$fulltbpasset->price}} </td> 
+															<td> {{$fulltbpasset->specification}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpasset->id}}" class="btn badge bg-info editasset">แก้ไข</a>
+															</td> 
+														</tr>
+													@endforeach              
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="investment-tab">
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายการ</th>  
+														<th>จำนวนเงิน (บาท)</th>                                                                                    
+														<th style="width:120px">เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_investment_wrapper_tr">    
+													@foreach ($fulltbpinvestments as $fulltbpinvestment)
+														<tr >
+															<td> {{$fulltbpinvestment->investment}}</td> 
+															<td> {{$fulltbpinvestment->cost}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpinvestment->id}}" class="btn badge bg-info editinvestment">แก้ไข</a>
+															</td> 
+														</tr>
+													@endforeach              
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="cost-tab">
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายการ</th>  
+														<th>เงินทุนที่มีอยู่แล้ว</th>                                                                                    
+														<th>เงินทุนที่เสนอขออนุมัติ</th>   
+														<th>เงินทุนที่ได้รับการอนุมัติแล้ว</th>   
+														<th>แผนการหาเงินทุนเพิ่ม</th>  
+														<th style="width:120px">เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_cost_wrapper_tr">    
+													@foreach ($fulltbpcosts as $fulltbpcost)
+														<tr >
+															<td> {{$fulltbpcost->costname}}</td> 
+															<td> {{$fulltbpcost->existing}} </td> 
+															<td> {{$fulltbpcost->need}} </td> 
+															<td> {{$fulltbpcost->approved}} </td> 
+															<td> {{$fulltbpcost->plan}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpcost->id}}" class="btn badge bg-info editcost">แก้ไข</a>
+															</td> 
+														</tr>
+													@endforeach              
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="returnofinvestment-tab">
+										<div class="row">	
+											<div class="col-md-12">
+												<fieldset>	
+													<div class="form-group">
+														<label>ประมาณการรายได้ที่จะเพิ่มขึ้น (บาท)</label>
+														<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label>ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น (บาท)</label>
+														<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control" >
+													</div>
+													<div class="form-group">
+														<label>ประมาณการต้นทุนที่จะลดลง (บาท)</label>
+														<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control" >
+													</div>
+												</fieldset>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="form-group">
+													<br>
+													<button type="button" id="btnaddreturnofinvestment" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกผลตอบแทนจากการลงทุน</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 
 						{{-- </form> --}}

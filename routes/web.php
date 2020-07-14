@@ -209,6 +209,47 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('delete','Api\FullTbpMarketAttachmentController@Delete')->name('api.fulltbp.market.attachment.delete');            
                 });
             });
+            Route::group(['prefix' => 'sell'], function(){
+                Route::post('add','Api\FullTbpSellController@Add')->name('api.fulltbp.sell.add');           
+                Route::post('delete','Api\FullTbpSellController@Delete')->name('api.fulltbp.sell.delete'); 
+                Route::post('get','Api\FullTbpSellController@Get')->name('api.fulltbp.sell.get'); 
+                Route::post('edit','Api\FullTbpSellController@Edit')->name('api.fulltbp.sell.edit');
+            });
+            Route::group(['prefix' => 'sellstatus'], function(){
+                Route::post('get','Api\FullTbpSellStatusController@Get')->name('api.fulltbp.sellstatus.get'); 
+                Route::post('edit','Api\FullTbpSellStatusController@Edit')->name('api.fulltbp.sellstatus.edit');
+            });
+            Route::group(['prefix' => 'debtpartner'], function(){
+                Route::post('add','Api\FullTbpDebtPartnerController@Add')->name('api.fulltbp.debtpartner.add'); 
+                Route::post('get','Api\FullTbpDebtPartnerController@Get')->name('api.fulltbp.debtpartner.get'); 
+                Route::post('delete','Api\FullTbpDebtPartnerController@Delete')->name('api.fulltbp.debtpartner.delete'); 
+                Route::post('edit','Api\FullTbpDebtPartnerController@Edit')->name('api.fulltbp.debtpartner.edit');
+            });
+            Route::group(['prefix' => 'creditpartner'], function(){
+                Route::post('add','Api\FullTbpCreditPartnerController@Add')->name('api.fulltbp.creditpartner.add'); 
+                Route::post('get','Api\FullTbpCreditPartnerController@Get')->name('api.fulltbp.creditpartner.get'); 
+                Route::post('delete','Api\FullTbpCreditPartnerController@Delete')->name('api.fulltbp.creditpartner.delete'); 
+                Route::post('edit','Api\FullTbpCreditPartnerController@Edit')->name('api.fulltbp.creditpartner.edit');
+            });
+            Route::group(['prefix' => 'asset'], function(){
+                Route::post('get','Api\FullTbpAssetController@Get')->name('api.fulltbp.asset.get'); 
+                Route::post('edit','Api\FullTbpAssetController@Edit')->name('api.fulltbp.asset.edit');
+            });
+            Route::group(['prefix' => 'investment'], function(){
+                Route::post('get','Api\FullTbpInvestmentController@Get')->name('api.fulltbp.investment.get'); 
+                Route::post('edit','Api\FullTbpInvestmentController@Edit')->name('api.fulltbp.investment.edit');
+            });
+            Route::group(['prefix' => 'cost'], function(){
+                Route::post('get','Api\FullTbpCostController@Get')->name('api.fulltbp.cost.get'); 
+                Route::post('edit','Api\FullTbpCostController@Edit')->name('api.fulltbp.cost.edit');
+            });
+            Route::group(['prefix' => 'roi'], function(){
+                Route::post('edit','Api\FullTbpROIController@Edit')->name('api.fulltbp.roi.edit');
+            });
+            Route::group(['prefix' => 'companydoc'], function(){
+                Route::post('add','Api\FullTbpCompanyDocController@Add')->name('api.fulltbp.companydoc.add');
+                Route::post('delete','Api\FullTbpCompanyDocController@Delete')->name('api.fulltbp.companydoc.delete');
+            });
         }); 
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

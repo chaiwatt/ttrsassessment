@@ -10,14 +10,19 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
+use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
+use App\Model\FullTbpAsset;
 use Illuminate\Http\Request;
 use App\Model\FullTbpEmployee;
+use App\Model\FullTbpInvestment;
+use App\Model\FullTbpSellStatus;
 use App\Model\ProjectAssignment;
 use App\Http\Controllers\Controller;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
+use App\Model\FullTbpReturnOfInvestment;
 use App\Model\BusinessPlanFeeTransaction;
 
 class AssessmentController extends Controller
@@ -51,20 +56,41 @@ class AssessmentController extends Controller
                 $fulltbpprojectcertify = new FullTbpProjectCertify();
                 $fulltbpprojectcertify->full_tbp_id = $fulltbp->id;
                 $fulltbpprojectcertify->save();
+                
+                $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C(Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
 
-                // $businessplanfeetransaction = new BusinessPlanFeeTransaction();
-                // $businessplanfeetransaction->invoiceno = Carbon::now()->timestamp;
-                // $businessplanfeetransaction->business_plan_id = $businessplan->id;
-                // $businessplanfeetransaction->save();
+                foreach ($sellstatus as $status) {
+                    FullTbpSellStatus::create([
+                        'full_tbp_id' => $fulltbp->id,
+                        'name' => $status
+                    ]);
+                }
+                $assets = array("ค่าที่ดิน", "ค่าอาคารและสิ่งปลูกสร้าง", "ค่าตกแต่งอาคารและสิ่งปลูกสร้าง","ค่าเครื่องจักร","ค่าคอมพิวเตอร์","อื่นๆ");
+                foreach ($assets as $asset) {
+                    FullTbpAsset::create([
+                        'full_tbp_id' => $fulltbp->id,
+                        'asset' => $asset
+                    ]);
+                }
+                $investments = array("ค่าใช้จ่ายในการจัดตั้งธุรกิจ (กรณีเพิ่งเริ่มจัดตั้งธุรกิจ)", "ค่าใช้จ่ายในการพัฒนาเทคโนโลยีหลักที่ใช้ในกระบวนการผลิตและบริการ", "ค่าใช้จ่ายในกระบวนการผลิต (เช่น ค่าวัตถุดิบ, ค่าแรง, ค่าใช้จ่ายในการผลิต)","ค่าใช้จ่ายในการดำเนินงาน","ค่าใช้จ่ายอื่นๆ");
+                foreach ($investments as $investment) {
+                    FullTbpInvestment::create([
+                        'full_tbp_id' => $fulltbp->id,
+                        'investment' => $investment
+                    ]);
+                }
 
-                // $messagebox = new MessageBox();
-                // $messagebox->title = 'แจ้งการชำระเงินค่าธรรมเนียม';
-                // $messagebox->message_priority_id = 1;
-                // $messagebox->body = "<h2>โปรดตรวสอบ</h2><a href=".route('dashboard.company.fee').">คลิกเพื่อไปยังลิงค์</a>";
-                // $messagebox->sender_id = User::where('user_type_id',1)->first()->id;
-                // $messagebox->receiver_id = Auth::user()->id;
-                // $messagebox->message_read_status_id = 1;
-                // $messagebox->save();
+                $costs = array("แหล่งเงินทุนภายใน", "แหล่งเงินทุนภายนอก");
+                foreach ($costs as $cost) {
+                    FullTbpCost::create([
+                        'full_tbp_id' => $fulltbp->id,
+                        'costname' => $cost
+                    ]);
+                }
+
+                $fulltbpreturnofinvestment = new FullTbpReturnOfInvestment();
+                $fulltbpreturnofinvestment->full_tbp_id = $fulltbp->id;
+                $fulltbpreturnofinvestment->save();
 
                 $messagebox = new MessageBox();
                 $messagebox->title = 'ขอรับการประเมินใหม่';

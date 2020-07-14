@@ -7,9 +7,12 @@ use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\FullTbpCost;
+use App\Model\FullTbpSell;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\CompanyBoard;
+use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
@@ -18,11 +21,16 @@ use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
 use App\Model\EmployExperience;
+use App\Model\FullTbpCompanyDoc;
+use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketNeed;
 use App\Model\FullTbpMarketSize;
+use App\Model\FullTbpSellStatus;
 use App\Model\CompanyStockHolder;
+use App\Model\FullTbpDebtPartner;
 use App\Model\FullTbpMarketShare;
 use App\Model\FullTbpProjectPlan;
+use App\Model\FullTbpCreditPartner;
 use App\Model\FullTbpProductDetail;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
@@ -32,6 +40,7 @@ use App\Model\FullTbpProjectStandard;
 use App\Model\FullTbpMarketAttachment;
 use App\Model\FullTbpMainProductDetail;
 use App\Model\FullTbpMarketCompetitive;
+use App\Model\FullTbpReturnOfInvestment;
 use App\Model\FullTbpProjectTechDevLevel;
 use App\Model\FullTbpCompanyProfileDetail;
 use App\Model\FullTbpProjectAbtractDetail;
@@ -84,6 +93,15 @@ class DashboardCompanyFullTbpController extends Controller
         $fullTbpmarketattachmentmodelcanvases = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',1)->get();
         $fullTbpmarketattachmentswots = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',2)->get();
         $fullTbpmarketattachmentfinancialplans = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',3)->get();
+        $fulltbpsells = FullTbpSell::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpsellstatuses = FullTbpSellStatus::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpdebtpartners = FullTbpDebtPartner::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpcreditpartners = FullTbpCreditPartner::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpassets = FullTbpAsset::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpinvestments = FullTbpInvestment::where('full_tbp_id',$fulltbp->id)->get();        
+        $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpreturnofinvestment = FullTbpReturnOfInvestment::where('full_tbp_id',$fulltbp->id)->first();
+        $fulltbpcompanydocs = FullTbpCompanyDoc::where('full_tbp_id',$fulltbp->id)->get();
         return view('dashboard.company.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -115,11 +133,19 @@ class DashboardCompanyFullTbpController extends Controller
                                                 ->withFulltbpmarketcompetitives($fulltbpmarketcompetitives)
                                                 ->withFullTbpmarketattachmentmodelcanvases($fullTbpmarketattachmentmodelcanvases)
                                                 ->withFullTbpmarketattachmentswots($fullTbpmarketattachmentswots)
-                                                ->withFullTbpmarketattachmentfinancialplans($fullTbpmarketattachmentfinancialplans);
+                                                ->withFullTbpmarketattachmentfinancialplans($fullTbpmarketattachmentfinancialplans)
+                                                ->withFulltbpsells($fulltbpsells)
+                                                ->withFulltbpsellstatuses($fulltbpsellstatuses)
+                                                ->withFulltbpdebtpartners($fulltbpdebtpartners)
+                                                ->withFulltbpcreditpartners($fulltbpcreditpartners)
+                                                ->withFulltbpassets($fulltbpassets)
+                                                ->withFulltbpinvestments($fulltbpinvestments)
+                                                ->withFulltbpcosts($fulltbpcosts)
+                                                ->withFulltbpreturnofinvestment($fulltbpreturnofinvestment)
+                                                ->withFulltbpcompanydocs($fulltbpcompanydocs);
     }
 
     public function EditSave(Request $request,$id){
-        // return $request->department1_qty;
         FullTbpEmployee::find($id)->update([
             'department1_qty' => $request->department1_qty,
             'department2_qty' => $request->department2_qty,

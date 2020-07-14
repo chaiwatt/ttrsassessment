@@ -74,7 +74,6 @@ class SettingProfileController extends Controller
         $useralertstatuses = UserAlertStatus::get();
         $smscredit = SMS::credit()[1];
         $socialloginstatuses = SocialLoginStatus::get();
-        // return $smscredit[1];
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -102,7 +101,7 @@ class SettingProfileController extends Controller
                                         ->withSmscredit($smscredit)
                                         ->withSocialloginstatuses($socialloginstatuses);
     }
-    public function EditSave(EditProfileRequest $request, $userid){
+    public function EditSave(Request $request, $userid){
         $auth = Auth::user();
         if($request->action == 'personal'){
             $user = User::find($userid);

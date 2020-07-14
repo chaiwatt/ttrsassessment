@@ -314,5 +314,24 @@ function deletePlan(id){
     })
 }
 
+function deleteCompanydoc(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/companydoc/delete`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 export {addAbtract,addProduct,addProductDetail,addTechDev,addTechDevLevel,deleteTechDevLevel,addTechDevProblem,
-  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan}
+  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc}
