@@ -272,6 +272,11 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('approve/{id}','DashboardAdminMiniTbpController@Approve')->name('dashboard.admin.minitbp.approve');    
                 Route::get('delete/{id}','DashboardAdminMiniTbpController@Delete')->name('dashboard.admin.minitbp.delete');  
             });  
+            Route::group(['prefix' => 'fulltbp'], function(){
+                Route::get('','DashboardAdminFullTbpController@Index')->name('dashboard.admin.fulltbp');            
+                Route::get('view/{id}','DashboardAdminFullTbpController@View')->name('dashboard.admin.fulltbp.view');  
+                Route::post('delete/{id}','DashboardAdminFullTbpController@Delete')->name('dashboard.admin.fulltbp.delete');  
+            }); 
             Route::group(['prefix' => 'projectassignment'], function(){
                 Route::get('','DashboardAdminProjectAssignmentController@Index')->name('dashboard.admin.projectassignment');           
                 Route::get('edit/{id}','DashboardAdminProjectAssignmentController@Edit')->name('dashboard.admin.projectassignment.edit');  

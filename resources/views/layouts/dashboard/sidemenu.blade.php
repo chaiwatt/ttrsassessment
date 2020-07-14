@@ -12,6 +12,7 @@
         <li class="nav-item"><a href="{{route('dashboard.admin.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.businessplan')?'active':''}}">ขอรับการประเมิน</a></li>     
         <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.minitbp')?'active':''}}">mini TBP</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fulltbp')?'active':''}}">Full TBP</a></li>	   
         {{-- <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fee')?'active':''}}">แบบขอการประเมิน mini TBP</a></li>  --}}
     </ul>
 </li>

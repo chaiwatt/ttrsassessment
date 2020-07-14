@@ -42,4 +42,8 @@ class FullTbp extends Model
         $presentyear = intval($this->created_at->format('Y'))+543-3;
         return $presentyear ; 
     } 
+
+    public function getUpdatedAtThAttribute(){
+        return DateConversion::engToThaiDate($this->updated_at->toDateString());
+    } 
 }

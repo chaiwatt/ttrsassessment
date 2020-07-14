@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\User;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Helper\EmailBox;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
 use App\Model\BusinessPlan;
@@ -26,6 +28,7 @@ use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketNeed;
 use App\Model\FullTbpMarketSize;
 use App\Model\FullTbpSellStatus;
+use App\Model\ProjectAssignment;
 use App\Model\CompanyStockHolder;
 use App\Model\FullTbpDebtPartner;
 use App\Model\FullTbpMarketShare;
@@ -179,6 +182,30 @@ class DashboardCompanyFullTbpController extends Controller
         $data = ['title' => 'ทดสอบ', 'body' => $text];
         $pdf = PDF::loadView('dashboard.company.fulltbp.pdf', $data);
         return $pdf->stream('document.pdf');
+    }
+
+    public function Submit($id){
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.company.fulltbp.submit')->withFulltbp($fulltbp);
+    }
+
+    public function SubmitSave(Request $request, $id){
+        $fulltbp = FullTbp::find($id);
+        if(!Empty($fulltbp->file)){
+            @unlink($fulltbp->file);
+        }
+        $file = $request->attachment;
+        $new_name = str_random(10).".".$file->getClientOriginalExtension();
+        $file->move("storage/uploads/fulltbp/attachment" , $new_name);
+        $filelocation = "storage/uploads/fulltbp/attachment/".$new_name;
+        $fulltbp->update([
+            'file' => $filelocation,
+            'status' => 2
+        ]);
+        $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ส่งเอกสาร Full TBP','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        return redirect()->route('dashboard.company.fulltbp')->withSuccess('ส่งเอกสาร Full TBP สำเร็จ');
     }
 
 }
