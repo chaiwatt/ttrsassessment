@@ -18,7 +18,7 @@ class CreateFullTbpDebtPartnersTable extends Migration
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
             $table->string('debtpartner',200)->nullable();
-            $table->char('numproject',2)->default(0);
+            $table->char('numproject',4)->default(0);
             $table->string('partnertaxid',20)->nullable();
             $table->double('totalyearsell',15,2)->nullable();
             $table->double('percenttosale',15,2)->nullable();

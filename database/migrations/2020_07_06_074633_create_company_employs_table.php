@@ -24,7 +24,7 @@ class CreateCompanyEmploysTable extends Migration
             $table->string('phone',12)->nullable();
             $table->string('workphone',12)->nullable();
             $table->string('email',120)->nullable();
-            $table->unsignedBigInteger('stockholder_id')->defualt(1);
+            $table->unsignedBigInteger('stockholder_id')->defualt('1');
             $table->timestamps();
         });
     }

@@ -207,9 +207,13 @@ $(document).on('click', '#btn_edit_employ', function(e) {
             </tr>`
             });
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
+         Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'แก้ไขข้อมูลบุคลากรสำเร็จ!',
+            });
     })
     .catch(error => {})
-    $('#modal_edit_employ').modal('show');
+    // $('#modal_edit_employ').modal('show');
 });
 
 

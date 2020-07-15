@@ -515,6 +515,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','SettingAdminAssessmentCriteriaGroupController@EditSave')->name('setting.admin.assessment.criteriagroup.editsave'); 
                     Route::get('delete/{id}','SettingAdminAssessmentCriteriaGroupController@Delete')->name('setting.admin.assessment.criteriagroup.delete'); 
                 });
+                Route::group(['prefix' => 'criteria'], function(){
+                    Route::get('','SettingAdminAssessmentCriteriaController@Index')->name('setting.admin.assessment.criteria');           
+                });
             });
         });
         Route::group(['prefix' => 'expert'], function(){
