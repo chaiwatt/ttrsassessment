@@ -517,6 +517,11 @@ Route::group(['middleware' => 'auth'], function(){
                 });
                 Route::group(['prefix' => 'criteria'], function(){
                     Route::get('','SettingAdminAssessmentCriteriaController@Index')->name('setting.admin.assessment.criteria');           
+                    Route::get('create','SettingAdminAssessmentCriteriaController@Create')->name('setting.admin.assessment.criteria.create');           
+                    Route::post('createsave','SettingAdminAssessmentCriteriaController@CreateSave')->name('setting.admin.assessment.criteria.createsave');           
+                    Route::get('edit/{id}','SettingAdminAssessmentCriteriaController@Edit')->name('setting.admin.assessment.criteria.edit');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentCriteriaController@EditSave')->name('setting.admin.assessment.criteria.editsave');           
+                    Route::get('delete/{id}','SettingAdminAssessmentCriteriaController@Delete')->name('setting.admin.assessment.criteria.delete');  
                 });
             });
         });

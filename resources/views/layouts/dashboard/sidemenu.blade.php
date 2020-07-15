@@ -82,7 +82,7 @@
             <a href="#" class="nav-link"><span>การประเมิน</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteriagroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">เกณฑ์การประเมิน</a></li>		             
-                <li class="nav-item"><a href="{{route('setting.admin.assessment.criteriagroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">น้ำหนัก criteria</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">น้ำหนัก criteria</a></li>		             
             </ul>
         </li>
     </ul>
