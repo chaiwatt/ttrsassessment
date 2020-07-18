@@ -18,7 +18,7 @@ class CreateExpertAssignmentsTable extends Migration
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('expert_assignment_status_id',1)->default(1);
+            $table->unsignedBigInteger('expert_assignment_status_id')->default(1);
             $table->timestamps();
         });
     }
