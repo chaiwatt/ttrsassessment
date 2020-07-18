@@ -281,6 +281,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('assignexpert/{id}','DashboardAdminFullTbpController@AssignExpert')->name('dashboard.admin.fulltbp.assignexpert');           
                 Route::post('assignexpertsave','DashboardAdminFullTbpController@AssignExpertSave')->name('dashboard.admin.fulltbp.assignexpertsave');                     
                 Route::post('assignexpertdelete','DashboardAdminFullTbpController@AssignExpertDelete')->name('dashboard.admin.fulltbp.assignexpertdelete');   
+                Route::post('editassignexpert','DashboardAdminFullTbpController@EditAssignExpert')->name('dashboard.admin.fulltbp.editassignexpert');   
             }); 
             Route::group(['prefix' => 'projectassignment'], function(){
                 Route::get('','DashboardAdminProjectAssignmentController@Index')->name('dashboard.admin.projectassignment');           

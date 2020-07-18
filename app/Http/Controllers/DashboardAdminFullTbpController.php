@@ -205,4 +205,21 @@ class DashboardAdminFullTbpController extends Controller
         }
         return response()->json($expertassignments); 
     }   
+    public function EditAssignExpert(Request $request){
+        ExpertAssignment::find($request->id)->update([
+            'expert_assignment_status_id' => $request->status
+        ]);
+        $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
+        
+        if($expertassignments->count() > 0){
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '2'
+            ]);
+        }else{
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '1'
+            ]);
+        }
+        return response()->json($expertassignments); 
+    }
 }

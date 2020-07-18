@@ -90,7 +90,7 @@
                                     <tr>
                                         <th>ชื่อ-สกุล</th> 
                                         @if (Auth::user()->user_type_id == 7 )
-                                            <th>Assign</th> 
+                                            <th>การรับมอบหมาย</th> 
                                         @endif     
                                         <th>สถานะ</th> 
                                         <th>เพิ่มเติม</th>                                                                 
@@ -101,7 +101,7 @@
                                     <tr>    
                                         <td> {{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</td> 
                                         @if (Auth::user()->user_type_id == 7 )
-                                            <td> sdfsdf</td> 
+                                            <td> <input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
                                         @endif
                                         <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
                                         <td> 
@@ -124,6 +124,9 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+    <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switchery.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -146,12 +149,22 @@
                 },
                 success: function(data){
                     $(".loader").removeClass("is-active")
-                    
+                   
                     var html = ``;
+
                     data.forEach(function (expert,index) {
+                        var onlymaster = ``;
+                        var checkstatus = ``;
+                        if(expert.expert_assignment_status_id == 2){
+                            checkstatus =  `checked`;
+                        }
+                        if("{{Auth::user()->user_type_id == 7}}"){
+                            onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
+                        }
                         html += `<tr >                                        
-                            <td> ${expert.user['name']} ${expert.user['lastname']}</td>    
-                            <td> ${expert.expertassignmentstatus['name']}</td>                                         
+                            <td> ${expert.user['name']} ${expert.user['lastname']}</td> 
+                            ${onlymaster}     
+                            <td> ${expert.expertassignmentstatus['name']}</td>                                        
                             <td> 
                                 <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
                             </td>
@@ -186,9 +199,18 @@
                         success: function(data){
                             var html = ``;
                             data.forEach(function (expert,index) {
+                                var onlymaster = ``;
+                                var checkstatus = ``;
+                                if(expert.expert_assignment_status_id == 2){
+                                    checkstatus =  `checked`;
+                                }
+                                if("{{Auth::user()->user_type_id == 7}}"){
+                                    onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
+                                }
                                 html += `<tr >                                        
-                                    <td> ${expert.user['name']} ${expert.user['lastname']}</td>    
-                                    <td> ${expert.expertassignmentstatus['name']}</td>                                         
+                                    <td> ${expert.user['name']} ${expert.user['lastname']}</td>   
+                                    ${onlymaster}      
+                                    <td> ${expert.expertassignmentstatus['name']}</td>                                   
                                     <td> 
                                         <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
                                     </td>
@@ -197,6 +219,50 @@
                             $("#expert_wrapper").html(html);
                         }
                     });
+                }
+            });
+        });
+
+        $(document).on('change', '.assignexpert', function(e) {
+            var status = 1;
+            if($(this).is(":checked")){
+                status = 2;
+            }
+            $.ajax({
+                url: `${route.url}/dashboard/admin/fulltbp/editassignexpert`,  //Server script to process data
+                type: 'POST',
+                headers: {"X-CSRF-TOKEN":route.token},
+                data: {
+                    'id': $(this).data('id'),
+                    'status': status,
+                    'fulltbpid': "{{$fulltbp->id}}"
+                },
+                beforeSend: function(){
+                    $(".loader").addClass("is-active")
+                },
+                success: function(data){
+                    $(".loader").removeClass("is-active")
+                    console.log(data);
+                    var html = ``;
+                    data.forEach(function (expert,index) {
+                        var onlymaster = ``;
+                        var checkstatus = ``;
+                        if(expert.expert_assignment_status_id == 2){
+                            checkstatus =  `checked`;
+                        }
+                        if("{{Auth::user()->user_type_id == 7}}"){
+                            onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
+                        }
+                        html += `<tr >                                        
+                            <td> ${expert.user['name']} ${expert.user['lastname']}</td>   
+                            ${onlymaster}      
+                            <td> ${expert.expertassignmentstatus['name']}</td>                                   
+                            <td> 
+                                <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
+                            </td>
+                        </tr>`
+                        });
+                    $("#expert_wrapper").html(html);
                 }
             });
         });
