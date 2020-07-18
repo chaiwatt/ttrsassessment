@@ -22,6 +22,7 @@ class FullTbpCompanyEmployController extends Controller
         $companyemploy->company_id = $company->id;
         $companyemploy->prefix_id = $request->prefix;
         $companyemploy->name = $request->name;
+        $companyemploy->stockholder_id = '1';
         $companyemploy->lastname = $request->lastname;
         $companyemploy->employ_position_id = $request->position;
         $companyemploy->phone = $request->phone;

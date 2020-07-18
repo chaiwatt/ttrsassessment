@@ -66,6 +66,10 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label>เวอร์ชั่น</label>
+                                    <input type="number" min="0.01" step="0.01" max="10000.00" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                </div>
+                                <div class="form-group">
                                     <label>เลือกเกณฑ์<span class="text-danger">*</span></label>
                                     <select name="criterialist[]" multiple="multiple" placeholder="เลือกเกณฑ์"  class="form-control form-control-select2">
                                         @foreach ($criterias as $criteria)
@@ -73,6 +77,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                 </div>

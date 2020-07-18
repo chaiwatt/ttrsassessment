@@ -13,24 +13,19 @@ class CriteriasTableSeeder extends Seeder
     {
         DB::table('criterias')->insert([
             [
-                'name' => 'criteria1',
-                'weight' => 0.02
+                'name' => 'criteria1'
             ],
             [
-                'name' => 'criteria2',
-                'weight' => 0.02
+                'name' => 'criteria2'
             ],
             [
-                'name' => 'criteria3',
-                'weight' => 0.02
+                'name' => 'criteria3'
             ],
             [
-                'name' => 'criteria4',
-                'weight' => 0.02
+                'name' => 'criteria4'
             ],
             [
-                'name' => 'criteria5',
-                'weight' => 0.02
+                'name' => 'criteria5'
             ]
         ]);
     }

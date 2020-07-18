@@ -276,6 +276,11 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('','DashboardAdminFullTbpController@Index')->name('dashboard.admin.fulltbp');            
                 Route::get('view/{id}','DashboardAdminFullTbpController@View')->name('dashboard.admin.fulltbp.view');  
                 Route::post('delete/{id}','DashboardAdminFullTbpController@Delete')->name('dashboard.admin.fulltbp.delete');  
+                Route::get('assigngroup/{id}','DashboardAdminFullTbpController@AssignGroup')->name('dashboard.admin.fulltbp.assigngroup');           
+                Route::post('assigngroupsave/{id}','DashboardAdminFullTbpController@AssignGroupSave')->name('dashboard.admin.fulltbp.assigngroupsave');                     
+                Route::get('assignexpert/{id}','DashboardAdminFullTbpController@AssignExpert')->name('dashboard.admin.fulltbp.assignexpert');           
+                Route::post('assignexpertsave','DashboardAdminFullTbpController@AssignExpertSave')->name('dashboard.admin.fulltbp.assignexpertsave');                     
+                Route::post('assignexpertdelete','DashboardAdminFullTbpController@AssignExpertDelete')->name('dashboard.admin.fulltbp.assignexpertdelete');   
             }); 
             Route::group(['prefix' => 'projectassignment'], function(){
                 Route::get('','DashboardAdminProjectAssignmentController@Index')->name('dashboard.admin.projectassignment');           
@@ -512,7 +517,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('create','SettingAdminAssessmentCriteriaGroupController@Create')->name('setting.admin.assessment.criteriagroup.create'); 
                     Route::post('createsave','SettingAdminAssessmentCriteriaGroupController@CreateSave')->name('setting.admin.assessment.criteriagroup.createsave'); 
                     Route::get('edit/{id}','SettingAdminAssessmentCriteriaGroupController@Edit')->name('setting.admin.assessment.criteriagroup.edit'); 
-                    Route::post('editsave/{id}','SettingAdminAssessmentCriteriaGroupController@EditSave')->name('setting.admin.assessment.criteriagroup.editsave'); 
+                    Route::post('editsave/{id}','SettingAdminAssessmentCriteriaGroupController@EditSave')->name('setting.admin.assessment.criteriagroup.editsave');
+                    Route::get('editweight/{id}','SettingAdminAssessmentCriteriaGroupController@EditWeight')->name('setting.admin.assessment.criteriagroup.editweight');  
+                    Route::post('editweightsave/{id}','SettingAdminAssessmentCriteriaGroupController@EditWeightSave')->name('setting.admin.assessment.criteriagroup.editweightsave');  
                     Route::get('delete/{id}','SettingAdminAssessmentCriteriaGroupController@Delete')->name('setting.admin.assessment.criteriagroup.delete'); 
                 });
                 Route::group(['prefix' => 'criteria'], function(){
@@ -520,7 +527,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('create','SettingAdminAssessmentCriteriaController@Create')->name('setting.admin.assessment.criteria.create');           
                     Route::post('createsave','SettingAdminAssessmentCriteriaController@CreateSave')->name('setting.admin.assessment.criteria.createsave');           
                     Route::get('edit/{id}','SettingAdminAssessmentCriteriaController@Edit')->name('setting.admin.assessment.criteria.edit');           
-                    Route::post('editsave/{id}','SettingAdminAssessmentCriteriaController@EditSave')->name('setting.admin.assessment.criteria.editsave');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentCriteriaController@EditSave')->name('setting.admin.assessment.criteria.editsave'); 
                     Route::get('delete/{id}','SettingAdminAssessmentCriteriaController@Delete')->name('setting.admin.assessment.criteria.delete');  
                 });
             });

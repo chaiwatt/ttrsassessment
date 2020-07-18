@@ -67,8 +67,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>ชื่อรายการ</th>
-                                        <th>กลุ่มธุรกิจ</th>                               
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        <th>กลุ่มอุตสาหกรรม</th>   
+                                        <th>เวอร์ชั่น</th>  
+                                        <th>ผลรวม weight</th>                              
+                                        <th style="width:200px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,8 +78,11 @@
                                     <tr>    
                                         <td> {{$key+1}} </td>
                                         <td> {{$criteriagroup->name}} </td>  
-                                        <td> {{$criteriagroup->industrygroup->name}} </td>                                         
+                                        <td> {{$criteriagroup->industrygroup->name}} </td>  
+                                        <td> {{$criteriagroup->version}} </td> 
+                                        <td> {{$criteriagroup->sumweight}} </td>                                        
                                         <td> 
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.editweight',['id' => $criteriagroup->id])}}" class=" badge bg-primary">แก้ไข weight</a>
                                             <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $criteriagroup->id])}}" class=" badge bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $criteriagroup->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>

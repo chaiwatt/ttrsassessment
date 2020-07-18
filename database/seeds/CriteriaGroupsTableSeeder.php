@@ -13,14 +13,9 @@ class CriteriaGroupsTableSeeder extends Seeder
     {
         DB::table('criteria_groups')->insert([
             [
-                'name' => 'เกณฑ์การประเมินที่1',
+                'name' => 'เกณฑ์การประเมินปี 2563',
                 'industry_group_id' => 1,
-                'user_id' => 1,
-            ],
-            [
-                'name' => 'เกณฑ์การประเมินที่2',
-                'industry_group_id' => 1,
-                'user_id' => 1,
+                'version' => 1
             ]
         ]);
     }

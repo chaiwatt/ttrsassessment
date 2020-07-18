@@ -16,7 +16,6 @@ class CreateCriteriasTable extends Migration
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
             $table->string('name',250)->comment('เกณฑ์การประเมิน');
-            $table->double('weight',10,4)->comment('น้ำหนักการประเมิน');
             $table->timestamps();
         });
     }

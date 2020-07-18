@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCriteriaGroupsTable extends Migration
+class CreateExpertAssignmentStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateCriteriaGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('criteria_groups', function (Blueprint $table) {
+        Schema::create('expert_assignment_statuses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('industry_group_id');
-            $table->string('name',250);
-            $table->char('version',10)->nullable();
+            $table->string('name',150);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateCriteriaGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criteria_groups');
+        Schema::dropIfExists('expert_assignment_statuses');
     }
 }

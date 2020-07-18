@@ -19,6 +19,8 @@ class CreateFullTbpsTable extends Migration
             $table->foreign('mini_tbp_id')->references('id')->on('mini_t_b_p_s')->onDelete('cascade');
             $table->string('file',250)->nullable();
             $table->char('status',1)->default(1);
+            $table->unsignedBigInteger('criteria_group_id')->nullable();
+            $table->char('assignexpert',1)->default('1');
             $table->timestamps();
         });
     }

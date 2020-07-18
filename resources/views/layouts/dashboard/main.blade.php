@@ -20,6 +20,8 @@
 	<link href="{{asset('assets/dashboard/css/components.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/colors.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/extend.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/dashboard/css/css-loader.css')}}" rel="stylesheet" type="text/css">
+	
 	<!-- /global stylesheets -->
     @section('pageCss')
     @show

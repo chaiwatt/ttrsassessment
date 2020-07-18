@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\MiniTBP;
+use App\Model\CriteriaGroup;
 use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
 
@@ -45,5 +46,9 @@ class FullTbp extends Model
 
     public function getUpdatedAtThAttribute(){
         return DateConversion::engToThaiDate($this->updated_at->toDateString());
+    } 
+
+    public function getCriteriagroupAttribute(){
+        return CriteriaGroup::find($this->criteria_group_id);
     } 
 }

@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มรายการ Criteria</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มรายการเกณฑ์การประเมิน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,9 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการ Criteria</span>
+                    <a href="{{route('setting.admin.assessment.criteriagroup')}}" class="breadcrumb-item"> รายการเกณฑ์การประเมิน</a>
+                    <span class="breadcrumb-item active">เพิ่มรายการเกณฑ์การประเมิน</span>
                 </div>
-
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -50,17 +50,16 @@
 				<!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.assessment.criteria.editsave',['id' => $criteria->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.assessment.criteriagroup.editweightsave',['id' => $criteriagroup->id])}}" enctype="multipart/form-data">
                             @csrf
                             <fieldset>	
-                                <div class="form-group">
-                                    <label>Criteria</label>
-                                    <input type="text"  name="criteria" value="{{$criteria->name}}"  placeholder="เกณฑ์การประเมิน" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>ค่านำหนัก</label>
-                                    <input type="number" step="0.001" min="0" max="1" name="weight" value="{{$criteria->weight}}"  placeholder="น้ำหนักการประเมิน" class="form-control">
-                                </div>
+                               
+                                @foreach ($criteriagrouptransactions as $criteriagrouptransaction)
+                                    <div class="form-group">
+                                        <label>{{$criteriagrouptransaction->criteria->name}}</label>
+                                        <input type="text"  name="weight[{{$criteriagrouptransaction->id}}]" value="{{$criteriagrouptransaction->weight}}"  placeholder="{{$criteriagrouptransaction->criteria->name}}" class="form-control">
+                                    </div>
+                                @endforeach
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                 </div>

@@ -18,6 +18,7 @@ class CreateCriteriaGroupTransactionsTable extends Migration
             $table->unsignedBigInteger('criteria_group_id');
             $table->foreign('criteria_group_id')->references('id')->on('criteria_groups')->onDelete('cascade');
             $table->unsignedBigInteger('criteria_id');
+            $table->double('weight',10,2)->default(0);
             $table->timestamps();
         });
     }

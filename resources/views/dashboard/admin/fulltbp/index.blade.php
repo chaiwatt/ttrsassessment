@@ -61,12 +61,13 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px">#</th>
+                                        {{-- <th style="width:50px">#</th> --}}
                                         <th>วันที่ขอส่ง</th> 
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
-                                        {{-- <th>ตรวจสอบแล้ว</th>  --}}
+                                        <th>เกณฑ์การประเมิน</th> 
+                                        <th>ผู้เชี่ยวชาญ</th> 
                                         <th>เพิ่มเติม</th> 
                                                                   
                                     </tr>
@@ -74,11 +75,26 @@
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$fulltbp->updatedatth}} </td> 
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                        <td> 
+                                            @if (!Empty($fulltbp->criteria_group_id))
+                                                    <a href="{{route('dashboard.admin.fulltbp.assigngroup',['id' => $fulltbp->id])}}" class="badge bg-success">กำหนดแล้ว</a>
+                                                @else
+                                                    <a href="{{route('dashboard.admin.fulltbp.assigngroup',['id' => $fulltbp->id])}}" class="badge bg-warning">Assign เกณฑ์การประเมิน</a>
+                                            @endif
+                                             
+                                        </td> 
+                                        <th> 
+                                            @if ($fulltbp->assignexpert == '2')
+                                                    <a href="{{route('dashboard.admin.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge bg-success">กำหนดแล้ว</a>
+                                                @else
+                                                    <a href="{{route('dashboard.admin.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge bg-warning">Assign Expert</a>
+                                            @endif
+                                        </th> 
                                         <td> 
                                             <a href="{{asset($fulltbp->file)}}" class="badge bg-teal">ดาวน์โหลด</a>
                                             <a href="{{route('dashboard.admin.fulltbp.view',['id' => $fulltbp->id])}}" class="badge bg-primary">รายละเอียด</a>

@@ -25,8 +25,9 @@ class SettingAdminAssessmentCriteriaGroupController extends Controller
     public function CreateSave(CreateAssessmentCriteriaGroupRequest $request){
         $criteriagroup = new CriteriaGroup();
         $criteriagroup->industry_group_id = $request->industrygroup;
-        $criteriagroup->user_id = Auth::user()->id;
+        // $criteriagroup->user_id = Auth::user()->id;
         $criteriagroup->name = $request->name;
+        $criteriagroup->version = $request->version;
         $criteriagroup->save();
 
         foreach($request->criterialist as $key => $criteria ){
@@ -52,7 +53,7 @@ class SettingAdminAssessmentCriteriaGroupController extends Controller
         $criteriagroup = CriteriaGroup::find($id)->update([
             'industry_group_id' => $request->industrygroup,
             'name' => $request->name,
-            'user_id' => Auth::user()->id
+            'version' => $request->version,
         ]);
 
         $comming_array  = Array();
@@ -86,5 +87,32 @@ class SettingAdminAssessmentCriteriaGroupController extends Controller
     public function Delete($id){
         CriteriaGroup::find($id)->delete();
         return redirect()->route('setting.admin.assessment.criteriagroup')->withSuccess('ลบรายการเกณฑ์การประเมินสำเร็จ');
+    }
+
+    public function EditWeight($id){
+        $criteriagroup = CriteriaGroup::find($id);
+        $criteriagrouptransactions = CriteriaGroupTransaction::where('criteria_group_id',$id)->get();
+        return  view('setting.admin.assessment.criteriagroup.editweight')->withCriteriagrouptransactions($criteriagrouptransactions)
+                                                                        ->withCriteriagroup($criteriagroup);
+    }
+    public function EditWeightSave(Request $request, $id){
+        $check = 0;
+        foreach( $request->weight as $id => $weight ){
+            if(!Empty($weight)){
+                $check += $weight;
+            }  
+        }
+        if($check > 1){
+            return redirect()->route('setting.admin.assessment.criteriagroup')->withError('ผลรวม Weight มากกว่า 1');
+        }
+
+        foreach( $request->weight as $id => $weight ){
+            if(!Empty($weight)){
+                CriteriaGroupTransaction::find($id)->update([
+                    'weight' => $weight
+                ]);
+            }  
+        }
+        return redirect()->route('setting.admin.assessment.criteriagroup')->withSuccess('แก้ไขค่า Weight สำเร็จ');
     }
 }
