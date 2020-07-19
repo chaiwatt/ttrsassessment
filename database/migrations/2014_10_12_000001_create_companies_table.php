@@ -26,8 +26,8 @@ class CreateCompaniesTable extends Migration
             $table->unsignedBigInteger('industry_group_id')->nullable();   
             $table->unsignedBigInteger('business_type_id')->default(1);
             $table->string('name',150)->nullable();
-            $table->string('phone',15)->nullable();
-            $table->string('fax',15)->nullable();
+            $table->string('phone',20)->nullable();
+            $table->string('fax',20)->nullable();
             $table->string('email',200)->nullable();
             $table->char('housenumber',5)->nullable();
             $table->string('address',150)->nullable();

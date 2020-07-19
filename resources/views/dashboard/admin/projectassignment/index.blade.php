@@ -93,9 +93,9 @@
                                         </td> 
                                         <td>
                                             @if ($projectassignment->leader_id == null)
-                                                <span class="badge bg-warning">ยังไม่ได้ Assign</span>
+                                                <span class="badge bg-warning">ยังไม่ได้ยืนยัน</span>
                                                 @else
-                                                <span class="badge bg-success">Assign แล้ว</span>
+                                                <span class="badge bg-success">ยืนยันแล้ว</span>
                                             @endif
                                         </td>
                                         @if (Auth::user()->user_type_id>=7)

@@ -20,7 +20,8 @@ class DashboardAdminBusinessPlanController extends Controller
         return view('dashboard.admin.businessplan.index')->withBusinessplans($businessplans);
     }
     public function View($id){
-        $company = Company::find($id);
+        $businessplan = BusinessPlan::find($id);
+        $company = Company::find($businessplan->company_id);
         $registeredcapitaltypes = RegisteredCapitalType::get();
         $industrygroups = IndustryGroup::get();
         $businesstypes = BusinessType::get();

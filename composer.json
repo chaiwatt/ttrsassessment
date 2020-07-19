@@ -25,7 +25,8 @@
         "mpdf/mpdf": "^8.0",
         "notyes/thsplitlib": "^0.1.0",
         "simplesoftwareio/simple-qrcode": "^2.0",
-        "spatie/laravel-activitylog": "^3.14"
+        "spatie/laravel-activitylog": "^3.14",
+        "spatie/laravel-google-calendar": "^2.6"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

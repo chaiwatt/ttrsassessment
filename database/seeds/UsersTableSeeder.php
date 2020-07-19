@@ -48,7 +48,7 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 7,
-                'name' => 'master',
+                'name' => 'สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ',
                 'email' => 'joerocknpc@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
