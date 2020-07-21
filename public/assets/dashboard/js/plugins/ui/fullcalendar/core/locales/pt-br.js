@@ -7,13 +7,13 @@
     var ptBr = {
         code: "pt-br",
         buttonText: {
-            prevText: "Anterior",
-            nextText: "Próximo",
-            currentText: "Hoje",
+            prev: "Anterior",
+            next: "Próximo",
+            today: "Hoje",
             month: "Mês",
             week: "Semana",
             day: "Dia",
-            list: "Compromissos"
+            list: "Lista"
         },
         weekLabel: "Sm",
         allDayText: "dia inteiro",

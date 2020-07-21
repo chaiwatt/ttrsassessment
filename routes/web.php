@@ -254,6 +254,11 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('delete','Api\FullTbpCompanyDocController@Delete')->name('api.fulltbp.companydoc.delete');
             });
         }); 
+        Route::group(['prefix' => 'calendar'], function(){
+            Route::group(['prefix' => 'google'], function(){
+                Route::post('getevent','Api\CalendarGoogleController@GetEvent')->name('api.calendar.google.getevent');
+            });
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
@@ -288,9 +293,17 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('edit/{id}','DashboardAdminProjectAssignmentController@Edit')->name('dashboard.admin.projectassignment.edit');  
                 Route::post('editsave/{id}','DashboardAdminProjectAssignmentController@EditSave')->name('dashboard.admin.projectassignment.editsave');    
             });  
+            Route::group(['prefix' => 'calendar'], function(){
+                Route::get('','DashboardAdminCalendarController@Index')->name('dashboard.admin.calendar');           
+                Route::get('create','DashboardAdminCalendarController@Create')->name('dashboard.admin.calendar.create'); 
+            });  
         }); 
         Route::group(['prefix' => 'expert'], function(){
-            Route::get('','DashboardExpertController@Index')->name('dashboard.expert');           
+            Route::get('','DashboardExpertController@Index')->name('dashboard.expert');    
+            Route::group(['prefix' => 'fulltbp'], function(){
+                Route::get('','DashboardExpertFullTbpController@Index')->name('dashboard.expert.fulltbp');   
+                Route::get('view/{id}','DashboardExpertFullTbpController@View')->name('dashboard.expert.fulltbp.view');      
+            });        
         }); 
         Route::group(['prefix' => 'company'], function(){
             Route::get('','DashboardCompanyController@Index')->name('dashboard.company');           

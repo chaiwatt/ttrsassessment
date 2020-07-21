@@ -11,9 +11,9 @@
             doy: 4 // The week that contains Jan 4th is the first week of the year.
         },
         buttonText: {
-            prevText: "Ant",
-            nextText: "Seg",
-            currentText: "Hoxe",
+            prev: "Ant",
+            next: "Seg",
+            today: "Hoxe",
             month: "Mes",
             week: "Semana",
             day: "Día",

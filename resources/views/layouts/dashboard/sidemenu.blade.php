@@ -13,7 +13,12 @@
         <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.minitbp')?'active':''}}">mini TBP</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fulltbp')?'active':''}}">Full TBP</a></li>	   
-        {{-- <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fee')?'active':''}}">แบบขอการประเมิน mini TBP</a></li>  --}}
+    </ul>
+</li>
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
+    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span></a>
+    <ul class="nav nav-group-sub" data-submenu-title="ปฎิทิน">
+        <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฎิทิน</a></li>
     </ul>
 </li>
 @endif
@@ -35,6 +40,24 @@
         </li>
     @endif
 @endif
+
+@if (Auth::user()->user_type_id ==3)
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
+        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
+        <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
+            @if (Auth::user()->expertassignment->count() > 0)
+                <li class="nav-item"><a href="{{route('dashboard.expert.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.fulltbp')?'active':''}}">Full TBP</a></li>
+            @endif
+        </ul>
+    </li>
+    {{-- <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
+        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span></a>
+        <ul class="nav nav-group-sub" data-submenu-title="ปฎิทิน">
+            <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฎิทิน</a></li>
+        </ul>
+    </li> --}}
+@endif
+
 @if (Auth::user()->user_type_id >= 4)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>

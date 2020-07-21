@@ -8,6 +8,7 @@ use App\Model\UserType;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
 use App\Model\UserPosition;
+use App\Model\ExpertAssignment;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -77,6 +78,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getCompanyAttribute()
     {
         return Company::where('user_id',$this->id)->first();
+    }
+    public function getExpertassignmentAttribute()
+    {
+        return ExpertAssignment::where('user_id',$this->id)->where('expert_assignment_status_id',2)->get();
     }
     
 }
