@@ -81,7 +81,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js')}}"></script>
+
 
     <script>
         var route = {

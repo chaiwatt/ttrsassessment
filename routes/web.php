@@ -254,11 +254,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('delete','Api\FullTbpCompanyDocController@Delete')->name('api.fulltbp.companydoc.delete');
             });
         }); 
-        Route::group(['prefix' => 'calendar'], function(){
-            Route::group(['prefix' => 'google'], function(){
-                Route::post('getevent','Api\CalendarGoogleController@GetEvent')->name('api.calendar.google.getevent');
-            });
-        });
+
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
