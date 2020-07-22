@@ -11,7 +11,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP </span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มปฎิทินกิจกรรม</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -20,8 +20,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการ Full TBP</span>
+                    <a href="#" class="breadcrumb-item">ปฎิทิน</a>
+                    <span class="breadcrumb-item active">เพิ่มปฎิทินกิจกรรม</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -61,14 +61,64 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>วันที่</label>
-                            <input type="text"  name="eventdate" id="eventdate" value=""  placeholder="วันที่" class="form-control" >
-                        </div>
-                        <div class="form-group">
-                            <label>เวลา</label>
-                            <input type="text"  name="eventtime" id="eventtime" value=""  placeholder="เวลา" class="form-control" >
-                        </div>
+                        <form method="POST" action="{{route('dashboard.admin.calendar.createsave')}}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>วันที่</label>
+                                        <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>เวลาเริ่ม</label>
+                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>เวลาสิ้นสุด</label>
+                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สถานที่</label>
+                                        <input type="text"  name="place"  value="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ห้อง</label>
+                                        <input type="text"  name="room" value="{{old('room')}}" placeholder="ห้อง" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>รายละเอียด</label>
+                                        <input type="text"  name="summary"  value="{{old('summary')}}"  placeholder="รายละเอียด" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
+                                        <select id="users[]" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-select2" multiple="multiple">
+                                            @foreach ($users as $user)
+                                                <option value="{{$user->id}}">{{$user->name}} {{$user->lastname}}</option> 
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -101,7 +151,16 @@
             time: false
         });
 
-        $('#eventtime').bootstrapMaterialDatePicker({
+        $('#eventtimestart').bootstrapMaterialDatePicker({
+            format: 'HH:mm',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            date: false,
+        });
+        
+        $('#eventtimeend').bootstrapMaterialDatePicker({
             format: 'HH:mm',
             clearButton: true,
             cancelText: "ยกเลิก",

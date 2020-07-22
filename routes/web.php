@@ -298,6 +298,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'calendar'], function(){
                 Route::get('','DashboardAdminCalendarController@Index')->name('dashboard.admin.calendar');           
                 Route::get('create','DashboardAdminCalendarController@Create')->name('dashboard.admin.calendar.create'); 
+                Route::post('createsave','DashboardAdminCalendarController@CreateSave')->name('dashboard.admin.calendar.createsave');
                 Route::get('delete','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
             }); 
         }); 
