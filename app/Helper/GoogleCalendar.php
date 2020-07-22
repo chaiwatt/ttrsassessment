@@ -54,15 +54,7 @@ class GoogleCalendar
             ['sendUpdates' => 'all']
           );
 
-          $optParams = array(
-            'maxResults' => 10,
-            'orderBy' => 'startTime',
-            'singleEvents' => true,
-            'timeMin' => date('c'),
-          );
-          $results = $service->events->listEvents($calendarId, $optParams);
-          $events = $results->getItems();
-          return $events;
+          return $event;
     } 
     public static function get(){
         $client = new Google_Client();
@@ -81,4 +73,23 @@ class GoogleCalendar
         $events = $results->getItems();
         return $events;
     } 
+
+    public static function delete($id){
+      $client = new Google_Client();
+      $client->setApplicationName('Google Calendar');
+      $client->setScopes(Google_Service_Calendar::CALENDAR_READONLY);
+      $client->setAuthConfig(storage_path('app/google-calendar/service-account-credentials.json'));
+      $service = new Google_Service_Calendar($client);
+      $calendarId = env('GOOGLE_CALENDAR_ID');
+      $optParams = array(
+              'maxResults' => 10,
+              'orderBy' => 'startTime',
+              'singleEvents' => true,
+              'timeMin' => date('c'),
+      );
+      $results = $service->events->listEvents($calendarId, $optParams);
+      $events = $results->getItems();
+      return $events;
+  } 
+
 }

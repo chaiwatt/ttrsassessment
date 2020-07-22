@@ -43,10 +43,11 @@ class DashboardAdminCalendarController extends Controller
             'location' => 'สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)',
             'description' => 'ประชุม TTRS โครงการฟาร์มอัจฉริยะ ณ ห้องประชุม 3 สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)',
             'startdate' =>  Carbon::now(),
-            'enddate' => Carbon::now()->addHour(2),
+            'enddate' => Carbon::now()->addHour(1),
             'attendees' => $attendees
             ];
-        $events = GoogleCalendar::add($data);
+        $event = GoogleCalendar::add($data);
+        return 'new event id: ' . $event->id;
         
         return redirect()->route('dashboard.admin.calendar');
     }

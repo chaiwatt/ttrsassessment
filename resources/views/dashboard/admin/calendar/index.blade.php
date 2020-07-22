@@ -61,15 +61,20 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="form-group">
+                            <label>วันที่</label>
+                            <input type="text"  name="eventdate" id="eventdate" value=""  placeholder="วันที่" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <label>เวลา</label>
+                            <input type="text"  name="eventtime" id="eventtime" value=""  placeholder="เวลา" class="form-control" >
+                        </div>
                         <div class="fullcalendar-basic"></div>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
-        <!-- /form layouts -->
     </div>
-    <!-- /content area -->
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/main.min.js')}}"></script>
@@ -115,5 +120,24 @@
                 eventLimit: true
             }).render();
         }
+
+        $('#eventdate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY HH:mm',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+        });
+
+        $('#eventtime').bootstrapMaterialDatePicker({
+            format: 'HH:mm',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            date: false,
+        });
+
     </script>
 @stop

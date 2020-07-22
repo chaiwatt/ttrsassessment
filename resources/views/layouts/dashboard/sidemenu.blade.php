@@ -1,10 +1,27 @@
+@if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
 <li class="nav-item nav-item-submenu ">
     <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
         <li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
     </ul>
 </li>
+@endif
+@if (Auth::user()->user_type_id ==3)
+<li class="nav-item nav-item-submenu ">
+    <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span></a>
+    <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
+        <li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
+    </ul>
+</li>
+@endif
+
 @if (Auth::user()->user_type_id >=4 )
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin')?'nav-item-expanded nav-item-open':''}}">
+    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>รายงาน</span></a>
+    <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
+        <li class="nav-item"><a href="{{route('dashboard.admin')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin')?'active':''}}">รายงาน</a></li>     
+    </ul>
+</li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
