@@ -30,11 +30,11 @@ class LoginController extends Controller
          $intendurl = redirect()->intended()->getTargetUrl();
          if(strcmp($intendurl,$baseurl) == 0){
             if($user->user_type_id >= 4){
-                return redirect()->route('dashboard.admin'); 
+                return redirect()->route('dashboard.admin.report'); 
             }else if($user->user_type_id == 3){
-                return redirect()->route('dashboard.expert'); 
+                return redirect()->route('dashboard.expert.report'); 
             }else if($user->user_type_id <= 2){
-                return redirect()->route('dashboard.company'); 
+                return redirect()->route('dashboard.company.report'); 
             }
          }else{
             return redirect($intendurl);

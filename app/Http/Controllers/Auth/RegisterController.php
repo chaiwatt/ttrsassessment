@@ -23,7 +23,7 @@ class RegisterController extends Controller
     {
          $generalinfo = GeneralInfo::first(); 
         if($generalinfo->verify_type_id == 1){
-            return 'dashboard/company';
+            return 'dashboard/company/report';
         }else if($generalinfo->verify_type_id == 2){
             return 'line';
         }else if($generalinfo->verify_type_id == 3){

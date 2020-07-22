@@ -22,12 +22,12 @@ class RedirectIfAuthenticated
             // return redirect(RouteServiceProvider::HOME);
             $user = Auth::user();
             if($user->user_type_id >= 4){
-                return redirect()->route('dashboard.admin'); 
+                return redirect()->route('dashboard.admin.report'); 
             }else if($user->user_type_id == 2){
-                return redirect()->route('dashboard.expert'); 
+                return redirect()->route('dashboard.expert.report'); 
             }else if($user->user_type_id <= 2){
                 if($user->verify_type == 1){
-                    return redirect()->route('dashboard.company'); 
+                    return redirect()->route('dashboard.company.report'); 
                 }
             }
             // return redirect()->intended();
