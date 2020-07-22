@@ -61,7 +61,7 @@ class LineSubScribeController extends Controller
         }
         // dd($result);
 
-        return redirect()->route('dashboard.company'); 
+        return redirect()->route('dashboard.company.report'); 
     }
 
     public function LineSend(){
@@ -95,6 +95,6 @@ class LineSubScribeController extends Controller
             // echo "status : ".$result_['status']; echo "message : ". $result_['message'];
         } 
         curl_close( $chOne );   
-        return redirect()->route('dashboard.company'); 
+        return redirect()->route('dashboard.company.report'); 
     }
 }

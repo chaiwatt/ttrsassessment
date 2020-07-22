@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use App\User;
 use App\Model\Prefix;
 use App\Model\Company;
-use App\Model\MiniTBP;
 use App\Model\FullTbp;
+use App\Model\MiniTBP;
 use App\Helper\EmailBox;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
@@ -15,14 +17,12 @@ use App\Model\CompanyBoard;
 use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
-use App\Model\CriteriaGroup;
 use Illuminate\Http\Request;
 use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
 use App\Model\EmployExperience;
-use App\Model\ExpertAssignment;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketNeed;
@@ -52,28 +52,30 @@ use App\Model\FullTbpProjectAwardAttachment;
 use App\Model\FullTbpCompanyProfileAttachment;
 use App\Model\FullTbpProjectCertifyAttachment;
 
-class DashboardExpertFullTbpController extends Controller
+class DashboardCompanyAssessmentFullTbpController extends Controller
 {
     public function Index(){
-        $expertassignments = ExpertAssignment::where('user_id',Auth::user()->id)
-                                            ->where('expert_assignment_status_id',2)
-                                            ->pluck('full_tbp_id')->toArray();
-        $fulltbps = FullTbp::whereIn('id',$expertassignments)->get();
-        return view('dashboard.expert.fulltbp.index')->withFulltbps($fulltbps) ;
+        $companyinfo = collect();
+        $company = Company::where('user_id',Auth::user()->id)->first();
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $fulltpbs = FullTbp::where('mini_tbp_id',$minitbp->id)->get();   
+        return view('dashboard.company.assessment.fulltbp.index')->withFulltbps($fulltpbs);
     }
-    public function View($id){
+
+    public function Edit($id){
         $businesstypes = BusinessType::get();
         $fulltbp = FullTbp::find($id);
         $fulltbpcompanyprofile = FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first();
         $fulltbpemployee = FullTbpEmployee::where('full_tbp_id', $fulltbp->id)->first();
         $fulltbpcompanyprofiledetails = FullTbpCompanyProfileDetail::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbp->id)->get();
-        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
-        $company = Company::find(BusinessPlan::find($minitbp->business_plan_id)->company_id);
+        $company = Company::where('user_id',Auth::user()->id)->first();
         $prefixes = Prefix::get();
         $employpositions = EmployPosition::get();
         $companyemploys = CompanyEmploy::where('company_id',$company->id)->get();
         $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $contactprefixes = Prefix::get();
         $contactpositions = UserPosition::get();
         $fulltbpprojectabtractdetails = FullTbpProjectAbtractDetail::where('full_tbp_id',$fulltbp->id)->get();
@@ -103,7 +105,7 @@ class DashboardExpertFullTbpController extends Controller
         $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpreturnofinvestment = FullTbpReturnOfInvestment::where('full_tbp_id',$fulltbp->id)->first();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('full_tbp_id',$fulltbp->id)->get();
-        return view('dashboard.admin.assessment.fulltbp.view')->withFulltbp($fulltbp)
+        return view('dashboard.company.assessment.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
                                                 ->withFulltbpcompanyprofile($fulltbpcompanyprofile)
@@ -145,4 +147,65 @@ class DashboardExpertFullTbpController extends Controller
                                                 ->withFulltbpreturnofinvestment($fulltbpreturnofinvestment)
                                                 ->withFulltbpcompanydocs($fulltbpcompanydocs);
     }
+
+    public function EditSave(Request $request,$id){
+        FullTbpEmployee::find($id)->update([
+            'department1_qty' => $request->department1_qty,
+            'department2_qty' => $request->department2_qty,
+            'department3_qty' => $request->department3_qty,
+            'department4_qty' => $request->department4_qty,
+            'department5_qty' => $request->department5_qty,
+        ]); 
+        $fulltbp = FullTbp::find($id); 
+        FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first()->update([
+               'profile' => $request->companyprofile
+            ]);
+
+        FullTbpCompanyProfileDetail::where('full_tbp_id',$fulltbp->id)->delete();
+        foreach( $request->companyprofile as $companyprofile ){
+            $fulltbpcompanyprofiledetail = new FullTbpCompanyProfileDetail();
+            $fulltbpcompanyprofiledetail->full_tbp_id = $fulltbp->id;
+            $fulltbpcompanyprofiledetail->line = $companyprofile;
+            $fulltbpcompanyprofiledetail->save();
+        }
+
+        return redirect()->back()->withSuccess('แก้ไข Full TBP สำเร็จ');
+    }
+
+    public function DownloadPDF($id){
+        // require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
+        // $segment = new \Segment();
+        // $body = 'หาดทรายละเอียดสีขาวตัดกับท้องฟ้าและน้ำทะเลสีครามใสคือบรรยากาศของท้องทะเลไทยในช่วงของการแพร่ ระบาดไวรัสโควิด-19ส่งผลให้ประเทศไทยมีการประกาศพ.ร.ก.ฉุกเฉินและปิดบริการสถานที่ท่องเที่ยวทางธรรมชาติทั่วประเทศเสมือนกำลังสร้างความสมดุลของ ระบบนิเวศให้กลับคืนสู่ธรรมชาติอีกครั้ง ส่วนการเปิดโรงเรียน ที่ประชุม ศบค.มีความเห็นว่า เนื่องจากโรงเรียนมีขนาดต่างกันและมีจำนวนมากจึงสั่งให้ประเมินความพร้อมเป็นรายแห่ง ให้กระทรวงศึกษาประเมินอีกครั้งภายในวันที่ 15 มิ.ย.';
+        // $words = $segment->get_segment_array($body);
+        // $text = implode("|",$words);
+        $text ='test';
+        $data = ['title' => 'ทดสอบ', 'body' => $text];
+        $pdf = PDF::loadView('dashboard.company.assessment.fulltbp.pdf', $data);
+        return $pdf->stream('document.pdf');
+    }
+
+    public function Submit($id){
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.company.assessment.fulltbp.submit')->withFulltbp($fulltbp);
+    }
+
+    public function SubmitSave(Request $request, $id){
+        $fulltbp = FullTbp::find($id);
+        if(!Empty($fulltbp->file)){
+            @unlink($fulltbp->file);
+        }
+        $file = $request->attachment;
+        $new_name = str_random(10).".".$file->getClientOriginalExtension();
+        $file->move("storage/uploads/fulltbp/attachment" , $new_name);
+        $filelocation = "storage/uploads/fulltbp/attachment/".$new_name;
+        $fulltbp->update([
+            'file' => $filelocation,
+            'status' => 2
+        ]);
+        $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ส่งเอกสาร Full TBP','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.assessment.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        return redirect()->route('dashboard.company.assessment.fulltbp')->withSuccess('ส่งเอกสาร Full TBP สำเร็จ');
+    }
+
 }

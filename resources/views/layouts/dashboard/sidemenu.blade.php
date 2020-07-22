@@ -1,11 +1,4 @@
-@if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
-<li class="nav-item nav-item-submenu ">
-    <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span></a>
-    <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
-        <li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
-    </ul>
-</li>
-@endif
+
 @if (Auth::user()->user_type_id ==3)
 <li class="nav-item nav-item-submenu ">
     <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span></a>
@@ -16,23 +9,23 @@
 @endif
 
 @if (Auth::user()->user_type_id >=4 )
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin')?'nav-item-expanded nav-item-open':''}}">
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>รายงาน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
-        <li class="nav-item"><a href="{{route('dashboard.admin')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin')?'active':''}}">รายงาน</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'active':''}}">รายงาน</a></li>     
     </ul>
 </li>
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.')?'nav-item-expanded nav-item-open':''}}">
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.projectassignment')?'active':''}}">Assignment</a></li>     
-        <li class="nav-item"><a href="{{route('dashboard.admin.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.businessplan')?'active':''}}">ขอรับการประเมิน</a></li>     
-        <li class="nav-item"><a href="{{route('dashboard.admin.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.minitbp')?'active':''}}">mini TBP</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.fulltbp')?'active':''}}">Full TBP</a></li>	   
+        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.projectassignment')?'active':''}}">Assignment</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.businessplan')?'active':''}}">ขอรับการประเมิน</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.minitbp')?'active':''}}">mini TBP</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.fulltbp')?'active':''}}">Full TBP</a></li>	   
     </ul>
 </li>
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ปฎิทิน">
         <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฎิทิน</a></li>
@@ -41,17 +34,23 @@
 @endif
 
 @if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'nav-item-expanded nav-item-open':''}}">
+        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>รายงาน</span></a>
+        <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
+            <li class="nav-item"><a href="{{route('dashboard.company.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'active':''}}">รายงาน</a></li>     
+        </ul>
+    </li>
     @if (!Empty(Auth::user()->company->businessplan))
-        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.assessment')?'nav-item-expanded nav-item-open':''}}">
             <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
                 <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment')?'active':''}}">รายการประเมิน</a></li>
                 @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
-                    <li class="nav-item"><a href="{{route('dashboard.company.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.minitbp')?'active':''}}">mini TBP</a></li>  
+                    <li class="nav-item"><a href="{{route('dashboard.company.assessment.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment.minitbp')?'active':''}}">mini TBP</a></li>  
                     @if (Auth::user()->company->businessplan->business_plan_status_id > 3)
-                        <li class="nav-item"><a href="{{route('dashboard.company.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.fulltbp')?'active':''}}">Full TBP</a></li>
+                        <li class="nav-item"><a href="{{route('dashboard.company.assessment.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment.fulltbp')?'active':''}}">Full TBP</a></li>
                     @endif
-                    <li class="nav-item"><a href="{{route('dashboard.company.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.fee')?'active':''}}">รายการแจ้งหนี้</a></li>  
+                    <li class="nav-item"><a href="{{route('dashboard.company.assessment.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment.fee')?'active':''}}">รายการแจ้งหนี้</a></li>  
                 @endif
             </ul>
         </li>

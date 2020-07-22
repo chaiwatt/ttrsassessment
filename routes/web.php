@@ -254,45 +254,52 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('delete','Api\FullTbpCompanyDocController@Delete')->name('api.fulltbp.companydoc.delete');
             });
         }); 
-
+        Route::group(['prefix' => 'googlecalendar'], function(){
+            Route::post('getevents','Api\GoogleCalendarController@GetEvents')->name('api.googlecalendar.getevents');
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
-            Route::get('','DashboardAdminController@Index')->name('dashboard.admin');  
-            Route::group(['prefix' => 'fee'], function(){
-                Route::get('','DashboardAdminFeeController@Index')->name('dashboard.admin.fee');           
-            });       
-            Route::group(['prefix' => 'businessplan'], function(){
-                Route::get('','DashboardAdminBusinessPlanController@Index')->name('dashboard.admin.businessplan');           
-                Route::get('view/{id}','DashboardAdminBusinessPlanController@View')->name('dashboard.admin.businessplan.view'); 
-                Route::get('delete/{id}','DashboardAdminBusinessPlanController@Delete')->name('dashboard.admin.businessplan.delete'); 
-            });     
-            Route::group(['prefix' => 'minitbp'], function(){
-                Route::get('','DashboardAdminMiniTbpController@Index')->name('dashboard.admin.minitbp');           
-                Route::get('view/{id}','DashboardAdminMiniTbpController@View')->name('dashboard.admin.minitbp.view');  
-                Route::get('approve/{id}','DashboardAdminMiniTbpController@Approve')->name('dashboard.admin.minitbp.approve');    
-                Route::get('delete/{id}','DashboardAdminMiniTbpController@Delete')->name('dashboard.admin.minitbp.delete');  
-            });  
-            Route::group(['prefix' => 'fulltbp'], function(){
-                Route::get('','DashboardAdminFullTbpController@Index')->name('dashboard.admin.fulltbp');            
-                Route::get('view/{id}','DashboardAdminFullTbpController@View')->name('dashboard.admin.fulltbp.view');  
-                Route::post('delete/{id}','DashboardAdminFullTbpController@Delete')->name('dashboard.admin.fulltbp.delete');  
-                Route::get('assigngroup/{id}','DashboardAdminFullTbpController@AssignGroup')->name('dashboard.admin.fulltbp.assigngroup');           
-                Route::post('assigngroupsave/{id}','DashboardAdminFullTbpController@AssignGroupSave')->name('dashboard.admin.fulltbp.assigngroupsave');                     
-                Route::get('assignexpert/{id}','DashboardAdminFullTbpController@AssignExpert')->name('dashboard.admin.fulltbp.assignexpert');           
-                Route::post('assignexpertsave','DashboardAdminFullTbpController@AssignExpertSave')->name('dashboard.admin.fulltbp.assignexpertsave');                     
-                Route::post('assignexpertdelete','DashboardAdminFullTbpController@AssignExpertDelete')->name('dashboard.admin.fulltbp.assignexpertdelete');   
-                Route::post('editassignexpert','DashboardAdminFullTbpController@EditAssignExpert')->name('dashboard.admin.fulltbp.editassignexpert');   
+            Route::group(['prefix' => 'report'], function(){
+                Route::get('','DashboardAdminReportController@Index')->name('dashboard.admin.report');           
             }); 
-            Route::group(['prefix' => 'projectassignment'], function(){
-                Route::get('','DashboardAdminProjectAssignmentController@Index')->name('dashboard.admin.projectassignment');           
-                Route::get('edit/{id}','DashboardAdminProjectAssignmentController@Edit')->name('dashboard.admin.projectassignment.edit');  
-                Route::post('editsave/{id}','DashboardAdminProjectAssignmentController@EditSave')->name('dashboard.admin.projectassignment.editsave');    
+            Route::group(['prefix' => 'assessment'], function(){
+                Route::group(['prefix' => 'fee'], function(){
+                    Route::get('','DashboardAdminAssessmentFeeController@Index')->name('dashboard.admin.assessment.fee');           
+                });       
+                Route::group(['prefix' => 'businessplan'], function(){
+                    Route::get('','DashboardAdminAssessmentBusinessPlanController@Index')->name('dashboard.admin.assessment.businessplan');           
+                    Route::get('view/{id}','DashboardAdminAssessmentBusinessPlanController@View')->name('dashboard.admin.assessment.businessplan.view'); 
+                    Route::get('delete/{id}','DashboardAdminAssessmentBusinessPlanController@Delete')->name('dashboard.admin.assessment.businessplan.delete'); 
+                });     
+                Route::group(['prefix' => 'minitbp'], function(){
+                    Route::get('','DashboardAdminAssessmentMiniTbpController@Index')->name('dashboard.admin.assessment.minitbp');           
+                    Route::get('view/{id}','DashboardAdminAssessmentMiniTbpController@View')->name('dashboard.admin.assessment.minitbp.view');  
+                    Route::get('approve/{id}','DashboardAdminAssessmentMiniTbpController@Approve')->name('dashboard.admin.assessment.minitbp.approve');    
+                    Route::get('delete/{id}','DashboardAdminAssessmentMiniTbpController@Delete')->name('dashboard.admin.assessment.minitbp.delete');  
+                });  
+                Route::group(['prefix' => 'fulltbp'], function(){
+                    Route::get('','DashboardAdminAssessmentFullTbpController@Index')->name('dashboard.admin.assessment.fulltbp');            
+                    Route::get('view/{id}','DashboardAdminAssessmentFullTbpController@View')->name('dashboard.admin.assessment.fulltbp.view');  
+                    Route::post('delete/{id}','DashboardAdminAssessmentFullTbpController@Delete')->name('dashboard.admin.assessment.fulltbp.delete');  
+                    Route::get('assigngroup/{id}','DashboardAdminAssessmentFullTbpController@AssignGroup')->name('dashboard.admin.assessment.fulltbp.assigngroup');           
+                    Route::post('assigngroupsave/{id}','DashboardAdminAssessmentFullTbpController@AssignGroupSave')->name('dashboard.admin.assessment.fulltbp.assigngroupsave');                     
+                    Route::get('assignexpert/{id}','DashboardAdminAssessmentFullTbpController@AssignExpert')->name('dashboard.admin.assessment.fulltbp.assignexpert');           
+                    Route::post('assignexpertsave','DashboardAdminAssessmentFullTbpController@AssignExpertSave')->name('dashboard.admin.assessment.fulltbp.assignexpertsave');                     
+                    Route::post('assignexpertdelete','DashboardAdminAssessmentFullTbpController@AssignExpertDelete')->name('dashboard.admin.assessment.fulltbp.assignexpertdelete');   
+                    Route::post('editassignexpert','DashboardAdminAssessmentFullTbpController@EditAssignExpert')->name('dashboard.admin.assessment.fulltbp.editassignexpert');   
+                }); 
+                Route::group(['prefix' => 'projectassignment'], function(){
+                    Route::get('','DashboardAdminAssessmentProjectAssignmentController@Index')->name('dashboard.admin.assessment.projectassignment');           
+                    Route::get('edit/{id}','DashboardAdminAssessmentProjectAssignmentController@Edit')->name('dashboard.admin.assessment.projectassignment.edit');  
+                    Route::post('editsave/{id}','DashboardAdminAssessmentProjectAssignmentController@EditSave')->name('dashboard.admin.assessment.projectassignment.editsave');    
+                }); 
             });  
             Route::group(['prefix' => 'calendar'], function(){
                 Route::get('','DashboardAdminCalendarController@Index')->name('dashboard.admin.calendar');           
                 Route::get('create','DashboardAdminCalendarController@Create')->name('dashboard.admin.calendar.create'); 
-            });  
+                Route::get('delete','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
+            }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){
             Route::get('','DashboardExpertController@Index')->name('dashboard.expert');    
@@ -302,32 +309,37 @@ Route::group(['middleware' => 'auth'], function(){
             });        
         }); 
         Route::group(['prefix' => 'company'], function(){
-            Route::get('','DashboardCompanyController@Index')->name('dashboard.company');           
+            Route::group(['prefix' => 'report'], function(){
+                Route::get('','DashboardCompanyReportController@Index')->name('dashboard.company.report');           
+            });      
             Route::group(['prefix' => 'assessment'], function(){
-                Route::get('','DashboardCompanyAssessmentController@Index')->name('dashboard.company.assessment');           
-            }); 
-            Route::group(['prefix' => 'minitbp'], function(){
-                Route::get('','DashboardCompanyMiniTBPController@Index')->name('dashboard.company.minitbp'); 
-                Route::get('edit/{id}','DashboardCompanyMiniTBPController@Edit')->name('dashboard.company.minitbp.edit');           
-                Route::post('editsave/{id}','DashboardCompanyMiniTBPController@EditSave')->name('dashboard.company.minitbp.editsave');   
-                Route::get('downloadpdf/{id}','DashboardCompanyMiniTBPController@DownloadPDF')->name('dashboard.company.minitbp.downloadpdf'); 
-                Route::get('submit/{id}','DashboardCompanyMiniTBPController@Submit')->name('dashboard.company.minitbp.submit'); 
-                Route::post('submitsave/{id}','DashboardCompanyMiniTBPController@SubmitSave')->name('dashboard.company.minitbp.submitsave'); 
-            }); 
-            Route::group(['prefix' => 'fee'], function(){
-                Route::get('','DashboardCompanyFeeController@Index')->name('dashboard.company.fee');           
-                Route::get('invoice/{id}','DashboardCompanyFeeController@Invoice')->name('dashboard.company.fee.invoice');  
-                Route::get('payment/{id}','DashboardCompanyFeeController@Payment')->name('dashboard.company.fee.payment'); 
-                Route::post('paymentsave/{id}','DashboardCompanyFeeController@PaymentSave')->name('dashboard.company.fee.paymentsave'); 
-            });  
-            Route::group(['prefix' => 'fulltbp'], function(){
-                Route::get('','DashboardCompanyFullTbpController@Index')->name('dashboard.company.fulltbp');  
-                Route::get('edit/{id}','DashboardCompanyFullTbpController@Edit')->name('dashboard.company.fulltbp.edit');   
-                Route::post('editsave/{id}','DashboardCompanyFullTbpController@EditSave')->name('dashboard.company.fulltbp.editsave');   
-                Route::get('downloadpdf/{id}','DashboardCompanyFullTbpController@DownloadPDF')->name('dashboard.company.fulltbp.downloadpdf'); 
-                Route::get('submit/{id}','DashboardCompanyFullTbpController@Submit')->name('dashboard.company.fulltbp.submit'); 
-                Route::post('submitsave/{id}','DashboardCompanyFullTbpController@SubmitSave')->name('dashboard.company.fulltbp.submitsave');        
-            }); 
+                Route::group(['prefix' => 'assessment'], function(){
+                    Route::get('','DashboardCompanyAssessmentAssessmentController@Index')->name('dashboard.company.assessment');           
+                }); 
+                Route::group(['prefix' => 'minitbp'], function(){
+                    Route::get('','DashboardCompanyAssessmentMiniTBPController@Index')->name('dashboard.company.assessment.minitbp'); 
+                    Route::get('edit/{id}','DashboardCompanyAssessmentMiniTBPController@Edit')->name('dashboard.company.assessment.minitbp.edit');           
+                    Route::post('editsave/{id}','DashboardCompanyAssessmentMiniTBPController@EditSave')->name('dashboard.company.assessment.minitbp.editsave');   
+                    Route::get('downloadpdf/{id}','DashboardCompanyAssessmentMiniTBPController@DownloadPDF')->name('dashboard.company.assessment.minitbp.downloadpdf'); 
+                    Route::get('submit/{id}','DashboardCompanyAssessmentMiniTBPController@Submit')->name('dashboard.company.assessment.minitbp.submit'); 
+                    Route::post('submitsave/{id}','DashboardCompanyAssessmentMiniTBPController@SubmitSave')->name('dashboard.company.assessment.minitbp.submitsave'); 
+                }); 
+                Route::group(['prefix' => 'fee'], function(){
+                    Route::get('','DashboardCompanyAssessmentFeeController@Index')->name('dashboard.company.assessment.fee');           
+                    Route::get('invoice/{id}','DashboardCompanyAssessmentFeeController@Invoice')->name('dashboard.company.assessment.fee.invoice');  
+                    Route::get('payment/{id}','DashboardCompanyAssessmentFeeController@Payment')->name('dashboard.company.assessment.fee.payment'); 
+                    Route::post('paymentsave/{id}','DashboardCompanyAssessmentFeeController@PaymentSave')->name('dashboard.company.assessment.fee.paymentsave'); 
+                });  
+                Route::group(['prefix' => 'fulltbp'], function(){
+                    Route::get('','DashboardCompanyAssessmentFullTbpController@Index')->name('dashboard.company.assessment.fulltbp');  
+                    Route::get('edit/{id}','DashboardCompanyAssessmentFullTbpController@Edit')->name('dashboard.company.assessment.fulltbp.edit');   
+                    Route::post('editsave/{id}','DashboardCompanyAssessmentFullTbpController@EditSave')->name('dashboard.company.assessment.fulltbp.editsave');   
+                    Route::get('downloadpdf/{id}','DashboardCompanyAssessmentFullTbpController@DownloadPDF')->name('dashboard.company.assessment.fulltbp.downloadpdf'); 
+                    Route::get('submit/{id}','DashboardCompanyAssessmentFullTbpController@Submit')->name('dashboard.company.assessment.fulltbp.submit'); 
+                    Route::post('submitsave/{id}','DashboardCompanyAssessmentFullTbpController@SubmitSave')->name('dashboard.company.assessment.fulltbp.submitsave');        
+                }); 
+            });       
+
         }); 
     });   
     Route::group(['prefix' => 'sms'], function(){

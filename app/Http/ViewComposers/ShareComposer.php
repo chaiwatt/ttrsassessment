@@ -11,6 +11,7 @@ use App\Model\GeneralInfo;
 use Illuminate\View\View; 
 use App\Model\PageCategory;
 use App\Model\WebsiteLayout;
+use App\Helper\GoogleCalendar;
 
 
 class ShareComposer 

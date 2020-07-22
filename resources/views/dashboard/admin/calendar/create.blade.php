@@ -11,7 +11,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการปฎิทินกิจกรรม</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -20,8 +20,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ปฎิทิน</a>
-                    <span class="breadcrumb-item active">รายการปฎิทินกิจกรรม</span>
+                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
+                    <span class="breadcrumb-item active">รายการ Full TBP</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -61,36 +61,13 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
-                                <thead>
-                                    <tr>
-                                        <th>เลขที่โครงการ</th> 
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>Event</th>  
-                                        <th>วัน-เวลา</th>
-                                        <th class="text-right">สถานะ</th> 
-                                                                  
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- @foreach ($businessplans as $key => $businessplan)
-                                    <tr>    
-                                        <td> {{$businessplan->createddateth}} </td> 
-                                        <td> {{$businessplan->code}} </td> 
-                                        <td> {{$businessplan->minitbp->project}} </td> 
-                                        <td>
-                                            <div class="progress" style="height: 1.375rem;">
-                                                <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
-                                                    <span class="sr-only"></span>
-                                                </div>
-                                            </div>
-                                        </td> 
-                                        <td class="text-right"> <span class="badge badge-flat border-warning text-warning-400 rounded-0">{{$businessplan->businessplanstatus->name}}</span></td>                                       
-                                    </tr>
-                                    @endforeach --}}
-                                </tbody>
-                            </table>      
+                        <div class="form-group">
+                            <label>วันที่</label>
+                            <input type="text"  name="eventdate" id="eventdate" value=""  placeholder="วันที่" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <label>เวลา</label>
+                            <input type="text"  name="eventtime" id="eventtime" value=""  placeholder="เวลา" class="form-control" >
                         </div>
                     </div>
                 </div>

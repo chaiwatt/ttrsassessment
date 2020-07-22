@@ -28,7 +28,7 @@ class SmsController extends Controller
         if(!Empty($otp)){
             if($otp == $request->otp){
                 Session::forget('otp');
-                return redirect()->route('dashboard.company');
+                return redirect()->route('dashboard.company.report');
             }else{
                 return redirect()->back()->withError('รหัส OPT ไม่ถูกต้อง');
             }

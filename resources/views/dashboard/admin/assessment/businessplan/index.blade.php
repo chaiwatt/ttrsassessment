@@ -1,9 +1,5 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-<link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/main.css')}}">
-<link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
-<link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
-<link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
 @stop
 @section('content')
     <!-- Page header -->
@@ -11,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการปฎิทินกิจกรรม</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการขอรับการประเมิน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -20,8 +16,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ปฎิทิน</a>
-                    <span class="breadcrumb-item active">รายการปฎิทินกิจกรรม</span>
+                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
+                    <span class="breadcrumb-item active">รายการขอรับการประเมิน</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -52,7 +48,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ปฎิทินกิจกรรม</h6>
+                        <h6 class="card-title">รายการขอรับการประเมิน</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -65,48 +61,40 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
+                                        <th style="width:50px">#</th>
+                                        <th>วันที่ขอ</th> 
                                         <th>เลขที่โครงการ</th> 
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>Event</th>  
-                                        <th>วัน-เวลา</th>
-                                        <th class="text-right">สถานะ</th> 
+                                        <th>บริษัท</th>
+                                        <th>เพิ่มเติม</th> 
                                                                   
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($businessplans as $key => $businessplan)
+                                    @foreach ($businessplans as $key => $businessplan)
                                     <tr>    
+                                        <td> {{$key+1}} </td>
                                         <td> {{$businessplan->createddateth}} </td> 
                                         <td> {{$businessplan->code}} </td> 
-                                        <td> {{$businessplan->minitbp->project}} </td> 
-                                        <td>
-                                            <div class="progress" style="height: 1.375rem;">
-                                                <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
-                                                    <span class="sr-only"></span>
-                                                </div>
-                                            </div>
-                                        </td> 
-                                        <td class="text-right"> <span class="badge badge-flat border-warning text-warning-400 rounded-0">{{$businessplan->businessplanstatus->name}}</span></td>                                       
+                                        <td> {{$businessplan->company->name}} </td>  
+                                        <td> 
+                                            <a href="{{route('dashboard.admin.assessment.businessplan.view',['id' => $businessplan->id])}}" class=" badge bg-primary">รายละเอียด</a>
+                                            <a href="{{route('dashboard.admin.assessment.businessplan.delete',['id' => $businessplan->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                        </td>                                
                                     </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>      
                         </div>
                     </div>
                 </div>
+            <!-- /striped rows -->
             </div>
         </div>
+        <!-- /form layouts -->
     </div>
+    <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/main.min.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.min.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.min.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.min.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/interaction/main.min.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
-
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -114,24 +102,5 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
-
-        $('#eventdate').bootstrapMaterialDatePicker({
-            format: 'DD/MM/YYYY HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            time: false
-        });
-
-        $('#eventtime').bootstrapMaterialDatePicker({
-            format: 'HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            date: false,
-        });
-
     </script>
 @stop
