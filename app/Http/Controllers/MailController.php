@@ -10,7 +10,7 @@ class MailController extends Controller
 {
     public function Send(){
         $data = [
-        'sendermail' => 'ttrs@nstda.or.th',
+        'sendermail' => env('MAIL_FROM_ADDRESS'),
         'sendername' => 'TTRS',
         'title' => 'ทดสอบการส่งเมล์',
         'message' => 'นี่คือการทดสอบส่งอีเมล์'
