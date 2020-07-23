@@ -18,7 +18,6 @@ class SettingAdminAssessmentCriteriaController extends Controller
     public function CreateSave(Request $request){
         $criteria = new Criteria();
         $criteria->name = $request->criteria;
-        $criteria->weight = $request->weight;
         $criteria->save();
         return redirect()->route('setting.admin.assessment.criteria')->withSuccess('เพิ่มรายการสำเร็จ');
     }
@@ -29,7 +28,6 @@ class SettingAdminAssessmentCriteriaController extends Controller
     public function EditSave(Request $request,$id){
         $criteria = Criteria::find($id)->update([
             'name' => $request->criteria,
-            'weight' => $request->weight
         ]);
         return redirect()->route('setting.admin.assessment.criteria')->withSuccess('แก้ไขรายการสำเร็จ');
     }

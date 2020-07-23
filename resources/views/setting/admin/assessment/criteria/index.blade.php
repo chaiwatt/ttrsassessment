@@ -66,8 +66,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Criteria</th>
-                                        <th>ค่าน้ำหนัก</th>                               
+                                        <th>Criteria</th>                             
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -75,8 +74,7 @@
                                     @foreach ($criterias as $key => $criteria)
                                     <tr>    
                                         <td> {{$key+1}} </td>
-                                        <td> {{$criteria->name}} </td>  
-                                        <td> {{$criteria->weight}} </td>                                         
+                                        <td> {{$criteria->name}} </td>                                         
                                         <td> 
                                             <a href="{{route('setting.admin.assessment.criteria.edit',['id' => $criteria->id])}}" class=" badge bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.assessment.criteria.delete',['id' => $criteria->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       

@@ -10,7 +10,7 @@ class MailController extends Controller
 {
     public function Send(){
         $data = [
-        'sendermail' => 'noreply@npctestserver.com',
+        'sendermail' => 'ttrs@nstda.or.th',
         'sendername' => 'TTRS',
         'title' => 'ทดสอบการส่งเมล์',
         'message' => 'นี่คือการทดสอบส่งอีเมล์'

@@ -137,7 +137,7 @@
 
         $(document).on('click', '#btn_modal_add_expert', function(e) {
             $.ajax({
-                url: `${route.url}/dashboard/admin/fulltbp/assignexpertsave`,  //Server script to process data
+                url: `${route.url}/dashboard/admin/assessment/fulltbp/assignexpertsave`,  //Server script to process data
                 type: 'POST',
                 headers: {"X-CSRF-TOKEN":route.token},
                 data: {
@@ -189,7 +189,7 @@
                 }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: `${route.url}/dashboard/admin/fulltbp/assignexpertdelete`,  //Server script to process data
+                        url: `${route.url}/dashboard/admin/assessment/fulltbp/assignexpertdelete`,  //Server script to process data
                         type: 'POST',
                         headers: {"X-CSRF-TOKEN":route.token},
                         data: {
@@ -229,7 +229,7 @@
                 status = 2;
             }
             $.ajax({
-                url: `${route.url}/dashboard/admin/fulltbp/editassignexpert`,  //Server script to process data
+                url: `${route.url}/dashboard/admin/assessment/fulltbp/editassignexpert`,  //Server script to process data
                 type: 'POST',
                 headers: {"X-CSRF-TOKEN":route.token},
                 data: {
