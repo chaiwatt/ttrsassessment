@@ -17,10 +17,12 @@ class CreateEventCalendarsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
-            $table->string('event_id',50);
-            $table->string('summary',50);
             $table->date('eventdate');
-            $table->time('eventtime');
+            $table->char('starttime',10);
+            $table->char('endtime',10);
+            $table->string('place',250);
+            $table->string('room',50);
+            $table->string('summary',250);
             $table->timestamps();
         });
     }

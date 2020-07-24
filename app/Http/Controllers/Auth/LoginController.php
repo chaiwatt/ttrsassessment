@@ -39,7 +39,6 @@ class LoginController extends Controller
          }else{
             return redirect($intendurl);
          }
-
     }
 
     public function Redirect($provider)

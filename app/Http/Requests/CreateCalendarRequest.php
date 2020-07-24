@@ -19,6 +19,7 @@ class CreateCalendarRequest extends FormRequest
     public function rules()
     {
         return [
+            'fulltbp' => 'required',
             'eventdate' => 'required',
             'eventtimestart' => 'required',
             'eventtimeend' => 'required',
@@ -31,6 +32,7 @@ class CreateCalendarRequest extends FormRequest
     public function messages()
     {
       return  [
+            'fulltbp.required' => 'ยังไม่ได้เลือกโครงการ',
             'eventdate.required' => 'ยังไม่ได้กรอกวันที่',
             'eventtimestart.required' => 'ยังไม่ได้กรอกเวลาเริ่ม',
             'eventtimeend.required' => 'ยังไม่ได้กรอกเวลาสิ้นสุด',

@@ -26,12 +26,12 @@ class EmailSystem extends Mailable
     public function build()
     {
         return $this->view('emailtemplate.register')
-        ->from($this->data['sendermail'], $this->data['sendername'])
-        // ->cc($this->data['ccmail'], 'chaiwat')
-        // ->bcc($address, $name)
-        // ->replyTo($address, $name)
-        ->subject($this->data['title'])
-        ->with([
+                ->from($this->data['sendermail'], $this->data['sendername'])
+                // ->cc($this->data['ccmail'], 'chaiwat')
+                // ->bcc($address, $name)
+                // ->replyTo($address, $name)
+                ->subject($this->data['title'])
+                ->with([
         'message' => $this->data['message']
         ]);;
     }

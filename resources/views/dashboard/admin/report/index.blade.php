@@ -93,7 +93,6 @@
                         
                         <div>
                             รอรับการยืนยัน
-                            {{-- <div class="font-size-sm opacity-75">$37,578 avg</div> --}}
                         </div>
                     </div>
 
@@ -130,7 +129,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รอรับการยืนยัน</h6>
+                        <h6 class="card-title">รายการโครงการ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -143,22 +142,19 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>วันที่</th>
-                                        <th>ชื่อบริษัท</th>
-                                        <th>สถานะ</th>                                   
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        <th>เลขที่โครงการ</th> 
+                                        <th>ชื่อโครงการ</th> 
+                                        <th>บริษัท</th>
+                                        <th>สถานะ</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>    
-                                        <td> 26/2/2563 </td>
-                                        <td> บริษัท ทดสอบ จำกัด </td> 
-                                        <td> <span class="badge badge-flat border-info text-info-600">รอรับยืนยัน</span>  </td>                                                            
-                                        <td> 
-                                            <a href="" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
-                                        </td>
-                                    </tr>
+                                    @foreach ($fulltbps as $fulltbp)
+                                        <td> {{$fulltbp->updatedatth}} </td> 
+                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        <td> {{$fulltbp->minitbp->project}} </td>  
+                                        <td> --- </td>  
+                                    @endforeach
                                 </tbody>
                             </table>      
                         </div>
@@ -171,7 +167,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รอรับการยืนยัน</h6>
+                        <h6 class="card-title">ปฎิทินกลาง</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -203,48 +199,48 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
-
-        var events = [];
-        getEvent().then(data => {
-            data.forEach(function (event,index) {
-                events.push({
-                    title: event["summary"],
-                    url: event["url"],
-                    start: event["start"]
+        $( document ).ready(function() {
+            var events = [];
+            getEvent().then(data => {
+                console.log(data);
+                data.forEach(function (event,index) {
+                    events.push({
+                        title: event["summary"],
+                        start: event["start"]
+                    });
                 });
-            });
-            console.log(events);
-            var calendarBasicViewElement = document.querySelector('.fullcalendar-basic');
-            // Initialize
-            if(calendarBasicViewElement) {
-                var calendarBasicViewInit = new FullCalendar.Calendar(calendarBasicViewElement, {
-                    locale: 'th',
-                    plugins: ["dayGrid", "timeGrid", "list", "interaction", "googleCalendar"],
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,dayGridWeek,dayGridDay'
-                    },
-                    events: events,
-                    editable: true,
-                    eventLimit: true
-                }).render();
-            }
-        }).catch(error => {})
-        
+                console.log(events);
+                var calendarBasicViewElement = document.querySelector('.fullcalendar-basic');
+                if(calendarBasicViewElement) {
+                    var calendarBasicViewInit = new FullCalendar.Calendar(calendarBasicViewElement, {
+                        locale: 'th',
+                        plugins: ["dayGrid", "timeGrid", "list", "interaction", "googleCalendar"],
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,dayGridWeek,dayGridDay'
+                        },
+                        events: events,
+                        editable: true,
+                        eventLimit: true
+                    }).render();
+                }
+            }).catch(error => {})
+        });
+
     function getEvent() {
         return new Promise((resolve, reject) => {
-        $.ajax({
-            url: `${route.url}/api/googlecalendar/getevents`,
-            type: 'POST',
-            headers: {"X-CSRF-TOKEN":route.token},
-            success: function(data) {
-            resolve(data)
-            },
-            error: function(error) {
-            reject(error)
-            },
-        })
+            $.ajax({
+                url: `${route.url}/dashboard/admin/report/getevent`,
+                type: 'POST',
+                headers: {"X-CSRF-TOKEN":route.token},
+                success: function(data) {
+                resolve(data)
+                },
+                error: function(error) {
+                reject(error)
+                },
+            })
         })
     }
 </script>

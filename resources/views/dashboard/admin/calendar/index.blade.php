@@ -68,30 +68,25 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>Event</th>  
                                         <th>วัน-เวลา</th>
-                                        <th class="text-right">สถานะ</th> 
+                                        <th>สถานะ</th> 
                                                                   
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($businessplans as $key => $businessplan)
+                                    @foreach ($eventcalendars as $key => $eventcalendar)
                                     <tr>    
-                                        <td> {{$businessplan->createddateth}} </td> 
-                                        <td> {{$businessplan->code}} </td> 
-                                        <td> {{$businessplan->minitbp->project}} </td> 
+                                        <td> {{$eventcalendar->fulltbp->minitbp->project}} </td> 
+                                        <td> {{$eventcalendar->summary}} </td> 
+                                        <td> {{$eventcalendar->eventdateth}} {{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} </td> 
                                         <td>
-                                            <div class="progress" style="height: 1.375rem;">
-                                                <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
-                                                    <span class="sr-only"></span>
-                                                </div>
-                                            </div>
+                                            <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class=" badge bg-primary">แก้ไข</a>
+                                            <a href="{{route('dashboard.admin.calendar.delete',['id' => $eventcalendar->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td> 
-                                        <td class="text-right"> <span class="badge badge-flat border-warning text-warning-400 rounded-0">{{$businessplan->businessplanstatus->name}}</span></td>                                       
                                     </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>      
                         </div>

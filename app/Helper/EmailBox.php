@@ -8,7 +8,7 @@ class EmailBox
 {
     public static function send($mailto,$title,$message){
         $data = [
-            'sendermail' => 'ttrs@nstda.or.th',
+            'sendermail' => env('MAIL_FROM_ADDRESS'),
             'sendername' => 'TTRS',
             'title' => $title,
             'message' => $message

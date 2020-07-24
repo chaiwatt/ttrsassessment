@@ -262,6 +262,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'admin'], function(){
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardAdminReportController@Index')->name('dashboard.admin.report');           
+                Route::post('getevent','DashboardAdminReportController@GetEvent')->name('dashboard.admin.getevent'); 
             }); 
             Route::group(['prefix' => 'assessment'], function(){
                 Route::group(['prefix' => 'fee'], function(){
@@ -299,7 +300,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('','DashboardAdminCalendarController@Index')->name('dashboard.admin.calendar');           
                 Route::get('create','DashboardAdminCalendarController@Create')->name('dashboard.admin.calendar.create'); 
                 Route::post('createsave','DashboardAdminCalendarController@CreateSave')->name('dashboard.admin.calendar.createsave');
-                Route::get('delete','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
+                Route::get('edit/{id}','DashboardAdminCalendarController@Edit')->name('dashboard.admin.calendar.edit'); 
+                Route::post('editsave/{id}','DashboardAdminCalendarController@EditSave')->name('dashboard.admin.calendar.editsave'); 
+                Route::get('delete/{id}','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
             }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){

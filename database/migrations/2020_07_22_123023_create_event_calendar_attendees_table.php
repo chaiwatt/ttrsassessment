@@ -17,7 +17,7 @@ class CreateEventCalendarAttendeesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('event_calendar_id');
             $table->foreign('event_calendar_id')->references('id')->on('event_calendars')->onDelete('cascade');
-            $table->string('email',100);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
