@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Model\Prefix;
 use App\Model\Company;
-use App\Model\MiniTBP;
 use App\Model\FullTbp;
+use App\Model\MiniTBP;
 use App\Helper\EmailBox;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
@@ -52,14 +53,11 @@ use App\Model\FullTbpProjectAwardAttachment;
 use App\Model\FullTbpCompanyProfileAttachment;
 use App\Model\FullTbpProjectCertifyAttachment;
 
-class DashboardExpertFullTbpController extends Controller
+class DashboardAdminProjectFullTbpController extends Controller
 {
     public function Index(){
-        $expertassignments = ExpertAssignment::where('user_id',Auth::user()->id)
-                                            ->where('expert_assignment_status_id',2)
-                                            ->pluck('full_tbp_id')->toArray();
-        $fulltbps = FullTbp::whereIn('id',$expertassignments)->get();
-        return view('dashboard.expert.fulltbp.index')->withFulltbps($fulltbps) ;
+        $fulltbps = FullTbp::where('status',2)->get();
+        return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps) ;
     }
     public function View($id){
         $businesstypes = BusinessType::get();
@@ -144,5 +142,86 @@ class DashboardExpertFullTbpController extends Controller
                                                 ->withFulltbpcosts($fulltbpcosts)
                                                 ->withFulltbpreturnofinvestment($fulltbpreturnofinvestment)
                                                 ->withFulltbpcompanydocs($fulltbpcompanydocs);
+    }
+
+    public function AssignGroup($id){
+        $fulltbp = FullTbp::find($id);
+        $criteriagroups = CriteriaGroup::get();
+        return view('dashboard.admin.project.fulltbp.assigngroup')->withCriteriagroups($criteriagroups)
+                                                    ->withFulltbp($fulltbp);
+    }
+    public function AssignGroupSave(Request $request,$id){
+        $fulltbp = FullTbp::find($id)->update([
+            'criteria_group_id' => $request->criteriagroup
+        ]);
+        return redirect()->route('dashboard.admin.project.fulltbp')->withSuccess('Assign เกณฑ์การประเมินสำเร็จ');
+    }
+    public function AssignExpert($id){
+        $experts = User::where('user_type_id',3)->get();
+        $expertassignments = ExpertAssignment::where('full_tbp_id',$id)->get();
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.admin.project.fulltbp.assignexpert')->withExpertassignments($expertassignments)
+                                                        ->withExperts($experts)
+                                                        ->withFulltbp($fulltbp);
+    }
+
+    public function AssignExpertSave(Request $request){
+        $check = ExpertAssignment::where('user_id',$request->id)->first();
+        if(Empty($check)){
+            $expertassignment = new ExpertAssignment();
+            $expertassignment->full_tbp_id = $request->fulltbpid;
+            $expertassignment->user_id = $request->id;
+            $expertassignment->expert_assignment_status_id = 1;
+            $expertassignment->save();
+        }
+        $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
+        EmailBox::send(User::find($request->id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน '.User::find($request->id)->name.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href="">คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        if(Auth::user()->user_type_id != 7){
+            EmailBox::send(User::where('user_type_id',7)->first()->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน Master <br> Leader ได้มอบหมายให้ ' .User::find($request->id)->name . ' เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        }
+        $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
+        if($expertassignments->count() > 0){
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '2'
+            ]);
+        }else{
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '1'
+            ]);
+        }
+        return response()->json($expertassignments); 
+    }
+
+    public function AssignExpertDelete(Request $request){
+        ExpertAssignment::find($request->id)->delete();
+        $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
+        
+        if($expertassignments->count() > 0){
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '2'
+            ]);
+        }else{
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '1'
+            ]);
+        }
+        return response()->json($expertassignments); 
+    }   
+    public function EditAssignExpert(Request $request){
+        ExpertAssignment::find($request->id)->update([
+            'expert_assignment_status_id' => $request->status
+        ]);
+        $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
+        
+        if($expertassignments->count() > 0){
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '2'
+            ]);
+        }else{
+            FullTbp::find($request->fulltbpid)->update([
+                'assignexpert' => '1'
+            ]);
+        }
+        return response()->json($expertassignments); 
     }
 }

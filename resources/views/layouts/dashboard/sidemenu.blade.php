@@ -16,19 +16,25 @@
     </ul>
 </li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
-    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
-    <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.projectassignment')?'active':''}}">Assignment</a></li>     
-        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.businessplan')?'active':''}}">ขอรับการประเมิน</a></li>     
-        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.minitbp')?'active':''}}">mini TBP</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.assessment.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment.fulltbp')?'active':''}}">Full TBP</a></li>	   
+    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>โครงการ</span></a>
+    <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">Assignment</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.businessplan')?'active':''}}">ขอรับการประเมิน</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">mini TBP</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">Full TBP</a></li>	   
     </ul>
 </li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ปฎิทิน">
         <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฎิทิน</a></li>
+    </ul>
+</li>
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
+    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span></a>
+    <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
+        <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">ประเมิน</a></li>
     </ul>
 </li>
 @endif
@@ -42,15 +48,15 @@
     </li>
     @if (!Empty(Auth::user()->company->businessplan))
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.assessment')?'nav-item-expanded nav-item-open':''}}">
-            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
-                <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment')?'active':''}}">รายการประเมิน</a></li>
+            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>โครงการ</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
+                <li class="nav-item"><a href="{{route('dashboard.company.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment')?'active':''}}">โครงการ</a></li>
                 @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
-                    <li class="nav-item"><a href="{{route('dashboard.company.assessment.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment.minitbp')?'active':''}}">mini TBP</a></li>  
+                    <li class="nav-item"><a href="{{route('dashboard.company.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.minitbp')?'active':''}}">mini TBP</a></li>  
                     @if (Auth::user()->company->businessplan->business_plan_status_id > 3)
-                        <li class="nav-item"><a href="{{route('dashboard.company.assessment.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment.fulltbp')?'active':''}}">Full TBP</a></li>
+                        <li class="nav-item"><a href="{{route('dashboard.company.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fulltbp')?'active':''}}">Full TBP</a></li>
                     @endif
-                    <li class="nav-item"><a href="{{route('dashboard.company.assessment.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.assessment.fee')?'active':''}}">รายการแจ้งหนี้</a></li>  
+                    <li class="nav-item"><a href="{{route('dashboard.company.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fee')?'active':''}}">รายการแจ้งหนี้</a></li>  
                 @endif
             </ul>
         </li>
@@ -59,8 +65,8 @@
 
 @if (Auth::user()->user_type_id ==3)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.')?'nav-item-expanded nav-item-open':''}}">
-        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>การประเมิน</span></a>
-        <ul class="nav nav-group-sub" data-submenu-title="รายการประเมิน">
+        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>โครงการ</span></a>
+        <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
             @if (Auth::user()->expertassignment->count() > 0)
                 <li class="nav-item"><a href="{{route('dashboard.expert.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.fulltbp')?'active':''}}">Full TBP</a></li>
             @endif
