@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ตำแหน่ง Expert</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ตำแหน่งผู้เชี่ยวชาญ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.dashboard.expertposition.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มตำแหน่ง Expert<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.dashboard.expertposition.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มตำแหน่งผู้เชี่ยวชาญ<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <span class="breadcrumb-item active">ตำแหน่ง Expert</span>
+                    <span class="breadcrumb-item active">ตำแหน่งผู้เชี่ยวชาญ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ตำแหน่ง Expert</h6>
+                        <h6 class="card-title">ตำแหน่งผู้เชี่ยวชาญ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -66,7 +66,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>ตำแหน่ง Expert</th>                               
+                                        <th>ตำแหน่งผู้เชี่ยวชาญ</th>                               
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>

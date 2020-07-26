@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขกลุ่มอุตสาหกรรม</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขตำแหน่งผู้ใช้งาน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -56,8 +56,8 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>กลุ่มอุตสาหกรรม</label>
-                                            <input type="text"  name="userposition" value="{{$userposition->name}}"  placeholder="ตำแหน่ง" class="form-control">
+                                            <label>ตำแหน่งผู้ใช้งาน</label>
+                                            <input type="text"  name="userposition" value="{{$userposition->name}}"  placeholder="ตำแหน่งผู้ใช้งาน" class="form-control">
                                         </div>
                                     </fieldset>
                                 </div>

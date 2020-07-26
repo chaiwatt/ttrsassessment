@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขสถานะการวางแผนธุรกิจ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขสถานะความก้าวหน้าโครงการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="breadcrumb-item"> สถานะการวางแผนธุรกิจ</a>
-                    <span class="breadcrumb-item active">แก้ไขสถานะการวางแผนธุรกิจ</span>
+                    <a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="breadcrumb-item"> สถานะความก้าวหน้าโครงการ</a>
+                    <span class="breadcrumb-item active">แก้ไขสถานะความก้าวหน้าโครงการ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -56,8 +56,8 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>สถานะการวางแผนธุรกิจ</label>
-                                            <input type="text"  name="businessplanstatus" value="{{$businessplanstatus->name}}"  placeholder="สถานะการวางแผนธุรกิจ" class="form-control">
+                                            <label>สถานะความก้าวหน้าโครงการ</label>
+                                            <input type="text"  name="businessplanstatus" value="{{$businessplanstatus->name}}"  placeholder="สถานะความก้าวหน้าโครงการ" class="form-control">
                                         </div>
                                     </fieldset>
                                 </div>

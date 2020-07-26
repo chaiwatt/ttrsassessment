@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">สถานะการวางแผนธุรกิจ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ความก้าวหน้าโครงการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.dashboard.businessplanstatus.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มสถานะการวางแผนธุรกิจ<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.dashboard.businessplanstatus.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มความก้าวหน้าโครงการ<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <span class="breadcrumb-item active">สถานะการวางแผนธุรกิจ</span>
+                    <span class="breadcrumb-item active">ความก้าวหน้าโครงการ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">สถานะการวางแผนธุรกิจ</h6>
+                        <h6 class="card-title">ความก้าวหน้าโครงการ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -66,7 +66,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>สถานะการวางแผนธุรกิจ</th>                               
+                                        <th>ความก้าวหน้าโครงการ</th>                               
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>

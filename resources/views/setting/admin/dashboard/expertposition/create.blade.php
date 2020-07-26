@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มตำแหน่ง Expert</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มตำแหน่งผู้เชี่ยวชาญ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.admin.dashboard.industrygroup')}}" class="breadcrumb-item"> ตำแหน่ง Expert</a>
-                    <span class="breadcrumb-item active">เพิ่มตำแหน่ง Expert</span>
+                    <a href="{{route('setting.admin.dashboard.industrygroup')}}" class="breadcrumb-item"> ตำแหน่งผู้เชี่ยวชาญ</a>
+                    <span class="breadcrumb-item active">เพิ่มตำแหน่งผู้เชี่ยวชาญ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -55,8 +55,8 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ตำแหน่ง Expert</label>
-                                            <input type="text"  name="expertposition" value="{{old('expertposition')}}"  placeholder="ตำแหน่ง expert" class="form-control">
+                                            <label>ตำแหน่งผู้เชี่ยวชาญ</label>
+                                            <input type="text"  name="expertposition" value="{{old('expertposition')}}"  placeholder="ตำแหน่งผู้เชี่ยวชาญ" class="form-control">
                                         </div>
                                     </fieldset>
                                 </div>
