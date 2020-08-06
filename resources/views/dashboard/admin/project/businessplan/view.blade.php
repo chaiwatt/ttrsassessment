@@ -101,8 +101,8 @@
                                         <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="แฟ็กซ์" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label>อีเมล์<span class="text-danger">*</span></label>
-                                        <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล์" class="form-control" readonly>
+                                        <label>อีเมล<span class="text-danger">*</span></label>
+                                        <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>ที่อยู่<span class="text-danger">*</span></label>

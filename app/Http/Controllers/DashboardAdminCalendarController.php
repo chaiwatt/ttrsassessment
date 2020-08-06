@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 use Google_Client;
 use App\Model\FullTbp;
+use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\EventCalendar;
 use Google_Service_Calendar;
@@ -95,6 +96,19 @@ class DashboardAdminCalendarController extends Controller
       '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
       '<br><br>ด้วยความนับถือ<br>TTRS');
 
+      foreach($request->users as $user){
+          $_user = User::find($user);
+          Message::sendMessage('นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+          '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+          '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+          '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
+          '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
+          '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+          '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
+          '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+      }
+      
+
       return redirect()->route('dashboard.admin.calendar')->withSuccess('เพิ่มรายการสำเร็จ');
   }
   public function Edit($id){
@@ -155,6 +169,16 @@ class DashboardAdminCalendarController extends Controller
     '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
     '<br><br>ด้วยความนับถือ<br>TTRS');
 
+    foreach($updateguest_array as $user){
+        $_user = User::find($user);
+        Message::sendMessage('นัดหมายการประชุม','TTRS:นัดหมายการประชุม(แก้ไข)','เรียนท่านคณะกรรมการ <br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+        '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+        '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+        '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
+        '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
+        '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+        '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+    }
     $mails = array();
     foreach($removeguest_array as $user){
         $_user = User::find($user);
@@ -168,6 +192,18 @@ class DashboardAdminCalendarController extends Controller
     '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
     '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
     '<br><br>ด้วยความนับถือ<br>TTRS');
+
+    foreach($removeguest_array as $user){
+        $_user = User::find($user);
+        Message::sendMessage('ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br> โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+        '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+        '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+        '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
+        '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
+        '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+        '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+    }
+
     return redirect()->route('dashboard.admin.calendar')->withSuccess('แก้ไขรายการสำเร็จ');
   }
   public function Delete($id){
@@ -188,6 +224,16 @@ class DashboardAdminCalendarController extends Controller
     '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
     '<br><br>ด้วยความนับถือ<br>TTRS');
     $eventcalendar->delete();
+    foreach($eventcalendars as $user){
+        $_user = User::find($user);
+        Message::sendMessage('ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการทุกท่าน <br> โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+        '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
+        '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
+        '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
+        '<br><strong>&nbsp;รายละเอียด:</strong> '.$eventcalendar->summary.
+        '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
+        '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+    }
     return redirect()->route('dashboard.admin.calendar')->withSuccess('ลบการสำเร็จ');
 
   }

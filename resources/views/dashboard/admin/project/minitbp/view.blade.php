@@ -266,7 +266,7 @@
 									<input type="text" name ="contactphone" value="{{$minitbp->contactphone}}" class="form-control" disabled>
 								</div>
 								<div class="form-group">
-									<label for="">อีเมล์</label>
+									<label for="">อีเมล</label>
 									<input type="text" name ="contactemail" value="{{$minitbp->contactemail}}" class="form-control" disabled>
 								</div>
 								<div class="form-group">

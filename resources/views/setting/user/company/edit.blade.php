@@ -82,10 +82,19 @@
                                             <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="หมายเลขผู้เสียภาษี" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label>กลุ่มธุรกิจ<span class="text-danger">*</span></label>
+                                            <label>ประเภทอุตสาหกรรม<span class="text-danger">*</span></label>
                                             <select name="industrygroup" data-placeholder="กลุ่มธุรกิจ" class="form-control form-control-select2">
                                                 @foreach ($industrygroups as $industrygroup)
                                                     <option value="{{$industrygroup->id}}" @if($company->industry_group_id == $industrygroup->id) selected @endif>{{$industrygroup->name}}</option> 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ประเภทธุรกิจตามรหัส ISIC<span class="text-danger">*</span></label>
+                                            <select name="isic" data-placeholder="ประเภทธุรกิจตามรหัส ISIC" class="form-control form-control-select2">
+                                                <option value="">เลือกประเภทธุรกิจตามรหัส ISIC</option>
+                                                @foreach ($industrygroupbyisics as $industrygroupbyisic)
+                                                    <option value="{{$industrygroupbyisic->id}}" @if($company->industry_group_by_isic_id == $industrygroupbyisic->id) selected @endif>{{$industrygroupbyisic->name}}</option> 
                                                 @endforeach
                                             </select>
                                         </div>
@@ -99,7 +108,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ปีที่จดทะเบียน</label>
-                                            <input type="number"  name="registeredyear" value="{{$registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
+                                            <input type="number"  name="registeredyear" value="{{$registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>ทุนจดทะเบียน</label>
@@ -130,8 +139,8 @@
                                             <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="แฟ็กซ์" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>อีเมล์<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล์" class="form-control">
+                                            <label>อีเมล<span class="text-danger">*</span></label>
+                                            <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <ul class="nav nav-tabs nav-tabs-highlight">

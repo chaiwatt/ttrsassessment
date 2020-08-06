@@ -1,9 +1,10 @@
 
 @if (Auth::user()->user_type_id ==3)
-<li class="nav-item nav-item-submenu ">
+{{-- <li class="nav-item nav-item-submenu "> --}}
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
-        <li class="nav-item"><a href="" class="nav-link">รายงาน</a></li>										
+        <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">รายงาน</a></li>										
     </ul>
 </li>
 @endif
@@ -13,6 +14,7 @@
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>รายงาน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
         <li class="nav-item"><a href="{{route('dashboard.admin.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'active':''}}">รายงาน</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.report.search')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report.search')?'active':''}}">ค้นหา</a></li>     
     </ul>
 </li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
@@ -107,7 +109,7 @@
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagestatus')?'active':''}}">สถานะเพจ</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagecategory')?'active':''}}">หมวดหมู่เพจ</a></li>
-                <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faqcategory')?'active':''}}">หมวดหมู่ Faq</a></li>
+                <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faqcategory')?'active':''}}">หมวดหมู่คำถามที่พบบ่อย</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.tag')?'active':''}}">ป้ายกำกับ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.slide')?'active':''}}">ภาพสไลด์</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.introsection')?'active':''}}">Intro section</a></li>		             
@@ -127,7 +129,7 @@
             <a href="#" class="nav-link"><span>การประเมิน</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteriagroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">เกณฑ์การประเมิน</a></li>		             
-                <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">น้ำหนัก criteria</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">criteria</a></li>		             
             </ul>
         </li>
     </ul>

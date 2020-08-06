@@ -273,17 +273,14 @@
 	</div>
 </div>
 <!-- /modal with subtitle -->
-
-
 	<!-- Modal with subtitle -->
 	<div id="modal_signature" class="modal fade" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="messagetitle">เซนต์ลายมือชื่อ</h5>		
+					<h5 class="modal-title" id="messagetitle">ลายมือชื่อ</h5>		
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-	
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
@@ -293,7 +290,7 @@
 										<canvas width="400" height="100" style="border: dashed 1px"></canvas>
 										<div class="signature-pad--footer">
 										  {{-- <div class="description" ></div> --}}
-									<p>เซนต์ลายมือชื่อ</p>
+									<p>ลายมือชื่อ</p>
 										  <div class="signature-pad--actions">
 											<div>
 											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัพโหลด</button>
@@ -344,8 +341,6 @@
 			</div>
 			<div class="ml-md-3 mt-2 mt-md-0">
 				<ul class="list-inline list-inline-condensed mb-0">
-					{{-- <li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</a></li> --}}
-					{{-- <li class="list-inline-item"><a href="#" class="btn btn-light border-transparent"><i class="icon-file-stats mr-2"></i> Statistics</a></li> --}}
 					<div class="form-group">
 						<div class="input-group">													
 							<button id="btnuploadcoverimg" class="btn btn-light border-transparent" type="button" onclick="document.getElementById('coverimg').click();"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</button>													
@@ -357,8 +352,6 @@
 		</div>
 	</div>
 	<!-- /cover area -->
-
-
 	<!-- Profile navigation -->
 	<div class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="text-center d-lg-none w-100">
@@ -379,7 +372,7 @@
 					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-user mr-2"></i>ข้อมูลส่วนตัว			
 					</a>
 				</li>
-				@if (Auth::user()->user_type_id == 2)
+				@if (Auth::user()->user_type_id == 3)
 					<li class="nav-item">
 						<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-medal-star mr-2"></i>ข้อมูลผู้เชี่ยวชาญ
 						</a>
@@ -468,7 +461,7 @@
 							<div class="table-responsive">
 								<table class="table table-inbox">
 									<tbody >										
-										@foreach ($messagereceives as $messagereceive)
+										@foreach ($messagereceives->reverse() as $messagereceive)
 										@php
 											$status = "";
 											if($messagereceive->message_read_status_id==1){
@@ -618,8 +611,8 @@
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-6">
-													<label>อีเมล์</label>
-													<input type="email" name="email" value="{{$user->email}}" data-placeholder="อีเมล์" class="form-control">
+													<label>อีเมล</label>
+													<input type="email" name="email" value="{{$user->email}}" data-placeholder="อีเมล" class="form-control">
 												</div>
 												<div class="col-md-6">
 													<label>รหัสผ่าน</label>
@@ -690,7 +683,7 @@
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-6">
-													<a href="" class="btn btn-primary btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_signature">ลายเซนต์</a>
+													<a href="" class="btn btn-primary btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
 												</div>
 											</div>
 											<div class="row">
@@ -698,7 +691,7 @@
 													<div id='sigdiv'>
 														@if (!Empty($user->signature))
 														<br>
-														<img src="{{asset($user->signature)}}" style="width: 150px;height:75px" alt="">
+														<img src="{{asset($user->signature)}}" style="width: 180px;height:45px" alt="">
 														@endif
 													</div>
 												</div>
@@ -725,7 +718,7 @@
 											<img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(240)->generate(url('').'/line/linesubscribe/'.Auth::user()->id)) !!} ">
 										</div>
 										<div class="col-md-6">
-											<a href="{{route('line.subcribe',['id'=> Auth::user()->id])}}" >หรือคลิกลิงค์</a>
+											<a href="{{route('line.subcribe',['id'=> Auth::user()->id])}}" >หรือคลิกลิงก์</a>
 										</div>
 										
 									</div>
@@ -895,7 +888,7 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>โทรศัพท์1</label>
-															<input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล์" class="form-control">
+															<input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล" class="form-control">
 														</div>
 														<div class="col-md-6">
 															<label>โทรศัพท์2</label>
@@ -910,8 +903,8 @@
 															<input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control">
 														</div>
 														<div class="col-md-6">
-															<label>อีเมล์</label>
-															<input type="email" name="organizationemail" value="{{$generalinfo->email}}" data-placeholder="อีเมล์" class="form-control">
+															<label>อีเมล</label>
+															<input type="email" name="organizationemail" value="{{$generalinfo->email}}" data-placeholder="อีเมล" class="form-control">
 														</div>
 													</div>
 												</div>
@@ -925,7 +918,7 @@
 												<div class="form-group">
 													<div class="row">
 														<div class="col-md-6">
-															<label>lineclint <a href="https://notify-bot.line.me/en/" target="_blank">ลิงค์</a></label>
+															<label>lineclint <a href="https://notify-bot.line.me/en/" target="_blank">ลิงก์</a></label>
 															<input type="text" name="lineclint" value="{{$generalinfo->client_id}}" data-placeholder="lineclint" class="form-control">
 														</div>
 														<div class="col-md-6">

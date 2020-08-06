@@ -84,9 +84,9 @@
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                          <label>ลิงค์เพจ</label>
-                                          <select name="page" id="page" placeholder="ลิงค์เพจ" class="form-control form-control-select2">
-                                            <option value="">เลือกลิงค์เพจ</option>
+                                          <label>ลิงก์เพจ</label>
+                                          <select name="page" id="page" placeholder="ลิงก์เพจ" class="form-control form-control-select2">
+                                            <option value="">เลือกลิงก์เพจ</option>
                                             @foreach($pages as $key => $page)
                                                 <option value="{{$page->id}}" >{{$page->name}}</option>
                                             @endforeach

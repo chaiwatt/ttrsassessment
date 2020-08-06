@@ -57,10 +57,6 @@
                                     <label>Criteria</label>
                                     <input type="text"  name="criteria" value="{{old('criteria')}}"  placeholder="เกณฑ์การประเมิน" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label>ค่านำหนัก</label>
-                                    <input type="number" step="0.001" min="0" max="1" name="weight" value="{{old('weight')}}"  placeholder="น้ำหนักการประเมิน" class="form-control">
-                                </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                 </div>

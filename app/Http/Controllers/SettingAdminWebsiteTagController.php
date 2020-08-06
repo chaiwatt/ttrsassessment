@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Tag;
+use App\Helper\CreateSlug;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTagRequest;
 
@@ -24,6 +25,7 @@ class SettingAdminWebsiteTagController extends Controller
     public function CreateSave(CreateTagRequest $request){
         $tag = new Tag();
         $tag->name = $request->tag;
+        $tag->slug = CreateSlug::createSlug($request->tag) ;
         $tag->save();
         return redirect()->route('setting.admin.website.tag')->withSuccess('เพิ่มป้ายกำกับเพจสำเร็จ');
     }
@@ -33,7 +35,8 @@ class SettingAdminWebsiteTagController extends Controller
     }
     public function EditSave(CreateTagRequest $request,$id){
         $tag = Tag::find($id)->update([
-            'name' => $request->tag
+            'name' => $request->tag,
+            'slug' => CreateSlug::createSlug($request->tag) 
         ]);
         return redirect()->route('setting.admin.website.tag')->withSuccess('แก้ไขป้ายกำกับเพจสำเร็จ');
     }

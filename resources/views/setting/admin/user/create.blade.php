@@ -79,8 +79,8 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>อีเมล์<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{old('email')}}"  placeholder="อีเมล์" class="form-control">
+                                            <label>อีเมล<span class="text-danger">*</span></label>
+                                            <input type="text"  name="email" value="{{old('email')}}"  placeholder="อีเมล" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>รหัสผ่าน<span class="text-danger">*</span></label>

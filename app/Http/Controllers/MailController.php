@@ -17,7 +17,7 @@ class MailController extends Controller
         'sendermail' => env('MAIL_FROM_ADDRESS'),
         'sendername' => 'TTRS',
         'title' => 'ทดสอบการส่งเมล์',
-        'message' => 'นี่คือการทดสอบส่งอีเมล์'
+        'message' => 'นี่คือการทดสอบส่งอีเมล'
         ];
         Mail::to($mails)->send(new EmailSystem($data));
     }

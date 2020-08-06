@@ -33,7 +33,7 @@ class EditMiniTbpRequest extends FormRequest
             'contactname.required' => 'ยังไม่ได้กรอกชื่อผู้ติดต่อ',
             'contactlastname.required' => 'ยังไม่ได้กรอกนามสกุลผู้ติดต่อ',
             'contactphone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์ผู้ติดต่อ',
-            'contactemail.required' => 'ยังไม่ได้กรอกอีเมล์ผู้ติดต่อเกณฑ์',
+            'contactemail.required' => 'ยังไม่ได้กรอกอีเมลผู้ติดต่อเกณฑ์',
       ]; 
     }
 }

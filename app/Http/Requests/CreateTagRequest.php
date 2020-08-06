@@ -19,13 +19,13 @@ class CreateTagRequest extends FormRequest
     public function rules()
     {
         return [
-            'tag_id' => 'required'
+            'tag' => 'required'
         ];
     }
     public function messages()
     {
       return  [
-            'tag_id.required' => 'ยังไม่ได้กรอกป้ายชื่อกำกับเพจ'
+            'tag.required' => 'ยังไม่ได้กรอกป้ายชื่อกำกับเพจ'
       ]; 
     }
 }

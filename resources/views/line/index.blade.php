@@ -6,7 +6,7 @@
             <div class="form-group">
                 <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(240)->generate(url('').'/line/linesubscribe/'.Auth::user()->id)) !!} ">
             </div>
-            <a href="{{route('line.subcribe',['id'=> Auth::user()->id])}}" class="btn bg-blue btn-block">หรือคลิกลิงค์</a>.
+            <a href="{{route('line.subcribe',['id'=> Auth::user()->id])}}" class="btn bg-blue btn-block">หรือคลิกลิงก์</a>.
         </div>    
     @endsection
 

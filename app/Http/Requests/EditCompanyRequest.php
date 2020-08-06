@@ -42,7 +42,7 @@ class EditCompanyRequest extends FormRequest
             'industrygroup.required' => 'ยังไม่ได้เลือกกลุ่มธุรกิจ',
             'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
             'fax.required' => 'ยังไม่ได้กรอกแฟ็กซ์',
-            'email.required' => 'ยังไม่ได้กรอกอีเมล์',
+            'email.required' => 'ยังไม่ได้กรอกอีเมล',
             'address.required' => 'ยังไม่ได้กรอกที่อยู่',
             'province.required' => 'ยังไม่ได้เลือกจังหวัด',
             'amphur.required' => 'ยังไม่ได้เลือกอำเภอ',

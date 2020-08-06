@@ -14,6 +14,7 @@ use App\Model\BusinessType;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
+use App\Model\IndustryGroupByIsic;
 use App\Model\RegisteredCapitalType;
 use App\Http\Requests\EditCompanyRequest;
 
@@ -29,6 +30,7 @@ class SettingUserCompanyController extends Controller
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$company->province_id)->get();
         $tambols = Tambol::where('amphur_id',$company->amphur_id)->get();
+        $industrygroupbyisics = IndustryGroupByIsic::get();
         $registeredyear='';
         if(!Empty($companyinfo)){
             $registeredyear = substr(json_decode($companyinfo->getContent(), true)[0]['registerdateth'], -4);
@@ -40,7 +42,8 @@ class SettingUserCompanyController extends Controller
                                         ->withAmphurs($amphurs)
                                         ->withTambols($tambols)
                                         ->withProvinces($provinces)
-                                        ->withRegisteredyear($registeredyear);
+                                        ->withRegisteredyear($registeredyear)
+                                        ->withIndustrygroupbyisics($industrygroupbyisics);
     }
 
     public function EditSave(EditCompanyRequest $request, $id){

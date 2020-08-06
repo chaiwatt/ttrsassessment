@@ -12,6 +12,7 @@ class BusinessPlan extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
+    protected $appends = ['company','businessplanstatus'];
 
     public function getCompanyAttribute(){
         return Company::find($this->company_id);

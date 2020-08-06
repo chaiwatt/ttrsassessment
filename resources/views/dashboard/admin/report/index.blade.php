@@ -4,6 +4,7 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
+
 @stop
 @section('content')
     <!-- Page header -->
@@ -11,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการประเมิน Admin</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายงาน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -19,8 +20,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <span class="breadcrumb-item active">รายการประเมิน</span>
+                    <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
+                    <span class="breadcrumb-item active">รายงาน</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -43,7 +44,7 @@
                         </div>
                         
                         <div>
-                            ผ่านการประเมิน
+                            จำนวนการยื่นขอประเมิน
                             {{-- <div class="font-size-sm opacity-75">489 avg</div> --}}
                         </div>
                     </div>
@@ -69,7 +70,7 @@
                         </div>
                         
                         <div>
-                            กำลังประเมิน
+                            จำนวนยื่น mini Tbp
                             {{-- <div class="font-size-sm opacity-75">$37,578 avg</div> --}}
                         </div>
                     </div>
@@ -92,7 +93,7 @@
                         </div>
                         
                         <div>
-                            รอรับการยืนยัน
+                            จำนวนยื่น full Tbp
                         </div>
                     </div>
 
@@ -102,7 +103,6 @@
 
             </div>
             <div class="col-lg-3">
-
                 <!-- Today's revenue -->
                 <div class="card bg-orange-400">
                     <div class="card-body">
@@ -114,15 +114,11 @@
                         </div>
                         
                         <div>
-                            ไม่ผ่านการประเมิน
-                            {{-- <div class="font-size-sm opacity-75">$37,578 avg</div> --}}
+                            จำนวนที่ได้รับการประเมิน
                         </div>
                     </div>
-
                     <div id="today-revenue"></div>
                 </div>
-                <!-- /today's revenue -->
-
             </div>
         </div>
         <div class="row">
@@ -145,7 +141,8 @@
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
-                                        <th>สถานะ</th> 
+                                        <th>สถานะ</th>
+                                        <th style="width:200px">เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -153,14 +150,111 @@
                                         <td> {{$fulltbp->updatedatth}} </td> 
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td> --- </td>  
+                                        <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
+                                        <td> 
+                                            <a href="{{route('dashboard.admin.report.search.view',['id' => $fulltbp->id])}}" class=" badge bg-primary">รายละเอียด</a>
+                                            <a href="{{route('dashboard.admin.report.search.pdf',['id' => $fulltbp->id])}}" class=" badge bg-teal">PDF</a>
+                                            <a href="{{route('dashboard.admin.report.search.excel',['id' => $fulltbp->id])}}" class=" badge bg-info">EXCEL</a>
+                                        </td> 
                                     @endforeach
                                 </tbody>
                             </table>      
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">จำนวนโครงการต่อการยื่น ปี2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="participate_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">จำนวนโครงการตามเกรดการประเมิน ปี2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="grade_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">โครงการตามกลุ่มอุตสาหกรรม ปี2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="industrygroup_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">จุดประสงค์การประเมิน ปี2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="financial_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">ข้อมูลย้อนหลัง ปี2561-2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="bar_chart"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -193,56 +287,14 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/interaction/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
 <script>
-        var route = {
-            url: "{{ url('/') }}",
-            token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
-        };
-        $( document ).ready(function() {
-            var events = [];
-            getEvent().then(data => {
-                console.log(data);
-                data.forEach(function (event,index) {
-                    events.push({
-                        title: event["summary"],
-                        start: event["start"]
-                    });
-                });
-                console.log(events);
-                var calendarBasicViewElement = document.querySelector('.fullcalendar-basic');
-                if(calendarBasicViewElement) {
-                    var calendarBasicViewInit = new FullCalendar.Calendar(calendarBasicViewElement, {
-                        locale: 'th',
-                        plugins: ["dayGrid", "timeGrid", "list", "interaction", "googleCalendar"],
-                        header: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'dayGridMonth,dayGridWeek,dayGridDay'
-                        },
-                        events: events,
-                        editable: true,
-                        eventLimit: true
-                    }).render();
-                }
-            }).catch(error => {})
-        });
-
-    function getEvent() {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `${route.url}/dashboard/admin/report/getevent`,
-                type: 'POST',
-                headers: {"X-CSRF-TOKEN":route.token},
-                success: function(data) {
-                resolve(data)
-                },
-                error: function(error) {
-                reject(error)
-                },
-            })
-        })
-    }
+    var route = {
+        url: "{{ url('/') }}",
+        token: $('meta[name="csrf-token"]').attr('content'),
+        branchid: "{{Auth::user()->branch_id}}"
+    };
 </script>
 
 @stop

@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EducationBranchesTableSeeder::class);
         $this->call(EducationLevelsTableSeeder::class);
         $this->call(IndustryGroupsTableSeeder::class);
+        $this->call(IndustryGroupByIsicsTableSeeder::class);
         $this->call(RegisteredCapitalTypesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CriteriaGroupsTableSeeder::class);

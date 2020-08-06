@@ -263,6 +263,13 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardAdminReportController@Index')->name('dashboard.admin.report');           
                 Route::post('getevent','DashboardAdminReportController@GetEvent')->name('dashboard.admin.getevent'); 
+                Route::group(['prefix' => 'search'], function(){
+                    Route::get('','DashboardAdminReportSearchController@Index')->name('dashboard.admin.report.search');    
+                    Route::post('getsearch','DashboardAdminReportSearchController@GetSearch')->name('dashboard.admin.report.search.getsearch');          
+                    Route::get('view/{id}','DashboardAdminReportSearchViewController@View')->name('dashboard.admin.report.search.view');          
+                    Route::get('pdf/{id}','DashboardAdminReportSearchPdfController@Pdf')->name('dashboard.admin.report.search.pdf');          
+                    Route::get('excel/{id}','DashboardAdminReportSearchExcelController@Excel')->name('dashboard.admin.report.search.excel');          
+                });
             }); 
             Route::group(['prefix' => 'project'], function(){
                 Route::group(['prefix' => 'fee'], function(){
@@ -313,11 +320,18 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'fulltbp'], function(){
                 Route::get('','DashboardExpertFullTbpController@Index')->name('dashboard.expert.fulltbp');   
                 Route::get('view/{id}','DashboardExpertFullTbpController@View')->name('dashboard.expert.fulltbp.view');      
-            });        
+            });      
+            Route::group(['prefix' => 'report'], function(){
+                Route::get('','DashboardExpertReportController@Index')->name('dashboard.expert.report');   
+                Route::get('view/{id}','DashboardExpertReportController@View')->name('dashboard.expert.report.view');          
+                    Route::get('pdf/{id}','DashboardExpertReportController@Pdf')->name('dashboard.expert.report.pdf');          
+                    Route::get('excel/{id}','DashboardExpertReportController@Excel')->name('dashboard.expert.report.excel');               
+            });    
         }); 
         Route::group(['prefix' => 'company'], function(){
             Route::group(['prefix' => 'report'], function(){
-                Route::get('','DashboardCompanyReportController@Index')->name('dashboard.company.report');           
+                Route::get('','DashboardCompanyReportController@Index')->name('dashboard.company.report');    
+                Route::post('getevent','DashboardCompanyReportController@GetEvent')->name('dashboard.company.report.getevent');         
             });      
             Route::group(['prefix' => 'project'], function(){
                 Route::group(['prefix' => 'assessment'], function(){

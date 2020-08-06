@@ -14,7 +14,7 @@
                         @csrf
                         <input type="hidden" name="token" value="{{ $token }}">
                         <div class="form-group">
-                            <label>อีเมล์แอดเดรส:</label>
+                            <label>อีเมลแอดเดรส:</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">

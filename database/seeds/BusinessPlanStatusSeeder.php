@@ -13,7 +13,7 @@ class BusinessPlanStatusSeeder extends Seeder
     {
         DB::table('business_plan_statuses')->insert([
             [
-                'name' => 'รอการยืนยันให้การประเมิน',
+                'name' => 'อยู่ระหว่างการตรวจสอบ',
                 'progress' => 5
             ],
             [
@@ -33,6 +33,14 @@ class BusinessPlanStatusSeeder extends Seeder
                 'progress' => 25
             ],
             [
+                'name' => 'รอนัดหมายการประเมิน',
+                'progress' => 80
+            ],
+            [
+                'name' => 'อยู่ระหว่างการประเมิน',
+                'progress' => 80
+            ],
+            [
                 'name' => 'รอผลการประเมิน',
                 'progress' => 80
             ],
@@ -47,4 +55,5 @@ class BusinessPlanStatusSeeder extends Seeder
         ]);
     }
 }
+
    

@@ -7,7 +7,7 @@ return [
     'forgotpassword' => 'ลืมรหัสผ่าน',
     'noaccount' => 'ยังไม่มีบัญชี',
     'signout' => 'ออกจากระบบ',
-    'emailus' => 'อีเมล์',
+    'emailus' => 'อีเมล',
     'callus' => 'โทรศัพท์',
     'contactdetail' => 'ข้อมูลติดต่อ',
     'openhour' => 'เวลาทำการ',

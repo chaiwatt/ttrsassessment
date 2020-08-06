@@ -95,8 +95,8 @@
                                             <input type="text"  name="textengthree" value="{{$slide->textengthree}}"  placeholder="ข้อความที่3 ภาษาอังกฤษ" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ลิงค์ URL</label>
-                                            <input type="text"  name="url" value="{{$slide->url}}"  placeholder="ลิงค์ URL" class="form-control">
+                                            <label>ลิงก์ URL</label>
+                                            <input type="text"  name="url" value="{{$slide->url}}"  placeholder="ลิงก์ URL" class="form-control">
                                         </div>
 										<div class="form-group">
 											<label>รูปสไลด์<span class="text-danger">*</span></label>

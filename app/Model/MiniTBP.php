@@ -12,6 +12,7 @@ class MiniTBP extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
+    protected $appends = ['businessplan','prefix','bank','userposition'];
 
     public function getBusinessPlanAttribute(){
         return BusinessPlan::find($this->business_plan_id);

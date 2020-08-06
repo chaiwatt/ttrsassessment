@@ -70,7 +70,7 @@
                 </div>             
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล์">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล">
                     <div class="form-control-feedback">
                         <i class="icon-mention text-muted"></i>
                     </div>
