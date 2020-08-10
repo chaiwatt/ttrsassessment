@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Model\Company;
+use App\Model\FullTbp;
+use App\Model\MiniTBP;
+use App\Model\BusinessPlan;
+use Illuminate\Http\Request;
+use App\Model\ProjectScoring;
+use App\Model\ProjectAssignment;
+use Illuminate\Support\Facades\Auth;
+use App\Model\CriteriaGroupTransaction;
+
+class DashboardAdminProjectAssessmentController extends Controller
+{
+    public function Index(){
+        $auth = Auth::user();
+        $fulltbps = FullTbp::where('status',2)->get();
+        if($auth->user_type_id < 7){
+            $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
+                                            ->orWhere('coleader_id',$auth->id)
+                                            ->pluck('business_plan_id')->toArray();
+            $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        }
+        return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
+    }
+    public function Edit($id){
+        $fulltbp = FullTbp::find($id);
+        $criteriagrouptransactions = CriteriaGroupTransaction::find($fulltbp->criteria_group_id)->get();
+        $projectscorings = ProjectScoring::where('full_tbp_id',$id)
+                                    ->where('user_id',Auth::user()->id)
+                                    ->where('criteria_group_id',$fulltbp->criteria_group_id)->get();
+        return view('dashboard.admin.project.assessment.edit')->withFulltbp($fulltbp)
+                                                        ->withCriteriagrouptransactions($criteriagrouptransactions)
+                                                        ->withProjectscorings($projectscorings);
+    }
+
+    public function EditSave(Request $request, $id){
+        $fulltbp = FullTbp::find($id);
+        foreach ($request->criterias as $key => $criteria) {
+            $check = ProjectScoring::where('full_tbp_id',$fulltbp->id)->where('user_id',Auth::user()->id)->where('criteria_group_id',$fulltbp->criteria_group_id)->where('criteria_id',$key)->first();
+            if(Empty($check)){
+                $projectscoring = new ProjectScoring();
+                $projectscoring->full_tbp_id = $fulltbp->id;
+                $projectscoring->criteria_group_id = $fulltbp->criteria_group_id;
+                $projectscoring->criteria_id = $key;
+                $projectscoring->user_id = Auth::user()->id;
+                $projectscoring->score = $criteria;
+                $projectscoring->sumscore = $criteria*(CriteriaGroupTransaction::where('criteria_group_id',$fulltbp->criteria_group_id)->where('criteria_id',$key)->first()->weight);
+                $projectscoring->save(); 
+            }else{
+                $check->update([
+                    'score' => $criteria,
+                    'sumscore' => $criteria*(CriteriaGroupTransaction::where('criteria_group_id',$fulltbp->criteria_group_id)->where('criteria_id',$key)->first()->weight)
+                ]);
+            }
+        }
+       return redirect()->route('dashboard.admin.project.assessment')->withSuccess('ลงคะแนนสำเร็จ');
+    }
+}

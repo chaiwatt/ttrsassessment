@@ -4,7 +4,9 @@ namespace App\Model;
 
 use App\Model\MiniTBP;
 use App\Model\CriteriaGroup;
+use App\Model\ProjectScoring;
 use App\Helper\DateConversion;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class FullTbp extends Model
@@ -51,5 +53,9 @@ class FullTbp extends Model
 
     public function getCriteriagroupAttribute(){
         return CriteriaGroup::find($this->criteria_group_id);
+    } 
+
+    public function getProjectScoreAttribute(){
+        return ProjectScoring::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->where('criteria_group_id',$this->criteria_group_id)->first();
     } 
 }

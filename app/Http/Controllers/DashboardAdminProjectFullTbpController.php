@@ -57,7 +57,15 @@ use App\Model\FullTbpProjectCertifyAttachment;
 class DashboardAdminProjectFullTbpController extends Controller
 {
     public function Index(){
+        $auth = Auth::user();
         $fulltbps = FullTbp::where('status',2)->get();
+        if($auth->user_type_id < 7){
+            $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
+                                            ->orWhere('coleader_id',$auth->id)
+                                            ->pluck('business_plan_id')->toArray();
+            $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
+            $fullpbts = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        }
         return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps) ;
     }
     public function View($id){

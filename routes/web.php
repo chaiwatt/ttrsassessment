@@ -302,6 +302,11 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('edit/{id}','DashboardAdminProjectProjectAssignmentController@Edit')->name('dashboard.admin.project.projectassignment.edit');  
                     Route::post('editsave/{id}','DashboardAdminProjectProjectAssignmentController@EditSave')->name('dashboard.admin.project.projectassignment.editsave');    
                 }); 
+                Route::group(['prefix' => 'assessment'], function(){
+                    Route::get('','DashboardAdminProjectAssessmentController@Index')->name('dashboard.admin.project.assessment');           
+                    Route::get('edit/{id}','DashboardAdminProjectAssessmentController@Edit')->name('dashboard.admin.project.assessment.edit');
+                    Route::post('editsave/{id}','DashboardAdminProjectAssessmentController@EditSave')->name('dashboard.admin.project.assessment.editsave');
+                }); 
             });  
             Route::group(['prefix' => 'calendar'], function(){
                 Route::get('','DashboardAdminCalendarController@Index')->name('dashboard.admin.calendar');           
