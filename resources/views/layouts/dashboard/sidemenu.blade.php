@@ -24,7 +24,7 @@
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">mini TBP</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">Full TBP</a></li>	   
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ประเมิน</a></li>	 
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
     </ul>
 </li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
@@ -66,12 +66,12 @@
 @endif
 
 @if (Auth::user()->user_type_id ==3)
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.')?'nav-item-expanded nav-item-open':''}}">
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.project')?'nav-item-expanded nav-item-open':''}}">
         <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>โครงการ</span></a>
         <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
             @if (Auth::user()->expertassignment->count() > 0)
-                <li class="nav-item"><a href="{{route('dashboard.expert.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.fulltbp')?'active':''}}">Full TBP</a></li>
-                {{-- <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ประเมิน</a></li>	  --}}
+                <li class="nav-item"><a href="{{route('dashboard.expert.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.fulltbp')?'active':''}}">Full TBP</a></li>
+                {{-- <li class="nav-item"><a href="{{route('dashboard.expert.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.assessment')?'active':''}}">ลงคะแนน</a></li>	  --}}
             @endif
         </ul>
     </li>

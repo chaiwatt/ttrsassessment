@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Helper\EmailBox;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Model\ProjectScoring;
@@ -57,6 +59,29 @@ class DashboardAdminProjectAssessmentController extends Controller
                 ]);
             }
         }
-       return redirect()->route('dashboard.admin.project.assessment')->withSuccess('ลงคะแนนสำเร็จ');
+
+        $businessplan = BusinessPlan::find(MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        $existing_array = ProjectScoring::where('full_tbp_id',$fulltbp->id)->where('criteria_group_id',$fulltbp->criteria_group_id)->distinct('user_id')->pluck('user_id')->toArray();
+        $users = array();
+        $users = User::where('user_type_id','>=',7)->pluck('id')->toArray();
+        array_push($users, $projectassignment->leader_id, $projectassignment->coleader_id);
+        $unique_array = array_diff($users, $existing_array);
+        $mails = array();
+        foreach($users as $user){
+            $_user = User::find($user);
+            $mails[] = $_user->email;
+        }
+        $pending ='';
+        foreach($unique_array as $user){
+            $_user = User::find($user);
+            $pending .= 'คุณ' . $_user->name . '  ' .  $_user->lastname . ',';
+        }
+        
+        EmailBox::send($mails,'TTRS:มีการลงคะแนนโครงการ','เรียนท่านคณะกรรมการ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
+        '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
+        '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
+        '<br><br>ด้วยความนับถือ<br>TTRS');
+        return redirect()->route('dashboard.admin.project.assessment')->withSuccess('ลงคะแนนสำเร็จ');
     }
 }

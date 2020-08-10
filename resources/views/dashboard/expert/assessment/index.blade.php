@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP </span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ประเมินโครงการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -15,9 +15,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการ Full TBP</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <span class="breadcrumb-item active">ประเมินโครงการ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -48,10 +47,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการ Full TBP</h6>
+                        <h6 class="card-title">ประเมินโครงการ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
                                 <span></span>
                             </a>
                         </div>
@@ -61,21 +59,27 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
+                                        <th>วันที่ขอส่ง</th> 
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
-                                        <th>เพิ่มเติม</th>                                                                  
+                                        <th>เพิ่มเติม</th>                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
+                                        <td> {{$fulltbp->updatedatth}} </td> 
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
                                         <td> 
-                                            <a href="{{asset($fulltbp->file)}}" class="badge bg-teal">ดาวน์โหลด</a>
-                                            <a href="{{route('dashboard.expert.fulltbp.view',['id' => $fulltbp->id])}}" class="badge bg-primary">รายละเอียด</a>                                      
+                                            @if (!Empty($fulltbp->projectscore))
+                                                    <a href="{{route('dashboard.expert.project.assessment.edit',['id' => $fulltbp->id])}}" class="badge bg-info">แก้ไขคะแนน</a>
+                                                @else
+                                                    <a href="{{route('dashboard.expert.project.assessment.edit',['id' => $fulltbp->id])}}" class="badge bg-warning">ยังไม่ได้ลงคะแนน</a>
+                                            @endif
+                                            
                                         </td>                                
                                     </tr>
                                     @endforeach
@@ -84,7 +88,6 @@
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
         <!-- /form layouts -->

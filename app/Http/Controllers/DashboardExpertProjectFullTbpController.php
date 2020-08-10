@@ -52,14 +52,14 @@ use App\Model\FullTbpProjectAwardAttachment;
 use App\Model\FullTbpCompanyProfileAttachment;
 use App\Model\FullTbpProjectCertifyAttachment;
 
-class DashboardExpertFullTbpController extends Controller
+class DashboardExpertProjectFullTbpController extends Controller
 {
     public function Index(){
         $expertassignments = ExpertAssignment::where('user_id',Auth::user()->id)
                                             ->where('expert_assignment_status_id',2)
                                             ->pluck('full_tbp_id')->toArray();
         $fulltbps = FullTbp::whereIn('id',$expertassignments)->get();
-        return view('dashboard.expert.fulltbp.index')->withFulltbps($fulltbps) ;
+        return view('dashboard.expert.project.fulltbp.index')->withFulltbps($fulltbps) ;
     }
     public function View($id){
         $businesstypes = BusinessType::get();
@@ -146,3 +146,4 @@ class DashboardExpertFullTbpController extends Controller
                                                 ->withFulltbpcompanydocs($fulltbpcompanydocs);
     }
 }
+

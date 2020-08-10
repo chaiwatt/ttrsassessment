@@ -321,11 +321,22 @@ Route::group(['middleware' => 'auth'], function(){
             }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){
-            Route::get('','DashboardExpertController@Index')->name('dashboard.expert');    
-            Route::group(['prefix' => 'fulltbp'], function(){
-                Route::get('','DashboardExpertFullTbpController@Index')->name('dashboard.expert.fulltbp');   
-                Route::get('view/{id}','DashboardExpertFullTbpController@View')->name('dashboard.expert.fulltbp.view');      
-            });      
+            Route::get('','DashboardExpertController@Index')->name('dashboard.expert');  
+            Route::group(['prefix' => 'project'], function(){
+                // Route::get('','DashboardExpertFullTbpController@Index')->name('dashboard.expert.fulltbp');   
+                // Route::get('view/{id}','DashboardExpertFullTbpController@View')->name('dashboard.expert.fulltbp.view');  
+                Route::group(['prefix' => 'fulltbp'], function(){
+                    Route::get('','DashboardExpertProjectFullTbpController@Index')->name('dashboard.expert.project.fulltbp');   
+                    Route::get('view/{id}','DashboardExpertProjectFullTbpController@View')->name('dashboard.expert.project.fulltbp.view');      
+                });   
+                Route::group(['prefix' => 'assessment'], function(){
+                    Route::get('','DashboardExpertProjectAssessmentController@Index')->name('dashboard.expert.project.assessment');           
+                    Route::get('edit/{id}','DashboardExpertProjectAssessmentController@Edit')->name('dashboard.expert.project.assessment.edit');
+                    Route::post('editsave/{id}','DashboardExpertProjectAssessmentController@EditSave')->name('dashboard.expert.project.assessment.editsave');
+                });    
+            }); 
+            
+    
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardExpertReportController@Index')->name('dashboard.expert.report');   
                 Route::get('view/{id}','DashboardExpertReportController@View')->name('dashboard.expert.report.view');          
