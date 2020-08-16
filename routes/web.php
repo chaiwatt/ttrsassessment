@@ -105,7 +105,22 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('deletefriend','Api\FriendController@DeleteFriend')->name('api.friend.deletefriend'); 
         });
         Route::group(['prefix' => 'assessment'], function(){
-            Route::post('add','Api\AssessmentController@Add')->name('api.assessment.add');          
+            Route::post('add','Api\AssessmentController@Add')->name('api.assessment.add');     
+            Route::group(['prefix' => 'cluster'], function(){
+                Route::post('get','Api\AssessmentClusterController@Get')->name('api.assessment.cluster.get');          
+            });  
+            Route::group(['prefix' => 'subcluster'], function(){
+                Route::post('get','Api\AssessmentSubclusterController@Get')->name('api.assessment.subcluster.get');          
+            });    
+            Route::group(['prefix' => 'extrafactor'], function(){
+                Route::post('get','Api\AssessmentExtrafactorController@Get')->name('api.assessment.extrafactor.get');          
+            });  
+            Route::group(['prefix' => 'subextrafactor'], function(){
+                Route::post('get','Api\AssessmentSubExtrafactorController@Get')->name('api.assessment.subextrafactor.get');          
+            });  
+            Route::group(['prefix' => 'clustertransaction'], function(){
+                Route::post('add','Api\AssessmentClusterTransactionController@Add')->name('api.assessment.clustertransaction.add');          
+            });  
         });
         Route::group(['prefix' => 'hid'], function(){
             Route::post('check','Api\HidController@Check')->name('api.hid.check');           
@@ -257,6 +272,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'googlecalendar'], function(){
             Route::post('getevents','Api\GoogleCalendarController@GetEvents')->name('api.googlecalendar.getevents');
         });
+        
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
@@ -330,10 +346,15 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('view/{id}','DashboardExpertProjectFullTbpController@View')->name('dashboard.expert.project.fulltbp.view');      
                 });   
                 Route::group(['prefix' => 'assessment'], function(){
-                    Route::get('','DashboardExpertProjectAssessmentController@Index')->name('dashboard.expert.project.assessment');           
+                    Route::get('','DashboardExpertProjectAssessmentController@Index')->name('dashboard.expert.project.assessment');   
                     Route::get('edit/{id}','DashboardExpertProjectAssessmentController@Edit')->name('dashboard.expert.project.assessment.edit');
                     Route::post('editsave/{id}','DashboardExpertProjectAssessmentController@EditSave')->name('dashboard.expert.project.assessment.editsave');
                 });    
+                Route::group(['prefix' => 'comment'], function(){
+                    Route::get('','DashboardExpertProjectCommentController@Index')->name('dashboard.expert.project.comment');   
+                    Route::get('edit/{fulltbpid}','DashboardExpertProjectCommentController@Edit')->name('dashboard.expert.project.comment.edit');
+                    Route::post('editsave/{fulltbpid}','DashboardExpertProjectCommentController@EditSave')->name('dashboard.expert.project.comment.editsave');
+                }); 
             }); 
             
     
@@ -588,6 +609,15 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('edit/{id}','SettingAdminAssessmentCriteriaController@Edit')->name('setting.admin.assessment.criteria.edit');           
                     Route::post('editsave/{id}','SettingAdminAssessmentCriteriaController@EditSave')->name('setting.admin.assessment.criteria.editsave'); 
                     Route::get('delete/{id}','SettingAdminAssessmentCriteriaController@Delete')->name('setting.admin.assessment.criteria.delete');  
+                });
+                Route::group(['prefix' => 'cluster'], function(){
+                    Route::get('','SettingAdminAssessmentClusterController@Index')->name('setting.admin.assessment.cluster');           
+                    Route::get('create','SettingAdminAssessmentClusterController@Create')->name('setting.admin.assessment.cluster.create');           
+                    Route::post('createsave','SettingAdminAssessmentClusterController@CreateSave')->name('setting.admin.assessment.cluster.createsave');           
+                    Route::get('edit/{id}','SettingAdminAssessmentClusterController@Edit')->name('setting.admin.assessment.cluster.edit');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentClusterController@EditSave')->name('setting.admin.assessment.cluster.editsave'); 
+                    Route::get('editcluster/{id}','SettingAdminAssessmentClusterController@EditCluster')->name('setting.admin.assessment.cluster.editcluster');           
+                    Route::get('delete/{id}','SettingAdminAssessmentClusterController@Delete')->name('setting.admin.assessment.cluster.delete');  
                 });
             });
         });

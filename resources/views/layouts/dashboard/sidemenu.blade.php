@@ -71,7 +71,8 @@
         <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
             @if (Auth::user()->expertassignment->count() > 0)
                 <li class="nav-item"><a href="{{route('dashboard.expert.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.fulltbp')?'active':''}}">Full TBP</a></li>
-                {{-- <li class="nav-item"><a href="{{route('dashboard.expert.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.assessment')?'active':''}}">ลงคะแนน</a></li>	  --}}
+                {{-- <li class="nav-item"><a href="{{route('dashboard.expert.project.comment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.comment')?'active':''}}">ลงความเห็น</a></li>	  --}}
+                <li class="nav-item"><a href="{{route('dashboard.expert.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
             @endif
         </ul>
     </li>
@@ -130,6 +131,7 @@
             <a href="#" class="nav-link"><span>การประเมิน</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteriagroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">เกณฑ์การประเมิน</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.assessment.cluster')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.cluster')?'active':''}}">เกณฑ์การประเมิน cluster</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">criteria</a></li>		             
             </ul>
         </li>

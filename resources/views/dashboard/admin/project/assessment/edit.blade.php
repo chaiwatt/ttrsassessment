@@ -64,7 +64,7 @@
                                             @endphp
                                             <div class="form-group">
                                                 <label>{{$criteriagrouptransaction->criteria->name}} (น้ำหนัก {{$criteriagrouptransaction->weight}})</label>
-                                                <input type="number" min="0" max="5" name ="criterias[{{$criteriagrouptransaction->criteria_id}}]" value="{{$score}}"  placeholder="กรอกคะแนน (0-5)" class="form-control">
+                                                <input type="text"  name ="criterias[{{$criteriagrouptransaction->criteria_id}}]" value="{{$score}}"  placeholder="กรอกคะแนน (0-5)" class="form-control">
                                             </div>
                                         @endforeach
                                     </fieldset>
