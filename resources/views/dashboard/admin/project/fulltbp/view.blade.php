@@ -1036,6 +1036,7 @@
 							<li class="nav-item"><a href="#left-icon-marketanalysis" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i> การตลาด</a></li>
 							<li class="nav-item"><a href="#left-icon-sell" class="nav-link" data-toggle="tab"><i class="icon-clipboard3 mr-2"></i> ยอดซื้อ/ขาย</a></li>
 							<li class="nav-item"><a href="#left-icon-financial" class="nav-link" data-toggle="tab"><i class="icon-cash3 mr-2"></i> การเงิน</a></li>
+							<li class="nav-item"><a href="#left-icon-timeline" class="nav-link" data-toggle="tab"><i class="icon-history mr-2"></i> TimeLine</a></li>
 						</ul>
 						{{-- <form method="POST" action="{{route('dashboard.company.project.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
 							@csrf --}}
@@ -2338,6 +2339,29 @@
 											</div>
 										</div> --}}
 									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-timeline">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>วันที่</th> 
+												<th>รายละเอียด</th> 
+												{{-- <th>ประเภท</th>  --}}
+												<th>โดย</th>                                                            
+											</tr>
+										</thead>
+										<tbody>
+											@foreach ($timelinehistories->reverse() as $timelinehistory)
+											<tr>    
+												<td> {{$timelinehistory->createdatth}} </td> 
+												<td> {{$timelinehistory->details}} </td>  
+												<td> {{$timelinehistory->user->name}} {{$timelinehistory->user->lastname}} </td>     
+											</tr>
+											@endforeach
+										</tbody>
+									</table>      
 								</div>
 							</div>
 						</div>

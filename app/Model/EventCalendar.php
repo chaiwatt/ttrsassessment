@@ -12,7 +12,7 @@ class EventCalendar extends Model
     protected $guarded = [];
 
     public function getFullTbpAttribute(){
-        return FullTbp::find($this->full_tbp_id)->first();
+        return FullTbp::find($this->full_tbp_id);
     } 
 
     public function getEventdatethAttribute(){

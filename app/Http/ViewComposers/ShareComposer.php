@@ -27,6 +27,7 @@ class ShareComposer
         $tags = Tag::get();
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
+        // $time = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
         $sharepages = Page::paginate(6);
         $sharefrontpage = FrontPage::first();
         $view->withGeneralinfo($generalinfo)

@@ -11,7 +11,7 @@ class ProjectAssignment extends Model
     protected $fillable = [];
     protected $guarded = [];
     public function getBusinessPlanAttribute(){
-        return BusinessPlan::find($this->business_plan_id)->first();
+        return BusinessPlan::find($this->business_plan_id);
     } 
     public function getLeaderAttribute(){
         return User::find($this->leader_id);

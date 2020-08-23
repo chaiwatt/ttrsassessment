@@ -23,6 +23,7 @@ use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
+use App\Model\TimeLineHistory;
 use App\Model\EmployExperience;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
@@ -216,5 +217,5 @@ class DashboardCompanyProjectFullTbpController extends Controller
         Message::sendMessage('ส่งเอกสาร Full TBP','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',7)->first()->id);
         return redirect()->route('dashboard.company.project.fulltbp')->withSuccess('ส่งเอกสาร Full TBP สำเร็จ');
     }
-
+   
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
@@ -44,5 +45,31 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         Message::sendMessage('มอบหมาย Leader โครงการ','เรียน '.User::find($request->leader)->name.'<br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitpb->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->leader)->id);
         Message::sendMessage('มอบหมาย Co-Leader โครงการ','เรียน '.User::find($request->coleader)->name.'<br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitpb->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->coleader)->id);
         return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('Assign สำเร็จ');
+    }
+    public function GetWorkLoadLeader(Request $request){
+        $businessplanids = ProjectAssignment::where('leader_id',$request->userid)->pluck('business_plan_id')->toArray();
+        $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
+        $allprojects = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+
+        $finishbusinessplans = BusinessPlan::whereIn('id',$businessplanids)->where('finished',1)->pluck('id')->toArray();
+        $minitbpids = MiniTBP::whereIn('business_plan_id',$finishbusinessplans)->pluck('id')->toArray();
+        $finishedprojects = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        return response()->json(array(
+            "allprojects" => $allprojects,
+            "finishedprojects" => $finishedprojects
+        ));
+    }
+    public function GetWorkLoadCoLeader(Request $request){
+        $businessplanids = ProjectAssignment::where('coleader_id',$request->userid)->pluck('business_plan_id')->toArray();
+        $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
+        $allprojects = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+
+        $finishbusinessplans = BusinessPlan::whereIn('id',$businessplanids)->where('finished',1)->pluck('id')->toArray();
+        $minitbpids = MiniTBP::whereIn('business_plan_id',$finishbusinessplans)->pluck('id')->toArray();
+        $finishedprojects = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        return response()->json(array(
+            "allprojects" => $allprojects,
+            "finishedprojects" => $finishedprojects
+        ));
     }
 }

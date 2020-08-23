@@ -147,6 +147,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $fulltbp)
+                                    <tr> 
                                         <td> {{$fulltbp->updatedatth}} </td> 
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
@@ -156,6 +157,7 @@
                                             <a href="{{route('dashboard.admin.report.search.pdf',['id' => $fulltbp->id])}}" class=" badge bg-teal">PDF</a>
                                             <a href="{{route('dashboard.admin.report.search.excel',['id' => $fulltbp->id])}}" class=" badge bg-info">EXCEL</a>
                                         </td> 
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>      

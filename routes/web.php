@@ -301,6 +301,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('view/{id}','DashboardAdminProjectMiniTbpController@View')->name('dashboard.admin.project.minitbp.view');  
                     Route::get('approve/{id}','DashboardAdminProjectMiniTbpController@Approve')->name('dashboard.admin.project.minitbp.approve');    
                     Route::get('delete/{id}','DashboardAdminProjectMiniTbpController@Delete')->name('dashboard.admin.project.minitbp.delete');  
+                    Route::post('editapprove','DashboardAdminProjectMiniTbpController@EditApprove')->name('dashboard.admin.project.minitbp.editapprove');    
                 });  
                 Route::group(['prefix' => 'fulltbp'], function(){
                     Route::get('','DashboardAdminProjectFullTbpController@Index')->name('dashboard.admin.project.fulltbp');            
@@ -312,11 +313,14 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('assignexpertsave','DashboardAdminProjectFullTbpController@AssignExpertSave')->name('dashboard.admin.project.fulltbp.assignexpertsave');                     
                     Route::post('assignexpertdelete','DashboardAdminProjectFullTbpController@AssignExpertDelete')->name('dashboard.admin.project.fulltbp.assignexpertdelete');   
                     Route::post('editassignexpert','DashboardAdminProjectFullTbpController@EditAssignExpert')->name('dashboard.admin.project.fulltbp.editassignexpert');   
+                    Route::post('editapprove','DashboardAdminProjectFullTbpController@EditApprove')->name('dashboard.admin.project.fulltbp.editapprove'); 
                 }); 
                 Route::group(['prefix' => 'projectassignment'], function(){
                     Route::get('','DashboardAdminProjectProjectAssignmentController@Index')->name('dashboard.admin.project.projectassignment');           
                     Route::get('edit/{id}','DashboardAdminProjectProjectAssignmentController@Edit')->name('dashboard.admin.project.projectassignment.edit');  
                     Route::post('editsave/{id}','DashboardAdminProjectProjectAssignmentController@EditSave')->name('dashboard.admin.project.projectassignment.editsave');    
+                    Route::post('getworkloadleader','DashboardAdminProjectProjectAssignmentController@GetWorkLoadLeader')->name('dashboard.admin.project.projectassignment.getworkloadleader');    
+                    Route::post('getworkloadcoleader','DashboardAdminProjectProjectAssignmentController@GetWorkLoadCoLeader')->name('dashboard.admin.project.projectassignment.getworkloadcoleader');                       
                 }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardAdminProjectAssessmentController@Index')->name('dashboard.admin.project.assessment');           
@@ -369,6 +373,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardCompanyReportController@Index')->name('dashboard.company.report');    
                 Route::post('getevent','DashboardCompanyReportController@GetEvent')->name('dashboard.company.report.getevent');         
+                Route::post('gettimeline','DashboardCompanyReportController@GetTimeLine')->name('dashboard.company.report.gettimeline'); 
+                Route::post('edittimelinestatus','DashboardCompanyReportController@EditTimeLineStatus')->name('dashboard.company.report.edittimelinestatus'); 
+                
             });      
             Route::group(['prefix' => 'project'], function(){
                 Route::group(['prefix' => 'assessment'], function(){

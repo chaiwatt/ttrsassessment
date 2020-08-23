@@ -47,9 +47,6 @@
         <div class="row">
             <div class="col-md-12">
 				<!-- Colors -->
-
-
-				
             	<div class="card">
 					{{-- <div class="card-header header-elements-inline">
 					
@@ -59,7 +56,8 @@
 						<ul class="nav nav-tabs nav-tabs-highlight">
 							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini TBP</a></li>
 							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ผู้รับผิดชอบ</a></li>
-							<li class="nav-item"><a href="#left-icon-manager" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ลงนาม</a></li>
+							<li class="nav-item"><a href="#left-icon-manager" class="nav-link" data-toggle="tab"><i class="icon-quill4 mr-2"></i> ข้อมูลผู้ลงนาม</a></li>
+							<li class="nav-item"><a href="#left-icon-timeline" class="nav-link" data-toggle="tab"><i class="icon-history mr-2"></i> TimeLine</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="left-icon-minitbp">
@@ -306,6 +304,29 @@
 											<option value="{{$signaturestatus->id}}" @if($minitbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
 										@endforeach
 									</select>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-timeline">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>วันที่</th> 
+												<th>รายละเอียด</th> 
+												{{-- <th>ประเภท</th>  --}}
+												<th>โดย</th>                                                            
+											</tr>
+										</thead>
+										<tbody>
+											@foreach ($timelinehistories->reverse() as $timelinehistory)
+											<tr>    
+												<td> {{$timelinehistory->createdatth}} </td> 
+												<td> {{$timelinehistory->details}} </td>  
+												<td> {{$timelinehistory->user->name}} {{$timelinehistory->user->lastname}} </td>     
+											</tr>
+											@endforeach
+										</tbody>
+									</table>      
 								</div>
 							</div>
 						</div>

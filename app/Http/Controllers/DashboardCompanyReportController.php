@@ -6,6 +6,7 @@ use App\Model\Company;
 use App\Model\BusinessPlan;
 use App\Model\EventCalendar;
 use Illuminate\Http\Request;
+use App\Model\TimeLineHistory;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,4 +32,18 @@ class DashboardCompanyReportController extends Controller
         return collect($_events);
     }
 
+    public function GetTimeLine(Request $request){
+        $timelinehistories = TimeLineHistory::where('owner_id',$request->userid)->orderBy('id','desc')->get();
+        return response()->json($timelinehistories); 
+    }
+
+    public function EditTimeLineStatus(Request $request){
+        TimeLineHistory::find($request->id)->update([
+            'status' => '1'
+        ]);
+
+        $timelinehistories = TimeLineHistory::where('owner_id',$request->userid)->get();
+        return response()->json($timelinehistories); 
+    }
+    
 }

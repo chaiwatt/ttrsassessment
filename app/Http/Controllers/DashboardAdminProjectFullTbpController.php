@@ -23,6 +23,7 @@ use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
+use App\Model\TimeLineHistory;
 use App\Model\EmployExperience;
 use App\Model\ExpertAssignment;
 use App\Model\FullTbpCompanyDoc;
@@ -110,6 +111,9 @@ class DashboardAdminProjectFullTbpController extends Controller
         $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpreturnofinvestment = FullTbpReturnOfInvestment::where('full_tbp_id',$fulltbp->id)->first();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('full_tbp_id',$fulltbp->id)->get();
+        $timelinehistories = TimeLineHistory::where('business_plan_id',$minitbp->business_plan_id)
+                                            ->where('message_type',2)
+                                            ->get();
         return view('dashboard.admin.project.fulltbp.view')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -150,7 +154,8 @@ class DashboardAdminProjectFullTbpController extends Controller
                                                 ->withFulltbpinvestments($fulltbpinvestments)
                                                 ->withFulltbpcosts($fulltbpcosts)
                                                 ->withFulltbpreturnofinvestment($fulltbpreturnofinvestment)
-                                                ->withFulltbpcompanydocs($fulltbpcompanydocs);
+                                                ->withFulltbpcompanydocs($fulltbpcompanydocs)
+                                                ->withTimelinehistories($timelinehistories);
     }
 
     public function AssignGroup($id){
@@ -234,5 +239,37 @@ class DashboardAdminProjectFullTbpController extends Controller
             ]);
         }
         return response()->json($expertassignments); 
+    }
+    public function EditApprove(Request $request){
+        $fulltbp = FullTbp::find($request->id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $_businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $_company = Company::find($_businessplan->company_id);
+        $_user = User::find($_company->user_id);
+        if($request->val == 1){
+            BusinessPlan::find($minitbp->business_plan_id)->update([
+                'business_plan_status_id' => 6
+            ]);
+            EmailBox::send($_user->email,'TTRS:อนุมัติเอกสาร Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full TBP กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('กรอกข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full TBP กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+            $timeLinehistory = new TimeLineHistory();
+            $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+            $timeLinehistory->details = 'เอกสาร Full TBP ของท่านได้รับอนุมัติ';
+            $timeLinehistory->message_type = 2;
+            $timeLinehistory->owner_id = $_company->user_id;
+            $timeLinehistory->user_id = Auth::user()->id;
+            $timeLinehistory->save();
+        }else{
+            EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  '<br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+            $timeLinehistory = new TimeLineHistory();
+            $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+            $timeLinehistory->details = $request->note;
+            $timeLinehistory->user_id = Auth::user()->id;
+            $timeLinehistory->message_type = 2;
+            $timeLinehistory->owner_id = $_company->user_id;
+            $timeLinehistory->save();
+        }
+        return response()->json($fulltbp); 
     }
 }

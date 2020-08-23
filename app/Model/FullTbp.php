@@ -16,7 +16,7 @@ class FullTbp extends Model
     protected $appends = ['minitbp','updatedatth'];
 
     public function getMiniTbpAttribute(){
-        return MiniTBP::find($this->mini_tbp_id)->first();
+        return MiniTBP::find($this->mini_tbp_id);
     } 
 
     public function getYearListAttribute(){

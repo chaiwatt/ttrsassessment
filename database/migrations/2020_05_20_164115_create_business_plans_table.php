@@ -20,15 +20,11 @@ class CreateBusinessPlansTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->unsignedBigInteger('business_plan_status_id')->default(1);
             $table->unsignedBigInteger('business_plan_active_status_id')->default(1);
+            $table->char('finished',0)->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('business_plans');

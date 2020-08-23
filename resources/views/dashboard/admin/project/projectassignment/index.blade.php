@@ -76,7 +76,7 @@
                                 <tbody>
                                     @foreach ($projectassignments as $key => $projectassignment)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        <td> {{$key+1}}</td>
                                         <td> {{$projectassignment->businessplan->code}} </td> 
                                         <td> {{$projectassignment->businessplan->minitbp->project}} </td> 
                                         <td> {{$projectassignment->businessplan->company->name}} </td> 
