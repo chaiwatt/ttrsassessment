@@ -638,6 +638,30 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('editev/{id}','SettingAdminAssessmentEvController@EditCluster')->name('setting.admin.assessment.ev.editcluster');           
                     Route::get('delete/{id}','SettingAdminAssessmentEvController@Delete')->name('setting.admin.assessment.ev.delete');  
                 });
+                Route::group(['prefix' => 'pillar'], function(){
+                    Route::get('','SettingAdminAssessmentPillarController@Index')->name('setting.admin.assessment.pillar'); 
+                    Route::get('create','SettingAdminAssessmentPillarController@Create')->name('setting.admin.assessment.pillar.create');           
+                    Route::post('createsave','SettingAdminAssessmentPillarController@CreateSave')->name('setting.admin.assessment.pillar.createsave');           
+                    Route::get('edit/{id}','SettingAdminAssessmentPillarController@Edit')->name('setting.admin.assessment.pillar.edit');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentPillarController@EditSave')->name('setting.admin.assessment.pillar.editsave'); 
+                    Route::get('delete/{id}','SettingAdminAssessmentPillarController@Delete')->name('setting.admin.assessment.pillar.delete');            
+                });
+                Route::group(['prefix' => 'subpillar'], function(){
+                    Route::get('','SettingAdminAssessmentSubPillarController@Index')->name('setting.admin.assessment.subpillar'); 
+                    Route::get('create','SettingAdminAssessmentSubPillarController@Create')->name('setting.admin.assessment.subpillar.create');           
+                    Route::post('createsave','SettingAdminAssessmentSubPillarController@CreateSave')->name('setting.admin.assessment.subpillar.createsave');           
+                    Route::get('edit/{id}','SettingAdminAssessmentSubPillarController@Edit')->name('setting.admin.assessment.subpillar.edit');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentSubPillarController@EditSave')->name('setting.admin.assessment.subpillar.editsave'); 
+                    Route::get('delete/{id}','SettingAdminAssessmentSubPillarController@Delete')->name('setting.admin.assessment.subpillar.delete');            
+                });
+                Route::group(['prefix' => 'subpillarindex'], function(){
+                    Route::get('','SettingAdminAssessmentSubPillarIndexController@Index')->name('setting.admin.assessment.subpillarindex'); 
+                    Route::get('create','SettingAdminAssessmentSubPillarIndexController@Create')->name('setting.admin.assessment.subpillarindex.create');           
+                    Route::post('createsave','SettingAdminAssessmentSubPillarIndexController@CreateSave')->name('setting.admin.assessment.subpillarindex.createsave');           
+                    Route::get('edit/{id}','SettingAdminAssessmentSubPillarIndexController@Edit')->name('setting.admin.assessment.subpillarindex.edit');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentSubPillarIndexController@EditSave')->name('setting.admin.assessment.subpillarindex.editsave'); 
+                    Route::get('delete/{id}','SettingAdminAssessmentSubPillarIndexController@Delete')->name('setting.admin.assessment.subpillarindex.delete');            
+                });
             });
         });
         Route::group(['prefix' => 'expert'], function(){
