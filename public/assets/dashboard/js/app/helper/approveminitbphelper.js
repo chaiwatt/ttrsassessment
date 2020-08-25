@@ -17,10 +17,9 @@ $('#my_radio_box').change(function(){
 });
 
 $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
-    console.log($("input[name='result']:checked").val());
+    $("#spinicon"+$('#minitbpid').val()).attr("hidden",false);
     MiniTbp.editApprove($('#minitbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
-        var html = ``;
-        console.log('ok test');
+        var html = ``;        
         window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
    }).catch(error => {})
 });

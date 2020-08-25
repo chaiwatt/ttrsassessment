@@ -4,27 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Model\Cluster;
 use Illuminate\Http\Request;
-use App\Model\AssessmentGroup;
+// use App\Model\AssessmentGroup;
 
 class SettingAdminAssessmentClusterController extends Controller
 {
     public function Index(){
-        $assessmentgroups = AssessmentGroup::get();
-        return view('setting.admin.assessment.cluster.index')->withAssessmentgroups($assessmentgroups);
+        $evs = Ev::get();
+        return view('setting.admin.assessment.ev.index')->withEvs($evs);
     }
     public function Create(){
         $clusters = Cluster::get();
-        return view('setting.admin.assessment.cluster.create')->withClusters($clusters);
+        return view('setting.admin.assessment.ev.create')->withClusters($clusters);
     }
     public function CreateSave(Request $request){
-        $assessmentgroup = new AssessmentGroup();
-        $assessmentgroup->name = $request->name;
-        $assessmentgroup->version = $request->version;
-        $assessmentgroup->save();
-        return redirect()->route('setting.admin.assessment.cluster')->withSuccess('เพิ่มรายการสำเร็จ');
+        $ev = new Ev();
+        $ev->name = $request->name;
+        $ev->version = $request->version;
+        $ev->save();
+        return redirect()->route('setting.admin.assessment.ev')->withSuccess('เพิ่มรายการสำเร็จ');
     }
     public function EditCLuster($id){
-        $assessmentgroup = AssessmentGroup::find($id);
-        return view('setting.admin.assessment.cluster.editcluster')->withAssessmentgroup($assessmentgroup);
+        $ev = Ev::find($id);
+        return view('setting.admin.assessment.ev.editcluster')->withAssessmentgroup($assessmentgroup);
     }
 }

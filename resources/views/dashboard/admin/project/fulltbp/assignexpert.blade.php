@@ -18,17 +18,20 @@
                         <div class="form-group">
                             <label>ผู้เชี่ยวชาญ<span class="text-danger">*</span></label>
                             <select id="expert" class="form-control form-control-select2">
+                                <option value="">==เลือกผู้เชี่ยวชาญ==</option>
                                 @foreach ($experts as $expert)
                                     <option value="{{$expert->id}}" >{{$expert->name}} {{$expert->lastname}}</option> 
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group" id="assignedproject">
                         </div>
 					</div>
 				</div>
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_expert" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				<button id="btn_modal_add_expert" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
 			</div>
 		</div>
 	</div>
@@ -38,20 +41,25 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการผู้เชี่ยวชาญ </span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">มอบหมายผู้เชี่ยวชาญ </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+            <div class="header-elements d-none">
+                <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd">ส่งต่อ JD<b><i class="icon-redo2"></i></b></a>
             </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการผู้เชี่ยวชาญ</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <a href="#" class="breadcrumb-item"> Full-TBP</a>
+                    <a href="{{route('dashboard.admin.project.fulltbp')}}" class="breadcrumb-item"> รายการ Full-TBP</a>
+                    <span class="breadcrumb-item active">{{$fulltbp->minitbp->project}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
+
         </div>
     </div>
     <!-- /page header -->
@@ -88,7 +96,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ชื่อ-สกุล</th> 
+                                        <th >ชื่อ-สกุล</th> 
                                         @if (Auth::user()->user_type_id == 7 )
                                             <th>การรับมอบหมาย</th> 
                                         @endif     
@@ -99,7 +107,7 @@
                                 <tbody id="expert_wrapper">
                                     @foreach ($expertassignments as $key => $expertassignment)
                                     <tr>    
-                                        <td> {{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</td> 
+                                        <td class='userid' data-id='{{$expertassignment->user->id}}'> {{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</td> 
                                         @if (Auth::user()->user_type_id == 7 )
                                             <td> <input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
                                         @endif
@@ -128,143 +136,17 @@
     <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switchery.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+    <script src="{{asset('assets/dashboard/js/app/helper/assignexperthelper.js')}}"></script>
     <script>
         var route = {
             url: "{{url('/')}}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            branchid: "{{Auth::user()->branch_id}}",
+            usertypeid: "{{Auth::user()->user_type_id}}",
+            fulltbpid: "{{$fulltbp->id}}",
         };
 
-        $(document).on('click', '#btn_modal_add_expert', function(e) {
-            $.ajax({
-                url: `${route.url}/dashboard/admin/project/fulltbp/assignexpertsave`,  //Server script to process data
-                type: 'POST',
-                headers: {"X-CSRF-TOKEN":route.token},
-                data: {
-                    'id': $('#expert').val(),
-                    'fulltbpid': "{{ $fulltbp->id }}"
-                },
-                beforeSend: function(){
-                    $(".loader").addClass("is-active")
-                },
-                success: function(data){
-                    $(".loader").removeClass("is-active")
-                   
-                    var html = ``;
 
-                    data.forEach(function (expert,index) {
-                        var onlymaster = ``;
-                        var checkstatus = ``;
-                        if(expert.expert_assignment_status_id == 2){
-                            checkstatus =  `checked`;
-                        }
-                        if("{{Auth::user()->user_type_id == 7}}"){
-                            onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
-                        }
-                        html += `<tr >                                        
-                            <td> ${expert.user['name']} ${expert.user['lastname']}</td> 
-                            ${onlymaster}     
-                            <td> ${expert.expertassignmentstatus['name']}</td>                                        
-                            <td> 
-                                <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
-                            </td>
-                        </tr>`
-                        });
-                    $("#expert_wrapper").html(html);
-                }
-            });
-        });
-
-        $(document).on("click",".deleteexpert",function(e){
-            Swal.fire({
-                title: 'คำเตือน!',
-                text: `ต้องการลบรายการ หรือไม่`,
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'ยืนยันลบ',
-                cancelButtonText: 'ยกเลิก',
-                closeOnConfirm: false,
-                closeOnCancel: false
-                }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        url: `${route.url}/dashboard/admin/project/fulltbp/assignexpertdelete`,  //Server script to process data
-                        type: 'POST',
-                        headers: {"X-CSRF-TOKEN":route.token},
-                        data: {
-                            'id': $(this).data('id'),
-                            'fulltbpid': "{{$fulltbp->id}}"
-                        },
-                        success: function(data){
-                            var html = ``;
-                            data.forEach(function (expert,index) {
-                                var onlymaster = ``;
-                                var checkstatus = ``;
-                                if(expert.expert_assignment_status_id == 2){
-                                    checkstatus =  `checked`;
-                                }
-                                if("{{Auth::user()->user_type_id == 7}}"){
-                                    onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
-                                }
-                                html += `<tr >                                        
-                                    <td> ${expert.user['name']} ${expert.user['lastname']}</td>   
-                                    ${onlymaster}      
-                                    <td> ${expert.expertassignmentstatus['name']}</td>                                   
-                                    <td> 
-                                        <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
-                                    </td>
-                                </tr>`
-                                });
-                            $("#expert_wrapper").html(html);
-                        }
-                    });
-                }
-            });
-        });
-
-        $(document).on('change', '.assignexpert', function(e) {
-            var status = 1;
-            if($(this).is(":checked")){
-                status = 2;
-            }
-            $.ajax({
-                url: `${route.url}/dashboard/admin/project/fulltbp/editassignexpert`,  //Server script to process data
-                type: 'POST',
-                headers: {"X-CSRF-TOKEN":route.token},
-                data: {
-                    'id': $(this).data('id'),
-                    'status': status,
-                    'fulltbpid': "{{$fulltbp->id}}"
-                },
-                beforeSend: function(){
-                    $(".loader").addClass("is-active")
-                },
-                success: function(data){
-                    $(".loader").removeClass("is-active")
-                    console.log(data);
-                    var html = ``;
-                    data.forEach(function (expert,index) {
-                        var onlymaster = ``;
-                        var checkstatus = ``;
-                        if(expert.expert_assignment_status_id == 2){
-                            checkstatus =  `checked`;
-                        }
-                        if("{{Auth::user()->user_type_id == 7}}"){
-                            onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
-                        }
-                        html += `<tr >                                        
-                            <td> ${expert.user['name']} ${expert.user['lastname']}</td>   
-                            ${onlymaster}      
-                            <td> ${expert.expertassignmentstatus['name']}</td>                                   
-                            <td> 
-                                <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
-                            </td>
-                        </tr>`
-                        });
-                    $("#expert_wrapper").html(html);
-                }
-            });
-        });
+ 
     </script>
 @stop

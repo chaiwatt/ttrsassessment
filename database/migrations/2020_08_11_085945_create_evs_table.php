@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCriteriasTable extends Migration
+class CreateEvsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateCriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('criterias', function (Blueprint $table) {
+        Schema::create('evs', function (Blueprint $table) {
             $table->id();
-            $table->string('name',250)->comment('เกณฑ์การประเมิน');
+            $table->string('name',250);
+            $table->string('version',10);
+            $table->unsignedBigInteger('ref_assessment_group_id')->nullable();
+            $table->unsignedBigInteger('full_tbp_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateCriteriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criterias');
+        Schema::dropIfExists('evs');
     }
 }

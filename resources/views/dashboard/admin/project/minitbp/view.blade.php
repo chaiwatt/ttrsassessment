@@ -6,7 +6,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่มรายการบัญชี</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">mini TBP: {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
         </div>
@@ -14,10 +14,10 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.admin.dashboard.bankaccount')}}" class="breadcrumb-item"> รายการบัญชี</a>
-                    <span class="breadcrumb-item active">เพิ่มรายการบัญชี</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <a href="#" class="breadcrumb-item"> mini TBP</a>
+                    <a href="{{route('dashboard.admin.project.minitbp')}}" class="breadcrumb-item"> รายการ mini TBP</a>
+                    <span class="breadcrumb-item active">{{$minitbp->project}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

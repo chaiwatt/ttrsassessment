@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการเกณฑ์การประเมิน</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ EV Template</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.assessment.cluster.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มรายการเกณฑ์การประเมิน<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.assessment.ev.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม EV Template<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -20,7 +20,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการเกณฑ์การประเมิน</span>
+                    <a href="#" class="breadcrumb-item"> EV Template</a>
+                    <span class="breadcrumb-item active">รายการ EV Template</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -52,7 +53,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">สถานะการวางแผนธุรกิจ</h6>
+                        <h6 class="card-title">EV Template</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -77,7 +78,7 @@
                                         <td> {{$assessmentgroup->name}} </td>  
                                         <td> {{$assessmentgroup->version}} </td>  
                                         <td> 
-                                            <a href="{{route('setting.admin.assessment.cluster.editcluster',['id' => $assessmentgroup->id])}}" class=" badge bg-primary">แก้ไข weight</a>
+                                            <a href="{{route('setting.admin.assessment.ev.editcluster',['id' => $assessmentgroup->id])}}" class=" badge bg-primary">แก้ไข weight</a>
                                         </td>                                    
                                         <td>   
                                             <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $assessmentgroup->id])}}" class=" badge bg-primary">แก้ไข</a>

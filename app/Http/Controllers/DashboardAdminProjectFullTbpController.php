@@ -181,6 +181,7 @@ class DashboardAdminProjectFullTbpController extends Controller
 
     public function AssignExpertSave(Request $request){
         $check = ExpertAssignment::where('user_id',$request->id)->first();
+        
         if(Empty($check)){
             $expertassignment = new ExpertAssignment();
             $expertassignment->full_tbp_id = $request->fulltbpid;
@@ -188,13 +189,13 @@ class DashboardAdminProjectFullTbpController extends Controller
             $expertassignment->expert_assignment_status_id = 1;
             $expertassignment->save();
         }
-        $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
-        EmailBox::send(User::find($request->id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน '.User::find($request->id)->name.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.expert.report').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน '.User::find($request->id)->name.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href="">คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->id)->id);
-        if(Auth::user()->user_type_id != 7){
-            EmailBox::send(User::where('user_type_id',7)->first()->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน Master <br> Leader ได้มอบหมายให้ ' .User::find($request->id)->name . ' เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน Master <br> Leader ได้มอบหมายให้ ' .User::find($request->id)->name . ' เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',7)->first()->id);
-        }
+        // $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
+        // EmailBox::send(User::find($request->id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน '.User::find($request->id)->name.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.expert.report').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        // Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน '.User::find($request->id)->name.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href="">คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->id)->id);
+        // if(Auth::user()->user_type_id != 7){
+        //     EmailBox::send(User::where('user_type_id',7)->first()->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน Master <br> Leader ได้มอบหมายให้ ' .User::find($request->id)->name . ' เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        //     Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน Master <br> Leader ได้มอบหมายให้ ' .User::find($request->id)->name . ' เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',7)->first()->id);
+        // }
         $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
         if($expertassignments->count() > 0){
             FullTbp::find($request->fulltbpid)->update([
@@ -271,5 +272,24 @@ class DashboardAdminProjectFullTbpController extends Controller
             $timeLinehistory->save();
         }
         return response()->json($fulltbp); 
+    }
+    public function GetExpert(Request $request){
+        $fulltbpids = ExpertAssignment::where('user_id',$request->id)->pluck('full_tbp_id')->toArray();
+        $fulltbps = FullTbp::whereIn('id',$fulltbpids)->get();
+        return response()->json($fulltbps); 
+    }  
+    public function NotifyJd(Request $request){
+        if(!Empty($request->users)){
+            $expert = '';
+            foreach($request->users as $_user){
+                $user = User::find($_user);
+                $expert .= $user->name . ' ' . $user->lastname . '<br>';
+            }
+            $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
+            EmailBox::send(User::where('user_type_id',7)->first()->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน Master <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน Master <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br> เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',7)->first()->id);
+        }
+        $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
+        return response()->json($expertassignments); 
     }
 }

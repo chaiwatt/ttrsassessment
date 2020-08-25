@@ -145,5 +145,15 @@ class DashboardExpertProjectFullTbpController extends Controller
                                                 ->withFulltbpreturnofinvestment($fulltbpreturnofinvestment)
                                                 ->withFulltbpcompanydocs($fulltbpcompanydocs);
     }
+    public function EditAccept(Request $request){
+        ExpertAssignment::where('full_tbp_id', $request->id)
+                                        ->where('user_id',Auth::user()->id)
+                                        ->first()->update([
+                                            'accepted' => $request->value
+                                        ]);
+        $expertassignments = ExpertAssignment::where('full_tbp_id', $request->id)
+                                        ->where('user_id',Auth::user()->id)->get();
+        return response()->json($expertassignments); 
+    }
 }
 

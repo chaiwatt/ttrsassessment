@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Assignment: {{$minitbp->project}}</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">การมอบหมาย Leader: {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -15,10 +15,10 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="{{route('dashboard.admin.project.projectassignment')}}" class="breadcrumb-item"> รายการ Assignment</a>
-                    <span class="breadcrumb-item active">Assignment {{$minitbp->project}}</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <a href="#" class="breadcrumb-item"> การมอบหมาย</a>
+                    <a href="{{route('dashboard.admin.project.projectassignment')}}" class="breadcrumb-item"> รายการมอบหมาย</a>
+                    <span class="breadcrumb-item active">{{$minitbp->project}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

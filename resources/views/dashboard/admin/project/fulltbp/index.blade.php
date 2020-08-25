@@ -54,14 +54,15 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
+
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการ Full TBP</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <a href="#" class="breadcrumb-item"> FullTBP</a>
+                    <span class="breadcrumb-item active">รายการ FullTBP</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -129,7 +130,7 @@
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
                                                     <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                 @else
-                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-warning">ยังไม่ได้อนุมัติ</a>
+                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                             @endif
                                         </td>  
                                         <td> 

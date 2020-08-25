@@ -24,7 +24,7 @@
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-input-styled" name="result" value="2" data-fouc>
-                                        ไม่การอนุมัติ/ให้แก้ไข
+                                        ไม่อนุมัติ/ให้แก้ไข
                                     </label>
                                 </div>
                             </div>
@@ -58,8 +58,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <a href="#" class="breadcrumb-item"> mini TBP</a>
                     <span class="breadcrumb-item active">รายการ mini TBP</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -124,7 +124,7 @@
                                             @if ($minitbp->businessplan->business_plan_status_id > 3)
                                                     <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                 @else
-                                                    <a href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-warning">ยังไม่ได้อนุมัติ</a>
+                                                <a href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                             @endif
                                         </td> 
                                         <td> 
@@ -142,6 +142,7 @@
             </div>
         </div>
         <!-- /form layouts -->
+
     </div>
     <!-- /content area -->
 @endsection

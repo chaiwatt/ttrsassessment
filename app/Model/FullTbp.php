@@ -6,6 +6,7 @@ use App\Model\MiniTBP;
 use App\Model\CriteriaGroup;
 use App\Model\ProjectScoring;
 use App\Helper\DateConversion;
+use App\Model\ExpertAssignment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
@@ -58,4 +59,10 @@ class FullTbp extends Model
     public function getProjectScoreAttribute(){
         return ProjectScoring::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->where('criteria_group_id',$this->criteria_group_id)->first();
     } 
+
+    public function getExpertAssignmentAttribute(){
+        return ExpertAssignment::where('user_id',Auth::user()->id)->first();
+    } 
 }
+
+

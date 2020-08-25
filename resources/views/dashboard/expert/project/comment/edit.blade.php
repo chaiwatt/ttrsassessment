@@ -52,7 +52,7 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs nav-tabs-highlight">
                             {{-- <li class="nav-item"><a href="#left-icon-fulltbp" class="nav-link active" data-toggle="tab"><i class="icon-files-empty mr-2"></i>Full Tbp</a></li> --}}
-                            <li class="nav-item"><a href="#left-icon-overview" class="nav-link" data-toggle="tab"><i class="icon-magic-wand2 mr-2"></i>Overview</a></li>
+                            <li class="nav-item"><a href="#left-icon-overview" class="nav-link active" data-toggle="tab"><i class="icon-magic-wand2 mr-2"></i>Overview</a></li>
                             <li class="nav-item"><a href="#left-icon-management" class="nav-link" data-toggle="tab"><i class="icon-stamp mr-2"></i>Management</a></li>
                             <li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-atom2 mr-2"></i>Technology</a></li>
                             <li class="nav-item"><a href="#left-icon-marketing" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i>Marketing</a></li>
@@ -62,7 +62,7 @@
                         <div class="tab-content">
                             {{-- <div class="tab-pane fade show active" id="left-icon-fulltbp">  
                             </div> --}}
-                            <div class="tab-pane fade" id="left-icon-overview">
+                            <div class="tab-pane fade show active" id="left-icon-overview">
                                 <div class="form-group">
                                     <textarea name="overview" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->overview}}</textarea>
                                 </div>

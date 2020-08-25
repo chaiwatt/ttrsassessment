@@ -107,7 +107,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'assessment'], function(){
             Route::post('add','Api\AssessmentController@Add')->name('api.assessment.add');     
             Route::group(['prefix' => 'cluster'], function(){
-                Route::post('get','Api\AssessmentClusterController@Get')->name('api.assessment.cluster.get');          
+                Route::post('get','Api\AssessmentClusterController@Get')->name('api.assessment.ev.get');          
             });  
             Route::group(['prefix' => 'subcluster'], function(){
                 Route::post('get','Api\AssessmentSubclusterController@Get')->name('api.assessment.subcluster.get');          
@@ -313,6 +313,8 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('assignexpertsave','DashboardAdminProjectFullTbpController@AssignExpertSave')->name('dashboard.admin.project.fulltbp.assignexpertsave');                     
                     Route::post('assignexpertdelete','DashboardAdminProjectFullTbpController@AssignExpertDelete')->name('dashboard.admin.project.fulltbp.assignexpertdelete');   
                     Route::post('editassignexpert','DashboardAdminProjectFullTbpController@EditAssignExpert')->name('dashboard.admin.project.fulltbp.editassignexpert');   
+                    Route::post('getexpert','DashboardAdminProjectFullTbpController@GetExpert')->name('dashboard.admin.project.fulltbp.getexpert');   
+                    Route::post('notifyjd','DashboardAdminProjectFullTbpController@NotifyJd')->name('dashboard.admin.project.fulltbp.notifyjd'); 
                     Route::post('editapprove','DashboardAdminProjectFullTbpController@EditApprove')->name('dashboard.admin.project.fulltbp.editapprove'); 
                 }); 
                 Route::group(['prefix' => 'projectassignment'], function(){
@@ -347,7 +349,8 @@ Route::group(['middleware' => 'auth'], function(){
                 // Route::get('view/{id}','DashboardExpertFullTbpController@View')->name('dashboard.expert.fulltbp.view');  
                 Route::group(['prefix' => 'fulltbp'], function(){
                     Route::get('','DashboardExpertProjectFullTbpController@Index')->name('dashboard.expert.project.fulltbp');   
-                    Route::get('view/{id}','DashboardExpertProjectFullTbpController@View')->name('dashboard.expert.project.fulltbp.view');      
+                    Route::get('view/{id}','DashboardExpertProjectFullTbpController@View')->name('dashboard.expert.project.fulltbp.view');   
+                    Route::post('editaccept','DashboardExpertProjectFullTbpController@EditAccept')->name('dashboard.expert.project.fulltbp.editaccept');    
                 });   
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardExpertProjectAssessmentController@Index')->name('dashboard.expert.project.assessment');   
@@ -617,14 +620,23 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','SettingAdminAssessmentCriteriaController@EditSave')->name('setting.admin.assessment.criteria.editsave'); 
                     Route::get('delete/{id}','SettingAdminAssessmentCriteriaController@Delete')->name('setting.admin.assessment.criteria.delete');  
                 });
-                Route::group(['prefix' => 'cluster'], function(){
-                    Route::get('','SettingAdminAssessmentClusterController@Index')->name('setting.admin.assessment.cluster');           
-                    Route::get('create','SettingAdminAssessmentClusterController@Create')->name('setting.admin.assessment.cluster.create');           
-                    Route::post('createsave','SettingAdminAssessmentClusterController@CreateSave')->name('setting.admin.assessment.cluster.createsave');           
-                    Route::get('edit/{id}','SettingAdminAssessmentClusterController@Edit')->name('setting.admin.assessment.cluster.edit');           
-                    Route::post('editsave/{id}','SettingAdminAssessmentClusterController@EditSave')->name('setting.admin.assessment.cluster.editsave'); 
-                    Route::get('editcluster/{id}','SettingAdminAssessmentClusterController@EditCluster')->name('setting.admin.assessment.cluster.editcluster');           
-                    Route::get('delete/{id}','SettingAdminAssessmentClusterController@Delete')->name('setting.admin.assessment.cluster.delete');  
+                // Route::group(['prefix' => 'cluster'], function(){
+                //     Route::get('','SettingAdminAssessmentClusterController@Index')->name('setting.admin.assessment.cluster');           
+                //     Route::get('create','SettingAdminAssessmentClusterController@Create')->name('setting.admin.assessment.cluster.create');           
+                //     Route::post('createsave','SettingAdminAssessmentClusterController@CreateSave')->name('setting.admin.assessment.cluster.createsave');           
+                //     Route::get('edit/{id}','SettingAdminAssessmentClusterController@Edit')->name('setting.admin.assessment.cluster.edit');           
+                //     Route::post('editsave/{id}','SettingAdminAssessmentClusterController@EditSave')->name('setting.admin.assessment.cluster.editsave'); 
+                //     Route::get('editcluster/{id}','SettingAdminAssessmentClusterController@EditCluster')->name('setting.admin.assessment.cluster.editcluster');           
+                //     Route::get('delete/{id}','SettingAdminAssessmentClusterController@Delete')->name('setting.admin.assessment.cluster.delete');  
+                // });
+                Route::group(['prefix' => 'ev'], function(){
+                    Route::get('','SettingAdminAssessmentEvController@Index')->name('setting.admin.assessment.ev');           
+                    Route::get('create','SettingAdminAssessmentEvController@Create')->name('setting.admin.assessment.ev.create');           
+                    Route::post('createsave','SettingAdminAssessmentEvController@CreateSave')->name('setting.admin.assessment.ev.createsave');           
+                    Route::get('edit/{id}','SettingAdminAssessmentEvController@Edit')->name('setting.admin.assessment.ev.edit');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentEvController@EditSave')->name('setting.admin.assessment.ev.editsave'); 
+                    Route::get('editev/{id}','SettingAdminAssessmentEvController@EditCluster')->name('setting.admin.assessment.ev.editcluster');           
+                    Route::get('delete/{id}','SettingAdminAssessmentEvController@Delete')->name('setting.admin.assessment.ev.delete');  
                 });
             });
         });

@@ -7,18 +7,23 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการมอบหมาย</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ EV Template</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+            <div class="header-elements d-none">
+                <a href="{{route('setting.admin.assessment.ev.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม EV Template<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="#" class="breadcrumb-item"> การมอบหมาย</a>
-                    <span class="breadcrumb-item active">รายการมอบหมาย</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
+                    <a href="#" class="breadcrumb-item"> EV Template</a>
+                    <span class="breadcrumb-item active">รายการ EV Template</span>
                 </div>
+
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -48,7 +53,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการ Assignment</h6>
+                        <h6 class="card-title">EV Template</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -61,49 +66,24 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px">#</th> 
-                                        <th>เลขที่โครงการ</th> 
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th>Leader</th>
-                                        <th>Co-Leader</th>
-                                        <th>สถานะ</th>
-                                        @if (Auth::user()->user_type_id>=7)
-                                            <th>เพิ่มเติม</th> 
-                                        @endif                             
+                                        <th>ชื่อรายการ</th> 
+                                        <th>เวอร์ชั่น</th>  
+                                        <th>Criteria</th>                              
+                                        <th style="width:200px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($projectassignments as $key => $projectassignment)
+                                    @foreach ($evs as $key => $ev)
                                     <tr>    
-                                        <td> {{$key+1}}</td>
-                                        <td> {{$projectassignment->businessplan->code}} </td> 
-                                        <td> {{$projectassignment->businessplan->minitbp->project}} </td> 
-                                        <td> {{$projectassignment->businessplan->company->name}} </td> 
+                                        <td> {{$ev->name}} </td>  
+                                        <td> {{$ev->version}} </td>  
                                         <td> 
-                                            @if (!Empty($projectassignment->leader))
-                                                {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
-                                            @endif
-                                        </td>  
-                                        <td> 
-                                            @if (!Empty($projectassignment->coleader))
-                                                {{$projectassignment->coleader->prefix->name}}{{$projectassignment->coleader->name}} {{$projectassignment->coleader->lastname}}
-                                            @endif
-                                           
-                                        </td> 
-                                        <td>
-                                            @if ($projectassignment->leader_id == null)
-                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ยืนยัน</span>
-                                                @else
-                                                <span class="badge badge-flat border-success text-success-600">ยืนยันแล้ว</span>
-                                            @endif
+                                            <a href="{{route('setting.admin.assessment.ev.editcluster',['id' => $ev->id])}}" class=" badge bg-primary">แก้ไข weight</a>
+                                        </td>                                    
+                                        <td>   
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $ev->id])}}" class=" badge bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $ev->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>
-                                        @if (Auth::user()->user_type_id>=7)
-                                            <td> 
-                                                <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
-                                            </td>    
-                                        @endif
-                               
                                     </tr>
                                     @endforeach
                                 </tbody>

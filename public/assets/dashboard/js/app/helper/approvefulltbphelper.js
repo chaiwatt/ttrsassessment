@@ -16,6 +16,7 @@ $('#my_radio_box').change(function(){
 });
 
 $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
+    $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
     FullTbp.editApprove($('#fulltbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
         var html = ``;
         console.log('ok test');

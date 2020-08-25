@@ -19,7 +19,7 @@
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>โครงการ</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">Assignment</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">การมอบหมาย</a></li>     
         <li class="nav-item"><a href="{{route('dashboard.admin.project.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.businessplan')?'active':''}}">ขอรับการประเมิน</a></li>     
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">mini TBP</a></li>	
@@ -131,7 +131,7 @@
             <a href="#" class="nav-link"><span>การประเมิน</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteriagroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">เกณฑ์การประเมิน</a></li>		             
-                <li class="nav-item"><a href="{{route('setting.admin.assessment.cluster')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.cluster')?'active':''}}">เกณฑ์การประเมิน cluster</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.assessment.ev')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.ev')?'active':''}}">EV Template</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">criteria</a></li>		             
             </ul>
         </li>

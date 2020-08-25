@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssessmentGroupsTable extends Migration
+class CreateSubPillaIndicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAssessmentGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assessment_groups', function (Blueprint $table) {
+        Schema::create('sub_pilla_indices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('sub_pilla_id');
             $table->string('name',250);
-            $table->string('version',10);
-            $table->unsignedBigInteger('ref_assessment_group_id')->nullable();
-            $table->unsignedBigInteger('full_tbp_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateAssessmentGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assessment_groups');
+        Schema::dropIfExists('sub_pilla_indices');
     }
 }
