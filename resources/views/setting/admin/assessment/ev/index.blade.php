@@ -78,11 +78,11 @@
                                         <td> {{$ev->name}} </td>  
                                         <td> {{$ev->version}} </td>  
                                         <td> 
-                                            <a href="{{route('setting.admin.assessment.ev.editcluster',['id' => $ev->id])}}" class=" badge bg-primary">แก้ไข weight</a>
+                                            <a href="{{route('setting.admin.assessment.ev.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข weight</a>
                                         </td>                                    
                                         <td>   
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $ev->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $ev->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.assessment.ev.edit',['id' => $ev->id])}}" class="btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.assessment.ev.delete',['id' => $ev->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach
@@ -91,7 +91,6 @@
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
         <!-- /form layouts -->

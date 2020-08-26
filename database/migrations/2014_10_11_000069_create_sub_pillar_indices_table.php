@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCriteriasTable extends Migration
+class CreateSubPillarIndicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateCriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('criterias', function (Blueprint $table) {
+        Schema::create('sub_pillar_indices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sub_pillar_index_id');
-            $table->string('name',250)->comment('เกณฑ์การประเมิน');
+            $table->unsignedBigInteger('sub_pillar_id');
+            $table->string('name',250);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateCriteriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criterias');
+        Schema::dropIfExists('sub_pillar_indices');
     }
 }

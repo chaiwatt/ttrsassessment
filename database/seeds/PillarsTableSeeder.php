@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PillasTableSeeder extends Seeder
+class PillarsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class PillasTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('pillas')->insert([
+        DB::table('pillars')->insert([
             [
                 'name' => 'การจัดการ',
                 'percent' => 25

@@ -30,9 +30,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPositionsTableSeeder::class);
         $this->call(SocialLoginStatusesTableSeeder::class);
         $this->call(EvTypesTableSeeder::class);
-        $this->call(PillasTableSeeder::class);
-        $this->call(SubPillasTableSeeder::class);
-        $this->call(SubPillaIndexsTableSeeder::class); 
+        $this->call(PillarsTableSeeder::class);
+        $this->call(SubPillarsTableSeeder::class);
+        $this->call(SubPillarIndicesTableSeeder::class); 
+        $this->call(IndexTypesTableSeeder::class);
         $this->call(SignatureStatusesTableSeeder::class);
         $this->call(PaymentStatusesSeeder::class);
         $this->call(ExpertAssignmentStatusesTableSeeder::class);

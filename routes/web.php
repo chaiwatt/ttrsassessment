@@ -121,6 +121,20 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'clustertransaction'], function(){
                 Route::post('add','Api\AssessmentClusterTransactionController@Add')->name('api.assessment.clustertransaction.add');          
             });  
+            Route::group(['prefix' => 'ev'], function(){
+                Route::group(['prefix' => 'pillar'], function(){
+                    Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
+                }); 
+                Route::group(['prefix' => 'subpillar'], function(){
+                    Route::post('getsubpillar','Api\AssessmentEvSubPillarController@GetSubpillar')->name('api.assessment.ev.subpillar.getsubpillar');          
+                    Route::post('getsubpillarindex','Api\AssessmentEvSubPillarController@GetSubPillarIndex')->name('api.assessment.ev.subpillar.getsubpillarindex');          
+                    Route::post('getcriteria','Api\AssessmentEvSubPillarController@GetCriteria')->name('api.assessment.ev.subpillar.getcriteria');          
+                    
+                }); 
+                // Route::group(['prefix' => 'subpillarindex'], function(){
+                //     Route::post('getsubpillarindex','Api\AssessmentEvSubPillarIndexController@GetSubpillarIndex')->name('api.assessment.ev.subpillarindex.getsubpillarindex');          
+                // }); 
+            });  
         });
         Route::group(['prefix' => 'hid'], function(){
             Route::post('check','Api\HidController@Check')->name('api.hid.check');           
@@ -629,13 +643,20 @@ Route::group(['middleware' => 'auth'], function(){
                 //     Route::get('editcluster/{id}','SettingAdminAssessmentClusterController@EditCluster')->name('setting.admin.assessment.cluster.editcluster');           
                 //     Route::get('delete/{id}','SettingAdminAssessmentClusterController@Delete')->name('setting.admin.assessment.cluster.delete');  
                 // });
+                Route::group(['prefix' => 'evportion'], function(){
+                    Route::get('','SettingAdminAssessmentEvPortionController@Index')->name('setting.admin.assessment.evportion');           
+                    Route::get('edit/{id}','SettingAdminAssessmentEvPortionController@Edit')->name('setting.admin.assessment.evportion.edit');           
+                    Route::post('editsave/{id}','SettingAdminAssessmentEvPortionController@EditSave')->name('setting.admin.assessment.evportion.editsave'); 
+                    Route::get('editev/{id}','SettingAdminAssessmentEvPortionController@EditEv')->name('setting.admin.assessment.evportion.editev');           
+                    Route::get('delete/{id}','SettingAdminAssessmentEvPortionController@Delete')->name('setting.admin.assessment.evportion.delete');  
+                });
                 Route::group(['prefix' => 'ev'], function(){
                     Route::get('','SettingAdminAssessmentEvController@Index')->name('setting.admin.assessment.ev');           
                     Route::get('create','SettingAdminAssessmentEvController@Create')->name('setting.admin.assessment.ev.create');           
                     Route::post('createsave','SettingAdminAssessmentEvController@CreateSave')->name('setting.admin.assessment.ev.createsave');           
                     Route::get('edit/{id}','SettingAdminAssessmentEvController@Edit')->name('setting.admin.assessment.ev.edit');           
                     Route::post('editsave/{id}','SettingAdminAssessmentEvController@EditSave')->name('setting.admin.assessment.ev.editsave'); 
-                    Route::get('editev/{id}','SettingAdminAssessmentEvController@EditCluster')->name('setting.admin.assessment.ev.editcluster');           
+                    Route::get('editev/{id}','SettingAdminAssessmentEvController@EditEv')->name('setting.admin.assessment.ev.editev');           
                     Route::get('delete/{id}','SettingAdminAssessmentEvController@Delete')->name('setting.admin.assessment.ev.delete');  
                 });
                 Route::group(['prefix' => 'pillar'], function(){

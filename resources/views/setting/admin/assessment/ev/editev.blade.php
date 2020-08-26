@@ -12,14 +12,70 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
+                    <input type="text" id="evid" value="{{$ev->id}}" hidden>
+                        <form class="wizard-form steps-basic" action="#" >
+                            <h6>Pillar</h6>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" id="cluster_wrapper">
+                                            <select name="pillar" id="pillar" data-placeholder="Pillar" class="form-control form-control-select2" >
+                                            </select> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+    
+                            <h6>Sub Pillar</h6>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select name="subpillar" id="subpillar" data-placeholder="Sub Pillar" class="form-control form-control-select2" >
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+    
+                            <h6>Index</h6>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select name="subpillarindex" id="subpillarindex" data-placeholder="Index" class="form-control form-control-select2" >
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">ประเภท Index</label>
+                                            <select name="indextype" id="indextype" data-placeholder="Index" class="form-control form-control-select2" >
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+    
+                            <h6>Criteria</h6>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <select name="criteria" id="criteria" data-placeholder="Index" class="form-control form-control-select2" multiple >
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    {{-- </div> --}}
                     <div class="row">
-                        <input type="text" id="assessmentgroupid" value="{{$assessmentgroup->id}}" hidden>
+                        <input type="text" id="assessmentgroupid" value="{{$ev->id}}" hidden>
                         <div class="col-md-12">
-                            <div class="form-group" id="cluster_wrapper">
-                                <label>Cluster<span class="text-danger">*</span></label>
-                                <select name="cluster" id="cluster" data-placeholder="Cluster" class="form-control form-control-select2" >
-                                </select> 
-                            </div>
+
                             <div class="form-group" id="subcluster_wrapper" hidden>
                                 <div class="row">
                                     <div class="col-md-8">
@@ -64,10 +120,10 @@
                         </div>
                     </div>
                 </div>           
-                <div class="modal-footer">
+                {{-- <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
                     <button id="btn_modal_add_clustergroup" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -77,7 +133,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$assessmentgroup->name}}</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -89,7 +145,7 @@
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
                     <a href="#" class="breadcrumb-item"> EV Template</a>
                     <a href="{{route('setting.admin.assessment.ev')}}" class="breadcrumb-item"> รายการ EV Template</a>
-                    <span class="breadcrumb-item active">{{$assessmentgroup->name}}</span>
+                    <span class="breadcrumb-item active">{{$ev->name}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -123,11 +179,11 @@
 					<div class="card-body">
                         <div class="form-group">
                             <label>ชื่อรายการ</label>
-                            <input type="text"  name="name" id="name" value="{{$assessmentgroup->name}}"  placeholder="ชื่อรายการ" class="form-control">
+                            <input type="text"  name="name" id="name" value="{{$ev->name}}"  placeholder="ชื่อรายการ" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>เวอร์ชั่น</label>
-                            <input type="text" name="version" value="{{$assessmentgroup->version}}"  placeholder="เวอร์ชั่น" class="form-control" readonly>
+                            <input type="text" name="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control" readonly>
                         </div>
                         <div class="form-group">	
                             <button type="button" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
@@ -158,12 +214,28 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/clusterhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/evhelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        $('.steps-basic').steps({
+            headerTag: 'h6',
+            bodyTag: 'fieldset',
+            transitionEffect: 'fade',
+            titleTemplate: '<span class="number">#index#</span> #title#',
+            labels: {
+                previous: '<i class="icon-arrow-left13 mr-2" /> กลับ',
+                next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
+                finish: 'เพิ่ม Criteria <i class="icon-arrow-right14 ml-2" />'
+            },
+            onFinished: function (event, currentIndex) {
+                // alert('Form submitted.');
+                console.log('ok');
+            }
+        });
     </script>
 @stop

@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่ม EV Template</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{$ev->name}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -19,7 +19,7 @@
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
                     <a href="#" class="breadcrumb-item"> EV Template</a>
                     <a href="{{route('setting.admin.assessment.ev')}}" class="breadcrumb-item"> รายการ EV Template</a>
-                    <span class="breadcrumb-item active">เพิ่ม EV Template</span>
+                    <span class="breadcrumb-item active">{{$ev->name}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -51,16 +51,16 @@
 				<!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.assessment.ev.createsave')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.assessment.ev.editsave',['id' => $ev->id])}}" enctype="multipart/form-data">
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
                                     <label>ชื่อ EV</label>
-                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
+                                    <input type="text"  name="name" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>เวอร์ชั่น</label>
-                                    <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                    <input type="text" name="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

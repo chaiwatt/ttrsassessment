@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubPillaIndicesTable extends Migration
+class CreateSubPillarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSubPillaIndicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_pilla_indices', function (Blueprint $table) {
+        Schema::create('sub_pillars', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sub_pilla_id');
+            $table->unsignedBigInteger('pillar_id');
             $table->string('name',250);
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateSubPillaIndicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_pilla_indices');
+        Schema::dropIfExists('sub_pillars');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubPilla extends Model
+class IndexType extends Model
 {
     //
 }
