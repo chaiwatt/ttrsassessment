@@ -2,9 +2,15 @@
 
 namespace App\Model;
 
+use App\Model\Pillar;
 use Illuminate\Database\Eloquent\Model;
 
 class SubPillar extends Model
 {
-    //
+    protected $fillable = [];
+    protected $guarded = [];
+
+    public function getPillarAttribute(){
+        return Pillar::find($this->pillar_id);
+    } 
 }
