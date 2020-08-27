@@ -122,6 +122,8 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\AssessmentClusterTransactionController@Add')->name('api.assessment.clustertransaction.add');          
             });  
             Route::group(['prefix' => 'ev'], function(){
+                Route::post('addevchecklist','Api\AssessmentEvController@AddEvChecklist')->name('api.assessment.ev.addevchecklist');          
+                Route::post('addevgrading','Api\AssessmentEvController@AddEvGrading')->name('api.assessment.ev.addevgrading'); 
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
                 }); 
@@ -129,7 +131,6 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('getsubpillar','Api\AssessmentEvSubPillarController@GetSubpillar')->name('api.assessment.ev.subpillar.getsubpillar');          
                     Route::post('getsubpillarindex','Api\AssessmentEvSubPillarController@GetSubPillarIndex')->name('api.assessment.ev.subpillar.getsubpillarindex');          
                     Route::post('getcriteria','Api\AssessmentEvSubPillarController@GetCriteria')->name('api.assessment.ev.subpillar.getcriteria');          
-                    
                 }); 
                 // Route::group(['prefix' => 'subpillarindex'], function(){
                 //     Route::post('getsubpillarindex','Api\AssessmentEvSubPillarIndexController@GetSubpillarIndex')->name('api.assessment.ev.subpillarindex.getsubpillarindex');          

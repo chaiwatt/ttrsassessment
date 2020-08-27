@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" id="evid" value="{{$ev->id}}" hidden>
-                        <form class="wizard-form steps-basic" action="#" >
+                        <form class="wizard-form steps-basic" action="#" data-fouc>
                             <h6>Pillar</h6>
                             <fieldset>
                                 <div class="row">
@@ -47,6 +47,8 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">ประเภท Index</label>
@@ -55,11 +57,71 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row" id="grade_wrapper" hidden>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>เกรด A</label>
+                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>เกรด B</label>
+                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>เกรด C</label>
+                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>เกรด D</label>
+                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>เกรด E</label>
+                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>เกรด F</label>
+                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </fieldset>
     
                             <h6>Criteria</h6>
                             <fieldset>
-                                <div class="row">
+                                <div class="row" id="criteria_wrapper">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-group">
@@ -189,17 +251,18 @@
                             <button type="button" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-bordered table-striped" id="criteriatable">
                                 <thead>
                                     <tr>
-                                        <th>Cluster</th>  
-                                        <th>Sub Cluster</th>                                                                                    
-                                        <th>Extra Factor</th>       
-                                        <th>Sub Extractor</th>  
+                                        <th>Pillar</th>  
+                                        <th>Sub Pillar</th>   
+                                        <th>Index</th>                                                                                   
+                                        <th>ประเภท</th>       
+                                        <th>Criteria</th>  
                                         <th>เพิ่มเติม</th>    
                                     </tr>
                                 </thead>
-                                <tbody id="cluster_transaction_wrapper_tr">    
+                                <tbody id="criteria_transaction_wrapper_tr">    
                                 </tbody>
                             </table>
                         </div>
@@ -222,20 +285,7 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
-        $('.steps-basic').steps({
-            headerTag: 'h6',
-            bodyTag: 'fieldset',
-            transitionEffect: 'fade',
-            titleTemplate: '<span class="number">#index#</span> #title#',
-            labels: {
-                previous: '<i class="icon-arrow-left13 mr-2" /> กลับ',
-                next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
-                finish: 'เพิ่ม Criteria <i class="icon-arrow-right14 ml-2" />'
-            },
-            onFinished: function (event, currentIndex) {
-                // alert('Form submitted.');
-                console.log('ok');
-            }
-        });
+
+
     </script>
 @stop
