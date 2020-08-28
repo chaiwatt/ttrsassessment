@@ -685,6 +685,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('edit/{id}','SettingAdminAssessmentSubPillarIndexController@Edit')->name('setting.admin.assessment.subpillarindex.edit');           
                     Route::post('editsave/{id}','SettingAdminAssessmentSubPillarIndexController@EditSave')->name('setting.admin.assessment.subpillarindex.editsave'); 
                     Route::get('delete/{id}','SettingAdminAssessmentSubPillarIndexController@Delete')->name('setting.admin.assessment.subpillarindex.delete');            
+                    Route::post('getsubpillar','SettingAdminAssessmentSubPillarIndexController@GetSubPillar')->name('setting.admin.assessment.subpillarindex.getsubpillar');            
                 });
             });
         });

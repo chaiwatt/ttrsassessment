@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{$subpillar->name}}</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{$subpillarindex->name}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,9 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> Sub Pillar</a>
-                    <a href="{{route('setting.admin.assessment.subpillar')}}" class="breadcrumb-item"> รายการ Sub Pillar</a>
-                    <span class="breadcrumb-item active">{{$subpillar->name}}</span>
+                    <a href="#" class="breadcrumb-item"> Sub Pillar Index</a>
+                    <a href="{{route('setting.admin.assessment.subpillarindex')}}" class="breadcrumb-item"> รายการ Sub Pillar Index</a>
+                    <span class="breadcrumb-item active">{{$subpillarindex->name}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -64,7 +64,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Sub Pillar</label>
-                                    <input type="text" name="subpillar" value="{{$subpillar->name}}"  placeholder="ร้อยละ" class="form-control">
+                                        <select name="pillarid" id="pillar" aria-placeholder="pillar" class="form-control form-control-select2">
+                                            @foreach ($pillars as $pillar)
+                                            <option value="{{$pillar->id}}" @if ($subpillar->pillar_id == $pillar->id) selected @endif>{{$pillar->name}}</option>
+                                            @endforeach
+                                        </select>
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

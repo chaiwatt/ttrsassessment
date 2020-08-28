@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{$subpillar->name}}</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่ม Sub Pillar Index</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -18,8 +18,8 @@
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
                     <a href="#" class="breadcrumb-item"> Sub Pillar</a>
-                    <a href="{{route('setting.admin.assessment.subpillar')}}" class="breadcrumb-item"> รายการ Sub Pillar</a>
-                    <span class="breadcrumb-item active">{{$subpillar->name}}</span>
+                    <a href="{{route('setting.admin.assessment.subpillarindex')}}" class="breadcrumb-item"> รายการ Sub Pillar Index</a>
+                    <span class="breadcrumb-item active">เพิ่ม Sub Pillar Index</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -51,20 +51,26 @@
 				<!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.assessment.subpillar.editsave',['id' => $subpillar->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.assessment.subpillarindex.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
                                     <label>Pillar</label>
-                                        <select name="pillarid" id="pillar" aria-placeholder="pillar" class="form-control form-control-select2">
+                                        <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-select2">
+                                            <option value="0">==เลือก Pillar==</option>
                                             @foreach ($pillars as $pillar)
-                                            <option value="{{$pillar->id}}" @if ($subpillar->pillar_id == $pillar->id) selected @endif>{{$pillar->name}}</option>
+                                                <option value="{{$pillar->id}}">{{$pillar->name}}</option>
                                             @endforeach
                                         </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Sub Pillar</label>
-                                    <input type="text" name="subpillar" value="{{$subpillar->name}}"  placeholder="ร้อยละ" class="form-control">
+                                        <select name="subpillar" id="subpillar" aria-placeholder="subpillar" class="form-control form-control-select2">
+                                        </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sub Pillar Index</label>
+                                    <input type="text" name="subpillarindex" value="{{old('subpillar')}}"  placeholder="subpillar" class="form-control">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -82,4 +88,43 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+    <script>
+        var route = {
+            url: "{{ url('/') }}",
+            token: $('meta[name="csrf-token"]').attr('content'),
+            branchid: "{{Auth::user()->branch_id}}"
+        };
+
+        $(document).on('change', '#pillar', function(e) {
+            console.log($(this).val());
+            var html ='';
+            getSubpillar($(this).val()).then(data => {
+                console.log (data);
+                data.forEach(function (ev,index) {
+                        html += `<option value="${ev['id']}" >${ev['name']}</option>`
+                    });
+                $("#subpillar").html(html);
+                // $("#subpillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+            }).catch(error => {})
+        });
+
+        function getSubpillar(pillar){
+            return new Promise((resolve, reject) => {
+                    $.ajax({
+                    url: `${route.url}/setting/admin/assessment/subpillarindex/getsubpillar`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    data: {
+                        pillar : pillar
+                    },
+                    success: function(data) {
+                        resolve(data)
+                    },
+                    error: function(error) {
+                        reject(error)
+                    },
+                    })
+                })
+        }
+    </script>
 @stop

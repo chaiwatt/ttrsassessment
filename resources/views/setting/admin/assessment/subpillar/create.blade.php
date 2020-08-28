@@ -55,7 +55,7 @@
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
-                                    <label>ตรงนี้ใช้ select loop pillar มา ทำต่อเลย</label>
+                                    <label>Pillar</label>
                                         <select name="pillarid" aria-placeholder="pillar" class="form-control form-control-select2">
                                             <option value="">เลือก Pillar</option>
                                             @foreach ($pillars as $pillar)
@@ -83,4 +83,5 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+
 @stop
