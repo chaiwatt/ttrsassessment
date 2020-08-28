@@ -257,12 +257,16 @@
                                         <th>Pillar</th>  
                                         <th>Sub Pillar</th>   
                                         <th>Index</th>                                                                                   
-                                        <th>ประเภท</th>       
                                         <th>Criteria</th>  
                                         <th>เพิ่มเติม</th>    
                                     </tr>
                                 </thead>
-                                <tbody id="criteria_transaction_wrapper_tr">    
+                                <div class="theme_tail theme_tail_circle loadprogress">
+                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                    <div class="pace_activity"></div>
+                                </div> 
+                                <tbody id="criteria_transaction_wrapper_tr"> 
+  
                                 </tbody>
                             </table>
                         </div>
@@ -285,7 +289,5 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
-
-
     </script>
 @stop

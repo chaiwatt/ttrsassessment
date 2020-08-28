@@ -124,17 +124,19 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'ev'], function(){
                 Route::post('addevchecklist','Api\AssessmentEvController@AddEvChecklist')->name('api.assessment.ev.addevchecklist');          
                 Route::post('addevgrading','Api\AssessmentEvController@AddEvGrading')->name('api.assessment.ev.addevgrading'); 
+                Route::post('getev','Api\AssessmentEvController@GetEv')->name('api.assessment.ev.getev'); 
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
+                    Route::post('deletepillar','Api\AssessmentEvPillarController@DeletePillar')->name('api.assessment.ev.pillar.deletepillar'); 
                 }); 
                 Route::group(['prefix' => 'subpillar'], function(){
                     Route::post('getsubpillar','Api\AssessmentEvSubPillarController@GetSubpillar')->name('api.assessment.ev.subpillar.getsubpillar');          
                     Route::post('getsubpillarindex','Api\AssessmentEvSubPillarController@GetSubPillarIndex')->name('api.assessment.ev.subpillar.getsubpillarindex');          
                     Route::post('getcriteria','Api\AssessmentEvSubPillarController@GetCriteria')->name('api.assessment.ev.subpillar.getcriteria');          
+                    Route::post('deletesubpillar','Api\AssessmentEvSubPillarController@DeleteSubPillar')->name('api.assessment.ev.subpillar.deletesubpillar'); 
+                    Route::post('deletesubpillarindex','Api\AssessmentEvSubPillarController@DeleteSubPillarIndex')->name('api.assessment.ev.subpillar.deletesubpillarindex'); 
                 }); 
-                // Route::group(['prefix' => 'subpillarindex'], function(){
-                //     Route::post('getsubpillarindex','Api\AssessmentEvSubPillarIndexController@GetSubpillarIndex')->name('api.assessment.ev.subpillarindex.getsubpillarindex');          
-                // }); 
+
             });  
         });
         Route::group(['prefix' => 'hid'], function(){

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Model\Ev;
 use App\Model\Pillar;
 use App\Model\Cluster;
+use App\Model\Criteria;
 use Illuminate\Http\Request;
+use App\Model\CriteriaTransaction;
 
 class SettingAdminAssessmentEvController extends Controller
 {

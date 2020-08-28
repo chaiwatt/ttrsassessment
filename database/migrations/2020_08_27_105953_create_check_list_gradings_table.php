@@ -17,6 +17,8 @@ class CreateCheckListGradingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ev_id');
             $table->foreign('ev_id')->references('id')->on('evs')->onDelete('cascade');
+            $table->unsignedBigInteger('pillar_id');
+            $table->unsignedBigInteger('sub_pillar_id');
             $table->unsignedBigInteger('sub_pillar_index_id');
             $table->integer('gradea')->default(0);
             $table->integer('gradeb')->default(0);

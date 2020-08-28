@@ -14,4 +14,24 @@ function getPillar(){
       })
   }
 
-export {getPillar}
+  function deletePillar(evid,pillarid){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/assessment/ev/pillar/deletepillar`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            evid : evid,
+            pillarid : pillarid
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
+
+export {getPillar,deletePillar}

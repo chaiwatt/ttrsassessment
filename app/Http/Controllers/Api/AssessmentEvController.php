@@ -15,6 +15,8 @@ class AssessmentEvController extends Controller
             $criteriatransaction = new CriteriaTransaction();
             $criteriatransaction->ev_id = $request->evid;
             $criteriatransaction->index_type_id = $request->indextype;
+            $criteriatransaction->pillar_id = $request->pillar;
+            $criteriatransaction->sub_pillar_id = $request->subpillar;
             $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
             $criteriatransaction->criteria_id = $criteria;
             $criteriatransaction->save();
@@ -22,6 +24,8 @@ class AssessmentEvController extends Controller
 
         $checklistgrading = new CheckListGrading();
         $checklistgrading->ev_id = $request->evid;
+        $checklistgrading->pillar_id = $request->pillar;
+        $checklistgrading->sub_pillar_id = $request->subpillar;
         $checklistgrading->sub_pillar_index_id = $request->indextype;
         $checklistgrading->gradea = $request->gradea;
         $checklistgrading->gradeb = $request->gradeb;
@@ -31,7 +35,11 @@ class AssessmentEvController extends Controller
         $checklistgrading->gradef = $request->gradef;
         $checklistgrading->save();
 
-        $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)->get();
+        $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
+                                                ->orderBy('pillar_id','asc')
+                                                ->orderBy('sub_pillar_id', 'asc')
+                                                ->orderBy('sub_pillar_index_id', 'asc')
+                                                ->get();
         return response()->json($criteriatransactions); 
     }
 
@@ -39,9 +47,23 @@ class AssessmentEvController extends Controller
         $criteriatransaction = new CriteriaTransaction();
         $criteriatransaction->ev_id = $request->evid;
         $criteriatransaction->index_type_id = $request->indextype;
+        $criteriatransaction->pillar_id = $request->pillar;
+        $criteriatransaction->sub_pillar_id = $request->subpillar;
         $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
         $criteriatransaction->save();
-        $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)->get();
+        $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
+                                                ->orderBy('pillar_id','asc')
+                                                ->orderBy('sub_pillar_id', 'asc')
+                                                ->orderBy('sub_pillar_index_id', 'asc')
+                                                ->get();
+        return response()->json($criteriatransactions); 
+    }
+    public function GetEv(Request $request){
+        $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
+                                                ->orderBy('pillar_id','asc')
+                                                ->orderBy('sub_pillar_id', 'asc')
+                                                ->orderBy('sub_pillar_index_id', 'asc')
+                                                ->get();
         return response()->json($criteriatransactions); 
     }
 }

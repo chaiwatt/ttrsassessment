@@ -1,6 +1,6 @@
 
 
-function addEvCheckList(evid,indextype,subpillarindex,criterias,gradea,gradeb,gradec,graded,gradee,gradef){
+function addEvCheckList(evid,indextype,pillar,subpillar,subpillarindex,criterias,gradea,gradeb,gradec,graded,gradee,gradef){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/assessment/ev/addevchecklist`,
@@ -9,6 +9,8 @@ function addEvCheckList(evid,indextype,subpillarindex,criterias,gradea,gradeb,gr
           data: {
             evid : evid,
             indextype : indextype,
+            pillar : pillar,
+            subpillar : subpillar,
             subpillarindex : subpillarindex,
             criterias : criterias,
             gradea : gradea,
@@ -28,7 +30,7 @@ function addEvCheckList(evid,indextype,subpillarindex,criterias,gradea,gradeb,gr
       })
 }
 
-function addEvGrading(evid,indextype,subpillarindex){
+function addEvGrading(evid,indextype,pillar,subpillar,subpillarindex){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/assessment/ev/addevgrading`,
@@ -37,6 +39,8 @@ function addEvGrading(evid,indextype,subpillarindex){
           data: {
             evid : evid,
             indextype : indextype,
+            pillar : pillar,
+            subpillar : subpillar,
             subpillarindex : subpillarindex
           },
           success: function(data) {
@@ -49,4 +53,23 @@ function addEvGrading(evid,indextype,subpillarindex){
       })
 }
 
-export {addEvCheckList,addEvGrading}
+function getEv(evid){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/assessment/ev/getev`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            evid : evid
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+}
+
+export {addEvCheckList,addEvGrading,getEv}
