@@ -1,19 +1,52 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
 @stop
 @section('content')
+    {{-- modal_exisingev --}}
+    <div id="modal_exisingev" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;EV ในระบบ</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="criteriatable_modal">
+                            <thead>
+                                <tr>
+                                    <th>Pillar</th>  
+                                    <th>Sub Pillar</th>   
+                                    <th>Index</th>                                                                                   
+                                    <th>Criteria</th>  
+                                </tr>
+                            </thead>
+                            <tbody id="criteria_transaction_modal_wrapper_tr"> 
 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_exisingev" class="btn bg-primary" data-dismiss="modal"><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- modal_add_clustergroup --}}
-    <div id="modal_add_clustergroup" class="modal fade" style="overflow:hidden;">
+    <div id="modal_add_clustergroup" class="modal fade " style="overflow:hidden;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม Criteria</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body context-menu-one" id="criteriamodal">
                     <input type="text" id="evid" value="{{$ev->id}}" hidden>
-                        <form class="wizard-form steps-basic" action="#" data-fouc>
+                    <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden>
+                        <form class="wizard-form steps-basic " action="#" data-fouc>
                             <h6>Pillar</h6>
                             <fieldset>
                                 <div class="row">
@@ -21,7 +54,7 @@
                                         <div class="form-group" id="cluster_wrapper">
                                             <select name="pillar" id="pillar" data-placeholder="Pillar" class="form-control form-control-select2" >
                                             </select> 
-                                        </div>
+                                        </div>  
                                     </div>
                                 </div>
                             </fieldset>
@@ -189,7 +222,31 @@
             </div>
         </div>
     </div>
-
+    {{-- modal_additem --}}
+    <div id="modal_additem" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;EV ในระบบ</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    {{-- <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                        <li class="list-inline-item text-muted"><span id="parent"></span></li>
+                        <li class="list-inline-item text-muted"><span id="clientname"></span></li>
+                    </ul> --}}
+                    <div class="form-group">
+                        <label>ชื่อรายการ</label>
+                        <input type="text"  name="name" id="name" value=""  placeholder="ชื่อรายการ" class="form-control">
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_additem" class="btn bg-info" data-dismiss="modal"><i class="icon-add font-size-base mr-1"></i> เพิ่ม</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -239,14 +296,31 @@
 				<!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
+                        <input type="text" id="tmpstepindex" value="0" hidden>
                         <div class="form-group">
+                            <label>EV ในระบบ</label>
+                                <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-select2">
+                                    <option value="0">==เลือกจาก EV ในระบบ==</option>
+                                    @foreach ($evs as $_ev)
+                                        <option value="{{$_ev->id}}" >
+                                            {{$_ev->name}}
+                                            @if (Empty($_ev->fulltbp))
+                                                (Template)
+                                                @else
+                                                ({{$_ev->fulltbp->minitbp->project}})
+                                            @endif
+                                        </option>
+                                    @endforeach
+                                </select>
+                        </div>
+                        {{-- <div class="form-group">
                             <label>ชื่อรายการ</label>
                             <input type="text"  name="name" id="name" value="{{$ev->name}}"  placeholder="ชื่อรายการ" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>เวอร์ชั่น</label>
                             <input type="text" name="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control" readonly>
-                        </div>
+                        </div> --}}
                         <div class="form-group">	
                             <button type="button" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
                         </div>
@@ -256,9 +330,8 @@
                                     <tr>
                                         <th>Pillar</th>  
                                         <th>Sub Pillar</th>   
-                                        <th>Index</th>                                                                                   
+                                        <th>Index</th>                                                                                
                                         <th>Criteria</th>  
-                                        {{-- <th>เพิ่มเติม</th>     --}}
                                     </tr>
                                 </thead>
                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -281,13 +354,16 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/evhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            usertypeid: "{{Auth::user()->user_type_id}}"
         };
     </script>
 @stop

@@ -24,13 +24,24 @@ class SettingAdminAssessmentSubPillarIndexController extends Controller
         return redirect()->route('setting.admin.assessment.subpillarindex')->withSuccess('เพิ่มรายการ subpillarindex สำเร็จ');
     }
     public function Edit($id){
-        // $pillars = Pillar::get();
-        
-        // $subpillarindex = SubPillarIndex::find($id);
-        // $subpillars = SubPillar::where('pillar_id',$subpillarindex->sub_pillar_id);
-        // return view('setting.admin.assessment.subpillarindex.edit')->withPillars($pillars)
-        //                                                         ->withSubpillars($subpillars)
-        //                                                         ->withSubpillarindex($subpillarindex);
+        $subpillarindex = SubPillarIndex::find($id);
+        $pillars = Pillar::get(); 
+        $_subpillars = SubPillar::find($subpillarindex->sub_pillar_id);
+        $subpillars = SubPillar::where('pillar_id',$_subpillars->pillar_id)->get();
+        return view('setting.admin.assessment.subpillarindex.edit')->withPillars($pillars)
+                                                                ->withSubpillars($subpillars)
+                                                                ->withSubpillarindex($subpillarindex);
+    }
+    public function EditSave(Request $request,$id){
+        SubPillarIndex::find($id)->update([
+            'sub_pillar_id' => $request->subpillar,
+            'name' => $request->subpillarindex
+        ]);
+        return redirect()->route('setting.admin.assessment.subpillarindex')->withSuccess('แก้ไขรายการสำเร็จ');
+    }
+    public function Delete($id){
+        SubPillarIndex::find($id)->delete();
+        return redirect()->route('setting.admin.assessment.subpillarindex')->withSuccess('ลบรายการสำเร็จ');
     }
     public function GetSubPillar(Request $request){
         $subpillars = SubPillar::where('pillar_id',$request->pillar)->get();

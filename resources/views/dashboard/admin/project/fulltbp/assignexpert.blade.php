@@ -45,7 +45,7 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd">ส่งต่อ JD<b><i class="icon-redo2"></i></b></a>
+                <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งต่อ JD<b><i class="icon-redo2"></i></b></a>
             </div>
         </div>
 

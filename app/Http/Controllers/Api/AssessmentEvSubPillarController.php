@@ -68,4 +68,35 @@ class AssessmentEvSubPillarController extends Controller
                                                 ->get();
         return response()->json($criteriatransactions); 
     }
+
+    public function AddSubpillar(Request $request){
+        $subpillar = new SubPillar();
+        $subpillar->pillar_id = $request->pillar;
+        $subpillar->name = $request->value;
+        $subpillar->save();
+        $subpillars = SubPillar::where('pillar_id', $request->pillar)->get();
+        return response()->json($subpillars); 
+    }
+    public function AddSubPillarIndex(Request $request){
+        $subpillarindex = new SubPillarIndex();
+        $subpillarindex->sub_pillar_id = $request->subpillar;
+        $subpillarindex->name = $request->value;
+        $subpillarindex->save();
+
+        $subpillarindexs = SubPillarIndex::where('sub_pillar_id', $request->subpillar)->get();
+        $indextypes = IndexType::get();
+        return response()->json(array(
+            "indextypes" => $indextypes,
+            "subpillarindexs" => $subpillarindexs
+        ));
+    }
+
+    public function AddCriteria(Request $request){
+        $criteria = new Criteria();
+        $criteria->sub_pillar_index_id = $request->subpillarindex;
+        $criteria->name = $request->value;
+        $criteria->save();
+        $criterias = Criteria::where('sub_pillar_index_id', $request->subpillarindex)->get();
+        return response()->json($criterias); 
+    }
 }

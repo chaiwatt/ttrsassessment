@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{$subpillarindex->name}}</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่ม EV Template</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,9 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> Sub Pillar Index</a>
-                    <a href="{{route('setting.admin.assessment.subpillarindex')}}" class="breadcrumb-item"> รายการ Sub Pillar Index</a>
-                    <span class="breadcrumb-item active">{{$subpillarindex->name}}</span>
+                    <a href="#" class="breadcrumb-item"> EV Template</a>
+                    <a href="{{route('setting.admin.assessment.ev')}}" class="breadcrumb-item"> รายการ EV Template</a>
+                    <span class="breadcrumb-item active">เพิ่ม EV Template</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -51,28 +51,17 @@
 				<!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.assessment.subpillarindex.editsave',['id' => $subpillarindex->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('dashboard.admin.project.fulltbp.createsaveev')}}" enctype="multipart/form-data">
                             @csrf
                             <fieldset>	
-                                <div class="form-group" >
-                                    <label>Pillar</label>
-                                        <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-select2" disabled>
-                                            @foreach ($pillars as $pillar)
-                                            <option value="{{$pillar->id}}" @if ($subpillarindex->pillar->id == $pillar->id) selected @endif>{{$pillar->name}}</option>
-                                            @endforeach
-                                        </select>
+                                <input type="text" name="fulltbpid" value="{{$fulltbp->id}}" hidden>
+                                <div class="form-group">
+                                    <label>ชื่อ EV</label>
+                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>Sub Pillar</label>
-                                        <select name="subpillar" id="subpillar" aria-placeholder="pillar" class="form-control form-control-select2">
-                                            @foreach ($subpillars as $subpillar)
-                                            <option value="{{$subpillar->id}}" @if ($subpillarindex->subpillar->id == $subpillar->id) selected @endif>{{$subpillar->name}}</option>
-                                            @endforeach
-                                        </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Sub Pillar Index</label>
-                                    <input type="text" name="subpillarindex" value="{{$subpillarindex->name}}"  placeholder="subpillar" class="form-control">
+                                    <label>เวอร์ชั่น</label>
+                                    <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -90,7 +79,4 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script>
-    $("#pillar").select2("readonly", true);
-</script>
 @stop

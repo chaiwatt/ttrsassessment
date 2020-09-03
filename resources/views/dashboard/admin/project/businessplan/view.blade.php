@@ -13,7 +13,7 @@
             <div class="header-elements d-none">
                 <div class="d-flex justify-content-center">
                     <div class="form-check ">
-                        <input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ให้ประเมิน" data-off-text="ไม่ให้ประเมิน" class="form-check-input-switch" @if ($company->businessplan->business_plan_status_id != 1 ) checked @endif >
+                        <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ให้ประเมิน" data-off-text="ไม่ให้ประเมิน" class="form-check-input-switch" @if ($company->businessplan->business_plan_status_id != 1 ) checked @endif >
                     </div>
                 </div>
             </div>
@@ -175,11 +175,17 @@
 
     $('#chkassessment').on('change.bootstrapSwitch', function(e) {
         var status = 0
+        $("#spinicon").attr("hidden",false);
         if(e.target.checked==true){
             status =1;
         }        
         // console.log(status);
-        updateBusinessPlanStatus("{{$company->businessplan->id}}",status);
+        // updateBusinessPlanStatus("{{$company->businessplan->id}}",status);
+
+        updateBusinessPlanStatus("{{$company->businessplan->id}}",status).then(data => {
+               $("#spinicon").attr("hidden",true);
+            })
+            .catch(error => {})
     });
 
     function updateBusinessPlanStatus(id,status){

@@ -20,6 +20,7 @@ class CreateEvsTable extends Migration
             $table->unsignedBigInteger('ref_assessment_group_id')->nullable();
             $table->unsignedBigInteger('full_tbp_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->char('status',1)->default(0);
             $table->timestamps();
         });
     }

@@ -125,16 +125,22 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('addevchecklist','Api\AssessmentEvController@AddEvChecklist')->name('api.assessment.ev.addevchecklist');          
                 Route::post('addevgrading','Api\AssessmentEvController@AddEvGrading')->name('api.assessment.ev.addevgrading'); 
                 Route::post('getev','Api\AssessmentEvController@GetEv')->name('api.assessment.ev.getev'); 
+                Route::post('getevbyfulltbp','Api\AssessmentEvController@GetEvByFulltbp')->name('api.assessment.ev.getevbyfulltbp'); 
+                Route::post('copyev','Api\AssessmentEvController@CopyEv')->name('api.assessment.ev.copyev'); 
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
                     Route::post('deletepillar','Api\AssessmentEvPillarController@DeletePillar')->name('api.assessment.ev.pillar.deletepillar'); 
                 }); 
                 Route::group(['prefix' => 'subpillar'], function(){
                     Route::post('getsubpillar','Api\AssessmentEvSubPillarController@GetSubpillar')->name('api.assessment.ev.subpillar.getsubpillar');          
+                    Route::post('addsubpillar','Api\AssessmentEvSubPillarController@AddSubpillar')->name('api.assessment.ev.subpillar.addsubpillar');          
                     Route::post('getsubpillarindex','Api\AssessmentEvSubPillarController@GetSubPillarIndex')->name('api.assessment.ev.subpillar.getsubpillarindex');          
+                    Route::post('addsubpillarindex','Api\AssessmentEvSubPillarController@AddSubPillarIndex')->name('api.assessment.ev.subpillar.addsubpillarindex');          
                     Route::post('getcriteria','Api\AssessmentEvSubPillarController@GetCriteria')->name('api.assessment.ev.subpillar.getcriteria');          
+                    Route::post('addcriteria','Api\AssessmentEvSubPillarController@AddCriteria')->name('api.assessment.ev.subpillar.addcriteria');          
                     Route::post('deletesubpillar','Api\AssessmentEvSubPillarController@DeleteSubPillar')->name('api.assessment.ev.subpillar.deletesubpillar'); 
                     Route::post('deletesubpillarindex','Api\AssessmentEvSubPillarController@DeleteSubPillarIndex')->name('api.assessment.ev.subpillar.deletesubpillarindex'); 
+                    
                 }); 
 
             });  
@@ -333,6 +339,12 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('getexpert','DashboardAdminProjectFullTbpController@GetExpert')->name('dashboard.admin.project.fulltbp.getexpert');   
                     Route::post('notifyjd','DashboardAdminProjectFullTbpController@NotifyJd')->name('dashboard.admin.project.fulltbp.notifyjd'); 
                     Route::post('editapprove','DashboardAdminProjectFullTbpController@EditApprove')->name('dashboard.admin.project.fulltbp.editapprove'); 
+                    Route::get('viewev/{id}','DashboardAdminProjectFullTbpController@ViewEv')->name('dashboard.admin.project.fulltbp.viewev'); 
+                    Route::get('createev/{id}','DashboardAdminProjectFullTbpController@CreateEv')->name('dashboard.admin.project.fulltbp.createev'); 
+                    Route::post('createsaveev','DashboardAdminProjectFullTbpController@CreateSaveEv')->name('dashboard.admin.project.fulltbp.createsaveev'); 
+                    Route::get('editev/{id}','DashboardAdminProjectFullTbpController@EditEv')->name('dashboard.admin.project.fulltbp.editev');
+                    Route::post('editsaveev/{id}','DashboardAdminProjectFullTbpController@EditSaveEv')->name('dashboard.admin.project.fulltbp.editsaveev');
+                    Route::get('deleteev/{id}','DashboardAdminProjectFullTbpController@DeleteEv')->name('dashboard.admin.project.fulltbp.deleteev');
                 }); 
                 Route::group(['prefix' => 'projectassignment'], function(){
                     Route::get('','DashboardAdminProjectProjectAssignmentController@Index')->name('dashboard.admin.project.projectassignment');           

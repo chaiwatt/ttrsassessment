@@ -78,7 +78,7 @@
                                         <td> {{$ev->name}} </td>  
                                         <td> {{$ev->version}} </td>  
                                         <td> 
-                                            <a href="{{route('setting.admin.assessment.ev.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข weight</a>
+                                            <a href="{{route('setting.admin.assessment.ev.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข Criteria</a>
                                         </td>                                    
                                         <td>   
                                             <a href="{{route('setting.admin.assessment.ev.edit',['id' => $ev->id])}}" class="btn-sm bg-primary">แก้ไข</a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\Ev;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\FullTbp;
@@ -291,5 +292,31 @@ class DashboardAdminProjectFullTbpController extends Controller
         }
         $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
         return response()->json($expertassignments); 
+    }
+
+    public function ViewEv($id){
+        $evs = Ev::where('full_tbp_id',$id)->get();
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.admin.project.fulltbp.viewev')->withFulltbp($fulltbp)
+                                                            ->withEvs($evs);
+    }
+    public function CreateEv($id){
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.admin.project.fulltbp.createev')->withFulltbp($fulltbp);
+    }
+    public function CreateSaveEv(Request $request){
+        $ev = new Ev();
+        $ev->full_tbp_id = $request->fulltbpid;
+        $ev->name = $request->name;
+        $ev->version = $request->version;
+        $ev->save();
+        return redirect()->route('dashboard.admin.project.fulltbp.viewev',['id' => $request->fulltbpid])->withSuccess('เพิ่มรายการสำเร็จ');
+    }
+
+    public function EditEv($id){
+        $ev = Ev::find($id);
+        $evs = Ev::where('full_tbp_id','!=',$ev->full_tbp_id)->orWhereNull('full_tbp_id')->get();
+        return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
+                                                            ->withEv($ev);
     }
 }

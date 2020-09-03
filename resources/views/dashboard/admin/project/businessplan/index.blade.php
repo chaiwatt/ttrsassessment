@@ -65,8 +65,7 @@
                                         <th>วันที่ขอ</th> 
                                         <th>เลขที่โครงการ</th> 
                                         <th>บริษัท</th>
-                                        <th>เพิ่มเติม</th> 
-                                                                  
+                                        <th>เพิ่มเติม</th>                                                                 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,8 +76,8 @@
                                         <td> {{$businessplan->code}} </td> 
                                         <td> {{$businessplan->company->name}} </td>  
                                         <td> 
-                                            <a href="{{route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id])}}" class=" badge bg-primary">รายละเอียด</a>
-                                            <a href="{{route('dashboard.admin.project.businessplan.delete',['id' => $businessplan->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
+                                            <a href="{{route('dashboard.admin.project.businessplan.delete',['id' => $businessplan->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                       
                                         </td>                                
                                     </tr>
                                     @endforeach

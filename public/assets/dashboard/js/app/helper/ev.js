@@ -72,4 +72,43 @@ function getEv(evid){
       })
 }
 
-export {addEvCheckList,addEvGrading,getEv}
+function getEvByFullTbp(fulltbpid){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/getevbyfulltbp`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          fulltbpid : fulltbpid
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+
+function copyEv(orgevid,newevid){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/copyev`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          orgevid : orgevid,
+          newevid : newevid
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv}

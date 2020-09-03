@@ -135,9 +135,9 @@
                                         </td>  
                                         <td> 
                                             @if (!Empty($fulltbp->criteria_group_id))
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assigngroup',['id' => $fulltbp->id])}}" class="btn-sm bg-success">เพิ่มแล้ว</a>
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-success">เพิ่มแล้ว</a>
                                                 @else
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assigngroup',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                             @endif
                                              
                                         </td> 

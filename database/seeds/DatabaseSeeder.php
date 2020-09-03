@@ -76,7 +76,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SubClustersTableSeeder::class);
         $this->call(ExtraFactorsTableSeeder::class);
         $this->call(SubExtraFactorsTableSeeder::class);
-        
+        $this->call(EvsTableSeeder::class);
+        $this->call(PillarIndexWeigthsTableSeeder::class);
         // $this->call(FriendRequestsTableSeeder::class);
         // $this->call(FriendsTableSeeder::class);
         // $this->call(MessageBoxesTableSeeder::class);

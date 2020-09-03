@@ -63,17 +63,19 @@
                                             @endforeach
                                         </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Sub Pillar</label>
-                                        <select name="subpillar" id="subpillar" aria-placeholder="subpillar" class="form-control form-control-select2">
-                                        </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Sub Pillar Index</label>
-                                    <input type="text" name="subpillarindex" value="{{old('subpillar')}}"  placeholder="subpillar" class="form-control">
-                                </div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                <div id="pillar_wrapper" hidden>
+                                    <div class="form-group">
+                                        <label>Sub Pillar</label>
+                                            <select name="subpillar" id="subpillar" aria-placeholder="subpillar" class="form-control form-control-select2">
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Sub Pillar Index</label>
+                                        <input type="text" name="subpillarindex" value="{{old('subpillar')}}"  placeholder="subpillar" class="form-control">
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                    </div>
                                 </div>
                             </fieldset>
                         </form>
@@ -96,15 +98,18 @@
         };
 
         $(document).on('change', '#pillar', function(e) {
-            console.log($(this).val());
             var html ='';
             getSubpillar($(this).val()).then(data => {
-                console.log (data);
                 data.forEach(function (ev,index) {
                         html += `<option value="${ev['id']}" >${ev['name']}</option>`
                     });
+                if(data.length == 0){
+                    $("#pillar_wrapper").attr("hidden",true);
+                }else{
+                    $("#pillar_wrapper").attr("hidden",false);
+                }
                 $("#subpillar").html(html);
-                // $("#subpillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+
             }).catch(error => {})
         });
 

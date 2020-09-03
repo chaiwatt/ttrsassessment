@@ -1,22 +1,20 @@
-
+import * as Ev from './ev.js';
 import * as Pillar from './pillar.js';
 import * as SubPillar from './subpillar.js';
-import * as Ev from './ev.js';
 
+var globalNewIndex = 0;
 $( document ).ready(function() {
-    Ev.getEv($('#evid').val()).then(data => {
-         RenderTable(data);
-         $(".loadprogress").attr("hidden",true);
-         RowSpan();
-    }).catch(error => {
-        
-    })
+    Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
+        RenderTable(data);
+        $(".loadprogress").attr("hidden",true);
+        RowSpan("criteriatable");
+    }).catch(error => {})
 });
+
 
 $(document).on('click', '#btnaddclustergroup', function(e) {
     Pillar.getPillar().then(data => {
         var html ='<option value="0" >==เลือกรายการ==</option>';
-        console.log(data);
         data.forEach(function (pilla,index) {
                 html += `<option value="${pilla['id']}" >${pilla['name']}</option>`
             });
@@ -58,7 +56,6 @@ $(document).on('change', '#subpillar', function(e) {
 $(document).on('change', '#subpillarindex', function(e) {
     $("#criteria_wrapper").attr("hidden",true);
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
-        console.log(data);
         var html ='';
         data.forEach(function (subpillar,index) {
                 html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
@@ -88,6 +85,36 @@ $('.steps-basic').steps({
     },
     autoFocus: true,
     onStepChanging: function (event, currentIndex, newIndex) {
+        $('#tmpstepindex').val(newIndex);
+        $('#criteriamodal').removeClass('context-menu-one'); 
+        if(newIndex > 0){
+            $('#criteriamodal').addClass('context-menu-one'); 
+            $(function() {
+                $.contextMenu({
+                    selector: '.context-menu-one', 
+                    callback: function(key, options) {
+                        var m = "clicked: " + key;
+                        console.log($('#tmpstepindex').val() + ' ' + key);
+                        if(key == 'add'){
+                            $("#parent").html($( "#pillar option:selected" ).text());
+                            $('#modal_additem').modal('show');
+                        }
+                    },
+                    items: {
+                        "add": {name: "เพิ่ม" , icon: "add"},
+                        "edit": {name: "แก้ไข", icon: "edit"},
+                        "sep1": "---------",
+                        "delete": {name: "ลบ", icon: function(){
+                            return 'context-menu-icon context-menu-icon-delete';
+                        }}
+                    }
+                });
+                $('.context-menu-one').on('click', function(e){
+                    console.log('clicked', this);
+            
+                })    
+            });
+        }
         if(newIndex == 1){
             if($('#pillar').val() == 0){
                 return false;
@@ -121,7 +148,6 @@ $('.steps-basic').steps({
         return true;
     },
     onFinished: function (event, currentIndex) {
-        console.log('ok');
         if($('#indextype').val() == 1){
             AddGrading();
         }else{
@@ -129,6 +155,10 @@ $('.steps-basic').steps({
         }
     }
 });
+
+// $(document).on('keyup', '#name', function(e) {
+//     $('#clientname').html($(this).val());
+// });
 
 function AddCheckList(){
     var criterias = [];
@@ -139,7 +169,7 @@ function AddCheckList(){
 
     Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val(),$('#gradef').val()).then(data => {
          RenderTable(data);
-         RowSpan();
+         RowSpan("criteriatable");
          Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มรายการสำเร็จ!',
@@ -148,10 +178,9 @@ function AddCheckList(){
 }
 
 function AddGrading(){
-    console.log('add grading');
     Ev.addEvGrading($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
         RenderTable(data);
-        RowSpan();
+        RowSpan("criteriatable");
          Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มรายการสำเร็จ!',
@@ -159,7 +188,27 @@ function AddGrading(){
     }).catch(error => {})
 }
 
-function RenderTable(data){
+$(document).on('change', '#existingev', function(e) {
+    if ($(this).val() == 0) return;
+    Ev.getEv($(this).val()).then(data => {
+        RenderModalTable(data);
+        RowSpan("criteriatable_modal");
+        $('#modal_exisingev').modal('show');
+    }).catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_exisingev', function(e) {
+    $(".loadprogress").attr("hidden",false);
+    Ev.copyEv($('#existingev').val(),$('#evid').val()).then(data => {
+        Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
+            $(".loadprogress").attr("hidden",true);
+            RenderTable(data);
+            RowSpan("criteriatable");
+        }).catch(error => {})
+    }).catch(error => {})
+});
+
+function RenderModalTable(data){
     var html =``;
     data.forEach(function (criteria,index) {
         var criterianame = '-';
@@ -167,26 +216,47 @@ function RenderTable(data){
             criterianame = criteria.criteria['name']
         }
         html += `<tr > 
-        <td> ${criteria.pillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" class="text-grey-300 deletepillar"><i class="icon-trash"></i></a></td>                                            
-        <td> ${criteria.subpillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
-        <td> ${criteria.subpillarindex['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}"  class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
+        <td> ${criteria.pillar['name']} </td>                                            
+        <td> ${criteria.subpillar['name']} </td>    
+        <td> ${criteria.subpillarindex['name']} </td>   
         <td> ${criterianame} </td>                                            
         </tr>`
         });
-     $("#criteria_transaction_wrapper_tr").html(html);
+    $("#criteria_transaction_modal_wrapper_tr").html(html);
+}
+function RenderTable(data){
+    var html =``;
+    data.forEach(function (criteria,index) {
+        var criterianame = '-';
+        if(criteria.criteria != null){
+            criterianame = criteria.criteria['name']
+        }
+        var isadmin = '';
+        // console.log(route.usertypeid);
+        if(route.usertypeid >= 7){
+            isadmin = `(<a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}"  class="text-grey-300 editweigth">แก้ไข Weigth</a>)`;
+        }
+        html += `<tr > 
+        <td> ${criteria.pillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" class="text-grey-300 deletepillar"><i class="icon-trash"></i></a></td>                                            
+        <td> ${criteria.subpillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
+        <td> ${criteria.subpillarindex['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a> ${isadmin}</td>   
+        <td> ${criterianame} </td>                                            
+        </tr>`
+        });
+    $("#criteria_transaction_wrapper_tr").html(html);
 }
 
-function RowSpan(){
-    const table = document.querySelector('table');
+function RowSpan(tableid){
+    const table = document.getElementById(tableid);// document.querySelector('table');
     let cell1 = null;
     let cell2 = null;
     let cell3 = null;
+    let cell4 = null;
     for (let row of table.rows) {
         const firstCell = row.cells[0];
         const secondCell = row.cells[1];
         const thirdCell = row.cells[2];
-        console.log(firstCell);
-        console.log(secondCell);
+        const forthCell = row.cells[3];
         if (cell1 === null || firstCell.innerText !== cell1.innerText) {
             cell1 = firstCell;
         } else {
@@ -204,6 +274,12 @@ function RowSpan(){
         } else {
             cell3.rowSpan++;
             thirdCell.remove();
+        }
+        if (cell4 === null || forthCell.innerText !== cell4.innerText) {
+            cell4 = forthCell;
+        } else {
+            cell4.rowSpan++;
+            forthCell.remove();
         }
     }
 }
@@ -223,7 +299,7 @@ $(document).on('click', '.deletepillar', function(e) {
         if (result.value) {
             Pillar.deletePillar($('#evid').val(),$(this).data('pillar')).then(data => {
                 RenderTable(data);
-                RowSpan();
+                RowSpan("criteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -233,6 +309,7 @@ $(document).on('click', '.deletepillar', function(e) {
         }
     });
 });
+
 
 $(document).on('click', '.deletesubpillar', function(e) {
     Swal.fire({
@@ -249,7 +326,7 @@ $(document).on('click', '.deletesubpillar', function(e) {
         if (result.value) {
             SubPillar.deleteSubPillar($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar')).then(data => {
                 RenderTable(data);
-                RowSpan();
+                RowSpan("criteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -275,7 +352,7 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
         if (result.value) {
             SubPillar.deleteSubPillarIndex($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar'),$(this).data('subpillarindex')).then(data => {
                 RenderTable(data);
-                RowSpan();
+                RowSpan("criteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -284,4 +361,48 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
             .catch(error => {})
         }
     });
+});
+
+$(document).on('click', '#btn_modal_additem', function(e) {
+    var html ='<option value="0" >==เลือกรายการ==</option>';
+    if($('#tmpstepindex').val() == 1){
+        SubPillar.addSubPillar($('#evid').val(),$('#pillar').val(),$('#name').val()).then(data => {
+            data.forEach(function (ev,index) {
+                html += `<option value="${ev['id']}" >${ev['name']}</option>`
+            });
+            $("#subpillar").html(html);
+            $("#subpillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+    
+            })
+        .catch(error => {})
+    }else if($('#tmpstepindex').val() == 2){
+        SubPillar.addSubPillarIndex($('#evid').val(),$('#subpillar').val(),$('#name').val()).then(data => {
+            console.log(data);
+            var html0 ='<option value="0" >==เลือกรายการ==</option>';
+            var html1 ='';
+            data.subpillarindexs.forEach(function (subpillar,index) {
+                    html0 += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+                });
+            data.indextypes.forEach(function (indextype,index) {
+                    html1 += `<option value="${indextype['id']}" >${indextype['name']}</option>`
+                });
+            $("#subpillarindex").html(html0);
+            $("#indextype").html(html1);
+            $("#subpillarindex option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+            })
+        .catch(error => {})
+    }else if($('#tmpstepindex').val() == 3){
+        SubPillar.addCriteria($('#evid').val(),$('#subpillarindex').val(),$('#name').val()).then(data => {
+            console.log(data);
+            var html ='';
+            data.forEach(function (subpillar,index) {
+                    html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+                });
+            $("#criteria").html(html);
+            $("#criteria option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+            })
+        .catch(error => {})
+    }
+
+
 });

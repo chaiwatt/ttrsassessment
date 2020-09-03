@@ -217,8 +217,11 @@ $(document).on('click', '#sendtojd', function(e) {
     $('.userid').each(function() {
         arr.push($(this).data('id'));
     });
-    console.log(arr); // You can get the array of pdp-id at this point
+    // console.log(arr); // You can get the array of pdp-id at this point
+    $("#spinicon").attr("hidden",false);
     notifyJD(arr,route.fulltbpid).then(data => {
+      console.log(data);
+      $("#spinicon").attr("hidden",true);
         var html = ``;
 
      }).catch(error => {})
