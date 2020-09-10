@@ -1,10 +1,12 @@
 import * as Ev from './ev.js';
 import * as Pillar from './pillar.js';
 import * as SubPillar from './subpillar.js';
+import * as PillaIndexWeigth from './pillaindexweigth.js';
 
 var globalNewIndex = 0;
 $( document ).ready(function() {
     Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
+        console.log(data);
         RenderTable(data);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
@@ -19,20 +21,27 @@ $(document).on('click', '#btnaddclustergroup', function(e) {
                 html += `<option value="${pilla['id']}" >${pilla['name']}</option>`
             });
          $("#pillar").html(html);
-        //  $("#pillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
          $('#modal_add_clustergroup').modal('show');
-    })
-    .catch(error => {})
+    }).catch(error => {})
 });
 
 $(document).on('change', '#pillar', function(e) {
     var html ='<option value="0" >==เลือกรายการ==</option>';
     SubPillar.getSubPillar($('#evid').val(),$(this).val()).then(data => {
+        // console.log(data);
         data.forEach(function (ev,index) {
                 html += `<option value="${ev['id']}" >${ev['name']}</option>`
             });
         $("#subpillar").html(html);
         $("#subpillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+        Pillar.getRelatedEv($('#evid').val()).then(data => {
+            console.log(data);
+            var html =``;
+            data.forEach(function (ev,index) {
+                    html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                });
+             $("#relateev").html(html);
+        }).catch(error => {})
     }).catch(error => {})
 });
 
@@ -50,18 +59,32 @@ $(document).on('change', '#subpillar', function(e) {
         $("#subpillarindex").html(html0);
         $("#indextype").html(html1);
         $("#subpillarindex option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+        Pillar.getRelatedEv($('#evid').val()).then(data => {
+            console.log(data);
+            var html =``;
+            data.forEach(function (ev,index) {
+                    html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                });
+             $("#relateev").html(html);
+        }).catch(error => {})
     }).catch(error => {})
 });
 
 $(document).on('change', '#subpillarindex', function(e) {
     $("#criteria_wrapper").attr("hidden",true);
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
-        var html ='';
+        var html =``;
         data.forEach(function (subpillar,index) {
                 html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
             });
         $("#criteria").html(html);
-        $("#criteria option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+        Pillar.getRelatedEv($('#evid').val()).then(data => {
+            var html =``;
+            data.forEach(function (ev,index) {
+                    html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                });
+             $("#relateev").html(html);
+        }).catch(error => {})
     }).catch(error => {})
 });
 
@@ -94,18 +117,35 @@ $('.steps-basic').steps({
                     selector: '.context-menu-one', 
                     callback: function(key, options) {
                         var m = "clicked: " + key;
-                        console.log($('#tmpstepindex').val() + ' ' + key);
+                        // console.log($('#tmpstepindex').val() + ' ' + key);
                         if(key == 'add'){
                             $("#parent").html($( "#pillar option:selected" ).text());
                             $('#modal_additem').modal('show');
                         }
+                        if(key == 'edit'){
+                            $("#multipleselect").attr("hidden",true);
+                            $("#parent").html($( "#pillar option:selected" ).text());
+                            var isempty = false;
+                            if($('#tmpstepindex').val() == 1){
+                                if($('#subpillar option:selected').val() == 0)isempty=true;
+                                $('#nameedit').val($('#subpillar option:selected').text())
+                            }else if($('#tmpstepindex').val() == 2){
+                                if($('#subpillarindex option:selected').val() == 0)isempty=true;
+                                $('#nameedit').val($('#subpillarindex option:selected').text())
+                            }else if($('#tmpstepindex').val() == 3){
+                                $("#multipleselect").attr("hidden",false);
+                                $('#tmpcriteria').html($('#criteria').html())
+                                $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
+                            }
+                            if(isempty==false)$('#modal_edititem').modal('show');
+                        }
                     },
                     items: {
                         "add": {name: "เพิ่ม" , icon: "add"},
-                        "edit": {name: "แก้ไข", icon: "edit"},
+                        // "edit": {name: "แก้ไข", icon: "edit"},
                         "sep1": "---------",
-                        "delete": {name: "ลบ", icon: function(){
-                            return 'context-menu-icon context-menu-icon-delete';
+                        "edit": {name: "แก้ไข", icon: function(){
+                            return 'context-menu-icon context-menu-icon-edit';
                         }}
                     }
                 });
@@ -170,10 +210,17 @@ function AddCheckList(){
     Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val(),$('#gradef').val()).then(data => {
          RenderTable(data);
          RowSpan("criteriatable");
-         Swal.fire({
-            title: 'สำเร็จ...',
-            text: 'เพิ่มรายการสำเร็จ!',
-            });
+         Pillar.getRelatedEv($('#evid').val()).then(data => {
+            var html =``;
+            data.forEach(function (ev,index) {
+                    html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                });
+             $("#relateev").html(html);
+             Swal.fire({
+                title: 'สำเร็จ...',
+                text: 'เพิ่มรายการสำเร็จ!',
+                });
+        }).catch(error => {})
     }).catch(error => {})
 }
 
@@ -231,15 +278,19 @@ function RenderTable(data){
         if(criteria.criteria != null){
             criterianame = criteria.criteria['name']
         }
-        var isadmin = '';
-        // console.log(route.usertypeid);
-        if(route.usertypeid >= 7){
-            isadmin = `(<a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}"  class="text-grey-300 editweigth">แก้ไข Weigth</a>)`;
+        // var isadmin = '';
+        // // console.log(route.usertypeid);
+        // if(route.usertypeid >= 7){
+        //     isadmin = `(<a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}"  class="text-grey-300 editweigth">แก้ไข Weigth</a>)`;
+        // }
+        var subpillarindex = criteria.subpillarindex['name'];
+        if(subpillarindex == null){
+            subpillarindex = "-";
         }
         html += `<tr > 
         <td> ${criteria.pillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" class="text-grey-300 deletepillar"><i class="icon-trash"></i></a></td>                                            
         <td> ${criteria.subpillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
-        <td> ${criteria.subpillarindex['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a> ${isadmin}</td>   
+        <td> ${subpillarindex} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
         <td> ${criterianame} </td>                                            
         </tr>`
         });
@@ -248,10 +299,10 @@ function RenderTable(data){
 
 function RowSpan(tableid){
     const table = document.getElementById(tableid);// document.querySelector('table');
-    let cell1 = null;
-    let cell2 = null;
-    let cell3 = null;
-    let cell4 = null;
+    let cell1 = "";
+    let cell2 = "";
+    let cell3 = "";
+    let cell4 = "";
     for (let row of table.rows) {
         const firstCell = row.cells[0];
         const secondCell = row.cells[1];
@@ -308,6 +359,43 @@ $(document).on('click', '.deletepillar', function(e) {
             .catch(error => {})
         }
     });
+});
+
+$(document).on('click', '#btn_modal_edititem', function(e) {
+    if($('#tmpstepindex').val() == 1){
+        SubPillar.editSubPillar($('#subpillar').val(),$('#pillar').val(),$('#nameedit').val()).then(data => {
+            var html =``;
+            data.forEach(function (ev,index) {
+                html += `<option value="${ev['id']}" >${ev['name']}</option>`
+            });
+            $("#subpillar").html(html);
+        })
+        .catch(error => {})
+    }else if ($('#tmpstepindex').val() == 2){
+        SubPillar.editSubPillarIndex($('#subpillarindex').val(),$('#subpillar').val(),$('#nameedit').val()).then(data => {
+            var html0 ='<option value="0" >==เลือกรายการ==</option>';
+            var html1 ='';
+            data.subpillarindexs.forEach(function (subpillar,index) {
+                    html0 += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+                });
+            data.indextypes.forEach(function (indextype,index) {
+                    html1 += `<option value="${indextype['id']}" >${indextype['name']}</option>`
+                });
+            $("#subpillarindex").html(html0);
+            $("#indextype").html(html1);
+        })
+        .catch(error => {})
+    }else if ($('#tmpstepindex').val() == 3){
+        SubPillar.editCriteria($('#tmpcriteria').val(),$('#subpillarindex').val(),$('#nameedit').val()).then(data => {
+            var html =``;
+            data.forEach(function (subpillar,index) {
+                    html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+                });
+            $("#criteria").html(html);
+        })
+        .catch(error => {})
+    }
+
 });
 
 
@@ -394,7 +482,7 @@ $(document).on('click', '#btn_modal_additem', function(e) {
     }else if($('#tmpstepindex').val() == 3){
         SubPillar.addCriteria($('#evid').val(),$('#subpillarindex').val(),$('#name').val()).then(data => {
             console.log(data);
-            var html ='';
+            var html =``;
             data.forEach(function (subpillar,index) {
                     html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
                 });
@@ -406,3 +494,55 @@ $(document).on('click', '#btn_modal_additem', function(e) {
 
 
 });
+
+$(document).on('change', '#tmpcriteria', function(e) {
+    $('#nameedit').val($('#tmpcriteria option:selected').text());
+});
+
+$(document).on('click', '#relateevid', function(e) {
+    // $('#existingev').val($(this).data('id')).attr("selected", "selected");
+    $("#existingev").val($(this).data('id')).change();
+    Ev.getEv($(this).data('id')).then(data => {
+        RenderModalTable(data);
+        RowSpan("criteriatable_modal");
+        $('#modal_exisingev').modal('show');
+    }).catch(error => {})
+});
+
+$('#chkevstatus').on('change.bootstrapSwitch', function(e) {
+    var status = 0
+    if(e.target.checked==true){
+        status =1;
+    }        
+    console.log($(this).data('id'));
+    $("#spinicon").attr("hidden",false);
+    Ev.updateEvStatus($(this).data('id'),status).then(data => {
+        $("#spinicon").attr("hidden",true);
+    }).catch(error => {})
+});
+
+// editweigth
+$(document).on('click', '.editweigth', function(e) {
+    PillaIndexWeigth.getWeigth($('#evid').val(),$(this).data('subpillarindex')).then(data => {
+        var weigth = 0.0;
+        if(typeof data.weigth !== 'undefined'){
+            weigth = data.weigth;
+        }  
+        $('#weight').val(weigth);
+        $('#subpillarindexid').val($(this).data('subpillarindex'));
+        $('#modal_edit_weight').modal('show');
+    }).catch(error => {})
+});
+
+$(document).on('click', '#btn_edit_weight', function(e) {
+    PillaIndexWeigth.editWeigth($('#evid').val(),$('#subpillarindexid').val(),$('#weight').val()).then(data => {
+        // var weigth = 0.0;
+        // if(typeof data.weigth !== 'undefined'){
+        //     weigth = data.weigth;
+        // }  
+        // $('#weight').val(weigth);
+        // $('#modal_edit_weight').modal('show');
+    }).catch(error => {})
+});
+
+

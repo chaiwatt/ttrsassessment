@@ -17,6 +17,26 @@ function getSubPillar(evid,value){
         })
       })
   }
+  function editSubPillar(id,pillar,value){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/assessment/ev/subpillar/editsubpillar`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            id: id,
+            pillar: pillar,
+            value: value
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
 
   function getSubPillarIndex(evid,value){
     return new Promise((resolve, reject) => {
@@ -38,6 +58,27 @@ function getSubPillar(evid,value){
       })
   }
 
+  function editSubPillarIndex(id,subpillar,value){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/assessment/ev/subpillar/editsubpillarindex`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            id: id,
+            subpillar: subpillar,
+            value: value
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
+
   function getCriteria(evid,value){
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -46,6 +87,27 @@ function getSubPillar(evid,value){
           headers: {"X-CSRF-TOKEN":route.token},
           data: {
             evid: evid,
+            value: value
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
+
+  function editCriteria(id,subpillarindex,value){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/assessment/ev/subpillar/editcriteria`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            id: id,
+            subpillarindex: subpillarindex,
             value: value
           },
           success: function(data) {
@@ -164,4 +226,25 @@ function getSubPillar(evid,value){
       })
   }
 
-export {getSubPillar,getSubPillarIndex,getCriteria,deleteSubPillar,deleteSubPillarIndex,addSubPillar,addSubPillarIndex,addCriteria}
+  function getRelatedEvList(evid,subpillar,subpillarindex){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/assessment/ev/subpillar/getrelatedev`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            evid : evid,
+            subpillar : subpillar,
+            subpillarindex : subpillarindex
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
+export {getSubPillar,getSubPillarIndex,getCriteria,deleteSubPillar,deleteSubPillarIndex,addSubPillar,addSubPillarIndex,addCriteria,
+  editSubPillarIndex,editSubPillar,editCriteria,getRelatedEvList}

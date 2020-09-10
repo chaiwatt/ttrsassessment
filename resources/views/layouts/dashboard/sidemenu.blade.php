@@ -24,6 +24,7 @@
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">mini TBP</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">Full TBP</a></li>	   
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight</a></li>	   
         <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
     </ul>
 </li>

@@ -111,4 +111,24 @@ function copyEv(orgevid,newevid){
   })
 }
 
-export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv}
+function updateEvStatus(id,chkevstatus){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/updateevstatus`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          id : id,
+          chkevstatus : chkevstatus
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus}

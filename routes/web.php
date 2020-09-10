@@ -127,22 +127,30 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('getev','Api\AssessmentEvController@GetEv')->name('api.assessment.ev.getev'); 
                 Route::post('getevbyfulltbp','Api\AssessmentEvController@GetEvByFulltbp')->name('api.assessment.ev.getevbyfulltbp'); 
                 Route::post('copyev','Api\AssessmentEvController@CopyEv')->name('api.assessment.ev.copyev'); 
+                Route::post('updateevstatus','Api\AssessmentEvController@UpdateEvStatus')->name('api.assessment.ev.updateevstatus'); 
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
                     Route::post('deletepillar','Api\AssessmentEvPillarController@DeletePillar')->name('api.assessment.ev.pillar.deletepillar'); 
+                    Route::post('getrelatedev','Api\AssessmentEvPillarController@GetRelatedEv')->name('api.assessment.ev.pillar.getrelatedev'); 
                 }); 
                 Route::group(['prefix' => 'subpillar'], function(){
                     Route::post('getsubpillar','Api\AssessmentEvSubPillarController@GetSubpillar')->name('api.assessment.ev.subpillar.getsubpillar');          
                     Route::post('addsubpillar','Api\AssessmentEvSubPillarController@AddSubpillar')->name('api.assessment.ev.subpillar.addsubpillar');          
+                    Route::post('editsubpillar','Api\AssessmentEvSubPillarController@EditSubpillar')->name('api.assessment.ev.subpillar.editsubpillar');          
                     Route::post('getsubpillarindex','Api\AssessmentEvSubPillarController@GetSubPillarIndex')->name('api.assessment.ev.subpillar.getsubpillarindex');          
                     Route::post('addsubpillarindex','Api\AssessmentEvSubPillarController@AddSubPillarIndex')->name('api.assessment.ev.subpillar.addsubpillarindex');          
+                    Route::post('editsubpillarindex','Api\AssessmentEvSubPillarController@EditSubPillarIndex')->name('api.assessment.ev.subpillar.editsubpillarindex');          
                     Route::post('getcriteria','Api\AssessmentEvSubPillarController@GetCriteria')->name('api.assessment.ev.subpillar.getcriteria');          
                     Route::post('addcriteria','Api\AssessmentEvSubPillarController@AddCriteria')->name('api.assessment.ev.subpillar.addcriteria');          
+                    Route::post('editcriteria','Api\AssessmentEvSubPillarController@EditCriteria')->name('api.assessment.ev.subpillar.editcriteria');          
                     Route::post('deletesubpillar','Api\AssessmentEvSubPillarController@DeleteSubPillar')->name('api.assessment.ev.subpillar.deletesubpillar'); 
                     Route::post('deletesubpillarindex','Api\AssessmentEvSubPillarController@DeleteSubPillarIndex')->name('api.assessment.ev.subpillar.deletesubpillarindex'); 
-                    
+                    Route::post('getrelatedev','Api\AssessmentEvSubPillarController@GetRelatedEv')->name('api.assessment.ev.subpillar.getrelatedev'); 
                 }); 
-
+                Route::group(['prefix' => 'pillarindexweigth'], function(){
+                    Route::post('getweigth','Api\AssessmentEvPillarIndexWeigthController@GetWeigth')->name('api.assessment.ev.pillarindexweigth.getweigth');          
+                    Route::post('editweigth','Api\AssessmentEvPillarIndexWeigthController@EditWeigth')->name('api.assessment.ev.pillarindexweigth.editweigth');          
+                }); 
             });  
         });
         Route::group(['prefix' => 'hid'], function(){
@@ -352,6 +360,13 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','DashboardAdminProjectProjectAssignmentController@EditSave')->name('dashboard.admin.project.projectassignment.editsave');    
                     Route::post('getworkloadleader','DashboardAdminProjectProjectAssignmentController@GetWorkLoadLeader')->name('dashboard.admin.project.projectassignment.getworkloadleader');    
                     Route::post('getworkloadcoleader','DashboardAdminProjectProjectAssignmentController@GetWorkLoadCoLeader')->name('dashboard.admin.project.projectassignment.getworkloadcoleader');                       
+                }); 
+                Route::group(['prefix' => 'evweight'], function(){
+                    Route::get('','DashboardAdminProjectEvWeightController@Index')->name('dashboard.admin.project.evweight');           
+                    Route::get('edit/{id}','DashboardAdminProjectEvWeightController@Edit')->name('dashboard.admin.project.evweight.edit');
+                    Route::post('editsave','DashboardAdminProjectEvWeightController@EditSave')->name('dashboard.admin.project.evweight.editsave');
+                    Route::post('getev','DashboardAdminProjectEvWeightController@GetEv')->name('dashboard.admin.project.evweight.getev');
+                    
                 }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardAdminProjectAssessmentController@Index')->name('dashboard.admin.project.assessment');           

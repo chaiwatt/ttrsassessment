@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\Ev;
 use App\Model\Pillar;
 use Illuminate\Http\Request;
 use App\Model\CriteriaTransaction;
@@ -25,6 +26,33 @@ class AssessmentEvPillarController extends Controller
         return response()->json($criteriatransactions); 
     }
 
-
-    
+    public function GetRelatedEv(Request $request){
+        $arrays = CriteriaTransaction::where('ev_id',$request->evid)->get();
+        $allfound = true;
+        $check = null;
+        $ev = array();
+        foreach($arrays as $value){  
+            $checks = CriteriaTransaction::where('ev_id','!=',$request->evid)
+                                    ->where('pillar_id',$value->pillar_id)
+                                    ->where('sub_pillar_id', $value->sub_pillar_id)
+                                    ->where('sub_pillar_index_id', $value->sub_pillar_index_id)
+                                    ->where('criteria_id', $value->criteria_id)->get();                                  
+            if($checks->count() != 0){
+                foreach($checks as $check){
+                    array_push($ev,$check->ev_id);
+                }
+            }                        
+        }
+        $_ev = array_count_values($ev);
+        $matchedev = array();
+        if(count($ev)>0){
+            foreach($_ev as $key => $item){
+                if(intval($item) == $arrays->count()){
+                    $matchedev[] = $key;
+                }
+            }
+        }
+        $evs = Ev::whereIn('id',$matchedev)->get();
+        return response()->json($evs); 
+    }
 }

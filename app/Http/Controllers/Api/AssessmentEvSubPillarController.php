@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\Ev;
 use App\Model\Criteria;
 use App\Model\IndexType;
 use App\Model\SubPillar;
@@ -77,6 +78,35 @@ class AssessmentEvSubPillarController extends Controller
         $subpillars = SubPillar::where('pillar_id', $request->pillar)->get();
         return response()->json($subpillars); 
     }
+
+    public function EditSubpillar(Request $request){
+        $subpillar = SubPillar::find($request->id)->update([
+            'name' => $request->value
+        ]);
+        $subpillars = SubPillar::where('pillar_id', $request->pillar)->get();
+        return response()->json($subpillars); 
+    }
+
+    public function EditSubPillarIndex(Request $request){
+        SubPillarIndex::find($request->id)->update([
+            'name' => $request->value
+        ]);
+        $subpillarindexs = SubPillarIndex::where('sub_pillar_id', $request->subpillar)->get();
+        $indextypes = IndexType::get();
+        return response()->json(array(
+            "indextypes" => $indextypes,
+            "subpillarindexs" => $subpillarindexs
+        ));
+    }
+
+    public function EditCriteria(Request $request){
+        Criteria::find($request->id)->update([
+            'name' => $request->value
+        ]);
+        $criterias = Criteria::where('sub_pillar_index_id', $request->subpillarindex)->get();
+        return response()->json($criterias); 
+    }
+
     public function AddSubPillarIndex(Request $request){
         $subpillarindex = new SubPillarIndex();
         $subpillarindex->sub_pillar_id = $request->subpillar;
@@ -99,4 +129,14 @@ class AssessmentEvSubPillarController extends Controller
         $criterias = Criteria::where('sub_pillar_index_id', $request->subpillarindex)->get();
         return response()->json($criterias); 
     }
+
+    public function GetRelatedEv(Request $request){
+        // dd('ok');
+        $criteriatransactionarray = CriteriaTransaction::where('ev_id',$request->evid)->pluck('sub_pillar_index_id')->toArray();
+        array_push($criteriatransactionarray,$request->subpillarindex);
+        $criteriatransactions = CriteriaTransaction::where('sub_pillar_id',$request->subpillar)->whereIn('sub_pillar_index_id',$criteriatransactionarray)->distinct('ev_id')->pluck('ev_id')->toArray();
+        $evs = Ev::whereIn('id',$criteriatransactions)->get();
+        return response()->json($evs); 
+    }
+    
 }

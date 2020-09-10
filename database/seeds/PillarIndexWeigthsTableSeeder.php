@@ -1,6 +1,8 @@
 <?php
 
+use App\Model\PillaIndexWeigth;
 use Illuminate\Database\Seeder;
+use App\Model\CriteriaTransaction;
 
 class PillarIndexWeigthsTableSeeder extends Seeder
 {
@@ -887,5 +889,22 @@ class PillarIndexWeigthsTableSeeder extends Seeder
                 ]
             ]
         );
+        $this->createDefaultWeigth();     
+    }
+
+    public function createDefaultWeigth(){
+        $criteriatransactions = CriteriaTransaction::where('ev_id',1)->get();
+        foreach($criteriatransactions as $criteriatransaction){
+            $pillaindexweigth = PillaIndexWeigth::where('ev_id',1)->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)->first();
+            if(Empty($pillaindexweigth)){
+                $pillaindexweigth = new PillaIndexWeigth();
+                $pillaindexweigth->ev_id = $criteriatransaction->ev_id;
+                $pillaindexweigth->pillar_id = $criteriatransaction->pillar_id;
+                $pillaindexweigth->sub_pillar_id = $criteriatransaction->sub_pillar_id;
+                $pillaindexweigth->sub_pillar_index_id = $criteriatransaction->sub_pillar_index_id;
+                $pillaindexweigth->weigth = 0;
+                $pillaindexweigth->save();
+            }
+        }  
     }
 }

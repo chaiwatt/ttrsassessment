@@ -3,38 +3,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
 @stop
 @section('content')
-    {{-- modal_exisingev --}}
-    <div id="modal_exisingev" class="modal fade" style="overflow:hidden;">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;EV ในระบบ</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="criteriatable_modal">
-                            <thead>
-                                <tr>
-                                    <th>Pillar</th>  
-                                    <th>Sub Pillar</th>   
-                                    <th>Index</th>                                                                                   
-                                    <th>Criteria</th>  
-                                </tr>
-                            </thead>
-                            <tbody id="criteria_transaction_modal_wrapper_tr"> 
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>           
-                <div class="modal-footer">
-                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_exisingev" class="btn bg-primary" data-dismiss="modal"><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
-                </div>
-            </div>
-        </div>
-    </div>
     {{-- modal_add_clustergroup --}}
     <div id="modal_add_clustergroup" class="modal fade " style="overflow:hidden;">
         <div class="modal-dialog">
@@ -184,7 +152,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
 
                             <div class="form-group" id="extrafactor_wrapper" hidden>
                                 <div class="row">
@@ -212,7 +180,9 @@
                             <div id="subextrafactor2_wrapper">
                                     
                             </div>
+                            
                         </div>
+                        <div id="relateev"></div>
                     </div>
                 </div>           
                 {{-- <div class="modal-footer">
@@ -222,6 +192,40 @@
             </div>
         </div>
     </div>
+    
+    {{-- modal_exisingev --}}
+    <div id="modal_exisingev" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;EV ในระบบ</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="criteriatable_modal">
+                            <thead>
+                                <tr>
+                                    <th>Pillar</th>  
+                                    <th>Sub Pillar</th>   
+                                    <th>Index</th>                                                                                   
+                                    <th>Criteria</th>  
+                                </tr>
+                            </thead>
+                            <tbody id="criteria_transaction_modal_wrapper_tr"> 
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_exisingev" class="btn bg-primary" data-dismiss="modal"><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- modal_additem --}}
     <div id="modal_additem" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog">
@@ -247,6 +251,29 @@
             </div>
         </div>
     </div>
+
+    {{-- modal_edit_weight --}}
+    <div id="modal_edit_weight" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แก้ไข Weight</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="subpillarindexid" hidden >
+                    <div class="form-group">
+                        <label>ค่า Weight</label>
+                        <input type="number"  name="weight" id="weight" value=""  placeholder="ค่า Weight" class="form-control">
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_edit_weight" class="btn bg-info" data-dismiss="modal"><i class="icon-add font-size-base mr-1"></i> เพิ่ม</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -254,6 +281,13 @@
             <div class="page-title d-flex">
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+            <div class="header-elements d-none">
+                <div class="d-flex justify-content-center">
+                    <div class="form-check ">
+                        <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif >
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -354,7 +388,8 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-
+<script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>

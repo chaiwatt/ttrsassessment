@@ -22,7 +22,6 @@
                 </div>
             </div>
         </div>
-
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
