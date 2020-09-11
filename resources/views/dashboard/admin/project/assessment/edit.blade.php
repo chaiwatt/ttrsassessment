@@ -1,5 +1,7 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+
 @stop
 @section('content')
     <!-- Page header -->
@@ -7,19 +9,27 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ลงคะแนน</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}} (Weight รวม <span id="sumofweight"></span>)</h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
+            {{-- <div class="header-elements d-none">
+                <div class="d-flex justify-content-center">
+                    <div class="form-check ">
+                        <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif >
+                    </div>
+                </div>
+            </div> --}}
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="{{route('setting.admin.dashboard.prefix')}}" class="breadcrumb-item"> ประเมิน</a>
-                    <span class="breadcrumb-item active">ลงคะแนน</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
+                    <a href="#" class="breadcrumb-item"> EV Template</a>
+                    <a href="{{route('setting.admin.assessment.ev')}}" class="breadcrumb-item"> รายการ EV Template</a>
+                    <span class="breadcrumb-item active">{{$ev->name}}</span>
                 </div>
-
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -49,32 +59,26 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('dashboard.admin.project.assessment.editsave',['id' => $fulltbp->id])}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">	
-                                <div class="col-md-12">
-                                    <fieldset>	
-                                        @foreach ($criteriagrouptransactions as $criteriagrouptransaction)
-                                            @php
-                                                $score = 0 ;
-                                                $check = $projectscorings->where('criteria_id',$criteriagrouptransaction->criteria_id)->first();
-                                                if (!Empty($check)) {
-                                                    $score = $check->score;
-                                                } 
-                                            @endphp
-                                            <div class="form-group">
-                                                <label>{{$criteriagrouptransaction->criteria->name}} (น้ำหนัก {{$criteriagrouptransaction->weight}})</label>
-                                                <input type="text"  name ="criterias[{{$criteriagrouptransaction->criteria_id}}]" value="{{$score}}"  placeholder="กรอกคะแนน (0-5)" class="form-control">
-                                            </div>
-                                        @endforeach
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                            </div>
-                        </form>
-
+                        <input type="text" id="evid" value="{{$ev->id}}" hidden>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="criteriatable">
+                                <thead>
+                                    <tr>
+                                        <th>Pillar</th>  
+                                        <th>Sub Pillar</th>   
+                                        <th>Index</th>                                                                                
+                                        <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                    </tr>
+                                </thead>
+                                <div class="theme_tail theme_tail_circle loadprogress">
+                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                    <div class="pace_activity"></div>
+                                </div> 
+                                <tbody id="criteria_transaction_wrapper_tr"> 
+  
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             <!-- /striped rows -->
@@ -85,4 +89,17 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+<script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/scoringhelper.js')}}"></script>
+    <script>
+        var route = {
+            url: "{{ url('/') }}",
+            token: $('meta[name="csrf-token"]').attr('content'),
+            usertypeid: "{{Auth::user()->user_type_id}}"
+        };
+    </script>
 @stop

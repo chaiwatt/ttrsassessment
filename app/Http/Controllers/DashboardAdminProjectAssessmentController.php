@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\Ev;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
@@ -30,13 +31,16 @@ class DashboardAdminProjectAssessmentController extends Controller
     }
     public function Edit($id){
         $fulltbp = FullTbp::find($id);
-        $criteriagrouptransactions = CriteriaGroupTransaction::find($fulltbp->criteria_group_id)->get();
-        $projectscorings = ProjectScoring::where('full_tbp_id',$id)
-                                    ->where('user_id',Auth::user()->id)
-                                    ->where('criteria_group_id',$fulltbp->criteria_group_id)->get();
-        return view('dashboard.admin.project.assessment.edit')->withFulltbp($fulltbp)
-                                                        ->withCriteriagrouptransactions($criteriagrouptransactions)
-                                                        ->withProjectscorings($projectscorings);
+        $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
+        return view('dashboard.admin.project.assessment.edit')->withEv($ev);
+        // $fulltbp = FullTbp::find($id);
+        // $criteriagrouptransactions = CriteriaGroupTransaction::find($fulltbp->criteria_group_id)->get();
+        // $projectscorings = ProjectScoring::where('full_tbp_id',$id)
+        //                             ->where('user_id',Auth::user()->id)
+        //                             ->where('criteria_group_id',$fulltbp->criteria_group_id)->get();
+        // return view('dashboard.admin.project.assessment.edit')->withFulltbp($fulltbp)
+        //                                                 ->withCriteriagrouptransactions($criteriagrouptransactions)
+        //                                                 ->withProjectscorings($projectscorings);
     }
 
     public function EditSave(Request $request, $id){
