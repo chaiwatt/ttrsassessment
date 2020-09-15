@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Ev;
+use App\Model\Grade;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class DashboardAdminProjectEvWeightController extends Controller
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "pillaindexweigths" => $pillaindexweigths,
-            "sumweigth" => $sumweigth,
+            "sumweigth" => $sumweigth
         ));
 
     }

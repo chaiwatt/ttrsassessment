@@ -68,6 +68,7 @@
                                         <th>Sub Pillar</th>   
                                         <th>Index</th>                                                                                
                                         <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                        <th style="width:250px">Weightsum(Portion*Pillar*Weight*Score)</th> 
                                     </tr>
                                 </thead>
                                 <div class="theme_tail theme_tail_circle loadprogress">

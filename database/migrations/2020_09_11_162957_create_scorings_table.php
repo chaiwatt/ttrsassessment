@@ -17,8 +17,10 @@ class CreateScoringsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('criteria_transaction_id');
             $table->foreign('criteria_transaction_id')->references('id')->on('criteria_transactions')->onDelete('cascade');
-            $table->char('weight',1)->nullable();
+            $table->unsignedBigInteger('sub_pillar_index_id');
             $table->char('scoretype',1)->default('1');
+            $table->char('score',1)->nullable();
+            $table->string('comment',250)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

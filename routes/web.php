@@ -371,7 +371,10 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardAdminProjectAssessmentController@Index')->name('dashboard.admin.project.assessment');           
                     Route::get('edit/{id}','DashboardAdminProjectAssessmentController@Edit')->name('dashboard.admin.project.assessment.edit');
+                    Route::post('getev','DashboardAdminProjectAssessmentController@GetEv')->name('dashboard.admin.project.assessment.getev'); 
                     Route::post('editsave/{id}','DashboardAdminProjectAssessmentController@EditSave')->name('dashboard.admin.project.assessment.editsave');
+                    Route::post('editscore','DashboardAdminProjectAssessmentController@EditScore')->name('dashboard.admin.project.assessment.editscore');
+                    Route::post('editcomment','DashboardAdminProjectAssessmentController@EditComment')->name('dashboard.admin.project.assessment.editcomment');
                 }); 
             });  
             Route::group(['prefix' => 'calendar'], function(){

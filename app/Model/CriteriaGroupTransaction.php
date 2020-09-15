@@ -12,11 +12,13 @@ class CriteriaGroupTransaction extends Model
     protected $fillable = [];
     protected $guarded = [];
     
+    // protected $appends = ['criteriatransaction'];
+
     public function getCriteriaGroupAttribute(){
         return CriteriaGroup::find($this->criteria_group_id);
     }
     public function getCriteriaAttribute(){
         return Criteria::find($this->criteria_id);
     }
-   
+ 
 }
