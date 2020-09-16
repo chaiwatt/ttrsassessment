@@ -28,7 +28,7 @@ class AssessmentEvController extends Controller
         $checklistgrading->ev_id = $request->evid;
         $checklistgrading->pillar_id = $request->pillar;
         $checklistgrading->sub_pillar_id = $request->subpillar;
-        $checklistgrading->sub_pillar_index_id = $request->indextype;
+        $checklistgrading->sub_pillar_index_id = $request->subpillarindex;
         $checklistgrading->gradea = $request->gradea;
         $checklistgrading->gradeb = $request->gradeb;
         $checklistgrading->gradec = $request->gradec;
@@ -43,7 +43,7 @@ class AssessmentEvController extends Controller
             $pillaindexweigth->ev_id = $request->evid;
             $pillaindexweigth->pillar_id = $request->pillar;
             $pillaindexweigth->sub_pillar_id = $request->subpillar;
-            $pillaindexweigth->sub_pillar_index_id = $request->subpillar;
+            $pillaindexweigth->sub_pillar_index_id = $request->subpillarindex;
             $pillaindexweigth->weigth = 0;
             $pillaindexweigth->save();
         }
@@ -71,7 +71,7 @@ class AssessmentEvController extends Controller
             $pillaindexweigth->ev_id = $request->evid;
             $pillaindexweigth->pillar_id = $request->pillar;
             $pillaindexweigth->sub_pillar_id = $request->subpillar;
-            $pillaindexweigth->sub_pillar_index_id = $request->subpillar;
+            $pillaindexweigth->sub_pillar_index_id = $request->subpillarindex;
             $pillaindexweigth->weigth = 0;
             $pillaindexweigth->save();
         }

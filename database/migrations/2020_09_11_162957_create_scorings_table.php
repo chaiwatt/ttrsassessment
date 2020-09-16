@@ -15,6 +15,7 @@ class CreateScoringsTable extends Migration
     {
         Schema::create('scorings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('ev_id');
             $table->unsignedBigInteger('criteria_transaction_id');
             $table->foreign('criteria_transaction_id')->references('id')->on('criteria_transactions')->onDelete('cascade');
             $table->unsignedBigInteger('sub_pillar_index_id');

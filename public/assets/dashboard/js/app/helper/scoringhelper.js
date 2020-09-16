@@ -1,5 +1,5 @@
 
-$( document ).ready(function() {
+$(function() {
     getEv($('#evid').val()).then(data => {
         RenderTable(data);
         $(".loadprogress").attr("hidden",true);
@@ -30,10 +30,9 @@ function getEv(evid){
   $(document).on('click', '#togglecomment', function(e) {
       $('.toggle').toggle();
    });
-function RenderTable(data,grades){
+function RenderTable(data){
     console.log(data);
     var html =``;
-    let myval = 'hello';
     data.criteriatransactions.forEach((criteria,index) => {
         var textvalue = '';
         var checkvalue = '';
@@ -70,14 +69,44 @@ function RenderTable(data,grades){
         }
         var indexpercent = (data.evportions.find(x => x.id === 1)['percent'])/100;
         var pillarpercent = (data.pillars.find(x => x.id === criteria.pillar['id'])['percent'])/100;
-        var pillarweight = (data.pillaindexweigths.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id'])['weigth']);
+        var check = data.pillaindexweigths.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
+        var pillarweight = 0;
+        if ( typeof(check) !== "undefined" && check !== null ) {
+            pillarweight = check['weigth'];
+        }
         var weightsum = raw*indexpercent*pillarpercent*pillarweight;
-        // console.log(indexpercent + ' ' + pillarpercent);
+
         criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
                             <label><i>ความเห็น</i></label>
                             <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control">
                             </div>
                         </div>`;
+
+        var numcheck = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']).length;   
+        if(numcheck > 0){
+            var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
+            console.log(checklistgrading['gradea']);
+            var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
+            let gradeis = 0;
+            for (let i = 0; i < grades.length; i++) {
+                if(numcheck <= grades[i]){
+                    gradeis = i;
+                    break;
+                }
+            } 
+            if(gradeis == 0){
+                weightsum = 5*indexpercent*pillarpercent*pillarweight;
+            }else if(gradeis == 1){
+                weightsum = 4*indexpercent*pillarpercent*pillarweight;
+            }else if(gradeis == 2){
+                weightsum = 3*indexpercent*pillarpercent*pillarweight;
+            }else if(gradeis == 3){
+                weightsum = 2*indexpercent*pillarpercent*pillarweight;
+            }else if(gradeis == 4){
+                weightsum = 1*indexpercent*pillarpercent*pillarweight;
+            }
+        }
+
         html += `<tr > 
         <td> ${criteria.pillar['name']}</td>                                            
         <td> ${criteria.subpillar['name']}</td>    

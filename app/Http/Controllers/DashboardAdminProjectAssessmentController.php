@@ -14,6 +14,7 @@ use App\Helper\EmailBox;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Model\ProjectScoring;
+use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
 use App\Model\CriteriaTransaction;
@@ -96,43 +97,29 @@ class DashboardAdminProjectAssessmentController extends Controller
         $pillars = Pillar::get();   
         $evportions = EvType::get();   
        
+        $scores = Scoring::where('ev_id',$request->evid)
+                    ->where('scoretype',2)
+                    ->get();
+        $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
+
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "pillaindexweigths" => $pillaindexweigths,
             "sumweigth" => $sumweigth,
             "pillars" => $pillars,
-            "evportions" => $evportions
+            "evportions" => $evportions,
+            "scores" => $scores,
+            "checklistgradings" => $checklistgradings
         ));
 
     }
 
     public function EditScore(Request $request){
-        $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)->first();
+        $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)->where('user_id',Auth::user()->id)->first();
         $criteriatransaction = CriteriaTransaction::find($request->transactionid);
-        $pillaindexweigth = PillaIndexWeigth::where('ev_id',$criteriatransaction->ev_id)
-                                        ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
-                                        ->first();
-        $pillar = Pillar::find($criteriatransaction->pillar_id);   
-        $evportion = EvType::find(1);                          
-        $weightsum = 0;
-        if(strtoupper(trim($request->score)) == 'A'){
-            $weightsum = ($pillaindexweigth->weigth)*5*($pillar->percent/100)*($evportion->percent/100);
-        }else if(strtoupper(trim($request->score)) == 'B'){
-            $weightsum = ($pillaindexweigth->weigth)*4*($pillar->percent/100)*($evportion->percent/100);
-        }else if(strtoupper(trim($request->score)) == 'C'){
-            $weightsum = ($pillaindexweigth->weigth)*3*($pillar->percent/100)*($evportion->percent/100);
-        }else if(strtoupper(trim($request->score)) == 'D'){
-            $weightsum = ($pillaindexweigth->weigth)*2*($pillar->percent/100)*($evportion->percent/100);
-        }else if(strtoupper(trim($request->score)) == 'E'){
-            $weightsum = ($pillaindexweigth->weigth)*1*($pillar->percent/100)*($evportion->percent/100);
-        }else if(strtoupper(trim($request->score)) == '1'){
-            $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
-                            ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
-                            ->get()->count();
-        }
-
         if(Empty($scoring)){
             $scoring = new Scoring();
+            $scoring->ev_id = $criteriatransaction->ev_id;
             $scoring->criteria_transaction_id = $request->transactionid;
             $scoring->sub_pillar_index_id = $request->subpillarindex;
             $scoring->scoretype = $request->scoretype;
@@ -148,7 +135,50 @@ class DashboardAdminProjectAssessmentController extends Controller
                 ]);
             }
         }
-
+        $pillaindexweigth = PillaIndexWeigth::where('ev_id',$criteriatransaction->ev_id)
+                                        ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
+                                        ->first();
+        $pillar = Pillar::find($criteriatransaction->pillar_id);   
+        $evportion = EvType::find(1);                          
+        $weightsum = 0;
+        $numcheck = 0;
+        if(strtoupper(trim($request->score)) == 'A'){
+            $weightsum = ($pillaindexweigth->weigth)*5*($pillar->percent/100)*($evportion->percent/100);
+        }else if(strtoupper(trim($request->score)) == 'B'){
+            $weightsum = ($pillaindexweigth->weigth)*4*($pillar->percent/100)*($evportion->percent/100);
+        }else if(strtoupper(trim($request->score)) == 'C'){
+            $weightsum = ($pillaindexweigth->weigth)*3*($pillar->percent/100)*($evportion->percent/100);
+        }else if(strtoupper(trim($request->score)) == 'D'){
+            $weightsum = ($pillaindexweigth->weigth)*2*($pillar->percent/100)*($evportion->percent/100);
+        }else if(strtoupper(trim($request->score)) == 'E'){
+            $weightsum = ($pillaindexweigth->weigth)*1*($pillar->percent/100)*($evportion->percent/100);
+        }else if(strtoupper(trim($request->score)) == '0' || strtoupper(trim($request->score)) == '1'){
+            $numcheck = Scoring::where('ev_id',$criteriatransaction->ev_id)
+                            ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
+                            ->where('scoretype',2)
+                            ->get()->count();
+            $checklistgrading = CheckListGrading::where('ev_id',$criteriatransaction->ev_id)
+                            ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)->first(); 
+            $grades=array($checklistgrading->gradea,$checklistgrading->gradeb,$checklistgrading->gradec,$checklistgrading->graded,$checklistgrading->gradee,$checklistgrading->gradef);    
+            $gradeis = 0;
+            foreach ($grades as $key => $grade) {
+                if($numcheck <= $grade){
+                    $gradeis = $key;
+                break;
+                }
+            }
+            if($gradeis == 0){
+                $weightsum = ($pillaindexweigth->weigth)*5*($pillar->percent/100)*($evportion->percent/100);
+            }else if($gradeis == 1){
+                $weightsum = ($pillaindexweigth->weigth)*4*($pillar->percent/100)*($evportion->percent/100);
+            }else if($gradeis == 2){
+                $weightsum = ($pillaindexweigth->weigth)*3*($pillar->percent/100)*($evportion->percent/100);
+            }else if($gradeis == 3){
+                $weightsum = ($pillaindexweigth->weigth)*2*($pillar->percent/100)*($evportion->percent/100);
+            }else if($gradeis == 4){
+                $weightsum = ($pillaindexweigth->weigth)*1*($pillar->percent/100)*($evportion->percent/100);
+            }
+        }
         $pillars = Pillar::get();   
         $evportions = EvType::get();   
         return response()->json($weightsum); 
