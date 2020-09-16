@@ -37,7 +37,7 @@
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">ประเมิน</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">สรุปการประเมิน</a></li>
     </ul>
 </li>
 @endif

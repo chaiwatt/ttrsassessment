@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\MiniTBP;
 use App\Model\CriteriaGroup;
+use App\Model\ProjectMember;
 use App\Model\ProjectScoring;
 use App\Helper\DateConversion;
 use App\Model\ExpertAssignment;
@@ -63,6 +64,10 @@ class FullTbp extends Model
     public function getExpertAssignmentAttribute(){
         return ExpertAssignment::where('user_id',Auth::user()->id)->first();
     } 
+    public function getProjectmemberAttribute(){
+        return ProjectMember::where('full_tbp_id',$this->id)->get();
+    } 
+
 }
 
 

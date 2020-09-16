@@ -353,6 +353,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('editev/{id}','DashboardAdminProjectFullTbpController@EditEv')->name('dashboard.admin.project.fulltbp.editev');
                     Route::post('editsaveev/{id}','DashboardAdminProjectFullTbpController@EditSaveEv')->name('dashboard.admin.project.fulltbp.editsaveev');
                     Route::get('deleteev/{id}','DashboardAdminProjectFullTbpController@DeleteEv')->name('dashboard.admin.project.fulltbp.deleteev');
+                    Route::post('getusers','DashboardAdminProjectFullTbpController@GetUsers')->name('dashboard.admin.project.fulltbp.getusers');
+                    Route::post('addprojectmember','DashboardAdminProjectFullTbpController@AddProjectMember')->name('dashboard.admin.project.fulltbp.addprojectmember');
+                    Route::post('deleteprojectmember','DashboardAdminProjectFullTbpController@DeleteProjectMember')->name('dashboard.admin.project.fulltbp.deleteprojectmember');
                 }); 
                 Route::group(['prefix' => 'projectassignment'], function(){
                     Route::get('','DashboardAdminProjectProjectAssignmentController@Index')->name('dashboard.admin.project.projectassignment');           
@@ -386,7 +389,8 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('delete/{id}','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
             }); 
             Route::group(['prefix' => 'assessment'], function(){
-                Route::get('','DashboardAdminAssessmentController@Index')->name('dashboard.admin.assessment');           
+                Route::get('','DashboardAdminAssessmentController@Index')->name('dashboard.admin.assessment');     
+                Route::get('edit/{id}','DashboardAdminAssessmentController@Edit')->name('dashboard.admin.assessment.edit');        
             }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){

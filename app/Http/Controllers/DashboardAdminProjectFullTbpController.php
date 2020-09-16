@@ -19,6 +19,7 @@ use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use App\Model\CriteriaGroup;
+use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\EmployPosition;
 use App\Model\EmployTraining;
@@ -319,5 +320,42 @@ class DashboardAdminProjectFullTbpController extends Controller
         return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
                                                             ->withEv($ev);
     }
+
+    public function GetUsers(Request $request){
+        $users = User::where('user_type_id','>=',3)->get();
+        $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
+        return response()->json(array(
+            "users" => $users,
+            "projectmembers" => $projectmembers
+        ));
+    }
+
+    public function AddProjectMember(Request $request){
+        $projectmember = ProjectMember::where('user_id',$request->userid)->first();
+        if(Empty($projectmember)){
+            $projectmember = new ProjectMember();
+            $projectmember->full_tbp_id = $request->fulltbpid;
+            $projectmember->user_id = $request->userid;
+            $projectmember->save();
+        }
+        $users = User::where('user_type_id','>=',3)->get();
+        $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
+        return response()->json(array(
+            "users" => $users,
+            "projectmembers" => $projectmembers
+        ));
+    }
+
+    public function DeleteProjectMember(Request $request){
+        ProjectMember::find($request->id)->delete();
+        $users = User::where('user_type_id','>=',3)->get();
+        $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
+        return response()->json(array(
+            "users" => $users,
+            "projectmembers" => $projectmembers
+        ));
+    }
+
+    
 
 }

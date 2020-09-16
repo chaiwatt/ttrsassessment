@@ -179,9 +179,6 @@
         if(e.target.checked==true){
             status =1;
         }        
-        // console.log(status);
-        // updateBusinessPlanStatus("{{$company->businessplan->id}}",status);
-
         updateBusinessPlanStatus("{{$company->businessplan->id}}",status).then(data => {
                $("#spinicon").attr("hidden",true);
             })

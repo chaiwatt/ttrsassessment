@@ -12,7 +12,6 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <input type="text" id="fulltbpid" hidden>
                     <form id="my_radio_box">
                         <div class="col-md-12">
                             <div class="form-check form-check-inline">
@@ -47,6 +46,51 @@
         </div>
     </div>
 </div>
+
+{{-- modal_edit_projectmember --}}
+<div id="modal_edit_projectmember" class="modal fade" style="overflow:hidden;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แก้ไขคณะกรรมการ</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 form-group" >
+                        <label>เลือกคณะกรรมการจากผู้ใช้</label>
+                        <select name="usermember" id="usermember" data-placeholder="เลือกคณะกรรมการจากผู้ใช้" class="form-control form-control-select2">
+                        </select> 
+                    </div>
+                </div>
+                คณะกรรมการปัจจุบัน
+                <div class="row">
+                    <div class="col-md-12" >
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อ</th> 
+                                        <th>นามสกุล</th> 
+                                        <th>เพิ่มเติม</th>                                                                                   
+                                    </tr>
+                                </thead>
+                                <tbody id="usermember_wrapper_tr"> 
+    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="modal-footer">
+                <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                <button id="btn_modal_edit_projectmember" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
@@ -102,6 +146,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <input type="text" id="fulltbpid"  hidden>
                         <div class="table-responsive">
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
@@ -114,6 +159,7 @@
                                         <th>การอนุมัติ</th> 
                                         <th>เกณฑ์การประเมิน</th> 
                                         <th>ผู้เชี่ยวชาญ</th> 
+                                        <th>คณะกรรมการ</th>
                                         <th>เพิ่มเติม</th> 
                                                                   
                                     </tr>
@@ -148,6 +194,9 @@
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
                                             @endif
                                         </th> 
+                                        <td> 
+                                            <button type="button" id="projectmember" class="btn btn-sm bg-info" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
+                                        </td>
                                         <td> 
                                             <a type="button" href="{{asset($fulltbp->file)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
