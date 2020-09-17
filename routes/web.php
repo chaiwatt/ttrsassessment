@@ -391,6 +391,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'assessment'], function(){
                 Route::get('','DashboardAdminAssessmentController@Index')->name('dashboard.admin.assessment');     
                 Route::get('edit/{id}','DashboardAdminAssessmentController@Edit')->name('dashboard.admin.assessment.edit');        
+                Route::post('getev','DashboardAdminAssessmentController@GetEv')->name('dashboard.admin.assessment.getev'); 
+                Route::post('addscore','DashboardAdminAssessmentController@AddScore')->name('dashboard.admin.assessment.addscore'); 
+                Route::post('conflictscore','DashboardAdminAssessmentController@ConflictScore')->name('dashboard.admin.assessment.conflictscore'); 
+                Route::post('conflictgrade','DashboardAdminAssessmentController@ConflictGrade')->name('dashboard.admin.assessment.conflictgrade'); 
             }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){

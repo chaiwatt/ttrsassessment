@@ -68,7 +68,7 @@
                                         <th>Sub Pillar</th>   
                                         <th>Index</th>                                                                                
                                         <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
-                                        <th style="width:250px">Weightsum(Portion*Pillar*Weight*Score)</th> 
+                                        {{-- <th style="width:250px">Weightsum(Portion*Pillar*Weight*Score)</th>  --}}
                                     </tr>
                                 </thead>
                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -95,7 +95,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/scoringhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/dashboardadminassessmenthelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

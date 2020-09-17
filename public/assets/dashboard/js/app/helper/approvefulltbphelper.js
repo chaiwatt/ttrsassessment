@@ -24,7 +24,7 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
    }).catch(error => {})
 });
 
-$(document).on('click', '#projectmember', function(e) {
+$(document).on('click', '.projectmember', function(e) {
     $('#fulltbpid').val($(this).data('id'));
     getUsers($(this).data('id')).then(data => {
         console.log(data);
@@ -42,6 +42,7 @@ $(document).on('click', '#projectmember', function(e) {
                         </td>
                     </tr>`
             });
+       
         $("#usermember_wrapper_tr").html(html1);
         $("#usermember").html(html);
         $('#modal_edit_projectmember').modal('show');
@@ -85,6 +86,7 @@ $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
                         </td>
                     </tr>`
             });
+        $("#projectmember"+$('#fulltbpid').val()).html(data.projectmembers.length + ' คน');
         $("#usermember_wrapper_tr").html(html1);
         $("#usermember").html(html);
         $('#modal_edit_projectmember').modal('show');
@@ -128,6 +130,7 @@ $(document).on('click', '.deleteprojectmember', function(e) {
                         </td>
                     </tr>`
             });
+        $("#projectmember"+$('#fulltbpid').val()).html(data.projectmembers.length + ' คน');
         $("#usermember_wrapper_tr").html(html1);
         $("#usermember").html(html);
         $('#modal_edit_projectmember').modal('show');

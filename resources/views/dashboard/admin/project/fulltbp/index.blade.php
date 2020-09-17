@@ -57,10 +57,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12 form-group" >
+                    <div class="col-md-12" >
                         <label>เลือกคณะกรรมการจากผู้ใช้</label>
-                        <select name="usermember" id="usermember" data-placeholder="เลือกคณะกรรมการจากผู้ใช้" class="form-control form-control-select2">
-                        </select> 
+                        <div class="form-group header-elements-md-inline">
+                            <select name="usermember" id="usermember" data-placeholder="เลือกคณะกรรมการจากผู้ใช้" class="form-control form-control-select2">
+                            </select> 
+                            &nbsp;<button id="btn_modal_edit_projectmember" class="btn bg-teal" > บันทึก</button>
+                        </div>
                     </div>
                 </div>
                 คณะกรรมการปัจจุบัน
@@ -85,7 +88,6 @@
             </div>           
             <div class="modal-footer">
                 <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                <button id="btn_modal_edit_projectmember" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
             </div>
         </div>
     </div>
@@ -98,7 +100,6 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -195,7 +196,7 @@
                                             @endif
                                         </th> 
                                         <td> 
-                                            <button type="button" id="projectmember" class="btn btn-sm bg-info" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
+                                            <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                         </td>
                                         <td> 
                                             <a type="button" href="{{asset($fulltbp->file)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>

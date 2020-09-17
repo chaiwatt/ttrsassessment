@@ -52,7 +52,7 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>สถานะ</th>
-                                        <th style="width:200px">เพิ่มเติม</th> 
+                                        <th>เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,9 +62,9 @@
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
                                         <td> 
-                                            <a href="{{route('dashboard.expert.report.view',['id' => $fulltbp->id])}}" class=" badge bg-primary">รายละเอียด</a>
-                                            <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class=" badge bg-teal">PDF</a>
-                                            <a href="{{route('dashboard.expert.report.excel',['id' => $fulltbp->id])}}" class=" badge bg-info">EXCEL</a>
+                                            <a href="{{route('dashboard.expert.report.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                            <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal">PDF</a>
+                                            <a href="{{route('dashboard.expert.report.excel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">EXCEL</a>
                                         </td> 
                                     @endforeach
                                 </tbody>
