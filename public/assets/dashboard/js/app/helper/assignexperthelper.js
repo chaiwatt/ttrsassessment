@@ -15,7 +15,8 @@ $(document).on('change', '#expert', function(e) {
             <thead>
                 <tr>    
                     <th>โครงการ</th> 
-                    <th>สถานะ</th>                                                                 
+                    <th>สถานะ</th>     
+                    <th>การตอบรับ</th>                                                                
                 </tr>
             </thead>
             <tbody>`;
@@ -25,9 +26,18 @@ $(document).on('change', '#expert', function(e) {
                 if(fulltbp.minitbp.businessplan.finished == '1'){
                     status = "ปิดโครงการ";
                 }
+                var acceptstatus = '';
+                if(fulltbp.expertassignment.accepted == 0){
+                  acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+                }else if(fulltbp.expertassignment.accepted == 1){
+                  acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
+                }else if(fulltbp.expertassignment.accepted == 2){
+                  acceptstatus = `<span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>`;
+                }
                 html += `<tr >                                        
                     <td> ${fulltbp.minitbp['project']} </td>                                            
                     <td> ${status} </td> 
+                    <td> ${acceptstatus}</td>
                 </tr>`
             });
             html +=`</tbody></table></div>`;
@@ -73,10 +83,19 @@ function getExpert(id){
             if(route.usertypeid == 7){
                 onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
             }
+            var acceptstatus = '';
+            if(expert.accepted == 0){
+              acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+            }else if(expert.accepted == 1){
+              acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
+            }else if(expert.accepted == 2){
+              acceptstatus = `<span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>`;
+            }
             html += `<tr >                                        
                 <td class='userid' data-id='${expert.user['id']}'> ${expert.user['name']} ${expert.user['lastname']}</td>   
                 ${onlymaster}      
-                <td> ${expert.expertassignmentstatus['name']}</td>                                   
+                <td> ${expert.expertassignmentstatus['name']}</td>  
+                <td> ${acceptstatus}</td>                                   
                 <td> 
                     <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
                 </td>

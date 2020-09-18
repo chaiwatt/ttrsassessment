@@ -44,9 +44,11 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">มอบหมายผู้เชี่ยวชาญ </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            <div class="header-elements d-none">
-                <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งต่อ JD<b><i class="icon-redo2"></i></b></a>
-            </div>
+            @if (Auth::user()->user_type_id != 7 )
+                <div class="header-elements d-none">
+                    <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งต่อ JD<b><i class="icon-redo2"></i></b></a>
+                </div>
+            @endif    
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -101,6 +103,7 @@
                                             <th>การรับมอบหมาย</th> 
                                         @endif     
                                         <th>สถานะ</th> 
+                                        <th>การตอบรับ</th> 
                                         <th>เพิ่มเติม</th>                                                                 
                                     </tr>
                                 </thead>
@@ -113,7 +116,16 @@
                                         @endif
                                         <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
                                         <td> 
-                                            <button type="button" data-id="{{$expertassignment->id}}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
+                                            @if ($expertassignment->accepted == 0)
+                                                   <span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span> 
+                                                @elseif($expertassignment->accepted == 1)
+                                                    <span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span> 
+                                                @elseif($expertassignment->accepted == 2)
+                                                    <span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>   
+                                            @endif
+                                        </td> 
+                                        <td> 
+                                            <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-danger deleteexpert">ลบ</button>                                       
                                         </td>                                
                                     </tr>
                                     @endforeach

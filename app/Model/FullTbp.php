@@ -15,7 +15,7 @@ class FullTbp extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
-    protected $appends = ['minitbp','updatedatth'];
+    protected $appends = ['minitbp','updatedatth','expertassignment'];
 
     public function getMiniTbpAttribute(){
         return MiniTBP::find($this->mini_tbp_id);
@@ -58,11 +58,20 @@ class FullTbp extends Model
     } 
 
     public function getProjectScoreAttribute(){
-        return ProjectScoring::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->where('criteria_group_id',$this->criteria_group_id)->first();
+        return ProjectScoring::where('full_tbp_id',$this->id)
+                            ->where('user_id',Auth::user()->id)
+                            ->where('criteria_group_id',$this->criteria_group_id)
+                            ->first();
     } 
 
     public function getExpertAssignmentAttribute(){
         return ExpertAssignment::where('user_id',Auth::user()->id)->first();
+    } 
+    public function getExpertAssignmentsAttribute(){
+        return ExpertAssignment::where('full_tbp_id',$this->id)
+                            ->where('expert_assignment_status_id',2)
+                            ->where('accepted',1)
+                            ->get();
     } 
     public function getProjectmemberAttribute(){
         return ProjectMember::where('full_tbp_id',$this->id)->get();

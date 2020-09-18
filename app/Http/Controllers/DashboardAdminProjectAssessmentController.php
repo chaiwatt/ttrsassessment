@@ -12,6 +12,7 @@ use App\Model\MiniTBP;
 use App\Model\Scoring;
 use App\Helper\EmailBox;
 use App\Model\BusinessPlan;
+use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\ProjectScoring;
 use App\Model\CheckListGrading;
@@ -25,14 +26,17 @@ class DashboardAdminProjectAssessmentController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        $fulltbps = FullTbp::where('status',2)->get();
-        if($auth->user_type_id < 7){
-            $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
-                                            ->orWhere('coleader_id',$auth->id)
-                                            ->pluck('business_plan_id')->toArray();
-            $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
-        }
+        // $fulltbps = FullTbp::where('status',2)->get();
+        // if($auth->user_type_id < 7){
+        //     $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
+        //                                     ->orWhere('coleader_id',$auth->id)
+        //                                     ->pluck('business_plan_id')
+        //                                     ->toArray();
+        //     $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
+        //     $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        // }
+        $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+        $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
     }
     public function Edit($id){

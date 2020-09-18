@@ -20,14 +20,17 @@ class DashboardAdminAssessmentController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        $fulltbps = FullTbp::where('status',2)->get();
-        if($auth->user_type_id < 7){
-            $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
-                                            ->orWhere('coleader_id',$auth->id)
-                                            ->pluck('business_plan_id')->toArray();
-            $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
-        }
+        // $fulltbps = FullTbp::where('status',2)->get();
+        // if($auth->user_type_id < 7){
+        //     $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
+        //                                     ->orWhere('coleader_id',$auth->id)
+        //                                     ->pluck('business_plan_id')
+        //                                     ->toArray();
+        //     $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
+        //     $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        // }
+        $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+        $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.assessment.index')->withFulltbps($fulltbps);
     }
    public function Edit($id){
@@ -42,12 +45,22 @@ class DashboardAdminAssessmentController extends Controller
                                 ->where('scoretype',2)
                                 ->pluck('sub_pillar_index_id')
                                 ->toArray();
-    $basearray = array();                            
+    $basearray = array();  
+    $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($request->evid)->full_tbp_id)->get();                              
     foreach ($subpillarindexarray as $key => $subpillarindex) {
         $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
                     ->pluck('criteria_transaction_id')
-                    ->toArray();         
-        $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
+                    ->toArray();    
+        $val_count = array_count_values($scores);
+        $repeat = $projectmembers->count();
+        $arrayrepeat = array();
+        foreach($scores as $v) {
+            if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
+        }
+
+        // $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
+        $basearray = array_merge($arrayrepeat,$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);        
+        
     }
     $subpillarindexarray = Scoring::where('ev_id',$request->evid)
                     ->distinct('sub_pillar_index_id')
@@ -62,7 +75,7 @@ class DashboardAdminAssessmentController extends Controller
                 $basearray[] = Scoring::where('ev_id',$request->evid)->where('sub_pillar_index_id',$subpillarindex)->first()->criteria_transaction_id;
             }   
     }
-    $criteriatransactions = CriteriaTransaction::whereIn('id',$basearray)
+    $criteriatransactions = CriteriaTransaction::whereIn('id',array_unique($basearray))
                                                 ->orderBy('pillar_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
@@ -167,27 +180,43 @@ class DashboardAdminAssessmentController extends Controller
                 ->where('scoretype',2)
                 ->pluck('sub_pillar_index_id')
                 ->toArray();
-        $basearray = array();                            
+                
+  
+        $basearray = array();     
+        $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($criteriatransaction->ev_id)->full_tbp_id)->get();                     
         foreach ($subpillarindexarray as $key => $subpillarindex) {
             $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
-            ->pluck('criteria_transaction_id')
-            ->toArray();         
-            $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
+                            ->pluck('criteria_transaction_id')
+                            ->toArray(); 
+            // return $scores;      
+            $val_count = array_count_values($scores);
+            $repeat = $projectmembers->count();
+            $arrayrepeat = array();
+            foreach($scores as $v) {
+              if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
+            }
+            // print_r($arrayrepeat);
+
+            // $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
+            $basearray = array_merge($arrayrepeat,$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
         }
+
         $subpillarindexarray = Scoring::where('ev_id',$criteriatransaction->ev_id)
                                     ->distinct('sub_pillar_index_id')
                                     ->where('scoretype',1)
                                     ->pluck('sub_pillar_index_id')
                                     ->toArray();
+
         foreach ($subpillarindexarray as $key => $subpillarindex) {
-        $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
-                        ->pluck('score')
-                        ->toArray();   
-        if(count(array_unique($scores)) != 1){
-            $basearray[] = Scoring::where('ev_id',$criteriatransaction->ev_id)->where('sub_pillar_index_id',$subpillarindex)->first()->criteria_transaction_id;
-        }   
+            $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+                            ->pluck('score')
+                            ->toArray();   
+            if(count(array_unique($scores)) != 1){
+                $basearray[] = Scoring::where('ev_id',$criteriatransaction->ev_id)->where('sub_pillar_index_id',$subpillarindex)->first()->criteria_transaction_id;
+            }   
         }
-        $criteriatransactions = CriteriaTransaction::whereIn('id',$basearray)
+
+        $criteriatransactions = CriteriaTransaction::whereIn('id',array_unique($basearray))
                                 ->orderBy('pillar_id','asc')
                                 ->orderBy('sub_pillar_id', 'asc')
                                 ->orderBy('sub_pillar_index_id', 'asc')
@@ -222,8 +251,13 @@ class DashboardAdminAssessmentController extends Controller
         $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
                         ->where('scoretype',2)
                         ->where('criteria_transaction_id',$request->id)
-                        ->get();
-        return response()->json($scores); 
+                        ->get();  
+        $projectmembers = Projectmember::where('full_tbp_id',Ev::find($criteriatransaction->ev_id)->full_tbp_id)->get();              
+        // return response()->json($scores); 
+        return response()->json(array(
+            "scores" => $scores,
+            "projectmembers" => $projectmembers
+    ));
     }
 
     
@@ -232,7 +266,7 @@ class DashboardAdminAssessmentController extends Controller
         $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
                         ->where('scoretype',1)
                         ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
-                        ->get();
+                        ->get();                       
         return response()->json($scores); 
     }
 }

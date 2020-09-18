@@ -255,14 +255,17 @@ function addScore(transactionid,score,subpillarindex,scoretype){
 
 
   $(document).on('click', '.conflictscore', function(e) {
-    // console.log($(this).data('id'));
     showConflictScore($(this).data('id')).then(data => {
-        // console.log(data);
         var html =``;
-        data.forEach(function (conflict,index) {
+        data.projectmembers.forEach(function (conflict,index) {
+            var icon = '<i class="icon-cross"></i>';
+            var check = data.scores.find(x => x.user_id === conflict.user['id']);
+            if ( typeof(check) !== "undefined" && check !== null ) {
+                icon = '<i class="icon-check"></i>';
+            }
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
-            <td> <i class="icon-check"></i> </td>                                            
+            <td> ${icon} </td>                                            
             </tr>`
             });
         $("#show_conflict_modal_wrapper_tr").html(html);
@@ -298,7 +301,7 @@ function showConflictScore(id){
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
             <td> ${conflict.score} </td>                                            
             </tr>`
-            });
+        });
         $("#show_conflict_modal_wrapper_tr").html(html);
         $('#modal_show_conflict').modal('show');
     }).catch(error => {})

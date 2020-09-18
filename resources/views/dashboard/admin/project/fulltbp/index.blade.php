@@ -189,7 +189,7 @@
                                              
                                         </td> 
                                         <th> 
-                                            @if ($fulltbp->assignexpert == '2')
+                                            @if ($fulltbp->expertassignments->count() > 0)
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-success">มอบหมายแล้ว</a>
                                                 @else
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
