@@ -12,7 +12,8 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 3,
-                'name' => 'expert1',
+                'name' => 'สมชาย',
+                'lastname' => 'สกุลผู้เชียวชาญ1',
                 'email' => 'ttrsexpert1@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
@@ -21,7 +22,8 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 3,
-                'name' => 'expert2',
+                'name' => 'สมหญิง',
+                'lastname' => 'สกุลผู้เชียวชาญ2',
                 'email' => 'ttrsexpert2@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
@@ -30,7 +32,8 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 4,
-                'name' => 'leader1',
+                'name' => 'สมปอง',
+                'lastname' => 'สกุลลิดเดอร์',
                 'email' => 'programprc@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
@@ -39,7 +42,8 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 4,
-                'name' => 'coleader1',
+                'name' => 'สมหวัง',
+                'lastname' => 'สกุลผู้ช่วยลิดเดอร์',
                 'email' => 'edutechthai@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
@@ -47,8 +51,19 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'prefix_id' => 1,
+                'user_type_id' => 4,
+                'name' => 'สมคิด',
+                'lastname' => 'สกุลแอดมิน',
+                'email' => 'ttrsassessment@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
                 'user_type_id' => 7,
-                'name' => 'สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ',
+                'name' => 'สมนึก',
+                'lastname' => 'สกุลเจดี',
                 'email' => 'joerocknpc@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),

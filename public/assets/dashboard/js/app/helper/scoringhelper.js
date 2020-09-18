@@ -63,7 +63,7 @@ function RenderTable(data){
 
         if(criteria.criteria != null){
             criterianame = `<label class="form-check-label">
-                                <input type="checkbox" id="checkscore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info" ${checkvalue}>
+                                <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info" ${checkvalue}>
                                 ${criteria.criteria['name']}
                             </label>`;
         }
@@ -82,14 +82,17 @@ function RenderTable(data){
                             </div>
                         </div>`;
 
-        var numcheck = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']).length;   
-        if(numcheck > 0){
+        // var numcheck = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']).length; 
+        var _scores = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']); 
+        const numcheck = _scores.map(item => item.score).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0);
+        console.log(numcheck)
+        if(_scores.length > 0){
             var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
             console.log(checklistgrading['gradea']);
             var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
             let gradeis = 0;
             for (let i = 0; i < grades.length; i++) {
-                if(numcheck <= grades[i]){
+                if(numcheck >= grades[i]){
                     gradeis = i;
                     break;
                 }
@@ -210,7 +213,13 @@ $(document).on('change', '#gradescore', function(e) {
 
 $(document).on('change', '#checkscore', function(e) {
     var state = 0;
-    if($(this).is(':checked') == true){state=1}
+    if($(this).is(':checked') == true){
+        state=1;
+        if($(this).data("name").includes("x2")){
+            state=2;
+        }
+    }
+    console.log('hello');
     addScore($(this).data('id'),state,$(this).data('subpillarindex'),2).then(data => {
         console.log(data);
         $('#weightsum'+$(this).data('subpillarindex')).val(data);

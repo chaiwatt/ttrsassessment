@@ -99,6 +99,7 @@ class DashboardAdminProjectAssessmentController extends Controller
        
         $scores = Scoring::where('ev_id',$request->evid)
                     ->where('scoretype',2)
+                    ->where('user_id',Auth::user()->id)
                     ->get();
         $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
 
@@ -135,6 +136,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                 ]);
             }
         }
+
         $pillaindexweigth = PillaIndexWeigth::where('ev_id',$criteriatransaction->ev_id)
                                         ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
                                         ->first();
@@ -152,17 +154,20 @@ class DashboardAdminProjectAssessmentController extends Controller
             $weightsum = ($pillaindexweigth->weigth)*2*($pillar->percent/100)*($evportion->percent/100);
         }else if(strtoupper(trim($request->score)) == 'E'){
             $weightsum = ($pillaindexweigth->weigth)*1*($pillar->percent/100)*($evportion->percent/100);
-        }else if(strtoupper(trim($request->score)) == '0' || strtoupper(trim($request->score)) == '1'){
+        }else if(strtoupper(trim($request->score)) == '0' || 
+                    strtoupper(trim($request->score)) == '1' || 
+                    strtoupper(trim($request->score)) == '2'){
             $numcheck = Scoring::where('ev_id',$criteriatransaction->ev_id)
                             ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
                             ->where('scoretype',2)
-                            ->get()->count();
+                            ->where('user_id',Auth::user()->id)
+                            ->get()->sum('score');             
             $checklistgrading = CheckListGrading::where('ev_id',$criteriatransaction->ev_id)
                             ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)->first(); 
             $grades=array($checklistgrading->gradea,$checklistgrading->gradeb,$checklistgrading->gradec,$checklistgrading->graded,$checklistgrading->gradee,$checklistgrading->gradef);    
             $gradeis = 0;
             foreach ($grades as $key => $grade) {
-                if($numcheck <= $grade){
+                if($numcheck >= $grade){
                     $gradeis = $key;
                 break;
                 }
@@ -180,7 +185,7 @@ class DashboardAdminProjectAssessmentController extends Controller
             }
         }
         $pillars = Pillar::get();   
-        $evportions = EvType::get();   
+        $evportions = EvType::get(); 
         return response()->json($weightsum); 
     }
 

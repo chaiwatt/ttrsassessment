@@ -4,6 +4,37 @@
 
 @stop
 @section('content')
+    {{-- modal_show_conflict --}}
+    <div id="modal_show_conflict" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;EV ในระบบ</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="criteriatable_modal">
+                            <thead>
+                                <tr>
+                                    <th>ชื่อ-สกุล</th>                                                                                   
+                                    <th>Score</th>  
+                                </tr>
+                            </thead>
+                            <tbody id="show_conflict_modal_wrapper_tr"> 
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_show_conflict" class="btn bg-primary" data-dismiss="modal"><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         

@@ -64,7 +64,7 @@ function RenderTable(data){
 
         if(criteria.criteria != null){
             criterianame = `<label class="form-check-label">
-                                <input type="checkbox" id="checkscore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info" ${checkvalue}>
+                                <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info" ${checkvalue}>
                                 ${criteria.criteria['name']} <a href="#" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
                             </label>`;
         }
@@ -83,14 +83,18 @@ function RenderTable(data){
                             </div>
                         </div>`;
 
-        var numcheck = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']).length;   
-        if(numcheck > 0){
+        // var numcheck = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']).length;   
+        // if(numcheck > 0){
+        var _scores = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']); 
+        const numcheck = _scores.map(item => item.score).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0);
+        console.log(numcheck)
+        if(_scores.length > 0){
             var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
             console.log(checklistgrading['gradea']);
             var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
             let gradeis = 0;
             for (let i = 0; i < grades.length; i++) {
-                if(numcheck <= grades[i]){
+                if(numcheck >= grades[i]){
                     gradeis = i;
                     break;
                 }
@@ -205,7 +209,12 @@ $(document).on('change', '#gradescore', function(e) {
 
 $(document).on('change', '#checkscore', function(e) {
     var state = 0;
-    if($(this).is(':checked') == true){state=1}
+    if($(this).is(':checked') == true){
+        state=1;
+        if($(this).data("name").includes("x2")){
+            state=2;
+        }
+    }
     addScore($(this).data('id'),state,$(this).data('subpillarindex'),2).then(data => {
         console.log(data);
         $('#weightsum'+$(this).data('subpillarindex')).val(data.weightsum);
@@ -248,7 +257,16 @@ function addScore(transactionid,score,subpillarindex,scoretype){
   $(document).on('click', '.conflictscore', function(e) {
     // console.log($(this).data('id'));
     showConflictScore($(this).data('id')).then(data => {
-        console.log(data);
+        // console.log(data);
+        var html =``;
+        data.forEach(function (conflict,index) {
+            html += `<tr > 
+            <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
+            <td> <i class="icon-check"></i> </td>                                            
+            </tr>`
+            });
+        $("#show_conflict_modal_wrapper_tr").html(html);
+        $('#modal_show_conflict').modal('show');
     }).catch(error => {})
 });
 
@@ -273,7 +291,34 @@ function showConflictScore(id){
 
   $(document).on('click', '.conflictgrade', function(e) {
     console.log($(this).data('id'));
-    // showConflict($(this).data('id')).then(data => {
-    //     console.log(data);
-    // }).catch(error => {})
+    showConflictGrade($(this).data('id')).then(data => {
+        var html =``;
+        data.forEach(function (conflict,index) {
+            html += `<tr > 
+            <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
+            <td> ${conflict.score} </td>                                            
+            </tr>`
+            });
+        $("#show_conflict_modal_wrapper_tr").html(html);
+        $('#modal_show_conflict').modal('show');
+    }).catch(error => {})
 });
+
+function showConflictGrade(id){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+        url: `${route.url}/dashboard/admin/assessment/conflictgrade`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+            id : id
+        },
+        success: function(data) {
+            resolve(data)
+        },
+        error: function(error) {
+            reject(error)
+        },
+        })
+    })
+  }

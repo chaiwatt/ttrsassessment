@@ -62,9 +62,17 @@
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
                                         <td> 
-                                            <a href="{{route('dashboard.expert.report.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
-                                            <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal">PDF</a>
-                                            <a href="{{route('dashboard.expert.report.excel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">EXCEL</a>
+                                            @if ($fulltbp->expertassignment->accepted == 0)
+                                                    <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
+                                                    <a href="{{route('dashboard.expert.report.reject',['id' => $fulltbp->id])}}" class="btn btn-sm bg-danger">ปฎิเสธเข้าร่วม</a>
+                                                @elseif($fulltbp->expertassignment->accepted == 1) 
+                                                    <a href="{{route('dashboard.expert.report.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                                    <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal">PDF</a>
+                                                    <a href="{{route('dashboard.expert.report.excel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">EXCEL</a>
+                                                @elseif($fulltbp->expertassignment->accepted == 2)
+                                                    <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปฎิเสธการเข้าร่วมหรือคลิกเพื่อเข้าร่วม</a>
+                                            @endif
+                                            
                                         </td> 
                                     @endforeach
                                 </tbody>

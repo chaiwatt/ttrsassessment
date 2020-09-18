@@ -423,8 +423,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardExpertReportController@Index')->name('dashboard.expert.report');   
                 Route::get('view/{id}','DashboardExpertReportController@View')->name('dashboard.expert.report.view');          
-                    Route::get('pdf/{id}','DashboardExpertReportController@Pdf')->name('dashboard.expert.report.pdf');          
-                    Route::get('excel/{id}','DashboardExpertReportController@Excel')->name('dashboard.expert.report.excel');               
+                Route::get('pdf/{id}','DashboardExpertReportController@Pdf')->name('dashboard.expert.report.pdf');          
+                Route::get('excel/{id}','DashboardExpertReportController@Excel')->name('dashboard.expert.report.excel');               
+                Route::get('accept/{id}','DashboardExpertReportController@Accept')->name('dashboard.expert.report.accept'); 
+                Route::get('reject/{id}','DashboardExpertReportController@Reject')->name('dashboard.expert.report.reject'); 
             });    
         }); 
         Route::group(['prefix' => 'company'], function(){

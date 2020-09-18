@@ -129,11 +129,14 @@ class DashboardAdminAssessmentController extends Controller
             $weightsum = ($pillaindexweigth->weigth)*2*($pillar->percent/100)*($evportion->percent/100);
         }else if(strtoupper(trim($request->score)) == 'E'){
             $weightsum = ($pillaindexweigth->weigth)*1*($pillar->percent/100)*($evportion->percent/100);
-        }else if(strtoupper(trim($request->score)) == '0' || strtoupper(trim($request->score)) == '1'){
+        }else if(strtoupper(trim($request->score)) == '0' || 
+                strtoupper(trim($request->score)) == '1' || 
+                strtoupper(trim($request->score)) == '2'){
             $numcheck = Scoring::where('ev_id',$criteriatransaction->ev_id)
                             ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
                             ->where('scoretype',2)
-                            ->get()->count();
+                            ->where('user_id',Auth::user()->id)
+                            ->get()->sum('score');   
             $checklistgrading = CheckListGrading::where('ev_id',$criteriatransaction->ev_id)
                             ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)->first(); 
             $grades=array($checklistgrading->gradea,$checklistgrading->gradeb,$checklistgrading->gradec,$checklistgrading->graded,$checklistgrading->gradee,$checklistgrading->gradef);    
@@ -166,22 +169,22 @@ class DashboardAdminAssessmentController extends Controller
                 ->toArray();
         $basearray = array();                            
         foreach ($subpillarindexarray as $key => $subpillarindex) {
-        $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
-        ->pluck('criteria_transaction_id')
-        ->toArray();         
-        $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
+            $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+            ->pluck('criteria_transaction_id')
+            ->toArray();         
+            $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
         }
         $subpillarindexarray = Scoring::where('ev_id',$criteriatransaction->ev_id)
-        ->distinct('sub_pillar_index_id')
-        ->where('scoretype',1)
-        ->pluck('sub_pillar_index_id')
-        ->toArray();
+                                    ->distinct('sub_pillar_index_id')
+                                    ->where('scoretype',1)
+                                    ->pluck('sub_pillar_index_id')
+                                    ->toArray();
         foreach ($subpillarindexarray as $key => $subpillarindex) {
         $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
-        ->pluck('score')
-        ->toArray();   
+                        ->pluck('score')
+                        ->toArray();   
         if(count(array_unique($scores)) != 1){
-        $basearray[] = Scoring::where('ev_id',$criteriatransaction->ev_id)->where('sub_pillar_index_id',$subpillarindex)->first()->criteria_transaction_id;
+            $basearray[] = Scoring::where('ev_id',$criteriatransaction->ev_id)->where('sub_pillar_index_id',$subpillarindex)->first()->criteria_transaction_id;
         }   
         }
         $criteriatransactions = CriteriaTransaction::whereIn('id',$basearray)
@@ -217,13 +220,19 @@ class DashboardAdminAssessmentController extends Controller
     public function ConflictScore(Request $request){
         $criteriatransaction = CriteriaTransaction::find($request->id);
         $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
-                        ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
+                        ->where('scoretype',2)
+                        ->where('criteria_transaction_id',$request->id)
                         ->get();
         return response()->json($scores); 
     }
 
     
     public function ConflictGrade(Request $request){
-  
+        $criteriatransaction = CriteriaTransaction::find($request->id);
+        $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
+                        ->where('scoretype',1)
+                        ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
+                        ->get();
+        return response()->json($scores); 
     }
 }
