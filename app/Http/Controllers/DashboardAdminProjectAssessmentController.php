@@ -13,6 +13,7 @@ use App\Model\Scoring;
 use App\Helper\EmailBox;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
+use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
 use App\Model\ProjectScoring;
 use App\Model\CheckListGrading;
@@ -202,6 +203,36 @@ class DashboardAdminProjectAssessmentController extends Controller
         }
         $scorings = Scoring::where('criteria_transaction_id',$request->transactionid)->get();
         return response()->json($scorings); 
+    }
+
+    public function UpdateScoringStatus(Request $request){
+        $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
+                                    ->where('project_member_id',ProjectMember::where('user_id',Auth::user()->id)->first()->id)
+                                    ->first();
+        // if(Empty($scoringstatus)){
+        //     if($request->status){
+
+        //     }else{
+
+        //     }
+        // }   
+        if($request->status == 1){
+            $scoringstatus = new ScoringStatus();
+            $scoringstatus->ev_id = $request->evid;
+            $scoringstatus->project_member_id = ProjectMember::where('user_id',Auth::user()->id)->first()->id;
+            $scoringstatus->save();
+        }else{
+            $scoringstatus->delete();
+        }                      
+        // dd('ok');
+        // $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)->first();
+        // if(!Empty($scoring)){
+        //     $scoring->update([
+        //         'comment' => $request->comment
+        //     ]);
+        // }
+        // $scorings = Scoring::where('criteria_transaction_id',$request->transactionid)->get();
+        // return response()->json($scorings); 
     }
     
 }

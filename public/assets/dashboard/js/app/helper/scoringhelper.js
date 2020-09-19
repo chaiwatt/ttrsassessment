@@ -274,3 +274,35 @@ function addScore(transactionid,score,subpillarindex,scoretype){
         })
     })
   }
+
+  $('#chkscorestatus').on('change.bootstrapSwitch', function(e) {
+    var status = 0
+    if(e.target.checked==true){
+        status =1;
+    }        
+    console.log($(this).data('id') + ' ' + status);
+    $("#spinicon").attr("hidden",false);
+    updateScoringStatus($(this).data('id'),status).then(data => {
+        $("#spinicon").attr("hidden",true);
+    }).catch(error => {})
+});
+
+function updateScoringStatus(evid,status){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+        url: `${route.url}/dashboard/admin/project/assessment/updatescoringstatus`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+            evid : evid,
+            status : status
+        },
+        success: function(data) {
+            resolve(data)
+        },
+        error: function(error) {
+            reject(error)
+        },
+        })
+    })
+  }
