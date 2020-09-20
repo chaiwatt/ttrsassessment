@@ -5,6 +5,11 @@ $(function() {
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         $('#sumofweight').html(data.sumweigth);
+        if(jQuery.isEmptyObject(data.scoringstatus) ){
+            $('.inpscore').prop("disabled", false);
+        }else{
+            $('.inpscore').prop("disabled", true);
+        }
     }).catch(error => {})
 });
 
@@ -59,11 +64,11 @@ function RenderTable(data){
         }
 
         var criterianame = `<label>กรอกเกรด (A-F)</label>
-                                <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control">`;
+                                <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control inpscore">`;
 
         if(criteria.criteria != null){
             criterianame = `<label class="form-check-label">
-                                <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info" ${checkvalue}>
+                                <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info inpscore" ${checkvalue}>
                                 ${criteria.criteria['name']}
                             </label>`;
         }
@@ -78,7 +83,7 @@ function RenderTable(data){
 
         criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
                             <label><i>ความเห็น</i></label>
-                            <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control">
+                            <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control inpscore">
                             </div>
                         </div>`;
 
@@ -283,6 +288,12 @@ function addScore(transactionid,score,subpillarindex,scoretype){
     console.log($(this).data('id') + ' ' + status);
     $("#spinicon").attr("hidden",false);
     updateScoringStatus($(this).data('id'),status).then(data => {
+        console.log(data);
+        if(jQuery.isEmptyObject(data) ){
+            $('.inpscore').prop("disabled", false);
+        }else{
+            $('.inpscore').prop("disabled", true);
+        }
         $("#spinicon").attr("hidden",true);
     }).catch(error => {})
 });

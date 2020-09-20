@@ -107,7 +107,9 @@ class DashboardAdminProjectAssessmentController extends Controller
                     ->where('user_id',Auth::user()->id)
                     ->get();
         $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
-
+        $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
+                                    ->where('user_id',Auth::user()->id)
+                                    ->first(); 
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "pillaindexweigths" => $pillaindexweigths,
@@ -115,7 +117,8 @@ class DashboardAdminProjectAssessmentController extends Controller
             "pillars" => $pillars,
             "evportions" => $evportions,
             "scores" => $scores,
-            "checklistgradings" => $checklistgradings
+            "checklistgradings" => $checklistgradings,
+            "scoringstatus" => $scoringstatus
         ));
 
     }
@@ -207,32 +210,20 @@ class DashboardAdminProjectAssessmentController extends Controller
 
     public function UpdateScoringStatus(Request $request){
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
-                                    ->where('project_member_id',ProjectMember::where('user_id',Auth::user()->id)->first()->id)
-                                    ->first();
-        // if(Empty($scoringstatus)){
-        //     if($request->status){
-
-        //     }else{
-
-        //     }
-        // }   
+                                    ->where('user_id',Auth::user()->id)
+                                    ->first(); 
         if($request->status == 1){
             $scoringstatus = new ScoringStatus();
             $scoringstatus->ev_id = $request->evid;
-            $scoringstatus->project_member_id = ProjectMember::where('user_id',Auth::user()->id)->first()->id;
+            $scoringstatus->user_id = Auth::user()->id;
             $scoringstatus->save();
         }else{
             $scoringstatus->delete();
-        }                      
-        // dd('ok');
-        // $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)->first();
-        // if(!Empty($scoring)){
-        //     $scoring->update([
-        //         'comment' => $request->comment
-        //     ]);
-        // }
-        // $scorings = Scoring::where('criteria_transaction_id',$request->transactionid)->get();
-        // return response()->json($scorings); 
+        }     
+        $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
+                                    ->where('user_id',Auth::user()->id)
+                                    ->first();                  
+        return response()->json($scoringstatus); 
     }
     
 }

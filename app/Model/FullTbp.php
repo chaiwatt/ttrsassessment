@@ -2,9 +2,11 @@
 
 namespace App\Model;
 
+use App\Model\Ev;
 use App\Model\MiniTBP;
 use App\Model\CriteriaGroup;
 use App\Model\ProjectMember;
+use App\Model\ScoringStatus;
 use App\Model\ProjectScoring;
 use App\Helper\DateConversion;
 use App\Model\ExpertAssignment;
@@ -76,6 +78,13 @@ class FullTbp extends Model
     public function getProjectmemberAttribute(){
         return ProjectMember::where('full_tbp_id',$this->id)->get();
     } 
+
+    public function getAllScoringAttribute(){
+        $ev = Ev::where('full_tbp_id',$this->id)->first();
+        $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
+        $projectmembers = ProjectMember::where('full_tbp_id',$this->id)->pluck('user_id')->toArray();
+        return count(array_diff($projectmembers,$scoringstatuses));
+    }
 
 }
 

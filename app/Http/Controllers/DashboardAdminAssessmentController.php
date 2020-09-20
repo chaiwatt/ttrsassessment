@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Model\Ev;
 use App\Model\EvType;
 use App\Model\Pillar;
@@ -9,6 +10,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
 use App\Model\ProjectMember;
+use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
@@ -20,23 +22,23 @@ class DashboardAdminAssessmentController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        // $fulltbps = FullTbp::where('status',2)->get();
-        // if($auth->user_type_id < 7){
-        //     $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
-        //                                     ->orWhere('coleader_id',$auth->id)
-        //                                     ->pluck('business_plan_id')
-        //                                     ->toArray();
-        //     $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-        //     $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
-        // }
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+
+
+        // $scoringstatuses = ScoringStatus::where('ev_id',$request->evid)->pluck('user_id')->toArray(); 
+        // return $scoringstatuses;
+        // $projectmembers = ProjectMember::where('ev_id',$request->evid)->get();
+
+
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
+
+
         return view('dashboard.admin.assessment.index')->withFulltbps($fulltbps);
     }
    public function Edit($id){
-    $fulltbp = FullTbp::find($id);
-    $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
-    return view('dashboard.admin.assessment.edit')->withEv($ev);
+        $fulltbp = FullTbp::find($id);
+        $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
+        return view('dashboard.admin.assessment.edit')->withEv($ev);
    }
 
    public function GetEv(Request $request){
@@ -57,7 +59,6 @@ class DashboardAdminAssessmentController extends Controller
         foreach($scores as $v) {
             if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
         }
-
         // $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
         $basearray = array_merge($arrayrepeat,$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);        
         
@@ -268,5 +269,14 @@ class DashboardAdminAssessmentController extends Controller
                         ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
                         ->get();                       
         return response()->json($scores); 
+    }
+
+    public function PendingUser(Request $request){
+        $ev = Ev::where('full_tbp_id',$request->id)->first();
+        $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
+        $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->pluck('user_id')->toArray();
+        $pending = array_diff($projectmembers,$scoringstatuses);
+        $users = User::whereIn('id',$pending)->get();
+        return response()->json($users); 
     }
 }

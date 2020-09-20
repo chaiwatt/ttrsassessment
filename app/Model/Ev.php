@@ -19,7 +19,6 @@ class Ev extends Model
     } 
 
     public function getScoringStatusAttribute(){
-        $projectmember = ProjectMember::where('user_id',Auth::user()->id)->first();
-        return ScoringStatus::where('ev_id',$this->id)->where('project_member_id',$projectmember->id)->get();
+        return ScoringStatus::where('ev_id',$this->id)->where('user_id',Auth::user()->id)->get();
     } 
 }

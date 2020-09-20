@@ -17,7 +17,7 @@ class CreateScoringStatusesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ev_id');
             $table->foreign('ev_id')->references('id')->on('evs')->onDelete('cascade');
-            $table->unsignedBigInteger('project_member_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
