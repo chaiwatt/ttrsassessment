@@ -20,7 +20,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         $projectassignments = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
                                             ->get();
-        if($auth->user_type_id >= 7){
+        if($auth->user_type_id >= 6){
             $projectassignments = ProjectAssignment::get();
         }
         return view('dashboard.admin.project.projectassignment.index')->withProjectassignments($projectassignments);

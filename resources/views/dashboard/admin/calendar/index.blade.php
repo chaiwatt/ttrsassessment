@@ -82,8 +82,8 @@
                                         <td> {{$eventcalendar->summary}} </td> 
                                         <td> {{$eventcalendar->eventdateth}} {{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} </td> 
                                         <td>
-                                            <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('dashboard.admin.calendar.delete',['id' => $eventcalendar->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('dashboard.admin.calendar.delete',['id' => $eventcalendar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td> 
                                     </tr>
                                     @endforeach

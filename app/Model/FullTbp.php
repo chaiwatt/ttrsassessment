@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\Ev;
 use App\Model\MiniTBP;
+use App\Model\BusinessPlan;
 use App\Model\CriteriaGroup;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
@@ -85,7 +86,12 @@ class FullTbp extends Model
         $projectmembers = ProjectMember::where('full_tbp_id',$this->id)->pluck('user_id')->toArray();
         return count(array_diff($projectmembers,$scoringstatuses));
     }
-
+    public function getProjectAssignmentAttribute(){
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        return ProjectAssignment::where('business_plan_id',$businessplan->id)
+                            ->where('leader_id',Auth::user()->id)->get();
+    } 
 }
 
 

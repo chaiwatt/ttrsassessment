@@ -17,7 +17,7 @@ class DashboardAdminProjectEvWeightController extends Controller
     public function Index(){
         $auth = Auth::user();
         $fulltbps = FullTbp::where('status',2)->get();
-        if($auth->user_type_id < 7){
+        if($auth->user_type_id < 6){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
                                             ->pluck('business_plan_id')->toArray();

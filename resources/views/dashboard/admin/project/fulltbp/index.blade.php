@@ -62,7 +62,7 @@
                         <div class="form-group header-elements-md-inline">
                             <select name="usermember" id="usermember" data-placeholder="เลือกคณะกรรมการจากผู้ใช้" class="form-control form-control-select2">
                             </select> 
-                            &nbsp;<button id="btn_modal_edit_projectmember" class="btn bg-teal" > บันทึก</button>
+                            &nbsp;<button id="btn_modal_edit_projectmember" class="btn bg-teal" > เพิ่ม</button>
                         </div>
                     </div>
                 </div>

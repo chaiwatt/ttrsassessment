@@ -28,7 +28,7 @@ class DashboardAdminProjectAssessmentController extends Controller
     public function Index(){
         $auth = Auth::user();
         // $fulltbps = FullTbp::where('status',2)->get();
-        // if($auth->user_type_id < 7){
+        // if($auth->user_type_id < 6){
         //     $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
         //                                     ->orWhere('coleader_id',$auth->id)
         //                                     ->pluck('business_plan_id')
@@ -70,7 +70,7 @@ class DashboardAdminProjectAssessmentController extends Controller
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $existing_array = ProjectScoring::where('full_tbp_id',$fulltbp->id)->where('criteria_group_id',$fulltbp->criteria_group_id)->distinct('user_id')->pluck('user_id')->toArray();
         $users = array();
-        $users = User::where('user_type_id','>=',7)->pluck('id')->toArray();
+        $users = User::where('user_type_id','>=',6)->pluck('id')->toArray();
         array_push($users, $projectassignment->leader_id, $projectassignment->coleader_id);
         $unique_array = array_diff($users, $existing_array);
         $mails = array();

@@ -23,7 +23,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
         // $businessplans = BusinessPlan::where('business_plan_status_id',3)->whereIn('id',$projectassignments)->pluck('id')->toArray();
         $businessplans = BusinessPlan::whereIn('id',$projectassignments)->pluck('id')->toArray();
-        if(Auth::user()->user_type_id >= 7){
+        if(Auth::user()->user_type_id >= 6){
             $businessplans = BusinessPlan::where('business_plan_status_id',3)->pluck('id')->toArray();
         }
         $minitbps = MiniTBP::whereIn('business_plan_id',$businessplans)->get();

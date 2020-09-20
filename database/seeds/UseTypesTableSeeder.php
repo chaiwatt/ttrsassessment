@@ -29,20 +29,8 @@ class UseTypesTableSeeder extends Seeder
                 'group' => 'B'
             ],
             [
-                'name' => 'admin1',
+                'name' => 'admin',
                 'group' => 'B'
-            ],
-            [
-                'name' => 'admin2',
-                'group' => 'B'
-            ],
-            [
-                'name' => 'admin3',
-                'group' => 'B'
-            ],
-            [
-                'name' => 'master',
-                'group' => 'C'
             ],
             [
                 'name' => 'director',

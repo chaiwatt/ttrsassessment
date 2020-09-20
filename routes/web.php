@@ -356,6 +356,15 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('getusers','DashboardAdminProjectFullTbpController@GetUsers')->name('dashboard.admin.project.fulltbp.getusers');
                     Route::post('addprojectmember','DashboardAdminProjectFullTbpController@AddProjectMember')->name('dashboard.admin.project.fulltbp.addprojectmember');
                     Route::post('deleteprojectmember','DashboardAdminProjectFullTbpController@DeleteProjectMember')->name('dashboard.admin.project.fulltbp.deleteprojectmember');
+                    Route::group(['prefix' => 'admin'], function(){
+                        Route::get('','DashboardAdminProjectFullTbpAdminController@Index')->name('dashboard.admin.project.fulltbp.admin');           
+                        Route::get('editev/{id}','DashboardAdminProjectFullTbpAdminController@EditEv')->name('dashboard.admin.project.fulltbp.admin.editev');
+                        Route::post('addevedithistory/{id}','DashboardAdminProjectFullTbpAdminController@AddEvEditHistory')->name('dashboard.admin.project.fulltbp.admin.addevedithistory');
+                    }); 
+                    Route::group(['prefix' => 'jd'], function(){
+                        Route::get('','DashboardAdminProjectFullTbpJdController@Index')->name('dashboard.admin.project.fulltbp.jd');           
+                        Route::get('editev/{id}','DashboardAdminProjectFullTbpJdController@EditEv')->name('dashboard.admin.project.fulltbp.jd.editev');           
+                    });
                 }); 
                 Route::group(['prefix' => 'projectassignment'], function(){
                     Route::get('','DashboardAdminProjectProjectAssignmentController@Index')->name('dashboard.admin.project.projectassignment');           

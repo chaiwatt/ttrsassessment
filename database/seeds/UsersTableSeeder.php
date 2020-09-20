@@ -51,7 +51,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'prefix_id' => 1,
-                'user_type_id' => 4,
+                'user_type_id' => 5,
                 'name' => 'สมคิด',
                 'lastname' => 'สกุลแอดมิน',
                 'email' => 'ttrsassessment@gmail.com',           
@@ -61,7 +61,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'prefix_id' => 1,
-                'user_type_id' => 7,
+                'user_type_id' => 6,
                 'name' => 'สมนึก',
                 'lastname' => 'สกุลเจดี',
                 'email' => 'joerocknpc@gmail.com',           

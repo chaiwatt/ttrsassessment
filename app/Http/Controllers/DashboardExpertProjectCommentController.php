@@ -21,7 +21,7 @@ class DashboardExpertProjectCommentController extends Controller
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $user_array[] = $projectassignment->leader_id;
         $user_array[] = $projectassignment->coleader_id;
-        foreach(User::where('user_type_id','>=',7)->get() as $user ){
+        foreach(User::where('user_type_id','>=',6)->get() as $user ){
             $user_array[] = $user->id;
         }
         $users = User::whereIn('id',$user_array)->get();

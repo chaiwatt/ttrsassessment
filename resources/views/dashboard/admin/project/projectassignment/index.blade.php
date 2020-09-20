@@ -68,7 +68,7 @@
                                         <th>Leader</th>
                                         <th>Co-Leader</th>
                                         <th>สถานะ</th>
-                                        @if (Auth::user()->user_type_id>=7)
+                                        @if (Auth::user()->user_type_id>=6)
                                             <th>เพิ่มเติม</th> 
                                         @endif                             
                                     </tr>
@@ -98,7 +98,7 @@
                                                 <span class="badge badge-flat border-success text-success-600">ยืนยันแล้ว</span>
                                             @endif
                                         </td>
-                                        @if (Auth::user()->user_type_id>=7)
+                                        @if (Auth::user()->user_type_id>=6)
                                             <td> 
                                                 <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
                                             </td>    

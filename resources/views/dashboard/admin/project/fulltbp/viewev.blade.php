@@ -84,7 +84,12 @@
                                         <td> {{$ev->version}} </td> 
                                         <td> {{$ev->fulltbp->minitbp->project}} </td>  
                                         <td> 
-                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข Criteria</a>
+                                            @if (Auth::user()->user_type_id == 4)
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข Criteria</a>
+                                                @elseif(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข Criteria</a>
+                                            @endif
+                                            
                                         </td>     
                                         <td> 
                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id])}}" class="btn-sm bg-primary">แก้ไข</a>

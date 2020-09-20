@@ -44,7 +44,7 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">มอบหมายผู้เชี่ยวชาญ </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            @if (Auth::user()->user_type_id != 7 )
+            @if (Auth::user()->user_type_id != 6 )
                 <div class="header-elements d-none">
                     <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งต่อ JD<b><i class="icon-redo2"></i></b></a>
                 </div>
@@ -99,7 +99,7 @@
                                 <thead>
                                     <tr>
                                         <th >ชื่อ-สกุล</th> 
-                                        @if (Auth::user()->user_type_id == 7 )
+                                        @if (Auth::user()->user_type_id == 6 )
                                             <th>การรับมอบหมาย</th> 
                                         @endif     
                                         <th>สถานะ</th> 
@@ -111,7 +111,7 @@
                                     @foreach ($expertassignments as $key => $expertassignment)
                                     <tr>    
                                         <td class='userid' data-id='{{$expertassignment->user->id}}'> {{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</td> 
-                                        @if (Auth::user()->user_type_id == 7 )
+                                        @if (Auth::user()->user_type_id == 6 )
                                             <td> <input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
                                         @endif
                                         <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
