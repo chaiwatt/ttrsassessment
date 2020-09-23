@@ -15,6 +15,7 @@ class CreateEvsTable extends Migration
     {
         Schema::create('evs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('name',250);
             $table->string('version',10);
             $table->unsignedBigInteger('ref_assessment_group_id')->nullable();

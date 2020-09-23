@@ -10,11 +10,17 @@ use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
+use App\Model\NotificationBubble;
 use App\Model\RegisteredCapitalType;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminProjectBusinessPlanController extends Controller
 {
     public function Index(){
+        NotificationBubble::where('target_user_id',Auth::user()->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',2)
+                        ->where('status',0)->delete();
         $businessplans = BusinessPlan::where('business_plan_active_status_id',1)
                                         ->where('business_plan_status_id',1)->get();
         return view('dashboard.admin.project.businessplan.index')->withBusinessplans($businessplans);

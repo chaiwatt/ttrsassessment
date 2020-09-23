@@ -7,7 +7,7 @@
                         <div class="header-row">
                             <nav class="header-nav-top">
                                 <ul class="nav nav-pills text-uppercase text-2">
-                                    @if (!Auth::check())
+                                    {{-- @if (!Auth::check())
                                         <li class="nav-item nav-item-anim-icon">
                                             <a class="nav-link pl-0" href="{{route('login')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> {{trans('lang.login')}}</a>
                                         </li>
@@ -21,7 +21,7 @@
                                                 @csrf
                                             </form>
                                         </li>
-                                    @endif
+                                    @endif --}}
                                     <li class="nav-item dropdown nav-item-left-border d-none d-sm-block nav-item-left-border-remove nav-item-left-border-md-show">
                                         <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             @if (Config::get('app.locale') == 'th')
@@ -43,10 +43,55 @@
                     </div>
                     <div class="header-column justify-content-end">
                         <div class="header-row">
-                            <ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
+                            <nav class="header-nav-top">
+                            <ul class="nav nav-pills text-uppercase text-2">
+                                @if (!Auth::check())
+                                    <li class="nav-item nav-item-anim-icon">
+                                        <a class="nav-link pl-0" href="{{route('login')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> {{trans('lang.login')}}</a>
+                                    </li>
+                                    <li class="nav-item nav-item-anim-icon">
+                                        <a class="nav-link" href="{{route('register')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> {{trans('lang.register')}}</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item nav-item-anim-icon">
+                                        <a class="dropdown-item" href="{{route('logout')}}" style="font-size: 14px" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-angle-right"></i>{{trans('lang.signout')}}</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                    <li class="nav-item nav-item-anim-icon">
+                                        @if (Auth::user()->user_type_id >= 4)
+                                            <a class="nav-link" href="{{route('dashboard.admin.report')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> {{trans('lang.dashboard')}}</a>
+                                        @elseif(Auth::user()->user_type_id == 3)
+                                            <a class="nav-link" href="{{route('dashboard.expert.report')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> {{trans('lang.dashboard')}}</a>
+                                        @else
+                                            <a class="nav-link" href="{{route('dashboard.company.report')}}" style="font-size: 14px"><i class="fas fa-angle-right"></i> {{trans('lang.dashboard')}}</a>
+                                        @endif
+                                    </li>
+
+                                @endif
+                                {{-- <li class="nav-item dropdown nav-item-left-border d-none d-sm-block nav-item-left-border-remove nav-item-left-border-md-show">
+                                    <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @if (Config::get('app.locale') == 'th')
+                                                <img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-th" alt="Thai" /> {{trans('lang.th')}}
+                                            @else
+                                                <img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-us" alt="English" /> {{trans('lang.en')}}
+                                        @endif
+                                        
+                                        <i class="fas fa-angle-down"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                                        <a class="dropdown-item" href="{{route('change',['locale' => 'th'])}}"><img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-th" alt="Thai" /> {{trans('lang.th')}}</a>
+                                        <a class="dropdown-item" href="{{route('change',['locale' => 'en'])}}"><img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-us" alt="English" /> {{trans('lang.en')}}</a>
+                                    </div>
+                                </li> --}}
+                            </ul>
+                            </nav>
+                            {{-- <ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
+                                
                                 <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                                 <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-youtube"></i></a></li>											
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>
@@ -79,6 +124,12 @@
                                     <strong><a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}}</a></strong>
                                 </div>
                             </li>
+                        </ul>
+                        <ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
+                                
+                            <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="social-icons-youtube"><a href="http://www.youtube.com/" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a></li>											
+                            <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>											
                         </ul>
                     </div>
                 </div>

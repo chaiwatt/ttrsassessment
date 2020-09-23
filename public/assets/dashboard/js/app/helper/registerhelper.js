@@ -1,4 +1,18 @@
 
+ $(".modal-body").on( 'scroll', function(){
+    if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight){
+        $('#btnaccept').prop('disabled', false);
+        // $('#term').prop('disabled', false);
+        $('#email').val('ddd');
+      }
+ });
+
+$(document).on("click","#btnaccept",function(e){
+    // $(".chkterm").attr("checked",true);
+    $(".chkterm").attr('checked',true);
+ });
+
+
 
 $("#usergroup").on('change', function() {
     console.log($(this).val());
@@ -11,7 +25,7 @@ $("#usergroup").on('change', function() {
     }
 });
 
-$("#vatno").change(function(){
+$("#vatno").on( 'change', function(){
     var vatid = $(this).val();
     if(vatid.length != 13){     
         $("#vatnomessage").removeClass("validation-valid-label")
@@ -49,7 +63,7 @@ $("#vatno").change(function(){
     .catch(error => {
         console.log(error)
     })
-});
+ });
 
 
 function checkTinPin(vatid){

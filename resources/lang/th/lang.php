@@ -12,4 +12,5 @@ return [
     'contactdetail' => 'ข้อมูลติดต่อ',
     'openhour' => 'เวลาทำการ',
     'copyright' => 'สงวนลิขสิทธิ์',
+    'dashboard' => 'แดชบอร์ด',
 ];

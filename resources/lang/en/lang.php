@@ -12,4 +12,5 @@ return [
     'contactdetail' => 'CONTACT Details',
     'openhour' => 'Open Hour',
     'copyright' => 'Copyright',
+    'dashboard' => 'Dashboard',
 ];

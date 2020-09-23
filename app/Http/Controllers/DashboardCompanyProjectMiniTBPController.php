@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\SignatureStatus;
 use App\Model\ProjectAssignment;
+use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditMiniTbpRequest;
 use setasign\Fpdi\PdfParser\StreamReader;
@@ -24,6 +25,10 @@ use niklasravnsborg\LaravelPdf\Facades\Pdf;
 class DashboardCompanyProjectMiniTBPController extends Controller
 {
     public function Index(){
+        NotificationBubble::where('target_user_id',Auth::user()->id)
+                    ->where('notification_category_id',1)
+                    ->where('notification_sub_category_id',4)
+                    ->where('status',0)->delete();
         $company = Company::where('user_id',Auth::user()->id)->first();
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         $minitbps = MiniTBP::where('business_plan_id',$businessplan->id)->get();

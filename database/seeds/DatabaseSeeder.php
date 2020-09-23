@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call(StockHoldersTableSeeder::class);
         $this->call(BankTypesTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
+        $this->call(NotificationCategoriesSeederTable::class);
+        $this->call(NotificationSubCategoriesSeederTable::class);
         $this->call(SlideStatusesTableSeeder::class);
         $this->call(LayoutstylesTableSeeder::class);
         $this->call(UserPositionsTableSeeder::class);

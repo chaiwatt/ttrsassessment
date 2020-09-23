@@ -18,7 +18,7 @@
                 </div>
                 <div class="modal-footer pt-3">
                     <button type="button" class="btn btn-link" data-dismiss="modal">ปิด</button>
-                    <button type="button" class="btn bg-primary" data-dismiss="modal">ยอมรับ</button>
+                    <button type="button" id="btnaccept" class="btn bg-primary" data-dismiss="modal" disabled>ยอมรับ</button>
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
                 <div class="form-group d-flex align-items-center">
                     <div class="form-check mb-0">
                         <label class="form-check-label">
-                            <input type="checkbox" name="term" class="form-input-styled" data-fouc>     
+                            <input type="checkbox" name="term" class="form-input-styled" data-fouc >     
                             <a data-toggle="modal" data-target="#modal_term" class="text-primary"><u>นโยบายและข้อกำหนด</u></a>  
                         </label>
                         @error('term') <span class="validation-invalid-label">กรุณายอมรับนโยบายและข้อกำหนด</span> @enderror
@@ -104,7 +104,9 @@
         </div>
     </div>
     @section('pageScript')
-    <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
+        <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
+        <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
+        <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
         <script>
                 var route = {
                 url: "{{ url('/') }}",
