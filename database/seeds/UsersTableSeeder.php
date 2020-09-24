@@ -31,10 +31,40 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'prefix_id' => 1,
+                'user_type_id' => 3,
+                'name' => 'สมควร',
+                'lastname' => 'สกุลผู้เชียวชาญ1',
+                'email' => 'ttrsexpertone2020@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],  
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 3,
+                'name' => 'สมศรี',
+                'lastname' => 'สกุลผู้เชียวชาญ2',
+                'email' => 'ttrsexperttwo2020@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],           
+            [
+                'prefix_id' => 1,
                 'user_type_id' => 4,
                 'name' => 'สมปอง',
                 'lastname' => 'สกุลลิดเดอร์',
                 'email' => 'programprc@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 4,
+                'name' => 'สมนึก',
+                'lastname' => 'สกุลลิดเดอร์',
+                'email' => 'ttrsleader2020@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
@@ -61,10 +91,30 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'prefix_id' => 1,
+                'user_type_id' => 5,
+                'name' => 'สมใจ',
+                'lastname' => 'สกุลแอดมิน',
+                'email' => 'ttrsmanager2020@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
                 'user_type_id' => 6,
                 'name' => 'สมนึก',
                 'lastname' => 'สกุลเจดี',
                 'email' => 'joerocknpc@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 6,
+                'name' => 'สมพร',
+                'lastname' => 'สกุลเจดี',
+                'email' => 'ttrsjd2020@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
