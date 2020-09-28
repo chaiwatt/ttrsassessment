@@ -195,8 +195,17 @@
                                              
                                         </td> 
                                         <th> 
+                                            {{-- {{$fulltbp->expertassignments}} --}}
                                             @if ($fulltbp->expertassignments->count() > 0)
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-success">มอบหมายแล้ว</a>
+                                                    @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                                        @else
+                                                            @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                @else
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-success">มอบหมายแล้ว</a>
+                                                            @endif
+                                                    @endif  
                                                 @else
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
                                             @endif

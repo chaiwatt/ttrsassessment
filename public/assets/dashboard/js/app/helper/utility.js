@@ -17,3 +17,33 @@ function confirmation(e) {
         }
     });
 }
+
+$(document).on('click', '.alertmessage', function(e) {
+    deleteAlert($(this).data('id')).then(data => {
+        data.forEach(function (alert,index) {
+            html += `<div class="alert alert-info alert-styled-left alert-dismissible">
+                        <button type="button" data-id ="${alert.id}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>${alert.detail}
+                    </div>`
+        });
+        $("#alertmessage_wrapper").html(html);
+    }).catch(error => {})
+});
+
+function deleteAlert(id) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: `${route.url}/api/alert/delete`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+                id : id,
+            },
+            success: function(data) {
+            resolve(data)
+            },
+            error: function(error) {
+            reject(error)
+            },
+        })
+    })
+}

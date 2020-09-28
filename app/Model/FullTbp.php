@@ -72,8 +72,8 @@ class FullTbp extends Model
     } 
     public function getExpertAssignmentsAttribute(){
         return ExpertAssignment::where('full_tbp_id',$this->id)
-                            ->where('expert_assignment_status_id',2)
-                            ->where('accepted',1)
+                            // ->where('expert_assignment_status_id',2)
+                            // ->where('accepted',1)
                             ->get();
     } 
     public function getProjectmemberAttribute(){

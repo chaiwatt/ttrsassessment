@@ -280,7 +280,7 @@ function RenderTable(data){
         }
         // var isadmin = '';
         // // console.log(route.usertypeid);
-        // if(route.usertypeid >= 7){
+        // if(route.usertypeid >= 6){
         //     isadmin = `(<a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}"  class="text-grey-300 editweigth">แก้ไข Weigth</a>)`;
         // }
         var subpillarindex = criteria.subpillarindex['name'];

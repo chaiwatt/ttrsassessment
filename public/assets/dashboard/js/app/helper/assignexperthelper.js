@@ -79,7 +79,7 @@ function getExpert(id){
             if(expert.expert_assignment_status_id == 2){
                 checkstatus =  `checked`;
             }
-            if(route.usertypeid == 7){
+            if(route.usertypeid == 6){
                 onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
             }
             var acceptstatus = '';
@@ -155,13 +155,22 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
             if(expert.expert_assignment_status_id == 2){
                 checkstatus =  `checked`;
             }
-            if(route.usertypeid == 7){
+            var acceptstatus = '';
+            if(expert.accepted == 0){
+              acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+            }else if(expert.accepted == 1){
+              acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
+            }else if(expert.accepted == 2){
+              acceptstatus = `<span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>`;
+            }
+            if(route.usertypeid == 6){
                 onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
             }
             html += `<tr >                                        
                 <td class='userid' data-id='${expert.user['id']}'> ${expert.user['name']} ${expert.user['lastname']}</td> 
                 ${onlymaster}     
                 <td> ${expert.expertassignmentstatus['name']}</td>                                        
+                <td> ${acceptstatus}</td>  
                 <td> 
                     <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
                 </td>
@@ -192,13 +201,23 @@ $(document).on("click",".deleteexpert",function(e){
                     if(expert.expert_assignment_status_id == 2){
                         checkstatus =  `checked`;
                     }
-                    if(route.usertypeid == 7){
+                    var acceptstatus = '';
+                    if(expert.accepted == 0){
+                      acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+                    }else if(expert.accepted == 1){
+                      acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
+                    }else if(expert.accepted == 2){
+                      acceptstatus = `<span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>`;
+                    }
+
+                    if(route.usertypeid == 6){
                         onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
                     }
                     html += `<tr >                                        
                         <td class='userid' data-id='${expert.user['id']}'> ${expert.user['name']} ${expert.user['lastname']}</td>   
                         ${onlymaster}      
-                        <td> ${expert.expertassignmentstatus['name']}</td>                                   
+                        <td> ${expert.expertassignmentstatus['name']}</td>   
+                        <td> ${acceptstatus} </td>
                         <td> 
                             <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
                         </td>
@@ -235,7 +254,6 @@ $(document).on('click', '#sendtojd', function(e) {
     $('.userid').each(function() {
         arr.push($(this).data('id'));
     });
-    // console.log(arr); // You can get the array of pdp-id at this point
     $("#spinicon").attr("hidden",false);
     notifyJD(arr,route.fulltbpid).then(data => {
       console.log(data);

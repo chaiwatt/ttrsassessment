@@ -32,6 +32,13 @@
 
     <!-- Content area -->
     <div class="content">
+        <div id="alertmessage_wrapper">
+            @foreach ($alertmessages as $alertmessage)
+                <div class="alert alert-info alert-styled-left alert-dismissible">
+                    <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{{$alertmessage->detail}}
+                </div>
+            @endforeach
+        </div>
         <div class="row">
             <div class="col-lg-3">
 
@@ -291,6 +298,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script>
     var route = {
         url: "{{ url('/') }}",

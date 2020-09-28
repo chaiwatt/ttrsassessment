@@ -11,9 +11,9 @@
 			</div>
 			<div class="header-elements d-none">
                 <div class="d-flex justify-content-center">
-                    <div class="form-check ">
+                    {{-- <div class="form-check ">
                         <input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ประเมิน" data-off-text="ไม่ประเมิน" class="form-check-input-switch" @if (!Empty($company->businessplan)) checked @endif >
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

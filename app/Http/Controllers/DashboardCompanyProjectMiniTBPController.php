@@ -10,6 +10,7 @@ use App\Model\Company;
 use App\Model\MiniTBP;
 use App\Model\ThaiBank;
 use App\Helper\EmailBox;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
@@ -199,6 +200,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         return view('dashboard.company.project.minitbp.submit')->withMinitbp($minitbp);
     }
     public function SubmitSave(Request $request, $id){
+        $auth = Auth::user();
         $minitbp = MiniTBP::find($id);
         if(!Empty($minitbp->attachment)){
             @unlink($minitbp->attachment);
@@ -220,8 +222,6 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             'business_plan_status_id' => 3
         ]);
 
-
-
         $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id)->first();
         if(Empty($projectassignment)){
             $projectassignment = new ProjectAssignment();
@@ -232,9 +232,15 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 1;
-            $notificationbubble->user_id = Auth::user()->id;
+            $notificationbubble->user_id = $auth->id;
             $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
             $notificationbubble->save();
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
+            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' ได้ส่งเอกสาร Mini TBP แล้ว โปรดมอบหมายลีดเดอร์ในขั้นตอนต่อไป';
+            $alertmessage->save();
 
         }else{
             $notificationbubble = new NotificationBubble();
@@ -244,6 +250,13 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             $notificationbubble->user_id = Auth::user()->id;
             $notificationbubble->target_user_id = $projectassignment->leader_id;
             $notificationbubble->save();
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $projectassignment->leader_id;
+            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' ได้ส่งเอกสาร Mini TBP ที่มีการแก้ไขแล้ว';
+            $alertmessage->save();
+
         }
 
         EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Mini TBP','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TPB โปรดตรวจสอบ/Assign ผู้รับผิดชอบ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');

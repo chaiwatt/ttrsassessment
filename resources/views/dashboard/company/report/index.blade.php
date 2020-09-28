@@ -29,7 +29,13 @@
 
     <!-- Content area -->
     <div class="content">
-        <div id="infostatus"></div>
+        <div id="alertmessage_wrapper">
+            @foreach ($alertmessages as $alertmessage)
+                <div class="alert alert-info alert-styled-left alert-dismissible">
+                    <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{{$alertmessage->detail}}
+                </div>
+            @endforeach
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -153,6 +159,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script>
     var route = {
         url: "{{ url('/') }}",
@@ -256,7 +263,6 @@
         });
 
 $(document).on('click', '#alertmessage', function(e) {
-    // console.log($(this).data('id'));
     editTimeLineStatus($(this).data('id')).then(data => {
         data.forEach(function (timeline,index) {
             var doctype = '';
@@ -265,20 +271,20 @@ $(document).on('click', '#alertmessage', function(e) {
             }else if(timeline.message_type == 2){
                 doctype ='เอกสาร mini TBP';
             }
-                        html += `<tr >                                        
-                            <td> ${timeline.createdatth} </td>                            
-                            <td> ${timeline.details} </td> 
-                            <td> ${doctype}</td>                         
-                            <td> ${timeline.user['name']} ${timeline.user['lastname']}</td>          
-                        </tr>`
-                        if(timeline.status == 0){
-                            infostatus += `<div class="alert alert-info alert-styled-left alert-dismissible">
-                                    <button type="button" id="alertmessage" data-id ="${timeline.id}" class="close" data-dismiss="alert"><span>&times;</span></button>${timeline.details}
-                            </div>`
-                        }
-                        });
-                     $("#timeline_wrapper_tr").html(html);
-                     $("#infostatus").html(infostatus);
+            html += `<tr >                                        
+                <td> ${timeline.createdatth} </td>                            
+                <td> ${timeline.details} </td> 
+                <td> ${doctype}</td>                         
+                <td> ${timeline.user['name']} ${timeline.user['lastname']}</td>          
+            </tr>`
+            // if(timeline.status == 0){
+            //     infostatus += `<div class="alert alert-info alert-styled-left alert-dismissible">
+            //             <button type="button" id="alertmessage" data-id ="${timeline.id}" class="close" data-dismiss="alert"><span>&times;</span></button>${timeline.details}
+            //     </div>`
+            // }
+            });
+            $("#timeline_wrapper_tr").html(html);
+            $("#infostatus").html(infostatus);
 
     }).catch(error => {})
 });

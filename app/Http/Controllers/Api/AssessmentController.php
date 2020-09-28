@@ -12,6 +12,7 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
 use App\Model\FullTbpCost;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ use App\Model\BusinessPlanFeeTransaction;
 class AssessmentController extends Controller
 {
     public function Add(Request $request){
+        $auth = Auth::user();
         $businessplan = BusinessPlan::where('company_id',$request->companyid)->first();
         if(Empty($businessplan)){
             if($request->status == 1){
@@ -63,7 +65,7 @@ class AssessmentController extends Controller
                 $notificationbubble->business_plan_id = $businessplan->id;
                 $notificationbubble->notification_category_id = 1;
                 $notificationbubble->notification_sub_category_id = 2;
-                $notificationbubble->user_id = Auth::user()->id;
+                $notificationbubble->user_id = $auth->id;
                 $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
                 $notificationbubble->save();
                 
@@ -105,11 +107,17 @@ class AssessmentController extends Controller
                 $messagebox = new MessageBox();
                 $messagebox->title = 'ขอรับการประเมินใหม่';
                 $messagebox->message_priority_id = 1;
-                $messagebox->body = Company::where('user_id',Auth::user()->id)->first()->name . 'ขอรับการประเมินใหม่';
-                $messagebox->sender_id = Auth::user()->id;
-                $messagebox->receiver_id = User::where('user_type_id',4)->first()->id;
+                $messagebox->body = Company::where('user_id',$auth->id)->first()->name . 'ขอรับการประเมินใหม่';
+                $messagebox->sender_id = $auth->id;
+                $messagebox->receiver_id = User::where('user_type_id',6)->first()->id;
                 $messagebox->message_read_status_id = 1;
                 $messagebox->save();
+
+                $alertmessage = new AlertMessage();
+                $alertmessage->user_id = $auth->id;
+                $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
+                $alertmessage->detail = Company::where('user_id',$auth->id)->first()->name . 'ขอรับการประเมินใหม่';
+                $alertmessage->save();
                 
                 EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ขอรับการประเมินใหม่','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
                 Message::sendMessage('ขอรับการประเมินใหม่','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);

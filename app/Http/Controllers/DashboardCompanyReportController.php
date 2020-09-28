@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Company;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\EventCalendar;
 use Illuminate\Http\Request;
@@ -17,8 +18,11 @@ class DashboardCompanyReportController extends Controller
         $this->middleware(['auth', 'verified']);
     }
     public function Index(){
-        $businessplans = BusinessPlan::where('company_id',Company::where('user_id',Auth::user()->id)->first()->id)->get();
-        return view('dashboard.company.report.index')->withBusinessplans($businessplans);
+        $auth = Auth::user();
+        $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
+        $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$auth->id)->first()->id)->get();
+        return view('dashboard.company.report.index')->withBusinessplans($businessplans)
+                                                ->withAlertmessages($alertmessages);
     }
 
     public function GetEvent(Request $request){

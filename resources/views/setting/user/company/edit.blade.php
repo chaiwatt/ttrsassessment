@@ -18,7 +18,7 @@
             <div class="header-elements d-none">
                 <div class="d-flex justify-content-center">
                     <div class="form-check ">
-                        <input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ประเมิน" data-off-text="ไม่ประเมิน" class="form-check-input-switch" @if (!Empty($company->businessplan)) checked @endif >
+                        <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ประเมิน" data-off-text="ไม่ประเมิน" class="form-check-input-switch" @if (!Empty($company->businessplan)) checked @endif >
                     </div>
                 </div>
             </div>
@@ -265,7 +265,7 @@
             </div>
         </div>
         <!-- /form layouts -->
-        <div class="loader loader-default" data-text="กำลังบันทึก..."></div>
+        {{-- <div class="loader loader-default" data-text="กำลังบันทึก..."></div> --}}
     </div>
     <!-- /content area -->
 @endsection

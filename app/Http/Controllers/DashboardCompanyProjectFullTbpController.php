@@ -12,6 +12,7 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\CompanyBoard;
@@ -198,6 +199,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
     }
 
     public function SubmitSave(Request $request, $id){
+        $auth = Auth::user();
         $fulltbp = FullTbp::find($id);
         if(!Empty($fulltbp->file)){
             @unlink($fulltbp->file);
@@ -222,16 +224,21 @@ class DashboardCompanyProjectFullTbpController extends Controller
         ]);
         
         $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id);
-        
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $businessplan->id;
         $notificationbubble->notification_category_id = 1;
         $notificationbubble->notification_sub_category_id = 5;
-        $notificationbubble->user_id = Auth::user()->id;
+        $notificationbubble->user_id = $auth->id;
         $notificationbubble->target_user_id = $projectassignment->leader_id;
         $notificationbubble->save();
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $projectassignment->leader_id;
+        $alertmessage->detail = 'โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' ได้ส่งเอกสาร Full TPB แล้ว';
+        $alertmessage->save();
 
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ส่งเอกสาร Full TBP','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
         EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Full TBP','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');

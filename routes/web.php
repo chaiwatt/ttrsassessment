@@ -33,6 +33,9 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'alert'], function(){
+        Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');            
+    });  
     Route::group(['prefix' => 'location'], function(){
         Route::post('province','Api\LocationController@Province')->name('api.location.province');           
         Route::post('amphur','Api\LocationController@Amphur')->name('api.location.amphur'); 

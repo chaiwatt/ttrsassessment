@@ -6,8 +6,8 @@ import * as Assessment from './assessment.js'
          status =1;
      }        
     console.log($(this).data('id'));
-    $(".loader").addClass('is-active');
+    $("#spinicon").attr("hidden",false);
     Assessment.addAssessment($(this).data('id'),status).then(data => {
-        $(".loader").removeClass('is-active');
+        $("#spinicon").attr("hidden",true);
     }).catch(error => {})
 });
