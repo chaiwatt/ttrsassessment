@@ -35,6 +35,7 @@ use App\Model\CompanyStockHolder;
 use App\Model\FullTbpDebtPartner;
 use App\Model\FullTbpMarketShare;
 use App\Model\FullTbpProjectPlan;
+use App\Model\NotificationBubble;
 use App\Model\FullTbpCreditPartner;
 use App\Model\FullTbpProductDetail;
 use App\Model\FullTbpCompanyProfile;
@@ -57,8 +58,13 @@ use App\Model\FullTbpProjectCertifyAttachment;
 class DashboardCompanyProjectFullTbpController extends Controller
 {
     public function Index(){
+        $auth = Auth::user();
+        NotificationBubble::where('target_user_id',$auth->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',5)
+                        ->where('status',0)->delete();
         $companyinfo = collect();
-        $company = Company::where('user_id',Auth::user()->id)->first();
+        $company = Company::where('user_id',$auth->id)->first();
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $fulltpbs = FullTbp::where('mini_tbp_id',$minitbp->id)->get();   
@@ -204,13 +210,29 @@ class DashboardCompanyProjectFullTbpController extends Controller
             'file' => $filelocation,
             'status' => 2
         ]);
+        $fulltbp = FullTbp::find($id);
+        if($fulltbp->refixstatus == 1){
+            $fulltbp->update([
+                'refixstatus' => 2  
+            ]);
+        }
 
         $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id)->update([
             'business_plan_status_id' => 5
         ]);
-
+        
         $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id);
+        
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 5;
+        $notificationbubble->user_id = Auth::user()->id;
+        $notificationbubble->target_user_id = $projectassignment->leader_id;
+        $notificationbubble->save();
+
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ส่งเอกสาร Full TBP','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
         EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Full TBP','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
         Message::sendMessage('ส่งเอกสาร Full TBP','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Full TPB กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($projectassignment->leader_id)->id);

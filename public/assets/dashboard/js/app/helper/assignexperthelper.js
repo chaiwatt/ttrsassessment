@@ -7,7 +7,6 @@ $(document).on('change', '#expert', function(e) {
        var html = 'ยังไม่มีโครงการที่ได้รับมอบหมาย';
         console.log(data.length);
         if(data.length > 0){
-
             html = `
             <div class="table-responsive">
             <strong>Work Load</strong>

@@ -66,7 +66,8 @@
                                 <thead>
                                     <tr>
                                         <th>เลขที่โครงการ</th>
-                                        <th>ชื่อโครงการ</th>                               
+                                        <th>ชื่อโครงการ</th>    
+                                        <th>สถานะ</th>                             
                                         <th style="text-align: right">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -74,7 +75,24 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                        <td> {{$fulltbp->minitbp->project}} </td>                                        
+                                        <td> {{$fulltbp->minitbp->project}} </td> 
+                                        <td>
+                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 4)
+                                                    <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
+                                                @else
+                                                    @if ($fulltbp->refixstatus == 0)
+                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 4)
+                                                                <span class="badge badge-flat border-success text-success-600">ส่งแล้ว</span>
+                                                            @else
+                                                                <span class="badge badge-flat border-success text-success-600">ผ่านอนุมัติแล้ว</span>
+                                                        @endif 
+                                                        @elseif($fulltbp->refixstatus == 1)
+                                                            <span class="badge badge-flat border-warning text-warning-600">ให้มีการแก้ไข</span>
+                                                        @elseif($fulltbp->refixstatus == 2)
+                                                            <span class="badge badge-flat border-warning text-warning-600">ส่งรายการแก้ไขแล้ว</span>
+                                                    @endif
+                                            @endif
+                                        </td>                                        
                                         <td style="text-align: right"> 
                                             <a href="{{route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-warning">แก้ไข</a>
                                             <a href="{{route('dashboard.company.project.fulltbp.downloadpdf',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-teal">ดาวน์โหลด PDF</a>

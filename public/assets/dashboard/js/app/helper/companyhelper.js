@@ -5,6 +5,9 @@ import * as Assessment from './assessment.js'
      if(e.target.checked==true){
          status =1;
      }        
-        console.log($(this).data('id'));
-      Assessment.addAssessment($(this).data('id'),status);
+    console.log($(this).data('id'));
+    $(".loader").addClass('is-active');
+    Assessment.addAssessment($(this).data('id'),status).then(data => {
+        $(".loader").removeClass('is-active');
+    }).catch(error => {})
 });

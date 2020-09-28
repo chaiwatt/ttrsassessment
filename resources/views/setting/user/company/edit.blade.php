@@ -1,6 +1,7 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-<style>
+
+<style>   
     #map {
         height: 100%;
       }
@@ -36,6 +37,7 @@
 
     <!-- Content area -->
     <div class="content">
+        
         @if (Session::has('success'))
             <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
@@ -263,10 +265,12 @@
             </div>
         </div>
         <!-- /form layouts -->
+        <div class="loader loader-default" data-text="กำลังบันทึก..."></div>
     </div>
     <!-- /content area -->
 @endsection
 @section('pageScript')
+
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>

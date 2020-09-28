@@ -6,7 +6,7 @@ $(document).on('click', '#editapprove', function(e) {
     $('#modal_edit_minitbp').modal('show');
 });
 
-$('#my_radio_box').change(function(){
+$(document).on('change', '#my_radio_box', function(e) {
     if($("input[name='result']:checked").val()=='1'){
         console.log('1');
         $('#note').attr('readonly', true);

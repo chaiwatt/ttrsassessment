@@ -157,8 +157,5 @@
             usertypeid: "{{Auth::user()->user_type_id}}",
             fulltbpid: "{{$fulltbp->id}}",
         };
-
-
- 
     </script>
 @stop

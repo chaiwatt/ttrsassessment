@@ -49,6 +49,7 @@ class CreateMiniTBPSTable extends Migration
             $table->string('attachment',250)->nullable();
             $table->unsignedBigInteger('signature_status_id')->default(1);
             $table->char('submit',1)->default('1');
+            $table->char('refixstatus',1)->default('0');
             $table->timestamps();
         });
     }

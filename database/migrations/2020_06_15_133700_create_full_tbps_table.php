@@ -22,6 +22,7 @@ class CreateFullTbpsTable extends Migration
             $table->char('asic',1)->nullable();
             $table->unsignedBigInteger('criteria_group_id')->nullable();
             $table->char('assignexpert',1)->default('1');
+            $table->char('refixstatus',1)->default('0');
             $table->timestamps();
         });
     }

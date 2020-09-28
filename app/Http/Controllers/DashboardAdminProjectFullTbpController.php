@@ -38,6 +38,7 @@ use App\Model\CompanyStockHolder;
 use App\Model\FullTbpDebtPartner;
 use App\Model\FullTbpMarketShare;
 use App\Model\FullTbpProjectPlan;
+use App\Model\NotificationBubble;
 use App\Model\FullTbpCreditPartner;
 use App\Model\FullTbpProductDetail;
 use App\Model\FullTbpCompanyProfile;
@@ -61,6 +62,10 @@ class DashboardAdminProjectFullTbpController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
+        NotificationBubble::where('target_user_id',$auth->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',5)
+                        ->where('status',0)->delete();
         $fulltbps = FullTbp::where('status',2)->get();
         if($auth->user_type_id < 6){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
@@ -253,6 +258,14 @@ class DashboardAdminProjectFullTbpController extends Controller
             BusinessPlan::find($minitbp->business_plan_id)->update([
                 'business_plan_status_id' => 6
             ]);
+
+            if($fulltbp->refixstatus != 0){
+                FullTbp::find($request->id)->update(
+                    [
+                        'refixstatus' => 0
+                    ]
+                );
+            }
             EmailBox::send($_user->email,'TTRS:อนุมัติเอกสาร Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full TBP กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br>ด้วยความนับถือ<br>TTRS');
             Message::sendMessage('กรอกข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full TBP กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
             $timeLinehistory = new TimeLineHistory();
@@ -263,6 +276,13 @@ class DashboardAdminProjectFullTbpController extends Controller
             $timeLinehistory->user_id = Auth::user()->id;
             $timeLinehistory->save();
         }else{
+            
+            FullTbp::find($request->id)->update(
+                [
+                    'refixstatus' => 1
+                ]
+            );
+
             EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  '<br><br>ด้วยความนับถือ<br>TTRS');
             Message::sendMessage('แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Full TBP ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
             $timeLinehistory = new TimeLineHistory();
@@ -273,6 +293,15 @@ class DashboardAdminProjectFullTbpController extends Controller
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->save();
         }
+
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 5;
+        $notificationbubble->user_id = Auth::user()->id;
+        $notificationbubble->target_user_id = $_user->id;
+        $notificationbubble->save();
+
         return response()->json($fulltbp); 
     }
     public function GetExpert(Request $request){

@@ -55,7 +55,6 @@
                         <h6 class="card-title">สถานะการวางแผนธุรกิจ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
                                 <span></span>
                             </a>
                         </div>
@@ -78,17 +77,26 @@
                                         <td> {{$minitbp->project}} </td>      
                                         <td> 
                                             @if ($minitbp->businessplan->business_plan_status_id < 3)
-                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
+                                                    <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
                                                 @else
-                                                <span class="badge badge-flat border-success text-success-600">ส่งแล้ว</span>
+                                                    @if ($minitbp->refixstatus == 0)
+                                                        @if ($minitbp->businessplan->business_plan_status_id == 3)
+                                                                <span class="badge badge-flat border-success text-success-600">ส่งแล้ว</span>
+                                                            @else
+                                                                <span class="badge badge-flat border-success text-success-600">ผ่านอนุมัติแล้ว</span>
+                                                        @endif 
+                                                        @elseif($minitbp->refixstatus == 1)
+                                                            <span class="badge badge-flat border-warning text-warning-600">ให้มีการแก้ไข</span>
+                                                        @elseif($minitbp->refixstatus == 2)
+                                                            <span class="badge badge-flat border-warning text-warning-600">ส่งรายการแก้ไขแล้ว</span>
+                                                    @endif
                                             @endif
                                         </td>                                     
                                         <td style="text-align: right"> 
                                             @if (!Empty($minitbp->attachment))
-                                            <a href="{{asset($minitbp->attachment)}}" class=" btn btn-sm bg-primary">ดาวน์โหลดไฟล์</a> 
+                                                <a href="{{asset($minitbp->attachment)}}" class=" btn btn-sm bg-primary">ดาวน์โหลดไฟล์</a> 
                                             @endif
                                             <a href="{{route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-warning">แก้ไข</a>
-                                            
                                             @if (!Empty($minitbp->project))
                                                 <a href="{{route('dashboard.company.project.minitbp.downloadpdf',['id' => $minitbp->id])}}" class=" btn btn-sm bg-teal">ดาวน์โหลด PDF</a>
                                                 <a href="{{route('dashboard.company.project.minitbp.submit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-info">ส่ง mini TBP</a>

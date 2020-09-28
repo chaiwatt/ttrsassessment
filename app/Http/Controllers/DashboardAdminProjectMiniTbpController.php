@@ -15,11 +15,16 @@ use Illuminate\Http\Request;
 use App\Model\SignatureStatus;
 use App\Model\TimeLineHistory;
 use App\Model\ProjectAssignment;
+use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminProjectMiniTbpController extends Controller
 {
     public function Index(){
+        NotificationBubble::where('target_user_id',Auth::user()->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',4)
+                        ->where('status',0)->delete();
         $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
         // $businessplans = BusinessPlan::where('business_plan_status_id',3)->whereIn('id',$projectassignments)->pluck('id')->toArray();
         $businessplans = BusinessPlan::whereIn('id',$projectassignments)->pluck('id')->toArray();
@@ -70,6 +75,15 @@ class DashboardAdminProjectMiniTbpController extends Controller
             BusinessPlan::find($minitbp->business_plan_id)->update([
                 'business_plan_status_id' => 4
             ]);
+            
+            if($minitbp->refixstatus != 0){
+                MiniTBP::find($request->id)->update(
+                    [
+                        'refixstatus' => 0
+                    ]
+                );
+            }
+
             EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Mini TBP ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full TBP ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
             Message::sendMessage('กรอกข้อมูล Full TBP','เรียนผู้ประกอบการ<br> เอกสาร Mini TBP ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full TBP ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
             $timeLinehistory = new TimeLineHistory();
@@ -80,6 +94,12 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $timeLinehistory->user_id = Auth::user()->id;
             $timeLinehistory->save();
         }else{
+            MiniTBP::find($request->id)->update(
+                [
+                    'refixstatus' => 1
+                ]
+            );
+
             EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Mini TBP','เรียนผู้ประกอบการ<br> เอกสาร Mini TBP ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  '<br><br>ด้วยความนับถือ<br>TTRS');
             Message::sendMessage('แก้ไขข้อมูล Mini TBP','เรียนผู้ประกอบการ<br> เอกสาร Mini TBP ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
             $timeLinehistory = new TimeLineHistory();
@@ -90,6 +110,13 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->save();
         }
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 4;
+        $notificationbubble->user_id = Auth::user()->id;
+        $notificationbubble->target_user_id = $_user->id;
+        $notificationbubble->save();
         return response()->json($minitbp); 
     }
 }

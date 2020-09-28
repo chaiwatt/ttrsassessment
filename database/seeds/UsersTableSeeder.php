@@ -62,7 +62,7 @@ class UsersTableSeeder extends Seeder
             [
                 'prefix_id' => 1,
                 'user_type_id' => 4,
-                'name' => 'สมนึก',
+                'name' => 'สมหมาย',
                 'lastname' => 'สกุลลิดเดอร์',
                 'email' => 'ttrsleader2020@gmail.com',           
                 'password' => Hash::make('11111111'), 

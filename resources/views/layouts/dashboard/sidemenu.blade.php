@@ -23,15 +23,27 @@
         @endif
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">การมอบหมาย</a></li>     
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">การมอบหมาย
+            @if ($sharenotificationbubbles->where('notification_sub_category_id',1)->count() > 0)
+                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+            @endif
+        </a></li>     
         <li class="nav-item"><a href="{{route('dashboard.admin.project.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.businessplan')?'active':''}}">ขอรับการประเมิน
             @if ($sharenotificationbubbles->where('notification_sub_category_id',2)->count() > 0)
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
             @endif
         </a></li>     
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">mini TBP</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">Full TBP</a></li>	   
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">mini TBP
+            @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
+                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+            @endif
+        </a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">Full TBP
+            @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
+                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+            @endif
+        </a></li>	   
         <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight</a></li>	   
         <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
     </ul>

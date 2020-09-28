@@ -210,14 +210,42 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $minitbp->update([
             'attachment' => $filelocation
         ]);
-
+        $minitbp = MiniTBP::find($id);
+        if($minitbp->refixstatus == 1){
+            $minitbp->update([
+                'refixstatus' => 2  
+            ]);
+        }
         BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
             'business_plan_status_id' => 3
         ]);
 
-        $projectassignment = new ProjectAssignment();
-        $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
-        $projectassignment->save();
+
+
+        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id)->first();
+        if(Empty($projectassignment)){
+            $projectassignment = new ProjectAssignment();
+            $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $projectassignment->save();
+
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 1;
+            $notificationbubble->user_id = Auth::user()->id;
+            $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
+            $notificationbubble->save();
+
+        }else{
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 4;
+            $notificationbubble->user_id = Auth::user()->id;
+            $notificationbubble->target_user_id = $projectassignment->leader_id;
+            $notificationbubble->save();
+        }
+
         EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Mini TBP','เรียน Master<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TPB โปรดตรวจสอบ/Assign ผู้รับผิดชอบ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
         return redirect()->route('dashboard.company.project.minitbp')->withSuccess('ส่งเอกสาร mini TBP สำเร็จ');
     }
