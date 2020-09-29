@@ -514,7 +514,6 @@ $('#chkevstatus').on('change.bootstrapSwitch', function(e) {
     if(e.target.checked==true){
         status =1;
     }        
-    console.log($(this).data('id'));
     $("#spinicon").attr("hidden",false);
     Ev.updateEvStatus($(this).data('id'),status).then(data => {
         $("#spinicon").attr("hidden",true);

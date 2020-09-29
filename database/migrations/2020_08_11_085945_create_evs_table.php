@@ -22,10 +22,11 @@ class CreateEvsTable extends Migration
             $table->unsignedBigInteger('full_tbp_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->char('status',1)->default(0);
+            $table->char('refixstatus',1)->default('0');
             $table->timestamps();
         });
     }
-
+   
     /**
      * Reverse the migrations.
      *

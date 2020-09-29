@@ -6,9 +6,11 @@ use App\Model\Ev;
 use App\Model\Grade;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
+use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,14 +18,18 @@ class DashboardAdminProjectEvWeightController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        $fulltbps = FullTbp::where('status',2)->get();
+        NotificationBubble::where('target_user_id',$auth->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',6)
+                        ->where('status',0)->delete();
+        $fulltbps = collect();
         if($auth->user_type_id < 6){
-            $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
-                                            ->orWhere('coleader_id',$auth->id)
-                                            ->pluck('business_plan_id')->toArray();
-            $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-            $fullpbts = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+            $projectsmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+            $fulltbps = FullTbp::whereIn('id',$projectsmembers)->get();
+        }else{
+            $fulltbps = FullTbp::where('status',2)->get();
         }
+
         return view('dashboard.admin.project.evweight.index')->withFulltbps($fulltbps) ;
     }
 

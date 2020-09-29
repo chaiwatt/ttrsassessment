@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\EvStatus;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Support\Facades\Auth;
@@ -20,5 +21,9 @@ class Ev extends Model
 
     public function getScoringStatusAttribute(){
         return ScoringStatus::where('ev_id',$this->id)->where('user_id',Auth::user()->id)->get();
+    } 
+
+    public function getEvStatusAttribute(){
+        return EvStatus::find($this->status);
     } 
 }

@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Model\Ev;
+use App\Model\FullTbp;
+use App\Model\MiniTBP;
+use App\Helper\Message;
+use App\Helper\EmailBox;
+use App\Model\AlertMessage;
+use App\Model\BusinessPlan;
+use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
+use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AssessmentEvController extends Controller
 {
@@ -142,10 +152,117 @@ class AssessmentEvController extends Controller
     }
 
     public function UpdateEvStatus(Request $request){
+        $auth = Auth::user();
+        $status = 1;
+        if($request->chkevstatus == 1){
+            $status = 2;
+        }
         Ev::find($request->id)->update([
-            'status' => $request->chkevstatus
+            'status' => $status
         ]);
         $ev = Ev::find($request->id);
+        $admins = User::where('user_type_id',5)->pluck('id')->toArray();
+        $projectsmembers = ProjectMember::where('full_tbp_id',$ev->full_tbp_id)->whereIn('user_id',$admins)->get();
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+
+        foreach ($projectsmembers as $key => $projectsmember) {
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $businessplan->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 6;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $projectsmember->user_id;
+            $notificationbubble->save();
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id =$projectsmember->user_id;
+            $alertmessage->detail = 'ตรวจสอบ Ev ของโครงการ ' . $minitbp->project;
+            $alertmessage->save();
+
+            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:ตรวจสอบ EV','เรียน Admin<br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+        }
+
+        $ev = Ev::find($request->id);
         return response()->json($ev);
+    }
+
+    public function UpdateAdminEvStatus(Request $request){
+        $auth = Auth::user();
+
+        Ev::find($request->id)->update([
+            'status' => $request->value
+        ]);
+
+        $ev = Ev::find($request->id);
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 6;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
+        $notificationbubble->save();
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
+        $alertmessage->detail = 'ตรวจสอบ Ev ของโครงการ ' . $minitbp->project;
+        $alertmessage->save();
+
+        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ตรวจสอบ EV','Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+
+        return response()->json($ev);  
+    }
+
+    function EditApprove(Request $request){
+        $auth = Auth::user();
+        $ev = Ev::find($request->id);
+        if($request->val == 1){
+            Ev::find($request->id)->update([
+                'status' => 4
+            ]);
+        }else{
+            Ev::find($request->id)->update(
+                [
+                    'refixstatus' => 1
+                ]
+            );
+
+            $ev = Ev::find($request->id);
+            $admins = User::where('user_type_id',5)->pluck('id')->toArray();
+            $projectsmembers = ProjectMember::where('full_tbp_id',$ev->full_tbp_id)->whereIn('user_id',$admins)->get();
+            $fulltbp = FullTbp::find($ev->full_tbp_id);
+            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+            $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+
+            foreach ($projectsmembers as $key => $projectsmember) {
+                $notificationbubble = new NotificationBubble();
+                $notificationbubble->business_plan_id = $businessplan->id;
+                $notificationbubble->notification_category_id = 1;
+                $notificationbubble->notification_sub_category_id = 6;
+                $notificationbubble->user_id = $auth->id;
+                $notificationbubble->target_user_id = $projectsmember->user_id;
+                $notificationbubble->save();
+
+                $alertmessage = new AlertMessage();
+                $alertmessage->user_id = $auth->id;
+                $alertmessage->target_user_id =$projectsmember->user_id;
+                $alertmessage->detail = 'ให้แก้ไข EV ของโครงการ' . $minitbp->project;
+                $alertmessage->save();
+
+                EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แก้ไข EV','เรียน Admin<br> JD ได้ตรวจ EV สำหรับโครงการ '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+                Message::sendMessage('แก้ไข EV','JD ได้ตรวจ EV สำหรับโครงการ  '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+            }
+
+        }
+        return response()->json($ev);  
     }
 }

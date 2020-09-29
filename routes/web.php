@@ -131,6 +131,8 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('getevbyfulltbp','Api\AssessmentEvController@GetEvByFulltbp')->name('api.assessment.ev.getevbyfulltbp'); 
                 Route::post('copyev','Api\AssessmentEvController@CopyEv')->name('api.assessment.ev.copyev'); 
                 Route::post('updateevstatus','Api\AssessmentEvController@UpdateEvStatus')->name('api.assessment.ev.updateevstatus'); 
+                Route::post('updateadminevstatus','Api\AssessmentEvController@UpdateAdminEvStatus')->name('api.assessment.ev.updateadminevstatus');
+                Route::post('editapprove','Api\AssessmentEvController@EditApprove')->name('api.assessment.ev.editapprove');
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
                     Route::post('deletepillar','Api\AssessmentEvPillarController@DeletePillar')->name('api.assessment.ev.pillar.deletepillar'); 

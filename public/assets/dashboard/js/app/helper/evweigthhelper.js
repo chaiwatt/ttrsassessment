@@ -161,3 +161,37 @@ function RowSpanWeight(tableid){
     }
 }
 
+    $('#chkevstatus').on('change.bootstrapSwitch', function(e) {
+        var status = 2
+        if(e.target.checked==true){
+            status =3;
+        }     
+        console.log(status);   
+        $("#spinicon").attr("hidden",false);
+        updateEvAdminStatus($(this).data('id'),status).then(data => {
+            $("#spinicon").attr("hidden",true);
+        }).catch(error => {})
+    });
+
+function updateEvAdminStatus(id,value){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+        url: `${route.url}/api/assessment/ev/updateadminevstatus`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+            id : id,
+            value : value
+        },
+        success: function(data) {
+            resolve(data)
+        },
+        error: function(error) {
+            reject(error)
+        },
+        })
+    })
+  }
+
+
+

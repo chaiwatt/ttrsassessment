@@ -92,6 +92,10 @@ class FullTbp extends Model
         return ProjectAssignment::where('business_plan_id',$businessplan->id)
                             ->where('leader_id',Auth::user()->id)->get();
     } 
+
+    public function getEvAttribute(){
+        return Ev::where('full_tbp_id',$this->id)->first();
+    } 
 }
 
 
