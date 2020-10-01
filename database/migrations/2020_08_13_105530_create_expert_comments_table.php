@@ -22,6 +22,7 @@ class CreateExpertCommentsTable extends Migration
             $table->text('technology')->nullable();
             $table->text('marketing')->nullable();
             $table->text('businessprospect')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

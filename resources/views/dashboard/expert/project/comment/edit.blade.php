@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form method="POST" action="{{route('dashboard.expert.project.comment.editsave',['fulltbpid' => $fulltbp->id])}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('dashboard.expert.project.comment.editsave',['id' => $fulltbp->id])}}" enctype="multipart/form-data">
                         @csrf
                     <div class="card-body">
                         <ul class="nav nav-tabs nav-tabs-highlight">

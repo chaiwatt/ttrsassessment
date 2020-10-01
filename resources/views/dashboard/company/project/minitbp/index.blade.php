@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Mini TBP</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Mini Tbp</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการ Mini TBP</span>
+                    <span class="breadcrumb-item active">รายการ Mini Tbp</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -96,7 +96,7 @@
                                             <a href="{{route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-warning">แก้ไข</a>
                                             @if (!Empty($minitbp->project))
                                                 <a href="{{route('dashboard.company.project.minitbp.downloadpdf',['id' => $minitbp->id])}}" class=" btn btn-sm bg-teal">ดาวน์โหลด PDF</a>
-                                                <a href="{{route('dashboard.company.project.minitbp.submit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-info">ส่ง mini TBP</a>
+                                                <a href="{{route('dashboard.company.project.minitbp.submit',['id' => $minitbp->id])}}" class=" btn btn-sm bg-info">ส่ง Mini Tbp</a>
                                             @endif
                                         </td>
                                     </tr>

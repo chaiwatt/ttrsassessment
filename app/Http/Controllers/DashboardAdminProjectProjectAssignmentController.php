@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
@@ -11,6 +12,7 @@ use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
@@ -69,20 +71,20 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = User::find($request->leader)->id;
-        $alertmessage->detail = 'ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบเอกสาร mini Tbp ในขึ้นตอนต่อไป';
+        $alertmessage->detail = 'ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบเอกสาร Mini Tbp ในขั้นตอนต่อไป ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
         $alertmessage->save();
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = User::find($request->coleader)->id;
-        $alertmessage->detail = 'ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบเอกสาร mini Tbp ในขึ้นตอนต่อไป';
+        $alertmessage->detail = 'ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบเอกสาร Mini Tbp ในขั้นตอนต่อไป ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
         $alertmessage->save();
 
-        EmailBox::send(User::find($request->leader)->email,'TTRS:มอบหมาย Leader โครงการ','เรียน '.User::find($request->leader)->name.'<br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-        EmailBox::send(User::find($request->coleader)->email,'TTRS:มอบหมาย Co-Leader โครงการ','เรียน '.User::find($request->coleader)->name.'<br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        EmailBox::send(User::find($request->leader)->email,'TTRS:มอบหมาย Leader โครงการ','เรียนคุณ'.User::find($request->leader)->name. ' ' .User::find($request->leader)->lastname. '<br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        EmailBox::send(User::find($request->coleader)->email,'TTRS:มอบหมาย Co-Leader โครงการ','เรียนคุณ'.User::find($request->coleader)->name. ' ' .User::find($request->coleader)->lastname.'<br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
 
-        Message::sendMessage('มอบหมาย Leader โครงการ','เรียน '.User::find($request->leader)->name.'<br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->leader)->id);
-        Message::sendMessage('มอบหมาย Co-Leader โครงการ','เรียน '.User::find($request->coleader)->name.'<br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->coleader)->id);
+        Message::sendMessage('มอบหมาย Leader โครงการ','เรียนคุณ'.User::find($request->leader)->name .' ' . User::find($request->leader)->lastname.'<br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->leader)->id);
+        Message::sendMessage('มอบหมาย Co-Leader โครงการ','เรียนคุณ'.User::find($request->coleader)->name .' ' . User::find($request->coleader)->lastname.'<br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->coleader)->id);
         return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('Assign สำเร็จ');
     }
     public function GetWorkLoadLeader(Request $request){

@@ -193,5 +193,31 @@ function updateEvAdminStatus(id,value){
     })
   }
 
+   $(document).on('click', '#sendedittojd', function(e) {
+        $("#spiniconev").attr("hidden",false);
+        sendEditEv($(this).data('id')).then(data => {
+            $("#spiniconev").attr("hidden",true);
+        }).catch(error => {})
+    });
+
+    function sendEditEv(id){
+        return new Promise((resolve, reject) => {
+            $.ajax({
+            url: `${route.url}/api/assessment/ev/sendeditev`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+                id : id
+            },
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(error) {
+                reject(error)
+            },
+            })
+        })
+      }
+
 
 

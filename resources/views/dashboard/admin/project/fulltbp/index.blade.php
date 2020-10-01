@@ -7,7 +7,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การอนุมัติ Full TBP</h5>
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การอนุมัติ Full Tbp</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -97,7 +97,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP </span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full Tbp </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -138,7 +138,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการ Full TBP</h6>
+                        <h6 class="card-title">รายการ Full Tbp</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -187,8 +187,12 @@
                                             @endif
                                         </td>  
                                         <td> 
-                                            @if (!Empty($fulltbp->criteria_group_id))
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-success">เพิ่มแล้ว</a>
+                                            @if (!Empty($fulltbp->ev))
+                                                    @if ($fulltbp->ev->status == 4)
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                        @else
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">อยู่ระหว่างการพิจารณา</a>
+                                                    @endif
                                                 @else
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                             @endif
@@ -203,7 +207,7 @@
                                                             @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
                                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
                                                                 @else
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-success">มอบหมายแล้ว</a>
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
                                                             @endif
                                                     @endif  
                                                 @else

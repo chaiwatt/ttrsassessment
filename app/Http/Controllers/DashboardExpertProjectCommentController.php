@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Helper\Message;
+use App\Helper\EmailBox;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ExpertComment;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
+use App\Model\NotificationBubble;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardExpertProjectCommentController extends Controller
 {
@@ -30,6 +37,8 @@ class DashboardExpertProjectCommentController extends Controller
                                                         ->withUsers($users);
     }
     public function EditSave(Request $request,$id){
+        $auth = Auth::user(); 
+
         $expertcomment = ExpertComment::where('full_tbp_id',$id)->first();
         if(Empty($expertcomment)){
             $expertcomment = new ExpertComment();
@@ -39,6 +48,7 @@ class DashboardExpertProjectCommentController extends Controller
             $expertcomment->technology = $request->technology;
             $expertcomment->marketing = $request->marketing;
             $expertcomment->businessprospect = $request->businessprospect;
+            $expertcomment->user_id = $auth->id;
             $expertcomment->save();
         }else{
             $expertcomment->update([
@@ -49,6 +59,27 @@ class DashboardExpertProjectCommentController extends Controller
                 'businessprospect' => $request->businessprospect
             ]);
         }
-        return redirect()->route('dashboard.expert.project.fulltbp')->withSuccess('เพิ่มรายการสำเร็จ');
+       
+        $minitbp = MiniTBP::find($id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 5;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $projectassignment->leader_id;
+        $notificationbubble->save();
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $projectassignment->leader_id;
+        $alertmessage->detail = 'ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+        $alertmessage->save();
+        
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
+        return redirect()->route('dashboard.expert.report')->withSuccess('เพิ่มรายการสำเร็จ');
     }
 }

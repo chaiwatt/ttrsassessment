@@ -26,11 +26,11 @@ class NotificationSubCategoriesSeederTable extends Seeder
             ],
             [
                 'notification_category_id' => 1,
-                'name' => 'mini Tbp'
+                'name' => 'Mini Tbp'
             ],
             [
                 'notification_category_id' => 1,
-                'name' => 'full Tbp'
+                'name' => 'Full Tbp'
             ],
             [
                 'notification_category_id' => 1,

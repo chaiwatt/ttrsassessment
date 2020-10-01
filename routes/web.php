@@ -133,6 +133,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('updateevstatus','Api\AssessmentEvController@UpdateEvStatus')->name('api.assessment.ev.updateevstatus'); 
                 Route::post('updateadminevstatus','Api\AssessmentEvController@UpdateAdminEvStatus')->name('api.assessment.ev.updateadminevstatus');
                 Route::post('editapprove','Api\AssessmentEvController@EditApprove')->name('api.assessment.ev.editapprove');
+                Route::post('sendeditev','Api\AssessmentEvController@SendEditEv')->name('api.assessment.ev.sendeditev');
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
                     Route::post('deletepillar','Api\AssessmentEvPillarController@DeletePillar')->name('api.assessment.ev.pillar.deletepillar'); 
@@ -361,6 +362,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('getusers','DashboardAdminProjectFullTbpController@GetUsers')->name('dashboard.admin.project.fulltbp.getusers');
                     Route::post('addprojectmember','DashboardAdminProjectFullTbpController@AddProjectMember')->name('dashboard.admin.project.fulltbp.addprojectmember');
                     Route::post('deleteprojectmember','DashboardAdminProjectFullTbpController@DeleteProjectMember')->name('dashboard.admin.project.fulltbp.deleteprojectmember');
+                    Route::post('doneassignement','DashboardAdminProjectFullTbpController@DoneAssignement')->name('dashboard.admin.project.fulltbp.doneassignement');
                     Route::group(['prefix' => 'admin'], function(){
                         Route::get('','DashboardAdminProjectFullTbpAdminController@Index')->name('dashboard.admin.project.fulltbp.admin');           
                         Route::get('editev/{id}','DashboardAdminProjectFullTbpAdminController@EditEv')->name('dashboard.admin.project.fulltbp.admin.editev');
@@ -431,8 +433,8 @@ Route::group(['middleware' => 'auth'], function(){
                 });    
                 Route::group(['prefix' => 'comment'], function(){
                     Route::get('','DashboardExpertProjectCommentController@Index')->name('dashboard.expert.project.comment');   
-                    Route::get('edit/{fulltbpid}','DashboardExpertProjectCommentController@Edit')->name('dashboard.expert.project.comment.edit');
-                    Route::post('editsave/{fulltbpid}','DashboardExpertProjectCommentController@EditSave')->name('dashboard.expert.project.comment.editsave');
+                    Route::get('edit/{id}','DashboardExpertProjectCommentController@Edit')->name('dashboard.expert.project.comment.edit');
+                    Route::post('editsave/{id}','DashboardExpertProjectCommentController@EditSave')->name('dashboard.expert.project.comment.editsave');
                 }); 
             }); 
             

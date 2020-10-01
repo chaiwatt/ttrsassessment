@@ -6,6 +6,7 @@ use App\Model\Ev;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use App\Model\CriteriaGroup;
+use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use App\Model\ProjectScoring;
@@ -96,6 +97,10 @@ class FullTbp extends Model
     public function getEvAttribute(){
         return Ev::where('full_tbp_id',$this->id)->first();
     } 
+    public function getExpertCommentAttribute(){
+        return ExpertComment::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->first();
+    } 
+    
 }
 
 

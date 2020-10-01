@@ -30,7 +30,7 @@
     <!-- Content area -->
     <div class="content">
         <div id="alertmessage_wrapper">
-            @foreach ($alertmessages as $alertmessage)
+            @foreach ($alertmessages->reverse() as $alertmessage)
                 <div class="alert alert-info alert-styled-left alert-dismissible">
                     <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{{$alertmessage->detail}}
                 </div>
@@ -241,9 +241,9 @@
                     data.forEach(function (timeline,index) {
                         var doctype = '';
                         if(timeline.message_type == 1){
-                            doctype ='เอกสาร mini TBP';
+                            doctype ='เอกสาร Mini Tbp';
                         }else if(timeline.message_type == 2){
-                            doctype ='เอกสาร full TBP';
+                            doctype ='เอกสาร Full Tbp';
                         }
                         html += `<tr >                                        
                             <td> ${timeline.createdatth} </td>                            
@@ -267,9 +267,9 @@ $(document).on('click', '#alertmessage', function(e) {
         data.forEach(function (timeline,index) {
             var doctype = '';
             if(timeline.message_type == 1){
-                doctype ='เอกสาร mini TBP';
+                doctype ='เอกสาร Mini Tbp';
             }else if(timeline.message_type == 2){
-                doctype ='เอกสาร mini TBP';
+                doctype ='เอกสาร Mini Tbp';
             }
             html += `<tr >                                        
                 <td> ${timeline.createdatth} </td>                            

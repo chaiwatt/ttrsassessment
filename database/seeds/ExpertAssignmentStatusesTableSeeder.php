@@ -13,10 +13,10 @@ class ExpertAssignmentStatusesTableSeeder extends Seeder
     {
         DB::table('expert_assignment_statuses')->insert([
             [
-                'name' => 'ยังไม่ได้ยืนยัน'
+                'name' => 'JD ยังไม่ได้ตรวจสอบ'
             ],
             [
-                'name' => 'ยืนยันแล้ว'
+                'name' => 'JD ยืนยันแล้ว'
             ],
             [
                 'name' => 'ปฎิเสธ'

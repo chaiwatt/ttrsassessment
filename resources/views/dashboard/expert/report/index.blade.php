@@ -31,8 +31,19 @@
 
     <!-- Content area -->
     <div class="content">
+        @if (Session::has('success'))
+            <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                {{ Session::get('success') }}
+            </div>
+        @elseif( Session::has('error') )
+            <div class="alert alert-warning alert-styled-left alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                {{ Session::get('error') }}
+            </div>
+        @endif
         <div id="alertmessage_wrapper">
-            @foreach ($alertmessages as $alertmessage)
+            @foreach ($alertmessages->reverse() as $alertmessage)
                 <div class="alert alert-info alert-styled-left alert-dismissible">
                     <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{{$alertmessage->detail}}
                 </div>
@@ -59,6 +70,7 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>สถานะ</th>
+                                        <th>แสดงความเห็น</th>
                                         <th>เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
@@ -69,10 +81,21 @@
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
                                         <td> 
+                                            @if($fulltbp->expertassignment->accepted == 1)
+                                                    @if (Empty($fulltbp->expertcomment))
+                                                            <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">แสดงความเห็น</a> 
+                                                        @else
+                                                            <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">แสดงความเห็นแล้ว</a> 
+                                                    @endif
+                                                @else
+                                                -
+                                            @endif
+                                        </td> 
+                                        <td> 
                                             @if ($fulltbp->expertassignment->accepted == 0)
                                                     <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
                                                     <a href="{{route('dashboard.expert.report.reject',['id' => $fulltbp->id])}}" class="btn btn-sm bg-danger">ปฎิเสธเข้าร่วม</a>
-                                                @elseif($fulltbp->expertassignment->accepted == 1) 
+                                                @elseif($fulltbp->expertassignment->accepted == 1)
                                                     <a href="{{route('dashboard.expert.report.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
                                                     <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal">PDF</a>
                                                     <a href="{{route('dashboard.expert.report.excel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">EXCEL</a>

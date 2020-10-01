@@ -70,9 +70,11 @@ function getExpert(id){
     if($(this).is(":checked")){
         status = 2;
     }
-
+    
+    $("#spiniconcheck"+$(this).data('id')).attr("hidden",false);
     assignExpert($(this).data('id'),status,route.fulltbpid).then(data => {
-        var html = ``;
+      $("#spiniconcheck"+$(this).data('id')).attr("hidden",true);  
+      var html = ``;
         data.forEach(function (expert,index) {
             var onlymaster = ``;
             var checkstatus = ``;
@@ -80,7 +82,7 @@ function getExpert(id){
                 checkstatus =  `checked`;
             }
             if(route.usertypeid == 6){
-                onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
+                onlymaster = `<td> <i class="icon-spinner spinner mr-2" id="spiniconcheck${expert.id}" hidden></i><input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
             }
             var acceptstatus = '';
             if(expert.accepted == 0){
@@ -101,8 +103,32 @@ function getExpert(id){
             </tr>`
             });
         $("#expert_wrapper").html(html);
+        if(data.length == $('.assignexpert').filter(':checked').length){
+            doneAssignement(route.fulltbpid).then(data => {
+              console.log(data);
+            }).catch(error => {})
+        }
      }).catch(error => {})
 });
+
+function doneAssignement(fulltbpid){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/dashboard/admin/project/fulltbp/doneassignement`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'fulltbpid': fulltbpid
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
 
 function assignExpert(id,status,fulltbpid){
     return new Promise((resolve, reject) => {
@@ -146,8 +172,9 @@ function assignExpert(id,status,fulltbpid){
   }
 
 $(document).on('click', '#btn_modal_add_expert', function(e) {
+    $("#spiniconcheck"+$(this).data('id')).attr("hidden",false);
     assignExpertSave($('#expert').val(),route.fulltbpid).then(data => {
-        console.log(data);
+      $("#spiniconcheck"+$(this).data('id')).attr("hidden",true);
         var html = ``;
         data.forEach(function (expert,index) {
             var onlymaster = ``;
@@ -164,7 +191,7 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
               acceptstatus = `<span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>`;
             }
             if(route.usertypeid == 6){
-                onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
+                onlymaster = `<td> <i class="icon-spinner spinner mr-2" id="spiniconcheck${expert.id}" hidden></i><input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
             }
             html += `<tr >                                        
                 <td class='userid' data-id='${expert.user['id']}'> ${expert.user['name']} ${expert.user['lastname']}</td> 
@@ -193,7 +220,9 @@ $(document).on("click",".deleteexpert",function(e){
         closeOnCancel: false
         }).then((result) => {
         if (result.value) {
+            $("#spiniconcheck"+$(this).data('id')).attr("hidden",false);
             deleteExpert($(this).data('id'),route.fulltbpid).then(data => {
+              $("#spiniconcheck"+$(this).data('id')).attr("hidden",true);
                 var html = ``;
                 data.forEach(function (expert,index) {
                     var onlymaster = ``;
@@ -211,7 +240,7 @@ $(document).on("click",".deleteexpert",function(e){
                     }
 
                     if(route.usertypeid == 6){
-                        onlymaster = `<td> <input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
+                        onlymaster = `<td> <i class="icon-spinner spinner mr-2" id="spiniconcheck${expert.id}" hidden></i><input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
                     }
                     html += `<tr >                                        
                         <td class='userid' data-id='${expert.user['id']}'> ${expert.user['name']} ${expert.user['lastname']}</td>   

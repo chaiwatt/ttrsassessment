@@ -52,7 +52,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full TBP (กำหนด Weight)</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Full Tbp (กำหนด Weight)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
 
@@ -126,15 +126,23 @@
                                         <td> 
                                             @if (Auth::user()->user_type_id >= 6)
                                                     @if ($fulltbp->ev->refixstatus == 0)
-                                                        <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>อยู่ระหว่าง JD พิจารณา</button> 
+                                                        @if ($fulltbp->ev->status == 4)
+                                                                <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+                                                            @else
+                                                                <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>อยู่ระหว่าง JD พิจารณา</button> 
+                                                        @endif
                                                     @elseif($fulltbp->ev->refixstatus == 1)
                                                         <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>ส่งคืนให้ Admin แก้ไข</button> 
                                                     @elseif($fulltbp->ev->refixstatus == 2)
-                                                        <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>ีการแก้ไขแล้ว</button> 
+                                                        <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>มีการแก้ไขแล้ว</button> 
                                                     @endif
                                                 @else
                                                     @if ($fulltbp->ev->refixstatus == 0)
-                                                        <span class="badge badge-flat border-warning text-warning-600">{{$fulltbp->ev->evstatus->name}}</span> 
+                                                        @if ($fulltbp->ev->status == 4)
+                                                                <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+                                                            @else
+                                                                <span class="badge badge-flat border-warning text-warning-600">{{$fulltbp->ev->evstatus->name}}</span> 
+                                                        @endif    
                                                     @elseif($fulltbp->ev->refixstatus == 1)
                                                         <span class="badge badge-flat border-pink text-pink-600">ให้แก้ไข EV</span>
                                                     @elseif($fulltbp->ev->refixstatus == 2)
@@ -184,14 +192,13 @@
             $('#modal_approve_ev').modal('show');
         });
         $(document).on('click', '#btn_modal_approve_ev', function(e) {
-            console.log($('#evid').val());
             $("#spinicon"+$('#evid').val()).attr("hidden",false);
             editApproveEv($('#evid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
                window.location.replace(`${route.url}/dashboard/admin/project/evweight`);
            }).catch(error => {})
         });
 
-        function editApproveEv(id,val,note){
+    function editApproveEv(id,val,note){
         return new Promise((resolve, reject) => {
             $.ajax({
             url: `${route.url}/api/assessment/ev/editapprove`,

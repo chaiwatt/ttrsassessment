@@ -59,119 +59,22 @@
 				{{$generalinfo->company}}
 			</span>
 
-			<ul class="navbar-nav ml-auto">
-
-						{{-- <li class="nav-item dropdown">
-							<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
-								<i class="icon-people"></i>
-								<span class="d-md-none ml-2">Users</span>
-							</a>
-							
-							<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-300">
-								<div class="dropdown-content-header">
-									<span class="font-weight-semibold">ผู้ใช้ออนไลน์</span>
-									<a href="#" class="text-default"><i class="icon-search4 font-size-base"></i></a>
-								</div>
-		
-								<div class="dropdown-content-body dropdown-scrollable">
-									<ul class="media-list">
-										<li class="media">
-											<div class="mr-3">
-												<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-											</div>
-											<div class="media-body">
-												<a href="#" class="media-title font-weight-semibold">Jordana Ansley</a>
-												<span class="d-block text-muted font-size-sm">Lead web developer</span>
-											</div>
-											<div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
-										</li>
-		
-										<li class="media">
-											<div class="mr-3">
-												<img src="{{asset('assets/dashboard/images/user.jpg')}}" width="36" height="36" class="rounded-circle" alt="">
-											</div>
-											<div class="media-body">
-												<a href="#" class="media-title font-weight-semibold">Will Brason</a>
-												<span class="d-block text-muted font-size-sm">Marketing manager</span>
-											</div>
-											<div class="ml-3 align-self-center"><span class="badge badge-mark border-danger"></span></div>
-										</li>
-									</ul>
-								</div>
-		
-								<div class="dropdown-content-footer bg-light">
-									<a href="#" class="text-grey mr-auto">All users</a>
-									<a href="#" class="text-grey"><i class="icon-gear"></i></a>
-								</div>
-							</div>
-						</li> --}}
-
-						
-				<li class="nav-item dropdown">
-						<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
-							<i class="icon-bubbles4"></i>
-							<span class="d-md-none ml-2">Messages</span>
-							@if ($shareunreadmessages->count() > 0)
-								<span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" id="_newmessagecount">{{$shareunreadmessages->count()}}</span>
-							@endif
-							
+			<ul class="navbar-nav ml-auto">	
+				<li class="nav-item dropdown dropdown-user">
+					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+						<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
+						<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ @if ($shareunreadmessages->count() > 0) <span class="badge badge-pill bg-blue ml-auto">{{$shareunreadmessages->count()}}</span> @endif
 						</a>
-						
-						<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
-							<div class="dropdown-content-header">
-								<span class="font-weight-semibold">ข้อความใหม่</span>
-								{{-- <a href="#" class="text-default"><i class="icon-compose"></i></a> --}}
-							</div>
-	
-							<div class="dropdown-content-body dropdown-scrollable">
-								<ul class="media-list" id="unreadmessages">
-									@foreach ($shareunreadmessages as $unreadmessage)
-										<li class="media">
-											<div class="mr-3 position-relative">
-												<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
-													<span class="letter-icon">J</span>
-												</span>
-											</div>
-											<div class="media-body">
-												<div class="media-title">
-													{{-- <a href="#"> --}}
-														<span class="font-weight-semibold">{{$unreadmessage->sender->name}} {{$unreadmessage->sender->lastname}} {{$unreadmessage->sender->name}}:  {{$unreadmessage->title}}</span>
-														<span class="text-muted float-right font-size-sm">{{$unreadmessage->timeago}}</span>
-													{{-- </a> --}}
-												</div>
-		
-												<span class="text-muted">{{substr($unreadmessage->title,0,50)}}...</span>
-											</div>
-										</li>
-									@endforeach
-								</ul>
-							</div>
-							{{-- <div class="dropdown-content-footer justify-content-center p-0">
-								<a href="#" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="Load more"><i class="icon-menu7 d-block top-0"></i></a>
-							</div> --}}
-						</div>
-					</li>
-
-					<li class="nav-item dropdown dropdown-user">
-							<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-								{{-- @if (!Empty(Auth::user()->picture))
-								<img src="{{asset(Auth::user()->picture)}}" class="rounded-circle mr-2" height="34" alt="">
-								@endif								 --}}
-								<span>{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
-							</a>
-							<div class="dropdown-menu dropdown-menu-right">
-								<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
-								{{-- <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a> --}}
-								<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ @if ($shareunreadmessages->count() > 0) <span class="badge badge-pill bg-blue ml-auto">{{$shareunreadmessages->count()}}</span> @endif
-								</a>
-								<div class="dropdown-divider"></div>
-								{{-- <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a> --}}
-								<a data-placement="bottom" class="dropdown-item" title="ออกจากระบบ" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-switch2"></i>ออกจากระบบ</a>
-							</div>
-							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-								@csrf
-							</form>
-						</li>
+						<div class="dropdown-divider"></div>
+						<a data-placement="bottom" class="dropdown-item" title="ออกจากระบบ" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-switch2"></i>ออกจากระบบ</a>
+					</div>
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						@csrf
+					</form>
+				</li>
 			</ul>
 		</div>
 	</div>

@@ -112,7 +112,7 @@
                                     <tr>    
                                         <td class='userid' data-id='{{$expertassignment->user->id}}'> {{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</td> 
                                         @if (Auth::user()->user_type_id == 6 )
-                                            <td> <input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
+                                            <td> <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$expertassignment->id}}" hidden></i><input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
                                         @endif
                                         <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
                                         <td> 

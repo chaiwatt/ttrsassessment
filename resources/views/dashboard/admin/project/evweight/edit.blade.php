@@ -12,11 +12,19 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <div class="d-flex justify-content-center">
-                    <div class="form-check ">
-                        <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ส่ง JD พิจารณา" class="form-check-input-switch" @if ($ev->status == 3) checked @endif >
-                    </div>
-                </div>
+                @if (Auth::user()->user_type_id == 5)
+                    @if ($ev->status >= 3)
+                            <div class="text-right">
+                                <button type="button" id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>ส่งรายการแก้ไข <i class="icon-paperplane ml-2"></i></button>
+                            </div>
+                        @else
+                            <div class="d-flex justify-content-center">
+                                <div class="form-check ">
+                                    <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ส่ง JD พิจารณา" class="form-check-input-switch" @if ($ev->status == 3) checked @endif >
+                                </div>
+                            </div>
+                    @endif
+                @endif
             </div>
         </div>
 

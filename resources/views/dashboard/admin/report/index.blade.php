@@ -33,7 +33,7 @@
     <!-- Content area -->
     <div class="content">
         <div id="alertmessage_wrapper">
-            @foreach ($alertmessages as $alertmessage)
+            @foreach ($alertmessages->reverse() as $alertmessage)
                 <div class="alert alert-info alert-styled-left alert-dismissible">
                     <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{{$alertmessage->detail}}
                 </div>
@@ -100,7 +100,7 @@
                         </div>
                         
                         <div>
-                            จำนวนยื่น full Tbp
+                            จำนวนยื่น Full Tbp
                         </div>
                     </div>
 
