@@ -131,4 +131,25 @@ function updateEvStatus(id,chkevstatus){
   })
 }
 
-export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus}
+function getEvCheckList(pillar,subpillar,subpillarindex){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/assessment/ev/getevchecklist`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          pillar : pillar,
+          subpillar : subpillar,
+          subpillarindex : subpillarindex
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList}

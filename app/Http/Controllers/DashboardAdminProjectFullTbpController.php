@@ -21,6 +21,7 @@ use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use App\Model\CriteriaGroup;
+use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\EmployPosition;
@@ -183,6 +184,7 @@ class DashboardAdminProjectFullTbpController extends Controller
     public function AssignExpert($id){
         $experts = User::where('user_type_id',3)->get();
         $expertassignments = ExpertAssignment::where('full_tbp_id',$id)->get();
+        
         $fulltbp = FullTbp::find($id);
         return view('dashboard.admin.project.fulltbp.assignexpert')->withExpertassignments($expertassignments)
                                                         ->withExperts($experts)
@@ -450,4 +452,9 @@ class DashboardAdminProjectFullTbpController extends Controller
         Message::sendMessage('JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
     }
 
+    public function ExpertComment(Request $request){
+        $expertassignment = ExpertAssignment::find($request->id);
+        $expertcomment = ExpertComment::where('full_tbp_id',$expertassignment->full_tbp_id)->where('user_id',$expertassignment->user_id)->first();
+        return response()->json($expertcomment); 
+    }
 }

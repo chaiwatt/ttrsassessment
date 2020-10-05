@@ -36,6 +36,64 @@
 		</div>
 	</div>
 </div>
+
+{{-- modal_expert_comment --}}
+<div id="modal_expert_comment" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความคิดเห็นผู้เชี่ยวชาญ</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+                        <ul class="nav nav-tabs nav-tabs-highlight">
+                            <li class="nav-item"><a href="#left-icon-overview" class="nav-link active" data-toggle="tab"><i class="icon-magic-wand2 mr-2"></i>Overview</a></li>
+                            <li class="nav-item"><a href="#left-icon-management" class="nav-link" data-toggle="tab"><i class="icon-stamp mr-2"></i>Management</a></li>
+                            <li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-atom2 mr-2"></i>Technology</a></li>
+                            <li class="nav-item"><a href="#left-icon-marketing" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i>Marketing</a></li>
+                            <li class="nav-item"><a href="#left-icon-businessprospect" class="nav-link" data-toggle="tab"><i class="icon-pie-chart5 mr-2"></i>Business Prospect</a></li>
+                            {{-- <li class="nav-item"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab"><i class="icon-attachment mr-2"></i>ไฟล์แนบ</a></li> --}}
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="left-icon-overview">
+                                <div class="form-group">
+                                    <textarea name="overview" id="overview" cols="30" rows="15" class="form-control" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="left-icon-management">
+                                <div class="form-group">
+                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="left-icon-technology">
+                                <div class="form-group">
+                                    <textarea name="technology" id="technology" cols="30" rows="15" class="form-control" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="left-icon-marketing">
+                                <div class="form-group">
+                                    <textarea name="marketing" id="marketing" cols="30" rows="15" class="form-control" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="left-icon-businessprospect">
+                                <div class="form-group">
+                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				{{-- <button id="btn_modal_expert_comment" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
+			</div>
+		</div>
+	</div>
+</div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -104,6 +162,7 @@
                                         @endif     
                                         <th>สถานะ</th> 
                                         <th>การตอบรับ</th> 
+                                        <th>ความคิดเห็น</th> 
                                         <th>เพิ่มเติม</th>                                                                 
                                     </tr>
                                 </thead>
@@ -124,6 +183,11 @@
                                                     <span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>   
                                             @endif
                                         </td> 
+                                        <td>
+                                            @if (!Empty($expertassignment->expertcomment))
+                                                <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>                                                                           
+                                            @endif  
+                                        </td>
                                         <td> 
                                             <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-danger deleteexpert">ลบ</button>                                       
                                         </td>                                

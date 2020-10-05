@@ -55,9 +55,17 @@
     </ul>
 </li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
-    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span></a>
+    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span>
+        @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
+            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+        @endif
+    </a>
     <ul class="nav nav-group-sub" data-submenu-title="ปฎิทิน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฎิทิน</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฎิทิน
+            @if ($sharenotificationbubbles->where('notification_sub_category_id',8)->count() > 0)
+                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+            @endif
+        </a></li>
     </ul>
 </li>
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">

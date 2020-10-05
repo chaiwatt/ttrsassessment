@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardExpertProjectCommentController extends Controller
 {
     public function Edit($id){
-        $expertcomment = ExpertComment::where('full_tbp_id',$id)->first();
+        $expertcomment = ExpertComment::where('full_tbp_id',$id)->where('user_id',Auth::user()->id)->first();
         $fulltbp = FullTbp::find($id);
         $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id);
 
@@ -38,8 +38,7 @@ class DashboardExpertProjectCommentController extends Controller
     }
     public function EditSave(Request $request,$id){
         $auth = Auth::user(); 
-
-        $expertcomment = ExpertComment::where('full_tbp_id',$id)->first();
+        $expertcomment = ExpertComment::where('full_tbp_id',$id)->where('user_id',$auth->id)->first();
         if(Empty($expertcomment)){
             $expertcomment = new ExpertComment();
             $expertcomment->full_tbp_id = $id;

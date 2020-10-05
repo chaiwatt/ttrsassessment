@@ -324,6 +324,12 @@ class AssessmentEvController extends Controller
         Message::sendMessage('ตรวจสอบ EV','Admin ได้แก้ไข EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
 
         return response()->json($ev);  
-
+    }
+    public function GetEvCheckList(Request $request){
+        $checklistgrading = CheckListGrading::where('pillar_id',$request->pillar)
+                                        ->where('sub_pillar_id',$request->subpillar)
+                                        ->where('sub_pillar_index_id',$request->subpillarindex)
+                                        ->first();
+        return response()->json($checklistgrading); 
     }
 }

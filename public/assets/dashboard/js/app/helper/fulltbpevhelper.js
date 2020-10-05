@@ -6,7 +6,6 @@ import * as PillaIndexWeigth from './pillaindexweigth.js';
 var globalNewIndex = 0;
 $( document ).ready(function() {
     Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
-        console.log(data);
         RenderTable(data);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
@@ -28,14 +27,12 @@ $(document).on('click', '#btnaddclustergroup', function(e) {
 $(document).on('change', '#pillar', function(e) {
     var html ='<option value="0" >==เลือกรายการ==</option>';
     SubPillar.getSubPillar($('#evid').val(),$(this).val()).then(data => {
-        // console.log(data);
         data.forEach(function (ev,index) {
                 html += `<option value="${ev['id']}" >${ev['name']}</option>`
             });
         $("#subpillar").html(html);
         $("#subpillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
         Pillar.getRelatedEv($('#evid').val()).then(data => {
-            console.log(data);
             var html =``;
             data.forEach(function (ev,index) {
                     html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
@@ -60,7 +57,6 @@ $(document).on('change', '#subpillar', function(e) {
         $("#indextype").html(html1);
         $("#subpillarindex option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
         Pillar.getRelatedEv($('#evid').val()).then(data => {
-            console.log(data);
             var html =``;
             data.forEach(function (ev,index) {
                     html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
@@ -71,6 +67,9 @@ $(document).on('change', '#subpillar', function(e) {
 });
 
 $(document).on('change', '#subpillarindex', function(e) {
+    $('#indextype').val(1);
+    $('#indextype').select2().trigger('change');
+    $(this).prop('selected',true);
     $("#criteria_wrapper").attr("hidden",true);
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
         var html =``;
@@ -81,8 +80,8 @@ $(document).on('change', '#subpillarindex', function(e) {
         Pillar.getRelatedEv($('#evid').val()).then(data => {
             var html =``;
             data.forEach(function (ev,index) {
-                    html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
-                });
+                html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+            });
              $("#relateev").html(html);
         }).catch(error => {})
     }).catch(error => {})
@@ -92,7 +91,18 @@ $(document).on('change', '#indextype', function(e) {
   if($(this).val() == 1){
     $("#grade_wrapper").attr("hidden",true);
   }else if($(this).val() == 2){
-      $("#grade_wrapper").attr("hidden",false);
+    $("#grade_wrapper").attr("hidden",false);
+    Ev.getEvCheckList($('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
+        var html =``;
+        if(!jQuery.isEmptyObject(data)){
+            $('#gradea').val(data.gradea);
+            $('#gradeb').val(data.gradeb);
+            $('#gradec').val(data.gradec);
+            $('#graded').val(data.graded);
+            $('#gradee').val(data.gradee);
+            $('#gradef').val(data.gradef);
+        }
+    }).catch(error => {})
   }
 });
 
@@ -117,7 +127,6 @@ $('.steps-basic').steps({
                     selector: '.context-menu-one', 
                     callback: function(key, options) {
                         var m = "clicked: " + key;
-                        // console.log($('#tmpstepindex').val() + ' ' + key);
                         if(key == 'add'){
                             $("#parent").html($( "#pillar option:selected" ).text());
                             $('#modal_additem').modal('show');
@@ -150,7 +159,7 @@ $('.steps-basic').steps({
                     }
                 });
                 $('.context-menu-one').on('click', function(e){
-                    console.log('clicked', this);
+                    // console.log('clicked', this);
             
                 })    
             });
@@ -278,11 +287,6 @@ function RenderTable(data){
         if(criteria.criteria != null){
             criterianame = criteria.criteria['name']
         }
-        // var isadmin = '';
-        // // console.log(route.usertypeid);
-        // if(route.usertypeid >= 6){
-        //     isadmin = `(<a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}"  class="text-grey-300 editweigth">แก้ไข Weigth</a>)`;
-        // }
         var subpillarindex = criteria.subpillarindex['name'];
         if(subpillarindex == null){
             subpillarindex = "-";
@@ -465,7 +469,6 @@ $(document).on('click', '#btn_modal_additem', function(e) {
         .catch(error => {})
     }else if($('#tmpstepindex').val() == 2){
         SubPillar.addSubPillarIndex($('#evid').val(),$('#subpillar').val(),$('#name').val()).then(data => {
-            console.log(data);
             var html0 ='<option value="0" >==เลือกรายการ==</option>';
             var html1 ='';
             data.subpillarindexs.forEach(function (subpillar,index) {
@@ -481,7 +484,6 @@ $(document).on('click', '#btn_modal_additem', function(e) {
         .catch(error => {})
     }else if($('#tmpstepindex').val() == 3){
         SubPillar.addCriteria($('#evid').val(),$('#subpillarindex').val(),$('#name').val()).then(data => {
-            console.log(data);
             var html =``;
             data.forEach(function (subpillar,index) {
                     html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
@@ -491,8 +493,6 @@ $(document).on('click', '#btn_modal_additem', function(e) {
             })
         .catch(error => {})
     }
-
-
 });
 
 $(document).on('change', '#tmpcriteria', function(e) {
@@ -500,7 +500,6 @@ $(document).on('change', '#tmpcriteria', function(e) {
 });
 
 $(document).on('click', '#relateevid', function(e) {
-    // $('#existingev').val($(this).data('id')).attr("selected", "selected");
     $("#existingev").val($(this).data('id')).change();
     Ev.getEv($(this).data('id')).then(data => {
         RenderModalTable(data);
@@ -520,7 +519,6 @@ $('#chkevstatus').on('change.bootstrapSwitch', function(e) {
     }).catch(error => {})
 });
 
-// editweigth
 $(document).on('click', '.editweigth', function(e) {
     PillaIndexWeigth.getWeigth($('#evid').val(),$(this).data('subpillarindex')).then(data => {
         var weigth = 0.0;

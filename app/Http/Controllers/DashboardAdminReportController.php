@@ -31,12 +31,14 @@ class DashboardAdminReportController extends Controller
                                                 ->withAlertmessages($alertmessages);
     }
     public function GetEvent(Request $request){
-        $eventcalendarattendees = EventCalendarAttendee::where('user_id',Auth::user()->id)->pluck('event_calendar_id')->toArray();
+        $auth = Auth::user();
+        $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->pluck('event_calendar_id')->toArray();
         $eventcalendars = EventCalendar::whereIn('id',$eventcalendarattendees)->get();
-    
+        
         $_events = array();
         foreach ($eventcalendars as $event) {
-            $_events[] = array('start' => $event->eventdate, 'summary' => $event->summary);
+            $eventcalendarattendee = EventCalendarAttendee::where('user_id',$auth->id)->where('event_calendar_id',$event->id)->first();
+            $_events[] = array('id' => $event->id,'color' => $eventcalendarattendee->color,'start' => $event->eventdate, 'summary' => $event->summary);
         }
         return collect($_events);
     }

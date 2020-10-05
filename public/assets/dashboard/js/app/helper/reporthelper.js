@@ -1,15 +1,17 @@
         
-        $( document ).ready(function() {
+       import * as Attendee from './eventcalendarattendee.js';
+        var globalid = null;
+       $(function() {
             var events = [];
-            getEvent().then(data => {
-                console.log(data);
+            getEvents().then(data => {
                 data.forEach(function (event,index) {
                     events.push({
+                        id: event["id"],
                         title: event["summary"],
-                        start: event["start"]
+                        start: event["start"],
+                        color: event["color"]
                     });
                 });
-                // console.log(events);
                 var calendarBasicViewElement = document.querySelector('.fullcalendar-basic');
                 if(calendarBasicViewElement) {
                     var calendarBasicViewInit = new FullCalendar.Calendar(calendarBasicViewElement, {
@@ -29,18 +31,80 @@
                         },
                         events: events,
                         editable: true,
-                        eventLimit: true
+                        eventLimit: true,
+                        eventClick: function(e) {
+                            getEvent(e.event.id).then(data => {
+                                console.log(data.attendeecalendar.id);
+                                $('#title').val('นัดหมายการประชุม โครงการ' + data.eventcalendar.fulltbp.minitbp['project']);
+                                $('#eventdate').val(data.eventcalendar.eventdateth);
+                                $('#starttime').val(data.eventcalendar.starttime);
+                                $('#endtime').val(data.eventcalendar.endtime);
+                                $('#placeroom').val(data.eventcalendar.place + ' ห้อง' + data.eventcalendar.room);
+                                $('#eventtype').val(data.eventcalendar.calendartype['name']);
+                                $('#detail').val(data.eventcalendar.summary);
+                                // if(data.eventcalendar.eventcalendarattendee['joinevent'] == 1){
+                                //     $('#chkjoinmetting').bootstrapSwitch('state', true, false); 
+                                // }else{
+                                //     $('#chkjoinmetting').bootstrapSwitch('state', false,false); 
+                                // }
+                                $('#attendeventid').val(data.attendeecalendar.id);
+                                var html =``;
+                               
+                                data.eventcalendarattendeestatuses.forEach(function (status,index) {
+                                    var chk = ``;
+                                    if(status['id'] == data.attendeecalendar.eventcalendarattendeestatus['id']){
+                                        chk = `selected`;
+                                    }
+                                    html += `<option value="${status['id']}" ${chk} >${status['name']}</option>`
+                                });
+                                $("#attendevent").html(html);
+                                $('#modal_get_calendar').modal('show');
+
+                                var html =``;
+                                data.eventcalendarattendees.forEach(function (attendee,index) {
+                                    var attendeestatus = `<span class="badge badge-flat border-success text-success-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
+                                    if(attendee.joinevent == 2){
+                                        attendeestatus = `<span class="badge badge-flat border-warning text-warning-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
+                                    }
+                                    html += `<tr > 
+                                    <td> ${attendee.user['name']} ${attendee.user['lastname']}</td>                                            
+                                    <td> ${attendeestatus} </td> 
+                                    </tr>`
+                                    });
+                                $("#attendee_modal_wrapper_tr").html(html);
+
+                            }).catch(error => {})
+                        },
                     }).render();
                 }
             }).catch(error => {})
         });
 
-    function getEvent() {
+    function getEvents() {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: `${route.url}/dashboard/admin/report/getevent`,
+                url: `${route.url}/dashboard/admin/report/getevents`,
                 type: 'POST',
                 headers: {"X-CSRF-TOKEN":route.token},
+                success: function(data) {
+                resolve(data)
+                },
+                error: function(error) {
+                reject(error)
+                },
+            })
+        })
+    }
+
+    function getEvent(id) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `${route.url}/api/calendar/getevent`,
+                type: 'POST',
+                headers: {"X-CSRF-TOKEN":route.token},
+                data: {
+                    id : id
+                },
                 success: function(data) {
                 resolve(data)
                 },
@@ -173,8 +237,8 @@
         option = {
             tooltip: {
                 trigger: 'axis',
-                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                axisPointer: {           
+                    type: 'shadow'        
                 }
             },
             legend: {
@@ -264,3 +328,38 @@
             myChart.setOption(option, true);
         }
     }
+
+$('#chkjoinmetting').on('change.bootstrapSwitch', function(e) {
+    var status = 0
+    if(e.target.checked==true){
+        status =1;
+    }        
+   console.log($(this).data('id'));
+   globalid = $(this).data('id');
+   $("#spinicon").attr("hidden",false);
+   Attendee.updateJoinEvent($(this).data('id'),status).then(data => {
+       $("#spinicon").attr("hidden",true);
+       console.log(data);
+      
+   }).catch(error => {})
+});
+
+
+$(document).on('change', '#attendevent', function(e) {
+    console.log($(this).val());
+    var status = 1
+    if($(this).val()==2){
+        status =0;
+    }        
+   $("#spinicon").attr("hidden",false);
+   Attendee.updateJoinEvent($('#attendeventid').val(),status).then(data => {
+       $("#spinicon").attr("hidden",true);
+       console.log(data);
+      
+   }).catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_get_calendar', function(e) {
+    console.log('dd');
+    window.location.replace(`${route.url}/dashboard/admin/report`);
+});

@@ -67,7 +67,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>โครงการ</label><span class="text-danger">*</span>
-                                        <select name="fulltbp" data-placeholder="โครงการ" class="form-control form-control-select2">
+                                        <select name="fulltbp" id="fulltbp" data-placeholder="โครงการ" class="form-control form-control-select2">
+                                           <option val="0">==เลือกโครงการ==</option>
                                             @foreach ($fulltbps as $fulltbp)
                                                 <option value="{{$fulltbp->id}}">{{$fulltbp->minitbp->project}}</option> 
                                             @endforeach
@@ -76,19 +77,29 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>วันที่</label>
-                                        <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control" >
+                                        <label>ประเภทปฎิทิน</label><span class="text-danger">*</span>
+                                        <select name="calendartype" data-placeholder="ประเภทปฎิทิน" class="form-control form-control-select2">
+                                            @foreach ($calendartypes as $calendartype)
+                                                <option value="{{$calendartype->id}}">{{$calendartype->name}}</option> 
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>วันที่</label>
+                                        <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
                                         <label>เวลาเริ่ม</label>
                                         <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control" >
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>เวลาสิ้นสุด</label>
                                         <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control" >
@@ -98,8 +109,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>สถานที่</label>
-                                        <input type="text"  name="place"  value="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control" >
+                                        <label>สถานที่นัดหมาย</label>
+                                        <input type="text"  name="place" value=""  placeholder="สถานที่นัดหมาย" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -113,16 +124,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>รายละเอียด</label>
-                                        <input type="text"  name="summary"  value="{{old('summary')}}"  placeholder="รายละเอียด" class="form-control" >
+                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
-                                        <select name="users[]" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-select2" multiple="multiple">
-                                            @foreach ($users as $user)
-                                                <option value="{{$user->id}}">{{$user->name}} {{$user->lastname}}</option> 
-                                            @endforeach
+                                        <select name="users[]" id="user" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-select2" multiple="multiple">
                                         </select>
                                     </div>
                                 </div>
@@ -146,7 +154,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

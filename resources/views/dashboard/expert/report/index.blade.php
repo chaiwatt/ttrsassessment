@@ -71,6 +71,8 @@
                                         <th>บริษัท</th>
                                         <th>สถานะ</th>
                                         <th>แสดงความเห็น</th>
+                                        <th>วันนัดประชุม</th>
+                                        <th>วันที่ประเมิน</th>
                                         <th>เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
@@ -91,6 +93,8 @@
                                                 -
                                             @endif
                                         </td> 
+                                        <td> {{$fulltbp->briefingdate}} </td>  
+                                        <td> {{$fulltbp->assessmentdate}} </td>  
                                         <td> 
                                             @if ($fulltbp->expertassignment->accepted == 0)
                                                     <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>

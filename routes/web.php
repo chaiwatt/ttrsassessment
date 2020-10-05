@@ -61,6 +61,11 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('uploadattachment','Api\MessageController@UploadAttachment')->name('api.message.uploadattachment');   
             Route::post('deleteattachment','Api\MessageController@DeleteAttachment')->name('api.message.deleteattachment');       
         });
+        Route::group(['prefix' => 'calendar'], function(){
+            Route::post('getparticipate','Api\CalendarController@GetParticipate')->name('api.calendar.getparticipate');   
+            Route::post('getevent','Api\CalendarController@GetEvent')->name('api.calendar.getevent');  
+            Route::post('updatejoinevent','Api\CalendarController@UpdateJoinEvent')->name('api.calendar.updatejoinevent');        
+        });
         Route::group(['prefix' => 'menu'], function(){
             Route::post('getmenu','Api\MenuController@GetMenu')->name('api.menu.getmenu');           
         });
@@ -134,6 +139,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('updateadminevstatus','Api\AssessmentEvController@UpdateAdminEvStatus')->name('api.assessment.ev.updateadminevstatus');
                 Route::post('editapprove','Api\AssessmentEvController@EditApprove')->name('api.assessment.ev.editapprove');
                 Route::post('sendeditev','Api\AssessmentEvController@SendEditEv')->name('api.assessment.ev.sendeditev');
+                Route::post('getevchecklist','Api\AssessmentEvController@GetEvCheckList')->name('api.assessment.ev.getevchecklist');
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
                     Route::post('deletepillar','Api\AssessmentEvPillarController@DeletePillar')->name('api.assessment.ev.pillar.deletepillar'); 
@@ -315,7 +321,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'admin'], function(){
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardAdminReportController@Index')->name('dashboard.admin.report');           
-                Route::post('getevent','DashboardAdminReportController@GetEvent')->name('dashboard.admin.getevent'); 
+                Route::post('getevents','DashboardAdminReportController@GetEvent')->name('dashboard.admin.report.getevents'); 
                 Route::group(['prefix' => 'search'], function(){
                     Route::get('','DashboardAdminReportSearchController@Index')->name('dashboard.admin.report.search');    
                     Route::post('getsearch','DashboardAdminReportSearchController@GetSearch')->name('dashboard.admin.report.search.getsearch');          
@@ -363,6 +369,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('addprojectmember','DashboardAdminProjectFullTbpController@AddProjectMember')->name('dashboard.admin.project.fulltbp.addprojectmember');
                     Route::post('deleteprojectmember','DashboardAdminProjectFullTbpController@DeleteProjectMember')->name('dashboard.admin.project.fulltbp.deleteprojectmember');
                     Route::post('doneassignement','DashboardAdminProjectFullTbpController@DoneAssignement')->name('dashboard.admin.project.fulltbp.doneassignement');
+                    Route::post('expertcomment','DashboardAdminProjectFullTbpController@ExpertComment')->name('dashboard.admin.project.fulltbp.expertcomment');
                     Route::group(['prefix' => 'admin'], function(){
                         Route::get('','DashboardAdminProjectFullTbpAdminController@Index')->name('dashboard.admin.project.fulltbp.admin');           
                         Route::get('editev/{id}','DashboardAdminProjectFullTbpAdminController@EditEv')->name('dashboard.admin.project.fulltbp.admin.editev');

@@ -64,10 +64,16 @@
                         <form method="POST" action="{{route('dashboard.admin.calendar.editsave',['id' => $eventcalendar->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>วันที่</label>
                                         <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ประเภทปฎิทิน</label>
+                                        <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฎิทิน" class="form-control" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +109,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>รายละเอียด</label>
-                                        <input type="text"  name="summary"  value="{{$eventcalendar->summary}}"  placeholder="รายละเอียด" class="form-control" >
+                                        {{-- <input type="text"  name="summary"  value="{{$eventcalendar->summary}}"  placeholder="รายละเอียด" class="form-control" > --}}
+                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control">{{$eventcalendar->summary}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

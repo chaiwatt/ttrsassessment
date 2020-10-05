@@ -84,6 +84,10 @@ function getExpert(id){
             if(route.usertypeid == 6){
                 onlymaster = `<td> <i class="icon-spinner spinner mr-2" id="spiniconcheck${expert.id}" hidden></i><input type="checkbox" data-id="${expert.id}" class="form-check assignexpert" ${checkstatus}></td> `;
             }
+            var comment = '';
+            if(expert.expertcomment != null){
+              comment = `<button type="button" data-id="${expert.id}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>`;
+            }
             var acceptstatus = '';
             if(expert.accepted == 0){
               acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
@@ -96,7 +100,8 @@ function getExpert(id){
                 <td class='userid' data-id='${expert.user['id']}'> ${expert.user['name']} ${expert.user['lastname']}</td>   
                 ${onlymaster}      
                 <td> ${expert.expertassignmentstatus['name']}</td>  
-                <td> ${acceptstatus}</td>                                   
+                <td> ${acceptstatus}</td>    
+                <td> ${comment}</td>                                 
                 <td> 
                     <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
                 </td>
@@ -176,12 +181,18 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
     assignExpertSave($('#expert').val(),route.fulltbpid).then(data => {
       $("#spiniconcheck"+$(this).data('id')).attr("hidden",true);
         var html = ``;
+        console.log(data);
         data.forEach(function (expert,index) {
             var onlymaster = ``;
             var checkstatus = ``;
             if(expert.expert_assignment_status_id == 2){
                 checkstatus =  `checked`;
             }
+            var comment = '';
+            if(expert.expertcomment != null){
+              comment = `<button type="button" data-id="${expert.id}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>`;
+            }
+            console.log('--> ' + expert.expertcomment);
             var acceptstatus = '';
             if(expert.accepted == 0){
               acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
@@ -198,8 +209,9 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
                 ${onlymaster}     
                 <td> ${expert.expertassignmentstatus['name']}</td>                                        
                 <td> ${acceptstatus}</td>  
+                <td> ${comment} </td>
                 <td> 
-                    <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
+                    <button type="button" data-id="${expert.id}" class="btn btn-sm bg-danger deleteexpert">ลบ</button>                                       
                 </td>
             </tr>`
             });
@@ -230,6 +242,10 @@ $(document).on("click",".deleteexpert",function(e){
                     if(expert.expert_assignment_status_id == 2){
                         checkstatus =  `checked`;
                     }
+                    var comment = '';
+                    if(expert.expertcomment != null){
+                      comment = `<button type="button" data-id="${expert.id}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>`;
+                    }
                     var acceptstatus = '';
                     if(expert.accepted == 0){
                       acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
@@ -247,8 +263,9 @@ $(document).on("click",".deleteexpert",function(e){
                         ${onlymaster}      
                         <td> ${expert.expertassignmentstatus['name']}</td>   
                         <td> ${acceptstatus} </td>
+                        <td> ${comment} </td>
                         <td> 
-                            <button type="button" data-id="${expert.id}" class="btn badge bg-danger deleteexpert">ลบ</button>                                       
+                            <button type="button" data-id="${expert.id}" class="btn btn-sm bg-danger deleteexpert">ลบ</button>                                       
                         </td>
                     </tr>`
                     });
@@ -301,6 +318,39 @@ function notifyJD(users,fulltbpid){
           data: {
             'users': users,
             'fulltbpid': fulltbpid
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
+
+  $(document).on('click', '.expertcomment', function(e) {
+    console.log($(this).data('id'));
+      expertComment($(this).data('id')).then(data => {
+          var html = ``;
+          console.log(data);
+          $('#overview').val(data.overview);
+          $('#management').val(data.management);
+          $('#technology').val(data.technology);
+          $('#marketing').val(data.marketing);
+          $('#businessprospect').val(data.businessprospect);
+          $('#modal_expert_comment').modal('show');
+      }).catch(error => {})
+  });
+
+  function expertComment(id){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/dashboard/admin/project/fulltbp/expertcomment`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            'id': id
           },
           success: function(data) {
             resolve(data)

@@ -7,6 +7,118 @@
 
 @stop
 @section('content')
+{{-- modal_get_calendar --}}
+<div id="modal_get_calendar" class="modal fade" style="overflow:hidden;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฎิทิน</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs nav-tabs-highlight">
+                    <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
+                    <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i> ผู้เข้าร่วม</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="left-icon-tab1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>หัวข้อ</label>
+                                        <input type="text"  id="title" value=""  placeholder="หัวข้อ" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>สถานที่/ห้อง</label>
+                                    <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>ประเภท</label>
+                                        <input type="text" id="eventtype" value=""  placeholder="ประเภท" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>วันที่</label>
+                                        <input type="text" id="eventdate" value=""  placeholder="วันที่" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>เวลาเริ่ม</label>
+                                        <input type="text" id="starttime" value=""  placeholder="เวลาเริ่ม" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>ถึงเวลา</label>
+                                        <input type="text" id="endtime" value=""  placeholder="ถึงเวลา" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>รายละเอียด</label>
+                                        <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control" readonly></textarea>
+                                    </div>
+                                </div>
+                                    {{-- <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkjoinmetting" data-id="" data-on-color="success" data-off-color="danger" data-on-text="เข้าร่วมแล้ว" data-off-text="ไม่เข้าร่วม" class="form-check-input-switch"  > --}}
+                               
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>การเข้าร่วม<span class="text-danger">*</span></label>
+                                    <select id="attendevent" class="form-control form-control-select2">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="left-icon-tab2">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="attendee_modal">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อ-สกุล</th>    
+                                        <th>สถานะ</th>                                                                               
+                                    </tr>
+                                </thead>
+                                <tbody id="attendee_modal_wrapper_tr"> 
+        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="modal-footer">
+                <button class="btn btn-link "  data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                <button id="btn_modal_get_calendar"  class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -131,6 +243,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">รายการโครงการ</h6>
                         <div class="header-elements">
@@ -149,7 +262,10 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>สถานะ</th>
-                                        <th style="width:200px">เพิ่มเติม</th> 
+                                        <th>วันนัดประชุม</th>
+                                        <th>วันที่ประเมิน</th>
+                                        <th>วันที่สรุปลประเมิน</th>
+                                        <th >เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -159,10 +275,13 @@
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
+                                        <td> {{$fulltbp->briefingdate}} </td>  
+                                        <td> {{$fulltbp->assessmentdate}} </td>  
+                                        <td> {{$fulltbp->finalassessmentdate}} </td>  
                                         <td> 
-                                            <a href="{{route('dashboard.admin.report.search.view',['id' => $fulltbp->id])}}" class=" badge bg-primary">รายละเอียด</a>
-                                            <a href="{{route('dashboard.admin.report.search.pdf',['id' => $fulltbp->id])}}" class=" badge bg-teal">PDF</a>
-                                            <a href="{{route('dashboard.admin.report.search.excel',['id' => $fulltbp->id])}}" class=" badge bg-info">EXCEL</a>
+                                            <a href="{{route('dashboard.admin.report.search.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                            <a href="{{route('dashboard.admin.report.search.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal">PDF</a>
+                                            <a href="{{route('dashboard.admin.report.search.excel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">EXCEL</a>
                                         </td> 
                                     </tr>
                                     @endforeach
@@ -273,7 +392,6 @@
                         <h6 class="card-title">ปฎิทินกลาง</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
                                 <span></span>
                             </a>
                         </div>
@@ -289,6 +407,8 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.min.js')}}"></script>
@@ -305,6 +425,7 @@
         token: $('meta[name="csrf-token"]').attr('content'),
         branchid: "{{Auth::user()->branch_id}}"
     };
+
 </script>
 
 @stop

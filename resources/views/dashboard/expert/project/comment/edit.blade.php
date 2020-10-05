@@ -57,11 +57,9 @@
                             <li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-atom2 mr-2"></i>Technology</a></li>
                             <li class="nav-item"><a href="#left-icon-marketing" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i>Marketing</a></li>
                             <li class="nav-item"><a href="#left-icon-businessprospect" class="nav-link" data-toggle="tab"><i class="icon-pie-chart5 mr-2"></i>Business Prospect</a></li>
-                            <li class="nav-item"><a href="#left-icon-share" class="nav-link" data-toggle="tab"><i class="icon-share2 mr-2"></i>Share</a></li>
+                            {{-- <li class="nav-item"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab"><i class="icon-attachment mr-2"></i>ไฟล์แนบ</a></li> --}}
                         </ul>
                         <div class="tab-content">
-                            {{-- <div class="tab-pane fade show active" id="left-icon-fulltbp">  
-                            </div> --}}
                             <div class="tab-pane fade show active" id="left-icon-overview">
                                 <div class="form-group">
                                     <textarea name="overview" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->overview}}</textarea>
@@ -87,7 +85,10 @@
                                     <textarea name="businessprospect" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->businessprospect}}</textarea>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="left-icon-share">
+                            {{-- <div class="tab-pane fade" id="left-icon-attachment">
+                               
+                            </div> --}}
+                            {{-- <div class="tab-pane fade" id="left-icon-share">
                                 <div class="form-group">
                                     <label>เลือกผู้รับ</label><span class="text-danger">*</span>
                                     <select id="users" data-placeholder="เลือกผู้รับ" class="form-control form-control-select2" multiple>
@@ -96,7 +97,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="text-right">
                             <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
