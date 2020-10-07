@@ -23,16 +23,7 @@ class DashboardAdminAssessmentController extends Controller
     public function Index(){
         $auth = Auth::user();
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
-
-
-        // $scoringstatuses = ScoringStatus::where('ev_id',$request->evid)->pluck('user_id')->toArray(); 
-        // return $scoringstatuses;
-        // $projectmembers = ProjectMember::where('ev_id',$request->evid)->get();
-
-
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
-
-
         return view('dashboard.admin.assessment.index')->withFulltbps($fulltbps);
     }
    public function Edit($id){
