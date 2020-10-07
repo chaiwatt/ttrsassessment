@@ -8,7 +8,9 @@ use Google_Client;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
+use App\Model\Isnotify;
 use App\Helper\EmailBox;
+use App\Model\MeetingDate;
 use App\Model\AlertMessage;
 use App\Model\CalendarType;
 use App\Model\EventCalendar;
@@ -45,9 +47,11 @@ class DashboardAdminCalendarController extends Controller
         $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
         $minitbps = MiniTBP::whereIn('business_plan_id',$projectassignments)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->get();
+        $isnotifies = Isnotify::get();
         return view('dashboard.admin.calendar.create')->withUsers($users)
                                                     ->withFulltbps($fulltbps)
-                                                    ->withCalendartypes($calendartypes);
+                                                    ->withCalendartypes($calendartypes)
+                                                    ->withIsnotifies($isnotifies);
     }
     public function CreateSave(CreateCalendarRequest $request){
       $auth = Auth::user();
@@ -60,22 +64,14 @@ class DashboardAdminCalendarController extends Controller
       $eventcalendar->place = $request->place;
       $eventcalendar->room = $request->room;
       $eventcalendar->summary = $request->summary;
+      $eventcalendar->isnotify_id = $request->isnotify;
       $eventcalendar->save();
 
-      $fulltbp = FullTbp::find($request->fulltbp);
-      if($request->calendartype == 1){
-            $fulltbp->update([
-                'briefingdate' => DateConversion::thaiToEngDate($request->eventdate)
-            ]);
-       }elseif($request->calendartype == 2){
-            $fulltbp->update([
-                'assessmentdate' => DateConversion::thaiToEngDate($request->eventdate)
-            ]);
-        }elseif($request->calendartype == 3){
-            $fulltbp->update([
-                'finalassessmentdate' => DateConversion::thaiToEngDate($request->eventdate)
-            ]);
-        }
+      if($request->isnotify == 2){
+        $meetingdate = new MeetingDate();
+        $meetingdate->event_calendar_id = $eventcalendar->id;
+        $meetingdate->save();
+      }
 
       $mails = array();
       $joinusers = array();
@@ -132,10 +128,12 @@ class DashboardAdminCalendarController extends Controller
     $eventcalendar = EventCalendar::find($id);
     $eventcalendarattendees = EventCalendarAttendee::where('event_calendar_id',$eventcalendar->id)->get();
     $users = User::where('user_type_id','>=',3)->get();
+    $isnotifies = Isnotify::get();
     return view('dashboard.admin.calendar.edit')->withUsers($users)
                                                 ->withEventcalendar($eventcalendar)
                                                 ->withEventcalendarattendees($eventcalendarattendees)
-                                                ->withCalendartypes($calendartypes);
+                                                ->withCalendartypes($calendartypes)
+                                                ->withIsnotifies($isnotifies);
   }
   public function EditSave(Request $request,$id){
     $auth = Auth::user();
@@ -171,6 +169,18 @@ class DashboardAdminCalendarController extends Controller
       'room' => $request->room,
       'summary' => $request->summary,
     ]);
+    
+    $eventcalendar = EventCalendar::find($id);
+    if($eventcalendar->isnotify_id == 1 && $request->isnotify == 2){
+      $check = MeetingDate::where('event_calendar_id',$request->id)->first();
+      if(Empty($check)){
+        $meetingdate = new MeetingDate();
+        $meetingdate->event_calendar_id = $eventcalendar->id;
+        $meetingdate->save();
+      }
+      $eventcalendar->update(['isnotify_id' => $request->isnotify]);
+    }
+
     $fulltbp = FullTbp::find(EventCalendar::find($id)->full_tbp_id);
     $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
     $mails = array();
@@ -180,21 +190,7 @@ class DashboardAdminCalendarController extends Controller
         $joinusers[] = $_user->name . ' ' . $_user->lastname;
         $mails[] = $_user->email;
     }
-
-    if($request->calendartype == 1){
-          $fulltbp->update([
-              'briefingdate' => DateConversion::thaiToEngDate($request->eventdate)
-          ]);
-     }elseif($request->calendartype == 2){
-          $fulltbp->update([
-              'assessmentdate' => DateConversion::thaiToEngDate($request->eventdate)
-          ]);
-    }elseif($request->calendartype == 3){
-          $fulltbp->update([
-              'finalassessmentdate' => DateConversion::thaiToEngDate($request->eventdate)
-          ]);
-    }
-
+ 
     EmailBox::send($mails,'TTRS:นัดหมายการประชุม(แก้ไข)','เรียนท่านคณะกรรมการ <br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
     '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .

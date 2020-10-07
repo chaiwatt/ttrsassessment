@@ -75,12 +75,22 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ประเภทปฎิทิน</label><span class="text-danger">*</span>
                                         <select name="calendartype" data-placeholder="ประเภทปฎิทิน" class="form-control form-control-select2">
                                             @foreach ($calendartypes as $calendartype)
                                                 <option value="{{$calendartype->id}}">{{$calendartype->name}}</option> 
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
+                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-select2">
+                                            @foreach ($isnotifies as $isnotify)
+                                                <option value="{{$isnotify->id}}">{{$isnotify->name}}</option> 
                                             @endforeach
                                         </select>
                                     </div>

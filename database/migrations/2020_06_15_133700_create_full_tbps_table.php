@@ -23,9 +23,9 @@ class CreateFullTbpsTable extends Migration
             $table->unsignedBigInteger('criteria_group_id')->nullable();
             $table->char('assignexpert',1)->default('1');
             $table->char('refixstatus',1)->default('0');
-            $table->date('briefingdate')->nullable();
-            $table->date('assessmentdate')->nullable();
-            $table->date('finalassessmentdate')->nullable();
+            // $table->date('briefingdate')->nullable();
+            // $table->date('assessmentdate')->nullable();
+            // $table->date('finalassessmentdate')->nullable();
             $table->timestamps();
         });
     }

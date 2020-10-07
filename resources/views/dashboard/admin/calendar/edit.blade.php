@@ -70,10 +70,20 @@
                                         <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control" >
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ประเภทปฎิทิน</label>
                                         <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฎิทิน" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
+                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-select2">
+                                            @foreach ($isnotifies as $isnotify)
+                                                <option value="{{$isnotify->id}}" @if ($isnotify->id == $eventcalendar->isnotify_id) selected @endif>{{$isnotify->name}}</option> 
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

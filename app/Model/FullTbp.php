@@ -6,6 +6,7 @@ use App\Model\Ev;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use App\Model\CriteriaGroup;
+use App\Model\EventCalendar;
 use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
@@ -100,7 +101,32 @@ class FullTbp extends Model
     public function getExpertCommentAttribute(){
         return ExpertComment::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->first();
     } 
-    
+    public function getBriefingdateAttribute(){
+        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',1)->first();
+        if(!Empty($eventcalendar)){
+            return DateConversion::engToThaiDate($eventcalendar->eventdate);
+        }else{
+            return '';
+        }
+    } 
+    public function getAssessmentdateAttribute(){
+        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',2)->first();
+        if(!Empty($eventcalendar)){
+            return DateConversion::engToThaiDate($eventcalendar->eventdate);
+        }else{
+            return '';
+        }
+    } 
+    public function getFinalassessmentdateAttribute(){
+        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',3)->first();
+        if(!Empty($eventcalendar)){
+           return DateConversion::engToThaiDate($eventcalendar->eventdate);
+        }else{
+            return '';
+        }
+    } 
+
+      
 }
 
 

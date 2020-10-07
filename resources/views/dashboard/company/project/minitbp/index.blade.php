@@ -78,7 +78,7 @@
                                                 @else
                                                     @if ($minitbp->refixstatus == 0)
                                                         @if ($minitbp->businessplan->business_plan_status_id == 3)
-                                                                <span class="badge badge-flat border-success text-success-600">ส่งแล้ว</span>
+                                                                <span class="badge badge-flat border-warning text-warning-600">อยู่ระหว่างพิจารณา Mini Tbp</span>
                                                             @else
                                                                 <span class="badge badge-flat border-success text-success-600">ผ่านอนุมัติแล้ว</span>
                                                         @endif 

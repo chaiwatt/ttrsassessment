@@ -77,13 +77,13 @@
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td> 
                                         <td>
-                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 4)
+                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)
                                                     <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
                                                 @else
                                                     @if ($fulltbp->refixstatus == 0)
-                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 4)
-                                                                <span class="badge badge-flat border-success text-success-600">ส่งแล้ว</span>
-                                                            @else
+                                                        @if($fulltbp->minitbp->businessplan->business_plan_status_id == 5)
+                                                                <span class="badge badge-flat border-warning text-warning-600">อยู่ระหว่างพิจารณา Full Tbp</span>
+                                                            @elseif($fulltbp->minitbp->businessplan->business_plan_status_id > 5)
                                                                 <span class="badge badge-flat border-success text-success-600">ผ่านอนุมัติแล้ว</span>
                                                         @endif 
                                                         @elseif($fulltbp->refixstatus == 1)
