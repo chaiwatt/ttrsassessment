@@ -93,9 +93,9 @@
                                         </td> 
                                         <td>
                                             @if ($projectassignment->leader_id == null)
-                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ยืนยัน</span>
+                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้มอบหมาย</span>
                                                 @else
-                                                <span class="badge badge-flat border-success text-success-600">ยืนยันแล้ว</span>
+                                                <span class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</span>
                                             @endif
                                         </td>
                                         @if (Auth::user()->user_type_id>=6)

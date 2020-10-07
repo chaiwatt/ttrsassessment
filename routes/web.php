@@ -418,6 +418,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('edit/{id}','DashboardAdminAssessmentController@Edit')->name('dashboard.admin.assessment.edit');        
                 Route::post('getev','DashboardAdminAssessmentController@GetEv')->name('dashboard.admin.assessment.getev'); 
                 Route::post('addscore','DashboardAdminAssessmentController@AddScore')->name('dashboard.admin.assessment.addscore'); 
+                Route::post('updatescore','DashboardAdminAssessmentController@UpdateScore')->name('dashboard.admin.assessment.updatescore'); 
                 Route::post('conflictscore','DashboardAdminAssessmentController@ConflictScore')->name('dashboard.admin.assessment.conflictscore'); 
                 Route::post('conflictgrade','DashboardAdminAssessmentController@ConflictGrade')->name('dashboard.admin.assessment.conflictgrade'); 
                 Route::post('pendinguser','DashboardAdminAssessmentController@PendingUser')->name('dashboard.admin.assessment.pendinguser');

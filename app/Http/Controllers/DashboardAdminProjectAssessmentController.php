@@ -198,13 +198,17 @@ class DashboardAdminProjectAssessmentController extends Controller
     }
 
     public function EditComment(Request $request){
-        $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)->first();
+        $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)
+                        ->whereNotNull('user_id')
+                        ->first();
         if(!Empty($scoring)){
             $scoring->update([
                 'comment' => $request->comment
             ]);
         }
-        $scorings = Scoring::where('criteria_transaction_id',$request->transactionid)->get();
+        $scorings = Scoring::where('criteria_transaction_id',$request->transactionid)
+                            ->whereNotNull('user_id')
+                            ->get();
         return response()->json($scorings); 
     }
 

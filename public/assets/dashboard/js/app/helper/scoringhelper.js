@@ -10,6 +10,7 @@ $(function() {
         }else{
             $('.inpscore').prop("disabled", true);
         }
+        
     }).catch(error => {})
 });
 

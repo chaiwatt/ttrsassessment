@@ -176,7 +176,7 @@
                                         <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
                                         <td> 
                                             @if ($expertassignment->accepted == 0)
-                                                   <span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span> 
+                                                   <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span> 
                                                 @elseif($expertassignment->accepted == 1)
                                                     <span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span> 
                                                 @elseif($expertassignment->accepted == 2)

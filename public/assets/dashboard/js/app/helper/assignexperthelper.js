@@ -27,7 +27,7 @@ $(document).on('change', '#expert', function(e) {
                 }
                 var acceptstatus = '';
                 if(fulltbp.expertassignment.accepted == 0){
-                  acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+                  acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;
                 }else if(fulltbp.expertassignment.accepted == 1){
                   acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
                 }else if(fulltbp.expertassignment.accepted == 2){
@@ -90,7 +90,7 @@ function getExpert(id){
             }
             var acceptstatus = '';
             if(expert.accepted == 0){
-              acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+              acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;
             }else if(expert.accepted == 1){
               acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
             }else if(expert.accepted == 2){
@@ -195,7 +195,7 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
             console.log('--> ' + expert.expertcomment);
             var acceptstatus = '';
             if(expert.accepted == 0){
-              acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+              acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;
             }else if(expert.accepted == 1){
               acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
             }else if(expert.accepted == 2){
@@ -248,7 +248,7 @@ $(document).on("click",".deleteexpert",function(e){
                     }
                     var acceptstatus = '';
                     if(expert.accepted == 0){
-                      acceptstatus = `<span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตอบรับ</span>`;
+                      acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;
                     }else if(expert.accepted == 1){
                       acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
                     }else if(expert.accepted == 2){

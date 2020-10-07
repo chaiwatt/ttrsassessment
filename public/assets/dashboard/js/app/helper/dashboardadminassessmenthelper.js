@@ -5,6 +5,7 @@ $(function() {
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         $('#sumofweight').html(data.sumweigth);
+
     }).catch(error => {})
 });
 
@@ -59,12 +60,12 @@ function RenderTable(data){
         }
 
         var criterianame = `<label>กรอกเกรด (A-F) <a href="#" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
-                           <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control">
+                           <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring">
                             `;
 
         if(criteria.criteria != null){
             criterianame = `<label class="form-check-label">
-                                <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info" ${checkvalue}>
+                                <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info scoring">
                                 ${criteria.criteria['name']} <a href="#" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
                             </label>`;
         }
@@ -83,14 +84,12 @@ function RenderTable(data){
                             </div>
                         </div>`;
 
-        // var numcheck = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']).length;   
-        // if(numcheck > 0){
         var _scores = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']); 
         const numcheck = _scores.map(item => item.score).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0);
         console.log(numcheck)
         if(_scores.length > 0){
             var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-            console.log(checklistgrading['gradea']);
+            // console.log(checklistgrading['gradea']);
             var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
             let gradeis = 0;
             for (let i = 0; i < grades.length; i++) {
@@ -196,33 +195,56 @@ function RowSpanWeight(tableid){
     }
 }
 
-$(document).on('change', '#gradescore', function(e) {
-    console.log($(this).data('id'));
-    addScore($(this).data('id'),$(this).val(),$(this).data('subpillarindex'),1).then(data => {
-        console.log(data);
-        $('#weightsum'+$(this).data('subpillarindex')).val(data.weightsum);
-        RenderTable(data);
-        $(".loadprogress").attr("hidden",true);
-        RowSpan("criteriatable");
-    }).catch(error => {})
-});
 
-$(document).on('change', '#checkscore', function(e) {
-    var state = 0;
-    if($(this).is(':checked') == true){
-        state=1;
-        if($(this).data("name").includes("x2")){
-            state=2;
+$(document).on('click', '#saveupdate', function(e) {
+    var conflictarray = $(".scoring").map(function () {
+        var val = $(this).val();
+        if($(this).data('scoretype') == 2){
+            val = $(this).is(':checked');
         }
-    }
-    addScore($(this).data('id'),state,$(this).data('subpillarindex'),2).then(data => {
-        console.log(data);
-        $('#weightsum'+$(this).data('subpillarindex')).val(data.weightsum);
-        RenderTable(data);
-        $(".loadprogress").attr("hidden",true);
-        RowSpan("criteriatable");
+        return {
+            evid: $('#evid').val(),
+            criteriatransactionid: $(this).data('id'),
+            subpillarindex: $(this).data('subpillarindex'),
+            scoretype: $(this).data('scoretype'),
+            value: val
+          } 
+    }).get();
+    console.log(conflictarray);
+
+    updateScore(conflictarray).then(data => {
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'สรุปคะแนนสำเร็จ!',
+            });
     }).catch(error => {})
 });
+// $(document).on('change', '#gradescore', function(e) {
+//     updateScore($(this).data('id'),$(this).val(),$(this).data('subpillarindex'),1).then(data => {
+//         console.log(data);
+//         $('#weightsum'+$(this).data('subpillarindex')).val(data.weightsum);
+//         RenderTable(data);
+//         $(".loadprogress").attr("hidden",true);
+//         RowSpan("criteriatable");
+//     }).catch(error => {})
+// });
+
+// $(document).on('change', '#checkscore', function(e) {
+//     var state = 0;
+//     if($(this).is(':checked') == true){
+//         state=1;
+//         if($(this).data("name").includes("x2")){
+//             state=2;
+//         }
+//     }
+//     updateScore($(this).data('id'),state,$(this).data('subpillarindex'),2).then(data => {
+//         console.log(data);
+//         $('#weightsum'+$(this).data('subpillarindex')).val(data.weightsum);
+//         RenderTable(data);
+//         $(".loadprogress").attr("hidden",true);
+//         RowSpan("criteriatable");
+//     }).catch(error => {})
+// });
 
 $(document).on('change', '#comment', function(e) {
     console.log($(this).data('id'));
@@ -230,6 +252,25 @@ $(document).on('change', '#comment', function(e) {
         console.log(data);
     }).catch(error => {})
 });
+
+function updateScore(arraylist){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+        url: `${route.url}/dashboard/admin/assessment/updatescore`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+            arraylist : arraylist
+        },
+        success: function(data) {
+            resolve(data)
+        },
+        error: function(error) {
+            reject(error)
+        },
+        })
+    })
+  }
 
 function addScore(transactionid,score,subpillarindex,scoretype){
     return new Promise((resolve, reject) => {

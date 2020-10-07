@@ -58,13 +58,13 @@
                                     <div class="input-group">													
                                         <input type="text" id="filename" class="form-control border-right-0" placeholder="ไฟล์สแกน Mini Tbp" >
                                         <span class="input-group-append">
-                                            <button class="btn bg-info" type="button" onclick="document.getElementById('attachment').click();">อัพโหลด Mini Tbp</button>													
+                                            <button class="btn bg-info" type="button" onclick="document.getElementById('attachment').click();">เลือกไฟล์</button>													
                                         </span>
                                     </div>
                                     <input type="file" style="display:none;" id="attachment" name="attachment"/>
                                 </div>
                                 <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal">ส่ง Mini Tbp <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </fieldset>
                         </form>

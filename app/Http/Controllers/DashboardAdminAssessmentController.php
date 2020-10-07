@@ -36,12 +36,14 @@ class DashboardAdminAssessmentController extends Controller
     $subpillarindexarray = Scoring::where('ev_id',$request->evid)
                                 ->distinct('sub_pillar_index_id')
                                 ->where('scoretype',2)
+                                ->whereNotNull('user_id')
                                 ->pluck('sub_pillar_index_id')
                                 ->toArray();
     $basearray = array();  
     $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($request->evid)->full_tbp_id)->get();                              
     foreach ($subpillarindexarray as $key => $subpillarindex) {
         $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+                    ->whereNotNull('user_id')
                     ->pluck('criteria_transaction_id')
                     ->toArray();    
         $val_count = array_count_values($scores);
@@ -50,21 +52,25 @@ class DashboardAdminAssessmentController extends Controller
         foreach($scores as $v) {
             if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
         }
-        // $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
-        $basearray = array_merge($arrayrepeat,$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);        
-        
+        $basearray = array_merge($arrayrepeat,$basearray); 
     }
     $subpillarindexarray = Scoring::where('ev_id',$request->evid)
+                    ->whereNotNull('user_id')
                     ->distinct('sub_pillar_index_id')
                     ->where('scoretype',1)
                     ->pluck('sub_pillar_index_id')
                     ->toArray();
     foreach ($subpillarindexarray as $key => $subpillarindex) {
         $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+                    ->whereNotNull('user_id')
                     ->pluck('score')
                     ->toArray();   
             if(count(array_unique($scores)) != 1){
-                $basearray[] = Scoring::where('ev_id',$request->evid)->where('sub_pillar_index_id',$subpillarindex)->first()->criteria_transaction_id;
+                $basearray[] = Scoring::where('ev_id',$request->evid)
+                                    ->where('sub_pillar_index_id',$subpillarindex)
+                                    ->whereNotNull('user_id')
+                                    ->first()
+                                    ->criteria_transaction_id;
             }   
     }
     $criteriatransactions = CriteriaTransaction::whereIn('id',array_unique($basearray))
@@ -79,6 +85,7 @@ class DashboardAdminAssessmentController extends Controller
         $evportions = EvType::get();   
     
         $scores = Scoring::where('ev_id',$request->evid)
+                    ->whereNotNull('user_id')
                     ->where('scoretype',2)
                     ->get();
         $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
@@ -97,7 +104,9 @@ class DashboardAdminAssessmentController extends Controller
     }
 
     public function AddScore(Request $request){
-        $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)->where('user_id',Auth::user()->id)->first();
+        $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)
+                        ->where('user_id',Auth::user()->id)
+                        ->first();
         $criteriatransaction = CriteriaTransaction::find($request->transactionid);
         if(Empty($scoring)){
             $scoring = new Scoring();
@@ -166,34 +175,32 @@ class DashboardAdminAssessmentController extends Controller
         }
         $pillars = Pillar::get();   
         $evportions = EvType::get();   
-        // return response()->json($weightsum); 
         $subpillarindexarray = Scoring::where('ev_id',$criteriatransaction->ev_id)
-                ->distinct('sub_pillar_index_id')
-                ->where('scoretype',2)
-                ->pluck('sub_pillar_index_id')
-                ->toArray();
+                                    ->whereNotNull('user_id')
+                                    ->distinct('sub_pillar_index_id')
+                                    ->where('scoretype',2)
+                                    ->pluck('sub_pillar_index_id')
+                                    ->toArray();
                 
-  
         $basearray = array();     
         $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($criteriatransaction->ev_id)->full_tbp_id)->get();                     
         foreach ($subpillarindexarray as $key => $subpillarindex) {
             $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+                            ->whereNotNull('user_id')
                             ->pluck('criteria_transaction_id')
-                            ->toArray(); 
-            // return $scores;      
+                            ->toArray();   
             $val_count = array_count_values($scores);
             $repeat = $projectmembers->count();
             $arrayrepeat = array();
             foreach($scores as $v) {
               if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
             }
-            // print_r($arrayrepeat);
-
-            // $basearray = array_merge(array_keys(array_intersect(array_count_values($scores),[1])),$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
-            $basearray = array_merge($arrayrepeat,$basearray);// array_merge(array_keys(array_intersect(array_count_values($basearray),[1])),$scores);   
+            
+            $basearray = array_merge($arrayrepeat,$basearray);
         }
 
         $subpillarindexarray = Scoring::where('ev_id',$criteriatransaction->ev_id)
+                                    ->whereNotNull('user_id')
                                     ->distinct('sub_pillar_index_id')
                                     ->where('scoretype',1)
                                     ->pluck('sub_pillar_index_id')
@@ -201,10 +208,15 @@ class DashboardAdminAssessmentController extends Controller
 
         foreach ($subpillarindexarray as $key => $subpillarindex) {
             $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+                            ->whereNotNull('user_id')
                             ->pluck('score')
                             ->toArray();   
             if(count(array_unique($scores)) != 1){
-                $basearray[] = Scoring::where('ev_id',$criteriatransaction->ev_id)->where('sub_pillar_index_id',$subpillarindex)->first()->criteria_transaction_id;
+                $basearray[] = Scoring::where('ev_id',$criteriatransaction->ev_id)
+                                    ->whereNotNull('user_id')
+                                    ->where('sub_pillar_index_id',$subpillarindex)
+                                    ->first()
+                                    ->criteria_transaction_id;
             }   
         }
 
@@ -220,6 +232,7 @@ class DashboardAdminAssessmentController extends Controller
         $evportions = EvType::get();   
 
         $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
+                        ->whereNotNull('user_id')
                         ->where('scoretype',2)
                         ->get();
         $checklistgradings = CheckListGrading::where('ev_id',$criteriatransaction->ev_id)->get(); 
@@ -241,6 +254,7 @@ class DashboardAdminAssessmentController extends Controller
     public function ConflictScore(Request $request){
         $criteriatransaction = CriteriaTransaction::find($request->id);
         $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
+                        ->whereNotNull('user_id')
                         ->where('scoretype',2)
                         ->where('criteria_transaction_id',$request->id)
                         ->get();  
@@ -256,6 +270,7 @@ class DashboardAdminAssessmentController extends Controller
     public function ConflictGrade(Request $request){
         $criteriatransaction = CriteriaTransaction::find($request->id);
         $scores = Scoring::where('ev_id',$criteriatransaction->ev_id)
+                        ->whereNotNull('user_id')
                         ->where('scoretype',1)
                         ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
                         ->get();                       
@@ -269,5 +284,48 @@ class DashboardAdminAssessmentController extends Controller
         $pending = array_diff($projectmembers,$scoringstatuses);
         $users = User::whereIn('id',$pending)->get();
         return response()->json($users); 
+    }
+
+    public function UpdateScore(Request $request){
+        foreach ($request->arraylist as $key => $criteria) {
+            if($criteria['scoretype'] == 1){
+                $scores = Scoring::where('ev_id',$criteria['evid'])
+                                ->whereNull('user_id')
+                                ->where('scoretype',1)
+                                ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
+                                ->where('sub_pillar_index_id',$criteria['subpillarindex'])
+                                ->first()->update([
+                                    'score' => $criteria['value']
+                                ]); 
+
+            }elseif($criteria['scoretype'] == 2){
+                $scores = Scoring::where('ev_id',$criteria['evid'])
+                                ->whereNull('user_id')
+                                ->where('scoretype',2)
+                                ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
+                                ->where('sub_pillar_index_id',$criteria['subpillarindex'])
+                                ->first();  
+                if(Empty($scores)){
+                    if($criteria['value'] == 'true'){
+                        $score = new Scoring();
+                        $score->ev_id = $criteria['evid'];
+                        $score->criteria_transaction_id  = $criteria['criteriatransactionid'];
+                        $score->sub_pillar_index_id = $criteria['subpillarindex'];
+                        $score->scoretype = 2;
+                        $score->score = 1;
+                        $score->save();
+                    }
+                }else{
+                    if($criteria['value'] == 'false'){
+                        Scoring::where('ev_id',$criteria['evid'])
+                                ->whereNull('user_id')
+                                ->where('scoretype',2)
+                                ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
+                                ->where('sub_pillar_index_id',$criteria['subpillarindex'])
+                                ->first()->delete(); 
+                    } 
+                }                
+            }
+        }
     }
 }
