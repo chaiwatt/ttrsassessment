@@ -84,9 +84,16 @@ class FullTbp extends Model
 
     public function getAllScoringAttribute(){
         $ev = Ev::where('full_tbp_id',$this->id)->first();
-        $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
-        $projectmembers = ProjectMember::where('full_tbp_id',$this->id)->pluck('user_id')->toArray();
-        return count(array_diff($projectmembers,$scoringstatuses));
+        
+        if(!Empty($ev)){
+            $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
+            $projectmembers = ProjectMember::where('full_tbp_id',$this->id)->pluck('user_id')->toArray(); 
+            return count(array_diff($projectmembers,$scoringstatuses));
+        }else{
+            return ProjectMember::where('full_tbp_id',$this->id)->count();
+        }
+        
+        
     }
     public function getProjectAssignmentAttribute(){
         $minitbp = MiniTBP::find($this->mini_tbp_id);

@@ -184,8 +184,8 @@ class AssessmentEvController extends Controller
             $alertmessage->detail = 'ตรวจสอบ Ev ของโครงการ ' . $minitbp->project .' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
             $alertmessage->save();
 
-            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:ตรวจสอบ EV','เรียน Admin<br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:ตรวจสอบ EV','เรียน Admin<br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
         }
 
         $ev = Ev::find($request->id);
@@ -218,8 +218,8 @@ class AssessmentEvController extends Controller
         $alertmessage->detail = 'ตรวจสอบ Ev ของโครงการ ' . $minitbp->project . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
         $alertmessage->save();
 
-        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('ตรวจสอบ EV','Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ตรวจสอบ EV','Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
 
         return response()->json($ev);  
     }
@@ -254,8 +254,8 @@ class AssessmentEvController extends Controller
                 $alertmessage->detail = 'EV ผ่านการอนุมัติ' . $minitbp->project .' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
                 $alertmessage->save();
 
-                EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:EV ผ่านการอนุมัติ','เรียน Admin<br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-                Message::sendMessage('EV ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+                EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:EV ผ่านการอนุมัติ','เรียน Admin<br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+                Message::sendMessage('EV ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
             }
         }else{
             Ev::find($request->id)->update(
@@ -286,8 +286,8 @@ class AssessmentEvController extends Controller
                 $alertmessage->detail = 'ให้แก้ไข EV ของโครงการ' . $minitbp->project . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
                 $alertmessage->save();
 
-                EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แก้ไข EV','เรียน Admin<br> JD ได้ตรวจ EV สำหรับโครงการ '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-                Message::sendMessage('แก้ไข EV','JD ได้ตรวจ EV สำหรับโครงการ  '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+                EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แก้ไข EV','เรียน Admin<br> JD ได้ตรวจ EV สำหรับโครงการ '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+                Message::sendMessage('แก้ไข EV','JD ได้ตรวจ EV สำหรับโครงการ  '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
             }
 
         }
@@ -320,8 +320,8 @@ class AssessmentEvController extends Controller
         $alertmessage->detail = 'มีการแก้ไข Ev ของโครงการ ' . $minitbp->project . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
         $alertmessage->save();
 
-        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Admin ได้แก้ไข EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('ตรวจสอบ EV','Admin ได้แก้ไข EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Admin ได้แก้ไข EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ตรวจสอบ EV','Admin ได้แก้ไข EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
 
         return response()->json($ev);  
     }

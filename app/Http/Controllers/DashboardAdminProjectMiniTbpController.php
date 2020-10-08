@@ -63,8 +63,8 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $_businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $_company = Company::find($_businessplan->company_id);
         $_user = User::find($_company->user_id);
-        EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+        EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br><br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
         
         return redirect()->back()->withSuccess('ยืนยัน Mini Tbp สำเร็จ');
     }
@@ -94,8 +94,8 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $alertmessage->detail = 'เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้วให้สามารถกรอกข้อมูล Full Tbp ได้ ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
             $alertmessage->save();
 
-            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br><br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('กรอกข้อมูล Full Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านได้รับอนุมัติแล้ว ให้สามารถกรอกข้อมูล Full Tbp ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
             
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
@@ -134,7 +134,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
-            EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Mini Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  '<br><br>ด้วยความนับถือ<br>TTRS');
+            EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Mini Tbp','เรียนผู้ประกอบการ<br><br> เอกสาร Mini Tbp ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  '<br><br>ด้วยความนับถือ<br>TTRS');
             Message::sendMessage('แก้ไขข้อมูล Mini Tbp','เรียนผู้ประกอบการ<br> เอกสาร Mini Tbp ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
         }
 

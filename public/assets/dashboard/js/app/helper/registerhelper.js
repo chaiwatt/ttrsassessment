@@ -2,8 +2,7 @@
  $(".modal-body").on( 'scroll', function(){
     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight){
         $('#btnaccept').prop('disabled', false);
-        // $('#term').prop('disabled', false);
-        $('#email').val('ddd');
+        $('#term').prop('disabled', false);
       }
  });
 

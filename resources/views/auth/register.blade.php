@@ -89,21 +89,16 @@
                     </div>
                 </div>
                 <div class="form-group d-flex align-items-center">
-                    <div class="form-check mb-0">
-                        <label class="form-check-label">
-                            <input type="checkbox" name="term" class="form-input-styled" data-fouc >     
-                            <a data-toggle="modal" data-target="#modal_term" class="text-primary"><u>นโยบายและข้อกำหนด</u></a>  
-                        </label>
-                        @error('term') <span class="validation-invalid-label">กรุณายอมรับนโยบายและข้อกำหนด</span> @enderror
-                    </div>
+                    <a data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">ลงทะเบียน <i class="icon-circle-right2 ml-2"></i></button>
+                    <button type="submit" id="term" class="btn btn-primary btn-block" disabled>ลงทะเบียน <i class="icon-circle-right2 ml-2"></i></button>
                 </div>
             </form>
         </div>
     </div>
     @section('pageScript')
+    <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switchery.min.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
         <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>

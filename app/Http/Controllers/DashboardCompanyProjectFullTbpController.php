@@ -244,11 +244,11 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $alertmessage->detail = 'โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' ได้ส่ง'.$message.' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
         $alertmessage->save();
 
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:'.$message,'เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:'.$message,'เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
 
-        Message::sendMessage('ส่ง'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($projectassignment->leader_id)->id);
-        Message::sendMessage('ส่ง'.$message,'เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+        Message::sendMessage('ส่ง'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($projectassignment->leader_id)->id);
+        Message::sendMessage('ส่ง'.$message,'เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
         
         return redirect()->route('dashboard.company.project.fulltbp')->withSuccess('ส่งเอกสาร Full Tbp สำเร็จ');
     }

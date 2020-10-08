@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\User;
+use Carbon\Carbon;
+use App\Model\Company;
+use App\Model\FullTbp;
+use App\Model\MiniTBP;
+use App\Helper\Message;
+use App\Helper\EmailBox;
+use App\Model\AlertMessage;
+use App\Model\BusinessPlan;
+use Illuminate\Http\Request;
+use App\Helper\DateConversion;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
+class MailController extends Controller
+{
+    public function SendUser(Request $request){
+        $auth = Auth::user();
+        $fulltbp = FullTbp::find($request->id);
+        $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $user = User::find($company->user_id);
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $user->id;
+        $alertmessage->detail = 'ข้อความระบบ: ' . $request->topic . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+        $alertmessage->save();
+
+        EmailBox::send($user->email,'TTRS:'.$request->topic,'เรียนผู้ประกอบการ<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียนผู้ประกอบการ<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS',$auth->id,$user->id);
+        return response()->json($fulltbp); 
+    }
+    public function SendMember(Request $request){
+        $auth = Auth::user();
+        $fulltbp = FullTbp::find($request->id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        foreach ($request->users as $key => $_user) {
+            $user = User::find($_user);
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $user->id;
+            $alertmessage->detail = 'ข้อความระบบ: ' . $request->topic . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->save();
+    
+            EmailBox::send($user->email,'TTRS:'.$request->topic,'เรียนทีมในโครงการ'.$minitbp->project.'<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียนทีมในโครงการ'.$minitbp->project.'<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS',$auth->id,$user->id);
+        }
+
+        return response()->json($fulltbp); 
+    }
+    
+}

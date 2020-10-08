@@ -46,8 +46,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'usergroup' => 'required',
-            'vatno' => 'required_if:usergroup,==,1',
-            'term' => 'required',
+            'vatno' => 'required_if:usergroup,==,1'
         ]);
     }
 

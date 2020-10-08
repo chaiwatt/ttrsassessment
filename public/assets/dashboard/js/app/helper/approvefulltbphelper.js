@@ -1,4 +1,5 @@
 import * as FullTbp from './fulltbp.js'
+import * as Calendar from './calendar.js'
 
 $(document).on('click', '#editapprove', function(e) {
     $('#fulltbpid').val($(this).data('id'));
@@ -156,3 +157,90 @@ function deleteProjectMember(id,fulltbpid){
         })
       })
 }
+
+
+$(document).on('click', '.mailtouser', function(e) {
+    $('#fulltbpid').val($(this).data('id'));
+    $('#modal_mailto_user').modal('show');
+});
+
+
+$(document).on('click', '#btn_modal_mailto_user', function(e) {
+  if($('#topic').val() == '' || $('#messagebody').val() == '')return;
+    $("#userspinicon").attr("hidden",false);
+    SendMailUser($('#fulltbpid').val(),$('#topic').val(),$('#messagebody').val()).then(data => {
+        $("#userspinicon").attr("hidden",true);
+        console.log(data);
+        $('#modal_mailto_user').modal('hide');
+    }).catch(error => {})
+});
+
+function SendMailUser(id,topic,body){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/mail/senduser`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id,
+          topic : topic,
+          body : body
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+$(document).on('click', '.mailtomember', function(e) {
+  $('#fulltbpid').val($(this).data('id'));
+  var html ='';
+  Calendar.getParticipate($(this).data('id')).then(data => {
+      data.forEach(function (participate,index) {
+          html += `<option value="${participate.user['id']}" selected >${participate.user['name']} ${participate.user['lastname']}</option>`
+      });
+      $("#user").html(html);
+      $('#modal_mailto_member').modal('show');
+  }).catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_mailto_member', function(e) {
+  if($('#topicmember').val() == '' || $('#messagebodymember').val() == '')return;
+  var selected = document.querySelectorAll('#user option:checked');
+  var users = Array.from(selected).map(el => el.value);
+
+  $("#memberspinicon").attr("hidden",false);
+  SendMailMember($('#fulltbpid').val(),users,$('#topicmember').val(),$('#messagebodymember').val()).then(data => {
+      $("#memberspinicon").attr("hidden",true);
+      console.log(data);
+      $('#modal_mailto_member').modal('hide');
+  }).catch(error => {})
+});
+
+function SendMailMember(id,users,topic,body){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/mail/sendmember`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id,
+          users : users,
+          topic : topic,
+          body : body
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+

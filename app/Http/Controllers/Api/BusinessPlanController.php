@@ -53,8 +53,8 @@ class BusinessPlanController extends Controller
             $alertmessage->detail = 'คำขอประเมินธุรกิจได้รับอนุมัติให้สามารถกรอกข้อมูล Mini Tbp ได้ ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
             $alertmessage->save();
 
-            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Mini Tbp','เรียนผู้ประกอบการ<br> คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini Tbp ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('กรอกข้อมูล Mini Tbp','เรียนผู้ประกอบการ<br> คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini Tbp ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br>ด้วยความนับถือ<br>TTRS',User::where('user_type_id',6)->first()->id,$_user->id);
+            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Mini Tbp','เรียนผู้ประกอบการ<br><br> คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini Tbp ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('กรอกข้อมูล Mini Tbp','เรียนผู้ประกอบการ<br> คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini Tbp ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',User::where('user_type_id',6)->first()->id,$_user->id);
 
         }
         BusinessPlan::find($request->id)->update([

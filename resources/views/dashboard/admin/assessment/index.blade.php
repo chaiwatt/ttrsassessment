@@ -74,6 +74,7 @@
         @endif
         <div class="row">
             <div class="col-md-12">
+
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ประเมินโครงการ</h6>
@@ -84,8 +85,9 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table text-nowrap" id="testtopictable">
                                 <thead>
                                     <tr>
                                         <th>วันที่ขอส่ง</th> 
@@ -108,7 +110,7 @@
                                                @else   
                                                     <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
                                              @endif 
-                                        </td>                                 
+                                        </td>                                
                                     </tr>
                                     @endforeach
                                 </tbody>
