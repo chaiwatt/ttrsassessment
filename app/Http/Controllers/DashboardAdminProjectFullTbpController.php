@@ -70,16 +70,19 @@ class DashboardAdminProjectFullTbpController extends Controller
                         ->where('notification_category_id',1)
                         ->where('notification_sub_category_id',5)
                         ->where('status',0)->delete();
+                        
         $fulltbps = FullTbp::where('status',2)->get();
         if($auth->user_type_id < 6){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
-                                            ->orWhere('coleader_id',$auth->id)
+                                            // ->orWhere('coleader_id',$auth->id)
                                             ->pluck('business_plan_id')->toArray();
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-            $fullpbts = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
         }
+
         return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps) ;
     }
+
     public function View($id){
         $businesstypes = BusinessType::get();
         $fulltbp = FullTbp::find($id);
@@ -192,8 +195,9 @@ class DashboardAdminProjectFullTbpController extends Controller
     }
 
     public function AssignExpertSave(Request $request){
-        $check = ExpertAssignment::where('user_id',$request->id)->first();
-        
+        $check = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)
+                            ->where('user_id',$request->id)
+                            ->first();
         if(Empty($check)){
             $expertassignment = new ExpertAssignment();
             $expertassignment->full_tbp_id = $request->fulltbpid;
@@ -403,7 +407,7 @@ class DashboardAdminProjectFullTbpController extends Controller
     }
 
     public function AddProjectMember(Request $request){
-        $projectmember = ProjectMember::where('user_id',$request->userid)->first();
+        $projectmember = ProjectMember::where('user_id',$request->userid)->where('full_tbp_id',$request->fulltbpid)->first();
         if(Empty($projectmember)){
             $projectmember = new ProjectMember();
             $projectmember->full_tbp_id = $request->fulltbpid;

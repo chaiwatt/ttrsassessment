@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 class DashboardAdminReportController extends Controller
 {
     public function Index(){
-
         $auth = Auth::user();
         $fulltbps = FullTbp::where('status',2)->get();
         if($auth->user_type_id < 6){
