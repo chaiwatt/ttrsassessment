@@ -22,14 +22,15 @@ class DashboardAdminProjectEvWeightController extends Controller
                         ->where('notification_category_id',1)
                         ->where('notification_sub_category_id',6)
                         ->where('status',0)->delete();
+
         $fulltbps = collect();
         if($auth->user_type_id < 6){
-            $projectsmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
-            $fulltbps = FullTbp::whereIn('id',$projectsmembers)->get();
+            $fulltbpids = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+            $_fulltbpids = Ev::whereIn('full_tbp_id',$fulltbpids)->pluck('full_tbp_id')->toArray();
+            $fulltbps = FullTbp::whereIn('id',$_fulltbpids)->get();
         }else{
             $fulltbps = FullTbp::where('status',2)->get();
         }
-
         return view('dashboard.admin.project.evweight.index')->withFulltbps($fulltbps) ;
     }
 

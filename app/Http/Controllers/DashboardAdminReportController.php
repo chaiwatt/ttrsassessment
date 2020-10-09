@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\AlertMessage;
+use App\Model\BusinessPlan;
 use App\Model\EventCalendar;
 use Illuminate\Http\Request;
 use App\Model\ProjectAssignment;
@@ -23,11 +24,14 @@ class DashboardAdminReportController extends Controller
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
         }
+  
+        $businessplans = BusinessPlan::get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->get();
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
-                                                ->withAlertmessages($alertmessages);
+                                                ->withAlertmessages($alertmessages)
+                                                ->withBusinessplans($businessplans);
     }
     public function GetEvent(Request $request){
         $auth = Auth::user();

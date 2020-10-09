@@ -21,13 +21,14 @@ class DashboardExpertReportController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        $userids = User::find($auth->id)->pluck('id')->toArray();
-        $fulltbptids = ExpertAssignment::whereIn('user_id', $userids)
+        // $userids = User::find($auth->id)->pluck('id')->toArray();
+        $fulltbptids = ExpertAssignment::where('user_id', $auth->id)
                                     ->where('expert_assignment_status_id',2)
                                     ->pluck('full_tbp_id')
                                     ->toArray();
         $fulltbps = FullTbp::whereIn('id', $fulltbptids)->get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
+        // return $fulltbps;
         return view('dashboard.expert.report.index')->withFulltbps($fulltbps)
                                                     ->withAlertmessages($alertmessages);
     }

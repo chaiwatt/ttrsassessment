@@ -70,7 +70,9 @@ class FullTbp extends Model
     } 
 
     public function getExpertAssignmentAttribute(){
-        return ExpertAssignment::where('user_id',Auth::user()->id)->first();
+        return ExpertAssignment::where('user_id',Auth::user()->id)
+                            ->where('full_tbp_id',$this->id)
+                            ->first();
     } 
     public function getExpertAssignmentsAttribute(){
         return ExpertAssignment::where('full_tbp_id',$this->id)

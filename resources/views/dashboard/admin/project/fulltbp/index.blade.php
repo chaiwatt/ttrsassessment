@@ -227,7 +227,7 @@
                                 <thead>
                                     <tr>
                                         {{-- <th style="width:50px">#</th> --}}
-                                        <th>วันที่ขอส่ง</th> 
+                                        {{-- <th>วันที่ขอส่ง</th>  --}}
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         {{-- <th>บริษัท</th> --}}
@@ -244,7 +244,7 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
                                         {{-- <td> {{$key+1}} </td> --}}
-                                        <td> {{$fulltbp->updatedatth}} </td> 
+                                        {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         {{-- <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> --}}

@@ -79,7 +79,6 @@ class DashboardAdminProjectFullTbpController extends Controller
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
         }
-
         return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps) ;
     }
 

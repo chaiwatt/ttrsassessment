@@ -43,7 +43,6 @@
                         <h6 class="card-title">สถานะโครงการ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
                                 <span></span>
                             </a>
                         </div>
@@ -171,6 +170,12 @@
     var myChart = echarts.init(dom);
     var app = {};
     option = null;
+    var check = "{{@$businessplans[0]->businessplanstatus->progress}}";
+    var datavalue = '0';
+    if(check.length!=0){
+        datavalue = check
+    }
+
     option = {
         tooltip: {
             formatter: '{a} <br/>{b} : {c}%'
@@ -188,8 +193,10 @@
                 endAngle:180,
                 clockwise:false,
                 data: [
-                    {value: "{{@$businessplans[0]->businessplanstatus->progress}}", 
-                    name: "{{@$businessplans[0]->businessplanstatus->name}}"}
+                    {
+                        value: datavalue, 
+                        name: "{{@$businessplans[0]->businessplanstatus->name}}"
+                    }
                 ]
             }
         ]
@@ -201,7 +208,7 @@
     }
 
     $( document ).ready(function() {
-        console.log('events');
+        // console.log('events');
             var events = [];
             getEvent().then(data => {
                 console.log(data);
@@ -262,32 +269,27 @@
             }).catch(error => {})
         });
 
-$(document).on('click', '#alertmessage', function(e) {
-    editTimeLineStatus($(this).data('id')).then(data => {
-        data.forEach(function (timeline,index) {
-            var doctype = '';
-            if(timeline.message_type == 1){
-                doctype ='เอกสาร Mini Tbp';
-            }else if(timeline.message_type == 2){
-                doctype ='เอกสาร Mini Tbp';
-            }
-            html += `<tr >                                        
-                <td> ${timeline.createdatth} </td>                            
-                <td> ${timeline.details} </td> 
-                <td> ${doctype}</td>                         
-                <td> ${timeline.user['name']} ${timeline.user['lastname']}</td>          
-            </tr>`
-            // if(timeline.status == 0){
-            //     infostatus += `<div class="alert alert-info alert-styled-left alert-dismissible">
-            //             <button type="button" id="alertmessage" data-id ="${timeline.id}" class="close" data-dismiss="alert"><span>&times;</span></button>${timeline.details}
-            //     </div>`
-            // }
-            });
+    $(document).on('click', '#alertmessage', function(e) {
+        editTimeLineStatus($(this).data('id')).then(data => {
+            data.forEach(function (timeline,index) {
+                var doctype = '';
+                if(timeline.message_type == 1){
+                    doctype ='เอกสาร Mini Tbp';
+                }else if(timeline.message_type == 2){
+                    doctype ='เอกสาร Mini Tbp';
+                }
+                html += `<tr >                                        
+                    <td> ${timeline.createdatth} </td>                            
+                    <td> ${timeline.details} </td> 
+                    <td> ${doctype}</td>                         
+                    <td> ${timeline.user['name']} ${timeline.user['lastname']}</td>          
+                </tr>`
+                });
             $("#timeline_wrapper_tr").html(html);
             $("#infostatus").html(infostatus);
 
-    }).catch(error => {})
-});
+        }).catch(error => {})
+    });
 
     function getEvent() {
         return new Promise((resolve, reject) => {

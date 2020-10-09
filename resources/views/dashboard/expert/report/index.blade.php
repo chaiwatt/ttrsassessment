@@ -67,22 +67,25 @@
                                 <thead>
                                     <tr>
                                         <th>เลขที่โครงการ</th> 
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
+                                        {{-- <th>ชื่อโครงการ</th>  --}}
+                                        <th>โครงการ</th>
                                         <th>สถานะ</th>
                                         <th>แสดงความเห็น</th>
                                         <th>วันนัดประชุม</th>
                                         <th>วันที่ประเมิน</th>
-                                        <th>วันที่สรุปลประเมิน</th>
-                                        <th>เพิ่มเติม</th> 
+                                        <th>วันที่สรุปผลประเมิน</th>
+                                        <th class="text-right">เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $fulltbp)
+                                    <tr>
                                         <td> {{$fulltbp->updatedatth}} </td> 
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
+                                        <td>  
+                                            <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
+                                        </td>  
                                         <td> 
                                             @if($fulltbp->expertassignment->accepted == 1)
                                                     @if (Empty($fulltbp->expertcomment))
@@ -97,7 +100,7 @@
                                         <td> {{$fulltbp->briefingdate}} </td>  
                                         <td> {{$fulltbp->assessmentdate}} </td>  
                                         <td> {{$fulltbp->finalassessmentdate}} </td> 
-                                        <td> 
+                                        <td class="text-right"> 
                                             @if ($fulltbp->expertassignment->accepted == 0)
                                                     <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
                                                     <a href="{{route('dashboard.expert.report.reject',['id' => $fulltbp->id])}}" class="btn btn-sm bg-danger">ปฎิเสธเข้าร่วม</a>
@@ -110,6 +113,7 @@
                                             @endif
                                             
                                         </td> 
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>     

@@ -151,20 +151,17 @@
                 </div>
             @endforeach
         </div>
+        @if (Auth::user()->user_type_id > 5)
         <div class="row">
             <div class="col-lg-3">
-
                 <!-- Members online -->
                 <div class="card bg-teal-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">152</h3>
-                            {{-- <span class="badge bg-teal-800 badge-pill align-self-center ml-auto">+53,6%</span> --}}
+                            <h3 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h3>
                         </div>
-                        
                         <div>
                             จำนวนการยื่นขอประเมิน
-                            {{-- <div class="font-size-sm opacity-75">489 avg</div> --}}
                         </div>
                     </div>
 
@@ -182,15 +179,11 @@
                 <div class="card bg-blue-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">50</h3>
-                            {{-- <div class="list-icons ml-auto">
-                                <a class="list-icons-item" data-action="reload"></a>
-                            </div> --}}
+                            <h3 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h3>
                         </div>
                         
                         <div>
                             จำนวนยื่น mini Tbp
-                            {{-- <div class="font-size-sm opacity-75">$37,578 avg</div> --}}
                         </div>
                     </div>
 
@@ -205,10 +198,7 @@
                 <div class="card bg-pink-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">20</h3>
-                            {{-- <div class="list-icons ml-auto">
-                                <a class="list-icons-item" data-action="reload"></a>
-                            </div> --}}
+                            <h3 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h3>
                         </div>
                         
                         <div>
@@ -226,10 +216,7 @@
                 <div class="card bg-orange-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">50</h3>
-                            {{-- <div class="list-icons ml-auto">
-                                <a class="list-icons-item" data-action="reload"></a>
-                            </div> --}}
+                            <h3 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',8)->count()}}</h3>
                         </div>
                         
                         <div>
@@ -240,6 +227,8 @@
                 </div>
             </div>
         </div>
+        @endif
+ 
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -260,28 +249,35 @@
                                     <tr>
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
+                                        {{-- <th>บริษัท</th> --}}
                                         <th>สถานะ</th>
                                         <th>วันนัดประชุม</th>
                                         <th>วันที่ประเมิน</th>
-                                        <th>วันที่สรุปลประเมิน</th>
-                                        <th >เพิ่มเติม</th> 
+                                        <th>วันที่สรุปผลประเมิน</th>
+                                        <th style="width: 20px"><i class="icon-arrow-down12"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $fulltbp)
                                     <tr> 
                                         <td> {{$fulltbp->updatedatth}} </td> 
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
                                         <td> {{$fulltbp->briefingdate}} </td>  
                                         <td> {{$fulltbp->assessmentdate}} </td>  
                                         <td> {{$fulltbp->finalassessmentdate}} </td>  
-                                        <td> 
-                                            <a href="{{route('dashboard.admin.report.search.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
-                                            <a href="{{route('dashboard.admin.report.search.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal">PDF</a>
-                                            <a href="{{route('dashboard.admin.report.search.excel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">EXCEL</a>
+                                        <td class="text-right">
+                                            <div class="list-icons">
+                                                <div class="list-icons-item dropdown">
+                                                    <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="{{route('dashboard.admin.report.search.view',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-file-download2"></i> รายละเอียด</a>
+                                                        <a href="{{route('dashboard.admin.report.search.pdf',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-eye2"></i> PDF</a>
+                                                        <a href="{{route('dashboard.admin.report.search.excel',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-trash"></i> EXCEL</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td> 
                                     </tr>
                                     @endforeach
