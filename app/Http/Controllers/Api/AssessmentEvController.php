@@ -135,15 +135,21 @@ class AssessmentEvController extends Controller
             $new->save();
 
             $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->newevid)->where('sub_pillar_index_id',$new->sub_pillar_index_id)->first();
-            if(Empty($pillaindexweigth)){
-                $pillaindexweigth = new PillaIndexWeigth();
-                $pillaindexweigth->ev_id = $new->ev_id;
-                $pillaindexweigth->pillar_id = $new->pillar_id;
-                $pillaindexweigth->sub_pillar_id = $new->sub_pillar_id;
-                $pillaindexweigth->sub_pillar_index_id = $new->sub_pillar_index_id;
-                $pillaindexweigth->weigth = 0;
-                $pillaindexweigth->save();
+            if(!Empty($pillaindexweigth)){
+                $pillaindexweigth->delete();
             }
+            $pillaindexweigthorg = PillaIndexWeigth::where('ev_id',$request->orgevid)
+                        ->where('pillar_id',$new->pillar_id)
+                        ->where('sub_pillar_id',$new->sub_pillar_id)
+                        ->where('sub_pillar_index_id',$new->sub_pillar_index_id)
+                        ->first();
+            $pillaindexweigth = new PillaIndexWeigth();
+            $pillaindexweigth->ev_id = $new->ev_id;
+            $pillaindexweigth->pillar_id = $pillaindexweigthorg->pillar_id;
+            $pillaindexweigth->sub_pillar_id = $pillaindexweigthorg->sub_pillar_id;
+            $pillaindexweigth->sub_pillar_index_id = $pillaindexweigthorg->sub_pillar_index_id;
+            $pillaindexweigth->weigth = $pillaindexweigthorg->weigth;
+            $pillaindexweigth->save();
         }  
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->newevid)
                                                 ->orderBy('pillar_id','asc')

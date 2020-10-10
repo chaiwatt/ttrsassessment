@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="form-group d-flex align-items-center">
-                    <a data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
+                    <a href="#" data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
                 </div>
                 <div class="form-group">
                     <button type="submit" id="term" class="btn btn-primary btn-block" disabled>ลงทะเบียน <i class="icon-circle-right2 ml-2"></i></button>

@@ -7,6 +7,7 @@ use App\Model\MiniTBP;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\EventCalendar;
+use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\ProjectAssignment;
 use App\Model\EventCalendarAttendee;
@@ -17,14 +18,17 @@ class DashboardAdminReportController extends Controller
     public function Index(){
         $auth = Auth::user();
         $fulltbps = FullTbp::where('status',2)->get();
-        if($auth->user_type_id < 6){
+        if($auth->user_type_id == 4){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
-                                            ->pluck('business_plan_id')->toArray();
+                                            ->pluck('business_plan_id')->toArray();                               
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        }else if($auth->user_type_id == 5){
+            $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+            $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         }
-  
+        
         $businessplans = BusinessPlan::get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->get();

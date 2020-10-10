@@ -264,10 +264,14 @@
                                         <td> 
                                             @if (!Empty($fulltbp->ev))
                                                     @if ($fulltbp->ev->status == 4)
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
-                                                        @else
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">อยู่ระหว่างการพิจารณา</a>
-                                                    @endif
+                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                    @elseif($fulltbp->ev->status == 3)
+                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่าง JD พิจารณา</a>
+                                                    @elseif($fulltbp->ev->status == 2)
+                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">อยู่ระหว่าง Admin พิจารณา</a>
+                                                    @elseif($fulltbp->ev->status == 0)
+                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้ส่ง</a>
+                                                    @endif  
                                                 @else
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                             @endif

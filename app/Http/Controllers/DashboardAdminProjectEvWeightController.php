@@ -26,7 +26,7 @@ class DashboardAdminProjectEvWeightController extends Controller
         $fulltbps = collect();
         if($auth->user_type_id < 6){
             $fulltbpids = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
-            $_fulltbpids = Ev::whereIn('full_tbp_id',$fulltbpids)->pluck('full_tbp_id')->toArray();
+            $_fulltbpids = Ev::whereIn('full_tbp_id',$fulltbpids)->where('status','>=',2)->pluck('full_tbp_id')->toArray();
             $fulltbps = FullTbp::whereIn('id',$_fulltbpids)->get();
         }else{
             $fulltbps = FullTbp::where('status',2)->get();

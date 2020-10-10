@@ -4,10 +4,12 @@ $( document ).ready(function() {
         console.log(data);
         RenderTable(data.criteriatransactions);
         RenderWeightTable(data.pillaindexweigths);
+        console.log(data.pillaindexweigths);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         RowSpanWeight("subpillarindex");
         $('#sumofweight').html(data.sumweigth);
+        
     }).catch(error => {})
 });
 
