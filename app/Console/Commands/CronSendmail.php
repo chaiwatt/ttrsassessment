@@ -105,7 +105,7 @@ class CronSendmail extends Command
                 $date = Carbon::parse($eventcalendar->eventdate);
                 if($date->isToday() == 1){
                     $ev = Ev::where('full_tbp_id',$eventcalendar->full_tbp_id)->first();
-                    ProjectMember::whereNotIn('user_id',$scoringstatuses)->delete();
+                    ProjectMember::whereNotIn('user_id',$scoringstatuses)->where('full_tbp_id',$eventcalendar->full_tbp_id)->delete();
                     $check = Scoring::where('ev_id',$ev->id)
                                     ->whereNull('user_id')
                                     ->get(); 

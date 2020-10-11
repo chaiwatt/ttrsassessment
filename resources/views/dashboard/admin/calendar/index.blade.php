@@ -76,7 +76,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($eventcalendars as $key => $eventcalendar)
+                                    @foreach ($eventcalendars->reverse() as $key => $eventcalendar)
                                     <tr>    
                                         <td> {{$eventcalendar->fulltbp->minitbp->project}} </td> 
                                         <td> {{$eventcalendar->summary}} </td> 

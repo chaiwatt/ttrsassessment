@@ -36,7 +36,9 @@ class DashboardAdminProjectAssessmentController extends Controller
         //     $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
         //     $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
         // }
+       
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+        // return $projectmembers;
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
     }
