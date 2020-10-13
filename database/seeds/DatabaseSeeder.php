@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BankTypesTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
         $this->call(EventCalendarAttendeeStatusesTableSeeder::class);
+        $this->call(IsicTablesSeeder::class);
+        $this->call(IsicSubsTablesSeeder::class);
         $this->call(CalendarTypesTableSeeder::class);
         $this->call(NotificationCategoriesSeederTable::class);
         $this->call(NotificationSubCategoriesSeederTable::class);
@@ -73,8 +75,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EducationBranchesTableSeeder::class);
         $this->call(EducationLevelsTableSeeder::class);
         $this->call(IndustryGroupsTableSeeder::class);
-        $this->call(IndustryGroupByIsicsTableSeeder::class);
-        $this->call(RegisteredCapitalTypesTableSeeder::class);
+        // $this->call(IndustryGroupByIsicsTableSeeder::class);
+        $this->call(RegisteredCapitalTypesSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CriteriaGroupsTableSeeder::class);
         $this->call(CriteriaGroupTransactionsTableSeeder::class);

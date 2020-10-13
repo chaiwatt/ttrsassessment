@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RegisteredCapitalTypesTableSeeder extends Seeder
+class RegisteredCapitalTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -39,4 +39,3 @@ class RegisteredCapitalTypesTableSeeder extends Seeder
         ]);
     }
 }
-

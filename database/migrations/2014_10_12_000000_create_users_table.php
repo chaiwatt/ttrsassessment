@@ -38,6 +38,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('allow_assessment')->default(1);
             $table->unsignedBigInteger('user_group_id')->default(2);
             $table->unsignedBigInteger('user_alert_status_id')->default(1);
+            $table->char('expert_type')->default(0);
             $table->date('otp')->nullable();
             $table->rememberToken();
             $table->timestamps();

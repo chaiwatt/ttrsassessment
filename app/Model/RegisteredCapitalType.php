@@ -21,6 +21,4 @@ class RegisteredCapitalType extends Model
     {
         return LogAction::logAction('ประเภทการจดทะเบียน',$eventName);
     }
-
 }
-

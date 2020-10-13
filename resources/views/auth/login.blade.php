@@ -1,12 +1,17 @@
 @extends('layouts.login')
-    @if( Session::has('error') )
-        <div class="alert bg-warning text-white alert-styled-left alert-dismissible">
+@section('content')
+<div class="login-form wmin-xl-400">
+    @if (Session::has('success'))
+        <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-            <span class="font-weight-semibold">{{ Session::get('error') }}</span>
+            {{ Session::get('success') }}
+        </div>
+    @elseif( Session::has('error') )
+        <div class="alert alert-warning alert-styled-left alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            {{ Session::get('error') }}
         </div>
     @endif
-@section('content')
-
     <div class="card mb-0">
         <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
@@ -57,6 +62,8 @@
             </form>
         </div>
     </div>
+</div>
+
 @endsection
 
 

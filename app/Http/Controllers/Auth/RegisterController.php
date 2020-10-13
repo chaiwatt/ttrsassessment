@@ -53,9 +53,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $group = 2;
+        $experttype = 0;
        if(!Empty($data['vatno'])){
             $group =1;
        }
+        $usertype = 1;
+        if($data['user_type'] == 2){
+            $usertype = 4;
+        }elseif($data['user_type'] == 3){
+            $usertype = 3;
+            if($data['expert'] == 2){
+                $experttype = 1;
+            }
+        }
         $user = User::create([
             'prefix_id' => 1,
             'user_type_id' => 2,
@@ -63,6 +73,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'user_group_id' => $group,
+            'user_type_id' => $usertype,
+            'expert_type' => $experttype,
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);

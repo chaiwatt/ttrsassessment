@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class IndustryGroupByIsicA extends Model
+class Isic extends Model
 {
     //
 }

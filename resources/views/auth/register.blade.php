@@ -23,80 +23,120 @@
             </div>
         </div>
     </div>
-    <div class="card mb-0">
-        <div class="card-body">
+    <div class="login-form wmin-xl-500">
+        <div class="card mb-0">
+            <div class="card mb-0">
                 <form method="POST" action="{{ route('register') }}">
-                @csrf
-                <div class="text-center mb-0">
-                    <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
-                    {{-- <h5 class="mb-0">เข้าสู่ระบบ</h5> --}}
-                </div>
-
-                <div class="form-group form-group-feedback form-group-feedback-left">                    
-                    <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-select2">
-                        @foreach ($usergroups as $usergroup)
-                            <option value="{{$usergroup->id}}" >{{$usergroup->name}}</option> 
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group" id="vatwrapper" >
-                    <input id="vatno" type="number" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีนิติบุคคล" >
-                    <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
-                    <input type="text" name="companyname" id="companyname" hidden>
-                </div>
-                <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
-                    <div class="form-control-feedback">
-                        <i class="icon-user text-muted"></i>
+                    @csrf
+                <ul class="nav nav-tabs nav-justified alpha-grey mb-0" id="usertype">
+                    <li class="nav-item" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1">ผู้ประกอบการ</h6></a></li>
+                    <li class="nav-item" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1">เจ้าหน้าที่ TTRS</h6></a></li>
+                    <li class="nav-item" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1">ผู้เชี่ยวชาญ</h6></a></li>
+                </ul>
+                
+                <div class="tab-content card-body">
+                    <div class="tab-pane fade show active" id="login-tab1">
+                        <div class="text-center mb-0">
+                            <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
+                        </div>
+        
                     </div>
-                </div>             
-
-                <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล">
-                    <div class="form-control-feedback">
-                        <i class="icon-mention text-muted"></i>
+                    <div class="tab-pane fade" id="login-tab2">
+                        <div class="text-center mb-0">
+                            <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
+                        </div>
                     </div>
-                    @error('email')
-                        <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                    @enderror
-                </div>
+                    <div class="tab-pane fade" id="login-tab3">
+                        <div class="text-center mb-0">
+                            <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
+                        </div>
+                        <div class="form-group mb-3 mb-md-2">
+                            {{-- <label class="d-block font-weight-semibold">ประเภทผู้เชี่ยวชาญ</label> --}}
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input-styled" name="expert" value="1" checked data-fouc>
+                                    ผู้เชี่ยวชาญภายใน
+                                </label>
+                            </div>
 
-                <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์มือถือ">
-                    <div class="form-control-feedback">
-                        <i class="icon-phone2 text-muted"></i>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input-styled" name="expert" value="2" data-fouc>
+                                    ผู้เชี่ยวชาญนอก
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    @error('phone')
-                        <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="รหัสผ่าน">
-                    <div class="form-control-feedback">
-                        <i class="icon-lock2 text-muted"></i>
+                    
+                    <div class="form-group form-group-feedback form-group-feedback-left" id="userselect">                    
+                        <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-select2">
+                            @foreach ($usergroups->reverse() as $usergroup)
+                                <option value="{{$usergroup->id}}" >{{$usergroup->name}}</option> 
+                            @endforeach
+                        </select>
                     </div>
-                    @error('password')
-                        <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="ยืนยันรหัสผ่าน">
-                    <div class="form-control-feedback">
-                        <i class="icon-lock2 text-muted"></i>
+    
+                    <div class="form-group" id="vatwrapper" hidden>
+                        <input id="vatno" type="number" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีนิติบุคคล" >
+                        <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
+                        <input type="text" name="companyname" id="companyname" hidden>
+                    </div>
+                    <div class="form-group form-group-feedback form-group-feedback-left">
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                    </div>             
+    
+                    <div class="form-group form-group-feedback form-group-feedback-left">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล">
+                        <div class="form-control-feedback">
+                            <i class="icon-mention text-muted"></i>
+                        </div>
+                        @error('email')
+                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                        @enderror
+                    </div>
+    
+                    <div class="form-group form-group-feedback form-group-feedback-left">
+                        <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์มือถือ">
+                        <div class="form-control-feedback">
+                            <i class="icon-phone2 text-muted"></i>
+                        </div>
+                        @error('phone')
+                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                        @enderror
+                    </div>
+    
+                    <div class="form-group form-group-feedback form-group-feedback-left">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="รหัสผ่าน">
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                        @error('password')
+                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                        @enderror
+                    </div>
+    
+                    <div class="form-group form-group-feedback form-group-feedback-left">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="ยืนยันรหัสผ่าน">
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <a href="#" data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
+                    </div>
+                    <input id="user_type" type="text" class="form-control" name="user_type" value="1" hidden>
+                    <div class="form-group">
+                        <button type="submit" id="term" class="btn btn-primary btn-block" disabled>ลงทะเบียน <i class="icon-circle-right2 ml-2"></i></button>
                     </div>
                 </div>
-                <div class="form-group d-flex align-items-center">
-                    <a href="#" data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
-                </div>
-                <div class="form-group">
-                    <button type="submit" id="term" class="btn btn-primary btn-block" disabled>ลงทะเบียน <i class="icon-circle-right2 ml-2"></i></button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+
     @section('pageScript')
     <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switchery.min.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
@@ -107,6 +147,19 @@
                 url: "{{ url('/') }}",
                 token: $('meta[name="csrf-token"]').attr('content'),
             };
+
+            $(".nav-item").on('click', function() {
+                $('#user_type').val($(this).val());
+                if($(this).val()!=1){
+                    $("#vatnomessage").attr("hidden",true);
+                    $("#userselect").attr("hidden",true);
+                    $('#usergroup').val(2);
+                    $('#usergroup').select2().trigger('change');
+                }else{
+                    $("#userselect").attr("hidden",false);
+                }
+            });
+
         </script>	
     @stop
 

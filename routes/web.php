@@ -33,6 +33,9 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'company'], function(){
+        Route::post('getsubisic','Api\CompanyController@GetSubisic')->name('api.company.getsubisic');            
+    }); 
     Route::group(['prefix' => 'alert'], function(){
         Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');            
     });  

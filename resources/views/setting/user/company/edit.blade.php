@@ -16,11 +16,11 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <div class="d-flex justify-content-center">
+                {{-- <div class="d-flex justify-content-center">
                     <div class="form-check ">
                         <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkassessment" data-id="{{$company->id}}" data-on-color="success" data-off-color="danger" data-on-text="ประเมิน" data-off-text="ไม่ประเมิน" class="form-check-input-switch" @if (!Empty($company->businessplan)) checked @endif >
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -90,15 +90,30 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>ประเภทธุรกิจตามรหัส ISIC<span class="text-danger">*</span></label>
-                                            <select name="isic" data-placeholder="ประเภทธุรกิจตามรหัส ISIC" class="form-control form-control-select2">
-                                                <option value="">เลือกประเภทธุรกิจตามรหัส ISIC</option>
-                                                @foreach ($industrygroupbyisics as $industrygroupbyisic)
-                                                    <option value="{{$industrygroupbyisic->id}}" @if($company->industry_group_by_isic_id == $industrygroupbyisic->id) selected @endif>{{$industrygroupbyisic->name}}</option> 
-                                                @endforeach
-                                            </select>
+                                        <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>หมวดหมู่หลัก ISIC<span class="text-danger">*</span></label>
+                                                    <select name="isic" id="isic" data-placeholder="หมวดหมู่หลัก ISIC" class="form-control form-control-select2">
+                                                        @foreach ($isics as $isic)
+                                                            <option value="{{$isic->id}}" @if($company->isic_id == $isic->id) selected @endif>{{$isic->name}}</option> 
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                            <div class="form-group">
+                                                <label>หมวดหมู่ย่อย ISIC<span class="text-danger">*</span></label>
+                                                <select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-select2">
+                                                    @foreach ($isicsubs as $isicsub)
+                                                        <option value="{{$isicsub->id}}" @if($company->isic_sub_id == $isicsub->id) selected @endif>{{$isicsub->name}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            </div>
                                         </div>
+
                                         <div class="form-group">
                                             <label>ประเภททุนจดทะเบียน<span class="text-danger">*</span></label>
                                             <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-select2">
@@ -256,7 +271,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event,'ข้อมูลกิจการ');">บันทึก <i class="icon-paperplane ml-2"></i></button>
                             </div>
                         </form>
                     </div>
@@ -275,7 +290,7 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/companyhelper.js')}}"></script>
-
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
     	var route = {
 			url: "{{ url('/') }}",

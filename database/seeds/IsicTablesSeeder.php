@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class IndustryGroupByIsicsTableSeeder extends Seeder
+class IsicTablesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class IndustryGroupByIsicsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('industry_group_by_isics')->insert([
+        DB::table('isics')->insert([
             [
                 'name' => 'เกษตรกรรม การป่าไม้ และการประมง',
                 'code' => 'A000000',

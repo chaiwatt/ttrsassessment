@@ -68,7 +68,7 @@
                                     <div class="form-group">
                                         <label>โครงการ</label><span class="text-danger">*</span>
                                         <select name="fulltbp" id="fulltbp" data-placeholder="โครงการ" class="form-control form-control-select2">
-                                           <option val="0">==เลือกโครงการ==</option>
+                                           {{-- <option val="0">==เลือกโครงการ==</option> --}}
                                             @foreach ($fulltbps as $fulltbp)
                                                 <option value="{{$fulltbp->id}}">{{$fulltbp->minitbp->project}}</option> 
                                             @endforeach
@@ -145,9 +145,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                            </div>
+
+                            @if ($fulltbps->count() == 0)
+                                <div class="text-right">
+                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>

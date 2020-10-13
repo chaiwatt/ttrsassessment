@@ -2,31 +2,29 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
-
     use VerifiesEmails;
 
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/dashboard/company/report'; //RouteServiceProvider::HOME;
+    // protected $redirectTo = '/dashboard/company/report'; //RouteServiceProvider::HOME;
+
+    public function verify(Request $request)
+    {
+        Auth::user()->update([
+            'email_verified_at' => Carbon::now()->toDateString()
+        ]);
+        Auth::logout();
+        Session::flush();
+        return redirect()->route('login')->withSuccess('ยืนยันอีเมลสำเร็จ');
+    }
 
     /**
      * Create a new controller instance.

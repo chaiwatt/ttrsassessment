@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use Image;
 use App\User;
+use App\Model\Isic;
 use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Tambol;
 use App\Helper\TinPin;
+use App\Model\AsicSub;
 use App\Model\Company;
+use App\Model\IsicSub;
 use App\Model\Province;
 use App\Model\BusinessType;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
-use App\Model\IndustryGroupByIsic;
 use App\Model\RegisteredCapitalType;
 use App\Http\Requests\EditCompanyRequest;
 
@@ -30,7 +32,8 @@ class SettingUserCompanyController extends Controller
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$company->province_id)->get();
         $tambols = Tambol::where('amphur_id',$company->amphur_id)->get();
-        $industrygroupbyisics = IndustryGroupByIsic::get();
+        $isics = Isic::get();
+        $isicsubs = IsicSub::where('isic_id',$company->isic_id)->get();
         $registeredyear='';
         if(!Empty($companyinfo)){
             $registeredyear = substr(json_decode($companyinfo->getContent(), true)[0]['registerdateth'], -4);
@@ -43,7 +46,8 @@ class SettingUserCompanyController extends Controller
                                         ->withTambols($tambols)
                                         ->withProvinces($provinces)
                                         ->withRegisteredyear($registeredyear)
-                                        ->withIndustrygroupbyisics($industrygroupbyisics);
+                                        ->withIsics($isics)
+                                        ->withIsicsubs($isicsubs);
     }
 
     public function EditSave(EditCompanyRequest $request, $id){

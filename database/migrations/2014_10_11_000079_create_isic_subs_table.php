@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIndustryGroupByIsicCSTable extends Migration
+class CreateIsicSubsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateIndustryGroupByIsicCSTable extends Migration
      */
     public function up()
     {
-        Schema::create('industry_group_by_isic_c_s', function (Blueprint $table) {
+        Schema::create('isic_subs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('industry_group_by_isic_b_id')->nullable();
-            $table->string('name',150);
-            $table->string('code',150);
+            $table->unsignedBigInteger('isic_id');
+            $table->foreign('isic_id')->references('id')->on('isics')->onDelete('cascade');
+            $table->string('name',250);
+            $table->char('code',10);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateIndustryGroupByIsicCSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('industry_group_by_isic_c_s');
+        Schema::dropIfExists('isic_subs');
     }
 }

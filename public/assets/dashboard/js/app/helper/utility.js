@@ -18,6 +18,26 @@ function confirmation(e) {
     });
 }
 
+function confirmsubmit(e,data) {
+    e.preventDefault();
+    var frm = e.target.form;
+    Swal.fire({
+            title: 'บันทึกรายการ',
+            text: `ต้องการบันทึก ${data} หรือไม่? `,
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'บันทึก',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            frm.submit();
+        }
+    });
+}
+
 $(document).on('click', '.alertmessage', function(e) {
     deleteAlert($(this).data('id')).then(data => {
         data.forEach(function (alert,index) {

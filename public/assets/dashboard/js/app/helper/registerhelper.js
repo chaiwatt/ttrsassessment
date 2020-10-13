@@ -14,7 +14,6 @@ $(document).on("click","#btnaccept",function(e){
 
 
 $("#usergroup").on('change', function() {
-    console.log($(this).val());
     $("#vatnomessage").attr("hidden",true);
     $("#vatnomessage").addClass("validation-invalid-label")
     if($(this).val() == 1) {

@@ -24,16 +24,18 @@
         @endif
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">การมอบหมาย
-            @if ($sharenotificationbubbles->where('notification_sub_category_id',1)->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-            @endif
-        </a></li>     
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.businessplan')?'active':''}}">ขอรับการประเมิน
-            @if ($sharenotificationbubbles->where('notification_sub_category_id',2)->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-            @endif
-        </a></li>     
+        @if (Auth::user()->user_type_id >=5)
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">การมอบหมาย
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',1)->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a></li> 
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.businessplan')?'active':''}}">ขอรับการประเมิน
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',2)->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a></li> 
+        @endif
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">Mini Tbp
             @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
@@ -113,21 +115,8 @@
         </li>
     @endif
 @endif
-{{-- 
-@if (Auth::user()->user_type_id ==3)
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.project')?'nav-item-expanded nav-item-open':''}}">
-        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>โครงการ</span></a>
-        <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
-            @if (Auth::user()->expertassignment->count() > 0)
-                <li class="nav-item"><a href="{{route('dashboard.expert.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.fulltbp')?'active':''}}">Full Tbp</a></li>
-                
-                <li class="nav-item"><a href="{{route('dashboard.expert.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.expert.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
-            @endif
-        </ul>
-    </li>
-@endif --}}
 
-@if (Auth::user()->user_type_id >= 4)
+@if (Auth::user()->user_type_id >= 5)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">

@@ -19,7 +19,7 @@ class CreateCompany
             'factoryprovince_id' => 4,
             'factoryamphur_id' => 67,
             'factorytambol_id' => 367,
-            'factorypostalcode' => '12120',
+            'factorypostalcode' => '12120'
         ]);
         return ;
     } 
