@@ -490,7 +490,8 @@ $("#usergroup").on('change', function() {
 });
 
 
-$("#vatno").change(function(){
+// $("#vatno").change(function(){
+$("#vatno").on('change', function() {
     $('#msg').removeClass();
     var vatid = $(this).val();
     if(vatid.length != 13){ 
@@ -608,7 +609,8 @@ $(document).on("click","#getotp",function(e){
     });
 });
 
-$("#hid").change(function(){
+// $("#hid").change(function(){
+$("#hid").on('change', function() {
      if($(this).val() == ""){
          if($(this).hasClass("border-danger")){
              $("#hidinvalid").attr("hidden",true);
@@ -632,3 +634,42 @@ $("#hid").change(function(){
          console.log(error)
      })
  });
+
+ $("#addposition").on('click', function() {
+    $('#modal_add_position').modal('show');
+ });
+
+ $("#btn_modal_add_position").on('click', function() {
+     if($('#modalposition').val()=='')return;
+
+     addUserPosition($('#modalposition').val()).then(data => {
+        var html =``;
+        data.forEach(function (position,index) {
+                html += `<option value="${position['id']}" >${position['name']}</option>`
+            });
+        $("#userposition").html(html);
+        
+        })
+    .catch(error => {})
+ });
+
+ function addUserPosition(position){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/profile/adduserposition`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            position : position
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+}
+
+

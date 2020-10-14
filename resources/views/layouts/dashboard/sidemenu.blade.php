@@ -30,11 +30,11 @@
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
             </a></li> 
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.businessplan')?'active':''}}">ขอรับการประเมิน
+            {{-- <li class="nav-item"><a href="{{route('dashboard.admin.project.businessplan')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.businessplan')?'active':''}}">ขอรับการประเมิน
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',2)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
-            </a></li> 
+            </a></li>  --}}
         @endif
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">Mini Tbp

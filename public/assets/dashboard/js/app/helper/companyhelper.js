@@ -8,7 +8,7 @@ import * as Company from './company.js'
      }        
     console.log($(this).data('id'));
     $("#spinicon").attr("hidden",false);
-    Assessment.addAssessment($(this).data('id'),status).then(data => {
+        Assessment.addAssessment($(this).data('id'),status).then(data => {
         $("#spinicon").attr("hidden",true);
     }).catch(error => {})
 });

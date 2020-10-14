@@ -250,6 +250,32 @@
 		</div>
 	</div>
 
+	{{-- modal add position --}}
+	<div id="modal_add_position" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มตำแหน่ง</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ตำแหน่ง</label><span class="text-danger">*</span>
+								<input type="text" id="modalposition" placeholder="ตำแหน่ง" class="form-control" >
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_add_position" class="btn bg-primary" data-dismiss="modal" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Modal with subtitle -->
 	<div id="modal_message" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
@@ -587,10 +613,11 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label>ตำแหน่ง<span class="text-danger">*</span></label>
-														<select name="userposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
+														<label>ตำแหน่ง<span class="text-danger">*</span><a href="#" id="addposition" class="text-info"> เพิ่มใหม่</a></label>
+														<select name="userposition" id="userposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
 															@foreach ($userpositions as $userposition)
-																<option value="{{$userposition->id}}" >{{$userposition->name}}</option> 
+																<option value="{{$userposition->id}}"
+																	@if ($userposition->id == $user->user_position_id) selected @endif >{{$userposition->name}}</option> 
 															@endforeach
 														</select>
 													</div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Image;
 use App\User;
+use App\Model\UserPosition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -34,5 +35,12 @@ class ProfileController extends Controller
         ]);
         $user = User::find(Auth::user()->id);
         return response()->json($user); 
+    }
+    public function AddUserPosition(Request $request){
+        $userposition = new UserPosition();
+        $userposition->name = $request->position;
+        $userposition->save();
+        $userpositions = UserPosition::get();
+        return response()->json($userpositions); 
     }
 }

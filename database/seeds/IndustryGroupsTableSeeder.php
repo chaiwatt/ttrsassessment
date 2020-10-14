@@ -31,9 +31,6 @@ class IndustryGroupsTableSeeder extends Seeder
                 'name' => 'อุตสาหกรรมหุ่นยนต์เพื่อการอุตสาหกรรม (Robotics)'
             ],
             [
-                'name' => 'อุตสาหกรรมอิเล็กทรอนิกส์อัจฉริยะ (Smart Electronics)'
-            ],
-            [
                 'name' => 'อุตสาหกรรมการบินและโลจิสติกส์ (Aviation and Logistics)'
             ],
             [

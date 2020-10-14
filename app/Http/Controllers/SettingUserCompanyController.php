@@ -11,10 +11,13 @@ use App\Model\Tambol;
 use App\Helper\TinPin;
 use App\Model\AsicSub;
 use App\Model\Company;
+use App\Model\FullTbp;
 use App\Model\IsicSub;
+use App\Model\MiniTBP;
 use App\Model\Province;
 use App\Model\BusinessType;
 use App\Model\IndustryGroup;
+use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\RegisteredCapitalType;
@@ -97,6 +100,20 @@ class SettingUserCompanyController extends Controller
             'factorylat' => $request->factorylat,
             'factorylng' => $request->factorylng
         ]);
+        BusinessPlan::where('company_id',$company->id)->first()->update([
+            'business_plan_status_id' => 2
+        ]);
+        $buninessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $minitbp = MiniTBP::where('business_plan_id',$buninessplan->id)->first();
+        $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+        $projectmember = ProjectMember::where('full_tbp_id',$fulltbp->id)
+                                    ->where('user_id',$auth->id)->first();
+        if(Empty($projectmember)){
+            $projectmember = new ProjectMember();
+            $projectmember->full_tbp_id = $fulltbp->id;
+            $projectmember->user_id = User::where('user_type_id',6)->first()->id;
+            $projectmember->save();
+        }
         return redirect()->back()->withSuccess('แก้ไขข้อมูลบริษัทสำเร็จ'); 
     }
 }

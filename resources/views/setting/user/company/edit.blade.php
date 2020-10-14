@@ -12,7 +12,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ข้อมูลบริษัท</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ข้อมูลสถานประกอบการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
@@ -26,8 +26,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ข้อมูลบริษัท</a>
-                    <span class="breadcrumb-item active">ข้อมูลบริษัท</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ข้อมูลสถานประกอบการ</a>
+                    <span class="breadcrumb-item active">ข้อมูลสถานประกอบการ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -64,33 +64,84 @@
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
-                                        <div class="form-group">
-                                            <label>การจดทะเบียน<span class="text-danger">*</span></label>
-                                            <select name="businesstype" data-placeholder="ประเภทการจดทะเบียน" class="form-control form-control-select2">
-                                                @foreach ($businesstypes as $businesstype)
-                                                    @if (Auth::user()->user_group_id == $businesstype->user_group_id)
-                                                        <option value="{{$businesstype->id}}" @if($company->registered_capital_type_id == $businesstype->id) selected @endif>{{$businesstype->name}}</option> 
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ชื่อกิจการ/บริษัท<span class="text-danger">*</span></label>
-                                            <input type="text"  name="company" value="{{$company->name}}"  placeholder="ชื่อกิจการ/บริษัท" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>หมายเลขประจำตัวผู้เสียภาษี</label>
-                                            <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="หมายเลขผู้เสียภาษี" class="form-control" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ประเภทอุตสาหกรรม<span class="text-danger">*</span></label>
-                                            <select name="industrygroup" data-placeholder="กลุ่มธุรกิจ" class="form-control form-control-select2">
-                                                @foreach ($industrygroups as $industrygroup)
-                                                    <option value="{{$industrygroup->id}}" @if($company->industry_group_id == $industrygroup->id) selected @endif>{{$industrygroup->name}}</option> 
-                                                @endforeach
-                                            </select>
+                                        <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>การจดทะเบียน<span class="text-danger">*</span></label>
+                                                    <select name="businesstype" data-placeholder="ประเภทการจดทะเบียน" class="form-control form-control-select2">
+                                                        @foreach ($businesstypes as $businesstype)
+                                                            @if (Auth::user()->user_group_id == $businesstype->user_group_id)
+                                                                <option value="{{$businesstype->id}}" @if($company->registered_capital_type_id == $businesstype->id) selected @endif>{{$businesstype->name}}</option> 
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล<span class="text-danger">*</span> @else ชื่อสถานประกอบการ @endif</label>
+                                                    <input type="text"  name="company" value="{{$company->name}}"  placeholder="@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล @else ชื่อสถานประกอบการ @endif" class="form-control">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>@if (Auth::user()->user_group_id == 1) เลขทะเบียนนิติบุคคล<span class="text-danger">*</span> @else เลขทะเบียนพาณิชย์ @endif</label>
+                                                    <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="@if (Auth::user()->user_group_id == 1) เลขทะเบียนนิติบุคคล @else เลขทะเบียนพาณิชย์ @endif" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>ประเภททุนจดทะเบียน</label>
+                                                    <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-select2">
+                                                        <option value="0">===เลือกทุนจดทะเบียน===</option>
+                                                        @foreach ($registeredcapitaltypes as $registeredcapitaltype)
+                                                            <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}: {{$registeredcapitaltype->detail}}</option> 
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>ปีที่จดทะเบียน@if (Auth::user()->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
+                                                    <input type="number" name="registeredyear" value="{{$registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>ทุนจดทะเบียน@if (Auth::user()->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
+                                                    <input type="number"  name="registeredcapital" value="{{$company->registeredcapital}}"  placeholder="ทุนจดทะเบียน" class="form-control" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>ทุนจดทะเบียนที่เรียกชำระแล้ว@if (Auth::user()->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
+                                                    <input type="number"  name="paidupcapital" value="{{$company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>วันที่ชำระทุนจดทะเบียน</label>
+                                                    <input type="text"  name="paidupcapitaldate" id="paidupcapitaldate" value="{{$company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">	
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>กลุ่มอุตสาหกรรม<span class="text-danger">*</span></label>
+                                                    <select name="industrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-select2">
+                                                        @foreach ($industrygroups as $industrygroup)
+                                                            <option value="{{$industrygroup->id}}" @if($company->industry_group_id == $industrygroup->id) selected @endif>{{$industrygroup->name}}</option> 
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>หมวดหมู่หลัก ISIC<span class="text-danger">*</span></label>
@@ -101,164 +152,186 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                
-                                            <div class="form-group">
-                                                <label>หมวดหมู่ย่อย ISIC<span class="text-danger">*</span></label>
-                                                <select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-select2">
-                                                    @foreach ($isicsubs as $isicsub)
-                                                        <option value="{{$isicsub->id}}" @if($company->isic_sub_id == $isicsub->id) selected @endif>{{$isicsub->name}}</option> 
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>ประเภททุนจดทะเบียน<span class="text-danger">*</span></label>
-                                            <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-select2">
-                                                @foreach ($registeredcapitaltypes as $registeredcapitaltype)
-                                                    <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}: {{$registeredcapitaltype->detail}}</option> 
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ปีที่จดทะเบียน</label>
-                                            <input type="number" name="registeredyear" value="{{$registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>ทุนจดทะเบียน</label>
-                                            <input type="number"  name="registeredcapital" value="{{$company->registeredcapital}}"  placeholder="ทุนจดทะเบียน" class="form-control" >
+                                        <div class="row">	
+                                            <div class="col-md-6">                                          
+                                                <div class="form-group">
+                                                    <label>หมวดหมู่ย่อย ISIC<span class="text-danger">*</span></label>
+                                                    <select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-select2">
+                                                        @foreach ($isicsubs as $isicsub)
+                                                            <option value="{{$isicsub->id}}" @if($company->isic_sub_id == $isicsub->id) selected @endif>{{$isicsub->name}}</option> 
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6"> 
+                                                <div class="form-group">
+                                                    <label>โทรศัพท์<span class="text-danger">*</span></label>
+                                                    <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">	
-                                            <div class="col-md-6">
+                                            <div class="col-md-6">   
                                                 <div class="form-group">
-                                                    <label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
-                                                    <input type="number"  name="paidupcapital" value="{{$company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" >
+                                                    <label>โทรสาร</label>
+                                                    <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="โทรสาร" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6">   
                                                 <div class="form-group">
-                                                    <label>เมื่อวันที่</label>
-                                                    <input type="text"  name="paidupcapitaldate" id="paidupcapitaldate" value="{{$company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control" >
+                                                    <label>อีเมล<span class="text-danger">*</span></label>
+                                                    <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-
-
-                                        <div class="form-group">
-                                            <label>โทรศัพท์<span class="text-danger">*</span></label>
-                                            <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>แฟ็กซ์<span class="text-danger">*</span></label>
-                                            <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="แฟ็กซ์" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control">
-                                        </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group"> --}}
                                             <ul class="nav nav-tabs nav-tabs-highlight">
-                                                <li class="nav-item"><a href="#left-icon-company" class="nav-link active" data-toggle="tab"><i class="icon-home2 mr-2"></i> ที่อยู่บริษัท</a></li>
-                                                <li class="nav-item"><a href="#left-icon-factory" class="nav-link" data-toggle="tab"><i class="icon-office mr-2"></i> ที่อยู่โรงงาน</a></li>
+                                                <li class="nav-item"><a href="#left-icon-company" class="nav-link active" data-toggle="tab"><i class="icon-home2 mr-2"></i> ที่ตั้งสถานประกอบการ</a></li>
+                                                <li class="nav-item"><a href="#left-icon-factory" class="nav-link" data-toggle="tab"><i class="icon-office mr-2"></i> ที่ตั้งโรงงาน</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane fade show active" id="left-icon-company">
-                                                    <div class="form-group">
-                                                        <label>ที่อยู่<span class="text-danger">*</span></label>
-                                                        <input type="text"  name="address" value="{{$company->address}}"  placeholder="ที่อยู่" class="form-control">
+                                                    <div class="row">	
+                                                        <div class="col-md-6">  
+                                                            <div class="form-group">
+                                                                <label>ที่อยู่บริษัท<span class="text-danger">*</span></label>
+                                                                <input type="text"  name="address" value="{{$company->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">  
+                                                            <div class="form-group">
+                                                                <label>จังหวัด<span class="text-danger">*</span></label>
+                                                                <select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2">
+                                                                    <option value=""></option>
+                                                                    @foreach ($provinces as $province)
+                                                                        <option value="{{$province->id}}" @if($company->province_id == $province->id) selected @endif>{{$province->name}}</option> 
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>จังหวัด<span class="text-danger">*</span></label>
-                                                        <select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2">
-                                                            <option value=""></option>
-                                                            @foreach ($provinces as $province)
-                                                                <option value="{{$province->id}}" @if($company->province_id == $province->id) selected @endif>{{$province->name}}</option> 
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="row">	
+                                                        <div class="col-md-6">  
+                                                            <div class="form-group">
+                                                                <label>อำเภอ<span class="text-danger">*</span></label>
+                                                                <select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+                                                                    @foreach ($amphurs as $amphur)                                                                
+                                                                        <option value="{{$amphur->id}}" @if ($amphur->id == $company->amphur_id) selected @endif> {{$amphur->name}} </option>
+                                                                    @endforeach   
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">  
+                                                            <div class="form-group">
+                                                                <label>ตำบล<span class="text-danger">*</span></label>
+                                                                <select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2">
+                                                                    @foreach ($tambols as $tambol)                                                                
+                                                                        <option value="{{$tambol->id}}" @if ($tambol->id == $company->tambol_id) selected @endif> {{$tambol->name}} </option>
+                                                                    @endforeach    
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>อำเภอ<span class="text-danger">*</span></label>
-                                                        <select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
-                                                            @foreach ($amphurs as $amphur)                                                                
-                                                                <option value="{{$amphur->id}}" @if ($amphur->id == $company->amphur_id) selected @endif> {{$amphur->name}} </option>
-                                                            @endforeach   
-                                                        </select>
+
+                                                    <div class="row">	
+                                                        <div class="col-md-6">  
+                                                            <div class="form-group">
+                                                                <label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
+                                                                <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">  
+                                                            <div class="form-group">
+                                                                <label>ละติจูด<span class="text-danger">*</span></label>
+                                                                <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="ละติจูด" class="form-control">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>ตำบล<span class="text-danger">*</span></label>
-                                                        <select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2">
-                                                            @foreach ($tambols as $tambol)                                                                
-                                                                <option value="{{$tambol->id}}" @if ($tambol->id == $company->tambol_id) selected @endif> {{$tambol->name}} </option>
-                                                            @endforeach    
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-                                                        <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>ละติจูด<span class="text-danger">*</span></label>
-                                                        <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="ละติจูด" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>ลองติจูด<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer">เปิดแผนที่</a> </label>
-                                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองติจูด" class="form-control">
+                                                    <div class="row">	
+                                                        <div class="col-md-6">  
+                                                            <div class="form-group">
+                                                                <label>ลองติจูด<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer">เปิดแผนที่</a> </label>
+                                                                <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองติจูด" class="form-control">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="left-icon-factory">
-                                                    <div class="form-group">
-                                                        <label>ที่อยู่<span class="text-danger">*</span></label>
-                                                        <input type="text"  name="factoryaddress" value="{{$company->factoryaddress}}"  placeholder="ที่อยู่" class="form-control">
+                                                    <div class="row">	
+                                                        <div class="col-md-6"> 
+                                                            <div class="form-group">
+                                                                <label>ที่อยู่โรงงาน<span class="text-danger">*</span></label>
+                                                                <input type="text"  name="factoryaddress" value="{{$company->factoryaddress}}"  placeholder="ที่อยู่โรงงาน" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"> 
+                                                            <div class="form-group">
+                                                                <label>จังหวัด<span class="text-danger">*</span></label>
+                                                                <select name="factoryprovince" id="factoryprovince" data-placeholder="จังหวัด" class="form-control form-control-select2">
+                                                                    <option value=""></option>
+                                                                    @foreach ($provinces as $province)
+                                                                        <option value="{{$province->id}}" @if($company->factoryprovince_id == $province->id) selected @endif>{{$province->name}}</option> 
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>จังหวัด<span class="text-danger">*</span></label>
-                                                        <select name="factoryprovince" id="factoryprovince" data-placeholder="จังหวัด" class="form-control form-control-select2">
-                                                            <option value=""></option>
-                                                            @foreach ($provinces as $province)
-                                                                <option value="{{$province->id}}" @if($company->factoryprovince_id == $province->id) selected @endif>{{$province->name}}</option> 
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="row">	
+                                                        <div class="col-md-6"> 
+                                                            <div class="form-group">
+                                                                <label>อำเภอ<span class="text-danger">*</span></label>
+                                                                <select name="factoryamphur" id="factoryamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+                                                                    @foreach ($amphurs as $amphur)                                                                
+                                                                        <option value="{{$amphur->id}}" @if ($amphur->id == $company->factoryamphur_id) selected @endif> {{$amphur->name}} </option>
+                                                                    @endforeach   
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"> 
+                                                            <div class="form-group">
+                                                                <label>ตำบล<span class="text-danger">*</span></label>
+                                                                <select name="factorytambol" id="factorytambol" data-placeholder="ตำบล" class="form-control form-control-select2">
+                                                                    @foreach ($tambols as $tambol)                                                                
+                                                                        <option value="{{$tambol->id}}" @if ($tambol->id == $company->factorytambol_id) selected @endif> {{$tambol->name}} </option>
+                                                                    @endforeach    
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>อำเภอ<span class="text-danger">*</span></label>
-                                                        <select name="factoryamphur" id="factoryamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
-                                                            @foreach ($amphurs as $amphur)                                                                
-                                                                <option value="{{$amphur->id}}" @if ($amphur->id == $company->factoryamphur_id) selected @endif> {{$amphur->name}} </option>
-                                                            @endforeach   
-                                                        </select>
+                                                    <div class="row">	
+                                                        <div class="col-md-6"> 
+                                                            <div class="form-group">
+                                                                <label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
+                                                                <input type="text"  name="factorypostalcode" value="{{$company->factorypostalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6"> 
+                                                            <div class="form-group">
+                                                                <label>ละติจูด<span class="text-danger">*</span></label>
+                                                                <input type="text"  name="factorylat" value="{{$company->factorylat}}"  placeholder="ละติจูด" class="form-control">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>ตำบล<span class="text-danger">*</span></label>
-                                                        <select name="factorytambol" id="factorytambol" data-placeholder="ตำบล" class="form-control form-control-select2">
-                                                            @foreach ($tambols as $tambol)                                                                
-                                                                <option value="{{$tambol->id}}" @if ($tambol->id == $company->factorytambol_id) selected @endif> {{$tambol->name}} </option>
-                                                            @endforeach    
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-                                                        <input type="text"  name="factorypostalcode" value="{{$company->factorypostalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>ละติจูด<span class="text-danger">*</span></label>
-                                                        <input type="text"  name="factorylat" value="{{$company->factorylat}}"  placeholder="ละติจูด" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>ลองติจูด<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->factorylat}},{{$company->factorylng}}" target="_blank" rel="noopener noreferrer">เปิดแผนที่</a> </label>
-                                                        <input type="text"  name="factorylng" value="{{$company->factorylng}}"  placeholder="ลองติจูด" class="form-control">
+                                                    <div class="row">	
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>ลองติจูด<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->factorylat}},{{$company->factorylng}}" target="_blank" rel="noopener noreferrer">เปิดแผนที่</a> </label>
+                                                                <input type="text"  name="factorylng" value="{{$company->factorylng}}"  placeholder="ลองติจูด" class="form-control">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> 
+                                        {{-- </div>  --}}
                                         <div class="form-group">
                                             <label>โลโก้ (ขนาด 500x500) px</label>
                                             <div class="input-group">													
-                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้" >
-                                                <span class="input-group-append">
+                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
+                                                {{-- <span class="input-group-append"> --}}
                                                     <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
-                                                </span>
+                                                {{-- </span> --}}
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="picture"/>
                                             @if (!Empty($company->logo))

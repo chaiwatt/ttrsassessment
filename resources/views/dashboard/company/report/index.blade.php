@@ -180,6 +180,9 @@
         tooltip: {
             formatter: '{a} <br/>{b} : {c}%'
         },
+        textStyle: {
+		    fontFamily: 'Kanit',
+	    },
         series: [
             {
                 name: 'gauge',
