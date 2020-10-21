@@ -17,19 +17,19 @@ class BusinessPlanStatusSeeder extends Seeder
                 'progress' => 5
             ],
             [
-                'name' => 'ให้ส่ง Mini Tbp',
+                'name' => 'ให้ส่ง Mini TBP',
                 'progress' => 10
             ],
             [
-                'name' => 'อยู่ระหว่างพิจารณา Mini Tbp',
+                'name' => 'อยู่ระหว่างพิจารณา Mini TBP',
                 'progress' => 15
             ],
             [
-                'name' => 'ให้ส่ง Full Tbp',
+                'name' => 'ให้ส่ง Full TBP',
                 'progress' => 20
             ],
             [
-                'name' => 'อยู่ระหว่างพิจารณา Full Tbp',
+                'name' => 'อยู่ระหว่างพิจารณา Full TBP',
                 'progress' => 25
             ],
             [

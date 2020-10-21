@@ -37,12 +37,12 @@
             </a></li>  --}}
         @endif
         <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">Mini Tbp
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">Mini TBP
             @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
             @endif
         </a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">Full Tbp
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">Full TBP
             @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
             @endif
@@ -97,13 +97,13 @@
             </a>
             <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
                 @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
-                    <li class="nav-item"><a href="{{route('dashboard.company.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.minitbp')?'active':''}}">Mini Tbp
+                    <li class="nav-item"><a href="{{route('dashboard.company.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.minitbp')?'active':''}}">Mini TBP
                         @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                             <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                         @endif
                     </a></li>  
                     @if (Auth::user()->company->businessplan->business_plan_status_id > 3)
-                        <li class="nav-item"><a href="{{route('dashboard.company.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fulltbp')?'active':''}}">Full Tbp
+                        <li class="nav-item"><a href="{{route('dashboard.company.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fulltbp')?'active':''}}">Full TBP
                             @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
                                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                             @endif
@@ -176,7 +176,7 @@
 </li>
 @endif
 
-@if (Auth::user()->user_type_id <= 2 && !Empty(Auth::user()->company))
+{{-- @if (Auth::user()->user_type_id <= 2 && !Empty(Auth::user()->company))
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">
@@ -188,4 +188,4 @@
         </li>
     </ul>	
 </li>
-@endif
+@endif --}}

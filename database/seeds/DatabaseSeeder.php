@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LayoutstylesTableSeeder::class);
         $this->call(UserPositionsTableSeeder::class);
         $this->call(SocialLoginStatusesTableSeeder::class);
+        $this->call(ExpertBranchesTableSeeder::class);
         $this->call(EvStatusTablesSeeder::class);
         $this->call(EvTypesTableSeeder::class);
         $this->call(PillarsTableSeeder::class);
@@ -76,7 +77,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EducationLevelsTableSeeder::class);
         $this->call(IndustryGroupsTableSeeder::class);
         // $this->call(IndustryGroupByIsicsTableSeeder::class);
-        $this->call(RegisteredCapitalTypesSeeder::class);
+        // $this->call(RegisteredCapitalTypesSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CriteriaGroupsTableSeeder::class);
         $this->call(CriteriaGroupTransactionsTableSeeder::class);

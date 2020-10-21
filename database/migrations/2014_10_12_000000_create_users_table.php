@@ -34,11 +34,17 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('province_id')->default(4);  //ปทุมธานี
             $table->unsignedBigInteger('amphur_id')->default(67);   //คลองหลวง
             $table->unsignedBigInteger('tambol_id')->default(367);  //คลองหนึ่ง
+            $table->char('postal',5)->nullable();
+            $table->string('address1',150)->nullable();
+            $table->unsignedBigInteger('province1_id')->default(4);  //ปทุมธานี
+            $table->unsignedBigInteger('amphur1_id')->default(67);   //คลองหลวง
+            $table->unsignedBigInteger('tambol1_id')->default(367);  //คลองหนึ่ง
+            $table->char('postal1',5)->nullable();
             $table->unsignedBigInteger('verify_type')->default(1);
             $table->unsignedBigInteger('allow_assessment')->default(1);
             $table->unsignedBigInteger('user_group_id')->default(2);
-            $table->unsignedBigInteger('user_alert_status_id')->default(1);
-            $table->char('expert_type')->default(0);
+            // $table->unsignedBigInteger('user_alert_status_id')->nullable();
+            $table->string('website',150)->nullable();
             $table->date('otp')->nullable();
             $table->rememberToken();
             $table->timestamps();

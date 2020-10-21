@@ -83,7 +83,7 @@
                                                 @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label>ประเภททุนจดทะเบียน<span class="text-danger">*</span></label>
                                         <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-select2" disabled>
                                             <option value=""></option>
@@ -91,7 +91,7 @@
                                                     <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}: {{$registeredcapitaltype->detail}}</option> 
                                                 @endforeach
                                         </select>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label>โทรศัพท์<span class="text-danger">*</span></label>
                                         <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control" readonly>

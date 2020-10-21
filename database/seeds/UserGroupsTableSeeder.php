@@ -17,6 +17,9 @@ class UserGroupsTableSeeder extends Seeder
             ],
             [
                 'name' => 'บุคคลธรรมดา'
+            ],
+            [
+                'name' => 'อื่นๆ'
             ]
         ]);
     }

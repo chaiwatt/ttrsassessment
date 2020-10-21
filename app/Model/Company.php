@@ -19,7 +19,7 @@ class Company extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['registered_capital_type_id','industry_group_id','business_type_id','name','phone','fax','email','address','province_id','amphur_id','tambol_id','postalcode'];
+    protected static $logAttributes = ['industry_group_id','business_type_id','name','phone','fax','email','address','province_id','amphur_id','tambol_id','postalcode'];
     protected static $logName = 'ประเภทการจดทะเบียน';
     protected static $logOnlyDirty = true;
     

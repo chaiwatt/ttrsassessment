@@ -202,7 +202,7 @@
                         </div>
                         
                         <div>
-                            จำนวนยื่น Full Tbp
+                            จำนวนยื่น Full TBP
                         </div>
                     </div>
 

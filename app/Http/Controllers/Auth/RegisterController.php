@@ -7,6 +7,7 @@ use App\Model\Company;
 use App\Model\UserGroup;
 use App\Model\GeneralInfo;
 use App\Model\BusinessPlan;
+use App\Model\ExpertDetail;
 use App\Helper\CreateCompany;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'vatno' => ['required', 'numeric','unique:companies'],
+            'lastname' => ['required', 'string', 'max:255'],
             'phone' => 'required|numeric',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -52,37 +55,43 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $group = 2;
+        // $group = 2;
         $experttype = 0;
-       if(!Empty($data['vatno'])){
-            $group =1;
-       }
+    //    if(!Empty($data['vatno'])){
+    //         $group =1;
+    //    }
         $usertype = 1;
         if($data['user_type'] == 2){
             $usertype = 4;
         }elseif($data['user_type'] == 3){
             $usertype = 3;
-            if($data['expert'] == 2){
-                $experttype = 1;
-            }
+            // if($data['expert'] == 2){
+            //     $experttype = 1;
+            // }
         }
         $user = User::create([
             'prefix_id' => 1,
             'user_type_id' => 2,
             'name' => $data['name'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'user_group_id' => $group,
+            'user_group_id' => $data['usergroup'],
             'user_type_id' => $usertype,
-            'expert_type' => $experttype,
+            // 'expert_type' => $experttype,
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
         $companyname= '';
-        $vatno = '';
-        if($group == 1){
-            $companyname = $data['companyname'];
-            $vatno = $data['vatno'];
+        $vatno = $data['vatno'];
+        if($data['usergroup'] == 1){
+            $companyname = $data['companyname'];  
+        }
+        if($user->user_type_id == 3){
+            $xpertdetail = new ExpertDetail();
+            $xpertdetail->user_id = $user->id;
+            $xpertdetail->expert_type_id = $data['expert'];
+            $xpertdetail->save();
         }
         CreateCompany::createCompany($user,$companyname,$vatno);
         return $user ; 

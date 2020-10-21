@@ -16,11 +16,11 @@ $(document).on("click","#btnaccept",function(e){
 $("#usergroup").on('change', function() {
     $("#vatnomessage").attr("hidden",true);
     $("#vatnomessage").addClass("validation-invalid-label")
-    if($(this).val() == 1) {
-        $("#vatwrapper").attr("hidden",false);
-    } else { 
-        $("#vatwrapper").attr("hidden",true);
-    }
+    // if($(this).val() == 1) {
+    //     $("#vatwrapper").attr("hidden",false);
+    // } else { 
+    //     $("#vatwrapper").attr("hidden",true);
+    // }
 });
 
 $("#vatno").on( 'change', function(){
@@ -28,7 +28,7 @@ $("#vatno").on( 'change', function(){
     if(vatid.length != 13){     
         $("#vatnomessage").removeClass("validation-valid-label")
         $("#vatnomessage").addClass("validation-invalid-label")
-        $('#msg').html("หมายเลขผู้เสียภาษีไม่ถูกต้อง")
+        $('#msg').html("เลขประจำตัวผู้เสียภาษีอากรไม่ถูกต้อง")
         $("#vatnomessage").attr("hidden",false);
         $('#vatno').val('');
         return ;
@@ -46,14 +46,14 @@ $("#vatno").on( 'change', function(){
             }else if(data[0].exist == 'y') {
                 $("#vatnomessage").removeClass("validation-valid-label")
                 $("#vatnomessage").addClass("validation-invalid-label")
-                $('#msg').html("นิติบุคคลนี้ลงทะเบียนแล้ว");
+                $('#msg').html("เลขประจำตัวผู้เสียภาษีอากรนี้ลงทะเบียนแล้ว");
                 $('#vatno').val('');
                 $("#vatnomessage").attr("hidden",false); 
             }
         }else{
             $("#vatnomessage").removeClass("validation-valid-label")
             $("#vatnomessage").addClass("validation-invalid-label")
-            $('#msg').html("ไม่พบนิติบุคคล");
+            $('#msg').html("ไม่พบเลขประจำตัวผู้เสียภาษีอากร");
             $('#vatno').val('');
             $("#vatnomessage").attr("hidden",false); 
         }

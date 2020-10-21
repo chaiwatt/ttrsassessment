@@ -115,7 +115,9 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $fulltbpinvestments = FullTbpInvestment::where('full_tbp_id',$fulltbp->id)->get();        
         $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpreturnofinvestment = FullTbpReturnOfInvestment::where('full_tbp_id',$fulltbp->id)->first();
-        $fulltbpcompanydocs = FullTbpCompanyDoc::where('full_tbp_id',$fulltbp->id)->get();
+
+        $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
+       
         return view('dashboard.company.project.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -180,7 +182,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
             $fulltbpcompanyprofiledetail->save();
         }
 
-        return redirect()->back()->withSuccess('แก้ไข Full Tbp สำเร็จ');
+        return redirect()->back()->withSuccess('แก้ไข Full TBP สำเร็จ');
     }
 
     public function DownloadPDF($id){
@@ -214,13 +216,13 @@ class DashboardCompanyProjectFullTbpController extends Controller
             'file' => $filelocation,
             'status' => 2
         ]);
-        $message = 'เอกสาร Full Tbp' ;
+        $message = 'เอกสาร Full TBP' ;
         $fulltbp = FullTbp::find($id);
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
-            $message = 'เอกสาร Full Tbp ที่มีการแก้ไข' ;
+            $message = 'เอกสาร Full TBP ที่มีการแก้ไข' ;
         }
 
         $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id)->update([
@@ -250,7 +252,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         Message::sendMessage('ส่ง'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($projectassignment->leader_id)->id);
         Message::sendMessage('ส่ง'.$message,'เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
         
-        return redirect()->route('dashboard.company.project.fulltbp')->withSuccess('ส่งเอกสาร Full Tbp สำเร็จ');
+        return redirect()->route('dashboard.company.project.fulltbp')->withSuccess('ส่งเอกสาร Full TBP สำเร็จ');
     }
    
 }

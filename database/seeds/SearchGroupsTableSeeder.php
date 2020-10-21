@@ -37,10 +37,10 @@ class SearchGroupsTableSeeder extends Seeder
                 'name' => 'ผู้เชี่ยวชาญ'
             ],
             [
-                'name' => 'วันที่รับ Mini Tbp'
+                'name' => 'วันที่รับ Mini TBP'
             ],
             [
-                'name' => 'วันที่รับ Full Tbp'
+                'name' => 'วันที่รับ Full TBP'
             ],
             [
                 'name' => 'วันที่ประเมิน'

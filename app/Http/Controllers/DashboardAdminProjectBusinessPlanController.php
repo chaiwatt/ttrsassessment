@@ -11,7 +11,7 @@ use App\Model\BusinessType;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Model\NotificationBubble;
-use App\Model\RegisteredCapitalType;
+// use App\Model\RegisteredCapitalType;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminProjectBusinessPlanController extends Controller
@@ -28,14 +28,14 @@ class DashboardAdminProjectBusinessPlanController extends Controller
     public function View($id){
         $businessplan = BusinessPlan::find($id);
         $company = Company::find($businessplan->company_id);
-        $registeredcapitaltypes = RegisteredCapitalType::get();
+        // $registeredcapitaltypes = RegisteredCapitalType::get();
         $industrygroups = IndustryGroup::get();
         $businesstypes = BusinessType::get();
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$company->province_id)->get();
         $tambols = Tambol::where('amphur_id',$company->amphur_id)->get();
         return view('dashboard.admin.project.businessplan.view')->withCompany($company)
-                                        ->withRegisteredcapitaltypes($registeredcapitaltypes)
+                                        // ->withRegisteredcapitaltypes($registeredcapitaltypes)
                                         ->withIndustrygroups($industrygroups)
                                         ->withBusinesstypes($businesstypes)
                                         ->withAmphurs($amphurs)

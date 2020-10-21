@@ -16,9 +16,11 @@
         <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class="text-center mb-0">
+                {{-- <div class="text-center mb-0">
                     <i class="icon-lock icon-2x text-warning-400 border-warning-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
-                    {{-- <h5 class="mb-0">เข้าสู่ระบบ</h5> --}}
+                </div> --}}
+                <div class="text-center mb-3 mb-md-2" style="font-size:40px">
+                    เข้าสู่ระบบ
                 </div>
 
                 <div class="form-group form-group-feedback form-group-feedback-left">

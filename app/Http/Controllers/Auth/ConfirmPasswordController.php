@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
@@ -26,7 +27,21 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function redirectTo()
+    {
+        $user = Auth::user();
+        if($user->user_type_id >= 4){
+            return redirect()->route('dashboard.admin.report'); 
+        }else if($user->user_type_id == 2){
+            return redirect()->route('dashboard.expert.report'); 
+        }else if($user->user_type_id <= 2){
+            if($user->verify_type == 1){
+                return redirect()->route('dashboard.company.report'); 
+            }
+        }
+    }
 
     /**
      * Create a new controller instance.

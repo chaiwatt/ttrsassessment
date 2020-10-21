@@ -20,7 +20,7 @@ class CreateCompanyEmploysTable extends Migration
             $table->unsignedBigInteger('prefix_id')->nullable();
             $table->string('name',120)->nullable();
             $table->string('lastname',120)->nullable();
-            $table->unsignedBigInteger('employ_position_id');
+            $table->unsignedBigInteger('employ_position_id')->nullable();
             $table->string('phone',12)->nullable();
             $table->string('workphone',12)->nullable();
             $table->string('email',120)->nullable();

@@ -15,8 +15,8 @@ class CreateFullTbpCompanyDocsTable extends Migration
     {
         Schema::create('full_tbp_company_docs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('full_tbp_id');
-            $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->string('name',120);
             $table->string('path',250);
             $table->timestamps();

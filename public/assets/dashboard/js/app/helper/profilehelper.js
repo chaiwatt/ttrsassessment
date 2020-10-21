@@ -3,6 +3,7 @@ import * as Expert from './expert.js'
 import * as Friend from './friend.js'
 import * as SMS from './sms.js'
 import * as Hid from './hid.js'
+import * as Project from './project.js';
 
 var a=0;
 $(document).on("click","#btn_modal_expertexpience",function(e){
@@ -306,8 +307,8 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
                         <td>${friendrequest.requestcoming.usertype['name']}</td>   
                         <td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td>                 
                         <td>                                                                                                      
-                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                                                        
-                            <a type="button" data-id="${friendrequest['id']}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a> 
+                            <a type="button" data-id="${friendrequest['id']}" class="btn btn-sm bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                                                        
+                            <a type="button" data-id="${friendrequest['id']}" class="btn btn-sm bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a> 
                         </td>
                     <tr>`
             });
@@ -319,7 +320,7 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
                             <td>${friend.user['name']}  ${(friend.user['lastname'] == null) ? "" : friend.user['lastname']}</td>
                             <td>${friend.user.usertype['name']}</td>                 
                             <td>                                                                                                      
-                                <a type="button" data-id="${friend['id']}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a>                                           
+                                <a type="button" data-id="${friend['id']}" class="btn btn-sm bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a>                                           
                             </td>
                         <tr>`
                 });
@@ -355,7 +356,7 @@ $(document).on("click","#deletefriendclass_editview",function(e){
                                 <td>${friend.user['name']}  ${(friend.user['lastname'] == null) ? "" : friend.user['lastname']}</td>
                                 <td>${friend.user.usertype['name']}</td>                 
                                 <td>                                                                                                                                                                             
-                                    <a type="button" data-id="${friend['id']}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
+                                    <a type="button" data-id="${friend['id']}" class="btn btn-sm bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
                                 </td>
                             <tr>`
                     });
@@ -496,7 +497,7 @@ $("#vatno").on('change', function() {
     var vatid = $(this).val();
     if(vatid.length != 13){ 
         $('#msg').addClass('text-danger');    
-        $('#msg').html(" หมายเลขผู้เสียภาษีไม่ถูกต้อง")
+        $('#msg').html(" เลขประจำตัวผู้เสียภาษีอากรไม่ถูกต้อง")
         $('#vatno').val('');
         return ;
     }
@@ -508,11 +509,11 @@ $("#vatno").on('change', function() {
                 $('#msg').html( data[0].title + data[0].name)
             }else if(data[0].exist == 'y') {
                 $('#msg').addClass('text-danger');   
-                $('#msg').html(" นิติบุคคลนี้ลงทะเบียนแล้ว");
+                $('#msg').html(" เลขประจำตัวผู้เสียภาษีอากรนี้ลงทะเบียนแล้ว");
             }
         }else{
             $('#msg').addClass('text-danger');   
-            $('#msg').html(" ไม่พบนิติบุคคล");
+            $('#msg').html(" ไม่พบเลขประจำตัวผู้เสียภาษีอากร");
             $('#vatno').val('');
         }
     })
@@ -673,3 +674,159 @@ $("#hid").on('change', function() {
 }
 
 
+$("#companydoc").on('change', function() {
+    if($('#companydocname').val() == '')return ;
+    var file = this.files[0];
+    console.log(file);
+    if (this.files[0].size/1024/1024*1000 > 2000 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+    formData.append('companydocname',$('#companydocname').val());
+        $.ajax({
+            url: `${route.url}/api/fulltbp/companydoc/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_companydoc_wrapper_tr").html(html);
+                 $('#modal_add_companydoc').modal('hide');
+        }
+    });
+});
+
+$(document).on("click",".deletefulltbpcompanydocattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deleteCompanydoc($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_companydoc_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on('click', '#btn_modal_add_authorized_director', function(e) {
+    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#directorname').val(),$('#directorlastname').val()).then(data => {
+        var html = ``;
+        console.log(data);
+        data.forEach(function (authorizeddirector,index) {
+            html += `<tr >                                        
+                <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            
+                <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
+            </tr>`
+            });
+         $("#authorized_director_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+function addAuthorizedDirector(id,prefix,name,lastname) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/company/addauthorizeddirector`,
+          type: 'POST',
+          dataType: "json",
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            id : id,
+            prefix : prefix,
+            name : name,
+            lastname : lastname,
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
+  $(document).on('click', '.deleteauthorizeddirector', function(e) {
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            deleteAuthorizedDirector($(this).data('id')).then(data => {
+                var html = ``;
+                console.log(data);
+                data.forEach(function (authorizeddirector,index) {
+                    html += `<tr >                                        
+                        <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            
+                        <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
+                    </tr>`
+                    });
+                 $("#authorized_director_wrapper_tr").html(html);
+            })
+            .catch(error => {})        
+        }
+    });
+
+
+});
+  function deleteAuthorizedDirector(id) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/company/deleteauthorizeddirector`,
+          type: 'POST',
+          dataType: "json",
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            id : id
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+      })
+  }
+ 
+ 

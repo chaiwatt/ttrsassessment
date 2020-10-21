@@ -5,6 +5,7 @@ namespace App;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\UserType;
+use App\Model\UserGroup;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
 use App\Model\UserPosition;
@@ -82,6 +83,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getExpertassignmentAttribute()
     {
         return ExpertAssignment::where('user_id',$this->id)->where('expert_assignment_status_id',2)->get();
+    }
+
+    public function getUsergroupAttribute()
+    {
+        return UserGroup::find($this->user_group_id);
     }
     
 }

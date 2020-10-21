@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Model\Company;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
@@ -60,8 +61,71 @@ class TinPinController extends Controller
                 $companyinfo = collect($_companyinfo);
                 return response()->json($companyinfo);
             }else{
-                return response()->json($companyinfo);
+                if(strlen($request->vatid) != 13){ 
+                    return response()->json($companyinfo);
+                }else{
+                    for($i=0, $sum=0; $i<12;$i++){
+                        $sum += (int)( $request->vatid[$i] ) * (13-$i);
+                    }
+                    if((11-($sum%11))%10 == (int)($request->vatid[12] ) ){
+                        $check = User::where('hid' , $request->vatid)->first();
+                        if( !empty($check) ){
+                            $_companyinfo[] = array('vatid' => $request->vatid, 'registerdate' => '', 'registerdateth' => '','title' => '','name' => 'บัตรประจำตัวประชาชน','housenumber' => ''
+                                            ,'moo' => '','soi' => '','street' => '','tambolname' => '','amphurname' => ''
+                                            ,'provincename' => '','postalcode' => '','vat' => '','exist' => 'y');
+                            $companyinfo = collect($_companyinfo);
+                            return response()->json($companyinfo);
+                        }
+                        else{
+                            $_companyinfo[] = array('vatid' => $request->vatid, 'registerdate' => '', 'registerdateth' => '','title' => '','name' => 'บัตรประจำตัวประชาชน','housenumber' => ''
+                                            ,'moo' => '','soi' => '','street' => '','tambolname' => '','amphurname' => ''
+                                            ,'provincename' => '','postalcode' => '','vat' => '','exist' => 'n');
+                            $companyinfo = collect($_companyinfo);
+                            return response()->json($companyinfo);
+                        }
+                    }
+                    else{
+                        return response()->json($companyinfo);
+                    }
+                }
             }
         }
     }
+
+    public function CheckHid($hid){
+        $arrresult = array();
+        if(strlen( $hid ) != 13){ 
+            $arrresult[] = array(
+                'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากรูปแบบไม่ถูกต้อง', 
+                'success' => false
+            );
+        }
+        else{
+            for($i=0, $sum=0; $i<12;$i++){
+                $sum += (int)( $hid[$i] ) * (13-$i);
+            }
+            if((11-($sum%11))%10 == (int)($hid[12] ) ){
+                $check = User::where('hid' , $hid)->first();
+                if( !empty($check) ){
+                    $arrresult[] = array(
+                        'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากมีอยู่ในระบบแล้ว', 
+                        'success' => false
+                    );
+                }
+                else{
+                    $arrresult[] = array(
+                        'message' => 'สามารถใช้รหัสบัตรประชาชนนี้ได้', 
+                        'success' => true
+                    );
+                }
+            }
+            else{
+                $arrresult[] = array(
+                    'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากรูปแบบไม่ถูกต้อง', 
+                    'success' => false
+                );
+            }
+        }
+        return response()->json($arrresult);  
+    } 
 }

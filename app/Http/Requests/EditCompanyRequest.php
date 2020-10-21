@@ -21,13 +21,11 @@ class EditCompanyRequest extends FormRequest
         return [
             'company' => 'required_if:usergroup,==,1',
             'vatno' => 'required_if:usergroup,==,1',
-            'registeredyear' => 'required_if:usergroup,==,1',
+            'registeredyear' => 'required_if:usergroup,==,1|numeric|between:2500,2600',
             'registeredcapital' => 'required_if:usergroup,==,1',
             'paidupcapital' => 'required_if:usergroup,==,1',
-            'businesstype' => 'required',
             'industrygroup' => 'required',
             'phone' => 'required',
-            'fax' => 'required',
             'email' => 'required',
             'address' => 'required',
             'province' => 'required',
@@ -39,15 +37,13 @@ class EditCompanyRequest extends FormRequest
     public function messages()
     {
       return  [
-            'company.required' => 'ยังไม่ได้กรอกชื่อนิติบุคคล',
-            'vatno.required' => 'ยังไม่ได้กรอกเลขทะเบียนนิติบุคคล',
-            'registeredyear.required' => 'ยังไม่ได้กรอกปีที่จดทะเบียน',
-            'registeredcapital.required' => 'ยังไม่ได้กรอกทุนจดทะเบียน',
-            'paidupcapital.required' => 'ยังไม่ได้กรอกทุนจดทะเบียนที่เรียกชำระแล้ว',
-            'businesstype.required' => 'ยังไม่ได้เลือกประเภทการจดทะเบียน',
+            'company.required_if' => 'ยังไม่ได้กรอกชื่อนิติบุคคล',
+            'vatno.required_if' => 'ยังไม่ได้กรอกเลขทะเบียนนิติบุคคล',
+            'registeredyear.required_if' => 'ปีที่จดทะเบียนไม่ถูกต้อง',
+            'registeredcapital.required_if' => 'ยังไม่ได้กรอกทุนจดทะเบียน',
+            'paidupcapital.required_if' => 'ยังไม่ได้กรอกทุนจดทะเบียนที่เรียกชำระแล้ว',
             'industrygroup.required' => 'ยังไม่ได้เลือกกลุ่มธุรกิจ',
             'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
-            'fax.required' => 'ยังไม่ได้กรอกแฟ็กซ์',
             'email.required' => 'ยังไม่ได้กรอกอีเมล',
             'address.required' => 'ยังไม่ได้กรอกที่อยู่',
             'province.required' => 'ยังไม่ได้เลือกจังหวัด',
@@ -57,4 +53,3 @@ class EditCompanyRequest extends FormRequest
       ]; 
     }
 }
-//'paidupcapital' => 'required_if:usergroup,==,1',

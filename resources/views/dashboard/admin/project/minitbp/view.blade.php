@@ -6,7 +6,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Mini Tbp: {{$minitbp->project}}</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Mini TBP: {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
         </div>
@@ -15,8 +15,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="#" class="breadcrumb-item"> Mini Tbp</a>
-                    <a href="{{route('dashboard.admin.project.minitbp')}}" class="breadcrumb-item"> รายการ Mini Tbp</a>
+                    <a href="#" class="breadcrumb-item"> Mini TBP</a>
+                    <a href="{{route('dashboard.admin.project.minitbp')}}" class="breadcrumb-item"> รายการ Mini TBP</a>
                     <span class="breadcrumb-item active">{{$minitbp->project}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -54,7 +54,7 @@
 
                 	<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-highlight">
-							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini Tbp</a></li>
+							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini TBP</a></li>
 							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ผู้รับผิดชอบ</a></li>
 							<li class="nav-item"><a href="#left-icon-manager" class="nav-link" data-toggle="tab"><i class="icon-quill4 mr-2"></i> ข้อมูลผู้ลงนาม</a></li>
 							<li class="nav-item"><a href="#left-icon-timeline" class="nav-link" data-toggle="tab"><i class="icon-history mr-2"></i> TimeLine</a></li>

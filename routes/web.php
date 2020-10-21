@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Auth::routes(['verify' => true]);
+Auth::routes();
+
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('generate','PDFController@Generate')->name('generate');
 
@@ -35,6 +39,8 @@ Route::group(['prefix' => 'social'], function(){
 Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => 'company'], function(){
         Route::post('getsubisic','Api\CompanyController@GetSubisic')->name('api.company.getsubisic');            
+        Route::post('addauthorizeddirector','Api\CompanyController@AddAuthorizedDirector')->name('api.company.addauthorizeddirector');
+        Route::post('deleteauthorizeddirector','Api\CompanyController@DeleteAuthorizedDirector')->name('api.company.deleteauthorizeddirector');
     }); 
     Route::group(['prefix' => 'alert'], function(){
         Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');            
@@ -103,7 +109,10 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::group(['prefix' => 'expert'], function(){
             Route::post('deleteexperience','Api\ExpertController@DeleteExperience')->name('api.expert.deleteexperience');    
-            Route::post('deleteeducation','Api\ExpertController@DeleteEducation')->name('api.expert.deleteeducation');         
+            Route::post('deleteeducation','Api\ExpertController@DeleteEducation')->name('api.expert.deleteeducation');        
+            Route::post('addExpertfield','Api\ExpertController@AddExpertField')->name('api.expert.addExpertfield');    
+            Route::post('deleteExpertfield','Api\ExpertController@DeleteExpertField')->name('api.expert.deleteExpertfield');    
+            Route::post('addexpertdoc','Api\ExpertController@AddExpertDoc')->name('api.expert.addexpertdoc');     
         });
         Route::group(['prefix' => 'businessplan'], function(){
             Route::group(['prefix' => 'status'], function(){
@@ -780,6 +789,14 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'profile'], function(){
             Route::get('edit/{userid}','SettingProfileController@Edit')->name('setting.profile.edit'); 
             Route::post('editsave/{userid}','SettingProfileController@EditSave')->name('setting.profile.editsave'); 
+            Route::group(['prefix' => 'user'], function(){
+                Route::get('edit/{userid}','SettingProfileUserController@Edit')->name('setting.profile.user.edit'); 
+                Route::post('editsave/{userid}','SettingProfileUserController@EditSave')->name('setting.profile.user.editsave'); 
+            });
+            Route::group(['prefix' => 'expert'], function(){
+                Route::get('edit/{userid}','SettingProfileExpertController@Edit')->name('setting.profile.expert.edit'); 
+                Route::post('editsave/{userid}','SettingProfileExpertController@EditSave')->name('setting.profile.expert.editsave'); 
+            });
         });
     });   
 });  

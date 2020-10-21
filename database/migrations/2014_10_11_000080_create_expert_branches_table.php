@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthorizedDirectorsTable extends Migration
+class CreateExpertBranchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateAuthorizedDirectorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('authorized_directors', function (Blueprint $table) {
+        Schema::create('expert_branches', function (Blueprint $table) {
             $table->id();
+            $table->string('name',250);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateAuthorizedDirectorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authorized_directors');
+        Schema::dropIfExists('expert_branches');
     }
 }

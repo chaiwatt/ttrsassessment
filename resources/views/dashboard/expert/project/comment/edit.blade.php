@@ -16,7 +16,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="#" class="breadcrumb-item"> Full Tbp</a>
+                    <a href="#" class="breadcrumb-item"> Full TBP</a>
                     <span class="breadcrumb-item active">ความเห็นผู้เชี่ยวชาญ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -51,7 +51,7 @@
                         @csrf
                     <div class="card-body">
                         <ul class="nav nav-tabs nav-tabs-highlight">
-                            {{-- <li class="nav-item"><a href="#left-icon-fulltbp" class="nav-link active" data-toggle="tab"><i class="icon-files-empty mr-2"></i>Full Tbp</a></li> --}}
+                            {{-- <li class="nav-item"><a href="#left-icon-fulltbp" class="nav-link active" data-toggle="tab"><i class="icon-files-empty mr-2"></i>Full TBP</a></li> --}}
                             <li class="nav-item"><a href="#left-icon-overview" class="nav-link active" data-toggle="tab"><i class="icon-magic-wand2 mr-2"></i>Overview</a></li>
                             <li class="nav-item"><a href="#left-icon-management" class="nav-link" data-toggle="tab"><i class="icon-stamp mr-2"></i>Management</a></li>
                             <li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-atom2 mr-2"></i>Technology</a></li>

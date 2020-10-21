@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Image;
 use App\User;
 use App\Helper\SMS;
+use App\Model\Isic;
 use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Friend;
@@ -11,6 +12,7 @@ use App\Model\Prefix;
 use App\Model\Tambol;
 use App\Model\Company;
 use App\Model\Country;
+use App\Model\IsicSub;
 use App\Model\Province;
 use App\Model\FrontPage;
 use App\Model\UserGroup;
@@ -19,17 +21,21 @@ use App\Model\GeneralInfo;
 use App\Model\UserPosition;
 use App\Model\VerifyStatus;
 use App\Model\FriendRequest;
+
+use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Helper\CreateCompany;
-
 use App\Model\EducationLevel;
+use App\Helper\DateConversion;
 use App\Model\EducationBranch;
 use App\Model\ExpertEducation;
 use App\Model\FrontPageStatus;
 use App\Model\MessagePriority;
 use App\Model\UserAlertStatus;
 use App\Model\ExpertExperience;
+use App\Model\FullTbpCompanyDoc;
 use App\Model\SocialLoginStatus;
+use App\Model\AuthorizedDirector;
 use App\Model\MessageBoxAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -50,7 +56,6 @@ class SettingProfileController extends Controller
         $educationlevels = EducationLevel::get();
         $educationbranches = EducationBranch::get();
         $countries = Country::get();
-        $auth = Auth::user();
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$auth->province_id)->get();
         $tambols = Tambol::where('amphur_id',$auth->amphur_id)->get();
@@ -74,6 +79,13 @@ class SettingProfileController extends Controller
         $useralertstatuses = UserAlertStatus::get();
         $smscredit = SMS::credit()[1];
         $socialloginstatuses = SocialLoginStatus::get();
+        $isics = Isic::get();
+        $company = Company::where('user_id',$auth->id)->first();
+        $isicsubs = IsicSub::where('isic_id',$company->isic_id)->get();
+        $industrygroups = IndustryGroup::get();
+
+        $fulltbpcompanydocs = FullTbpCompanyDoc::get();
+        $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
         return view('setting.profile.edit')->withUser($user)
                                         ->withPrefixes($prefixes)
                                         ->withProvinces($provinces)
@@ -99,17 +111,102 @@ class SettingProfileController extends Controller
                                         ->withFrontpagestatuses($frontpagestatuses)
                                         ->withUseralertstatuses($useralertstatuses)
                                         ->withSmscredit($smscredit)
-                                        ->withSocialloginstatuses($socialloginstatuses);
+                                        ->withSocialloginstatuses($socialloginstatuses)
+                                        ->withIsics($isics)
+                                        ->withIsicsubs($isicsubs)
+                                        ->withIndustrygroups($industrygroups)
+                                        ->withFulltbpcompanydocs($fulltbpcompanydocs)
+                                        ->withAuthorizeddirectors($authorizeddirectors);
     }
-    public function EditSave(Request $request, $userid){
+    public function EditSave(EditProfileRequest $request, $userid){
+        
         $auth = Auth::user();
-        if($request->action == 'personal'){
+        if($request->action == 'personal'){ //บุคคลธรรมดาและนิติบุคคล
             $user = User::find($userid);
             if(!Empty($request->password)){
                 $user->update([
                     'password' => Hash::make($request->password)
                 ]);
             }
+
+            $company = Company::where('user_id',$userid)->first();
+            $file = $request->picture; 
+            $filelocation = $company->logo;
+            if(!Empty($file)){         
+                if(!Empty($company->logo)){
+                    @unlink($company->logo);
+                }
+                $name = $file->getClientOriginalName();
+                $file = $request->picture;
+                $img = Image::make($file);  
+                $fname=str_random(10).".".$file->getClientOriginalExtension();
+                $filelocation = "storage/uploads/company/".$fname;
+                Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+            }
+
+            if($user->user_group_id == 1){
+                $paidupcapitaldate=null;
+                if(!Empty($request->paidupcapitaldate)){
+                    $paidupcapitaldate=DateConversion::thaiToEngDate($request->paidupcapitaldate);
+                }
+                $company->update([
+                    'name' => $request->company,
+                    'commercialregnumber' => $request->commercialregnumber,
+                    'registeredyear' => $request->registeredyear,
+                    'registeredcapital' => $request->registeredcapital,
+                    'paidupcapital' => $request->paidupcapital,
+                    'paidupcapitaldate' => $paidupcapitaldate,
+                    'industry_group_id' => $request->industrygroup,
+                    'business_type_id' => $request->businesstype,
+                    'phone' => $request->phone,
+                    'fax' => $request->fax,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'province_id' => $request->province,
+                    'amphur_id' => $request->amphur,
+                    'tambol_id' => $request->tambol,
+                    'postalcode' => $request->postalcode,
+                    'lat' => $request->lat,
+                    'lng' => $request->lng,
+                    'logo' => $filelocation
+                ]);
+                $user = User::find($userid);
+                $user->update([
+                    'prefix_id' => $request->prefix,
+                    'name' => $request->name,
+                    'lastname' => $request->lastname
+                ]);
+
+                return 'company';
+            }elseif($user->user_group_id == 2){
+                // $filelocation = $user->picture;
+                // if(!Empty($file)){         
+                //     if(!Empty($user->picture)){
+                //         @unlink($user->picture);
+                //     }
+                //     $name = $file->getClientOriginalName();
+                //     $file = $request->picture;
+                //     $img = Image::make($file);  
+                //     $fname=str_random(10).".".$file->getClientOriginalExtension();
+                //     $filelocation = "storage/uploads/company/".$fname;
+                //     Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+                // }
+
+                $user = User::find($userid);
+                $user->update([
+                    'prefix_id' => $request->prefix,
+                    'name' => $request->name,
+                    'lastname' => $request->lastname,
+                    'hid' => $request->hid,
+                    'user_position_id' => $request->userposition,
+                    'address' => $request->address,
+                    'phone' => $request->phone,
+                    'picture' => $filelocation,
+                    // 'user_group_id' => $usergroup,
+                    // 'user_alert_status_id' => $request->alert
+                ]);
+            }
+
             $email = $user->email;
             if(!Empty($request->email) && $email != $request->email){
                 $user->update([
@@ -151,7 +248,7 @@ class SettingProfileController extends Controller
                 'phone' => $request->phone,
                 'picture' => $filelocation,
                 'user_group_id' => $usergroup,
-                'user_alert_status_id' => $request->alert
+                // 'user_alert_status_id' => $request->alert
             ]);
             return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ');
         }else if($request->action == 'expert'){

@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ส่ง Mini Tbp</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ส่ง Mini TBP</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="{{route('setting.admin.assessment.criteriagroup')}}" class="breadcrumb-item"> Mini Tbp</a>
-                    <span class="breadcrumb-item active">ส่ง Mini Tbp</span>
+                    <a href="{{route('setting.admin.assessment.criteriagroup')}}" class="breadcrumb-item"> Mini TBP</a>
+                    <span class="breadcrumb-item active">ส่ง Mini TBP</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -54,9 +54,9 @@
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
-                                    <label>ไฟล์สแกน Mini Tbp</label>
+                                    <label>ไฟล์สแกน Mini TBP</label>
                                     <div class="input-group">													
-                                        <input type="text" id="filename" class="form-control border-right-0" placeholder="ไฟล์สแกน Mini Tbp" >
+                                        <input type="text" id="filename" class="form-control border-right-0" placeholder="ไฟล์สแกน Mini TBP" >
                                         <span class="input-group-append">
                                             <button class="btn bg-info" type="button" onclick="document.getElementById('attachment').click();">เลือกไฟล์</button>													
                                         </span>
@@ -64,7 +64,7 @@
                                     <input type="file" style="display:none;" id="attachment" name="attachment"/>
                                 </div>
                                 <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">ส่ง Mini Tbp <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal">ส่ง Mini TBP <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </fieldset>
                         </form>

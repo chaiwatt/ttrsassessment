@@ -16,9 +16,9 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->char('vatno',13)->nullable();
+            $table->char('vatno',13)->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('registered_capital_type_id')->nullable();
+            $table->char('commercialregnumber',15)->nullable();
             $table->unsignedBigInteger('isic_id')->default(1);
             $table->unsignedBigInteger('isic_sub_id')->default(1);
             $table->char('registeredyear',4)->nullable();
@@ -26,7 +26,7 @@ class CreateCompaniesTable extends Migration
             $table->double('paidupcapital',10,2)->nullable();
             $table->date('paidupcapitaldate')->nullable();
             $table->unsignedBigInteger('industry_group_id')->nullable();   
-            $table->unsignedBigInteger('business_type_id')->default(1);
+            $table->unsignedBigInteger('business_type_id')->nullable(); 
             $table->string('name',150)->nullable();
             $table->string('phone',20)->nullable();
             $table->string('fax',20)->nullable();

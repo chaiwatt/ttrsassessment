@@ -73,7 +73,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($registeredcapitaltypes as $registeredcapitaltype)
+                                    {{-- @foreach ($registeredcapitaltypes as $registeredcapitaltype)
                                     <tr>    
                                         <td> {{$registeredcapitaltype->name}} </td>                                         
                                         <td> {{$registeredcapitaltype->detail}} </td>  
@@ -84,7 +84,7 @@
                                             <a href="{{route('setting.admin.dashboard.registeredcapitaltype.delete',['id' => $registeredcapitaltype->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>      
                         </div>

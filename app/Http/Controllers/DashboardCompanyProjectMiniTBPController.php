@@ -240,11 +240,11 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
-            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' ได้ส่งเอกสาร Mini Tbp แล้ว โปรดมอบหมาย Leader ในขั้นตอนต่อไป ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' ได้ส่งเอกสาร Mini TBP แล้ว โปรดมอบหมาย Leader ในขั้นตอนต่อไป ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
             $alertmessage->save();
 
-            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Mini Tbp','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('ส่งเอกสาร Mini Tbp',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบ',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
+            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Mini TBP','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('ส่งเอกสาร Mini TBP',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TBP โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบ',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
 
         }else{
             $notificationbubble = new NotificationBubble();
@@ -258,15 +258,15 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $projectassignment->leader_id;
-            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' เอกสาร Mini Tbp ที่มีการแก้ไขแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' เอกสาร Mini TBP ที่มีการแก้ไขแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
             $alertmessage->save();
 
-            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:เอกสาร Mini Tbp ที่มีการแก้ไขแล้ว','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('เอกสาร Mini Tbp ที่มีการแก้ไขแล้ว',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:เอกสาร Mini TBP ที่มีการแก้ไขแล้ว','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('เอกสาร Mini TBP ที่มีการแก้ไขแล้ว',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TBP ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
     
         }
 
       
-        return redirect()->route('dashboard.company.project.minitbp')->withSuccess('ส่งเอกสาร Mini Tbp สำเร็จ');
+        return redirect()->route('dashboard.company.project.minitbp')->withSuccess('ส่งเอกสาร Mini TBP สำเร็จ');
     }
 }

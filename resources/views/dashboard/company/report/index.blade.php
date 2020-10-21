@@ -251,9 +251,9 @@
                     data.forEach(function (timeline,index) {
                         var doctype = '';
                         if(timeline.message_type == 1){
-                            doctype ='เอกสาร Mini Tbp';
+                            doctype ='เอกสาร Mini TBP';
                         }else if(timeline.message_type == 2){
-                            doctype ='เอกสาร Full Tbp';
+                            doctype ='เอกสาร Full TBP';
                         }
                         html += `<tr >                                        
                             <td> ${timeline.createdatth} </td>                            
@@ -277,9 +277,9 @@
             data.forEach(function (timeline,index) {
                 var doctype = '';
                 if(timeline.message_type == 1){
-                    doctype ='เอกสาร Mini Tbp';
+                    doctype ='เอกสาร Mini TBP';
                 }else if(timeline.message_type == 2){
-                    doctype ='เอกสาร Mini Tbp';
+                    doctype ='เอกสาร Mini TBP';
                 }
                 html += `<tr >                                        
                     <td> ${timeline.createdatth} </td>                            
