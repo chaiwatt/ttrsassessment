@@ -65,13 +65,15 @@
 						<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						@if (Auth::user()->user_type_id == 1)
+						@if (Auth::user()->user_type_id ==2)
 								<a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
-							@elseif(Auth::user()->user_type_id == 2)
+							{{-- @elseif(Auth::user()->user_type_id == 2) --}}
 								
 							@elseif(Auth::user()->user_type_id == 3)
 								<a href="{{route('setting.profile.expert.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
-							@elseif(Auth::user()->user_type_id == 4)
+								@elseif(Auth::user()->user_type_id == 4)
+								<a href="{{route('setting.profile.officer.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
+							{{-- @elseif(Auth::user()->user_type_id == 4) --}}
 						@endif
 						
 						<a href="{{route('setting.profile.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-comment-discussion"></i> ข้อความ @if ($shareunreadmessages->count() > 0) <span class="badge badge-pill bg-blue ml-auto">{{$shareunreadmessages->count()}}</span> @endif

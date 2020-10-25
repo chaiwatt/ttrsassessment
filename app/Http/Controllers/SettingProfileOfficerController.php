@@ -4,28 +4,20 @@ namespace App\Http\Controllers;
 use Image;
 use App\User;
 use Carbon\Carbon;
-use App\Model\Isic;
 use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Prefix;
 use App\Model\Tambol;
-use App\Model\Company;
-use App\Model\IsicSub;
 use App\Model\Province;
 use App\Model\ExpertDoc;
 use App\Model\ExpertField;
 use App\Model\ExpertBranch;
-use App\Model\ExpertDetail;
-use App\Model\IndustryGroup;
+use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
 use App\Model\EducationLevel;
-use App\Model\FullTbpCompanyDoc;
-use App\Model\AuthorizedDirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\EditProfileExpertRequest;
 
-class SettingProfileExpertController extends Controller
+class SettingProfileOfficerController extends Controller
 {
     public function Edit($userid){
         $user = Auth::user();
@@ -35,32 +27,28 @@ class SettingProfileExpertController extends Controller
         $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
         $amphurs1 = Amphur::where('province_id',$user->province1_id)->get();
         $tambols1 = Tambol::where('amphur_id',$user->amphur1_id)->get();
-        $expertbranches = ExpertBranch::get();
+        $officerbanches = ExpertBranch::get();
         $educationlevels = EducationLevel::get();
-        $expert = ExpertDetail::where('user_id',$userid)->first();
-        $expertfields = ExpertField::where('user_id',$user->id)->get();
-        $expertdocs = ExpertDoc::where('user_id',$user->id)->get();
-        return view('setting.profile.expert.edit')->withUser($user)
+        $officer = OfficerDetail::where('user_id',$userid)->first();
+        $officerfields = ExpertField::where('user_id',$user->id)->get();
+        $officerdocs = ExpertDoc::where('user_id',$user->id)->get();
+        
+        return view('setting.profile.officer.edit')->withUser($user)
                                             ->withPrefixes($prefixes)
                                             ->withProvinces($provinces)
                                             ->withAmphurs($amphurs)
                                             ->withTambols($tambols)
                                             ->withAmphurs1($amphurs1)
                                             ->withTambols1($tambols1)
-                                            ->withExpertbranches($expertbranches)
+                                            ->withOfficerbanches($officerbanches)
                                             ->withEducationlevels($educationlevels)
-                                            ->withExpert($expert)
-                                            ->withExpertfields($expertfields)
-                                            ->withExpertdocs($expertdocs);
+                                            ->withOfficer($officer)
+                                            ->withOfficerfields($officerfields)
+                                            ->withOfficerdocs($officerdocs);
     }
-    public function EditSave(EditProfileExpertRequest $request, $id){
+    public function EditSave(Request $request, $id){
         $auth = Auth::user();
         $user = User::find($auth->id);
-        if(!Empty($request->password)){
-            $user->update([
-                'password' => Hash::make($request->password)
-            ]);
-        }
         $file = $request->picture; 
         $filelocation = $user->picture;
         if(!Empty($file)){         
@@ -98,11 +86,10 @@ class SettingProfileExpertController extends Controller
             'lng' => $request->lng,
         ]);
 
-        ExpertDetail::where('user_id',$auth->id)->first()->update([
+        OfficerDetail::where('user_id',$auth->id)->first()->update([
             'position' => $request->position,
             'organization' => $request->organization,
             'education_level_id' => $request->educationlevel,
-            'expert_branch_id' => $request->expertbranch,
             'expereinceyear' => $request->expereinceyear,
             'expereincemonth' => $request->expereincemonth
         ]);
@@ -110,4 +97,3 @@ class SettingProfileExpertController extends Controller
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 
     }
 }
-

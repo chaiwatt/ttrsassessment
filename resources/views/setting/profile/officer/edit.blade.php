@@ -106,68 +106,69 @@
 		</div>
 	</div>
 
-	{{-- modal add_expertfield --}}
-	<div id="modal_add_expertfield" class="modal fade" style="overflow:hidden;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มความเชี่ยวชาญ</h5>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>ลำดับ</label><span class="text-danger">*</span>
-								<input type="number"  id="expertfieldnum" placeholder="ลำดับ" class="form-control" >
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>ความเชี่ยวชาญ</label><span class="text-danger">*</span>
-								<input type="text" id="expertfielddetail" placeholder="ความเชี่ยวชาญ" class="form-control" >
-							</div>
-						</div>
+		{{-- modal add_expertfield --}}
+		<div id="modal_add_expertfield" class="modal fade" style="overflow:hidden;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มความเชี่ยวชาญ</h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-				</div>           
-				<div class="modal-footer">
-					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_add_expertfield" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>ลำดับ</label><span class="text-danger">*</span>
+									<input type="number"  id="expertfieldnum" placeholder="ลำดับ" class="form-control" >
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>ความเชี่ยวชาญ</label><span class="text-danger">*</span>
+									<input type="text" id="expertfielddetail" placeholder="ความเชี่ยวชาญ" class="form-control" >
+								</div>
+							</div>
+						</div>
+					</div>           
+					<div class="modal-footer">
+						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+						<button id="btn_modal_add_expertfield" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div id="modal_add_expertdoc" class="modal fade" style="overflow:hidden;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเอกสารแนบ</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-                                <input type="text" id="expertdocname" placeholder="ชื่อเอกสาร" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-12">	
-                            <div class="input-group">													
-                                <button id="btnuploadexpertdoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('expertdoc').click();" >แนบเอกสาร</button>													
-                            </div>
-                            <input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc"/>
-                        </div>
-                    </div>
-                </div>           
-                <div class="modal-footer">
-                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_expertdoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	
+		<div id="modal_add_expertdoc" class="modal fade" style="overflow:hidden;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเอกสารแนบ</h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>ชื่อเอกสาร</label><span class="text-danger">*</span>
+									<input type="text" id="expertdocname" placeholder="ชื่อเอกสาร" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-12">	
+								<div class="input-group">													
+									<button id="btnuploadexpertdoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('expertdoc').click();" >แนบเอกสาร</button>													
+								</div>
+								<input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc"/>
+							</div>
+						</div>
+					</div>           
+					<div class="modal-footer">
+						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+						<button id="btn_modal_add_expertdoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	
 
 	<!-- Cover area -->
 	<div class="profile-cover">
@@ -251,7 +252,7 @@
 			</div>
 		@endif
 		<!-- Inner container -->
-		<form method="POST" action="{{route('setting.profile.expert.editsave',['userid' => $user->id ])}}" enctype="multipart/form-data">
+		<form method="POST" action="{{route('setting.profile.officer.editsave',['userid' => $user->id ])}}" enctype="multipart/form-data">
 			@csrf
 			<input name="usergroup" value="{{$user->user_group_id}}" type="text" hidden>
 			<div class="d-flex align-items-start flex-column flex-md-row">
@@ -262,7 +263,9 @@
 					{{-- <div class="tab-pane fade" id="personalinfo"> --}}
 						<!-- personalinfo -->
 						<div class="card">
-							<div class="card-body">																						
+							<div class="card-body">	
+
+																					
 										<div class="row">
 											<div class="col-md-6">  
 												<div class="form-group">
@@ -299,7 +302,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>เลขบัตรประจำตัวประชาชน<span class="text-danger">*</span></label></span>
-														<input type="number" name="hid" id="hid" value="{{old('hid') ?? $user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control" >
+														<input type="number" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control" >
 														<small id="hidinvalid" class="form-text text-danger" hidden></small>
 													</div>
 												</div>
@@ -311,7 +314,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ที่อยู่</label><span class="text-danger">*</span>
-													<input type="text"  name="address" value="{{old('address') ?? $user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+													<input type="text"  name="address" value="{{$user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -348,7 +351,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode" value="{{old('postalcode') ?? $user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+													<input type="text"  name="postalcode" value="{{$user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control">
 												</div>
 											</div>
 											<legend>
@@ -357,7 +360,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ที่อยู่</label><span class="text-danger">*</span>
-													<input type="text"  name="address1" value="{{old('address1') ?? $user->address1}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+													<input type="text"  name="address1" value="{{$user->address1}}"  placeholder="ที่อยู่บริษัท" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -394,55 +397,58 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode1" value="{{old('postalcode1') ?? $user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+													<input type="text"  name="postalcode1" value="{{$user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>โทรศัพท์<span class="text-danger">*</span></label>
-													<input type="text"  name="phone" value="{{old('phone') ?? $user->phone}}"  placeholder="โทรศัพท์" class="form-control">
+													<input type="text"  name="phone" value="{{$user->phone}}"  placeholder="โทรศัพท์" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>โทรสาร</label>
-													<input type="text"  name="fax" value="{{old('fax') ?? $user->fax}}"  placeholder="โทรสาร" class="form-control">
+													<input type="text"  name="fax" value="{{$user->fax}}"  placeholder="โทรสาร" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>เว็บไซต์</label>
-													<input type="text"  name="website" value="{{old('website') ?? $user->website}}"  placeholder="โทรศัพท์" class="form-control">
+													<input type="text"  name="website" value="{{$user->website}}"  placeholder="โทรศัพท์" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ละติจูด</label>
-													<input type="text"  name="lat" value="{{old('lat') ?? $user->lat}}"  placeholder="ละติจูด" class="form-control">
+													<input type="text"  name="lat" value="{{$user->lat}}"  placeholder="ละติจูด" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ลองติจูด<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
-													<input type="text"  name="lng" value="{{old('lng') ?? $user->lng}}"  placeholder="ลองติจูด" class="form-control">
+													{{-- <label>ลองติจูด<a href="https://google.com/maps/place/00,11" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label> --}}
+													<input type="text"  name="lng" value="{{$user->lng}}"  placeholder="ลองติจูด" class="form-control">
+													{{-- <input type="text"  name="lng" value="{{$user->company->lng}}"  placeholder="ลองติจูด" class="form-control"> --}}
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ประเภทผู้เชี่ยวชาญ<span class="text-danger">*</span></label>
-													<input type="text"  name="experttype" value="{{$expert->user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly>
+													<label>ประเภทผู้เชี่ยวชาญ</label>
+													{{-- <input type="text"  name="experttype" value="{{$officer->user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly> --}}
+													<input type="text"  name="experttype" value=""  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>หน่วยงานที่สังกัด<span class="text-danger">*</span></label>
-													<input type="text"  name="organization" value="{{old('organization') ?? $expert->organization}}"  placeholder="หน่วยงานที่สังกัด" class="form-control">
+													<label>หน่วยงานที่สังกัด</label>
+													<input type="text"  name="organization" value="{{$officer->organization}}"  placeholder="หน่วยงานที่สังกัด" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ตำแหน่ง<span class="text-danger">*</span></label>
-													<input type="text"  name="position" value="{{old('position') ?? $expert->position}}"  placeholder="ตำแหน่ง" class="form-control">
+													<label>ตำแหน่ง</label>
+													<input type="text"  name="position" value="{{$officer->position}}"  placeholder="ตำแหน่ง" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
@@ -450,9 +456,9 @@
 													{{-- <label>วุติการศึกษาสูงสุด</label>
 													<input type="text"  name="lat" value=""  placeholder="ละติจูด" class="form-control"> --}}
 													<label>วุติการศึกษาสูงสุด<span class="text-danger">*</span></label>
-													<select name="educationlevel" id="educationlevel" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-select2">
+													<select name="educationlevel" id="educationlevel" data-placeholder="วุติการศึกษาสูงสุด" class="form-control form-control-select2">
 														@foreach ($educationlevels as $educationlevel)                                                                
-															<option value="{{$educationlevel->id}}" @if ($educationlevel->id == $expert->education_level_id) selected @endif > {{$educationlevel->name}} </option>
+															<option value="{{$educationlevel->id}}" @if ($educationlevel->id == $officer->education_level_id) selected @endif > {{$educationlevel->name}} </option>
 														@endforeach    
 													</select>
 												</div>
@@ -461,24 +467,30 @@
 												<div class="row">
 													<div class="col-md-6"> 
 														<div class="form-group">
-															<label>ประสบการณ์การทำงาน (ปี)<span class="text-danger">*</span></label>
-															<input type="text"  name="expereinceyear" value="{{old('expereinceyear') ?? $expert->expereinceyear}}"  placeholder="ประสบการณ์การทำงาน (ปี)" class="form-control">
+															<label>ประสบการณ์การทำงาน (ปี)</label>
+															<input type="text"  name="expereinceyear" value="{{$officer->expereinceyear}}"  placeholder="ประสบการณ์การทำงาน (ปี)" class="form-control">
 														</div>
 													</div>
 													<div class="col-md-6"> 
 														<div class="form-group">
-															<label>ประสบการณ์การทำงาน (เดือน)<span class="text-danger">*</span></label>
-															<input type="text"  name="expereincemonth" value="{{old('expereincemonth') ?? $expert->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control">
+															<label>ประสบการณ์การทำงาน (เดือน)</label>
+															<input type="text"  name="expereincemonth" value="{{$officer->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control">
 														</div>
 													</div>
 												</div>
 											</div>
+											{{-- <div class="col-md-6">  
+												<div class="form-group">
+													<label>ความเชี่ยวชาญ</label>
+													<input type="text"  name="lat" value=""  placeholder="ละติจูด" class="form-control">
+												</div>
+											</div> --}}
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>สาขาความเชี่ยวชาญ<span class="text-danger">*</span></label>
 													<select name="expertbranch" id="tambol" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-select2">
-														@foreach ($expertbranches as $expertbranch)                                                                
-															<option value="{{$expertbranch->id}}" @if ($expertbranch->id == $expert->expert_branch_id) selected @endif> {{$expertbranch->name}} </option>
+														@foreach ($officerbanches as $officerbanch)                                                                
+															<option value="{{$officerbanch->id}}" @if ($officerbanch->id == $officer->officer_branch_id) selected @endif> {{$officerbanch->name}} </option>
 														@endforeach    
 													</select>
 												</div>
@@ -500,8 +512,8 @@
 											<hr>
 											<div class="col-md-12">
 												<div class="form-group">
-													<input type="text" name="inpexpertfield" id="inpexpertfield" value="{{($expertfields->count() > 0) ? $expertfields->count() : ''}}" hidden>
-													<label for="">ความเชี่ยวชาญ<span class="text-danger">*</span></label>
+													{{-- <div class="col-md-12" > --}}
+													<label for="">ความเชี่ยวชาญ  </label>
 													<a href="#" id="btnexpertfield"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertfield">คลิกเพิ่ม</a>
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">
@@ -513,12 +525,13 @@
 																	</tr>
 																</thead>
 																<tbody id="expertfield_wrapper_tr"> 
-																	@foreach ($expertfields as $expertfield)
+																	@foreach ($officerfields as $officerfield)
 																		<tr >                                        
-																			<td> {{$expertfield->order}}</td>                                            
-																			<td> {{$expertfield->detail}}</td>    
+																			<td> {{$officerfield->order}}</td>                                            
+																			<td> {{$officerfield->detail}}</td>    
 																			<td> 
-																				<a type="button" data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield">ลบ</a>                                       
+																				{{-- <a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a> --}}
+																				<a type="button" data-id="{{$officerfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield">ลบ</a>                                       
 																			</td>
 																		</tr>
 																	@endforeach
@@ -543,12 +556,12 @@
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_expertdoc_wrapper_tr"> 
-																	@foreach ($expertdocs as $expertdoc)
+																	@foreach ($officerdocs as $officerdoc)
 																		<tr >                                        
-																			<td> {{$expertdoc->name}}</td>                                            
+																			<td> {{$officerdoc->name}}</td>                                            
 																			<td> 
-																				<a href="{{asset($expertdoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-																				<a type="button" data-id="{{$expertdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
+																				<a href="{{asset($officerdoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+																				<a type="button" data-id="{{$officerdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
 																			</td>
 																		</tr>
 																	@endforeach

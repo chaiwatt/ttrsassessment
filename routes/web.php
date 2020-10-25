@@ -113,7 +113,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('addExpertfield','Api\ExpertController@AddExpertField')->name('api.expert.addExpertfield');    
             Route::post('deleteExpertfield','Api\ExpertController@DeleteExpertField')->name('api.expert.deleteExpertfield');    
             Route::post('addexpertdoc','Api\ExpertController@AddExpertDoc')->name('api.expert.addexpertdoc');     
+            Route::post('deleteexpertdoc','Api\ExpertController@DeleteExpertDoc')->name('api.expert.deleteexpertdoc'); 
         });
+
         Route::group(['prefix' => 'businessplan'], function(){
             Route::group(['prefix' => 'status'], function(){
                 Route::post('update','Api\BusinessPlanController@Update')->name('api.businessplan.update');          
@@ -796,6 +798,10 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'expert'], function(){
                 Route::get('edit/{userid}','SettingProfileExpertController@Edit')->name('setting.profile.expert.edit'); 
                 Route::post('editsave/{userid}','SettingProfileExpertController@EditSave')->name('setting.profile.expert.editsave'); 
+            });
+            Route::group(['prefix' => 'officer'], function(){
+                Route::get('edit/{userid}','SettingProfileOfficerController@Edit')->name('setting.profile.officer.edit'); 
+                Route::post('editsave/{userid}','SettingProfileOfficerController@EditSave')->name('setting.profile.officer.editsave'); 
             });
         });
     });   

@@ -56,4 +56,42 @@ function addExpertfield(expertfieldnum,expertfielddetail){
     })
 }
 
-export {deleteEducation,deleteExpereince,addExpertfield}
+function deleteExpertDoc(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/expert/deleteexpertdoc`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function deleteExpertfield(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/expert/deleteExpertfield`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {deleteEducation,deleteExpereince,addExpertfield,deleteExpertDoc,deleteExpertfield}

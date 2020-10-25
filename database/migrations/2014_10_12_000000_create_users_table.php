@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('user_type_id');
             $table->string('linetoken')->nullable();
             $table->string('phone')->nullable();
+            $table->string('fax')->nullable();
             $table->string('picture')->nullable();
             $table->string('signature')->nullable();
             $table->string('cover')->nullable();
@@ -43,8 +44,9 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('verify_type')->default(1);
             $table->unsignedBigInteger('allow_assessment')->default(1);
             $table->unsignedBigInteger('user_group_id')->default(2);
-            // $table->unsignedBigInteger('user_alert_status_id')->nullable();
             $table->string('website',150)->nullable();
+            $table->string('lat',50)->nullable();
+            $table->string('lng',50)->nullable();
             $table->date('otp')->nullable();
             $table->rememberToken();
             $table->timestamps();

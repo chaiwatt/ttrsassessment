@@ -8,6 +8,7 @@ use App\Model\UserGroup;
 use App\Model\GeneralInfo;
 use App\Model\BusinessPlan;
 use App\Model\ExpertDetail;
+use App\Model\OfficerDetail;
 use App\Helper\CreateCompany;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +92,11 @@ class RegisterController extends Controller
             $xpertdetail = new ExpertDetail();
             $xpertdetail->user_id = $user->id;
             $xpertdetail->expert_type_id = $data['expert'];
+            $xpertdetail->save();
+        }
+        if($user->user_type_id == 4){
+            $xpertdetail = new OfficerDetail();
+            $xpertdetail->user_id = $user->id;
             $xpertdetail->save();
         }
         CreateCompany::createCompany($user,$companyname,$vatno);

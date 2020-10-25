@@ -3,7 +3,8 @@ Sortable.create(productList, {
     group: "sorting",
     sort: true
 });
-$('#btnsave').click(function() {
+// $('#btnsave').click(function() {
+$(document).on('click', '#btnsave', function(e) {
     var list = [];
     $("input:checkbox").each(function(key){
         if ($(this).is(":checked"))

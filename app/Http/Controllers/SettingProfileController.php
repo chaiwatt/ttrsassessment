@@ -122,7 +122,7 @@ class SettingProfileController extends Controller
         
         $auth = Auth::user();
         if($request->action == 'personal'){ //บุคคลธรรมดาและนิติบุคคล
-            $user = User::find($userid);
+            $user = $auth;
             if(!Empty($request->password)){
                 $user->update([
                     'password' => Hash::make($request->password)
