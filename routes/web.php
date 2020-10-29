@@ -334,7 +334,15 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'googlecalendar'], function(){
             Route::post('getevents','Api\GoogleCalendarController@GetEvents')->name('api.googlecalendar.getevents');
         });
-        
+        Route::group(['prefix' => 'minitbp'], function(){
+            Route::post('editsave','Api\MiniTbpController@EditSave')->name('api.minitbp.editsave');
+            Route::post('createpdf','Api\MiniTbpController@CreatePdf')->name('api.minitbp.createpdf');
+            Route::post('submitwithattachement','Api\MiniTbpController@SubmitWithAttachement')->name('api.minitbp.submitwithattachement');
+            Route::post('submitnoattachement','Api\MiniTbpController@SubmitNoAttachement')->name('api.minitbp.submitnoattachement');
+            Route::post('addjdmessage','Api\MiniTbpController@AddJdMessage')->name('api.minitbp.addjdmessage');
+            Route::post('getjdmessage','Api\MiniTbpController@GetJdMessage')->name('api.minitbp.getjdmessage');
+            
+        });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){

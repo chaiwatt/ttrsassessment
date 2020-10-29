@@ -75,6 +75,7 @@ class SettingUserCompanyController extends Controller
     }
 
     public function EditSave(EditCompanyRequest $request, $id){
+        
         $company = Company::find($id);
         $file = $request->picture; 
         $filelocation = $company->logo;

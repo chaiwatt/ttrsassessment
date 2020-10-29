@@ -97,7 +97,7 @@
             </a>
             <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
                 @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
-                    <li class="nav-item"><a href="{{route('dashboard.company.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.minitbp')?'active':''}}">Mini TBP
+                    <li class="nav-item"><a href="{{route('dashboard.company.project.minitbp.edit',['id'=>Auth::user()->company->businessplan->minitbp->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.minitbp')?'active':''}}">Mini TBP
                         @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                             <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                         @endif

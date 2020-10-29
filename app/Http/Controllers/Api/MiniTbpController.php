@@ -1,81 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\User;
-use DateTimeZone;
 use Carbon\Carbon;
-use App\Model\Amphur;
 use App\Model\Prefix;
-use App\Model\Tambol;
 use App\Model\Company;
 use App\Model\MiniTBP;
 use App\Helper\Message;
-use App\Model\Province;
-use App\Model\ThaiBank;
 use App\Helper\EmailBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
-use App\Model\SignatureStatus;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\EditMiniTbpRequest;
 use setasign\Fpdi\PdfParser\StreamReader;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
-class DashboardCompanyProjectMiniTBPController extends Controller
+class MiniTbpController extends Controller
 {
-    public function Index(){
-        NotificationBubble::where('target_user_id',Auth::user()->id)
-                    ->where('notification_category_id',1)
-                    ->where('notification_sub_category_id',4)
-                    ->where('status',0)->delete();
-        $company = Company::where('user_id',Auth::user()->id)->first();
-        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
-        $minitbps = MiniTBP::where('business_plan_id',$businessplan->id)->get();
-        // return $businessplan;
-        return view('dashboard.company.project.minitbp.index')->withMinitbps($minitbps);
-    }
-    public function Edit($id){
-        $user = Auth::user();
-        $company = Company::where('user_id',$user->id)->first();
-        $banks = ThaiBank::get();
-        $minitbp = MiniTBP::find($id);
-        $contactprefixes = Prefix::get();
-        $contactpositions = UserPosition::get();
-        $signaturestatuses = SignatureStatus::get();
-        $provinces = Province::get();
-        $amphurs = Amphur::where('province_id',$user->province_id)->get();
-        $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
-        return view('dashboard.company.project.minitbp.edit')->withMinitbp($minitbp)
-                                                ->withBanks($banks)
-                                                ->withCompany($company)
-                                                ->withContactprefixes($contactprefixes)
-                                                ->withContactpositions($contactpositions)
-                                                ->withSignaturestatuses($signaturestatuses)
-                                                ->withProvinces($provinces)
-                                                ->withAmphurs($amphurs)
-                                                ->withUser($user)
-                                                ->withTambols($tambols);
-    }
-    public function Pdf(){
-        require_once(base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
-        $segment = new \Segment();
-        $body = 'หาดทรายละเอียดสีขาว ตัดกับท้องฟ้าและน้ำทะเลสีครามใส คือบรรยากาศของท้องทะเลไทย ในช่วงของการแพร่ระบาดไวรัสโควิด-19 หาดทรายละเอียดสีขาว ตัดกับท้องฟ้าและน้ำทะเลสีครามใส คือบรรยากาศของท้องทะเลไทย ในช่วงของการแพร่ระบาดไวรัสโควิด-19';
-        $words = $segment->get_segment_array($body);
-        $text = implode("|",$words);
-        $data = ['title'=> 'DomPDF with Laravel','body'=> $text];
-        $pdf = Pdf::loadView('dashboard.company.project.minitbp.pdf',$data);
-        return $pdf->stream('document.pdf');
-    }
-    public function EditSave(EditMiniTbpRequest $request,$id){
-        MiniTBP::find($id)->update([
+    public function EditSave(Request $request){
+        $minitbp = MiniTBP::find($request->id);
+        $minitbpcode = $minitbp->minitbp_code;
+        if(Empty($minitbpcode)){
+            $minitbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad((MiniTBP::get()->count()),3,0,STR_PAD_LEFT); 
+        }
+        MiniTBP::find($request->id)->update([
             'project' => $request->project,
             'projecteng' => $request->projecteng,
+            'minitbp_code' => $minitbpcode,
             'finance1' => $request->finance1,
             'thai_bank_id' => $request->bank,
             'finance1_loan' => $request->finance1loan,
@@ -96,6 +53,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             'contactprefix' => $request->contactprefix,
             'contactname' => $request->contactname,
             'contactlastname' => $request->contactlastname,
+            'contactphone' => $request->contactphone,
+            'contactemail' => $request->contactemail,
             'contactposition_id' => $request->contactposition,
             'managerprefix' => $request->managerprefix,
             'managername' => $request->managername,
@@ -104,10 +63,22 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             'website' => $request->website,
             'signature_status_id' => $request->signature
         ]);
-        return  redirect()->route('dashboard.company.project.minitbp')->withSuccess('แก้ไขรายการสำเร็จ');
+
+        Company::where('user_id',Auth::user()->id)->first()->update([
+            'name' => $request->companyname,
+            'address' => $request->address,
+            'province_id' => $request->province,
+            'amphur_id' => $request->amphur,
+            'tambol_id' => $request->tambol,
+            'postalcode' => $request->postalcode
+        ]);
+
+        $minitbp = MiniTBP::find($request->id);
+        return response()->json($minitbp);
     }
 
-    public function DownloadPDF($id){
+    public function CreatePdf(Request $request){
+        
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -129,7 +100,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         ]);
         $auth = Auth::user();
         $company = Company::where('user_id',$auth->id)->first();
-        $minitpb = MiniTBP::find($id);
+        $minitpb = MiniTBP::find($request->id);
+        
         $company_name = (!Empty($company->name))?$company->name:'';
         $company_address = (!Empty($company->address))?$company->address:'';
 
@@ -150,7 +122,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $nonefinance5_detail = (!Empty($minitpb->nonefinance5) && !Empty($minitpb->nonefinance5_detail))?$minitpb->nonefinance5_detail:'' ;
         $nonefinance6_text = (!Empty($minitpb->nonefinance6))?'x':'';
         $nonefinance6_detail = (!Empty($minitpb->nonefinance6) && !Empty($minitpb->nonefinance6_detail))?$minitpb->nonefinance6_detail:'' ;
-        $signature = (!Empty($minitpb->signature_status_id) && !Empty(Auth::user()->signature))?Auth::user()->signature:'';
+        $signature = ($minitpb->signature_status_id == 2 && !Empty($auth->signature))?$auth->signature:'';
         $managerprefix = (!Empty($minitpb->managerprefix))?Prefix::find($minitpb->managerprefix)->name:'';
         $managername = (!Empty($minitpb->managername))?$minitpb->managername:'';
         $managerlastname = (!Empty($minitpb->managerlastname))?$minitpb->managerlastname:'';
@@ -158,7 +130,6 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $fileContent = file_get_contents(asset("assets/dashboard/template/minitbp.pdf"),'rb');
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
-        
         $segment = new \Segment();
         $words = $segment->get_segment_array($minitpb->project);
         $firstparagraph = '';
@@ -205,15 +176,14 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$managerposition. '</span>', 130,253.3, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 142,261.7, 150, 90, 'auto');
         // $mpdf->Output();
-        $path = public_path("storage/uploads/minitbp/pdf/");
-        $mpdf->Output($path . 'minitbp001.pdf');
+        $path = public_path("storage/uploads/minitbp/attachment/");
+        $mpdf->Output($path . $minitpb->minitbp_code.'.pdf');
+        return 'storage/uploads/minitbp/attachment/'.$minitpb->minitbp_code.'.pdf' ;
     }
-    
-    public function Submit($id){
-        $minitbp = MiniTBP::find($id);
-        return view('dashboard.company.project.minitbp.submit')->withMinitbp($minitbp);
-    }
-    public function SubmitSave(Request $request, $id){
+
+    public function SubmitWithAttachement(Request $request){
+        
+        $id = $request->id;
         $auth = Auth::user();
         $minitbp = MiniTBP::find($id);
         if(!Empty($minitbp->attachment)){
@@ -235,10 +205,10 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
             'business_plan_status_id' => 3
         ]);
-        
+
         $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id)->first();
-        
-        if(Empty($projectassignment)){
+        if(Empty($projectassignment->leader_id)){
+         
             $projectassignment = new ProjectAssignment();
             $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
             $projectassignment->save();
@@ -279,6 +249,80 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             Message::sendMessage('เอกสาร Mini TBP ที่มีการแก้ไขแล้ว',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TBP ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
         }
 
-        return redirect()->route('dashboard.company.project.minitbp')->withSuccess('ส่งเอกสาร Mini TBP สำเร็จ');
+    }
+    public function SubmitNoAttachement(Request $request){
+        $id = $request->id;
+        $auth = Auth::user();
+        $minitbp = MiniTBP::find($id);
+        $filelocation = "storage/uploads/minitbp/attachment/".$minitbp->minitbp_code.'pdf';
+
+        $minitbp->update([
+            'attachment' => $filelocation
+        ]);
+        $minitbp = MiniTBP::find($id);
+        if($minitbp->refixstatus == 1){
+            $minitbp->update([
+                'refixstatus' => 2  
+            ]);
+        }
+        BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
+            'business_plan_status_id' => 3
+        ]);
+
+        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id)->first();
+        if(Empty($projectassignment->leader_id)){
+         
+            $projectassignment = new ProjectAssignment();
+            $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $projectassignment->save();
+
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 1;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
+            $notificationbubble->save();
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
+            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' ได้ส่งเอกสาร Mini TBP แล้ว โปรดมอบหมาย Leader ในขั้นตอนต่อไป ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->save();
+
+            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Mini TBP','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('ส่งเอกสาร Mini TBP',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TBP โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบ',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
+
+        }else{
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 4;
+            $notificationbubble->user_id = Auth::user()->id;
+            $notificationbubble->target_user_id = $projectassignment->leader_id;
+            $notificationbubble->save();
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $projectassignment->leader_id;
+            $alertmessage->detail = 'โครงการ' .$minitbp->project. ' เอกสาร Mini TBP ที่มีการแก้ไขแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->save();
+
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:เอกสาร Mini TBP ที่มีการแก้ไขแล้ว','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('เอกสาร Mini TBP ที่มีการแก้ไขแล้ว',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TBP ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+        }
+    }
+
+    
+    public function GetJdMessage(Request $request){
+        $minitbp = MiniTBP::find($request->id);
+        return response()->json($minitbp);
+    }
+    public function AddJdMessage(Request $request){
+        MiniTBP::find($request->id)->update([
+            'jdmessage' => $request->message
+        ]);
+        $minitbp = MiniTBP::find($request->id);
+        return response()->json($minitbp);
     }
 }

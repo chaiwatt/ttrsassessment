@@ -18,6 +18,7 @@ class CreateMiniTBPSTable extends Migration
             $table->unsignedBigInteger('business_plan_id');
             $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
             $table->char('ref_doc',15)->nullable();
+            $table->string('minitbp_code',20)->nullable();
             $table->string('project',150)->nullable();
             $table->string('projecteng',150)->nullable();
             $table->char('finance1',5)->nullable()->comment('ขอสินเชื่อ)');
@@ -40,6 +41,8 @@ class CreateMiniTBPSTable extends Migration
             $table->unsignedBigInteger('contactprefix')->nullable();
             $table->string('contactname',250)->nullable();
             $table->string('contactlastname',250)->nullable();
+            $table->char('contactphone',12)->nullable();
+            $table->string('contactemail',250)->nullable();
             $table->unsignedBigInteger('contactposition_id')->nullable();
             $table->unsignedBigInteger('managerprefix')->nullable();
             $table->string('managername',250)->nullable();
@@ -49,6 +52,7 @@ class CreateMiniTBPSTable extends Migration
             $table->string('attachment',250)->nullable();
             $table->unsignedBigInteger('signature_status_id')->default(1);
             $table->char('submit',1)->default('1');
+            $table->text('jdmessage')->nullable();
             $table->char('refixstatus',1)->default('0');
             $table->timestamps();
         });

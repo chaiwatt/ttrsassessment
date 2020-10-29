@@ -1050,39 +1050,9 @@
 										<div class="row">	
 											<div class="col-md-12">
 												<fieldset>	
-													<div class="form-group">
-														<label>ชื่อกิจการ</label>
-														<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control" readonly>
-													</div>
-													 <div class="form-group">
-														<label>การจดทะเบียน<span class="text-danger">*</span></label>
-														<select name="businesstype" data-placeholder="การจดทะเบียน" class="form-control form-control-select2" disabled>
-															<option value=""></option>
-																@foreach ($businesstypes as $businesstype)
-																	<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
-																@endforeach
-														</select>
-													</div>
-													<div class="form-group">
-														<label>เลขทะเบียนนิติบุคคล</label>
-														<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control" readonly>
-													</div>
-													<div class="form-group">
-														<label>ปีที่จดทะเบียน</label>
-														<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
-													</div>
-													<div class="form-group">
-														<label>ทุนที่จดทะเบียน</label>
-														<input type="number" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control" readonly>
-													</div>
-													<div class="form-group">
-														<label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
-														<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
-													</div>
-													<div class="form-group">
-														<label>ทุนจดทะเบียนที่เรียกชำระแล้ว เมื่อวันที่</label>
-														<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
-													</div>
+
+
+
 												</fieldset>
 											</div>
 										</div>
@@ -1142,69 +1112,13 @@
 		
 										<div class="tab-content">
 											<div class="tab-pane fade show active" id="vertical-left-companyprofile" >	
-												<div class="form-group">
-													<div class="form-group">
-														<label for="">ข้อความ </label> <span class="text-primary" id="companyprofiletextlength"></span>
-														<input type="text" id="companyprofile_input" class="form-control companyprofileclass" >
-													</div>
-													<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
-														@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
-															<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
-														@endforeach
-													</div>
-												</div>
-												<hr>	
-												<div class="row">
-													<div class="col-md-12">	
-														<div class="input-group">													
-															<button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													
-														</div>
-														<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/>
-													</div>
-												</div>																								
-												<div class="row">	
-													<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12">	
-														<div class="table-responsive">
-															<table class="table table-striped">
-																<thead>
-																	<tr>
-																		<th>เอกสารแนบ</th>                                                                                  
-																		<th style="width:150px">ดาวน์โหลด</th>
-																	</tr>
-																</thead>
-																<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
-																	@foreach ($fulltbpcompanyprofileattachments as $fulltbpcompanyprofileattachment)
-																		<tr >                                        
-																			<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
-																			<td> 
-																				<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
-																				<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
-																			</td>
-																		</tr>
-																	@endforeach                            
-																</tbody>
-															</table>
-														</div>
-													</div>      
-												</div>
-												<div class="row">
-													<div class="col-md-12">	
-														<div class="form-group">
-															<br>
-															<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกประวัติบริษัท</button>
-														</div>
-													</div>
-												</div>
+
 												
 											</div>
 											<div class="tab-pane fade" id="vertical-left-quantityemploy">
 												<div class="row">
 													<div class="col-md-12">	
-														<div class="form-group">
+														{{-- <div class="form-group">
 															<label for="">ฝ่ายบริหาร</label>
 															<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
 														</div>
@@ -1223,7 +1137,7 @@
 														<div class="form-group">
 															<label for="">พนักงานทั่วไป </label>
 															<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
-														</div>
+														</div> --}}
 													</div>
 												</div>
 												<div class="row">
@@ -1863,7 +1777,7 @@
 								</div>
 							</div>
 							<div class="tab-pane fade" id="left-icon-marketanalysis">
-								<ul class="nav nav-tabs">
+								<ul class="nav nav-tabs ">
 									<li class="nav-item"><a href="#marketneed-tab" class="nav-link active" data-toggle="tab">Market need</a></li>
 									<li class="nav-item"><a href="#marketsize-tab" class="nav-link " data-toggle="tab">Market size</a></li>
 									<li class="nav-item"><a href="#marketshare-tab" class="nav-link " data-toggle="tab">Market share</a></li>
@@ -2349,9 +2263,284 @@
 						</div>
 
 						{{-- </form> --}}
+
+				
+					
+
 					</div>
+
+
+
 				</div>
 				<!-- /colors -->
+
+				<div class="card">
+					<div class="card-header bg-white header-elements-inline">
+						<h6 class="card-title">Basic example</h6>
+						<div class="header-elements">
+							<div class="list-icons">
+		                		<a class="list-icons-item" data-action="collapse"></a>
+		                		<a class="list-icons-item" data-action="reload"></a>
+		                		<a class="list-icons-item" data-action="remove"></a>
+		                	</div>
+	                	</div>
+					</div>
+					<div class="card-body">
+						<form class="wizard-form steps-basic" action="#" data-fouc>
+							<h6>1.ข้อมูลทั่วไป</h6>
+							<fieldset>
+								<ul class="nav nav-tabs nav-tabs-solid bg-primary-400 border-1 rounded nav-justified">
+								{{-- <ul class="nav nav-tabs nav-tabs-solid nav-justified rounded bg-light"> --}}
+									<li class="nav-item"><a href="#colored-justified-tab1" class="nav-link active" data-toggle="tab">1.1 ข้อมูลกิจการ</a></li>
+									<li class="nav-item"><a href="#colored-justified-tab2" class="nav-link" data-toggle="tab">1.2 ข้อมูลบุคลากร</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="colored-justified-tab1">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>ชื่อนิติบุคคล</label>
+													<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>ประเภทธุรกิจ</label>
+													<select name="businesstype" id="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-select2" data-fouc>
+														@foreach ($businesstypes as $businesstype)
+															<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
+														@endforeach
+													</select>
+												</div>
+											</div>
+		
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>ทะเบียนนิติบุคคลเลขที่</label>
+													<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control" readonly>
+												</div>
+											</div>
+		
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>ปีที่จดทะเบียน</label>
+													<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>ทุนที่จดทะเบียน</label>
+													<input type="number" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control" readonly>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
+													<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>วันที่ชำระทุนจดทะเบียน</label>
+													<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>แผนผังองค์กร</label>
+													<div class="input-group">													
+														<input type="text" id="fileorganizeimg" class="form-control border-right-0" placeholder="แผนผังองค์กร"  >
+															<button class="btn bg-info" type="button" onclick="document.getElementById('organizeimg').click();">อัพโหลด</button>													
+													</div>
+													<input type="file" style="display:none;" id="organizeimg" name="organizeimg"/>
+													@if (!Empty($fulltbp->minitbp->businessplan->organizeimg))
+													<br>
+														<img src="{{asset($fulltbp->minitbp->businessplan->organizeimg)}}" width="500" height="300" alt="">
+													@endif
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>วันที่ชำระทุนจดทะเบียน</label>
+													<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+												</div>
+											</div>
+											<legend>
+												<label for="">รายการบุคลากร</label>
+											</legend>
+											<div class="col-md-12">
+												<div class="row">
+													<div class="col-md-3">
+														<div class="form-group">
+															<label>จำนวนบุคลากรทั้งหมด</label>
+															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="จำนวนบุคลากรทั้งหมด" class="form-control" readonly>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label>ผ่ายบริหาร</label>
+															<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label>ฝ่ายวิจัยและพัฒนา</label>
+															<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label>ฝ่ายผลิต/วิศวกรรม</label>
+															<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label>ผ่ายการตลาด</label>
+															<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label>พนักงานทั่วไป</label>
+															<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+														</div>
+													</div>
+												</div>
+											</div>
+											<legend>
+												<label for="">ประวัติบริษัท</label>
+											</legend>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label for="">รายระเอียด (การก่อตั้ง การเพิ่มทุน กสนเปลี่ยนชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </label> <span class="text-primary" id="companyprofiletextlength"></span>
+													<input type="text" id="companyprofile_input" class="form-control companyprofileclass" >
+												</div>
+												<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
+													@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
+														<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
+													@endforeach
+												</div>
+												<hr>	
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="input-group">													
+															<button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													
+														</div>
+														<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/>
+													</div>
+												</div>																								
+												<div class="row">	
+													<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="table-responsive">
+															<table class="table table-striped">
+																<thead>
+																	<tr>
+																		<th>เอกสารแนบ</th>                                                                                  
+																		<th style="width:150px">ดาวน์โหลด</th>
+																	</tr>
+																</thead>
+																<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
+																	@foreach ($fulltbpcompanyprofileattachments as $fulltbpcompanyprofileattachment)
+																		<tr >                                        
+																			<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
+																			<td> 
+																				<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																				<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+																			</td>
+																		</tr>
+																	@endforeach                            
+																</tbody>
+															</table>
+														</div>
+													</div>      
+												</div>
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="form-group">
+															<br>
+															<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกประวัติบริษัท</button>
+														</div>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+
+									<div class="tab-pane fade" id="colored-justified-tab2">
+										Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid laeggin.
+									</div>
+
+								</div>
+
+						
+							</fieldset>
+
+							<h6>2.ภาพรวมโครงการที่ขอรับประเมิน</h6>
+							<fieldset>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>University:</label>
+											<input type="text" name="university" placeholder="University name" class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>ดดกดเ:</label>
+											<input type="text" name="university" placeholder="University name" class="form-control">
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+
+							<h6>3.ความเป็นไปได้ด้านการตลาดแผนสู่เชิงพาณิชย์</h6>
+							<fieldset>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Company:</label>
+											<input type="text" name="experience-company" placeholder="Company name" class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Compaดกกกกกกกกกny:</label>
+											<input type="text" name="experience-company" placeholder="Company name" class="form-control">
+										</div>
+									</div>
+								</div>
+							</fieldset>
+
+							<h6>4.ข้อมูลทางด้านการเงิน</h6>
+							<fieldset>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>aaa:</label>
+											<input type="text" name="experience-company" placeholder="Company name" class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>bbb:</label>
+											<input type="text" name="experience-company" placeholder="Company name" class="form-control">
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>				
+	            </div>
+
+	
             </div>
         </div>
         <!-- /form layouts -->
@@ -2362,6 +2551,9 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script>
 <script>
 	var route = {
 		url: "{{ url('/') }}",
@@ -2369,13 +2561,28 @@
 		branchid: "{{Auth::user()->branch_id}}"
 	};
 	$(document).ready(function() {
+		$(window).keydown(function(event){
+			if((event.keyCode == 13)) {
+				event.preventDefault();
+				return false;
+			}
+		});
+	});
+        // Basic wizard setup
+        $('.steps-basic').steps({
+            headerTag: 'h6',
+            bodyTag: 'fieldset',
+            transitionEffect: 'fade',
+            titleTemplate: '<span class="number">#index#</span> #title#',
+            labels: {
+                previous: '<i class="icon-arrow-left13 mr-2" /> Previous',
+                next: 'Next <i class="icon-arrow-right14 ml-2" />',
+                finish: 'Submit form <i class="icon-arrow-right14 ml-2" />'
+			},
+            onFinished: function (event, currentIndex) {
+                alert('Form submitted.');
+            }
+        });
 
-    $(window).keydown(function(event){
-        if((event.keyCode == 13)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-  });
 </script>
 @stop

@@ -2,6 +2,33 @@
 @section('pageCss')
 @stop
 @section('content')
+    {{-- modal_add_jdmessage --}}
+    <div id="modal_add_jdmessage" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มความเห็น JD</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="text" id="minitbpid" hidden>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>ความเห็น JD</label>
+                                <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_add_jdmessage" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="userspinicon" hidden></i> เพิ่ม</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -65,6 +92,7 @@
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
+                                        <th>ความเห็น JD</th>
                                         <th>Leader</th>
                                         <th>Co-Leader</th>
                                         <th>สถานะ</th>
@@ -80,6 +108,14 @@
                                         <td> {{$projectassignment->businessplan->code}} </td> 
                                         <td> {{$projectassignment->businessplan->minitbp->project}} </td> 
                                         <td> {{$projectassignment->businessplan->company->name}} </td> 
+                                        <td> 
+                                            @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
+                                                    <a href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                @else
+                                                    <a href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                            @endif
+                                            
+                                        </td>  
                                         <td> 
                                             @if (!Empty($projectassignment->leader))
                                                 {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
@@ -100,7 +136,7 @@
                                         </td>
                                         @if (Auth::user()->user_type_id>=6)
                                             <td> 
-                                                <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
+                                                <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">มอบหมาย</a>
                                             </td>    
                                         @endif
                                
@@ -126,5 +162,63 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+
+        $(document).on('click', '.jdmessage', function(e) {
+            getJdMessage($(this).data('id')).then(data => {
+                $('#messagebody').html(data.jdmessage);
+                $('#minitbpid').val($(this).data('id'));
+                
+                $('#modal_add_jdmessage').modal('show');
+            })
+            .catch(error => {}) 
+        });
+
+        
+        $(document).on('click', '#btn_modal_add_jdmessage', function(e) {
+            addJdMessage($('#minitbpid').val(),$('#messagebody').val()).then(data => {
+                $('#modal_add_jdmessage').modal('hide');
+                window.location.reload();
+            })
+            .catch(error => {}) 
+        });
+
+        function getJdMessage(id){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `${route.url}/api/minitbp/getjdmessage`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    data: {
+                        id : id
+                    },
+                    success: function(data) {
+                    resolve(data)
+                    },
+                    error: function(error) {
+                    reject(error)
+                    },
+                })
+            })
+        }
+
+        function addJdMessage(id,message){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `${route.url}/api/minitbp/addjdmessage`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    data: {
+                        id : id,
+                        message : message
+                    },
+                    success: function(data) {
+                    resolve(data)
+                    },
+                    error: function(error) {
+                    reject(error)
+                    },
+                })
+            })
+        }
     </script>
 @stop

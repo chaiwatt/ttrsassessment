@@ -65,7 +65,7 @@
 						<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						@if (Auth::user()->user_type_id ==2)
+						@if (Auth::user()->user_type_id ==1 || Auth::user()->user_type_id ==2)
 								<a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
 							{{-- @elseif(Auth::user()->user_type_id == 2) --}}
 								

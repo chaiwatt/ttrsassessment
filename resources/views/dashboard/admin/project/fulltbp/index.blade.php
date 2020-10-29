@@ -17,14 +17,14 @@
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-input-styled" name="result" value="1" checked data-fouc>
-                                        ผ่านการอนุมัติ
+                                        อนุมัติ
                                     </label>
                                 </div>
             
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-input-styled" name="result" value="2" data-fouc>
-                                        ไม่การอนุมัติ/ให้แก้ไข
+                                        ให้แก้ไข
                                     </label>
                                 </div>
                             </div>

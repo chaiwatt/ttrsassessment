@@ -17,6 +17,7 @@ use App\Model\Province;
 use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
+use App\Model\UserPosition;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
@@ -44,6 +45,7 @@ class SettingProfileUserController extends Controller
         $isicsubs = IsicSub::where('isic_id',$company->isic_id)->get();
         $industrygroups = IndustryGroup::get();
         $fulltbpcompanydocs = FullTbpCompanyDoc::get();
+        $userpositions = UserPosition::get();
         $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
         return view('setting.profile.user.edit')->withUser($user)
                                             ->withPrefixes($prefixes)
@@ -55,7 +57,8 @@ class SettingProfileUserController extends Controller
                                             ->withIsicsubs($isicsubs)
                                             ->withIndustrygroups($industrygroups)
                                             ->withFulltbpcompanydocs($fulltbpcompanydocs)
-                                            ->withAuthorizeddirectors($authorizeddirectors);
+                                            ->withAuthorizeddirectors($authorizeddirectors)
+                                            ->withUserpositions($userpositions);
     }
     public function EditSave(Request $request, $id){
         // return $request->usergroup;
@@ -81,7 +84,10 @@ class SettingProfileUserController extends Controller
         }
         $company->update([
             'name' => $request->company,
+            'vatno' => $request->vatno,
             'commercialregnumber' => $request->commercialregnumber,
+            'isic_id' => $request->isic,
+            'isic_sub_id' => $request->subisic,
             'registeredyear' => $request->registeredyear,
             'registeredcapital' => $request->registeredcapital,
             'paidupcapital' => $request->paidupcapital,
@@ -107,6 +113,44 @@ class SettingProfileUserController extends Controller
             // 'factorylat' => $request->factorylat,
             // 'factorylng' => $request->factorylng
         ]);
+
+
+ 
+
+        // $table->unsignedBigInteger('')->default(1);
+        // $table->unsignedBigInteger('')->default(1);
+        // $table->char('registeredyear',4)->nullable();
+        // $table->double('registeredcapital',10,2)->nullable();
+        // $table->double('paidupcapital',10,2)->nullable();
+        // $table->date('paidupcapitaldate')->nullable();
+        // $table->unsignedBigInteger('industry_group_id')->nullable();   
+        // $table->unsignedBigInteger('business_type_id')->nullable(); 
+        // $table->string('name',150)->nullable();
+        // $table->string('phone',20)->nullable();
+        // $table->string('fax',20)->nullable();
+        // $table->string('email',200)->nullable();
+        // $table->char('housenumber',5)->nullable();
+        // $table->string('address',150)->nullable();
+        // $table->char('soi',5)->nullable();
+        // $table->string('street',100)->nullable();
+        // $table->unsignedBigInteger('province_id')->nullable();
+        // $table->unsignedBigInteger('amphur_id')->nullable();
+        // $table->unsignedBigInteger('tambol_id')->nullable();
+        // $table->string('postalcode',10)->nullable();
+        // $table->string('lat',50)->nullable();
+        // $table->string('lng',50)->nullable();
+        // $table->char('factoryhousenumber',5)->nullable();
+        // $table->string('factoryaddress',150)->nullable();
+        // $table->char('factorysoi',5)->nullable();
+        // $table->string('factorystreet',100)->nullable();
+        // $table->unsignedBigInteger('factoryprovince_id')->nullable();
+        // $table->unsignedBigInteger('factoryamphur_id')->nullable();
+        // $table->unsignedBigInteger('factorytambol_id')->nullable();
+        // $table->string('factorypostalcode',10)->nullable();
+        // $table->string('factorylat',50)->nullable();
+        // $table->string('factorylng',50)->nullable();
+        // $table->string('logo',250)->nullable();
+
 
         $user = Auth::user();
         $user->update([

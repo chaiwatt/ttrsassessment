@@ -56,6 +56,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
+        // dd($data['usergroup']);
         // $group = 2;
         $experttype = 0;
     //    if(!Empty($data['vatno'])){

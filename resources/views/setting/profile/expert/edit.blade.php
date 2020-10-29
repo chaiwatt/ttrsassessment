@@ -462,7 +462,7 @@
 													<div class="col-md-6"> 
 														<div class="form-group">
 															<label>ประสบการณ์การทำงาน (ปี)<span class="text-danger">*</span></label>
-															<input type="text"  name="expereinceyear" value="{{old('expereinceyear') ?? $expert->expereinceyear}}"  placeholder="ประสบการณ์การทำงาน (ปี)" class="form-control">
+															<input type="text" id="expereinceyear" name="expereinceyear" value="{{old('expereinceyear') ?? $expert->expereinceyear}}"  placeholder="ประสบการณ์การทำงาน (ปี)" class="form-control">
 														</div>
 													</div>
 													<div class="col-md-6"> 
