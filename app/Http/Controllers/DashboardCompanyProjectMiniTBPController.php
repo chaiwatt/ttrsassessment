@@ -106,7 +106,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         ]);
         return  redirect()->route('dashboard.company.project.minitbp')->withSuccess('แก้ไขรายการสำเร็จ');
     }
-
+// 
+// 'tempDir'               => base_path('public/storage'),
     public function DownloadPDF($id){
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
@@ -114,9 +115,14 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
         $fontData = $defaultFontConfig['fontdata'];
         $mpdf = new \Mpdf\Mpdf([
-            'fontDir' => array_merge($fontDirs, [
-                base_path('public/assets/dashboard/fonts/'),
-            ]),
+            'fontDir' => array_merge($fontDirs, 
+                    [
+                        base_path('public/assets/dashboard/fonts/'),
+                    ]
+                ),
+            [
+                'tempDir' => base_path('public/storage')
+            ],
             'fontdata' => $fontData + [
                 'kanit' => [
                     'R'  => 'thsarabunnew-webfont.ttf',    
