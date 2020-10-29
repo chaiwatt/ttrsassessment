@@ -120,9 +120,9 @@ class DashboardCompanyProjectMiniTBPController extends Controller
                         base_path('public/assets/dashboard/fonts/'),
                     ]
                 ),
-            // [
-            //     'tempDir' => base_path('public/storage')
-            // ],
+            [
+                'tempDir' => base_path('public/storage')
+            ],
             'fontdata' => $fontData + [
                 'kanit' => [
                     'R'  => 'thsarabunnew-webfont.ttf',    
