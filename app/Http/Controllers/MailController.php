@@ -12,7 +12,7 @@ class MailController extends Controller
         $mails = array("ttrsexpert1@gmail.com", "ttrsuser1@gmail.com", "ttrsexpert2@gmail.com");
 
         $data = [
-        'sendermail' => 'noreply@npctestserver.com',
+        'sendermail' => env('MAIL_FROM_ADDRESS'),
         'sendername' => 'TTRS',
         'title' => 'ทดสอบการส่งเมล์',
         'message' => 'นี่คือการทดสอบส่งอีเมล'

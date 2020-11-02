@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -167,7 +168,7 @@ return [
         'Intervention\Image\ImageServiceProvider',
         Jenssegers\Agent\AgentServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-        // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         /*
          * Package Service Providers...
          */
