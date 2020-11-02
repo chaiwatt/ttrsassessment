@@ -55,6 +55,11 @@ class SettingProfileExpertController extends Controller
     }
     public function EditSave(EditProfileExpertRequest $request, $id){
         $auth = Auth::user();
+        if(!Empty($request->password)){
+            $auth->update([
+                'password' => Hash::make($request->password)
+            ]);
+        }
         $user = User::find($auth->id);
         if(!Empty($request->password)){
             $user->update([

@@ -16,6 +16,7 @@ use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
 use App\Model\EducationLevel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SettingProfileOfficerController extends Controller
 {
@@ -48,6 +49,11 @@ class SettingProfileOfficerController extends Controller
     }
     public function EditSave(Request $request, $id){
         $auth = Auth::user();
+        if(!Empty($request->password)){
+            $auth->update([
+                'password' => Hash::make($request->password)
+            ]);
+        }
         $user = User::find($auth->id);
         $file = $request->picture; 
         $filelocation = $user->picture;

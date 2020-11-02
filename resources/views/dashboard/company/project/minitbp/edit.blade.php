@@ -1,5 +1,12 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+	<style>
+		.pdfobject-container { 
+			height: 100%; 
+			width: 100%;
+			border: 1rem solid rgba(0,0,0,.1); 
+		}
+	</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -469,8 +476,9 @@
 								<fieldset>
 									<div class="col-md-12">
 										<div class="form-group">
-											<div style="width:100%;height:600px;overflow-y:scroll;" class="col-md-12 center"  >
-												<canvas id="the-canvas"></canvas>
+											<div style="width:100%;height:600px;" class="col-md-12 center"  >
+												{{-- <canvas id="the-canvas"></canvas> --}}
+												<div id="example1"></div>
 											</div>
 											<input type="file" style="display:none;" id="minitbppdf"/>
 										</div>
@@ -505,8 +513,9 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script>
+{{-- <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script> --}}
 <script>
 	var route = {
 		url: "{{ url('/') }}",
@@ -616,39 +625,34 @@
 								var pdfpath = route.url + '/'+ data;
 								var url = pdfpath;
 								$('#downloadpdf').attr('href', url);
-								var pdfjsLib = window['pdfjs-dist/build/pdf'];
-								var loadingTask = pdfjsLib.getDocument(url);
-								loadingTask.promise.then(function(pdf) {
-								console.log('PDF loaded');
+								PDFObject.embed(pdfpath, "#example1");
+								// var pdfjsLib = window['pdfjs-dist/build/pdf'];
+								// var loadingTask = pdfjsLib.getDocument(url);
+								// loadingTask.promise.then(function(pdf) {
+								// console.log('PDF loaded');
 								
-								// Fetch the first page
-								var pageNumber = 1;
-								pdf.getPage(pageNumber).then(function(page) {
-									console.log('Page loaded');
-									
-									var scale = 1.5;
-									var viewport = page.getViewport({scale: scale});
+								// var pageNumber = 1;
+								// pdf.getPage(pageNumber).then(function(page) {						
+								// 	var scale = 1.5;
+								// 	var viewport = page.getViewport(scale);
+								// 	var canvas = document.getElementById('the-canvas');
+								// 	var context = canvas.getContext('2d');
+								// 	canvas.height = viewport.height;
+								// 	canvas.width = viewport.width;
 
-									// Prepare canvas using PDF page dimensions
-									var canvas = document.getElementById('the-canvas');
-									var context = canvas.getContext('2d');
-									canvas.height = viewport.height;
-									canvas.width = viewport.width;
+								// 	var renderContext = {
+								// 	canvasContext: context,
+								// 	viewport: viewport
+								// 	};
+								// 	var renderTask = page.render(renderContext);
+								// 	renderTask.promise.then(function () {
+								// 	console.log('Page rendered');
+								// 	});
+								// });
+								// }, function (reason) {
 
-									// Render PDF page into canvas context
-									var renderContext = {
-									canvasContext: context,
-									viewport: viewport
-									};
-									var renderTask = page.render(renderContext);
-									renderTask.promise.then(function () {
-									console.log('Page rendered');
-									});
-								});
-								}, function (reason) {
-								// PDF loading error
-								console.error(reason);
-								});
+								// console.error(reason);
+								// });
 							}).catch(error => {})
 						}
 					});
@@ -658,39 +662,32 @@
 						var pdfpath = route.url + '/'+ data;
 						var url = pdfpath;
 						$('#downloadpdf').attr('href', url);
-						var pdfjsLib = window['pdfjs-dist/build/pdf'];
-						var loadingTask = pdfjsLib.getDocument(url);
-						loadingTask.promise.then(function(pdf) {
-						console.log('PDF loaded');
-						
-						// Fetch the first page
-						var pageNumber = 1;
-						pdf.getPage(pageNumber).then(function(page) {
-							console.log('Page loaded');
-							
-							var scale = 1.5;
-							var viewport = page.getViewport({scale: scale});
-
-							// Prepare canvas using PDF page dimensions
-							var canvas = document.getElementById('the-canvas');
-							var context = canvas.getContext('2d');
-							canvas.height = viewport.height;
-							canvas.width = viewport.width;
-
-							// Render PDF page into canvas context
-							var renderContext = {
-							canvasContext: context,
-							viewport: viewport
-							};
-							var renderTask = page.render(renderContext);
-							renderTask.promise.then(function () {
-							console.log('Page rendered');
-							});
-						});
-						}, function (reason) {
-						// PDF loading error
-						console.error(reason);
-						});
+						PDFObject.embed(pdfpath, "#example1");
+						// var pdfjsLib = window['pdfjs-dist/build/pdf'];
+						// var loadingTask = pdfjsLib.getDocument(url);
+						// loadingTask.promise.then(function(pdf) {
+						// console.log('PDF loaded');
+					
+						// var pageNumber = 1;
+						// pdf.getPage(pageNumber).then(function(page) {			
+						// 	var scale = 1.5;
+						// 	var viewport = page.getViewport({scale: scale});
+						// 	var canvas = document.getElementById('the-canvas');
+						// 	var context = canvas.getContext('2d');
+						// 	canvas.height = viewport.height;
+						// 	canvas.width = viewport.width;
+						// 	var renderContext = {
+						// 	canvasContext: context,
+						// 	viewport: viewport
+						// 	};
+						// 	var renderTask = page.render(renderContext);
+						// 	renderTask.promise.then(function () {
+						// 	console.log('Page rendered');
+						// 	});
+						// });
+						// }, function (reason) {
+						// console.error(reason);
+						// });
 					}).catch(error => {})
 				}
 			

@@ -133,28 +133,28 @@
     ]
 
     var  gradedata = [
-        {value: 10, name: 'เกรดA'},
-        {value: 15, name: 'เกรดB'},
-        {value: 12, name: 'เกรดC'},
-        {value: 5, name: 'เกรดD'},
+        {value: 335, name: 'เกรด A'},
+        {value: 310, name: 'เกรด B'},
+        {value: 234, name: 'เกรด C'},
+        {value: 135, name: 'เกรด D'},
     ]
     var  dradelegend = [
-        'เกรดA',
-        'เกรดB',
-        'เกรดC',
-        'เกรดD'
+        'เกรด A',
+        'เกรด B',
+        'เกรด C',
+        'เกรด D'
     ]
 
     var  participatedata = [
         {value: 335, name: 'ยื่นขอ'},
-        {value: 310, name: 'mimi tbp'},
-        {value: 234, name: 'full tbp'},
+        {value: 310, name: 'Mimi TBP'},
+        {value: 234, name: 'Full TBP'},
         {value: 135, name: 'ประเมิน'},
     ]
     var  participatelegend = [
         'ยื่นขอ',
-        'mimi tbp',
-        'full tbp',
+        'Mimi TBP',
+        'Full TBP',
         'ประเมิน'
     ]
 
@@ -170,7 +170,7 @@
     genDonutchart(data,legend,'กลุ่มอุตสาหกรรม','จำนวนโครงการตามกลุ่มอุตสาหกรรม','industrygroup_chart','right');
     genDonutchart(gradedata,dradelegend,'เกรดการประเมิน','จำนวนโครงการตามเกรดการประเมิน','grade_chart','center');
     genDonutchart(participatedata,participatelegend,'โครงการต่อการยื่น','จำนวนโครงการต่อการยื่น','participate_chart','center');
-    genDonutchart(financialdata,financiallegend,'จุดประสงค์ด้านการประเมิน','จุดประสงค์ด้านการประเมิน','financial_chart','center');
+    genDonutchart(financialdata,financiallegend,'วัตถุประสงค์ของการขอรับการประเมิน','วัตถุประสงค์ของการขอรับการประเมิน','financial_chart','center');
     genBarchart();
     function genDonutchart(data,legend,text,sub,eleid,legendalign){
         var dom = document.getElementById(eleid);
@@ -242,7 +242,7 @@
                 }
             },
             legend: {
-                data: [ 'ขอประเมิน', 'mini tbp', 'full tbp', 'รับการประเมิน', 'ด้านการเงิน', 'ไม่ใช่ด้านการเงิน', 'เกรด A', 'เกรด B', 'เกรด C', 'เกรด D']
+                data: [ 'ขอประเมิน', 'Mini TBP', 'Full TBP', 'รับการประเมิน', 'ด้านการเงิน', 'ไม่ใช่ด้านการเงิน', 'เกรด A', 'เกรด B', 'เกรด C', 'เกรด D']
             },
             grid: {
                 left: '3%',
@@ -269,13 +269,13 @@
                     data: [120, 132, 101]
                 },
                 {
-                    name: 'mini tbp',
+                    name: 'Mini TBP',
                     type: 'bar',
                     stack: 'group1',
                     data: [220, 182, 191]
                 },
                 {
-                    name: 'full tbp',
+                    name: 'Full TBP',
                     type: 'bar',
                     stack: 'group1',
                     data: [150, 232, 201]

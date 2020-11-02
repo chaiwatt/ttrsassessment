@@ -29,6 +29,7 @@ use App\Model\AuthorizedDirector;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Http\Requests\EditCompanyRequest;
 
@@ -63,6 +64,11 @@ class SettingProfileUserController extends Controller
     public function EditSave(Request $request, $id){
         // return $request->usergroup;
         $auth = Auth::user();
+        if(!Empty($request->password)){
+            $auth->update([
+                'password' => Hash::make($request->password)
+            ]);
+        }
         $company = Company::where('user_id',$auth->id)->first();
         // $company = Company::find($id);
         $file = $request->picture; 

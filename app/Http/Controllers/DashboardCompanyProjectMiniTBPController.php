@@ -106,8 +106,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         ]);
         return  redirect()->route('dashboard.company.project.minitbp')->withSuccess('แก้ไขรายการสำเร็จ');
     }
-// 
-// 'tempDir'               => base_path('public/storage'),
+
     public function DownloadPDF($id){
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();

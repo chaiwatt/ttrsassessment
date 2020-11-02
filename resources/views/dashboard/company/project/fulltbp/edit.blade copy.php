@@ -986,9 +986,9 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Full TBP</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
-			{{-- <div class="text-right">
+			<div class="text-right">
 				<button type="button" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-			</div> --}}
+			</div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -1025,10 +1025,519 @@
         @endif
         <div class="row">
             <div class="col-md-12">
+				<!-- Colors -->
+            	<div class="card">
+                	<div class="card-body">
+						<ul class="nav nav-tabs nav-tabs-highlight">
+							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลทั่วไป</a></li>
+							<li class="nav-item"><a href="#left-icon-oganization" class="nav-link" data-toggle="tab"><i class="icon-archive mr-2"></i> ข้อมูลองค์กร</a></li>
+							<li class="nav-item"><a href="#left-icon-project" class="nav-link" data-toggle="tab"><i class="icon-box mr-2"></i> โครงการ</a></li>
+							<li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-cog2 mr-2"></i> เทคโนโลยี</a></li>
+							<li class="nav-item"><a href="#left-icon-marketanalysis" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i> การตลาด</a></li>
+							<li class="nav-item"><a href="#left-icon-sell" class="nav-link" data-toggle="tab"><i class="icon-clipboard3 mr-2"></i> ยอดซื้อ/ขาย</a></li>
+							<li class="nav-item"><a href="#left-icon-financial" class="nav-link" data-toggle="tab"><i class="icon-cash3 mr-2"></i> การเงิน</a></li>
+						</ul>
+						{{-- <form method="POST" action="{{route('dashboard.company.project.fulltbp.editsave',['id'=>$fulltbp->id])}}" enctype="multipart/form-data">
+							@csrf --}}
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="left-icon-minitbp">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#left-icon-companyinfo" class="nav-link active" data-toggle="tab"> ข้อมูลกิจการ</a></li>
+									<li class="nav-item"><a href="#left-icon-companydoc" class="nav-link" data-toggle="tab"> เอกสารสำคัญ</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="left-icon-companyinfo" >	
+										<div class="row">	
+											<div class="col-md-12">
+												<fieldset>	
+
+
+
+												</fieldset>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade show active" id="left-icon-companydoc" >	
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add"></i></button>
+												</div>
+												
+											</div>
+										</div>																								
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_companydoc_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:200px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_companydoc_wrapper_tr">    
+															@foreach ($fulltbpcompanydocs as $fulltbpcompanydoc)
+																<tr >                                        
+																	<td> {{$fulltbpcompanydoc->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fulltbpcompanydoc->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fulltbpcompanydoc->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      
+										</div>
+									</div>
+								</div>
+
+							
+							</div>
+							<div class="tab-pane fade" id="left-icon-oganization">
+								<div class="row">	
+									<div class="col-md-12"  >	
+										<ul class="nav nav-tabs">
+											<li class="nav-item"><a href="#vertical-left-companyprofile" class="nav-link active" data-toggle="tab"> ประวัติของบริษัท</a></li>
+											<li class="nav-item"><a href="#vertical-left-quantityemploy" class="nav-link" data-toggle="tab"> จำนวนบุคลากร</a></li>
+											<li class="nav-item"><a href="#vertical-left-employhistory" class="nav-link" data-toggle="tab"> ข้อมูลบุคลากรที่สำคัญ</a></li>
+											<li class="nav-item"><a href="#vertical-left-stockholder" class="nav-link" data-toggle="tab"> บัญชีรายชื่อผู้ถือหุ้น</a></li>
+										</ul>
+		
+										<div class="tab-content">
+											<div class="tab-pane fade show active" id="vertical-left-companyprofile" >	
+
+												
+											</div>
+											<div class="tab-pane fade" id="vertical-left-quantityemploy">
+												<div class="row">
+													<div class="col-md-12">	
+														{{-- <div class="form-group">
+															<label for="">ฝ่ายบริหาร</label>
+															<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">ฝ่ายวิจัยและพัฒนา</label>
+															<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">ฝ่ายผลิต/วิศวกรรม</label>
+															<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">ฝ่ายการตลาด</label>
+															<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
+														</div>
+														<div class="form-group">
+															<label for="">พนักงานทั่วไป </label>
+															<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+														</div> --}}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">	
+														<div class="form-group">
+															<br>
+															<button type="button" id="btneditquantityemploy" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกจำนวนบุคลากร</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="vertical-left-employhistory">
+												
+												
+											</div>
+										
+											<div class="tab-pane fade" id="vertical-left-stockholder">
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-project">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#responsibleperson-tab" class="nav-link active" data-toggle="tab">ผู้รับผิดชอบโครงการ</a></li>
+									<li class="nav-item"><a href="#projectabtract-tab" class="nav-link" data-toggle="tab">รายละเอียดโครงการ</a></li>
+									<li class="nav-item"><a href="#mainproduct-tab" class="nav-link" data-toggle="tab">ผลิตภัณฑ์หลัก</a></li>
+									<li class="nav-item"><a href="#productdetails-tab" class="nav-link" data-toggle="tab">จุดเด่นผลิตภัณฑ์หลัก</a></li>
+									<li class="nav-item"><a href="#projectplan-tab" class="nav-link" data-toggle="tab">แผนการดำเนินงาน</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="responsibleperson-tab">
+										<div class="form-group">
+											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+											<select name="contactprefix" id="" class="form-control form-control-select2" disabled>
+												@foreach ($contactprefixes as $contactprefix)
+													<option value="{{$contactprefix->id}}" @if($minitbp->contactprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="">ชื่อ<span class="text-danger">*</span></label>
+											<input type="text" name ="contactname" value="{{$minitbp->contactname}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<label for="">นามสกุล<span class="text-danger">*</span></label>
+											<input type="text" name ="contactlastname" value="{{$minitbp->contactlastname}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
+											<select name="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2" disabled>
+												@foreach ($contactpositions as $contactposition)
+													<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="">เบอร์โทร<span class="text-danger">*</span></label>
+											<input type="text" name ="contactphone" value="{{Auth::user()->phone}}" class="form-control" disabled>
+										</div>
+										<div class="form-group">
+											<label for="">อีเมล<span class="text-danger">*</span></label>
+											<input type="text" name ="contactemail" value="{{Auth::user()->email}}" class="form-control" disabled>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectabtract-tab">
+
+									</div>
+
+									<div class="tab-pane fade" id="mainproduct-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ผลิตภัณฑ์หลัก(สินค้าและบริการ)ของโครงการ </label> <span class="text-primary" id="mainproducttextlength"></span>
+												<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
+												<input type="text" id="mainproduct_input" class="form-control mainproductclass" >
+											</div>
+											<div id="fulltbp_mainproduct_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpMainproductdetails as $fulltbpMainproductdetail)
+													<input type="text" name ="mainproduct[]" value="{{$fulltbpMainproductdetail->line}}" class="form-control mainproductclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmainproduct" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกผลิตภัณฑ์หลัก</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="productdetails-tab">
+						
+									</div>
+									<div class="tab-pane fade" id="projectplan-tab">
+
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-technology">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#projectechdev-tab" class="nav-link active" data-toggle="tab">การพัฒนาเทคโนโลยี</a></li>
+									<li class="nav-item"><a href="#projectechdevlevel-tab" class="nav-link " data-toggle="tab">ระดับเทคโนโลยี</a></li>
+									<li class="nav-item"><a href="#projectechdevproblem-tab" class="nav-link " data-toggle="tab">อุปสรรค ความเสี่ยง</a></li>
+									<li class="nav-item"><a href="#projectcertify-tab" class="nav-link " data-toggle="tab">สิทธิบัตรที่ได้รับ</a></li>
+									<li class="nav-item"><a href="#projectaward-tab" class="nav-link" data-toggle="tab">รางวัลเทคโนโลยี</a></li>
+									<li class="nav-item"><a href="#projectcertificate-tab" class="nav-link" data-toggle="tab">ใบรับรองมาตรฐาน</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div class="tab-pane fade  show active" id="projectechdev-tab">
+			
+									</div>
+									<div class="tab-pane fade" id="projectechdevlevel-tab">
+										
+									</div>
+									<div class="tab-pane fade" id="projectechdevproblem-tab">
+										<div class="form-group">
+				
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectcertify-tab">
+										<div class="row">
+
+										</div>
+										<hr>
+
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="form-group">
+													<br>
+													<button type="button" id="btnaddprojectcertify" data-id="{{$fulltbpprojectcertify->id}}" class="btn bg-teal float-right" >บันทึกข้อมูลสิทธิบัตร</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="projectaward-tab">
+										
+									</div>
+									<div class="tab-pane fade" id="projectcertificate-tab">
+										
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="left-icon-marketanalysis">
+								<ul class="nav nav-tabs ">
+									<li class="nav-item"><a href="#marketneed-tab" class="nav-link active" data-toggle="tab">Market need</a></li>
+									<li class="nav-item"><a href="#marketsize-tab" class="nav-link " data-toggle="tab">Market size</a></li>
+									<li class="nav-item"><a href="#marketshare-tab" class="nav-link " data-toggle="tab">Market share</a></li>
+									<li class="nav-item"><a href="#competitive-tab" class="nav-link " data-toggle="tab">Competitive</a></li>
+									<li class="nav-item"><a href="#businessmodelcanvas-tab" class="nav-link" data-toggle="tab">Business model canvas</a></li>
+									<li class="nav-item"><a href="#swot-tab" class="nav-link" data-toggle="tab">SWOT</a></li>
+									<li class="nav-item"><a href="#financialplan-tab" class="nav-link" data-toggle="tab">Finalcial plan</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="marketneed-tab">
+										<div class="form-group">
+										
+										</div>
+									</div>
+									<div class="tab-pane fade" id="marketsize-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ระบุและให้รายละเอียดเกี่ยวกับตลาดภายในและนอกประเทศ (Market size)</label> <span class="text-primary" id="marketsizetextlength"></span>
+												<input type="text" id="marketsize_input" class="form-control marketsizeclass" >
+											</div>
+											<div id="fulltbp_marketsize_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpmarketsizes as $fulltbpmarketsize)
+													<input type="text" name ="marketsize[]" value="{{$fulltbpmarketsize->line}}" class="form-control marketsizeclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmarketsize" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market size</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="marketshare-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ส่วนแบ่งของตลาดที่คาดว่าผลิตภัณฑ์จะครอบครอง (Market share)</label> <span class="text-primary" id="marketsharetextlength"></span>
+												<input type="text" id="marketshare_input" class="form-control marketshareclass" >
+											</div>
+											<div id="fulltbp_marketshare_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpmarketshares as $fulltbpmarketshare)
+													<input type="text" name ="marketshare[]" value="{{$fulltbpmarketshare->line}}" class="form-control marketshareclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmarketshare" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market share</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="competitive-tab">
+										<div class="form-group">
+											<div class="form-group">
+												<label for="">ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการ โดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</label> <span class="text-primary" id="marketcompetitivetextlength"></span>
+												<input type="text" id="marketcompetitive_input" class="form-control marketcompetitiveclass" >
+											</div>
+											<div id="fulltbp_marketcompetitive_wrapper" style="border: dashed 1px #999999">
+												@foreach ($fulltbpmarketcompetitives as $fulltbpmarketcompetitive)
+													<input type="text" name ="marketcompetitive[]" value="{{$fulltbpmarketcompetitive->line}}" class="form-control marketcompetitiveclass" style="border: 0" >
+												@endforeach
+											</div>
+											<div class="row">
+												<div class="col-md-12">	
+													<div class="form-group">
+														<br>
+														<button type="button" id="btnaddmarketcompetitive" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market competitive</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="businessmodelcanvas-tab">
+									
+									</div>
+									<div class="tab-pane fade" id="swot-tab">
+									
+									</div>
+									<div class="tab-pane fade" id="financialplan-tab">
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="input-group">													
+													<button id="btnuploadfinancialplan" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('financialplan').click();"><i class="icon-add"></i></button>													
+												</div>
+												<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="financialplan" name="financialplan"/>
+											</div>
+										</div>
+										<div class="row">	
+											<div class="col-md-12" id="fulltbp_financialplan_wrapper" >	
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">	
+												<div class="table-responsive">
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>เอกสารแนบ</th>                                                                                  
+																<th style="width:200px">ดาวน์โหลด</th>
+															</tr>
+														</thead>
+														<tbody id="fulltbp_financialplan_wrapper_tr">    
+															@foreach ($fullTbpmarketattachmentfinancialplans as $fullTbpmarketattachmentfinancialplan)
+																<tr >                                        
+																	<td> {{$fullTbpmarketattachmentfinancialplan->name}} </td>                                            
+																	<td> 
+																		<a href="{{asset($fullTbpmarketattachmentfinancialplan->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																		<a type="button" data-id="{{$fullTbpmarketattachmentfinancialplan->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+																	</td>
+																</tr>
+															@endforeach                            
+														</tbody>
+													</table>
+												</div>
+											</div>      	
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="left-icon-sell">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#sell-tab" class="nav-link active" data-toggle="tab">มูลค่ายอดขาย</a></li>
+									<li class="nav-item"><a href="#sellstatus-tab" class="nav-link " data-toggle="tab">สถานะยอดขาย</a></li>
+									<li class="nav-item"><a href="#buyin-tab" class="nav-link " data-toggle="tab">คู่ค้าหลัก(ยอดซื้อ)</a></li>
+									<li class="nav-item"><a href="#sellout-tab" class="nav-link " data-toggle="tab">คู่ค้าหลัก(ยอดขาย)</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="sell-tab">
+
+									</div>
+									<div class="tab-pane fade" id="sellstatus-tab">
+										
+									</div>
+									<div class="tab-pane fade" id="buyin-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add"></i></a>
+											<br>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
+														<th>จำนวนผลิตภัณฑ์หรือโครงการ</th> 
+														<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
+														<th>ยอดขายต่อปี(บาท)</th>       
+														<th>เปรียบเทียบกับยอดขาย (%)</th>  
+														<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
+														<th style="width:120px">เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_debtpartner_wrapper_tr">    
+													@foreach ($fulltbpdebtpartners as $fulltbpdebtpartner)
+														<tr >
+															<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
+															<td> {{$fulltbpdebtpartner->numproject}} </td> 
+															<td> {{$fulltbpdebtpartner->partnertaxid}} </td> 
+															<td> {{$fulltbpdebtpartner->totalyearsell}} </td>                                            															
+															<td> {{$fulltbpdebtpartner->percenttosale}} </td> 
+															<td> {{$fulltbpdebtpartner->businessyear}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
+																<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a> 
+															</td> 
+														</tr>
+													@endforeach              
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="sellout-tab">
+										<div class="form-group">	
+											<a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add"></i></a>
+											<br>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
+														<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
+														<th>ยอดซื้อต่อปี(บาท)</th>       
+														<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
+														<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
+														<th style="width:120px">เพิ่มเติม</th>    
+													</tr>
+												</thead>
+												<tbody id="fulltbp_creditpartner_wrapper_tr">    
+													@foreach ($fulltbpcreditpartners as $fulltbpcreditpartner)
+														<tr >
+															<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
+															<td> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+															<td> {{$fulltbpcreditpartner->totalyearpurchase}} </td>                                            															
+															<td> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
+															<td> {{$fulltbpcreditpartner->businessyear}} </td> 
+															<td> 
+																<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
+																<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 
+															</td> 
+														</tr>
+													@endforeach              
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="tab-pane fade" id="left-icon-financial">
+								<ul class="nav nav-tabs">
+									<li class="nav-item"><a href="#asset-tab" class="nav-link active" data-toggle="tab">การจัดหาแหล่งเงินลงทุน</a></li>
+									<li class="nav-item"><a href="#investment-tab" class="nav-link " data-toggle="tab">เงินลงทุนสำหรับดำเนินการของโครงการ</a></li>
+									<li class="nav-item"><a href="#cost-tab" class="nav-link " data-toggle="tab">แหล่งเงินทุนของโครงการ</a></li>
+									<li class="nav-item"><a href="#returnofinvestment-tab" class="nav-link " data-toggle="tab">ประมาณการผลตอบแทน</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="asset-tab">
+
+									</div>
+									<div class="tab-pane fade" id="investment-tab">
+										
+									</div>
+									<div class="tab-pane fade" id="cost-tab">
 	
+									</div>
+									<div class="tab-pane fade" id="returnofinvestment-tab">
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{{-- </form> --}}
+
+				
+					
+
+					</div>
+
+
+
+				</div>
+				<!-- /colors -->
 
 				<div class="card">
-					{{-- <div class="card-header bg-white header-elements-inline">
+					<div class="card-header bg-white header-elements-inline">
 						<h6 class="card-title">Basic example</h6>
 						<div class="header-elements">
 							<div class="list-icons">
@@ -1037,7 +1546,7 @@
 		                		<a class="list-icons-item" data-action="remove"></a>
 		                	</div>
 	                	</div>
-					</div> --}}
+					</div>
 					<div class="card-body">
 						<form class="wizard-form steps-basic" action="#" data-fouc>
 							<h6>1.ข้อมูลทั่วไป</h6>

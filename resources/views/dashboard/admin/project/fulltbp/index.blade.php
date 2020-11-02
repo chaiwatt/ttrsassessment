@@ -240,7 +240,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
                                         {{-- <td> {{$key+1}} </td> --}}

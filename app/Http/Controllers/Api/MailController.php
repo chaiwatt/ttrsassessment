@@ -53,5 +53,6 @@ class MailController extends Controller
 
         return response()->json($fulltbp); 
     }
+
     
 }

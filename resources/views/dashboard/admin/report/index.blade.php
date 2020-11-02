@@ -345,7 +345,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จุดประสงค์การประเมิน ปี2563</h6>
+                        <h6 class="card-title">วัตถุประสงค์ของการขอรับการประเมิน ปี2563</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}

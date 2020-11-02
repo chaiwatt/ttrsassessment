@@ -119,7 +119,6 @@ class SettingProfileController extends Controller
                                         ->withAuthorizeddirectors($authorizeddirectors);
     }
     public function EditSave(EditProfileRequest $request, $userid){
-        
         $auth = Auth::user();
         if($request->action == 'personal'){ //บุคคลธรรมดาและนิติบุคคล
             $user = $auth;

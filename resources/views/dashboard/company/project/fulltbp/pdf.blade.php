@@ -99,8 +99,8 @@
 
             <div class="container" >
                 <div class="box"  >
-                    <img src="{{asset('assets/dashboard/images/ttrs.png')}}" style="width:175px;width:145px" alt="">
-                    <img src="{{asset('assets/dashboard/images/nstda.png')}}" style="width:200px;width:180px" class="right"  alt="">
+                    <img src="{{asset('assets/dashboard/images/newlogo.png')}}" style="width:120px" alt="">
+                    <img src="{{asset('assets/dashboard/images/nstda.png')}}" style="width:100px" class="right"  alt="">
                 </div>
 
                 <div class="box center">

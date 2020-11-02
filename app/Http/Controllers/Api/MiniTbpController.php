@@ -270,8 +270,9 @@ class MiniTbpController extends Controller
         ]);
 
         $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id)->first();
+        
         if(Empty($projectassignment->leader_id)){
-         
+            
             $projectassignment = new ProjectAssignment();
             $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
             $projectassignment->save();
@@ -289,7 +290,7 @@ class MiniTbpController extends Controller
             $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
             $alertmessage->detail = 'โครงการ' .$minitbp->project. ' ได้ส่งเอกสาร Mini TBP แล้ว โปรดมอบหมาย Leader ในขั้นตอนต่อไป ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
             $alertmessage->save();
-
+            
             EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสาร Mini TBP','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
             Message::sendMessage('ส่งเอกสาร Mini TBP',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TBP โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบ',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
 

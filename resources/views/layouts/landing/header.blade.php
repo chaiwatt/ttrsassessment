@@ -104,7 +104,7 @@
                         <div class="header-logo header-logo-sticky-change">
                             <a href="index.html">
                                 <img class="header-logo-sticky opacity-0" style="padding-bottom:-20px" alt="Porto" width="479" height="99" data-sticky-width="100" data-sticky-height="43" data-sticky-top="140" src="{{asset('assets/landing/img/logo-dark.png')}}">
-                                <img class="header-logo-non-sticky opacity-0" alt="Porto" width="479" height="99" src="{{asset('assets/landing/img/ttrs.png')}}">
+                                <img class="header-logo-non-sticky opacity-0" alt="Porto" width="250" height="80" src="{{asset('assets/landing/img/newlogo.png')}}">
                             </a>
                         </div>
                     </div>

@@ -176,35 +176,159 @@
         datavalue = check
     }
 
+    // option = {
+    //     tooltip: {
+    //         formatter: '{a} <br/>{b} : {c}%'
+    //     },
+    //     textStyle: {
+	// 	    fontFamily: 'Kanit',
+	//     },
+    //     series: [
+    //         {
+    //             name: 'gauge',
+    //             type: 'gauge',
+    //             detail: {
+    //                 formatter: '{value}%'
+    //             },
+    //             min:0,
+    //             max:100,
+    //             startAngle:0,
+    //             endAngle:180,
+    //             clockwise:false,
+    //             // axisLabel: { textStyle: { color: 'auto' } },
+    //             data: [
+    //                 {
+    //                     value: datavalue, 
+    //                     name: "{{@$businessplans[0]->businessplanstatus->name}}"
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // };
+
     option = {
-        tooltip: {
-            formatter: '{a} <br/>{b} : {c}%'
-        },
         textStyle: {
-		    fontFamily: 'Kanit',
-	    },
-        series: [
-            {
-                name: 'gauge',
-                type: 'gauge',
-                detail: {
-                    formatter: '{value}%'
+                    fontFamily: 'Kanit',
                 },
-                min:0,
-                max:100,
-                startAngle:0,
-                endAngle:180,
-                clockwise:false,
+         series: [
+             {
+                 type: "gauge",
+                 center: ["50%", "45%"], 
+                 radius: "80%", 
+                 startAngle: 200, 
+                 endAngle: -20, 
+                 axisLine: {
+                     show: false,
+                     lineStyle: { 
+                         color: [
+                             [ 0.5,  new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                 offset: 1,
+                                 color: "#E75F25" // 50% 
+                             }, {
+                                 offset: 0.8,
+                                 color: "#D9452C" // 40% 
+                             }], false) ], // 100% 
+                              [ 0.7,  new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                 offset: 1,
+                                 color: "#FFC539" // 70% 
+                             }, {
+                                 offset: 0.8,
+                                 color: "#FE951E" // 66% 
+                             }, {
+                                 offset: 0,
+                                 color: "#E75F25" // 50% 
+                             }], false) ],
+                              [ 0.9,  new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                 offset: 1,
+                                 color: "#C7DD6B" // 90% 
+                             }, {
+                                 offset: 0.8,
+                                 color: "#FEEC49" // 86% 
+                             }, {
+                                 offset: 0,
+                                 color: "#FFC539" // 70% 
+                             }], false) ],
+                             [1,  new echarts.graphic.LinearGradient(0, 0, 0, 1, [ {
+                                 offset: 0.2,
+                                 color: "#1CAD52" // 92% 
+                             }, {
+                                 offset: 0,
+                                 color: "#C7DD6B" // 90% 
+                             }], false) ]
+                         ],
+                         width: 10
+                     }
+                 },
+
+                 splitLine: {
+                     show: false
+                 },
+                 axisTick: {
+                     show: false
+                 },
+                 axisLabel: {
+                     show: false
+                 },
+                 pointer : { 
+                     length: '45%'
+                 },
+                 detail: {
+                     show: false
+                 }
+             },
+             {
+                 type : "gauge",
+                 center: ["50%", "45%"], 
+                 radius : "70%",
+                 startAngle: 200,
+                 endAngle: -20,
+                 axisLine : {
+                     show : true,
+                     lineStyle : { 
+                         color : [ 
+                             [ 0.3, "#DA462C" ],//0-50%
+                             [ 0.7, "#FF9618" ],//51%-70%
+                             [ 0.9, "#FFED44" ],//70%-90%
+                             [ 1,"#20AE51" ]//90%-100%
+                         ],
+                         width : 30
+                     }
+                 },
+                 splitLine : { 
+                     length : 30,
+                     lineStyle : { 
+                         width : 2
+                     }
+                 },
+                 axisTick : { 
+                      length : 20
+                 },
+                 axisLabel : { 
+                     color : "black",
+                     distance : 5 
+                 },
+                 detail: {
+                     formatter : "{score|{value}%}",
+                     offsetCenter: [0, "40%"],
+                    //  backgroundColor: '#FFEC45',
+                     height:30,
+                     rich : {
+                         score : {
+                            //  color : "white",
+                             fontFamily : "Kanit",
+                             fontSize : 32
+                         }
+                     }
+                 },
                 data: [
                     {
                         value: datavalue, 
                         name: "{{@$businessplans[0]->businessplanstatus->name}}"
                     }
                 ]
-            }
-        ]
-    };
-
+             }
+         ]
+     };
 
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
