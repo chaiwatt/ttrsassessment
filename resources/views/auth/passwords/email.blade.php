@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h6 class="card-title">ขอรหัสผ่านใหม่</h6>
+                    <h6 class="card-title">ขอรีเซตรหัสผ่านใหม่</h6>
                 </div>
 
                 <div class="card-body">
@@ -18,7 +18,7 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
                         <div class="form-group">
-                            <label>{{ __('อีเมลแอดเดรส') }}</label>
+                            <label>{{ __('กรอกอีเมลที่ลงทะเบียน') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center">
-                            <button type="submit" class="btn bg-blue ml-3">{{ __('รีเซตรหัสผ่าน') }} <i class="icon-paperplane ml-2"></i></button>
+                            <button type="submit" class="btn bg-blue ml-3">ส่ง</button>
                         </div>
                     </form>
                 </div>

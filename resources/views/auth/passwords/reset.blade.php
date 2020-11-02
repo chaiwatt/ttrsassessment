@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center">
-                            <button type="submit" class="btn bg-blue ml-3">รีเซตรหัสผ่าน <i class="icon-paperplane ml-2"></i></button>
+                            <button type="submit" class="btn bg-blue ml-3">รีเซตรหัสผ่าน</button>
                         </div>
                     </form>
                 </div>
