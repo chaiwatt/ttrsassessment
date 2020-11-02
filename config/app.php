@@ -167,7 +167,7 @@ return [
         'Intervention\Image\ImageServiceProvider',
         Jenssegers\Agent\AgentServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -238,7 +238,7 @@ return [
         'Image' => 'Intervention\Image\Facades\Image',
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+        // 'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
     ],
 
 ];
