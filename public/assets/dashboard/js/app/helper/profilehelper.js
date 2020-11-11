@@ -845,3 +845,15 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
     })
     .catch(error => {})
 });
+
+$(document).on('click', '#btn_modal_add_address', function(e) {
+    console.log($('#addressname').val());
+    // Pillar.getPillar().then(data => {
+    //     var html ='<option value="0" >==เลือกรายการ==</option>';
+    //     data.forEach(function (pilla,index) {
+    //             html += `<option value="${pilla['id']}" >${pilla['name']}</option>`
+    //         });
+    //      $("#pillar").html(html);
+    //      $('#modal_add_clustergroup').modal('show');
+    // }).catch(error => {})
+});

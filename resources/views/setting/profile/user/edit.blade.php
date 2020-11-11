@@ -645,7 +645,7 @@
 											</div>
 
 											{{-- {{$user->company->companyaddress}} --}}
-											@if ($user->company->companyaddress->count() == 1)
+											{{-- @if ($user->company->companyaddress->count() == 1) --}}
 												@php
 													$companyaddress = $user->company->companyaddress->first();
 												@endphp
@@ -704,12 +704,48 @@
 															<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองติจูด" class="form-control">
 														</div>
 													</div>
-												@else
+
+													@if ($user->company->companyaddress->count() > 1)
+														<div class="col-md-12">
+															<div class="form-group">
+																<label for="">ที่อยู่อื่น ๆ</label>
+																<div class="table-responsive">
+																	<table class="table table-bordered table-striped">
+																		<thead>
+																			<tr class="bg-info">
+																				<th >ประเภท</th> 
+																				<th >ที่อยู่</th> 
+																				<th >ตำบล</th> 
+																				<th >อำเภอ</th> 
+																				<th >จังหวัด</th> 
+																				<th >รหัสไปรษณีย์</th> 
+																				<th >เพิ่มเติม</th>                                                                                   
+																			</tr>
+																		</thead>
+																		<tbody id="authorized_director_wrapper_tr"> 
+																			@foreach (array_slice($user->company->companyaddress, 1) as $companyaddress)
+																			<tr >                                        
+																				<td> {{$companyaddress->addresstype}}</td>                                            
+																				<td> {{$companyaddress->address}}</td>   
+																				<td> {{$companyaddress->tambol->name}}</td>   
+																				<td> {{$companyaddress->amphur->name}}</td>   
+																				<td> {{$companyaddress->province->name}}</td>   
+																				<td> {{$companyaddress->postalcode}}</td>   
+																			</tr>
+																			@endforeach
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													@endif
+													
+												{{-- @else
 													@foreach ($user->company->companyaddress as $companyaddress)
 													
 													@endforeach
 	
-											@endif
+											@endif --}}
 										
 											{{-- <div class="col-md-6">
 												<div class="form-group">

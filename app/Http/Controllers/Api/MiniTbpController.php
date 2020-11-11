@@ -177,6 +177,9 @@ class MiniTbpController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 142,261.7, 150, 90, 'auto');
         // $mpdf->Output();
         $path = public_path("storage/uploads/pdf/attachment/");
+        if (!file_exists($path)) {
+            mkdir($path, 0666, true);
+        }
         $mpdf->Output($path . $minitpb->minitbp_code.'.pdf');
         return 'storage/uploads/pdf/attachment/'.$minitpb->minitbp_code.'.pdf' ;
     }

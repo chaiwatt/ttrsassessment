@@ -17,6 +17,7 @@ class CreateCompanyAddressesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->string('addresstype',150)->nullable();
             $table->char('housenumber',5)->nullable();
             $table->string('address',150)->nullable();
             $table->char('soi',5)->nullable();

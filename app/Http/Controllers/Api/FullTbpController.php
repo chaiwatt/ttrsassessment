@@ -53,6 +53,9 @@ class FullTbpController extends Controller
         ];
         $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf', $data);
         $path = public_path("storage/uploads/pdf/attachment/");
+        if (!file_exists($path)) {
+            mkdir($path, 0666, true);
+        }
         $pdf->save($path.$fulltbpcode.'.pdf');
         return 'storage/uploads/pdf/attachment/'.$fulltbpcode.'.pdf' ;
     }

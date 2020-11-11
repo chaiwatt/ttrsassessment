@@ -85,3 +85,6 @@ $(document).on('change', '#amphur1', function(e) {
             console.log(error)
         })
     });
+
+
+    
