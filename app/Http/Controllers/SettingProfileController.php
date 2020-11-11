@@ -160,15 +160,16 @@ class SettingProfileController extends Controller
                     'phone' => $request->phone,
                     'fax' => $request->fax,
                     'email' => $request->email,
-                    'address' => $request->address,
-                    'province_id' => $request->province,
-                    'amphur_id' => $request->amphur,
-                    'tambol_id' => $request->tambol,
-                    'postalcode' => $request->postalcode,
-                    'lat' => $request->lat,
-                    'lng' => $request->lng,
+                    // 'address' => $request->address,
+                    // 'province_id' => $request->province,
+                    // 'amphur_id' => $request->amphur,
+                    // 'tambol_id' => $request->tambol,
+                    // 'postalcode' => $request->postalcode,
+                    // 'lat' => $request->lat,
+                    // 'lng' => $request->lng,
                     'logo' => $filelocation
                 ]);
+                
                 $user = User::find($userid);
                 $user->update([
                     'prefix_id' => $request->prefix,
@@ -230,7 +231,7 @@ class SettingProfileController extends Controller
                 $usergroup = 2;
                 $company = Company::where('vatno',$request->vatno)->first();
                 if(Empty($check)){
-                    CreateCompany::createCompany($auth,$auth->name,$request->vatno);
+                    CreateCompany::createCompany($auth,$auth->name,$request->vatno,5);
                 }else{
                     $company->update([
                         'vatno' => $request->vatno

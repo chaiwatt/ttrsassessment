@@ -1,6 +1,8 @@
 <?php
 
+use App\User;
 use Carbon\Carbon;
+use App\Helper\CreateCompany;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -9,106 +11,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 3,
-            //     'name' => 'สมชาย',
-            //     'lastname' => 'สกุลผู้เชียวชาญ1',
-            //     'email' => 'ttrsexpert1@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 3,
-            //     'name' => 'สมหญิง',
-            //     'lastname' => 'สกุลผู้เชียวชาญ2',
-            //     'email' => 'ttrsexpert2@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 3,
-            //     'name' => 'สมควร',
-            //     'lastname' => 'สกุลผู้เชียวชาญ1',
-            //     'email' => 'ttrsexpertone2020@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],  
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 3,
-            //     'name' => 'สมศรี',
-            //     'lastname' => 'สกุลผู้เชียวชาญ2',
-            //     'email' => 'ttrsexperttwo2020@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],           
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 4,
-            //     'name' => 'สมปอง',
-            //     'lastname' => 'สกุลลิดเดอร์',
-            //     'email' => 'programprc@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 4,
-            //     'name' => 'สมหมาย',
-            //     'lastname' => 'สกุลลิดเดอร์',
-            //     'email' => 'ttrsleader2020@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 4,
-            //     'name' => 'สมหวัง',
-            //     'lastname' => 'สกุลผู้ช่วยลิดเดอร์',
-            //     'email' => 'edutechthai@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 5,
-            //     'name' => 'สมคิด',
-            //     'lastname' => 'สกุลแอดมิน',
-            //     'email' => 'ttrsassessment@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],
-            // [
-            //     'prefix_id' => 1,
-            //     'user_type_id' => 5,
-            //     'name' => 'สมใจ',
-            //     'lastname' => 'สกุลแอดมิน',
-            //     'email' => 'ttrsmanager2020@gmail.com',           
-            //     'password' => Hash::make('11111111'), 
-            //     'email_verified_at' => Carbon::now()->toDateString(),
-            //     'verify_type' => 1
-            // ],
-            [
-                'prefix_id' => 1,
-                'user_type_id' => 6,
-                'name' => 'สมนึก',
-                'lastname' => 'สกุลเจดี',
-                'email' => 'joerocknpc@gmail.com',           
-                'password' => Hash::make('11111111'), 
-                'email_verified_at' => Carbon::now()->toDateString(),
-                'verify_type' => 1
-            ],
             [
                 'prefix_id' => 1,
                 'user_type_id' => 6,
@@ -118,8 +20,27 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 6,
+                'name' => 'สมนึก',
+                'lastname' => 'สกุลเจดี',
+                'email' => 'joerocknpc@gmail.com',           
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
             ]
         ]);
+        DB::table('officer_details')->insert([
+            [
+                'user_id' => 1,
+            ],
+            [
+                'user_id' => 2,
+            ]
+        ]);
+        CreateCompany::createCompany(User::find(1),'สวทช','0994000165668',2);
+        CreateCompany::createCompany(User::find(2),'สวทช','0994000165667',2);
     }
 }
-

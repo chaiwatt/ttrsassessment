@@ -68,7 +68,7 @@ class LoginController extends Controller
             $user->password = Hash::make('11111111');
             $user->email_verified_at = Carbon::now()->toDateString();
             $user->save();
-            CreateCompany::createCompany($user,'','');
+            CreateCompany::createCompany($user,'','',5);
         }
         return $user;
     }

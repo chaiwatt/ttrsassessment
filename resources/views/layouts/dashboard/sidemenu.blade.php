@@ -103,7 +103,7 @@
                         @endif
                     </a></li>  
                     @if (Auth::user()->company->businessplan->business_plan_status_id > 3)
-                        <li class="nav-item"><a href="{{route('dashboard.company.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fulltbp')?'active':''}}">Full TBP
+                        <li class="nav-item"><a href="{{route('dashboard.company.project.fulltbp.edit',['id'=>Auth::user()->company->businessplan->minitbp->fulltbp->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fulltbp')?'active':''}}">Full TBP
                             @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
                                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                             @endif
@@ -130,8 +130,8 @@
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.educationlevel')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.educationlevel')?'active':''}}">ระดับการศึกษา</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businesstype')?'active':''}}">ประเภทธุรกิจ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.industrygroup')?'active':''}}">กลุ่มอุตสาหกรรม</a></li>
-                <li class="nav-item"><a href="{{route('setting.admin.dashboard.registeredcapitaltype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.registeredcapitaltype')?'active':''}}">การจดทะเบียน</a></li>
-                <li class="nav-item"><a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businessplanstatus')?'active':''}}">สถานะความก้าวหน้าโครงการ</a></li>
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.dashboard.registeredcapitaltype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.registeredcapitaltype')?'active':''}}">การจดทะเบียน</a></li> --}}
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businessplanstatus')?'active':''}}">สถานะโครงการ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.userposition')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.userposition')?'active':''}}">ตำแหน่งผู้ใช้งาน</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.expertposition')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.expertposition')?'active':''}}">ตำแหน่งผู้เชี่ยวชาญ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.banktype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.banktype')?'active':''}}">ประเภทบัญชีเงินฝาก</a></li>
@@ -150,7 +150,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าเพจ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu.create')?'active':''}}">เมนู</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	
-                <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">ฟร้อนท์เพจ</a></li>	
+                <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้าแรก</a></li>	
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.user')?'nav-item-expanded':''}}">
@@ -171,8 +171,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">criteria</a></li>		             
             </ul>
         </li>
-    </ul>
-    	
+    </ul>	
 </li>
 @endif
 

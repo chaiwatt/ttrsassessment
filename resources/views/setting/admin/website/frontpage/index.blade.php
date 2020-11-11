@@ -7,7 +7,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขหน้าฟร้อนท์เพจ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขหน้าแรก</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <span class="breadcrumb-item active">แก้ไขหน้าฟร้อนท์เพจ</span>
+                    {{-- <span class="breadcrumb-item active">แก้ไขหน้าฟร้อนท์เพจ</span> --}}
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -64,7 +64,7 @@
                                         <div class="form-group">
                                             <label>รูปพื้น (ขนาด 1200x857 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <button id ="_frontimg" class="btn bg-info" type="button" onclick="document.getElementById('frontimg').click();">อัพโหลดรูปพื้น</button>													
+                                                <button id ="_frontimg" class="btn bg-info" type="button" onclick="document.getElementById('frontimg').click();">อัปโหลดรูปพื้นหลัง</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="frontimg" name="frontimg"/>
                                         </div>
@@ -74,7 +74,7 @@
                                         <div class="form-group">
                                             <label>รูปปุ่มกด (ขนาด 600x128 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <button id="_btnimg" class="btn bg-info" type="button" onclick="document.getElementById('btnimg').click();">อัพโหลดรูปปุ่มกด</button>													
+                                                <button id="_btnimg" class="btn bg-info" type="button" onclick="document.getElementById('btnimg').click();">อัปโหลดรูปปุ่มกด</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="btnimg" name="btnimg"/>
                                         </div>
@@ -107,10 +107,10 @@
     };
 
     $("#frontimg").on('change', function() {
-        $("#_frontimg").html('อัพโหลดรูปพื้น(1)');
+        $("#_frontimg").html('อัปโหลดรูปพื้นหลัง(1)');
     });
     $("#btnimg").on('change', function() {
-        $("#_btnimg").html('อัพโหลดรูปปุ่มกด(1)');
+        $("#_btnimg").html('อัปโหลดรูปปุ่มกด(1)');
     });
 </script>
 @stop

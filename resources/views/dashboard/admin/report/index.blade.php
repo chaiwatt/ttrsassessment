@@ -183,7 +183,7 @@
                         </div>
                         
                         <div>
-                            จำนวนยื่น mini Tbp
+                            จำนวนยื่น Mini Tbp
                         </div>
                     </div>
 

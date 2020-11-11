@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>ที่อยู่<span class="text-danger">*</span></label>
-                                        <input type="text"  name="address" value="{{$company->address}}"  placeholder="ที่อยู่" class="form-control" readonly>
+                                        <input type="text"  name="address" value="{{$company->companyaddress->first()->address}}"  placeholder="ที่อยู่" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>จังหวัด<span class="text-danger">*</span></label>

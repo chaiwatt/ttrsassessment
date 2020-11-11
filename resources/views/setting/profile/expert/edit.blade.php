@@ -264,7 +264,7 @@
 						<div class="card">
 							<div class="card-body">																						
 										<div class="row">
-											<div class="col-md-6">  
+											{{-- <div class="col-md-6">  
 												<div class="form-group">
 													<label>อีเมลผู้ใช้งาน<span class="text-danger">*</span></label>
 													<input type="text"  name="useremail" value="{{$user->email}}"  placeholder="อีเมล" class="form-control" disabled>
@@ -273,7 +273,7 @@
 											<div class="col-md-6">
 												<label>รหัสผ่านผู้ใช้งาน</label>
 												<input type="password" name="password" value="" data-placeholder="รหัสผ่าน" class="form-control">
-											</div>
+											</div> --}}
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>คำนำหน้า<span class="text-danger">*</span></label>
@@ -299,7 +299,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>เลขบัตรประจำตัวประชาชน<span class="text-danger">*</span></label></span>
-														<input type="number" name="hid" id="hid" value="{{old('hid') ?? $user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control" >
+														<input type="text" name="hid" id="hid" value="{{old('hid') ?? $user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control" >
 														<small id="hidinvalid" class="form-text text-danger" hidden></small>
 													</div>
 												</div>
@@ -352,12 +352,19 @@
 												</div>
 											</div>
 											<legend>
-												<label for="">ที่อยู่ที่ติดต่อได้</label>
+												<label for="">ที่อยู่ที่ติดต่อได้ (<label class="form-check-label"  >
+												<div class="form-check">
+													<label class="form-check-label">
+														<input type="checkbox" class="form-check-input-styled-primary" data-fouc>
+														ที่อยู่เดียวกับที่อยู่ตามบัตรประจำตัวประชาชน
+													</label>)
+												</div>
+													
 											</legend>	
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ที่อยู่</label><span class="text-danger">*</span>
-													<input type="text"  name="address1" value="{{old('address1') ?? $user->address1}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+													<label>ที่อยู่อื่น</label><span class="text-danger">*</span>
+													<input type="text"  name="address1" value="{{old('address1') ?? $user->address1}}"  placeholder="ที่อยู่อื่น" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -405,25 +412,25 @@
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
-													<label>โทรสาร</label>
-													<input type="text"  name="fax" value="{{old('fax') ?? $user->fax}}"  placeholder="โทรสาร" class="form-control">
+													<label>อีเมล<span class="text-danger">*</span></label>
+													<input type="text"  name="email" value="{{old('email') ?? $user->company->email}}"  placeholder="อีเมล" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>เว็บไซต์</label>
-													<input type="text"  name="website" value="{{old('website') ?? $user->website}}"  placeholder="โทรศัพท์" class="form-control">
+													<input type="text"  name="website" value="{{old('website') ?? $user->website}}"  placeholder="เว็บไซต์" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ละติจูด</label>
+													<label>ละติจูด<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
 													<input type="text"  name="lat" value="{{old('lat') ?? $user->lat}}"  placeholder="ละติจูด" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ลองติจูด<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
+													<label>ลองติจูด</label>
 													<input type="text"  name="lng" value="{{old('lng') ?? $user->lng}}"  placeholder="ลองติจูด" class="form-control">
 												</div>
 											</div>
@@ -487,8 +494,10 @@
 												<div class="form-group">
 													<label>รูปถ่าย (ขนาด 500x500) px</label>
 													<div class="input-group">													
-														<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
-															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+														<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปถ่าย"  >
+														<span class="input-group-append">
+															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>													
+														</span>							
 													</div>
 													<input type="file" style="display:none;" id="file" name="picture"/>
 													@if (!Empty($user->picture))
@@ -506,7 +515,7 @@
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">
 																<thead>
-																	<tr>
+																	<tr class="bg-info">
 																		<th style="width:10%">ลำดับ</th> 
 																		<th style="width:70%">รายละเอียด</th> 
 																		<th style="width:20%">เพิ่มเติม</th>                                                                                   
@@ -533,11 +542,12 @@
 												<div class="form-group">
 													{{-- <div class="col-md-12" > --}}
 														<label for="">เอกสารแนบ  </label>
-													<a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertdoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณสนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
+													<a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertdoc">คลิกเพิ่ม</a>
+													<p><small>(Resume, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่น ๆ)</small></p> 
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">
 																<thead>
-																	<tr>
+																	<tr class="bg-info">
 																		<th style="width:80%">ไฟล์</th> 
 																		<th style="width:20%">เพิ่มเติม</th>                                                                                   
 																	</tr>
@@ -755,6 +765,7 @@
 @endsection
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/expertprofilehelper.js')}}"></script>
 {{-- <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script> --}}

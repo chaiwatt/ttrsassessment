@@ -12,7 +12,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
 							<select id="employprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
@@ -21,15 +21,20 @@
 								@endforeach
 							</select>
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
 							<input type="text" id="employname" placeholder="ชื่อ" class="form-control">
 						</div>
-
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
 							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control">
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่ง<span class="text-danger">*</span></label>
 							<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
@@ -38,13 +43,23 @@
 								@endforeach
 							</select>
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone" placeholder="เบอร์โทรศัพท์" class="form-control">
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone" placeholder="โทรศัพท์มือถือ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>อีเมล</label><span class="text-danger">*</span>
+							<input type="text" id="employemail" placeholder="อีเมล" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -62,7 +77,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มข้อมูลบุคลากร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -73,6 +88,7 @@
 								<li class="nav-item"><a href="#left-icon-employeducation" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการศึกษา</a></li>
 								<li class="nav-item"><a href="#left-icon-employexpereince" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการทำงาน</a></li>
 								<li class="nav-item"><a href="#left-icon-employtraining" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการฝึกอบรม</a></li>								
+								<li class="nav-item"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> เอกสารแนบ</a></li>	
 							</ul>
 
 							<div class="tab-content">
@@ -92,7 +108,7 @@
 										<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control">
 									</div>
 									<div class="form-group">
-										<label>ตำแหน่ง<span class="text-danger">*</span></label>
+										<label>ตำแหน่ง</label>
 										<div id="employposition_wrapper"></div>
 									</div>
 									<div class="form-group">
@@ -100,11 +116,16 @@
 										<input type="text" id="employphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
 									</div>
 									<div class="form-group">
-										<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
+										<label>โทรศัพท์มือถือ</label>
 										<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
 									</div>
 									<div class="form-group">
-										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล employ</button>
+										<label>อีเมล</label><span class="text-danger">*</span>
+										<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control">
+									</div>
+									
+									<div class="form-group">
+										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูลพนักงาน</button>
 									</div>
 									
 								</div>
@@ -114,7 +135,7 @@
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
 									</div>
 									<div class="table-responsive">
-										<table class="table table-striped">
+										<table class="table table-striped table-bordered">
 											<thead>
 												<tr>
 													<th>ระดับ</th>  
@@ -136,7 +157,7 @@
 									</div>
 
 									<div class="table-responsive">
-										<table class="table table-striped">
+										<table class="table table-striped table-bordered">
 											<thead>
 												<tr>
 													<th>เริ่มต้น-สิ้นสุด</th>  
@@ -152,13 +173,32 @@
 										</table>
 									</div>
 								</div>
+								<div class="tab-pane fade" id="left-icon-attachment">
+									<div class="input-group">													
+										<label for="">เอกสารแนบ <a type="button" id="btnuploadboardattachment" onclick="document.getElementById('boardattachment').click();"><i class="icon-add text-info"></i></a></label>
+									</div>
+									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment"/>
+
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered">
+											<thead>
+												<tr>
+													<th>เอกสารแนบ</th>                                                                                  
+													<th style="width:200px">ดาวน์โหลด</th>
+												</tr>
+											</thead>
+											<tbody id="fulltbp_board_attachment_wrapper_tr">                             
+											</tbody>
+										</table>
+									</div>
+								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
 									<div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a>
 									</div>
 
 									<div class="table-responsive">
-										<table class="table table-striped">
+										<table class="table table-striped table-bordered">
 											<thead>
 												<tr>
 													<th>วัน เดือน ปี</th>  
@@ -193,6 +233,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
+					<label for="" class="text-danger">*กรุณาบันทึกวุฒิการศึกษาสูงสุดก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ระดับ</label><span class="text-danger">*</span>
@@ -214,7 +255,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationyear" placeholder="เบอร์โทรศัพท์" class="form-control">
+							<input type="text" id="employeducationyear" placeholder="ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -232,11 +273,12 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการทำงาน</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<div class="row">
+					<label for="" class="text-danger">*กรุณาบันทึกประสบการณ์ทำงานจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ช่วงเวลาการทำงานเริ่มต้น</label><span class="text-danger">*</span>
@@ -279,11 +321,12 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการฝึกอบรม</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<div class="row">
+					<label for="" class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>วัน เดือน ปี</label><span class="text-danger">*</span>
@@ -674,8 +717,8 @@
 								<input type="number" id="debtpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายต่อปี(บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="debttotalyearsell" placeholder="ยอดขายต่อปี(บาท)" class="form-control">
+								<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="debttotalyearsell" placeholder="ยอดขายต่อปี (บาท)" class="form-control">
 							</div>
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
@@ -721,8 +764,8 @@
 									<input type="number" id="debtpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
 								</div>
 								<div class="form-group">
-									<label>ยอดขายต่อปี(บาท)</label><span class="text-danger">*</span>
-									<input type="number" id="debttotalyearselledit" placeholder="ยอดขายต่อปี(บาท)" class="form-control">
+									<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
+									<input type="number" id="debttotalyearselledit" placeholder="ยอดขายต่อปี (บาท)" class="form-control">
 								</div>
 								<div class="form-group">
 									<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
@@ -763,8 +806,8 @@
 								<input type="number" id="creditpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดซื้อต่อปี(บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="credittotalyearsell" placeholder="ยอดซื้อต่อปี(บาท)" class="form-control">
+								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="credittotalyearsell" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control">
 							</div>
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
@@ -806,8 +849,8 @@
 								<input type="number" id="creditpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดซื้อต่อปี(บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="credittotalyearselledit" placeholder="ยอดซื้อต่อปี(บาท)" class="form-control">
+								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="credittotalyearselledit" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control">
 							</div>
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
@@ -846,12 +889,12 @@
 								<input type="text" id="asset" placeholder="รายการ" class="form-control" readonly >
 							</div>
 							<div class="form-group">
-								<label>จำนวนเงิน(บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="assetcostedit" placeholder="จำนวนเงิน(บาท)" class="form-control">
+								<label>จำนวนเงิน (บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="assetcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>จำนวน(ชิ้น)</label><span class="text-danger">*</span>
-								<input type="number" id="assetquantityedit" placeholder="จำนวน(ชิ้น)" class="form-control">
+								<label>จำนวน (ชิ้น)</label><span class="text-danger">*</span>
+								<input type="number" id="assetquantityedit" placeholder="จำนวน (ชิ้น)" class="form-control">
 							</div>
 							<div class="form-group">
 								<label>ราคาต่อเครื่อง (บาท)</label><span class="text-danger">*</span>
@@ -889,8 +932,8 @@
 								<input type="text" id="investment" placeholder="รายการ" class="form-control" readonly >
 							</div>
 							<div class="form-group">
-								<label>จำนวนเงิน(บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="investmentcostedit" placeholder="จำนวนเงิน(บาท)" class="form-control">
+								<label>จำนวนเงิน (บาท)</label><span class="text-danger">*</span>
+								<input type="number" id="investmentcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -978,6 +1021,128 @@
 	</div>
 </div>
 
+{{-- modal_add_researcher --}}
+<div id="modal_add_researcher" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มนักวิจัย</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>คำนำหน้าชื่อ</label>
+									<select id="researcherfix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+										@foreach ($prefixes as $prefix)
+											<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>ชื่อ</label>
+									<input type="text" id="researchername" placeholder="ชื่อ" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group">
+									<label>นามสกุล</label>
+									<input type="text" id="researcherlastname" placeholder="นามสกุล" class="form-control">
+								</div>
+							</div>
+						</div>
+				
+					</div>
+					<div class="col-md-12">
+							<div class="form-group">
+								<label>ประวัติการศึกษา</label>
+								<input type="text" id="researchereducation" placeholder="ประวัติการศึกษา" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ประสบการณ์การทำงาน</label>
+								<input type="text" id="researcherexperience" placeholder="ประสบการณ์การทำงาน" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ประวัดิการฝึกอบรม</label>
+								<input type="text" id="researchertraining" placeholder="ประวัดิการฝึกอบรม" class="form-control">
+							</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_researcher" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{{-- modal_add_projectmember --}}
+<div id="modal_add_projectmember" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มทีมงานในโครงการ</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>คำนำหน้าชื่อ</label>
+									<select id="projectmemberfix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+										@foreach ($prefixes as $prefix)
+											<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+										@endforeach
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>ชื่อ</label>
+									<input type="text" id="projectmembername" placeholder="ชื่อ" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group">
+									<label>นามสกุล</label>
+									<input type="text" id="projectmemberlastname" placeholder="นามสกุล" class="form-control">
+								</div>
+							</div>
+						</div>
+				
+					</div>
+					<div class="col-md-12">
+							<div class="form-group">
+								<label>ประวัติการศึกษา</label>
+								<input type="text" id="projectmembereducation" placeholder="ประวัติการศึกษา" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ประสบการณ์การทำงาน</label>
+								<input type="text" id="projectmemberexperience" placeholder="ประสบการณ์การทำงาน" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>ประวัดิการฝึกอบรม</label>
+								<input type="text" id="projectmembertraining" placeholder="ประวัดิการฝึกอบรม" class="form-control">
+							</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_projectmember" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
 
     <!-- Page header -->
     <div class="page-header page-header-light">
@@ -1039,6 +1204,7 @@
 	                	</div>
 					</div> --}}
 					<div class="card-body">
+					<input type="text" id="fulltbpid" value="{{$fulltbp->id}}" hidden>
 						<form class="wizard-form steps-basic" action="#" data-fouc>
 							<h6>1.ข้อมูลทั่วไป</h6>
 
@@ -1067,7 +1233,7 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>ชื่อนิติบุคคล</label>
-															<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control">
+															<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control" readonly>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -1112,24 +1278,28 @@
 															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>แผนผังองค์กร</label>
-															<div class="input-group">													
-																<input type="text" id="fileorganizeimg" class="form-control border-right-0" placeholder="แผนผังองค์กร"  >
-																	<button class="btn bg-info" type="button" onclick="document.getElementById('organizeimg').click();">อัพโหลด</button>													
-															</div>
-															<input type="file" style="display:none;" id="organizeimg" name="organizeimg"/>
-															@if (!Empty($fulltbp->minitbp->businessplan->organizeimg))
-															<br>
-																<img src="{{asset($fulltbp->minitbp->businessplan->organizeimg)}}" width="500" height="300" alt="">
-															@endif
-														</div>
-													</div>
-													<div class="col-md-6">
+													{{-- <div class="col-md-6">
 														<div class="form-group">
 															<label>วันที่ชำระทุนจดทะเบียน</label>
 															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+														</div>
+													</div> --}}
+													<div class="col-md-12">
+														<div class="form-group">
+															<label>แผนผังองค์กร (รูปขนาด 500 x 300px)</label>
+															<div class="input-group">													
+																{{-- <input type="text" id="fileorganizeimg" class="form-control border-right-0" placeholder="แผนผังองค์กร"  > --}}
+																	<button class="btn bg-info" type="button" onclick="document.getElementById('organizeimg').click();">อัปโหลด</button>													
+															</div>
+															<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg"/>
+															@if (!Empty($fulltbp->minitbp->businessplan->company->organizeimg))
+																<br>
+																<img id="organizeimgholder" src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" width="500" height="300" alt="">
+																@else
+																<br>
+																<img id="organizeimgholder" src="{{asset('assets/dashboard/images/orgimg.png')}}" width="500" height="300" alt="">
+																
+															@endif
 														</div>
 													</div>
 													<legend>
@@ -1140,7 +1310,7 @@
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>จำนวนบุคลากรทั้งหมด</label>
-																	<input type="text" value="0"  class="form-control" >
+																	<input type="number" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control" >
 																</div>
 															</div>
 															<div class="col-md-3">
@@ -1180,23 +1350,25 @@
 													</legend>
 													<div class="col-md-12">
 														<div class="form-group">
-															<label for="">รายระเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </label> <span class="text-primary" id="companyprofiletextlength"></span>
-															<input type="text" id="companyprofile_input" class="form-control companyprofileclass" >
+															<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </label> <span class="text-primary" id="companyprofiletextlength"></span>
+															{{-- <input type="text" id="companyprofile_input" class="form-control companyprofileclass" > --}}
+															<textarea name="companyhistory" id="companyhistory" class="form-control" cols="3" rows="7">{{$fulltbp->minitbp->businessplan->company->companyhistory}}</textarea>
 														</div>
-														<div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
+														{{-- <div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
 															@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
 																<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
 															@endforeach
 														</div>
-														<hr>	
+														<hr>	 --}}
 														<div class="row">
 															<div class="col-md-12">	
 																<div class="input-group">													
-																	<button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													
+																	{{-- <button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													 --}}
+																	<label for="">เอกสารแนบข้อมูลทั่วไป <a type="button" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add text-info"></i></a></label>
 																</div>
 																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/>
 															</div>
-														</div>																								
+														</div>			
 														<div class="row">	
 															<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
 															</div>
@@ -1204,9 +1376,9 @@
 														<div class="row">
 															<div class="col-md-12">	
 																<div class="table-responsive">
-																	<table class="table table-striped">
+																	<table class="table table-striped table-bordered">
 																		<thead>
-																			<tr>
+																			<tr class="bg-info">
 																				<th>เอกสารแนบ</th>                                                                                  
 																				<th style="width:200px">ดาวน์โหลด</th>
 																			</tr>
@@ -1226,14 +1398,14 @@
 																</div>
 															</div>      
 														</div>
-														<div class="row">
+														{{-- <div class="row">
 															<div class="col-md-12">	
 																<div class="form-group">
 																	<br>
 																	<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกประวัติบริษัท</button>
 																</div>
 															</div>
-														</div>	
+														</div>	 --}}
 													</div>
 												</div>
 											</div>
@@ -1243,7 +1415,7 @@
 									<div class="card mb-0 border-top-success rounded-top-0 rounded-0 border-y-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.2 ข้อมูลผู้บริหารระดับสูง</a>
+												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.2 ข้อมูลบุคลากร</a>
 											</h6>
 										</div>
 		
@@ -1253,25 +1425,27 @@
 													<div class="col-md-12">	
 														<label for="">ข้อมูลผู้บริหารระดับสูง <a href="" id="btnaddemploy" data-toggle="modal" data-target="#modal_add_employ"><i class="icon-add text-info"></i></a></label>
 														<div class="table-responsive">
-															<table class="table table-striped border">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>ชื่อ-สกุล</th>  
 																		<th>ตำแหน่ง</th>                                                                                    
 																		<th>โทรศัพท์</th>       
 																		<th>โทรศัพท์มือถือ</th>  
-																		<th style="width:200px">เพิ่มเติม</th>    
+																		<th>อีเมล</th>
+																		<th style="width:250px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_companyemploy_wrapper_tr">    
-																	@foreach ($companyemploys as $companyemploy)
+																	@foreach ($companyemploys->where('employ_position_id','<=',5) as $companyemploy)
 																		<tr >                                        
 																			<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
 																			<td> {{$companyemploy->employposition->name}} </td> 
 																			<td> {{$companyemploy->phone}} </td>                                            
 																			<td> {{$companyemploy->workphone}} </td> 
+																			<td> {{$companyemploy->email}} </td> 
 																			<td> 
-																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-info editEmployinfo">แก้ไข</a>
+																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
 																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a> 
 																			</td> 
 																		</tr>
@@ -1280,12 +1454,12 @@
 															</table>
 														</div>
 													</div>
-													<br>
+												
 													{{-- <div class="row"> --}}
-														<div class="col-md-12">	
-															<label for="">ข้อมูลผู้ถือหุ้น <a href="" id="btnstckholder" data-id="{{$company->id}}" ><i class="icon-add text-info"></i></a></label>
+														<div class="col-md-12 mt-3">	
+															<label for="">ข้อมูลผู้ถือหุ้น <a type="button" id="btnstckholder" data-id="{{$company->id}}" ><i class="icon-add text-info"></i></a></label>
 															<div class="table-responsive">
-																<table class="table table-striped border">
+																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-สกุล</th>  
@@ -1306,12 +1480,12 @@
 															</div>
 														</div>
 													{{-- </div> --}}
-													<br>
+													
 													{{-- <div class="row"> --}}
-														<div class="col-md-12">	
-															<label for="">ข้อมูลทีมวิจัย <a href="" id="btnresearcher" data-id="{{$company->id}}" ><i class="icon-add text-info"></i></a></label>
+														<div class="col-md-12 mt-3">	
+															<label for="">ข้อมูลทีมวิจัย <a href="#" data-toggle="modal" data-target="#modal_add_researcher"><i class="icon-add text-info"></i></a></label>
 															<div class="table-responsive">
-																<table class="table table-striped border">
+																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-สกุล</th>  
@@ -1322,7 +1496,43 @@
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_researcher_wrapper_tr">    
-																								   
+																		@foreach ($fulltbpresearchers->where('employtype',1) as $fulltbpresearcher)
+																			<tr >                                        
+																				<td> {{$fulltbpresearcher->prefix->name}}{{$fulltbpresearcher->name}} {{$fulltbpresearcher->name}}</td> 
+																				<td> {{$fulltbpresearcher->education}} </td> 
+																				<td> {{$fulltbpresearcher->experience}} </td> 
+																				<td> {{$fulltbpresearcher->training}} </td> 
+																				<td> <a type="button" data-id="{{$fulltbpresearcher->id}}" class="btn btn-sm bg-warning deleteresearcher">ลบ</a> </td> 
+																			</tr>
+																		@endforeach    			   
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
+														<div class="col-md-12 mt-3">	
+															<label for="">ข้อมูลทีมงานในโครงการ <a href="#" data-toggle="modal" data-target="#modal_add_projectmember"><i class="icon-add text-info"></i></a></label>
+															<div class="table-responsive">
+																<table class="table table-striped table-bordered">
+																	<thead>
+																		<tr class="bg-info">
+																			<th>ชื่อ-สกุล</th>  
+																			<th>ประวัติการศึกษา</th>
+																			<th>ประสบการณ์การทำงาน</th>
+																			<th>ประวัดิการฝึกอบรม</th>
+																			<th style="width:200px">เพิ่มเติม</th>    
+																		</tr>
+																	</thead>
+																	<tbody id="fulltbp_projectmember_wrapper_tr">    
+																		@foreach ($fulltbpresearchers->where('employtype',2) as $fulltbpresearcher)
+																			<tr >                                        
+																				<td> {{$fulltbpresearcher->prefix->name}}{{$fulltbpresearcher->name}} {{$fulltbpresearcher->name}}</td> 
+																				<td> {{$fulltbpresearcher->education}} </td> 
+																				<td> {{$fulltbpresearcher->experience}} </td> 
+																				<td> {{$fulltbpresearcher->training}} </td> 
+																				<td> <a type="button" data-id="{{$fulltbpresearcher->id}}" class="btn btn-sm bg-warning deleteresearcher">ลบ</a> </td> 
+																			</tr>
+																		@endforeach    			   
 																	</tbody>
 																</table>
 															</div>
@@ -1330,28 +1540,77 @@
 													{{-- </div> --}}
 													<br>
 													{{-- <div class="row"> --}}
-														<legend><label for=""><strong>ข้อมูลผู้รับผิดชอบหลักในโครงการ</strong> </label></legend>
+														<legend class="mt-2"><label for=""><strong>ข้อมูลผู้รับผิดชอบหลักในโครงการ</strong> </label></legend>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>คำนำหน้าชื่อ</label>
+																<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+																	@foreach ($prefixes as $prefix)
+																		<option value="{{$prefix->id}}" 
+																			@if ($prefix->id == @$fulltbp->fulltbpresponsibleperson->prefix_id) selected @endif >{{$prefix->name}}</option> 
+																	@endforeach
+																</select>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>ชื่อ</label>
+																<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name}}" placeholder="ชื่อ" class="form-control">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>นามสกุล</label>
+																<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname}}" placeholder="นามสกุล" class="form-control">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>อีเมล</label>
+																<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email}}" placeholder="อีเมล" class="form-control">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>ตำแหน่ง</label>
+																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position}}" placeholder="ตำแหน่ง" class="form-control">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>โทรศัพท์</label>
+																<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1}}" placeholder="เบอร์โทรศัพท์" class="form-control">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>โทรศัพท์มือถือ</label>
+																<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2}}" placeholder="โทรศัพท์มือถือ" class="form-control">
+															</div>
+														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประวัติการศึกษา</label>
-																<input type="number" name ="projectownereducation" id ="projectownereducation" value="" class="form-control" >
+																
+																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->educationhistory}}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประสบการณ์การทำงาน</label>
-																<input type="number" name ="projectownerexpereince" id ="projectownerexpereince" value="" class="form-control" >
+																
+																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->experiencehistory}}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
-																<label>ประวัดิการฝึกอบรม</label>
-																<input type="number" name ="projectownertraining" id ="projectownertraining" value="" class="form-control" >
+																<label>ประวัติการฝึกอบรม</label>
+																
+																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->traininghistory}}</textarea>
 															</div>
 														</div>
 													{{-- </div> --}}
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -1381,13 +1640,13 @@
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="">ชื่อภาษาไทย<span class="text-danger">*</span></label>
+																<label for="">ชื่อโครงการ<span class="text-danger">*</span></label>
 																<input type="text"  value="{{$minitbp->project}}" class="form-control" disabled>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="">ชื่อภาษาอังกฤษ<span class="text-danger">*</span></label>
+																<label for="">ชื่อโครงการ (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
 																<input type="text" value="{{$minitbp->projecteng}}" class="form-control" disabled>
 															</div>
 														</div>
@@ -1395,12 +1654,10 @@
 															<div class="form-group">
 																<div class="form-group">
 																	<label for="">บทคัดย่อ </label> <span class="text-primary" id="projectabtracttextlength"></span>
-																	<p><small><i>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือ
-																		ตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและ
-																		สังคม</i> </small></p>
+																	<p><small><i>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและสังคม</i> </small></p>
 																	
 																	{{-- <input type="text" id="projectabtract_input" class="form-control projectabtractclass" > --}}
-																	<textarea name="" id="" class="form-control" cols="3" rows="5"></textarea>
+																	<textarea name="" id="projectabtract_input" class="form-control" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
 																</div>
 																{{-- <div id="fulltbp_projectabtract_wrapper" style="border: dashed 1px #999999">
 																	@foreach ($fulltbpprojectabtractdetails as $fulltbpprojectabtractdetail)
@@ -1419,9 +1676,32 @@
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
-																<label for="">จุดเด่นผลิตภัณฑ์หลัก(สินค้าและบริการ)ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
+																<label for="">ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ </label>
+																<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
+																<textarea name="" id="mainproduct_input" class="form-control" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
+																{{-- <input type="text" id="productdetails_input" class="form-control productdetailsclass" > --}}
+															</div>
+															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
+																@foreach ($fulltbpproductdetails as $fulltbpproductdetail)
+																	<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control productdetailsclass" style="border: 0" >
+																@endforeach
+															</div>
+															<div class="row">
+																<div class="col-md-12">	
+																	<div class="form-group">
+																		<br>
+																		<button type="button" id="btnaddproductdetails" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกจุดเด่นผลิตภัณฑ์หลัก</button>
+																	</div>
+																</div>
+															</div> --}}
+
+														</div>
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
 																<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
-																<textarea name="" id="" class="form-control" cols="3" rows="5"></textarea>
+																<textarea name="" id="productdetails_input" class="form-control" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																{{-- <input type="text" id="productdetails_input" class="form-control productdetailsclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
@@ -1459,7 +1739,7 @@
 															<div class="form-group">
 																<label for="">การพัฒนาเทคโนโลยี</label> <span class="text-primary" id="projectechdevtextlength"></span>
 																<p><small><i>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</i> </small></p>
-																<textarea name="" id="" class="form-control" cols="3" rows="7"></textarea>
+																<textarea name="" id="projectechdev_input" class="form-control" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
 																{{-- <input type="text" id="projectechdev_input" class="form-control projectechdevclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_projectechdev_wrapper" style="border: dashed 1px #999999">
@@ -1479,11 +1759,11 @@
 														<div class="col-md-12">
 															<div class="form-group">	
 																{{-- <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add"></i></a> --}}
-																<label for="">ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์ <a href="#" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add text-info"></i></a></label>
+																<label for="">ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์ <a type="button" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add text-info"></i></a></label>
 																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน(เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
 															</div>
 															<div class="table-responsive">
-																<table class="table table-striped">
+																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>รายการ</th>  
@@ -1510,7 +1790,7 @@
 															<div class="form-group">
 																<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																<p><small><i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i> </small></p>
-																<textarea name="" id="" class="form-control" cols="3" rows="7"></textarea>
+																<textarea name="" id="projectechdevproblem_input" class="form-control" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
 																{{-- <input type="text" id="projectechdevproblem_input" class="form-control projectechdevproblemclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_projectechdevproblem_wrapper" style="border: dashed 1px #999999">
@@ -1705,7 +1985,7 @@
 																<div class="col-md-12">	
 																	<div class="form-group">												
 																		{{-- <button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('certify').click();"><i class="icon-add"></i></button>													 --}}
-																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร <a href="#" id="btnuploadcertify" onclick="document.getElementById('certify').click();"><i class="icon-add text-info"></i></a></label>
+																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร <a type="button" id="btnuploadcertify" onclick="document.getElementById('certify').click();"><i class="icon-add text-info"></i></a></label>
 																	</div>
 																	<input type="file" style="display:none;" data-id="{{$fulltbpprojectcertify->id}}" id="certify" name="certify"/>
 																</div>
@@ -1717,7 +1997,7 @@
 															{{-- <div class="row"> --}}
 																<div class="col-md-12">	
 																	<div class="table-responsive">
-																		<table class="table table-striped">
+																		<table class="table table-striped table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
@@ -1741,25 +2021,24 @@
 															{{-- </div> --}}
 
 															<br>
-															<legend><label for=""><strong>การจัดการด้านทรัพย์สินทางปัญญา</strong> </label></legend>
-
-															{{-- <div class="row"> --}}
-																<div class="col-md-12">	
+															<legend><label for=""><strong>รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> </label></legend>
+															
+																<div class="col-md-12">
+																	<div class="form-group">
+																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
+																		<p><small><i>เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</i> </small></p>
+																		<textarea name="" id="projectinnovation_input" class="form-control" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
+																	</div>	
 																	<div class="form-group">												
-																		{{-- <button id="btnuploadaward" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add"></i></button> --}}
 																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ <a href="#" id="btnuploadaward" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add text-info"></i></a></label>
 																	</div>
 																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
 																</div>
-															{{-- </div>																								 --}}
-															{{-- <div class="row">	 --}}
 																<div class="col-md-12" id="fulltbp_award_wrapper" >	
 																</div>
-															{{-- </div> --}}
-															{{-- <div class="row"> --}}
 																<div class="col-md-12">	
 																	<div class="table-responsive">
-																		<table class="table table-striped">
+																		<table class="table table-striped table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารรางวัลด้านเทคโนโลยี/นวัตกรรม</th>                                                                                  
@@ -1768,7 +2047,7 @@
 																			</thead>
 																			<tbody id="fulltbp_award_wrapper_tr">    
 																				@foreach ($fulltbpprojectawardattachments as $fulltbpprojectawardattachment)
-																					<tr class="bg-info">                                        
+																					<tr>                                        
 																						<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
 																						<td> 
 																							<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
@@ -1787,11 +2066,15 @@
 
 															<div class="row">
 																<div class="col-md-12">	
+																	<div class="form-group">
+																		<label for="">ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
+																		<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
+																		<textarea name="" id="projectstandard_input" class="form-control" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
+																	</div>	
 																	<div class="form-group">												
 																		{{-- <button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add"></i></button> --}}
-																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ <a href="#" id="btnuploadaward" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add text-info"></i></a></label>
-																		
-																		<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
+																		<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI  <a href="#" id="btnuploadstandard" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add text-info"></i></a></label>
+																		{{-- <p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p> --}}
 																	</div>
 																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
 																</div>
@@ -1803,7 +2086,7 @@
 															<div class="row">
 																<div class="col-md-12">	
 																	<div class="table-responsive">
-																		<table class="table table-striped">
+																		<table class="table table-striped table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ</th>                                                                                  
@@ -1838,7 +2121,7 @@
 										<div class="card rounded-top-0">
 											<div class="card-header">
 												<h6 class="card-title">
-													<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.3 แผนการดำเนินงาน(Gantt Chart)</a>
+													<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.3 แผนการดำเนินงาน (Gantt Chart)</a>
 												</h6>
 											</div>
 
@@ -1911,9 +2194,7 @@
 							</fieldset>
 
 							<h6>3.ความเป็นไปได้ด้านการตลาดแผนสู่เชิงพาณิชย์</h6>
-				
 							<fieldset>
-							
 								<div id="accordion-group">
 									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
 										<div class="card-header">
@@ -1936,34 +2217,18 @@
 																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</li>
 																</ul>
 																</i> </small></p>
-															{{-- <input type="text" id="marketneed_input" class="form-control marketneedclass" > --}}
-															<textarea name="" id="" class="form-control" cols="3" rows="10"></textarea>
+															<textarea name="" id="analysis" class="form-control" cols="3" rows="10">{{@$fulltbp->fulltbpmarketanalysis->detail}}</textarea>
 														</div>
-														{{-- <div id="fulltbp_marketneed_wrapper" style="border: dashed 1px #999999">
-															@foreach ($fulltbpmarketneeds as $fulltbpmarketneed)
-																<input type="text" name ="marketneed[]" value="{{$fulltbpmarketneed->line}}" class="form-control marketneedclass" style="border: 0" >
-															@endforeach
-														</div>
-														<div class="row">
-															<div class="col-md-12">	
-																<div class="form-group">
-																	<br>
-																	<button type="button" id="btnaddmarketneed" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึก Market need</button>
-																</div>
-															</div>
-														</div> --}}
 													</div>
 
 													<div class="col-md-12">	
 														<div class="form-group">
 															<label for=""><u>Business Model Canvas</u></label>
 															<p><small><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i> </small></p>
-															{{-- <input type="text" id="marketneed_input" class="form-control marketneedclass" > --}}
-															<textarea name="" id="" class="form-control" cols="3" rows="5"></textarea>
+															<textarea name="" id="modelcanvas" class="form-control" cols="3" rows="5">{{@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail}}</textarea>
 														</div>
 														<div class="col-md-12">	
 															<div class="input-group">													
-																{{-- <button id="btnuploadbusinessmodelcanvas" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('businessmodelcanvas').click();"><i class="icon-add"></i></button>													 --}}
 																<label for="">เอกสารแนบ Business Model Canvas <a href="#" id="btnuploadbusinessmodelcanvas" onclick="document.getElementById('businessmodelcanvas').click();"><i class="icon-add text-info"></i></a></label>
 															</div>
 															<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="businessmodelcanvas" name="businessmodelcanvas"/>
@@ -1972,10 +2237,10 @@
 														</div>
 														<div class="col-md-12">	
 															<div class="table-responsive">
-																<table class="table table-striped">
+																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th>เอกสารBusiness Model Canvas</th>                                                                                  
+																			<th>เอกสาร Business Model Canvas</th>                                                                                  
 																			<th style="width:200px">ดาวน์โหลด</th>
 																		</tr>
 																	</thead>
@@ -1996,17 +2261,14 @@
 														<br>
 														<div class="col-md-12">	
 															<div class="form-group">
-																<label for="" ><u>วิเคราะห์ศักยภาพทางการค้า</u> </label>
-																<p><small><i>SWOT Analysis, Five Fources Analysis</i> </small></p>
-																<textarea name="" id="" class="form-control" cols="3" rows="5"></textarea>
+																<label for="" ><u>วิเคราะห์ศักยภาพทางการค้า</u></label>
+																<p><small><i>SWOT Analysis, Five Forces Analysis</i> </small></p>
+																<textarea name="" id="swot" class="form-control" cols="3" rows="5">{{@$fulltbp->fulltbpmarketswot->detail}}</textarea>
 															</div>
-		
-		
-								
 															<div class="col-md-12">	
 																<div class="input-group">													
 																	{{-- <button id="btnuploadswot" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('swot').click();"><i class="icon-add"></i></button>													 --}}
-																	<label for="">SWOT Analysis, Five Fources Analysis<a href="#" id="btnuploadswot" onclick="document.getElementById('swot').click();"><i class="icon-add text-info"></i></a></label>
+																	<label for="">SWOT Analysis, Five Forces Analysis<a href="#" id="btnuploadswot" onclick="document.getElementById('swot').click();"><i class="icon-add text-info"></i></a></label>
 																</div>
 																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="swot" name="swot"/>
 															</div>
@@ -2016,10 +2278,10 @@
 		
 															<div class="col-md-12">	
 																<div class="table-responsive">
-																	<table class="table table-striped">
+																	<table class="table table-striped table-bordered">
 																		<thead>
 																			<tr class="bg-info">
-																				<th>เอกสารSWOT Analysis, Five Fources Analysis</th>                                                                                  
+																				<th>เอกสาร SWOT Analysis, Five Forces Analysis</th>                                                                                  
 																				<th style="width:200px">ดาวน์โหลด</th>
 																			</tr>
 																		</thead>
@@ -2039,12 +2301,6 @@
 															</div>      
 														</div>													
 													</div>
-
-
-
-
-
-
 												</div>
 											</div>
 										</div>
@@ -2062,12 +2318,11 @@
 												<div class="row">
 													<div class="col-md-12">	
 														<div class="form-group">	
-															{{-- <a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" id="btnaddsell" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add"></i></a> --}}
 															<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><a href="#" id="btnuploadaward" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add text-info"></i></a></label>
 															<p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
@@ -2103,10 +2358,10 @@
 															<small><i>สถานะยอดขาย (สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
 														{{-- </div> --}}
 														<div class="table-responsive">
-															<table class="table table-striped">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr  class="bg-info">
-																		<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
+																		<th>ระยะเวลา</th>  
 																		<th>ยอดขายปีปัจจุบัน</th> 
 																		<th>{{$fulltbp->past1}}</th>                                                                                    
 																		<th>{{$fulltbp->past2}}</th>       
@@ -2153,13 +2408,13 @@
 															<p><small><i>ลูกหนี้การค้า</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
 																		<th>จำนวนผลิตภัณฑ์หรือโครงการ</th> 
 																		<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
-																		<th>ยอดขายต่อปี(บาท)</th>       
+																		<th>ยอดขายต่อปี (บาท)</th>       
 																		<th>เปรียบเทียบกับยอดขาย (%)</th>  
 																		<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
 																		<th style="width:120px">เพิ่มเติม</th>    
@@ -2186,34 +2441,32 @@
 													</div>
 													<div class="col-md-12 mt-4">
 														<div class="form-group">	
-															<label for=""><u>เจ้าหนี้การค้า</u><a href="#" data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add text-info"></i></a></label>
+															<label for=""><u>เจ้าหนี้การค้า</u><a href="#" data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add text-info"></i></a></label>
 															<p><small><i>เจ้าหนี้การค้า</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
-																		<th>จำนวนผลิตภัณฑ์หรือโครงการ</th> 
 																		<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
-																		<th>ยอดขายต่อปี(บาท)</th>       
-																		<th>เปรียบเทียบกับยอดขาย (%)</th>  
+																		<th>ยอดซื้อต่อปี (บาท)</th>       
+																		<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
 																		<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
 																		<th style="width:120px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
-																<tbody id="fulltbp_debtpartner_wrapper_tr">    
-																	@foreach ($fulltbpdebtpartners as $fulltbpdebtpartner)
+																<tbody id="fulltbp_creditpartner_wrapper_tr">    
+																	@foreach ($fulltbpcreditpartners as $fulltbpcreditpartner)
 																		<tr >
-																			<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
-																			<td> {{$fulltbpdebtpartner->numproject}} </td> 
+																			<td> {{$fulltbpdebtpartner->creditpartner}}</td> 
 																			<td> {{$fulltbpdebtpartner->partnertaxid}} </td> 
-																			<td> {{$fulltbpdebtpartner->totalyearsell}} </td>                                            															
-																			<td> {{$fulltbpdebtpartner->percenttosale}} </td> 
+																			<td> {{$fulltbpdebtpartner->totalyearpurchase}} </td>                                            															
+																			<td> {{$fulltbpdebtpartner->percenttopurchase}} </td> 
 																			<td> {{$fulltbpdebtpartner->businessyear}} </td> 
 																			<td> 
-																				<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a> 
+																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
+																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 
 																			</td> 
 																		</tr>
 																	@endforeach              
@@ -2229,11 +2482,7 @@
 								<!-- /accordion group -->
 		
 							</fieldset>
-
-
-
 							<h6>4.ข้อมูลทางด้านการเงิน</h6>
-							
 							<fieldset>	
 								<div id="accordion-group">
 									<div class="card border-top-info rounded-top-1 mb-0">
@@ -2251,13 +2500,13 @@
 															<p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
 																		<th>จำนวนเงิน (บาท)</th>                                                                                    
-																		<th>จำนวน(ชิ้น)</th>       
-																		<th>ราคาต่อเครื่อง(บาท)</th>  
+																		<th>จำนวน (ชิ้น)</th>       
+																		<th>ราคาต่อเครื่อง (บาท)</th>  
 																		<th>ข้อมูลจำเพาะทางเทคนิค</th> 
 																		<th style="width:120px">เพิ่มเติม</th>    
 																	</tr>
@@ -2285,7 +2534,7 @@
 															<p><small><i>ตารางแสดงรายละเอียดเงินลงทุนสำหรับดำเนินการของโครงการ</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
@@ -2313,7 +2562,7 @@
 															<p><small><i>ตารางแสดงรายละเอียดแหล่งเงินทุนของโครงการ</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped">
+															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr>
 																		<th>รายการ</th>  
@@ -2387,17 +2636,58 @@
 											</div>
 										</div>
 									</div>
-
+								</div>
+								<br>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
+										<select name="signature" id="usersignature" value="{{$fulltbp->signature_status_id}}" id="" class="form-control form-control-select2">
+											@foreach ($signaturestatuses as $signaturestatus)
+												<option value="{{$signaturestatus->id}}" @if($fulltbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
+											@endforeach
+										</select>
+									</div>
+									<div class="form-group" id="signature_wrapper" @if($fulltbp->signature_status_id == 1) hidden @endif>
+										<a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
+										<div class="col-md-12">
+											<div id='sigdiv'>
+												@if (!Empty(Auth::user()->signature))
+												<br>
+												<img src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" alt="">
+												@endif
+											</div>
+										</div>
+									</div>
 								</div>
 								<!-- /accordion group -->
 		
 							</fieldset>
+							<h6>5.เสร็จสิ้น</h6>
+							<fieldset>
+								<div class="col-md-12">
+									<div class="form-group">
+										<div style="width:100%;height:600px;" class="col-md-12 center"  >
+											{{-- <canvas id="the-canvas"></canvas> --}}
+											<div style="width:100%;height:600px;" id="example1"></div>
+										</div>
+										<input type="file" style="display:none;" id="fulltbppdf"/>
+									</div>
+								</div>
+								<div class="col-md-12 " id="appceptagreement_wrapper">
+									<div class="form-group float-right">
+										<div class="form-check">
+											<label class="form-check-label">
+												<input type="checkbox" name="appceptagreement"  id="appceptagreement" class="form-check-input-styled-primary"  data-fouc>
+												ข้าพเจ้าขอรับรองว่าข้อมูลทั้งหมดเป็นความจริงทุกประการ
+											</label>
+										</div>
+									</div>
+								</div>
 
+							</fieldset>
 						</form>
 					</div>				
 	            </div>
-
-	
             </div>
         </div>
         <!-- /form layouts -->
@@ -2411,11 +2701,15 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 <script>
+
 	var route = {
 		url: "{{ url('/') }}",
 		token: $('meta[name="csrf-token"]').attr('content'),
-		branchid: "{{Auth::user()->branch_id}}"
+		branchid: "{{Auth::user()->branch_id}}",
+		submitstatus: "{{$minitbp->businessplan->business_plan_status_id}}",
+		refixstatus: "{{$minitbp->refixstatus}}"
 	};
 	$(document).ready(function() {
 		$(window).keydown(function(event){
@@ -2425,21 +2719,6 @@
 			}
 		});
 	});
-        // Basic wizard setup
-        $('.steps-basic').steps({
-            headerTag: 'h6',
-            bodyTag: 'fieldset',
-            transitionEffect: 'fade',
-            titleTemplate: '<span class="number">#index#</span> #title#',
-            labels: {
-                previous: '<i class="icon-arrow-left13 mr-2" /> ย้อนกลับ',
-                next: 'ทำรายการต่อไป <i class="icon-arrow-right14 ml-2" />',
-                finish: 'บันทึก <i class="icon-arrow-right14 ml-2" />'
-			},
-            onFinished: function (event, currentIndex) {
-                alert('Form submitted.');
-            }
-        });
 
 </script>
 @stop

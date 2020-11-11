@@ -45,7 +45,7 @@ class SettingProfileUserController extends Controller
         $company = Company::where('user_id',$user->id)->first();
         $isicsubs = IsicSub::where('isic_id',$company->isic_id)->get();
         $industrygroups = IndustryGroup::get();
-        $fulltbpcompanydocs = FullTbpCompanyDoc::get();
+        $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
         $userpositions = UserPosition::get();
         $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
         return view('setting.profile.user.edit')->withUser($user)
@@ -103,13 +103,13 @@ class SettingProfileUserController extends Controller
             'phone' => $request->phone,
             'fax' => $request->fax,
             'email' => $request->email,
-            'address' => $request->address,
-            'province_id' => $request->province,
-            'amphur_id' => $request->amphur,
-            'tambol_id' => $request->tambol,
-            'postalcode' => $request->postalcode,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
+            // 'address' => $request->address,
+            // 'province_id' => $request->province,
+            // 'amphur_id' => $request->amphur,
+            // 'tambol_id' => $request->tambol,
+            // 'postalcode' => $request->postalcode,
+            // 'lat' => $request->lat,
+            // 'lng' => $request->lng,
             'logo' => $filelocation,
             // 'factoryaddress' => $request->factoryaddress,
             // 'factoryprovince_id' => $request->factoryprovince,
@@ -217,7 +217,7 @@ class SettingProfileUserController extends Controller
                 // $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
                 // $notificationbubble->save();
                 
-                $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C(Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
+                $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
 
                 foreach ($sellstatus as $status) {
                     FullTbpSellStatus::create([

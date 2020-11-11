@@ -7,7 +7,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มข้อมูลบุคลากร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -62,7 +62,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มข้อมูลบุคลากร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -104,7 +104,7 @@
 										<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
 									</div>
 									<div class="form-group">
-										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล employ</button>
+										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูลพนักงาน</button>
 									</div>
 									
 								</div>
@@ -232,7 +232,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มข้อมูลบุคลากร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -279,7 +279,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม employ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มข้อมูลบุคลากร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -1175,7 +1175,7 @@
 																		<tr >                                        
 																			<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
 																			<td> 
-																				<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" badge bg-primary">ดาวน์โหลด</a>
+																				<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
 																				{{-- <a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                        --}}
 																			</td>
 																		</tr>
@@ -1251,6 +1251,7 @@
 																	<td> {{$companyemploy->employposition->name}} </td> 
 																	<td> {{$companyemploy->phone}} </td>                                            
 																	<td> {{$companyemploy->workphone}} </td> 
+																	<td> {{$companyemploy->email}} </td>
 																	{{-- <td> 
 																		<a type="button" data-id="{{$companyemploy->id}}" class="btn badge bg-info editEmployinfo">แก้ไข</a>
 																		<a type="button" data-id="{{$companyemploy->id}}" class="btn badge bg-warning deletecompanyemploy">ลบ</a> 
@@ -1321,11 +1322,12 @@
 										</div>
 										<div class="form-group">
 											<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
-											<select name="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2" disabled>
+											<input type="text" name ="contactposition" value="{{$minitbp->contactposition}}" class="form-control" disabled>
+											{{-- <select name="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2" disabled>
 												@foreach ($contactpositions as $contactposition)
 													<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
 												@endforeach
-											</select>
+											</select> --}}
 										</div>
 										<div class="form-group">
 											<label for="">เบอร์โทร<span class="text-danger">*</span></label>
@@ -1373,7 +1375,7 @@
 									<div class="tab-pane fade" id="mainproduct-tab">
 										<div class="form-group">
 											<div class="form-group">
-												<label for="">ผลิตภัณฑ์หลัก(สินค้าและบริการ)ของโครงการ </label> <span class="text-primary" id="mainproducttextlength"></span>
+												<label for="">ผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ </label> <span class="text-primary" id="mainproducttextlength"></span>
 												{{-- <p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
 												<input type="text" id="mainproduct_input" class="form-control mainproductclass" > --}}
 											</div>
@@ -1395,7 +1397,7 @@
 									<div class="tab-pane fade" id="productdetails-tab">
 										<div class="form-group">
 											<div class="form-group">
-												<label for="">จุดเด่นผลิตภัณฑ์หลัก(สินค้าและบริการ)ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
+												<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
 												{{-- <p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
 												<input type="text" id="productdetails_input" class="form-control productdetailsclass" > --}}
 											</div>

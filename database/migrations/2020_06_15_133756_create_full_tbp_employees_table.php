@@ -17,6 +17,7 @@ class CreateFullTbpEmployeesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
+            $table->char('department_qty',2)->default(0)->comment('จำนวนบุคลากรทั้งหมด');
             $table->char('department1_qty',2)->default(0)->comment('ฝ่ายบริหาร');
             $table->char('department2_qty',2)->default(0)->comment('ฝ่ายวิจัยและพัฒนา');
             $table->char('department3_qty',2)->default(0)->comment('ฝ่ายผลิต/วิศวกรรม');

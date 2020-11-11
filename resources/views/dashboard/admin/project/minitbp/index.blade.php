@@ -133,7 +133,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width:50px">#</th>
-                                        <th>วันที่ขอส่ง</th> 
+                                        {{-- <th>วันที่ขอส่ง</th>  --}}
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
@@ -149,7 +149,7 @@
                                     @foreach ($minitbps as $key => $minitbp)
                                     <tr>    
                                         <td> {{$key+1}} </td>
-                                        <td> {{$minitbp->updatedatth}} </td> 
+                                        {{-- <td> {{$minitbp->updatedatth}} </td>  --}}
                                         <td> {{$minitbp->businessplan->code}} </td> 
                                         <td> {{$minitbp->project}} </td>  
                                         <td> {{$minitbp->businessplan->company->name}} </td> 

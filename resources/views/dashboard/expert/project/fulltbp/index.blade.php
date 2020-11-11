@@ -126,7 +126,7 @@
                                         </td> 
                                         <td> 
                                             @if ($fulltbp->expertassignment->accepted > 1)
-                                                <a href="{{asset($fulltbp->file)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
+                                                <a href="{{asset($fulltbp->attachment)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
                                                 <a href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>                                      
                                             @endif      
                                         </td>                                

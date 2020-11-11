@@ -90,7 +90,7 @@
                             <table class="table text-nowrap" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>วันที่ขอส่ง</th> 
+                                        {{-- <th>วันที่ส่งขอประเมิน</th>  --}}
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
@@ -100,7 +100,7 @@
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
-                                        <td> {{$fulltbp->updatedatth}} </td> 
+                                        {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 

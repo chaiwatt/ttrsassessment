@@ -115,7 +115,7 @@
                                <ul id="tree1">
                                   @foreach($menus as $menu)
                                      <li>
-                                       <strong class="text-teal" style="line-height:24px">{{$menu->name}}({{$menu->engname}})</strong>  
+                                       <strong class="text-teal" style="line-height:24px">{{$menu->name}} ({{$menu->engname}})</strong>  
                                          @if(count($menu->childs))
                                              @include('layouts.landing.menu.managechild',['childs' => $menu->childs])
                                          @endif

@@ -17,7 +17,7 @@ class CreateFullTbpProjectAbtractDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
-            $table->string('line',120)->nullable();
+            $table->longText('line')->nullable();
             $table->timestamps();
         });
     }

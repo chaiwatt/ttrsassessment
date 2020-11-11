@@ -221,14 +221,14 @@
                                 </div>
                                 {{-- <div class="col-md-6">   
                                     <div class="form-group">
-                                        <label>อีเมลบริษัท<span class="text-danger">*</span></label>
+                                        <label>อีเมล<span class="text-danger">*</span></label>
                                         <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control">
                                     </div>
                                 </div> --}}
                                 @if (Auth::user()->user_group_id == 1)
                                     <div class="col-md-6">  
                                         <div class="form-group">
-                                            <label>อีเมลบริษัท<span class="text-danger">*</span></label>
+                                            <label>อีเมล<span class="text-danger">*</span></label>
                                             <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control">
                                         </div>
                                     </div>
@@ -273,7 +273,7 @@
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>ที่อยู่บริษัท<span class="text-danger">*</span></label>
-                                        <input type="text"  name="address" value="{{$company->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+                                        <input type="text"  name="address" value="{{$company->companyaddress->first()->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
@@ -330,7 +330,9 @@
                                         <label>โลโก้ (ขนาด 500x500) px</label>
                                         <div class="input-group">													
                                             <input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
-                                                <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+                                            <span class="input-group-append">
+                                                <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																																						
+                                            </span>
                                         </div>
                                         <input type="file" style="display:none;" id="file" name="picture"/>
                                         @if (!Empty($company->logo))
@@ -375,7 +377,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">เอกสารแนบ  </label>
-                                    <a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณสนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
+                                    <a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12" >

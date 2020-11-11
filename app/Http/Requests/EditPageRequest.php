@@ -43,7 +43,7 @@ class EditPageRequest extends FormRequest
         'gallery.mimes' => 'แกลเลอรี่รองรับเฉพาะไฟล์รูปเท่านั้น',
         'gallery.max' => 'ขนาดไฟล์แกลเลอรี่มากกว่า 1 MB',
         'gallery.dimensions' => 'ขนาดไฟล์รูปแกลเลอรี่ขั้นต่ำ 1000px x 1000px',
-        'gallery.max' => 'ไฟล์รูปแกลเลอรี่อัพโหลดสูงสุด 6 ไฟล์',
+        'gallery.max' => 'ไฟล์รูปแกลเลอรี่อัปโหลดสูงสุด 6 ไฟล์',
       ]; 
     }
 }

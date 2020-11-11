@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\FullTbp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\FullTbpProjectCertify;
@@ -54,7 +55,7 @@ class FullTbpProjectCertifyController extends Controller
             $cer11='1';
         }
 
-        FullTbpProjectCertify::find($request->id)->update([
+        FullTbpProjectCertify::where('full_tbp_id',$request->id)->first()->update([
             'cer1' => $cer1,
             'cer1_qty' => $request->cer1qty,
             'cer2' => $cer2,
@@ -77,7 +78,7 @@ class FullTbpProjectCertifyController extends Controller
             'cer11' => $cer11,
             'cer11_qty' => $request->cer11qty,
         ]);
-        $fulltbpprojectcertify = FullTbpProjectCertify::find($request->id);
+        $fulltbpprojectcertify = FullTbpProjectCertify::where('full_tbp_id',$request->id)->first();
         return response()->json($fulltbpprojectcertify); 
     }
 }

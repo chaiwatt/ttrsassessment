@@ -67,9 +67,6 @@ class RegisterController extends Controller
             $usertype = 4;
         }elseif($data['user_type'] == 3){
             $usertype = 3;
-            // if($data['expert'] == 2){
-            //     $experttype = 1;
-            // }
         }
         $user = User::create([
             'prefix_id' => 1,
@@ -86,8 +83,10 @@ class RegisterController extends Controller
         ]);
         $companyname= '';
         $vatno = $data['vatno'];
+        $businesstype = 5;
         if($data['usergroup'] == 1){
             $companyname = $data['companyname'];  
+            $businesstype = 2;
         }
         if($user->user_type_id == 3){
             $xpertdetail = new ExpertDetail();
@@ -100,7 +99,7 @@ class RegisterController extends Controller
             $xpertdetail->user_id = $user->id;
             $xpertdetail->save();
         }
-        CreateCompany::createCompany($user,$companyname,$vatno);
+        CreateCompany::createCompany($user,$companyname,$vatno,$businesstype);
         return $user ; 
     }
 

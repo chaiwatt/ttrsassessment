@@ -24,9 +24,9 @@ class CreateMiniTBPSTable extends Migration
             $table->char('finance1',5)->nullable()->comment('ขอสินเชื่อ)');
             $table->unsignedBigInteger('thai_bank_id')->nullable();
             $table->double('finance1_loan',10,2)->nullable();
-            $table->char('finance2',5)->nullable()->comment('ขอรับการค้ำประกันสินเชื่อฯ บสย (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)');
+            $table->char('finance2',5)->nullable()->comment('ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)');
             $table->char('finance3',5)->nullable()->comment('โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)');
-            $table->char('finance4',5)->nullable()->comment('บริษัทร่วมทุน (สวทช)');
+            $table->char('finance4',5)->nullable()->comment('บริษัทร่วมทุน (สวทช.)');
             $table->double('finance4_joint',10,2)->nullable();
             $table->double('finance4_joint_min',10,2)->nullable();
             $table->double('finance4_joint_max',10,2)->nullable();
@@ -43,8 +43,8 @@ class CreateMiniTBPSTable extends Migration
             $table->string('contactlastname',250)->nullable();
             $table->char('contactphone',12)->nullable();
             $table->string('contactemail',250)->nullable();
-            $table->unsignedBigInteger('contactposition_id')->nullable();
-            $table->unsignedBigInteger('managerprefix')->nullable();
+            $table->string('contactposition')->nullable();
+            $table->unsignedBigInteger('managerprefix_id')->nullable();
             $table->string('managername',250)->nullable();
             $table->string('managerlastname',250)->nullable();
             $table->unsignedBigInteger('managerposition_id')->nullable();

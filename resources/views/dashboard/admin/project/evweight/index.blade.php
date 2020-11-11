@@ -119,7 +119,7 @@
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
-                                        <td> {{$fulltbp->updatedatth}} </td> 
+                                        {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 

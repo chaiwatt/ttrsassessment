@@ -15,7 +15,6 @@
 	<link href="{{asset('assets/dashboard/css/bootstrap_limitless.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/js/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>  
 	<link href="{{asset('assets/dashboard/js/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"/>  
-	{{-- <link href="{{asset('assets/dashboard/js/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" /> --}}
 	<link href="{{asset('assets/dashboard/js/plugins/materialdatetimepickerth/css/materialDateTimePicker.css') }}" rel="stylesheet" />
 	<link href="{{asset('assets/dashboard/css/layout.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/components.min.css')}}" rel="stylesheet" type="text/css">
@@ -66,13 +65,13 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						@if (Auth::user()->user_type_id ==1 || Auth::user()->user_type_id ==2)
-								<a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
+								<a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์</a>
 							{{-- @elseif(Auth::user()->user_type_id == 2) --}}
 								
 							@elseif(Auth::user()->user_type_id == 3)
-								<a href="{{route('setting.profile.expert.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
-								@elseif(Auth::user()->user_type_id == 4)
-								<a href="{{route('setting.profile.officer.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์ของฉัน</a>
+								<a href="{{route('setting.profile.expert.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์</a>
+								@elseif(Auth::user()->user_type_id >= 4)
+								<a href="{{route('setting.profile.officer.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โปรไฟล์</a>
 							{{-- @elseif(Auth::user()->user_type_id == 4) --}}
 						@endif
 						

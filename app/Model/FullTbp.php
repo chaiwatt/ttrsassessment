@@ -3,18 +3,39 @@
 namespace App\Model;
 
 use App\Model\Ev;
+use App\Model\Prefix;
 use App\Model\MiniTBP;
+use App\Model\FullTbpCost;
+use App\Model\FullTbpSell;
 use App\Model\BusinessPlan;
+use App\Model\FullTbpAsset;
+use App\Model\CompanyEmploy;
 use App\Model\CriteriaGroup;
 use App\Model\EventCalendar;
 use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
+use App\Model\EmployTraining;
 use App\Model\ProjectScoring;
 use App\Helper\DateConversion;
+use App\Model\EmployEducation;
+use App\Model\FullTbpEmployee;
+use App\Model\EmployExperience;
 use App\Model\ExpertAssignment;
+use App\Model\FullTbpInvestment;
+use App\Model\FullTbpMarketSwot;
+use App\Model\FullTbpSellStatus;
+use App\Model\FullTbpDebtPartner;
+use App\Model\FullTbpProjectPlan;
+use App\Model\FullTbpCreditPartner;
+use App\Model\FullTbpMarketAnalysis;
+use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
+use App\Model\FullTbpResponsiblePerson;
 use Illuminate\Database\Eloquent\Model;
+use App\Model\FullTbpReturnOfInvestment;
+use App\Model\FullTbpProjectTechDevLevel;
+use App\Model\FullTbpMarketBusinessModelCanvas;
 
 class FullTbp extends Model
 {
@@ -135,7 +156,88 @@ class FullTbp extends Model
         }
     } 
 
-      
+    public function getFulltbpemployeeAttribute(){
+        return FullTbpEmployee::where('full_tbp_id',$this->id)->first();
+    }  
+    public function getFulltbpresponsiblepersonAttribute(){
+        return FullTbpResponsiblePerson::where('full_tbp_id',$this->id)->first();
+    }  
+
+    public function getCompanyemployAttribute(){
+        return CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+    }  
+
+    public function getEmployeducationAttribute(){
+        $ceo = CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+        return EmployEducation::where('company_employ_id',$ceo->id)->get();
+    }  
+
+    public function getEmployexperienceAttribute(){
+        $ceo = CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+        return EmployExperience::where('company_employ_id',$ceo->id)->get();
+    } 
+    
+    public function getEmploytrainingAttribute(){
+        $ceo = CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+        return EmployTraining::where('company_employ_id',$ceo->id)->get();
+    } 
+       
+    public function getFulltbpprojecttechdevlevelAttribute(){
+        return FullTbpProjectTechDevLevel::where('full_tbp_id',$this->id)->get();
+    } 
+
+    public function getFulltbpprojectcertifyAttribute(){
+        return FullTbpProjectCertify::where('full_tbp_id',$this->id)->first();
+    } 
+
+    public function getFulltbpprojectplanAttribute(){
+        return FullTbpProjectPlan::where('full_tbp_id',$this->id)->get();
+    } 
+
+    public function getFulltbpmarketanalysisAttribute(){
+        return FullTbpMarketAnalysis::where('full_tbp_id',$this->id)->first();
+    } 
+
+    public function getFulltbpmarketbusinessmodelcanvasAttribute(){
+        return FullTbpMarketBusinessModelCanvas::where('full_tbp_id',$this->id)->first();
+    } 
+
+    public function getFulltbpmarketswotAttribute(){
+        return FullTbpMarketSwot::where('full_tbp_id',$this->id)->first();
+    } 
+    
+    public function getFulltbpsellAttribute(){
+        return FullTbpSell::where('full_tbp_id',$this->id)->get();
+    } 
+    
+    public function getFulltbpsellstatusAttribute(){
+        return FullTbpSellStatus::where('full_tbp_id',$this->id)->get();
+    } 
+
+    public function getFulltbpdebtpartnerAttribute(){
+        return FullTbpDebtPartner::where('full_tbp_id',$this->id)->get();
+    } 
+
+    public function getFulltbpcreditpartnerAttribute(){
+        return FullTbpCreditPartner::where('full_tbp_id',$this->id)->get();
+    } 
+    
+    public function getFulltbpassetAttribute(){
+        return FullTbpAsset::where('full_tbp_id',$this->id)->get();
+    } 
+
+    public function getFulltbpinvestmentAttribute(){
+        return FullTbpInvestment::where('full_tbp_id',$this->id)->get();
+    }
+
+    public function getFulltbpcostAttribute(){
+        return FullTbpCost::where('full_tbp_id',$this->id)->get();
+    }
+
+    public function getFulltbpreturnofinvestmentAttribute(){
+        return FullTbpReturnOfInvestment::where('full_tbp_id',$this->id)->first();
+    }
+    
 }
 
 

@@ -319,9 +319,9 @@
 									<p>ลายมือชื่อ</p>
 										  <div class="signature-pad--actions">
 											<div>
-											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัพโหลด</button>
+											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัปโหลด</button>
 											  <button type="button" class="btn bg-primary clear" data-action="clear">เคลียร์</button>
-											  <button type="button" class="btn bg-primary" data-action="undo">Undo</button>
+											  <button type="button" class="btn bg-primary" data-action="undo">ยกเลิก</button>
 											  <button type="button" class="btn bg-success save" data-action="save-png">บันทึก</button>								
 											</div>
 											<input type="file" style="display:none;" id="signature" name="picture"/>
@@ -667,7 +667,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>เลขบัตรประจำตัวประชาชน</label></span>
-														<input type="number" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control">
+														<input type="text" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control">
 														<small id="hidinvalid" class="form-text text-danger" hidden></small>
 													</div>
 												</div>
@@ -786,8 +786,8 @@
 											@if ($user->user_group_id == 1)
 												<div class="col-md-6">  
 													<div class="form-group">
-														<label>อีเมลบริษัท<span class="text-danger">*</span></label>
-														<input type="text"  name="email" value="{{$user->company->email}}"  placeholder="อีเมลบริษัท" class="form-control">
+														<label>อีเมล<span class="text-danger">*</span></label>
+														<input type="text"  name="email" value="{{$user->company->email}}"  placeholder="อีเมล" class="form-control">
 													</div>
 												</div>
 											@endif
@@ -822,7 +822,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>@if ($user->user_group_id == 1) ที่อยู่บริษัท @else ที่ตั้งสถานประกอบการ @endif</label><span class="text-danger">*</span>
-													<input type="text"  name="address" value="{{$user->company->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+													<input type="text"  name="address" value="{{$user->company->companyaddress->first()->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -879,7 +879,9 @@
 													<label>โลโก้ (ขนาด 500x500) px</label>
 													<div class="input-group">													
 														<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
-															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+														<span class="input-group-append">
+															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																									
+														</span>
 													</div>
 													<input type="file" style="display:none;" id="file" name="picture"/>
 													@if (!Empty($user->company->logo))
@@ -894,7 +896,7 @@
 													<div class="input-group">													
 														<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปถ่าย" disabled>
 														<span class="input-group-append">
-															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>													
 														</span>
 													</div>
 													<input type="file" style="display:none;" id="file" name="picture"/>
@@ -944,7 +946,7 @@
 												<div class="form-group">
 													{{-- <div class="col-md-12" > --}}
 														<label for="">เอกสารแนบ  </label>
-													<a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณสนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
+													<a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">
 																<thead>

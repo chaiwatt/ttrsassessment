@@ -1,4 +1,4 @@
-function saveEmploy(prefix,name,lastname,position,phone,workphone){
+function saveEmploy(prefix,name,lastname,position,phone,workphone,email){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/fulltbp/employ/add`,
@@ -11,6 +11,7 @@ function saveEmploy(prefix,name,lastname,position,phone,workphone){
             position :position,
             phone :phone,
             workphone :workphone,
+            email :email
           },
           success: function(data) {
             resolve(data)
@@ -41,7 +42,7 @@ function getEmploy(id){
     })
 }
 
-function editEmploy(id,name,lastname,position,phone,workphone){
+function editEmploy(id,name,lastname,position,phone,workphone,email){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/employ/edit`,
@@ -54,6 +55,7 @@ function editEmploy(id,name,lastname,position,phone,workphone){
           position :position,
           phone :phone,
           workphone :workphone,
+          email :email
         },
         success: function(data) {
           resolve(data)
@@ -255,5 +257,24 @@ function editEmployQuantity(id,department1_qty,department2_qty,department3_qty,d
     })
 }
 
+function deleteBoardAttachment(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/employ/deleteboardattachment`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id:id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 export {saveEmploy,getEmploy,editEmploy,addEmployEducation,addEmployExperience,addEmployTraining,deleteEmployEducation,
-  deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo,editEmployQuantity}
+  deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo,editEmployQuantity,deleteBoardAttachment}

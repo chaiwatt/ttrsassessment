@@ -29,10 +29,10 @@ class CreateIntroSectionRequest extends FormRequest
     public function messages()
     {
       return  [
-        'textone.required' => 'ยังไม่ได้กรอกข้อความที่1 (ภาษาไทย)',
-        'textoneeng.required' => 'ยังไม่ได้กรอกข้อความที่1 (ภาษาอังกฤษ)',
-        'texttwo.required' => 'ยังไม่ได้กรอกข้อความที่2 (ภาษาไทย)',
-        'texttwoeng.required' => 'ยังไม่ได้กรอกข้อความที่2 (ภาษาอังกฤษ)',
+        'textone.required' => 'ยังไม่ได้กรอกข้อความที่ 1 (ภาษาไทย)',
+        'textoneeng.required' => 'ยังไม่ได้กรอกข้อความที่ 1 (ภาษาอังกฤษ)',
+        'texttwo.required' => 'ยังไม่ได้กรอกข้อความที่ 2 (ภาษาไทย)',
+        'texttwoeng.required' => 'ยังไม่ได้กรอกข้อความที่ 2 (ภาษาอังกฤษ)',
         'picture.required' => 'ยังไม่ได้เลือกรูปไอคอน',
         'picture.image' => 'กรุณาเลือกไฟล์รูป', 
         'picture.mimes' => 'รองรับเฉพาะไฟล์ png เท่านั้น',

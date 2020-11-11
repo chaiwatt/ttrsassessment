@@ -13,10 +13,10 @@ class ExpertPositionsTableSeeder extends Seeder
     {
         DB::table('expert_positions')->insert([
             [
-                'name' => 'ผู้เชี่ยวชาญระดับ1'
+                'name' => 'ผู้เชี่ยวชาญระดับ 1'
             ],
             [
-                'name' => 'ผู้เชี่ยวชาญระดับ2'
+                'name' => 'ผู้เชี่ยวชาญระดับ 2'
             ]
         ]);
     }

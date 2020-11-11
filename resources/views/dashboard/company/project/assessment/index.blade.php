@@ -61,7 +61,7 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>วันที่ขอประเมิน</th> 
+                                        {{-- <th>วันที่ขอประเมิน</th>  --}}
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th >ความคืบหน้า</th>    
@@ -72,7 +72,7 @@
                                 <tbody>
                                     @foreach ($businessplans as $key => $businessplan)
                                     <tr>    
-                                        <td> {{$businessplan->createddateth}} </td> 
+                                        {{-- <td> {{$businessplan->createddateth}} </td>  --}}
                                         <td> {{$businessplan->code}} </td> 
                                         <td> {{$businessplan->minitbp->project}} </td> 
                                         <td>

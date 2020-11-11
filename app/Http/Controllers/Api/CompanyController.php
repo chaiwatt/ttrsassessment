@@ -37,5 +37,17 @@ class CompanyController extends Controller
         $authorizeddirectors = AuthorizedDirector::where('company_id',$companyid)->get();
         return response()->json($authorizeddirectors);
     }
+    public function UploadOrganizeImg(Request $request){
+        $file = $request->file;
+        $new_name = str_random(10).".".$file->getClientOriginalExtension();
+        $file->move("storage/uploads/company/attachment" , $new_name);
+        $filelocation = "storage/uploads/company/attachment/".$new_name;
+        Company::find($request->id)->update([
+            'organizeimg' => $filelocation
+        ]);
+
+        $company = Company::find($request->id);
+        return response()->json($company); 
+    }
 }
 

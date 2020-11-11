@@ -18,7 +18,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <span class="breadcrumb-item active">จัดการหมวดหมู่เพจ</span>
+                    {{-- <span class="breadcrumb-item active">จัดการหมวดหมู่เพจ</span> --}}
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

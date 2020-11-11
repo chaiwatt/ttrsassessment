@@ -8,6 +8,8 @@ use App\Model\Tambol;
 use App\Model\Province;
 use App\Helper\LogAction;
 use App\Model\BusinessPlan;
+use App\Model\CompanyEmploy;
+use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -18,6 +20,7 @@ class Company extends Model
     
     protected $fillable = [];
     protected $guarded = [];
+    protected $appends = ['companyaddress'];
 
     protected static $logAttributes = ['industry_group_id','business_type_id','name','phone','fax','email','address','province_id','amphur_id','tambol_id','postalcode'];
     protected static $logName = 'ประเภทการจดทะเบียน';
@@ -35,7 +38,6 @@ class Company extends Model
 
     public function getBusinessPlanAttribute()
     {
-        // return BusinessPlan::where('company_id',$this->id)->where('business_plan_active_status_id',1)->first();
         return BusinessPlan::where('company_id',$this->id)->first();
     }
 
@@ -58,4 +60,9 @@ class Company extends Model
         if(Empty($this->paidupcapitaldate)) return ;
         return DateConversion::engToThaiDate($this->paidupcapitaldate);
     }
+    public function getCompanyaddressAttribute()
+    {
+        return CompanyAddress::where('company_id',$this->id)->get();
+    }
+
 }

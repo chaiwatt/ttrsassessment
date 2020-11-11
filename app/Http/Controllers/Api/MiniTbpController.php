@@ -27,7 +27,7 @@ class MiniTbpController extends Controller
         $minitbp = MiniTBP::find($request->id);
         $minitbpcode = $minitbp->minitbp_code;
         if(Empty($minitbpcode)){
-            $minitbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad((MiniTBP::get()->count()),3,0,STR_PAD_LEFT); 
+            $minitbpcode = 'PL-'.Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad((MiniTBP::get()->count()),3,0,STR_PAD_LEFT); 
         }
         MiniTBP::find($request->id)->update([
             'project' => $request->project,
@@ -55,30 +55,28 @@ class MiniTbpController extends Controller
             'contactlastname' => $request->contactlastname,
             'contactphone' => $request->contactphone,
             'contactemail' => $request->contactemail,
-            'contactposition_id' => $request->contactposition,
-            'managerprefix' => $request->managerprefix,
+            'contactposition' => $request->contactposition,
+            'managerprefix_id' => $request->managerprefix,
             'managername' => $request->managername,
             'managerlastname' => $request->managerlastname,
             'managerposition_id' => $request->managerposition,
             'website' => $request->website,
             'signature_status_id' => $request->signature
         ]);
-
+       
         Company::where('user_id',Auth::user()->id)->first()->update([
             'name' => $request->companyname,
-            'address' => $request->address,
-            'province_id' => $request->province,
-            'amphur_id' => $request->amphur,
-            'tambol_id' => $request->tambol,
-            'postalcode' => $request->postalcode
+            // 'address' => $request->address,
+            // 'province_id' => $request->province,
+            // 'amphur_id' => $request->amphur,
+            // 'tambol_id' => $request->tambol,
+            // 'postalcode' => $request->postalcode
         ]);
-
         $minitbp = MiniTBP::find($request->id);
         return response()->json($minitbp);
     }
 
     public function CreatePdf(Request $request){
-        
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -103,7 +101,7 @@ class MiniTbpController extends Controller
         $minitpb = MiniTBP::find($request->id);
         
         $company_name = (!Empty($company->name))?$company->name:'';
-        $company_address = (!Empty($company->address))?$company->address:'';
+        $company_address = (!Empty($company->companyaddress->first()->address))?$company->companyaddress->first()->address:'';
 
         $finance1_text = (!Empty($minitpb->finance1))?'x':'';
         $finance1_bank = (!Empty($minitpb->finance1) && !Empty($minitpb->thai_bank_id))?$minitpb->bank->name:'' ;
@@ -123,42 +121,44 @@ class MiniTbpController extends Controller
         $nonefinance6_text = (!Empty($minitpb->nonefinance6))?'x':'';
         $nonefinance6_detail = (!Empty($minitpb->nonefinance6) && !Empty($minitpb->nonefinance6_detail))?$minitpb->nonefinance6_detail:'' ;
         $signature = ($minitpb->signature_status_id == 2 && !Empty($auth->signature))?$auth->signature:'';
-        $managerprefix = (!Empty($minitpb->managerprefix))?Prefix::find($minitpb->managerprefix)->name:'';
+        $managerprefix = (!Empty($minitpb->managerprefix_id))?Prefix::find($minitpb->managerprefix_id)->name:'';
         $managername = (!Empty($minitpb->managername))?$minitpb->managername:'';
         $managerlastname = (!Empty($minitpb->managerlastname))?$minitpb->managerlastname:'';
         $managerposition = (!Empty($minitpb->managerposition_id))?UserPosition::find($minitpb->managerposition_id)->name:'';
         $fileContent = file_get_contents(asset("assets/dashboard/template/minitbp.pdf"),'rb');
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
-        $segment = new \Segment();
-        $words = $segment->get_segment_array($minitpb->project);
-        $firstparagraph = '';
-        foreach($words as $word){
-            $firstparagraph .= $word;
-            if(strlen($firstparagraph) > 180 )break;
-        }
+        // $segment = new \Segment();
+        // $words = $segment->get_segment_array($minitpb->project);
+        // $firstparagraph = '';
+        // foreach($words as $word){
+        //     $firstparagraph .= $word;
+        //     if(strlen($firstparagraph) > 180 )break;
+        // }
 
+        // $projectname = $minitpb->project;
+        // if(strlen($firstparagraph) > 180){
+        //     $projectname = substr_replace( $minitpb->project, '<br>', strlen($firstparagraph), 0 );
+        // }
         $projectname = $minitpb->project;
-        if(strlen($firstparagraph) > 180){
-            $projectname = substr_replace( $minitpb->project, '<br>', strlen($firstparagraph), 0 );
-        }
+        $projectnameeng = (!Empty($minitpb->projecteng))?$minitpb->projecteng:'';
         $mpdf->UseTemplate($tplId);
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->prefix->name . $minitpb->contactname . ' ' .$minitpb->contactlastname .'</span>', 69, 79, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'d').'</span>',172, 34.8, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:25px;heigh:100px;text-align:center;display:block;">'.DateConversion::shortThaiDate($minitpb->created_at,'d').'</div>',171, 34.8, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'m').'</span>',180, 34.8, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'y').'</span>',187, 34.8, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company_name.'</span>', 69, 86.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company_address. ' ตำบล'. $company->tambol->name .' อำเภอ'. $company->amphur->name .' จังหวัด'. $company->province->name. ' ' .$company->postalcode.'</span>', 69, 94.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactphone.'</span>', 69, 102.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->contactemail.'</span>', 69, 110.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 118.4, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname . ' ' .$projectnameeng.'</span>', 69, 118.4, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML($finance1_text, 20.8, 150.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance1_bank.'</span>', 57, 151.8, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance1_loan.'</span>', 60, 158, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:155px;heigh:100px;text-align:center;">'.$finance1_bank.'</div>', 55, 151.8, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_loan.'</div>', 54, 158, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML($finance2_text, 20.8, 163.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML($finance3_text, 20.8, 177, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML($finance4_text, 20.8, 183.2, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance4_joint.'</span>', 62, 191, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center;">'.$finance4_joint.'</div>', 56, 191, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance4_joint_min.'</span>', 75, 197.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance4_joint_max.'</span>', 92, 197.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML($nonefinance1_text, 105.8, 150.5, 150, 90, 'auto');
@@ -172,17 +172,16 @@ class MiniTbpController extends Controller
         if (!Empty($signature)) {
             $mpdf->WriteFixedPosHTML('<img src="'.asset($signature).'" width="120" height="30" alt="">', 125, 232, 150, 90, 'auto');
         } 
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$managerprefix.$managername . ' ' . $managerlastname. '</span>', 127,244.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$managerposition. '</span>', 130,253.3, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$managerprefix.$managername . ' ' . $managerlastname. '</div>', 118,244.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$managerposition. '</div>', 118,253.3, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 142,261.7, 150, 90, 'auto');
         // $mpdf->Output();
-        $path = public_path("storage/uploads/minitbp/attachment/");
+        $path = public_path("storage/uploads/pdf/attachment/");
         $mpdf->Output($path . $minitpb->minitbp_code.'.pdf');
-        return 'storage/uploads/minitbp/attachment/'.$minitpb->minitbp_code.'.pdf' ;
+        return 'storage/uploads/pdf/attachment/'.$minitpb->minitbp_code.'.pdf' ;
     }
 
     public function SubmitWithAttachement(Request $request){
-        
         $id = $request->id;
         $auth = Auth::user();
         $minitbp = MiniTBP::find($id);
@@ -191,8 +190,8 @@ class MiniTbpController extends Controller
         }
         $file = $request->attachment;
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-        $file->move("storage/uploads/minitbp/attachment" , $new_name);
-        $filelocation = "storage/uploads/minitbp/attachment/".$new_name;
+        $file->move("storage/uploads/pdf/attachment" , $new_name);
+        $filelocation = "storage/uploads/pdf/attachment/".$new_name;
         $minitbp->update([
             'attachment' => $filelocation
         ]);
@@ -248,13 +247,12 @@ class MiniTbpController extends Controller
             EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:เอกสาร Mini TBP ที่มีการแก้ไขแล้ว','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini Tbp ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
             Message::sendMessage('เอกสาร Mini TBP ที่มีการแก้ไขแล้ว',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสาร Mini TBP ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
         }
-
     }
     public function SubmitNoAttachement(Request $request){
         $id = $request->id;
         $auth = Auth::user();
         $minitbp = MiniTBP::find($id);
-        $filelocation = "storage/uploads/minitbp/attachment/".$minitbp->minitbp_code.'pdf';
+        $filelocation = "storage/uploads/pdf/attachment/".$minitbp->minitbp_code.'.pdf';
 
         $minitbp->update([
             'attachment' => $filelocation

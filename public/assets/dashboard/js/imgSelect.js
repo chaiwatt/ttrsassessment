@@ -13,7 +13,7 @@
 
         savingMessage: 'กำลังบันทึก...',
         loadingMessage: 'กำลังโหลด...',
-        uploadingMessage: 'กำลังอัพโหลด...',
+        uploadingMessage: 'กำลังอัปโหลด...',
         invalidResponseMessage: 'Invalid server response.',
         invalidCropMessage: 'ยังไม่ได้ Crop รูป',
         cameraErrorMessage: 'Could not access the camera. ',

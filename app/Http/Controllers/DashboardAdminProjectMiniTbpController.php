@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Carbon\Carbon;
+use App\Model\Amphur;
 use App\Model\Prefix;
+use App\Model\Tambol;
 use App\Model\Company;
 use App\Model\MiniTBP;
 use App\Helper\Message;
+use App\Model\Province;
 use App\Model\ThaiBank;
 use App\Helper\EmailBox;
 use App\Model\AlertMessage;
@@ -41,18 +44,29 @@ class DashboardAdminProjectMiniTbpController extends Controller
     public function View($id){
         $banks = ThaiBank::get();
         $minitbp = MiniTBP::find($id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $user = User::find($company->user_id);
         $contactprefixes = Prefix::get();
         $contactpositions = UserPosition::get();
         $signaturestatuses = SignatureStatus::get();
         $timelinehistories = TimeLineHistory::where('business_plan_id',$minitbp->business_plan_id)
                                             ->where('message_type',1)
                                             ->get();
+        $provinces = Province::get();
+        $amphurs = Amphur::where('province_id',$user->province_id)->get();
+        $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
         return view('dashboard.admin.project.minitbp.view')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withContactprefixes($contactprefixes)
                                                 ->withContactpositions($contactpositions)
                                                 ->withSignaturestatuses($signaturestatuses)
-                                                ->withTimelinehistories($timelinehistories);
+                                                ->withTimelinehistories($timelinehistories)
+                                                ->withUser($user)
+                                                ->withUser($user)
+                                                ->withProvinces($provinces)
+                                                ->withAmphurs($amphurs)
+                                                ->withTambols($tambols);
     }
     public function Approve($id){
         $minitbp = MiniTBP::find($id);

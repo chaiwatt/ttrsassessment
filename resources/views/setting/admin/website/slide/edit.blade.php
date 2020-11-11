@@ -71,28 +71,28 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่1 ภาษาไทย</label>
-                                            <input type="text"  name="textone" value="{{$slide->textone}}"  placeholder="ข้อความที่1 ภาษาไทย" class="form-control">
+                                            <label>ข้อความที่ 1 ภาษาไทย</label>
+                                            <input type="text"  name="textone" value="{{$slide->textone}}"  placeholder="ข้อความที่ 1 ภาษาไทย" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่1 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengone" value="{{$slide->textengone}}"  placeholder="ข้อความที่1 ภาษาอังกฤษ" class="form-control">
+                                            <label>ข้อความที่ 1 ภาษาอังกฤษ</label>
+                                            <input type="text"  name="textengone" value="{{$slide->textengone}}"  placeholder="ข้อความที่ 1 ภาษาอังกฤษ" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่2 ภาษาไทย</label>
-                                            <input type="text"  name="texttwo" value="{{$slide->texttwo}}"  placeholder="ข้อความที่2 ภาษาไทย" class="form-control">
+                                            <label>ข้อความที่ 2 ภาษาไทย</label>
+                                            <input type="text"  name="texttwo" value="{{$slide->texttwo}}"  placeholder="ข้อความที่ 2 ภาษาไทย" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่2 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengtwo" value="{{$slide->textengtwo}}"  placeholder="ข้อความที่2 ภาษาอังกฤษ" class="form-control">
+                                            <label>ข้อความที่ 2 ภาษาอังกฤษ</label>
+                                            <input type="text"  name="textengtwo" value="{{$slide->textengtwo}}"  placeholder="ข้อความที่ 2 ภาษาอังกฤษ" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่3 ภาษาไทย</label>
-                                            <input type="text"  name="textthree" value="{{$slide->textthree}}"  placeholder="ข้อความที่3 ภาษาไทย" class="form-control">
+                                            <label>ข้อความที่ 3 ภาษาไทย</label>
+                                            <input type="text"  name="textthree" value="{{$slide->textthree}}"  placeholder="ข้อความที่ 3 ภาษาไทย" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่3 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengthree" value="{{$slide->textengthree}}"  placeholder="ข้อความที่3 ภาษาอังกฤษ" class="form-control">
+                                            <label>ข้อความที่ 3 ภาษาอังกฤษ</label>
+                                            <input type="text"  name="textengthree" value="{{$slide->textengthree}}"  placeholder="ข้อความที่ 3 ภาษาอังกฤษ" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>ลิงก์ URL</label>
@@ -103,7 +103,7 @@
 											<div class="input-group">													
 												<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปสไลด์" disabled>
 												<span class="input-group-append">
-													<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+													<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>													
 												</span>
 											</div>
 											<input type="file" style="display:none;" id="file" name="picture"/>

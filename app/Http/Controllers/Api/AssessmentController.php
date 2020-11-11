@@ -70,7 +70,7 @@ class AssessmentController extends Controller
                 $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
                 $notificationbubble->save();
                 
-                $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C(Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
+                $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
 
                 foreach ($sellstatus as $status) {
                     FullTbpSellStatus::create([

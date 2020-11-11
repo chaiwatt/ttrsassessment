@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Intro section</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไข Intro section</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -18,7 +18,7 @@
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
                     <a href="{{route('setting.admin.website.introsection')}}" class="breadcrumb-item"> Intro section</a>
-                    <span class="breadcrumb-item active">เพิ่ม Intro section</span>
+                    {{-- <span class="breadcrumb-item active">แก้ไข Intro section</span> --}}
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -55,27 +55,27 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ข้อความที่1 (ภาษาไทย)</label>
-                                            <input type="text"  name="textone" value="{{$introsection->text1}}"  placeholder="ข้อความที่1 (ภาษาไทย)" class="form-control">
+                                            <label>ข้อความที่ 1 (ภาษาไทย)</label>
+                                            <input type="text"  name="textone" value="{{$introsection->text1}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่1 (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="textoneeng" value="{{$introsection->texteng1}}"  placeholder="ข้อความที่1 (ภาษาอังกฤษ)" class="form-control">
+                                            <label>ข้อความที่ 1 (ภาษาอังกฤษ)</label>
+                                            <input type="text"  name="textoneeng" value="{{$introsection->texteng1}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่2 (ภาษาไทย)</label>
-                                            <input type="text"  name="texttwo" value="{{$introsection->text2}}"  placeholder="ข้อความที่2 (ภาษาไทย)" class="form-control">
+                                            <label>ข้อความที่ 2 (ภาษาไทย)</label>
+                                            <input type="text"  name="texttwo" value="{{$introsection->text2}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่2 (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="texttwoeng" value="{{$introsection->texteng2}}"  placeholder="ข้อความที่2 (ภาษาอังกฤษ)" class="form-control">
+                                            <input type="text"  name="texttwoeng" value="{{$introsection->texteng2}}"  placeholder="ข้อความที่ 2 (ภาษาอังกฤษ)" class="form-control">
                                         </div>
 										<div class="form-group">
 											<label>รูปไอคอน<span class="text-danger">*</span></label>
 											<div class="input-group">													
 												<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปไอคอน" disabled>
 												<span class="input-group-append">
-													<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+													<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>													
 												</span>
 											</div>
 											<input type="file" style="display:none;" id="file" name="picture"/>

@@ -17,15 +17,22 @@ class CreateFullTbpsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('mini_tbp_id');
             $table->foreign('mini_tbp_id')->references('id')->on('mini_t_b_p_s')->onDelete('cascade');
-            $table->string('file',250)->nullable();
+            $table->string('fulltbp_code',20)->nullable();
+            $table->unsignedBigInteger('signature_status_id')->default(1);
+            // $table->string('file',250)->nullable();
             $table->char('status',1)->default(1);
             $table->char('asic',1)->nullable();
             $table->unsignedBigInteger('criteria_group_id')->nullable();
             $table->char('assignexpert',1)->default('1');
             $table->char('refixstatus',1)->default('0');
-            // $table->date('briefingdate')->nullable();
-            // $table->date('assessmentdate')->nullable();
-            // $table->date('finalassessmentdate')->nullable();
+            $table->longText('abtract')->nullable();
+            $table->longText('mainproduct')->nullable();
+            $table->longText('productdetail')->nullable();
+            $table->longText('techdev')->nullable();
+            $table->longText('techdevproblem')->nullable();
+            $table->longText('innovation')->nullable();
+            $table->longText('standard')->nullable();
+            $table->string('attachment',250)->nullable();
             $table->timestamps();
         });
     }

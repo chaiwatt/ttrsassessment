@@ -175,9 +175,9 @@
 									<p>ลายมือชื่อ</p>
 										  <div class="signature-pad--actions">
 											<div>
-											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัพโหลด</button>
+											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัปโหลด</button>
 											  <button type="button" class="btn bg-primary clear" data-action="clear">เคลียร์</button>
-											  <button type="button" class="btn bg-primary" data-action="undo">Undo</button>
+											  <button type="button" class="btn bg-primary" data-action="undo">ยกเลิก</button>
 											  <button type="button" class="btn bg-success save" data-action="save-png">บันทึก</button>								
 											</div>
 											<input type="file" style="display:none;" id="signature" name="picture"/>
@@ -266,7 +266,87 @@
             </div>
         </div>
     </div>
+	{{-- modal add_address --}}
+	<div id="modal_add_address" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มที่อยู่</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ประเภทที่อยู่</label><small> เช่น ที่อยู่สาขา, ที่อยู่โรงงาน</small><span class="text-danger">*</span>
+								<input type="text"  id="addressname" placeholder="ชื่อประเภท เช่น ชื่อบริษัท, ชื่อสาขา, ชื่อโรงงาน" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ที่อยู่</label><span class="text-danger">*</span>
+								<input type="text"  id="address" placeholder="ที่อยู่" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>จังหวัด</label><span class="text-danger">*</span>
+								<select id="provincemodal" data-placeholder="จังหวัด" class="form-control form-control-select2">
+									<option value=""></option>
+									@foreach ($provinces as $province)
+										<option value="{{$province->id}}" >{{$province->name}}</option> 
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>อำเภอ</label><span class="text-danger">*</span>
+								<select id="amphurmodal" data-placeholder="อำเภอ" class="form-control form-control-select2">
+									@foreach ($amphurs as $amphur)                                                                
+										<option value="{{$amphur->id}}"> {{$amphur->name}} </option>
+									@endforeach   
+								</select>
+							</div>
+						</div>
 
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ตำบล</label><span class="text-danger">*</span>
+								<select id="tambolmodal" data-placeholder="ตำบล" class="form-control form-control-select2">
+									@foreach ($tambols as $tambol)                                                                
+										<option value="{{$tambol->id}}"> {{$tambol->name}} </option>
+									@endforeach    
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>รหัสไปรษณีย์</label><span class="text-danger">*</span>
+								<input type="number" id="postalcode" placeholder="รหัสไปรษณีย์" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ละติจูด</label>
+								<input type="text" id="lat" placeholder="ละติจูด" class="form-control" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ลองติจูด</label>
+								<input type="text" id="lng" placeholder="ลองติจูด" class="form-control" >
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_add_address" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Cover area -->
 	<div class="profile-cover">
 		<div id="bgcover">
@@ -364,16 +444,16 @@
 
 																					
 										<div class="row">
-											<div class="col-md-6">  
+											{{-- <div class="col-md-6">  
 												<div class="form-group">
 													<label>อีเมลผู้ใช้งาน<span class="text-danger">*</span></label>
 													<input type="text"  name="useremail" value="{{$user->email}}"  placeholder="อีเมล" class="form-control" disabled>
 												</div>
 											</div>
 											<div class="col-md-6">
-												<label>รหัสผ่านผู้ใช้งาน</label>
+												<label>เปลี่ยนรหัสผ่านผู้ใช้งาน</label>
 												<input type="password" name="password" value="" data-placeholder="รหัสผ่าน" class="form-control">
-											</div>
+											</div> --}}
 											@if (Auth::user()->user_group_id !=1)
 												<div class="col-md-6">
 													<div class="form-group">
@@ -387,26 +467,26 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label>ชื่อ</label>
+														<label>ชื่อ<span class="text-danger">*</span></label>
 														<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label>นามสกุล</label>
+														<label>นามสกุล<span class="text-danger">*</span></label>
 														<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label>เลขบัตรประจำตัวประชาชน</label></span>
-														<input type="number" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control">
+														<label>เลขบัตรประจำตัวประชาชน</label><span class="text-danger">*</span></span>
+														<input type="text" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control">
 														<small id="hidinvalid" class="form-text text-danger" hidden></small>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label>ตำแหน่ง<span class="text-danger">*</span><a href="#" id="addposition" class="text-info"> เพิ่มใหม่</a></label>
+														<label>ตำแหน่ง<a href="#" id="addposition" class="text-info"> เพิ่มใหม่</a></label>
 														<select name="userposition" id="userposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
 															@foreach ($userpositions as $userposition)
 																<option value="{{$userposition->id}}"
@@ -516,14 +596,20 @@
 													<input type="text"  name="fax" value="{{$user->company->fax}}"  placeholder="โทรสาร" class="form-control">
 												</div>
 											</div>
-											@if ($user->user_group_id == 1)
+											{{-- @if ($user->user_group_id == 1) --}}
 												<div class="col-md-6">  
 													<div class="form-group">
-														<label>อีเมลบริษัท<span class="text-danger">*</span></label>
-														<input type="text"  name="email" value="{{$user->company->email}}"  placeholder="อีเมลบริษัท" class="form-control">
+														<label>อีเมล<span class="text-danger">*</span></label>
+														<input type="text"  name="email" value="{{$user->company->email}}"  placeholder="อีเมล" class="form-control">
 													</div>
 												</div>
-											@endif
+												<div class="col-md-6">  
+													<div class="form-group">
+														<label>เว็บไซต์</label>
+														<input type="text"  name="website" value="{{$user->company->website}}"  placeholder="เว็บไซต์" class="form-control">
+													</div>
+												</div>
+											{{-- @endif --}}
 											@if ($user->user_group_id == 1)
 												<div class="col-md-6">
 													<div class="row">
@@ -539,7 +625,7 @@
 														</div>
 														<div class="col-md-9">
 															<div class="form-group">
-																<label>ชื่อผู้ประสานงาน</label>
+																<label>ชื่อผู้ประสานงาน<span class="text-danger">*</span></label>
 																<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control">
 															</div>
 														</div>
@@ -547,73 +633,91 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label>นามสกุลผู้ประสานงาน</label>
+														<label>นามสกุลผู้ประสานงาน<span class="text-danger">*</span></label>
 														<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control">
 													</div>
 												</div>
 											@endif
-											<div class="col-md-6">  
-												<div class="form-group">
-													<label>@if ($user->user_group_id == 1) ที่อยู่บริษัท @else ที่ตั้งสถานประกอบการ @endif</label><span class="text-danger">*</span>
-													<input type="text"  name="address" value="{{$user->company->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
-												</div>
+											<div class="col-md-12">  
+												<legend>
+													<label for=""><strong>ที่อยู่</strong> <a href="#" class="text-primary" data-toggle="modal" data-target="#modal_add_address">คลิกเพิ่มที่อยู่อื่น ๆ</a></label>
+												</legend>
 											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>จังหวัด<span class="text-danger">*</span></label>
-													<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2">
-														<option value=""></option>
-														@foreach ($provinces as $province)
-															<option value="{{$province->id}}" @if($user->company->province_id == $province->id) selected @endif>{{$province->name}}</option> 
-														@endforeach
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>อำเภอ<span class="text-danger">*</span></label>
-													<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
-														@foreach ($amphurs as $amphur)                                                                
-															<option value="{{$amphur->id}}" @if ($user->company->amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
-														@endforeach   
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>ตำบล<span class="text-danger">*</span></label>
-													<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2">
-														@foreach ($tambols as $tambol)                                                                
-															<option value="{{$tambol->id}}" @if ($user->company->tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
-														@endforeach    
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6">  
-												<div class="form-group">
-													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode" value="{{$user->company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
-												</div>
-											</div>
-											<div class="col-md-6">  
-												<div class="form-group">
-													<label>ละติจูด</label>
-													<input type="text"  name="lat" value="{{$user->company->lat}}"  placeholder="ละติจูด" class="form-control">
-												</div>
-											</div>
-											<div class="col-md-6">  
-												<div class="form-group">
-													<label>ลองติจูด<a href="https://google.com/maps/place/{{$user->company->lat}},{{$user->company->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
-													<input type="text"  name="lng" value="{{$user->company->lng}}"  placeholder="ลองติจูด" class="form-control">
-												</div>
-											</div>
+
+											{{-- {{$user->company->companyaddress}} --}}
+											@if ($user->company->companyaddress->count() == 1)
+												@php
+													$companyaddress = $user->company->companyaddress->first();
+												@endphp
+													<div class="col-md-6">  
+														<div class="form-group">
+															<label>@if ($user->user_group_id == 1) ที่อยู่บริษัท @else ที่ตั้งสถานประกอบการ @endif</label><span class="text-danger">*</span>
+															<input type="text"  name="address" value="{{$companyaddress->address}}"  placeholder="" class="form-control">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>จังหวัด<span class="text-danger">*</span></label>
+															<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2">
+																<option value=""></option>
+																@foreach ($provinces as $province)
+																	<option value="{{$province->id}}" @if($companyaddress->province_id == $province->id) selected @endif>{{$province->name}}</option> 
+																@endforeach
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>อำเภอ<span class="text-danger">*</span></label>
+															<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+																@foreach ($amphurs as $amphur)                                                                
+																	<option value="{{$amphur->id}}" @if ($companyaddress->amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
+																@endforeach   
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>ตำบล<span class="text-danger">*</span></label>
+															<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2">
+																@foreach ($tambols as $tambol)                                                                
+																	<option value="{{$tambol->id}}" @if ($companyaddress->tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
+																@endforeach    
+															</select>
+														</div>
+													</div>
+													<div class="col-md-6">  
+														<div class="form-group">
+															<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
+															<input type="text"  name="postalcode" value="{{$companyaddress->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+														</div>
+													</div>
+													<div class="col-md-6">  
+														<div class="form-group">
+															<label>ละติจูด<a href="https://google.com/maps/place/{{$companyaddress->lat}},{{$companyaddress->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
+															<input type="text"  name="lat" value="{{$companyaddress->lat}}"  placeholder="ละติจูด" class="form-control">
+														</div>
+													</div>
+													<div class="col-md-6">  
+														<div class="form-group">
+															<label>ลองติจูด</label>
+															<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองติจูด" class="form-control">
+														</div>
+													</div>
+												@else
+													@foreach ($user->company->companyaddress as $companyaddress)
+													
+													@endforeach
+	
+											@endif
+										
 											{{-- <div class="col-md-6">
 												<div class="form-group">
 													<label>รูปถ่าย</label>
 													<div class="input-group">													
 														<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปถ่าย" disabled>
 														<span class="input-group-append">
-															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>													
 														</span>
 													</div>
 													<input type="file" style="display:none;" id="file" name="picture"/>
@@ -633,12 +737,12 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													{{-- <div class="col-md-12" > --}}
-														<label for="">รายชื่อกรรมการ</label>
+														<label for="">รายชื่อกรรมการ/ผู้มีอำนาจลงนาม<span class="text-danger">*</span></label>
 														<a href="#" class="text-primary" data-toggle="modal" data-target="#modal_add_authorized_director">คลิกเพิ่ม</a>
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">
 																<thead>
-																	<tr>
+																	<tr class="bg-info">
 																		<th style="width:80%">ชื่อ  นามสกุล</th> 
 																		<th style="width:20%">เพิ่มเติม</th>                                                                                   
 																	</tr>
@@ -663,11 +767,13 @@
 												<div class="form-group">
 													{{-- <div class="col-md-12" > --}}
 														<label for="">เอกสารแนบ  </label>
-													<a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณสนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
+													<a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">อัปโหลดเอกสารแนบ</a> 
+													<p><small>(หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ)</small></p>
+													
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">
 																<thead>
-																	<tr>
+																	<tr class="bg-info">
 																		<th style="width:80%">ไฟล์</th> 
 																		<th style="width:20%">เพิ่มเติม</th>                                                                                   
 																	</tr>
@@ -692,8 +798,10 @@
 												<div class="form-group">
 													<label>โลโก้ (ขนาด 500x500) px</label>
 													<div class="input-group">													
-														<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
-															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัพโหลดรูป</button>													
+														<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >											
+															<span class="input-group-append">
+																<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>
+															</span>
 													</div>
 													<input type="file" style="display:none;" id="file" name="picture"/>
 													@if (!Empty($user->company->logo))

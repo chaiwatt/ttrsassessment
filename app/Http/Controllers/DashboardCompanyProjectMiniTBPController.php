@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PDF;
 use App\User;
 use DateTimeZone;
 use Carbon\Carbon;
@@ -25,7 +25,7 @@ use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditMiniTbpRequest;
 use setasign\Fpdi\PdfParser\StreamReader;
-use niklasravnsborg\LaravelPdf\Facades\Pdf;
+
 
 class DashboardCompanyProjectMiniTBPController extends Controller
 {
@@ -96,8 +96,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             'contactprefix' => $request->contactprefix,
             'contactname' => $request->contactname,
             'contactlastname' => $request->contactlastname,
-            'contactposition_id' => $request->contactposition,
-            'managerprefix' => $request->managerprefix,
+            'contactposition' => $request->contactposition,
+            'managerprefix_id' => $request->managerprefix,
             'managername' => $request->managername,
             'managerlastname' => $request->managerlastname,
             'managerposition_id' => $request->managerposition,
@@ -136,7 +136,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $company = Company::where('user_id',$auth->id)->first();
         $minitpb = MiniTBP::find($id);
         $company_name = (!Empty($company->name))?$company->name:'';
-        $company_address = (!Empty($company->address))?$company->address:'';
+        $company_address = (!Empty($company->companyaddress->first()->address))?$company->companyaddress->first()->address:'';
 
         $finance1_text = (!Empty($minitpb->finance1))?'x':'';
         $finance1_bank = (!Empty($minitpb->finance1) && !Empty($minitpb->thai_bank_id))?$minitpb->bank->name:'' ;
@@ -156,7 +156,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $nonefinance6_text = (!Empty($minitpb->nonefinance6))?'x':'';
         $nonefinance6_detail = (!Empty($minitpb->nonefinance6) && !Empty($minitpb->nonefinance6_detail))?$minitpb->nonefinance6_detail:'' ;
         $signature = (!Empty($minitpb->signature_status_id) && !Empty(Auth::user()->signature))?Auth::user()->signature:'';
-        $managerprefix = (!Empty($minitpb->managerprefix))?Prefix::find($minitpb->managerprefix)->name:'';
+        $managerprefix = (!Empty($minitpb->managerprefix_id))?Prefix::find($minitpb->managerprefix_id)->name:'';
         $managername = (!Empty($minitpb->managername))?$minitpb->managername:'';
         $managerlastname = (!Empty($minitpb->managerlastname))?$minitpb->managerlastname:'';
         $managerposition = (!Empty($minitpb->managerposition_id))?UserPosition::find($minitpb->managerposition_id)->name:'';
@@ -226,8 +226,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         }
         $file = $request->attachment;
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-        $file->move("storage/uploads/minitbp/attachment" , $new_name);
-        $filelocation = "storage/uploads/minitbp/attachment/".$new_name;
+        $file->move("storage/uploads/pdf/attachment" , $new_name);
+        $filelocation = "storage/uploads/pdf/attachment/".$new_name;
         $minitbp->update([
             'attachment' => $filelocation
         ]);

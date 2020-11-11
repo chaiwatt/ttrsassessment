@@ -63,7 +63,7 @@
                                     @foreach ($businessplans as $key => $businessplan)
                                     <tr>    
                                         <td> {{$businessplan->createddateth}} </td> 
-                                        <td> {{$businessplan->code}} </td> 
+                                        <td> {{$businessplan->minitbp->fulltbp->fulltbp_code}} </td> 
                                         <td> {{$businessplan->minitbp->project}} </td> 
                                         <td>
                                             <div class="progress" style="height: 1.375rem;">

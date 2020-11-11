@@ -52,6 +52,8 @@ class CreateCompaniesTable extends Migration
             $table->string('factorylat',50)->nullable();
             $table->string('factorylng',50)->nullable();
             $table->string('logo',250)->nullable();
+            $table->string('organizeimg',250)->nullable();
+            $table->longText('companyhistory')->nullable();
             $table->timestamps();
         });
     }

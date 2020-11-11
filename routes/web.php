@@ -41,6 +41,7 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('getsubisic','Api\CompanyController@GetSubisic')->name('api.company.getsubisic');            
         Route::post('addauthorizeddirector','Api\CompanyController@AddAuthorizedDirector')->name('api.company.addauthorizeddirector');
         Route::post('deleteauthorizeddirector','Api\CompanyController@DeleteAuthorizedDirector')->name('api.company.deleteauthorizeddirector');
+        Route::post('uploadorganizeimg','Api\CompanyController@UploadOrganizeImg')->name('api.company.uploadorganizeimg');  
     }); 
     Route::group(['prefix' => 'alert'], function(){
         Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');            
@@ -188,6 +189,21 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('check','Api\HidController@Check')->name('api.hid.check');           
         }); 
         Route::group(['prefix' => 'fulltbp'], function(){
+            Route::post('generatepdf','Api\FullTbpController@GeneratePdf')->name('api.fulltbp.generatepdf');
+            Route::post('editsignature','Api\FullTbpController@EditSignature')->name('api.fulltbp.editsignature');
+            Route::post('submitwithattachement','Api\FullTbpController@SubmitWithattAchement')->name('api.fulltbp.submitwithattachement');
+            Route::post('submitwithnoattachement','Api\FullTbpController@SubmitWithNoattAchement')->name('api.fulltbp.submitwithnoattachement');   
+            Route::group(['prefix' => 'general'], function(){
+                Route::post('edit','Api\FullTbpGeneralController@Edit')->name('api.fulltbp.general.edit');           
+                Route::post('addresearcher','Api\FullTbpGeneralController@AddResearcher')->name('api.fulltbp.general.addresearcher');
+                Route::post('deleteresearcher','Api\FullTbpGeneralController@DeleteResearcher')->name('api.fulltbp.general.deleteresearcher');
+            });
+            Route::group(['prefix' => 'overall'], function(){
+                Route::post('edit','Api\FullTbpOverAllController@Edit')->name('api.fulltbp.overall.edit');           
+            });
+            Route::group(['prefix' => 'marketplan'], function(){
+                Route::post('edit','Api\FullTbpMarketPlanController@Edit')->name('api.fulltbp.marketplan.edit');           
+            });
             Route::group(['prefix' => 'companyprofile'], function(){
                 Route::post('add','Api\FullTbpCompanyProfileController@CompanyprofileAdd')->name('api.fulltbp.companyprofile.add');           
                 Route::group(['prefix' => 'attachement'], function(){
@@ -206,6 +222,8 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('get','Api\FullTbpCompanyEmployController@Get')->name('api.fulltbp.employ.get');  
                 Route::post('edit','Api\FullTbpCompanyEmployController@Edit')->name('api.fulltbp.employ.edit'); 
                 Route::post('getlist','Api\FullTbpCompanyEmployController@GetList')->name('api.fulltbp.employ.getlist'); 
+                Route::post('addboardattachment','Api\FullTbpCompanyEmployController@AddBoardAttachment')->name('api.fulltbp.employ.addboardattachment'); 
+                Route::post('deleteboardattachment','Api\FullTbpCompanyEmployController@DeleteBoardAttachment')->name('api.fulltbp.employ.deleteboardattachment');
 
                 Route::group(['prefix' => 'education'], function(){
                     Route::post('add','Api\FullTbpCompanyEmployEducationController@Add')->name('api.fulltbp.employ.education.add');           

@@ -190,7 +190,7 @@
                                         <div class="form-group">
                                             <label>รูป Feature (ขนาด 1200x500 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('file').click();">อัพโหลด Feature</button>													
+                                                <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('file').click();">อัปโหลด Feature</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature"/>
                                             <br>
@@ -222,7 +222,7 @@
                                         <div class="form-group">
                                             <label>รูปแกลอรี่ (ขนาด 500x500 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <button class="btn bg-info" type="button" onclick="document.getElementById('singlefile').click();">อัพโหลดรูป</button>													
+                                                <button class="btn bg-info" type="button" onclick="document.getElementById('singlefile').click();">อัปโหลดรูป</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="singlefile" />
                                         </div>

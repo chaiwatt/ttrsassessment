@@ -6,14 +6,15 @@ import * as StockHolder from './stockholder.js';
 import * as Project from './project.js';
 import * as Market from './market.js';
 import * as Sell from './sell.js';
+import * as FullTbp from './fulltbp.js';
 
-$(document).on('keyup', '#companyprofile_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="companyprofile[]" value="${$(this).val()}" class="form-control companyprofileclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_companyprofile_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#companyprofile_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="companyprofile[]" value="${$(this).val()}" class="form-control companyprofileclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_companyprofile_wrapper').append(html);
+//     }
+// });
 
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
@@ -33,9 +34,9 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
     .catch(error => {})
 });
 
-$("#attachment").on('change', function() {
+// $("#attachment").on('change', function() {
+$(document).on('change', '#attachment', function(e) {
     console.log($(this).data('id'));
-
     var file = this.files[0];
 
     if (this.files[0].size/1024/1024*1000 > 1000 ){
@@ -59,8 +60,8 @@ $("#attachment").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -89,8 +90,8 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -103,7 +104,7 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
 
 
 $(document).on('click', '#btn_modal_add_employ', function(e) {
-    Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val()).then(data => {
+    Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
         console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
@@ -112,8 +113,9 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
                 <td> ${employ.employposition['name']} </td> 
                 <td> ${employ.phone} </td>                                            
                 <td> ${employ.workphone} </td> 
-                <td> <a type="button" data-id="${employ.id}" class="btn badge bg-info editEmployinfo">แก้ไข</a> 
-                <a type="button" data-id="${employ.id}" class="btn badge bg-warning deletecompanyemploy">ลบ</a>  </td> 
+                <td> ${employ.email} </td> 
+                <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td> 
             </tr>`
             });
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
@@ -151,7 +153,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
                 <td> ${education.employeducationyear} </td> 
-                <td> <a type="button" data-id="${education.id}" class="btn badge bg-danger deleteemployeducation">ลบ</a> </td> 
+                <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
             </tr>`
             });
         $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
@@ -164,7 +166,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
                 <td> ${experience.endposition} </td> 
-                <td> <a type="button" data-id="${experience.id}" class="btn badge bg-danger deleteemployexperience">ลบ</a> </td> 
+                <td> <a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a> </td> 
             </tr>`
             });
          $("#fulltbp_companyemployexperience_wrapper_tr").html(experiencetable);
@@ -175,10 +177,22 @@ $(document).on('click', '.editEmployinfo', function(e) {
                  <td> ${training.trainingdateth}</td>                                            
                  <td> ${training.course} </td> 
                  <td> ${training.owner} </td>                                            
-                 <td> <a type="button" data-id="${training.id}" class="btn badge bg-danger deleteemploytraining">ลบ</a> </td> 
+                 <td> <a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a> </td> 
              </tr>`
              });
           $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
+        var attachment  = '';
+          data.fullTbpboardattachments.forEach(function (boardattachment,index) {
+            attachment += `<tr >                                        
+                  <td> ${boardattachment.name}</td>                                                                                      
+                  <td> 
+                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                    <a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a> 
+                  </td> 
+              </tr>`
+              });
+           $("#fulltbp_board_attachment_wrapper_tr").html(attachment);
+
 
         $("#employposition_wrapper").html(selectemployposition);
         $('#employid').val(data.employ['id'])
@@ -186,6 +200,8 @@ $(document).on('click', '.editEmployinfo', function(e) {
         $('#employlastname_edit').val(data.employ['lastname'])
         $('#employphone_edit').val(data.employ['phone'])
         $('#employworkphone_edit').val(data.employ['workphone']) 
+        $('#employemail_edit').val(data.employ['email']) 
+        
     })
     .catch(error => {})
     $('#modal_edit_employ').modal('show');
@@ -193,7 +209,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
 
 $(document).on('click', '#btn_edit_employ', function(e) {
     console.log($(this).data('id'));
-    Employ.editEmploy($('#employid').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val()).then(data => {
+    Employ.editEmploy($('#employid').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {
         console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
@@ -202,8 +218,9 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                 <td> ${employ.employposition['name']} </td> 
                 <td> ${employ.phone} </td>                                            
                 <td> ${employ.workphone} </td> 
-                <td> <a type="button" data-id="${employ.id}" class="btn badge bg-info editEmployinfo">แก้ไข</a> 
-                <a type="button" data-id="${employ.id}" class="btn badge bg-warning deletecompanyemploy">ลบ</a>  </td>  
+                <td> ${employ.email} </td> 
+                <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td>  
             </tr>`
             });
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
@@ -239,8 +256,9 @@ $(document).on("click",".deletecompanyemploy",function(e){
                         <td> ${employ.employposition['name']} </td> 
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn badge bg-info editEmployinfo">แก้ไข</a> 
-                        <a type="button" data-id="${employ.id}" class="btn badge bg-warning deletecompanyemploy">ลบ</a>  </td>  
+                        <td> ${employ.email} </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td>  
                     </tr>`
                     });
                  $("#fulltbp_companyemploy_wrapper_tr").html(html);
@@ -261,7 +279,7 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
                 <td> ${education.employeducationyear} </td> 
-                <td> <a type="button" data-id="${education.id}" class="btn badge bg-danger deleteemployeducation">ลบ</a> </td> 
+                <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
             </tr>`
             });
          $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
@@ -305,7 +323,7 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
                 <td> ${experience.endposition} </td> 
-                <td> <a type="button" data-id="${experience.id}" class="btn badge bg-danger deleteemployexperience">ลบ</a> </td> 
+                <td> <a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a> </td> 
             </tr>`
             });
          $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
@@ -323,7 +341,7 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
                 <td> ${training.trainingdateth}</td>                                            
                 <td> ${training.course} </td> 
                 <td> ${training.owner} </td>                                            
-                <td> <a type="button" data-id="${training.id}" class="btn badge bg-danger deleteemploytraining">ลบ</a> </td> 
+                <td> <a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a> </td> 
             </tr>`
             });
          $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
@@ -366,7 +384,7 @@ $(document).on("click",".deleteemployeducation",function(e){
                 <td> ${education.employeducationinstitute} </td> 
                     <td> ${education.employeducationmajor} </td>                                            
                     <td> ${education.employeducationmajor} </td> 
-                    <td> <a type="button" data-id="${education.id}" class="btn badge bg-danger deleteemployeducation">ลบ</a> </td> 
+                    <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
                 </tr>`
                 });
             $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
@@ -401,7 +419,7 @@ $(document).on("click",".deleteemployexperience",function(e){
                         <td> ${experience.businesstype} </td>                                            
                         <td> ${experience.startposition} </td> 
                         <td> ${experience.endposition} </td> 
-                        <td> <a type="button" data-id="${experience.id}" class="btn badge bg-danger deleteemployexperience">ลบ</a> </td> 
+                        <td> <a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a> </td> 
                     </tr>`
                     });
                  $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
@@ -434,7 +452,7 @@ $(document).on("click",".deleteemploytraining",function(e){
                         <td> ${training.trainingdateth}</td>                                            
                         <td> ${training.course} </td> 
                         <td> ${training.owner} </td>                                            
-                        <td> <a type="button" data-id="${training.id}" class="btn badge bg-danger deleteemploytraining">ลบ</a> </td> 
+                        <td> <a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a> </td> 
                     </tr>`
                     });
                  $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
@@ -468,7 +486,7 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
             html += `<tr >                                        
                 <td> ${stockholder.companyemploy['name']} ${stockholder.companyemploy['lastname']}</td>                                            
                 <td> ${stockholder.relationwithceo} </td>                                           
-                <td> <a type="button" data-id="${stockholder.id}" class="btn badge bg-warning deletestockholder">ลบ</a> </td> 
+                <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-warning deletestockholder">ลบ</a> </td> 
             </tr>`
             });
             console.log(html);
@@ -497,7 +515,7 @@ $(document).on("click",".deletestockholder",function(e){
                     html += `<tr >                                        
                         <td> ${stockholder.companyemploy['name']} ${stockholder.companyemploy['lastname']}</td>                                            
                         <td> ${stockholder.relationwithceo} </td>                                           
-                        <td> <a type="button" data-id="${stockholder.id}" class="btn badge bg-warning deletestockholder">ลบ</a> </td> 
+                        <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-warning deletestockholder">ลบ</a> </td> 
                     </tr>`
                     });
                     console.log(html);
@@ -512,13 +530,13 @@ $(document).on('keyup', '.projectabtractclass', function(e) {
     $('#projectabtracttextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#projectabtract_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="projectabtract[]" value="${$(this).val()}" class="form-control projectabtractclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_projectabtract_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#projectabtract_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="projectabtract[]" value="${$(this).val()}" class="form-control projectabtractclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_projectabtract_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddprojectabtract', function(e) {
     var lines = $('input[name="projectabtract[]"]').map(function(){ 
@@ -538,13 +556,13 @@ $(document).on('keyup', '.mainproductclass', function(e) {
     $('#mainproducttextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#mainproduct_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="mainproduct[]" value="${$(this).val()}" class="form-control mainproductclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_mainproduct_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#mainproduct_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="mainproduct[]" value="${$(this).val()}" class="form-control mainproductclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_mainproduct_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddmainproduct', function(e) {
     var lines = $('input[name="mainproduct[]"]').map(function(){ 
@@ -564,13 +582,13 @@ $(document).on('keyup', '.productdetailsclass', function(e) {
     $('#productdetailstextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#productdetails_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="productdetails[]" value="${$(this).val()}" class="form-control productdetailsclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_productdetails_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#productdetails_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="productdetails[]" value="${$(this).val()}" class="form-control productdetailsclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_productdetails_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddproductdetails', function(e) {
     var lines = $('input[name="productdetails[]"]').map(function(){ 
@@ -590,13 +608,13 @@ $(document).on('keyup', '.projectechdevclass', function(e) {
     $('#projectechdevtextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#projectechdev_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="projectechdev[]" value="${$(this).val()}" class="form-control projectechdevclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_projectechdev_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#projectechdev_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="projectechdev[]" value="${$(this).val()}" class="form-control projectechdevclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_projectechdev_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddprojectechdev', function(e) {
     var lines = $('input[name="projectechdev[]"]').map(function(){ 
@@ -623,7 +641,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td> 
-                <a type="button" data-id="${techdevlevel.id}" class="btn badge bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
+                <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
             });
          $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
@@ -653,7 +671,7 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
                         <td> ${techdevlevel.presenttechnology} </td> 
                         <td> ${techdevlevel.projecttechnology} </td>                                            
                         <td> 
-                        <a type="button" data-id="${techdevlevel.id}" class="btn badge bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
+                        <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
                     </tr>`
                     });
                  $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
@@ -667,13 +685,13 @@ $(document).on('keyup', '.projectechdevproblemclass', function(e) {
     $('#projectechdevproblemtextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#projectechdevproblem_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="projectechdevproblem[]" value="${$(this).val()}" class="form-control projectechdevproblemclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_projectechdevproblem_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#projectechdevproblem_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="projectechdevproblem[]" value="${$(this).val()}" class="form-control projectechdevproblemclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_projectechdevproblem_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     var lines = $('input[name="projectechdevproblem[]"]').map(function(){ 
@@ -689,70 +707,70 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     .catch(error => {})
 });
 
-$("#cer1").on('change', function() {
+$(document).on('change', '#cer1', function(e) {
     if($(this).is(":checked")){
         $("#cer1qtydiv").attr("hidden",false);
     }else{
         $("#cer1qtydiv").attr("hidden",true);
     }
 });
-$("#cer2").on('change', function() {
+$(document).on('change', '#cer2', function(e) {
     if($(this).is(":checked")){
         $("#cer2qtydiv").attr("hidden",false);
     }else{
         $("#cer2qtydiv").attr("hidden",true);
     }
 });
-$("#cer3").on('change', function() {
+$(document).on('change', '#cer3', function(e) {
     if($(this).is(":checked")){
         $("#cer3qtydiv").attr("hidden",false);
     }else{
         $("#cer3qtydiv").attr("hidden",true);
     }
 });
-$("#cer4").on('change', function() {
+$(document).on('change', '#cer4', function(e) {
     if($(this).is(":checked")){
         $("#cer4qtydiv").attr("hidden",false);
     }else{
         $("#cer4qtydiv").attr("hidden",true);
     }
 });
-$("#cer5").on('change', function() {
+$(document).on('change', '#cer5', function(e) {
     if($(this).is(":checked")){
         $("#cer5qtydiv").attr("hidden",false);
     }else{
         $("#cer5qtydiv").attr("hidden",true);
     }
 });
-$("#cer6").on('change', function() {
+$(document).on('change', '#cer6', function(e) {
     if($(this).is(":checked")){
         $("#cer6qtydiv").attr("hidden",false);
     }else{
         $("#cer6qtydiv").attr("hidden",true);
     }
 });
-$("#cer7").on('change', function() {
+$(document).on('change', '#cer7', function(e) {
     if($(this).is(":checked")){
         $("#cer7qtydiv").attr("hidden",false);
     }else{
         $("#cer7qtydiv").attr("hidden",true);
     }
 });
-$("#cer8").on('change', function() {
+$(document).on('change', '#cer8', function(e) {
     if($(this).is(":checked")){
         $("#cer8qtydiv").attr("hidden",false);
     }else{
         $("#cer8qtydiv").attr("hidden",true);
     }
 });
-$("#cer9").on('change', function() {
+$(document).on('change', '#cer9', function(e) {
     if($(this).is(":checked")){
         $("#cer9qtydiv").attr("hidden",false);
     }else{
         $("#cer9qtydiv").attr("hidden",true);
     }
 });
-$("#cer11").on('change', function() {
+$(document).on('change', '#cer11', function(e) {
     if($(this).is(":checked")){
         $("#cer11qtydiv").attr("hidden",false);
     }else{
@@ -796,8 +814,8 @@ $("#certify").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -826,8 +844,8 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -862,8 +880,8 @@ $("#award").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -892,8 +910,8 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -928,8 +946,8 @@ $("#standard").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -958,8 +976,8 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -990,8 +1008,8 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                 <td> ${plan.name} </td>                                            
                     ${tdbody}
                 <td> 
-                <a type="button" data-id="${plan.id}" class="btn badge bg-info editprojectplan">แก้ไข</a>
-                    <a type="button" data-id="${plan.id}" data-name="" class="btn badge bg-warning deleteprojectplan">ลบ</a>                                       
+                <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a>                                       
                 </td>
             </tr>`
             });
@@ -1041,8 +1059,8 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                 <td> ${plan.name} </td>                                            
                     ${tdbody}
                 <td> 
-                <a type="button" data-id="${plan.id}" class="btn badge bg-info editprojectplan">แก้ไข</a>
-                    <a type="button" data-id="${plan.id}" data-name="" class="btn badge bg-warning deleteprojectplan">ลบ</a>                                       
+                <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a>                                       
                 </td>
             </tr>`
             });
@@ -1080,8 +1098,8 @@ $(document).on("click",".deleteprojectplan",function(e){
                         <td> ${plan.name} </td>                                            
                             ${tdbody}
                         <td> 
-                        <a type="button" data-id="${plan.id}" class="btn badge bg-info editprojectplan">แก้ไข</a>
-                            <a type="button" data-id="${plan.id}" data-name="" class="btn badge bg-warning deleteprojectplan">ลบ</a>                                       
+                        <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1096,13 +1114,13 @@ $(document).on('keyup', '.marketneedclass', function(e) {
     $('#marketneedtextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#marketneed_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="marketneed[]" value="${$(this).val()}" class="form-control marketneedclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_marketneed_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#marketneed_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="marketneed[]" value="${$(this).val()}" class="form-control marketneedclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_marketneed_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddmarketneed', function(e) {
     var lines = $('input[name="marketneed[]"]').map(function(){ 
@@ -1122,13 +1140,13 @@ $(document).on('keyup', '.marketsizeclass', function(e) {
     $('#marketsizetextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#marketsize_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="marketsize[]" value="${$(this).val()}" class="form-control marketsizeclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_marketsize_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#marketsize_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="marketsize[]" value="${$(this).val()}" class="form-control marketsizeclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_marketsize_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddmarketsize', function(e) {
     var lines = $('input[name="marketsize[]"]').map(function(){ 
@@ -1148,13 +1166,13 @@ $(document).on('keyup', '.marketshareclass', function(e) {
     $('#marketsharetextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#marketshare_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="marketshare[]" value="${$(this).val()}" class="form-control marketshareclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_marketshare_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#marketshare_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="marketshare[]" value="${$(this).val()}" class="form-control marketshareclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_marketshare_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddmarketshare', function(e) {
     var lines = $('input[name="marketshare[]"]').map(function(){ 
@@ -1174,13 +1192,13 @@ $(document).on('keyup', '.marketcompetitiveclass', function(e) {
     $('#marketcompetitivetextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-$(document).on('keyup', '#marketcompetitive_input', function(e) {
-    if (e.keyCode === 13) {
-        var html = `<input type="text" name ="marketcompetitive[]" value="${$(this).val()}" class="form-control marketcompetitiveclass" style="border: 0" >`;
-        $(this).val('');
-        $('#fulltbp_marketcompetitive_wrapper').append(html);
-    }
-});
+// $(document).on('keyup', '#marketcompetitive_input', function(e) {
+//     if (e.keyCode === 13) {
+//         var html = `<input type="text" name ="marketcompetitive[]" value="${$(this).val()}" class="form-control marketcompetitiveclass" style="border: 0" >`;
+//         $(this).val('');
+//         $('#fulltbp_marketcompetitive_wrapper').append(html);
+//     }
+// });
 
 $(document).on('click', '#btnaddmarketcompetitive', function(e) {
     var lines = $('input[name="marketcompetitive[]"]').map(function(){ 
@@ -1223,8 +1241,8 @@ $("#businessmodelcanvas").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1255,8 +1273,8 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1294,8 +1312,8 @@ $("#swot").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1325,8 +1343,8 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1364,8 +1382,8 @@ $("#financialplan").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1395,8 +1413,8 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1418,8 +1436,8 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
                 <td> ${sell.past2} </td> 
                 <td> ${sell.past3} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editsell">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletesell">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1452,8 +1470,8 @@ $(document).on("click",".deletesell",function(e){
                         <td> ${sell.past2} </td> 
                         <td> ${sell.past3} </td> 
                         <td> 
-                            <a type="button" data-id="${sell.id}" class="btn badge bg-info editsell">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletesell">ลบ</a>
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1488,8 +1506,8 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
                 <td> ${sell.past2} </td> 
                 <td> ${sell.past3} </td>                                            
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editsell">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletesell">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1522,7 +1540,7 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
                 <td> ${sell.past2} </td> 
                 <td> ${sell.past3} </td>                                            
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editsellstatus">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -1543,8 +1561,8 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
                 <td> ${sell.percenttosale} </td> 
                 <td> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editdebtpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletedebtpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1579,8 +1597,8 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
                 <td> ${sell.percenttosale} </td> 
                 <td> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editdebtpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletedebtpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1613,8 +1631,8 @@ $(document).on("click",".deletedebtpartner",function(e){
                         <td> ${sell.percenttosale} </td>
                         <td> ${sell.businessyear} </td>
                         <td> 
-                            <a type="button" data-id="${sell.id}" class="btn badge bg-info editdebtpartner">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletedebtpartner">ลบ</a>
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1636,8 +1654,8 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
                 <td> ${sell.percenttopurchase} </td> 
                 <td> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editcreditpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletecreditpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1670,8 +1688,8 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
                 <td> ${sell.percenttopurchase} </td> 
                 <td> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-info editcreditpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletecreditpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1703,8 +1721,8 @@ $(document).on("click",".deletecreditpartner",function(e){
                         <td> ${sell.percenttopurchase} </td> 
                         <td> ${sell.businessyear} </td> 
                         <td> 
-                            <a type="button" data-id="${sell.id}" class="btn badge bg-info editcreditpartner">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn badge bg-warning deletecreditpartner">ลบ</a>
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1739,7 +1757,7 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
                 <td> ${asset.price} </td> 
                 <td> ${asset.specification} </td> 
                 <td> 
-                    <a type="button" data-id="${asset.id}" class="btn badge bg-info editasset">แก้ไข</a> 
+                    <a type="button" data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -1766,7 +1784,7 @@ $(document).on('click', '#btn_modal_edit_investment', function(e) {
                 <td> ${invesment.investment} </td>                            
                 <td> ${invesment.cost} </td>  
                 <td> 
-                    <a type="button" data-id="${invesment.id}" class="btn badge bg-info editinvestment">แก้ไข</a> 
+                    <a type="button" data-id="${invesment.id}" class="btn btn-sm bg-info editinvestment">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -1800,7 +1818,7 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
                 <td> ${cost.approved} </td>  
                 <td> ${cost.plan} </td>
                 <td> 
-                    <a type="button" data-id="${cost.id}" class="btn badge bg-info editcost">แก้ไข</a> 
+                    <a type="button" data-id="${cost.id}" class="btn btn-sm bg-info editcost">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -1848,8 +1866,8 @@ $("#companydoc").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1879,8 +1897,8 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" badge bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn badge bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1905,3 +1923,371 @@ $(document).on('click', '#btneditquantityemploy', function(e) {
     })
     .catch(error => {})
 });
+
+$(document).on('change', '#organizeimg', function(e) {
+    var file = this.files[0];
+    if (this.files[0].size/1024/1024*1000 > 2000 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        return ;
+    }
+    console.log(file);
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$(this).data('id'));
+        $.ajax({
+            url: `${route.url}/api/company/uploadorganizeimg`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var imgpath = route.url + '/'+ data.organizeimg;
+                $("#organizeimgholder").attr("src", imgpath);
+                //organizeimgholder
+        }
+    });
+});
+
+// Basic wizard setup
+$('.steps-basic').steps({
+    headerTag: 'h6',
+    bodyTag: 'fieldset',
+    transitionEffect: 'fade',
+    enableFinishButton: false,
+    titleTemplate: '<span class="number">#index#</span> #title#',
+    labels: {
+        previous: '<i class="icon-arrow-left13 mr-2" /> ย้อนกลับ',
+        next: 'ทำรายการต่อไป <i class="icon-arrow-right14 ml-2" />',
+        finish: 'บันทึก <i class="icon-arrow-right14 ml-2" />'
+    },
+    onStepChanged:function (event, currentIndex, newIndex) {
+        if(currentIndex == 1){
+            $(".actions").find(".libtn").remove();
+            FullTbp.editGeneral($('#fulltbpid').val(),$('#businesstype').val(),$('#department_qty').val(),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val(),
+            $('#companyhistory').val(),$('#responsibleprefix').val(),$('#responsiblename').val(),$('#responsiblelastname').val(),$('#responsibleposition').val(),$('#responsibleemail').val(),$('#responsiblephone').val(),$('#responsibleworkphone').val(),$('#responsibleeducationhistory').val(),$('#responsibleexperiencehistory').val(),$('#responsibletraininghistory').val()).then(data => {
+                console.log(data);
+            })
+            .catch(error => {})
+        }else if(currentIndex == 2){
+            $(".actions").find(".libtn").remove();
+            FullTbp.editOverAll($('#fulltbpid').val(),$('#projectabtract_input').val(),$('#productdetails_input').val(),$('#projectechdev_input').val(),$('#projectechdevproblem_input').val(),$('#mainproduct_input').val(),$('#projectinnovation_input').val(),$('#projectstandard_input').val()).then(data => {
+                Project.editProjectCertify($('#fulltbpid').val(),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
+                    console.log(data);
+                })
+                .catch(error => {})
+            })  
+        }else if(currentIndex == 3){
+            $(".actions").find(".libtn").remove();
+            FullTbp.editMarketPlan($('#fulltbpid').val(),$('#analysis').val(),$('#modelcanvas').val(),$('#swot').val()).then(data => {
+                console.log(data);
+            })
+            .catch(error => {})
+        }else if(currentIndex == 4){
+            var hidden = '';
+            if(route.submitstatus !=4 && route.refixstatus == 0){
+                hidden = 'hidden';
+                $("#appceptagreement_wrapper").attr("hidden",true);
+            }
+            $(document).find(".actions ul").append(`
+                <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
+                <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
+            `);
+
+            FullTbp.generatePdf($('#fulltbpid').val()).then(data => {
+                var pdfpath = route.url + '/'+ data;
+                var url = pdfpath;
+                $('#downloadpdf').attr('href', url);
+                PDFObject.embed(pdfpath, "#example1");
+            })
+        }
+    },
+    onFinished: function (event, currentIndex) {
+        alert('Form submitted.');
+    }
+});
+
+$(document).on('click', '#btn_modal_add_researcher', function(e) {
+    FullTbp.addResearcher(1,$('#fulltbpid').val(),$('#researcherfix').val(),$('#researchername').val(),$('#researcherlastname').val(),$('#researchereducation').val(),$('#researcherexperience').val(),$('#researchertraining').val()).then(data => {
+        var html = ``;
+        data.forEach(function (researcher,index) {
+            html += `<tr >                                        
+                <td> ${researcher.prefix['name']}${researcher.name} ${researcher.lastname}</td>                                            
+                <td> ${researcher.education} </td>     
+                <td> ${researcher.experience} </td>     
+                <td> ${researcher.training} </td>  
+                <td> 
+                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteresearcher">ลบ</a>                                       
+                </td>
+            </tr>`
+            });
+         $("#fulltbp_researcher_wrapper_tr").html(html);
+   })
+   .catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_add_projectmember', function(e) {
+    FullTbp.addResearcher(2,$('#fulltbpid').val(),$('#researcherfix').val(),$('#researchername').val(),$('#researcherlastname').val(),$('#researchereducation').val(),$('#researcherexperience').val(),$('#researchertraining').val()).then(data => {
+        var html = ``;
+        data.forEach(function (researcher,index) {
+            html += `<tr >                                        
+                <td> ${researcher.prefix['name']}${researcher.name} ${researcher.lastname}</td>                                            
+                <td> ${researcher.education} </td>     
+                <td> ${researcher.experience} </td>     
+                <td> ${researcher.training} </td>  
+                <td> 
+                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteprojectmember">ลบ</a>                                       
+                </td>
+            </tr>`
+            });
+         $("#fulltbp_projectmember_wrapper_tr").html(html);
+   })
+   .catch(error => {})
+});
+
+$(document).on("click",".deleteresearcher",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            FullTbp.deleteResearcher(1,$(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (researcher,index) {
+                    html += `<tr >                                        
+                        <td> ${researcher.prefix['name']}${researcher.name} ${researcher.lastname}</td>                                            
+                        <td> ${researcher.education} </td>     
+                        <td> ${researcher.experience} </td>     
+                        <td> ${researcher.training} </td>  
+                        <td> 
+                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteresearcher">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_researcher_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on("click",".deleteprojectmember",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            FullTbp.deleteResearcher(2,$(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (researcher,index) {
+                    html += `<tr >                                        
+                        <td> ${researcher.prefix['name']}${researcher.name} ${researcher.lastname}</td>                                            
+                        <td> ${researcher.education} </td>     
+                        <td> ${researcher.experience} </td>     
+                        <td> ${researcher.training} </td>  
+                        <td> 
+                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteresearcher">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_projectmember_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on('change', '#boardattachment', function(e) {
+    console.log($(this).data('id'));
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+    formData.append('id',$('#employid').val());
+        $.ajax({
+            url: `${route.url}/api/fulltbp/employ/addboardattachment`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data)
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_board_attachment_wrapper_tr").html(html);
+        }
+    });
+});
+
+$(document).on("click",".deleteboardattachment",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteBoardAttachment($(this).data('id')).then(data => {
+                var html = ``;
+                var html = ``;
+                data.forEach(function (attachment,index) {
+                    html += `<tr >                                        
+                        <td> ${attachment.name} </td>                                            
+                        <td> 
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#fulltbp_board_attachment_wrapper_tr").html(html);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
+$(document).on('change', '#usersignature', function(e) {
+    var usesignature = 1;
+    if($(this).val() == 1){
+        $("#signature_wrapper").attr("hidden",true);
+    }else{
+        usesignature = 2;
+        $("#signature_wrapper").attr("hidden",false);
+    }
+    FullTbp.editSignature($('#fulltbpid').val(),usesignature).then(data => {
+        console.log(data);
+    })
+});
+
+$(document).on('click', '#submitfulltbp', function(e) {
+    console.log($('#appceptagreement').is(':checked'));
+    if($('#appceptagreement').is(':checked') === false){
+        Swal.fire({
+            title: 'ผิดพลาด!',
+            type: 'warning',
+            text: 'กรุณารับรองว่าข้อมูลทั้งหมดเป็นความจริง',
+        });
+        return;
+    }
+    var text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
+    if($('#usersignature').val() == 1){
+        text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+    }
+    Swal.fire({
+        title: 'เอกสาร Full TBP',
+        text: text,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            if($('#usersignature').val() == 1){
+                $("#fulltbppdf").trigger('click');
+            }else{
+                $("#spinicon").attr("hidden",false);
+                submitNoAttachement($('#fulltbpid').val()).then(data => {
+                    $("#submitfulltbp").attr("hidden",true);
+                    $("#spinicon").attr("hidden",true);
+                    $("#appceptagreement_wrapper").attr("hidden",true);
+                        var html = ``;
+                        Swal.fire({
+                            title: 'สำเร็จ...',
+                            text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+                        });
+                    })
+                .catch(error => {})
+            }
+        }
+    });
+});
+
+$(document).on('change', '#fulltbppdf', function(e) {
+    var file = this.files[0];
+    if (file === undefined) {
+        return ;
+    }
+    if (this.files[0].size/1024/1024*1000 > 2000 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('attachment',file);
+    formData.append('id',$('#fulltbpid').val());
+    console.log($('#fulltbpid').val());
+    $.ajax({
+        url: `${route.url}/api/fulltbp/submitwithattachement`,  //Server script to process data
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: formData,
+        contentType: false,
+        processData: false,
+        beforeSend: function ( xhr ) {
+            $("#spinicon").attr("hidden",false);
+        },
+        success: function(data){
+            $("#submitfulltbp").attr("hidden",true);
+            $("#spinicon").attr("hidden",true);
+            $("#appceptagreement_wrapper").attr("hidden",true);
+            Swal.fire({
+                title: 'สำเร็จ...',
+                text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+            });
+        }
+    });
+});
+
+function submitNoAttachement(id){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: `${route.url}/api/fulltbp/submitwithnoattachement`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+            id : id
+            },
+            success: function(data) {
+            resolve(data)
+            },
+            error: function(error) {
+            reject(error)
+            },
+        })
+    })
+}

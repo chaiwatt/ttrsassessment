@@ -26,12 +26,14 @@ use App\Model\EmployTraining;
 use App\Helper\DateConversion;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
+use App\Model\SignatureStatus;
 use App\Model\TimeLineHistory;
 use App\Model\EmployExperience;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketNeed;
 use App\Model\FullTbpMarketSize;
+use App\Model\FullTbpResearcher;
 use App\Model\FullTbpSellStatus;
 use App\Model\ProjectAssignment;
 use App\Model\CompanyStockHolder;
@@ -115,9 +117,9 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $fulltbpinvestments = FullTbpInvestment::where('full_tbp_id',$fulltbp->id)->get();        
         $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpreturnofinvestment = FullTbpReturnOfInvestment::where('full_tbp_id',$fulltbp->id)->first();
-
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
-       
+        $fulltbpresearchers = FullTbpResearcher::where('full_tbp_id',$fulltbp->id)->get(); 
+        $signaturestatuses = SignatureStatus::get();
         return view('dashboard.company.project.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -158,7 +160,9 @@ class DashboardCompanyProjectFullTbpController extends Controller
                                                 ->withFulltbpinvestments($fulltbpinvestments)
                                                 ->withFulltbpcosts($fulltbpcosts)
                                                 ->withFulltbpreturnofinvestment($fulltbpreturnofinvestment)
-                                                ->withFulltbpcompanydocs($fulltbpcompanydocs);
+                                                ->withFulltbpcompanydocs($fulltbpcompanydocs)
+                                                ->withFulltbpresearchers($fulltbpresearchers)
+                                                ->withSignaturestatuses($signaturestatuses);
     }
 
     public function EditSave(Request $request,$id){
@@ -186,14 +190,26 @@ class DashboardCompanyProjectFullTbpController extends Controller
     }
 
     public function DownloadPDF($id){
-        // require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
-        // $segment = new \Segment();
-        // $body = 'หาดทรายละเอียดสีขาวตัดกับท้องฟ้าและน้ำทะเลสีครามใสคือบรรยากาศของท้องทะเลไทยในช่วงของการแพร่ ระบาดไวรัสโควิด-19ส่งผลให้ประเทศไทยมีการประกาศพ.ร.ก.ฉุกเฉินและปิดบริการสถานที่ท่องเที่ยวทางธรรมชาติทั่วประเทศเสมือนกำลังสร้างความสมดุลของ ระบบนิเวศให้กลับคืนสู่ธรรมชาติอีกครั้ง ส่วนการเปิดโรงเรียน ที่ประชุม ศบค.มีความเห็นว่า เนื่องจากโรงเรียนมีขนาดต่างกันและมีจำนวนมากจึงสั่งให้ประเมินความพร้อมเป็นรายแห่ง ให้กระทรวงศึกษาประเมินอีกครั้งภายในวันที่ 15 มิ.ย.';
-        // $words = $segment->get_segment_array($body);
-        // $text = implode("|",$words);
-        $text ='test';
-        $data = ['title' => 'ทดสอบ', 'body' => $text];
+        require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
+        $segment = new \Segment();
+        $fulltbp = FullTbp::find($id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $ceo = CompanyEmploy::where('full_tbp_id',$id)->where('employ_position_id',1)->first();
+        $companyboards = CompanyEmploy::where('full_tbp_id',$id)->where('employ_position_id','<=',5)->where('id','!=',$ceo->id)->get();
+        $companyemploys = CompanyEmploy::where('full_tbp_id',$id)->where('employ_position_id','>',5)->where('id','!=',$ceo->id)->get();
+        $companyhistory = $segment->get_segment_array($company->companyhistory);
+        $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();
+        $data = [
+            'fulltbp' => $fulltbp,
+            'companyboards' => $companyboards,
+            'companyemploys' => $companyemploys,
+            'companystockholders' => $companystockholders,
+            'companyhistory' => $companyhistory
+        ];
         $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf', $data);
+        $path = public_path("storage/uploads/fulltbp/");
         return $pdf->stream('document.pdf');
     }
 
@@ -205,8 +221,8 @@ class DashboardCompanyProjectFullTbpController extends Controller
     public function SubmitSave(Request $request, $id){
         $auth = Auth::user();
         $fulltbp = FullTbp::find($id);
-        if(!Empty($fulltbp->file)){
-            @unlink($fulltbp->file);
+        if(!Empty($fulltbp->attachment)){
+            @unlink($fulltbp->attachment);
         }
         $file = $request->attachment;
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
@@ -216,6 +232,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
             'file' => $filelocation,
             'status' => 2
         ]);
+        
         $message = 'เอกสาร Full TBP' ;
         $fulltbp = FullTbp::find($id);
         if($fulltbp->refixstatus == 1){
