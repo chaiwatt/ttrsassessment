@@ -55,7 +55,7 @@
                                 <div class="form-group">
 									<label for="">Leader<span class="text-danger">*</span></label>
 									<select name="leader" id="leader" value="{{$projectassignment->leader_id}}" id="" class="form-control form-control-select2">
-                                        <option value="0">===เลือก Leader===</option>
+                                        {{-- <option value="0">===เลือก Leader===</option> --}}
                                         @foreach ($users as $user)
 											<option value="{{$user->id}}" @if($projectassignment->leader_id == $user->id) selected @endif >{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</option>
 										@endforeach

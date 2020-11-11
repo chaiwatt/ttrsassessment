@@ -14,42 +14,42 @@ class BusinessPlanStatusSeeder extends Seeder
         DB::table('business_plan_statuses')->insert([
             [
                 'name' => 'อยู่ระหว่างการตรวจสอบ',
+                'progress' => 0
+            ],
+            [
+                'name' => 'อยู่ระหว่างการพัฒนา Mini TBP',
                 'progress' => 5
             ],
             [
-                'name' => 'ให้ส่ง Mini TBP',
+                'name' => 'อยู่ระหว่างการพิจารณา Mini TBP',
                 'progress' => 10
             ],
             [
-                'name' => 'อยู่ระหว่างพิจารณา Mini TBP',
-                'progress' => 15
-            ],
-            [
-                'name' => 'ให้ส่ง Full TBP',
+                'name' => 'อยู่ระหว่างการพัฒนา Full TBP',
                 'progress' => 20
             ],
             [
-                'name' => 'อยู่ระหว่างพิจารณา Full TBP',
-                'progress' => 25
+                'name' => 'อยู่ระหว่างการพิจารณา Full TBP',
+                'progress' => 30
             ],
             [
-                'name' => 'รอนัดหมายการประเมิน',
-                'progress' => 35
+                'name' => 'อยู่ระหว่างการนัดหมายการประเมิน',
+                'progress' => 50
             ],
             [
-                'name' => 'อยู่ระหว่างการพิจารณา',
-                'progress' => 45
-            ],
-            [
-                'name' => 'รอผลการประเมิน',
-                'progress' => 60
-            ],
-            [
-                'name' => 'รอการชำระเงินค่าธรรมเนียม',
+                'name' => 'อยู่ระหว่างการพิจารณาผลการประเมิน',
                 'progress' => 70
             ],
             [
-                'name' => 'ผ่านการประเมิน',
+                'name' => 'อยู่ระหว่างรอการชำระเงินค่าธรรมเนียม',
+                'progress' => 80
+            ],
+            [
+                'name' => 'อยู่ระหว่างการแจ้งผลการประเมิน',
+                'progress' => 90
+            ],
+            [
+                'name' => 'ดำเนินการแล้วเสร็จ',
                 'progress' => 100
             ],
         ]);

@@ -1068,8 +1068,8 @@
 								<input type="text" id="researcherexperience" placeholder="ประสบการณ์การทำงาน" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ประวัดิการฝึกอบรม</label>
-								<input type="text" id="researchertraining" placeholder="ประวัดิการฝึกอบรม" class="form-control">
+								<label>ประวัติการฝึกอบรม</label>
+								<input type="text" id="researchertraining" placeholder="ประวัติการฝึกอบรม" class="form-control">
 							</div>
 					</div>
 				</div>
@@ -1377,7 +1377,7 @@
 																			<td> {{$companyemploy->workphone}} </td> 
 																			<td> {{$companyemploy->email}} </td> 
 																			<td> 
-																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
+																				<a type="button" data-id="{{$companyemploy->id}}" data-employtype="1" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
 																				{{-- <a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  --}}
 																			</td> 
 																		</tr>
@@ -1423,7 +1423,7 @@
 																			<th>ชื่อ-สกุล</th>  
 																			<th>ประวัติการศึกษา</th>
 																			<th>ประสบการณ์การทำงาน</th>
-																			<th>ประวัดิการฝึกอบรม</th>
+																			<th>ประวัติการฝึกอบรม</th>
 																			{{-- <th style="width:200px">เพิ่มเติม</th>     --}}
 																		</tr>
 																	</thead>

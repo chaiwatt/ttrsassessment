@@ -163,7 +163,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_expertdoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+                    {{-- <button id="btn_modal_add_expertdoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
                 </div>
             </div>
         </div>
@@ -355,7 +355,7 @@
 												<label for="">ที่อยู่ที่ติดต่อได้ (<label class="form-check-label"  >
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-primary" data-fouc>
+														<input type="checkbox" name="sameaddress" class="form-check-input-styled-primary" checked data-fouc>
 														ที่อยู่เดียวกับที่อยู่ตามบัตรประจำตัวประชาชน
 													</label>)
 												</div>

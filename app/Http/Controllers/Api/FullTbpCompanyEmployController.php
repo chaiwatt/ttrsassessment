@@ -60,6 +60,11 @@ class FullTbpCompanyEmployController extends Controller
         )); 
     }
 
+    public function GetPosition(Request $request){      
+        $employpositions = EmployPosition::get();
+        return response()->json($employpositions); 
+    }
+
     public function Edit(Request $request){      
         CompanyEmploy::find($request->id)->update([
             'name' => $request->name,

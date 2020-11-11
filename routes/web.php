@@ -222,6 +222,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\FullTbpCompanyEmployController@Add')->name('api.fulltbp.employ.add');    
                 Route::post('delete','Api\FullTbpCompanyEmployController@Delete')->name('api.fulltbp.employ.delete');       
                 Route::post('get','Api\FullTbpCompanyEmployController@Get')->name('api.fulltbp.employ.get');  
+                Route::post('getposition','Api\FullTbpCompanyEmployController@GetPosition')->name('api.fulltbp.employ.getposition');  
                 Route::post('edit','Api\FullTbpCompanyEmployController@Edit')->name('api.fulltbp.employ.edit'); 
                 Route::post('getlist','Api\FullTbpCompanyEmployController@GetList')->name('api.fulltbp.employ.getlist'); 
                 Route::post('addboardattachment','Api\FullTbpCompanyEmployController@AddBoardAttachment')->name('api.fulltbp.employ.addboardattachment'); 

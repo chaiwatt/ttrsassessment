@@ -7,7 +7,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มพนักงาน</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มบุคลากร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -1068,8 +1068,8 @@
 								<input type="text" id="researcherexperience" placeholder="ประสบการณ์การทำงาน" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ประวัดิการฝึกอบรม</label>
-								<input type="text" id="researchertraining" placeholder="ประวัดิการฝึกอบรม" class="form-control">
+								<label>ประวัติการฝึกอบรม</label>
+								<input type="text" id="researchertraining" placeholder="ประวัติการฝึกอบรม" class="form-control">
 							</div>
 					</div>
 				</div>
@@ -1130,8 +1130,8 @@
 								<input type="text" id="projectmemberexperience" placeholder="ประสบการณ์การทำงาน" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ประวัดิการฝึกอบรม</label>
-								<input type="text" id="projectmembertraining" placeholder="ประวัดิการฝึกอบรม" class="form-control">
+								<label>ประวัติการฝึกอบรม</label>
+								<input type="text" id="projectmembertraining" placeholder="ประวัติการฝึกอบรม" class="form-control">
 							</div>
 					</div>
 				</div>
@@ -1491,7 +1491,7 @@
 																			<th>ชื่อ-สกุล</th>  
 																			<th>ประวัติการศึกษา</th>
 																			<th>ประสบการณ์การทำงาน</th>
-																			<th>ประวัดิการฝึกอบรม</th>
+																			<th>ประวัติการฝึกอบรม</th>
 																			<th style="width:200px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
@@ -1519,7 +1519,7 @@
 																			<th>ชื่อ-สกุล</th>  
 																			<th>ประวัติการศึกษา</th>
 																			<th>ประสบการณ์การทำงาน</th>
-																			<th>ประวัดิการฝึกอบรม</th>
+																			<th>ประวัติการฝึกอบรม</th>
 																			<th style="width:200px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
@@ -2229,7 +2229,7 @@
 														</div>
 														<div class="col-md-12">	
 															<div class="input-group">													
-																<label for="">เอกสารแนบ Business Model Canvas <a href="#" id="btnuploadbusinessmodelcanvas" onclick="document.getElementById('businessmodelcanvas').click();"><i class="icon-add text-info"></i></a></label>
+																<label for="">เอกสารแนบ Business Model Canvas <a type="button" id="btnuploadbusinessmodelcanvas" onclick="document.getElementById('businessmodelcanvas').click();"><i class="icon-add text-info"></i></a></label>
 															</div>
 															<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="businessmodelcanvas" name="businessmodelcanvas"/>
 														</div>
@@ -2268,9 +2268,9 @@
 															<div class="col-md-12">	
 																<div class="input-group">													
 																	{{-- <button id="btnuploadswot" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('swot').click();"><i class="icon-add"></i></button>													 --}}
-																	<label for="">SWOT Analysis, Five Forces Analysis<a href="#" id="btnuploadswot" onclick="document.getElementById('swot').click();"><i class="icon-add text-info"></i></a></label>
+																	<label for="">SWOT Analysis, Five Forces Analysis<a type="button" id="btnuploadswot" onclick="document.getElementById('swotfile').click();"><i class="icon-add text-info"></i></a></label>
 																</div>
-																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="swot" name="swot"/>
+																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="swotfile" name="swot"/>
 															</div>
 				
 															<div class="col-md-12" id="fulltbp_swot_wrapper" >	

@@ -42,6 +42,25 @@ function getEmploy(id){
     })
 }
 
+function getEmployPosition(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/employ/getposition`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id,
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 function editEmploy(id,name,lastname,position,phone,workphone,email){
   return new Promise((resolve, reject) => {
       $.ajax({
@@ -277,4 +296,4 @@ function deleteBoardAttachment(id){
 }
 
 export {saveEmploy,getEmploy,editEmploy,addEmployEducation,addEmployExperience,addEmployTraining,deleteEmployEducation,
-  deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo,editEmployQuantity,deleteBoardAttachment}
+  deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo,editEmployQuantity,deleteBoardAttachment,getEmployPosition}
