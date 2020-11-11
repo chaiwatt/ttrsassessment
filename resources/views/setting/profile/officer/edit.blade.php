@@ -353,7 +353,7 @@
 												<label for="">ที่อยู่ที่ติดต่อได้ (<label class="form-check-label"  >
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" class="form-check-input-styled-primary" data-fouc>
+														<input type="checkbox" name="sameaddress" class="form-check-input-styled-primary" data-fouc>
 														ที่อยู่เดียวกับที่อยู่ตามบัตรประจำตัวประชาชน
 													</label>)
 												</div>
@@ -484,7 +484,7 @@
 												<div class="form-group">
 													<label>ความเชี่ยวชาญ</label>
 													<input type="text"  name="lat" value=""  placeholder="ละติจูด" class="form-control">
-												</div>
+												</div>g
 											</div> --}}
 											<div class="col-md-6">  
 												<div class="form-group">

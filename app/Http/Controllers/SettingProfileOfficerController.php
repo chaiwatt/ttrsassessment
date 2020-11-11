@@ -48,6 +48,7 @@ class SettingProfileOfficerController extends Controller
                                             ->withOfficerdocs($officerdocs);
     }
     public function EditSave(Request $request, $id){
+      
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -68,29 +69,54 @@ class SettingProfileOfficerController extends Controller
             $filelocation = "storage/uploads/company/".$fname;
             Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
         }
+        if(Empty($request->sameaddress)){
+            $user->update([
+                'prefix_id' => $request->prefix,
+                'name' => $request->name,
+                'hid' => $request->hid,
+                'lastname' => $request->lastname,
+                'picture' => $filelocation,
+                'address' => $request->address,
+                'province_id' => $request->province,
+                'amphur_id' => $request->amphur,
+                'tambol_id' => $request->tambol,
+                'postal' => $request->postalcode,
+                'address1' => $request->address1,
+                'province1_id' => $request->province1,
+                'amphur1_id' => $request->amphur1,
+                'tambol1_id' => $request->tambol1,
+                'postal1' => $request->postalcode1,
+                'phone' => $request->phone,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+            ]);
+        }else{
+            $user->update([
+                'prefix_id' => $request->prefix,
+                'name' => $request->name,
+                'hid' => $request->hid,
+                'lastname' => $request->lastname,
+                'picture' => $filelocation,
+                'address' => $request->address,
+                'province_id' => $request->province,
+                'amphur_id' => $request->amphur,
+                'tambol_id' => $request->tambol,
+                'postal' => $request->postalcode,
+                'address1' => $request->address,
+                'province1_id' => $request->province,
+                'amphur1_id' => $request->amphur,
+                'tambol1_id' => $request->tambol,
+                'postal1' => $request->postalcode,
+                'phone' => $request->phone,
+                'fax' => $request->fax,
+                'website' => $request->website,
+                'lat' => $request->lat,
+                'lng' => $request->lng,
+            ]);
+        }
 
-        $user->update([
-            'prefix_id' => $request->prefix,
-            'name' => $request->name,
-            'hid' => $request->hid,
-            'lastname' => $request->lastname,
-            'picture' => $filelocation,
-            'address' => $request->address,
-            'province_id' => $request->province,
-            'amphur_id' => $request->amphur,
-            'tambol_id' => $request->tambol,
-            'postal' => $request->postalcode,
-            'address1' => $request->address1,
-            'province1_id' => $request->province1,
-            'amphur1_id' => $request->amphur1,
-            'tambol1_id' => $request->tambol1,
-            'postal1' => $request->postalcode1,
-            'phone' => $request->phone,
-            'fax' => $request->fax,
-            'website' => $request->website,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
-        ]);
 
         OfficerDetail::where('user_id',$auth->id)->first()->update([
             'position' => $request->position,

@@ -161,13 +161,6 @@ class SettingProfileController extends Controller
                     'phone' => $request->phone,
                     'fax' => $request->fax,
                     'email' => $request->email,
-                    // 'address' => $request->address,
-                    // 'province_id' => $request->province,
-                    // 'amphur_id' => $request->amphur,
-                    // 'tambol_id' => $request->tambol,
-                    // 'postalcode' => $request->postalcode,
-                    // 'lat' => $request->lat,
-                    // 'lng' => $request->lng,
                     'logo' => $filelocation
                 ]);
                 $company = Company::where('user_id',$userid)->first();

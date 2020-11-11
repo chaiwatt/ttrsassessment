@@ -107,21 +107,7 @@ class SettingUserCompanyController extends Controller
             'phone' => $request->phone,
             'fax' => $request->fax,
             'email' => $request->email,
-            // 'address' => $request->address,
-            // 'province_id' => $request->province,
-            // 'amphur_id' => $request->amphur,
-            // 'tambol_id' => $request->tambol,
-            // 'postalcode' => $request->postalcode,
-            // 'lat' => $request->lat,
-            // 'lng' => $request->lng,
             'logo' => $filelocation,
-            // 'factoryaddress' => $request->factoryaddress,
-            // 'factoryprovince_id' => $request->factoryprovince,
-            // 'factoryamphur_id' => $request->factoryamphur,
-            // 'factorytambol_id' => $request->factorytambol,
-            // 'factorypostalcode' => $request->factorypostalcode,
-            // 'factorylat' => $request->factorylat,
-            // 'factorylng' => $request->factorylng
         ]);
         CompanyAddress::where('company_id',$company->id)->first()->update([
             'address' => $request->address,

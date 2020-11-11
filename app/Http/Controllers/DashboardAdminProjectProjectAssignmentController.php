@@ -37,7 +37,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
     public function Edit($id){
         $projectassignment = ProjectAssignment::find($id);
         $minitbp = MiniTBP::where('business_plan_id',BusinessPlan::find($projectassignment->business_plan_id)->id)->first();
-        $users = User::where('user_type_id','>=',4)->get();
+        $users = User::where('user_type_id',4)->get();
         return view('dashboard.admin.project.projectassignment.edit')->withProjectassignment($projectassignment)
                                                             ->withUsers($users)
                                                             ->withMinitbp($minitbp);
