@@ -52,12 +52,9 @@ class FullTbpController extends Controller
             'companyhistory' => $companyhistory
         ];
         $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf', $data);
-        $path = public_path("storage/uploads/pdf/attachment/");
-        if (!file_exists($path)) {
-            mkdir($path, 0666, true);
-        }
+        $path = public_path("storage/uploads/");
         $pdf->save($path.$fulltbpcode.'.pdf');
-        return 'storage/uploads/pdf/attachment/'.$fulltbpcode.'.pdf' ;
+        return 'storage/uploads/'.$fulltbpcode.'.pdf' ;
     }
     
     public function EditSignature(Request $request){
@@ -122,7 +119,7 @@ class FullTbpController extends Controller
     public function SubmitWithNoAttachement(Request $request){
         $auth = Auth::user();
         $fulltbp = FullTbp::find($request->id);
-        $filelocation = "storage/uploads/pdf/attachment/".$fulltbp->fulltbp_code.'.pdf';
+        $filelocation = "storage/uploads/".$fulltbp->fulltbp_code.'.pdf';
 
         $fulltbp->update([
             'attachment' => $filelocation

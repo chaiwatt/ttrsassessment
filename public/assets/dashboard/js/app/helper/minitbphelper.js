@@ -18,17 +18,8 @@ $(document).on('change', '#finance4', function(e) {
     }
 });
 
-// $("#nonefinance4").on('change', function() {
-$(document).on('change', '#nonefinance4', function(e) {
-    if($(this).is(":checked")){
-        $("#nonefinancediv1").attr("hidden",false);
-    }else{
-        $("#nonefinancediv1").attr("hidden",true);
-    }
-});
-
-// $("#nonefinance5").on('change', function() {
-$(document).on('change', '#nonefinance5', function(e) {
+// $("#nonefinance6").on('change', function() {
+$(document).on('change', '#nonefinance6', function(e) {
     if($(this).is(":checked")){
         $("#nonefinancediv2").attr("hidden",false);
     }else{
@@ -36,7 +27,15 @@ $(document).on('change', '#nonefinance5', function(e) {
     }
 });
 
-// $("#finance1").on('change', function() {
+// $("#nonefinance5").on('change', function() {
+$(document).on('change', '#nonefinance5', function(e) {
+    if($(this).is(":checked")){
+        $("#nonefinancediv1").attr("hidden",false);
+    }else{
+        $("#nonefinancediv1").attr("hidden",true);
+    }
+});
+
 $(document).on('change', '#finance1', function(e) {
     if($(this).is(":checked")){
         $("#financediv1").attr("hidden",false);

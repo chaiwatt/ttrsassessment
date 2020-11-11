@@ -11,6 +11,7 @@ class CompanyAddress extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
+    protected $appends = ['tambol','amphur','province'];
 
     public function getTambolAttribute()
     {

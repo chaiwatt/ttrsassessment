@@ -807,8 +807,6 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
             .catch(error => {})        
         }
     });
-
-
 });
   function deleteAuthorizedDirector(id) {
     return new Promise((resolve, reject) => {
@@ -847,13 +845,97 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
 });
 
 $(document).on('click', '#btn_modal_add_address', function(e) {
-    console.log($('#addressname').val());
-    // Pillar.getPillar().then(data => {
-    //     var html ='<option value="0" >==เลือกรายการ==</option>';
-    //     data.forEach(function (pilla,index) {
-    //             html += `<option value="${pilla['id']}" >${pilla['name']}</option>`
-    //         });
-    //      $("#pillar").html(html);
-    //      $('#modal_add_clustergroup').modal('show');
-    // }).catch(error => {})
+    addAddress($(this).data('id'),$('#addressname').val(),$('#address').val(),$('#provincemodal').val(),$('#amphurmodal').val(),$('#tambolmodal').val(),$('#postalcode').val(),$('#lat').val(),$('#lng').val()).then(data => {
+        var html = ``;
+        data.forEach(function (address,index) {
+            html += `<tr >                                        
+                <td> ${address.addresstype} </td>                                            
+                <td> ${address.address} </td> 
+                <td> ${address.tambol['name']} </td> 
+                <td> ${address.amphur['name']} </td> 
+                <td> ${address.province['name']} </td> 
+                <td> ${address.postalcode} </td> 
+                <td><a type="button" data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
+            </tr>`
+            });
+         $("#authorized_address_wrapper_tr").html(html);
+    }).catch(error => {})
 });
+
+$(document).on('click', '.deleteaddress', function(e) {
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            deleteAddress($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (address,index) {
+                    html += `<tr >                                        
+                        <td> ${address.addresstype} </td>                                            
+                        <td> ${address.address} </td> 
+                        <td> ${address.tambol['name']} </td> 
+                        <td> ${address.amphur['name']} </td> 
+                        <td> ${address.province['name']} </td> 
+                        <td> ${address.postalcode} </td> 
+                        <td><a type="button" data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
+                    </tr>`
+                    });
+                 $("#authorized_address_wrapper_tr").html(html);
+            }).catch(error => {})     
+        }
+    });
+});
+
+function addAddress(id,addressname,address,provincemodal,amphurmodal,tambolmodal,postalcode,lat,lng){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/profile/addaddress`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            id : id,
+            addressname : addressname,
+            address : address,
+            provincemodal : provincemodal,
+            amphurmodal : amphurmodal,
+            tambolmodal : tambolmodal,
+            postalcode : postalcode,
+            lat : lat,
+            lng : lng
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+    })
+}
+
+function deleteAddress(id){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url: `${route.url}/api/profile/deleteaddress`,
+          type: 'POST',
+          headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            id : id
+          },
+          success: function(data) {
+            resolve(data)
+          },
+          error: function(error) {
+            reject(error)
+          },
+        })
+    })
+}

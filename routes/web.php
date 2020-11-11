@@ -66,6 +66,8 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('uploadcanvassignature','Api\ProfileController@UploadCanvasSignature')->name('api.profile.uploadcanvassignature');           
         Route::post('uploadsignature','Api\ProfileController@UploadSignature')->name('api.profile.uploadsignature');           
         Route::post('adduserposition','Api\ProfileController@AddUserPosition')->name('api.profile.adduserposition');           
+        Route::post('addaddress','Api\ProfileController@AddAddress')->name('api.profile.addaddress'); 
+        Route::post('deleteaddress','Api\ProfileController@DeleteAddress')->name('api.profile.deleteaddress'); 
     }); 
 }); 
 

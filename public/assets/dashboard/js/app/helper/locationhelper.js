@@ -30,7 +30,6 @@ $(document).on('change', '#amphur', function(e) {
 });
 
 $(document).on('change', '#factoryprovince', function(e) {
-// $("#factoryprovince").change(function(){
     Geo.amphur($(this).val()).then(data => {
         let  html = "";
         data.forEach((amphur,index) => 
@@ -43,8 +42,8 @@ $(document).on('change', '#factoryprovince', function(e) {
         console.log(error)
     })
 });
+
 $(document).on('change', '#factoryamphur', function(e) {
-// $("#factoryamphur").change(function(){
     Geo.tambol($(this).val()).then(data => {
         let  html = "";
         data.forEach((tambol,index) => 
@@ -73,18 +72,46 @@ $(document).on('change', '#province1', function(e) {
 });
 
 $(document).on('change', '#amphur1', function(e) {
-        Geo.tambol($(this).val()).then(data => {
-            let  html = "";
-            data.forEach((tambol,index) => 
-                html += `<option value='${tambol.id}'>${tambol.name}</option>`
-            )
-            $("#tambol1").html(html);
-            $("#tambol1 option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    });
+    Geo.tambol($(this).val()).then(data => {
+        let  html = "";
+        data.forEach((tambol,index) => 
+            html += `<option value='${tambol.id}'>${tambol.name}</option>`
+        )
+        $("#tambol1").html(html);
+        $("#tambol1 option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
+    })
+    .catch(error => {
+        console.log(error)
+    })
+});
+
+$(document).on('change', '#provincemodal', function(e) {
+    Geo.amphur($(this).val()).then(data => {
+        let  html = "";
+        data.forEach((amphur,index) => 
+            html += `<option value='${amphur.id}'>${amphur.name}</option>`
+        )
+        $("#amphurmodal").html(html);
+        $("#amphurmodal option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
+    })
+    .catch(error => {
+        console.log(error)
+    })
+});
+
+$(document).on('change', '#amphurmodal', function(e) {
+    Geo.tambol($(this).val()).then(data => {
+        let  html = "";
+        data.forEach((tambol,index) => 
+            html += `<option value='${tambol.id}'>${tambol.name}</option>`
+        )
+        $("#tambolmodal").html(html);
+        $("#tambolmodal option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
+    })
+    .catch(error => {
+        console.log(error)
+    })
+});
 
 
     

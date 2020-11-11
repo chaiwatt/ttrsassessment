@@ -6,6 +6,7 @@ use Image;
 use App\User;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
+use App\Model\CompanyAddress;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,5 +43,29 @@ class ProfileController extends Controller
         $userposition->save();
         $userpositions = UserPosition::get();
         return response()->json($userpositions); 
+    }
+    public function AddAddress(Request $request){
+        $companyaddress = new CompanyAddress();
+        $companyaddress->company_id = $request->id;
+        $companyaddress->addresstype = $request->addressname;
+        $companyaddress->address = $request->address;
+        $companyaddress->province_id = $request->provincemodal;
+        $companyaddress->amphur_id = $request->amphurmodal;
+        $companyaddress->tambol_id = $request->tambolmodal;
+        $companyaddress->postalcode = $request->postalcode;
+        $companyaddress->lat = $request->lat;
+        $companyaddress->lng = $request->lng;
+        $companyaddress->save();
+        $check = CompanyAddress::where('company_id',$request->id)->first();
+        $companyaddresses = CompanyAddress::where('id','!=',$check->id)->where('company_id',$request->id)->get();
+        return response()->json($companyaddresses); 
+    }
+    
+    public function DeleteAddress(Request $request){
+        $companyid = CompanyAddress::find($request->id)->company_id;
+        CompanyAddress::find($request->id)->delete();
+        $check = CompanyAddress::where('company_id',$companyid)->first();
+        $companyaddresses = CompanyAddress::where('id','!=',$check->id)->where('company_id',$check->company_id)->get();
+        return response()->json($companyaddresses); 
     }
 }

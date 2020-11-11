@@ -176,12 +176,10 @@ class MiniTbpController extends Controller
         $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$managerposition. '</div>', 118,253.3, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 142,261.7, 150, 90, 'auto');
         // $mpdf->Output();
-        $path = public_path("storage/uploads/pdf/attachment/");
-        if (!file_exists($path)) {
-            mkdir($path, 0666, true);
-        }
+        $path = public_path("storage/uploads/");
+
         $mpdf->Output($path . $minitpb->minitbp_code.'.pdf');
-        return 'storage/uploads/pdf/attachment/'.$minitpb->minitbp_code.'.pdf' ;
+        return 'storage/uploads/'.$minitpb->minitbp_code.'.pdf' ;
     }
 
     public function SubmitWithAttachement(Request $request){
@@ -255,7 +253,7 @@ class MiniTbpController extends Controller
         $id = $request->id;
         $auth = Auth::user();
         $minitbp = MiniTBP::find($id);
-        $filelocation = "storage/uploads/pdf/attachment/".$minitbp->minitbp_code.'.pdf';
+        $filelocation = "storage/uploads/".$minitbp->minitbp_code.'.pdf';
 
         $minitbp->update([
             'attachment' => $filelocation

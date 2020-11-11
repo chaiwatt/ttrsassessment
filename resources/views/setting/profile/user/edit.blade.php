@@ -342,7 +342,7 @@
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_add_address" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+					<button id="btn_modal_add_address" data-id="{{$user->company->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
 				</div>
 			</div>
 		</div>
@@ -708,6 +708,7 @@
 													@if ($user->company->companyaddress->count() > 1)
 														<div class="col-md-12">
 															<div class="form-group">
+																<hr>
 																<label for="">ที่อยู่อื่น ๆ</label>
 																<div class="table-responsive">
 																	<table class="table table-bordered table-striped">
@@ -722,16 +723,21 @@
 																				<th >เพิ่มเติม</th>                                                                                   
 																			</tr>
 																		</thead>
-																		<tbody id="authorized_director_wrapper_tr"> 
-																			@foreach (array_slice($user->company->companyaddress, 1) as $companyaddress)
-																			<tr >                                        
-																				<td> {{$companyaddress->addresstype}}</td>                                            
-																				<td> {{$companyaddress->address}}</td>   
-																				<td> {{$companyaddress->tambol->name}}</td>   
-																				<td> {{$companyaddress->amphur->name}}</td>   
-																				<td> {{$companyaddress->province->name}}</td>   
-																				<td> {{$companyaddress->postalcode}}</td>   
-																			</tr>
+																		<tbody id="authorized_address_wrapper_tr"> 
+																			@foreach ($user->company->companyaddress as $key => $companyaddress)
+																				@if ($key != 0)
+																					<tr >                                        
+																						<td> {{$companyaddress->addresstype}}</td>                                            
+																						<td> {{$companyaddress->address}}</td>   
+																						<td> {{$companyaddress->tambol->name}}</td>   
+																						<td> {{$companyaddress->amphur->name}}</td>   
+																						<td> {{$companyaddress->province->name}}</td>   
+																						<td> {{$companyaddress->postalcode}}</td>   
+																						<td> 
+																							<a type="button" data-id="{{$companyaddress->id}}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>
+																						</td>   
+																					</tr>	
+																				@endif
 																			@endforeach
 																		</tbody>
 																	</table>
