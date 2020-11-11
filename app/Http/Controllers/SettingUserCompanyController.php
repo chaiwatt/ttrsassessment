@@ -24,6 +24,7 @@ use App\Model\FullTbpAsset;
 use App\Model\IndustryGroup;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
 use App\Model\FullTbpCompanyDoc;
@@ -122,7 +123,15 @@ class SettingUserCompanyController extends Controller
             // 'factorylat' => $request->factorylat,
             // 'factorylng' => $request->factorylng
         ]);
-
+        CompanyAddress::where('company_id',$company->id)->first()->update([
+            'address' => $request->address,
+            'province_id' => $request->province,
+            'amphur_id' => $request->amphur,
+            'tambol_id' => $request->tambol,
+            'postalcode' => $request->postalcode,
+            'lat' => $request->lat,
+            'lng' => $request->lng
+        ]);
         $user = Auth::user();
         $user->update([
             'prefix_id' => $request->prefix,

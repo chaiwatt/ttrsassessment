@@ -20,6 +20,7 @@ use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
+use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
 use App\Model\FullTbpCompanyDoc;
@@ -120,7 +121,15 @@ class SettingProfileUserController extends Controller
             // 'factorylng' => $request->factorylng
         ]);
 
-
+        CompanyAddress::where('company_id',$company->id)->first()->update([
+            'address' => $request->address,
+            'province_id' => $request->province,
+            'amphur_id' => $request->amphur,
+            'tambol_id' => $request->tambol,
+            'postalcode' => $request->postalcode,
+            'lat' => $request->lat,
+            'lng' => $request->lng
+        ]);
  
 
         // $table->unsignedBigInteger('')->default(1);
