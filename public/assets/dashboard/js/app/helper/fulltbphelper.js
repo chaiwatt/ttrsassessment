@@ -103,110 +103,6 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
 }); 
 
 
-$(document).on('click', '#btn_modal_add_employ', function(e) {
-    Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
-        console.log(data);
-        var html = ``;
-        data.forEach(function (employ,index) {
-            html += `<tr >                                        
-                <td> ${employ.name}${employ.lastname} </td>                                            
-                <td> ${employ.employposition['name']} </td> 
-                <td> ${employ.phone} </td>                                            
-                <td> ${employ.workphone} </td> 
-                <td> ${employ.email} </td> 
-                <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td> 
-            </tr>`
-            });
-         $("#fulltbp_companyemploy_wrapper_tr").html(html);
-    })
-    .catch(error => {})
-});
-
-$(document).on('click', '.editEmployinfo', function(e) {
-    Employ.getEmploy($(this).data('id')).then(data => {
-        var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
-        data.prefixes.forEach(function (prefix,index) {
-            var selected = '';
-            if(data.employ['prefix_id'] == prefix['id']){
-                selected = 'selected';
-            }
-            selectprefix += `<option value="${prefix['id']}" ${selected} >${prefix['name']}</option>`
-            });
-            selectprefix += `</select>`;
-        $("#employprefix_wrapper").html(selectprefix);
-
-        var selectemployposition = `<select id="employposition_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
-        data.employpositions.forEach(function (position,index) {
-            var selected = '';
-            if(data.employ['employ_position_id'] == position['id']){
-                selected = 'selected';
-            }
-            selectemployposition += `<option value="${position['id']}" ${selected} >${position['name']}</option>`
-            });
-            selectemployposition += `</select>`;
-
-        var employeducationtable = '';
-        data.employeducations.forEach(function (education,index) {
-            employeducationtable += `<tr >                                        
-                <td> ${education.employeducationlevel} </td>                                            
-                <td> ${education.employeducationinstitute} </td> 
-                <td> ${education.employeducationmajor} </td>                                            
-                <td> ${education.employeducationyear} </td> 
-                <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
-            </tr>`
-            });
-        $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
-
-        var experiencetable = '';
-        data.employexperiences.forEach(function (experience,index) {
-            experiencetable += `<tr >                                        
-                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
-                <td> ${experience.company} </td> 
-                <td> ${experience.businesstype} </td>                                            
-                <td> ${experience.startposition} </td> 
-                <td> ${experience.endposition} </td> 
-                <td> <a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a> </td> 
-            </tr>`
-            });
-         $("#fulltbp_companyemployexperience_wrapper_tr").html(experiencetable);
-
-         var trainingtable = '';
-         data.employtrainings.forEach(function (training,index) {
-            trainingtable += `<tr >                                        
-                 <td> ${training.trainingdateth}</td>                                            
-                 <td> ${training.course} </td> 
-                 <td> ${training.owner} </td>                                            
-                 <td> <a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a> </td> 
-             </tr>`
-             });
-          $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
-        var attachment  = '';
-          data.fullTbpboardattachments.forEach(function (boardattachment,index) {
-            attachment += `<tr >                                        
-                  <td> ${boardattachment.name}</td>                                                                                      
-                  <td> 
-                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-                    <a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a> 
-                  </td> 
-              </tr>`
-              });
-           $("#fulltbp_board_attachment_wrapper_tr").html(attachment);
-
-
-        $("#employposition_wrapper").html(selectemployposition);
-        $('#employid').val(data.employ['id'])
-        $('#employname_edit').val(data.employ['name'])
-        $('#employlastname_edit').val(data.employ['lastname'])
-        $('#employphone_edit').val(data.employ['phone'])
-        $('#employworkphone_edit').val(data.employ['workphone']) 
-        $('#employemail_edit').val(data.employ['email']) 
-        
-    })
-    .catch(error => {})
-    $('#modal_edit_employ').modal('show');
-});
-
 $(document).on('click', '#btn_edit_employ', function(e) {
     console.log($(this).data('id'));
     Employ.editEmploy($('#employid').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {
@@ -251,15 +147,17 @@ $(document).on("click",".deletecompanyemploy",function(e){
             Employ.deleteEmployInfo($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (employ,index) {
-                    html += `<tr >                                        
-                        <td> ${employ.name}${employ.lastname} </td>                                            
-                        <td> ${employ.employposition['name']} </td> 
-                        <td> ${employ.phone} </td>                                            
-                        <td> ${employ.workphone} </td> 
-                        <td> ${employ.email} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td>  
-                    </tr>`
+                    if(employ.employ_position_id < 6 ){
+                        html += `<tr >                                        
+                            <td> ${employ.name}${employ.lastname} </td>                                            
+                            <td> ${employ.employposition['name']} </td> 
+                            <td> ${employ.phone} </td>                                            
+                            <td> ${employ.workphone} </td> 
+                            <td> ${employ.email} </td> 
+                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td>  
+                        </tr>`
+                        }
                     });
                  $("#fulltbp_companyemploy_wrapper_tr").html(html);
             })
@@ -2228,6 +2126,8 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         Swal.fire({
                             title: 'สำเร็จ...',
                             text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+                        }).then((result) => {
+                            window.location.reload();
                         });
                     })
                 .catch(error => {})
@@ -2292,40 +2192,10 @@ function submitNoAttachement(id){
 
 
 $(document).on('click', '#btnaddboard', function(e) {
-    // Employ.getEmployPosition().then(data => {
-    //     var selectemployposition = `<select id="employposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
-    //     data.forEach(function (position,index) {
-    //             if(index <= 4){
-    //                 selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
-    //             }
-    //         });
-    //     selectemployposition += `</select>`;
-    //     $("#employ_position_wrapper").html(selectemployposition);
-    // })
-    // .catch(error => {})
-    // $('#modal_add_employ').modal('show');
-});
-
-$(document).on('click', '#btnaddresearch', function(e) {
-    // Employ.getEmployPosition().then(data => {
-    //     var selectemployposition = `<select id="employposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
-    //     data.forEach(function (position,index) {
-    //             if(index == 5){
-    //                 selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
-    //             }
-    //         });
-    //     selectemployposition += `</select>`;
-    //     $("#employ_position_wrapper").html(selectemployposition);
-    // })
-    // .catch(error => {})
-    // $('#modal_add_employ').modal('show');
-});
-
-$(document).on('click', '#btnaddprojectmember', function(e) {
     Employ.getEmployPosition().then(data => {
-        var selectemployposition = `<select id="employposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
+        var selectemployposition = `<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
         data.forEach(function (position,index) {
-                if(index > 5){
+                if(index <= 4){
                     selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
                 }
             });
@@ -2335,3 +2205,256 @@ $(document).on('click', '#btnaddprojectmember', function(e) {
     .catch(error => {})
     $('#modal_add_employ').modal('show');
 });
+
+$(document).on('click', '.editEmployinfo', function(e) {
+    Employ.getEmploy($(this).data('id')).then(data => {
+        var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        data.prefixes.forEach(function (prefix,index) {
+            var selected = '';
+            if(data.employ['prefix_id'] == prefix['id']){
+                selected = 'selected';
+            }
+            selectprefix += `<option value="${prefix['id']}" ${selected} >${prefix['name']}</option>`
+            });
+            selectprefix += `</select>`;
+        $("#employprefix_wrapper").html(selectprefix);
+
+        var selectemployposition = `<select id="employposition_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        data.employpositions.forEach(function (position,index) {
+            var selected = '';
+            if(data.employ['employ_position_id'] == position['id']){
+                selected = 'selected';
+            }
+            selectemployposition += `<option value="${position['id']}" ${selected} >${position['name']}</option>`
+            });
+            selectemployposition += `</select>`;
+
+        var employeducationtable = '';
+        data.employeducations.forEach(function (education,index) {
+            employeducationtable += `<tr >                                        
+                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${education.employeducationinstitute} </td> 
+                <td> ${education.employeducationmajor} </td>                                            
+                <td> ${education.employeducationyear} </td> 
+                <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
+            </tr>`
+            });
+        $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
+
+        var experiencetable = '';
+        data.employexperiences.forEach(function (experience,index) {
+            experiencetable += `<tr >                                        
+                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                <td> ${experience.company} </td> 
+                <td> ${experience.businesstype} </td>                                            
+                <td> ${experience.startposition} </td> 
+                <td> ${experience.endposition} </td> 
+                <td> <a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a> </td> 
+            </tr>`
+            });
+         $("#fulltbp_companyemployexperience_wrapper_tr").html(experiencetable);
+
+         var trainingtable = '';
+         data.employtrainings.forEach(function (training,index) {
+            trainingtable += `<tr >                                        
+                 <td> ${training.trainingdateth}</td>                                            
+                 <td> ${training.course} </td> 
+                 <td> ${training.owner} </td>                                            
+                 <td> <a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a> </td> 
+             </tr>`
+             });
+          $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
+        var attachment  = '';
+          data.fullTbpboardattachments.forEach(function (boardattachment,index) {
+            attachment += `<tr >                                        
+                  <td> ${boardattachment.name}</td>                                                                                      
+                  <td> 
+                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                    <a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a> 
+                  </td> 
+              </tr>`
+              });
+           $("#fulltbp_board_attachment_wrapper_tr").html(attachment);
+
+
+        $("#employposition_wrapper").html(selectemployposition);
+        $('#employid').val(data.employ['id'])
+        $('#employname_edit').val(data.employ['name'])
+        $('#employlastname_edit').val(data.employ['lastname'])
+        $('#employphone_edit').val(data.employ['phone'])
+        $('#employworkphone_edit').val(data.employ['workphone']) 
+        $('#employemail_edit').val(data.employ['email']) 
+        
+    })
+    .catch(error => {})
+    $('#modal_edit_employ').modal('show');
+});
+
+$(document).on('click', '#btnaddresearch', function(e) {
+    Employ.getEmployPosition().then(data => {
+        var selectemployposition = `<select id="employposition_research" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
+        data.forEach(function (position,index) {
+            if(index == 5){
+                selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
+            }
+        });
+        selectemployposition += `</select>`;
+        $("#employ_position_research_wrapper").html(selectemployposition);
+    })
+    .catch(error => {})
+    $('#modal_add_employ_research').modal('show');
+});
+
+$(document).on('click', '#btn_modal_add_employ', function(e) {
+    Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
+        console.log(data);
+        var html = ``;
+        data.forEach(function (employ,index) {
+            if(employ.employ_position_id < 6 ){
+                html += `<tr >                                        
+                    <td> ${employ.name}${employ.lastname} </td>                                            
+                    <td> ${employ.employposition['name']} </td> 
+                    <td> ${employ.phone} </td>                                            
+                    <td> ${employ.workphone} </td> 
+                    <td> ${employ.email} </td> 
+                    <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                    <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td> 
+                </tr>`
+            }
+      
+            });
+         $("#fulltbp_companyemploy_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on('click', '#btn_modal_add_employ_research', function(e) {
+    Employ.saveEmploy($('#employprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
+        console.log(data);
+        var html = ``;
+        data.forEach(function (employ,index) {
+                if(employ.employ_position_id == 6){
+                    html += `<tr >                                        
+                        <td> ${employ.name}${employ.lastname} </td>                                            
+                        <td> ${employ.employposition['name']} </td> 
+                        <td> ${employ.phone} </td>                                            
+                        <td> ${employ.workphone} </td> 
+                        <td> ${employ.email} </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_research">ลบ</a>  </td> 
+                    </tr>`
+                }
+            });
+         $("#fulltbp_researcher_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on("click",".deletecompanyemploy_research",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteEmployInfo($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (employ,index) {
+                    if(employ.employ_position_id == 6){
+                        html += `<tr >                                        
+                            <td> ${employ.name}${employ.lastname} </td>                                            
+                            <td> ${employ.employposition['name']} </td> 
+                            <td> ${employ.phone} </td>                                            
+                            <td> ${employ.workphone} </td> 
+                            <td> ${employ.email} </td> 
+                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_research">ลบ</a>  </td> 
+                        </tr>`
+                    }
+                });
+                $("#fulltbp_researcher_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+}); 
+
+$(document).on('click', '#btnaddprojectmember', function(e) {
+    Employ.getEmployPosition().then(data => {
+        var selectemployposition = `<select id="employposition_projectmember" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
+        data.forEach(function (position,index) {
+                if(index > 5){
+                    selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
+                }
+            });
+        selectemployposition += `</select>`;
+        $("#employ_position_projectmember_wrapper").html(selectemployposition);
+    })
+    .catch(error => {})
+    $('#modal_add_employ_projectmember').modal('show');
+});
+
+$(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
+    Employ.saveEmploy($('#employprefix_projectmember').val(),$('#employname_projectmember').val(),$('#employlastname_projectmember').val(),$('#employposition_projectmember').val(),$('#employphone_projectmember').val(),$('#employworkphone_projectmember').val(),$('#employemail_projectmember').val()).then(data => {
+        console.log(data);
+        var html = ``;
+        data.forEach(function (employ,index) {
+                if(employ.employ_position_id > 6){
+                    html += `<tr >                                        
+                        <td> ${employ.name}${employ.lastname} </td>                                            
+                        <td> ${employ.employposition['name']} </td> 
+                        <td> ${employ.phone} </td>                                            
+                        <td> ${employ.workphone} </td> 
+                        <td> ${employ.email} </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_projectmember">ลบ</a>  </td> 
+                    </tr>`
+                }
+            });
+         $("#fulltbp_projectmember_wrapper_tr").html(html);
+    })
+    .catch(error => {})
+});
+
+$(document).on("click",".deletecompanyemploy_projectmember",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteEmployInfo($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (employ,index) {
+                    if(employ.employ_position_id > 6){
+                        html += `<tr >                                        
+                            <td> ${employ.name}${employ.lastname} </td>                                            
+                            <td> ${employ.employposition['name']} </td> 
+                            <td> ${employ.phone} </td>                                            
+                            <td> ${employ.workphone} </td> 
+                            <td> ${employ.email} </td> 
+                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
+                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_projectmember">ลบ</a>  </td> 
+                        </tr>`
+                    }
+                });
+             $("#fulltbp_projectmember_wrapper_tr").html(html);
+            })
+           .catch(error => {})
+        }
+    });
+}); 

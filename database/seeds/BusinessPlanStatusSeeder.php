@@ -13,11 +13,11 @@ class BusinessPlanStatusSeeder extends Seeder
     {
         DB::table('business_plan_statuses')->insert([
             [
-                'name' => 'อยู่ระหว่างการตรวจสอบ',
+                'name' => 'ยังไม่ได้ตั้งค่าโปรไฟล์',
                 'progress' => 0
             ],
             [
-                'name' => 'อยู่ระหว่างการพัฒนา Mini TBP',
+                'name' => 'ให้พัฒนา Mini TBP',
                 'progress' => 5
             ],
             [

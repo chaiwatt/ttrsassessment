@@ -34,7 +34,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ข้อความเพิ่มเติม<span class="text-danger">*</span></label>
-                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control" readonly></textarea>
+                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                                         <td> 
                                             @if (Empty($minitbp->jdmessage))
                                                     @if (Auth::user()->user_type_id == 6)
-                                                        <a href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                        <a href="#" data-id="{{$minitbp->businessplan->projectassignment->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
                                                     @endif
                                                 @else
                                                     <a href="#" data-id="{{$minitbp->id}}" class="btn-sm bg-info jdmessage">ดูความเห็น</a>

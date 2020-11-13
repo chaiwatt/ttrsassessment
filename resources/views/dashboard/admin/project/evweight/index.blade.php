@@ -178,15 +178,15 @@
         };
     </script>
     <script>
-        $('#my_radio_box').change(function(){
-            if($("input[name='result']:checked").val()=='1'){
-                console.log('1');
-                $('#note').attr('readonly', true);
-            }else{
-                console.log('2');
-                $('#note').attr('readonly', false);
-            }
-        });
+        // $('#my_radio_box').change(function(){
+        //     if($("input[name='result']:checked").val()=='1'){
+        //         console.log('1');
+        //         $('#note').attr('readonly', true);
+        //     }else{
+        //         console.log('2');
+        //         $('#note').attr('readonly', false);
+        //     }
+        // });
         $(document).on('click', '#editapprove', function(e) {
             $('#evid').val($(this).data('id'));
             $('#modal_approve_ev').modal('show');

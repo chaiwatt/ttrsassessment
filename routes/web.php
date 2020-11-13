@@ -155,6 +155,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('addevchecklist','Api\AssessmentEvController@AddEvChecklist')->name('api.assessment.ev.addevchecklist');          
                 Route::post('addevgrading','Api\AssessmentEvController@AddEvGrading')->name('api.assessment.ev.addevgrading'); 
                 Route::post('getev','Api\AssessmentEvController@GetEv')->name('api.assessment.ev.getev'); 
+                Route::post('editev','Api\AssessmentEvController@EditEv')->name('api.assessment.ev.editev'); 
                 Route::post('getevbyfulltbp','Api\AssessmentEvController@GetEvByFulltbp')->name('api.assessment.ev.getevbyfulltbp'); 
                 Route::post('copyev','Api\AssessmentEvController@CopyEv')->name('api.assessment.ev.copyev'); 
                 Route::post('updateevstatus','Api\AssessmentEvController@UpdateEvStatus')->name('api.assessment.ev.updateevstatus'); 
@@ -351,6 +352,11 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\FullTbpCompanyDocController@Add')->name('api.fulltbp.companydoc.add');
                 Route::post('delete','Api\FullTbpCompanyDocController@Delete')->name('api.fulltbp.companydoc.delete');
             });
+            Route::group(['prefix' => 'bol'], function(){
+                Route::post('add','Api\FullTbpBolController@Add')->name('api.fulltbp.bol.add');                    
+                Route::post('delete','Api\FullTbpBolController@Delete')->name('api.fulltbp.bol.delete'); 
+            });
+
         }); 
         Route::group(['prefix' => 'googlecalendar'], function(){
             Route::post('getevents','Api\GoogleCalendarController@GetEvents')->name('api.googlecalendar.getevents');
@@ -427,6 +433,9 @@ Route::group(['middleware' => 'auth'], function(){
                         Route::get('','DashboardAdminProjectFullTbpJdController@Index')->name('dashboard.admin.project.fulltbp.jd');           
                         Route::get('editev/{id}','DashboardAdminProjectFullTbpJdController@EditEv')->name('dashboard.admin.project.fulltbp.jd.editev');           
                     });
+                    Route::group(['prefix' => 'bol'], function(){
+                        Route::get('/{id}','DashboardAdminProjectFullTbpBolController@Index')->name('dashboard.admin.project.fulltbp.bol');                    
+                    });
                 }); 
                 Route::group(['prefix' => 'projectassignment'], function(){
                     Route::get('','DashboardAdminProjectProjectAssignmentController@Index')->name('dashboard.admin.project.projectassignment');           
@@ -446,6 +455,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('','DashboardAdminProjectAssessmentController@Index')->name('dashboard.admin.project.assessment');           
                     Route::get('edit/{id}','DashboardAdminProjectAssessmentController@Edit')->name('dashboard.admin.project.assessment.edit');
                     Route::post('getev','DashboardAdminProjectAssessmentController@GetEv')->name('dashboard.admin.project.assessment.getev'); 
+                    Route::post('getsummaryev','DashboardAdminProjectAssessmentController@GetSummaryEv')->name('dashboard.admin.project.assessment.getsummaryev'); 
                     Route::post('editsave/{id}','DashboardAdminProjectAssessmentController@EditSave')->name('dashboard.admin.project.assessment.editsave');
                     Route::post('editscore','DashboardAdminProjectAssessmentController@EditScore')->name('dashboard.admin.project.assessment.editscore');
                     Route::post('editcomment','DashboardAdminProjectAssessmentController@EditComment')->name('dashboard.admin.project.assessment.editcomment');
@@ -465,11 +475,17 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('','DashboardAdminAssessmentController@Index')->name('dashboard.admin.assessment');     
                 Route::get('edit/{id}','DashboardAdminAssessmentController@Edit')->name('dashboard.admin.assessment.edit');        
                 Route::post('getev','DashboardAdminAssessmentController@GetEv')->name('dashboard.admin.assessment.getev'); 
+                Route::get('summary/{id}','DashboardAdminAssessmentController@Summary')->name('dashboard.admin.assessment.summary');
                 Route::post('addscore','DashboardAdminAssessmentController@AddScore')->name('dashboard.admin.assessment.addscore'); 
                 Route::post('updatescore','DashboardAdminAssessmentController@UpdateScore')->name('dashboard.admin.assessment.updatescore'); 
                 Route::post('conflictscore','DashboardAdminAssessmentController@ConflictScore')->name('dashboard.admin.assessment.conflictscore'); 
                 Route::post('conflictgrade','DashboardAdminAssessmentController@ConflictGrade')->name('dashboard.admin.assessment.conflictgrade'); 
                 Route::post('pendinguser','DashboardAdminAssessmentController@PendingUser')->name('dashboard.admin.assessment.pendinguser');
+            }); 
+            Route::group(['prefix' => 'evaluationresult'], function(){
+                Route::get('','DashboardAdminEvaluationResultController@Index')->name('dashboard.admin.evaluationresult');           
+                Route::get('edit/{id}','DashboardAdminEvaluationResultController@Edit')->name('dashboard.admin.evaluationresult.edit');  
+                Route::get('editsave/{id}','DashboardAdminEvaluationResultController@EditSave')->name('dashboard.admin.evaluationresult.editsave');  
             }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){

@@ -99,9 +99,8 @@
                         <div class="ml30 mt0">โทรศัพท์ : {{$fulltbp->companyemploy->workphone}}</div>
                         <div class="ml30 mt0">โทรศัพท์มือถือ : {{$fulltbp->companyemploy->phone}}</div>
                         <div class="ml30 mt0">อีเมล : {{$fulltbp->companyemploy->email}}</div>
-
                         @if ($fulltbp->employeducation->count() > 0)
-                            <div class="ml30 mt20"><strong>ประวัติการศึกษา</strong>
+                            <div class="ml30 mt10"><strong>ประวัติการศึกษา</strong>
                                 <table class="mt5 font14 border tbwrap" >
                                     <thead>
                                         <tr>
@@ -386,8 +385,8 @@
                     <div class="ml30 mt0"><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong>{{$fulltbp->mainproduct}}</div>
                     <div class="ml30 mt0"><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong> {{$fulltbp->productdetail}}</div>
                     <div class="ml30 mt0"><strong>2.6 ข้อมูลเทคโนโลยี
-                        <div class="ml50 mt0"><strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {{$fulltbp->techdev}}</div>
-                        <div class="ml30 mt20"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
+                        <div class="ml30 mt0"><strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {{$fulltbp->techdev}}</div>
+                        <div class="mt20"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
                             <table class="mt5 font14 border tbwrap" >
                                 <thead>
                                     <tr>
@@ -517,7 +516,7 @@
                                 <th style="width:15%">{{$fulltbp->past1}}</th>                                                                                    
                                 <th style="width:15%">{{$fulltbp->past2}}</th>       
                                 <th style="width:15%">{{$fulltbp->past3}}</th>  
-                                <th style="width:20%">ปีปัจจุบัน (ประมาณการ)</th>
+                                <th style="width:20%">ปีปัจจุบัน<pre>(ประมาณการ)</pre></th>
                             <tr>
                         </thead>
                         <tbody>

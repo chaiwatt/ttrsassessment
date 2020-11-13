@@ -543,3 +543,43 @@ $(document).on('click', '#btn_edit_weight', function(e) {
 });
 
 
+$(document).on('click', '#editev', function(e) {
+    Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'แก้ไข EV สำเร็จ!',
+            });
+    })
+    .catch(error => {})
+});
+
+$(document).on('keyup', '#percentindex', function(e) {
+    if ($(this).val() > 100){
+        $(this).val('100');
+    }else if($(this).val() < 0){
+        $(this).val('0');
+    }
+    $('#percentextra').val((100-($(this).val())));
+});
+
+$(document).on('keyup', '#percentextra', function(e) {
+    if ($(this).val() > 100){
+        $(this).val('100');
+    }else if($(this).val() < 0){
+        $(this).val('0');
+    }
+    $('#percentindex').val((100-($(this).val())));
+});
+
+$(document).on('click', '#updateev', function(e) {
+    $("#spinicon").attr("hidden",false);
+    Ev.updateEvStatus($(this).data('id'),1).then(data => {
+        $("#spinicon").attr("hidden",true);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'ส่ง EV ให้ JD ตรวจสอบสำเร็จ!',
+        }).then((result) => {
+            window.location.reload();
+        });
+    }).catch(error => {})
+});

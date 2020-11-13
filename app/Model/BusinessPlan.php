@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Model\Company;
 use App\Model\MiniTBP;
 use App\Helper\DateConversion;
+use App\Model\ProjectAssignment;
 use App\Model\BusinessPlanStatus;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,6 +32,10 @@ class BusinessPlan extends Model
 
     public function getMiniTBPAttribute(){
         return MiniTBP::where('business_plan_id',$this->id)->first();
+    } 
+
+    public function getProjectassignmentAttribute(){
+        return ProjectAssignment::where('business_plan_id',$this->id)->first();
     } 
     
 }

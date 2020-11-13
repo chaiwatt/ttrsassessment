@@ -18,6 +18,7 @@ use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
+use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use App\Model\SignatureStatus;
 use App\Model\ProjectAssignment;
@@ -49,8 +50,9 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $contactpositions = UserPosition::get();
         $signaturestatuses = SignatureStatus::get();
         $provinces = Province::get();
-        $amphurs = Amphur::where('province_id',$user->province_id)->get();
-        $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
+        $companyaddress = CompanyAddress::where('company_id',$company->id)->first();
+        $amphurs = Amphur::where('province_id',$companyaddress->province_id)->get();
+        $tambols = Tambol::where('amphur_id',$companyaddress->amphur_id)->get();
         return view('dashboard.company.project.minitbp.edit')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withCompany($company)

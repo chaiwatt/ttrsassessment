@@ -2,35 +2,7 @@
 @section('pageCss')
 @stop
 @section('content')
-  {{-- modal_show_conflict --}}
-  <div id="modal_pending_user" class="modal fade" style="overflow:hidden;">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายการผู้ยังไม่ได้ลงคะแนน</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="criteriatable_modal">
-                        <thead>
-                            <tr>
-                                <th>ชื่อ-สกุล</th>                                                                                   
-                            </tr>
-                        </thead>
-                        <tbody id="pending_user_modal_wrapper_tr"> 
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>           
-            <div class="modal-footer">
-                <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                
-            </div>
-        </div>
-    </div>
-</div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -90,11 +62,10 @@
                             <table class="table text-nowrap" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th>วันที่ส่งขอประเมิน</th>  --}}
-                                        <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th>สถานะ</th>                   
+                                        <th>คะแนน</th>
+                                        <th>เกรด</th>     
+                                        <th>รายงานผล</th>                 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,21 +74,7 @@
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                        <td>
-                                             @if ($fulltbp->allscoring == 0)
-                                                @if ($fulltbp->done_assessment != 0)
-                                                        @if ($fulltbp->ev->status == 5)
-                                                                <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn-sm bg-info">สรุปเกรด</a>
-                                                            @else
-                                                                <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn-sm bg-info">ปรับปรุงคะแนน</a>
-                                                        @endif
-                                                    @else
-                                                        รอเวลา
-                                                @endif     
-                                            @else   
-                                                    <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
-                                             @endif 
-                                        </td>                                
+                                        <td> <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn-sm bg-info">แก้ไขการแจ้งผล</a> </td> 
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -133,7 +90,6 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/dashboardadminassessmentindexhelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

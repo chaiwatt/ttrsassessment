@@ -210,9 +210,8 @@ $(document).on('click', '#saveupdate', function(e) {
             value: val
           } 
     }).get();
-    console.log(conflictarray);
 
-    updateScore(conflictarray).then(data => {
+    updateScore(conflictarray,$(this).data(id)).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'สรุปคะแนนสำเร็จ!',
@@ -253,14 +252,15 @@ $(document).on('change', '#comment', function(e) {
     }).catch(error => {})
 });
 
-function updateScore(arraylist){
+function updateScore(arraylist,evid){
     return new Promise((resolve, reject) => {
         $.ajax({
         url: `${route.url}/dashboard/admin/assessment/updatescore`,
         type: 'POST',
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
-            arraylist : arraylist
+            arraylist : arraylist,
+            evid : evid
         },
         success: function(data) {
             resolve(data)

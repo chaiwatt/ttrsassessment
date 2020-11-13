@@ -7,7 +7,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มบุคลากร</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มผู้บริหารระดับสูง</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -37,11 +37,12 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่ง<span class="text-danger">*</span></label>
-							<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
+							{{-- <select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
 								@foreach ($employpositions as $employposition)
 									<option value="{{$employposition->id}}" >{{$employposition->name}}</option> 
 								@endforeach
-							</select>
+							</select> --}}
+							<div id="employ_position_wrapper"></div>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -67,6 +68,136 @@
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
 				<button id="btn_modal_add_employ" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal_add_employ_research" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มนักวิจัย</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+							<select id="employprefix_research" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+								@foreach ($prefixes as $prefix)
+									<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>ชื่อ</label><span class="text-danger">*</span>
+							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>นามสกุล</label><span class="text-danger">*</span>
+							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>ตำแหน่ง<span class="text-danger">*</span></label>
+							<div id="employ_position_research_wrapper"></div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>โทรศัพท์</label><span class="text-danger">*</span>
+							<input type="text" id="employphone_research" placeholder="เบอร์โทรศัพท์" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
+							<input type="text" id="employworkphone_research" placeholder="โทรศัพท์มือถือ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>อีเมล</label><span class="text-danger">*</span>
+							<input type="text" id="employemail_research" placeholder="อีเมล" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_employ_research" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal_add_employ_projectmember" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มทีมงานในโครงการ</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+							<select id="employprefix_projectmember" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+								@foreach ($prefixes as $prefix)
+									<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>ชื่อ</label><span class="text-danger">*</span>
+							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>นามสกุล</label><span class="text-danger">*</span>
+							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>ตำแหน่ง<span class="text-danger">*</span></label>
+							<div id="employ_position_projectmember_wrapper"></div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>โทรศัพท์</label><span class="text-danger">*</span>
+							<input type="text" id="employphone_projectmember" placeholder="เบอร์โทรศัพท์" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
+							<input type="text" id="employworkphone_projectmember" placeholder="โทรศัพท์มือถือ" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>อีเมล</label><span class="text-danger">*</span>
+							<input type="text" id="employemail_projectmember" placeholder="อีเมล" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_add_employ_projectmember" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
 			</div>
 		</div>
 	</div>
@@ -420,7 +551,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการศึกษา</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเอกสารแนบ</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -441,7 +572,7 @@
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_award" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				{{-- <button id="btn_modal_add_award" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
 			</div>
 		</div>
 	</div>
@@ -473,7 +604,7 @@
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_standard" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				{{-- <button id="btn_modal_add_standard" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
 			</div>
 		</div>
 	</div>
@@ -1015,7 +1146,7 @@
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_companydoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				{{-- <button id="btn_modal_add_companydoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
 			</div>
 		</div>
 	</div>
@@ -1423,7 +1554,7 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col-md-12">	
-														<label for="">ข้อมูลผู้บริหารระดับสูง <a href="" id="btnaddemploy" data-toggle="modal" data-target="#modal_add_employ"><i class="icon-add text-info"></i></a></label>
+														<label for="">ข้อมูลผู้บริหารระดับสูง <a type="button" id="btnaddboard"><i class="icon-add text-info"></i></a></label>
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
 																<thead>
@@ -1483,9 +1614,9 @@
 													
 													{{-- <div class="row"> --}}
 														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลทีมวิจัย <a href="#" data-toggle="modal" data-target="#modal_add_researcher"><i class="icon-add text-info"></i></a></label>
+															<label for="">ข้อมูลทีมวิจัย <a type="button" id="btnaddresearch"><i class="icon-add text-info"></i></a></label>
 															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
+																{{-- <table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-สกุล</th>  
@@ -1506,33 +1637,65 @@
 																			</tr>
 																		@endforeach    			   
 																	</tbody>
+																</table> --}}
+																<table class="table table-striped table-bordered">
+																	<thead>
+																		<tr class="bg-info">
+																			<th>ชื่อ-สกุล</th>  
+																			<th>ตำแหน่ง</th>                                                                                    
+																			<th>โทรศัพท์</th>       
+																			<th>โทรศัพท์มือถือ</th>  
+																			<th>อีเมล</th>
+																			<th style="width:250px">เพิ่มเติม</th>    
+																		</tr>
+																	</thead>
+																	<tbody id="fulltbp_researcher_wrapper_tr">    
+																		@foreach ($companyemploys->where('employ_position_id',6) as $companyemploy)
+																			<tr >                                        
+																				<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
+																				<td> {{$companyemploy->employposition->name}} </td> 
+																				<td> {{$companyemploy->phone}} </td>                                            
+																				<td> {{$companyemploy->workphone}} </td> 
+																				<td> {{$companyemploy->email}} </td> 
+																				<td> 
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning deletecompanyemploy_research">ลบ</a> 
+																				</td> 
+																			</tr>
+																		@endforeach                            
+																	</tbody>
 																</table>
 															</div>
 														</div>
 														
 														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลทีมงานในโครงการ <a href="#" data-toggle="modal" data-target="#modal_add_projectmember"><i class="icon-add text-info"></i></a></label>
+															<label for="">ข้อมูลทีมงานในโครงการ <a type="button" id="btnaddprojectmember"><i class="icon-add text-info"></i></a></label>
 															<div class="table-responsive">
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-สกุล</th>  
-																			<th>ประวัติการศึกษา</th>
-																			<th>ประสบการณ์การทำงาน</th>
-																			<th>ประวัติการฝึกอบรม</th>
-																			<th style="width:200px">เพิ่มเติม</th>    
+																			<th>ตำแหน่ง</th>                                                                                    
+																			<th>โทรศัพท์</th>       
+																			<th>โทรศัพท์มือถือ</th>  
+																			<th>อีเมล</th>
+																			<th style="width:250px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_projectmember_wrapper_tr">    
-																		@foreach ($fulltbpresearchers->where('employtype',2) as $fulltbpresearcher)
+																		@foreach ($companyemploys->where('employ_position_id','>',6) as $companyemploy)
 																			<tr >                                        
-																				<td> {{$fulltbpresearcher->prefix->name}}{{$fulltbpresearcher->name}} {{$fulltbpresearcher->name}}</td> 
-																				<td> {{$fulltbpresearcher->education}} </td> 
-																				<td> {{$fulltbpresearcher->experience}} </td> 
-																				<td> {{$fulltbpresearcher->training}} </td> 
-																				<td> <a type="button" data-id="{{$fulltbpresearcher->id}}" class="btn btn-sm bg-warning deleteresearcher">ลบ</a> </td> 
+																				<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
+																				<td> {{$companyemploy->employposition->name}} </td> 
+																				<td> {{$companyemploy->phone}} </td>                                            
+																				<td> {{$companyemploy->workphone}} </td> 
+																				<td> {{$companyemploy->email}} </td> 
+																				<td> 
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning deletecompanyemploy_projectmember">ลบ</a> 
+																				</td> 
 																			</tr>
-																		@endforeach    			   
+																		@endforeach                            
 																	</tbody>
 																</table>
 															</div>
@@ -1982,7 +2145,7 @@
 																</div>
 															</div>
 															{{-- <div class="row"> --}}
-																<div class="col-md-12">	
+																<div class="col-md-12 mt-4">	
 																	<div class="form-group">												
 																		{{-- <button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('certify').click();"><i class="icon-add"></i></button>													 --}}
 																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร <a type="button" id="btnuploadcertify" onclick="document.getElementById('certify').click();"><i class="icon-add text-info"></i></a></label>

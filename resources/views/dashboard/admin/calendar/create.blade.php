@@ -146,7 +146,7 @@
                                 </div>
                             </div>
 
-                            @if ($fulltbps->count() == 0)
+                            @if ($fulltbps->count() != 0)
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                 </div>

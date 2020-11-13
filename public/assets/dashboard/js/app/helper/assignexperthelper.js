@@ -305,7 +305,12 @@ $(document).on('click', '#sendtojd', function(e) {
       console.log(data);
       $("#spinicon").attr("hidden",true);
         var html = ``;
-
+          Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'ส่งผู้เชี่ยวชาญให้ JD พิจารณาสำเร็จ!',
+        }).then((result) => {
+            window.location.reload();
+        });
      }).catch(error => {})
 });
 

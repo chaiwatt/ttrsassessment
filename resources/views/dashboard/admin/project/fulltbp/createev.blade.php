@@ -55,16 +55,34 @@
                             @csrf
                             <fieldset>	
                                 <input type="text" name="fulltbpid" value="{{$fulltbp->id}}" hidden>
-                                <div class="form-group">
-                                    <label>ชื่อ EV</label>
-                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>เวอร์ชั่น</label>
-                                    <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                <div class="row">
+                                    <div class="col-md-12">	
+                                        <div class="form-group">
+                                            <label>ชื่อ EV</label>
+                                            <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">	
+                                        <div class="form-group">
+                                            <label>เปอร์เซนต์ Index</label>
+                                            <input type="number" name="percentindex" value="{{old('percentindex')}}"  placeholder="เปอร์เซนต์ Index" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">	
+                                        <div class="form-group">
+                                            <label>เปอร์เซนต์ Extra</label>
+                                            <input type="number" name="percentextra" value="{{old('percentextra')}}"  placeholder="เปอร์เซนต์ Extra" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">	
+                                        <div class="form-group">
+                                            <label>เวอร์ชั่น</label>
+                                            <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal">บันทึก<i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </fieldset>
                         </form>

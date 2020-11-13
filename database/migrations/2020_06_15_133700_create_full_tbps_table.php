@@ -33,6 +33,7 @@ class CreateFullTbpsTable extends Migration
             $table->longText('innovation')->nullable();
             $table->longText('standard')->nullable();
             $table->string('attachment',250)->nullable();
+            $table->char('done_assessment',1)->nullable(0);
             $table->timestamps();
         });
     }

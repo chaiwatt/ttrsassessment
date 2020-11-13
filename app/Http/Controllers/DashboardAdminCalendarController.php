@@ -35,6 +35,7 @@ class DashboardAdminCalendarController extends Controller
                         ->where('notification_sub_category_id',8)
                         ->where('status',0)->delete();
       $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
+
       $minitbps = MiniTBP::whereIn('business_plan_id',$projectassignments)->pluck('id')->toArray();
       $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->pluck('id')->toArray();
       $eventcalendars = EventCalendar::whereIn('full_tbp_id',$fulltbps)->get();
@@ -45,8 +46,11 @@ class DashboardAdminCalendarController extends Controller
         $users = User::where('user_type_id','>=',3)->get();
         $calendartypes = CalendarType::get();
         $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
+        
         $minitbps = MiniTBP::whereIn('business_plan_id',$projectassignments)->pluck('id')->toArray();
+        
         $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->get();
+        // return $fulltbps;
         $isnotifies = Isnotify::get();
         return view('dashboard.admin.calendar.create')->withUsers($users)
                                                     ->withFulltbps($fulltbps)

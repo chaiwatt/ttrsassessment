@@ -73,7 +73,8 @@ class DashboardAdminProjectFullTbpController extends Controller
                         ->where('notification_sub_category_id',5)
                         ->where('status',0)->delete();
                         
-        $fulltbps = FullTbp::where('status',2)->get();
+        // $fulltbps = FullTbp::where('status',2)->get();
+        $fulltbps = FullTbp::get();
         if($auth->user_type_id < 6){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             // ->orWhere('coleader_id',$auth->id)

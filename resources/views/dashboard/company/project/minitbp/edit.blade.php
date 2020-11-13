@@ -155,7 +155,7 @@
 											<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2 required">
 												<option value=""></option>
 												@foreach ($provinces as $province)
-													<option value="{{$province->id}}" @if($user->company->province_id == $province->id) selected @endif>{{$province->name}}</option> 
+													<option value="{{$province->id}}" @if($user->company->companyaddress->first()->province_id == $province->id) selected @endif>{{$province->name}}</option> 
 												@endforeach
 											</select>
 										</div>
@@ -165,7 +165,7 @@
 											<label>อำเภอ<span class="text-danger">*</span></label>
 											<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2 required">
 												@foreach ($amphurs as $amphur)                                                                
-													<option value="{{$amphur->id}}" @if ($user->company->amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
+													<option value="{{$amphur->id}}" @if ($user->company->companyaddress->first()->amphur_id == $amphur->id) selected @endif> {{$amphur->name}} </option>
 												@endforeach   
 											</select>
 										</div>
@@ -175,7 +175,7 @@
 											<label>ตำบล<span class="text-danger">*</span></label>
 											<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2 required">
 												@foreach ($tambols as $tambol)                                                                
-													<option value="{{$tambol->id}}" @if ($user->company->tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
+													<option value="{{$tambol->id}}" @if ($user->company->companyaddress->first()->tambol_id == $tambol->id) selected @endif> {{$tambol->name}} </option>
 												@endforeach    
 											</select>
 										</div>
@@ -183,7 +183,7 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control required">
+											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control required">
 										</div>
 									</div>
 									<legend>
@@ -743,7 +743,7 @@
 								title: 'สำเร็จ...',
 								text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
 							}).then((result) => {
-								window.location.reload(true);
+								window.location.reload();
 							});
 						})
 					.catch(error => {})

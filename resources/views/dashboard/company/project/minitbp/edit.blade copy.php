@@ -743,8 +743,9 @@
 							Swal.fire({
 								title: 'สำเร็จ...',
 								text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+							}).then((result) => {
+								window.location.reload();
 							});
-							window.location.reload(true);
 						})
 					.catch(error => {})
 				}

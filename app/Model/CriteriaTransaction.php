@@ -14,7 +14,7 @@ class CriteriaTransaction extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
-    protected $appends = ['pillar','subpillar','criteria','subpillarindex','scoring'];
+    protected $appends = ['pillar','subpillar','criteria','subpillarindex','scoring','sumscoring'];
 
     public function getCriteriaAttribute(){
         return Criteria::find($this->criteria_id);
@@ -35,5 +35,8 @@ class CriteriaTransaction extends Model
 
     public function getScoringAttribute(){
         return Scoring::where('criteria_transaction_id',$this->id)->where('user_id',Auth::user()->id)->first();
+    } 
+    public function getSumscoringAttribute(){
+        return Scoring::where('criteria_transaction_id',$this->id)->whereNull('user_id')->first();
     } 
 }

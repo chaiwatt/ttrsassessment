@@ -230,8 +230,10 @@
                                         {{-- <th>วันที่ขอส่ง</th>  --}}
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
+                                        
                                         {{-- <th>บริษัท</th> --}}
                                         <th>การอนุมัติ</th> 
+                                        <th>BOL</th> 
                                         <th>เกณฑ์การประเมิน</th> 
                                         <th>ผู้เชี่ยวชาญ</th> 
                                         <th>ทีมประเมิน</th>
@@ -246,7 +248,6 @@
                                         {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                        {{-- <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> --}}
                                         <td>    
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
                                                     <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
@@ -259,10 +260,31 @@
                                                             <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                     @endif       
                                             @endif
-                                        </td>  
+                                        </td>
+                                        <td> 
+                                            @if ( $fulltbp->bol->count() != 0)
+                                                    <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-info">เอกสาร BOL</a> 
+                                                @else
+                                                    <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
+                                            @endif
+                                        </td>   
                                         <td> 
                                             @if (!Empty($fulltbp->ev))
-                                                    @if ($fulltbp->ev->status == 4)
+                                                @php
+                                                    $evstatus = 'ผ่านการอนุมัติ';
+                                                    $style = 'badge badge-flat border-success text-success-600';
+                                                    if($fulltbp->ev->status == 0){
+                                                        $evstatus = 'แก้ไข';
+                                                        $style = 'btn-sm bg-warning';
+                                                    }elseif($fulltbp->ev->status == 2){
+                                                        $evstatus = 'อยู่ระหว่าง Admin พิจารณา';
+                                                        $style = 'btn-sm bg-warning';
+                                                    }elseif($fulltbp->ev->status == 3){
+                                                        $evstatus = 'อยู่ระหว่าง JD พิจารณา';
+                                                        $style = 'btn-sm bg-pink';
+                                                    }
+                                                @endphp
+                                                    {{-- @if ($fulltbp->ev->status == 4)
                                                         <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                     @elseif($fulltbp->ev->status == 3)
                                                         <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่าง JD พิจารณา</a>
@@ -270,11 +292,16 @@
                                                         <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">อยู่ระหว่าง Admin พิจารณา</a>
                                                     @elseif($fulltbp->ev->status == 0)
                                                         <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้ส่ง</a>
-                                                    @endif  
+                                                    @endif   --}}
+                                                    @if (Auth::user()->user_type_id == 4)
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                        @elseif(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                    @endif
+
                                                 @else
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                             @endif
-                                             
                                         </td> 
                                         <th> 
                                             {{-- {{$fulltbp->expertassignments}} --}}

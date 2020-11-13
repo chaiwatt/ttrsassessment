@@ -122,7 +122,38 @@ class DashboardAdminProjectAssessmentController extends Controller
             "checklistgradings" => $checklistgradings,
             "scoringstatus" => $scoringstatus
         ));
+    }
 
+    public function GetSummaryEv(Request $request){
+        $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
+                                                ->orderBy('pillar_id','asc')
+                                                ->orderBy('sub_pillar_id', 'asc')
+                                                ->orderBy('sub_pillar_index_id', 'asc')
+                                                ->get();
+        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
+        $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->sum('weigth'), 4); 
+        $pillars = Pillar::get();   
+        $evportions = EvType::get();   
+       
+        $scores = Scoring::where('ev_id',$request->evid)
+                    ->where('scoretype',2)
+                    ->whereNull('user_id')
+                    ->get();
+        // dd($scores);
+        $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
+        // $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
+        //                             ->where('user_id',Auth::user()->id)
+        //                             ->first(); 
+        return response()->json(array(
+            "criteriatransactions" => $criteriatransactions,
+            "pillaindexweigths" => $pillaindexweigths,
+            "sumweigth" => $sumweigth,
+            "pillars" => $pillars,
+            "evportions" => $evportions,
+            "scores" => $scores,
+            "checklistgradings" => $checklistgradings,
+            // "scoringstatus" => $scoringstatus
+        ));
     }
 
     public function EditScore(Request $request){

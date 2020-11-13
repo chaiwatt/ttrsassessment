@@ -328,5 +328,15 @@ class DashboardAdminAssessmentController extends Controller
                 }                
             }
         }
+        Ev::find($request->evid)->update([
+            'status' => 5
+        ]);
     }
+
+    public function Summary($id){
+        $ev = Ev::where('full_tbp_id',$id)->first();
+        return view('dashboard.admin.assessment.summary')->withEv($ev);
+    }
+
+
 }

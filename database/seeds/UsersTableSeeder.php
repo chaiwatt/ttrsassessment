@@ -23,10 +23,10 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'prefix_id' => 1,
-                'user_type_id' => 6,
+                'user_type_id' => 5,
                 'name' => 'สมนึก',
-                'lastname' => 'สกุลเจดี',
-                'email' => 'joerocknpc@gmail.com',           
+                'lastname' => 'สกุลแอดมิน',
+                'email' => 'ttrsmanager2020@gmail.com',           
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1

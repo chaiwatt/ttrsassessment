@@ -36,6 +36,8 @@
                 </div>
             @endforeach
         </div>
+
+        @if (@$businessplans->first()->business_plan_status_id > 2)
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -52,9 +54,9 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>วันที่ขอประเมิน</th> 
-                                        <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
+                                        {{-- <th>วันที่ขอประเมิน</th>  --}}
+                                        <th>เลขที่โครงการ</th> 
                                         <th >ความก้าวหน้าการประเมิน</th>    
                                         <th class="text-right">สถานะ</th>                                                                  
                                     </tr>
@@ -62,9 +64,16 @@
                                 <tbody>
                                     @foreach ($businessplans as $key => $businessplan)
                                     <tr>    
-                                        <td> {{$businessplan->createddateth}} </td> 
-                                        <td> {{$businessplan->minitbp->fulltbp->fulltbp_code}} </td> 
-                                        <td> {{$businessplan->minitbp->project}} </td> 
+                                        <td> 
+                                            @if ($businessplan->business_plan_status_id < 4)
+                                                    <a class="text-info" href="{{route('dashboard.company.project.minitbp.edit',['id' => $businessplan->minitbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
+                                                @elseif($businessplan->business_plan_status_id >= 4)
+                                                <a class="text-info" href="{{route('dashboard.company.project.fulltbp.edit',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
+                                                @else
+                                                    {{$businessplan->minitbp->project}} 
+                                            @endif
+                                        </td> 
+                                        <td> {{$businessplan->code}} </td> 
                                         <td>
                                             <div class="progress" style="height: 1.375rem;">
                                                 <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
@@ -83,6 +92,7 @@
             <!-- /striped rows -->
             </div>
         </div>
+        @endif
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
@@ -90,8 +100,17 @@
                         <h6 class="card-title">ความก้าวหน้าโครงการ</h6>
                     </div>
                     <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="progress_chart"></div>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="chart-container" style="height:70%">
+                                    <div class="chart has-fixed-height" id="progress_chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="text-align: center">
+                                @if ($businessplans->count() == 0)
+                                    <a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="btn bg-warning">ตั้งค่าโปรไฟล์ ก่อนขอรับการประเมิน</a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -644,8 +644,7 @@
 												</legend>
 											</div>
 
-											{{-- {{$user->company->companyaddress}} --}}
-											{{-- @if ($user->company->companyaddress->count() == 1) --}}
+
 												@php
 													$companyaddress = $user->company->companyaddress->first();
 												@endphp
@@ -671,7 +670,7 @@
 															<label>อำเภอ<span class="text-danger">*</span></label>
 															<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
 																@foreach ($amphurs as $amphur)                                                                
-																	<option value="{{$amphur->id}}" @if ($companyaddress->amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
+																	<option value="{{$amphur->id}}" @if ($companyaddress->amphur_id == $amphur->id) selected @endif> {{$amphur->name}} </option>
 																@endforeach   
 															</select>
 														</div>
@@ -681,7 +680,7 @@
 															<label>ตำบล<span class="text-danger">*</span></label>
 															<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2">
 																@foreach ($tambols as $tambol)                                                                
-																	<option value="{{$tambol->id}}" @if ($companyaddress->tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
+																	<option value="{{$tambol->id}}" @if ($companyaddress->tambol_id == $tambol->id) selected @endif> {{$tambol->name}} </option>
 																@endforeach    
 															</select>
 														</div>

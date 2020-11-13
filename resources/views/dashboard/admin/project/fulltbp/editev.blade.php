@@ -279,15 +279,20 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}
+                @if ($ev->status != 0)
+                    (ส่งให้ JD แล้ว)
+                @endif
+                
+                </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
                 <div class="d-flex justify-content-center">
                     {{-- @if ($ev->status <= 1) --}}
-                        <div class="form-check ">
+                        {{-- <div class="form-check ">
                             <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif >
-                        </div>     
+                        </div>      --}}
                     {{-- @endif --}}
                 </div>
             </div>
@@ -329,10 +334,49 @@
         @endif
         <div class="row">
             <div class="col-md-12">
-				<!-- Multiple selection -->
+                <div class="card">
+					<div class="card-body">
+                        <div class="text-right">
+                            <button id="editev" class="btn bg-primary">แก้ไขข้อมูล<i class="icon-floppy-disk ml-2"></i></button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <label>ชื่อ EV</label>
+                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <label>เวอร์ชั่น</label>
+                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <label>เปอร์เซนต์ Index</label>
+                                    <input type="number" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <label>เปอร์เซนต์ Extra</label>
+                                    <input type="number" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
                         <input type="text" id="tmpstepindex" value="0" hidden>
+                        <div class="text-right">
+                            <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
+                            {{--  <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif > --}}
+                        </div>
                         <div class="form-group">
                             <label>EV ในระบบ</label>
                                 <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-select2">
@@ -396,6 +440,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js')}}"></script>
+{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/evhelper.js')}}"></script> --}}
     <script>
         var route = {
             url: "{{ url('/') }}",

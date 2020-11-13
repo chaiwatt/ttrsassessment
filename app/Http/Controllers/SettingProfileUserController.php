@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Image;
 use App\User;
+use App\Model\Ev;
 use Carbon\Carbon;
 use App\Model\Isic;
 use App\Helper\Crop;
@@ -19,10 +20,12 @@ use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\IndustryGroup;
+use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
+use App\Model\EvaluationResult;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpSellStatus;
@@ -38,12 +41,13 @@ class SettingProfileUserController extends Controller
 {
     public function Edit($userid){
         $user = User::find($userid);
+        $company = Company::where('user_id',$user->id)->first();
+        $companyaddress = CompanyAddress::where('company_id',$company->id)->first();
         $prefixes = Prefix::get();
         $provinces = Province::get();
-        $amphurs = Amphur::where('province_id',$user->province_id)->get();
-        $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
+        $amphurs = Amphur::where('province_id',$companyaddress->province_id)->get();
+        $tambols = Tambol::where('amphur_id',$companyaddress->amphur_id)->get();
         $isics = Isic::get();
-        $company = Company::where('user_id',$user->id)->first();
         $isicsubs = IsicSub::where('isic_id',$company->isic_id)->get();
         $industrygroups = IndustryGroup::get();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
@@ -63,7 +67,6 @@ class SettingProfileUserController extends Controller
                                             ->withUserpositions($userpositions);
     }
     public function EditSave(Request $request, $id){
-        // return $request->usergroup;
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -71,7 +74,6 @@ class SettingProfileUserController extends Controller
             ]);
         }
         $company = Company::where('user_id',$auth->id)->first();
-        // $company = Company::find($id);
         $file = $request->picture; 
         $filelocation = $company->logo;
         if(!Empty($file)){         
@@ -159,21 +161,6 @@ class SettingProfileUserController extends Controller
             'name' => $request->name,
             'lastname' => $request->lastname
         ]);
-        // return $company->id;
-        // BusinessPlan::where('company_id',$company->id)->first()->update([
-        //     'business_plan_status_id' => 2
-        // ]);
-        // $buninessplan = BusinessPlan::where('company_id',$company->id)->first();
-        // $minitbp = MiniTBP::where('business_plan_id',$buninessplan->id)->first();
-        // $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
-        // $projectmember = ProjectMember::where('full_tbp_id',$fulltbp->id)
-        //                             ->where('user_id',$auth->id)->first();
-        // if(Empty($projectmember)){
-        //     $projectmember = new ProjectMember();
-        //     $projectmember->full_tbp_id = $fulltbp->id;
-        //     $projectmember->user_id = User::where('user_type_id',6)->first()->id;
-        //     $projectmember->save();
-        // }
 
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         if(Empty($businessplan)){
@@ -192,6 +179,14 @@ class SettingProfileUserController extends Controller
                 $fulltbp->mini_tbp_id = $minitbp->id;
                 $fulltbp->save();
 
+                $ev = new Ev();
+                $ev->full_tbp_id = $fulltbp->id;
+                $ev->save();
+
+                $evaluationresult = new EvaluationResult();
+                $evaluationresult->full_tbp_id = $fulltbp->id;
+                $evaluationresult->save();
+
                 $fulltbpemployee = new FullTbpEmployee();
                 $fulltbpemployee->full_tbp_id = $fulltbp->id;
                 $fulltbpemployee->save();
@@ -203,6 +198,20 @@ class SettingProfileUserController extends Controller
                 $fulltbpprojectcertify = new FullTbpProjectCertify();
                 $fulltbpprojectcertify->full_tbp_id = $fulltbp->id;
                 $fulltbpprojectcertify->save();
+
+                $projectmember = ProjectMember::where('full_tbp_id',$fulltbp->id)
+                                            ->where('user_id',$auth->id)->first();
+                if(Empty($projectmember)){
+                    $projectmember = new ProjectMember();
+                    $projectmember->full_tbp_id = $fulltbp->id;
+                    $projectmember->user_id = User::where('user_type_id',5)->first()->id;
+                    $projectmember->save();
+
+                    $projectmember = new ProjectMember();
+                    $projectmember->full_tbp_id = $fulltbp->id;
+                    $projectmember->user_id = User::where('user_type_id',6)->first()->id;
+                    $projectmember->save();
+                }
 
                 // $notificationbubble = new NotificationBubble();
                 // $notificationbubble->business_plan_id = $businessplan->id;

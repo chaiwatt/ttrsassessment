@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Ev;
+use App\Model\Bol;
 use App\Model\Prefix;
 use App\Model\MiniTBP;
 use App\Model\FullTbpCost;
@@ -21,6 +22,7 @@ use App\Helper\DateConversion;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
 use App\Model\EmployExperience;
+use App\Model\EvaluationResult;
 use App\Model\ExpertAssignment;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketSwot;
@@ -237,7 +239,14 @@ class FullTbp extends Model
     public function getFulltbpreturnofinvestmentAttribute(){
         return FullTbpReturnOfInvestment::where('full_tbp_id',$this->id)->first();
     }
+
+    public function getBolAttribute(){
+        return Bol::where('full_tbp_id',$this->id)->get();
+    }
     
+    public function getEvaluationresultAttribute(){
+        return EvaluationResult::where('full_tbp_id',$this->id)->first();
+    }
 }
 
 

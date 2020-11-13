@@ -152,4 +152,27 @@ function getEvCheckList(pillar,subpillar,subpillarindex){
     })
 }
 
-export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList}
+function editEv(evid,name,version,percentindex,percentextra){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/assessment/ev/editev`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          evid : evid,
+          name : name,
+          version : version,
+          percentindex : percentindex,
+          percentextra : percentextra
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv}

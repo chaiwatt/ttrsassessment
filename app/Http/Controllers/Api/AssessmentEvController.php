@@ -338,4 +338,14 @@ class AssessmentEvController extends Controller
                                         ->first();
         return response()->json($checklistgrading); 
     }
+    public function EditEv(Request $request){
+        Ev::find($request->evid)->update([
+            'name' => $request->name,
+            'version' => $request->version,
+            'percentindex' => $request->percentindex,
+            'percentextra' => $request->percentextra
+        ]);
+        $ev = Ev::find($request->evid);
+        return response()->json($ev); 
+    }
 }

@@ -260,6 +260,7 @@ $(document).on('click', '.deletesubpillar', function(e) {
     });
 });
 
+
 $(document).on('click', '.deletesubpillarindex', function(e) {
     Swal.fire({
         title: 'คำเตือน!',
@@ -285,3 +286,4 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
         }
     });
 });
+
