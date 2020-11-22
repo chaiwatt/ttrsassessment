@@ -13,7 +13,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เอกสาร Mini TBP</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แบบคำขอรับบริการประเมิน TTRS (Mini TBP)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			<div class="header-elements d-none">
@@ -28,9 +28,9 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> การประเมิน</a>
-                    <a href="{{route('dashboard.company.project.minitbp')}}" class="breadcrumb-item"> รายการ Mini TBP</a>
-                    <span class="breadcrumb-item active">Mini TBP</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>โครงการ</a>
+                    {{-- <a href="{{route('dashboard.company.project.minitbp')}}" class="breadcrumb-item"> รายการ Mini TBP</a> --}}
+                    <span class="breadcrumb-item active">แบบคำขอรับบริการประเมิน</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -137,6 +137,9 @@
 							<h6>ผู้ยื่นแบบคำขอ</h6>
 							<fieldset>
 								<div class="row">
+									<legend>
+										<label><strong>ข้อมูลบริษัท</strong></label>
+									</legend>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อบริษัท<span class="text-danger">*</span></label>
@@ -187,7 +190,7 @@
 										</div>
 									</div>
 									<legend>
-										<label>ข้อมูลผู้ยื่นแบบคำขอ</label>
+										<label><strong>ข้อมูลผู้ยื่นแบบคำขอ</strong></label>
 									</legend>
 									<div class="col-md-6">
 										<div class="form-group">
@@ -225,13 +228,25 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">เบอร์โทรศัพท์<span class="text-danger">*</span></label>
-											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $minitbp->contactphone}}" class="form-control required">
+											@php
+												$phone = $minitbp->contactphone;
+												if(Empty($minitbp->contactphone)){
+													$phone = Auth::user()->phone;
+												}
+											@endphp
+											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $phone}}" class="form-control required">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">อีเมล<span class="text-danger">*</span></label>
-											<input type="text" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $minitbp->contactemail}}" class="form-control required">
+											@php
+												$email = $minitbp->contactemail;
+												if(Empty($minitbp->contactemail)){
+													$email = Auth::user()->email;
+												}
+											@endphp
+											<input type="email" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $email}}" class="form-control required">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -264,6 +279,9 @@
 									</div>
 								</div>
 								<div class="row">
+									<legend>
+										<label><strong>วัตถุประสงค์ของการยื่นขอรับบริการประเมิน TTRS (สามารถเลือกได้มากกว่า 1 ข้อ)</strong></label>
+									</legend>
 									<div class="col-md-12">
 										<div class="form-group mb-3 mb-md-2">
 											<label class="font-weight-semibold">สิทธิประโยชน์ทางการเงิน (Finance)</label>
@@ -321,7 +339,7 @@
 															<div class="col-md-4">
 																<div class="form-group">
 																	<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																	<input type="text" name ="finance4joint" id="finance4joint" class="form-control" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}">
+																	<input type="number" name ="finance4joint" id="finance4joint" class="form-control" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}">
 																</div>
 															</div>
 															<div class="col-md-4">
@@ -562,13 +580,13 @@
 			console.log('current step ' + currentIndex);
 			if(currentIndex == 3){
 				var hidden = '';
-				if(submitstatus !=2 && refixstatus == 0){
+				if(submitstatus !=2 && (refixstatus == 0 || refixstatus == 2 )){
 					hidden = 'hidden';
 					$("#appceptagreement_wrapper").attr("hidden",true);
 				}
 				$(document).find(".actions ul").append(`
 					<li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-					<li class='libtn' ${hidden}><a href='#' id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
+					<li class='libtn' ${hidden}><a type="button" id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
 				`);
 
 				if(submitstatus == 2 || refixstatus != 0){
@@ -743,7 +761,8 @@
 								title: 'สำเร็จ...',
 								text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
 							}).then((result) => {
-								window.location.reload();
+								// window.location.reload();
+								window.location.replace(`${route.url}/dashboard/company/report`);
 							});
 						})
 					.catch(error => {})
@@ -782,6 +801,9 @@
 				Swal.fire({
 					title: 'สำเร็จ...',
 					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+				}).then((result) => {
+					// window.location.reload();
+					window.location.replace(`${route.url}/dashboard/company/report`);
 				});
 			}
 		});

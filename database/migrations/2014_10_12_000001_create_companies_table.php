@@ -22,8 +22,8 @@ class CreateCompaniesTable extends Migration
             $table->unsignedBigInteger('isic_id')->default(1);
             $table->unsignedBigInteger('isic_sub_id')->default(1);
             $table->char('registeredyear',4)->nullable();
-            $table->double('registeredcapital',10,2)->nullable();
-            $table->double('paidupcapital',10,2)->nullable();
+            $table->double('registeredcapital',15,2)->nullable();
+            $table->double('paidupcapital',15,2)->nullable();
             $table->date('paidupcapitaldate')->nullable();
             $table->unsignedBigInteger('industry_group_id')->nullable();   
             $table->unsignedBigInteger('business_type_id')->nullable(); 
@@ -32,7 +32,7 @@ class CreateCompaniesTable extends Migration
             $table->string('fax',20)->nullable();
             $table->string('email',200)->nullable();
             // $table->char('housenumber',5)->nullable();
-            // $table->string('address',150)->nullable();
+            $table->string('website',150)->nullable();
             // $table->char('soi',5)->nullable();
             // $table->string('street',100)->nullable();
             // $table->unsignedBigInteger('province_id')->nullable();

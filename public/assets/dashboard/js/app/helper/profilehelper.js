@@ -753,6 +753,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
                 <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
             </tr>`
             });
+         $('#authorizeddirector').val(data.length);
          $("#authorized_director_wrapper_tr").html(html);
     })
     .catch(error => {})
@@ -795,13 +796,14 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
         if (result.value) {
             deleteAuthorizedDirector($(this).data('id')).then(data => {
                 var html = ``;
-                console.log(data);
+                console.log(data.length);
                 data.forEach(function (authorizeddirector,index) {
                     html += `<tr >                                        
                         <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            
                         <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
                     </tr>`
                     });
+                 $('#authorizeddirector').val(data.length);
                  $("#authorized_director_wrapper_tr").html(html);
             })
             .catch(error => {})        
@@ -858,6 +860,12 @@ $(document).on('click', '#btn_modal_add_address', function(e) {
                 <td><a type="button" data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
             </tr>`
             });
+            console.log(data.length);
+            if (data.length >= 1) {
+                $("#other_address_wrapper").attr("hidden",false);
+            }else{
+                $("#other_address_wrapper").attr("hidden",true);
+            }
          $("#authorized_address_wrapper_tr").html(html);
     }).catch(error => {})
 });
@@ -888,6 +896,11 @@ $(document).on('click', '.deleteaddress', function(e) {
                         <td><a type="button" data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
                     </tr>`
                     });
+                    if (data.length >= 1) {
+                        $("#other_address_wrapper").attr("hidden",false);
+                    }else{
+                        $("#other_address_wrapper").attr("hidden",true);
+                    }
                  $("#authorized_address_wrapper_tr").html(html);
             }).catch(error => {})     
         }

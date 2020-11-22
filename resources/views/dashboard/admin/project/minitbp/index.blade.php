@@ -180,7 +180,7 @@
                                         <td> 
                                             <a href="{{asset($minitbp->attachment)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
-                                            <a href="{{route('dashboard.admin.project.minitbp.delete',['id' => $minitbp->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                       
+                                            {{-- <a href="{{route('dashboard.admin.project.minitbp.delete',['id' => $minitbp->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>                                
                                     </tr>
                                     @endforeach

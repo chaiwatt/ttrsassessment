@@ -1,3 +1,4 @@
+@inject('provider', 'App\Http\Controllers\DashboardAdminEvaluationResultController')
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -91,7 +92,7 @@
                     </div>
                     <div class="page-break"></div>
                     <div class="ml20 mt0"><strong>1.9 ประวัติของบริษัท (Company Profile)</strong>
-                        <div>{!!$companyhistory!!}</div>
+                        <div>{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
                     </div>
                     <div class="ml20 mt20"><strong>1.10 ข้อมูลผู้บริหารระดับสูง (CEO หรือ กรรมการผู้จัดการ)</strong>
                         <div class="ml30 mt0">ชื่อ-นามสกุล : {{$fulltbp->companyemploy->prefix->name}}{{$fulltbp->companyemploy->name}} {{$fulltbp->companyemploy->lastname}}</div>

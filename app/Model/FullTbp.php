@@ -247,6 +247,8 @@ class FullTbp extends Model
     public function getEvaluationresultAttribute(){
         return EvaluationResult::where('full_tbp_id',$this->id)->first();
     }
+    
+   
 }
 
 

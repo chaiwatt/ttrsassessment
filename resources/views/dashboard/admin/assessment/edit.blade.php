@@ -44,7 +44,7 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <button id="saveupdate" data-id="{{$ev->id}}" class="btn btn-labeled btn-labeled-right bg-teal">บันทึกคะแนน <b><i class="icon-floppy-disk"></i></b></button>
+                <button id="saveupdate" data-id="{{$ev->id}}" class="btn btn-labeled btn-labeled-right bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>บันทึกคะแนน <b><i class="icon-floppy-disk"></i></b></button>
             </div>
         </div>
 

@@ -1,5 +1,7 @@
+@inject('provider', 'App\Http\Controllers\DashboardAdminEvaluationResultController')
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
 {{-- modal_add_employ --}}
@@ -1483,7 +1485,7 @@
 														<div class="form-group">
 															<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </label> <span class="text-primary" id="companyprofiletextlength"></span>
 															{{-- <input type="text" id="companyprofile_input" class="form-control companyprofileclass" > --}}
-															<textarea name="companyhistory" id="companyhistory" class="form-control" cols="3" rows="7">{{$fulltbp->minitbp->businessplan->company->companyhistory}}</textarea>
+															<textarea name="companyhistory" id="companyhistory" class="form-control" cols="3" rows="7">{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</textarea>
 														</div>
 														{{-- <div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
 															@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
@@ -1755,21 +1757,21 @@
 															<div class="form-group">
 																<label>ประวัติการศึกษา</label>
 																
-																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->educationhistory}}</textarea>
+																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->educationhistory!!}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประสบการณ์การทำงาน</label>
 																
-																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->experiencehistory}}</textarea>
+																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->experiencehistory!!}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประวัติการฝึกอบรม</label>
 																
-																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->traininghistory}}</textarea>
+																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->traininghistory!!}</textarea>
 															</div>
 														</div>
 													{{-- </div> --}}
@@ -2380,7 +2382,7 @@
 																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</li>
 																</ul>
 																</i> </small></p>
-															<textarea name="" id="analysis" class="form-control" cols="3" rows="10">{{@$fulltbp->fulltbpmarketanalysis->detail}}</textarea>
+															<textarea name="" id="analysis" class="form-control" cols="3" rows="10">{!!@$fulltbp->fulltbpmarketanalysis->detail!!}</textarea>
 														</div>
 													</div>
 
@@ -2388,7 +2390,7 @@
 														<div class="form-group">
 															<label for=""><u>Business Model Canvas</u></label>
 															<p><small><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i> </small></p>
-															<textarea name="" id="modelcanvas" class="form-control" cols="3" rows="5">{{@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail}}</textarea>
+															<textarea name="" id="modelcanvas" class="form-control" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail!!}</textarea>
 														</div>
 														<div class="col-md-12">	
 															<div class="input-group">													
@@ -2426,7 +2428,7 @@
 															<div class="form-group">
 																<label for="" ><u>วิเคราะห์ศักยภาพทางการค้า</u></label>
 																<p><small><i>SWOT Analysis, Five Forces Analysis</i> </small></p>
-																<textarea name="" id="swot" class="form-control" cols="3" rows="5">{{@$fulltbp->fulltbpmarketswot->detail}}</textarea>
+																<textarea name="" id="swot" class="form-control" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketswot->detail!!}</textarea>
 															</div>
 															<div class="col-md-12">	
 																<div class="input-group">													
@@ -2858,6 +2860,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
@@ -2865,6 +2868,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
+
 <script>
 
 	var route = {
@@ -2881,7 +2885,130 @@
 				return false;
 			}
 		});
+		$('#companyhistory').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#responsibleeducationhistory').summernote({
+			toolbar: false,
+			height: 150,
+		});
+		$('#responsibleexperiencehistory').summernote({
+			toolbar: false,
+			height: 150,
+		});
+		$('#responsibletraininghistory').summernote({
+			toolbar: false,
+			height: 150,
+		});
+		$('#projectabtract_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#mainproduct_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#productdetails_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectechdev_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectechdevproblem_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectinnovation_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectstandard_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#analysis').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#swot').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
 	});
 
 </script>
 @stop
+

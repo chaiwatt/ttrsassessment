@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Http\Requests\EditCompanyRequest;
+use App\Http\Requests\EditProfileRequest;
 
 class SettingProfileUserController extends Controller
 {
@@ -66,7 +67,7 @@ class SettingProfileUserController extends Controller
                                             ->withAuthorizeddirectors($authorizeddirectors)
                                             ->withUserpositions($userpositions);
     }
-    public function EditSave(Request $request, $id){
+    public function EditSave(EditProfileRequest $request, $id){
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -76,16 +77,21 @@ class SettingProfileUserController extends Controller
         $company = Company::where('user_id',$auth->id)->first();
         $file = $request->picture; 
         $filelocation = $company->logo;
-        if(!Empty($file)){         
-            if(!Empty($company->logo)){
-                @unlink($company->logo);
+        if(!Empty($file)){   
+            $extension_picture = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png');     
+            if( in_array($file->getClientOriginalExtension(), $extension_picture) ){
+                if(!Empty($company->logo)){
+                    @unlink($company->logo);
+                }
+                $name = $file->getClientOriginalName();
+                $file = $request->picture;
+                $img = Image::make($file);  
+                $fname=str_random(10).".".$file->getClientOriginalExtension();
+                $filelocation = "storage/uploads/company/".$fname;
+                Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+            }else{
+                return redirect()->back()->withError('รูปแบบไฟล์ภาพไม่ถูกต้อง'); 
             }
-            $name = $file->getClientOriginalName();
-            $file = $request->picture;
-            $img = Image::make($file);  
-            $fname=str_random(10).".".$file->getClientOriginalExtension();
-            $filelocation = "storage/uploads/company/".$fname;
-            Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
         }
         $paidupcapitaldate=null;
         if(!Empty($request->paidupcapitaldate)){
@@ -94,6 +100,7 @@ class SettingProfileUserController extends Controller
         $company->update([
             'name' => $request->company,
             'vatno' => $request->vatno,
+            'email' => $auth->email,
             'commercialregnumber' => $request->commercialregnumber,
             'isic_id' => $request->isic,
             'isic_sub_id' => $request->subisic,
@@ -104,6 +111,7 @@ class SettingProfileUserController extends Controller
             'industry_group_id' => $request->industrygroup,
             'business_type_id' => $request->businesstype,
             'phone' => $request->phone,
+            'website' => $request->website,
             'fax' => $request->fax,
             'email' => $request->email,
             'logo' => $filelocation,
@@ -119,52 +127,19 @@ class SettingProfileUserController extends Controller
             'lng' => $request->lng
         ]);
  
-
-        // $table->unsignedBigInteger('')->default(1);
-        // $table->unsignedBigInteger('')->default(1);
-        // $table->char('registeredyear',4)->nullable();
-        // $table->double('registeredcapital',10,2)->nullable();
-        // $table->double('paidupcapital',10,2)->nullable();
-        // $table->date('paidupcapitaldate')->nullable();
-        // $table->unsignedBigInteger('industry_group_id')->nullable();   
-        // $table->unsignedBigInteger('business_type_id')->nullable(); 
-        // $table->string('name',150)->nullable();
-        // $table->string('phone',20)->nullable();
-        // $table->string('fax',20)->nullable();
-        // $table->string('email',200)->nullable();
-        // $table->char('housenumber',5)->nullable();
-        // $table->string('address',150)->nullable();
-        // $table->char('soi',5)->nullable();
-        // $table->string('street',100)->nullable();
-        // $table->unsignedBigInteger('province_id')->nullable();
-        // $table->unsignedBigInteger('amphur_id')->nullable();
-        // $table->unsignedBigInteger('tambol_id')->nullable();
-        // $table->string('postalcode',10)->nullable();
-        // $table->string('lat',50)->nullable();
-        // $table->string('lng',50)->nullable();
-        // $table->char('factoryhousenumber',5)->nullable();
-        // $table->string('factoryaddress',150)->nullable();
-        // $table->char('factorysoi',5)->nullable();
-        // $table->string('factorystreet',100)->nullable();
-        // $table->unsignedBigInteger('factoryprovince_id')->nullable();
-        // $table->unsignedBigInteger('factoryamphur_id')->nullable();
-        // $table->unsignedBigInteger('factorytambol_id')->nullable();
-        // $table->string('factorypostalcode',10)->nullable();
-        // $table->string('factorylat',50)->nullable();
-        // $table->string('factorylng',50)->nullable();
-        // $table->string('logo',250)->nullable();
-
-
         $user = Auth::user();
         $user->update([
             'prefix_id' => $request->prefix,
             'name' => $request->name,
-            'lastname' => $request->lastname
+            'lastname' => $request->lastname,
+            'hid' => $request->hid
         ]);
 
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         if(Empty($businessplan)){
             // if($request->status == 1){
+                $auth = Auth::user();
+                $company = Company::where('user_id',$auth->id)->first();
                 $businessplan = new BusinessPlan();
                 $businessplan->code = Carbon::now()->timestamp;
                 $businessplan->company_id = $company->id;
@@ -173,6 +148,11 @@ class SettingProfileUserController extends Controller
 
                 $minitbp = new MiniTBP();
                 $minitbp->business_plan_id = $businessplan->id;
+                $minitbp->contactname = $auth->name;
+                $minitbp->contactlastname = $auth->lastname;
+                $minitbp->contactemail = $auth->email;
+                $minitbp->contactphone = $auth->phone;
+                $minitbp->website = $company->website;
                 $minitbp->save();
 
                 $fulltbp = new FullTbp();
@@ -286,6 +266,6 @@ class SettingProfileUserController extends Controller
             }
         }
 
-        return redirect()->back()->withSuccess('แก้ไขข้อมูลสถานประกอบการสำเร็จ'); 
+        return redirect()->back()->withSuccess('แก้ไขข้อมูลสำเร็จ'); 
     }
 }

@@ -210,11 +210,14 @@ $(document).on('click', '#saveupdate', function(e) {
             value: val
           } 
     }).get();
-
-    updateScore(conflictarray,$(this).data(id)).then(data => {
+    $("#spinicon").attr("hidden",false);
+    updateScore(conflictarray,$(this).data('id')).then(data => {
+        $("#spinicon").attr("hidden",true);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'สรุปคะแนนสำเร็จ!',
+            }).then((result) => {
+                window.location.replace(`${route.url}/dashboard/admin/assessment`);
             });
     }).catch(error => {})
 });

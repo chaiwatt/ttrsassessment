@@ -49,7 +49,7 @@
 
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ประเมินโครงการ</h6>
+                        <h6 class="card-title">สรุปผลการประเมินโครงการ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
@@ -65,16 +65,20 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>คะแนน</th>
                                         <th>เกรด</th>     
-                                        <th>รายงานผล</th>                 
+                                        <th style="width:300px">รายงานผล</th>                 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                        <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                        <td> <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn-sm bg-info">แก้ไขการแจ้งผล</a> </td> 
+                                        <td> {{$fulltbp->minitbp->project}} </td> 
+                                        <td> yyyy </td>  
+                                        <td> xxxx </td> 
+                                        <td> 
+                                            <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียดการแจ้งผล</a> 
+                                            <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
+                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-success">ดาวน์โหลด Certificate</a>
+                                        </td> 
                                     </tr>
                                     @endforeach
                                 </tbody>

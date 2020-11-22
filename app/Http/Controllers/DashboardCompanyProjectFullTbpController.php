@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+// use Segment;
 use App\User;
 use Carbon\Carbon;
 use App\Model\Prefix;
@@ -201,14 +202,14 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $companyemploys = CompanyEmploy::where('full_tbp_id',$id)->where('employ_position_id','>',5)->where('id','!=',$ceo->id)->get();
         // $companyemploys = FullTbpResearcher::where('full_tbp_id',$id)->get(); 
         // return  $companyemploys;
-        $companyhistory = $segment->get_segment_array($company->companyhistory);
+        // $companyhistory = $segment->get_segment_array($company->companyhistory);
         $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();
         $data = [
             'fulltbp' => $fulltbp,
             'companyboards' => $companyboards,
             'companyemploys' => $companyemploys,
             'companystockholders' => $companystockholders,
-            'companyhistory' => $companyhistory
+            // 'companyhistory' => $companyhistory
         ];
         $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf', $data);
         $path = public_path("storage/uploads/fulltbp/");

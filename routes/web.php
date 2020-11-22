@@ -485,7 +485,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'evaluationresult'], function(){
                 Route::get('','DashboardAdminEvaluationResultController@Index')->name('dashboard.admin.evaluationresult');           
                 Route::get('edit/{id}','DashboardAdminEvaluationResultController@Edit')->name('dashboard.admin.evaluationresult.edit');  
-                Route::get('editsave/{id}','DashboardAdminEvaluationResultController@EditSave')->name('dashboard.admin.evaluationresult.editsave');  
+                Route::get('pdf/{id}','DashboardAdminEvaluationResultController@Pdf')->name('dashboard.admin.evaluationresult.pdf'); 
+                Route::get('certificate/{id}','DashboardAdminEvaluationResultController@Certificate')->name('dashboard.admin.evaluationresult.certificate'); 
+                Route::post('editsave/{id}','DashboardAdminEvaluationResultController@EditSave')->name('dashboard.admin.evaluationresult.editsave');  
             }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){
@@ -529,6 +531,9 @@ Route::group(['middleware' => 'auth'], function(){
                 
             });      
             Route::group(['prefix' => 'project'], function(){
+                Route::group(['prefix' => 'invoice'], function(){
+                    Route::get('/{id}','DashboardCompanyInvoiceController@Invoice')->name('dashboard.company.project.invoice');           
+                }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardCompanyProjectAssessmentController@Index')->name('dashboard.company.assessment');           
                 }); 

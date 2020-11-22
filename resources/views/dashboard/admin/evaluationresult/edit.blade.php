@@ -1,5 +1,6 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
     <!-- Page header -->
@@ -51,7 +52,7 @@
                         @csrf
                     <div class="card-body">
                         <ul class="nav nav-tabs nav-tabs-highlight">
-                            <li class="nav-item"><a href="#left-icon-management" class="nav-link" data-toggle="tab"><i class="icon-stamp mr-2"></i>Management</a></li>
+                            <li class="nav-item"><a href="#left-icon-management" class="nav-link active" data-toggle="tab"><i class="icon-stamp mr-2"></i>Management</a></li>
                             <li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-atom2 mr-2"></i>Technology</a></li>
                             <li class="nav-item"><a href="#left-icon-marketing" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i>Marketability</a></li>
                             <li class="nav-item"><a href="#left-icon-businessprospect" class="nav-link" data-toggle="tab"><i class="icon-pie-chart5 mr-2"></i>Business Prospect</a></li>
@@ -59,22 +60,22 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="left-icon-management">
                                 <div class="form-group">
-                                    <textarea name="management" id="" cols="30" rows="15" class="form-control">{{$evaluationresult->management}}</textarea>
+                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control">{{$evaluationresult->management}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-technology">
                                 <div class="form-group">
-                                    <textarea name="technoandinnovation" id="" cols="30" rows="15" class="form-control">{{$evaluationresult->technoandinnovation}}</textarea>
+                                    <textarea name="technoandinnovation" id="technoandinnovation" cols="30" rows="15" class="form-control">{{$evaluationresult->technoandinnovation}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-marketing">
                                 <div class="form-group">
-                                    <textarea name="marketability" id="" cols="30" rows="15" class="form-control">{{$evaluationresult->marketability}}</textarea>
+                                    <textarea name="marketability" id="marketability" cols="30" rows="15" class="form-control">{{$evaluationresult->marketability}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-businessprospect">
                                 <div class="form-group">
-                                    <textarea name="businessprospect" id="" cols="30" rows="15" class="form-control">{{$evaluationresult->businessprospect}}</textarea>
+                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control">{{$evaluationresult->businessprospect}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -93,11 +94,58 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        $(document).ready(function() {
+            $('#management').summernote({
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ],
+                height: 300,
+            });
+            $('#technoandinnovation').summernote({
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ],
+                height: 300,
+            });
+            $('#marketability').summernote({
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ],
+                height: 300,
+            });
+            $('#businessprospect').summernote({
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ],
+                height: 300,
+            });
+        });
     </script>
 @stop

@@ -23,8 +23,8 @@ class CreateFullTbpsTable extends Migration
             $table->char('status',1)->default(1);
             $table->char('asic',1)->nullable();
             $table->unsignedBigInteger('criteria_group_id')->nullable();
-            $table->char('assignexpert',1)->default('1');
-            $table->char('refixstatus',1)->default('0');
+            $table->char('assignexpert',1)->default(1);
+            $table->char('refixstatus',1)->default(0);
             $table->longText('abtract')->nullable();
             $table->longText('mainproduct')->nullable();
             $table->longText('productdetail')->nullable();
@@ -33,7 +33,7 @@ class CreateFullTbpsTable extends Migration
             $table->longText('innovation')->nullable();
             $table->longText('standard')->nullable();
             $table->string('attachment',250)->nullable();
-            $table->char('done_assessment',1)->nullable(0);
+            $table->char('done_assessment',1)->default(0);
             $table->timestamps();
         });
     }

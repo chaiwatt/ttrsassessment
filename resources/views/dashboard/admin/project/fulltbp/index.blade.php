@@ -243,101 +243,101 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                    <tr>    
-                                        {{-- <td> {{$key+1}} </td> --}}
-                                        {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                        <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td>    
-                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
-                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
-                                                @else
-                                                    @if ($fulltbp->refixstatus == 0)
-                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
-                                                        @elseif($fulltbp->refixstatus == 1)
-                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ส่งคืนแก้ไข</a>
-                                                        @elseif($fulltbp->refixstatus == 2)
-                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
-                                                    @endif       
-                                            @endif
-                                        </td>
-                                        <td> 
-                                            @if ( $fulltbp->bol->count() != 0)
-                                                    <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-info">เอกสาร BOL</a> 
-                                                @else
-                                                    <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
-                                            @endif
-                                        </td>   
-                                        <td> 
-                                            @if (!Empty($fulltbp->ev))
-                                                @php
-                                                    $evstatus = 'ผ่านการอนุมัติ';
-                                                    $style = 'badge badge-flat border-success text-success-600';
-                                                    if($fulltbp->ev->status == 0){
-                                                        $evstatus = 'แก้ไข';
-                                                        $style = 'btn-sm bg-warning';
-                                                    }elseif($fulltbp->ev->status == 2){
-                                                        $evstatus = 'อยู่ระหว่าง Admin พิจารณา';
-                                                        $style = 'btn-sm bg-warning';
-                                                    }elseif($fulltbp->ev->status == 3){
-                                                        $evstatus = 'อยู่ระหว่าง JD พิจารณา';
-                                                        $style = 'btn-sm bg-pink';
-                                                    }
-                                                @endphp
-                                                    {{-- @if ($fulltbp->ev->status == 4)
-                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
-                                                    @elseif($fulltbp->ev->status == 3)
-                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่าง JD พิจารณา</a>
-                                                    @elseif($fulltbp->ev->status == 2)
-                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">อยู่ระหว่าง Admin พิจารณา</a>
-                                                    @elseif($fulltbp->ev->status == 0)
-                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้ส่ง</a>
-                                                    @endif   --}}
-                                                    @if (Auth::user()->user_type_id == 4)
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
-                                                        @elseif(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
-                                                    @endif
-
-                                                @else
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
-                                            @endif
-                                        </td> 
-                                        <th> 
-                                            {{-- {{$fulltbp->expertassignments}} --}}
-                                            @if ($fulltbp->expertassignments->count() > 0)
-                                                    @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
+                                            <tr>    
+                                                <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                <td> {{$fulltbp->minitbp->project}} </td>  
+                                                <td>    
+                                                    @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
+                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                         @else
-                                                            @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
-                                                                @else
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
+                                                            @if ($fulltbp->refixstatus == 0)
+                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
+                                                                @elseif($fulltbp->refixstatus == 1)
+                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ส่งคืนแก้ไข</a>
+                                                                @elseif($fulltbp->refixstatus == 2)
+                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                            @endif       
+                                                    @endif
+                                                </td>
+                                                <td> 
+                                                    @if ( $fulltbp->bol->count() != 0)
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-info">เอกสาร BOL</a> 
+                                                        @else
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
+                                                    @endif
+                                                </td>   
+                                                <td> 
+                                                    @if (!Empty($fulltbp->ev))
+                                                        @php
+                                                            $evstatus = 'ผ่านการอนุมัติ';
+                                                            $style = 'badge badge-flat border-success text-success-600';
+                                                            if($fulltbp->ev->status == 0){
+                                                                $evstatus = 'แก้ไข';
+                                                                $style = 'btn-sm bg-warning';
+                                                            }elseif($fulltbp->ev->status == 2){
+                                                                $evstatus = 'อยู่ระหว่าง Admin พิจารณา';
+                                                                $style = 'btn-sm bg-warning';
+                                                            }elseif($fulltbp->ev->status == 3){
+                                                                $evstatus = 'อยู่ระหว่าง JD พิจารณา';
+                                                                $style = 'btn-sm bg-pink';
+                                                            }
+                                                        @endphp
+                                                            {{-- @if ($fulltbp->ev->status == 4)
+                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                            @elseif($fulltbp->ev->status == 3)
+                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่าง JD พิจารณา</a>
+                                                            @elseif($fulltbp->ev->status == 2)
+                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">อยู่ระหว่าง Admin พิจารณา</a>
+                                                            @elseif($fulltbp->ev->status == 0)
+                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้ส่ง</a>
+                                                            @endif   --}}
+                                                            @if (Auth::user()->user_type_id == 4)
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                @elseif(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                             @endif
-                                                    @endif  
-                                                @else
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
-                                            @endif
-                                        </th> 
-                                        <td> 
-                                            <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="list-icons">
-                                                <div class="list-icons-item dropdown">
-                                                    <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลด</a>
-                                                        <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-eye2"></i> รายละเอียด</a>
-                                                        <a href="{{route('dashboard.admin.project.fulltbp.delete',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-trash"></i> ลบ</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtouser"><i class="icon-mail5"></i> อีเมลถึงผู้ประกอบการ</a>
-                                                        <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtomember"><i class="icon-mail5"></i> อีเเมลถึงทีมประเมิน</a>
+
+                                                        @else
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
+                                                    @endif
+                                                </td> 
+                                                <th> 
+                                                    {{-- {{$fulltbp->expertassignments}} --}}
+                                                    @if ($fulltbp->expertassignments->count() > 0)
+                                                            @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                                                @else
+                                                                    @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
+                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                        @else
+                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
+                                                                    @endif
+                                                            @endif  
+                                                        @else
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
+                                                    @endif
+                                                </th> 
+                                                <td> 
+                                                    <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="list-icons">
+                                                        <div class="list-icons-item dropdown">
+                                                            <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลด</a>
+                                                                <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-eye2"></i> รายละเอียด</a>
+                                                                <a href="{{route('dashboard.admin.project.fulltbp.delete',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-trash"></i> ลบ</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtouser"><i class="icon-mail5"></i> อีเมลถึงผู้ประกอบการ</a>
+                                                                <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtomember"><i class="icon-mail5"></i> อีเเมลถึงทีมประเมิน</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </td>                              
-                                    </tr>
+                                                </td>                              
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>      

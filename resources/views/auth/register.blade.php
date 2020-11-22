@@ -41,7 +41,7 @@
                         </div> --}}
                         
                         <div class="text-center mb-3 mb-md-2" style="font-size:40px">
-                            ลงทะเบียน
+                            สมัครสมาชิก
                         </div>
         
                     </div>
@@ -50,12 +50,12 @@
                             <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
                         </div> --}}
                         <div class="text-center mb-3 mb-md-2" style="font-size:40px">
-                            ลงทะเบียน
+                            สมัครสมาชิก
                         </div>
                     </div>
                     <div class="tab-pane fade" id="login-tab3">
                         <div class="text-center mb-3 mb-md-2" style="font-size:40px">
-                            ลงทะเบียน
+                            สมัครสมาชิก
                         </div>
                         {{-- <div class="text-center mb-0">
                             <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
@@ -87,7 +87,7 @@
                     </div>
     
                     <div class="form-group" id="vatwrapper" >
-                        <label for="" class="text-info">ใช้ทดสอบ 0107537000882 0107536000374 0107536001079</label>
+                        <label for="" class="text-info"><small>ใช้ทดสอบ 0105547107432 0107546000229 0105550075163 0105552012126 0105548008098 0105552061356 0105553151791 0107548000609</small> </label>
                         <input id="vatno" type="number" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
                         <input type="text" name="companyname" id="companyname" hidden>
@@ -149,7 +149,7 @@
                     </div>
                     <input id="user_type" type="text" class="form-control" name="user_type" value="1" hidden>
                     <div class="form-group">
-                        <button type="submit" id="term" class="btn btn-primary btn-block" disabled>ลงทะเบียน <i class="icon-circle-right2 ml-2"></i></button>
+                        <button type="submit" id="term" class="btn btn-primary btn-block" disabled>สมัครสมาชิก <i class="icon-circle-right2 ml-2"></i></button>
                     </div>
                 </div>
                 </form>

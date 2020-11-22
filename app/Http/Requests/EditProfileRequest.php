@@ -6,75 +6,50 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EditProfileRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    // public function rules()
-    // {
-    //     return [
-    //         'name' => 'required',
-    //         'lastname' => 'required',
-    //         'hid' => 'required',
-    //         'phone' => 'required',
-    //         'address' => 'required',
-    //         'picture' => 'image|mimes:jpeg,png,jpg|max:512' //512 = 0.5MB
-    //     ];
-    // }
-    // public function messages()
-    // {
-    //   return  [
-    //         'name.required' => 'ยังไม่ได้กรอกชื่อ',
-    //         'lastname.required' => 'ยังไม่ได้กรอกนามสกุล',
-    //         'hid.required' => 'ยังไม่ได้กรอกเลขบัตรประชาชน',
-    //         'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
-    //         'address.required' => 'ยังไม่ได้กรอกที่อยู่',
-    //         'picture.image' => 'กรุณาเลือกไฟล์รูป',
-    //         'picture.mimes' => 'รองรับเฉพาะไฟล์ jpeg png หรือ jpg เท่านั้น',
-    //         'picture.max' => 'ขนาดไฟล์มากกว่า 0.5 MB',
-    //   ]; 
-    // }
     public function rules()
     {
+        //usergroup 1=นิติบุคคล, 2=บุคลลธรรมดา
         return [
             'company' => 'required_if:usergroup,==,1',
+            'name' => 'required',
+            'lastname' => 'required',
+            'hid' => 'required_if:usergroup,==,2|digits_between:13,13|numeric',
             'vatno' => 'required_if:usergroup,==,1',
-            'registeredyear' => 'required_if:usergroup,==,1',
+            'registeredyear' => 'required_if:usergroup,==,1|integer|between:2200,2700',
             'registeredcapital' => 'required_if:usergroup,==,1',
+            'registeredcapital' => 'required_if:usergroup,==,1|integer|between:0,100000000000000',
             'paidupcapital' => 'required_if:usergroup,==,1',
-            'industrygroup' => 'required',
             'phone' => 'required',
             'email' => 'required',
             'address' => 'required',
-            'province' => 'required',
-            'amphur' => 'required',
-            'tambol' => 'required',
-            'postalcode' => 'required'
+            'authorizeddirector' => 'required|not_in:0',
         ];
     }
     public function messages()
     {
       return  [
             'company.required_if' => 'ยังไม่ได้กรอกชื่อนิติบุคคล',
+            'name.required' => 'ยังไม่ได้กรอกชื่อ',
+            'lastname.required' => 'ยังไม่ได้กรอกนามสกุล',
+            'hid.required_if' => 'ยังไม่ได้กรอกหมายเลขบัตรประชาชน',
+            'hid.digits_between' => 'รูปแบบหมายเลขบัตรประชาชนไม่ถูกต้อง',
+            'hid.numeric' => 'รูปแบบหมายเลขบัตรประชาชนไม่ถูกต้อง',
             'vatno.required_if' => 'ยังไม่ได้กรอกเลขทะเบียนนิติบุคคล',
             'registeredyear.required_if' => 'ยังไม่ได้กรอกปีที่จดทะเบียน',
+            'registeredyear.between' => 'ปีที่จดทะเบียนต้องอยู่ระหว่าง พ.ศ. 2200 - 2700 เท่านั้น',
             'registeredcapital.required_if' => 'ยังไม่ได้กรอกทุนจดทะเบียน',
+            'registeredcapital.between' => 'ทุนจดทะเบียนต้องอยู่ในช่วง 0 - 100000000000000',
             'paidupcapital.required_if' => 'ยังไม่ได้กรอกทุนจดทะเบียนที่เรียกชำระแล้ว',
-            'industrygroup.required' => 'ยังไม่ได้เลือกกลุ่มธุรกิจ',
             'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
             'email.required' => 'ยังไม่ได้กรอกอีเมล',
             'address.required' => 'ยังไม่ได้กรอกที่อยู่',
-            'province.required' => 'ยังไม่ได้เลือกจังหวัด',
-            'amphur.required' => 'ยังไม่ได้เลือกอำเภอ',
-            'tambol.required' => 'ยังไม่ได้เลือกตำบล',
-            'postalcode.required' => 'ยังไม่ได้กรอกรหีสไปรษณีย์'
+            'authorizeddirector.required' => 'ยังไม่ได้เพิ่มรายชื่อกรรมการ/ผู้มีอำนาจลงนาม',
+            'authorizeddirector.not_in' => 'ยังไม่ได้เพิ่มรายชื่อกรรมการ/ผู้มีอำนาจลงนาม',
       ]; 
     }
 }
-// }

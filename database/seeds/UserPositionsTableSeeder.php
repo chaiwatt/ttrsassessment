@@ -13,10 +13,16 @@ class UserPositionsTableSeeder extends Seeder
     {
         DB::table('user_positions')->insert([
             [
+                'name' => 'ประธานบริหาร'
+            ],
+            [
+                'name' => 'กรรมการผู้จัดการ'
+            ],
+            [
                 'name' => 'ผู้จัดการ'
             ],
             [
-                'name' => 'กรรมการ'
+                'name' => 'เจ้าของกิจการ'
             ]
         ]);
     }
