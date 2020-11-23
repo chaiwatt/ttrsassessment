@@ -1323,7 +1323,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Full TBP</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			{{-- <div class="text-right">
@@ -1334,9 +1334,9 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> การประเมิน</a>
-                    <a href="{{route('dashboard.company.project.fulltbp')}}" class="breadcrumb-item"> รายการ Full TBP</a>
-                    <span class="breadcrumb-item active">Full TBP</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    {{-- <a href="{{route('dashboard.company.project.fulltbp')}}" class="breadcrumb-item"> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</a> --}}
+                    <span class="breadcrumb-item active">แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -2666,11 +2666,11 @@
 																<tbody id="fulltbp_creditpartner_wrapper_tr">    
 																	@foreach ($fulltbpcreditpartners as $fulltbpcreditpartner)
 																		<tr >
-																			<td> {{$fulltbpdebtpartner->creditpartner}}</td> 
-																			<td> {{$fulltbpdebtpartner->partnertaxid}} </td> 
-																			<td> {{$fulltbpdebtpartner->totalyearpurchase}} </td>                                            															
-																			<td> {{$fulltbpdebtpartner->percenttopurchase}} </td> 
-																			<td> {{$fulltbpdebtpartner->businessyear}} </td> 
+																			<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
+																			<td> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+																			<td> {{$fulltbpcreditpartner->totalyearpurchase}} </td>                                            															
+																			<td> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
+																			<td> {{$fulltbpcreditpartner->businessyear}} </td> 
 																			<td> 
 																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
 																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 

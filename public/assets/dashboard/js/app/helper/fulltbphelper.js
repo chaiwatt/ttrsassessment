@@ -1448,6 +1448,7 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
 $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
     Sell.addDebtPartner($(this).data('id'),$('#debtpartner').val(),$('#numproject').val(),$('#debtpartnertaxid').val(),$('#debttotalyearsell').val(),$('#debtpercenttosale').val(),$('#debtpartneryear').val()).then(data => {
         var html = ``;
+        console.log(data);
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
@@ -1903,6 +1904,7 @@ $('.steps-basic').steps({
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
+        console.log();
         if(currentIndex == 3){
             if($('#usersignature').val() == 2){
                 if (typeof $('#signatureimg').val() === 'undefined'){
@@ -2475,3 +2477,44 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
         }
     });
 }); 
+
+	// Initialize validation
+	$('.steps-basic').validate({
+	    ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+	    errorClass: 'validation-invalid-label',
+	    highlight: function(element, errorClass) {
+	        $(element).removeClass(errorClass);
+	    },
+	    unhighlight: function(element, errorClass) {
+	        $(element).removeClass(errorClass);
+	    },
+
+	    // Different components require proper error label placement
+	    errorPlacement: function(error, element) {
+
+	        // Unstyled checkboxes, radios
+	        if (element.parents().hasClass('form-check')) {
+	            error.appendTo( element.parents('.form-check').parent() );
+	        }
+
+	        // Input with icons and Select2
+	        else if (element.parents().hasClass('form-group-feedback') || element.hasClass('select2-hidden-accessible')) {
+	            error.appendTo( element.parent() );
+	        }
+
+	        // Input group, styled file input
+	        else if (element.parent().is('.uniform-uploader, .uniform-select') || element.parents().hasClass('input-group')) {
+	            error.appendTo( element.parent().parent() );
+	        }
+
+	        // Other elements
+	        else {
+	            error.insertAfter(element);
+	        }
+	    },
+	    rules: {
+	        email: {
+	            email: true
+	        }
+	    }
+	});

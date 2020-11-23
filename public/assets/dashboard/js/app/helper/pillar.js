@@ -1,9 +1,12 @@
-function getPillar(){
+function getPillar(evtype){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/assessment/ev/pillar/getpillar`,
           type: 'POST',
           headers: {"X-CSRF-TOKEN":route.token},
+          data: {
+            evtype : evtype
+          },
           success: function(data) {
             resolve(data)
           },

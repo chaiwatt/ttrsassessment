@@ -15,7 +15,7 @@
                     <span id="thaifont">Co-Founder, CTO</span>
                 </div>
                 <div class="card-footer ">
-                    <a class="" id="thaifont" href="#">อ่ายเพื่มเติม</a>
+                    <a class="" id="thaifont" href="#">อ่านเพิ่มเติม</a>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     <span id="thaifont">Co-Founder, Marketing</span>
                 </div>
                 <div class="card-footer">
-                    <a id="thaifont" href="#">อ่ายเพื่มเติม </a>
+                    <a id="thaifont" href="#">อ่านเพิ่มเติม </a>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <span id="thaifont">Marketing</span>
                 </div>
                 <div class="card-footer">
-                    <a id="thaifont" href="#">อ่ายเพื่มเติม </a>
+                    <a id="thaifont" href="#">อ่านเพิ่มเติม </a>
                 </div>
             </div>
         </div>

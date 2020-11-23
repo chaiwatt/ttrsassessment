@@ -59,6 +59,54 @@ class SubPillarsTableSeeder extends Seeder
             [
                 'pillar_id' => 4,
                 'name' => 'กำไร'
+            ],
+            [
+                'pillar_id' => 5,
+                'name' => 'พื้นฐานความรู้'
+            ],
+            [
+                'pillar_id' => 5,
+                'name' => 'ความสามารถ'
+            ],
+            [
+                'pillar_id' => 5,
+                'name' => 'คณะทำงาน'
+            ],
+            [
+                'pillar_id' => 6,
+                'name' => 'วิจัย'
+            ],
+            [
+                'pillar_id' => 6,
+                'name' => 'สถานะ'
+            ],
+            [
+                'pillar_id' => 6,
+                'name' => 'ระดับ'
+            ],
+            [
+                'pillar_id' => 6,
+                'name' => 'ความสมบูรณ์'
+            ],
+            [
+                'pillar_id' => 7,
+                'name' => 'ตลาด'
+            ],
+            [
+                'pillar_id' => 7,
+                'name' => 'ปัจจัย'
+            ],
+            [
+                'pillar_id' => 7,
+                'name' => 'แข่งขัน'
+            ],
+            [
+                'pillar_id' => 8,
+                'name' => 'ความสามารถ'
+            ],
+            [
+                'pillar_id' => 8,
+                'name' => 'กำไร'
             ]
         ]);
     }

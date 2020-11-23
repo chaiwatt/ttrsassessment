@@ -21,7 +21,6 @@ $(document).on('click', '#btnaddclustergroup', function(e) {
                 html += `<option value="${pilla['id']}" >${pilla['name']}</option>`
             });
          $("#pillar").html(html);
-        //  $("#pillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
          $('#modal_add_clustergroup').modal('show');
     })
     .catch(error => {})

@@ -171,6 +171,102 @@ class SubPillarIndicesTableSeeder extends Seeder
             [
                 'sub_pillar_id' => 12,
                 'name' => 'กำไรสุทธิ'
+            ],
+            [
+                'sub_pillar_id' => 13,
+                'name' => 'Extra1'
+            ],
+            [
+                'sub_pillar_id' => 13,
+                'name' => 'Extra2'
+            ],
+            [
+                'sub_pillar_id' => 14,
+                'name' => 'Extra3'
+            ],
+            [
+                'sub_pillar_id' => 14,
+                'name' => 'Extra4'
+            ],
+            [
+                'sub_pillar_id' => 15,
+                'name' => 'Extra5'
+            ],
+            [
+                'sub_pillar_id' => 15,
+                'name' => 'Extra6'
+            ],
+            [
+                'sub_pillar_id' => 16,
+                'name' => 'Extra7'
+            ],
+            [
+                'sub_pillar_id' => 16,
+                'name' => 'Extra8'
+            ],
+            [
+                'sub_pillar_id' => 17,
+                'name' => 'Extra9'
+            ],
+            [
+                'sub_pillar_id' => 17,
+                'name' => 'Extra10'
+            ],
+            [
+                'sub_pillar_id' => 18,
+                'name' => 'Extra11'
+            ],
+            [
+                'sub_pillar_id' => 18,
+                'name' => 'Extra12'
+            ],
+            [
+                'sub_pillar_id' => 19,
+                'name' => 'Extra13'
+            ],
+            [
+                'sub_pillar_id' => 19,
+                'name' => 'Extra14'
+            ],
+            [
+                'sub_pillar_id' => 20,
+                'name' => 'Extra15'
+            ],
+            [
+                'sub_pillar_id' => 20,
+                'name' => 'Extra16'
+            ],
+            [
+                'sub_pillar_id' => 21,
+                'name' => 'Extra17'
+            ],
+            [
+                'sub_pillar_id' => 21,
+                'name' => 'Extra18'
+            ],
+            [
+                'sub_pillar_id' => 22,
+                'name' => 'Extra19'
+            ],
+            [
+                'sub_pillar_id' => 22,
+                'name' => 'Extra20'
+            ],
+            [
+                'sub_pillar_id' => 23,
+                'name' => 'Extra21'
+            ],
+            [
+                'sub_pillar_id' => 23,
+                'name' => 'Extra22'
+            ],
+            [
+                'sub_pillar_id' => 24,
+                'name' => 'Extra23'
+            ],
+            [
+                'sub_pillar_id' => 24,
+                'name' => 'Extra24'
             ]
         ]);
     }

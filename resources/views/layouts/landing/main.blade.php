@@ -11,26 +11,27 @@
 
 </head>
 <body>
-    <!-- ======= Top Bar ======= -->
-	@include('layouts.landing.topbar')
+  <!-- ======= Top Bar ======= -->
+  @include('layouts.landing.topbar')
+  
 	<!-- ======= Header ======= -->
 	@include('layouts.landing.header')
-	<!-- End Header -->
+  <!-- End Header -->
+  
 	<!-- ======= Hero Section ======= -->
- 
 	@include('layouts.landing.slide')
   <!-- End Hero -->
 
-   <!-- ======= Services Section ======= -->
-   @include('layouts.landing.service')
+  <!-- ======= Services Section ======= -->
+  @include('layouts.landing.service')
   <!-- End Services Section -->
 
-   <!-- ======= Counts Section ======= -->
-   @include('layouts.landing.pillars')
+  <!-- ======= Counts Section ======= -->
+  @include('layouts.landing.pillars')
   <!-- End Counts Section -->
 
-   <!-- ======= News Section ======= -->
-   @include('layouts.landing.news')
+  <!-- ======= News Section ======= -->
+  @include('layouts.landing.news')
   <!-- End News Section -->
 
 

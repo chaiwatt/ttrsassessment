@@ -15,6 +15,7 @@ class CreatePillarsTable extends Migration
     {
         Schema::create('pillars', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('ev_type_id');
             $table->string('name',250);
             $table->float('percent')->default(0);
             $table->timestamps();

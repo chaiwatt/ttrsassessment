@@ -78,6 +78,11 @@ class DashboardCompanyProjectFullTbpController extends Controller
     }
 
     public function Edit($id){
+        $auth = Auth::user();
+        NotificationBubble::where('target_user_id',$auth->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',5)
+                        ->where('status',0)->delete();
         $businesstypes = BusinessType::get();
         $fulltbp = FullTbp::find($id);
         $fulltbpcompanyprofile = FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first();
@@ -263,7 +268,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' ได้ส่ง'.$message.' ' ;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' ได้ส่ง'.$message.' <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>' ;
         $alertmessage->save();
 
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');

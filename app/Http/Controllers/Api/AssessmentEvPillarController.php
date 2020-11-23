@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class AssessmentEvPillarController extends Controller
 {
     public function GetPillar(Request $request){
-        $pillars = Pillar::get();
+        $pillars = Pillar::where('ev_type_id',$request->evtype)->get();
         return response()->json($pillars); 
     }
     public function DeletePillar(Request $request){

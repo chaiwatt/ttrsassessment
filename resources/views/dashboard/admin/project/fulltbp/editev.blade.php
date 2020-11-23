@@ -8,7 +8,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม Criteria</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม Index Criteria</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body context-menu-one" id="criteriamodal">
@@ -193,6 +193,134 @@
         </div>
     </div>
     
+    <div id="modal_add_extracriteria" class="modal fade " style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม Extra Criteria</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body context-menu-one" id="extracriteriamodal">
+                    {{-- <input type="text" id="evid" value="{{$ev->id}}" hidden> --}}
+                    {{-- <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden> --}}
+                        <form class="wizard-form steps-basic-extra" action="#" data-fouc>
+                            <h6>Pillar</h6>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" id="extra_criteria_wrapper">
+                                            <select name="extrapillar" id="extrapillar" data-placeholder="Pillar" class="form-control form-control-select2" >
+                                            </select> 
+                                        </div>  
+                                    </div>
+                                </div>
+                            </fieldset>
+    
+                            <h6>Sub Pillar</h6>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select name="extrasubpillar" id="extrasubpillar" data-placeholder="Sub Pillar" class="form-control form-control-select2" >
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+    
+                            <h6>Index</h6>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select name="extrasubpillarindex" id="extrasubpillarindex" data-placeholder="Index" class="form-control form-control-select2" >
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">ประเภท Indexfff</label>
+                                            <select name="indextype" id="indextype" data-placeholder="Index" class="form-control form-control-select2" >
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                {{-- <div class="row" id="grade_wrapper">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>เกรด A</label>
+                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>เกรด B</label>
+                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>เกรด C</label>
+                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>เกรด D</label>
+                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>เกรด E</label>
+                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>เกรด F</label>
+                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                            </fieldset>
+    
+                        </form>
+                    {{-- </div> --}}
+  
+                </div>           
+                {{-- <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_add_clustergroup" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+
     {{-- modal_exisingev --}}
     <div id="modal_exisingev" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -379,50 +507,60 @@
                         </div>
                         <div class="form-group">
                             <label>EV ในระบบ</label>
-                                <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-select2">
-                                    <option value="0">==เลือกจาก EV ในระบบ==</option>
-                                    @foreach ($evs as $_ev)
-                                        <option value="{{$_ev->id}}" >
-                                            {{$_ev->name}}
-                                            @if (Empty($_ev->fulltbp))
-                                                (Template)
-                                                @else
-                                                ({{$_ev->fulltbp->minitbp->project}})
-                                            @endif
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-select2">
+                                <option value="0">==เลือกจาก EV ในระบบ==</option>
+                                @foreach ($evs as $_ev)
+                                    <option value="{{$_ev->id}}" >
+                                        {{$_ev->name}}
+                                        @if (Empty($_ev->fulltbp))
+                                            (Template)
+                                            @else
+                                            ({{$_ev->fulltbp->minitbp->project}})
+                                        @endif
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                        {{-- <div class="form-group">
-                            <label>ชื่อรายการ</label>
-                            <input type="text"  name="name" id="name" value="{{$ev->name}}"  placeholder="ชื่อรายการ" class="form-control">
+
+                        <ul class="nav nav-tabs nav-tabs-highlight">
+                            <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
+                            <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="left-icon-tab1">
+                                <div class="form-group">	
+                                    <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="criteriatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Pillar</th>  
+                                                <th>Sub Pillar</th>   
+                                                <th>Index</th>                                                                                
+                                                <th>Criteria</th>  
+                                            </tr>
+                                        </thead>
+                                        <div class="theme_tail theme_tail_circle loadprogress">
+                                            <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                            <div class="pace_activity"></div>
+                                        </div> 
+                                        <tbody id="criteria_transaction_wrapper_tr"> 
+          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="left-icon-tab2">
+                                <div class="form-group">	
+                                    <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" ><i class="icon-add"></i></button>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <label>เวอร์ชั่น</label>
-                            <input type="text" name="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control" readonly>
-                        </div> --}}
-                        <div class="form-group">	
-                            <button type="button" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="criteriatable">
-                                <thead>
-                                    <tr>
-                                        <th>Pillar</th>  
-                                        <th>Sub Pillar</th>   
-                                        <th>Index</th>                                                                                
-                                        <th>Criteria</th>  
-                                    </tr>
-                                </thead>
-                                <div class="theme_tail theme_tail_circle loadprogress">
-                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
-                                    <div class="pace_activity"></div>
-                                </div> 
-                                <tbody id="criteria_transaction_wrapper_tr"> 
-  
-                                </tbody>
-                            </table>
-                        </div>
+
 					</div>
 				</div>
 				<!-- /multiple selection -->

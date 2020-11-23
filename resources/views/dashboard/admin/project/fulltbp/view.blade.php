@@ -1,5 +1,6 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
 {{-- modal_add_employ --}}
@@ -255,16 +256,16 @@
 										<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control">
 									</div>
 									
-									<div class="form-group">
+									{{-- <div class="form-group">
 										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูลพนักงาน</button>
-									</div>
+									</div> --}}
 									
 								</div>
 
 								<div class="tab-pane fade" id="left-icon-employeducation">
-									<div class="form-group">	
+									{{-- <div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
-									</div>
+									</div> --}}
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
 											<thead>
@@ -283,9 +284,9 @@
 
 								</div>
 								<div class="tab-pane fade" id="left-icon-employexpereince">
-									<div class="form-group">	
+									{{-- <div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add"></i></a>
-									</div>
+									</div> --}}
 
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
@@ -324,9 +325,9 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
-									<div class="form-group">	
+									{{-- <div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a>
-									</div>
+									</div> --}}
 
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
@@ -1279,7 +1280,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Full TBP</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{$fulltbp->minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			{{-- <div class="text-right">
@@ -1290,9 +1291,9 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> การประเมิน</a>
-                    <a href="{{route('dashboard.company.project.fulltbp')}}" class="breadcrumb-item"> รายการ Full TBP</a>
-                    <span class="breadcrumb-item active">Full TBP</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>โครงการ</a>
+                    <a href="{{route('dashboard.admin.project.fulltbp')}}" class="breadcrumb-item"> รายการแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</a>
+					{{-- <span class="breadcrumb-item active">{{$fulltbp->minitbp->project}}</span> --}}
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -1440,37 +1441,37 @@
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>จำนวนบุคลากรทั้งหมด</label>
-																	<input type="number" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control" >
+																	<input type="number" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control" readonly >
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ผ่ายบริหาร</label>
-																	<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" >
+																	<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายวิจัยและพัฒนา</label>
-																	<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" >
+																	<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายผลิต/วิศวกรรม</label>
-																	<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" >
+																	<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ผ่ายการตลาด</label>
-																	<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" >
+																	<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>พนักงานทั่วไป</label>
-																	<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" >
+																	<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" readonly>
 																</div>
 															</div>
 														</div>
@@ -1706,7 +1707,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>คำนำหน้าชื่อ</label>
-																<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+																<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2" disabled>
 																	@foreach ($prefixes as $prefix)
 																		<option value="{{$prefix->id}}" 
 																			@if ($prefix->id == @$fulltbp->fulltbpresponsibleperson->prefix_id) selected @endif >{{$prefix->name}}</option> 
@@ -1717,37 +1718,37 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>ชื่อ</label>
-																<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name}}" placeholder="ชื่อ" class="form-control">
+																<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name}}" placeholder="ชื่อ" class="form-control" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>นามสกุล</label>
-																<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname}}" placeholder="นามสกุล" class="form-control">
+																<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname}}" placeholder="นามสกุล" class="form-control" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>อีเมล</label>
-																<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email}}" placeholder="อีเมล" class="form-control">
+																<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email}}" placeholder="อีเมล" class="form-control" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>ตำแหน่ง</label>
-																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position}}" placeholder="ตำแหน่ง" class="form-control">
+																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position}}" placeholder="ตำแหน่ง" class="form-control" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>โทรศัพท์</label>
-																<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1}}" placeholder="เบอร์โทรศัพท์" class="form-control">
+																<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1}}" placeholder="เบอร์โทรศัพท์" class="form-control" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>โทรศัพท์มือถือ</label>
-																<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2}}" placeholder="โทรศัพท์มือถือ" class="form-control">
+																<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2}}" placeholder="โทรศัพท์มือถือ" class="form-control" readonly>
 															</div>
 														</div>
 														<div class="col-md-12">
@@ -1983,7 +1984,7 @@
 																			<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer1_qty}}">
+																						<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer1_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -1997,7 +1998,7 @@
 																			<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer2_qty}}">
+																						<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer2_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2013,7 +2014,7 @@
 																			<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer3_qty}}">
+																						<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer3_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2027,7 +2028,7 @@
 																			<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer4_qty}}">
+																						<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer4_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2043,7 +2044,7 @@
 																			<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer5_qty}}">
+																						<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer5_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2057,7 +2058,7 @@
 																			<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer6_qty}}">
+																						<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer6_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2082,7 +2083,7 @@
 																			<div class="row" id="cer7qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer7) || Empty(@$fulltbpprojectcertify->cer7_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer7_qty}}">
+																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer7_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2096,7 +2097,7 @@
 																			<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer8_qty}}">
+																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer8_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2112,7 +2113,7 @@
 																			<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer9_qty}}">
+																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer9_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2135,7 +2136,7 @@
 																			<div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" name="cer11qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer11_qty}}">
+																						<input type="text" name="cer11qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer11_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2772,15 +2773,15 @@
 															<fieldset>	
 																<div class="form-group">
 																	<label>ประมาณการรายได้ที่จะเพิ่มขึ้น (บาท)</label>
-																	<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control" >
+																	<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control" readonly>
 																</div>
 																<div class="form-group">
 																	<label>ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น (บาท)</label>
-																	<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control" >
+																	<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control" readonly>
 																</div>
 																<div class="form-group">
 																	<label>ประมาณการต้นทุนที่จะลดลง (บาท)</label>
-																	<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control" >
+																	<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control" readonly>
 																</div>
 															</fieldset>
 														{{-- </div> --}}
@@ -2802,23 +2803,25 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
-										<select name="signature" id="usersignature" value="{{$fulltbp->signature_status_id}}" id="" class="form-control form-control-select2">
+										<select name="signature" id="usersignature" value="{{$fulltbp->signature_status_id}}" id="" class="form-control form-control-select2" disabled >
 											@foreach ($signaturestatuses as $signaturestatus)
 												<option value="{{$signaturestatus->id}}" @if($fulltbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
 											@endforeach
 										</select>
 									</div>
-									{{-- <div class="form-group" id="signature_wrapper" @if($fulltbp->signature_status_id == 1) hidden @endif>
-										<a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
+									<div class="form-group" >
+										{{-- <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a> --}}
 										<div class="col-md-12">
 											<div id='sigdiv'>
-												@if (!Empty(Auth::user()->signature))
+												@if (!Empty($fulltbp->minitbp->businessplan->company->user->signature))
+												<label for="">ลายมือชื่อผู้ลงนาม</label>
 												<br>
-												<img src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" alt="">
+												<img id="signatureimg" src="{{asset($fulltbp->minitbp->businessplan->company->user->signature)}}" style="width: 180px;height:45px" alt="">
 												@endif
+												<span id="signatureerror" class="form-text text-danger" hidden >*ไม่พบลายมือชื่อ</span>
 											</div>
 										</div>
-									</div> --}}
+									</div>
 								</div>
 								<!-- /accordion group -->
 		
@@ -2856,6 +2859,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
@@ -2878,6 +2882,128 @@
 				event.preventDefault();
 				return false;
 			}
+		});
+		$('#companyhistory').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#responsibleeducationhistory').summernote({
+			toolbar: false,
+			height: 150,
+		});
+		$('#responsibleexperiencehistory').summernote({
+			toolbar: false,
+			height: 150,
+		});
+		$('#responsibletraininghistory').summernote({
+			toolbar: false,
+			height: 150,
+		});
+		$('#projectabtract_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#mainproduct_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#productdetails_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectechdev_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectechdevproblem_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectinnovation_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#projectstandard_input').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#analysis').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
+		});
+		$('#swot').summernote({
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			height: 300,
 		});
 	});
 
