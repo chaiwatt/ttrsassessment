@@ -1276,6 +1276,48 @@
 		</div>
 	</div>
 </div>
+	<!-- Modal with subtitle -->
+	<div id="modal_signature" class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="messagetitle">ลายมือชื่อ</h5>		
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<div id="signature-pad" class="signature-pad" style="text-align: center">
+										<canvas width="400" height="100" style="border: dashed 1px"></canvas>
+										<div class="signature-pad--footer">
+										  {{-- <div class="description" ></div> --}}
+									<p>ลายมือชื่อ</p>
+										  <div class="signature-pad--actions">
+											<div>
+											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัปโหลด</button>
+											  <button type="button" class="btn bg-primary clear" data-action="clear">เคลียร์</button>
+											  <button type="button" class="btn bg-primary" data-action="undo">ยกเลิก</button>
+											  <button type="button" class="btn bg-success save" data-action="save-png">บันทึก</button>								
+											</div>
+											<input type="file" style="display:none;" id="signature" name="picture"/>
+										  </div>
+										</div>
+									  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button> --}}
+				</div>
+			</div>
+		</div>
+	</div>
 
     <!-- Page header -->
     <div class="page-header page-header-light">
@@ -2818,8 +2860,9 @@
 											<div id='sigdiv'>
 												@if (!Empty(Auth::user()->signature))
 												<br>
-												<img src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" alt="">
+												<img id="signatureimg" src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" alt="">
 												@endif
+												<span id="signatureerror" class="form-text text-danger" hidden >*ไม่พบลายมือชื่อ</span>
 											</div>
 										</div>
 									</div>
@@ -2867,6 +2910,8 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 
 <script>
@@ -2876,7 +2921,7 @@
 		token: $('meta[name="csrf-token"]').attr('content'),
 		branchid: "{{Auth::user()->branch_id}}",
 		submitstatus: "{{$minitbp->businessplan->business_plan_status_id}}",
-		refixstatus: "{{$minitbp->refixstatus}}"
+		refixstatus: "{{$fulltbp->refixstatus}}"
 	};
 	$(document).ready(function() {
 		$(window).keydown(function(event){

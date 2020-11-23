@@ -402,7 +402,7 @@
                         if(timeline.message_type == 1){
                             doctype ='เอกสาร Mini TBP';
                         }else if(timeline.message_type == 2){
-                            doctype ='เอกสาร Full TBP';
+                            doctype ='แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)';
                         }
                         html += `<tr >                                        
                             <td> ${timeline.createdatth} </td>                            

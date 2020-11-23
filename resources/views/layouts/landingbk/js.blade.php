@@ -1,0 +1,24 @@
+		<!-- Vendor -->
+		<script src="{{asset('assets/landing/vendor/modernizr/modernizr.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery/jquery.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery.appear/jquery.appear.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery.cookie/jquery.cookie.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/popper/umd/popper.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/common/common.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery.validation/jquery.validate.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery.gmap/jquery.gmap.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/jquery.lazyload/jquery.lazyload.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/isotope/jquery.isotope.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/vide/jquery.vide.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/vivus/vivus.min.js')}}"></script>
+		<script src="{{asset('assets/landing/js/theme.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/rs-plugin/js/jquery.themepunch.tools.min.js')}}"></script>
+		<script src="{{asset('assets/landing/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
+		<script src="{{asset('assets/landing/js/views/view.contact.js')}}"></script>
+		<script src="{{asset('assets/landing/js/custom.js')}}"></script>
+		<script src="{{asset('assets/landing/js/theme.init.js')}}"></script>

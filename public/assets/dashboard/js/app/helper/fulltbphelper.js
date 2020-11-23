@@ -1847,6 +1847,7 @@ $(document).on('change', '#organizeimg', function(e) {
 });
 
 // Basic wizard setup
+var form = $('.steps-basic').show();
 $('.steps-basic').steps({
     headerTag: 'h6',
     bodyTag: 'fieldset',
@@ -1879,10 +1880,12 @@ $('.steps-basic').steps({
             FullTbp.editMarketPlan($('#fulltbpid').val(),$('#analysis').val(),$('#modelcanvas').val(),$('#swot').val()).then(data => {
                 console.log(data);
             })
+            
             .catch(error => {})
         }else if(currentIndex == 4){
             var hidden = '';
-            if(route.submitstatus !=4 && route.refixstatus == 0){
+            // if(route.submitstatus !=4 && route.refixstatus == 0){
+            if(route.submitstatus !=4 && (route.refixstatus == 0 || route.refixstatus == 2 )){
                 hidden = 'hidden';
                 $("#appceptagreement_wrapper").attr("hidden",true);
             }
@@ -1898,6 +1901,20 @@ $('.steps-basic').steps({
                 PDFObject.embed(pdfpath, "#example1");
             })
         }
+    },
+    onStepChanging: function (event, currentIndex, newIndex) {
+        if(currentIndex == 3){
+            if($('#usersignature').val() == 2){
+                if (typeof $('#signatureimg').val() === 'undefined'){
+                    $("#signatureerror").attr("hidden",false);
+                    return;
+                }else{
+                    $("#signatureerror").attr("hidden",true);
+                }
+            }
+        }
+        form.validate().settings.ignore = ':disabled,:hidden';
+        return form.valid();
     },
     onFinished: function (event, currentIndex) {
         alert('Form submitted.');
@@ -2098,12 +2115,12 @@ $(document).on('click', '#submitfulltbp', function(e) {
         });
         return;
     }
-    var text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
+    var text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) หรือไม่'
     if($('#usersignature').val() == 1){
-        text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+        text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
     }
     Swal.fire({
-        title: 'เอกสาร Full TBP',
+        title: 'โปรดยืนยัน',
         text: text,
         type: 'warning',
         showCancelButton: true,
@@ -2125,7 +2142,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         var html = ``;
                         Swal.fire({
                             title: 'สำเร็จ...',
-                            text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
                         }).then((result) => {
                             window.location.reload();
                         });

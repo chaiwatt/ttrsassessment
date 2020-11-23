@@ -1,39 +1,69 @@
-<footer id="footer" class="mt-0">
-    <div class="container my-4">
-        <div class="row py-5">
-            <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
-                <h5 class="text-5 text-transform-none font-weight-light text-color-light mb-4">{{trans('lang.contactdetail')}}</h5>
-                <p class="text-4 mb-0">{{$generalinfo->address}} ตำบล{{$generalinfo->tambol->name}} อำเภอ{{$generalinfo->amphur->name}} จังหวัด{{$generalinfo->province->name}} {{$generalinfo->postalcode}}</p>
+<footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+           
+              <a href="index.html"><img src="{{asset('assets/landing/img/logo.png')}}" class="w-75" alt="" class="img-fluid"></a>
+         
+            <p id="thaifont">
+              111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120
+             
+             
+            </p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
             </div>
-            <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
-                <h5 class="text-5 text-transform-none font-weight-light text-color-light mb-4">{{trans('lang.openhour')}}</h5>
-                <p class="text-4 mb-0">จันทร์-ศุกร์: <span class="text-color-light">{{$generalinfo->workdaytime}}</span></p>
-                <p class="text-4 mb-0">เสาร์: <span class="text-color-light">{{$generalinfo->saturdaytime}}</span></p>
-                <p class="text-4 mb-0">อาทิตย์: <span class="text-color-light">{{$generalinfo->sundaytime}}</span></p>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
-                <h5 class="text-5 text-transform-none font-weight-light text-color-light mb-4">{{trans('lang.callus')}}</h5>
-                <p class="text-4 mb-0">โทรศัพท์: <span class="text-color-light">{{$generalinfo->phone1}} {{$generalinfo->phone2}}</span></p>
-                <p class="text-4 mb-0">แฟ็กซ์: <span class="text-color-light">{{$generalinfo->fax}}</span></p>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <h5 class="text-5 text-transform-none font-weight-light text-color-light mb-4">Social Media</h5>
-                <ul class="footer-social-icons social-icons m-0">
-                    <li class="social-icons-facebook"><a href="{{$generalinfo->facebook}}" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                    <li class="social-icons-youtube"><a href="{{$generalinfo->youtube}}" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-                </ul>
-            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-7 footer-links">
+            <h4>เวลาทำการ</h4>
+             จันทร์-ศุกร์: <strong> 08.00-16.00</strong> 
+            <br>
+            เสาร์:  <strong> 08.00-17.00</strong> 
+            <br>
+            อาทิตย์: <strong> ปิดทำการ</strong> 
+
+            <h4 class="mt-3">เวลาทำการ</h4>
+            โทรศัพท์: <strong>0-2564-7000, 0-2564-8000</strong>
+            <br>
+            แฟ็กซ์: <strong>0-2564-7001-5</strong>
+          </div>
+
+          <div class="col-lg-2 col-md-5 footer-links">
+            <h4>เมนู ด่วน</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">หน้าหลัก</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">ข่าวสาร</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">ประกาศ</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">งานบริการ</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">ติดต่อเรา</a></li>
+            </ul>
+          </div>
+          
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>ศูนย์ช่วยเหลือ</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
         </div>
+      </div>
     </div>
+
     <div class="container">
-        <div class="footer-copyright footer-copyright-style-2 pb-4">
-            <div class="py-2">
-                <div class="row py-4">
-                    <div class="col d-flex align-items-center justify-content-center mb-4 mb-lg-0">
-                        <p>© {{trans('lang.copyright')}} {{date("Y")}} {{$generalinfo->company}} {{URL('')}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="copyright">
+        &copy;สงวนลิขสิทธิ์ 2020  <strong><span>สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ</span></strong>.  http://203.185.137.240
+      </div>
+    
     </div>
-</footer>
+  </footer>

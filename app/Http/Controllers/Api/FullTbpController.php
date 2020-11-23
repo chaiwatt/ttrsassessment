@@ -77,13 +77,13 @@ class FullTbpController extends Controller
             'status' => 2
         ]);
         
-        $message = 'เอกสาร Full TBP' ;
+        $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)' ;
         $fulltbp = FullTbp::find($request->id);
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
-            $message = 'เอกสาร Full TBP ที่มีการแก้ไข' ;
+            $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ที่มีการแก้ไข' ;
         }
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
@@ -125,13 +125,13 @@ class FullTbpController extends Controller
             'attachment' => $filelocation
         ]);
         
-        $message = 'เอกสาร Full TBP' ;
+        $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)' ;
         $fulltbp = FullTbp::find($request->id);
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
-            $message = 'เอกสาร Full TBP ที่มีการแก้ไข' ;
+            $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ที่มีการแก้ไข' ;
         }
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);

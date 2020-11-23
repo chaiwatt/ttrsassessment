@@ -71,13 +71,13 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = User::find($request->leader)->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบเอกสารแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
         $alertmessage->save();
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = User::find($request->coleader)->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบเอกสารแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project . ' โปรดตรวจสอบแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
         $alertmessage->save();
 
         EmailBox::send(User::find($request->leader)->email,'TTRS:มอบหมาย Leader โครงการ','เรียนคุณ'.User::find($request->leader)->name. ' ' .User::find($request->leader)->lastname. '<br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
@@ -85,7 +85,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
 
         Message::sendMessage('มอบหมาย Leader โครงการ','เรียนคุณ'.User::find($request->leader)->name .' ' . User::find($request->leader)->lastname.'<br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->leader)->id);
         Message::sendMessage('มอบหมาย Co-Leader โครงการ','เรียนคุณ'.User::find($request->coleader)->name .' ' . User::find($request->coleader)->lastname.'<br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->coleader)->id);
-        return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('Assign สำเร็จ');
+        return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('การมอบหมายสำเร็จ');
     }
     public function GetWorkLoadLeader(Request $request){
         $businessplanids = ProjectAssignment::where('leader_id',$request->userid)->pluck('business_plan_id')->toArray();

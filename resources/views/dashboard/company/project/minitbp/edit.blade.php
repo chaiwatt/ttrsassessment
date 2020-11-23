@@ -482,8 +482,11 @@
 												<div id='sigdiv'>
 													@if (!Empty(Auth::user()->signature))
 													<br>
-													<img src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" alt="">
+													<img id="signatureimg" src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" >
+													{{-- input type="image" --}}
+													{{-- <input id="signatureimg" type="image" src="{{asset(@Auth::user()->signature)}}" style="width: 180px;height:45px" required > --}}
 													@endif
+													<span id="signatureerror" class="form-text text-danger" hidden >*ไม่พบลายมือชื่อ</span>
 												</div>
 											</div>
 										</div>
@@ -569,6 +572,17 @@
 				form.find('.body:eq(' + newIndex + ') label.error').remove();
 				form.find('.body:eq(' + newIndex + ') .error').removeClass('error');
 			}
+			if(currentIndex == 2){
+				if($('#usersignature').val() == 2){
+					// console.log($('#signatureimg').val());
+					if (typeof $('#signatureimg').val() === 'undefined'){
+						$("#signatureerror").attr("hidden",false);
+						return;
+					}else{
+						$("#signatureerror").attr("hidden",true);
+					}
+				}
+			}
 			form.validate().settings.ignore = ':disabled,:hidden';
 			return form.valid();
 		},
@@ -577,7 +591,7 @@
 			return form.valid();
 		},
 		onStepChanged:function (event, currentIndex, newIndex) {
-			console.log('current step ' + currentIndex);
+			// console.log('current step ' + currentIndex);
 			if(currentIndex == 3){
 				var hidden = '';
 				if(submitstatus !=2 && (refixstatus == 0 || refixstatus == 2 )){
@@ -628,8 +642,7 @@
 					formData.append('managername',$('#managername').val());
 					formData.append('managerlastname',$('#managerlastname').val());
 					formData.append('managerposition',$('#managerposition').val());
-					formData.append('signature',$('#usersignature').val());
-					
+					formData.append('signature',$('#usersignature').val());	
 					$.ajax({
 						url: `${route.url}/api/minitbp/editsave`,  //Server script to process data
 						type: 'POST',

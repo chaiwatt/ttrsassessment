@@ -78,7 +78,7 @@ savePNGButton.addEventListener("click", function (event) {
     var dataURL = signaturePad.toDataURL();
     uploadSignature(dataURL).then(data => {
     console.log(data);
-    var html = `<img src="${route.url}/${data.signature}" style="width: 150px;height:75px" alt="">`;
+    var html = `<img id="signatureimg" src="${route.url}/${data.signature}" style="width: 150px;height:75px" alt="">`;
     // console.log(html);
     $('#modal_signature').modal('hide');
       $("#sigdiv").html(html);
@@ -130,7 +130,7 @@ $("#signature").on('change', function() {
           processData: false,
           success: function(data){
               console.log(data)
-              var html = `<br><img src="${route.url}/${data.signature}" style="width: 150px;height:75px" alt="">`;
+              var html = `<br><img id="signatureimg" src="${route.url}/${data.signature}" style="width: 150px;height:75px" alt="">`;
               $('#modal_signature').modal('hide');
               $("#sigdiv").html(html);
       }

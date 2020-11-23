@@ -236,13 +236,13 @@ class DashboardCompanyProjectFullTbpController extends Controller
             'status' => 2
         ]);
         
-        $message = 'เอกสาร Full TBP' ;
+        $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)' ;
         $fulltbp = FullTbp::find($id);
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
-            $message = 'เอกสาร Full TBP ที่มีการแก้ไข' ;
+            $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ที่มีการแก้ไข' ;
         }
 
         $businessplan = BusinessPlan::find(MiniTBP::find($fulltbp->mini_tbp_id)->business_plan_id)->update([
@@ -263,7 +263,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
-        $alertmessage->detail = 'โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' ได้ส่ง'.$message.' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' ได้ส่ง'.$message.' ' ;
         $alertmessage->save();
 
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
@@ -272,7 +272,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         Message::sendMessage('ส่ง'.$message,'เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($projectassignment->leader_id)->id);
         Message::sendMessage('ส่ง'.$message,'เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
         
-        return redirect()->route('dashboard.company.project.fulltbp')->withSuccess('ส่งเอกสาร Full TBP สำเร็จ');
+        return redirect()->route('dashboard.company.project.fulltbp')->withSuccess('ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ');
     }
    
 }
