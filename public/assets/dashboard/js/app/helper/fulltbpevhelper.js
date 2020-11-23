@@ -6,9 +6,12 @@ import * as PillaIndexWeigth from './pillaindexweigth.js';
 var globalNewIndex = 0;
 $( document ).ready(function() {
     Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
-        RenderTable(data);
+        RenderTable(data,1);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
+        RenderTable(data,2);
+        $(".loadprogress").attr("hidden",true);
+        RowSpan("extracriteriatable");
     }).catch(error => {})
 });
 
@@ -296,11 +299,19 @@ $('.steps-basic-extra').steps({
         return true;
     },
     onFinished: function (event, currentIndex) {
-        if($('#indextype').val() == 1){
-            AddGrading();
-        }else{
-            AddCheckList();
-        }
+        // if($('#indextype').val() == 1){
+            // AddGrading();
+        // }else{
+        //     AddCheckList();
+        // }
+        Ev.addExtraEvGrading($('#evid').val(),1,$('#extrapillar').val(),$('#extrasubpillar').val(),$('#extrasubpillarindex').val()).then(data => {
+            RenderTable(data,2);
+            RowSpan("extracriteriatable");
+             Swal.fire({
+                title: 'สำเร็จ...',
+                text: 'เพิ่มรายการสำเร็จ!',
+                });
+        }).catch(error => {})
     }
 });
 
@@ -316,7 +327,7 @@ function AddCheckList(){
     });
 
     Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val(),$('#gradef').val()).then(data => {
-         RenderTable(data);
+         RenderTable(data,1);
          RowSpan("criteriatable");
          Pillar.getRelatedEv($('#evid').val()).then(data => {
             var html =``;
@@ -334,7 +345,7 @@ function AddCheckList(){
 
 function AddGrading(){
     Ev.addEvGrading($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
-        RenderTable(data);
+        RenderTable(data,1);
         RowSpan("criteriatable");
          Swal.fire({
             title: 'สำเร็จ...',
@@ -357,7 +368,7 @@ $(document).on('click', '#btn_modal_exisingev', function(e) {
     Ev.copyEv($('#existingev').val(),$('#evid').val()).then(data => {
         Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
             $(".loadprogress").attr("hidden",true);
-            RenderTable(data);
+            RenderTable(data,1);
             RowSpan("criteriatable");
         }).catch(error => {})
     }).catch(error => {})
@@ -379,10 +390,10 @@ function RenderModalTable(data){
         });
     $("#criteria_transaction_modal_wrapper_tr").html(html);
 }
-function RenderTable(data){
+function RenderTable(data,evtype){
     var html =``;
     data.forEach(function (criteria,index) {
-        if(criteria.ev_type_id == 1){
+        if(criteria.ev_type_id == evtype){
             var criterianame = '-';
             if(criteria.criteria != null){
                 criterianame = criteria.criteria['name']
@@ -399,7 +410,13 @@ function RenderTable(data){
             </tr>`
         }
         });
-    $("#criteria_transaction_wrapper_tr").html(html);
+    if(evtype == 1){
+        $("#criteria_transaction_wrapper_tr").html(html);
+    }else if(evtype == 2){
+        $("#extra_criteria_transaction_wrapper_tr").html(html);
+    }
+
+    
 }
 
 function RowSpan(tableid){
@@ -454,8 +471,10 @@ $(document).on('click', '.deletepillar', function(e) {
         }).then((result) => {
         if (result.value) {
             Pillar.deletePillar($('#evid').val(),$(this).data('pillar')).then(data => {
-                RenderTable(data);
+                RenderTable(data,1);
                 RowSpan("criteriatable");
+                RenderTable(data,2);
+                RowSpan("extracriteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -518,8 +537,10 @@ $(document).on('click', '.deletesubpillar', function(e) {
         }).then((result) => {
         if (result.value) {
             SubPillar.deleteSubPillar($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar')).then(data => {
-                RenderTable(data);
+                RenderTable(data,1);
                 RowSpan("criteriatable");
+                RenderTable(data,2);
+                RowSpan("extracriteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -544,8 +565,10 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
         }).then((result) => {
         if (result.value) {
             SubPillar.deleteSubPillarIndex($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar'),$(this).data('subpillarindex')).then(data => {
-                RenderTable(data);
+                RenderTable(data,1);
                 RowSpan("criteriatable");
+                RenderTable(data,2);
+                RowSpan("extracriteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',

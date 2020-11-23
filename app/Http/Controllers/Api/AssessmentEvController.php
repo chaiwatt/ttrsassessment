@@ -95,6 +95,34 @@ class AssessmentEvController extends Controller
                                                 ->get();
         return response()->json($criteriatransactions); 
     }
+    public function AddExtraEvGrading(Request $request){
+        $criteriatransaction = new CriteriaTransaction();
+        $criteriatransaction->ev_id = $request->evid;
+        $criteriatransaction->ev_type_id = 2;
+        $criteriatransaction->index_type_id = $request->indextype;
+        $criteriatransaction->pillar_id = $request->pillar;
+        $criteriatransaction->sub_pillar_id = $request->subpillar;
+        $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
+        $criteriatransaction->save();
+
+        $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)->where('sub_pillar_index_id',$request->subpillarindex)->first();
+        if(Empty($pillaindexweigth)){
+            $pillaindexweigth = new PillaIndexWeigth();
+            $pillaindexweigth->ev_id = $request->evid;
+            $pillaindexweigth->pillar_id = $request->pillar;
+            $pillaindexweigth->sub_pillar_id = $request->subpillar;
+            $pillaindexweigth->sub_pillar_index_id = $request->subpillarindex;
+            $pillaindexweigth->weigth = 0;
+            $pillaindexweigth->save();
+        }
+
+        $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
+                                                ->orderBy('pillar_id','asc')
+                                                ->orderBy('sub_pillar_id', 'asc')
+                                                ->orderBy('sub_pillar_index_id', 'asc')
+                                                ->get();
+        return response()->json($criteriatransactions); 
+    }
     public function GetEv(Request $request){
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
                                                 ->orderBy('pillar_id','asc')

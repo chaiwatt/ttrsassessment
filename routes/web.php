@@ -154,6 +154,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'ev'], function(){
                 Route::post('addevchecklist','Api\AssessmentEvController@AddEvChecklist')->name('api.assessment.ev.addevchecklist');          
                 Route::post('addevgrading','Api\AssessmentEvController@AddEvGrading')->name('api.assessment.ev.addevgrading'); 
+                Route::post('addextraevgrading','Api\AssessmentEvController@AddExtraEvGrading')->name('api.assessment.ev.addextraevgrading'); 
                 Route::post('getev','Api\AssessmentEvController@GetEv')->name('api.assessment.ev.getev'); 
                 Route::post('editev','Api\AssessmentEvController@EditEv')->name('api.assessment.ev.editev'); 
                 Route::post('getevbyfulltbp','Api\AssessmentEvController@GetEvByFulltbp')->name('api.assessment.ev.getevbyfulltbp'); 

@@ -557,6 +557,25 @@
                                 <div class="form-group">	
                                     <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" ><i class="icon-add"></i></button>
                                 </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="extracriteriatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Pillar</th>  
+                                                <th>Sub Pillar</th>   
+                                                <th>Index</th>                                                                                
+                                                <th>Criteria</th>  
+                                            </tr>
+                                        </thead>
+                                        <div class="theme_tail theme_tail_circle loadprogress">
+                                            <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                            <div class="pace_activity"></div>
+                                        </div> 
+                                        <tbody id="extra_criteria_transaction_wrapper_tr"> 
+          
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                         </div>

@@ -52,6 +52,28 @@ function addEvGrading(evid,indextype,pillar,subpillar,subpillarindex){
         })
       })
 }
+function addExtraEvGrading(evid,indextype,pillar,subpillar,subpillarindex){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/assessment/ev/addextraevgrading`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          evid : evid,
+          indextype : indextype,
+          pillar : pillar,
+          subpillar : subpillar,
+          subpillarindex : subpillarindex
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
 
 function getEv(evid){
     return new Promise((resolve, reject) => {
@@ -175,4 +197,4 @@ function editEv(evid,name,version,percentindex,percentextra){
     })
 }
 
-export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv}
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading}
