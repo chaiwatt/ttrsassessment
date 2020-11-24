@@ -458,34 +458,37 @@ class AssessmentEvController extends Controller
         $evedithistory->save();
         $evedithistories = EvEditHistory::where('ev_id',$request->id)->get();
 
-
-        FullTbp::find($request->id)->update(
+        Ev::find($request->id)->update(
             [
                 'refixstatus' => 1
             ]
         );
 
-        // $timeLinehistory = new TimeLineHistory();
-        // $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
-        // $timeLinehistory->details = $request->note;
-        // $timeLinehistory->user_id = Auth::user()->id;
-        // $timeLinehistory->message_type = 2;
-        // $timeLinehistory->owner_id = $_company->user_id;
-        // $timeLinehistory->save();
+        $ev = Ev::find($request->id);
 
-        // $alertmessage = new AlertMessage();
-        // $alertmessage->user_id = $auth->id;
-        // $alertmessage->target_user_id = $_company->user_id;
-        // $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดแก้ไขแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ตามข้อแนะนำ ดังนี้<br><br>' .$request->note . '<br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
-        // $alertmessage->save();
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 5;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $projectassignment->leader_id;
+        $notificationbubble->save();
 
-        // $notificationbubble = new NotificationBubble();
-        // $notificationbubble->business_plan_id = $minitbp->business_plan_id;
-        // $notificationbubble->notification_category_id = 1;
-        // $notificationbubble->notification_sub_category_id = 5;
-        // $notificationbubble->user_id = Auth::user()->id;
-        // $notificationbubble->target_user_id = $_user->id;
-        // $notificationbubble->save();
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id =  $projectassignment->leader_id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ให้แก้ไข EV <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
+        $alertmessage->save();
+
+        $fulltbps = FullTbp::where('id', $id)->get();
+
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' แล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' เสร็จแล้ว','ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
 
         // EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br><br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  ' <br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a><br><br>ด้วยความนับถือ<br>TTRS');
         // Message::sendMessage('แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a><br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);

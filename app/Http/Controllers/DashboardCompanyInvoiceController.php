@@ -36,11 +36,11 @@ class DashboardCompanyInvoiceController extends Controller
         }
 
         
-        public function SampleInvoice(){
-            $data = [
-                'fulltbp' => 'nothing'
-            ];
-            $pdf = PDF::loadView('dashboard.company.project.invoice.invoicepdf', $data);
-            return $pdf->stream('document.pdf');
-        }
+        // public function SampleInvoice(){
+        //     $data = [
+        //         'fulltbp' => 'nothing'
+        //     ];
+        //     $pdf = PDF::loadView('dashboard.company.project.invoice.invoicepdf', $data);
+        //     return $pdf->stream('document.pdf');
+        // }
 }

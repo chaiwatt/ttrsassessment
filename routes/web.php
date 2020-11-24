@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
-Route::group(['prefix' => 'invoice'], function(){
-    Route::get('','DashboardCompanyInvoiceController@SampleInvoice')->name('dashboard.company.project.voice');           
-}); 
+// Route::group(['prefix' => 'invoice'], function(){
+//     Route::get('','DashboardCompanyInvoiceController@SampleInvoice')->name('dashboard.company.project.voice');           
+// }); 
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
@@ -539,9 +539,9 @@ Route::group(['middleware' => 'auth'], function(){
                 
             });      
             Route::group(['prefix' => 'project'], function(){
-                // Route::group(['prefix' => 'invoice'], function(){
-                //     Route::get('/{id}','DashboardCompanyInvoiceController@Invoice')->name('dashboard.company.project.invoice');           
-                // }); 
+                Route::group(['prefix' => 'invoice'], function(){
+                    Route::get('/{id}','DashboardCompanyInvoiceController@Invoice')->name('dashboard.company.project.invoice');           
+                }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardCompanyProjectAssessmentController@Index')->name('dashboard.company.assessment');           
                 }); 
