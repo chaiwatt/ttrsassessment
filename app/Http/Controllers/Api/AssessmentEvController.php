@@ -11,6 +11,7 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+use App\Model\EvEditHistory;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
@@ -447,5 +448,55 @@ class AssessmentEvController extends Controller
         ]);
         $ev = Ev::find($request->evid);
         return response()->json($ev); 
+    }
+    public function CommentEvStageone(Request $request){
+        $evedithistory = new EvEditHistory();
+        $evedithistory->ev_id  = $request->id;
+        $evedithistory->historytype = 1;
+        $evedithistory->detail = $request->comment;
+        $evedithistory->user_id = Auth::user()->id;
+        $evedithistory->save();
+        $evedithistories = EvEditHistory::where('ev_id',$request->id)->get();
+
+
+        FullTbp::find($request->id)->update(
+            [
+                'refixstatus' => 1
+            ]
+        );
+
+        // $timeLinehistory = new TimeLineHistory();
+        // $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        // $timeLinehistory->details = $request->note;
+        // $timeLinehistory->user_id = Auth::user()->id;
+        // $timeLinehistory->message_type = 2;
+        // $timeLinehistory->owner_id = $_company->user_id;
+        // $timeLinehistory->save();
+
+        // $alertmessage = new AlertMessage();
+        // $alertmessage->user_id = $auth->id;
+        // $alertmessage->target_user_id = $_company->user_id;
+        // $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดแก้ไขแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ตามข้อแนะนำ ดังนี้<br><br>' .$request->note . '<br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
+        // $alertmessage->save();
+
+        // $notificationbubble = new NotificationBubble();
+        // $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+        // $notificationbubble->notification_category_id = 1;
+        // $notificationbubble->notification_sub_category_id = 5;
+        // $notificationbubble->user_id = Auth::user()->id;
+        // $notificationbubble->target_user_id = $_user->id;
+        // $notificationbubble->save();
+
+        // EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br><br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  ' <br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a><br><br>ด้วยความนับถือ<br>TTRS');
+        // Message::sendMessage('แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a><br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+
+        return response()->json($evedithistories); 
+    }
+    public function DeleteEvComment(Request $request){
+        $evedithistory = EvEditHistory::find($request->id);
+        $evedithistoryid = $evedithistory->ev_id;
+        $evedithistory->delete();
+        $evedithistories = EvEditHistory::where('ev_id',$evedithistoryid)->get();
+        return response()->json($evedithistories); 
     }
 }

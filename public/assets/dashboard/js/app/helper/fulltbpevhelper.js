@@ -830,3 +830,52 @@ $(document).on('change', '#extrasubpillar', function(e) {
         // }).catch(error => {})
     }).catch(error => {})
 });
+
+
+$(document).on('click', '#btn_modal_add_comment', function(e) {
+    console.log('hello');
+    Ev.addCommentStageOne($('#evid').val(),$('#comment').val()).then(data => {
+        console.log(data);
+        var html =``;
+        data.forEach(function (comment,index) {
+                html += `<tr > 
+                <td> ${comment.created_at} </td>                                            
+                <td> ${comment.detail} </td>    
+                <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
+                </tr>`
+            });
+        $("#ev_edit_history_wrapper_tr").html(html);
+
+    }).catch(error => {})
+});
+
+$(document).on("click",".deletecomment",function(e){
+    console.log($(this).data('id'));
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Ev.deleteComment($(this).data('id')).then(data => {
+                console.log(data);
+                var html =``;
+                data.forEach(function (comment,index) {
+                        html += `<tr > 
+                        <td> ${comment.created_at} </td>                                            
+                        <td> ${comment.detail} </td>    
+                        <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
+                        </tr>`
+                    });
+                $("#ev_edit_history_wrapper_tr").html(html);
+        
+            }).catch(error => {})
+        }
+    });
+}); 

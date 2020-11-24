@@ -646,7 +646,7 @@
                                             <tr class="bg-info">
                                                 <th>วันที่</th>  
                                                 <th>รายละเอียด</th>   
-                                                {{-- <th>โดย</th> --}}
+                                                <th>เพิ่มเติม</th>
                                             </tr>
                                         </thead>
                                         <tbody id="ev_edit_history_wrapper_tr"> 
@@ -654,7 +654,7 @@
                                             <tr>
                                                 <td>{{$evedithistory->created_at}}</td>
                                                 <td>{{$evedithistory->detail}}</td>
-                                                <td>{{$evedithistory->user->name}} {{$evedithistory->user->lastname}}</td>
+                                                <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
                                             </tr>
                                             @endforeach
                                         </tbody>

@@ -215,4 +215,43 @@ function editEv(evid,name,version,percentindex,percentextra){
     })
 }
 
-export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading,approveEvStageOne}
+function addCommentStageOne(id,comment){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/commentevstageone`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          id : id,
+          comment : comment
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+
+function deleteComment(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/deleteevcomment`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          id : id
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading,approveEvStageOne,addCommentStageOne,deleteComment}

@@ -164,7 +164,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('updateevstatus','Api\AssessmentEvController@UpdateEvStatus')->name('api.assessment.ev.updateevstatus'); 
                 Route::post('approveevstageone','Api\AssessmentEvController@ApproveEvStageOne')->name('api.assessment.ev.approveevstageone'); 
                 Route::post('commentevstageone','Api\AssessmentEvController@CommentEvStageone')->name('api.assessment.ev.commentevstageone');
-                Route::post('deletecommentevstageone','Api\AssessmentEvController@DeleteCommentEvStageone')->name('api.assessment.ev.deletecommentevstageone');
+                Route::post('deleteevcomment','Api\AssessmentEvController@DeleteEvComment')->name('api.assessment.ev.deleteevcomment');
                 Route::post('approveevstagetwo','Api\AssessmentEvController@ApproveEvStageTwo')->name('api.assessment.ev.approveevstagetwo'); 
                 Route::post('approveevstagethree','Api\AssessmentEvController@ApproveEvStageThree')->name('api.assessment.ev.approveevstagethree'); 
                 Route::post('updateadminevstatus','Api\AssessmentEvController@UpdateAdminEvStatus')->name('api.assessment.ev.updateadminevstatus');
