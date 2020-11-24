@@ -12,7 +12,7 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                @if (Auth::user()->user_type_id == 5)
+                @if (Auth::user()->user_type_id > 5)
                     @if ($ev->status >= 3)
                             <div class="text-right">
                                 <button type="button" id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>ส่งรายการแก้ไข <i class="icon-paperplane ml-2"></i></button>

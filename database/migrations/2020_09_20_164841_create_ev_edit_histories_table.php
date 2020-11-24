@@ -17,6 +17,7 @@ class CreateEvEditHistoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ev_id');
             $table->foreign('ev_id')->references('id')->on('evs')->onDelete('cascade');
+            $table->char('historytype',1)->default(1); //1 = jd comment first ev, 2 = admin comment before weight, 3 = jd comment weight
             $table->text('detail')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

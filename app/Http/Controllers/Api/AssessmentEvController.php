@@ -189,12 +189,65 @@ class AssessmentEvController extends Controller
 
     public function UpdateEvStatus(Request $request){
         $auth = Auth::user();
-        $status = 1;
-        if($request->chkevstatus == 1){
-            $status = 2;
-        }
+        // $status = 1;
+        // if($request->chkevstatus == 1){
+        //     $status = 2;
+        // }
         Ev::find($request->id)->update([
-            'status' => $status
+            'status' => 1
+        ]);
+        $ev = Ev::find($request->id);
+        // $admins = User::where('user_type_id',5)->pluck('id')->toArray();
+        // $projectsmembers = ProjectMember::where('full_tbp_id',$ev->full_tbp_id)->whereIn('user_id',$admins)->get();
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+
+        // foreach ($projectsmembers as $key => $projectsmember) {
+        //     $notificationbubble = new NotificationBubble();
+        //     $notificationbubble->business_plan_id = $businessplan->id;
+        //     $notificationbubble->notification_category_id = 1;
+        //     $notificationbubble->notification_sub_category_id = 6;
+        //     $notificationbubble->user_id = $auth->id;
+        //     $notificationbubble->target_user_id = $projectsmember->user_id;
+        //     $notificationbubble->save();
+
+        //     $alertmessage = new AlertMessage();
+        //     $alertmessage->user_id = $auth->id;
+        //     $alertmessage->target_user_id =$projectsmember->user_id;
+        //     $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ตรวจสอบ EV ของโครงการ ' . $minitbp->project .'  ';
+        //     $alertmessage->save();
+
+        //     EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        //     Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+        // }
+
+        $jd = User::where('user_type_id',6)->first();
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 5;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $jd->id;
+        $notificationbubble->save();
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id =$jd->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ตรวจสอบ EV ของโครงการ ' . $minitbp->project .' <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> ';
+        $alertmessage->save();
+
+        EmailBox::send(User::find($jd->id)->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$jd->id);
+
+        $ev = Ev::find($request->id);
+        return response()->json($ev);
+    }
+
+    public function ApproveEvStageOne(Request $request){
+        $auth = Auth::user();
+        Ev::find($request->id)->update([
+            'status' => 2
         ]);
         $ev = Ev::find($request->id);
         $admins = User::where('user_type_id',5)->pluck('id')->toArray();
@@ -215,16 +268,35 @@ class AssessmentEvController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =$projectsmember->user_id;
-            $alertmessage->detail = 'ตรวจสอบ Ev ของโครงการ ' . $minitbp->project .' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ตรวจสอบ EV ของโครงการ ' . $minitbp->project .' <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> ';
             $alertmessage->save();
 
-            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:ตรวจสอบ EV','เรียน Admin<br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:กำหนด Weight EV','เรียน Admin<br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('กำหนด Weight EV','JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a><br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
         }
+
+        // $jd = User::where('user_type_id',6)->first();
+        // $notificationbubble = new NotificationBubble();
+        // $notificationbubble->business_plan_id = $businessplan->id;
+        // $notificationbubble->notification_category_id = 1;
+        // $notificationbubble->notification_sub_category_id = 6;
+        // $notificationbubble->user_id = $auth->id;
+        // $notificationbubble->target_user_id = $jd->id;
+        // $notificationbubble->save();
+
+        // $alertmessage = new AlertMessage();
+        // $alertmessage->user_id = $auth->id;
+        // $alertmessage->target_user_id =$jd->id;
+        // $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ตรวจสอบ EV ของโครงการ ' . $minitbp->project .' <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> ';
+        // $alertmessage->save();
+
+        // EmailBox::send(User::find($jd->id)->email,'TTRS:ตรวจสอบ EV','เรียน JD<br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        // Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$jd->id);
 
         $ev = Ev::find($request->id);
         return response()->json($ev);
     }
+
 
     public function UpdateAdminEvStatus(Request $request){
         $auth = Auth::user();

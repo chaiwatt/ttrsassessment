@@ -34,4 +34,13 @@ class DashboardCompanyInvoiceController extends Controller
             // $path = public_path("storage/uploads/fulltbp/");
             return $pdf->stream('document.pdf');
         }
+
+        
+        public function SampleInvoice(){
+            $data = [
+                'fulltbp' => 'nothing'
+            ];
+            $pdf = PDF::loadView('dashboard.company.project.invoice.invoicepdf', $data);
+            return $pdf->stream('document.pdf');
+        }
 }

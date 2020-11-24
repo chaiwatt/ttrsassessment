@@ -359,7 +359,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;EV ในระบบ</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการ Index</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -379,6 +379,28 @@
             </div>
         </div>
     </div>
+
+        {{-- modal_addextraitem --}}
+        <div id="modal_addextraitem" class="modal fade" style="overflow:hidden;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการ Extra</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ชื่อรายการ</label>
+                            <input type="text"  name="extraitemname" id="extraitemname" value=""  placeholder="ชื่อรายการ" class="form-control">
+                        </div>
+                    </div>           
+                    <div class="modal-footer">
+                        <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                        <button id="btn_modal_addextraitem" class="btn bg-info" data-dismiss="modal"><i class="icon-add font-size-base mr-1"></i> เพิ่ม</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     {{-- modal_edit_weight --}}
     <div id="modal_edit_weight" class="modal fade" style="overflow:hidden;">
@@ -402,6 +424,30 @@
             </div>
         </div>
     </div>
+
+    <div id="modal_add_comment" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มความเห็น</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Comment<span class="text-danger">*</span></label>
+                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Leader" class="form-control" ></textarea>
+                        </div>
+                    </div>
+                </div>         
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_add_comment" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -409,7 +455,7 @@
             <div class="page-title d-flex">
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}
                 @if ($ev->status != 0)
-                    (ส่งให้ JD แล้ว)
+                  <span class="text-success">(นำส่งแล้ว)</span> 
                 @endif
                 
                 </span></h4>
@@ -464,32 +510,32 @@
             <div class="col-md-12">
                 <div class="card">
 					<div class="card-body">
-                        <div class="text-right">
+                        {{-- <div class="text-right">
                             <button id="editev" class="btn bg-primary">แก้ไขข้อมูล<i class="icon-floppy-disk ml-2"></i></button>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>ชื่อ EV</label>
-                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
+                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เวอร์ชั่น</label>
-                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Index</label>
-                                    <input type="number" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" class="form-control">
+                                    <input type="number" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Extra</label>
-                                    <input type="number" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" class="form-control">
+                                    <input type="number" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -502,7 +548,14 @@
 					<div class="card-body">
                         <input type="text" id="tmpstepindex" value="0" hidden>
                         <div class="text-right">
-                            <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
+                            @if ($ev->status == 0 || $ev->refixstatus == 1)
+                                <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
+                            @endif
+                            @if (($ev->status == 1 || $ev->refixstatus == 1))
+                                @if (Auth::user()->user_type_id == 6)
+                                    <button id="approveevstageone" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
+                                @endif
+                            @endif
                             {{--  <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif > --}}
                         </div>
                         <div class="form-group">
@@ -522,20 +575,23 @@
                             </select>
                         </div>
 
-                        <ul class="nav nav-tabs nav-tabs-highlight">
+                        <ul class="nav nav-tabs nav-tabs-highlight ">
                             <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
                             <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
+                            <li class="nav-item"><a href="#left-icon-tab3" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment</a></li>
                         </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="left-icon-tab1">
                                 <div class="form-group">	
-                                    <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
+                                    @if ($ev->status == 0 || $ev->refixstatus == 1)
+                                        <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
+                                    @endif
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped" id="criteriatable">
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-info">
                                                 <th>Pillar</th>  
                                                 <th>Sub Pillar</th>   
                                                 <th>Index</th>                                                                                
@@ -555,12 +611,14 @@
 
                             <div class="tab-pane fade" id="left-icon-tab2">
                                 <div class="form-group">	
+                                    @if ($ev->status == 0 || $ev->refixstatus == 1)
                                     <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" ><i class="icon-add"></i></button>
+                                    @endif
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped" id="extracriteriatable">
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-info">
                                                 <th>Pillar</th>  
                                                 <th>Sub Pillar</th>   
                                                 <th>Index</th>                                                                                
@@ -577,7 +635,32 @@
                                     </table>
                                 </div>
                             </div>
-
+                            <div class="tab-pane fade" id="left-icon-tab3">
+                                <div class="form-group">	
+                                    <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
+                                    <br>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="criteriatable">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th>วันที่</th>  
+                                                <th>รายละเอียด</th>   
+                                                {{-- <th>โดย</th> --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ev_edit_history_wrapper_tr"> 
+                                            @foreach ($evedithistories->reverse() as $evedithistory)
+                                            <tr>
+                                                <td>{{$evedithistory->created_at}}</td>
+                                                <td>{{$evedithistory->detail}}</td>
+                                                <td>{{$evedithistory->user->name}} {{$evedithistory->user->lastname}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
 					</div>

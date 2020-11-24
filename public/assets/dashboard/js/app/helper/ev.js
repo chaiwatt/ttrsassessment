@@ -133,15 +133,14 @@ function copyEv(orgevid,newevid){
   })
 }
 
-function updateEvStatus(id,chkevstatus){
+function updateEvStatus(id){
   return new Promise((resolve, reject) => {
       $.ajax({
       url: `${route.url}/api/assessment/ev/updateevstatus`,
       type: 'POST',
       headers: {"X-CSRF-TOKEN":route.token},
       data: {
-          id : id,
-          chkevstatus : chkevstatus
+          id : id
       },
       success: function(data) {
           resolve(data)
@@ -152,6 +151,25 @@ function updateEvStatus(id,chkevstatus){
       })
   })
 }
+function approveEvStageOne(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/approveevstageone`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          id : id
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+
 
 function getEvCheckList(pillar,subpillar,subpillarindex){
   return new Promise((resolve, reject) => {
@@ -197,4 +215,4 @@ function editEv(evid,name,version,percentindex,percentextra){
     })
 }
 
-export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading}
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading,approveEvStageOne}

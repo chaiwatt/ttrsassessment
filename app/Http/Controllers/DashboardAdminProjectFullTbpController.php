@@ -21,6 +21,7 @@ use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use App\Model\CriteriaGroup;
+use App\Model\EvEditHistory;
 use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
@@ -399,8 +400,10 @@ class DashboardAdminProjectFullTbpController extends Controller
     public function EditEv($id){
         $ev = Ev::find($id);
         $evs = Ev::where('full_tbp_id','!=',$ev->full_tbp_id)->orWhereNull('full_tbp_id')->get();
+        $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',1)->get();
         return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
-                                                            ->withEv($ev);
+                                                            ->withEv($ev)
+                                                            ->withEvedithistories($evedithistories);
     }
 
     public function GetUsers(Request $request){

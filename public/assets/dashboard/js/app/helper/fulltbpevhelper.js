@@ -231,7 +231,7 @@ $('.steps-basic-extra').steps({
                         // var m = "clicked: " + key;
                         if(key == 'add'){
                             $("#parent").html($( "#pillar option:selected" ).text());
-                            $('#modal_additem').modal('show');
+                            $('#modal_addextraitem').modal('show');
                         }
                         if(key == 'edit'){
                             $("#multipleselect").attr("hidden",true);
@@ -248,7 +248,7 @@ $('.steps-basic-extra').steps({
                                 $('#tmpcriteria').html($('#criteria').html())
                                 $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
                             }
-                            if(isempty==false)$('#modal_edititem').modal('show');
+                            if(isempty==false)$('#modal_editextraitem').modal('show');
                         }
                     },
                     items: {
@@ -618,7 +618,36 @@ $(document).on('click', '#btn_modal_additem', function(e) {
         .catch(error => {})
     }
 });
-
+$(document).on('click', '#btn_modal_addextraitem', function(e) {
+    var html ='<option value="0" >==เลือกรายการ==</option>';
+    if($('#tmpstepindex').val() == 1){
+        SubPillar.addSubPillar($('#evid').val(),$('#extrapillar').val(),$('#extraitemname').val()).then(data => {
+            data.forEach(function (ev,index) {
+                html += `<option value="${ev['id']}" >${ev['name']}</option>`
+            });
+            $("#extrasubpillar").html(html);
+            $("#extrasubpillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+    
+            })
+        .catch(error => {})
+    }else if($('#tmpstepindex').val() == 2){
+        SubPillar.addSubPillarIndex($('#evid').val(),$('#extrasubpillar').val(),$('#extraitemname').val()).then(data => {
+            var html0 ='<option value="0" >==เลือกรายการ==</option>';
+            var html1 ='';
+            data.subpillarindexs.forEach(function (subpillar,index) {
+                    html0 += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+                });
+            data.indextypes.forEach(function (indextype,index) {
+                    html1 += `<option value="${indextype['id']}" >${indextype['name']}</option>`
+                });
+            $("#extrasubpillarindex").html(html0);
+            $("#indextype").html(html1);
+            $("#extrasubpillarindex option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
+            })
+        .catch(error => {})
+    }
+});
+// 
 $(document).on('change', '#tmpcriteria', function(e) {
     $('#nameedit').val($('#tmpcriteria option:selected').text());
 });
@@ -638,7 +667,7 @@ $('#chkevstatus').on('change.bootstrapSwitch', function(e) {
         status =1;
     }        
     $("#spinicon").attr("hidden",false);
-    Ev.updateEvStatus($(this).data('id'),status).then(data => {
+    Ev.updateEvStatus($(this).data('id')).then(data => {
         $("#spinicon").attr("hidden",true);
     }).catch(error => {})
 });
@@ -677,6 +706,22 @@ $(document).on('click', '#editev', function(e) {
     .catch(error => {})
 });
 
+$(document).on('change', '#evname', function(e) {
+    Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
+
+    }).catch(error => {})
+});
+$(document).on('change', '#version', function(e) {
+    Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
+
+    }).catch(error => {})
+});
+$(document).on('change', '#percentindex', function(e) {
+    Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
+
+    }).catch(error => {})
+});
+
 $(document).on('keyup', '#percentindex', function(e) {
     if ($(this).val() > 100){
         $(this).val('100');
@@ -696,12 +741,45 @@ $(document).on('keyup', '#percentextra', function(e) {
 });
 
 $(document).on('click', '#updateev', function(e) {
+    console.log($("#extracriteriatable tr").length);
+    if($("#criteriatable tr").length == 1){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ยังไม่ได้เพิ่ม Criteria!',
+        }).then((result) => {
+            return;
+        });
+    }else{
+        if($('#percentextra').val() > 0){
+            if($("#extracriteriatable tr").length == 1){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'ยังไม่ได้เพิ่ม Extra Criteria!',
+                }).then((result) => {
+                    return;
+                });
+            }
+        }
+    }
     $("#spinicon").attr("hidden",false);
-    Ev.updateEvStatus($(this).data('id'),1).then(data => {
+    Ev.updateEvStatus($(this).data('id')).then(data => {
         $("#spinicon").attr("hidden",true);
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'ส่ง EV ให้ JD ตรวจสอบสำเร็จ!',
+            text: 'นำส่ง EV สำเร็จ!',
+        }).then((result) => {
+            window.location.reload();
+        });
+    }).catch(error => {})
+});
+
+$(document).on('click', '#approveevstageone', function(e) {
+    $("#spinicon").attr("hidden",false);
+    Ev.approveEvStageOne($(this).data('id')).then(data => {
+        $("#spinicon").attr("hidden",true);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'Admin สามารถกำหนด Weight ในขั้นตอนถัดไป!',
         }).then((result) => {
             window.location.reload();
         });

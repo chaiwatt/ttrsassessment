@@ -35,8 +35,8 @@ class DashboardAdminProjectEvWeightController extends Controller
     }
 
     public function Edit($id){
-        $fulltbp = FullTbp::find($id);
-        $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
+        // $fulltbp = FullTbp::find($id);
+        $ev = Ev::find($id);//Ev::where('full_tbp_id',$fulltbp->id)->first();
         return view('dashboard.admin.project.evweight.edit')->withEv($ev);
     }
 

@@ -272,26 +272,21 @@
                                                             $evstatus = 'ผ่านการอนุมัติ';
                                                             $style = 'badge badge-flat border-success text-success-600';
                                                             if($fulltbp->ev->status == 0){
-                                                                $evstatus = 'แก้ไข';
+                                                                $evstatus = 'อยู่ระหว่าง Leader สร้าง EV';
+                                                                $style = 'btn-sm bg-warning';
+                                                            }elseif($fulltbp->ev->status == 1){
+                                                                $evstatus = 'อยู่ระหว่าง JD ตรวจสอบ';
                                                                 $style = 'btn-sm bg-warning';
                                                             }elseif($fulltbp->ev->status == 2){
-                                                                $evstatus = 'อยู่ระหว่าง Admin พิจารณา';
-                                                                $style = 'btn-sm bg-warning';
-                                                            }elseif($fulltbp->ev->status == 3){
+                                                                $evstatus = 'อยู่ระหว่าง Admin พิจารณาและกำหนด Weight';
+                                                                $style = 'btn-sm bg-pink';
+                                                            }
+                                                            elseif($fulltbp->ev->status == 3){
                                                                 $evstatus = 'อยู่ระหว่าง JD พิจารณา';
                                                                 $style = 'btn-sm bg-pink';
                                                             }
                                                         @endphp
-                                                            {{-- @if ($fulltbp->ev->status == 4)
-                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
-                                                            @elseif($fulltbp->ev->status == 3)
-                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่าง JD พิจารณา</a>
-                                                            @elseif($fulltbp->ev->status == 2)
-                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">อยู่ระหว่าง Admin พิจารณา</a>
-                                                            @elseif($fulltbp->ev->status == 0)
-                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้ส่ง</a>
-                                                            @endif   --}}
-                                                            @if (Auth::user()->user_type_id == 4)
+                                                            @if (Auth::user()->user_type_id == 4 || Auth::user()->user_type_id == 6)
                                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                                 @elseif(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
                                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>

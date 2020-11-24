@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
-
+Route::group(['prefix' => 'invoice'], function(){
+    Route::get('','DashboardCompanyInvoiceController@SampleInvoice')->name('dashboard.company.project.voice');           
+}); 
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
@@ -160,6 +162,11 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('getevbyfulltbp','Api\AssessmentEvController@GetEvByFulltbp')->name('api.assessment.ev.getevbyfulltbp'); 
                 Route::post('copyev','Api\AssessmentEvController@CopyEv')->name('api.assessment.ev.copyev'); 
                 Route::post('updateevstatus','Api\AssessmentEvController@UpdateEvStatus')->name('api.assessment.ev.updateevstatus'); 
+                Route::post('approveevstageone','Api\AssessmentEvController@ApproveEvStageOne')->name('api.assessment.ev.approveevstageone'); 
+                Route::post('commentevstageone','Api\AssessmentEvController@CommentEvStageone')->name('api.assessment.ev.commentevstageone');
+                Route::post('deletecommentevstageone','Api\AssessmentEvController@DeleteCommentEvStageone')->name('api.assessment.ev.deletecommentevstageone');
+                Route::post('approveevstagetwo','Api\AssessmentEvController@ApproveEvStageTwo')->name('api.assessment.ev.approveevstagetwo'); 
+                Route::post('approveevstagethree','Api\AssessmentEvController@ApproveEvStageThree')->name('api.assessment.ev.approveevstagethree'); 
                 Route::post('updateadminevstatus','Api\AssessmentEvController@UpdateAdminEvStatus')->name('api.assessment.ev.updateadminevstatus');
                 Route::post('editapprove','Api\AssessmentEvController@EditApprove')->name('api.assessment.ev.editapprove');
                 Route::post('sendeditev','Api\AssessmentEvController@SendEditEv')->name('api.assessment.ev.sendeditev');
@@ -532,9 +539,9 @@ Route::group(['middleware' => 'auth'], function(){
                 
             });      
             Route::group(['prefix' => 'project'], function(){
-                Route::group(['prefix' => 'invoice'], function(){
-                    Route::get('/{id}','DashboardCompanyInvoiceController@Invoice')->name('dashboard.company.project.invoice');           
-                }); 
+                // Route::group(['prefix' => 'invoice'], function(){
+                //     Route::get('/{id}','DashboardCompanyInvoiceController@Invoice')->name('dashboard.company.project.invoice');           
+                // }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardCompanyProjectAssessmentController@Index')->name('dashboard.company.assessment');           
                 }); 
