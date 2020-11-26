@@ -61,4 +61,11 @@ class DateConversion
             return $strYear;
         }
     }
+    public static function thaiDateTime($date)
+	{
+        $strYear = date("Y",strtotime($date->toDateString()))+543;
+		$strMonth= date("n",strtotime($date->toDateString()));
+        $strDay= date("j",strtotime($date->toDateString()));
+        return $strDay.'/'.$strMonth.'/'.$strYear . ' ' . $date->format('H:i:s');
+    }
 }

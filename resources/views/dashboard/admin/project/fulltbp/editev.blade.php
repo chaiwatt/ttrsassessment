@@ -442,7 +442,7 @@
                 </div>         
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_comment" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                    <button id="btn_modal_add_comment" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="addcommentspinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
                 </div>
             </div>
         </div>
@@ -510,6 +510,7 @@
             <div class="col-md-12">
                 <div class="card">
 					<div class="card-body">
+                        <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                         {{-- <div class="text-right">
                             <button id="editev" class="btn bg-primary">แก้ไขข้อมูล<i class="icon-floppy-disk ml-2"></i></button>
                         </div> --}}
@@ -548,7 +549,7 @@
 					<div class="card-body">
                         <input type="text" id="tmpstepindex" value="0" hidden>
                         <div class="text-right">
-                            @if ($ev->status == 0 || $ev->refixstatus == 1)
+                            @if (($ev->status == 0 || $ev->refixstatus == 1) && Auth::user()->user_type_id != 6)
                                 <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
                             @endif
                             @if (($ev->status == 1 || $ev->refixstatus == 1))
@@ -576,13 +577,15 @@
                         </div>
 
                         <ul class="nav nav-tabs nav-tabs-highlight ">
-                            <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
-                            <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
-                            <li class="nav-item"><a href="#left-icon-tab3" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment</a></li>
+                            <li class="nav-item"><a href="#indextab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
+                            <li class="nav-item"><a href="#extratab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
+                            @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
+                            <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
+                            @endif
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="left-icon-tab1">
+                            <div class="tab-pane fade show active" id="indextab">
                                 <div class="form-group">	
                                     @if ($ev->status == 0 || $ev->refixstatus == 1)
                                         <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
@@ -609,7 +612,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="left-icon-tab2">
+                            <div class="tab-pane fade" id="extratab">
                                 <div class="form-group">	
                                     @if ($ev->status == 0 || $ev->refixstatus == 1)
                                     <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" ><i class="icon-add"></i></button>
@@ -635,26 +638,33 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="left-icon-tab3">
+                            <div class="tab-pane fade" id="commenttab">
+                                @if (Auth::user()->user_type_id == 6)
                                 <div class="form-group">	
                                     <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
                                     <br>
                                 </div>
+                                @endif
+
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped" id="criteriatable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th>วันที่</th>  
                                                 <th>รายละเอียด</th>   
-                                                <th>เพิ่มเติม</th>
+                                                @if (Auth::user()->user_type_id == 6)
+                                                    <th>เพิ่มเติม</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody id="ev_edit_history_wrapper_tr"> 
                                             @foreach ($evedithistories->reverse() as $evedithistory)
                                             <tr>
-                                                <td>{{$evedithistory->created_at}}</td>
+                                                <td>{{$evedithistory->thaidate}}</td>
                                                 <td>{{$evedithistory->detail}}</td>
+                                                @if (Auth::user()->user_type_id == 6)
                                                 <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>

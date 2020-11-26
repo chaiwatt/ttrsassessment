@@ -253,5 +253,25 @@ function deleteComment(id){
       })
   })
 }
+function clearCommentTab(id,stage){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/clearcommenttab`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          id : id,
+          stage : stage,
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
 
-export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading,approveEvStageOne,addCommentStageOne,deleteComment}
+export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading,approveEvStageOne,
+  addCommentStageOne,deleteComment,clearCommentTab}

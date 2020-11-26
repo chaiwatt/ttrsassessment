@@ -403,9 +403,9 @@ function RenderTable(data,evtype){
                 subpillarindex = "-";
             }
             html += `<tr > 
-            <td> ${criteria.pillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" class="text-grey-300 deletepillar"><i class="icon-trash"></i></a></td>                                            
-            <td> ${criteria.subpillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
-            <td> ${subpillarindex} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
+            <td> ${criteria.pillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" class="text-grey-300 deletepillar"><i class="icon-trash"></i></a></td>                                            
+            <td> ${criteria.subpillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
+            <td> ${subpillarindex} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
             <td> ${criterianame} </td>                                            
             </tr>`
         }
@@ -458,6 +458,7 @@ function RowSpan(tableid){
 }
 
 $(document).on('click', '.deletepillar', function(e) {
+    if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -524,6 +525,7 @@ $(document).on('click', '#btn_modal_edititem', function(e) {
 
 
 $(document).on('click', '.deletesubpillar', function(e) {
+    if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -552,6 +554,7 @@ $(document).on('click', '.deletesubpillar', function(e) {
 });
 
 $(document).on('click', '.deletesubpillarindex', function(e) {
+    if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -833,20 +836,33 @@ $(document).on('change', '#extrasubpillar', function(e) {
 
 
 $(document).on('click', '#btn_modal_add_comment', function(e) {
-    console.log('hello');
+    $("#addcommentspinicon").attr("hidden",false);
     Ev.addCommentStageOne($('#evid').val(),$('#comment').val()).then(data => {
-        console.log(data);
-        var html =``;
-        data.forEach(function (comment,index) {
-                html += `<tr > 
-                <td> ${comment.created_at} </td>                                            
-                <td> ${comment.detail} </td>    
-                <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
-                </tr>`
-            });
-        $("#ev_edit_history_wrapper_tr").html(html);
-
+        $("#addcommentspinicon").attr("hidden",true);
+        $('#modal_add_comment').modal('hide');
+        // var html =``;
+        // data.forEach(function (comment,index) {
+        //         html += `<tr > 
+        //         <td> ${comment.created_at} </td>                                            
+        //         <td> ${comment.detail} </td>    
+        //         <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
+        //         </tr>`
+        //     });
+        // $("#ev_edit_history_wrapper_tr").html(html);
+        window.location.reload();
     }).catch(error => {})
+});
+
+$('.nav-tabs a').on('shown.bs.tab', function (e) {
+    // alert('Hello from the other siiiiiide!');
+    if(route.usertypeid == 6)return;
+    console.log($(e.target).attr("href"));
+    if($(e.target).attr("href") == '#commenttab'){
+        Ev.clearCommentTab($('#evid').val(),1).then(data => {
+    
+        }).catch(error => {})
+    }
+    // var previous_tab = e.relatedTarget;
 });
 
 $(document).on("click",".deletecomment",function(e){

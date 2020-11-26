@@ -17,6 +17,7 @@ use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\CompanyBoard;
+use App\Model\EvCommentTab;
 use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
@@ -401,9 +402,12 @@ class DashboardAdminProjectFullTbpController extends Controller
         $ev = Ev::find($id);
         $evs = Ev::where('full_tbp_id','!=',$ev->full_tbp_id)->orWhereNull('full_tbp_id')->get();
         $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',1)->get();
+        $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('status',1)->get();
+        // return $evcommenttabs;
         return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
                                                             ->withEv($ev)
-                                                            ->withEvedithistories($evedithistories);
+                                                            ->withEvedithistories($evedithistories)
+                                                            ->withEvcommenttabs($evcommenttabs);
     }
 
     public function GetUsers(Request $request){

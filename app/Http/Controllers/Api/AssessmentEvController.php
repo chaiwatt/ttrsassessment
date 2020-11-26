@@ -11,12 +11,14 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+use App\Model\EvCommentTab;
 use App\Model\EvEditHistory;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
+use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use App\Http\Controllers\Controller;
@@ -197,6 +199,14 @@ class AssessmentEvController extends Controller
         Ev::find($request->id)->update([
             'status' => 1
         ]);
+        $ev = Ev::find($request->id);
+        if($ev->refixstatus == 1){
+            $ev->update([
+                'refixstatus' => 2  
+            ]);
+
+        }
+
         $ev = Ev::find($request->id);
         // $admins = User::where('user_type_id',5)->pluck('id')->toArray();
         // $projectsmembers = ProjectMember::where('full_tbp_id',$ev->full_tbp_id)->whereIn('user_id',$admins)->get();
@@ -450,6 +460,7 @@ class AssessmentEvController extends Controller
         return response()->json($ev); 
     }
     public function CommentEvStageone(Request $request){
+        $auth = Auth::user();
         $evedithistory = new EvEditHistory();
         $evedithistory->ev_id  = $request->id;
         $evedithistory->historytype = 1;
@@ -482,17 +493,17 @@ class AssessmentEvController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id =  $projectassignment->leader_id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ให้แก้ไข EV <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ให้แก้ไข EV ของโครงการ' . $minitbp->project.' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id]).'>ตรวจสอบ</a>';
         $alertmessage->save();
 
-        $fulltbps = FullTbp::where('id', $id)->get();
+        $evcommenttab = new EvCommentTab();
+        $evcommenttab->ev_id = $request->id;
+        $evcommenttab->stage = 1;
+        $evcommenttab->status = 1;
+        $evcommenttab->save();
 
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' แล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' เสร็จแล้ว','ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
-
-        // EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br><br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  ' <br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a><br><br>ด้วยความนับถือ<br>TTRS');
-        // Message::sendMessage('แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a><br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
-
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ให้แก้ไข EV โครงการ'.$minitbp->project,'เรียน Leader<br> JD ได้ตรวจสอบ EV โครงการ' . $minitbp->project . ' แล้วมีรายการแก้ไข โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id]).'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ให้แก้ไข EV โครงการ'.$minitbp->project,'เรียน Leader<br> JD ได้ตรวจสอบ EV โครงการ' . $minitbp->project . ' แล้วมีรายการแก้ไข โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id]).'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
         return response()->json($evedithistories); 
     }
     public function DeleteEvComment(Request $request){
@@ -502,4 +513,9 @@ class AssessmentEvController extends Controller
         $evedithistories = EvEditHistory::where('ev_id',$evedithistoryid)->get();
         return response()->json($evedithistories); 
     }
+    public function ClearCommentTab(Request $request){
+        EvCommentTab::where('ev_id',$request->id)->where('stage',$request->stage)->delete();
+        return; 
+    }
+    
 }

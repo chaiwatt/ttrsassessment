@@ -275,8 +275,16 @@
                                                                 $evstatus = 'อยู่ระหว่าง Leader สร้าง EV';
                                                                 $style = 'btn-sm bg-warning';
                                                             }elseif($fulltbp->ev->status == 1){
-                                                                $evstatus = 'อยู่ระหว่าง JD ตรวจสอบ';
-                                                                $style = 'btn-sm bg-warning';
+                                                                if($fulltbp->ev->refixstatus == 0){
+                                                                    $evstatus = 'อยู่ระหว่าง JD ตรวจสอบ';
+                                                                    $style = 'btn-sm bg-warning';
+                                                                }else if($fulltbp->ev->refixstatus == 1){
+                                                                    $evstatus = 'ส่งคืนแก้ไข';
+                                                                    $style = 'btn-sm bg-pink';
+                                                                }else if($fulltbp->ev->refixstatus == 2){
+                                                                    $evstatus = 'มีการแก้ไขแล้ว';
+                                                                    $style = 'btn-sm bg-indigo';
+                                                                }
                                                             }elseif($fulltbp->ev->status == 2){
                                                                 $evstatus = 'อยู่ระหว่าง Admin พิจารณาและกำหนด Weight';
                                                                 $style = 'btn-sm bg-pink';
