@@ -510,7 +510,7 @@
             <div class="col-md-12">
                 <div class="card">
 					<div class="card-body">
-                        <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
+                        {{-- <input type="text" id="evstatus" value="{{$ev->status}}" hidden> --}}
                         {{-- <div class="text-right">
                             <button id="editev" class="btn bg-primary">แก้ไขข้อมูล<i class="icon-floppy-disk ml-2"></i></button>
                         </div> --}}

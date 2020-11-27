@@ -1,3 +1,4 @@
+import * as Ev from './ev.js';
 
 $( document ).ready(function() {
     getEv($('#evid').val()).then(data => {
@@ -80,14 +81,20 @@ function RenderTable(data){
 
 function RenderWeightTable(data){
     var html =``;
+    var readonly =``;
+    if($('#evstatus').val() == 4 ){
+        readonly =`readonly`;
+    }
     data.forEach(function (pillaindex,index) {
+        // $readonly = `<input type="number" id ="weigthvalue" value="${pillaindex.weigth}" data-id="${pillaindex.id}"class="form-control">`;
+
         html += `<tr > 
         <td> ${pillaindex.pillar['name']}</td>                                            
         <td> ${pillaindex.subpillar['name']}</td>    
         <td> 
             <div class="form-group">
                 <label>${pillaindex.subpillarindex['name']}</label>
-                <input type="number" id ="weigthvalue" value="${pillaindex.weigth}" data-id="${pillaindex.id}"  class="form-control">
+                <input type="number" id ="weigthvalue" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control">
             </div>
         </td>                           
         </tr>`
@@ -163,15 +170,23 @@ function RowSpanWeight(tableid){
     }
 }
 
-    $('#chkevstatus').on('change.bootstrapSwitch', function(e) {
-        var status = 2
-        if(e.target.checked==true){
-            status =3;
-        }     
-        console.log(status);   
+    // $('#chkevstatus').on('change.bootstrapSwitch', function(e) {
+    //     var status = 2
+    //     if(e.target.checked==true){
+    //         status =3;
+    //     }     
+    //     console.log(status);   
+    //     $("#spinicon").attr("hidden",false);
+    //     updateEvAdminStatus($(this).data('id'),status).then(data => {
+    //         $("#spinicon").attr("hidden",true);
+    //     }).catch(error => {})
+    // });
+
+    $(document).on('click', '#updateevstatus', function(e) { 
         $("#spinicon").attr("hidden",false);
-        updateEvAdminStatus($(this).data('id'),status).then(data => {
+        updateEvAdminStatus($(this).data('id'),3).then(data => {
             $("#spinicon").attr("hidden",true);
+            window.location.reload();
         }).catch(error => {})
     });
 
@@ -199,6 +214,7 @@ function updateEvAdminStatus(id,value){
         $("#spiniconev").attr("hidden",false);
         sendEditEv($(this).data('id')).then(data => {
             $("#spiniconev").attr("hidden",true);
+            window.location.reload();
         }).catch(error => {})
     });
 
@@ -221,5 +237,67 @@ function updateEvAdminStatus(id,value){
         })
       }
 
+      $(document).on('click', '#btn_modal_add_comment', function(e) {
+        $("#addcommentspinicon").attr("hidden",false);
+        Ev.addCommentStageTwo($('#evid').val(),$('#comment').val()).then(data => {
+            $("#addcommentspinicon").attr("hidden",true);
+            $('#modal_add_comment').modal('hide');
+            window.location.reload();
+        }).catch(error => {})
+    });
 
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        // alert('Hello from the other siiiiiide!');
+        if(route.usertypeid == 6)return;
+        console.log($(e.target).attr("href"));
+        if($(e.target).attr("href") == '#commenttab'){
+            Ev.clearCommentTab($('#evid').val(),2).then(data => {
+        
+            }).catch(error => {})
+        }
+        // var previous_tab = e.relatedTarget;
+    });
+    
+    $(document).on("click",".deletecomment",function(e){
+        console.log($(this).data('id'));
+        Swal.fire({
+            title: 'คำเตือน!',
+            text: `ต้องการลบรายการ หรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ยืนยันลบ',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                Ev.deleteComment($(this).data('id')).then(data => {
+                    console.log(data);
+                    var html =``;
+                    data.forEach(function (comment,index) {
+                            html += `<tr > 
+                            <td> ${comment.created_at} </td>                                            
+                            <td> ${comment.detail} </td>    
+                            <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
+                            </tr>`
+                        });
+                    $("#ev_edit_history_wrapper_tr").html(html);
+            
+                }).catch(error => {})
+            }
+        });
+    }); 
 
+    $(document).on('click', '#approveevstagetwo', function(e) {
+        $("#spinicon").attr("hidden",false);
+        Ev.approveEvStageTwo($(this).data('id')).then(data => {
+            $("#spinicon").attr("hidden",true);
+            Swal.fire({
+                title: 'สำเร็จ...',
+                text: 'EV ได้รับการอนุมัติแล้ว',
+            }).then((result) => {
+                window.location.reload();
+            });
+        }).catch(error => {})
+    });

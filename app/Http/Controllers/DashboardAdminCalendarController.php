@@ -113,7 +113,7 @@ class DashboardAdminCalendarController extends Controller
           $alertmessage = new AlertMessage();
           $alertmessage->user_id = $auth->id;
           $alertmessage->target_user_id = $_user->id;
-          $alertmessage->detail = 'นัดหมายการประชุมสำหรับโครงการ'.$minitbp->project.' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายการประชุมสำหรับโครงการ'.$minitbp->project;
           $alertmessage->save();
     
           $notificationbubble = new NotificationBubble();
@@ -219,7 +219,7 @@ class DashboardAdminCalendarController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $_user->id;
-        $alertmessage->detail = 'นัดหมายการประชุม (แก้ไข)สำหรับโครงการ'.$minitbp->project.' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายการประชุม (แก้ไข)สำหรับโครงการ'.$minitbp->project.' ' ;
         $alertmessage->save();
   
         $notificationbubble = new NotificationBubble();

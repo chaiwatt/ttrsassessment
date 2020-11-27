@@ -72,8 +72,8 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
                                         <td> {{$fulltbp->minitbp->project}} </td> 
-                                        <td> yyyy </td>  
-                                        <td> xxxx </td> 
+                                        <td> 72 </td>  
+                                        <td> A </td> 
                                         <td> 
                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียดการแจ้งผล</a> 
                                             <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>

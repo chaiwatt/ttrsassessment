@@ -234,6 +234,25 @@ function addCommentStageOne(id,comment){
       })
   })
 }
+function addCommentStageTwo(id,comment){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/commentevstagetwo`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          id : id,
+          comment : comment
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
 
 function deleteComment(id){
   return new Promise((resolve, reject) => {
@@ -273,5 +292,23 @@ function clearCommentTab(id,stage){
   })
 }
 
+function approveEvStageTwo(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/assessment/ev/approveevstagetwo`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          id : id
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
 export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading,approveEvStageOne,
-  addCommentStageOne,deleteComment,clearCommentTab}
+  addCommentStageOne,deleteComment,clearCommentTab,addCommentStageTwo,approveEvStageTwo}

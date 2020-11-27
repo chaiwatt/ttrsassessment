@@ -6,6 +6,8 @@ use App\Model\Ev;
 use App\Model\Grade;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\EvCommentTab;
+use App\Model\EvEditHistory;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\PillaIndexWeigth;
@@ -29,15 +31,18 @@ class DashboardAdminProjectEvWeightController extends Controller
             $_fulltbpids = Ev::whereIn('full_tbp_id',$fulltbpids)->where('status','>=',2)->pluck('full_tbp_id')->toArray();
             $fulltbps = FullTbp::whereIn('id',$_fulltbpids)->get();
         }else{
-            $fulltbps = FullTbp::where('status',2)->get();
+            $fulltbps = FullTbp::where('status',1)->get();
         }
         return view('dashboard.admin.project.evweight.index')->withFulltbps($fulltbps) ;
     }
 
     public function Edit($id){
-        // $fulltbp = FullTbp::find($id);
-        $ev = Ev::find($id);//Ev::where('full_tbp_id',$fulltbp->id)->first();
-        return view('dashboard.admin.project.evweight.edit')->withEv($ev);
+        $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',2)->get();
+        $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('stage',2)->get();
+        $ev = Ev::find($id);
+        return view('dashboard.admin.project.evweight.edit')->withEv($ev)
+                                                            ->withEvedithistories($evedithistories)
+                                                            ->withEvcommenttabs($evcommenttabs);
     }
 
     public function GetEv(Request $request){

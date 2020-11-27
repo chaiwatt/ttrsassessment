@@ -45,7 +45,12 @@ class DashboardAdminProjectAssessmentController extends Controller
     public function Edit($id){
         $fulltbp = FullTbp::find($id);
         $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
-        return view('dashboard.admin.project.assessment.edit')->withEv($ev);
+        $scoringstatus = ScoringStatus::where('ev_id',$ev->id)
+                                    ->where('user_id',Auth::user()->id)
+                                    ->first(); 
+        
+        return view('dashboard.admin.project.assessment.edit')->withEv($ev)
+                                                            ->withScoringstatus($scoringstatus);
     }
 
     public function EditSave(Request $request, $id){

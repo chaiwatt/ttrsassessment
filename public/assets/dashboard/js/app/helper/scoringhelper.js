@@ -1,6 +1,7 @@
 
 $(function() {
     getEv($('#evid').val()).then(data => {
+        // console.log(data);
         RenderTable(data);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
@@ -281,23 +282,23 @@ function addScore(transactionid,score,subpillarindex,scoretype){
     })
   }
 
-  $('#chkscorestatus').on('change.bootstrapSwitch', function(e) {
-    var status = 0
-    if(e.target.checked==true){
-        status =1;
-    }        
-    console.log($(this).data('id') + ' ' + status);
-    $("#spinicon").attr("hidden",false);
-    updateScoringStatus($(this).data('id'),status).then(data => {
-        console.log(data);
-        if(jQuery.isEmptyObject(data) ){
-            $('.inpscore').prop("disabled", false);
-        }else{
-            $('.inpscore').prop("disabled", true);
-        }
-        $("#spinicon").attr("hidden",true);
-    }).catch(error => {})
-});
+//   $('#chkscorestatus').on('change.bootstrapSwitch', function(e) {
+//     var status = 0
+//     if(e.target.checked==true){
+//         status =1;
+//     }        
+//     console.log($(this).data('id') + ' ' + status);
+//     $("#spinicon").attr("hidden",false);
+//     updateScoringStatus($(this).data('id'),status).then(data => {
+//         console.log(data);
+//         if(jQuery.isEmptyObject(data) ){
+//             $('.inpscore').prop("disabled", false);
+//         }else{
+//             $('.inpscore').prop("disabled", true);
+//         }
+//         $("#spinicon").attr("hidden",true);
+//     }).catch(error => {})
+// });
 
 function updateScoringStatus(evid,status){
     return new Promise((resolve, reject) => {
@@ -318,3 +319,21 @@ function updateScoringStatus(evid,status){
         })
     })
   }
+
+  $(document).on('click', '#submitscore', function(e) {
+    $("#spinicon").attr("hidden",false);
+    updateScoringStatus($(this).data('id'),1).then(data => {
+        if(jQuery.isEmptyObject(data) ){
+            $('.inpscore').prop("disabled", false);
+        }else{
+            $('.inpscore').prop("disabled", true);
+        }
+        $("#spinicon").attr("hidden",true);
+        Swal.fire({
+            title: 'สำเร็จ...',
+            text: 'นำส่งคะแนนสำเร็จ!',
+        }).then((result) => {
+            window.location.reload();
+        });
+    }).catch(error => {})
+});

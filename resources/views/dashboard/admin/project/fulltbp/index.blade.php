@@ -261,7 +261,7 @@
                                                 </td>
                                                 <td> 
                                                     @if ( $fulltbp->bol->count() != 0)
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-info">เอกสาร BOL</a> 
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
                                                         @else
                                                             <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
                                                     @endif

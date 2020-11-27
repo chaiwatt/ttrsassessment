@@ -256,13 +256,13 @@ class DashboardAdminProjectFullTbpController extends Controller
             ]);
 
             $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
-            EmailBox::send(User::find($request->id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียนคุณ'.User::find($request->id)->name . ' ' .User::find($request->id)->lastname.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.expert.report').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน '.User::find($request->id)->name.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.expert.report').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->id)->id);
+            EmailBox::send(User::find($request->id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียนคุณ'.User::find($request->id)->name . ' ' .User::find($request->id)->lastname.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน '.User::find($request->id)->name.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::find($request->id)->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $request->id;
-            $alertmessage->detail = 'ได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ '.$minitbp->project .' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ '.$minitbp->project .' ';
             $alertmessage->save();
 
         }else{
@@ -328,7 +328,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $_company->user_id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดแก้ไขแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ตามข้อแนะนำ ดังนี้<br><br>' .$request->note . '<br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดแก้ไขแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ตามข้อแนะนำ ดังนี้<br><br>' .$request->note . '<br><br> <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
             $alertmessage->save();
 
             $notificationbubble = new NotificationBubble();
@@ -350,6 +350,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         return response()->json($fulltbps); 
     }  
     public function NotifyJd(Request $request){
+        $fulltbp = FullTbp::find($request->fulltbpid);
         $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
         if(!Empty($request->users)){
             $expert = '';
@@ -361,7 +362,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = Auth::user()->id;
             $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
-            $alertmessage->detail = 'ตรวจสอบการมอบหมายผู้เชี่ยวชาญ สำหรับโครงการ' . $minitbp->project . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() . ' ตรวจสอบการมอบหมายผู้เชี่ยวชาญ สำหรับโครงการ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a> ';
             $alertmessage->save();
 
             $notificationbubble = new NotificationBubble();
@@ -372,8 +373,8 @@ class DashboardAdminProjectFullTbpController extends Controller
             $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
             $notificationbubble->save();
 
-            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br> เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $request->fulltbpid]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br> เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
         }
         $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
         return response()->json($expertassignments); 
@@ -402,7 +403,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $ev = Ev::find($id);
         $evs = Ev::where('full_tbp_id','!=',$ev->full_tbp_id)->orWhereNull('full_tbp_id')->get();
         $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',1)->get();
-        $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('status',1)->get();
+        $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('stage',1)->get();
         // return $evcommenttabs;
         return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
                                                             ->withEv($ev)
@@ -447,10 +448,11 @@ class DashboardAdminProjectFullTbpController extends Controller
 
     public function DoneAssignement(Request $request){
         $auth = Auth::user();
+
         $minitbp = MiniTBP::find($request->fulltbpid);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
-
+        $fulltbp = FullTbp::find($request->fulltbpid);
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $businessplan->id;
         $notificationbubble->notification_category_id = 1;
@@ -462,11 +464,12 @@ class DashboardAdminProjectFullTbpController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
-        $alertmessage->detail = 'JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().  'JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a>' ;
+        // $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
         $alertmessage->save();
         
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
     }
 
     public function ExpertComment(Request $request){

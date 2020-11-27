@@ -840,15 +840,6 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
     Ev.addCommentStageOne($('#evid').val(),$('#comment').val()).then(data => {
         $("#addcommentspinicon").attr("hidden",true);
         $('#modal_add_comment').modal('hide');
-        // var html =``;
-        // data.forEach(function (comment,index) {
-        //         html += `<tr > 
-        //         <td> ${comment.created_at} </td>                                            
-        //         <td> ${comment.detail} </td>    
-        //         <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
-        //         </tr>`
-        //     });
-        // $("#ev_edit_history_wrapper_tr").html(html);
         window.location.reload();
     }).catch(error => {})
 });

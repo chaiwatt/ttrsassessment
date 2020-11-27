@@ -104,7 +104,8 @@
             </div>
             @if (Auth::user()->user_type_id != 6 )
                 <div class="header-elements d-none">
-                    <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งต่อ JD<b><i class="icon-redo2"></i></b></a>
+                    {{-- <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD</a> --}}
+                    <button id="sendtojd" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
                 </div>
             @endif    
         </div>

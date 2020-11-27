@@ -112,7 +112,8 @@
                                                                 <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn-sm bg-info">ปรับปรุงคะแนน</a>
                                                         @endif
                                                     @else
-                                                        รอเวลา
+                                                    <span class="badge badge-flat border-warning text-warning-600">รอเวลา</span>
+                                                        
                                                 @endif     
                                             @else   
                                                     <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
