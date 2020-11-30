@@ -484,7 +484,7 @@ class DashboardAdminProjectFullTbpController extends Controller
     public function DownloadZip($id){
         $zip = new ZipArchive();
         $fulltbp = FullTbp::find($id);
-        $filename = $fulltbp->fulltbp_code .".zip";
+        $filename = 'fulltbp_'.$fulltbp->fulltbp_code .".zip";
         if ($zip->open(public_path('storage/uploads/fulltbp/'.$filename), ZipArchive::CREATE) === TRUE)
         {
             $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbp->id)->get();
