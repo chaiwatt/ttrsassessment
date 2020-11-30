@@ -487,10 +487,6 @@ class DashboardAdminProjectFullTbpController extends Controller
         $filename = $fulltbp->fulltbp_code .".zip";
         if ($zip->open(public_path('storage/uploads/fulltbp/'.$filename), ZipArchive::CREATE) === TRUE)
         {
-            if(File::exists(public_path('storage/uploads/fulltbp/'.$filename))){
-                File::delete(public_path('storage/uploads/fulltbp/'.$filename));
-            }
-            
             $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbp->id)->get();
             foreach ($fulltbpcompanyprofileattachments as $key => $fulltbpcompanyprofileattachment) {
                 $file = public_path($fulltbpcompanyprofileattachment->path);
@@ -501,6 +497,6 @@ class DashboardAdminProjectFullTbpController extends Controller
             }
             $zip->close();
         }
-        return response()->download(public_path('storage/uploads/fulltbp/'.$filename));
+        return response()->download(public_path('storage/uploads/fulltbp/'.$filename))->deleteFileAfterSend(true);
     }
 }
