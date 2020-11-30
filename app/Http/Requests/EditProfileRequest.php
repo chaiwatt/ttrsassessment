@@ -20,17 +20,9 @@ class EditProfileRequest extends FormRequest
             'lastname' => 'required',
             'hid' => 'required_if:usergroup,==,2|digits_between:13,13|numeric',
             'vatno' => 'required_if:usergroup,==,1',
-            // 'registeredyear' => 'required_if:usergroup,==,1|numeric|between:2200,2700',
             'registeredyear' => [
-                                    'required_if:usergroup,==,1',
-                                    'numeric',
-                                    'between:2200,2700',
+                                    'required_if:usergroup,==,1'
                                 ],
-            // 'registeredcapital' => [
-            //                         'required_if:usergroup,==,1',
-            //                         'numeric',
-            //                         'between:0,100000000000000',
-            //                     ],
             'registeredcapital' => 'required_if:usergroup,==,1,numeric,between:0,100000000000000',
             'paidupcapital' => 'required_if:usergroup,==,1',
             'phone' => 'required',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 use PDF;
 use App\User;
+use ZipArchive;
 use Carbon\Carbon;
 use App\Model\Company;
 use App\Model\FullTbp;
@@ -20,7 +21,9 @@ use App\Model\CompanyStockHolder;
 use App\Model\NotificationBubble;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Model\FullTbpCompanyProfileDetail;
+use App\Model\FullTbpCompanyProfileAttachment;
 
 class FullTbpController extends Controller
 {
@@ -163,4 +166,5 @@ class FullTbpController extends Controller
         Message::sendMessage('ส่ง'.$message,'เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>  <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
         
     }
+
 }

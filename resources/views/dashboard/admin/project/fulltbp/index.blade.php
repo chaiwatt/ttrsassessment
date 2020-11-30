@@ -328,7 +328,9 @@
                                                         <div class="list-icons-item dropdown">
                                                             <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลด</a>
+                                                                
+                                                                <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลด Full TBP</a>
+                                                                <a href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbp->id])}}" data-id="{{$fulltbp->id}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลดเอกสารแนบ</a>
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-eye2"></i> รายละเอียด</a>
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.delete',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-trash"></i> ลบ</a>
                                                                 <div class="dropdown-divider"></div>

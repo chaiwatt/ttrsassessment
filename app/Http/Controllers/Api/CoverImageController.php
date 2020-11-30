@@ -26,4 +26,21 @@ class CoverImageController extends Controller
     
         return response()->json(Auth::user());  
     }
+    
+    public function AddAvatar(Request $request){
+        $file = $request->file;
+        $img = Image::make($file);  
+        $fname=str_random(10).".".$file->getClientOriginalExtension();
+        $picture = "storage/uploads/profile/user/".$fname;
+        Crop::crop(true,public_path("storage/uploads/profile/user/"),$fname,Image::make($file),550,550,1);
+        $auth = Auth::user();
+        if(!Empty($auth->picture)){
+            @unlink($auth->picture);
+        }
+        $auth->update([
+            'picture' => $picture
+        ]);
+    
+        return response()->json(Auth::user());  
+    }
 }

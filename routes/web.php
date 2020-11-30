@@ -127,7 +127,8 @@ Route::group(['middleware' => 'auth'], function(){
             });
         });
         Route::group(['prefix' => 'coverimage'], function(){
-            Route::post('add','Api\CoverImageController@Add')->name('api.coverimage.add');          
+            Route::post('add','Api\CoverImageController@Add')->name('api.coverimage.add');    
+            Route::post('addavatar','Api\CoverImageController@AddAvatar')->name('api.coverimage.addavatar');       
         });
         Route::group(['prefix' => 'friend'], function(){
             Route::post('addrequest','Api\FriendController@AddRequest')->name('api.friend.addrequest');   
@@ -205,7 +206,8 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('generatepdf','Api\FullTbpController@GeneratePdf')->name('api.fulltbp.generatepdf');
             Route::post('editsignature','Api\FullTbpController@EditSignature')->name('api.fulltbp.editsignature');
             Route::post('submitwithattachement','Api\FullTbpController@SubmitWithattAchement')->name('api.fulltbp.submitwithattachement');
-            Route::post('submitwithnoattachement','Api\FullTbpController@SubmitWithNoattAchement')->name('api.fulltbp.submitwithnoattachement');   
+            Route::post('submitwithnoattachement','Api\FullTbpController@SubmitWithNoattAchement')->name('api.fulltbp.submitwithnoattachement'); 
+
             Route::group(['prefix' => 'general'], function(){
                 Route::post('edit','Api\FullTbpGeneralController@Edit')->name('api.fulltbp.general.edit');           
                 Route::post('addresearcher','Api\FullTbpGeneralController@AddResearcher')->name('api.fulltbp.general.addresearcher');
@@ -434,6 +436,8 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('deleteprojectmember','DashboardAdminProjectFullTbpController@DeleteProjectMember')->name('dashboard.admin.project.fulltbp.deleteprojectmember');
                     Route::post('doneassignement','DashboardAdminProjectFullTbpController@DoneAssignement')->name('dashboard.admin.project.fulltbp.doneassignement');
                     Route::post('expertcomment','DashboardAdminProjectFullTbpController@ExpertComment')->name('dashboard.admin.project.fulltbp.expertcomment');
+                    Route::get('downloadzip/{id}','DashboardAdminProjectFullTbpController@DownloadZip')->name('dashboard.admin.project.fulltbp.downloadzip');
+                    
                     Route::group(['prefix' => 'admin'], function(){
                         Route::get('','DashboardAdminProjectFullTbpAdminController@Index')->name('dashboard.admin.project.fulltbp.admin');           
                         Route::get('editev/{id}','DashboardAdminProjectFullTbpAdminController@EditEv')->name('dashboard.admin.project.fulltbp.admin.editev');

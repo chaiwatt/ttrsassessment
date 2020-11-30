@@ -190,5 +190,24 @@ function editSignature(id,usesignature){
     })
 }
 
-export {editApprove,editGeneral,addResearcher,deleteResearcher,editOverAll,editMarketPlan,generatePdf,editSignature}
+function downloadZipFullTbp(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/downloadzip`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {editApprove,editGeneral,addResearcher,deleteResearcher,editOverAll,editMarketPlan,generatePdf,editSignature,downloadZipFullTbp}
 

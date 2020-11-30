@@ -141,6 +141,5 @@ class DashboardAdminEvaluationResultController extends Controller
     public static function FixBreak($data){
         $segment = new \Segment();
         return $segment->get_segment_array($data);
-    }
-    
+    } 
 }

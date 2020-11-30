@@ -87,7 +87,7 @@
                     </div>
     
                     <div class="form-group" id="vatwrapper" >
-                        {{-- <label for="" class="text-info"><small>ใช้ทดสอบ 0105547107432 0107546000229 0105550075163 0105552012126 0105548008098 0105552061356 0105553151791 0107548000609</small> </label> --}}
+                        <label for="" class="text-info"><small>ใช้ทดสอบ 0105547107432 0107546000229 0105550075163 0105552012126 0105548008098 0105552061356 0105553151791 0107548000609</small> </label>
                         <input id="vatno" type="number" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
                         <input type="text" name="companyname" id="companyname" hidden>

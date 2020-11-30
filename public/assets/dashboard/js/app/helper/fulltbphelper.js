@@ -1895,12 +1895,20 @@ $('.steps-basic').steps({
                 <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
             `);
 
-            FullTbp.generatePdf($('#fulltbpid').val()).then(data => {
-                var pdfpath = route.url + '/'+ data;
-                var url = pdfpath;
-                $('#downloadpdf').attr('href', url);
-                PDFObject.embed(pdfpath, "#example1");
+            Sell.editROI($('#fulltbpid').val(),$('#income').val(),$('#profit').val(),$('#reduce').val()).then(data => {
+                $('#income').val(data.income);
+                $('#profit').val(data.profit);
+                $('#reduce').val(data.reduce);
+                FullTbp.generatePdf($('#fulltbpid').val()).then(data => {
+                    var pdfpath = route.url + '/'+ data;
+                    var url = pdfpath;
+                    $('#downloadpdf').attr('href', url);
+                    PDFObject.embed(pdfpath, "#example1");
+                })
             })
+            .catch(error => {})
+
+
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
@@ -2477,6 +2485,7 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
         }
     });
 }); 
+
 
 	// Initialize validation
 	$('.steps-basic').validate({

@@ -68,6 +68,15 @@ class RegisterController extends Controller
         }elseif($data['user_type'] == 3){
             $usertype = 3;
         }
+        $companyname= '';
+        $vatno = $data['vatno'];
+        $businesstype = 5;
+        $hid = $vatno;
+        if($data['usergroup'] == 1){   //1 = นิติบุคคล 2 = บุคคลธรรมดา
+            $companyname = $data['companyname'];  
+            $businesstype = 2;
+            $hid = '';
+        }
         $user = User::create([
             'prefix_id' => 1,
             'user_type_id' => 2,
@@ -77,26 +86,22 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'user_group_id' => $data['usergroup'],
             'user_type_id' => $usertype,
-            // 'expert_type' => $experttype,
+            'hid' => $hid,
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
-        $companyname= '';
-        $vatno = $data['vatno'];
-        $businesstype = 5;
-        if($data['usergroup'] == 1){
-            $companyname = $data['companyname'];  
-            $businesstype = 2;
-        }
+
         if($user->user_type_id == 3){
             $xpertdetail = new ExpertDetail();
             $xpertdetail->user_id = $user->id;
+            // $xpertdetail->hid = $vatno;
             $xpertdetail->expert_type_id = $data['expert'];
             $xpertdetail->save();
         }
         if($user->user_type_id == 4){
             $xpertdetail = new OfficerDetail();
             $xpertdetail->user_id = $user->id;
+            // $xpertdetail->hid = $vatno;
             $xpertdetail->save();
         }
         CreateCompany::createCompany($user,$companyname,$vatno,$businesstype);

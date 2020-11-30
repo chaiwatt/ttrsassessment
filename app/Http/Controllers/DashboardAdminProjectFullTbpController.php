@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use ZipArchive;
 use App\Model\Ev;
 use Carbon\Carbon;
 use App\Model\Prefix;
@@ -53,10 +54,12 @@ use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
 use App\Model\FullTbpProjectTechDev;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Model\FullTbpProjectStandard;
 use App\Model\FullTbpMarketAttachment;
 use App\Model\FullTbpMainProductDetail;
 use App\Model\FullTbpMarketCompetitive;
+use Illuminate\Support\Facades\Storage;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Model\FullTbpProjectTechDevLevel;
 use App\Model\FullTbpCompanyProfileDetail;
@@ -477,4 +480,32 @@ class DashboardAdminProjectFullTbpController extends Controller
         $expertcomment = ExpertComment::where('full_tbp_id',$expertassignment->full_tbp_id)->where('user_id',$expertassignment->user_id)->first();
         return response()->json($expertcomment); 
     }
+
+    public function DownloadZip($id){
+        $zip = new ZipArchive();
+        $fulltbp = FullTbp::find($id);
+        $filename = $fulltbp->fulltbp_code .".zip";
+        if ($zip->open(public_path('storage/uploads/fulltbp/'.$filename), ZipArchive::CREATE) === TRUE)
+        {
+            if(File::exists(public_path('storage/uploads/fulltbp/'.$filename))){
+                File::delete(public_path('storage/uploads/fulltbp/'.$filename));
+                // return public_path('storage/uploads/fulltbp/'.$filename);
+                // return public_path($filename);
+                // unlink(public_path('storage/uploads/fulltbp/'.$filename));
+                // File::delete(public_path($filename));
+            }
+            
+            $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbp->id)->get();
+            foreach ($fulltbpcompanyprofileattachments as $key => $fulltbpcompanyprofileattachment) {
+                $file = public_path($fulltbpcompanyprofileattachment->path);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                $download_file = file_get_contents($file);
+                $zip->addFromString(basename($file), $download_file);
+                // $zip->renameName(basename($file), 'เอกสารบริษัท'.$key.'.'.$extension);
+            }
+            $zip->close();
+        }
+        // return response()->download(public_path('storage/uploads/fulltbp/'.$filename));
+    }
+    
 }

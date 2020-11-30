@@ -181,13 +181,14 @@
 		</div>
 		<div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
 			<div class="mr-md-3 mb-2 mb-md-0">
-				<a href="#" class="profile-thumb">
+				<a href="#" id="avatar"  type="button" onclick="document.getElementById('avatarimg').click();" class="profile-thumb">
 					@if (!Empty($user->picture))
 						<img src="{{asset($user->picture)}}" class="border-white rounded-circle" width="48" height="48" alt="">
 					@else
 						<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
 					@endif
 				</a>
+				<input type="file" style="display:none;" id="avatarimg" name="avatarimg"/>
 			</div>
 			<div class="media-body text-white">
 				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>

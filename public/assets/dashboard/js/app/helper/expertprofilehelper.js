@@ -131,3 +131,50 @@ $(document).on("click",".deleteexpertdoc",function(e){
         }
     });
 }); 
+$("#coverimg").on('change', function() {
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+
+    $.ajax({
+        url: `${route.url}/api/coverimage/add`,  //Server script to process data
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            var html = `<div class="profile-cover-img" style="background-image: url(${route.url}/${data.cover})"></div>`;
+            $("#bgcover").html(html);
+    }
+});
+});
+
+$("#avatarimg").on('change', function() {
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+
+    $.ajax({
+        url: `${route.url}/api/coverimage/addavatar`,  //Server script to process data
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            var html = `<img src="${route.url}/${data.picture}" class="border-white rounded-circle" width="48" height="48" alt="">`;
+            $("#avatar").html(html);
+    }
+ });
+});

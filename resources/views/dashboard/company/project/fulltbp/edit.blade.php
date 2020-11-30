@@ -2831,14 +2831,14 @@
 															</fieldset>
 														{{-- </div> --}}
 													</div>
-													<div class="row">
+													{{-- <div class="row">
 														<div class="col-md-12">	
 															<div class="form-group">
 																<br>
 																<button type="button" id="btnaddreturnofinvestment" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกผลตอบแทนจากการลงทุน</button>
 															</div>
 														</div>
-													</div>
+													</div> --}}
 												</div>
 											</div>
 										</div>

@@ -480,7 +480,35 @@ $("#coverimg").on('change', function() {
     }
 });
 
+
 });
+
+$("#avatarimg").on('change', function() {
+    var file = this.files[0];
+
+    if (this.files[0].size/1024/1024*1000 > 1000 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        return ;
+    }
+    var formData = new FormData();
+    formData.append('file',file);
+
+    $.ajax({
+        url: `${route.url}/api/coverimage/addavatar`,  //Server script to process data
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            var html = `<img src="${route.url}/${data.picture}" class="border-white rounded-circle" width="48" height="48" alt="">`;
+            $("#avatar").html(html);
+    }
+ });
+});
+
+
+
 
 $("#usergroup").on('change', function() {
     if($(this).val() == 2) {

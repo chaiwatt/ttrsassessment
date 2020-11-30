@@ -12,4 +12,8 @@
 		  <script src="{{asset('assets/landing/vendor/aos/aos.js')}}"></script>
 		
 		  <!-- Template Main JS File -->
-		  <script src="{{asset('assets/landing/js/new_main.js')}}"></script>
+		  <script src="{{asset('assets/landing/js/main.js')}}"></script>
+
+		  <script>
+			
+		  </script>

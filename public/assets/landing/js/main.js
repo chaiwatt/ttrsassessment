@@ -60,7 +60,8 @@
   });
 
   // Activate smooth scroll on page load with hash links in the url
-  $(document).ready(function() {
+  $(function() {
+
     if (window.location.hash) {
       var initial_nav = window.location.hash;
       if ($(initial_nav).length) {
@@ -74,10 +75,16 @@
 
   // Mobile Navigation
   if ($('.nav-menu').length) {
-    var $mobile_nav = $('.nav-menu').clone().prop({
+    var authcheck = `เข้าสู่ระบบ`;
+    if($('#authcheck').val() == 0){
+      authcheck = `แดชบอร์ด`;
+    }
+    var mobile_nav = $('.nav-menu').clone().prop({
       class: 'mobile-nav d-lg-none'
     });
-    $('body').append($mobile_nav);
+    var mobile_nav = $(".nav-menu").clone().prop({ class: "mobile-nav d-lg-none" });
+    mobile_nav = mobile_nav.append(`<li><a href="${$('#url').val()}" id="thaifont" style="color: #fff;" class="btn-get-started animate__animated animate__fadeInUp scrollto">${authcheck}</a></li>`);
+    $('body').append(mobile_nav);
     $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
     $('body').append('<div class="mobile-nav-overly"></div>');
 
