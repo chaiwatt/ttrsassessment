@@ -489,10 +489,6 @@ class DashboardAdminProjectFullTbpController extends Controller
         {
             if(File::exists(public_path('storage/uploads/fulltbp/'.$filename))){
                 File::delete(public_path('storage/uploads/fulltbp/'.$filename));
-                // return public_path('storage/uploads/fulltbp/'.$filename);
-                // return public_path($filename);
-                // unlink(public_path('storage/uploads/fulltbp/'.$filename));
-                // File::delete(public_path($filename));
             }
             
             $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbp->id)->get();
@@ -501,11 +497,10 @@ class DashboardAdminProjectFullTbpController extends Controller
                 $extension = pathinfo($file, PATHINFO_EXTENSION);
                 $download_file = file_get_contents($file);
                 $zip->addFromString(basename($file), $download_file);
-                // $zip->renameName(basename($file), 'เอกสารบริษัท'.$key.'.'.$extension);
+                $zip->renameName(basename($file), 'เอกสารบริษัท'.$key.'.'.$extension);
             }
             $zip->close();
         }
-        // return response()->download(public_path('storage/uploads/fulltbp/'.$filename));
+        return response()->download(public_path('storage/uploads/fulltbp/'.$filename));
     }
-    
 }
