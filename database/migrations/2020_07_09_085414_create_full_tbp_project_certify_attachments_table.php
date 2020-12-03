@@ -17,6 +17,7 @@ class CreateFullTbpProjectCertifyAttachmentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('project_certify_id');
             $table->foreign('project_certify_id')->references('id')->on('full_tbp_project_certifies')->onDelete('cascade');
+            $table->unsignedBigInteger('full_tbp_id');
             $table->string('name',120);
             $table->string('path',250);
             $table->timestamps();

@@ -899,6 +899,7 @@ class PillarIndexWeigthsTableSeeder extends Seeder
             if(Empty($pillaindexweigth)){
                 $pillaindexweigth = new PillaIndexWeigth();
                 $pillaindexweigth->ev_id = $criteriatransaction->ev_id;
+                $pillaindexweigth->ev_type_id = $criteriatransaction->ev_type_id;
                 $pillaindexweigth->pillar_id = $criteriatransaction->pillar_id;
                 $pillaindexweigth->sub_pillar_id = $criteriatransaction->sub_pillar_id;
                 $pillaindexweigth->sub_pillar_index_id = $criteriatransaction->sub_pillar_index_id;

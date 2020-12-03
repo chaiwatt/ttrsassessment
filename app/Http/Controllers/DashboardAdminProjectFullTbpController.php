@@ -55,6 +55,7 @@ use App\Model\FullTbpProjectCertify;
 use App\Model\FullTbpProjectTechDev;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Model\FullTbpBoardAttachment;
 use App\Model\FullTbpProjectStandard;
 use App\Model\FullTbpMarketAttachment;
 use App\Model\FullTbpMainProductDetail;
@@ -491,9 +492,68 @@ class DashboardAdminProjectFullTbpController extends Controller
             foreach ($fulltbpcompanyprofileattachments as $key => $fulltbpcompanyprofileattachment) {
                 $file = public_path($fulltbpcompanyprofileattachment->path);
                 $extension = pathinfo($file, PATHINFO_EXTENSION);
+                $name = preg_replace("/\.[^.]+$/", "", $fulltbpcompanyprofileattachment->name);
                 $download_file = file_get_contents($file);
                 $zip->addFromString(basename($file), $download_file);
-                $zip->renameName(basename($file), 'เอกสารบริษัท'.$key.'.'.$extension);
+                $zip->renameName(basename($file), 'เอกสารบริษัท_'.$name.'.'.$extension);
+            }
+            $companyemploys = CompanyEmploy::where('full_tbp_id',$fulltbp->id)->get();
+            foreach ($companyemploys as $key => $companyemploy) {
+                $boardattacements = FullTbpBoardAttachment::where('company_employ_id',$companyemploy->id)->get();
+                foreach ($boardattacements as $key => $boardattacement) {
+                    $file = public_path($boardattacement->path);
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $name = preg_replace("/\.[^.]+$/", "", $boardattacement->name);
+                    $download_file = file_get_contents($file);
+                    $zip->addFromString(basename($file), $download_file);
+                    $zip->renameName(basename($file), 'บุคลากร_'.$companyemploy->name.'_'.$companyemploy->lastname.'_'.$name.'.'.$extension);
+                }
+            }
+            $certifyattachments = FullTbpProjectCertifyAttachment::where('full_tbp_id',$fulltbp->id)->get();
+            foreach ($certifyattachments as $key => $certifyattachment) {
+                $file = public_path($certifyattachment->path);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                $name = preg_replace("/\.[^.]+$/", "", $certifyattachment->name);
+                $download_file = file_get_contents($file);
+                $zip->addFromString(basename($file), $download_file);
+                $zip->renameName(basename($file), 'สิทธิบัตร_'.$name.'.'.$extension);
+            }
+            $awardattachments = FullTbpProjectAwardAttachment::where('full_tbp_id',$fulltbp->id)->get();
+            foreach ($awardattachments as $key => $awardattachment) {
+                $file = public_path($awardattachment->path);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                $name = preg_replace("/\.[^.]+$/", "", $awardattachment->name);
+                $download_file = file_get_contents($file);
+                $zip->addFromString(basename($file), $download_file);
+                $zip->renameName(basename($file), 'นวัตกรรม_'.$name.'.'.$extension);
+            }
+            
+            $standards = FullTbpProjectStandard::where('full_tbp_id',$fulltbp->id)->get();
+            foreach ($standards as $key => $standard) {
+                $file = public_path($standard->path);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                $name = preg_replace("/\.[^.]+$/", "", $standard->name);
+                $download_file = file_get_contents($file);
+                $zip->addFromString(basename($file), $download_file);
+                $zip->renameName(basename($file), 'รับรองมาตรฐาน_'.$name.'.'.$extension);
+            }
+            $marketattachments = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',1)->get();
+            foreach ($marketattachments as $key => $marketattachment) {
+                $file = public_path($marketattachment->path);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                $name = preg_replace("/\.[^.]+$/", "", $marketattachment->name);
+                $download_file = file_get_contents($file);
+                $zip->addFromString(basename($file), $download_file);
+                $zip->renameName(basename($file), 'bmc_'.$name.'.'.$extension);
+            }
+            $marketattachments = FullTbpMarketAttachment::where('full_tbp_id',$fulltbp->id)->where('attachmenttype',2)->get();
+            foreach ($marketattachments as $key => $marketattachment) {
+                $file = public_path($marketattachment->path);
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+                $name = preg_replace("/\.[^.]+$/", "", $marketattachment->name);
+                $download_file = file_get_contents($file);
+                $zip->addFromString(basename($file), $download_file);
+                $zip->renameName(basename($file), 'swot_'.$name.'.'.$extension);
             }
             $zip->close();
         }

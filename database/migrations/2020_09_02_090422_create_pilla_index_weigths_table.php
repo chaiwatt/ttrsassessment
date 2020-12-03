@@ -17,6 +17,7 @@ class CreatePillaIndexWeigthsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ev_id');
             $table->foreign('ev_id')->references('id')->on('evs')->onDelete('cascade');
+            $table->unsignedBigInteger('ev_type_id')->default(1);
             $table->unsignedBigInteger('pillar_id');
             $table->unsignedBigInteger('sub_pillar_id');
             $table->unsignedBigInteger('sub_pillar_index_id');

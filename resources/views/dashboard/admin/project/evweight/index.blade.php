@@ -126,7 +126,7 @@
                                         <td> 
                                             @if (Auth::user()->user_type_id >= 6)
                                                     @if ($fulltbp->ev->refixstatus == 0)
-                                                        @if ($fulltbp->ev->status == 4)
+                                                        @if ($fulltbp->ev->status >= 4)
                                                                 <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
                                                             @else
                                                                 <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>อยู่ระหว่าง JD พิจารณา</button> 
@@ -138,7 +138,7 @@
                                                     @endif
                                                 @else
                                                     @if ($fulltbp->ev->refixstatus == 0)
-                                                        @if ($fulltbp->ev->status == 4)
+                                                        @if ($fulltbp->ev->status >= 4)
                                                                 <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
                                                             @else
                                                                 <span class="badge badge-flat border-warning text-warning-600">{{$fulltbp->ev->evstatus->name}}</span> 

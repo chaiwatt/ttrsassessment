@@ -35,7 +35,7 @@
                     <div class="box ml50 text-justify" style="width:550px;word-wrap:break-word" ><span>บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการ</span></div>
                     <div class="box bw600 text-justify" style="word-wrap:break-word" >ประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการ</div>
                     <div class="box bw600 text-justify" style="word-wrap:break-word">ประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่ง</div>
-                    <div class="box bw600 text-justify" style="word-wrap:break-word">ได้คะแนน 85 คะแนน จากคะแนนเต็ม 100 คะแนนคิดเป็นเกรดระดับ AAA โดยมีประเด็นสำคัญในการ</div>
+                    <div class="box bw600 text-justify" style="word-wrap:break-word">ได้คะแนน {{number_format($fulltbp->projectgrade->percent, 2, '.', '')}} คะแนน จากคะแนนเต็ม 100 คะแนนคิดเป็นเกรดระดับ {{$fulltbp->projectgrade->grade}} โดยมีประเด็นสำคัญในการ</div>
                     <div class="box bw600 text-justify" style="word-wrap:break-word">กำหนดระดับคะแนนและข้อเสนอแนะจากประเมิน ดังต่อไปนี้</div>
                 </div>
                 <div class="box mt10 ml30">

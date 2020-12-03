@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Auth;
 class AssessmentEvController extends Controller
 {
     public function AddEvChecklist(Request $request){
-        
         foreach($request->criterias as $criteria){
             $criteriatransaction = new CriteriaTransaction();
             $criteriatransaction->ev_id = $request->evid;
@@ -112,6 +111,7 @@ class AssessmentEvController extends Controller
         if(Empty($pillaindexweigth)){
             $pillaindexweigth = new PillaIndexWeigth();
             $pillaindexweigth->ev_id = $request->evid;
+            $pillaindexweigth->ev_type_id = 2;
             $pillaindexweigth->pillar_id = $request->pillar;
             $pillaindexweigth->sub_pillar_id = $request->subpillar;
             $pillaindexweigth->sub_pillar_index_id = $request->subpillarindex;
@@ -176,6 +176,7 @@ class AssessmentEvController extends Controller
                         ->first();
             $pillaindexweigth = new PillaIndexWeigth();
             $pillaindexweigth->ev_id = $new->ev_id;
+            $pillaindexweigth->ev_type_id = $new->ev_type_id;
             $pillaindexweigth->pillar_id = $pillaindexweigthorg->pillar_id;
             $pillaindexweigth->sub_pillar_id = $pillaindexweigthorg->sub_pillar_id;
             $pillaindexweigth->sub_pillar_index_id = $pillaindexweigthorg->sub_pillar_index_id;
@@ -204,7 +205,6 @@ class AssessmentEvController extends Controller
             $ev->update([
                 'refixstatus' => 2  
             ]);
-
         }
 
         $ev = Ev::find($request->id);
@@ -258,7 +258,8 @@ class AssessmentEvController extends Controller
     public function ApproveEvStageOne(Request $request){
         $auth = Auth::user();
         Ev::find($request->id)->update([
-            'status' => 2
+            'status' => 2,
+            'refixstatus' => 0
         ]);
         $ev = Ev::find($request->id);
         $admins = User::where('user_type_id',5)->pluck('id')->toArray();
@@ -414,11 +415,18 @@ class AssessmentEvController extends Controller
 
     public function SendEditEv(Request $request){
         $auth = Auth::user();
-        Ev::find($request->id)->update(
-            [
-                'refixstatus' => 2
-            ]
-        );
+        $ev = Ev::find($request->id);
+
+        $ev->update([
+            'status' => 3  
+        ]);
+
+        if($ev->refixstatus == 1){
+            $ev->update([
+                'refixstatus' => 2  
+            ]);
+        }
+
         $ev = Ev::find($request->id);
         $fulltbp = FullTbp::find($ev->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
@@ -528,12 +536,6 @@ class AssessmentEvController extends Controller
         $evedithistory->user_id = Auth::user()->id;
         $evedithistory->save();
         $evedithistories = EvEditHistory::where('ev_id',$request->id)->get();
-
-        Ev::find($request->id)->update(
-            [
-                'refixstatus' => 1
-            ]
-        );
 
         Ev::find($request->id)->update(
             [

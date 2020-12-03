@@ -37,6 +37,13 @@ class CriteriaTransaction extends Model
         return Scoring::where('criteria_transaction_id',$this->id)->where('user_id',Auth::user()->id)->first();
     } 
     public function getSumscoringAttribute(){
-        return Scoring::where('criteria_transaction_id',$this->id)->whereNull('user_id')->first();
+        $check = Scoring::where('criteria_transaction_id',$this->id)->whereNull('user_id')->first();
+        if(!Empty($check)){
+            return $check;
+        }else{
+            return null;
+        }
+        
     } 
+    
 }

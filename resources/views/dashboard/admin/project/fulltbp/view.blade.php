@@ -1932,7 +1932,7 @@
 																			<th>รายการ</th>  
 																			<th>เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
 																			<th>เทคโนโลยีในโครงการ</th>
-																			<th>เพิ่มเติม</th>    
+																			{{-- <th>เพิ่มเติม</th>     --}}
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    

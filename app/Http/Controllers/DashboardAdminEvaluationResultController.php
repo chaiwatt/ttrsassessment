@@ -93,15 +93,14 @@ class DashboardAdminEvaluationResultController extends Controller
                 'tempDir' => base_path('public/storage')
             ],
             'fontdata' => $fontData + [
-                'opun' => [
-                    'R'  => 'opun-regular.ttf',    
-                    // 'R'  => 'thsarabunnew-webfont.ttf', 
-                    'B'  => 'thsarabunnew_bold-webfont.ttf',       
-                    'I'  => 'thsarabunnew_italic-webfont.ttf',    
-                    'BI' => 'thsarabunnew_bolditalic-webfont.ttf' 
+                'kittithada' => [
+                    'R'  => 'PSL-Kittithada.ttf',    
+                    'B'  => 'PSL-KittithadaBold.ttf',       
+                    'I'  => 'PSL-KittithadaItalic.ttf',    
+                    'BI' => 'PSL-KittithadaBoldItalic.ttf' 
                 ]
             ],
-            'default_font' => 'opun',
+            'default_font' => 'kittithada',
             'format' => [279, 203]
         ]);
 
@@ -131,7 +130,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">สาขาเทคโนโลยี</span>', 13, 103.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">เทคโนโลยีอาหาร</span>', 50, 103.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">ระดับ</span>', 13, 112, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">AAA</span>', 50, 112, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">'. $fulltbp->projectgrade->grade.'</span>', 50, 112, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS</span>', 13, 120.5, 250, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">ให้ไว้ ณ วันที่ 23 ตุลาคม พ.ศ. 2563</span>', 13, 135, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");

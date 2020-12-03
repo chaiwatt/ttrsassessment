@@ -52,11 +52,15 @@ class DashboardAdminProjectEvWeightController extends Controller
                                                 ->orderBy('sub_pillar_index_id', 'asc')
                                                 ->get();
         $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
-        $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->sum('weigth'), 4); 
+        $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
+        $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
+        $ev= Ev::find($request->evid);
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "pillaindexweigths" => $pillaindexweigths,
-            "sumweigth" => $sumweigth
+            "sumweigth" => $sumweigth,
+            "sumextraweigth" => $sumextraweigth,
+            "ev" => $ev
         ));
 
     }
@@ -66,7 +70,7 @@ class DashboardAdminProjectEvWeightController extends Controller
             'weigth' => $request->value
         ]);
         $pillaindexweigth = PillaIndexWeigth::find($request->id);
-        $sumweigth = PillaIndexWeigth::where('ev_id',$pillaindexweigth->ev_id)->sum('weigth'); 
+        $sumweigth = PillaIndexWeigth::where('ev_id',$pillaindexweigth->ev_id)->where('ev_type_id',$request->evtypeid)->sum('weigth'); 
         return response()->json(array(
             "pillaindexweigth" => $pillaindexweigth,
             "sumweigth" => $sumweigth

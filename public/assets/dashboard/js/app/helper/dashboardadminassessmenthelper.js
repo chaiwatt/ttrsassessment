@@ -1,9 +1,11 @@
 
 $(function() {
     getEv($('#evid').val()).then(data => {
-        RenderTable(data);
+        RenderTable(data,1);
+        RenderTable(data,2);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
+        RowSpan("extra_criteriatable");
         $('#sumofweight').html(data.sumweigth);
 
     }).catch(error => {})
@@ -31,95 +33,101 @@ function getEv(evid){
   $(document).on('click', '#togglecomment', function(e) {
       $('.toggle').toggle();
    });
-function RenderTable(data){
-    console.log(data);
-    var html =``;
-    data.criteriatransactions.forEach((criteria,index) => {
-        var textvalue = '';
-        var checkvalue = '';
-        var comment = '';
-        var raw = 0;
-        if(criteria.scoring != null){
-            if(criteria.scoring['comment'] != null){comment = criteria.scoring['comment'];}
-            if(criteria.scoring['scoretype'] == 1){
-                textvalue = criteria.scoring['score'];
-                if(textvalue == 'A'){
-                    raw = 5;
-                }else if(textvalue == 'B'){
-                    raw = 4;
-                }else if(textvalue == 'C'){
-                    raw = 3;
-                }else if(textvalue == 'D'){
-                    raw = 2;
-                }else if(textvalue == 'E'){
-                    raw = 1;
+   function RenderTable(data,evtype){
+        var html =``;
+        data.criteriatransactions.forEach((criteria,index) => {
+            if(criteria.ev_type_id == evtype){
+                var textvalue = '';
+                var checkvalue = '';
+                var comment = '';
+                var raw = 0;
+                if(criteria.scoring != null){
+                    if(criteria.scoring['comment'] != null){comment = criteria.scoring['comment'];}
+                    if(criteria.scoring['scoretype'] == 1){
+                        textvalue = criteria.scoring['score'];
+                        if(textvalue == 'A'){
+                            raw = 5;
+                        }else if(textvalue == 'B'){
+                            raw = 4;
+                        }else if(textvalue == 'C'){
+                            raw = 3;
+                        }else if(textvalue == 'D'){
+                            raw = 2;
+                        }else if(textvalue == 'E'){
+                            raw = 1;
+                        }
+                    }else if(criteria.scoring['scoretype'] == 2){
+                        checkvalue = "checked";
+                    }
                 }
-            }else if(criteria.scoring['scoretype'] == 2){
-                checkvalue = "checked";
-            }
-        }
-
-        var criterianame = `<label>กรอกเกรด (A-F) <a href="#" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
-                           <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring">
-                            `;
-
-        if(criteria.criteria != null){
-            criterianame = `<label class="form-check-label">
-                                <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info scoring">
-                                ${criteria.criteria['name']} <a href="#" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
-                            </label>`;
-        }
-        var indexpercent = (data.evportions.find(x => x.id === 1)['percent'])/100;
-        var pillarpercent = (data.pillars.find(x => x.id === criteria.pillar['id'])['percent'])/100;
-        var check = data.pillaindexweigths.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-        var pillarweight = 0;
-        if ( typeof(check) !== "undefined" && check !== null ) {
-            pillarweight = check['weigth'];
-        }
-        var weightsum = raw*indexpercent*pillarpercent*pillarweight;
-
-        criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
-                            <label><i>ความเห็น</i></label>
-                            <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control">
-                            </div>
-                        </div>`;
-
-        var _scores = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']); 
-        const numcheck = _scores.map(item => item.score).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0);
-        console.log(numcheck)
-        if(_scores.length > 0){
-            var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-            // console.log(checklistgrading['gradea']);
-            var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
-            let gradeis = 0;
-            for (let i = 0; i < grades.length; i++) {
-                if(numcheck >= grades[i]){
-                    gradeis = i;
-                    break;
+        
+                var criterianame = `<label>กรอกเกรด (A-F) <a href="#" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
+                                <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring">
+                                    `;
+        
+                if(criteria.criteria != null){
+                    criterianame = `<label class="form-check-label">
+                                        <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info scoring">
+                                        ${criteria.criteria['name']} <a href="#" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
+                                    </label>`;
                 }
-            } 
-            if(gradeis == 0){
-                weightsum = 5*indexpercent*pillarpercent*pillarweight;
-            }else if(gradeis == 1){
-                weightsum = 4*indexpercent*pillarpercent*pillarweight;
-            }else if(gradeis == 2){
-                weightsum = 3*indexpercent*pillarpercent*pillarweight;
-            }else if(gradeis == 3){
-                weightsum = 2*indexpercent*pillarpercent*pillarweight;
-            }else if(gradeis == 4){
-                weightsum = 1*indexpercent*pillarpercent*pillarweight;
+                var indexpercent = (data.evportions.find(x => x.id === 1)['percent'])/100;
+                var pillarpercent = (data.pillars.find(x => x.id === criteria.pillar['id'])['percent'])/100;
+                var check = data.pillaindexweigths.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
+                var pillarweight = 0;
+                if ( typeof(check) !== "undefined" && check !== null ) {
+                    pillarweight = check['weigth'];
+                }
+                var weightsum = raw*indexpercent*pillarpercent*pillarweight;
+        
+                criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
+                                    <label><i>ความเห็น</i></label>
+                                    <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control">
+                                    </div>
+                                </div>`;
+        
+                var _scores = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']); 
+                const numcheck = _scores.map(item => item.score).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0);
+                console.log(numcheck)
+                if(_scores.length > 0){
+                    var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
+                    var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
+                    let gradeis = 0;
+                    for (let i = 0; i < grades.length; i++) {
+                        if(numcheck >= grades[i]){
+                            gradeis = i;
+                            break;
+                        }
+                    } 
+                    if(gradeis == 0){
+                        weightsum = 5*indexpercent*pillarpercent*pillarweight;
+                    }else if(gradeis == 1){
+                        weightsum = 4*indexpercent*pillarpercent*pillarweight;
+                    }else if(gradeis == 2){
+                        weightsum = 3*indexpercent*pillarpercent*pillarweight;
+                    }else if(gradeis == 3){
+                        weightsum = 2*indexpercent*pillarpercent*pillarweight;
+                    }else if(gradeis == 4){
+                        weightsum = 1*indexpercent*pillarpercent*pillarweight;
+                    }
+                }
+        
+                html += `<tr > 
+                <td> ${criteria.pillar['name']}</td>                                            
+                <td> ${criteria.subpillar['name']}</td>    
+                <td> ${criteria.subpillarindex['name']}</td>   
+                <td> ${criterianame} </td>     
+                                            
+                </tr>`
             }
-        }
-
-        html += `<tr > 
-        <td> ${criteria.pillar['name']}</td>                                            
-        <td> ${criteria.subpillar['name']}</td>    
-        <td> ${criteria.subpillarindex['name']}</td>   
-        <td> ${criterianame} </td>     
-                                     
-        </tr>`
         });
-    $("#criteria_transaction_wrapper_tr").html(html);
+    // }
+    if(evtype == 1){
+        $("#criteria_transaction_wrapper_tr").html(html);
+    }else if(evtype == 2){
+        $("#extra_criteria_transaction_wrapper_tr").html(html);
+    }
+    
 }
 
 function RowSpan(tableid){
@@ -369,3 +377,101 @@ function showConflictGrade(id){
         })
     })
   }
+
+  var submitbutton = true;
+if($('#evid').val() >= 5 ){
+    submitbutton = false;
+}
+var form = $('.step-evweight').show();
+$('.step-evweight').steps({
+    headerTag: 'h6',
+    bodyTag: 'fieldset',
+    transitionEffect: 'fade',
+    titleTemplate: '<span class="number">#index#</span> #title#',
+    labels: {
+        previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
+        next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
+        finish: '<i class="icon-spinner spinner mr-2" id="spinicon" hidden/>บันทึกคะแนน'
+    },
+    enableFinishButton: submitbutton,
+    onFinished: function (event, currentIndex) {
+        $('.scoring').each(function() {
+            if($(this).val() == ''){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+                    });
+                return;
+            }
+        });
+        var conflictarray = $(".scoring").map(function () {
+            var val = $(this).val();
+            if($(this).data('scoretype') == 2){
+                val = $(this).is(':checked');
+            }
+            return {
+                evid: $('#evid').val(),
+                criteriatransactionid: $(this).data('id'),
+                subpillarindex: $(this).data('subpillarindex'),
+                scoretype: $(this).data('scoretype'),
+                value: val
+              } 
+        }).get();
+        $("#spinicon").attr("hidden",false);
+        updateScore(conflictarray,$('#evid').val()).then(data => {
+            $("#spinicon").attr("hidden",true);
+            Swal.fire({
+                title: 'สำเร็จ...',
+                text: 'สรุปคะแนนสำเร็จ!',
+                }).then((result) => {
+                    window.location.replace(`${route.url}/dashboard/admin/assessment`);
+                });
+        }).catch(error => {})
+    },
+    transitionEffect: 'fade',
+    autoFocus: true,
+    onStepChanged:function (event, currentIndex, newIndex) {
+        return true;
+    },   
+});
+
+    // Initialize validation
+    $('.step-evweight').validate({
+        ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+        errorClass: 'validation-invalid-label',
+        highlight: function(element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).removeClass(errorClass);
+        },
+
+        // Different components require proper error label placement
+        errorPlacement: function(error, element) {
+
+            // Unstyled checkboxes, radios
+            if (element.parents().hasClass('form-check')) {
+                error.appendTo( element.parents('.form-check').parent() );
+            }
+
+            // Input with icons and Select2
+            else if (element.parents().hasClass('form-group-feedback') || element.hasClass('select2-hidden-accessible')) {
+                error.appendTo( element.parent() );
+            }
+
+            // Input group, styled file input
+            else if (element.parent().is('.uniform-uploader, .uniform-select') || element.parents().hasClass('input-group')) {
+                error.appendTo( element.parent().parent() );
+            }
+
+            // Other elements
+            else {
+                error.insertAfter(element);
+            }
+        },
+        rules: {
+            email: {
+                email: true
+            }
+        }
+    });

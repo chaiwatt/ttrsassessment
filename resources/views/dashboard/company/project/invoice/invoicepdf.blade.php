@@ -16,9 +16,9 @@
     <body>
 
         <div class="wrapper">
-            <htmlpagefooter name="page-footer">
+            {{-- <htmlpagefooter name="page-footer">
                 <div class="font12 right" alt="">F-CO-TTRS-02 rev0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>เอกสารสำคัญปกปิด(Private & Confidential)</strong>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{PAGENO}/{nb}</div>
-             </htmlpagefooter>
+             </htmlpagefooter> --}}
             <div class="container" >
                 <div class="box"  >
                     {{-- <img src="{{asset('assets/dashboard/images/ttrs.png')}}" style="width:120px" alt=""> --}}

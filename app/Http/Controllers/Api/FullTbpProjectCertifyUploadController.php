@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\FullTbpProjectCertify;
 use App\Model\FullTbpProjectCertifyAttachment;
 
 class FullTbpProjectCertifyUploadController extends Controller
@@ -13,8 +14,10 @@ class FullTbpProjectCertifyUploadController extends Controller
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
         $file->move("storage/uploads/fulltbp/project/certify/attachment" , $new_name);
         $filelocation = "storage/uploads/fulltbp/project/certify/attachment/".$new_name;
+        $projectcertify = FullTbpProjectCertify::find($request->id);
         $fulltbpprojectcertifyattachment = new FullTbpProjectCertifyAttachment();
         $fulltbpprojectcertifyattachment->project_certify_id = $request->id;
+        $fulltbpprojectcertifyattachment->full_tbp_id = $projectcertify->full_tbp_id;
         $fulltbpprojectcertifyattachment->name = $file->getClientOriginalName();;
         $fulltbpprojectcertifyattachment->path = $filelocation;
         $fulltbpprojectcertifyattachment->save();

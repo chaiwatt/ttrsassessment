@@ -14,7 +14,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Comment<span class="text-danger">*</span></label>
-                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Leader" class="form-control" ></textarea>
+                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Admin" class="form-control" ></textarea>
                         </div>
                     </div>
                 </div>         
@@ -27,15 +27,14 @@
     </div>
     <!-- Page header -->
     <div class="page-header page-header-light">
-        
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}} (Weight รวม <span id="sumofweight"></span>)</h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}</h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
                 @if (Auth::user()->user_type_id >= 5)
-                    @if ($ev->status >= 3)
+                    @if ($ev->status >= 4)
                             <div class="text-right">
                                 {{-- <button type="button" id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>ส่งรายการแก้ไข <i class="icon-paperplane ml-2"></i></button> --}}
                                 
@@ -46,6 +45,11 @@
                                     {{-- <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ส่ง JD พิจารณา" class="form-check-input-switch" @if ($ev->status == 3) checked @endif > --}}
                                     {{-- <button id="updateevstatus" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button> --}}
                                     {{-- <button type="button" id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>นำส่ง JD fff<i class="icon-paperplane ml-2"></i></button> --}}
+                                    @if (($ev->status == 3))
+                                        @if (Auth::user()->user_type_id == 6)
+                                            <button id="approveevstagetwo" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                     @endif
@@ -90,101 +94,155 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    <input type="text" id="evid" value="{{$ev->id}}" hidden>
                     <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                     <div class="card-body">
-                        <input type="text" id="tmpstepindex" value="0" hidden>
-                        <div class="text-right">
-                            {{-- {{$ev}} --}}
-                            @if (($ev->status == 2 || $ev->refixstatus == 1) && Auth::user()->user_type_id != 6)
-                                <button id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
-                            @endif
-                            @if (($ev->status == 2))
-                                @if (Auth::user()->user_type_id == 6)
-                                    <button id="approveevstagetwo" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
-                                @endif
-                            @endif
-                            {{--  <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif > --}}
-                        </div>
-                        <ul class="nav nav-tabs nav-tabs-highlight">
-                            <li class="nav-item"><a href="#detailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
-                            <li class="nav-item"><a href="#weighttab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i> กำหนด Weigth</a></li>
-                            @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
-                                <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
-                            @endif
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="detailtab">
-                                <input type="text" id="evid" value="{{$ev->id}}" hidden>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="criteriatable">
-                                        <thead>
-                                            <tr>
-                                                <th>Pillar</th>  
-                                                <th>Sub Pillar</th>   
-                                                <th>Index</th>                                                                                
-                                                <th>Criteria</th>  
-                                            </tr>
-                                        </thead>
-                                        <div class="theme_tail theme_tail_circle loadprogress">
-                                            <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
-                                            <div class="pace_activity"></div>
-                                        </div> 
-                                        <tbody id="criteria_transaction_wrapper_tr"> 
-          
-                                        </tbody>
-                                    </table>
+                        <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>
+                        <form id="frmminitbp" method="POST" class="wizard-form step-evweight" action="" data-fouc>
+                            @csrf
+                            <h6>Index Weight</h6>
+							<fieldset>
+                                <input type="text" id="tmpstepindex" value="0" hidden>
+                                {{-- <div class="text-right">
+                                    @if (($ev->status == 2 || $ev->refixstatus == 1) && Auth::user()->user_type_id != 6)
+                                        <button id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
+                                    @endif
+                                    @if (($ev->status == 2))
+                                        @if (Auth::user()->user_type_id == 6)
+                                            <button id="approveevstagetwo" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
+                                        @endif
+                                    @endif
+                                </div> --}}
+                                <ul class="nav nav-tabs nav-tabs-highlight indexweight">
+                                    <li class="nav-item"><a href="#detailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
+                                    <li class="nav-item"><a href="#weighttab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weigth <span id="weight"></span></a></li>
+                                    @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
+                                        <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
+                                    @endif
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="detailtab">
+                                        {{-- <input type="text" id="evid" value="{{$ev->id}}" hidden> --}}
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="criteriatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pillar</th>  
+                                                        <th>Sub Pillar</th>   
+                                                        <th>Index</th>                                                                                
+                                                        <th>Criteria</th>  
+                                                    </tr>
+                                                </thead>
+                                                <div class="theme_tail theme_tail_circle loadprogress">
+                                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                                    <div class="pace_activity"></div>
+                                                </div> 
+                                                <tbody id="criteria_transaction_wrapper_tr"> 
+                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+        
+                                    <div class="tab-pane fade" id="weighttab">
+                                        <table class="table table-bordered table-striped" id="subpillarindex">
+                                            <thead>
+                                                <tr>
+                                                    <th>Pillar</th>  
+                                                    <th>Sub Pillar</th>   
+                                                    <th>Weigth</th>                                                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody id="subpillar_index_transaction_wrapper_tr"> 
+              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="commenttab">
+                                        @if (Auth::user()->user_type_id == 6)
+                                        <div class="form-group">	
+                                            <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
+                                            <br>
+                                        </div>
+                                        @endif
+        
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" >
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th>วันที่</th>  
+                                                        <th>รายละเอียด</th>   
+                                                        @if (Auth::user()->user_type_id == 6)
+                                                            <th>เพิ่มเติม</th>
+                                                        @endif
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="ev_edit_history_wrapper_tr"> 
+                                                    @foreach ($evedithistories->reverse() as $evedithistory)
+                                                    <tr>
+                                                        <td>{{$evedithistory->thaidate}}</td>
+                                                        <td>{{$evedithistory->detail}}</td>
+                                                        @if (Auth::user()->user_type_id == 6)
+                                                        <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
+                                                        @endif
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="weighttab">
-                                <table class="table table-bordered table-striped" id="subpillarindex">
-                                    <thead>
-                                        <tr>
-                                            <th>Pillar</th>  
-                                            <th>Sub Pillar</th>   
-                                            <th>Weigth</th>                                                                                
-                                        </tr>
-                                    </thead>
-                                    <tbody id="subpillar_index_transaction_wrapper_tr"> 
-      
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade" id="commenttab">
-                                @if (Auth::user()->user_type_id == 6)
-                                <div class="form-group">	
-                                    <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
-                                    <br>
+                            </fieldset>
+                            @if ($ev->percentextra > 0)
+                            <h6>Extra Weight</h6>
+							<fieldset>
+                                {{-- <input type="text" id="tmpstepindex" value="0" hidden> --}}
+                                <ul class="nav nav-tabs nav-tabs-highlight">
+                                    <li class="nav-item"><a href="#extradetailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
+                                    <li class="nav-item"><a href="#extraweighttab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i> กำหนด Weigth <span id="extraweight"></span></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="extradetailtab">
+                                        {{-- <input type="text" id="evid" value="{{$ev->id}}" hidden> --}}
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="extra_criteriatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pillar AAA</th>  
+                                                        <th>Sub Pillar</th>   
+                                                        <th>Index</th>                                                                                
+                                                        <th>Criteria</th>  
+                                                    </tr>
+                                                </thead>
+                                                <div class="theme_tail theme_tail_circle loadprogress">
+                                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                                    <div class="pace_activity"></div>
+                                                </div> 
+                                                <tbody id="extra_criteria_transaction_wrapper_tr"> 
+                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+        
+                                    <div class="tab-pane fade" id="extraweighttab">
+                                        <table class="table table-bordered table-striped" id="extra_subpillarindex">
+                                            <thead>
+                                                <tr>
+                                                    <th>Pillar BBB</th>  
+                                                    <th>Sub Pillar</th>   
+                                                    <th>Weigth</th>                                                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody id="extra_subpillar_index_transaction_wrapper_tr"> 
+              
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                @endif
-
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="criteriatable">
-                                        <thead>
-                                            <tr class="bg-info">
-                                                <th>วันที่</th>  
-                                                <th>รายละเอียด</th>   
-                                                @if (Auth::user()->user_type_id == 6)
-                                                    <th>เพิ่มเติม</th>
-                                                @endif
-                                            </tr>
-                                        </thead>
-                                        <tbody id="ev_edit_history_wrapper_tr"> 
-                                            @foreach ($evedithistories->reverse() as $evedithistory)
-                                            <tr>
-                                                <td>{{$evedithistory->thaidate}}</td>
-                                                <td>{{$evedithistory->detail}}</td>
-                                                @if (Auth::user()->user_type_id == 6)
-                                                <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
-                                                @endif
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                            </fieldset>
+                            @endif
+                        </form>   
                     </div>
                 </div>
             <!-- /striped rows -->
@@ -197,15 +255,17 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
-<script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/evweigthhelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            usertypeid: "{{Auth::user()->user_type_id}}"
+            usertypeid: "{{Auth::user()->user_type_id}}",
+            refixstatus: "{{$ev->refixstatus}}",
         };
 
     </script>

@@ -2,14 +2,17 @@ import * as Ev from './ev.js';
 
 $( document ).ready(function() {
     getEv($('#evid').val()).then(data => {
-        console.log(data);
-        RenderTable(data.criteriatransactions);
-        RenderWeightTable(data.pillaindexweigths);
-        console.log(data.pillaindexweigths);
+        RenderTable(data.criteriatransactions,1);
+        RenderTable(data.criteriatransactions,2);
+        RenderWeightTable(data.pillaindexweigths,1);
+        RenderWeightTable(data.pillaindexweigths,2);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
+        RowSpan("extra_criteriatable");
         RowSpanWeight("subpillarindex");
-        $('#sumofweight').html(data.sumweigth);
+        RowSpanWeight("extra_subpillarindex");
+        $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
+        $('#extraweight').html('(' + data.sumextraweigth.toFixed(3) + ')');
         
     }).catch(error => {})
 });
@@ -33,16 +36,43 @@ function getEv(evid){
     })
   }
 
-  $(document).on('change', '#weigthvalue', function(e) {
-    // $(".loadprogress2").attr("hidden",false);
-    editWeight($(this).data('id'),$(this).val()).then(data => {
-        // $(".loadprogress2").attr("hidden",true);
-        // console.log(data.sumweigth);
-        $('#sumofweight').html(data.sumweigth);
+ $(document).on('focusin', '#weigthvalue1', function(){
+    $(this).data('old', $(this).val());
+ }).on('change', '#weigthvalue1', function(e) {
+    var check = parseFloat($('#weight').html().replace(/[{()}]/g, ''));
+    var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
+    if(newval.toFixed(3) > 1){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ผลรวม Weight มากกว่า 1 !',
+            });
+            $(this).val($(this).data('old')) 
+            return;
+    }
+    editWeight($(this).data('id'),$(this).val(),1).then(data => {
+        $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
     }).catch(error => {})
 });
 
-function editWeight(id,value){
+$(document).on('focusin', '#weigthvalue1', function(){
+    $(this).data('old', $(this).val());
+ }).on('change', '#weigthvalue2', function(e) {
+    var check = parseFloat($('#extraweight').html().replace(/[{()}]/g, ''));
+    var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
+    if(newval.toFixed(3) > 1){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ผลรวม Weight มากกว่า 1 !',
+            });
+            $(this).val($(this).data('old')) 
+            return;
+    }
+    editWeight($(this).data('id'),$(this).val(),2).then(data => {
+        $('#extraweight').html('(' + data.sumweigth.toFixed(3) + ')');
+    }).catch(error => {})
+});
+
+function editWeight(id,value,evtypeid){
     return new Promise((resolve, reject) => {
         $.ajax({
         url: `${route.url}/dashboard/admin/project/evweight/editsave`,
@@ -50,7 +80,8 @@ function editWeight(id,value){
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
             id : id,
-            value : value
+            value : value,
+            evtypeid : evtypeid,
         },
         success: function(data) {
             resolve(data)
@@ -62,44 +93,61 @@ function editWeight(id,value){
     })
   }
 
-function RenderTable(data){
+  function RenderTable(data,evtype){
     var html =``;
     data.forEach(function (criteria,index) {
-        var criterianame = '-';
-        if(criteria.criteria != null){
-            criterianame = criteria.criteria['name']
+        if(criteria.ev_type_id == evtype){
+            var criterianame = '-';
+            if(criteria.criteria != null){
+                criterianame = criteria.criteria['name']
+            }
+            html += `<tr > 
+            <td> ${criteria.pillar['name']}</td>                                            
+            <td> ${criteria.subpillar['name']}</td>    
+            <td> ${criteria.subpillarindex['name']}</td>   
+            <td> ${criterianame} </td>                                            
+            </tr>`
         }
-        html += `<tr > 
-        <td> ${criteria.pillar['name']}</td>                                            
-        <td> ${criteria.subpillar['name']}</td>    
-        <td> ${criteria.subpillarindex['name']}</td>   
-        <td> ${criterianame} </td>                                            
-        </tr>`
-        });
-    $("#criteria_transaction_wrapper_tr").html(html);
+     });
+     if(evtype == 1){
+        $("#criteria_transaction_wrapper_tr").html(html);
+    }else if(evtype == 2){
+        $("#extra_criteria_transaction_wrapper_tr").html(html);
+    }
+    
 }
 
-function RenderWeightTable(data){
+function RenderWeightTable(data,evtypeid){
     var html =``;
-    var readonly =``;
-    if($('#evstatus').val() == 4 ){
+    var readonly =`readonly`;
+    console.log($('#evstatus').val());
+    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
+    // if(($('#evstatus').val() == 2 && route.refixstatus != 1) ||  $('#evstatus').val() == 4 ){
+        readonly =``;
+    }
+    if($('#evstatus').val() >= 4){
         readonly =`readonly`;
     }
+    console.log(data);
     data.forEach(function (pillaindex,index) {
-        // $readonly = `<input type="number" id ="weigthvalue" value="${pillaindex.weigth}" data-id="${pillaindex.id}"class="form-control">`;
-
-        html += `<tr > 
-        <td> ${pillaindex.pillar['name']}</td>                                            
-        <td> ${pillaindex.subpillar['name']}</td>    
-        <td> 
-            <div class="form-group">
-                <label>${pillaindex.subpillarindex['name']}</label>
-                <input type="number" id ="weigthvalue" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control">
-            </div>
-        </td>                           
-        </tr>`
+        if(pillaindex.ev_type_id == evtypeid){
+            html += `<tr > 
+                <td> ${pillaindex.pillar['name']}</td>                                            
+                <td> ${pillaindex.subpillar['name']}</td>    
+                <td> 
+                    <div class="form-group">
+                        <label>${pillaindex.subpillarindex['name']}</label>
+                        <input type="number" id ="weigthvalue${evtypeid}" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control inputweigth">
+                    </div>
+                </td>                           
+            </tr>`
+        }
         });
-    $("#subpillar_index_transaction_wrapper_tr").html(html);
+        if(evtypeid == 1){
+            $("#subpillar_index_transaction_wrapper_tr").html(html);
+        }else if(evtypeid == 2){
+            $("#extra_subpillar_index_transaction_wrapper_tr").html(html);
+        }
 }
 
 function RowSpan(tableid){
@@ -210,13 +258,18 @@ function updateEvAdminStatus(id,value){
     })
   }
 
-   $(document).on('click', '#sendedittojd', function(e) {
-        $("#spiniconev").attr("hidden",false);
-        sendEditEv($(this).data('id')).then(data => {
-            $("#spiniconev").attr("hidden",true);
-            window.location.reload();
-        }).catch(error => {})
-    });
+//    $(document).on('click', '#sendedittojd', function(e) {
+//         $("#spiniconev").attr("hidden",false);
+//         sendEditEv($(this).data('id')).then(data => {
+//             $("#spiniconev").attr("hidden",true);
+//             Swal.fire({
+//                 title: 'สำเร็จ...',
+//                 text: 'นำส่ง EV ให้ JD สำเร็จ!',
+//             }).then((result) => {
+//                 window.location.reload();
+//             });
+//         }).catch(error => {})
+//     });
 
     function sendEditEv(id){
         return new Promise((resolve, reject) => {
@@ -246,8 +299,7 @@ function updateEvAdminStatus(id,value){
         }).catch(error => {})
     });
 
-    $('.nav-tabs a').on('shown.bs.tab', function (e) {
-        // alert('Hello from the other siiiiiide!');
+    $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
         if(route.usertypeid == 6)return;
         console.log($(e.target).attr("href"));
         if($(e.target).attr("href") == '#commenttab'){
@@ -255,8 +307,19 @@ function updateEvAdminStatus(id,value){
         
             }).catch(error => {})
         }
-        // var previous_tab = e.relatedTarget;
-    });
+    })
+
+    // $('.nav-tabs a').on('shown.bs.tab', function (e) {
+    //     console.log($(e.target).attr("href"));
+    //     if(route.usertypeid == 6)return;
+    //     console.log($(e.target).attr("href"));
+    //     if($(e.target).attr("href") == '#commenttab'){
+    //         Ev.clearCommentTab($('#evid').val(),2).then(data => {
+        
+    //         }).catch(error => {})
+    //     }
+    //     // var previous_tab = e.relatedTarget;
+    // });
     
     $(document).on("click",".deletecomment",function(e){
         console.log($(this).data('id'));
@@ -301,3 +364,105 @@ function updateEvAdminStatus(id,value){
             });
         }).catch(error => {})
     });
+    var submitbutton = false;
+    console.log('user ' + $('#evstatus').val() );
+    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1)) && route.usertypeid != 6){
+        submitbutton = true;
+    }
+    var form = $('.step-evweight').show();
+	$('.step-evweight').steps({
+		headerTag: 'h6',
+		bodyTag: 'fieldset',
+		transitionEffect: 'fade',
+		titleTemplate: '<span class="number">#index#</span> #title#',
+		labels: {
+			previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
+			next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
+			finish: '<i class="icon-spinner spinner mr-2" id="spiniconsendjd" hidden/>นำส่ง JD <i class="icon-arrow-right14 ml-2" />'
+		},
+		enableFinishButton: submitbutton,
+		onFinished: function (event, currentIndex) {
+            $('.inputweigth').each(function() {
+                if($(this).val() == ''){
+                    $(this).val(0);
+                }
+            });
+
+            if(parseFloat($('#weight').html().replace(/[{()}]/g, '')) != 1){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'ผลรวม Index Weight ไม่เท่ากับ 1',
+                })
+                return ;
+            }
+            if($('#percentextra').val() > 0){
+                if(parseFloat($('#extraweight').html().replace(/[{()}]/g, '')) != 1){
+                    Swal.fire({
+                        title: 'ผิดพลาด...',
+                        text: 'ผลรวม Extra Weight ไม่เท่ากับ 1',
+                    })
+                    return ;
+                }
+            }  
+            // $("#sendedittojd").trigger("click");
+            $("#spiniconsendjd").attr("hidden",false);
+            sendEditEv($('#evid').val()).then(data => {
+                $("#spiniconsendjd").attr("hidden",true);
+                Swal.fire({
+                    title: 'สำเร็จ...',
+                    text: 'นำส่ง EV ให้ JD สำเร็จ!',
+                }).then((result) => {
+                    window.location.reload();
+                });
+            }).catch(error => {})
+		},
+		transitionEffect: 'fade',
+		autoFocus: true,
+		onStepChanged:function (event, currentIndex, newIndex) {
+			// console.log('current step ' + currentIndex);
+
+		return true;
+		},
+		
+    });
+    
+    	// Initialize validation
+	$('.step-evweight').validate({
+	    ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+	    errorClass: 'validation-invalid-label',
+	    highlight: function(element, errorClass) {
+	        $(element).removeClass(errorClass);
+	    },
+	    unhighlight: function(element, errorClass) {
+	        $(element).removeClass(errorClass);
+	    },
+
+	    // Different components require proper error label placement
+	    errorPlacement: function(error, element) {
+
+	        // Unstyled checkboxes, radios
+	        if (element.parents().hasClass('form-check')) {
+	            error.appendTo( element.parents('.form-check').parent() );
+	        }
+
+	        // Input with icons and Select2
+	        else if (element.parents().hasClass('form-group-feedback') || element.hasClass('select2-hidden-accessible')) {
+	            error.appendTo( element.parent() );
+	        }
+
+	        // Input group, styled file input
+	        else if (element.parent().is('.uniform-uploader, .uniform-select') || element.parents().hasClass('input-group')) {
+	            error.appendTo( element.parent().parent() );
+	        }
+
+	        // Other elements
+	        else {
+	            error.insertAfter(element);
+	        }
+	    },
+	    rules: {
+	        email: {
+	            email: true
+	        }
+	    }
+	});

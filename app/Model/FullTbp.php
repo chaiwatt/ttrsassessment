@@ -10,6 +10,7 @@ use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
+use App\Model\ProjectGrade;
 use App\Model\CompanyEmploy;
 use App\Model\CriteriaGroup;
 use App\Model\EventCalendar;
@@ -247,8 +248,10 @@ class FullTbp extends Model
     public function getEvaluationresultAttribute(){
         return EvaluationResult::where('full_tbp_id',$this->id)->first();
     }
+    public function getProjectgradeAttribute(){
+        return ProjectGrade::where('full_tbp_id',$this->id)->first();
+    }
     
-   
 }
 
 
