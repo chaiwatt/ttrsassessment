@@ -11,26 +11,6 @@
 
 </head>
 <body>
-  
-  @if (Auth::check())
-        <input type="text" id="authcheck" value="0" hidden>
-        @if (Auth::user()->user_type_id >= 4)
-            <input type="text" id="url" value="{{route('dashboard.admin.report')}}" hidden>
-        @elseif(Auth::user()->user_type_id == 3)
-            <input type="text" id="url" value="{{route('dashboard.expert.report')}}" hidden>
-        @else
-            <input type="text" id="url" value="{{route('dashboard.company.report')}}" hidden>
-        @endif
-      @else
-        <input type="text" id="authcheck" value="1" hidden>
-        <input type="text" id="url" value="{{url('/')}}" hidden>
-  @endif
-     
-
-
-
-
-
   <!-- ======= Top Bar ======= -->
   @include('layouts.landing.topbar')
   
@@ -41,6 +21,7 @@
 	<!-- ======= Hero Section ======= -->
 	@include('layouts.landing.slide')
   <!-- End Hero -->
+
   <!-- ======= Services Section ======= -->
   @include('layouts.landing.service')
   <!-- End Services Section -->
@@ -53,6 +34,11 @@
   @include('layouts.landing.news')
   <!-- End News Section -->
 
+  
+  <!-- ======= Cookie ======= -->
+  @include('layouts.landing.cookie')
+  <!-- End Cookie -->
+  
   <!-- ======= Footer ======= -->
   @include('layouts.landing.footer')
   <!-- End Footer -->

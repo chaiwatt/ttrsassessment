@@ -60,8 +60,7 @@
   });
 
   // Activate smooth scroll on page load with hash links in the url
-  $(function() {
-
+  $(document).ready(function() {
     if (window.location.hash) {
       var initial_nav = window.location.hash;
       if ($(initial_nav).length) {
@@ -75,15 +74,11 @@
 
   // Mobile Navigation
   if ($('.nav-menu').length) {
-    var authcheck = `เข้าสู่ระบบ`;
-    if($('#authcheck').val() == 0){
-      authcheck = `แดชบอร์ด`;
-    }
     var mobile_nav = $('.nav-menu').clone().prop({
       class: 'mobile-nav d-lg-none'
     });
     var mobile_nav = $(".nav-menu").clone().prop({ class: "mobile-nav d-lg-none" });
-    mobile_nav = mobile_nav.append(`<li><a href="${$('#url').val()}" id="thaifont" style="color: #fff;" class="btn-get-started animate__animated animate__fadeInUp scrollto">${authcheck}</a></li>`);
+    mobile_nav = mobile_nav.append('<li><a href="#" id="thaifont" style="color: #fff;" class="btn-get-started animate__animated animate__fadeInUp scrollto"><i class="icofont-login"></i>  เข้าสู่ระบบ</a></li>');
     $('body').append(mobile_nav);
     $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
     $('body').append('<div class="mobile-nav-overly"></div>');
@@ -114,29 +109,7 @@
     $(".mobile-nav, .mobile-nav-toggle").hide();
   }
 
-  // Navigation active state on scroll
-  var nav_sections = $('section');
-  var main_nav = $('.nav-menu, .mobile-nav');
-
-  $(window).on('scroll', function() {
-    var cur_pos = $(this).scrollTop() + 200;
-
-    nav_sections.each(function() {
-      var top = $(this).offset().top,
-        bottom = top + $(this).outerHeight();
-
-      if (cur_pos >= top && cur_pos <= bottom) {
-        if (cur_pos <= bottom) {
-          main_nav.find('li').removeClass('active');
-        }
-        main_nav.find('a[href="#' + $(this).attr('id') + '"]').parent('li').addClass('active');
-      }
-      if (cur_pos < 300) {
-        $(".nav-menu ul:first li:first").addClass('active');
-      }
-    });
-  });
-
+ 
   // Intro carousel
   var heroCarousel = $("#heroCarousel");
   var heroCarouselIndicators = $("#hero-carousel-indicators");
@@ -222,3 +195,57 @@
   });
 
 })(jQuery);
+
+
+/*
+ * Bootstrap Cookie Alert 
+ */
+(function () {
+  "use strict";
+
+  var cookieAlert = document.querySelector(".cookiealert");
+  var acceptCookies = document.querySelector(".acceptcookies");
+
+  if (!cookieAlert) {
+     return;
+  }
+
+  cookieAlert.offsetHeight; 
+  if (!getCookie("acceptCookies")) {
+      cookieAlert.classList.add("show");
+  }
+
+  // When clicking on the agree button, create a 1 year
+  // cookie to remember user's choice and close the banner
+  acceptCookies.addEventListener("click", function () {
+      setCookie("acceptCookies", true, 365);
+      cookieAlert.classList.remove("show");
+
+      // dispatch the accept event
+      window.dispatchEvent(new Event("cookieAlertAccept"))
+  });
+
+  // Cookie functions from w3schools
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) === ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) === 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+})();
