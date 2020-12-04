@@ -9,6 +9,7 @@ use App\Model\Province;
 use App\Helper\LogAction;
 use App\Model\BusinessPlan;
 use App\Model\CompanyEmploy;
+use App\Model\IndustryGroup;
 use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
@@ -64,5 +65,8 @@ class Company extends Model
     {
         return CompanyAddress::where('company_id',$this->id)->get();
     }
-
+    public function getIndustrygroupAttribute()
+    {
+        return IndustryGroup::find($this->industry_group_id);
+    }
 }

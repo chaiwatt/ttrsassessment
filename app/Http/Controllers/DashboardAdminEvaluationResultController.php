@@ -114,25 +114,23 @@ class DashboardAdminEvaluationResultController extends Controller
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
 
-
+		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+        $strMonthThai=$strMonthCut[Carbon::today()->format('m')];
 
         $projectname = $minitbp->project;
-        // if(strlen($firstparagraph) > 180){
-        //     $projectname = substr_replace( $minitpb->project, '<br>', strlen($firstparagraph), 0 );
-        // }
         $mpdf->UseTemplate($tplId);
-
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 24pt;">'. $minitbp->project.'</span>', 45, 66.5, 200, 150, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">เลขที่</span>', 13, 86.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">207001-DM</span>', 50, 86.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">โดย</span>', 13, 95, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">บริษัท ABC-DM จำกัด</span>', 50, 95, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">สาขาเทคโนโลยี</span>', 13, 103.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">เทคโนโลยีอาหาร</span>', 50, 103.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">ระดับ</span>', 13, 112, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">'. $fulltbp->projectgrade->grade.'</span>', 50, 112, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS</span>', 13, 120.5, 250, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 12pt;">ให้ไว้ ณ วันที่ 23 ตุลาคม พ.ศ. 2563</span>', 13, 135, 200, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 37pt;">'. $minitbp->project. ' ' . $minitbp->projecteng.'</span>', 45, 69.5, 200, 150, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>เลขที่</strong></span>', 13, 84, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.Carbon::today()->format('Y').sprintf("%03d",  $fulltbp->id).'</strong></span>', 50, 84, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>โดย</strong></span>', 13, 92.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>บริษัท '.$minitbp->businessplan->company->name.'</strong></span>', 50, 92.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>สาขาเทคโนโลยี</strong></span>', 13, 101.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$minitbp->businessplan->company->industrygroup->name.'</strong></span>', 50, 101.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ระดับ</strong></span>', 13, 109.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'. $fulltbp->projectgrade->grade.'</strong></span>', 50, 109.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)</strong></span>', 13, 118, 250, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ให้ไว้ ณ วันที่ '.ltrim(Carbon::today()->format('d'), '0').' '.$strMonthCut[Carbon::today()->format('m')].' พ.ศ. '.(Carbon::today()->format('Y')+543).'</strong></span>', 13, 132.5, 200, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">(นายณรงค์ ศิริเลิศวรกุล)</div>', 14,160, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output();
     }

@@ -37,6 +37,6 @@
         <p  id="thaifont" class="description">การจัดอันดับเทคโนโลยีและออกใบรับรอง</p>
       </div>
     </div>
-    <a href="#" class="btn-get-started float-right" data-aos="fade-up" data-aos-delay="550">เริ่มต้นใช้งาน</a>
+    <a href="{{route('register')}}" class="btn-get-started float-right" data-aos="fade-up" data-aos-delay="550">เริ่มต้นใช้งาน</a>
   </div>
 </section>
