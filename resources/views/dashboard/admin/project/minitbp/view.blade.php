@@ -13,7 +13,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เอกสาร Mini TBP</span></h4>
+			    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เอกสาร Mini TBP : {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			<div class="header-elements d-none">
@@ -728,12 +728,12 @@
 			});
 			return;
 		}
-		var text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
+		var text = 'ส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
 		if($('#usersignature').val() == 1){
-			text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
 		}
 		Swal.fire({
-			title: 'เอกสาร mini TBP',
+			title: 'โปรดยืนยัน',
 			text: text,
 			type: 'warning',
 			showCancelButton: true,

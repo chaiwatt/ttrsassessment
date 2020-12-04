@@ -265,7 +265,6 @@ class DashboardAdminAssessmentController extends Controller
                         ->where('criteria_transaction_id',$request->id)
                         ->get();  
         $projectmembers = Projectmember::where('full_tbp_id',Ev::find($criteriatransaction->ev_id)->full_tbp_id)->get();              
-        // return response()->json($scores); 
         return response()->json(array(
             "scores" => $scores,
             "projectmembers" => $projectmembers
@@ -293,10 +292,6 @@ class DashboardAdminAssessmentController extends Controller
     }
 
     public function UpdateScore(Request $request){
-        
-        // if(count($request->arraylist)){
-
-        // }
         if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
                 if($criteria['scoretype'] == 1){

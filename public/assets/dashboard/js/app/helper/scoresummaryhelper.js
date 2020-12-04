@@ -4,11 +4,14 @@ $(function() {
         $('#showgrade').html(data.projectgrade.grade);
         sumGrade(data);
         RenderTable(data,1);
-        RenderTable(data,2);
+        if(data.ev.percentextra > 0){
+            RenderTable(data,2);   
+        }
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
-        RowSpan("extra_criteriatable");
-        // $('#sumofweight').html(data.sumweigth);
+        if(data.ev.percentextra > 0){
+            RowSpan("extra_criteriatable");
+        }
         $('.inpscore').prop("disabled", true);
         
 
@@ -307,40 +310,40 @@ $('.step-evweight').steps({
         next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
         finish: '<i class="icon-spinner spinner mr-2" id="spinicon" hidden/>บันทึกคะแนน'
     },
-    enableFinishButton: submitbutton,
+    enableFinishButton: false,
     onFinished: function (event, currentIndex) {
-        $('.scoring').each(function() {
-            if($(this).val() == ''){
-                Swal.fire({
-                    title: 'ผิดพลาด...',
-                    text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
-                    });
-                return;
-            }
-        });
-        var conflictarray = $(".scoring").map(function () {
-            var val = $(this).val();
-            if($(this).data('scoretype') == 2){
-                val = $(this).is(':checked');
-            }
-            return {
-                evid: $('#evid').val(),
-                criteriatransactionid: $(this).data('id'),
-                subpillarindex: $(this).data('subpillarindex'),
-                scoretype: $(this).data('scoretype'),
-                value: val
-              } 
-        }).get();
-        $("#spinicon").attr("hidden",false);
-        updateScore(conflictarray,$('#evid').val()).then(data => {
-            $("#spinicon").attr("hidden",true);
-            Swal.fire({
-                title: 'สำเร็จ...',
-                text: 'สรุปคะแนนสำเร็จ!',
-                }).then((result) => {
-                    window.location.replace(`${route.url}/dashboard/admin/assessment`);
-                });
-        }).catch(error => {})
+        // $('.scoring').each(function() {
+        //     if($(this).val() == ''){
+        //         Swal.fire({
+        //             title: 'ผิดพลาด...',
+        //             text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+        //             });
+        //         return;
+        //     }
+        // });
+        // var conflictarray = $(".scoring").map(function () {
+        //     var val = $(this).val();
+        //     if($(this).data('scoretype') == 2){
+        //         val = $(this).is(':checked');
+        //     }
+        //     return {
+        //         evid: $('#evid').val(),
+        //         criteriatransactionid: $(this).data('id'),
+        //         subpillarindex: $(this).data('subpillarindex'),
+        //         scoretype: $(this).data('scoretype'),
+        //         value: val
+        //       } 
+        // }).get();
+        // $("#spinicon").attr("hidden",false);
+        // updateScore(conflictarray,$('#evid').val()).then(data => {
+        //     $("#spinicon").attr("hidden",true);
+        //     Swal.fire({
+        //         title: 'สำเร็จ...',
+        //         text: 'สรุปคะแนนสำเร็จ!',
+        //         }).then((result) => {
+        //             window.location.replace(`${route.url}/dashboard/admin/assessment`);
+        //         });
+        // }).catch(error => {})
     },
     transitionEffect: 'fade',
     autoFocus: true,
@@ -348,6 +351,26 @@ $('.step-evweight').steps({
         return true;
     },   
 });
+
+// function updateScore(arraylist,evid){
+//     return new Promise((resolve, reject) => {
+//         $.ajax({
+//         url: `${route.url}/dashboard/admin/assessment/updatescore`,
+//         type: 'POST',
+//         headers: {"X-CSRF-TOKEN":route.token},
+//         data: {
+//             arraylist : arraylist,
+//             evid : evid
+//         },
+//         success: function(data) {
+//             resolve(data)
+//         },
+//         error: function(error) {
+//             reject(error)
+//         },
+//         })
+//     })
+//   }
 
     // Initialize validation
     $('.step-evweight').validate({

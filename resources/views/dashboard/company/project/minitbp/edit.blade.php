@@ -745,12 +745,12 @@
 			});
 			return;
 		}
-		var text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
+		var text = 'ส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
 		if($('#usersignature').val() == 1){
-			text = 'ยืนยันส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
 		}
 		Swal.fire({
-			title: 'เอกสาร Mini TBP',
+			title: 'โปรดยืนยัน',
 			text: text,
 			type: 'warning',
 			showCancelButton: true,

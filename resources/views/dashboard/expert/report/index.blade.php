@@ -82,7 +82,9 @@
                                     <tr>
                                         <td> {{$fulltbp->updatedatth}} </td> 
                                         {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
-                                        <td> {{$fulltbp->minitbp->project}} </td>  
+                                        <td>  
+                                            <a class="text-info" href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" >{{$fulltbp->minitbp->project}}</a>
+                                        </td>  
                                         <td>  
                                             <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
                                         </td>  
@@ -105,9 +107,7 @@
                                                     <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
                                                     <a href="{{route('dashboard.expert.report.reject',['id' => $fulltbp->id])}}" class="btn btn-sm bg-danger">ปฎิเสธเข้าร่วม</a>
                                                 @elseif($fulltbp->expertassignment->accepted == 1)
-                                                    <a href="{{route('dashboard.expert.report.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
-                                                    <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal">PDF</a>
-                                                    <a href="{{route('dashboard.expert.report.excel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">EXCEL</a>
+                                                     <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">PDF</a>
                                                 @elseif($fulltbp->expertassignment->accepted == 2)
                                                     <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปฎิเสธการเข้าร่วมหรือคลิกเพื่อเข้าร่วม</a>
                                             @endif

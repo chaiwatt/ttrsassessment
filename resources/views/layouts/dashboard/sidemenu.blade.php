@@ -115,7 +115,7 @@
                             @endif
                         </a></li>
                     @endif
-                    @if (Auth::user()->company->businessplan->business_plan_status_id > 1)
+                    @if (Auth::user()->company->businessplan->business_plan_status_id >= 5)
                         <li class="nav-item"><a href="{{route('dashboard.company.project.invoice',['id'=>Auth::user()->company->businessplan->minitbp->fulltbp->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">ใบแจ้งหนี้
                             @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
                                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>

@@ -9,7 +9,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}} (Weight รวม <span id="sumofweight"></span>)</h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}</h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
 
@@ -114,19 +114,20 @@
 
                             </tbody>
                         </table>
-                        <br>
-                        <table class="table table-bordered table-striped" id="extra_gradesummary">
-                            <thead>
-                                <tr class="bg-info">
-                                    <th>Pillar (Extra)</th>  
-                                    <th style="width:30%">เปอร์เซนต์</th>                                                                                 
-                                </tr>
-                            </thead>
-                            <tbody id="extra_gradesummary_wrapper_tr"> 
+                        @if ($ev->percentextra > 0)
+                            <br>
+                            <table class="table table-bordered table-striped" id="extra_gradesummary">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th>Pillar (Extra)</th>  
+                                        <th style="width:30%">เปอร์เซนต์</th>                                                                                 
+                                    </tr>
+                                </thead>
+                                <tbody id="extra_gradesummary_wrapper_tr"> 
 
-                            </tbody>
-                        </table>
-
+                                </tbody>
+                            </table>
+                        @endif
                         <input type="text" id="evid" value="{{$ev->id}}" hidden>
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                             <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>

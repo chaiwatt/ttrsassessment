@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Model\Prefix;
 use App\Model\Company;
-use App\Model\MiniTBP;
 use App\Model\FullTbp;
+use App\Model\MiniTBP;
 use App\Helper\EmailBox;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
@@ -21,12 +21,15 @@ use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\FullTbpEmployee;
+use App\Model\SignatureStatus;
+use App\Model\TimeLineHistory;
 use App\Model\EmployExperience;
 use App\Model\ExpertAssignment;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketNeed;
 use App\Model\FullTbpMarketSize;
+use App\Model\FullTbpResearcher;
 use App\Model\FullTbpSellStatus;
 use App\Model\ProjectAssignment;
 use App\Model\CompanyStockHolder;
@@ -102,7 +105,12 @@ class DashboardExpertProjectFullTbpController extends Controller
         $fulltbpinvestments = FullTbpInvestment::where('full_tbp_id',$fulltbp->id)->get();        
         $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbp->id)->get();
         $fulltbpreturnofinvestment = FullTbpReturnOfInvestment::where('full_tbp_id',$fulltbp->id)->first();
-        $fulltbpcompanydocs = FullTbpCompanyDoc::where('full_tbp_id',$fulltbp->id)->get();
+        $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
+        $timelinehistories = TimeLineHistory::where('business_plan_id',$minitbp->business_plan_id)
+                                            ->where('message_type',2)
+                                            ->get();
+        $fulltbpresearchers = FullTbpResearcher::where('full_tbp_id',$fulltbp->id)->get(); 
+        $signaturestatuses = SignatureStatus::get();
         return view('dashboard.admin.project.fulltbp.view')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -143,7 +151,10 @@ class DashboardExpertProjectFullTbpController extends Controller
                                                 ->withFulltbpinvestments($fulltbpinvestments)
                                                 ->withFulltbpcosts($fulltbpcosts)
                                                 ->withFulltbpreturnofinvestment($fulltbpreturnofinvestment)
-                                                ->withFulltbpcompanydocs($fulltbpcompanydocs);
+                                                ->withFulltbpcompanydocs($fulltbpcompanydocs)
+                                                ->withTimelinehistories($timelinehistories)
+                                                ->withFulltbpresearchers($fulltbpresearchers)
+                                                ->withSignaturestatuses($signaturestatuses);
     }
     public function EditAccept(Request $request){
         ExpertAssignment::where('full_tbp_id', $request->id)

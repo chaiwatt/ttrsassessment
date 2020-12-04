@@ -35,7 +35,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ข้อความเพิ่มเติม<span class="text-danger">*</span></label>
-                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยัง Admin" class="form-control" readonly></textarea>
+                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยัง Admin" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>

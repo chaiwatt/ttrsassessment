@@ -10,6 +10,7 @@ use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
+use App\Model\Criteria;
 use App\Helper\EmailBox;
 use App\Model\FinalGrade;
 use App\Model\BusinessPlan;
@@ -210,24 +211,51 @@ class DashboardAdminProjectAssessmentController extends Controller
                                             ->where('sub_pillar_id',$demo->sub_pillar_id)
                                             ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->pluck('id');
                     if(count($count)>0){
-                        $inscore = Scoring::where('ev_id',$request->evid)->whereIn('criteria_transaction_id',$count)->whereNull('user_id')->pluck('id');
+                        $inscore = Scoring::where('ev_id',$request->evid)->whereIn('criteria_transaction_id',$count)->whereNull('user_id')->pluck('criteria_transaction_id');
+                        $_transactions = CriteriaTransaction::whereIn('id',$inscore)->get();
+                        $_sumscore = 0;
+                        foreach ($_transactions as $key => $_transaction) {
+                            $_criteria = Criteria::find($_transaction->criteria_id);
+                            $name = $_criteria->name;
+                            preg_match('#\((.*?)\)#', $name, $match);
+                            if(!Empty($match[1])){
+                                preg_match('!\d+!',$match[1], $result);
+                                $_sumscore += intVal($result[0]);
+                            }else{
+                                $_sumscore += 1;
+                            }
+                        }
+
                         $checklistgrading = CheckListGrading::where('ev_id',$request->evid)
                                             ->where('pillar_id',$pillar->id)
                                             ->where('sub_pillar_id',$demo->sub_pillar_id)
                                             ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
                     if(!Empty($checklistgrading)){
                         $yourgrade = 0;
-                        if($inscore->count() >= $checklistgrading->gradea){
+                        // if($inscore->count() >= $checklistgrading->gradea){
+                        //     $yourgrade = 5;
+                        // }else if($inscore->count() >= $checklistgrading->gradeb && $inscore->count() < $checklistgrading->gradea){
+                        //     $yourgrade = 4;
+                        // }else if($inscore->count() >= $checklistgrading->gradec && $inscore->count() < $checklistgrading->gradeb){
+                        //     $yourgrade = 3;
+                        // }else if($inscore->count() >= $checklistgrading->graded && $inscore->count() < $checklistgrading->gradec){
+                        //     $yourgrade = 2;
+                        // }else if($inscore->count() >= $checklistgrading->gradee && $inscore->count() < $checklistgrading->graded){
+                        //     $yourgrade = 1;
+                        // }
+
+                        if($_sumscore >= $checklistgrading->gradea){
                             $yourgrade = 5;
-                        }else if($inscore->count() >= $checklistgrading->gradeb && $inscore->count() < $checklistgrading->gradea){
+                        }else if($_sumscore >= $checklistgrading->gradeb && $_sumscore < $checklistgrading->gradea){
                             $yourgrade = 4;
-                        }else if($inscore->count() >= $checklistgrading->gradec && $inscore->count() < $checklistgrading->gradeb){
+                        }else if($_sumscore >= $checklistgrading->gradec && $_sumscore < $checklistgrading->gradeb){
                             $yourgrade = 3;
-                        }else if($inscore->count() >= $checklistgrading->graded && $inscore->count() < $checklistgrading->gradec){
+                        }else if($_sumscore >= $checklistgrading->graded && $_sumscore < $checklistgrading->gradec){
                             $yourgrade = 2;
-                        }else if($inscore->count() >= $checklistgrading->gradee && $inscore->count() < $checklistgrading->graded){
+                        }else if($_sumscore >= $checklistgrading->gradee && $_sumscore < $checklistgrading->graded){
                             $yourgrade = 1;
                         }
+
                         $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)
                                                             ->where('pillar_id',$pillar->id)
                                                             ->where('sub_pillar_id',$demo->sub_pillar_id)
@@ -267,7 +295,11 @@ class DashboardAdminProjectAssessmentController extends Controller
 
         $finalgrade = FinalGrade::where('ev_id',$request->evid)->get();
         $indexpercent = FinalGrade::where('ev_id',$request->evid)->where('pillar_id','<=',4)->sum('percent')/FinalGrade::where('ev_id',$request->evid)->where('pillar_id','<=',4)->count();
-        $extrapercent = FinalGrade::where('ev_id',$request->evid)->where('pillar_id','>',4)->sum('percent')/FinalGrade::where('ev_id',$request->evid)->where('pillar_id','>',4)->count();
+        $extrapercent = 0;
+        if($ev->percentextra > 0){
+            $extrapercent = FinalGrade::where('ev_id',$request->evid)->where('pillar_id','>',4)->sum('percent')/FinalGrade::where('ev_id',$request->evid)->where('pillar_id','>',4)->count();
+        }
+        
         $percent = floatval($indexpercent) * floatval($ev->percentindex)/100 + floatval($extrapercent) * floatval($ev->percentextra)/100 ;
         $grade = 0;
         if($percent >= 87){
@@ -308,7 +340,8 @@ class DashboardAdminProjectAssessmentController extends Controller
             "criteriatransactions" => $criteriatransactions,
             "finalgrade" => $finalgrade,
             "pillars" => $pillars,
-            "projectgrade" => $projectgrade
+            "projectgrade" => $projectgrade,
+            "ev" => $ev
         ));
     }
 

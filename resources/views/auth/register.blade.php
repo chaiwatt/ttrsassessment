@@ -132,7 +132,8 @@
                             @error('password')
                                 <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                             @enderror
-                            <small class="form-text text-right pwstrength_viewport_verdict"></small>
+                            {{-- <small class="form-text text-right pwstrength_viewport_verdict"></small> --}}
+                            
                         </div>
         
                         <div class="form-group form-group-feedback form-group-feedback-left">
@@ -140,7 +141,11 @@
                             <div class="form-control-feedback ">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
+                            {{-- <div class="col-sm-12" style="padding-top: 5px;"> --}}
+                            <div class="pwstrength_viewport_progress" style="padding-top: 10px;"></div>
+                            {{-- </div> --}}
                         </div>
+                        
                         
                     </div>
 
@@ -175,7 +180,7 @@
                 options.ui = {
                     container: "#pwd-container",
                     // showStatus: true,
-                    showProgressBar: false,
+                    // showProgressBar: false,
                     addRule: function (name, method, score, active) {
                         this.each(function (idx, el) {
                             var options = $(el).data("pwstrength");
@@ -185,8 +190,10 @@
                         });
                     },
                     viewports: {
-                        verdict: ".pwstrength_viewport_verdict"
-                    }
+                        // verdict: ".pwstrength_viewport_verdict"
+                        progress: ".pwstrength_viewport_progress"
+                    },
+                        showVerdictsInsideProgressBar: true
                 };
                 $('#password').pwstrength(options);
             });
@@ -215,6 +222,14 @@
                     $('.toggle_password').removeClass("icon-eye");
                     $('#password').attr("type", "password");
                     $('#password-confirm').attr("type", "password");
+                }
+            });
+
+            $(document).on('keyup', '#password', function(e) {
+                if($(this).val() == ''){
+                    $(".pwstrength_viewport_progress").attr("hidden",true);
+                }else{
+                    $(".pwstrength_viewport_progress").attr("hidden",false);
                 }
             });
         </script>	

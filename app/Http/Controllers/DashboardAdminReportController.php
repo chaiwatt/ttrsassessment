@@ -17,7 +17,7 @@ class DashboardAdminReportController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        $fulltbps = FullTbp::where('status',2)->get();
+        $fulltbps = FullTbp::where('status',1)->get();
         if($auth->user_type_id == 4){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
