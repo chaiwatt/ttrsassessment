@@ -49,5 +49,6 @@ class CompanyController extends Controller
         $company = Company::find($request->id);
         return response()->json($company); 
     }
+    
 }
 

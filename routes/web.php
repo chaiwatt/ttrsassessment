@@ -397,8 +397,15 @@ Route::group(['middleware' => 'auth'], function(){
                 });
             }); 
             Route::group(['prefix' => 'project'], function(){
-                Route::group(['prefix' => 'fee'], function(){
-                    Route::get('','DashboardAdminProjectFeeController@Index')->name('dashboard.admin.project.fee');           
+                Route::group(['prefix' => 'invoice'], function(){
+                    Route::get('','DashboardAdminProjectInvoiceController@Index')->name('dashboard.admin.project.invoice');           
+                    Route::get('create','DashboardAdminProjectInvoiceController@Create')->name('dashboard.admin.project.invoice.create'); 
+                    Route::post('createsave','DashboardAdminProjectInvoiceController@CreateSave')->name('dashboard.admin.project.invoice.createsave'); 
+                    Route::get('edit/{id}','DashboardAdminProjectInvoiceController@Edit')->name('dashboard.admin.project.invoice.edit'); 
+                    Route::post('editsave/{id}','DashboardAdminProjectInvoiceController@EditSave')->name('dashboard.admin.project.invoice.editsave'); 
+                    Route::get('delete/{id}','DashboardAdminProjectInvoiceController@Delete')->name('dashboard.admin.project.invoice.delete'); 
+                    Route::get('view/{id}','DashboardAdminProjectInvoiceController@View')->name('dashboard.admin.project.invoice.view'); 
+                    Route::post('updatestatus','DashboardAdminProjectInvoiceController@UpdateStatus')->name('dashboard.admin.project.invoice.updatestatus'); 
                 });       
                 Route::group(['prefix' => 'businessplan'], function(){
                     Route::get('','DashboardAdminProjectBusinessPlanController@Index')->name('dashboard.admin.project.businessplan');           
@@ -546,7 +553,10 @@ Route::group(['middleware' => 'auth'], function(){
             });      
             Route::group(['prefix' => 'project'], function(){
                 Route::group(['prefix' => 'invoice'], function(){
-                    Route::get('/{id}','DashboardCompanyInvoiceController@Invoice')->name('dashboard.company.project.invoice');           
+                    Route::get('','DashboardCompanyInvoiceController@Index')->name('dashboard.company.project.invoice'); 
+                    Route::get('view/{id}','DashboardCompanyInvoiceController@View')->name('dashboard.company.project.invoice.view');   
+                    Route::get('paymentnotification/{id}','DashboardCompanyInvoiceController@PaymentNotification')->name('dashboard.company.project.invoice.paymentnotification');   
+                    Route::post('paymentnotificationsave/{id}','DashboardCompanyInvoiceController@PaymentNotificationSave')->name('dashboard.company.project.invoice.paymentnotificationsave');           
                 }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardCompanyProjectAssessmentController@Index')->name('dashboard.company.assessment');           
@@ -758,6 +768,10 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'frontpage'], function(){     
                     Route::get('','SettingAdminWebsiteFrontPageController@Index')->name('setting.admin.website.frontpage'); 
                     Route::post('save','SettingAdminWebsiteFrontPageController@Save')->name('setting.admin.website.frontpage.save'); 
+                });
+                Route::group(['prefix' => 'system'], function(){     
+                    Route::get('','SettingAdminSystemController@Index')->name('setting.admin.system'); 
+                    Route::post('save','SettingAdminSystemController@Save')->name('setting.admin.system.save'); 
                 });
             }); 
             Route::group(['prefix' => 'user'], function(){

@@ -25,15 +25,20 @@ class CreateGeneralInfosTable extends Migration
             $table->unsignedBigInteger('province_id')->default(4);  //ปทุมธานี
             $table->unsignedBigInteger('amphur_id')->default(67);   //คลองหลวง
             $table->unsignedBigInteger('tambol_id')->default(367);  //คลองหนึ่ง
-            $table->char('postalcode',5)->default('12120');;
+            $table->char('postalcode',5)->default('12120');
             $table->string('client_id',250);
             $table->string('client_secret',250);
-            $table->string('youtube',250);
-            $table->string('facebook',250);
+            $table->string('youtube',250)->nullable();
+            $table->string('facebook',250)->nullable();
+            $table->string('twitter',250)->nullable();
+            $table->string('instagram',250)->nullable();
+            $table->string('skype',250)->nullable();
+            $table->string('linkedin',250)->nullable();
             $table->unsignedBigInteger('layout_style_id')->default(1);  //คลองหนึ่ง
-            $table->string('workdaytime',250);
-            $table->string('saturdaytime',250);
-            $table->string('sundaytime',250);
+            $table->string('workdaytime',250)->nullable();
+            $table->string('saturdaytime',250)->nullable();
+            $table->string('sundaytime',250)->nullable();
+            $table->string('director',250)->nullable();
             $table->string('thsmsuser',250)->nullable();
             $table->text('thsmspass')->nullable();
             $table->longText('consent')->nullable();

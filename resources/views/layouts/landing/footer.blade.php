@@ -23,16 +23,13 @@
 
         <div class="col-lg-3 col-md-7 footer-links">
           <h4>เวลาทำการ</h4>
-           จันทร์-ศุกร์: <strong> 08.00-16.00</strong> 
+           จันทร์-ศุกร์: <strong>{{$generalinfo->workdaytime}}</strong> 
           <br>
-          เสาร์:  <strong> 08.00-17.00</strong> 
-          <br>
-          อาทิตย์: <strong> ปิดทำการ</strong> 
-
+          อาทิตย์: <strong> {{$generalinfo->saturdaytime}}</strong> 
           <h4 class="mt-3">เวลาทำการ</h4>
-          โทรศัพท์: <strong>0-2564-7000, 0-2564-8000</strong>
+          โทรศัพท์: <strong>{{$generalinfo->phone1}}, {{$generalinfo->phone2}}</strong>
           <br>
-          แฟ็กซ์: <strong>0-2564-7001-5</strong>
+          แฟ็กซ์: <strong>{{$generalinfo->fax}}</strong>
         </div>
 
         <div class="col-lg-2 col-md-5 footer-links">
@@ -62,7 +59,7 @@
 
   <div class="container">
     <div class="copyright">
-      &copy;สงวนลิขสิทธิ์ 2020  <strong><span>สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ</span></strong>.  http://203.185.137.240
+      &copy;สงวนลิขสิทธิ์ 2020  <strong><span>{{$generalinfo->company}}</span></strong>. 
     </div>
   
   </div>

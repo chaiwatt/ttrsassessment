@@ -22,7 +22,7 @@ class NotificationSubCategoriesSeederTable extends Seeder
             ],
             [
                 'notification_category_id' => 1,
-                'name' => 'ค่าธรรมเนียม'
+                'name' => 'ใบแจ้งหนี้'
             ],
             [
                 'notification_category_id' => 1,

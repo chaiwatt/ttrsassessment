@@ -7,18 +7,21 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการเกณฑ์การประเมิน</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ใบแจ้งหนี้</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
+            {{-- <div class="header-elements d-none">
+                <a href="{{route('setting.admin.assessment.criteriagroup.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มรายการเกณฑ์การประเมิน<b><i class="icon-plus3"></i></b></a>
+            </div> --}}
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <span class="breadcrumb-item active">รายการเกณฑ์การประเมิน</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <span class="breadcrumb-item active">ใบแจ้งหนี้</span>
                 </div>
+
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -48,7 +51,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">สถานะการวางแผนธุรกิจ</h6>
+                        <h6 class="card-title">รายการใบแจ้งหนี้</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -61,20 +64,33 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px">#</th>
-                                        <th>บริษัท</th>
-                                        <th>ค่าธรรมเนียม</th>    
-                                        <th>จำนวนเงิน</th> 
-                                                                  
+                                        <th>วันที่</th>
+                                        <th>เลขที่เอกสาร</th>    
+                                        <th>รายละเอียด</th>   
+                                        <th>สถานะ</th>                             
+                                        <th style="text-align: right">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($businessplanfeetransactions as $key => $businessplanfeetransaction)
+                                    @foreach ($invoicetransactions as $key => $invoicetransaction)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
-                                        <td> {{$businessplanfeetransaction->company->name}} </td>  
-                                        <td> {{$businessplanfeetransaction->feetype->name}} </td> 
-                                        <td> {{$businessplanfeetransaction->feetype->price}} </td>                                   
+                                        <td> {{$invoicetransaction->issuedate}} </td> 
+                                        <td> {{$invoicetransaction->docno}} </td> 
+                                        <td> {{$invoicetransaction->description}} </td>                                      
+                                        <td> 
+                                            @if ($invoicetransaction->status == 3)
+                                                    <span class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</span>
+                                                @elseif($invoicetransaction->status == 2)
+                                                    <span class="badge badge-flat border-info text-info-600 rounded-0">รอการตรวจสอบ</span>
+                                                    {{-- <a href="{{route('dashboard.company.project.invoice.paymentnotification',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งการจ่ายเงิน</a> --}}
+                                                @elseif($invoicetransaction->status == 1)
+                                                    <a href="{{route('dashboard.company.project.invoice.paymentnotification',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งการจ่ายเงิน</a>
+                                                @else                                       
+                                            @endif
+                                        </td> 
+                                        <td style="text-align: right"> 
+                                            <a href="{{route('dashboard.company.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">ดาวน์โหลดใบแจ้งหนี้</a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

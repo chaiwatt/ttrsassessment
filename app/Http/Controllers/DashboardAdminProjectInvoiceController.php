@@ -2,33 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
+use App\User;
 use Carbon\Carbon;
 use App\Model\Company;
-use App\Model\FullTbp;
 use App\Model\MiniTBP;
-use App\Model\ThaiBank;
+use App\Helper\Message;
+use App\Helper\EmailBox;
 use App\Model\GeneralInfo;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
-use App\Model\EvaluationResult;
 use App\Model\InvoiceTransaction;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use setasign\Fpdi\PdfParser\StreamReader;
 
-class DashboardCompanyInvoiceController extends Controller
+class DashboardAdminProjectInvoiceController extends Controller
 {
     public function Index(){
-        NotificationBubble::where('target_user_id',Auth::user()->id)
-                    ->where('notification_category_id',1)
-                    ->where('notification_sub_category_id',3)
-                    ->where('status',0)->delete();
-        $auth = Auth::user();
-        $invoicetransactions = InvoiceTransaction::where('company_id',$auth->company->id)->where('status','>',0)->get();
-        return view('dashboard.company.project.invoice.index')->withInvoicetransactions($invoicetransactions);
+        $invoicetransactions = InvoiceTransaction::get();
+        return view('dashboard.admin.project.invoice.index')->withInvoicetransactions($invoicetransactions);
     }
+    public function Create(){
+        $users = User::where('user_type_id','<',3)->pluck('id');
+        $companies = Company::whereIn('user_id',$users)->get();
+        return view('dashboard.admin.project.invoice.create')->withCompanies($companies);
+    }
+    public function CreateSave(Request $request){
+        $invoicetransaction = new InvoiceTransaction();
+        $invoicetransaction->company_id = $request->company;
+        $invoicetransaction->customer = $request->customer;
+        $invoicetransaction->docno = $request->docno;
+        $invoicetransaction->issuedate = Carbon::now()->toDateString();
+        $invoicetransaction->quotationno = $request->quotationno;
+        $invoicetransaction->purchaseorderno = $request->purchaseorderno;
+        $invoicetransaction->saleorderno = $request->saleorderno;
+        $invoicetransaction->saleorderdate = DateConversion::thaiToEngDate($request->saleorderdate);
+        $invoicetransaction->refno = $request->refno;
+        $invoicetransaction->description = $request->description;
+        $invoicetransaction->price = $request->price;
+        $invoicetransaction->billerid = $request->billerid;
+        $invoicetransaction->branchid = $request->branchid;
+        $invoicetransaction->servicecode = $request->servicecode;
+        $invoicetransaction->compcode = $request->compcode;
+        $invoicetransaction->save();
+        return redirect()->route('dashboard.admin.project.invoice')->withSuccess('สร้างรายการสำเร็จ');
+    }
+
     public function View($id){
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
@@ -91,16 +112,65 @@ class DashboardCompanyInvoiceController extends Controller
         $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:center;">'.number_format($invoicetransaction->price*0.07, 2).'</div>', 172,172.5, 91, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:center;">'.number_format($invoicetransaction->price, 2).'</div>', 172,179.5, 91, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 8pt;width:80px;heigh:95px;text-align:center;">'.$generalinfo->fax.'</div>', 147,199.8, 80, 90, 'auto');
+        
         $mpdf->WriteFixedPosHTML('<span style="font-size: 8.5pt;">บริษัท '.$company->name.'</span>', 15.5, 230, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output();
     }
 
-    public function PaymentNotification($id){
+    public function Edit($id){
+        $users = User::where('user_type_id','<',3)->pluck('id');
+        $companies = Company::whereIn('user_id',$users)->get();
         $invoicetransaction = InvoiceTransaction::find($id);
-        $banks = ThaiBank::get();
-        return view('dashboard.company.project.invoice.paymentnotification')->withInvoicetransaction($invoicetransaction)
-                                                                        ->withBanks($banks);
+        return view('dashboard.admin.project.invoice.edit')->withCompanies($companies)
+                                                        ->withInvoicetransaction($invoicetransaction);
+    }
+    public function EditSave(Request $request,$id){
+        InvoiceTransaction::find($id)->update([
+            'customer' => $request->customer,
+            'docno' => $request->docno,
+            'issuedate' => Carbon::now()->toDateString(),
+            'quotationno' => $request->quotationno,
+            'purchaseorderno' => $request->purchaseorderno,
+            'saleorderno' => $request->saleorderno,
+            'saleorderdate' => DateConversion::thaiToEngDate($request->saleorderdate),
+            'refno' => $request->refno,
+            'description' => $request->description,
+            'price' => $request->price,
+            'billerid' => $request->billerid,
+            'branchid' => $request->branchid,
+            'servicecode' => $request->servicecode,
+            'compcode' => $request->compcode
+        ]);
+        return redirect()->route('dashboard.admin.project.invoice')->withSuccess('แก้ไขรายการสำเร็จ');
     }
 
+    public function UpdateStatus(Request $request){
+        $invoicetransaction = InvoiceTransaction::find($request->id);
+        $company = Company::find($invoicetransaction->company_id);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $auth = Auth::user();
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 3;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $company->user_id;
+        $notificationbubble->save();
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $company->user_id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+        $alertmessage->save();
+
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบรายการใบแจ้งหนี้','เรียนผู้ขอรับการประเมิน<br> กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('กรุณาตรวจสอบรายการใบแจ้งหนี้','กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ตรวจสอบ</a>',Auth::user()->id,$company->user_id);    
+        
+        InvoiceTransaction::find($request->id)->update([
+            'status' => $request->status
+        ]);
+        return;
+    }
 }

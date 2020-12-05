@@ -2,6 +2,7 @@ import * as Geo from './location.js'
 
 // $("#province").change(function(){
 $(document).on('change', '#province', function(e) {
+    console.log('hello');
     Geo.amphur($(this).val()).then(data => {
         let  html = "";
         data.forEach((amphur,index) => 

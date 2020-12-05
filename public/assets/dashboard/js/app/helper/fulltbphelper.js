@@ -1885,7 +1885,6 @@ $('.steps-basic').steps({
             .catch(error => {})
         }else if(currentIndex == 4){
             var hidden = '';
-            // if(route.submitstatus !=4 && route.refixstatus == 0){
             if(route.submitstatus !=4 && (route.refixstatus == 0 || route.refixstatus == 2 )){
                 hidden = 'hidden';
                 $("#appceptagreement_wrapper").attr("hidden",true);
@@ -1907,8 +1906,6 @@ $('.steps-basic').steps({
                 })
             })
             .catch(error => {})
-
-
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {

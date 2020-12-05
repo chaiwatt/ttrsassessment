@@ -36,7 +36,7 @@
                 @endif
             </a></li>  --}}
         @endif
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fee')?'active':''}}">ค่าธรรมเนียม</a></li>	
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้</a></li>	
         <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
             @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
@@ -115,16 +115,11 @@
                             @endif
                         </a></li>
                     @endif
-                    @if (Auth::user()->company->businessplan->business_plan_status_id >= 5)
-                        <li class="nav-item"><a href="{{route('dashboard.company.project.invoice',['id'=>Auth::user()->company->businessplan->minitbp->fulltbp->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">ใบแจ้งหนี้
-                            @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
+                        <li class="nav-item"><a href="{{route('dashboard.company.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">ใบแจ้งหนี้
+                            @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
                                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                             @endif
                         </a></li>
-                    @endif
-                    @if (@Auth::user()->company->businessplan->business_plan_status_id == 8 )
-                        <li class="nav-item"><a href="{{route('dashboard.company.project.fee')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fee')?'active':''}}">รายการแจ้งหนี้</a></li>  
-                    @endif 
                 @endif
             </ul>
         </li>
@@ -186,6 +181,14 @@
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">criteria</a></li>		             
             </ul>
         </li>
+        @if (Auth::user()->user_type_id >= 5)
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.system')?'nav-item-expanded':''}}">
+            <a href="#" class="nav-link"><span>ระบบ</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="ระบบ">
+                <li class="nav-item"><a href="{{route('setting.admin.system')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.system')?'active':''}}">ตั้งค่าระบบ</a></li>		             
+            </ul>
+        </li>
+        @endif
     </ul>	
 </li>
 @endif

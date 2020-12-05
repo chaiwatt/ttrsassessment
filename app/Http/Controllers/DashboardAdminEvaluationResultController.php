@@ -3,37 +3,38 @@
 namespace App\Http\Controllers;
 
 use PDF;
-use App\Model\Company;
-use App\Model\FullTbp;
-use App\Model\MiniTBP;
-use App\Model\BusinessPlan;
-use Illuminate\Http\Request;
-use App\Model\EvaluationResult;
-use Illuminate\Support\Facades\Auth;
-use setasign\Fpdi\PdfParser\StreamReader;
-
-
 use App\User;
 use DateTimeZone;
 use Carbon\Carbon;
 use App\Model\Amphur;
 use App\Model\Prefix;
 use App\Model\Tambol;
+use App\Model\Company;
+use App\Model\FullTbp;
 
 
+use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Model\Province;
 use App\Model\ThaiBank;
 use App\Helper\EmailBox;
+use App\Model\GeneralInfo;
+
+
 use App\Model\AlertMessage;
-
+use App\Model\BusinessPlan;
 use App\Model\UserPosition;
-
+use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
+
 use App\Helper\DateConversion;
+
 use App\Model\SignatureStatus;
+use App\Model\EvaluationResult;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
+use Illuminate\Support\Facades\Auth;
+use setasign\Fpdi\PdfParser\StreamReader;
 
 
 class DashboardAdminEvaluationResultController extends Controller
@@ -109,7 +110,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
-
+        $generalinfo = GeneralInfo::first();
         $fileContent = file_get_contents(asset("assets/dashboard/template/certificate.pdf"),'rb');
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
@@ -130,7 +131,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'. $fulltbp->projectgrade->grade.'</strong></span>', 50, 109.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)</strong></span>', 13, 118, 250, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ให้ไว้ ณ วันที่ '.ltrim(Carbon::today()->format('d'), '0').' '.$strMonthCut[Carbon::today()->format('m')].' พ.ศ. '.(Carbon::today()->format('Y')+543).'</strong></span>', 13, 132.5, 200, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">(นายณรงค์ ศิริเลิศวรกุล)</div>', 14,160, 200, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">('.$generalinfo->director.')</div>', 14,160, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output();
     }
