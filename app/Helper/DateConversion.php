@@ -68,4 +68,14 @@ class DateConversion
         $strDay= date("j",strtotime($date->toDateString()));
         return $strDay.'/'.$strMonth.'/'.$strYear . ' ' . $date->format('H:i:s');
     }
+    public static function thaiMonthNow()
+	{
+		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+        $strMonthThai=$strMonthCut[Carbon::today()->format('m')];
+        return $strMonthThai;
+    }
+    public static function thaiYearNow()
+	{
+        return Carbon::today()->format('yy')+543;;
+    }
 }

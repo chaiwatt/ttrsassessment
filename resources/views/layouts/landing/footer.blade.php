@@ -7,8 +7,8 @@
          
             <a href="index.html"><img src="{{asset('assets/landing/img/logo.png')}}" class="w-75" alt="" class="img-fluid"></a>
        
-          <p id="thaifont">
-            111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120
+            <p class="sarabun">
+              111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120 
            
     
           </p>
@@ -25,7 +25,7 @@
           <h4>เวลาทำการ</h4>
            จันทร์-ศุกร์: <strong>{{$generalinfo->workdaytime}}</strong> 
           <br>
-          อาทิตย์: <strong> {{$generalinfo->saturdaytime}}</strong> 
+          อาทิตย์: <strong> {{$generalinfo->sundaytime}}</strong> 
           <h4 class="mt-3">เวลาทำการ</h4>
           โทรศัพท์: <strong>{{$generalinfo->phone1}}, {{$generalinfo->phone2}}</strong>
           <br>
@@ -59,7 +59,7 @@
 
   <div class="container">
     <div class="copyright">
-      &copy;สงวนลิขสิทธิ์ 2020  <strong><span>{{$generalinfo->company}}</span></strong>. 
+      &copy;สงวนลิขสิทธิ์ {{date('Y')}}  <strong><span>{{$generalinfo->company}}</span></strong>. 
     </div>
   
   </div>

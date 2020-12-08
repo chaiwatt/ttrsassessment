@@ -23,4 +23,7 @@ class InvoiceTransaction extends Model
     public function getSaleorderdatethAttribute(){
         return DateConversion::engToThaiDate($this->saleorderdate);
     } 
+    public function getPaymentdatethAttribute(){
+        return DateConversion::engToThaiDate($this->paymentdate);
+    } 
 }

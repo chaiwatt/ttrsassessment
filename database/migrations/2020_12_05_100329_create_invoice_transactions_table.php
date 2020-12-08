@@ -27,15 +27,16 @@ class CreateInvoiceTransactionsTable extends Migration
             $table->text('saleorderdate',50)->nullable();
             $table->text('refno',50)->nullable();
             $table->text('description',50)->nullable();
-            $table->text('price',50)->nullable();
+            $table->double('price',10,2)->default(0);
+            $table->double('transferprice',10,2)->default(0);
             $table->date('paymentdate',50)->nullable();
+            $table->text('paymenttime',50)->nullable();
             $table->text('billerid',50)->nullable();
             $table->text('branchid',50)->nullable();
             $table->text('servicecode',50)->nullable();
             $table->text('compcode',50)->nullable();
             $table->text('ref1',50)->nullable();
             $table->text('ref2',50)->nullable();
-            $table->text('paymenttime',50)->nullable();
             $table->text('note',250)->nullable();
             $table->text('attachment',250)->nullable();
             $table->char('status',1)->default(0);

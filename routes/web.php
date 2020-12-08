@@ -24,6 +24,7 @@ Route::get('generate','PDFController@Generate')->name('generate');
 Route::get('', 'HomeController@Index')->name('landing.index');
 Route::get('front', 'HomeController@Front')->name('landing.front');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
+Route::get('blog', 'HomeController@Blog')->name('landing.blog');
 Route::get('tag/{slug}', 'HomeController@Tag')->name('landing.tag');
 Route::get('cate/{slug}', 'HomeController@Category')->name('landing.cate');
 Route::get('search', 'HomeController@Search')->name('landing.search');
@@ -404,6 +405,8 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('edit/{id}','DashboardAdminProjectInvoiceController@Edit')->name('dashboard.admin.project.invoice.edit'); 
                     Route::post('editsave/{id}','DashboardAdminProjectInvoiceController@EditSave')->name('dashboard.admin.project.invoice.editsave'); 
                     Route::get('delete/{id}','DashboardAdminProjectInvoiceController@Delete')->name('dashboard.admin.project.invoice.delete'); 
+                    Route::get('payment/{id}','DashboardAdminProjectInvoiceController@Payment')->name('dashboard.admin.project.invoice.payment');
+                    Route::post('paymentprove/{id}','DashboardAdminProjectInvoiceController@PaymentProve')->name('dashboard.admin.project.invoice.paymentprove');
                     Route::get('view/{id}','DashboardAdminProjectInvoiceController@View')->name('dashboard.admin.project.invoice.view'); 
                     Route::post('updatestatus','DashboardAdminProjectInvoiceController@UpdateStatus')->name('dashboard.admin.project.invoice.updatestatus'); 
                 });       

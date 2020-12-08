@@ -2,7 +2,7 @@
     <div class="container">
 
       <div class="section-title">
-        <h2 id="thaifont">ข่าวสารยอดนิยม</h2>
+        <h2 class="sarabun">ข่าวสารยอดนิยม</h2>
       </div>
     
 
@@ -11,11 +11,11 @@
             <div class="card mb-3">
                 <img class="card-img-top" src="https://via.placeholder.com/400x300/5fa9f8/ffffff" alt="Amanda Shah">
                 <div class="card-body py-3">
-                    <h5 id="thaifont" class="mb-0">John Doe</h5>
-                    <span id="thaifont">Co-Founder, CTO</span>
+                    <h5 class="mb-0 sarabun">John Doe</h5>
+                    <span class="sarabun">Co-Founder, CTO</span>
                 </div>
                 <div class="card-footer ">
-                    <a class="" id="thaifont" href="#">อ่านเพิ่มเติม</a>
+                    <a  class="sarabun" href="#">อ่านเพิ่มเติม</a>
                 </div>
             </div>
         </div>
@@ -23,11 +23,11 @@
             <div class="card mb-3">
                 <img class="card-img-top" src="https://via.placeholder.com/400x300/5fa9f8/ffffff" alt="Lucas Brüner">
                 <div class="card-body py-3">
-                    <h5 id="thaifont" class="mb-0">John Doe</h5>
-                    <span id="thaifont">Co-Founder, Marketing</span>
+                    <h5 class="sarabun" class="mb-0">John Doe</h5>
+                    <span class="sarabun">Co-Founder, Marketing</span>
                 </div>
                 <div class="card-footer">
-                    <a id="thaifont" href="#">อ่านเพิ่มเติม </a>
+                    <a class="sarabun" href="#">อ่านเพิ่มเติม </a>
                 </div>
             </div>
         </div>
@@ -35,11 +35,11 @@
             <div class="card mb-3">
                 <img class="card-img-top" src="https://via.placeholder.com/400x300/5fa9f8/ffffff" alt="Lucille Hobson">
                 <div class="card-body py-3">
-                    <h5 id="thaifont" class="mb-0">John Doe</h5>
-                    <span id="thaifont">Marketing</span>
+                    <h5 class="sarabun" class="mb-0">John Doe</h5>
+                    <span class="sarabun">Marketing</span>
                 </div>
                 <div class="card-footer">
-                    <a id="thaifont" href="#">อ่านเพิ่มเติม </a>
+                    <a class="sarabun" href="#">อ่านเพิ่มเติม </a>
                 </div>
             </div>
         </div>

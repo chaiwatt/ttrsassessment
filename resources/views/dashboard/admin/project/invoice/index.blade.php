@@ -78,9 +78,9 @@
                                         <td> {{$invoicetransaction->docno}} </td> 
                                         <td> 
                                         @if ($invoicetransaction->status == 3)
-                                              <span class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</span>
+                                              <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</a>
                                             @elseif($invoicetransaction->status == 2)
-                                              <a href="#" class=" btn btn-sm bg-info">แจ้งการชำระแล้ว</a>
+                                              <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">แจ้งการชำระแล้ว</a>
                                             @elseif($invoicetransaction->status == 1)
                                               <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่จ่ายเงิน</span>
                                             @else                                     

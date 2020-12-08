@@ -45,11 +45,27 @@ class DashboardAdminEvaluationResultController extends Controller
     }
     public function Edit($id){
         $evaluationresult = EvaluationResult::find($id);
-        return view('dashboard.admin.evaluationresult.edit')->withEvaluationresult($evaluationresult);
+        $fulltbp = FullTbp::find($evaluationresult->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        $user = User::find($projectassignment->leader_id);
+        $generalinfo = GeneralInfo::first();
+        return view('dashboard.admin.evaluationresult.edit')->withEvaluationresult($evaluationresult)
+                                                        ->withUser($user)
+                                                        ->withGeneralinfo($generalinfo);
     }
 
     public function EditSave(Request $request,$id){
         EvaluationResult::find($id)->update([
+            'headercode' => $request->headercode,
+            'contactname' => $request->contactname,
+            'contactlastname' => $request->contactlastname,
+            'contactposition' => $request->contactposition,
+            'contactphone' => $request->contactphone,
+            'contactphoneext' => $request->contactphoneext,
+            'contactfax' => $request->contactfax,
+            'contactemail' => $request->contactemail,
             'management' => $request->management,
             'technoandinnovation' => $request->technoandinnovation,
             'marketability' => $request->marketability,
@@ -66,11 +82,13 @@ class DashboardAdminEvaluationResultController extends Controller
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
         $evaluationresult= EvaluationResult::where('full_tbp_id',$id)->first();
+        $generalinfo = GeneralInfo::first();
         $data = [
             'fulltbp' => $fulltbp,
             'minitbp' => $minitbp,
             'company' => $company,
-            'evaluationresult' => $evaluationresult
+            'evaluationresult' => $evaluationresult,
+            'generalinfo' => $generalinfo
         ];
         $pdf = PDF::loadView('dashboard.admin.evaluationresult.pdf', $data);
         $path = public_path("storage/uploads/fulltbp/");
@@ -78,7 +96,6 @@ class DashboardAdminEvaluationResultController extends Controller
     }
     
     public function Certificate($id){
-
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];

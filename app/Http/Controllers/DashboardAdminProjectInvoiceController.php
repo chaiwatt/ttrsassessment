@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Model\Company;
 use App\Model\MiniTBP;
 use App\Helper\Message;
+use App\Model\ThaiBank;
 use App\Helper\EmailBox;
 use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
@@ -172,5 +173,42 @@ class DashboardAdminProjectInvoiceController extends Controller
             'status' => $request->status
         ]);
         return;
+    }
+
+    public function Payment($id){
+        $banks = ThaiBank::get();
+        $invoicetransaction = InvoiceTransaction::find($id);
+        return view('dashboard.admin.project.invoice.payment')->withBanks($banks)
+                                                        ->withInvoicetransaction($invoicetransaction);
+    }
+
+    public function PaymentProve(Request $request,$id){
+        $invoicetransaction = InvoiceTransaction::find($request->id);
+        $company = Company::find($invoicetransaction->company_id);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $auth = Auth::user();
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 3;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $company->user_id;
+        $notificationbubble->save();
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $company->user_id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ยืนยันการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+        $alertmessage->save();
+
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:ยืนยันการชำระเงิน','เรียนผู้ขอรับการประเมิน<br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('ยืนยันการชำระเงิน','ยืนยันการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ตรวจสอบ</a>',Auth::user()->id,$company->user_id);    
+        
+        InvoiceTransaction::find($id)->update([
+            'status' => 3
+        ]);
+    
+        return redirect()->route('dashboard.admin.project.invoice')->withSuccess('ยืนยันรายการสำเร็จ');
     }
 }

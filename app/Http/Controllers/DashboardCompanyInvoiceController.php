@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\User;
 use Carbon\Carbon;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Helper\Message;
 use App\Model\ThaiBank;
+use App\Helper\EmailBox;
 use App\Model\GeneralInfo;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\EvaluationResult;
+use App\Model\ProjectAssignment;
 use App\Model\InvoiceTransaction;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
@@ -101,6 +106,48 @@ class DashboardCompanyInvoiceController extends Controller
         $banks = ThaiBank::get();
         return view('dashboard.company.project.invoice.paymentnotification')->withInvoicetransaction($invoicetransaction)
                                                                         ->withBanks($banks);
+    }
+
+    public function PaymentNotificationSave(Request $request,$id){
+        $auth = Auth::user();
+        $file = $request->file;
+        $new_name = str_random(10).".".$file->getClientOriginalExtension();
+        $file->move("storage/uploads/company/invoice/prove" , $new_name);
+        $filelocation = "storage/uploads/company/invoice/prove/".$new_name;
+        InvoiceTransaction::find($id)->update([
+            'bank_id' => $request->bank,
+            'transferprice' => $request->price,
+            'paymentdate' => DateConversion::thaiToEngDate($request->paymentdate),
+            'paymenttime' => $request->paymenttime,
+            'attachment' => $filelocation,
+            'note' => $request->note,
+            'status' => 2
+        ]);
+        $invoicetransaction = InvoiceTransaction::find($id);
+        $company = Company::find($invoicetransaction->company_id);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 3;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $projectassignment->leader_id;
+        $notificationbubble->save();
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $projectassignment->leader_id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+        $alertmessage->save();
+
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบผลการแจ้งการชำระเงิน','เรียนผู้ขอรับการประเมิน<br> กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        Message::sendMessage('กรุณาตรวจสอบผลการแจ้งการชำระเงิน','กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>',Auth::user()->id,$company->user_id);    
+        
+
+       return redirect()->route('dashboard.company.project.invoice')->withSuccess('แจ้งการชำระเงินสำเร็จ');
     }
 
 }

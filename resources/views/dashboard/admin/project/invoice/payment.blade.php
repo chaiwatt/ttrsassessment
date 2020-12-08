@@ -7,7 +7,8 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แจ้งการจ่ายเงิน</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แจ้งการจ่ายเงิน @if ($invoicetransaction->status == 3)<span class="text-success">(ยืนยันจ่ายเงินแล้ว)</span> @endif    
+                </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -48,7 +49,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('dashboard.company.project.invoice.paymentnotificationsave',['id' => $invoicetransaction->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('dashboard.admin.project.invoice.paymentprove',['id' => $invoicetransaction->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 {{-- <div class="col-md-12"> --}}
@@ -61,13 +62,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>จำนวนเงิน<span class="text-danger">*</span></label>
-                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control">
+                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control" readonly >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>จ่ายผ่านธนาคาร<span class="text-danger">*</span></label>
-                                            <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-select2">
+                                            <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-select2" disabled>
                                                 @foreach ($banks as $bank)
                                                     <option value="{{$bank->id}}" 
                                                       @if ($bank->id == $invoicetransaction->bank_id ) selected @endif >{{$bank->name}}</option> 
@@ -78,40 +79,34 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>วันที่<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymentdate" id="paymentdate" value="{{$invoicetransaction->paymentdateth}}"  placeholder="วันที่" class="form-control">
+                                            <input type="text"  name="paymentdate" id="paymentdate" value="{{$invoicetransaction->paymentdateth}}"  placeholder="วันที่" class="form-control" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymenttime" value="{{$invoicetransaction->paymenttime}}" placeholder="เวลา" class="form-control">
+                                            <input type="text"  name="paymenttime" value="{{$invoicetransaction->paymenttime}}" placeholder="เวลา" class="form-control" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>เอกสารการจ่ายเงิน</label>
-                                            <div class="input-group">													
-                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="เอกสารการจ่ายเงิน"  >
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด</button>																																						
-                                                </span>
-                                            </div>
-                                            <input type="file" style="display:none;" id="file" name="file"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">เพิ่มเติม</label>
-                                            <textarea name="note" class="form-control" cols="3" rows="6">{{$invoicetransaction->note}}</textarea>
+                                            <textarea name="note" class="form-control" cols="3" rows="7" readonly >{{$invoicetransaction->note}}</textarea>
                                         </div>
                                     </div>
                                 {{-- </div> --}}
+                             
+                                
                             </div>
-                            @if ($invoicetransaction->status == 1)
+                            <div class="col-md-12">
                                 <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
+                                    <a type="button" href="{{asset($invoicetransaction->attachment)}}" class="btn bg-primary" target="blank" >ดาวน์โหลดเอกสารแนบ<i class="icon-download ml-2"></i></a>
+                                    @if ($invoicetransaction->status == 2)
+                                    <button type="submit" class="btn bg-teal">ยืนยันการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
+                                    @endif
                                 </div>
-                            @endif
+                            </div>
+                     
 
                         </form>
                     </div>
