@@ -1,16 +1,23 @@
 <div id="carouselExampleIndicators" class="carousel slide  carousel-fade" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1" ></li>
+    @foreach ($slides as $key => $slide)
+        <li data-target="#carouselExampleIndicators" data-slide-to="{{$key}}" ></li>
+    @endforeach
   </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="{{asset('assets/landing/img/Banner.jpg')}}" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{{asset('assets/landing/img/Banner02.jpg')}}" alt="First slide">
-    </div>
-   
+    @foreach ($slides as $key => $slide)
+        @if ($key == 0)
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="{{asset($slide->file)}}" alt="First slide">
+          </div>
+          @else 
+          <div class="carousel-item">
+              <img class="d-block w-100" src="{{asset($slide->file)}}" alt="First slide">
+            </div>
+        @endif
+    @endforeach
+
+
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

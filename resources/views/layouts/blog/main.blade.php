@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTRS | ศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศ</title>
 
-    <link href="{{asset('assets/landing/img/logo.png')}}" rel="shortcut icon">
+    <link href="{{asset($generalinfo->logo)}}" rel="shortcut icon">
     
     @include('layouts.landing.css')
     <!-- Vendor CSS Files -->
@@ -22,12 +22,9 @@
   <!-- End Header -->
 
 	<!-- ======= Header ======= -->
-	@include('layouts.blog.content')
+	{{-- @include('layouts.blog.content') --}}
   <!-- End Header -->
-
-
-
-
+  @yield('content')
   
   <!-- ======= Cookie ======= -->
   @include('layouts.landing.cookie')

@@ -72,21 +72,23 @@ class SettingAdminWebsitePageController extends Controller
         $page->content = $detail;
         $page->feature_image_id = $request->featureinp;
         $page->feature_image_thumbnail_id =  $request->featurethumbnailinp;
+        $page->blogsidebarimage_id =  $request->blogsidebarimage;
+        $page->bloghomepageimage_id =  $request->bloghomepageimage;
         $page->user_id = Auth::user()->id;
         $page->save();
 
-        foreach ($request->gal as $key => $gal) {
-            PageImage::find($gal)->update([
-                'page_id' => $page->id
-            ]);
-        }
+        // foreach ($request->gal as $key => $gal) {
+        //     PageImage::find($gal)->update([
+        //         'page_id' => $page->id
+        //     ]);
+        // }
 
-        foreach($imgarray as $item){
-            $summernoteimage = new SummernoteImage();
-            $summernoteimage->page_id = $page->id;
-            $summernoteimage->file = $item;
-            $summernoteimage->save();
-        }
+        // foreach($imgarray as $item){
+        //     $summernoteimage = new SummernoteImage();
+        //     $summernoteimage->page_id = $page->id;
+        //     $summernoteimage->file = $item;
+        //     $summernoteimage->save();
+        // }
 
         foreach ($request->pagetag as $key => $tag) {
             $pagetag = new PageTag();

@@ -6,6 +6,7 @@ use App\Model\Menu;
 use App\Model\Page;
 use App\Model\Slide;
 use App\Model\FrontPage;
+use App\Model\DirectMenu;
 use App\Model\MessageBox;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
@@ -22,18 +23,21 @@ class ShareComposer
         $auth = Auth::user();
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::get()->first();
-        $menus = Menu::where('parent_id', 0)->get();
+        // $directmenus = Menu::where('parent_id', 0)->get();
+        // $sharepages = Page::take(5)->get();
+        $directmenus = DirectMenu::get();
         $websitelayouts = WebsiteLayout::where('status', 1)->get();
-        $slides = Slide::where('slide_status_id', 1)->get();
+        // $slides = Slide::where('slide_status_id', 1)->get();
+        $slides = Slide::get();
         $tags = Tag::get();
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
         // $time = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
-        $sharepages = Page::paginate(6);
+        $sharepages = Page::paginate(3);
         $sharefrontpage = FrontPage::first();
         $sharenotificationbubbles = NotificationBubble::where('target_user_id',@$auth->id)->where('status',0)->get();
         $view->withGeneralinfo($generalinfo)
-            ->withMenus($menus)
+            ->withDirectmenus($directmenus)
             ->withShareunreadmessages($shareunreadmessages)
             ->withWebsitelayouts($websitelayouts)
             ->withSlides($slides)

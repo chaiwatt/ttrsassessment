@@ -80,7 +80,7 @@
     <div class="page-header page-header-light">  
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Mini TBP</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แบบคำขอรับการประเมิน (Mini TBP)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -88,8 +88,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="#" class="breadcrumb-item"> Mini TBP</a>
-                    <span class="breadcrumb-item active">รายการ Mini TBP</span>
+                    <span class="breadcrumb-item active">แบบคำขอรับการประเมิน (Mini TBP)</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

@@ -5,6 +5,7 @@ namespace App\Model;
 use App\User;
 use App\Model\PageTag;
 use App\Model\PageView;
+use App\Model\BlogComment;
 use App\Model\FeatureImage;
 use App\Model\PageCategory;
 use App\Helper\DateConversion;
@@ -33,6 +34,10 @@ class Page extends Model
     {
         return DateConversion::thaiDate($this->created_at,'m');
     }
+    public function getYearAttribute()
+    {
+        return DateConversion::thaiDate($this->created_at,'y');
+    }
     public function getPageViewAttribute()
     {
         return PageView::where('page_id',$this->id);
@@ -53,6 +58,21 @@ class Page extends Model
     {
         return FeatureImageThumbnail::find($this->feature_image_thumbnail_id);
     }
+    public function getBlogcommentAttribute()
+    {
+        return BlogComment::where('page_id',$this->id)->get();
+    }
+
+    public function getSidebarimageAttribute()
+    {
+        return FeatureImageThumbnail::find($this->blogsidebarimage_id);
+    }
+
+    public function getHomepageblogimageAttribute()
+    {
+        return FeatureImageThumbnail::find($this->bloghomepageimage_id);
+    }
+ 
 }
 
 

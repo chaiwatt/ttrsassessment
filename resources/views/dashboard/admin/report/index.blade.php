@@ -251,7 +251,7 @@
                                         <th>ชื่อโครงการ</th> 
                                         {{-- <th>บริษัท</th> --}}
                                         <th>สถานะ</th>
-                                        <th>วันนัดประชุม</th>
+                                        <th>วันนัดประชุมก่อนลงพื้นที่</th>
                                         <th>วันที่ประเมิน</th>
                                         <th>วันที่สรุปผลประเมิน</th>
                                         {{-- <th style="width: 20px"><i class="icon-arrow-down12"></i></th> --}}
@@ -295,6 +295,23 @@
                                 </tbody>
                             </table>      
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">ปฎิทินกลาง</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="fullcalendar-basic"></div>
                     </div>
                 </div>
             </div>
@@ -388,23 +405,6 @@
                         <div class="chart-container">
                             <div class="chart has-fixed-height" id="bar_chart"></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ปฎิทินกลาง</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="fullcalendar-basic"></div>
                     </div>
                 </div>
             </div>

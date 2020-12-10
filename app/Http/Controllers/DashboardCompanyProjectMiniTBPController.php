@@ -22,6 +22,7 @@ use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use App\Model\SignatureStatus;
 use App\Model\ProjectAssignment;
+use App\Model\AuthorizedDirector;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditMiniTbpRequest;
@@ -53,6 +54,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $companyaddress = CompanyAddress::where('company_id',$company->id)->first();
         $amphurs = Amphur::where('province_id',$companyaddress->province_id)->get();
         $tambols = Tambol::where('amphur_id',$companyaddress->amphur_id)->get();
+        $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
         return view('dashboard.company.project.minitbp.edit')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withCompany($company)
@@ -62,6 +64,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
                                                 ->withProvinces($provinces)
                                                 ->withAmphurs($amphurs)
                                                 ->withUser($user)
+                                                ->withAuthorizeddirectors($authorizeddirectors)
                                                 ->withTambols($tambols);
     }
     public function Pdf(){

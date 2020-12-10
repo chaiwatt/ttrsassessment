@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::group(['prefix' => 'menu'], function(){
             Route::post('getmenu','Api\MenuController@GetMenu')->name('api.menu.getmenu');           
+            Route::post('getdirectmenu','Api\MenuController@GetDirectMenu')->name('api.menu.getdirectmenu'); 
         });
         Route::group(['prefix' => 'category'], function(){
             Route::post('getcategory','Api\CategoryController@GetCategory')->name('api.category.getcategory');           
@@ -595,7 +596,11 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('send','SmsController@Send')->name('sms.send');           
         Route::get('credit','SmsController@Credit')->name('sms.credit');  
         Route::post('verify','SmsController@Verify')->name('sms.verify');
-    });    
+    });  
+    Route::group(['prefix' => 'blog'], function(){
+        Route::post('comment/{id}','BlogController@Comment')->name('blog.comment');  
+        Route::get('delete/{id}','BlogController@Delete')->name('blog.delete');  
+    });   
     Route::group(['prefix' => 'setting'], function(){
         Route::group(['prefix' => 'admin'], function(){
             Route::group(['prefix' => 'dashboard'], function(){
@@ -764,6 +769,10 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'menu'], function(){     
                     Route::get('create','SettingAdminWebsiteMenuController@Create')->name('setting.admin.website.menu.create'); 
                     Route::post('crud','SettingAdminWebsiteMenuController@Crud')->name('setting.admin.website.menu.crud');
+                });
+                Route::group(['prefix' => 'directmenu'], function(){
+                    Route::get('create','SettingAdminWebsiteDirectMenuController@Create')->name('setting.admin.website.directmenu.create'); 
+                    Route::post('crud','SettingAdminWebsiteDirectMenuController@Crud')->name('setting.admin.website.directmenu.crud');
                 });
                 Route::group(['prefix' => 'layout'], function(){     
                     Route::get('','SettingAdminWebsiteLayoutController@Index')->name('setting.admin.website.layout'); 

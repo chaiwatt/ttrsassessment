@@ -39,14 +39,14 @@ class SettingAdminWebsiteSlideController extends Controller
 
         $slide = new Slide();
         $slide->name = $file->getClientOriginalName();
-        $slide->slide_status_id = $request->slidestatus;
-        $slide->slide_style_id = $request->slidestyle;
-        $slide->textone = $request->textone;
-        $slide->textengone = $request->textengone;
-        $slide->texttwo = $request->texttwo;
-        $slide->textengtwo = $request->textengtwo;
-        $slide->textthree = $request->textthree;
-        $slide->textengthree = $request->textengthree;
+        // $slide->slide_status_id = $request->slidestatus;
+        // $slide->slide_style_id = $request->slidestyle;
+        // $slide->textone = $request->textone;
+        // $slide->textengone = $request->textengone;
+        // $slide->texttwo = $request->texttwo;
+        // $slide->textengtwo = $request->textengtwo;
+        // $slide->textthree = $request->textthree;
+        // $slide->textengthree = $request->textengthree;
         $slide->url = $request->url;
         $slide->file = $filelocation;
         $slide->save();
@@ -78,14 +78,14 @@ class SettingAdminWebsiteSlideController extends Controller
             Crop::crop(true,public_path("storage/uploads/slide/"),$fname,Image::make($file),2300,1000,1);
         }
         $slide = Slide::find($id)->update([
-            'slide_status_id' => $request->slidestatus,
-            'slide_style_id' => $request->slidestyle,
-            'textone' => $request->textone,
-            'textengone' => $request->textengone,
-            'texttwo' => $request->texttwo,
-            'textengtwo' => $request->textengtwo,
-            'textthree' => $request->textthree,
-            'textengthree' => $request->textengthree,
+            // 'slide_status_id' => $request->slidestatus,
+            // 'slide_style_id' => $request->slidestyle,
+            // 'textone' => $request->textone,
+            // 'textengone' => $request->textengone,
+            // 'texttwo' => $request->texttwo,
+            // 'textengtwo' => $request->textengtwo,
+            // 'textthree' => $request->textthree,
+            // 'textengthree' => $request->textengthree,
             'url' => $request->url,
             'name' => $name,
             'file' => $filelocation

@@ -29,7 +29,6 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>โครงการ</a>
-                    {{-- <a href="{{route('dashboard.company.project.minitbp')}}" class="breadcrumb-item"> รายการ Mini TBP</a> --}}
                     <span class="breadcrumb-item active">แบบคำขอรับบริการประเมิน</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -438,9 +437,17 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+											@php
+												$checkprefic = $minitbp->managerprefix_id;
+												if($authorizeddirectors->count() > 0){
+													if($checkprefic == null){
+														$checkprefic = $authorizeddirectors->first()->prefix_id;
+													}
+												}
+											@endphp
 											<select name="managerprefix" id="managerprefix" class="form-control form-control-select2">
 												@foreach ($contactprefixes as $contactprefix)
-													<option value="{{$contactprefix->id}}" @if($minitbp->managerprefix_id == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
+													<option value="{{$contactprefix->id}}" @if($checkprefic == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
 												@endforeach
 											</select>
 										</div>
@@ -448,13 +455,23 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name ="managername" id ="managername" value="{{old('managername') ?? $minitbp->managername}}" class="form-control required" >
+											@if ($authorizeddirectors->count() > 0)
+													<input type="text" name ="managername" id ="managername" value="{{$authorizeddirectors->first()->name ?? $minitbp->managername}}" class="form-control required" >
+												@else
+													<input type="text" name ="managername" id ="managername" value="{{old('managername') ?? $minitbp->managername}}" class="form-control required" >
+											@endif
+											
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name ="managerlastname" id="managerlastname" value="{{old('managerlastname') ?? $minitbp->managerlastname}}" class="form-control required" >
+											@if ($authorizeddirectors->count() > 0)
+												<input type="text" name ="managerlastname" id="managerlastname" value="{{$authorizeddirectors->first()->lastname ?? $minitbp->managerlastname}}" class="form-control required" >
+											@else
+												<input type="text" name ="managerlastname" id="managerlastname" value="{{old('managerlastname') ?? $minitbp->managerlastname}}" class="form-control required" >
+											@endif
+											
 										</div>
 									</div>
 									<div class="col-md-6">

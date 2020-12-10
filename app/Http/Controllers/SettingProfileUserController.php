@@ -33,10 +33,13 @@ use App\Model\AuthorizedDirector;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Http\Requests\EditCompanyRequest;
 use App\Http\Requests\EditProfileRequest;
+use App\Model\FullTbpCompanyProfileAttachment;
 
 class SettingProfileUserController extends Controller
 {
@@ -68,6 +71,8 @@ class SettingProfileUserController extends Controller
                                             ->withUserpositions($userpositions);
     }
     public function EditSave(EditProfileRequest $request, $id){
+   
+
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -158,6 +163,19 @@ class SettingProfileUserController extends Controller
                 $fulltbp = new FullTbp();
                 $fulltbp->mini_tbp_id = $minitbp->id;
                 $fulltbp->save();
+
+                $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
+                if($fulltbpcompanydocs->count() > 0){
+                    foreach ($fulltbpcompanydocs as $key => $fulltbpcompanydoc) {
+                        $filename = basename($fulltbpcompanydoc->path); 
+                        File::copy(public_path($fulltbpcompanydoc->path),public_path("storage/uploads/fulltbp/companyprofile/attachment/".$filename));
+                        $fulltbpcompanyprofileattachment = new FullTbpCompanyProfileAttachment();
+                        $fulltbpcompanyprofileattachment->full_tbp_id = $fulltbp->id;
+                        $fulltbpcompanyprofileattachment->path = "storage/uploads/fulltbp/companyprofile/attachment/".$filename;
+                        $fulltbpcompanyprofileattachment->name = $fulltbpcompanydoc->name;
+                        $fulltbpcompanyprofileattachment->save();
+                    }
+                }
 
                 $ev = new Ev();
                 $ev->full_tbp_id = $fulltbp->id;

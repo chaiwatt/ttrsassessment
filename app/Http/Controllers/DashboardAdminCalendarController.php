@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use Google_Client;
+use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
@@ -12,6 +13,7 @@ use App\Model\Isnotify;
 use App\Helper\EmailBox;
 use App\Model\MeetingDate;
 use App\Model\AlertMessage;
+use App\Model\BusinessPlan;
 use App\Model\CalendarType;
 use App\Model\EventCalendar;
 use Google_Service_Calendar;
@@ -50,7 +52,6 @@ class DashboardAdminCalendarController extends Controller
         $minitbps = MiniTBP::whereIn('business_plan_id',$projectassignments)->pluck('id')->toArray();
         
         $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->get();
-        // return $fulltbps;
         $isnotifies = Isnotify::get();
         return view('dashboard.admin.calendar.create')->withUsers($users)
                                                     ->withFulltbps($fulltbps)
@@ -124,6 +125,22 @@ class DashboardAdminCalendarController extends Controller
           $notificationbubble->target_user_id = $_user->id;
           $notificationbubble->save();
       }
+       $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+       $company = Company::find($businessplan->company_id);
+
+       $alertmessage = new AlertMessage();
+       $alertmessage->user_id = $auth->id;
+       $alertmessage->target_user_id = $company->user_id;
+       $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน สำหรับโครงการ'.$minitbp->project;
+       $alertmessage->save();
+
+      // $notificationbubble = new NotificationBubble();
+      // $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+      // $notificationbubble->notification_category_id = 2;
+      // $notificationbubble->notification_sub_category_id = 8;
+      // $notificationbubble->user_id = $auth->id;
+      // $notificationbubble->target_user_id = $_user->id;
+      // $notificationbubble->save();
       
       return redirect()->route('dashboard.admin.calendar')->withSuccess('เพิ่มรายการสำเร็จ');
   }

@@ -116,7 +116,7 @@
                                             <tr>
                                                 <td>{{$employeducation->employeducationlevel}}</td>
                                                 <td>{{$employeducation->employeducationinstitute}}</td>
-                                                <td>{{$employeducation->employeducationmajor}}</td>
+                                                <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
                                                 <td>{{$employeducation->employeducationyear}}</td>
                                             </tr>   
                                         @endforeach
@@ -202,7 +202,7 @@
                                                 <tr>
                                                     <td>{{$employeducation->employeducationlevel}}</td>
                                                     <td>{{$employeducation->employeducationinstitute}}</td>
-                                                    <td>{{$employeducation->employeducationmajor}}</td>
+                                                    <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
                                                     <td>{{$employeducation->employeducationyear}}</td>
                                                 </tr>   
                                             @endforeach
@@ -307,7 +307,7 @@
                                                 <tr>
                                                     <td>{{$employeducation->employeducationlevel}}</td>
                                                     <td>{{$employeducation->employeducationinstitute}}</td>
-                                                    <td>{{$employeducation->employeducationmajor}}</td>
+                                                    <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
                                                     <td>{{$employeducation->employeducationyear}}</td>
                                                 </tr>   
                                             @endforeach
@@ -333,7 +333,7 @@
                                                 <tr>
                                                     <td>{{$employexperience->startdate}}</td>
                                                     <td>{{$employexperience->enddate}}</td>
-                                                    <td>{{$employexperience->company}}</td>
+                                                    <td>{!!$provider::FixBreak($employexperience->company)!!}</td>
                                                     <td>{{$employexperience->businesstype}}</td>
                                                     <td>{{$employexperience->startposition}}</td>
                                                     <td>{{$employexperience->endposition}}</td>
@@ -382,11 +382,11 @@
                 <div class="box bw650 font14 mt20" >
                     <div class="ml30 mt-10"><strong>2.1 ชื่อโครงการ :</strong> {{$fulltbp->minitbp->project}}</div>
                     <div class="ml30 mt0"><strong>2.2 ชื่อโครงการ (ภาษาอังกฤษ) :</strong> {{$fulltbp->minitbp->projecteng}}</div>
-                    <div class="ml30 mt0"><strong>2.3 บทคัดย่อโครงการ :</strong> {{$fulltbp->abtract}}</div>
-                    <div class="ml30 mt0"><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong>{{$fulltbp->mainproduct}}</div>
-                    <div class="ml30 mt0"><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong> {{$fulltbp->productdetail}}</div>
+                    <div class="ml30 mt0"><strong>2.3 บทคัดย่อโครงการ :</strong> <span >{!!$provider::FixBreak($fulltbp->abtract)!!}</span></div>
+                    <div class="ml30 mt0"><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
+                    <div class="ml30 mt0"><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
                     <div class="ml30 mt0"><strong>2.6 ข้อมูลเทคโนโลยี
-                        <div class="ml30 mt0"><strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {{$fulltbp->techdev}}</div>
+                        <div class="ml30 mt0"><strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {!!$provider::FixBreak($fulltbp->techdev)!!}</div>
                         <div class="mt20"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
                             <table class="mt5 font14 border tbwrap" >
                                 <thead>
@@ -409,7 +409,7 @@
                                 </tbody>
                             </table>
                         </div>  
-                        <div class="ml30 mt20"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong>{{$fulltbp->techdevproblem}}</div>
+                        <div class="ml30 mt20"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong>{!!$provider::FixBreak($fulltbp->techdevproblem)!!}</div>
                         <div class="ml30 mt5"><strong>2.6.2 การจัดการด้านทรัพย์สินทางปัญญา </strong></div>
                         <table class="mt5 font14 tbwrap" >
                             <thead>
@@ -449,9 +449,9 @@
                             </tbody>
                         </table>
                         <div class="ml30 mt20"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong></div>
-                        <div class="ml30">{{$fulltbp->innovation}}</div>
+                        <div class="ml30">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
                         <div class="ml30"><strong>2.6.4 ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ </strong></div>
-                        <div class="ml30">{{$fulltbp->standard}}</div>
+                        <div class="ml30">{!!$provider::FixBreak($fulltbp->standard)!!}</div>
                     </div>
                     <div class="ml30 mt20"><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart) </strong></div>
 
@@ -503,11 +503,11 @@
                 <div class="box bw650 font14 mt20" >
                     <div class="ml30 "><strong>3.1 ข้อมูลด้านการตลาด</strong></div>
                     <div class="ml50"><strong>Market analysis</strong></div>
-                    <div class="ml50">{{$fulltbp->fulltbpmarketanalysis->detail}}</div>
+                    <div class="ml50">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div>
                     <div class="ml50"><strong>Business model canvas</strong></div>
-                    <div class="ml50">{{$fulltbp->fulltbpmarketbusinessmodelcanvas->detail}}</div>
+                    <div class="ml50">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div>
                     <div class="ml50"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
-                    <div class="ml50">{{$fulltbp->fulltbpmarketswot->detail}}</div>
+                    <div class="ml50">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
                     <div class="ml30 "><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></div>
                     <div>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย: บาท)</div>
                     <table class="mt5 font14 border tbwrap" >
@@ -719,9 +719,9 @@
                         </tbody>
                     </table>
                     <div class="ml30 mt20"><strong>4.2 ประมาณการผลตอบแทนจากการลงทุน </strong></div>
-                    <div class="ml30">- ประมาณการรายได้ที่จะเพิ่มขึ้น  {{$fulltbp->fulltbpreturnofinvestment->income}} บาท</div>
-                    <div class="ml30">- ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น {{$fulltbp->fulltbpreturnofinvestment->profit}} บาท</div>
-                    <div class="ml30">- ประมาณการต้นทุนที่จะลดลง {{$fulltbp->fulltbpreturnofinvestment->reduce}} บาท</div>
+                    <div class="ml30">- ประมาณการรายได้ที่จะเพิ่มขึ้น  {{number_format($fulltbp->fulltbpreturnofinvestment->income,2)}} บาท</div>
+                    <div class="ml30">- ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น {{number_format($fulltbp->fulltbpreturnofinvestment->profit,2)}} บาท</div>
+                    <div class="ml30">- ประมาณการต้นทุนที่จะลดลง {{number_format($fulltbp->fulltbpreturnofinvestment->reduce,2)}} บาท</div>
                 </div>
         </div>
         <div class="box ml50 bw650 font14 mt20 ">

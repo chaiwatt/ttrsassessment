@@ -77,11 +77,10 @@ class DashboardAdminProjectFullTbpController extends Controller
         NotificationBubble::where('target_user_id',$auth->id)
                         ->where('notification_category_id',1)
                         ->where('notification_sub_category_id',5)
-                        ->where('status',0)->delete();
-                        
+                        ->where('status',0)->delete();                      
         // $fulltbps = FullTbp::where('status',2)->get();
         $fulltbps = FullTbp::get();
-        if($auth->user_type_id < 6){
+        if($auth->user_type_id < 5){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             // ->orWhere('coleader_id',$auth->id)
                                             ->pluck('business_plan_id')->toArray();

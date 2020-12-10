@@ -57,7 +57,7 @@ class DashboardExpertReportController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id =  $projectassignment->leader_id;
-        $alertmessage->detail =  DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().  ' ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project .' ส่งเมื่อ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a>' ;
+        $alertmessage->detail =  DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().  ' ผู้เชี่ยวชาญ '.$auth->name . ' '. $auth->lastname .' ตอบรับเข้าร่วมโครงการ' . $minitbp->project .' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a>' ;
         // $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ตรวจสอบ</a>';
         $alertmessage->save();
 

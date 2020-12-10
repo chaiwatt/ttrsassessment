@@ -44,7 +44,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>โครงการ</a>
-                    <a href="{{route('dashboard.admin.project.fulltbp')}}" class="breadcrumb-item"> รายการแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</a>
+                    <a href="{{route('dashboard.admin.project.fulltbp')}}" class="breadcrumb-item"> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</a>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

@@ -5,7 +5,7 @@
 
         <div class="col-lg-3 col-md-6 footer-info">
          
-            <a href="index.html"><img src="{{asset('assets/landing/img/logo.png')}}" class="w-75" alt="" class="img-fluid"></a>
+            <a href="{{route('landing.index')}}"><img src="{{asset($generalinfo->logo)}}" class="w-75" alt="" class="img-fluid"></a>
        
             <p class="sarabun">
               111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120 

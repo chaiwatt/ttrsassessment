@@ -24,6 +24,8 @@ class CreatePagesTable extends Migration
             $table->unsignedBigInteger('feature_image_id')->nullable();
             $table->unsignedBigInteger('feature_image_thumbnail_id')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('blogsidebarimage_id')->nullable();
+            $table->unsignedBigInteger('bloghomepageimage_id')->nullable();
             $table->timestamps();
         });
     }

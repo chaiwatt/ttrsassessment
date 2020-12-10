@@ -274,7 +274,8 @@ $("#file").on('change', function() {
 
                 var inp = `<input name="featureinp" value="${data.feature.id}" data-id="${data.feature.id}" class="featureinp" hidden>`;
                 $('#feature_input_wrapper').append(inp);
-                var inp2 = `<input name="featurethumbnailinp" value="${data.thumbnail.id}" data-id="${data.thumbnail.id}" class="featurethumbnailinp" hidden>                                     `;
+                var inp2 = `<input name="blogsidebarimage" value="${data.blogsidebarimage.id}" data-id="${data.blogsidebarimage.id}" class="blogsidebarimage" hidden>
+                            <input name="bloghomepageimage" value="${data.bloghomepageimage.id}" data-id="${data.bloghomepageimage.id}" class="bloghomepageimage" hidden>`;
                 $('#featurethumbnail_input_wrapper').append(inp2);
                 var html = `<div class="form-group" id="featurediv" >
                             <div class="row"><div class="col-sm-6 col-xl-6">
@@ -285,7 +286,7 @@ $("#file").on('change', function() {
                                 <div class="card-body">
                                     <div class="d-flex align-items-start flex-nowrap">
                                         <div class="list-icons list-icons-extended ml-auto">
-                                            <a href="#" id="deletefeature" data-id="${data.feature.id}" data-thumbnail="${data.thumbnail.id}"  class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                                            <a href="#" id="deletefeature" data-id="${data.feature.id}" data-thumbnail="${data.bloghomepageimage.id}"  class="list-icons-item"><i class="icon-bin top-0"></i></a>
                                         </div>
                                     </div>
                                 </div>

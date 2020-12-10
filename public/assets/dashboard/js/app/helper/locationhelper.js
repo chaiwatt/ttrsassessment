@@ -16,7 +16,6 @@ $(document).on('change', '#province', function(e) {
     })
 });
 $(document).on('change', '#amphur', function(e) {
-// $("#amphur").change(function(){
     Geo.tambol($(this).val()).then(data => {
         let  html = "";
         data.forEach((tambol,index) => 

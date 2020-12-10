@@ -197,7 +197,9 @@
                                                     <input name="featureinp" value="{{$page->feature_image_id}}" data-id="{{$page->feature_image_id}}" class="featureinp" hidden> 
                                                 </div>
                                                 <div class="col-md-12" id="featurethumbnail_input_wrapper" >
-                                                    <input name="featurethumbnailinp" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden> 
+                                                    {{-- <input name="featurethumbnailinp" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden>  --}}
+                                                    <input name="blogsidebarimage" value="{{$page->blogsidebarimage_id}}" data-id="{{$page->blogsidebarimage_id}}" class="blogsidebarimage" hidden> 
+                                                    <input name="bloghomepageimage" value="{{$page->bloghomepageimage_id}}" data-id="{{$page->bloghomepageimage_id}}" class="bloghomepageimage" hidden> 
                                                 </div>
                                                 <div id="featurethumbnail_wrapper">
                                                     <div class="form-group" id="featurediv" >

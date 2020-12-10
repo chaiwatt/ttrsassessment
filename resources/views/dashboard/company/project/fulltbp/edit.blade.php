@@ -50,7 +50,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
-							<input type="text" id="employphone" placeholder="เบอร์โทรศัพท์" class="form-control">
+							<input type="text" id="employphone" placeholder="โทรศัพท์" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -180,7 +180,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
-							<input type="text" id="employphone_projectmember" placeholder="เบอร์โทรศัพท์" class="form-control">
+							<input type="text" id="employphone_projectmember" placeholder="โทรศัพท์" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -246,7 +246,7 @@
 									</div>
 									<div class="form-group">
 										<label>โทรศัพท์</label><span class="text-danger">*</span>
-										<input type="text" id="employphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
+										<input type="text" id="employphone_edit" placeholder="โทรศัพท์" class="form-control">
 									</div>
 									<div class="form-group">
 										<label>โทรศัพท์มือถือ</label>
@@ -370,19 +370,19 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ระดับ</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationlevel" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="employeducationlevel" placeholder="ระดับ" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อสถานศึกษา</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationinstitute" placeholder="นามสกุล" class="form-control">
+							<input type="text" id="employeducationinstitute" placeholder="ชื่อสถานศึกษา" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>สาขาวิชาเอก</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationmajor" placeholder="ตำแหน่ง" class="form-control">
+							<input type="text" id="employeducationmajor" placeholder="สาขาวิชาเอก" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -561,7 +561,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อรางวัล</label><span class="text-danger">*</span>
-							<input type="text" id="awardname" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="awardname" placeholder="ชื่อรางวัล" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">	
@@ -593,7 +593,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ใบรับรองมาตรฐาน</label><span class="text-danger">*</span>
-							<input type="text" id="standardname" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="standardname" placeholder="ใบรับรองมาตรฐาน" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">	
@@ -711,7 +711,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
-								<input type="text" id="productname" placeholder="รายการ" class="form-control">
+								<input type="text" id="productname" placeholder="ชื่อผลิตภัณฑ์" class="form-control">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
@@ -745,7 +745,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มยอดขาย</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ข้อมูลยอดขาย</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -754,23 +754,23 @@
 							<input type="text" id="sellid" value="" hidden >
 							<div class="form-group">
 								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
-								<input type="text" id="productnameedit" placeholder="รายการ" class="form-control">
+								<input type="text" id="productnameedit" placeholder="ชื่อผลิตภัณฑ์" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellpresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+								<label>ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellpresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+								<label>ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit1" placeholder="ปี{{$fulltbp->past1}}" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+								<label>ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit2" placeholder="ปี{{$fulltbp->past2}}" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+								<label>ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit3" placeholder="ปี{{$fulltbp->past3}}" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -788,7 +788,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มยอดขาย</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการ</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -800,20 +800,20 @@
 								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control" readonly>
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+								<label>ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+								<label>ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit1" placeholder="ปี {{$fulltbp->past1}}" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+								<label>ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit2" placeholder="ปี {{$fulltbp->past2}}" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+								<label>ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit3" placeholder="ปี {{$fulltbp->past3}}" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -1539,8 +1539,15 @@
 															<div class="col-md-12">	
 																<div class="input-group">													
 																	{{-- <button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													 --}}
-																	<label for="">เอกสารแนบข้อมูลทั่วไป <a type="button" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add text-info"></i></a></label>
+																	{{-- <label for="">เอกสารแนบข้อมูลทั่วไป </label>
+																	<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p> --}}
+
+																	<label for="">เอกสารแนบข้อมูลทั่วไป </label> <a type="button" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add text-info"></i></a>
+																	
+																	
+
 																</div>
+																<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
 																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/>
 															</div>
 														</div>			

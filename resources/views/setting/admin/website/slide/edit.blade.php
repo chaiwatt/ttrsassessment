@@ -54,7 +54,7 @@
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>สถานะการแสดง<span class="text-danger">*</span></label>
                                             <select name="slidestatus" data-placeholder="สถานะการแสดง" class="form-control form-control-select2">
                                                 @foreach ($slidestatuses as $slidestatus)
@@ -93,7 +93,7 @@
                                         <div class="form-group">
                                             <label>ข้อความที่ 3 ภาษาอังกฤษ</label>
                                             <input type="text"  name="textengthree" value="{{$slide->textengthree}}"  placeholder="ข้อความที่ 3 ภาษาอังกฤษ" class="form-control">
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label>ลิงก์ URL</label>
                                             <input type="text"  name="url" value="{{$slide->url}}"  placeholder="ลิงก์ URL" class="form-control">

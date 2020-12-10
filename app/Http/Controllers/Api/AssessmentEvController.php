@@ -159,6 +159,7 @@ class AssessmentEvController extends Controller
             $new = new CriteriaTransaction();
             $new->ev_id = $request->newevid;
             $new->index_type_id = $criteriatransaction->index_type_id;
+            $new->ev_type_id = $criteriatransaction->ev_type_id;
             $new->pillar_id = $criteriatransaction->pillar_id;
             $new->sub_pillar_id = $criteriatransaction->sub_pillar_id;
             $new->sub_pillar_index_id = $criteriatransaction->sub_pillar_index_id;
@@ -370,12 +371,31 @@ class AssessmentEvController extends Controller
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id =$projectsmember->user_id;
-                $alertmessage->detail = 'EV ผ่านการอนุมัติ' . $minitbp->project .' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+                $alertmessage->detail = 'EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
                 $alertmessage->save();
 
-                EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:EV ผ่านการอนุมัติ','เรียน Admin<br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-                Message::sendMessage('EV ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
+                EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','เรียน Admin<br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+                Message::sendMessage('EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectsmember->user_id);
             }
+
+            $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $businessplan->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 6;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $projectassignment->leader_id;
+            $notificationbubble->save();
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id =$projectassignment->leader_id;
+            $alertmessage->detail = 'EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->save();
+            
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','เรียน Leader<br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$projectassignment->leader_id);
+
         }else{
             Ev::find($request->id)->update(
                 [

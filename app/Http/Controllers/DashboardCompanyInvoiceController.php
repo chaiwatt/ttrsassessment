@@ -22,6 +22,7 @@ use App\Model\InvoiceTransaction;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use setasign\Fpdi\PdfParser\StreamReader;
+use App\Http\Requests\EditPaymentNotification;
 
 class DashboardCompanyInvoiceController extends Controller
 {
@@ -108,7 +109,7 @@ class DashboardCompanyInvoiceController extends Controller
                                                                         ->withBanks($banks);
     }
 
-    public function PaymentNotificationSave(Request $request,$id){
+    public function PaymentNotificationSave(EditPaymentNotification $request,$id){
         $auth = Auth::user();
         $file = $request->file;
         $new_name = str_random(10).".".$file->getClientOriginalExtension();

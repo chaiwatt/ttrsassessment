@@ -1,4 +1,4 @@
-<link href="{{asset('assets/landing/img/logo.png')}}" rel="shortcut icon">
+{{-- <link href="{{asset($generalinfo->logo)}}" rel="shortcut icon"> --}}
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">

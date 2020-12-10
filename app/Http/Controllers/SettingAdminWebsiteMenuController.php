@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Menu;
 use App\Model\Page;
+use App\Model\DirectMenu;
 use App\Helper\CreateSlug;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateMenuRequest;
@@ -12,9 +13,10 @@ class SettingAdminWebsiteMenuController extends Controller
 {
     public function Create(){
         $menus = Menu::where('parent_id',0)->get();
-        $allmenus = Menu::pluck('name','id')->all();
+        // $allmenus = Menu::pluck('name','id')->all();
+        $allmenus = DirectMenu::pluck('name','id')->all();
         $pages = Page::get();
-        return view('setting.admin.website.menu.create')->withMenus($menus)
+        return view('setting.admin.website.directmenu.create')->withMenus($menus)
                                                     ->withAllmenus($allmenus)
                                                     ->withPages($pages);
     }

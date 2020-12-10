@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TTRS | ศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศ</title>
 
-    <link href="{{asset('assets/landing/img/logo.png')}}" rel="shortcut icon">
+    <link href="{{asset($generalinfo->logo)}}" rel="shortcut icon">
 
 	@include('layouts.landing.css')
 

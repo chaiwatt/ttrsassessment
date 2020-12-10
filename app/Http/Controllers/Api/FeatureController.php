@@ -16,18 +16,31 @@ class FeatureController extends Controller
         $img = Image::make($file);  
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1200,500,1);
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),960,540,2);
         $featureimage = new FeatureImage();
         $featureimage->name = $feature;
         $featureimage->save();
 
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),550,412,2);
-        $featureimagethumbnail = new FeatureImageThumbnail();
-        $featureimagethumbnail->name = $feature;
-        $featureimagethumbnail->save();
-        return response()->json(array("feature" => $featureimage,"thumbnail" => $featureimagethumbnail));  
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),500,330,2);
+        $featureimagethumbnail_1 = new FeatureImageThumbnail();
+        $featureimagethumbnail_1->name = $feature;
+        $featureimagethumbnail_1->save();
+
+        $fname=str_random(10).".".$file->getClientOriginalExtension();
+        $feature = "storage/uploads/page/feature/".$fname;
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),400,300,2);
+        $featureimagethumbnail_2 = new FeatureImageThumbnail();
+        $featureimagethumbnail_2->name = $feature;
+        $featureimagethumbnail_2->save();
+
+        return response()->json(
+            array(
+                "feature" => $featureimage,
+                "blogsidebarimage" => $featureimagethumbnail_1,
+                "bloghomepageimage" => $featureimagethumbnail_2
+                ));  
     }
 
 

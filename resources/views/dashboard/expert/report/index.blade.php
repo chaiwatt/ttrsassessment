@@ -19,8 +19,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
-                    <span class="breadcrumb-item active">รายการประเมิน</span>
+                    <a href="{{route('dashboard.expert.report')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
+                    <span class="breadcrumb-item active">รายงาน</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -71,7 +71,7 @@
                                         <th>โครงการ</th>
                                         <th>สถานะ</th>
                                         <th>แสดงความเห็น</th>
-                                        <th>วันนัดประชุม</th>
+                                        <th>วันนัดประชุมก่อนลงพื้นที่</th>
                                         <th>วันที่ประเมิน</th>
                                         <th>วันที่สรุปผลประเมิน</th>
                                         <th class="text-right">เพิ่มเติม</th> 

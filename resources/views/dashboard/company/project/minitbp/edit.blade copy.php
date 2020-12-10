@@ -29,8 +29,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> การประเมิน</a>
-                    <a href="{{route('dashboard.company.project.minitbp')}}" class="breadcrumb-item"> รายการ Mini TBP</a>
-                    <span class="breadcrumb-item active">Mini TBP</span>
+                    <a href="{{route('dashboard.company.project.minitbp')}}" class="breadcrumb-item"> รายการแบบคำขอรับการประเมิน (Mini TBP)</a>
+                    <span class="breadcrumb-item active">แบบคำขอรับการประเมิน (Mini TBP)</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

@@ -1,5 +1,6 @@
 
 import * as Expert from './expert.js'
+import * as Geo from './location.js'
 
 $("#btn_modal_add_expertfield").on('click', function() {
    Expert.addExpertfield($('#expertfieldnum').val(),$('#expertfielddetail').val()).then(data => {
@@ -177,4 +178,53 @@ $("#avatarimg").on('change', function() {
             $("#avatar").html(html);
     }
  });
+});
+
+$("#sameaddress").on('change', function() {
+    if(this.checked) {
+        $("#address1").val($('#address').val());
+        $("#postalcode1").val($('#postalcode').val());
+        
+        Geo.province().then(data => {
+            let  html = "";
+            data.forEach((amphur,index) => 
+                html += `<option value='${amphur.id}'>${amphur.name}</option>`
+            )           
+            $("#province1").html(html);
+            $("#province1 option:contains("+$('#province').find("option:selected").text()+")").attr('selected', true).trigger('change');
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }else{
+        // $("#contact_address_wrapper").attr("hidden",false);
+    }
+});
+
+$(document).on('change', '#province1', function(e) {
+    Geo.amphur($('#province').val()).then(data => {
+        let  html = "";
+        data.forEach((amphur,index) => 
+            html += `<option value='${amphur.id}'>${amphur.name}</option>`
+        )
+        $("#amphur1").html(html);
+        $("#amphur1 option:contains("+$('#amphur').find("option:selected").text()+")").attr('selected', true).trigger('change');
+    })
+    .catch(error => {
+        console.log(error)
+    })
+});
+
+$(document).on('change', '#amphur1', function(e) {
+    Geo.tambol($('#amphur').val()).then(data => {
+        let  html = "";
+        data.forEach((tambol,index) => 
+            html += `<option value='${tambol.id}'>${tambol.name}</option>`
+        )
+        $("#tambol1").html(html);
+        $("#tambol1 option:contains("+$('#tambol').find("option:selected").text()+")").attr('selected', true).trigger('change');
+    })
+    .catch(error => {
+        console.log(error)
+    })
 });

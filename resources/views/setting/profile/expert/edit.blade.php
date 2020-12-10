@@ -191,7 +191,7 @@
 			</div>
 			<div class="media-body text-white">
 				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>
-				<span class="d-block">{{$user->userposition->name}}</span>
+				<span class="d-block">{{$expert->position}}</span>
 			</div>
 			<div class="ml-md-3 mt-2 mt-md-0">
 				<ul class="list-inline list-inline-condensed mb-0">
@@ -312,7 +312,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ที่อยู่</label><span class="text-danger">*</span>
-													<input type="text"  name="address" value="{{old('address') ?? $user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+													<input type="text"  name="address" id="address" value="{{old('address') ?? $user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -349,14 +349,14 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode" value="{{old('postalcode') ?? $user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+													<input type="text"  name="postalcode" id="postalcode" value="{{old('postalcode') ?? $user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control">
 												</div>
 											</div>
 											<legend>
 												<label for="">ที่อยู่ที่ติดต่อได้ (<label class="form-check-label"  >
 												<div class="form-check">
 													<label class="form-check-label">
-														<input type="checkbox" name="sameaddress" class="form-check-input-styled-primary" checked data-fouc>
+														<input type="checkbox" name="sameaddress" id="sameaddress" class="form-check-input-styled-primary" data-fouc>
 														ที่อยู่เดียวกับที่อยู่ตามบัตรประจำตัวประชาชน
 													</label>)
 												</div>
@@ -365,7 +365,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ที่อยู่อื่น</label><span class="text-danger">*</span>
-													<input type="text"  name="address1" value="{{old('address1') ?? $user->address1}}"  placeholder="ที่อยู่อื่น" class="form-control">
+													<input type="text"  name="address1" id="address1" value="{{old('address1') ?? $user->address1}}"  placeholder="ที่อยู่อื่น" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -402,9 +402,12 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode1" value="{{old('postalcode1') ?? $user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+													<input type="text"  name="postalcode1" id="postalcode1" value="{{old('postalcode1') ?? $user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control">
 												</div>
 											</div>
+											<legend>
+
+											</legend>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>โทรศัพท์<span class="text-danger">*</span></label>
@@ -438,7 +441,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ประเภทผู้เชี่ยวชาญ<span class="text-danger">*</span></label>
-													<input type="text"  name="experttype" value="{{$expert->user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly>
+													<input type="text"  name="experttype" value="{{$expert->user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly >
 												</div>
 											</div>
 											<div class="col-md-6">  
@@ -491,7 +494,7 @@
 													</select>
 												</div>
 											</div>
-											<div class="col-md-6">  
+											{{-- <div class="col-md-6">  
 												<div class="form-group">
 													<label>รูปถ่าย (ขนาด 500x500) px</label>
 													<div class="input-group">													
@@ -506,7 +509,7 @@
 														<img src="{{asset($user->picture)}}" width="300" height="300" alt="">
 													@endif
 												</div>
-											</div>
+											</div> --}}
 											<hr>
 											<div class="col-md-12">
 												<div class="form-group">

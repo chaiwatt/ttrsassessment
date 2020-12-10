@@ -54,7 +54,7 @@
                                 {{-- <div class="col-md-12"> --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>เลขที่เอกสาร<span class="text-danger">*</span></label>
+                                            <label>เลขที่เอกสาร</label>
                                             <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="ชื่อ" class="form-control" readonly>
                                         </div>
                                     </div>
