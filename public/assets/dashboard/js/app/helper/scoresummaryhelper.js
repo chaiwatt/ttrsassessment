@@ -197,7 +197,7 @@ $(document).on('click', '#togglecomment', function(e) {
                 }
             }
 
-            var criterianame = `<label>กรอกเกรด (A-F)</label>
+            var criterianame = `<label>กรอกเกรด/คะแนน</label>
                                     <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control inpscore">`;
 
             if(criteria.criteria != null){

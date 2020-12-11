@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Model\Ev;
+use Carbon\Carbon;
 use App\Model\EvType;
 use App\Model\Pillar;
+use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
+use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
+use App\Model\InvoiceTransaction;
 use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
 
@@ -337,6 +342,34 @@ class DashboardAdminAssessmentController extends Controller
         Ev::find($request->evid)->update([
             'status' => 5
         ]);
+        $ev = Ev::find($request->evid);
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        BusinessPlan::find($minitbp->business_plan_id)->update([
+            'business_plan_status_id' => 8
+        ]);
+
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+
+        $invoicetransaction = new InvoiceTransaction();
+        $invoicetransaction->company_id = $company->id;
+        $invoicetransaction->customer = $company->name;
+        // $invoicetransaction->docno = $request->docno;
+        $invoicetransaction->issuedate = Carbon::now()->toDateString();
+        // $invoicetransaction->quotationno = $request->quotationno;
+        // $invoicetransaction->purchaseorderno = $request->purchaseorderno;
+        // $invoicetransaction->saleorderno = $request->saleorderno;
+        $invoicetransaction->saleorderdate = Carbon::now()->toDateString();
+        // $invoicetransaction->refno = $request->refno;
+        $invoicetransaction->description = 'ค่าธรรมเนียมการประเมินเทคโนโลยี';
+        $invoicetransaction->price = 0;
+        // $invoicetransaction->billerid = $request->billerid;
+        // $invoicetransaction->branchid = $request->branchid;
+        // $invoicetransaction->servicecode = $request->servicecode;
+        // $invoicetransaction->compcode = $request->compcode;
+        $invoicetransaction->save();
+
     }
 
     public function Summary($id){

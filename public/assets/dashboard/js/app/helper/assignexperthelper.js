@@ -70,7 +70,7 @@ function getExpert(id){
     if($(this).is(":checked")){
         status = 2;
     }
-    
+
     $("#spiniconcheck"+$(this).data('id')).attr("hidden",false);
     assignExpert($(this).data('id'),status,route.fulltbpid).then(data => {
       $("#spiniconcheck"+$(this).data('id')).attr("hidden",true);  
@@ -192,7 +192,7 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
             if(expert.expertcomment != null){
               comment = `<button type="button" data-id="${expert.id}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>`;
             }
-            console.log('--> ' + expert.expertcomment);
+            // console.log('--> ' + expert.expertcomment);
             var acceptstatus = '';
             if(expert.accepted == 0){
               acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;

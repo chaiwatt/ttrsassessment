@@ -99,7 +99,7 @@
         </div>
         @endif
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ความก้าวหน้าโครงการ</h6>
@@ -107,7 +107,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 ">
-                                <div class="chart-container" style="height:70%">
+                                <div class="chart-container" style="height:300px">
                                     <div class="chart has-fixed-height" id="progress_chart"></div>
                                 </div>
                             </div>
@@ -120,8 +120,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-7">
+                {{-- <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ปฎิทินนัดหมาย</h6>
                         <div class="header-elements">
@@ -133,11 +133,7 @@
                     <div class="card-body">
                         <div class="fullcalendar"></div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+                </div> --}}
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">TimeLine</h6>
@@ -155,8 +151,8 @@
                                     <tr>
                                         <th>วันที่</th> 
                                         <th>รายละเอียด</th> 
-                                        <th>ประเภท</th> 
-                                        <th>โดย</th>                                                            
+                                        {{-- <th>ประเภท</th>  --}}
+                                        {{-- <th>โดย</th>                                                             --}}
                                     </tr>
                                 </thead>
                                 <tbody id="timeline_wrapper_tr">
@@ -166,6 +162,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
             <!-- /striped rows -->
             </div>
         </div>
@@ -406,8 +407,8 @@
                         html += `<tr >                                        
                             <td> ${timeline.createdatth} </td>                            
                             <td> ${timeline.details} </td>     
-                            <td> ${doctype}</td>                      
-                            <td> ${timeline.user['name']} ${timeline.user['lastname']}</td> 
+                                           
+                           
                         </tr>`
                         if(timeline.status == 0){
                             infostatus += `<div class="alert alert-info alert-styled-left alert-dismissible">
@@ -432,8 +433,8 @@
                 html += `<tr >                                        
                     <td> ${timeline.createdatth} </td>                            
                     <td> ${timeline.details} </td> 
-                    <td> ${doctype}</td>                         
-                    <td> ${timeline.user['name']} ${timeline.user['lastname']}</td>          
+                                       
+                         
                 </tr>`
                 });
             $("#timeline_wrapper_tr").html(html);

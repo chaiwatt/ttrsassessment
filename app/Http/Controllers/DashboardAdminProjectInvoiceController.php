@@ -208,7 +208,9 @@ class DashboardAdminProjectInvoiceController extends Controller
         InvoiceTransaction::find($id)->update([
             'status' => 3
         ]);
-    
+        BusinessPlan::where('company_id',$company->id)->first()->update([
+            'business_plan_status_id' => 9
+          ]);
         return redirect()->route('dashboard.admin.project.invoice')->withSuccess('ยืนยันรายการสำเร็จ');
     }
 }

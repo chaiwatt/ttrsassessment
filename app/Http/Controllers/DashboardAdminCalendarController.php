@@ -20,6 +20,7 @@ use Google_Service_Calendar;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Helper\GoogleCalendar;
+use App\Model\TimeLineHistory;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Google_Service_Calendar_Event;
@@ -125,23 +126,35 @@ class DashboardAdminCalendarController extends Controller
           $notificationbubble->target_user_id = $_user->id;
           $notificationbubble->save();
       }
-       $businessplan = BusinessPlan::find($minitbp->business_plan_id);
-       $company = Company::find($businessplan->company_id);
 
-       $alertmessage = new AlertMessage();
-       $alertmessage->user_id = $auth->id;
-       $alertmessage->target_user_id = $company->user_id;
-       $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน สำหรับโครงการ'.$minitbp->project;
-       $alertmessage->save();
+      if ($request->calendartype == 2) {
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
 
-      // $notificationbubble = new NotificationBubble();
-      // $notificationbubble->business_plan_id = $minitbp->business_plan_id;
-      // $notificationbubble->notification_category_id = 2;
-      // $notificationbubble->notification_sub_category_id = 8;
-      // $notificationbubble->user_id = $auth->id;
-      // $notificationbubble->target_user_id = $_user->id;
-      // $notificationbubble->save();
-      
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $company->user_id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน สำหรับโครงการ'.$minitbp->project;
+        $alertmessage->save();
+ 
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:นัดหมายการประเมิน ณ. สถานประกอบการ','เรียนผู้ประกอบการ <br> แจ้งนัดหมายการประเมิน ณ. สถานประกอบการ มีรายละเอียดดังนี้' .
+        '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+        '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+        '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+        '<br><br>ด้วยความนับถือ<br>TTRS');
+
+        $timeLinehistory = new TimeLineHistory();
+        $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->details = 'นัดหมายการประเมิน ณ สถานประกอบการ';
+        $timeLinehistory->message_type = 2;
+        $timeLinehistory->owner_id = $company->user_id;
+        $timeLinehistory->user_id = $auth->id;
+        $timeLinehistory->save();
+      }else if($request->calendartype == 3) {
+        BusinessPlan::find($minitbp->business_plan_id)->update([
+          'business_plan_status_id' => 7
+        ]);
+      }
       return redirect()->route('dashboard.admin.calendar')->withSuccess('เพิ่มรายการสำเร็จ');
   }
   public function Edit($id){

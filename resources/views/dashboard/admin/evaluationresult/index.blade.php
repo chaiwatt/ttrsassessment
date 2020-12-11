@@ -65,7 +65,8 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>คะแนน</th>
                                         <th>เกรด</th>     
-                                        <th style="width:300px">รายงานผล</th>                 
+                                        <th>รายงานผล</th>    
+                                        <th>สิ้นสุดโครงการ</th>              
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,6 +79,10 @@
                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียดการแจ้งผล</a> 
                                             <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
                                             <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-success">ดาวน์โหลด Certificate</a>
+                                        </td> 
+                                        <td> 
+                                           
+                                            <a href="" class="btn btn-sm bg-teal">สิ้นสุดโครงการ</a>
                                         </td> 
                                     </tr>
                                     @endforeach

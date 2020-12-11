@@ -1,4 +1,5 @@
 
+var stepindex =0;
 $(function() {
     getEv($('#evid').val()).then(data => {
         RenderTable(data,1);
@@ -61,8 +62,8 @@ function getEv(evid){
                     }
                 }
         
-                var criterianame = `<label>กรอกเกรด (A-F) <a href="#" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
-                                <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring">
+                var criterianame = `<label>กรอกเกรด/คะแนน <a href="#" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
+                                <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring gradescore">
                                     `;
         
                 if(criteria.criteria != null){
@@ -229,32 +230,6 @@ $(document).on('click', '#saveupdate', function(e) {
             });
     }).catch(error => {})
 });
-// $(document).on('change', '#gradescore', function(e) {
-//     updateScore($(this).data('id'),$(this).val(),$(this).data('subpillarindex'),1).then(data => {
-//         console.log(data);
-//         $('#weightsum'+$(this).data('subpillarindex')).val(data.weightsum);
-//         RenderTable(data);
-//         $(".loadprogress").attr("hidden",true);
-//         RowSpan("criteriatable");
-//     }).catch(error => {})
-// });
-
-// $(document).on('change', '#checkscore', function(e) {
-//     var state = 0;
-//     if($(this).is(':checked') == true){
-//         state=1;
-//         if($(this).data("name").includes("x2")){
-//             state=2;
-//         }
-//     }
-//     updateScore($(this).data('id'),state,$(this).data('subpillarindex'),2).then(data => {
-//         console.log(data);
-//         $('#weightsum'+$(this).data('subpillarindex')).val(data.weightsum);
-//         RenderTable(data);
-//         $(".loadprogress").attr("hidden",true);
-//         RowSpan("criteriatable");
-//     }).catch(error => {})
-// });
 
 $(document).on('change', '#comment', function(e) {
     console.log($(this).data('id'));
@@ -345,7 +320,7 @@ function showConflictScore(id){
   }
 
   $(document).on('click', '.conflictgrade', function(e) {
-    console.log($(this).data('id'));
+    // console.log($(this).data('id'));
     showConflictGrade($(this).data('id')).then(data => {
         var html =``;
         data.forEach(function (conflict,index) {
@@ -378,7 +353,32 @@ function showConflictGrade(id){
     })
   }
 
-  var submitbutton = true;
+  $(document).on('change', '.gradescore', function(e) {
+    console.log($(this).val() + ' index:' + stepindex);
+    if(stepindex == 0){
+        if($(this).val() !== 'A' && $(this).val() !== 'B' && $(this).val() !== 'C' && $(this).val() !== 'D' && $(this).val() !== 'E' && $(this).val() !== 'F'){
+            
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรอกเกรด A-F เท่านั้น!',
+            })
+            $(this).val('');
+            return;
+        }
+    }else if(stepindex == 1){
+        if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรอกคะแนน 0-5 เท่านั้น!',
+            })
+            $(this).val('');
+            return;
+        }  
+    }
+});
+
+
+var submitbutton = true;
 if($('#evid').val() >= 5 ){
     submitbutton = false;
 }
@@ -395,15 +395,22 @@ $('.step-evweight').steps({
     },
     enableFinishButton: submitbutton,
     onFinished: function (event, currentIndex) {
+        var noblank = true;
         $('.scoring').each(function() {
             if($(this).val() == ''){
-                Swal.fire({
-                    title: 'ผิดพลาด...',
-                    text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
-                    });
+                noblank = false;
                 return;
             }
         });
+
+        if (noblank == false){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+            })
+            return;
+        };
+
         var conflictarray = $(".scoring").map(function () {
             var val = $(this).val();
             if($(this).data('scoretype') == 2){
@@ -417,6 +424,7 @@ $('.step-evweight').steps({
                 value: val
               } 
         }).get();
+        
         $("#spinicon").attr("hidden",false);
         updateScore(conflictarray,$('#evid').val()).then(data => {
             $("#spinicon").attr("hidden",true);
@@ -431,6 +439,7 @@ $('.step-evweight').steps({
     transitionEffect: 'fade',
     autoFocus: true,
     onStepChanged:function (event, currentIndex, newIndex) {
+        stepindex = currentIndex;
         return true;
     },   
 });

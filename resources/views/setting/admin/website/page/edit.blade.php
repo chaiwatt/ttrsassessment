@@ -280,13 +280,13 @@
                                             @endforeach
                                         </div>    
 
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>รูปแกลอรี่ (ขนาด 500x500 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('singlefile').click();">อัปโหลดรูป</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="singlefile" />
-                                        </div>                                       
+                                        </div>                                        --}}
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
                                             <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">

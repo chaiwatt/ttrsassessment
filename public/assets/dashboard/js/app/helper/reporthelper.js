@@ -34,7 +34,7 @@
                         eventLimit: true,
                         eventClick: function(e) {
                             getEvent(e.event.id).then(data => {
-                                console.log(data.attendeecalendar.id);
+                                // console.log(data.attendeecalendar.id);
                                 $('#title').val('นัดหมายการประชุม โครงการ' + data.eventcalendar.fulltbp.minitbp['project']);
                                 $('#eventdate').val(data.eventcalendar.eventdateth);
                                 $('#starttime').val(data.eventcalendar.starttime);
