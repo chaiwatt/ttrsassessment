@@ -86,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </td> 
-                                        <td class="text-right"> <span class="badge badge-flat border-warning text-warning-400 rounded-0">{{$businessplan->businessplanstatus->name}}</span></td>                                       
+                                        <td class="text-right"> <span class="badge badge-flat border-success text-success-400 rounded-0">{{$businessplan->businessplanstatus->name}}</span></td>                                       
                                     </tr>
                                     @endforeach
                                 </tbody>

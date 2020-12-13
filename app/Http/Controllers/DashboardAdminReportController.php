@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminReportController extends Controller
 {
+    public function __construct() 
+    { 
+        $this->middleware('auth'); 
+        // 1=admin, 2=expert, 3=company 
+        $this->middleware('role:4,5,6'); 
+    }
     public function Index(){
         $auth = Auth::user();
         $fulltbps = FullTbp::where('status',1)->get();

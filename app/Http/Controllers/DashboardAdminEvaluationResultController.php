@@ -40,7 +40,7 @@ use setasign\Fpdi\PdfParser\StreamReader;
 class DashboardAdminEvaluationResultController extends Controller
 {
     public function Index(){
-        $fulltbps = FullTbp::where('status',1)->get();
+        $fulltbps = FullTbp::get();
         return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps);
     }
     public function Edit($id){
@@ -95,7 +95,7 @@ class DashboardAdminEvaluationResultController extends Controller
         return $pdf->stream('document.pdf');
     }
     
-    public function Certificate($id){
+    public function Certificate($id,$type){
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -129,6 +129,10 @@ class DashboardAdminEvaluationResultController extends Controller
         $company = Company::find($businessplan->company_id);
         $generalinfo = GeneralInfo::first();
         $fileContent = file_get_contents(asset("assets/dashboard/template/certificate.pdf"),'rb');
+        if($type == 2){
+            $fileContent = file_get_contents(asset("assets/dashboard/template/blankcertificate.pdf"),'rb');
+        }
+        
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
 

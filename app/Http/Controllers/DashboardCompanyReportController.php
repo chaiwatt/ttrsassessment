@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardCompanyReportController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
+    public function __construct() 
+    { 
+        $this->middleware('auth'); 
+        $this->middleware('role:1,2'); 
     }
     public function Index(){
         $auth = Auth::user();

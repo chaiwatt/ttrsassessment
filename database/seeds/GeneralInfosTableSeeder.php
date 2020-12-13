@@ -26,7 +26,7 @@ class GeneralInfosTableSeeder extends Seeder
                 'skype' => 'https://www.skype.com',
                 'linkedin' => 'https://th.linkedin.com',
                 'workdaytime' => '08.00-16.00',
-                'saturdaytime' => '08.00-17.00',
+                'saturdaytime' => 'ปิดทำการ',
                 'sundaytime' => 'ปิดทำการ',
                 'address' => '111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน',
                 'client_id' => 'j7GPSrVYdCTx8DYFR7hj1g',

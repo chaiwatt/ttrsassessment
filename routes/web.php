@@ -29,6 +29,9 @@ Route::get('tag/{slug}', 'HomeController@Tag')->name('landing.tag');
 Route::get('cate/{slug}', 'HomeController@Category')->name('landing.cate');
 Route::get('search', 'HomeController@Search')->name('landing.search');
 Route::get('change/{locale}', 'LanguageController@Change')->name('change');
+Route::get('contact', 'HomeController@Contact')->name('landing.search');
+
+Route::post('addcontact', 'ContactInfoController@AddContact')->name('landing.addcontact');
 
 Route::group(['prefix' => 'email'], function(){
     Route::get('send','MailController@Send')->name('mail.send');
@@ -448,6 +451,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('doneassignement','DashboardAdminProjectFullTbpController@DoneAssignement')->name('dashboard.admin.project.fulltbp.doneassignement');
                     Route::post('expertcomment','DashboardAdminProjectFullTbpController@ExpertComment')->name('dashboard.admin.project.fulltbp.expertcomment');
                     Route::get('downloadzip/{id}','DashboardAdminProjectFullTbpController@DownloadZip')->name('dashboard.admin.project.fulltbp.downloadzip');
+                    Route::get('finishproject/{id}','DashboardAdminProjectFullTbpController@FinishProject')->name('dashboard.admin.project.fulltbp.finishproject');
                     
                     Route::group(['prefix' => 'admin'], function(){
                         Route::get('','DashboardAdminProjectFullTbpAdminController@Index')->name('dashboard.admin.project.fulltbp.admin');           
@@ -511,7 +515,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('','DashboardAdminEvaluationResultController@Index')->name('dashboard.admin.evaluationresult');           
                 Route::get('edit/{id}','DashboardAdminEvaluationResultController@Edit')->name('dashboard.admin.evaluationresult.edit');  
                 Route::get('pdf/{id}','DashboardAdminEvaluationResultController@Pdf')->name('dashboard.admin.evaluationresult.pdf'); 
-                Route::get('certificate/{id}','DashboardAdminEvaluationResultController@Certificate')->name('dashboard.admin.evaluationresult.certificate'); 
+                Route::get('certificate/{id}/{type}','DashboardAdminEvaluationResultController@Certificate')->name('dashboard.admin.evaluationresult.certificate'); 
                 Route::post('editsave/{id}','DashboardAdminEvaluationResultController@EditSave')->name('dashboard.admin.evaluationresult.editsave');  
             }); 
         }); 

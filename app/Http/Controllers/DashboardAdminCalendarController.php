@@ -41,7 +41,7 @@ class DashboardAdminCalendarController extends Controller
 
       $minitbps = MiniTBP::whereIn('business_plan_id',$projectassignments)->pluck('id')->toArray();
       $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->pluck('id')->toArray();
-      $eventcalendars = EventCalendar::whereIn('full_tbp_id',$fulltbps)->get();
+      $eventcalendars = EventCalendar::whereIn('full_tbp_id',$fulltbps)->where('status',1)->get();
       return view('dashboard.admin.calendar.index')->withEventcalendars($eventcalendars); 
     }
 

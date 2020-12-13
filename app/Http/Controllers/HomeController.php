@@ -85,4 +85,9 @@ class HomeController extends Controller
         $pages = Page::paginate(10);
         return view('landing.blog')->withPages($pages);
     }
+
+    public function Contact(){
+        $generalinfo = GeneralInfo::first();
+        return view('landing.contact')->withGeneralinfo($generalinfo);
+    }
 }

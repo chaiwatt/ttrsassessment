@@ -34,19 +34,19 @@
            
             <div class="well">
                 @if (Session::has('success'))
-                <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
-                    {{ Session::get('success') }}
-                </div>
-                @elseif( Session::has('error') )
-                <div class="alert alert-danger alert-styled-left alert-dismissible">
-                    {{ Session::get('error') }}
-                </div>
+                    <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
+                        {{ Session::get('success') }}
+                    </div>
+                    @elseif( Session::has('error') )
+                    <div class="alert alert-danger alert-styled-left alert-dismissible">
+                        {{ Session::get('error') }}
+                    </div>
+                    @endif
+                    @if ($errors->count() > 0)
+                    <div class="alert alert-danger alert-styled-left alert-dismissible">
+                        {{ $errors->first() }}
+                    </div>
                 @endif
-                @if ($errors->count() > 0)
-                <div class="alert alert-danger alert-styled-left alert-dismissible">
-                    {{ $errors->first() }}
-                </div>
-            @endif
                 <h4><i class="fa fa-paper-plane-o"></i> แสดงความเห็น:</h4>
                 <form method="POST" action="{{route('blog.comment',['id' => $page->id])}}" enctype="multipart/form-data">
                     @csrf

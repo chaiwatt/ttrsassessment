@@ -43,12 +43,34 @@
               @endforeach
           </ul> --}}
            
-             <li class="drop-down"><a href=""><img src="{{asset('assets/landing/img/Thai_Flag.png')}}" alt="" srcset=""></a>
+             
+              @if (Config::get('app.locale') == 'th')
+                      <li class="drop-down"><a href=""><img src="{{asset('assets/landing/img/Thai_Flag.png')}}" alt="" srcset=""></a>
+                  @else
+                      <li class="drop-down"><a href=""><img src="{{asset('assets/landing/img/Us_FlagFill out the form.png')}}" alt="" srcset=""></a>
+              @endif
               <ul>
-                  <li><a class="sarabun" href="#"><img src="{{asset('assets/landing/img/Thai_Flag.png')}}" alt="" srcset=""> ภาษาไทย</a></li>
-                  <li><a class="sarabun" href="#"><img src="{{asset('assets/landing/img/Us_Flag.png')}}" alt="" srcset=""> ภาษาอังกฤษ</a></li>
+                  <li><a class="sarabun" href="{{route('change',['locale' => 'th'])}}"><img src="{{asset('assets/landing/img/Thai_Flag.png')}}" alt="" srcset=""> {{trans('lang.th')}}</a></li>
+                  <li><a class="sarabun" href="{{route('change',['locale' => 'en'])}}"><img src="{{asset('assets/landing/img/Us_Flag.png')}}" alt="" srcset=""> {{trans('lang.en')}}</a></li>
                 </ul>
             </li>
+
+
+            {{-- <li class="nav-item dropdown nav-item-left-border d-none d-sm-block nav-item-left-border-remove nav-item-left-border-md-show">
+                <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if (Config::get('app.locale') == 'th')
+                            <img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-th" alt="Thai" /> {{trans('lang.th')}}
+                        @else
+                            <img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-us" alt="English" /> {{trans('lang.en')}}
+                    @endif
+                    
+                    <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                    <a class="dropdown-item" href="{{route('change',['locale' => 'th'])}}"><img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-th" alt="Thai" /> {{trans('lang.th')}}</a>
+                    <a class="dropdown-item" href="{{route('change',['locale' => 'en'])}}"><img src="{{asset('assets/landing/img/blank.gif')}}" class="flag flag-us" alt="English" /> {{trans('lang.en')}}</a>
+                </div>
+            </li> --}}
 
             {{-- <li>
               <a href="#" class="sarabun" style="color: #fff;" class="btn-get-started animate__animated animate__fadeInUp scrollto"><i class="icofont-login"></i>  เข้าสู่ระบบ</a>

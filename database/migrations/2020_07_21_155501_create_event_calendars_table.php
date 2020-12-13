@@ -24,6 +24,7 @@ class CreateEventCalendarsTable extends Migration
             $table->string('place',250);
             $table->string('room',50);
             $table->string('summary',250);
+            $table->char('status',1)->default(1);
             $table->unsignedBigInteger('isnotify_id')->default(1);
             $table->timestamps();
         });

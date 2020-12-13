@@ -78,11 +78,22 @@
                                         <td> 
                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียดการแจ้งผล</a> 
                                             <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
-                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-success">ดาวน์โหลด Certificate</a>
+                                            {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-success">ดาวน์โหลด Certificate</a> --}}
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">ดาวน์โหลด Certificate</button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
+                                                    <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item"><i class="icon-download"></i> ดาวน์โหลด</a>
+                                                </div>
+                                            </div>
                                         </td> 
                                         <td> 
-                                           
-                                            <a href="" class="btn btn-sm bg-teal">สิ้นสุดโครงการ</a>
+                                           @if ($fulltbp->status == 1)
+                                                <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-teal">สิ้นสุดโครงการ</a>
+                                               @else
+                                                <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
+                                           @endif
+                                            
                                         </td> 
                                     </tr>
                                     @endforeach
@@ -105,5 +116,24 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        function confirmfinish(e) {
+            e.preventDefault();
+            var urlToRedirect = e.currentTarget.getAttribute('href');
+            Swal.fire({
+                    title: 'ยืนยัน!',
+                    text: `ต้องการสิ้นสุดโครงการหรือไม่? `,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                if (result.value) {
+                    window.location.href = urlToRedirect;
+                }
+            });
+        }
     </script>
 @stop

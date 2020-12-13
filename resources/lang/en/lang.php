@@ -13,4 +13,9 @@ return [
     'openhour' => 'Open Hour',
     'copyright' => 'Copyright',
     'dashboard' => 'Dashboard',
+    'registrationprocess' => 'Registration process',
+    'submitanapplication' => 'Submit an application',
+    'fillouttheform' => 'Fill out the form',
+    'preliminaryconsideration' => 'Preliminary consideration',
+    'assessment' => 'Assessment'
 ];

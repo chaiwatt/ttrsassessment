@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardExpertReportController extends Controller
 {
+    public function __construct() 
+    { 
+        $this->middleware('auth'); 
+        $this->middleware('role:3'); 
+    }
     public function Index(){
         $auth = Auth::user();
         // $userids = User::find($auth->id)->pluck('id')->toArray();
