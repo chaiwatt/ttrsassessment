@@ -349,9 +349,10 @@ class DashboardAdminProjectFullTbpController extends Controller
         return response()->json($fulltbp); 
     }
     public function GetExpert(Request $request){
-        $fulltbpids = ExpertAssignment::where('user_id',$request->id)->pluck('full_tbp_id')->toArray();
-        $fulltbps = FullTbp::whereIn('id',$fulltbpids)->get();
-        return response()->json($fulltbps); 
+        // $fulltbpids = ExpertAssignment::where('user_id',$request->id)->pluck('full_tbp_id')->toArray();
+        // $fulltbps = FullTbp::whereIn('id',$fulltbpids)->get();
+        $expertassignments = ExpertAssignment::where('user_id',$request->id)->get();
+        return response()->json($expertassignments); 
     }  
     public function NotifyJd(Request $request){
         $fulltbp = FullTbp::find($request->fulltbpid);

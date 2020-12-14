@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\Grade;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\FinalGrade;
 use App\Model\SearchGroup;
 use App\Model\BusinessPlan;
 use App\Model\IndustryGroup;
@@ -17,6 +19,7 @@ class DashboardAdminReportSearchController extends Controller
 {
     public function Index(){
         $searchgroups = SearchGroup::get();
+        $grades = Grade::get();
         $fulltbbs = FullTbp::get();
         $industrygroups = IndustryGroup::get();
         $years = FullTbp::get()->map(function($item){ 
@@ -25,7 +28,8 @@ class DashboardAdminReportSearchController extends Controller
         return view('dashboard.admin.report.search.index')->withSearchgroups($searchgroups)
                                                         ->withFulltbps($fulltbbs)
                                                         ->withYears($years)
-                                                        ->withIndustrygroups($industrygroups);
+                                                        ->withIndustrygroups($industrygroups)
+                                                        ->withGrades($grades);
     }
 
     public function GetSearch(Request $request){

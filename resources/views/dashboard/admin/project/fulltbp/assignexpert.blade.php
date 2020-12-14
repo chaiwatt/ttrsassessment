@@ -94,6 +94,28 @@
 	</div>
 </div>
 
+<div id="modal_expert_workload" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Workload</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+                        <div class="form-group" id="expert_workload_wrapper">
+                        </div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				{{-- <button id="btn_modal_add_expert" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
+			</div>
+		</div>
+	</div>
+</div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -170,7 +192,9 @@
                                 <tbody id="expert_wrapper">
                                     @foreach ($expertassignments as $key => $expertassignment)
                                     <tr>    
-                                        <td class='userid' data-id='{{$expertassignment->user->id}}'> {{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</td> 
+                                        <td class='userid' data-id='{{$expertassignment->user->id}}'> 
+                                            <a type="button" class="text-info expertworkload" data-id="{{$expertassignment->user_id}}">{{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</a>
+                                        </td> 
                                         @if (Auth::user()->user_type_id == 6 )
                                             <td> <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$expertassignment->id}}" hidden></i><input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
                                         @endif

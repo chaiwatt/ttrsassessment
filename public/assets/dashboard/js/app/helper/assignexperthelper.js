@@ -1,46 +1,50 @@
 $(document).on('change', '#expert', function(e) {
+  console.log($(this).val());
     if($(this).val() == ''){
         $('#assignedproject').html('');
         return;
     }
     getExpert($(this).val()).then(data => {
+      console.log(data);
        var html = 'ยังไม่มีโครงการที่ได้รับมอบหมาย';
-        console.log(data.length);
+       
         if(data.length > 0){
+          
             html = `
             <div class="table-responsive">
             <strong>Work Load</strong>
             <table class="table table-striped">
             <thead>
-                <tr>    
-                    <th>โครงการ</th> 
-                    <th>สถานะ</th>     
-                    <th>การตอบรับ</th>                                                                
+                <tr>
+                    <th>โครงการ</th>
+                    <th>สถานะโครงการ</th>
+                    <th>การตอบรับ</th>
                 </tr>
             </thead>
             <tbody>`;
-            // console.log('html');
-            data.forEach(function (fulltbp,index) {
-                var status = fulltbp.minitbp.businessplan.businessplanstatus['name'];
-                if(fulltbp.minitbp.businessplan.finished == '1'){
+
+            data.forEach(function (expertassignment,index) {
+                var status = expertassignment.fulltbp.minitbp.businessplan.businessplanstatus['name'];
+                if(expertassignment.fulltbp.minitbp.businessplan.finished == '1'){
                     status = "ปิดโครงการ";
                 }
                 var acceptstatus = '';
-                if(fulltbp.expertassignment.accepted == 0){
+                if(expertassignment.accepted == 0){
                   acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;
-                }else if(fulltbp.expertassignment.accepted == 1){
+                }else if(expertassignment.accepted == 1){
                   acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
-                }else if(fulltbp.expertassignment.accepted == 2){
+                }else if(expertassignment.accepted == 2){
                   acceptstatus = `<span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>`;
                 }
+                
                 html += `<tr >                                        
-                    <td> ${fulltbp.minitbp['project']} </td>                                            
-                    <td> ${status} </td> 
+                    <td> ${expertassignment.fulltbp.minitbp['project']} </td>                                            
+                    <td><span class="badge badge-flat border-info text-info-600">${status}</span></td> 
                     <td> ${acceptstatus}</td>
                 </tr>`
             });
             html +=`</tbody></table></div>`;
-            console.log('html');
+            console.log(html);
         }
         $('#assignedproject').html(html);
     }).catch(error => {})
@@ -366,3 +370,52 @@ function notifyJD(users,fulltbpid){
         })
       })
   }
+
+  
+  $(document).on('click', '.expertworkload', function(e) {
+    getExpert($(this).data('id')).then(data => {
+      console.log(data);
+       var html = 'ยังไม่มีโครงการที่ได้รับมอบหมาย';
+       
+        if(data.length > 0){
+          
+            html = `
+            <div class="table-responsive">
+            <strong>Work Load</strong>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>โครงการ</th>
+                    <th>สถานะโครงการ</th>
+                    <th>การตอบรับ</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+            data.forEach(function (expertassignment,index) {
+                var status = expertassignment.fulltbp.minitbp.businessplan.businessplanstatus['name'];
+                if(expertassignment.fulltbp.minitbp.businessplan.finished == '1'){
+                    status = "ปิดโครงการ";
+                }
+                var acceptstatus = '';
+                if(expertassignment.accepted == 0){
+                  acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;
+                }else if(expertassignment.accepted == 1){
+                  acceptstatus = `<span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span>`;
+                }else if(expertassignment.accepted == 2){
+                  acceptstatus = `<span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>`;
+                }
+                
+                html += `<tr >                                        
+                    <td> ${expertassignment.fulltbp.minitbp['project']} </td>                                            
+                    <td><span class="badge badge-flat border-info text-info-600">${status}</span></td> 
+                    <td> ${acceptstatus}</td>
+                </tr>`
+            });
+            html +=`</tbody></table></div>`;
+            console.log(html);
+        }
+        $('#expert_workload_wrapper').html(html);
+        $('#modal_expert_workload').modal('show');
+    }).catch(error => {})
+  });

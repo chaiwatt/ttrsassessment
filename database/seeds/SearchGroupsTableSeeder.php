@@ -16,6 +16,9 @@ class SearchGroupsTableSeeder extends Seeder
                 'name' => 'ปีของโครงการ'
             ],
             [
+                'name' => 'เลขที่โครงการ/Mini TBP/Full Tbp'
+            ],
+            [
                 'name' => 'ชื่อโครงการ'
             ],
             [
@@ -27,9 +30,9 @@ class SearchGroupsTableSeeder extends Seeder
             [
                 'name' => 'เกรด'
             ],
-            [
-                'name' => 'เลขที่ใบรับรอง'
-            ],
+            // [
+            //     'name' => 'เลขที่ใบรับรอง'
+            // ],
             [
                 'name' => 'Leader'
             ],
@@ -37,13 +40,16 @@ class SearchGroupsTableSeeder extends Seeder
                 'name' => 'ผู้เชี่ยวชาญ'
             ],
             [
-                'name' => 'วันที่รับ Mini TBP'
+                'name' => 'แบบคำขอรับบริการประเมิน TTRS (Mini TBP)'
             ],
             [
-                'name' => 'วันที่รับ Full TBP'
+                'name' => 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)'
             ],
             [
                 'name' => 'วันที่ประเมิน'
+            ],
+            [
+                'name' => 'ทั้งหมด'
             ],
         ]);
     }

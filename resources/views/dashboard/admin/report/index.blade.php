@@ -158,7 +158,7 @@
                 <div class="card bg-teal-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h3>
+                            <h1 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h1>
                         </div>
                         <div>
                             จำนวนการยื่นขอประเมิน
@@ -179,7 +179,7 @@
                 <div class="card bg-blue-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h3>
+                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
                         </div>
                         
                         <div>
@@ -198,7 +198,7 @@
                 <div class="card bg-pink-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h3>
+                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
                         </div>
                         
                         <div>
@@ -216,7 +216,7 @@
                 <div class="card bg-orange-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',8)->count()}}</h3>
+                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',8)->count()}}</h1>
                         </div>
                         
                         <div>

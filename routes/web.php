@@ -390,6 +390,21 @@ Route::group(['middleware' => 'auth'], function(){
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin'], function(){
+            Route::group(['prefix' => 'search'], function(){
+                Route::group(['prefix' => 'project'], function(){
+                    Route::get('','DashboardAdminSearchProjectController@Index')->name('dashboard.admin.search.project');
+                });
+                Route::group(['prefix' => 'company'], function(){
+        
+                });
+                Route::group(['prefix' => 'expert'], function(){
+        
+                });
+                Route::group(['prefix' => 'officer'], function(){
+        
+                });
+            }); 
+
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardAdminReportController@Index')->name('dashboard.admin.report');           
                 Route::post('getevents','DashboardAdminReportController@GetEvent')->name('dashboard.admin.report.getevents'); 

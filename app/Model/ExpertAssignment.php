@@ -14,7 +14,7 @@ class ExpertAssignment extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
-    protected $appends = ['user','expertassignmentstatus','expertcomment'];
+    protected $appends = ['user','expertassignmentstatus','expertcomment','fulltbp'];
     public function getUserAttribute(){
         return User::find($this->user_id);
     }
@@ -25,5 +25,9 @@ class ExpertAssignment extends Model
 
     public function getExpertcommentAttribute(){
         return ExpertComment::where('full_tbp_id',$this->full_tbp_id)->where('user_id',$this->user_id)->first();
+    }
+
+    public function getFullTbpAttribute(){
+        return FullTbp::find($this->full_tbp_id);
     }
 }

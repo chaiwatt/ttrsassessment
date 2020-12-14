@@ -1,21 +1,33 @@
 
 
 $(document).on('change', '#searchgroup', function(e) {
-    if($(this).val() < 9){
+    console.log($(this).val());
+    if($(this).val() < 12){
         if($(this).val() == 1){
+            $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",false);
             $("#searchword_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchdate_wrapper").attr("hidden",true);
             $("#searchdate").val('');
-        }else if($(this).val() == 4){
+        }else if($(this).val() == 5){
+            $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",false);
             $("#searchdate_wrapper").attr("hidden",true);
+            $("#searchword_wrapper").attr("hidden",true);
             $("#searchdate").val('');
-        }else
-        {
+        }else if($(this).val() == 6){
+            $("#grage_wrapper").attr("hidden",false);
+            $("#searchyear_wrapper").attr("hidden",true);
+            $("#searchyear_wrapper").attr("hidden",true);
+            $("#searchindustrygroup_wrapper").attr("hidden",true);
+            $("#searchdate_wrapper").attr("hidden",true);
+            $("#searchword_wrapper").attr("hidden",true);
+            $("#searchdate").val('');
+        }else{
+            $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",false);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
@@ -23,6 +35,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchdate").val('');
         }
     }else{
+        $("#grade_wrapper").attr("hidden",true);
         $("#searchyear_wrapper").attr("hidden",true);
         $("#searchword_wrapper").attr("hidden",true);
         $("#searchindustrygroup_wrapper").attr("hidden",true);
