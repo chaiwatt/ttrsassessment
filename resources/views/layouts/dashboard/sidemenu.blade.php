@@ -132,7 +132,7 @@
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ค้นหา</span>
             @endif
         </a>
-        <ul class="nav nav-group-sub" data-submenu-title="ปฎิทิน">
+        <ul class="nav nav-group-sub" data-submenu-title="ค้นหา">
             <li class="nav-item"><a href="{{route('dashboard.admin.search.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.project')?'active':''}}">โครงการ</a></li>
             {{-- <li class="nav-item"><a href="{{route('setting.admin.dashboard.prefix')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.prefix')?'active':''}}">ผู้รับการประเมิน</a></li>
             <li class="nav-item"><a href="{{route('setting.admin.dashboard.prefix')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.prefix')?'active':''}}">ผู้เชี่ยวชาญ</a></li>
