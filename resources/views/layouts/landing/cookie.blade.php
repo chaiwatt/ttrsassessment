@@ -13,7 +13,7 @@
       </div>
       <div class="col-sm-2 mt-3">
          {{-- <a href="#" id="btn-cookie" class="  px-2 btn  btn-outline-secondary rounded-pill cookiealert">ตั้งค่าคุกกี้</a> --}}
-         <a href="#" class="px-2 btn  btn-primary rounded-pill btn-cookie acceptcookies">&nbsp; ตกลง &nbsp;</a>
+         <a href="#" class="px-2 btn  btn-primary rounded-pill btn-cookie acceptcookies" style="text-decoration:none" >&nbsp; ตกลง &nbsp;</a>
       </div>
     </div>
   </div>
