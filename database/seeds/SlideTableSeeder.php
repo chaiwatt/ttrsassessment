@@ -21,8 +21,8 @@ class SlideTableSeeder extends Seeder
                 // 'textengtwo' => 'TTRS, evaluation tool through which the commercial viability and risks associated for SMEs.',
                 // 'textthree' => 'เพิ่มเติม',
                 // 'textengthree' => 'Read More',
-                'name' => 'slide1.jpg',
-                'file' => '/assets/landing/img/slides/imgslide1.jpg',
+                'name' => 'slide1.png',
+                'file' => '/assets/landing/img/slides/slide1.png',
             ],
             [
                 // 'slide_status_id' => 1,
@@ -33,8 +33,8 @@ class SlideTableSeeder extends Seeder
                 // 'textengtwo' => 'Need more information, call 02-564-7000 ext 71752.',
                 // 'textthree' => 'เพิ่มเติม',
                 // 'textengthree' => 'Read More',
-                'name' => 'slide2.jpg',
-                'file' => '/assets/landing/img/slides/imgslide2.jpg',
+                'name' => 'slide2.png',
+                'file' => '/assets/landing/img/slides/slide2.png',
             ]
         ]);
     }
