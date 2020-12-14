@@ -12,7 +12,7 @@
                ข้อมูลเพิ่มเติมเกี่ยวกับการใช้คุกกี้ของเราผ่านทาง <a href="#" target="_blank" >'นโยบายคุกกี้'</a> และ <a href="#" target="_blank" > 'นโยบายความเป็นส่วนตัว'</a></p>  
       </div>
       <div class="col-sm-2 mt-3">
-         {{-- <a href="#" id="btn-cookie" class="  px-2 btn  btn-outline-secondary rounded-pill cookiealert">ตั้งค่าคุกกี้</a> --}}
+         {{-- <a href="#" id="btn-cookie" class="  px-2 btn  btn-outline-secondary rounded-pill">ตั้งค่าคุกกี้</a> --}}
          <a href="#" class="px-2 btn  btn-primary rounded-pill btn-cookie acceptcookies" style="text-decoration:none" >&nbsp; ตกลง &nbsp;</a>
       </div>
     </div>

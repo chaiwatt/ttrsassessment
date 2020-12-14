@@ -13,6 +13,7 @@ use Illuminate\View\View;
 use App\Model\PageCategory;
 use App\Model\WebsiteLayout;
 use App\Helper\GoogleCalendar;
+use App\Model\HomepageService;
 use App\Model\NotificationBubble;
 
 
@@ -33,6 +34,7 @@ class ShareComposer
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
         // $time = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
+        $homepageservices = HomepageService::get();
         $sharepages = Page::paginate(3);
         $sharefrontpage = FrontPage::first();
         $sharenotificationbubbles = NotificationBubble::where('target_user_id',@$auth->id)->where('status',0)->get();
@@ -46,6 +48,7 @@ class ShareComposer
             ->withSharepages($sharepages)
             ->withShareunreadmessages($shareunreadmessages)
             ->withSharenotificationbubbles($sharenotificationbubbles)
-            ->withSharefrontpage($sharefrontpage);
+            ->withSharefrontpage($sharefrontpage)
+            ->withHomepageservices($homepageservices);
     }
 }
