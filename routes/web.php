@@ -804,6 +804,14 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('','SettingAdminSystemController@Index')->name('setting.admin.system'); 
                     Route::post('save','SettingAdminSystemController@Save')->name('setting.admin.system.save'); 
                 });
+                Route::group(['prefix' => 'homepage'], function(){     
+                    Route::group(['prefix' => 'service'], function(){     
+                        Route::get('','SettingAdminWebsiteHomepageServiceController@Index')->name('setting.admin.website.homepage.service'); 
+                    });
+                    Route::group(['prefix' => 'pillar'], function(){     
+                        Route::get('','SettingAdminWebsiteHomepagePillarController@Index')->name('setting.admin.website.homepage.pillar'); 
+                    });
+                });
             }); 
             Route::group(['prefix' => 'user'], function(){
                 Route::get('','SettingAdminUserController@Index')->name('setting.admin.user');           

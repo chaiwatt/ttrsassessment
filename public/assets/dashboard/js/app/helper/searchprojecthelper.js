@@ -4,6 +4,8 @@ $(document).on('change', '#searchgroup', function(e) {
     console.log($(this).val());
     if($(this).val() < 12){
         if($(this).val() == 1){
+            $("#expert_wrapper").attr("hidden",true);
+            $("#leader_wrapper").attr("hidden",true);
             $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",false);
             $("#searchword_wrapper").attr("hidden",true);
@@ -11,30 +13,58 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchdate_wrapper").attr("hidden",true);
             $("#searchdate").val('');
         }else if($(this).val() == 5){
+            $("#expert_wrapper").attr("hidden",false);
+            $("#leader_wrapper").attr("hidden",true);
             $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",false);
             $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
-            $("#searchdate").val('');
+            // $("#searchdate").val('');
         }else if($(this).val() == 6){
+            $("#expert_wrapper").attr("hidden",false);
+            $("#leader_wrapper").attr("hidden",true);
             $("#grage_wrapper").attr("hidden",false);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
-            $("#searchdate").val('');
+            // $("#searchdate").val('');
+        }else if($(this).val() == 7){
+            $("#expert_wrapper").attr("hidden",false);
+            $("#leader_wrapper").attr("hidden",false);
+            $("#grage_wrapper").attr("hidden",true);
+            $("#searchyear_wrapper").attr("hidden",true);
+            $("#searchyear_wrapper").attr("hidden",true);
+            $("#searchindustrygroup_wrapper").attr("hidden",true);
+            $("#searchdate_wrapper").attr("hidden",true);
+            $("#searchword_wrapper").attr("hidden",true);
+            // $("#searchdate").val('');
+        }else if($(this).val() == 8){
+            $("#expert_wrapper").attr("hidden",false);
+            $("#leader_wrapper").attr("hidden",true);
+            $("#grage_wrapper").attr("hidden",true);
+            $("#searchyear_wrapper").attr("hidden",true);
+            $("#searchyear_wrapper").attr("hidden",true);
+            $("#searchindustrygroup_wrapper").attr("hidden",true);
+            $("#searchdate_wrapper").attr("hidden",true);
+            $("#searchword_wrapper").attr("hidden",true);
+            // $("#searchdate").val('');
         }else{
+            $("#expert_wrapper").attr("hidden",false);
+            $("#leader_wrapper").attr("hidden",true);
             $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",false);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchdate_wrapper").attr("hidden",true);
-            $("#searchdate").val('');
+            // $("#searchdate").val('');
         }
     }else{
+        $("#expert_wrapper").attr("hidden",false);
+        $("#leader_wrapper").attr("hidden",true);
         $("#grade_wrapper").attr("hidden",true);
         $("#searchyear_wrapper").attr("hidden",true);
         $("#searchword_wrapper").attr("hidden",true);
@@ -44,16 +74,15 @@ $(document).on('change', '#searchgroup', function(e) {
     }
 });
 
-$('#searchdate').bootstrapMaterialDatePicker({
-    format: 'DD/MM/YYYY HH:mm',
-    clearButton: true,
-    cancelText: "ยกเลิก",
-    okText: "ตกลง",
-    clearText: "เคลียร์",
-    time: false
-});
+// $('#searchdate').bootstrapMaterialDatePicker({
+//     format: 'DD/MM/YYYY HH:mm',
+//     clearButton: true,
+//     cancelText: "ยกเลิก",
+//     okText: "ตกลง",
+//     clearText: "เคลียร์",
+//     time: false
+// });
 $(document).on('change', '#searchyear', function(e) {
-    // console.log('ddd');
     search($('#searchgroup').val(),$(this).val()).then(data => {
         createTable(data);
     })
@@ -119,4 +148,10 @@ function createTable(data){
      $("#reportsearch_wrapper").html(html);
 }
 
+$(document).on('change', '#searchdate', function(e) {
+    search($('#searchgroup').val(),$(this).val()).then(data => {
+        createTable(data);
+    })
+    .catch(error => {})
+});
 
