@@ -112,14 +112,16 @@
                                         <tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($fulltbp->employeducation as $employeducation)
-                                            <tr>
-                                                <td>{{$employeducation->employeducationlevel}}</td>
-                                                <td>{{$employeducation->employeducationinstitute}}</td>
-                                                <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                <td>{{$employeducation->employeducationyear}}</td>
-                                            </tr>   
-                                        @endforeach
+                                        @if ($fulltbp->employeducation->count() > 0)
+                                            @foreach ($fulltbp->employeducation as $employeducation)
+                                                <tr>
+                                                    <td>{{$employeducation->employeducationlevel}}</td>
+                                                    <td>{{$employeducation->employeducationinstitute}}</td>
+                                                    <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
+                                                    <td>{{$employeducation->employeducationyear}}</td>
+                                                </tr>   
+                                            @endforeach   
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -138,16 +140,18 @@
                                         <tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($fulltbp->employexperience as $employexperience)
-                                            <tr>
-                                                <td>{{$employexperience->startdate}}</td>
-                                                <td>{{$employexperience->enddate}}</td>
-                                                <td>{{$employexperience->company}}</td>
-                                                <td>{{$employexperience->businesstype}}</td>
-                                                <td>{{$employexperience->startposition}}</td>
-                                                <td>{{$employexperience->endposition}}</td>
-                                            </tr>   
-                                        @endforeach
+                                        @if ($fulltbp->employexperience->count() > 0)
+                                            @foreach ($fulltbp->employexperience as $employexperience)
+                                                <tr>
+                                                    <td>{{$employexperience->startdate}}</td>
+                                                    <td>{{$employexperience->enddate}}</td>
+                                                    <td>{{$employexperience->company}}</td>
+                                                    <td>{{$employexperience->businesstype}}</td>
+                                                    <td>{{$employexperience->startposition}}</td>
+                                                    <td>{{$employexperience->endposition}}</td>
+                                                </tr>   
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div> 
@@ -163,104 +167,114 @@
                                         <tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($fulltbp->employtraining as $employtraining)
-                                            <tr>
-                                                <td>{{$employtraining->trainingdate}}</td>
-                                                <td>{{$employtraining->course}}</td>
-                                                <td>{{$employtraining->owner}}</td>
-                                            </tr>   
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>  
-                        @endif
-                    </div>
-                    <div class="ml20 mt20"><strong>1.11 ข้อมูลทีมบริหาร (CTO, CFO, COO, และ CMO)</strong>
-                        @foreach ($companyboards as $key => $companyemboard)
-                            @if ($companyboards->count() > 1)
-                                <div class="ml30 mt10"><strong><u>ลำดับที่ {{$key +1}}</u></strong></div>
-                            @endif
-                            <div class="ml30 mt0">ชื่อ-นามสกุล : {{$companyemboard->prefix->name}}{{$companyemboard->name}} {{$companyemboard->lastname}}</div>
-                            <div class="ml30 mt0">ตำแหน่ง : {{$companyemboard->employposition->name}}</div>
-                            <div class="ml30 mt0">โทรศัพท์ : {{$companyemboard->workphone}}</div>
-                            <div class="ml30 mt0">โทรศัพท์มือถือ : {{$companyemboard->phone}}</div>
-                            <div class="ml30 mt0">อีเมล : {{$companyemboard->email}}</div>
-
-                            @if ($companyemboard->employeducation->count() > 0)
-                                <div class="ml30 mt20"><strong>ประวัติการศึกษา</strong>
-                                    <table class="mt5 font14 border tbwrap" >
-                                        <thead>
-                                            <tr>
-                                                <th style="width:25%">ระดับ</th>
-                                                <th style="width:35%">ชื่อสถานศึกษา</th>
-                                                <th style="width:20%">สาขาวิชาเอก</th>
-                                                <th style="width:20%">ปีที่ศึกษา<pre>(เริ่มต้น-สิ้นสุด)</pre></th>
-                                            <tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($companyemboard->employeducation as $employeducation)
-                                                <tr>
-                                                    <td>{{$employeducation->employeducationlevel}}</td>
-                                                    <td>{{$employeducation->employeducationinstitute}}</td>
-                                                    <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                    <td>{{$employeducation->employeducationyear}}</td>
-                                                </tr>   
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                            @if ($companyemboard->employexperience->count() > 0)
-                                <div class="ml30 mt20"><strong>ประวัติการทำงาน</strong>
-                                    <table class="mt5 font14 tbwrap" >
-                                        <thead>
-                                            <tr>
-                                                <th >เริ่มต้น</th>
-                                                <th >สิ้นสุด</th>
-                                                <th >บริษัท</th>
-                                                <th >ประเภทธุรกิจ</th>
-                                                <th style="width:20%">ตำแหน่งแรกเข้า</th>
-                                                <th style="width:20%">ตำแหน่งล่าสุด</th>
-                                            <tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($companyemboard->employexperience as $employexperience)
-                                                <tr>
-                                                    <td>{{$employexperience->startdate}}</td>
-                                                    <td>{{$employexperience->enddate}}</td>
-                                                    <td>{{$employexperience->company}}</td>
-                                                    <td>{{$employexperience->businesstype}}</td>
-                                                    <td>{{$employexperience->startposition}}</td>
-                                                    <td>{{$employexperience->endposition}}</td>
-                                                </tr>   
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                            @if ($companyemboard->employtraining->count() > 0)
-                                <div class="ml30 mt20"><strong>ประวัติการฝึกอบรม</strong>
-                                    <table class="mt5 font14 border tbwrap" >
-                                        <thead>
-                                            <tr>
-                                                <th style="width:25%">วัน เดือน ปี</th>
-                                                <th >หลักสูตร</th>
-                                                <th style="width:20%">หน่วยงานผู้จัด</th>
-                                            <tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($companyemboard->employtraining as $employtraining)
+                                        @if ($fulltbp->employtraining->count() > 0)
+                                            @foreach ($fulltbp->employtraining as $employtraining)
                                                 <tr>
                                                     <td>{{$employtraining->trainingdate}}</td>
                                                     <td>{{$employtraining->course}}</td>
                                                     <td>{{$employtraining->owner}}</td>
                                                 </tr>   
                                             @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>  
-                            @endif
-                        @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>  
+                        @endif
+                    </div>
+                    <div class="ml20 mt20"><strong>1.11 ข้อมูลทีมบริหาร (CTO, CFO, COO, และ CMO)</strong>
+                        @if ($companyboards->count() > 0)
+                            @foreach ($companyboards as $key => $companyemboard)
+                                @if ($companyboards->count() > 1)
+                                    <div class="ml30 mt10"><strong><u>ลำดับที่ {{$key +1}}</u></strong></div>
+                                @endif
+                                <div class="ml30 mt0">ชื่อ-นามสกุล : {{$companyemboard->prefix->name}}{{$companyemboard->name}} {{$companyemboard->lastname}}</div>
+                                <div class="ml30 mt0">ตำแหน่ง : {{$companyemboard->employposition->name}}</div>
+                                <div class="ml30 mt0">โทรศัพท์ : {{$companyemboard->workphone}}</div>
+                                <div class="ml30 mt0">โทรศัพท์มือถือ : {{$companyemboard->phone}}</div>
+                                <div class="ml30 mt0">อีเมล : {{$companyemboard->email}}</div>
+
+                                @if ($companyemboard->employeducation->count() > 0)
+                                    <div class="ml30 mt20"><strong>ประวัติการศึกษา</strong>
+                                        <table class="mt5 font14 border tbwrap" >
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:25%">ระดับ</th>
+                                                    <th style="width:35%">ชื่อสถานศึกษา</th>
+                                                    <th style="width:20%">สาขาวิชาเอก</th>
+                                                    <th style="width:20%">ปีที่ศึกษา<pre>(เริ่มต้น-สิ้นสุด)</pre></th>
+                                                <tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($companyemboard->employeducation->count() > 0)
+                                                    @foreach ($companyemboard->employeducation as $employeducation)
+                                                        <tr>
+                                                            <td>{{$employeducation->employeducationlevel}}</td>
+                                                            <td>{{$employeducation->employeducationinstitute}}</td>
+                                                            <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
+                                                            <td>{{$employeducation->employeducationyear}}</td>
+                                                        </tr>   
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                                @if ($companyemboard->employexperience->count() > 0)
+                                    <div class="ml30 mt20"><strong>ประวัติการทำงาน</strong>
+                                        <table class="mt5 font14 tbwrap" >
+                                            <thead>
+                                                <tr>
+                                                    <th >เริ่มต้น</th>
+                                                    <th >สิ้นสุด</th>
+                                                    <th >บริษัท</th>
+                                                    <th >ประเภทธุรกิจ</th>
+                                                    <th style="width:20%">ตำแหน่งแรกเข้า</th>
+                                                    <th style="width:20%">ตำแหน่งล่าสุด</th>
+                                                <tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($companyemboard->employexperience->count() > 0)
+                                                    @foreach ($companyemboard->employexperience as $employexperience)
+                                                        <tr>
+                                                            <td>{{$employexperience->startdate}}</td>
+                                                            <td>{{$employexperience->enddate}}</td>
+                                                            <td>{{$employexperience->company}}</td>
+                                                            <td>{{$employexperience->businesstype}}</td>
+                                                            <td>{{$employexperience->startposition}}</td>
+                                                            <td>{{$employexperience->endposition}}</td>
+                                                        </tr>   
+                                                    @endforeach 
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                                @if ($companyemboard->employtraining->count() > 0)
+                                    <div class="ml30 mt20"><strong>ประวัติการฝึกอบรม</strong>
+                                        <table class="mt5 font14 border tbwrap" >
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:25%">วัน เดือน ปี</th>
+                                                    <th >หลักสูตร</th>
+                                                    <th style="width:20%">หน่วยงานผู้จัด</th>
+                                                <tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($companyemboard->employtraining->count() > 0)
+                                                    @foreach ($companyemboard->employtraining as $employtraining)
+                                                        <tr>
+                                                            <td>{{$employtraining->trainingdate}}</td>
+                                                            <td>{{$employtraining->course}}</td>
+                                                            <td>{{$employtraining->owner}}</td>
+                                                        </tr>   
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                     <div class="ml20 mt20"><strong>1.12 บัญชีรายชื่อผู้ถือหุ้น</strong>
                         <table class="ml30 mt5 font14 tbwrap" >
@@ -271,101 +285,114 @@
                                 <tr>
                             </thead>
                             <tbody>
-                                @foreach ($companystockholders as $key => $companystockholder)
-                                    <tr>
-                                        <td>{{$companystockholder->companyemploy->prefix->name}}{{$companystockholder->companyemploy->name}} {{$companystockholder->companyemploy->lastname}}</td>
-                                        <td>{{$companystockholder->relationwithceo}}</td>
-                                    </tr>   
-                                @endforeach
+                                @if ($companystockholders->count() > 0)
+                                    @foreach ($companystockholders as $key => $companystockholder)
+                                        <tr>
+                                            <td>{{$companystockholder->companyemploy->prefix->name}}{{$companystockholder->companyemploy->name}} {{$companystockholder->companyemploy->lastname}}</td>
+                                            <td>{{$companystockholder->relationwithceo}}</td>
+                                        </tr>   
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
                     <div class="ml20 mt20"><strong>1.13 ข้อมูลพนักงานด้านการวิจัย พัฒนา การผลิต และวิศวกรรม </strong>
-                        @foreach ($companyemploys as $key => $companyemploy)
-                            @if ($companyemploys->count() > 1)
-                                <div class="ml30 mt10"><strong><u>ลำดับที่ {{$key +1}}</u></strong></div>
-                            @endif
-                            <div class="ml30 mt0">ชื่อ-นามสกุล : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</div>
-                            <div class="ml30 mt0">ตำแหน่ง : {{$companyemploy->employposition->name}}</div>
-                            <div class="ml30 mt0">โทรศัพท์ : {{$companyemploy->workphone}}</div>
-                            <div class="ml30 mt0">โทรศัพท์มือถือ : {{$companyemploy->phone}}</div>
-                            <div class="ml30 mt0">อีเมล : {{$companyemploy->email}}</div>
+                        @if ($companyemploys->count() > 0)
+                            @foreach ($companyemploys as $key => $companyemploy)
+                                @if ($companyemploys->count() > 1)
+                                    <div class="ml30 mt10"><strong><u>ลำดับที่ {{$key +1}}</u></strong></div>
+                                @endif
+                                <div class="ml30 mt0">ชื่อ-นามสกุล : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</div>
+                                <div class="ml30 mt0">ตำแหน่ง : {{$companyemploy->employposition->name}}</div>
+                                <div class="ml30 mt0">โทรศัพท์ : {{$companyemploy->workphone}}</div>
+                                <div class="ml30 mt0">โทรศัพท์มือถือ : {{$companyemploy->phone}}</div>
+                                <div class="ml30 mt0">อีเมล : {{$companyemploy->email}}</div>
 
-                            @if ($companyemploy->employeducation->count() > 0)
-                                <div class="ml30 mt20"><strong>ประวัติการศึกษา</strong>
-                                    <table class="mt5 font14 border tbwrap" >
-                                        <thead>
-                                            <tr>
-                                                <th style="width:25%">ระดับ</th>
-                                                <th style="width:35%">ชื่อสถานศึกษา</th>
-                                                <th style="width:20%">สาขาวิชาเอก</th>
-                                                <th style="width:20%">ปีที่ศึกษา<pre>(เริ่มต้น-สิ้นสุด)</pre></th>
-                                            <tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($companyemploy->employeducation as $employeducation)
+                                @if ($companyemploy->employeducation->count() > 0)
+                                    <div class="ml30 mt20"><strong>ประวัติการศึกษา</strong>
+                                        <table class="mt5 font14 border tbwrap" >
+                                            <thead>
                                                 <tr>
-                                                    <td>{{$employeducation->employeducationlevel}}</td>
-                                                    <td>{{$employeducation->employeducationinstitute}}</td>
-                                                    <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                    <td>{{$employeducation->employeducationyear}}</td>
-                                                </tr>   
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                            @if ($companyemploy->employexperience->count() > 0)
-                                <div class="ml30 mt20"><strong>ประวัติการทำงาน</strong>
-                                    <table class="mt5 font14 tbwrap" >
-                                        <thead>
-                                            <tr>
-                                                <th >เริ่มต้น</th>
-                                                <th >สิ้นสุด</th>
-                                                <th >บริษัท</th>
-                                                <th >ประเภทธุรกิจ</th>
-                                                <th style="width:20%">ตำแหน่งแรกเข้า</th>
-                                                <th style="width:20%">ตำแหน่งล่าสุด</th>
-                                            <tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($companyemploy->employexperience as $employexperience)
+                                                    <th style="width:25%">ระดับ</th>
+                                                    <th style="width:35%">ชื่อสถานศึกษา</th>
+                                                    <th style="width:20%">สาขาวิชาเอก</th>
+                                                    <th style="width:20%">ปีที่ศึกษา<pre>(เริ่มต้น-สิ้นสุด)</pre></th>
                                                 <tr>
-                                                    <td>{{$employexperience->startdate}}</td>
-                                                    <td>{{$employexperience->enddate}}</td>
-                                                    <td>{!!$provider::FixBreak($employexperience->company)!!}</td>
-                                                    <td>{{$employexperience->businesstype}}</td>
-                                                    <td>{{$employexperience->startposition}}</td>
-                                                    <td>{{$employexperience->endposition}}</td>
-                                                </tr>   
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                            @if ($companyemploy->employtraining->count() > 0)
-                                <div class="ml30 mt20"><strong>ประวัติการฝึกอบรม</strong>
-                                    <table class="mt5 font14 border tbwrap" >
-                                        <thead>
-                                            <tr>
-                                                <th style="width:25%">วัน เดือน ปี</th>
-                                                <th >หลักสูตร</th>
-                                                <th style="width:20%">หน่วยงานผู้จัด</th>
-                                            <tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($companyemploy->employtraining as $employtraining)
+                                            </thead>
+                                            <tbody>
+                                                @if ($companyemploy->employeducation->count() > 0)
+                                                    @foreach ($companyemploy->employeducation as $employeducation)
+                                                        <tr>
+                                                            <td>{{$employeducation->employeducationlevel}}</td>
+                                                            <td>{{$employeducation->employeducationinstitute}}</td>
+                                                            <td>{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
+                                                            <td>{{$employeducation->employeducationyear}}</td>
+                                                        </tr>   
+                                                    @endforeach
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                                @if ($companyemploy->employexperience->count() > 0)
+                                    <div class="ml30 mt20"><strong>ประวัติการทำงาน</strong>
+                                        <table class="mt5 font14 tbwrap" >
+                                            <thead>
                                                 <tr>
-                                                    <td>{{$employtraining->trainingdate}}</td>
-                                                    <td>{{$employtraining->course}}</td>
-                                                    <td>{{$employtraining->owner}}</td>
-                                                </tr>   
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>  
-                            @endif
-                        @endforeach
+                                                    <th >เริ่มต้น</th>
+                                                    <th >สิ้นสุด</th>
+                                                    <th >บริษัท</th>
+                                                    <th >ประเภทธุรกิจ</th>
+                                                    <th style="width:20%">ตำแหน่งแรกเข้า</th>
+                                                    <th style="width:20%">ตำแหน่งล่าสุด</th>
+                                                <tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($companyemploy->employexperience->count() > 0)
+                                                    @foreach ($companyemploy->employexperience as $employexperience)
+                                                        <tr>
+                                                            <td>{{$employexperience->startdate}}</td>
+                                                            <td>{{$employexperience->enddate}}</td>
+                                                            <td>{!!$provider::FixBreak($employexperience->company)!!}</td>
+                                                            <td>{{$employexperience->businesstype}}</td>
+                                                            <td>{{$employexperience->startposition}}</td>
+                                                            <td>{{$employexperience->endposition}}</td>
+                                                        </tr>   
+                                                    @endforeach  
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                                @if ($companyemploy->employtraining->count() > 0)
+                                    <div class="ml30 mt20"><strong>ประวัติการฝึกอบรม</strong>
+                                        <table class="mt5 font14 border tbwrap" >
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:25%">วัน เดือน ปี</th>
+                                                    <th >หลักสูตร</th>
+                                                    <th style="width:20%">หน่วยงานผู้จัด</th>
+                                                <tr>
+                                            </thead>
+                                            <tbody>
+                                                @if ($companyemploy->employtraining->count() > 0)
+                                                    @foreach ($companyemploy->employtraining as $employtraining)
+                                                        <tr>
+                                                            <td>{{$employtraining->trainingdate}}</td>
+                                                            <td>{{$employtraining->course}}</td>
+                                                            <td>{{$employtraining->owner}}</td>
+                                                        </tr>   
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                @endif
+                            @endforeach
+                        @endif
+
                     </div>
 
                     <div class="ml20 mt20"><strong>1.14 ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong>
@@ -479,21 +506,23 @@
                             </tr>
                         </thead>
                         <tbody id="fulltbp_projectplan_wrapper_tr">    
-                            @foreach ($fulltbp->fulltbpprojectplan as $fulltbpprojectplan)
-                                <tr >                                        
-                                    <td> {{$fulltbpprojectplan->name}} </td> 
-                                    @for ($i = 1; $i <= 12; $i++)
-                                        @php
-                                            $color = 'white';
-                                            $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
-                                            if (!Empty($check)) {
-                                                $color = 'grey';
-                                            }
-                                        @endphp
-                                        <td style="background-color:{{$color}}"> </td> 
-                                    @endfor															
-                                </tr>
-                            @endforeach                            
+                            @if ($fulltbp->fulltbpprojectplan->count() > 0)
+                                @foreach ($fulltbp->fulltbpprojectplan as $fulltbpprojectplan)
+                                    <tr >                                        
+                                        <td> {{$fulltbpprojectplan->name}} </td> 
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            @php
+                                                $color = 'white';
+                                                $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+                                                if (!Empty($check)) {
+                                                    $color = 'grey';
+                                                }
+                                            @endphp
+                                            <td style="background-color:{{$color}}"> </td> 
+                                        @endfor															
+                                    </tr>
+                                @endforeach   
+                            @endif                         
                         </tbody>
                     </table>
                 </div>

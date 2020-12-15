@@ -260,7 +260,6 @@
                 }
                 return "";
             }
-
         </script>	
     @stop
 
