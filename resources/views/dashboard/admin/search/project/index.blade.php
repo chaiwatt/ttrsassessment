@@ -94,8 +94,8 @@
                                     </select>
                                 </div>  
                                 <div id="expert_wrapper" class="col-md-6" hidden>
-                                    <label>Leader</label><span class="text-danger">*</span>
-                                    <select name="searchexpert" id="searchexpert" data-placeholder="expert" class="form-control form-control-select2">
+                                    <label>ผู้เชี่ยวชาญ</label><span class="text-danger">*</span>
+                                    <select name="searchexpert" id="searchexpert" data-placeholder="ผู้เชี่ยวชาญ" class="form-control form-control-select2">
                                         @foreach ($experts as $expert)
                                             <option value="{{$expert->id}}">{{$expert->name}} {{$expert->lastname}}</option> 
                                         @endforeach

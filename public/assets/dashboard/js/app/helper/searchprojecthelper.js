@@ -2,7 +2,7 @@
 
 $(document).on('change', '#searchgroup', function(e) {
     console.log($(this).val());
-    if($(this).val() < 12){
+    // if($(this).val() < 12){
         if($(this).val() == 1){
             $("#expert_wrapper").attr("hidden",true);
             $("#leader_wrapper").attr("hidden",true);
@@ -13,7 +13,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchdate_wrapper").attr("hidden",true);
             $("#searchdate").val('');
         }else if($(this).val() == 5){
-            $("#expert_wrapper").attr("hidden",false);
+            $("#expert_wrapper").attr("hidden",true);
             $("#leader_wrapper").attr("hidden",true);
             $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
@@ -23,7 +23,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchword_wrapper").attr("hidden",true);
             // $("#searchdate").val('');
         }else if($(this).val() == 6){
-            $("#expert_wrapper").attr("hidden",false);
+            $("#expert_wrapper").attr("hidden",true);
             $("#leader_wrapper").attr("hidden",true);
             $("#grage_wrapper").attr("hidden",false);
             $("#searchyear_wrapper").attr("hidden",true);
@@ -33,7 +33,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchword_wrapper").attr("hidden",true);
             // $("#searchdate").val('');
         }else if($(this).val() == 7){
-            $("#expert_wrapper").attr("hidden",false);
+            $("#expert_wrapper").attr("hidden",true);
             $("#leader_wrapper").attr("hidden",false);
             $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
@@ -53,7 +53,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchword_wrapper").attr("hidden",true);
             // $("#searchdate").val('');
         }else{
-            $("#expert_wrapper").attr("hidden",false);
+            $("#expert_wrapper").attr("hidden",true);
             $("#leader_wrapper").attr("hidden",true);
             $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",true);
@@ -62,16 +62,16 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchdate_wrapper").attr("hidden",true);
             // $("#searchdate").val('');
         }
-    }else{
-        $("#expert_wrapper").attr("hidden",false);
-        $("#leader_wrapper").attr("hidden",true);
-        $("#grade_wrapper").attr("hidden",true);
-        $("#searchyear_wrapper").attr("hidden",true);
-        $("#searchword_wrapper").attr("hidden",true);
-        $("#searchindustrygroup_wrapper").attr("hidden",true);
-        $("#searchdate_wrapper").attr("hidden",false);
-        $("#searchword").val('');
-    }
+    // }else{
+    //     $("#expert_wrapper").attr("hidden",false);
+    //     $("#leader_wrapper").attr("hidden",true);
+    //     $("#grade_wrapper").attr("hidden",true);
+    //     $("#searchyear_wrapper").attr("hidden",true);
+    //     $("#searchword_wrapper").attr("hidden",true);
+    //     $("#searchindustrygroup_wrapper").attr("hidden",true);
+    //     $("#searchdate_wrapper").attr("hidden",false);
+    //     $("#searchword").val('');
+    // }
 });
 
 // $('#searchdate').bootstrapMaterialDatePicker({
