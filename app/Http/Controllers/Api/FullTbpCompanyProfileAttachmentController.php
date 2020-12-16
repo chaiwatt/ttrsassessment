@@ -15,10 +15,10 @@ class FullTbpCompanyProfileAttachmentController extends Controller
         $filelocation = "storage/uploads/fulltbp/companyprofile/attachment/".$new_name;
         $fulltbpcompanyprofileattachment = new FullTbpCompanyProfileAttachment();
         $fulltbpcompanyprofileattachment->full_tbp_id = $request->id;
-        $fulltbpcompanyprofileattachment->name = $file->getClientOriginalName();;
+        $fulltbpcompanyprofileattachment->name = $request->companydocname;
         $fulltbpcompanyprofileattachment->path = $filelocation;
         $fulltbpcompanyprofileattachment->save();
-        $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$request->id)->get();
+        $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$request->id)->orderBy('id','desc')->get();
         return response()->json($fulltbpcompanyprofileattachments); 
     }
     public function Delete(Request $request){
@@ -27,7 +27,7 @@ class FullTbpCompanyProfileAttachmentController extends Controller
         $fulltbpid = $fulltbpcompanyprofileattachment->full_tbp_id;
         @unlink($fulltbpcompanyprofileattachment->path);
         $fulltbpcompanyprofileattachment->delete();
-        $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbpid)->get();
+        $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
         return response()->json($fulltbpcompanyprofileattachments); 
     }
 }

@@ -35,17 +35,55 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
 });
 
 // $("#attachment").on('change', function() {
-$(document).on('change', '#attachment', function(e) {
-    console.log($(this).data('id'));
-    var file = this.files[0];
+// $(document).on('change', '#attachment', function(e) {
+//     console.log($(this).data('id'));
+//     var file = this.files[0];
 
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+//     if (this.files[0].size/1024/1024*1000 > 1000 ){
+//         alert('ไฟล์ขนาดมากกว่า 1 MB');
+//         return ;
+//     }
+//     var formData = new FormData();
+//     formData.append('file',file);
+//     formData.append('id',$(this).data('id'));
+//         $.ajax({
+//             url: `${route.url}/api/fulltbp/companyprofile/attachement/add`,  //Server script to process data
+//             type: 'POST',
+//             headers: {"X-CSRF-TOKEN":route.token},
+//             data: formData,
+//             contentType: false,
+//             processData: false,
+//             success: function(data){
+//                 console.log(data)
+//                 var html = ``;
+//                 data.forEach(function (attachment,index) {
+//                     html += `<tr >                                        
+//                         <td> ${attachment.name} </td>                                            
+//                         <td> 
+//                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+//                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+//                         </td>
+//                     </tr>`
+//                     });
+//                  $("#fulltbp_companyprofile_attachment_wrapper_tr").html(html);
+//         }
+//     });
+
+// });
+
+$("#companygeneraldoc").on('change', function() {
+    if($('#companydocname').val() == '')return ;
+    var file = this.files[0];
+    console.log(file);
+ 
+    if (this.files[0].size/1024/1024*1000 > 2000 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
+    formData.append('companydocname',$('#companydocname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/companyprofile/attachement/add`,  //Server script to process data
             type: 'POST',
@@ -66,10 +104,13 @@ $(document).on('change', '#attachment', function(e) {
                     </tr>`
                     });
                  $("#fulltbp_companyprofile_attachment_wrapper_tr").html(html);
+                 $('#modal_add_companydoc').modal('hide');
         }
     });
-
 });
+
+
+
 
 $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
     Swal.fire({

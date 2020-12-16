@@ -563,7 +563,7 @@ class DashboardAdminProjectFullTbpController extends Controller
 
     public function FinishProject($id){
         FullTbp::find($id)->update([
-            'status' => 2
+            'status' => 3
         ]);
 
         $auth = Auth::user();

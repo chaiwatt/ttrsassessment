@@ -23,7 +23,8 @@ class DashboardAdminReportController extends Controller
     }
     public function Index(){
         $auth = Auth::user();
-        $fulltbps = FullTbp::where('status',1)->get();
+        $fulltbps = FullTbp::get();
+        // return $fulltbps;
         if($auth->user_type_id == 4){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
@@ -38,6 +39,8 @@ class DashboardAdminReportController extends Controller
         $businessplans = BusinessPlan::get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->get();
+
+        
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
                                                 ->withAlertmessages($alertmessages)

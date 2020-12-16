@@ -88,7 +88,7 @@
                                             </div>
                                         </td> 
                                         <td> 
-                                           @if ($fulltbp->status == 1)
+                                           @if ($fulltbp->status != 3)
                                                 <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-teal">สิ้นสุดโครงการ</a>
                                                @else
                                                 <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>

@@ -1127,7 +1127,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเอกสารสำคัญ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเอกสารแนบข้อมูลทั่วไป</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -1140,9 +1140,9 @@
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >แนบเอกสาร</button>													
+							<button class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companygeneraldoc').click();" >แนบเอกสาร</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc"/>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="companygeneraldoc" name="companygeneraldoc"/>
 					</div>
 				</div>
 			</div>           
@@ -1542,13 +1542,14 @@
 																	{{-- <label for="">เอกสารแนบข้อมูลทั่วไป </label>
 																	<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p> --}}
 
-																	<label for="">เอกสารแนบข้อมูลทั่วไป </label> <a type="button" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add text-info"></i></a>
-																	
+																	<label for="">เอกสารแนบข้อมูลทั่วไป </label> 
+																	{{-- <a type="button" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add text-info"></i></a> --}}
+																	<a type="button" class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add text-info"></i></a> 
 																	
 
 																</div>
 																<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
-																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/>
+																{{-- <input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/> --}}
 															</div>
 														</div>			
 														<div class="row">	
@@ -1566,7 +1567,7 @@
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
-																			@foreach ($fulltbpcompanyprofileattachments as $fulltbpcompanyprofileattachment)
+																			@foreach ($fulltbpcompanyprofileattachments->reverse() as $fulltbpcompanyprofileattachment)
 																				<tr >                                        
 																					<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
 																					<td> 
@@ -1988,7 +1989,7 @@
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
-																		@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
+																		@foreach ($fulltbpprojecttechdevlevels->reverse() as $fulltbpprojecttechdevlevel)
 																			<tr >                                        
 																				<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																				<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
@@ -2220,7 +2221,7 @@
 																				</tr>
 																			</thead>
 																			<tbody id="fulltbp_certify_wrapper_tr">    
-																				@foreach ($fulltbpprojectcertifyattachments as $fulltbpprojectcertifyattachment)
+																				@foreach ($fulltbpprojectcertifyattachments->reverse() as $fulltbpprojectcertifyattachment)
 																					<tr >                                        
 																						<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
 																						<td> 
@@ -2261,7 +2262,7 @@
 																				</tr>
 																			</thead>
 																			<tbody id="fulltbp_award_wrapper_tr">    
-																				@foreach ($fulltbpprojectawardattachments as $fulltbpprojectawardattachment)
+																				@foreach ($fulltbpprojectawardattachments->reverse() as $fulltbpprojectawardattachment)
 																					<tr>                                        
 																						<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
 																						<td> 
@@ -2309,7 +2310,7 @@
 																				</tr>
 																			</thead>
 																			<tbody id="fulltbp_standard_wrapper_tr">    
-																				@foreach ($fulltbpprojectstandards as $fulltbpprojectstandard)
+																				@foreach ($fulltbpprojectstandards->reverse() as $fulltbpprojectstandard)
 																					<tr >                                        
 																						<td> {{$fulltbpprojectstandard->name}} </td>                                            
 																						<td> 
@@ -2460,7 +2461,7 @@
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_businessmodelcanvas_wrapper_tr">    
-																		@foreach ($fullTbpmarketattachmentmodelcanvases as $fullTbpmarketattachmentmodelcanvas)
+																		@foreach ($fullTbpmarketattachmentmodelcanvases->reverse() as $fullTbpmarketattachmentmodelcanvas)
 																			<tr >                                        
 																				<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
 																				<td> 
@@ -2501,7 +2502,7 @@
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_swot_wrapper_tr">    
-																			@foreach ($fullTbpmarketattachmentswots as $fullTbpmarketattachmentswot)
+																			@foreach ($fullTbpmarketattachmentswots->reverse() as $fullTbpmarketattachmentswot)
 																				<tr >                                        
 																					<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
 																					<td> 
