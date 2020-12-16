@@ -16,8 +16,10 @@
           
           <div class="social-links float-right" >
             @if (!Auth::check())
-              <a href="{{route('login')}}" class="linkedin sarabun" style="text-decoration: none"><i class="icofont-login"></i> {{trans('lang.login')}}</a>
-              <a href="{{route('register')}}" class="linkedin sarabun" style="text-decoration: none"><i class="icofont-address-book"></i> {{trans('lang.register')}}</a>
+              {{-- <a href="{{route('login')}}" class="linkedin sarabun" style="text-decoration: none"><i class="icofont-login"></i> {{trans('lang.login')}}</a> --}}
+              {{-- <a href="{{route('register')}}" class="linkedin sarabun" style="text-decoration: none"><i class="icofont-address-book"></i> {{trans('lang.register')}}</a> --}}
+              <a href="{{url('login')}}" class="linkedin sarabun" style="text-decoration: none"><i class="icofont-login"></i> {{trans('lang.login')}}</a>
+              <a href="{{url('register')}}" class="linkedin sarabun" style="text-decoration: none"><i class="icofont-address-book"></i> {{trans('lang.register')}}</a>
             @else
               <a href="{{route('logout')}}" class="linkedin sarabun" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icofont-logout"></i> {{trans('lang.signout')}}</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
