@@ -229,14 +229,10 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         if(!Empty($minitbp->attachment)){
             @unlink($minitbp->attachment);
         }
-        $attachementdir = public_path("storage/uploads/pdf/attachment/");
-        if (!file_exists($attachementdir)) {
-            mkdir($attachementdir, 0777, true);
-        }
         $file = $request->attachment;
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-        $file->move("storage/uploads/pdf/attachment" , $new_name);
-        $filelocation = "storage/uploads/pdf/attachment/".$new_name;
+        $file->move("storage/uploads/company/attachment" , $new_name);
+        $filelocation = "storage/uploads/company/attachment/".$new_name;
         $minitbp->update([
             'attachment' => $filelocation
         ]);
