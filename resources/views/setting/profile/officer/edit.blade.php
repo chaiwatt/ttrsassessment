@@ -440,8 +440,9 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ประเภทผู้เชี่ยวชาญ<span class="text-danger">*</span></label>
+													{{$officer->user_group_id}}
 													{{-- <input type="text"  name="experttype" value="{{$officer->user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly> --}}
-													<input type="text"  name="experttype" value=""  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly>
+													<input type="text"  name="experttype" value="{{$user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">  

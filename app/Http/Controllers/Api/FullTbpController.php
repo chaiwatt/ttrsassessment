@@ -43,8 +43,8 @@ class FullTbpController extends Controller
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
         $ceo = CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id',1)->first();
-        $companyboards = CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id','<=',5)->where('id','!=',$ceo->id)->get();
-        $companyemploys = CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id','>',5)->where('id','!=',$ceo->id)->get();
+        $companyboards = CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id','<=',5)->where('id','!=',@$ceo->id)->get();
+        $companyemploys = CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id','>',5)->where('id','!=',@$ceo->id)->get();
         $companyhistory = $segment->get_segment_array($company->companyhistory);
         $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();
         $data = [
