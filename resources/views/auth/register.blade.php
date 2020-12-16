@@ -152,7 +152,7 @@
                     <div class="form-group d-flex align-items-center">
                         <a href="#" data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
                     </div>
-                    <input id="user_type" type="text" class="form-control" name="user_type" value="1" hidden>
+                    <input id="user_type" type="text" class="form-control" name="user_type" hidden>
                     <div class="form-group">
                         <button type="submit" id="term" class="btn btn-primary btn-block" disabled>สมัครสมาชิก <i class="icon-circle-right2 ml-2"></i></button>
                     </div>
@@ -197,8 +197,9 @@
                 };
                 $('#password').pwstrength(options);
             });
-
+// console.log($('#user_type').val());
             $(".nav-item").on('click', function() {
+                
                 $('#user_type').val($(this).val());
                 // if($(this).val()!=1){
                 //     $("#vatnomessage").attr("hidden",true);
@@ -234,6 +235,7 @@
             });
 
             $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+                console.log($(e.target).attr("href"));
                 setCookie('lastTab', $(e.target).attr("href"), 100);
             })
 
@@ -243,8 +245,15 @@
                 var expires = "expires="+ d.toUTCString();
                 document.cookie = cname + "=" + cvalue + "; " + expires;
             }
-
-            $('.nav-tabs a[href="'+getCookie('lastTab')+'"]').tab('show');
+            var lastabcookie = getCookie('lastTab');
+            $('.nav-tabs a[href="'+lastabcookie+'"]').tab('show');
+            if(lastabcookie == '#login-tab2'){
+                $('#user_type').val('2');
+            }else if(lastabcookie == '#login-tab3'){
+                $('#user_type').val('3');
+            }else{
+                $('#user_type').val('1');
+            }
 
             function getCookie(cname) {
                 var name = cname + "=";
