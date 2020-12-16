@@ -95,11 +95,11 @@
                         <div>{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
                     </div>
                     <div class="ml20 mt20"><strong>1.10 ข้อมูลผู้บริหารระดับสูง (CEO หรือ กรรมการผู้จัดการ)</strong>
-                        <div class="ml30 mt0">ชื่อ-นามสกุล : {{$fulltbp->companyemploy->prefix->name}}{{$fulltbp->companyemploy->name}} {{$fulltbp->companyemploy->lastname}}</div>
-                        <div class="ml30 mt0">ตำแหน่ง : {{$fulltbp->companyemploy->employposition->name}}</div>
-                        <div class="ml30 mt0">โทรศัพท์ : {{$fulltbp->companyemploy->workphone}}</div>
-                        <div class="ml30 mt0">โทรศัพท์มือถือ : {{$fulltbp->companyemploy->phone}}</div>
-                        <div class="ml30 mt0">อีเมล : {{$fulltbp->companyemploy->email}}</div>
+                        <div class="ml30 mt0">ชื่อ-นามสกุล : {{@$fulltbp->companyemploy->prefix->name}}{{@$fulltbp->companyemploy->name}} {{@$fulltbp->companyemploy->lastname}}</div>
+                        <div class="ml30 mt0">ตำแหน่ง : {{@$fulltbp->companyemploy->employposition->name}}</div>
+                        <div class="ml30 mt0">โทรศัพท์ : {{@$fulltbp->companyemploy->workphone}}</div>
+                        <div class="ml30 mt0">โทรศัพท์มือถือ : {{@$fulltbp->companyemploy->phone}}</div>
+                        <div class="ml30 mt0">อีเมล : {{@$fulltbp->companyemploy->email}}</div>
                         @if ($fulltbp->employeducation->count() > 0)
                             <div class="ml30 mt10"><strong>ประวัติการศึกษา</strong>
                                 <table class="mt5 font14 border tbwrap" >
