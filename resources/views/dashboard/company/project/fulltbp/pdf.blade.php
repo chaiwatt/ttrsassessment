@@ -170,9 +170,9 @@
                                         @if ($fulltbp->employtraining->count() > 0)
                                             @foreach ($fulltbp->employtraining as $employtraining)
                                                 <tr>
-                                                    <td>{{@$employtraining->trainingdate}}</td>
-                                                    <td>{{@$employtraining->course}}</td>
-                                                    <td>{{@$employtraining->owner}}</td>
+                                                    <td>{{$employtraining->trainingdate}}</td>
+                                                    <td>{{$employtraining->course}}</td>
+                                                    <td>{{$employtraining->owner}}</td>
                                                 </tr>   
                                             @endforeach
                                         @endif

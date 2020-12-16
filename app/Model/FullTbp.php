@@ -172,7 +172,7 @@ class FullTbp extends Model
 
     public function getEmployeducationAttribute(){
         $ceo = CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
-        return EmployEducation::where('company_employ_id',$ceo->id)->get();
+        return EmployEducation::where('company_employ_id',@$ceo->id)->get();
     }  
 
     public function getEmployexperienceAttribute(){
