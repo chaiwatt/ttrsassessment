@@ -22,10 +22,11 @@ class DashboardExpertReportController extends Controller
     public function __construct() 
     { 
         $this->middleware('auth'); 
-        $this->middleware('role:3'); 
+        // $this->middleware('role:3'); 
     }
     public function Index(){
         $auth = Auth::user();
+        // return $auth->user_type_id;
         // $userids = User::find($auth->id)->pluck('id')->toArray();
         $fulltbptids = ExpertAssignment::where('user_id', $auth->id)
                                     ->where('expert_assignment_status_id',2)
@@ -33,12 +34,13 @@ class DashboardExpertReportController extends Controller
                                     ->toArray();
         $fulltbps = FullTbp::whereIn('id', $fulltbptids)->get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
-        // return $fulltbps;
         return view('dashboard.expert.report.index')->withFulltbps($fulltbps)
                                                     ->withAlertmessages($alertmessages);
     }
     public function Accept($id){
+        
         $auth = Auth::user();
+        
         ExpertAssignment::where('full_tbp_id', $id)
                     ->where('user_id',$auth->id)
                     ->first()

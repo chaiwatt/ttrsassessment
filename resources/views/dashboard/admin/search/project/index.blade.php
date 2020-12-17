@@ -47,8 +47,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('dashboard.admin.calendar.createsave')}}" enctype="multipart/form-data">
-                            @csrf
+                        {{-- <form method="POST" action="{{route('dashboard.admin.calendar.createsave')}}" enctype="multipart/form-data"> --}}
+                            {{-- @csrf --}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -63,7 +63,7 @@
                                 <div id="searchyear_wrapper" class="col-md-6">
                                     <label>ปี</label><span class="text-danger">*</span>
                                     <select name="searchyear" id="searchyear" data-placeholder="ปี" class="form-control form-control-select2">
-                                        <option value="0000">เลือกปี</option>
+                                        {{-- <option value="0000">เลือกปี</option> --}}
                                         @foreach ($years as $year)
                                             <option value="{{$year}}">{{$year}}</option> 
                                         @endforeach
@@ -111,9 +111,9 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn bg-teal">ค้นหา <i class="icon-search4 ml-2"></i></button>
+                                <button type="button" id="btnsearch" class="btn bg-teal">ค้นหา <i class="icon-search4 ml-2"></i></button>
                             </div>
-                        </form>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>

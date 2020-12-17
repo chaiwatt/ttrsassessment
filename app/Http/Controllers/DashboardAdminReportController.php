@@ -19,7 +19,7 @@ class DashboardAdminReportController extends Controller
     { 
         $this->middleware('auth'); 
         // 1=admin, 2=expert, 3=company 
-        $this->middleware('role:4,5,6'); 
+        $this->middleware('role:3,4,5,6'); 
     }
     public function Index(){
         $auth = Auth::user();

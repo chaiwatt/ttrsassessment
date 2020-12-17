@@ -16,6 +16,7 @@ class Role
      */
     public function handle($request, Closure $next, ...$roles)
     {
+        
         if($request->user() && in_array($request->user()->user_type_id, $roles) ) 
         { 
             return $next($request); 
