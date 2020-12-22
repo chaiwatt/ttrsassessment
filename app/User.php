@@ -8,6 +8,7 @@ use App\Model\UserType;
 use App\Model\UserGroup;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
+use App\Model\ExpertDetail;
 use App\Model\UserPosition;
 use App\Model\ExpertAssignment;
 use Illuminate\Support\Facades\Cache;
@@ -90,4 +91,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return UserGroup::find($this->user_group_id);
     }
     
+    // public function getExpertdetailAttribute()
+    // {
+    //     return ExpertDetail::where('user_id',$this->id)->first();
+    // }
 }

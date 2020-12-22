@@ -461,7 +461,7 @@
 													{{-- <label>วุติการศึกษาสูงสุด</label>
 													<input type="text"  name="lat" value=""  placeholder="ละติจูด" class="form-control"> --}}
 													<label>วุติการศึกษาสูงสุด<span class="text-danger">*</span></label>
-													<select name="educationlevel" id="educationlevel" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-select2">
+													<select name="educationlevel" id="educationlevel" data-placeholder="วุติการศึกษาสูงสุด" class="form-control form-control-select2">
 														@foreach ($educationlevels as $educationlevel)                                                                
 															<option value="{{$educationlevel->id}}" @if ($educationlevel->id == $expert->education_level_id) selected @endif > {{$educationlevel->name}} </option>
 														@endforeach    

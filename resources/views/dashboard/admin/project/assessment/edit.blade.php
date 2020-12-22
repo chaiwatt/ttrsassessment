@@ -65,7 +65,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-
+                        <input type="text" id="isfinal" value="{{$projectgrade->count()}}" hidden>
                         <input type="text" id="evid" value="{{$ev->id}}" hidden>
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                             <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>
@@ -81,7 +81,9 @@
                                                     <th>Sub Pillar</th>   
                                                     <th>Index</th>                                                                                
                                                     <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
-                                                    {{-- <th style="width:250px">Weightsum(Portion*Pillar*Weight*Score)</th>  --}}
+                                                    @if ($projectgrade->count() !=0)
+                                                        <th>Final</th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <div class="theme_tail theme_tail_circle loadprogress">
@@ -105,7 +107,9 @@
                                                         <th>Sub Pillar</th>   
                                                         <th>Index</th>                                                                                
                                                         <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
-
+                                                        @if ($projectgrade->count() !=0)
+                                                            <th>Final</th>
+                                                        @endif
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -137,13 +141,14 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
-{{-- <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script> --}}
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/scoringhelper.js')}}"></script>
+
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            usertypeid: "{{Auth::user()->user_type_id}}"
+            usertypeid: "{{$user->user_type_id}}",
+            userid: "{{$user->id}}",
         };
     </script>
+    <script type="module" src="{{asset('assets/dashboard/js/app/helper/scoringhelper.js')}}"></script>
 @stop

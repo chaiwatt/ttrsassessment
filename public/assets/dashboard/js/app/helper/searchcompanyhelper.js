@@ -4,136 +4,44 @@ import * as SearchProject from './searchproject.js';
 import * as Company from './company.js'
 
 $(document).on('change', '#searchgroup', function(e) {
-    // console.log($(this).val());
+    
     // if($(this).val() < 12){
         var selectedtedtext = $(this).find("option:selected").text();
-        if(selectedtedtext == 'ปีของโครงการ'){
+        console.log(selectedtedtext);
+        if(selectedtedtext == 'ชื่อโครงการ'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",true);
-            $("#searchcompanyname_wrapper").attr("hidden",true);
-            $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",false);
-            $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
-            $("#searchdate").val('');
-        }else if(selectedtedtext == 'เลขที่โครงการ/Mini TBP/Full TBP'){
-            $("#registeredcapital_wrapper").attr("hidden",true);
-            $("#isic_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",false);
-            $("#searchcompanyname_wrapper").attr("hidden",true);
-            $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
-            $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
-            $("#searchword_wrapper").attr("hidden",true);
-        }else if(selectedtedtext == 'ชื่อโครงการ'){
-            $("#registeredcapital_wrapper").attr("hidden",true);
-            $("#isic_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",true);
             $("#searchcompanyname_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",false);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
         }else if(selectedtedtext == 'รหัส ISIC'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",false);
-            $("#searchdocno_wrapper").attr("hidden",true);
             $("#searchcompanyname_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
         }else if(selectedtedtext == 'กลุ่มอุตสาหกรรม'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",true);
             $("#searchcompanyname_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",false);
-            // $("#searchdate_wrapper").attr("hidden",true);
-            $("#searchword_wrapper").attr("hidden",true);
-        }else if(selectedtedtext == 'เกรด'){
-            $("#registeredcapital_wrapper").attr("hidden",true);
-            $("#isic_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",true);
-            $("#searchcompanyname_wrapper").attr("hidden",true);
-            $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",false);
-            $("#searchyear_wrapper").attr("hidden",true);
-            $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
-            $("#searchword_wrapper").attr("hidden",true);
-        }else if(selectedtedtext == 'Leader'){
-            $("#registeredcapital_wrapper").attr("hidden",true);
-            $("#isic_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",true);
-            $("#searchcompanyname_wrapper").attr("hidden",true);
-            $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",false);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
-            $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
-            $("#searchword_wrapper").attr("hidden",true);
-        }else if(selectedtedtext == 'ผู้เชี่ยวชาญ'){
-            $("#registeredcapital_wrapper").attr("hidden",true);
-            $("#isic_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",true);
-            $("#searchcompanyname_wrapper").attr("hidden",true);
-            $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",false);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
-            $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
         }else if(selectedtedtext == 'ชื่อบริษัท'){
             $("#registeredcapital_wrapper").attr("hidden",true);
-            $("#searchdocno_wrapper").attr("hidden",true);
+            $("#isic_wrapper").attr("hidden",true);
             $("#searchcompanyname_wrapper").attr("hidden",false);
             $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
         }else if(selectedtedtext == 'ทุนจดทะเบียน'){
+            $("#isic_wrapper").attr("hidden",true);
             $("#registeredcapital_wrapper").attr("hidden",false);
-            $("#searchdocno_wrapper").attr("hidden",true);
             $("#searchcompanyname_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",true);
-            $("#expert_wrapper").attr("hidden",true);
-            $("#leader_wrapper").attr("hidden",true);
-            $("#grage_wrapper").attr("hidden",true);
-            $("#searchyear_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
-            // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
         }
         // else{
@@ -268,14 +176,13 @@ function search(searchid,value){
 function createTable(data){
     var html ='';
     data.forEach(function (fulltbp,index) {
-        html += `<tr >                                                           
-            <td> ${fulltbp.minitbp['project']} </td>                         
-            <td> ${fulltbp.minitbp.businessplan.company['name']} </td> 
-            <td>
-                <span class="badge badge-flat border-info text-info-600">${fulltbp.minitbp.businessplan.businessplanstatus['name']}</span> 
-            </td> 
+        html += `<tr >  
             <td> 
-                <a href="${route.url}/dashboard/admin/report/search/view/${fulltbp.id}" class="btn btn-sm bg-info">รายละเอียด</a> 
+            <a  href="${route.url}/dashboard/admin/search/company/profile/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp.businessplan.company['name']}</a> 
+            </td>                                                          
+            <td> ${fulltbp.minitbp['project']} </td>                         
+            <td>
+                ${fulltbp.minitbp.businessplan.company['registeredcapital'].toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} 
             </td> 
         </tr>`
         });

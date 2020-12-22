@@ -23,6 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->unsignedBigInteger('isic_sub_id')->default(1);
             $table->char('registeredyear',4)->nullable();
             $table->double('registeredcapital',15,2)->nullable();
+            $table->unsignedBigInteger('registeredcapitaltype')->nullable();
             $table->double('paidupcapital',15,2)->nullable();
             $table->date('paidupcapitaldate')->nullable();
             $table->unsignedBigInteger('industry_group_id')->nullable();   

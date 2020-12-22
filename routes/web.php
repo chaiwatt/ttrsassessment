@@ -62,6 +62,32 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'search'], function(){
+        Route::group(['prefix' => 'project'], function(){
+            Route::post('year','Api\SearchProjectController@Year')->name('api.search.project.year');            
+            Route::post('docno','Api\SearchProjectController@DocNo')->name('api.search.project.docno');  
+            Route::post('projectname','Api\SearchProjectController@ProjectName')->name('api.search.project.projectname');  
+            Route::post('isic','Api\SearchProjectController@Isic')->name('api.search.project.isic');  
+            Route::post('industrygroup','Api\SearchProjectController@IndustryGroup')->name('api.search.project.industrygroup');  
+            Route::post('grade','Api\SearchProjectController@Grade')->name('api.search.project.grade'); 
+            Route::post('leader','Api\SearchProjectController@Leader')->name('api.search.project.leader'); 
+            Route::post('expert','Api\SearchProjectController@Expert')->name('api.search.project.expert'); 
+            Route::post('companyname','Api\SearchProjectController@CompanyName')->name('api.search.project.companyname'); 
+            Route::post('registeredcapital','Api\SearchProjectController@RegisteredCapital')->name('api.search.project.registeredcapital'); 
+            Route::post('text','Api\SearchProjectController@Text')->name('api.search.project.text'); 
+        });
+        Route::group(['prefix' => 'expert'], function(){
+            Route::post('branch','Api\SearchExpertController@Branch')->name('api.search.expert.branch');            
+            Route::post('projectstatus','Api\SearchExpertController@ProjectStatus')->name('api.search.expert.projectstatus');  
+            Route::post('projectname','Api\SearchExpertController@ProjectName')->name('api.search.expert.projectname');  
+        });  
+        Route::group(['prefix' => 'officer'], function(){
+            Route::post('branch','Api\SearchOfficerController@Branch')->name('api.search.officer.branch');            
+            Route::post('projectstatus','Api\SearchOfficerController@ProjectStatus')->name('api.search.officer.projectstatus');  
+            Route::post('projectname','Api\SearchOfficerController@ProjectName')->name('api.search.officer.projectname');  
+        }); 
+    });
+  
     Route::group(['prefix' => 'company'], function(){
         Route::post('getsubisic','Api\CompanyController@GetSubisic')->name('api.company.getsubisic');            
         Route::post('addauthorizeddirector','Api\CompanyController@AddAuthorizedDirector')->name('api.company.addauthorizeddirector');
@@ -414,13 +440,16 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('','DashboardAdminSearchProjectController@Index')->name('dashboard.admin.search.project');
                 });
                 Route::group(['prefix' => 'company'], function(){
-        
+                    Route::get('','DashboardAdminSearchCompanyController@Index')->name('dashboard.admin.search.company');
+                    Route::group(['prefix' => 'profile'], function(){
+                        Route::get('/{id}','DashboardAdminSearchCompanyProfileController@Index')->name('dashboard.admin.report.company.profile');          
+                    });      
                 });
                 Route::group(['prefix' => 'expert'], function(){
-        
+                    Route::get('','DashboardAdminSearchExpertController@Index')->name('dashboard.admin.search.expert');
                 });
                 Route::group(['prefix' => 'officer'], function(){
-        
+                    Route::get('','DashboardAdminSearchOfficerController@Index')->name('dashboard.admin.search.officer');
                 });
             }); 
 
@@ -433,6 +462,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('view/{id}','DashboardAdminReportSearchViewController@View')->name('dashboard.admin.report.search.view');          
                     Route::get('pdf/{id}','DashboardAdminReportSearchPdfController@Pdf')->name('dashboard.admin.report.search.pdf');          
                     Route::get('excel/{id}','DashboardAdminReportSearchExcelController@Excel')->name('dashboard.admin.report.search.excel');          
+                });
+                Route::group(['prefix' => 'detail'], function(){
+                    Route::get('view/{id}','DashboardAdminReportDetailController@View')->name('dashboard.admin.report.detail.view');       
                 });
             }); 
             Route::group(['prefix' => 'project'], function(){
@@ -516,7 +548,7 @@ Route::group(['middleware' => 'auth'], function(){
                 }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardAdminProjectAssessmentController@Index')->name('dashboard.admin.project.assessment');           
-                    Route::get('edit/{id}','DashboardAdminProjectAssessmentController@Edit')->name('dashboard.admin.project.assessment.edit');
+                    Route::get('edit/{id}/{userid}','DashboardAdminProjectAssessmentController@Edit')->name('dashboard.admin.project.assessment.edit');
                     Route::post('getev','DashboardAdminProjectAssessmentController@GetEv')->name('dashboard.admin.project.assessment.getev'); 
                     Route::post('getsummaryev','DashboardAdminProjectAssessmentController@GetSummaryEv')->name('dashboard.admin.project.assessment.getsummaryev'); 
                     Route::post('editsave/{id}','DashboardAdminProjectAssessmentController@EditSave')->name('dashboard.admin.project.assessment.editsave');

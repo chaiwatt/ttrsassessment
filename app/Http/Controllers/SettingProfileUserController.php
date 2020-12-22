@@ -102,6 +102,16 @@ class SettingProfileUserController extends Controller
         if(!Empty($request->paidupcapitaldate)){
             $paidupcapitaldate=DateConversion::thaiToEngDate($request->paidupcapitaldate);
         }
+        $reg = $request->registeredcapital;
+        $_registeredcapital = 4;
+
+        if($reg > 0 && $reg < 1000000){
+            $_registeredcapital = 1;
+        }else if($reg >= 1000000 && $reg < 5000000){
+            $_registeredcapital = 2;
+        }else if($reg >= 5000000 && $reg < 10000000){
+            $_registeredcapital = 3;
+        }
         $company->update([
             'name' => $request->company,
             'vatno' => $request->vatno,
@@ -111,6 +121,7 @@ class SettingProfileUserController extends Controller
             'isic_sub_id' => $request->subisic,
             'registeredyear' => $request->registeredyear,
             'registeredcapital' => $request->registeredcapital,
+            'registeredcapitaltype' => $_registeredcapital,
             'paidupcapital' => $request->paidupcapital,
             'paidupcapitaldate' => $paidupcapitaldate,
             'industry_group_id' => $request->industrygroup,

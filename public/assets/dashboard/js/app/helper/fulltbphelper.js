@@ -1898,7 +1898,7 @@ $('.steps-basic').steps({
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> ย้อนกลับ',
-        next: 'ทำรายการต่อไป <i class="icon-arrow-right14 ml-2" />',
+        next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
         finish: 'บันทึก <i class="icon-arrow-right14 ml-2" />'
     },
     onStepChanged:function (event, currentIndex, newIndex) {

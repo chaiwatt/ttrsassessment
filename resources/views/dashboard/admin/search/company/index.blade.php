@@ -52,21 +52,15 @@
                                     <div class="form-group">
                                         <label>ประเภทการค้นหา</label><span class="text-danger">*</span>
                                         <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-select2">
-                                            @foreach ($searchgroups as $searchgroup)
-                                                <option value="{{$searchgroup->id}}">{{$searchgroup->name}}</option> 
-                                            @endforeach
+                                            {{-- <option value="0000">===เลือก รายการ===</option> --}}
+                                            <option value="1">ชื่อโครงการ</option>
+                                            <option value="2">ชื่อบริษัท</option>
+                                            <option value="3">ทุนจดทะเบียน</option>
+                                            <option value="4">กลุ่มอุตสาหกรรม</option>
+                                            <option value="5">รหัส ISIC</option>
                                         </select>
                                     </div>
-                                </div>    
-                                <div id="searchyear_wrapper" class="col-md-6">
-                                    <label>ปี</label><span class="text-danger">*</span>
-                                    <select name="searchyear" id="searchyear" data-placeholder="ปี" class="form-control form-control-select2">
-                                        <option value="0000">===เลือก ปี===</option>
-                                        @foreach ($years as $year)
-                                            <option value="{{$year}}">{{$year}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>   
+                                </div>      
                                 <div id="searchindustrygroup_wrapper" class="col-md-6" hidden>
                                     <label>กลุ่มอุตสาหกรรม</label><span class="text-danger">*</span>
                                     <select name="searchindustrygroup" id="searchindustrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-select2">
@@ -75,34 +69,7 @@
                                             <option value="{{$industrygroup->id}}">{{$industrygroup->name}}</option> 
                                         @endforeach
                                     </select>
-                                </div>     
-                                <div id="grage_wrapper" class="col-md-6" hidden>
-                                    <label>เกรด</label><span class="text-danger">*</span>
-                                    <select name="searchgrade" id="searchgrade" data-placeholder="เกรด" class="form-control form-control-select2">
-                                        <option value="0000">===เลือก เกรด===</option>
-                                        @foreach ($grades as $grade)
-                                            <option value="{{$grade->id}}">{{$grade->name}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>    
-                                <div id="leader_wrapper" class="col-md-6" hidden>
-                                    <label>Leader</label><span class="text-danger">*</span>
-                                    <select name="searchleader" id="searchleader" data-placeholder="Leader" class="form-control form-control-select2">
-                                        <option value="0000">===เลือก Leader===</option>
-                                        @foreach ($leaders as $leader)
-                                            <option value="{{$leader->id}}">{{$leader->name}} {{$leader->lastname}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>  
-                                <div id="expert_wrapper" class="col-md-6" hidden>
-                                    <label>ผู้เชี่ยวชาญ</label><span class="text-danger">*</span>
-                                    <select name="searchexpert" id="searchexpert" data-placeholder="ผู้เชี่ยวชาญ" class="form-control form-control-select2">
-                                        <option value="0000">===เลือก ผู้เชี่ยวชาญ===</option>
-                                        @foreach ($experts as $expert)
-                                            <option value="{{$expert->id}}">{{$expert->name}} {{$expert->lastname}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>  
+                                </div>        
                                 <div id="isic_wrapper" class="col-md-6" hidden>
                                     <label>ISIC</label><span class="text-danger">*</span>
                                     <select name="isic" id="isic" data-placeholder="ISIC" class="form-control form-control-select2">
@@ -116,24 +83,14 @@
 
                                     </select>
                                 </div>                    
-
-                                <div id="searchword_wrapper" class="col-md-6" hidden>
-                                    <label>คำค้น</label>
-                                    <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control" >
-                                </div>
-                                <div id="searchprojectname_wrapper" class="col-md-6" hidden>
-                                    <label>ชื่อโครงการ</label>
-                                    <input type="text"  name="searchprojectname" id="searchprojectname" value=""  placeholder="ชื่อโครงการ" class="form-control" >
-                                </div>
                                 <div id="searchcompanyname_wrapper" class="col-md-6" hidden>
                                     <label>ชื่อบริษัท</label>
                                     <input type="text"  name="searchcompanyname" id="searchcompanyname" value=""  placeholder="ชื่อบริษัท" class="form-control" >
-                                </div>
-                                <div id="searchdocno_wrapper" class="col-md-6" hidden>
-                                    <label>เลขที่โครงการ/Mini TBP/Full TBP</label>
-                                    <input type="text"  name="searchdocno" id="searchdocno" value=""  placeholder="เลขที่โครงการ/Mini TBP/Full TBP" class="form-control" >
-                                </div>
-                                
+                                </div>  
+                                <div id="searchprojectname_wrapper" class="col-md-6" >
+                                    <label>ชื่อโครงการ</label>
+                                    <input type="text"  name="searchprojectname" id="searchprojectname" value=""  placeholder="ชื่อโครงการ" class="form-control" >
+                                </div>     
                                 <div id="registeredcapital_wrapper" class="col-md-6" hidden>
                                     <label>ทุนจดทะเบียน</label><span class="text-danger">*</span>
                                     <select name="searchregisteredcapital" id="searchregisteredcapital" data-placeholder="ทุนจดทะเบียน" class="form-control form-control-select2">
@@ -143,6 +100,10 @@
                                         @endforeach
                                     </select>
                                 </div> 
+                                <div id="searchword_wrapper" class="col-md-6" hidden>
+                                    <label>คำค้น</label>
+                                    <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control" >
+                                </div>
                             </div>
                     </div>
                 </div>
@@ -159,29 +120,24 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ชื่อโครงการ</th> 
+                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>บริษัท</th>
-                                        <th>สถานะ</th>
-                                        <th>เพิ่มเติม</th>
-                                        {{-- <th>Mini TBP</th> 
-                                        <th>Full TBP</th> 
-                                        <th>เกณฑ์การประเมิน</th> 
-                                        <th>เกรด</th>  --}}
+                                        <th>ชื่อโครงการ</th> 
+                                        <th>ทุนจดทะเบียน</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">
                                     @foreach ($fulltbps as $fulltbp)
                                     <tr>
+                                        {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
+                                        <td>
+                                            <a  href="{{route('dashboard.admin.report.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank">{{$fulltbp->minitbp->businessplan->company->name}} </a>
+                                        </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td>  
-                                            <a href="{{route('dashboard.admin.report.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->name}} </a>  
-                                        </td>  
-                                        <td>
-                                            <span class="badge badge-flat border-success text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span> 
-                                        </td>    
-                                        <td>
-                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>        
-                                        </td>
+                                        <td> {{number_format(@$fulltbp->minitbp->businessplan->company->registeredcapital, 2, '.', '')}}</td>  
+                                        {{-- <td>
+                                            <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span> 
+                                        </td>                                        --}}
                                     </tr>  
                                     @endforeach
                                 </tbody>
@@ -195,7 +151,7 @@
     </div>
 @endsection
 @section('pageScript')
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/searchprojecthelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/searchcompanyhelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

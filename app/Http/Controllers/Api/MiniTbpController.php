@@ -27,7 +27,7 @@ class MiniTbpController extends Controller
         $minitbp = MiniTBP::find($request->id);
         $minitbpcode = $minitbp->minitbp_code;
         if(Empty($minitbpcode)){
-            $minitbpcode = 'PL-'.Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad((MiniTBP::get()->count()),3,0,STR_PAD_LEFT); 
+            $minitbpcode = 'PL-'.Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($request->id),3,0,STR_PAD_LEFT); 
         }
         MiniTBP::find($request->id)->update([
             'project' => $request->project,

@@ -34,7 +34,7 @@ class FullTbpController extends Controller
         $fulltbp = FullTbp::find($request->id);
         $fulltbpcode = $fulltbp->fulltbp_code;
         if(Empty($fulltbpcode)){
-            $fulltbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad((FullTbp::get()->count()),3,0,STR_PAD_LEFT); 
+            $fulltbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($request->id),3,0,STR_PAD_LEFT); 
             FullTbp::find($request->id)->update([
                 'fulltbp_code' => $fulltbpcode
             ]);

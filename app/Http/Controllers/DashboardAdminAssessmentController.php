@@ -12,6 +12,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
 use App\Model\BusinessPlan;
+use App\Helper\GetEvPercent;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
 use App\Model\InvoiceTransaction;
 use App\Model\CriteriaTransaction;
+use App\Model\SummaryExpertPercent;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminAssessmentController extends Controller
@@ -45,10 +47,13 @@ class DashboardAdminAssessmentController extends Controller
                                 ->whereNotNull('user_id')
                                 ->pluck('sub_pillar_index_id')
                                 ->toArray();
+    
     $basearray = array();  
     $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($request->evid)->full_tbp_id)->get();                              
     foreach ($subpillarindexarray as $key => $subpillarindex) {
-        $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+        $scores = array();
+        $scores = Scoring::where('ev_id',$request->evid)
+                    ->where('sub_pillar_index_id',$subpillarindex)
                     ->whereNotNull('user_id')
                     ->pluck('criteria_transaction_id')
                     ->toArray();    
@@ -60,6 +65,7 @@ class DashboardAdminAssessmentController extends Controller
         }
         $basearray = array_merge($arrayrepeat,$basearray); 
     }
+    
     $subpillarindexarray = Scoring::where('ev_id',$request->evid)
                     ->whereNotNull('user_id')
                     ->distinct('sub_pillar_index_id')
@@ -67,7 +73,8 @@ class DashboardAdminAssessmentController extends Controller
                     ->pluck('sub_pillar_index_id')
                     ->toArray();
     foreach ($subpillarindexarray as $key => $subpillarindex) {
-        $scores = Scoring::where('sub_pillar_index_id',$subpillarindex)
+        $scores = Scoring::where('ev_id',$request->evid)
+                    ->where('sub_pillar_index_id',$subpillarindex)
                     ->whereNotNull('user_id')
                     ->pluck('score')
                     ->toArray();   
@@ -79,6 +86,7 @@ class DashboardAdminAssessmentController extends Controller
                                     ->criteria_transaction_id;
             }   
     }
+
     $criteriatransactions = CriteriaTransaction::whereIn('id',array_unique($basearray))
                                                 ->orderBy('pillar_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')
@@ -86,7 +94,6 @@ class DashboardAdminAssessmentController extends Controller
                                                 ->get();
 
         $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
-        // $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->sum('weigth'), 4); 
         $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
         $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
         $pillars = Pillar::get();   
@@ -370,6 +377,14 @@ class DashboardAdminAssessmentController extends Controller
         // $invoicetransaction->compcode = $request->compcode;
         $invoicetransaction->save();
 
+        $projectmembers = ProjectMember::where('full_tbp_id',$ev->full_tbp_id)->get();
+        foreach ($projectmembers as $key => $projectmember) {
+            $summaryexpertpercent = new SummaryExpertPercent();
+            $summaryexpertpercent->ev_id = $ev->id;
+            $summaryexpertpercent->user_id = $projectmember->user_id;
+            $summaryexpertpercent->percent = GetEvPercent::getEvPercent($projectmember->user_id,$ev->full_tbp_id); 
+            $summaryexpertpercent->save();
+        }
     }
 
     public function Summary($id){

@@ -46,15 +46,18 @@ class DashboardAdminProjectAssessmentController extends Controller
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
     }
-    public function Edit($id){
+    public function Edit($id,$userid){
         $fulltbp = FullTbp::find($id);
         $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
         $scoringstatus = ScoringStatus::where('ev_id',$ev->id)
-                                    ->where('user_id',Auth::user()->id)
+                                    ->where('user_id',$userid)
                                     ->first(); 
-        
+        $user = User::find($userid);   
+        $projectgrade = ProjectGrade::where('full_tbp_id',$fulltbp->id)->get();                         
         return view('dashboard.admin.project.assessment.edit')->withEv($ev)
-                                                            ->withScoringstatus($scoringstatus);
+                                                            ->withScoringstatus($scoringstatus)
+                                                            ->withUser($user)
+                                                            ->withProjectgrade($projectgrade);
     }
 
     public function EditSave(Request $request, $id){
@@ -103,38 +106,39 @@ class DashboardAdminProjectAssessmentController extends Controller
     }
 
     public function GetEv(Request $request){
+        // dd($request->userid);
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
                                                 ->orderBy('pillar_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
                                                 ->get();
         $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
-        // $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->sum('weigth'), 4); 
         $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
-        $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
+        // $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
         $pillars = Pillar::get();   
-        $evportions = EvType::get();   
+        // $evportions = EvType::get();   
        
-        $scores = Scoring::where('ev_id',$request->evid)
-                    ->where('scoretype',2)
-                    ->where('user_id',Auth::user()->id)
-                    ->get();
-        $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
+        // $scores = Scoring::where('ev_id',$request->evid)
+        //             ->where('scoretype',2)
+        //             ->where('user_id',$request->userid)
+        //             ->get();
+        // dd($scores);            
+        // $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
-                                    ->where('user_id',Auth::user()->id)
+                                    ->where('user_id',$request->userid)
                                     ->first(); 
-        $ev = Ev::find($request->evid);                            
+        // $ev = Ev::find($request->evid);                            
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "pillaindexweigths" => $pillaindexweigths,
             "sumweigth" => $sumweigth,
-            "sumextraweigth" => $sumextraweigth,
+            // "sumextraweigth" => $sumextraweigth,
             "pillars" => $pillars,
-            "evportions" => $evportions,
-            "scores" => $scores,
-            "checklistgradings" => $checklistgradings,
+            // "evportions" => $evportions,
+            // "scores" => $scores,
+            // "checklistgradings" => $checklistgradings,
             "scoringstatus" => $scoringstatus,
-            "ev" => $ev
+            // "ev" => $ev
         ));
     }
 

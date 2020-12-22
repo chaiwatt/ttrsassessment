@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\User;
 use App\Model\UserGroup;
+use App\Model\ExpertBranch;
 use Illuminate\Database\Eloquent\Model;
 
 class ExpertDetail extends Model
@@ -16,5 +17,10 @@ class ExpertDetail extends Model
     {
         return User::find($this->user_id);
     }
+
+    // public function getExpertbranchAttribute()
+    // {
+    //     return ExpertBranch::find($this->expert_branch_id);
+    // }
 
 }

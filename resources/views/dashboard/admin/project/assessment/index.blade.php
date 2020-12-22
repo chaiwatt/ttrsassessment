@@ -76,9 +76,9 @@
                                                 <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
                                                 <td> 
                                                     @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
-                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id])}}" class="btn-sm bg-success">ส่งแล้ว</a>
+                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-success">ส่งแล้ว</a>
                                                         @else
-                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
+                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
                                                     @endif
                                                     
                                                 </td>                                

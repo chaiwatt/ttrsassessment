@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\Isic;
 use App\Model\Grade;
 use App\Model\FullTbp;
 use App\Model\SearchGroup;
@@ -10,6 +11,7 @@ use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
+use App\Model\RegisteredCapitalType;
 
 class DashboardAdminSearchProjectController extends Controller
 {
@@ -19,19 +21,23 @@ class DashboardAdminSearchProjectController extends Controller
         $fulltbbs = FullTbp::get();
         $industrygroups = IndustryGroup::get();
         $years = FullTbp::get()->map(function($item){ 
-                                return $item['created_at']->year+543; 
-                            })->unique()->sort()->toArray();
+                    return $item['created_at']->year+543; 
+                })->unique()->sort()->toArray();
         $leaderarray = ProjectAssignment::distinct()->pluck('leader_id');
         $leaders = User::whereIn('id',$leaderarray)->get();
         $expertarray = ExpertAssignment::distinct()->pluck('user_id');
         $experts = User::whereIn('id',$expertarray)->get();
+        $isics = Isic::get();
+        $registeredcapitals = RegisteredCapitalType::get();
         return view('dashboard.admin.search.project.index')->withSearchgroups($searchgroups)
                                                         ->withFulltbps($fulltbbs)
                                                         ->withYears($years)
                                                         ->withIndustrygroups($industrygroups)
                                                         ->withGrades($grades)
                                                         ->withLeaders($leaders)
-                                                        ->withExperts($experts);
+                                                        ->withExperts($experts)
+                                                        ->withIsics($isics)
+                                                        ->withRegisteredcapitals($registeredcapitals);
     }
 
     public function GetSearch(Request $request){
