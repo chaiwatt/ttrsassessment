@@ -269,13 +269,14 @@ function createTable(data){
     var html ='';
     data.forEach(function (fulltbp,index) {
         html += `<tr >                                                           
-            <td> ${fulltbp.minitbp['project']} </td>                         
-            <td> ${fulltbp.minitbp.businessplan.company['name']} </td> 
-            <td>
-                <span class="badge badge-flat border-info text-info-600">${fulltbp.minitbp.businessplan.businessplanstatus['name']}</span> 
-            </td> 
+            <td>  
+                <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
+            </td>                         
             <td> 
-                <a href="${route.url}/dashboard/admin/report/search/view/${fulltbp.id}" class="btn btn-sm bg-info">รายละเอียด</a> 
+                <a href="${route.url}/dashboard/admin/search/company/profile/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp.businessplan.company['name']} </a> 
+            </td> 
+            <td>
+                <span class="badge badge-flat border-success text-success-600">${fulltbp.minitbp.businessplan.businessplanstatus['name']}</span> 
             </td> 
         </tr>`
         });

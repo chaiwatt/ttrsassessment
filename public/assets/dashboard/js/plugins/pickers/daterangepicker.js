@@ -734,8 +734,36 @@
             } else {
                 html += '<th></th>';
             }
-
-            var dateHtml = this.locale.monthNames[calendar[1][1].month()] + calendar[1][1].format(" YYYY");
+            $check = calendar[1][1].month();
+            var stmonth = 'มกราคม';
+            if($check == 0){
+                stmonth = 'มกราคม';
+            }else if($check == 1){
+                stmonth = 'กุมภาพันธ์';
+            }else if($check == 2){
+                stmonth = 'มีนาคม';
+            }else if($check == 3){
+                stmonth = 'เมษายน';
+            }else if($check == 4){
+                stmonth = 'พฤษภาคม';
+            }else if($check == 5){
+                stmonth = 'มิถุนายน ';
+            }else if($check == 6){
+                stmonth = 'กรกฎาคม';
+            }else if($check == 7){
+                stmonth = 'สิงหาคม';
+            }else if($check == 8){
+                stmonth = 'กันยายน';
+            }else if($check == 9){
+                stmonth = 'ตุลาคม';
+            }else if($check == 10){
+                stmonth = 'พฤศจิกายน';
+            }else if($check == 11){
+                stmonth = 'ธันวาคม';
+            }
+            // var dateHtml = this.locale.monthNames[calendar[1][1].month()] + calendar[1][1].format(" YYYY");
+            var dateHtml = stmonth + calendar[1][1].format(" YYYY");
+            
 
             if (this.showDropdowns) {
                 var currentMonth = calendar[1][1].month();

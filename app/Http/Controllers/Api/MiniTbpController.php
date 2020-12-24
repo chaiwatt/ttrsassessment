@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 use App\Model\Prefix;
 use App\Model\Company;
+use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
@@ -205,16 +206,17 @@ class MiniTbpController extends Controller
         BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
             'business_plan_status_id' => 3
         ]);
-
-        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id)->first();
+        $minitbp = MiniTBP::find($id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find($minitbp->business_plan_id)->id)->first();
         if(Empty($projectassignment->leader_id)){
-         
+            
             $projectassignment = new ProjectAssignment();
-            $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $projectassignment->full_tbp_id = FullTbp::where('mini_tbp_id',$minitbp->id)->first()->id;
+            $projectassignment->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
             $projectassignment->save();
 
             $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $notificationbubble->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 1;
             $notificationbubble->user_id = $auth->id;
@@ -267,17 +269,18 @@ class MiniTbpController extends Controller
         BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
             'business_plan_status_id' => 3
         ]);
-
-        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id)->first();
+        $minitbp = MiniTBP::find($id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find($minitbp->business_plan_id)->id)->first();
         
         if(Empty($projectassignment->leader_id)){
             
             $projectassignment = new ProjectAssignment();
-            $projectassignment->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $projectassignment->full_tbp_id = FullTbp::where('mini_tbp_id',$minitbp->id)->first()->id;
+            $projectassignment->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
             $projectassignment->save();
 
             $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $notificationbubble->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 1;
             $notificationbubble->user_id = $auth->id;
@@ -295,7 +298,7 @@ class MiniTbpController extends Controller
 
         }else{
             $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
+            $notificationbubble->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 4;
             $notificationbubble->user_id = Auth::user()->id;

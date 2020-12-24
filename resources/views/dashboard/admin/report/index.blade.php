@@ -235,9 +235,15 @@
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">รายการโครงการ</h6>
+                        {{-- <div class="header-elements">
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
+                                <i class="icon-calendar3 mr-2"></i>
+                                <span></span>
+                            </a>
+                        </div> --}}
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
+                                <i class="icon-calendar3 mr-2"></i>
                                 <span></span>
                             </a>
                         </div>
@@ -260,17 +266,26 @@
                                 <tbody>
                                     @foreach ($fulltbps as $fulltbp)
                                     <tr> 
-                                        <td> {{$fulltbp->updatedatth}} </td> 
+                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> 
-                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 4)
+                                            {{-- @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 4)
                                                     <a class="text-info" href="{{route('dashboard.admin.project.minitbp.view',['id' => $fulltbp->minitbp->businessplan->minitbp->id])}}" class="breadcrumb-item">{{$fulltbp->minitbp->businessplan->minitbp->project}} </a>
                                                 @elseif($fulltbp->minitbp->businessplan->business_plan_status_id >= 4)
                                                     <a class="text-info" href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->minitbp->businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$fulltbp->minitbp->businessplan->minitbp->project}} </a>
                                                 @else
                                                     {{$fulltbp->minitbp->businessplan->minitbp->project}} 
-                                            @endif
+                                            @endif --}}
+                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                         </td>  
-                                        <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
+                                        <td> 
+                                            @if ($fulltbp->status == 3)
+                                                    <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                                @else
+                                                <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                            @endif
+                                            
+
+                                        </td>  
                                         <td> {{$fulltbp->briefingdate}} </td>  
                                         <td> {{$fulltbp->assessmentdate}} </td>  
                                         <td> {{$fulltbp->finalassessmentdate}} </td>  
@@ -297,6 +312,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="row">
@@ -305,7 +321,7 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ปฎิทินกลาง</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
                             </a>
                         </div>
@@ -322,7 +338,7 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">จำนวนโครงการต่อการยื่น ปี2563</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
                             </a>
                         </div>
@@ -339,7 +355,7 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">จำนวนโครงการตามเกรดการประเมิน ปี2563</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
                             </a>
                         </div>
@@ -358,7 +374,7 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">โครงการตามกลุ่มอุตสาหกรรม ปี2563</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
                             </a>
                         </div>
@@ -375,7 +391,7 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">วัตถุประสงค์ของการขอรับการประเมิน ปี2563</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
                                 <span></span>
                             </a>
@@ -389,14 +405,13 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ข้อมูลย้อนหลัง ปี2561-2563</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
                             </a>
                         </div>
@@ -408,7 +423,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- /form layouts -->
     </div>
     <!-- /content area -->
@@ -423,6 +438,11 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/interaction/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
+
+{{-- <script src="{{asset('assets/dashboard/js/plugins/ui/moment/moment.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pickers/daterangepicker.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/dashboard/js/demo_pages/dashboard.js')}}"></script> --}}
+
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
@@ -432,6 +452,7 @@
         token: $('meta[name="csrf-token"]').attr('content'),
         branchid: "{{Auth::user()->branch_id}}"
     };
+
 
 </script>
 

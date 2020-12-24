@@ -9,56 +9,45 @@ $(document).on('change', '#searchgroup', function(e) {
         var selectedtedtext = $(this).find("option:selected").text();
         console.log(selectedtedtext);
         if(selectedtedtext == 'สาขาความเชี่ยวชาญ'){
+            $("#searchname_wrapper").attr("hidden",true);
             $("#searchexpertbranch_wrapper").attr("hidden",false);
             $("#searchword_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#projectstatus_wrapper").attr("hidden",true);
             searchprojectstatus
         }else if(selectedtedtext == 'ชื่อโครงการ'){
+            $("#searchname_wrapper").attr("hidden",true);
             $("#searchexpertbranch_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",false);
             $("#projectstatus_wrapper").attr("hidden",true);
         }if(selectedtedtext == 'สถานะโครงการ'){
+            $("#searchname_wrapper").attr("hidden",true);
             $("#searchexpertbranch_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#projectstatus_wrapper").attr("hidden",false);
+        }if(selectedtedtext == 'ชื่อ-สกุล'){
+            $("#searchname_wrapper").attr("hidden",false);
+            $("#searchexpertbranch_wrapper").attr("hidden",true);
+            $("#searchword_wrapper").attr("hidden",true);
+            $("#searchprojectname_wrapper").attr("hidden",true);
+            $("#projectstatus_wrapper").attr("hidden",true);
         }
-        // else{
-        //     $("#searchdocno_wrapper").attr("hidden",true);
-        //     $("#searchcompanyname_wrapper").attr("hidden",true);
-        //     $("#searchprojectname_wrapper").attr("hidden",true);
-        //     $("#expert_wrapper").attr("hidden",true);
-        //     $("#leader_wrapper").attr("hidden",true);
-        //     $("#grage_wrapper").attr("hidden",true);
-        //     $("#searchyear_wrapper").attr("hidden",true);
-        //     $("#searchword_wrapper").attr("hidden",false);
-        //     $("#searchindustrygroup_wrapper").attr("hidden",true);
-        //     $("#searchdate_wrapper").attr("hidden",true);
-        // }
-    // }else{
-    //     $("#expert_wrapper").attr("hidden",false);
-    //     $("#leader_wrapper").attr("hidden",true);
-    //     $("#grade_wrapper").attr("hidden",true);
-    //     $("#searchyear_wrapper").attr("hidden",true);
-    //     $("#searchword_wrapper").attr("hidden",true);
-    //     $("#searchindustrygroup_wrapper").attr("hidden",true);
-    //     $("#searchdate_wrapper").attr("hidden",false);
-    //     $("#searchword").val('');
-    // }
+
 });
 
-// $('#searchdate').bootstrapMaterialDatePicker({
-//     format: 'DD/MM/YYYY HH:mm',
-//     clearButton: true,
-//     cancelText: "ยกเลิก",
-//     okText: "ตกลง",
-//     clearText: "เคลียร์",
-//     time: false
-// });
+$(document).on('keyup', '#searchname', function(e) {
+    console.log($(this).val());
+    SearchExpert.searchName($(this).val()).then(data => {
+        createTable(data);
+    })
+    .catch(error => {})
+});
+
 $(document).on('change', '#searchexpertbranch', function(e) {
     SearchExpert.searchBranch($(this).val()).then(data => {
+        console.log(data);
         createTable(data);
     })
     .catch(error => {})
@@ -88,10 +77,34 @@ $(document).on('change', '#searchprojectstatus', function(e) {
 
 function createTable(data){
     var html ='';
+    
     data.forEach(function (expert,index) {
+        var td ='';
+        expert['fulltbpexpert'].forEach(function (fulltbp,item) {
+            var color = 'bg-grey-300';
+            var status = 'กำลังดำเนินการ';
+            if(fulltbp.status == 3){
+                color = "bg-success-400";
+                status = "เสร็จสิ้น";
+            }
+            td += `
+            <li>
+                <i class="icon-primitive-dot mr-2"></i>
+                <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
+                <span class="badge badge-pill ${color} ml-20 ml-md-0">${status}</span>
+            </li>
+            `
+        });
         html += `<tr >  
-            <td> ${expert.name} ${expert.lastname}</td>                                                          
-            <td> xxx </td>                         
+            <td> 
+                <a href="${route.url}/dashboard/admin/search/expert/profile/${expert.id}" class="text-info" target="_blank">${expert.name} ${expert.lastname} </a> 
+            </td>                                                          
+            <td> 
+                <ul class="list list-unstyled mb-0">
+                    ${td}
+                </ul>
+                
+            </td>                         
         </tr>`
         });
      $("#reportsearch_wrapper").html(html);

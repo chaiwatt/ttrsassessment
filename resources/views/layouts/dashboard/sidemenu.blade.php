@@ -125,21 +125,6 @@
         </li>
     @endif
 @endif
-@if (Auth::user()->user_type_id >=4)
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.search')?'nav-item-expanded nav-item-open':''}}">
-        <a href="#" class="nav-link"><i class="icon-search4"></i> <span>ค้นหา</span>
-            @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ค้นหา</span>
-            @endif
-        </a>
-        <ul class="nav nav-group-sub" data-submenu-title="ค้นหา">
-            <li class="nav-item"><a href="{{route('dashboard.admin.search.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.project')?'active':''}}">โครงการ</a></li>
-            <li class="nav-item"><a href="{{route('dashboard.admin.search.company')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.company')?'active':''}}">ผู้รับการประเมิน</a></li>
-            <li class="nav-item"><a href="{{route('dashboard.admin.search.expert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.expert')?'active':''}}">ผู้เชี่ยวชาญ</a></li>
-            <li class="nav-item"><a href="{{route('dashboard.admin.search.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.officer')?'active':''}}">เจ้าหน้าที่ TTRS</a></li>
-        </ul>
-    </li>
-@endif
 @if (Auth::user()->user_type_id >= 5)
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
@@ -212,6 +197,36 @@
         @endif
     </ul>	
 </li>
+@endif
+@if (Auth::user()->user_type_id >=4)
+<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport')?'nav-item-expanded nav-item-open':''}}">
+    <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span>
+        @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
+            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">รายงาน</span>
+        @endif
+    </a>
+    <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
+        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'active':''}}">โครงการ</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.grade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.grade')?'active':''}}">โครงการตามเกรด</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.industrygroup')?'active':''}}">โครงการตามกลุ่มอุตสาหกรรม</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.download')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.download')?'active':''}}">ดาวน์โหลดเอกสาร</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.visit')?'active':''}}">เข้าชมเว็ปไซต์</a></li>
+    </ul>
+</li>
+
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.search')?'nav-item-expanded nav-item-open':''}}">
+        <a href="#" class="nav-link"><i class="icon-search4"></i> <span>ค้นหา</span>
+            @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
+                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ค้นหา</span>
+            @endif
+        </a>
+        <ul class="nav nav-group-sub" data-submenu-title="ค้นหา">
+            <li class="nav-item"><a href="{{route('dashboard.admin.search.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.project')?'active':''}}">โครงการ</a></li>
+            <li class="nav-item"><a href="{{route('dashboard.admin.search.company')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.company')?'active':''}}">ผู้รับการประเมิน</a></li>
+            <li class="nav-item"><a href="{{route('dashboard.admin.search.expert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.expert')?'active':''}}">ผู้เชี่ยวชาญ</a></li>
+            <li class="nav-item"><a href="{{route('dashboard.admin.search.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.officer')?'active':''}}">เจ้าหน้าที่ TTRS</a></li>
+        </ul>
+    </li>
 @endif
 
 {{-- @if (Auth::user()->user_type_id <= 2 && !Empty(Auth::user()->company))

@@ -23,8 +23,12 @@ class SearchOfficerController extends Controller
                 ->orWhere('projecteng', 'like', '%' . $request->projectname . '%')->pluck('id')->toArray();
         $fulltbpids = FullTbp::whereIn('mini_tbp_id', $minitbpids)->pluck('id')->toArray();
         $projectmemberids = ProjectMember::whereIn('full_tbp_id',$fulltbpids)->pluck('user_id')->toArray();
+
         $projectmemberuniqueids = array_unique($projectmemberids);
-        $officers = User::whereIn('id',$projectmemberuniqueids)->get();
+
+        $officerdetailids = OfficerDetail::whereIn('user_id', $projectmemberuniqueids)->pluck('user_id')->toArray();
+        $officerdetailuniqueids = array_unique($officerdetailids);
+        $officers = User::whereIn('id',$officerdetailuniqueids)->get();
         return response()->json($officers); 
     }
 
@@ -35,7 +39,18 @@ class SearchOfficerController extends Controller
         }        
         $projectmemberids = ProjectMember::whereIn('full_tbp_id',$fulltbpids)->pluck('user_id')->toArray();
         $projectmemberuniqueids = array_unique($projectmemberids);
-        $experts = User::whereIn('id',$projectmemberuniqueids)->get();
-        return response()->json($experts); 
+
+        $officerdetailids = OfficerDetail::whereIn('user_id', $projectmemberuniqueids)->pluck('user_id')->toArray();
+        $officerdetailuniqueids = array_unique($officerdetailids);
+        $officers = User::whereIn('id',$officerdetailuniqueids)->get();
+        return response()->json($officers); 
+    }
+    public function Name(Request $request){
+        $userids = User::where('name', 'like', '%' . $request->name . '%')
+                    ->orWhere('lastname', 'like', '%' . $request->name . '%')->pluck('id')->toArray();
+        $officerdetailids = OfficerDetail::whereIn('user_id', $userids)->pluck('user_id')->toArray();
+        $officerdetailuniqueids = array_unique($officerdetailids);
+        $officers = User::whereIn('id',$officerdetailuniqueids)->get();
+        return response()->json($officers);  
     }
 }

@@ -62,6 +62,11 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'report'], function(){
+        Route::group(['prefix' => 'chart'], function(){
+            Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');            
+        }); 
+    }); 
     Route::group(['prefix' => 'search'], function(){
         Route::group(['prefix' => 'project'], function(){
             Route::post('year','Api\SearchProjectController@Year')->name('api.search.project.year');            
@@ -80,11 +85,13 @@ Route::group(['prefix' => 'api'], function(){
             Route::post('branch','Api\SearchExpertController@Branch')->name('api.search.expert.branch');            
             Route::post('projectstatus','Api\SearchExpertController@ProjectStatus')->name('api.search.expert.projectstatus');  
             Route::post('projectname','Api\SearchExpertController@ProjectName')->name('api.search.expert.projectname');  
+            Route::post('name','Api\SearchExpertController@Name')->name('api.search.expert.name');  
         });  
         Route::group(['prefix' => 'officer'], function(){
             Route::post('branch','Api\SearchOfficerController@Branch')->name('api.search.officer.branch');            
             Route::post('projectstatus','Api\SearchOfficerController@ProjectStatus')->name('api.search.officer.projectstatus');  
             Route::post('projectname','Api\SearchOfficerController@ProjectName')->name('api.search.officer.projectname');  
+            Route::post('name','Api\SearchOfficerController@Name')->name('api.search.officer.name'); 
         }); 
     });
   
@@ -442,17 +449,39 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'company'], function(){
                     Route::get('','DashboardAdminSearchCompanyController@Index')->name('dashboard.admin.search.company');
                     Route::group(['prefix' => 'profile'], function(){
-                        Route::get('/{id}','DashboardAdminSearchCompanyProfileController@Index')->name('dashboard.admin.report.company.profile');          
+                        Route::get('/{id}','DashboardAdminSearchCompanyProfileController@Index')->name('dashboard.admin.search.company.profile');          
                     });      
                 });
                 Route::group(['prefix' => 'expert'], function(){
                     Route::get('','DashboardAdminSearchExpertController@Index')->name('dashboard.admin.search.expert');
+                    Route::group(['prefix' => 'profile'], function(){
+                        Route::get('/{id}','DashboardAdminSearchExpertProfileController@Index')->name('dashboard.admin.search.expert.profile');          
+                    });   
                 });
                 Route::group(['prefix' => 'officer'], function(){
                     Route::get('','DashboardAdminSearchOfficerController@Index')->name('dashboard.admin.search.officer');
+                    Route::group(['prefix' => 'profile'], function(){
+                        Route::get('/{id}','DashboardAdminSearchOfficerProfileController@Index')->name('dashboard.admin.search.officer.profile');          
+                    });  
                 });
             }); 
-
+            Route::group(['prefix' => 'realtimereport'], function(){
+                Route::group(['prefix' => 'project'], function(){
+                    Route::get('','DashboardAdminRealtimeReportProjectController@Index')->name('dashboard.admin.realtimereport.project');
+                });
+                Route::group(['prefix' => 'grade'], function(){
+                    Route::get('','DashboardAdminRealtimeReportGradeController@Index')->name('dashboard.admin.realtimereport.grade');
+                });
+                Route::group(['prefix' => 'industrygroup'], function(){
+                    Route::get('','DashboardAdminRealtimeReportIndustrygroupController@Index')->name('dashboard.admin.realtimereport.industrygroup');
+                });
+                Route::group(['prefix' => 'download'], function(){
+                    Route::get('','DashboardAdminRealtimeReportDownloadController@Index')->name('dashboard.admin.realtimereport.download');
+                });
+                Route::group(['prefix' => 'visit'], function(){
+                    Route::get('','DashboardAdminRealtimeReportVisitController@Index')->name('dashboard.admin.realtimereport.visit');
+                });
+            });
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardAdminReportController@Index')->name('dashboard.admin.report');           
                 Route::post('getevents','DashboardAdminReportController@GetEvent')->name('dashboard.admin.report.getevents'); 

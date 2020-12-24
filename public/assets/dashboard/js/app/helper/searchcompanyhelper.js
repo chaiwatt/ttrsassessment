@@ -180,7 +180,9 @@ function createTable(data){
             <td> 
             <a  href="${route.url}/dashboard/admin/search/company/profile/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp.businessplan.company['name']}</a> 
             </td>                                                          
-            <td> ${fulltbp.minitbp['project']} </td>                         
+            <td>
+            <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
+            </td>                         
             <td>
                 ${fulltbp.minitbp.businessplan.company['registeredcapital'].toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} 
             </td> 

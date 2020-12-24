@@ -1,3 +1,23 @@
+
+function searchName(name){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/search/expert/name`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          name : name
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 function searchBranch(branch){
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -55,4 +75,4 @@ function searchProjectstatus(projectstatus){
       })
 }
 
-export {searchBranch,searchProjectname,searchProjectstatus}
+export {searchName,searchBranch,searchProjectname,searchProjectstatus}

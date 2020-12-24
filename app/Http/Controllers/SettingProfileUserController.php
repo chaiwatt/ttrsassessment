@@ -154,10 +154,11 @@ class SettingProfileUserController extends Controller
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         if(Empty($businessplan)){
             // if($request->status == 1){
+                $count = BusinessPlan::get()->count() + 1;
                 $auth = Auth::user();
                 $company = Company::where('user_id',$auth->id)->first();
                 $businessplan = new BusinessPlan();
-                $businessplan->code = Carbon::now()->timestamp;
+                $businessplan->code = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($count),3,0,STR_PAD_LEFT); 
                 $businessplan->company_id = $company->id;
                 $businessplan->business_plan_status_id = 2;
                 $businessplan->save();

@@ -36,4 +36,11 @@ class SearchExpertController extends Controller
         $experts = User::whereIn('id',$expertassignmentuniqueids)->get();
         return response()->json($experts); 
     }
+    public function Name(Request $request){
+        $userids = User::where('name', 'like', '%' . $request->name . '%')
+        ->orWhere('lastname', 'like', '%' . $request->name . '%')->pluck('id')->toArray();
+        $expertdetailids = ExpertDetail::where('user_id', $userids)->pluck('user_id')->toArray();
+        $experts = User::whereIn('id',$expertdetailids)->get();
+        return response()->json($experts);  
+    }
 }

@@ -18,9 +18,9 @@ class ExpertDetail extends Model
         return User::find($this->user_id);
     }
 
-    // public function getExpertbranchAttribute()
-    // {
-    //     return ExpertBranch::find($this->expert_branch_id);
-    // }
+    public function getExpertbranchAttribute()
+    {
+        return ExpertBranch::find($this->expert_branch_id);
+    }
 
 }

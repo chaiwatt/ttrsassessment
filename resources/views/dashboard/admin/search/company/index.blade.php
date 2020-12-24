@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">โครงการ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ผู้รับการประเมิน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -15,8 +15,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
-                    <span class="breadcrumb-item active">ค้นหา</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ค้นหา</a>
+                    <span class="breadcrumb-item active">ผู้รับการประเมิน</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -113,7 +113,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการโครงการ</h6>
+                        <h6 class="card-title">รายการผู้รับการประเมิน</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -131,9 +131,11 @@
                                     <tr>
                                         {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td>
-                                            <a  href="{{route('dashboard.admin.report.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank">{{$fulltbp->minitbp->businessplan->company->name}} </a>
+                                            <a  href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank">{{$fulltbp->minitbp->businessplan->company->name}} </a>
                                         </td> 
-                                        <td> {{$fulltbp->minitbp->project}} </td>  
+                                        <td>
+                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                        </td>  
                                         <td> {{number_format(@$fulltbp->minitbp->businessplan->company->registeredcapital, 2, '.', '')}}</td>  
                                         {{-- <td>
                                             <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span> 

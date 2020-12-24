@@ -4,13 +4,17 @@ namespace App;
 
 use App\Model\Prefix;
 use App\Model\Company;
+use App\Model\FullTbp;
 use App\Model\UserType;
 use App\Model\UserGroup;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
 use App\Model\ExpertDetail;
 use App\Model\UserPosition;
+use App\Model\OfficerDetail;
+use App\Model\ProjectMember;
 use App\Model\ExpertAssignment;
+use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -27,7 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $fillable = [];
     protected $guarded = [];
-    protected $appends = ['usertype'];
+    protected $appends = ['usertype','fulltbpexpert','fulltbpofficer'];
 
     protected static $ignoreChangedAttributes = ['password'];
     protected static $logAttributesToIgnore = [ 'password'];
@@ -91,8 +95,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return UserGroup::find($this->user_group_id);
     }
     
-    // public function getExpertdetailAttribute()
-    // {
-    //     return ExpertDetail::where('user_id',$this->id)->first();
-    // }
+    public function getExpertdetailAttribute()
+    {
+        return ExpertDetail::where('user_id',$this->id)->first();
+    }
+    public function getFulltbpexpertAttribute()
+    {
+        $projectmemberarray = ProjectMember::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();
+        return FullTbp::whereIn('id',$projectmemberarray)->get();
+    }
+    public function getFulltbpofficerAttribute()
+    {
+        $officerdetailids = OfficerDetail::where('user_id', $this->id)->pluck('user_id')->toArray();
+        $projectmemberids = ProjectMember::whereIn('user_id',$officerdetailids)->pluck('full_tbp_id')->toArray();
+        $projectmemberuniqueids = array_unique($projectmemberids);
+        $projectassignmentids = ProjectAssignment::where('coleader_id',$this->id)->pluck('full_tbp_id')->toArray();
+        $projectassignmentuniqueids = array_unique($projectassignmentids);
+        $fulltbpids = array_unique(array_merge($projectmemberuniqueids,$projectassignmentuniqueids));
+        return FullTbp::whereIn('id',$fulltbpids)->get();
+    }
 }

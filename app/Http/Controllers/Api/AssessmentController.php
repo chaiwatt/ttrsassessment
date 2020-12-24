@@ -36,8 +36,9 @@ class AssessmentController extends Controller
         $businessplan = BusinessPlan::where('company_id',$request->companyid)->first();
         if(Empty($businessplan)){
             if($request->status == 1){
+                $count = BusinessPlan::get()->count() + 1;
                 $businessplan = new BusinessPlan();
-                $businessplan->code = Carbon::now()->timestamp;
+                $businessplan->code = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($count),3,0,STR_PAD_LEFT); 
                 $businessplan->company_id = $request->companyid;
                 $businessplan->business_plan_status_id = 1;
                 $businessplan->save();

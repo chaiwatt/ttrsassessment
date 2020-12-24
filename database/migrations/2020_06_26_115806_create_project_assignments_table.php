@@ -17,6 +17,7 @@ class CreateProjectAssignmentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('business_plan_id');
             $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
+            $table->unsignedBigInteger('full_tbp_id')->nullable();
             $table->unsignedBigInteger('leader_id')->nullable();
             $table->unsignedBigInteger('coleader_id')->nullable();
             $table->timestamps();

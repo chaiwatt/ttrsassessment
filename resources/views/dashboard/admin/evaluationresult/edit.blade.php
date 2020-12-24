@@ -132,9 +132,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                        </div>
+                        @if ($evaluationresult->fulltbp->status != 3)
+                            <div class="text-right">
+                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                            </div>
+                        @endif
                     </div>
                     </form>
                 </div>

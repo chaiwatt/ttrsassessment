@@ -8,6 +8,7 @@ use App\Model\Tambol;
 use App\Model\Province;
 use App\Helper\LogAction;
 use App\Model\BusinessPlan;
+use App\Model\ExpertDetail;
 use App\Model\CompanyEmploy;
 use App\Model\IndustryGroup;
 use App\Model\CompanyAddress;
@@ -69,4 +70,5 @@ class Company extends Model
     {
         return IndustryGroup::find($this->industry_group_id);
     }
+
 }

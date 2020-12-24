@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">โครงการ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เจ้าหน้าที่ TTRS</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -15,8 +15,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
-                    <span class="breadcrumb-item active">ค้นหา</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ค้นหา</a>
+                    <span class="breadcrumb-item active">เจ้าหน้าที่ TTRS</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -52,13 +52,18 @@
                                     <div class="form-group">
                                         <label>ประเภทการค้นหา</label><span class="text-danger">*</span>
                                         <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-select2">
+                                            <option value="0">ชื่อ-สกุล</option>
                                             <option value="1">สาขาความเชี่ยวชาญ</option>
                                             <option value="2">ชื่อโครงการ</option>
                                             <option value="3">สถานะโครงการ</option>
                                         </select>
                                     </div>
+                                </div>  
+                                <div id="searchname_wrapper" class="col-md-6">
+                                    <label>ชื่อ-สกุล</label>
+                                    <input type="text"  name="searchname" id="searchname" value=""  placeholder="ชื่อ-สกุล" class="form-control" >
                                 </div>      
-                                <div id="searchexpertbranch_wrapper" class="col-md-6">
+                                <div id="searchexpertbranch_wrapper" class="col-md-6" hidden>
                                     <label>สาขาความเชี่ยวชาญ</label><span class="text-danger">*</span>
                                     <select name="searchexpertbranch" id="searchexpertbranch" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-select2">
                                         <option value="0000">===เลือก สาขาความเชี่ยวชาญ===</option>
@@ -92,7 +97,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการโครงการ</h6>
+                        <h6 class="card-title">รายการเจ้าหน้าที่ TTRS</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -100,16 +105,36 @@
                                 <thead>
                                     <tr>
                                         <th>ชื่อ-สกุล</th>
-                                        <th>ความเชี่ยวชาญ</th> 
-                                        <th>เพิ่มเติม</th> 
+                                        <th>โครงการรับผิดชอบ</th> 
+                                        {{-- <th>เพิ่มเติม</th>  --}}
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">
                                     @foreach ($officers as $officer)
                                     <tr>
-                                        <td> {{$officer->name}} {{$officer->lastname}}</td> 
-                                        <td> xxx </td>  
-                                        <td> yyy </td>  
+                                        <td> 
+                                            <a href="{{route('dashboard.admin.search.officer.profile',['id' => $officer->id])}}" class="text-info" target="_blank">{{$officer->name}} {{$officer->lastname}}</a>
+                                        </td> 
+                                        <td> 
+                                            <ul class="list list-unstyled mb-0">
+                                                @foreach ($officer->fulltbpofficer as $fulltbp)
+                                                @php
+                                                    $color = "bg-grey-300";
+                                                    $status = "กำลังดำเนินการ";
+                                                    if($fulltbp->status == 3){
+                                                        $color = "bg-success-400";
+                                                        $status = "เสร็จสิ้น";
+                                                    }
+                                                @endphp
+                                                <li>
+                                                    <i class="icon-primitive-dot mr-2"></i>
+                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                    <span class="badge badge-pill {{$color}} ml-20 ml-md-0">{{$status}}</span>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </td> 
+                                        {{-- <td> yyy </td>   --}}
                                     </tr>  
                                     @endforeach
                                 </tbody>
