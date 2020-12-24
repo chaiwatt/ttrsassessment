@@ -131,9 +131,9 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px">#</th>
+                                        {{-- <th style="width:50px">#</th> --}}
                                         {{-- <th>วันที่ขอส่ง</th>  --}}
-                                        <th>เลขที่โครงการ</th> 
+                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>ความเห็น JD</th>
@@ -147,9 +147,9 @@
                                 <tbody>
                                     @foreach ($minitbps as $key => $minitbp)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         {{-- <td> {{$minitbp->updatedatth}} </td>  --}}
-                                        <td> {{$minitbp->businessplan->code}} </td> 
+                                        {{-- <td> {{$minitbp->businessplan->code}} </td>  --}}
                                         <td> {{$minitbp->project}} </td>  
                                         <td> {{$minitbp->businessplan->company->name}} </td> 
                                         <td> 
@@ -167,18 +167,18 @@
                                                         <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                     @else
                                                         @if ($minitbp->refixstatus == 0)
-                                                                <a href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
+                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                             @elseif($minitbp->refixstatus == 1)
-                                                                <a href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a>
+                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a>
                                                             @elseif($minitbp->refixstatus == 2)
-                                                                <a href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                         @endif
                                                 @endif
                                             </td> 
                                         @endif
                                         <td> 
-                                            <a href="{{asset($minitbp->attachment)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
-                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
+                                            <a type="button" href="{{asset($minitbp->attachment)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
+                                            <a type="button" href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
                                             {{-- <a href="{{route('dashboard.admin.project.minitbp.delete',['id' => $minitbp->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>                                
                                     </tr>

@@ -228,7 +228,7 @@
                                     <tr>
                                         {{-- <th style="width:50px">#</th> --}}
                                         {{-- <th>วันที่ขอส่ง</th>  --}}
-                                        <th>เลขที่โครงการ</th> 
+                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
                                         
                                         {{-- <th>บริษัท</th> --}}
@@ -245,7 +245,7 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>    
-                                                <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                                 <td> {{$fulltbp->minitbp->project}} </td>  
                                                 <td>    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
