@@ -95,7 +95,7 @@
                 <div class="row">
                     @foreach ($pages->reverse() as $_page)
                     <div class="card">
-                        <img src="{{asset($page->sidebarimage->name)}}" class="card-img-top" alt="...">
+                        <img src="{{asset($_page->sidebarimage->name)}}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <a href="{{route('landing.page',['slug' => $_page->slug])}}" class="card-text">{{$_page->name}}</a>
                         </div>

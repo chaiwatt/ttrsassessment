@@ -1540,7 +1540,7 @@
 																<div class="input-group">													
 																	{{-- <button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													 --}}
 																	{{-- <label for="">เอกสารแนบข้อมูลทั่วไป </label>
-																	<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p> --}}
+																	<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p> --}}
 
 																	<label for="">เอกสารแนบข้อมูลทั่วไป </label> 
 																	{{-- <a type="button" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add text-info"></i></a> --}}
@@ -1548,7 +1548,7 @@
 																	
 
 																</div>
-																<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการทดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
+																<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
 																{{-- <input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/> --}}
 															</div>
 														</div>			
