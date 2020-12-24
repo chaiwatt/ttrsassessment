@@ -1,23 +1,28 @@
 
-@if (Auth::user()->user_type_id ==3)
+@php
+    $test =2 ;
+@endphp
+
+{{-- @if ($test == 1) --}}
+    @if (Auth::user()->user_type_id ==3)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-stats-bars2"></i> <span>แดชบอร์ด</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">รายงาน</a></li>
         <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>								
     </ul>
-</li>
-@endif
+    </li>
+    @endif
 
-@if (Auth::user()->user_type_id >=4 )
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'nav-item-expanded nav-item-open':''}}">
+    @if (Auth::user()->user_type_id >=4 )
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-stats-bars2"></i> <span>แดชบอร์ด</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.admin.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'active':''}}">หน้าแรก</a></li>     
         {{-- <li class="nav-item"><a href="{{route('dashboard.admin.report.search')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report.search')?'active':''}}">ค้นหา</a></li>      --}}
     </ul>
-</li>
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
+    </li>
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-archive"></i> <span>โครงการ</span>
         @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
             <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
@@ -56,8 +61,8 @@
         @endif
         <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
     </ul>
-</li>
-@if (Auth::user()->user_type_id ==4)
+    </li>
+    @if (Auth::user()->user_type_id ==4)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
         <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span>
             @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
@@ -72,22 +77,22 @@
             </a></li>
         </ul>
     </li>
-@endif
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
+    @endif
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
         <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">สรุปคะแนน</a></li>
     </ul>
-</li>
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
+    </li>
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
         <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน</a></li>
     </ul>
-</li>
-@endif
+    </li>
+    @endif
 
-@if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
+    @if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'nav-item-expanded nav-item-open':''}}">
         <a href="#" class="nav-link"><i class="icon-stats-bars2"></i> <span>แดชบอร์ด</span></a>
         <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
@@ -124,9 +129,9 @@
             </ul>
         </li>
     @endif
-@endif
-@if (Auth::user()->user_type_id >= 5)
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
+    @endif
+    @if (Auth::user()->user_type_id >= 5)
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-gear"></i> <span>ตั้งค่า</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="ตั้งค่า">
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.dashboard')?'nav-item-expanded':''}}">
@@ -196,10 +201,10 @@
         </li>
         @endif
     </ul>	
-</li>
-@endif
-@if (Auth::user()->user_type_id >=4)
-<li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport')?'nav-item-expanded nav-item-open':''}}">
+    </li>
+    @endif
+    @if (Auth::user()->user_type_id >=4)
+    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span>
         @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
             <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">รายงาน</span>
@@ -212,7 +217,7 @@
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.download')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.download')?'active':''}}">ดาวน์โหลดเอกสาร</a></li>
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.visit')?'active':''}}">เข้าชมเว็ปไซต์</a></li>
     </ul>
-</li>
+    </li>
 
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.search')?'nav-item-expanded nav-item-open':''}}">
         <a href="#" class="nav-link"><i class="icon-search4"></i> <span>ค้นหา</span>
@@ -227,7 +232,9 @@
             <li class="nav-item"><a href="{{route('dashboard.admin.search.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.officer')?'active':''}}">เจ้าหน้าที่ TTRS</a></li>
         </ul>
     </li>
-@endif
+    @endif
+{{-- @endif --}}
+
 
 {{-- @if (Auth::user()->user_type_id <= 2 && !Empty(Auth::user()->company))
 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.')?'nav-item-expanded nav-item-open':''}}">
