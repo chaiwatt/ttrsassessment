@@ -29,9 +29,9 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                 <ul class="nav nav-tabs nav-justified alpha-grey mb-0" id="usertype">
-                    <li class="nav-item" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1">ผู้ขอรับการประเมิน</h6></a></li>
-                    <li class="nav-item" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1">เจ้าหน้าที่ TTRS</h6></a></li>
-                    <li class="nav-item" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1">ผู้เชี่ยวชาญ</h6></a></li>
+                    <li class="nav-item bg-primary-300" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1">ผู้ขอรับการประเมิน</h6></a></li>
+                    <li class="nav-item bg-teal-300" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1">เจ้าหน้าที่ TTRS</h6></a></li>
+                    <li class="nav-item bg-info-300" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1">ผู้เชี่ยวชาญ</h6></a></li>
                 </ul>
                 
                 <div class="tab-content card-body">
