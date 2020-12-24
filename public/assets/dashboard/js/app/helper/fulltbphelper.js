@@ -2400,7 +2400,7 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
         data.forEach(function (employ,index) {
                 if(employ.employ_position_id == 6){
                     html += `<tr >                                        
-                        <td> ${employ.name}${employ.lastname} </td>                                            
+                        <td> ${employ.name} ${employ.lastname} </td>                                            
                         <td> ${employ.employposition['name']} </td> 
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
@@ -2434,7 +2434,7 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                 data.forEach(function (employ,index) {
                     if(employ.employ_position_id == 6){
                         html += `<tr >                                        
-                            <td> ${employ.name}${employ.lastname} </td>                                            
+                            <td> ${employ.name} ${employ.lastname} </td>                                            
                             <td> ${employ.employposition['name']} </td> 
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
