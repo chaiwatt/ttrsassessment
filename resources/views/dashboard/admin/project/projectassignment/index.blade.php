@@ -88,8 +88,8 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px">#</th> 
-                                        <th>เลขที่โครงการ</th> 
+                                        {{-- <th style="width:50px">#</th>  --}}
+                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>ความเห็น JD</th>
@@ -104,15 +104,15 @@
                                 <tbody>
                                     @foreach ($projectassignments as $key => $projectassignment)
                                     <tr>    
-                                        <td> {{$key+1}}</td>
-                                        <td> {{$projectassignment->businessplan->code}} </td> 
+                                        {{-- <td> {{$key+1}}</td> --}}
+                                        {{-- <td> {{$projectassignment->businessplan->code}} </td>  --}}
                                         <td> {{$projectassignment->businessplan->minitbp->project}} </td> 
                                         <td> {{$projectassignment->businessplan->company->name}} </td> 
                                         <td> 
                                             @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
-                                                    <a href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
                                                 @else
-                                                    <a href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                             
                                         </td>  
@@ -136,7 +136,7 @@
                                         </td>
                                         @if (Auth::user()->user_type_id>=6)
                                             <td> 
-                                                <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">มอบหมาย</a>
+                                                <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">มอบหมาย</a>
                                             </td>    
                                         @endif
                                
