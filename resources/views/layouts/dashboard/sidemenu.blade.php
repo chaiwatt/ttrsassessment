@@ -64,13 +64,13 @@
     </li>
     @if (Auth::user()->user_type_id ==4)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
-        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฎิทิน</span>
+        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฏิทิน</span>
             @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
             @endif
         </a>
-        <ul class="nav nav-group-sub" data-submenu-title="ปฎิทิน">
-            <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฎิทิน
+        <ul class="nav nav-group-sub" data-submenu-title="ปฏิทิน">
+            <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฏิทิน
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',8)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
@@ -146,7 +146,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.industrygroup')?'active':''}}">กลุ่มอุตสาหกรรม</a></li>
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.dashboard.registeredcapitaltype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.registeredcapitaltype')?'active':''}}">การจดทะเบียน</a></li> --}}
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businessplanstatus')?'active':''}}">สถานะโครงการ</a></li>
-                <li class="nav-item"><a href="{{route('setting.admin.dashboard.userposition')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.userposition')?'active':''}}">ตำแหน่งผู้ใช้งาน</a></li>
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.dashboard.userposition')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.userposition')?'active':''}}">ตำแหน่งผู้ใช้งาน</a></li> --}}
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.expertposition')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.expertposition')?'active':''}}">ตำแหน่งผู้เชี่ยวชาญ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.banktype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.banktype')?'active':''}}">ประเภทบัญชีเงินฝาก</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.bankaccount')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.bankaccount')?'active':''}}">บัญชีเงินฝาก</a></li>

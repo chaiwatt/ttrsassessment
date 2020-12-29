@@ -25,7 +25,7 @@
                         buttonText: {
                             today:    'วันนี้',
                             month:    'เดือน',
-                            week:     'สัปห์ดา',
+                            week:     'สัปดาห์',
                             day:      'วัน',
                             list:     'รายการ'
                         },

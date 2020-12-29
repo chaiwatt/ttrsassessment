@@ -44,10 +44,23 @@ $(document).on('change', '#finance1', function(e) {
     }
 });
 
-$(document).on('change', '#usersignature', function(e) {
-    if($(this).val() == 1){
-        $("#signature_wrapper").attr("hidden",true);
-    }else{
-        $("#signature_wrapper").attr("hidden",false);
+// $(document).on('change', '#usersignature', function(e) {
+//     if($(this).val() == 1){
+//         // $("#signature_wrapper").attr("hidden",true);
+//     }else{
+//         // $("#signature_wrapper").attr("hidden",false);
+//         $(".chkauthorizeddirector:checked").each(function(){
+//             if($(this).data('id') === 1){
+
+//             }
+//         });
+//     }
+// });
+
+$(document).on('change', '#bank', function(e) {
+    var selectedtedtext = $(this).find("option:selected").text();
+    if(selectedtedtext == "อื่น ๆ โปรดระบุ"){
+        
     }
+    console.log();
 });

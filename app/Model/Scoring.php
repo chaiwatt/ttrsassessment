@@ -11,9 +11,9 @@ class Scoring extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected $appends = ['user'];
+    // protected $appends = ['user'];
 
-    public function getUserAttribute(){
-        return User::find($this->user_id);
-    } 
+    // public function getUserAttribute(){
+    //     return User::find($this->user_id);
+    // } 
 }

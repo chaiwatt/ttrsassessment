@@ -104,6 +104,9 @@ class RegisterController extends Controller
             // $xpertdetail->hid = $vatno;
             $xpertdetail->save();
         }
+        if($companyname == "บัตรประจำตัวประชาชน"){
+            $companyname = "";
+        }
         $companyname =  str_replace("บริษัท","",$companyname);
         $companyname =  str_replace("ห้างหุ้นส่วน","",$companyname);
         CreateCompany::createCompany($user,$companyname,$vatno,$businesstype);

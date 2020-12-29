@@ -106,39 +106,23 @@ class DashboardAdminProjectAssessmentController extends Controller
     }
 
     public function GetEv(Request $request){
-        // dd($request->userid);
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
-                                                ->orderBy('pillar_id','asc')
+                                                ->orderBy('ev_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
-                                                ->get();
-        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
+                                                ->get()
+                                                ->makeHidden(['updated_at','created_at'])
+                                                ->makeHidden('sumscoring');
         $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
-        // $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
-        $pillars = Pillar::get();   
-        // $evportions = EvType::get();   
-       
-        // $scores = Scoring::where('ev_id',$request->evid)
-        //             ->where('scoretype',2)
-        //             ->where('user_id',$request->userid)
-        //             ->get();
-        // dd($scores);            
-        // $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
+        $pillars = Pillar::get(['id', 'ev_type_id']);   
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
                                     ->where('user_id',$request->userid)
-                                    ->first(); 
-        // $ev = Ev::find($request->evid);                            
+                                    ->first(['ev_id', 'user_id']);  
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
-            "pillaindexweigths" => $pillaindexweigths,
             "sumweigth" => $sumweigth,
-            // "sumextraweigth" => $sumextraweigth,
             "pillars" => $pillars,
-            // "evportions" => $evportions,
-            // "scores" => $scores,
-            // "checklistgradings" => $checklistgradings,
             "scoringstatus" => $scoringstatus,
-            // "ev" => $ev
         ));
     }
 
@@ -148,7 +132,8 @@ class DashboardAdminProjectAssessmentController extends Controller
                                                 ->orderBy('pillar_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
-                                                ->get();
+                                                ->get()
+                                                ->makeHidden(['updated_at','created_at']);
         GradeSummary::where('ev_id',$request->evid)->delete();
         for ($i=1; $i <= 2; $i++) {                                       
             $criteriatransactiongradings = CriteriaTransaction::where('ev_id',$request->evid)
@@ -236,17 +221,6 @@ class DashboardAdminProjectAssessmentController extends Controller
                                             ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
                     if(!Empty($checklistgrading)){
                         $yourgrade = 0;
-                        // if($inscore->count() >= $checklistgrading->gradea){
-                        //     $yourgrade = 5;
-                        // }else if($inscore->count() >= $checklistgrading->gradeb && $inscore->count() < $checklistgrading->gradea){
-                        //     $yourgrade = 4;
-                        // }else if($inscore->count() >= $checklistgrading->gradec && $inscore->count() < $checklistgrading->gradeb){
-                        //     $yourgrade = 3;
-                        // }else if($inscore->count() >= $checklistgrading->graded && $inscore->count() < $checklistgrading->gradec){
-                        //     $yourgrade = 2;
-                        // }else if($inscore->count() >= $checklistgrading->gradee && $inscore->count() < $checklistgrading->graded){
-                        //     $yourgrade = 1;
-                        // }
 
                         if($_sumscore >= $checklistgrading->gradea){
                             $yourgrade = 5;
@@ -339,7 +313,8 @@ class DashboardAdminProjectAssessmentController extends Controller
         $projectgrade->percent = $percent;
         $projectgrade->grade = $grade;
         $projectgrade->save();
-
+        $projectgrade = ProjectGrade::where('ev_id',$ev->id)->first(['percent', 'grade']); 
+        // 
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "finalgrade" => $finalgrade,

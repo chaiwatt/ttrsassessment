@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use App\Model\EducationLevel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\EditOfficerProfile;
+use App\Http\Requests\EditProfileExpertRequest;
 
 class SettingProfileOfficerController extends Controller
 {
@@ -47,8 +49,7 @@ class SettingProfileOfficerController extends Controller
                                             ->withOfficerfields($officerfields)
                                             ->withOfficerdocs($officerdocs);
     }
-    public function EditSave(Request $request, $id){
-      
+    public function EditSave(EditOfficerProfile $request, $id){
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -122,6 +123,7 @@ class SettingProfileOfficerController extends Controller
             'position' => $request->position,
             'organization' => $request->organization,
             'education_level_id' => $request->educationlevel,
+            'officer_branch_id' => $request->expertbranch,
             'expereinceyear' => $request->expereinceyear,
             'expereincemonth' => $request->expereincemonth
         ]);

@@ -565,7 +565,7 @@
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >แนบเอกสาร</button>													
+							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
 					</div>
@@ -597,7 +597,7 @@
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >แนบเอกสาร</button>													
+							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
 					</div>
@@ -617,7 +617,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มแผนการดำเนินงาน</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แผนการดำเนินงาน</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -625,7 +625,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
-							<input type="text" id="plandetail" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
+							<input type="text" id="plandetail" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -659,7 +659,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มแผนการดำเนินงาน</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แผนการดำเนินงาน</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -668,7 +668,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
-							<input type="text" id="plandetail_edit" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
+							<input type="text" id="plandetail_edit" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -1134,12 +1134,12 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-							<input type="text" id="companydocname" placeholder="ชื่อเอกสาร" class="form-control">
+							<input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >แนบเอกสาร</button>													
+							<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc"/>
 					</div>
@@ -1922,7 +1922,7 @@
 														<div class="col-md-12">
 															<div class="form-group">	
 																{{-- <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add"></i></a> --}}
-																<label for="">ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</label>
+																<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์</label>
 																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน(เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
 															</div>
 															<div class="table-responsive">
@@ -2725,7 +2725,7 @@
 														</div>
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
-																<thead>
+																<thead class="bg-info">
 																	<tr>
 																		<th>รายการ</th>  
 																		<th>เงินทุนที่มีอยู่แล้ว</th>                                                                                    

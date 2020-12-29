@@ -98,6 +98,8 @@ Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => 'company'], function(){
         Route::post('getsubisic','Api\CompanyController@GetSubisic')->name('api.company.getsubisic');            
         Route::post('addauthorizeddirector','Api\CompanyController@AddAuthorizedDirector')->name('api.company.addauthorizeddirector');
+        Route::post('getauthorizeddirector','Api\CompanyController@GetAuthorizedDirector')->name('api.company.getauthorizeddirector');
+        Route::post('editauthorizeddirector','Api\CompanyController@EditAuthorizedDirector')->name('api.company.editauthorizeddirector');
         Route::post('deleteauthorizeddirector','Api\CompanyController@DeleteAuthorizedDirector')->name('api.company.deleteauthorizeddirector');
         Route::post('uploadorganizeimg','Api\CompanyController@UploadOrganizeImg')->name('api.company.uploadorganizeimg');  
     }); 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use Image;
+use App\User;
 use App\Helper\Crop;
+use App\Model\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +25,8 @@ class CoverImageController extends Controller
         $auth->update([
             'cover' => $cover
         ]);
-    
-        return response()->json(Auth::user());  
+        $auth = Auth::user()->makeHidden('fulltbpexpert')->makeHidden('fulltbpofficer')->makeHidden('usertype');
+        return response()->json($auth);  
     }
     
     public function AddAvatar(Request $request){
@@ -40,7 +42,9 @@ class CoverImageController extends Controller
         $auth->update([
             'picture' => $picture
         ]);
-    
-        return response()->json(Auth::user());  
+        // $auth = Auth::user()->makeHidden('fulltbpexpert')->makeHidden('fulltbpofficer')->makeHidden('usertype');
+        $auth = Auth::user();
+        //gzencode
+        return response()->json($auth);  
     }
 }

@@ -170,6 +170,8 @@
 	<script src="{{asset('assets/dashboard/js/plugins/forms/selects/select2.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/handsontable.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/forms/styling/uniform.min.js')}}"></script>
+	<script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script>
+	{{-- <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave-phone.th.js')}}"></script> --}}
 
 	<script src="{{asset('assets/dashboard/js/app.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/demo_pages/form_layouts.js')}}"></script>

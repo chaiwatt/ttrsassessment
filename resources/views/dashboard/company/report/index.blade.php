@@ -123,7 +123,7 @@
             <div class="col-md-7">
                 {{-- <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ปฎิทินนัดหมาย</h6>
+                        <h6 class="card-title">ปฏิทินนัดหมาย</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
@@ -384,7 +384,7 @@
                         buttonText: {
                             today:    'วันนี้',
                             month:    'เดือน',
-                            week:     'สัปห์ดา',
+                            week:     'สัปดาห์',
                             day:      'วัน',
                             list:     'รายการ'
                         },

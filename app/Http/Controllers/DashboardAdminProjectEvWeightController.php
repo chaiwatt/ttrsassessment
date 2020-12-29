@@ -49,17 +49,19 @@ class DashboardAdminProjectEvWeightController extends Controller
                                                 ->orderBy('pillar_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
-                                                ->get();
-        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
+                                                ->get()
+                                                ->makeHidden(['updated_at','created_at','index_type_id'])
+                                                ->makeHidden('scoring');
+        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get()->makeHidden(['updated_at','created_at']);
         $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
         $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
-        $ev= Ev::find($request->evid);
+        // $ev= Ev::find($request->evid);
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "pillaindexweigths" => $pillaindexweigths,
             "sumweigth" => $sumweigth,
             "sumextraweigth" => $sumextraweigth,
-            "ev" => $ev
+            // "ev" => $ev
         ));
 
     }

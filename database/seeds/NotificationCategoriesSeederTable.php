@@ -16,7 +16,7 @@ class NotificationCategoriesSeederTable extends Seeder
                 'name' => 'โครงการ'
             ],
             [
-                'name' => 'ปฎิทิน'
+                'name' => 'ปฏิทิน'
             ],
             [
                 'name' => 'ประเมิน'

@@ -12,7 +12,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฎิทิน</h5>
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฏิทิน</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -319,7 +319,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ปฎิทินกลาง</h6>
+                        <h6 class="card-title">ปฏิทิน</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>

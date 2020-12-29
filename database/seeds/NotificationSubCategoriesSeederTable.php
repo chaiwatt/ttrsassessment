@@ -42,7 +42,7 @@ class NotificationSubCategoriesSeederTable extends Seeder
             ],
             [
                 'notification_category_id' => 2,
-                'name' => 'ปฎิทิน'
+                'name' => 'ปฏิทิน'
             ],
             [
                 'notification_category_id' => 3,

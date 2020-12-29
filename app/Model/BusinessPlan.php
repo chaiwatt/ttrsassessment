@@ -19,7 +19,7 @@ class BusinessPlan extends Model
         return Company::find($this->company_id);
     } 
     public function getBusinessPlanStatusAttribute(){
-        return BusinessPlanStatus::find($this->business_plan_status_id);
+        return BusinessPlanStatus::find($this->business_plan_status_id,['name', 'progress']);
     } 
 
     public function getCreateddateTHAttribute(){

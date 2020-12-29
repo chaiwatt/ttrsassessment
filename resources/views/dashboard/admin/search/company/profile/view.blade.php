@@ -72,13 +72,14 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label>ตำแหน่ง<a href="#" id="addposition" class="text-info"> เพิ่มใหม่</a></label>
-												<select name="userposition" id="userposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
+												<label>ตำแหน่ง</label>
+												<input type="text" name="userposition" value="{{$user->position}}" data-placeholder="ตำแหน่ง" class="form-control">
+												{{-- <select name="userposition" id="userposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
 													@foreach ($userpositions as $userposition)
 														<option value="{{$userposition->id}}"
 															@if ($userposition->id == $user->user_position_id) selected @endif >{{$userposition->name}}</option> 
 													@endforeach
-												</select>
+												</select> --}}
 											</div>
 										</div>
 									@endif
@@ -279,14 +280,14 @@
 										</div>
 										<div class="col-md-6">  
 											<div class="form-group">
-												<label>ละติจูด<a href="https://google.com/maps/place/{{$companyaddress->lat}},{{$companyaddress->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
+												<label>พิกัดละติจูด (เช่น 14.076868486942407)<a href="https://google.com/maps/place/{{$companyaddress->lat}},{{$companyaddress->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
 												<input type="text"  name="lat" value="{{$companyaddress->lat}}"  placeholder="ละติจูด" class="form-control">
 											</div>
 										</div>
 										<div class="col-md-6">  
 											<div class="form-group">
-												<label>ลองติจูด</label>
-												<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองติจูด" class="form-control">
+												<label>พิกัดลองจิจูด (เช่น 100.60153839991285)</label>
+												<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองจิจูด" class="form-control">
 											</div>
 										</div>
 										<div class="col-md-12" id="other_address_wrapper" @if ($user->company->companyaddress->count() == 1) hidden @endif>
@@ -361,9 +362,9 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											{{-- <div class="col-md-12" > --}}
-												<label for="">เอกสารแนบ  </label>
+												<label for="">แนบเอกสารข้อมูลทั่วไป  </label>
 											{{-- <a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">อัปโหลดเอกสารแนบ</a>  --}}
-											<p><small>(หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ)</small></p>
+											<p><small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ)</small></p>
 											
 												<div class="table-responsive">
 													<table class="table table-bordered table-striped">

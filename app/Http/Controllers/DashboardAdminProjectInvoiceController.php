@@ -76,7 +76,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             ],
             'default_font' => 'opun'
         ]);
-
+        // $mpdf->SetCompression(false);
         $invoicetransaction = InvoiceTransaction::find($id);
         $company = Company::find($invoicetransaction->company_id);
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();

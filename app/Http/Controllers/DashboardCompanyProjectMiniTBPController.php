@@ -18,6 +18,7 @@ use App\Helper\EmailBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
+use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
@@ -55,7 +56,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $companyaddress = CompanyAddress::where('company_id',$company->id)->first();
         $amphurs = Amphur::where('province_id',$companyaddress->province_id)->get();
         $tambols = Tambol::where('amphur_id',$companyaddress->amphur_id)->get();
-        $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
+        // $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
+        $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
         return view('dashboard.company.project.minitbp.edit')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withCompany($company)
@@ -79,18 +81,19 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         return $pdf->stream('document.pdf');
     }
     public function EditSave(EditMiniTbpRequest $request,$id){
+        // return $request->finance1loan;
         MiniTBP::find($id)->update([
             'project' => $request->project,
             'projecteng' => $request->projecteng,
             'finance1' => $request->finance1,
             'thai_bank_id' => $request->bank,
-            'finance1_loan' => $request->finance1loan,
+            'finance1_loan' => str_replace( ',', '', $request->finance1loan),
             'finance2' => $request->finance2,
             'finance3' => $request->finance3,
             'finance4' => $request->finance4,
-            'finance4_joint' => $request->finance4joint,
-            'finance4_joint_min' => $request->finance4jointmin,
-            'finance4_joint_max' => $request->finance4jointmax,
+            'finance4_joint' => str_replace( ',', '', $request->finance4joint),
+            'finance4_joint_min' => str_replace( ',', '', $request->finance4jointmin),
+            'finance4_joint_max' => str_replace( ',', '', $request->finance4jointmax),
             'nonefinance1' => $request->nonefinance1,
             'nonefinance2' => $request->nonefinance2,
             'nonefinance3' => $request->nonefinance3,
@@ -138,6 +141,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             ],
             'default_font' => 'kanit',
         ]);
+        // $mpdf->SetCompression(false);
         $auth = Auth::user();
         $company = Company::where('user_id',$auth->id)->first();
         $minitpb = MiniTBP::find($id);
@@ -150,9 +154,9 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $finance2_text = (!Empty($minitpb->finance2))?'x':'';
         $finance3_text = (!Empty($minitpb->finance3))?'x':'';
         $finance4_text = (!Empty($minitpb->finance4))?'x':'';
-        $finance4_joint = (!Empty($minitpb->finance4) && !Empty($minitpb->finance4_joint))?number_format($minitpb->finance4_joint,2):'' ;
-        $finance4_joint_min = (!Empty($minitpb->finance4) && !Empty($minitpb->finance4_joint_min))?$minitpb->finance4_joint_min:'' ;
-        $finance4_joint_max = (!Empty($minitpb->finance4) && !Empty($minitpb->finance4_joint_max))?$minitpb->finance4_joint_max:'' ;
+        $finance4_joint = (!Empty($minitpb->finance4) && !Empty($minitpb->finance4_joint))?number_format(Math.ceil($minitpb->finance4_joint),2):'' ;
+        $finance4_joint_min = (!Empty($minitpb->finance4) && !Empty($minitpb->finance4_joint_min))?$minitpb->finance4_joint_min ."%":'' ;
+        $finance4_joint_max = (!Empty($minitpb->finance4) && !Empty($minitpb->finance4_joint_max))?$minitpb->finance4_joint_max ."%":'' ;
         $nonefinance1_text = (!Empty($minitpb->nonefinance1))?'x':'';
         $nonefinance2_text = (!Empty($minitpb->nonefinance2))?'x':'';
         $nonefinance3_text = (!Empty($minitpb->nonefinance3))?'x':'';
@@ -169,7 +173,6 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $fileContent = file_get_contents(asset("assets/dashboard/template/minitbp.pdf"),'rb');
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
-        
         $segment = new \Segment();
         $words = $segment->get_segment_array($minitpb->project);
         $firstparagraph = '';

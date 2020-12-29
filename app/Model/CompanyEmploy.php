@@ -3,10 +3,14 @@
 namespace App\Model;
 
 use App\Model\Prefix;
+use App\Model\Company;
+use App\Model\MiniTBP;
+use App\Model\BusinessPlan;
 use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\EmployExperience;
+use App\Model\MinitbpSignature;
 use Illuminate\Database\Eloquent\Model;
 
 class CompanyEmploy extends Model
@@ -33,5 +37,17 @@ class CompanyEmploy extends Model
     
     public function getEmploytrainingAttribute(){
         return EmployTraining::where('company_employ_id',$this->id)->get();
+    } 
+
+    public function getUsesignatureAttribute(){
+        $company = Company::find($this->company_id);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $minitbp=MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $signature = '1';
+        $check = MinitbpSignature::where('company_employee_id',$this->id)->where('mini_tbp_id',$minitbp->id)->first();
+        if(!Empty($check)){
+            $signature = '2';
+        }
+        return $signature;
     } 
 }

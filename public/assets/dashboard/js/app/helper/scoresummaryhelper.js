@@ -1,5 +1,6 @@
 $(function() {
     getSummaryEv($('#evid').val()).then(data => {
+        // console.log(data);
         $('#showpercent').html(parseFloat(data.projectgrade.percent).toFixed(2));
         $('#showgrade').html(data.projectgrade.grade);
         sumGrade(data);
@@ -152,7 +153,7 @@ function getSummaryEv(evid){
         if (cell4 === null || forthCell.innerText !== cell4.innerText) {
             cell4 = forthCell;
         } else {
-            console.log(forthCell.innerText)
+            // console.log(forthCell.innerText)
             if (forthCell.innerText.includes("placeholder") == true){
                 cell4.rowSpan++;
                 forthCell.remove();
@@ -168,7 +169,7 @@ $(document).on('click', '#togglecomment', function(e) {
 
 
  function RenderTable(data,evtype){
-    console.log(data.criteriatransactions);
+    // console.log(data.criteriatransactions);
     var html =``;
 
     data.criteriatransactions.forEach((criteria,index) => {
@@ -198,54 +199,20 @@ $(document).on('click', '#togglecomment', function(e) {
             }
 
             var criterianame = `<label>กรอกเกรด/คะแนน</label>
-                                    <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control inpscore">`;
+                                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control inpscore">`;
 
             if(criteria.criteria != null){
                 criterianame = `<label class="form-check-label">
-                                    <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info inpscore" ${checkvalue}>
+                                    <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info inpscore" ${checkvalue}>
                                     ${criteria.criteria['name']}
                                 </label>`;
             }
-            // var indexpercent = (data.evportions.find(x => x.id === 1)['percent'])/100;
-            // var pillarpercent = (data.pillars.find(x => x.id === criteria.pillar['id'])['percent'])/100;
-            // var check = data.pillaindexweigths.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-            // var pillarweight = 0;
-            // if ( typeof(check) !== "undefined" && check !== null ) {
-            //     pillarweight = check['weigth'];
-            // }
-            // var weightsum = raw*indexpercent*pillarpercent*pillarweight;
 
             criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
                                 <label><i>ความเห็น</i></label>
-                                <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control inpscore">
+                                <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control inpscore">
                                 </div>
                             </div>`;
-
-            // var _scores = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']); 
-            // const numcheck = _scores.map(item => item.score).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0);
-
-            // if(_scores.length > 0){
-            //     var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-            //     var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
-            //     let gradeis = 0;
-            //     for (let i = 0; i < grades.length; i++) {
-            //         if(numcheck >= grades[i]){
-            //             gradeis = i;
-            //             break;
-            //         }
-            //     } 
-            //     if(gradeis == 0){
-            //         weightsum = 5*indexpercent*pillarpercent*pillarweight;
-            //     }else if(gradeis == 1){
-            //         weightsum = 4*indexpercent*pillarpercent*pillarweight;
-            //     }else if(gradeis == 2){
-            //         weightsum = 3*indexpercent*pillarpercent*pillarweight;
-            //     }else if(gradeis == 3){
-            //         weightsum = 2*indexpercent*pillarpercent*pillarweight;
-            //     }else if(gradeis == 4){
-            //         weightsum = 1*indexpercent*pillarpercent*pillarweight;
-            //     }
-            // }
             
             html += `<tr > 
             <td> ${criteria.pillar['name']}</td>                                            

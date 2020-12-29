@@ -15,12 +15,12 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-							<input type="text" id="docname" placeholder="ชื่อเอกสาร" class="form-control">
+							<input type="text" id="docname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button id="btnaddboldoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('boldoc').click();" >แนบเอกสาร</button>													
+							<button id="btnaddboldoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('boldoc').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="boldoc" name="boldoc"/>
 					</div>

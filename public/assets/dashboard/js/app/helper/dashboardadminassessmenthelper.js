@@ -34,6 +34,7 @@ function getEv(evid){
   $(document).on('click', '#togglecomment', function(e) {
       $('.toggle').toggle();
    });
+   
    function RenderTable(data,evtype){
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {

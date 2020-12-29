@@ -10,7 +10,7 @@ use App\Model\UserGroup;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
 use App\Model\ExpertDetail;
-use App\Model\UserPosition;
+// use App\Model\UserPosition;
 use App\Model\OfficerDetail;
 use App\Model\ProjectMember;
 use App\Model\ExpertAssignment;
@@ -31,7 +31,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $fillable = [];
     protected $guarded = [];
-    protected $appends = ['usertype','fulltbpexpert','fulltbpofficer'];
+    // protected $appends = ['usertype'];
+    // protected $appends = ['usertype','fulltbpexpert','fulltbpofficer'];
+    protected $appends = ['usertype'];
 
     protected static $ignoreChangedAttributes = ['password'];
     protected static $logAttributesToIgnore = [ 'password'];
@@ -64,10 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return UserStatus::find($this->user_status_id);
     }
-    public function getUserPositionAttribute()
-    {
-        return UserPosition::find($this->user_position_id);
-    }
+    // public function getUserPositionAttribute()
+    // {
+    //     return UserPosition::find($this->user_position_id);
+    // }
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);
@@ -99,19 +101,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return ExpertDetail::where('user_id',$this->id)->first();
     }
-    public function getFulltbpexpertAttribute()
-    {
-        $projectmemberarray = ProjectMember::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();
-        return FullTbp::whereIn('id',$projectmemberarray)->get();
-    }
-    public function getFulltbpofficerAttribute()
-    {
-        $officerdetailids = OfficerDetail::where('user_id', $this->id)->pluck('user_id')->toArray();
-        $projectmemberids = ProjectMember::whereIn('user_id',$officerdetailids)->pluck('full_tbp_id')->toArray();
-        $projectmemberuniqueids = array_unique($projectmemberids);
-        $projectassignmentids = ProjectAssignment::where('coleader_id',$this->id)->pluck('full_tbp_id')->toArray();
-        $projectassignmentuniqueids = array_unique($projectassignmentids);
-        $fulltbpids = array_unique(array_merge($projectmemberuniqueids,$projectassignmentuniqueids));
-        return FullTbp::whereIn('id',$fulltbpids)->get();
-    }
+    // public function getFulltbpexpertAttribute()
+    // {
+    //     $projectmemberarray = ProjectMember::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();
+    //     return FullTbp::whereIn('id',$projectmemberarray)->get();
+    // }
+    // public function getFulltbpofficerAttribute()
+    // {
+    //     $officerdetailids = OfficerDetail::where('user_id', $this->id)->pluck('user_id')->toArray();
+    //     $projectmemberids = ProjectMember::whereIn('user_id',$officerdetailids)->pluck('full_tbp_id')->toArray();
+    //     $projectmemberuniqueids = array_unique($projectmemberids);
+    //     $projectassignmentids = ProjectAssignment::where('coleader_id',$this->id)->pluck('full_tbp_id')->toArray();
+    //     $projectassignmentuniqueids = array_unique($projectassignmentids);
+    //     $fulltbpids = array_unique(array_merge($projectmemberuniqueids,$projectassignmentuniqueids));
+    //     return FullTbp::whereIn('id',$fulltbpids)->get();
+    // }
 }

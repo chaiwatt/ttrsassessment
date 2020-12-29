@@ -17,6 +17,7 @@ return [
 	'show_watermark'       => false,
 	'watermark_font'       => 'sans-serif',
 	'display_mode'         => 'fullpage',
+	// 'SetCompression'         => 'false',
 	'watermark_text_alpha' => 0.1,
 	'custom_font_dir'      => base_path('public/assets/dashboard/fonts/'),
 	'custom_font_data' 	   =>  [

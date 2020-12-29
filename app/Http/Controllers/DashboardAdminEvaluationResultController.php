@@ -121,7 +121,7 @@ class DashboardAdminEvaluationResultController extends Controller
             'default_font' => 'kittithada',
             'format' => [279, 203]
         ]);
-
+        // $mpdf->SetCompression(false);
         $evaluationresult = EvaluationResult::find($id);
         $fulltbp = FullTbp::find($evaluationresult->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);

@@ -142,19 +142,19 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อบริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="companyname" id ="companyname" value="{{old('companyname') ?? $minitbp->businessplan->company->name}}" class="form-control required" >
+											<input type="text" name ="companyname" id ="companyname" value="{{old('companyname') ?? $minitbp->businessplan->company->name}}" class="form-control form-control-lg required" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ที่อยู่บริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="address" id ="address" value="{{$user->company->companyaddress->first()->address}}" class="form-control required" >
+											<input type="text" name ="address" id ="address" value="{{$user->company->companyaddress->first()->address}}" class="form-control form-control-lg required" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>จังหวัด<span class="text-danger">*</span></label>
-											<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2 required">
+											<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2 required">
 												<option value=""></option>
 												@foreach ($provinces as $province)
 													<option value="{{$province->id}}" @if($user->company->companyaddress->first()->province_id == $province->id) selected @endif>{{$province->name}}</option> 
@@ -165,7 +165,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>อำเภอ<span class="text-danger">*</span></label>
-											<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2 required">
+											<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2 required">
 												@foreach ($amphurs as $amphur)                                                                
 													<option value="{{$amphur->id}}" @if ($user->company->companyaddress->first()->amphur_id == $amphur->id) selected @endif> {{$amphur->name}} </option>
 												@endforeach   
@@ -175,7 +175,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>ตำบล<span class="text-danger">*</span></label>
-											<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2 required">
+											<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2 required">
 												@foreach ($tambols as $tambol)                                                                
 													<option value="{{$tambol->id}}" @if ($user->company->companyaddress->first()->tambol_id == $tambol->id) selected @endif> {{$tambol->name}} </option>
 												@endforeach    
@@ -185,7 +185,7 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control required">
+											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required">
 										</div>
 									</div>
 									<legend>
@@ -194,9 +194,20 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-											<select name="contactprefix" id="contactprefix" class="form-control form-control-select2 required">
+											<select name="contactprefix" id="contactprefix" class="form-control form-control-lg form-control-select2 required">
 												@foreach ($contactprefixes as $contactprefix)
-													<option value="{{$contactprefix->id}}" @if($minitbp->contactprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
+													<option value="{{$contactprefix->id}}" 
+														@if ($minitbp->contactprefix != 0)
+																@if($minitbp->contactprefix == $contactprefix->id) 
+																	selected 
+																@endif 
+															@else
+																@if($user->prefix_id == $contactprefix->id) 
+																	selected 
+																@endif 
+														@endif
+
+														>{{$contactprefix->name}}</option>
 												@endforeach
 											</select>
 										</div>
@@ -204,20 +215,20 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name ="contactname" id ="contactname" value="{{old('contactname') ?? $minitbp->contactname}}" class="form-control required" >
+											<input type="text" name ="contactname" id ="contactname" value="{{old('contactname') ?? $minitbp->contactname}}" class="form-control form-control-lg stringformat60 required" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name ="contactlastname" id ="contactlastname" value="{{old('contactlastname') ?? $minitbp->contactlastname}}" class="form-control required" >
+											<input type="text" name ="contactlastname" id ="contactlastname" value="{{old('contactlastname') ?? $minitbp->contactlastname}}" class="form-control form-control-lg stringformat60 required" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ตำแหน่ง</label>
-											<input type="text" name ="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" class="form-control" >
-											{{-- <select name="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2">
+											<input type="text" name ="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" class="form-control form-control-lg stringformat60" >
+											{{-- <select name="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-lg form-control-select2">
 												@foreach ($contactpositions as $contactposition)
 													<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
 												@endforeach
@@ -233,7 +244,7 @@
 													$phone = Auth::user()->phone;
 												}
 											@endphp
-											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $phone}}" class="form-control required">
+											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $phone}}" class="form-control form-control-lg required">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -245,13 +256,13 @@
 													$email = Auth::user()->email;
 												}
 											@endphp
-											<input type="email" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $email}}" class="form-control required">
+											<input type="email" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $email}}" class="form-control form-control-lg required">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">เว็บไซต์</label>
-											<input type="text" name ="website" id ="website" value="{{old('website') ?? $minitbp->website}}" class="form-control" >
+											<input type="text" name ="website" id ="website" value="{{$company->website ?? $minitbp->website}}" class="form-control form-control-lg" >
 										</div>
 									</div>
 								</div>
@@ -264,7 +275,7 @@
 										<fieldset>	
 											<div class="form-group">
 												<label>ชื่อโครงการ/เทคโนโลยี<span class="text-danger">*</span></label>
-												<input type="text" id="project" name="project" value="{{old('project') ?? $minitbp->project}}"  placeholder="ชื่อโครงการ/เทคโนโลยี" class="form-control required" >
+												<input type="text" id="project" name="project" value="{{old('project') ?? $minitbp->project}}" placeholder="ชื่อโครงการ/เทคโนโลยี" class="form-control form-control-lg stringformat60 required" >
 											</div>
 										</fieldset>
 									</div>
@@ -272,7 +283,7 @@
 										<fieldset>	
 											<div class="form-group">
 												<label>ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ (ถ้ามี)</label>
-												<input type="text" id="projecteng" name="projecteng" value="{{old('projecteng') ?? $minitbp->projecteng}}"  placeholder="ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ" class="form-control">
+												<input type="text" id="projecteng" name="projecteng" value="{{old('projecteng') ?? $minitbp->projecteng}}" placeholder="ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ" class="form-control form-control-lg stringformat60">
 											</div>
 										</fieldset>
 									</div>
@@ -283,10 +294,10 @@
 									</legend>
 									<div class="col-md-12">
 										<div class="form-group mb-3 mb-md-2">
-											<label class="font-weight-semibold">สิทธิประโยชน์ทางการเงิน (Finance)</label>
+											<label class="font-weight-semibold"><u>สิทธิประโยชน์ทางการเงิน (Finance)</u></label>
 											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
+												<div class="col-md-12">
+													{{-- <div class="form-group"> --}}
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" name="finance1"  id="finance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance1)) checked @endif data-fouc>
@@ -296,22 +307,23 @@
 																<div class="col-md-6">
 																	<div class="form-group">
 																		<label for="">เลือกธนาคาร</label>
-																		<select name="bank" id="bank" class="form-control form-control-select2">
+																		<select name="bank" id="bank" class="form-control form-control-lg form-control-select2">
 																			@foreach ($banks as $bank)
 																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_id == $bank->id) selected @endif >{{$bank->name}}</option>
 																			@endforeach
 																		</select>
 																	</div>
+																	{{-- <input type="text" name="otherbank" id="otherbank" value="" class="form-control form-control-lg" > --}}
 																</div>
 																<div class="col-md-6">
 																	<div class="form-group">
 																		<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																		<input type="number" name="finance1loan" id="finance1loan" value="{{old('finance1loan') ?? $minitbp->finance1_loan}}" class="form-control" >
+																		<input type="text" name="finance1loan" id="finance1loan" value="{{old('finance1loan') ?? $minitbp->finance1_loan}}" class="form-control form-control-lg numeralformat10" >
 																	</div>
 																</div>
 															</div>	
 														</div>
-													</div>
+													{{-- </div> --}}
 	
 													<div class="form-check">
 														<label class="form-check-label">
@@ -326,9 +338,6 @@
 															โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)
 														</label>
 													</div>
-												</div>
-	
-												<div class="col-md-6">
 													<div class="form-check">
 														<label class="form-check-label">
 															<input type="checkbox" name="finance4" id="finance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance4)) checked @endif data-fouc>
@@ -338,33 +347,37 @@
 															<div class="col-md-4">
 																<div class="form-group">
 																	<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																	<input type="number" name ="finance4joint" id="finance4joint" class="form-control" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}">
+																	<input type="text" name ="finance4joint" id="finance4joint" class="form-control form-control-lg numeralformat10" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}">
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">สัดส่วนลงทุน บริษัท</label>
-																	<input type="number" name="finance4jointmin" id="finance4jointmin" class="form-control" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}">
+																	<label for="">สัดส่วนลงทุน บริษัท %</label>
+																	<input type="text" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}">
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">: สวทช.</label>
-																	<input type="number" name="finance4jointmax" id="finance4jointmax" class="form-control" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}">
+																	<label for="">: สวทช. %</label>
+																	<input type="text" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}">
 																</div>
 															</div>
 														</div>
 													</div>
 												</div>
+	
+												{{-- <div class="col-md-12">
+													
+												</div> --}}
 											</div>
 										</div>
 									</div>
 								</div>
-								<hr>
-								<div class="row">
+								{{-- <hr> --}}
+								<div class="row mt-2">
 									<div class="col-md-12">
 										<div class="form-group mb-3 mb-md-2">
-											<label class="font-weight-semibold">สิทธิประโยชน์ที่ไม่ใช่การเงิน (Non-Finance)</label>
+											<label class="font-weight-semibold"><u>สิทธิประโยชน์ที่ไม่ใช่การเงิน (Non-Finance)</u></label>
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-check">
@@ -405,7 +418,7 @@
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for="">โปรดระบุ</label>
-																	<input type="text" name ="nonefinance5detail" id ="nonefinance5detail" class="form-control" value="{{old('nonefinance5detail') ?? $minitbp->nonefinance5_detail}}">
+																	<input type="text" name ="nonefinance5detail" id ="nonefinance5detail" class="form-control form-control-lg" value="{{old('nonefinance5detail') ?? $minitbp->nonefinance5_detail}}">
 																</div>
 															</div>
 														</div>
@@ -420,7 +433,7 @@
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for="">โปรดระบุ</label>
-																	<input type="text" name="nonefinance6detail" id="nonefinance6detail" class="form-control" value="{{old('nonefinance6detail') ?? $minitbp->nonefinance6_detail}}">
+																	<input type="text" name="nonefinance6detail" id="nonefinance6detail" class="form-control form-control-lg" value="{{old('nonefinance6detail') ?? $minitbp->nonefinance6_detail}}">
 																</div>
 															</div>
 														</div>
@@ -434,7 +447,68 @@
 							<h6>ข้อมูลผู้ลงนาม</h6>
 							<fieldset>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-12">
+										<div class="form-group">
+											{{-- <div class="col-md-12" > --}}
+												{{-- <input type="text" name="authorizeddirector" id="authorizeddirector" value="{{$authorizeddirectors->count()}}" hidden > --}}
+												{{-- <label for="">รายชื่อกรรมการ/ผู้มีอำนาจลงนาม<span class="text-danger">*</span></label> --}}
+												{{-- <a href="#" type="button" id="btn_add_authorized_director" class="text-primary" >คลิกเพิ่ม</a> --}}
+												<div class="table-responsive">
+													<table class="table table-bordered table-striped">
+														<thead>
+															<tr class="bg-info">
+																<th style="width:70%">เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน TTRS (Mini TBP)</th>
+																{{-- <th style="width:55%">ชื่อ  นามสกุล</th>  --}}
+																<th style="width:15%">ลายมือชื่อ</th> 
+																<th style="width:15%">ตำแหน่ง</th>   
+																{{-- <th style="width:20%">เพิ่มเติม</th>                                                                                    --}}
+															</tr>
+														</thead>
+														<tbody id="authorized_director_wrapper_tr"> 
+															@foreach ($authorizeddirectors as $authorizeddirector)
+															<tr >      
+																<td>
+																	<div class="form-check">
+																		<label class="form-check-label">
+																			@if (Empty($authorizeddirector->signature_id))
+																					<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
+																					@if ($authorizeddirector->usesignature == 2)
+																						checked
+																					@endif
+																					>
+																				@else
+																					<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
+																					@if ($authorizeddirector->usesignature == 2)
+																						checked
+																					@endif
+																					>
+																			@endif
+																			{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
+																		</label>
+																	</div>
+																</td>  
+																<td>
+																@if (Empty($authorizeddirector->signature_id))
+																		<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>
+																	@else
+																		<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
+																@endif
+																</td>                                
+																{{-- <td> {{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}</td>                                             --}}
+																<td> {{$authorizeddirector->employposition->name}}</td>      
+																{{-- <td> 
+																	<a type="button" data-id="{{$authorizeddirector->id}}" data-name="" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
+																</td> --}}
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>
+											</div>
+										{{-- </div> --}}
+									</div>
+
+									{{-- <div class="col-md-6">
 										<div class="form-group">
 											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
 											@php
@@ -445,7 +519,7 @@
 													}
 												}
 											@endphp
-											<select name="managerprefix" id="managerprefix" class="form-control form-control-select2">
+											<select name="managerprefix" id="managerprefix" class="form-control form-control-lg form-control-select2">
 												@foreach ($contactprefixes as $contactprefix)
 													<option value="{{$contactprefix->id}}" @if($checkprefic == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
 												@endforeach
@@ -456,20 +530,20 @@
 										<div class="form-group">
 											<label for="">ชื่อ<span class="text-danger">*</span></label>
 											@if ($authorizeddirectors->count() > 0)
-													<input type="text" name ="managername" id ="managername" value="{{$authorizeddirectors->first()->name ?? $minitbp->managername}}" class="form-control required" >
+													<input type="text" name ="managername" id ="managername" value="{{$authorizeddirectors->first()->name ?? $minitbp->managername}}" class="form-control form-control-lg required" >
 												@else
-													<input type="text" name ="managername" id ="managername" value="{{old('managername') ?? $minitbp->managername}}" class="form-control required" >
+													<input type="text" name ="managername" id ="managername" value="{{old('managername') ?? $minitbp->managername}}" class="form-control form-control-lg required" >
 											@endif
 											
 										</div>
-									</div>
-									<div class="col-md-6">
+									</div> --}}
+									{{-- <div class="col-md-6">
 										<div class="form-group">
 											<label for="">นามสกุล<span class="text-danger">*</span></label>
 											@if ($authorizeddirectors->count() > 0)
-												<input type="text" name ="managerlastname" id="managerlastname" value="{{$authorizeddirectors->first()->lastname ?? $minitbp->managerlastname}}" class="form-control required" >
+												<input type="text" name ="managerlastname" id="managerlastname" value="{{$authorizeddirectors->first()->lastname ?? $minitbp->managerlastname}}" class="form-control form-control-lg required" >
 											@else
-												<input type="text" name ="managerlastname" id="managerlastname" value="{{old('managerlastname') ?? $minitbp->managerlastname}}" class="form-control required" >
+												<input type="text" name ="managerlastname" id="managerlastname" value="{{old('managerlastname') ?? $minitbp->managerlastname}}" class="form-control form-control-lg required" >
 											@endif
 											
 										</div>
@@ -477,36 +551,35 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
-											<select name="managerposition" id="managerposition" value="{{$minitbp->managerposition}}" id="" class="form-control form-control-select2 required">
+											<select name="managerposition" id="managerposition" value="{{$minitbp->managerposition}}" id="" class="form-control form-control-lg form-control-select2 required">
 												@foreach ($contactpositions as $contactposition)
 													<option value="{{$contactposition->id}}" @if($minitbp->managerposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
 												@endforeach
 											</select>
 										</div>
-									</div>
+									</div> --}}
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
-											<select name="signature" id="usersignature" value="{{$minitbp->signature_status_id}}" id="" class="form-control form-control-select2">
+											<select name="signature" id="usersignature" value="{{$minitbp->signature_status_id}}" id="" class="form-control form-control-lg form-control-select2">
 												@foreach ($signaturestatuses as $signaturestatus)
 													<option value="{{$signaturestatus->id}}" @if($minitbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
 												@endforeach
 											</select>
 										</div>
-										<div class="form-group" id="signature_wrapper" @if($minitbp->signature_status_id == 1) hidden @endif>
+										{{-- <div class="form-group" id="signature_wrapper" @if($minitbp->signature_status_id == 1) hidden @endif>
 											<a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
 											<div class="col-md-12">
 												<div id='sigdiv'>
 													@if (!Empty(Auth::user()->signature))
 													<br>
 													<img id="signatureimg" src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" >
-													{{-- input type="image" --}}
-													{{-- <input id="signatureimg" type="image" src="{{asset(@Auth::user()->signature)}}" style="width: 180px;height:45px" required > --}}
+													
 													@endif
 													<span id="signatureerror" class="form-text text-danger" hidden >*ไม่พบลายมือชื่อ</span>
 												</div>
 											</div>
-										</div>
+										</div> --}}
 									</div>
 								</div>
 							</fieldset>
@@ -553,6 +626,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 {{-- <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script> --}}
 <script>
 	var route = {
@@ -590,13 +664,29 @@
 				form.find('.body:eq(' + newIndex + ') .error').removeClass('error');
 			}
 			if(currentIndex == 2){
-				if($('#usersignature').val() == 2){
-					// console.log($('#signatureimg').val());
-					if (typeof $('#signatureimg').val() === 'undefined'){
-						$("#signatureerror").attr("hidden",false);
-						return;
-					}else{
-						$("#signatureerror").attr("hidden",true);
+
+				if($('.chkauthorizeddirector').filter(':checked').length == 0){
+					Swal.fire({
+						title: 'ผิดพลาด!',
+						text: 'ยังไม่ได้เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน',
+					});
+        			return false; //not go next
+				}else{
+					if($('#usersignature').val() == 2){
+						var iserror = false;
+						$(".chkauthorizeddirector:checked").each(function(){
+							if($(this).data('id') == 1){
+								iserror = true;
+								console.log('found');
+							}
+						});
+						if(iserror == true ){
+							Swal.fire({
+									title: 'ผิดพลาด!',
+									text: 'มีผู้ลงนามที่ยังไม่ได้เพิ่มลายมือชื่อ',
+								})
+								return false;
+						}
 					}
 				}
 			}
@@ -608,7 +698,6 @@
 			return form.valid();
 		},
 		onStepChanged:function (event, currentIndex, newIndex) {
-			// console.log('current step ' + currentIndex);
 			if(currentIndex == 3){
 				var hidden = '';
 				if(submitstatus !=2 && (refixstatus == 0 || refixstatus == 2 )){
@@ -619,6 +708,10 @@
 					<li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
 					<li class='libtn' ${hidden}><a type="button" id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
 				`);
+				var selected_director = [];
+					$(".chkauthorizeddirector:checked").each(function(){
+						selected_director.push($(this).val());
+				});
 
 				if(submitstatus == 2 || refixstatus != 0){
 					var formData = new FormData();
@@ -627,13 +720,13 @@
 					formData.append('projecteng',$('#projecteng').val());
 					formData.append('finance1',$('#finance1').is(':checked') === true ? '1' : '');
 					formData.append('bank',$('#bank').val());
-					formData.append('finance1loan',$('#finance1loan').val());
+					formData.append('finance1loan',$('#finance1loan').val().replace(/,/g, ''));
 					formData.append('finance2',$('#finance2').is(':checked') === true ? '1' : '');
 					formData.append('finance3',$('#finance3').is(':checked') === true ? '1' : '');
 					formData.append('finance4',$('#finance4').is(':checked') === true ? '1' : '');
-					formData.append('finance4joint',$('#finance4joint').val());
-					formData.append('finance4jointmin',$('#finance4jointmin').val());
-					formData.append('finance4jointmax',$('#finance4jointmax').val());
+					formData.append('finance4joint',$('#finance4joint').val().replace(/,/g, ''));
+					formData.append('finance4jointmin',$('#finance4jointmin').val().replace(/,/g, ''));
+					formData.append('finance4jointmax',$('#finance4jointmax').val().replace(/,/g, ''));
 					formData.append('nonefinance1',$('#nonefinance1').is(':checked') === true ? '1' : '');
 					formData.append('nonefinance2',$('#nonefinance2').is(':checked') === true ? '1' : '');
 					formData.append('nonefinance3',$('#nonefinance3').is(':checked') === true ? '1' : '');
@@ -660,6 +753,7 @@
 					formData.append('managerlastname',$('#managerlastname').val());
 					formData.append('managerposition',$('#managerposition').val());
 					formData.append('signature',$('#usersignature').val());	
+					formData.append('director', JSON.stringify(selected_director));	
 					$.ajax({
 						url: `${route.url}/api/minitbp/editsave`,  //Server script to process data
 						type: 'POST',
@@ -733,6 +827,16 @@
 	    }
 	});
 
+	$(".chkauthorizeddirector").on('change', function() {
+		if($('.chkauthorizeddirector').filter(':checked').length > 3){
+			$(this).prop('checked', false);
+			Swal.fire({
+				title: 'ผิดพลาด!',
+				text: 'เลือกผู้ลงนามได้ไม่เกิน 2 คน',
+			});
+		}
+	});
+
 	function createPdf(id){
 		return new Promise((resolve, reject) => {
 			$.ajax({
@@ -791,7 +895,6 @@
 								title: 'สำเร็จ...',
 								text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
 							}).then((result) => {
-								// window.location.reload();
 								window.location.replace(`${route.url}/dashboard/company/report`);
 							});
 						})

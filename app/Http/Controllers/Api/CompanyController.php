@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\IsicSub;
+use App\Model\Signature;
+use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
+use App\Model\EmployPosition;
 use App\Model\AuthorizedDirector;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +18,6 @@ class CompanyController extends Controller
     public function GetSubisic(Request $request){
         $subisics = IsicSub::where('isic_id',$request->id)->get();
         $company = Company::where('user_id',Auth::user()->id)->first();
-        // return response()->json($subisics);
         return response()->json(array(
             "subisics" => $subisics,
             "company" => $company
@@ -22,20 +25,27 @@ class CompanyController extends Controller
     }
 
     public function AddAuthorizedDirector(Request $request){
-        $authorizeddirector = new AuthorizedDirector();
-        $authorizeddirector->company_id = $request->id;
-        $authorizeddirector->prefix_id = $request->prefix;
-        $authorizeddirector->name = $request->name;
-        $authorizeddirector->lastname = $request->lastname;
-        $authorizeddirector->save();
-        $authorizeddirectors = AuthorizedDirector::where('company_id',$request->id)->get();
-        return response()->json($authorizeddirectors);
+        $companyemploy = new CompanyEmploy();
+        $companyemploy->company_id = $request->id;
+        $companyemploy->prefix_id = $request->prefix;
+        $companyemploy->name = $request->name;
+        $companyemploy->lastname = $request->lastname;
+        $companyemploy->employ_position_id = $request->position;
+        $companyemploy->signature_id = $request->signature;
+        $companyemploy->save();
+        $companyemploys = CompanyEmploy::where('company_id',$request->id)->orderBy('id','desc')->get();
+        return response()->json($companyemploys);
     }
     public function DeleteAuthorizedDirector(Request $request){
-        $companyid = AuthorizedDirector::find($request->id)->company_id;
-        AuthorizedDirector::find($request->id)->delete();
-        $authorizeddirectors = AuthorizedDirector::where('company_id',$companyid)->get();
-        return response()->json($authorizeddirectors);
+        $signature = CompanyEmploy::find($request->id)->signature_id;
+            if(!Empty($signature)){
+                unlink(Signature::find($signature)->path);
+                Signature::find($signature)->delete();
+            }
+        $companyid = CompanyEmploy::find($request->id)->company_id;
+        CompanyEmploy::find($request->id)->delete();
+        $companyemploys = CompanyEmploy::where('company_id',$companyid)->orderBy('id','desc')->get();
+        return response()->json($companyemploys);
     }
     public function UploadOrganizeImg(Request $request){
         $file = $request->file;
@@ -50,5 +60,42 @@ class CompanyController extends Controller
         return response()->json($company); 
     }
     
+    public function GetAuthorizedDirector(Request $request){
+        $signature = '';
+        $employpositions = EmployPosition::where('id', '<=',5)->get();
+        $companyemploy = CompanyEmploy::find($request->id);
+        $prefixes = Prefix::get();
+        if(!Empty($companyemploy->signature_id)){
+            $signature = Signature::find($companyemploy->signature_id)->path;
+        }
+        
+        return response()->json(array(
+            "companyemploy" => $companyemploy,
+            "employpositions" => $employpositions,
+            "prefixes" => $prefixes,
+            '$signature' => $signature
+        ));
+    }
+
+    public function EditAuthorizedDirector(Request $request){
+        $signature = CompanyEmploy::find($request->id)->signature_id;
+        if(!Empty($request->signature)){
+            if(!Empty($signature)){
+                unlink(Signature::find($signature)->path);
+                Signature::find($signature)->delete();
+            }
+            $signature = $request->signature;
+        }
+        CompanyEmploy::find($request->id)->update([
+            'prefix_id' => $request->prefix,
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'employ_position_id' => $request->position,
+            'signature_id' => $signature
+        ]);
+        $companyid = CompanyEmploy::find($request->id)->company_id;
+        $companyemploys = CompanyEmploy::where('company_id',$companyid)->orderBy('id','desc')->get();
+        return response()->json($companyemploys);
+    }
 }
 

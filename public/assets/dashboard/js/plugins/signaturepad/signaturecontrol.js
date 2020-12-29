@@ -1,4 +1,5 @@
 var wrapper = document.getElementById("signature-pad");
+var wrapper_edit = document.getElementById("signature_type");
 var clearButton = wrapper.querySelector("[data-action=clear]");
 var changeColorButton = wrapper.querySelector("[data-action=change-color]");
 var undoButton = wrapper.querySelector("[data-action=undo]");
@@ -78,10 +79,16 @@ savePNGButton.addEventListener("click", function (event) {
     var dataURL = signaturePad.toDataURL();
     uploadSignature(dataURL).then(data => {
     console.log(data);
-    var html = `<img id="signatureimg" src="${route.url}/${data.signature}" style="width: 150px;height:75px" alt="">`;
+    var html = `<img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
     // console.log(html);
+    $("#signatureid").val(data.id);
     $('#modal_signature').modal('hide');
+    if(wrapper_edit.value == 1){
       $("#sigdiv").html(html);
+    }else{
+      $("#sigdiv_edit").html(html);
+    }
+
   })
   .catch(error => {
       console.log(error)
@@ -93,9 +100,10 @@ savePNGButton.addEventListener("click", function (event) {
 });
 
 function uploadSignature(dataURL){
+  var url = `${route.url}/api/profile/uploadcanvassignature`;
   return new Promise((resolve, reject) => {
       $.ajax({
-        url: `${route.url}/api/profile/uploadcanvassignature`,
+        url: url,
         type: 'POST',
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
@@ -121,8 +129,9 @@ $("#signature").on('change', function() {
 
   var formData = new FormData();
   formData.append('signature',file);
+  var url = `${route.url}/api/profile/uploadsignature`;
       $.ajax({
-          url: `${route.url}/api/profile/uploadsignature`,  //Server script to process data
+          url: url,  //Server script to process data
           type: 'POST',
           headers: {"X-CSRF-TOKEN":route.token},
           data: formData,
@@ -130,9 +139,15 @@ $("#signature").on('change', function() {
           processData: false,
           success: function(data){
               console.log(data)
-              var html = `<br><img id="signatureimg" src="${route.url}/${data.signature}" style="width: 150px;height:75px" alt="">`;
+              
+              $("#signatureid").val(data.id);
+              var html = `<br><img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
               $('#modal_signature').modal('hide');
-              $("#sigdiv").html(html);
+              if(wrapper_edit.value == 1){
+                $("#sigdiv").html(html);
+              }else{
+                $("#sigdiv_edit").html(html);
+              }
       }
   });
 });

@@ -11,7 +11,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ปฎิทินกิจกรรม</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ปฏิทินกิจกรรม</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -20,8 +20,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item">ปฎิทิน</a>
-                    <span class="breadcrumb-item active">ปฎิทินกิจกรรม</span>
+                    <a href="#" class="breadcrumb-item">ปฏิทิน</a>
+                    <span class="breadcrumb-item active">ปฏิทินกิจกรรม</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ปฎิทินกิจกรรม</h6>
+                        <h6 class="card-title">ปฏิทินกิจกรรม</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 {{-- <i class="icon-calendar3 mr-2"></i> --}}
@@ -72,8 +72,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>ประเภทปฎิทิน</label>
-                                        <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฎิทิน" class="form-control" disabled>
+                                        <label>ประเภทปฏิทิน</label>
+                                        <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฏิทิน" class="form-control" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-2">

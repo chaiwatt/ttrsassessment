@@ -144,7 +144,6 @@
                                                 @endforeach
                                             </ul>
                                         </td>  
-                                         
                                         {{-- <td> yyy </td>   --}}
                                     </tr>  
                                     @endforeach

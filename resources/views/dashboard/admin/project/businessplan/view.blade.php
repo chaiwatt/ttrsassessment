@@ -138,12 +138,12 @@
                                         <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label>ละติจูด<span class="text-danger">*</span></label>
-                                        <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="ละติจูด" class="form-control" readonly>
+                                        <label>พิกัดละติจูด (เช่น 14.076868486942407)<span class="text-danger">*</span></label>
+                                        <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="พิกัดละติจูด" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label>ลองติจูด<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer" >เปิดแผนที่</a> </label>
-                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองติจูด" class="form-control" readonly>
+                                        <label>พิกัดลองจิจูด (เช่น 100.60153839991285)<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer" >เปิดแผนที่</a> </label>
+                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองจิจูด" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
                                         @if (!Empty($company->logo))

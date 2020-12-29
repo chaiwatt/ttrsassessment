@@ -203,14 +203,14 @@
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ละติจูด<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
+													<label>พิกัดละติจูด (เช่น 14.076868486942407)<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
 													<input type="text"  name="lat" value="{{old('lat') ?? $user->lat}}"  placeholder="ละติจูด" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ลองติจูด</label>
-													<input type="text"  name="lng" value="{{old('lng') ?? $user->lng}}"  placeholder="ลองติจูด" class="form-control">
+													<label>พิกัดลองจิจูด (เช่น 100.60153839991285)</label>
+													<input type="text"  name="lng" value="{{old('lng') ?? $user->lng}}"  placeholder="ลองจิจูด" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  

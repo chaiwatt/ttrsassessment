@@ -19,10 +19,12 @@ use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
 use App\Model\UserPosition;
+use App\Model\CompanyEmploy;
 use App\Model\IndustryGroup;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
+use App\Model\EmployPosition;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
 use App\Model\EvaluationResult;
@@ -56,7 +58,9 @@ class SettingProfileUserController extends Controller
         $industrygroups = IndustryGroup::get();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
         $userpositions = UserPosition::get();
-        $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
+        // $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
+        $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
+        $employpositions = EmployPosition::where('id', '<=',5)->get();
         return view('setting.profile.user.edit')->withUser($user)
                                             ->withPrefixes($prefixes)
                                             ->withProvinces($provinces)
@@ -68,10 +72,11 @@ class SettingProfileUserController extends Controller
                                             ->withIndustrygroups($industrygroups)
                                             ->withFulltbpcompanydocs($fulltbpcompanydocs)
                                             ->withAuthorizeddirectors($authorizeddirectors)
-                                            ->withUserpositions($userpositions);
+                                            ->withUserpositions($userpositions)
+                                            ->withEmploypositions($employpositions);
     }
     public function EditSave(EditProfileRequest $request, $id){
-   
+        // return $request->registeredcapital;
 
         $auth = Auth::user();
         if(!Empty($request->password)){
@@ -120,9 +125,9 @@ class SettingProfileUserController extends Controller
             'isic_id' => $request->isic,
             'isic_sub_id' => $request->subisic,
             'registeredyear' => $request->registeredyear,
-            'registeredcapital' => $request->registeredcapital,
+            'registeredcapital' => str_replace( ',', '', $request->registeredcapital),
             'registeredcapitaltype' => $_registeredcapital,
-            'paidupcapital' => $request->paidupcapital,
+            'paidupcapital' => str_replace( ',', '', $request->paidupcapital),
             'paidupcapitaldate' => $paidupcapitaldate,
             'industry_group_id' => $request->industrygroup,
             'business_type_id' => $request->businesstype,
@@ -148,7 +153,8 @@ class SettingProfileUserController extends Controller
             'prefix_id' => $request->prefix,
             'name' => $request->name,
             'lastname' => $request->lastname,
-            'hid' => $request->hid
+            'hid' => $request->hid,
+            'position' => $request->userposition
         ]);
 
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
@@ -166,6 +172,8 @@ class SettingProfileUserController extends Controller
                 $minitbp = new MiniTBP();
                 $minitbp->business_plan_id = $businessplan->id;
                 $minitbp->contactname = $auth->name;
+                $minitbp->contactprefix = $user->prefix;
+                $minitbp->contactposition = $user->position;
                 $minitbp->contactlastname = $auth->lastname;
                 $minitbp->contactemail = $auth->email;
                 $minitbp->contactphone = $auth->phone;

@@ -2,6 +2,7 @@
 var stepindex =0;
 $(function() {
     getEv($('#evid').val(),route.userid).then(data => {
+        // console.log(data);
         RenderTable(data,1);
         RenderTable(data,2);
         $(".loadprogress").attr("hidden",true);

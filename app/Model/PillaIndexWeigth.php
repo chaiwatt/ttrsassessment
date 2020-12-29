@@ -16,14 +16,14 @@ class PillaIndexWeigth extends Model
 
     public function getPillarAttribute()
     {
-        return Pillar::find($this->pillar_id);
+        return Pillar::find($this->pillar_id,['id', 'name']);
     }
     public function getSubPillarAttribute()
     {
-        return SubPillar::find($this->sub_pillar_id);
+        return SubPillar::find($this->sub_pillar_id,['id', 'name']);
     }
     public function getSubPillarIndexAttribute()
     {
-        return SubPillarIndex::find($this->sub_pillar_index_id);
+        return SubPillarIndex::find($this->sub_pillar_index_id,['id', 'name']);
     }
 }

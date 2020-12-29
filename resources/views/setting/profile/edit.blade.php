@@ -354,12 +354,12 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-                                <input type="text" id="companydocname" placeholder="ชื่อเอกสาร" class="form-control">
+                                <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-12">	
                             <div class="input-group">													
-                                <button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >แนบเอกสาร</button>													
+                                <button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
                             </div>
                             <input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc"/>
                         </div>
@@ -432,7 +432,7 @@
 			</div>
 			<div class="media-body text-white">
 				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>
-				<span class="d-block">{{$user->userposition->name}}</span>
+				<span class="d-block">{{$user->position}}</span>
 			</div>
 			<div class="ml-md-3 mt-2 mt-md-0">
 				<ul class="list-inline list-inline-condensed mb-0">

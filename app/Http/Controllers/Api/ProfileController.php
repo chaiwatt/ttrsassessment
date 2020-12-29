@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Image;
 use App\User;
+use App\Model\Signature;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
@@ -20,22 +21,28 @@ class ProfileController extends Controller
             mkdir($imgpath, 0777, true);
         }
         Image::make($base64)->save($imgpath.$new_name);
-        User::find(Auth::user()->id)->update([
-            'signature' => 'storage/uploads/profile/signature/' .$new_name
-        ]);
-        $user = User::find(Auth::user()->id);
-        return response()->json($user);  ;  
+        // User::find(Auth::user()->id)->update([
+        //     'signature' => 'storage/uploads/profile/signature/' .$new_name
+        // ]);
+        $signature = new Signature();
+        $signature->path = 'storage/uploads/profile/signature/' .$new_name;
+        $signature->save();
+        // $user = User::find(Auth::user()->id);
+        return response()->json($signature);  
     }
     public function UploadSignature(Request $request){
         $file = $request->signature;
         $new_name = str_random(10).".".$file->getClientOriginalExtension();
         $file->move("storage/uploads/profile/signature" , $new_name);
         $filelocation = "storage/uploads/profile/signature/".$new_name;
-        User::find(Auth::user()->id)->update([
-            'signature' => $filelocation
-        ]);
-        $user = User::find(Auth::user()->id);
-        return response()->json($user); 
+        // User::find(Auth::user()->id)->update([
+        //     'signature' => $filelocation
+        // ]);
+        $signature = new Signature();
+        $signature->path = $filelocation;
+        $signature->save();
+        // $user = User::find(Auth::user()->id);
+        return response()->json($signature); 
     }
     public function AddUserPosition(Request $request){
         $userposition = new UserPosition();

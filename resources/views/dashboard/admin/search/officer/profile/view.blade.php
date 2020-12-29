@@ -194,15 +194,15 @@
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ละติจูด<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a></label>
+													<label>พิกัดละติจูด (เช่น 14.076868486942407)<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a></label>
 													<input type="text"  name="lat" value="{{$user->lat}}"  placeholder="ละติจูด" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>ลองติจูด </label>
+													<label>พิกัดลองจิจูด (เช่น 100.60153839991285) </label>
 													{{-- <label>ลองติจูด<a href="https://google.com/maps/place/00,11" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label> --}}
-													<input type="text"  name="lng" value="{{$user->lng}}"  placeholder="ลองติจูด" class="form-control">
+													<input type="text"  name="lng" value="{{$user->lng}}"  placeholder="ลองจิจูด" class="form-control">
 													{{-- <input type="text"  name="lng" value="{{$user->company->lng}}"  placeholder="ลองติจูด" class="form-control"> --}}
 												</div>
 											</div>
@@ -228,8 +228,6 @@
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													{{-- <label>วุติการศึกษาสูงสุด</label>
-													<input type="text"  name="lat" value=""  placeholder="ละติจูด" class="form-control"> --}}
 													<label>วุติการศึกษาสูงสุด<span class="text-danger">*</span></label>
 													<select name="educationlevel" id="educationlevel" data-placeholder="วุติการศึกษาสูงสุด" class="form-control form-control-select2">
 														@foreach ($educationlevels as $educationlevel)                                                                
@@ -254,12 +252,6 @@
 													</div>
 												</div>
 											</div>
-											{{-- <div class="col-md-6">  
-												<div class="form-group">
-													<label>ความเชี่ยวชาญ</label>
-													<input type="text"  name="lat" value=""  placeholder="ละติจูด" class="form-control">
-												</div>g
-											</div> --}}
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>สาขาความเชี่ยวชาญ<span class="text-danger">*</span></label>

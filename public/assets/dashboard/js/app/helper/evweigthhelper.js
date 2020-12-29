@@ -1,7 +1,8 @@
 import * as Ev from './ev.js';
 
-$( document ).ready(function() {
+$(function() {
     getEv($('#evid').val()).then(data => {
+        // console.log(data);
         RenderTable(data.criteriatransactions,1);
         RenderTable(data.criteriatransactions,2);
         RenderWeightTable(data.pillaindexweigths,1);
@@ -36,9 +37,9 @@ function getEv(evid){
     })
   }
 
- $(document).on('focusin', '#weigthvalue1', function(){
+ $(document).on('focusin', '.weigthvalue1', function(){
     $(this).data('old', $(this).val());
- }).on('change', '#weigthvalue1', function(e) {
+ }).on('change', '.weigthvalue1', function(e) {
     var check = parseFloat($('#weight').html().replace(/[{()}]/g, ''));
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
     if(newval.toFixed(3) > 1){
@@ -54,9 +55,9 @@ function getEv(evid){
     }).catch(error => {})
 });
 
-$(document).on('focusin', '#weigthvalue1', function(){
+$(document).on('focusin', '.weigthvalue1', function(){
     $(this).data('old', $(this).val());
- }).on('change', '#weigthvalue2', function(e) {
+ }).on('change', '.weigthvalue2', function(e) {
     var check = parseFloat($('#extraweight').html().replace(/[{()}]/g, ''));
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
     if(newval.toFixed(3) > 1){
@@ -95,6 +96,7 @@ function editWeight(id,value,evtypeid){
 
   function RenderTable(data,evtype){
     var html =``;
+    
     data.forEach(function (criteria,index) {
         if(criteria.ev_type_id == evtype){
             var criterianame = '-';
@@ -120,15 +122,14 @@ function editWeight(id,value,evtypeid){
 function RenderWeightTable(data,evtypeid){
     var html =``;
     var readonly =`readonly`;
-    console.log($('#evstatus').val());
+    // console.log($('#evstatus').val());
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
-    // if(($('#evstatus').val() == 2 && route.refixstatus != 1) ||  $('#evstatus').val() == 4 ){
         readonly =``;
     }
     if($('#evstatus').val() >= 4){
         readonly =`readonly`;
     }
-    console.log(data);
+    // console.log(data);
     data.forEach(function (pillaindex,index) {
         if(pillaindex.ev_type_id == evtypeid){
             html += `<tr > 
@@ -137,7 +138,7 @@ function RenderWeightTable(data,evtypeid){
                 <td> 
                     <div class="form-group">
                         <label>${pillaindex.subpillarindex['name']}</label>
-                        <input type="number" id ="weigthvalue${evtypeid}" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control inputweigth">
+                        <input type="number" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control inputweigth weigthvalue${evtypeid}">
                     </div>
                 </td>                           
             </tr>`
@@ -301,7 +302,7 @@ function updateEvAdminStatus(id,value){
 
     $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
         if(route.usertypeid == 6)return;
-        console.log($(e.target).attr("href"));
+        // console.log($(e.target).attr("href"));
         if($(e.target).attr("href") == '#commenttab'){
             Ev.clearCommentTab($('#evid').val(),2).then(data => {
         
@@ -322,7 +323,7 @@ function updateEvAdminStatus(id,value){
     // });
     
     $(document).on("click",".deletecomment",function(e){
-        console.log($(this).data('id'));
+        // console.log($(this).data('id'));
         Swal.fire({
             title: 'คำเตือน!',
             text: `ต้องการลบรายการ หรือไม่`,
@@ -336,7 +337,7 @@ function updateEvAdminStatus(id,value){
             }).then((result) => {
             if (result.value) {
                 Ev.deleteComment($(this).data('id')).then(data => {
-                    console.log(data);
+                    // console.log(data);
                     var html =``;
                     data.forEach(function (comment,index) {
                             html += `<tr > 
@@ -365,7 +366,7 @@ function updateEvAdminStatus(id,value){
         }).catch(error => {})
     });
     var submitbutton = false;
-    console.log('user ' + $('#evstatus').val() );
+    // console.log('user ' + $('#evstatus').val() );
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1)) && route.usertypeid != 6){
         submitbutton = true;
     }

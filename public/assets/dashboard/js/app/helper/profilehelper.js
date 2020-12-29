@@ -772,13 +772,28 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
 });
 
 $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
-    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#directorname').val(),$('#directorlastname').val()).then(data => {
+    if($('#directorname').val() =='' || $('#directorlastname').val() ==''){
+        return ;
+    }
+    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#directorname').val(),$('#directorlastname').val(),$('#directorposition').val(),$('#signatureid').val()).then(data => {
         var html = ``;
-        console.log(data);
-        data.forEach(function (authorizeddirector,index) {
+        //
+        data.forEach(function (director,index) {
+            console.log(director.signature_id);
+            var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
+            if(director.signature_id){
+                check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
+            }
             html += `<tr >                                        
-                <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            
-                <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
+                <td> ${director.prefix['name']}${director.name}  ${director.lastname} </td>                                            
+                <td> ${director.employposition['name']} </td>  
+                <td>
+                    ${check}
+                </td>   
+                <td>
+                    <a type="button" data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
+                    <a type="button" data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
+                </td> 
             </tr>`
             });
          $('#authorizeddirector').val(data.length);
@@ -787,7 +802,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
     .catch(error => {})
 });
 
-function addAuthorizedDirector(id,prefix,name,lastname) {
+function addAuthorizedDirector(id,prefix,name,lastname,position,signature) {
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/company/addauthorizeddirector`,
@@ -799,6 +814,8 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
             prefix : prefix,
             name : name,
             lastname : lastname,
+            position : position,
+            signature : signature
           },
           success: function(data) {
             resolve(data)
@@ -825,10 +842,21 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
             deleteAuthorizedDirector($(this).data('id')).then(data => {
                 var html = ``;
                 console.log(data.length);
-                data.forEach(function (authorizeddirector,index) {
+                data.forEach(function (director,index) {
+                    var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
+                    if(director.signature_id){
+                        check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
+                    }
                     html += `<tr >                                        
-                        <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            
-                        <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
+                        <td> ${director.prefix['name']}${director.name}  ${director.lastname} </td>                                            
+                        <td> ${director.employposition['name']} </td>  
+                        <td>
+                            ${check}
+                        </td>   
+                        <td>
+                            <a type="button" data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
+                            <a type="button" data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
+                        </td> 
                     </tr>`
                     });
                  $('#authorizeddirector').val(data.length);
@@ -857,6 +885,7 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
         })
       })
   }
+
  
   $(document).on('change', '#isic', function(e) {
     Company.getSubIsic($(this).val()).then(data => {
@@ -980,3 +1009,123 @@ function deleteAddress(id){
         })
     })
 }
+
+$(document).on('click', '#btn_add_authorized_director', function(e) {
+    $('#signature_type').val('1');
+    $('#signatureid').val('');
+    $("#sigdiv").html('');
+    $('#modal_add_authorized_director').modal('show');
+});
+
+$(document).on('click', '.editauthorizeddirector', function(e) {
+    $('#signature_type').val('2');
+    getAuthorizedDirector($(this).data('id')).then(data => {
+        var html =``;
+        var html1 =``;
+        // console.log(data.companyemploy['employ_position_id']);
+        data.employpositions.forEach(function (position,index) {
+                var selectposition = '';
+                if(position.id == data.companyemploy['employ_position_id']){
+                    console.log('ok');
+                    selectposition = 'selected';
+                }
+                html += `<option value="${position['id']}" ${selectposition} >${position['name']}</option>`
+            });
+        data.prefixes.forEach(function (prefix,index) {
+            var selectprefix = '';
+            if(prefix.id == data.companyemploy['prefix_id']){
+                selectprefix = 'selected';
+            }
+            html1 += `<option value="${prefix['id']}" ${selectprefix}>${prefix['name']}</option>`
+        });
+        
+        if(data.$signature != ''){            
+            $("#sigdiv_edit").html(`<img src="${route.url}/${data.$signature}" style="width: 180px;height:45px" alt=""></img>`);
+        }else{
+            $("#sigdiv_edit").html(`ไม่พบลายมือชื่อ`);
+        }
+
+        $("#directorname_edit").val(data.companyemploy['name']);
+        $("#directorlastname_edit").val(data.companyemploy['lastname']);
+        $("#directorposition_edit").html(html);
+        $("#directorprefix_edit").html(html1);
+        $("#authorized_director_id").val(data.companyemploy['id']);
+        
+        $('#modal_edit_authorized_director').modal('show');
+    }).catch(error => {}) 
+});
+
+    function getAuthorizedDirector(id) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+              url: `${route.url}/api/company/getauthorizeddirector`,
+              type: 'POST',
+              dataType: "json",
+              headers: {"X-CSRF-TOKEN":route.token},
+              data: {
+                id : id
+              },
+              success: function(data) {
+                resolve(data)
+              },
+              error: function(error) {
+                reject(error)
+              },
+            })
+          })
+      }
+
+
+      function editAuthorizedDirector(id,prefix,name,lastname,position,signature) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+              url: `${route.url}/api/company/editauthorizeddirector`,
+              type: 'POST',
+              dataType: "json",
+              headers: {"X-CSRF-TOKEN":route.token},
+              data: {
+                id : id,
+                prefix : prefix,
+                name : name,
+                lastname : lastname,
+                position : position,
+                signature : signature
+              },
+              success: function(data) {
+                resolve(data)
+              },
+              error: function(error) {
+                reject(error)
+              },
+            })
+          })
+      }
+
+      
+
+      $(document).on('click', '#btn_modal_edit_authorized_director', function(e) {
+        editAuthorizedDirector($('#authorized_director_id').val(),$('#directorprefix_edit').val(),$('#directorname_edit').val(),$('#directorlastname_edit').val(),$('#directorposition_edit').val(),$('#signatureid').val()).then(data => {
+            var html = ``;
+            console.log(data);
+            data.forEach(function (director,index) {
+                var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
+                if(director.signature_id){
+                    check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
+                }
+                html += `<tr >                                        
+                    <td> ${director.prefix['name']}${director.name}  ${director.lastname} </td>                                            
+                    <td> ${director.employposition['name']} </td>  
+                    <td>
+                        ${check}
+                    </td>   
+                    <td>
+                        <a type="button" data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
+                        <a type="button" data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
+                    </td> 
+                </tr>`
+                });
+             $('#authorizeddirector').val(data.length);
+             $("#authorized_director_wrapper_tr").html(html);
+        })
+        .catch(error => {})
+    });

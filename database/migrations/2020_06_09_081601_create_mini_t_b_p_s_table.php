@@ -53,6 +53,7 @@ class CreateMiniTBPSTable extends Migration
             $table->unsignedBigInteger('signature_status_id')->default(1);
             $table->char('submit',1)->default('1');
             $table->text('jdmessage')->nullable();
+            $table->string('otherbank')->nullable();
             $table->char('refixstatus',1)->default('0');
             $table->timestamps();
         });

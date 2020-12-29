@@ -29,16 +29,13 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                 <ul class="nav nav-tabs nav-justified alpha-grey mb-0" id="usertype">
-                    <li class="nav-item bg-primary-300" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1">ผู้ขอรับการประเมิน</h6></a></li>
-                    <li class="nav-item bg-teal-300" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1">เจ้าหน้าที่ TTRS</h6></a></li>
+                    <li class="nav-item bg-info-300" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1">ผู้ขอรับการประเมิน</h6></a></li>
+                    <li class="nav-item bg-info-300" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1">เจ้าหน้าที่ TTRS</h6></a></li>
                     <li class="nav-item bg-info-300" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1">ผู้เชี่ยวชาญ</h6></a></li>
                 </ul>
                 
                 <div class="tab-content card-body">
                     <div class="tab-pane fade show active" id="login-tab1">
-                        {{-- <div class="text-center mb-0">
-                            <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
-                        </div> --}}
                         
                         <div class="text-center mb-3 mb-md-2" style="font-size:40px">
                             สมัครสมาชิก
@@ -87,25 +84,24 @@
                     </div>
     
                     <div class="form-group" id="vatwrapper" >
-                        {{-- <label for="" class="text-info"><small>ใช้ทดสอบ 0105547107432 0107546000229 0105550075163 0105552012126 0105548008098 0105552061356 0105553151791 0107548000609</small> </label> --}}
-                        <input id="vatno" type="number" class="form-control @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร" >
+                        <input id="vatno" type="text" class="form-control numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
                         <input type="text" name="companyname" id="companyname" hidden>
                     </div>
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
+                        <input id="name" type="text" class="form-control text50 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
                         <div class="form-control-feedback">
                             <i class="icon-user text-muted"></i>
                         </div>
                     </div>             
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
+                        <input id="lastname" type="text" class="form-control text50 @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
                         <div class="form-control-feedback">
                             <i class="icon-user text-muted"></i>
                         </div>
                     </div>    
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
+                        <input id="email" type="email" class="form-control text50 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
                         <div class="form-control-feedback">
                             <i class="icon-mention text-muted"></i>
                         </div>
@@ -125,7 +121,7 @@
                     </div>
                     <div id="pwd-container">
                         <div class="form-group form-group-feedback form-group-feedback-left" >
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" title="ใช้ได้เฉพาะตัวอักษรและภาษาอังกฤษเท่านั้น" placeholder="รหัสผ่าน">
+                            <input id="password" type="password" class="form-control engonly @error('password') is-invalid @enderror" name="password" title="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร">
                             <div class="form-control-feedback">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
@@ -166,6 +162,9 @@
         <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/pwstrength/pwstrength.js')}}"></script>
+        <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
+        <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script>
+        <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
         <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
         <script>
                 var route = {
@@ -196,21 +195,10 @@
                 };
                 $('#password').pwstrength(options);
             });
-// console.log($('#user_type').val());
             $(".nav-item").on('click', function() {
-                
                 $('#user_type').val($(this).val());
-                // if($(this).val()!=1){
-                //     $("#vatnomessage").attr("hidden",true);
-                //     $("#userselect").attr("hidden",true);
-                //     $('#usergroup').val(2);
-                //     $('#usergroup').select2().trigger('change');
-                // }else{
-                //     $("#userselect").attr("hidden",false);
-                // }
             });
             $(".toggle_password").click(function() {
-                console.log($('#password').attr("type"));
                 var check = $('#password').attr("type");
                 if (check == "password") {
                     $('.toggle_password').removeClass("icon-eye-blocked");
@@ -234,7 +222,6 @@
             });
 
             $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-                console.log($(e.target).attr("href"));
                 setCookie('lastTab', $(e.target).attr("href"), 100);
             })
 
@@ -253,6 +240,21 @@
             }else{
                 $('#user_type').val('1');
             }
+            $(document).on('change', '#usergroup', function(e) {
+                if($(this).val() == 1){
+                    setCookie('lastGroup', 1, 100);
+                }else{
+                    setCookie('lastGroup', 2, 100);
+                }
+            });
+            var lasusergroupcookie = getCookie('lastGroup');
+            if(lasusergroupcookie == '' || lasusergroupcookie == 1){
+                $('#usergroup').val(1);
+                $('#usergroup').select2().trigger('change');
+            }else{
+                $('#usergroup').val(2);
+                $('#usergroup').select2().trigger('change');
+            }
 
             function getCookie(cname) {
                 var name = cname + "=";
@@ -268,6 +270,36 @@
                 }
                 return "";
             }
+
+        $(document).on('keyup', '.engonly', function(e) {
+                var pattern_eng = /^[0-9a-zA-Z]+$/;
+                if(!$(this).val().match(pattern_eng) && $(this).val() != ''){
+                    $(this).val('')
+                    Swal.fire({
+                        title: 'ผิดพลาด...',
+                        text: 'ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร',
+                    }).then((result) => {});
+                    return false;
+                }
+        });
+        $(document).on('keypress', '#phone', function(e) {
+                var pattern_num = /^[0-9]+$/;
+                if(!$(this).val().match(pattern_num) && $(this).val() != ''){
+                    $(this).val('')
+                    return false;
+                }else{
+                    if($(this).val().length >= 10){
+                        $(this).val($(this).val().substring(0, 9));
+                    }
+                }
+        });
+
+        $(document).on('keypress', '.text50', function(e) {
+            if($(this).val().length >= 50){
+                $(this).val($(this).val().substring(0, 49));
+            }
+        });
+
         </script>	
     @stop
 

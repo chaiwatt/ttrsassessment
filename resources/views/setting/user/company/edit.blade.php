@@ -20,12 +20,12 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-                                <input type="text" id="companydocname" placeholder="ชื่อเอกสาร" class="form-control">
+                                <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-12">	
                             <div class="input-group">													
-                                <button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >แนบเอกสาร</button>													
+                                <button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
                             </div>
                             <input type="file" style="display:none;" id="companydoc" data-id="{{$company->id}}" name="companydoc"/>
                         </div>
@@ -315,14 +315,14 @@
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
-                                        <label>ละติจูด</label>
+                                        <label>พิกัดละติจูด (เช่น 14.076868486942407)</label>
                                         <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="ละติจูด" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
-                                        <label>ลองติจูด<a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
-                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองติจูด" class="form-control">
+                                        <label>พิกัดลองจิจูด (เช่น 100.60153839991285)<a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
+                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองจิจูด" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
@@ -377,7 +377,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">เอกสารแนบ  </label>
-                                    <a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
+                                    <a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ)</small>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12" >

@@ -2,6 +2,9 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 <link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
+<style>
+
+</style>
 @stop
 @section('content')
 {{-- modal_add_employ --}}
@@ -9,7 +12,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มผู้บริหารระดับสูง</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้บริหารระดับสูง</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -79,7 +82,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มนักวิจัย</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;นักวิจัย</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -144,7 +147,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มทีมงานในโครงการ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ทีมงานในโครงการ</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -207,21 +210,21 @@
 
 {{-- modal_edit_employ --}}
 <div id="modal_edit_employ" class="modal fade" style="overflow:hidden;">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-full">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มข้อมูลบุคลากร</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ข้อมูลบุคลากร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<div class="row">
 						<div class="card-body">
 							<ul class="nav nav-tabs nav-tabs-highlight">
-								<li class="nav-item"><a href="#left-icon-employinfo" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลส่วนตัว</a></li>
-								<li class="nav-item"><a href="#left-icon-employeducation" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการศึกษา</a></li>
-								<li class="nav-item"><a href="#left-icon-employexpereince" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการทำงาน</a></li>
-								<li class="nav-item"><a href="#left-icon-employtraining" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการฝึกอบรม</a></li>								
-								<li class="nav-item"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> เอกสารแนบ</a></li>	
+								<li class="nav-item bg-orange-300"><a href="#left-icon-employinfo" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูลส่วนตัว</a></li>
+								<li class="nav-item bg-orange-300"><a href="#left-icon-employeducation" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการศึกษา</a></li>
+								<li class="nav-item bg-orange-300"><a href="#left-icon-employexpereince" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการทำงาน</a></li>
+								<li class="nav-item bg-orange-300" ><a href="#left-icon-employtraining" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ประวัติการฝึกอบรม</a></li>								
+								<li class="nav-item bg-orange-300"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> เอกสารแนบ</a></li>	
 							</ul>
 
 							<div class="tab-content">
@@ -258,7 +261,7 @@
 									</div>
 									
 									<div class="form-group">
-										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูลพนักงาน</button>
+										<button id="btn_edit_employ" data-id="" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล</button>
 									</div>
 									
 								</div>
@@ -269,7 +272,7 @@
 									</div>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
-											<thead>
+											<thead class="bg-info">
 												<tr>
 													<th>ระดับ</th>  
 													<th>ชื่อสถานศึกษา</th>                                                                                    
@@ -291,7 +294,7 @@
 
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
-											<thead>
+											<thead class="bg-info">
 												<tr>
 													<th>เริ่มต้น-สิ้นสุด</th>  
 													<th>บริษัท</th>                                                                                    
@@ -308,13 +311,13 @@
 								</div>
 								<div class="tab-pane fade" id="left-icon-attachment">
 									<div class="input-group">													
-										<label for="">เอกสารแนบ <a type="button" id="btnuploadboardattachment" onclick="document.getElementById('boardattachment').click();"><i class="icon-add text-info"></i></a></label>
+										<label for="">เอกสารแนบ เช่น Resume, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่น ๆ <a type="button" id="btnuploadboardattachment" onclick="document.getElementById('boardattachment').click();"><i class="icon-add text-info"></i></a></label>
 									</div>
 									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment"/>
 
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
-											<thead>
+											<thead class="bg-info">
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
 													<th style="width:200px">ดาวน์โหลด</th>
@@ -361,7 +364,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการศึกษา</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ประวัติการศึกษา</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -406,7 +409,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการทำงาน</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ประวัติการทำงาน</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -454,7 +457,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการฝึกอบรม</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ประวัติการฝึกอบรม</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -490,7 +493,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มผู้ถือหุ้น</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้ถือหุ้น</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -519,7 +522,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มระดับเทคโนโลยี</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดเทคโนโลยี</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -553,7 +556,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเอกสารแนบ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รางวัลด้านเทคโนโลยี/นวัตกรรม</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -561,12 +564,12 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อรางวัล</label><span class="text-danger">*</span>
-							<input type="text" id="awardname" placeholder="ชื่อรางวัล" class="form-control">
+							<input type="text" id="awardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >แนบเอกสาร</button>													
+							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
 					</div>
@@ -585,20 +588,20 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มประวัติการศึกษา</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ประวัติการศึกษา</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>ใบรับรองมาตรฐาน</label><span class="text-danger">*</span>
-							<input type="text" id="standardname" placeholder="ใบรับรองมาตรฐาน" class="form-control">
+							<label>ใบรับรองมาตรฐาน เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label><span class="text-danger">*</span>
+							<input type="text" id="standardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >แนบเอกสาร</button>													
+							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
 					</div>
@@ -618,7 +621,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มแผนการดำเนินงาน</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แผนการดำเนินงาน</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -626,7 +629,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
-							<input type="text" id="plandetail" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
+							<input type="text" id="plandetail" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -660,7 +663,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มแผนการดำเนินงาน</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แผนการดำเนินงาน</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -669,7 +672,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
-							<input type="text" id="plandetail_edit" placeholder="รายละเอียดการดำเนินงาน" class="form-control">
+							<input type="text" id="plandetail_edit" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -703,7 +706,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มยอดขาย</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ยอดขาย</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -788,7 +791,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการ</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายการ</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -831,7 +834,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มลูกหนี้การค้า</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ลูกหนี้การค้า</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -877,7 +880,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มลูกหนี้การค้า</h5>
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ลูกหนี้การค้า</h5>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -924,7 +927,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเจ้าหนี้การค้า</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เจ้าหนี้การค้า</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -966,7 +969,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเจ้าหนี้การค้า</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เจ้าหนี้การค้า</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -1010,7 +1013,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเจ้าหนี้การค้า</h5>
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เจ้าหนี้การค้า</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
@@ -1127,7 +1130,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มเอกสารแนบข้อมูลทั่วไป</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เอกสารแนบข้อมูลทั่วไป</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -1135,12 +1138,12 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-							<input type="text" id="companydocname" placeholder="ชื่อเอกสาร" class="form-control">
+							<input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-12">	
 						<div class="input-group">													
-							<button class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companygeneraldoc').click();" >แนบเอกสาร</button>													
+							<button class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companygeneraldoc').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="companygeneraldoc" name="companygeneraldoc"/>
 					</div>
@@ -1159,7 +1162,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มนักวิจัย</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;นักวิจัย</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -1221,7 +1224,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มทีมงานในโครงการ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ทีมงานในโครงการ</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -1540,15 +1543,13 @@
 																<div class="input-group">													
 																	{{-- <button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													 --}}
 																	{{-- <label for="">เอกสารแนบข้อมูลทั่วไป </label>
-																	<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p> --}}
+																	<p><small><i>หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p> --}}
 
-																	<label for="">เอกสารแนบข้อมูลทั่วไป </label> 
-																	{{-- <a type="button" id="btnuploadattachment" onclick="document.getElementById('attachment').click();"><i class="icon-add text-info"></i></a> --}}
-																	<a type="button" class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add text-info"></i></a> 
+																	<label for="">แนบเอกสารข้อมูลทั่วไป <a type="button" class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc"> <i class="icon-add text-info"></i></a></label>
 																	
-
+																	
 																</div>
-																<p><small><i>หนังสือบริคณห์สนธิ(บอจ.2),สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5),สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
+																<p><small><i>หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
 																{{-- <input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment"/> --}}
 															</div>
 														</div>			
@@ -1789,7 +1790,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>ตำแหน่ง</label>
-																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->userposition->name}}" placeholder="ตำแหน่ง" class="form-control">
+																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->position}}" placeholder="ตำแหน่ง" class="form-control">
 															</div>
 														</div>
 														<div class="col-md-6">
@@ -1975,7 +1976,7 @@
 														<div class="col-md-12">
 															<div class="form-group">	
 																{{-- <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add"></i></a> --}}
-																<label for="">ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์ <a type="button" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add text-info"></i></a></label>
+																<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์ <a type="button" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add text-info"></i></a></label>
 																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน(เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
 															</div>
 															<div class="table-responsive">
@@ -2779,7 +2780,7 @@
 														</div>
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
-																<thead>
+																<thead class="bg-info">
 																	<tr>
 																		<th>รายการ</th>  
 																		<th>เงินทุนที่มีอยู่แล้ว</th>                                                                                    
@@ -2922,6 +2923,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 
 <script>
 

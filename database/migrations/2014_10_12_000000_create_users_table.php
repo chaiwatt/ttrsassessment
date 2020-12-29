@@ -17,10 +17,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('prefix_id')->default(1);
             $table->unsignedBigInteger('user_status_id')->default(1);
-            $table->unsignedBigInteger('user_position_id')->default(1);
+            // $table->unsignedBigInteger('user_position_id')->default(1);
             $table->char('hid',13)->nullable();
             $table->string('name');
             $table->string('lastname')->nullable();
+            $table->string('position')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
