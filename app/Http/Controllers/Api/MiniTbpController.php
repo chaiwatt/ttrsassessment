@@ -43,7 +43,10 @@ class MiniTbpController extends Controller
                 $minitbpsignature->save();
             }
         }
-
+        $otherbank = $minitbp->otherbank;
+        if(!Empty($request->otherbank)){
+            $otherbank = $request->otherbank;
+        }
         MiniTBP::find($request->id)->update([
             'project' => $request->project,
             'projecteng' => $request->projecteng,
@@ -77,7 +80,7 @@ class MiniTbpController extends Controller
             'managerposition_id' => $request->managerposition,
             'website' => $request->website,
             'signature_status_id' => $request->signature,
-            'otherbank' => $request->otherbank
+            'otherbank' => $otherbank
         ]);
        
         Company::where('user_id',Auth::user()->id)->first()->update([

@@ -759,13 +759,13 @@
 										<div class="col-md-6">  
 											<div class="form-group">
 												<label>พิกัดละติจูด (เช่น 14.076868486942407)<a href="https://google.com/maps/place/{{$companyaddress->lat}},{{$companyaddress->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
-												<input type="text"  name="lat" value="{{$companyaddress->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg stringformat60">
+												<input type="text"  name="lat" value="{{$companyaddress->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg decimalformat">
 											</div>
 										</div>
 										<div class="col-md-6">  
 											<div class="form-group">
 												<label>พิกัดลองจิจูด (เช่น 100.60153839991285)</label>
-												<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg stringformat60">
+												<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg decimalformat">
 											</div>
 										</div>
 										<div class="col-md-12" id="other_address_wrapper" @if ($user->company->companyaddress->count() == 1) hidden @endif>

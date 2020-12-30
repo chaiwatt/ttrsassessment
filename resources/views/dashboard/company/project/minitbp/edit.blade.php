@@ -313,10 +313,10 @@
 																			@endforeach
 																		</select>
 																	</div>
-																	@if ($minitbp->bank->name == 'อื่น ๆ โปรดระบุ')
-																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg" >
+																	@if (@$minitbp->bank->name == 'อื่น ๆ โปรดระบุ')
+																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" >
 																		@else
-																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg" hidden >
+																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" hidden >
 																	@endif
 																	
 																</div>

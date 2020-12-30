@@ -43,4 +43,10 @@ $(function() {
             blocks: [2]
         })
     });
+    $('.decimalformat').toArray().forEach(function(field){
+        new Cleave(field, {
+            numeral: true,
+            numeralDecimalScale: 15
+        })
+    });
 });

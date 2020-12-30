@@ -27,12 +27,12 @@
     @show
 </head>
 
-<body @isset($mini) class="sidebar-xs" @endisset>
+<body>
 	<!-- Main navbar -->
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
 			<a href="{{url('/')}}" class="d-inline-block">
-				<img src="{{asset('assets/dashboard/images/user.jpg')}}" alt="">
+				<img src="{{asset('assets/dashboard/images/logo-light.png')}}" alt="">
 			</a>
 		</div>
 
