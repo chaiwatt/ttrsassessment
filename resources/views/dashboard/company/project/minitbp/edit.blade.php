@@ -313,7 +313,12 @@
 																			@endforeach
 																		</select>
 																	</div>
-																	{{-- <input type="text" name="otherbank" id="otherbank" value="" class="form-control form-control-lg" > --}}
+																	@if ($minitbp->bank->name == 'อื่น ๆ โปรดระบุ')
+																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg" >
+																		@else
+																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg" hidden >
+																	@endif
+																	
 																</div>
 																<div class="col-md-6">
 																	<div class="form-group">
@@ -457,10 +462,10 @@
 													<table class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
-																<th style="width:70%">เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน TTRS (Mini TBP)</th>
+																<th style="width:50%">เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน TTRS (Mini TBP)</th>
 																{{-- <th style="width:55%">ชื่อ  นามสกุล</th>  --}}
 																<th style="width:15%">ลายมือชื่อ</th> 
-																<th style="width:15%">ตำแหน่ง</th>   
+																<th style="width:35%">ตำแหน่ง</th>   
 																{{-- <th style="width:20%">เพิ่มเติม</th>                                                                                    --}}
 															</tr>
 														</thead>
@@ -754,6 +759,8 @@
 					formData.append('managerposition',$('#managerposition').val());
 					formData.append('signature',$('#usersignature').val());	
 					formData.append('director', JSON.stringify(selected_director));	
+					formData.append('otherbank',$('#otherbank').val());	
+					
 					$.ajax({
 						url: `${route.url}/api/minitbp/editsave`,  //Server script to process data
 						type: 'POST',
@@ -832,7 +839,7 @@
 			$(this).prop('checked', false);
 			Swal.fire({
 				title: 'ผิดพลาด!',
-				text: 'เลือกผู้ลงนามได้ไม่เกิน 2 คน',
+				text: 'เลือกผู้ลงนามได้ไม่เกิน 3 คน',
 			});
 		}
 	});

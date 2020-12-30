@@ -76,7 +76,8 @@ class MiniTbpController extends Controller
             'managerlastname' => $request->managerlastname,
             'managerposition_id' => $request->managerposition,
             'website' => $request->website,
-            'signature_status_id' => $request->signature
+            'signature_status_id' => $request->signature,
+            'otherbank' => $request->otherbank
         ]);
        
         Company::where('user_id',Auth::user()->id)->first()->update([
@@ -123,7 +124,12 @@ class MiniTbpController extends Controller
         $company_address = (!Empty($company->companyaddress->first()->address))?$company->companyaddress->first()->address:'';
 
         $finance1_text = (!Empty($minitpb->finance1))?'x':'';
-        $finance1_bank = (!Empty($minitpb->finance1) && !Empty($minitpb->thai_bank_id))?$minitpb->bank->name:'' ;
+
+        $finance1_bank = $minitpb->otherbank;
+        if($minitpb->bank->name != 'อื่น ๆ โปรดระบุ'){
+            $finance1_bank = (!Empty($minitpb->finance1) && !Empty($minitpb->thai_bank_id))?$minitpb->bank->name:'' ;
+        }
+
         $finance1_loan = (!Empty($minitpb->finance1) && !Empty($minitpb->finance1_loan))?number_format($minitpb->finance1_loan,2):'' ;
         $finance2_text = (!Empty($minitpb->finance2))?'x':'';
         $finance3_text = (!Empty($minitpb->finance3))?'x':'';

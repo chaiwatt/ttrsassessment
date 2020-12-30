@@ -60,7 +60,9 @@ $(document).on('change', '#finance1', function(e) {
 $(document).on('change', '#bank', function(e) {
     var selectedtedtext = $(this).find("option:selected").text();
     if(selectedtedtext == "อื่น ๆ โปรดระบุ"){
-        
+        $("#otherbank").attr("hidden",false);
+    }else{
+        $("#otherbank").attr("hidden",true);
     }
-    console.log();
+    
 });

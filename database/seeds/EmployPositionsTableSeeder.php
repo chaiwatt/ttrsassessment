@@ -13,19 +13,19 @@ class EmployPositionsTableSeeder extends Seeder
     {
         DB::table('employ_positions')->insert([
             [
-                'name' => 'CEO'
+                'name' => 'กรรมการผู้จัดการ (CEO)'
             ],
             [
-                'name' => 'CTO'
+                'name' => 'ผู้บริหารฝ่าย IT (CTO)'
             ],
             [
-                'name' => 'CFO'
+                'name' => 'ผู้บริหารฝ่ายการเงิน (CFO)'
             ],
             [
-                'name' => 'COO'
+                'name' => 'ผู้บริหารฝ่ายปฎิบัติการ (COO)'
             ],
             [
-                'name' => 'CMO'
+                'name' => 'ผู้บริหารฝ่ายการตลาด (CMO)'
             ],
             [
                 'name' => 'นักวิจัย'
