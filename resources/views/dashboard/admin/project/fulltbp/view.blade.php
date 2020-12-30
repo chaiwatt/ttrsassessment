@@ -2955,6 +2955,12 @@
 			height: 300,
 		});
 		$('#swot').summernote('disable');
+
+		$('#modelcanvas').summernote({
+			toolbar: false,
+			height: 300,
+		});
+		$('#modelcanvas').summernote('disable');
 	});
 
 </script>
