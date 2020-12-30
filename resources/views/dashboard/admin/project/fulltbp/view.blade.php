@@ -1482,15 +1482,9 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </label> <span class="text-primary" id="companyprofiletextlength"></span>
-															{{-- <input type="text" id="companyprofile_input" class="form-control companyprofileclass" > --}}
-															<textarea name="companyhistory" id="companyhistory" class="form-control" cols="3" rows="7">{{$fulltbp->minitbp->businessplan->company->companyhistory}}</textarea>
+															
+															<textarea name="companyhistory" id="companyhistory" class="form-control" cols="3" rows="7" readonly >{{$fulltbp->minitbp->businessplan->company->companyhistory}}</textarea>
 														</div>
-														{{-- <div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
-															@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
-																<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
-															@endforeach
-														</div>
-														<hr>	 --}}
 														<div class="row">
 															<div class="col-md-12">	
 																<div class="input-group">													
@@ -2883,128 +2877,84 @@
 				return false;
 			}
 		});
+		// $('#companyhistory').prop('disabled', true);
+		
 		$('#companyhistory').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
-			height: 300,
+			toolbar: false,
+			height: 300
 		});
+		$('#companyhistory').summernote('disable');
+
 		$('#responsibleeducationhistory').summernote({
 			toolbar: false,
 			height: 150,
 		});
+		$('#responsibleeducationhistory').summernote('disable');
+
 		$('#responsibleexperiencehistory').summernote({
 			toolbar: false,
 			height: 150,
 		});
+		$('#responsibleexperiencehistory').summernote('disable');
+
 		$('#responsibletraininghistory').summernote({
 			toolbar: false,
 			height: 150,
 		});
+		$('#responsibletraininghistory').summernote('disable');
+
 		$('#projectabtract_input').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#projectabtract_input').summernote('disable');
+
 		$('#mainproduct_input').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#mainproduct_input').summernote('disable');
+
 		$('#productdetails_input').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#productdetails_input').summernote('disable');
+
 		$('#projectechdev_input').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#projectechdev_input').summernote('disable');
+
 		$('#projectechdevproblem_input').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#projectechdevproblem_input').summernote('disable');
+
 		$('#projectinnovation_input').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#projectinnovation_input').summernote('disable');
+
 		$('#projectstandard_input').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#projectstandard_input').summernote('disable');
+
 		$('#analysis').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#analysis').summernote('disable');
 		$('#swot').summernote({
-			toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-				['font', ['strikethrough', 'superscript', 'subscript']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
+			toolbar: false,
 			height: 300,
 		});
+		$('#swot').summernote('disable');
 	});
 
 </script>

@@ -709,7 +709,6 @@
 										</legend>
 									</div>
 
-
 									@php
 										$companyaddress = $user->company->companyaddress->first();
 									@endphp
