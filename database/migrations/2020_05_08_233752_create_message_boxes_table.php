@@ -21,6 +21,7 @@ class CreateMessageBoxesTable extends Migration
             $table->unsignedBigInteger('sender_id')->comment('ID ผู้ส่ง');
             $table->unsignedBigInteger('receiver_id')->comment('ID ผู้รับ');
             $table->unsignedBigInteger('message_read_status_id')->default(1);
+            $table->char('alertmessage_id')->default(0);
             $table->timestamps();
         });
     }

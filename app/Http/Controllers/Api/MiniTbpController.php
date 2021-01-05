@@ -11,6 +11,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\Signature;
+use App\Model\MessageBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
@@ -275,6 +276,7 @@ class MiniTbpController extends Controller
         ]);
         $minitbp = MiniTBP::find($id);
         $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find($minitbp->business_plan_id)->id)->first();
+        $company = $minitbp->businessplan->company;
         if(Empty($projectassignment->leader_id)){
             $projectassignment = new ProjectAssignment();
             $projectassignment->full_tbp_id = FullTbp::where('mini_tbp_id',$minitbp->id)->first()->id;
@@ -289,15 +291,20 @@ class MiniTbpController extends Controller
             $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
             $notificationbubble->save();
 
+            $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project,'บริษัท'.$company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
+
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
+            $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' บริษัท'.$minitbp->businessplan->company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' บริษัท'.$company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>';
             $alertmessage->save();
 
-            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP)','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP)','บริษัท'.$minitbp->businessplan->company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
-
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'<strong>เรียน JD</strong><br> บริษัท'. $company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a> <br><br><strong>ด้วยความนับถือ</strong><br>TTRS');
+            
         }else{
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
@@ -307,14 +314,20 @@ class MiniTbpController extends Controller
             $notificationbubble->target_user_id = $projectassignment->leader_id;
             $notificationbubble->save();
 
+            $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว','บริษัท'.$company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
+
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $projectassignment->leader_id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' .$minitbp->project. ' เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a>';
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().'บริษัท'.$company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>';
             $alertmessage->save();
 
-            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a>',Auth::user()->id,$projectassignment->leader_id);
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว','<strong>เรียน Leader</strong><br> บริษัท'. $company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a> <br><br><strong>ด้วยความนับถือ</strong><br>TTRS'); 
         }
     }
     public function SubmitNoAttachement(Request $request){
@@ -337,7 +350,7 @@ class MiniTbpController extends Controller
         ]);
         $minitbp = MiniTBP::find($id);
         $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find($minitbp->business_plan_id)->id)->first();
-        
+        $company = $minitbp->businessplan->company;
         if(Empty($projectassignment->leader_id)){
             
             $projectassignment = new ProjectAssignment();
@@ -356,11 +369,11 @@ class MiniTbpController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' บริษัท'.$minitbp->businessplan->company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' บริษัท'.$company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>';
             $alertmessage->save();
             
-            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP)','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP)','บริษัท'.$minitbp->businessplan->company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
+            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP)','เรียน JD<br> บริษัท'. $company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP)','บริษัท'.$company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);    
 
         }else{
             $notificationbubble = new NotificationBubble();
@@ -374,11 +387,11 @@ class MiniTbpController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $projectassignment->leader_id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' .$minitbp->project. ' เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' .$minitbp->project. ' เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>';
             $alertmessage->save();
 
-            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว','เรียน Leader<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว',Company::where('user_id',Auth::user()->id)->first()->name . ' ได้ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ตรวจสอบ</a>',Auth::user()->id,$projectassignment->leader_id);
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว','เรียน Leader<br> บริษัท'. $company->name . ' ได้ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            Message::sendMessage('เอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว','บริษัท'.$company->name . ' ได้ส่งเอกสารคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
         }
     }
 

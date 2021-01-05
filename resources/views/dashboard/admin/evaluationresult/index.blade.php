@@ -51,9 +51,9 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">สรุปผลการประเมินโครงการ</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">

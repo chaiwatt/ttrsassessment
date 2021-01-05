@@ -72,10 +72,17 @@
 
                                         <div class="form-group">
                                             <label>กลุ่มผู้ใช้งาน<span class="text-danger">*</span></label>
-                                            <select name="usertype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
+                                            <select name="usertype" id="usertype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
                                                 @foreach ($usertypes as $usertype)
                                                     <option value="{{$usertype->id}}" @if($user->user_type_id == $usertype->id) selected @endif>{{$usertype->name}}</option> 
                                                 @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="experttype_wrapper" hidden>
+                                            <label>ประเภทผู้เชี่ยวชาญ</label>
+                                            <select name="experttype" id="experttype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
+                                                <option value="1" >ผู้เชี่ยวชาญภายใน</option> 
+                                                <option value="2" >ผู้เชี่ยวชาญภายนอก</option> 
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -111,5 +118,14 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-	
+	<script>
+        $(document).on('change', '#usertype', function(e) {
+            if($(this).val() == 3){
+                console.log('expert');
+                $("#experttype_wrapper").attr("hidden",false);
+            }else{
+                $("#experttype_wrapper").attr("hidden",true);
+            }
+        });
+    </script>
 @stop

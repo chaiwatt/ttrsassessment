@@ -1,11 +1,12 @@
-  function addStockHolder(employid,ceorelation){
+  function addStockHolder(id,holdername,ceorelation){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/fulltbp/stockholder/add`,
           type: 'POST',
           headers: {"X-CSRF-TOKEN":route.token},
           data: {
-            id:employid,
+            id:id,
+            holdername:holdername,
             ceorelation:ceorelation,
           },
           success: function(data) {

@@ -48,10 +48,18 @@
         <div class="row">
             <div class="col-md-12">
 				<div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">รายการเจ้าหน้าที่ TTRS</h6>
+                        <div class="header-elements">
+                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a> --}}
+                        </div>
+                    </div>
 					<div class="card-body">
                         <form method="POST" action="{{route('dashboard.admin.project.projectassignment.editsave',['id' => $projectassignment->id])}}" enctype="multipart/form-data">
                             @csrf
-                            <fieldset>	
+                            {{-- <fieldset>	
                                 <div class="form-group">
 									<label for="">Leader<span class="text-danger">*</span></label>
 									<select name="leader" id="leader" value="{{$projectassignment->leader_id}}" id="" class="form-control form-control-select2">
@@ -70,11 +78,47 @@
 										@endforeach
 									</select>
 								</div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+
+                            </fieldset> --}}
+                       
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr class="bg-info">
+                                                    <th style="width:15px">Leader</th>
+                                                    <th style="width:15px">Coleader</th>
+                                                    <th >ชื่อ สกุล</th>
+                                                    <th >โครงการรับผิดชอบ</th> 
+                                                    <th >กำลังดำเนินการ</th>    
+                                                    <th >เสร็จสิ้น</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="authorized_director_wrapper_tr"> 
+                                                @foreach ($users as $key => $user)
+                                                <tr >  
+                                                    <td><input type="radio" name="leader" value="{{$user->id}}" class="form-check-input-styled leader" data-fouc @if($projectassignment->leader_id == $user->id) checked @endif  ></td>  
+                                                    <td><input type="radio" name="coleader" value="{{$user->id}}" class="form-check-input-styled coleader" data-fouc   @if($projectassignment->coleader_id == $user->id) checked @endif  ></td>      
+                                                    <td>{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</td>
+                                                    <td>{{$user->projecthandle->count()}}</td>      
+                                                    <td>{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
+                                                    <td>{{$user->projecthandle->where('ststus',3)->count()}}</td> 
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </fieldset>
-                        </form>
+                                <div class="form-group">
+                                    <div class="text-right">
+                                        <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </form>
 					</div>
 				</div>
 				<!-- /multiple selection -->
@@ -117,10 +161,10 @@
                         <div class="card-header header-elements-sm-inline">
                             <h6 class="card-title">รายการโครงการ</h6>
                             <div class="header-elements">
-                                <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                    {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                                {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                    
                                     <span></span>
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -160,6 +204,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/projectassignmenthelper.js')}}"></script>
 <script>
     var route = {

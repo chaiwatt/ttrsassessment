@@ -18,7 +18,7 @@ class FullTbpProjectCertifyUploadController extends Controller
         $fulltbpprojectcertifyattachment = new FullTbpProjectCertifyAttachment();
         $fulltbpprojectcertifyattachment->project_certify_id = $request->id;
         $fulltbpprojectcertifyattachment->full_tbp_id = $projectcertify->full_tbp_id;
-        $fulltbpprojectcertifyattachment->name = $file->getClientOriginalName();;
+        $fulltbpprojectcertifyattachment->name = $request->certifyname;
         $fulltbpprojectcertifyattachment->path = $filelocation;
         $fulltbpprojectcertifyattachment->save();
         $fulltbpprojectcertifyattachments = FullTbpProjectCertifyAttachment::where('project_certify_id',$request->id)->get();

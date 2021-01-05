@@ -37,7 +37,7 @@ class FullTbpCompanyEmployController extends Controller
         $companyemploy->workphone = $request->workphone;
         $companyemploy->email = $request->email;
         $companyemploy->save();
-        $companyemploys = CompanyEmploy::where('company_id',$company->id)->get();
+        $companyemploys = CompanyEmploy::where('company_id',$company->id)->orderBy('id','desc')->get();
         return response()->json($companyemploys); 
     }
 
@@ -75,7 +75,7 @@ class FullTbpCompanyEmployController extends Controller
             'email' => $request->email
         ]);
         $companyid = Company::find(CompanyEmploy::find($request->id)->company_id);
-        $companyemploys = CompanyEmploy::where('company_id',$companyid->id)->get();
+        $companyemploys = CompanyEmploy::where('company_id',$companyid->id)->orderBy('id','desc')->get();
         return response()->json($companyemploys); 
     }
 
@@ -88,7 +88,7 @@ class FullTbpCompanyEmployController extends Controller
         $companyid = Company::find(CompanyEmploy::find($request->id)->company_id);     
         CompanyEmploy::find($request->id)->delete();
         
-        $companyemploys = CompanyEmploy::where('company_id',$companyid->id)->get();
+        $companyemploys = CompanyEmploy::where('company_id',$companyid->id)->orderBy('id','desc')->get();
         return response()->json($companyemploys); 
     }
     
@@ -106,7 +106,7 @@ class FullTbpCompanyEmployController extends Controller
         $fulltbpboardattachment->name = $file->getClientOriginalName();;
         $fulltbpboardattachment->path = $filelocation;
         $fulltbpboardattachment->save();
-        $fullTbpboardattachments = FullTbpBoardAttachment::where('company_employ_id',$request->id)->get();
+        $fullTbpboardattachments = FullTbpBoardAttachment::where('company_employ_id',$request->id)->orderBy('id','desc')->get();
         return response()->json($fullTbpboardattachments); 
     }
 
@@ -117,8 +117,14 @@ class FullTbpCompanyEmployController extends Controller
         }
         $companyemployid = $fulltbpboardattachment->company_employ_id;
         FullTbpBoardAttachment::find($request->id)->delete();
-        $fullTbpboardattachments = FullTbpBoardAttachment::where('company_employ_id',$companyemployid)->get();
+        $fullTbpboardattachments = FullTbpBoardAttachment::where('company_employ_id',$companyemployid)->orderBy('id','desc')->get();
         return response()->json($fullTbpboardattachments); 
     }
     
+    public function Search(Request $request){
+        $companyemploys = CompanyEmploy::where('company_id',$request->company)
+                                    ->where('name', 'like', '%' . $request->search . '%')
+                                    ->orWhere('lastname', 'like', '%' . $request->search . '%')->get();
+        return response()->json($companyemploys); 
+    }
 }

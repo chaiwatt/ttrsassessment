@@ -49,8 +49,18 @@ class RegisterController extends Controller
             'phone' => 'required|numeric',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'usergroup' => 'required',
-            'vatno' => 'required_if:usergroup,==,1'
+            'usergroup' => 'required'
+        ],
+        [
+            'name.required' => 'ยังไม่ได้กรอกชื่อ',
+            'lastname.required' => 'ยังไม่ได้กรอกนามสกุล',
+            'vatno.required' => 'ยังไม่ได้กรอกเลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน',
+            'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
+            'email.required' => 'ยังไม่ได้กรอกอีเมล',
+            'password.required' => 'ยังไม่ได้กรอกรหัสผ่าน',
+            'password.confirmed' => 'ยังไม่ได้กรอกรหัสผ่าน',
+            'email.unique' => 'อีเมลนี้ลงทะเบียนแล้ว',
+            'email.required' => 'ยังไม่ได้กรอกอีเมล'
         ]);
     }
 
@@ -94,14 +104,12 @@ class RegisterController extends Controller
         if($user->user_type_id == 3){
             $xpertdetail = new ExpertDetail();
             $xpertdetail->user_id = $user->id;
-            // $xpertdetail->hid = $vatno;
             $xpertdetail->expert_type_id = $data['expert'];
             $xpertdetail->save();
         }
         if($user->user_type_id == 4){
             $xpertdetail = new OfficerDetail();
             $xpertdetail->user_id = $user->id;
-            // $xpertdetail->hid = $vatno;
             $xpertdetail->save();
         }
         if($companyname == "บัตรประจำตัวประชาชน"){

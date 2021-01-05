@@ -10,6 +10,7 @@ use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Model\EmployEducation;
 use App\Model\EmployExperience;
+use App\Model\FulltbpSignature;
 use App\Model\MinitbpSignature;
 use Illuminate\Database\Eloquent\Model;
 
@@ -45,6 +46,19 @@ class CompanyEmploy extends Model
         $minitbp=MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $signature = '1';
         $check = MinitbpSignature::where('company_employee_id',$this->id)->where('mini_tbp_id',$minitbp->id)->first();
+        if(!Empty($check)){
+            $signature = '2';
+        }
+        return $signature;
+    } 
+
+    public function getUsefulltbpsignatureAttribute(){
+        $company = Company::find($this->company_id);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $minitbp=MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+        $signature = '1';
+        $check = FulltbpSignature::where('company_employee_id',$this->id)->where('full_tbp_id',$fulltbp->id)->first();
         if(!Empty($check)){
             $signature = '2';
         }

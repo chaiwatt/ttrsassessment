@@ -16,7 +16,7 @@ class UserStatusesTableSeeder extends Seeder
                 'name' => 'เปิดใช้งาน'
             ],
             [
-                'name' => 'ปิดการใช้งาน'
+                'name' => 'ระงับการใช้งาน'
             ]
         ]);
     }

@@ -17,9 +17,9 @@ class FullTbpCostController extends Controller
         $fulltbpcost = FullTbpCost::find($request->id);
         $fulltbpid = $fulltbpcost->full_tbp_id;
         $fulltbpcost->update([
-            'existing' => $request->existing,
-            'need' => $request->need,
-            'approved' => $request->approved,
+            'existing' => str_replace(',', '', $request->existing),
+            'need' => str_replace(',', '', $request->need),
+            'approved' => str_replace(',', '', $request->approved),
             'plan' => $request->plan,
         ]);
         $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbpid)->get();

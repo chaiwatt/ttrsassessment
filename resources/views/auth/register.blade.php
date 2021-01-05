@@ -76,7 +76,7 @@
                     </div>
                     
                     <div class="form-group form-group-feedback form-group-feedback-left" id="userselect">                    
-                        <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-select2">
+                        <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-lg form-control-select2">
                             @foreach ($usergroups as $usergroup)
                                 <option value="{{$usergroup->id}}" >{{$usergroup->name}}</option> 
                             @endforeach
@@ -84,24 +84,36 @@
                     </div>
     
                     <div class="form-group" id="vatwrapper" >
-                        <input id="vatno" type="text" class="form-control numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน" >
+                        <input id="vatno" type="text" class="form-control form-control-lg numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                        @error('vatno')
+                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                        @enderror
                         <input type="text" name="companyname" id="companyname" hidden>
                     </div>
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="name" type="text" class="form-control text50 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
+                        <input id="name" type="text" class="form-control form-control-lg stringformat60 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
                         <div class="form-control-feedback">
                             <i class="icon-user text-muted"></i>
                         </div>
+                        @error('name')
+                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                        @enderror
                     </div>             
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="lastname" type="text" class="form-control text50 @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
+                        <input id="lastname" type="text" class="form-control form-control-lg stringformat60 @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
                         <div class="form-control-feedback">
                             <i class="icon-user text-muted"></i>
                         </div>
+                        @error('lastname')
+                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                        @enderror
                     </div>    
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="email" type="email" class="form-control text50 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
+                        <input id="email" type="email" class="form-control form-control-lg stringformat60 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
                         <div class="form-control-feedback">
                             <i class="icon-mention text-muted"></i>
                         </div>
@@ -111,7 +123,7 @@
                     </div>
     
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์มือถือ">
+                        <input id="phone" type="phone" class="form-control form-control-lg numeralformathphone @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์มือถือ">
                         <div class="form-control-feedback">
                             <i class="icon-phone2 text-muted"></i>
                         </div>
@@ -121,7 +133,7 @@
                     </div>
                     <div id="pwd-container">
                         <div class="form-group form-group-feedback form-group-feedback-left" >
-                            <input id="password" type="password" class="form-control engonly @error('password') is-invalid @enderror" name="password" title="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร">
+                            <input id="password" type="password" class="form-control form-control-lg engonly @error('password') is-invalid @enderror" name="password" title="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร">
                             <div class="form-control-feedback">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
@@ -133,7 +145,7 @@
                         </div>
         
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" title="ใช้ได้เฉพาะตัวอักษรและภาษาอังกฤษเท่านั้น" placeholder="ยืนยันรหัสผ่าน">
+                            <input id="password-confirm" type="password" class="form-control engonly form-control-lg" name="password_confirmation" title="ใช้ได้เฉพาะตัวอักษรและภาษาอังกฤษเท่านั้น" placeholder="ยืนยันรหัสผ่าน">
                             <div class="form-control-feedback ">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
@@ -281,23 +293,6 @@
                     }).then((result) => {});
                     return false;
                 }
-        });
-        $(document).on('keypress', '#phone', function(e) {
-                var pattern_num = /^[0-9]+$/;
-                if(!$(this).val().match(pattern_num) && $(this).val() != ''){
-                    $(this).val('')
-                    return false;
-                }else{
-                    if($(this).val().length >= 10){
-                        $(this).val($(this).val().substring(0, 9));
-                    }
-                }
-        });
-
-        $(document).on('keypress', '.text50', function(e) {
-            if($(this).val().length >= 50){
-                $(this).val($(this).val().substring(0, 49));
-            }
         });
 
         </script>	

@@ -149,7 +149,7 @@
 
 				<div class="modal-footer">
 					{{-- <button type="button" class="btn btn-link" data-dismiss="modal">Close</button> --}}
-					<button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button>
+					<button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">ปิด</button>
 				</div>
 			</div>
 		</div>
@@ -243,7 +243,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_authorized_director" class="btn bg-primary" data-id="{{$user->company->id}}" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+                    <button id="btn_modal_add_authorized_director" class="btn bg-primary" data-id="{{$user->company->id}}" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
                 </div>
             </div>
         </div>
@@ -816,8 +816,8 @@
 													<table class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
-																<th style="width:55%">ชื่อ  นามสกุล</th> 
-																<th style="width:15%">ตำแหน่ง</th>   
+																<th style="width:45%">ชื่อ  นามสกุล</th> 
+																<th style="width:25%">ตำแหน่ง</th>   
 																<th style="width:15%">ลายมือชื่อ</th>
 																<th style="width:15%">เพิ่มเติม</th>                                                                                   
 															</tr>

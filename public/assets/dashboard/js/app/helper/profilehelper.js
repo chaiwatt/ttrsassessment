@@ -104,11 +104,11 @@ $(document).on("click",".deleteexperteducationclass",function(e){
 }); 
 
 $(document).on("click",".messagelink",function(e){
+    // console.log('new year');
     $(this).removeClass("unread")
     Message.getMessage($(this).data('id')).then(data => {
         let html= '';
         let html2= '';
-        // console.log(data);
         if(data.attachment.length > 0){
             html=`<hr><div class="table-responsive">
             <table class="table table-striped">
@@ -153,7 +153,8 @@ $(document).on("click",".messagelink",function(e){
         
         $("#tablemessage").html(html);
         $("#unreadmessages").html(html2);
-        $("#messagetitle").html(data.message.title);
+        // $("#messagetitle").html(data.message.title);
+        $("#messagetitle").html("ข้อความ");
         $("#messagebody").html(data.message.body);
         $('#modal_message').modal('show');
     })
@@ -772,16 +773,16 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
 });
 
 $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
-    if($('#directorname').val() =='' || $('#directorlastname').val() ==''){
+    console.log($('#directorposition').val());
+    if($('#directorname').val() =='' || $('#directorlastname').val() =='' || $('#directorposition').val() == ''){
         return ;
     }
     addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#directorname').val(),$('#directorlastname').val(),$('#directorposition').val(),$('#signatureid').val()).then(data => {
         var html = ``;
         //
         data.forEach(function (director,index) {
-            console.log(director.signature_id);
             var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
-            if(director.signature_id){
+            if(director.signature_id != null){
                 check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
             }
             html += `<tr >                                        
@@ -798,6 +799,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
             });
          $('#authorizeddirector').val(data.length);
          $("#authorized_director_wrapper_tr").html(html);
+         $('#modal_add_authorized_director').modal('hide');
     })
     .catch(error => {})
 });
@@ -844,7 +846,7 @@ function addAuthorizedDirector(id,prefix,name,lastname,position,signature) {
                 console.log(data.length);
                 data.forEach(function (director,index) {
                     var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
-                    if(director.signature_id){
+                    if(director.signature_id != null){
                         check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
                     }
                     html += `<tr >                                        

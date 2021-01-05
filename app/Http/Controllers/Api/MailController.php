@@ -32,7 +32,7 @@ class MailController extends Controller
         $alertmessage->save();
 
         EmailBox::send($user->email,'TTRS:'.$request->topic,'เรียนผู้ประกอบการ<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียนผู้ประกอบการ<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS',$auth->id,$user->id);
+        Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียนผู้ประกอบการ<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ',$auth->id,$user->id);
         return response()->json($fulltbp); 
     }
     public function SendMember(Request $request){
@@ -48,7 +48,7 @@ class MailController extends Controller
             $alertmessage->save();
     
             EmailBox::send($user->email,'TTRS:'.$request->topic,'เรียนทีมในโครงการ'.$minitbp->project.'<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียนทีมในโครงการ'.$minitbp->project.'<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS',$auth->id,$user->id);
+            Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียนทีมในโครงการ'.$minitbp->project.'<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ',$auth->id,$user->id);
         }
 
         return response()->json($fulltbp); 

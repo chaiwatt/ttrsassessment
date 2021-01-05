@@ -101,6 +101,18 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return ExpertDetail::where('user_id',$this->id)->first();
     }
+    public function getOfficerdetailAttribute()
+    {
+        return OfficerDetail::where('user_id',$this->id)->first();
+    }
+    public function getProjecthandleAttribute()
+    {
+        $expertassignmentfulltbparray = ExpertAssignment::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();
+        $leaderfulltbparray= ProjectAssignment::where('leader_id',$this->id)->pluck('full_tbp_id')->toArray();
+        $coleaderfulltbparray = ProjectAssignment::where('coleader_id',$this->id)->pluck('full_tbp_id')->toArray();
+        $fulltbpiduniques = array_unique(array_merge($expertassignmentfulltbparray,$leaderfulltbparray,$coleaderfulltbparray));
+        return FullTbp::whereIn('id',$fulltbpiduniques)->get();
+    }
     // public function getFulltbpexpertAttribute()
     // {
     //     $projectmemberarray = ProjectMember::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Model\MessageBox;
 
+use App\Model\AlertMessage;
 use Illuminate\Http\Request;
 use App\Model\MessageBoxAttachment;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,8 @@ class MessageController extends Controller
         MessageBox::find($request->messageid)->update([
             'message_read_status_id' => 2
         ]);
+
+        AlertMessage::where('messagebox_id',MessageBox::find($request->messageid)->id)->delete();
         
         $messagereceive = MessageBox::find($request->messageid);
         $unreadmessages = MessageBox::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();

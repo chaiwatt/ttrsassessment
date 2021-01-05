@@ -36,7 +36,7 @@ Auth::routes();
 // }); 
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
-Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('generate','PDFController@Generate')->name('generate');
 
@@ -294,6 +294,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('add','Api\FullTbpCompanyEmployController@Add')->name('api.fulltbp.employ.add');    
                 Route::post('delete','Api\FullTbpCompanyEmployController@Delete')->name('api.fulltbp.employ.delete');       
                 Route::post('get','Api\FullTbpCompanyEmployController@Get')->name('api.fulltbp.employ.get');  
+                Route::post('search','Api\FullTbpCompanyEmployController@Search')->name('api.fulltbp.employ.search'); 
                 Route::post('getposition','Api\FullTbpCompanyEmployController@GetPosition')->name('api.fulltbp.employ.getposition');  
                 Route::post('edit','Api\FullTbpCompanyEmployController@Edit')->name('api.fulltbp.employ.edit'); 
                 Route::post('getlist','Api\FullTbpCompanyEmployController@GetList')->name('api.fulltbp.employ.getlist'); 

@@ -7,7 +7,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มความเห็น JD</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเห็น JD</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -15,7 +15,7 @@
                         <input type="text" id="minitbpid" hidden>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>ความเห็น JD</label>
+                                <label>ความเห็น</label>
                                 <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control"></textarea>
                             </div>
                         </div>
@@ -75,12 +75,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการ Assignment</h6>
+                        <h6 class="card-title">รายการมอบหมาย</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                
                                 <span></span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -88,8 +88,6 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="width:50px">#</th>  --}}
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>ความเห็น JD</th>
@@ -104,10 +102,12 @@
                                 <tbody>
                                     @foreach ($projectassignments as $key => $projectassignment)
                                     <tr>    
-                                        {{-- <td> {{$key+1}}</td> --}}
-                                        {{-- <td> {{$projectassignment->businessplan->code}} </td>  --}}
-                                        <td> {{$projectassignment->businessplan->minitbp->project}} </td> 
-                                        <td> {{$projectassignment->businessplan->company->name}} </td> 
+                                        <td> 
+                                                <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="text-info" target="_blank">{{$projectassignment->businessplan->minitbp->project}} </a>
+                                        </td> 
+                                        <td> 
+                                            {{$projectassignment->businessplan->company->name}}
+                                        </td> 
                                         <td> 
                                             @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
                                                     <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
@@ -136,7 +136,12 @@
                                         </td>
                                         @if (Auth::user()->user_type_id>=6)
                                             <td> 
-                                                <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">มอบหมาย</a>
+                                                @if ($projectassignment->leader_id == null)
+                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">มอบหมาย</a>
+                                                    @else
+                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-warning">แก้ไข</a>
+                                                @endif
+                                                
                                             </td>    
                                         @endif
                                

@@ -50,9 +50,9 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">โครงการ</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -107,8 +107,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 ">
-                                <div class="chart-container" style="height:300px">
-                                    <div class="chart has-fixed-height" id="progress_chart"></div>
+                                <div class="chart-container" >
+                                    <div class="chart has-fixed-height" style="margin-top:-40px; " id="progress_chart"></div>
                                 </div>
                             </div>
                             <div class="col-md-12" style="text-align: center">
@@ -138,10 +138,10 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">TimeLine</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                
                                 <span></span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -235,11 +235,12 @@
         textStyle: {
                     fontFamily: 'Kanit',
                 },
+                
          series: [
              {
                  type: "gauge",
-                 center: ["50%", "45%"], 
-                 radius: "80%", 
+                 center: ["50%", "50%"], 
+                 radius: "100%", 
                  startAngle: 200, 
                  endAngle: -20, 
                  axisLine: {
@@ -303,8 +304,8 @@
              },
              {
                  type : "gauge",
-                 center: ["50%", "45%"], 
-                 radius : "70%",
+                 center: ["50%", "60%"], 
+                 radius : "100%",
                  startAngle: 200,
                  endAngle: -20,
                  axisLine : {

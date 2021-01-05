@@ -55,10 +55,10 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">Sub Pillar</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                
                                 <span></span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">

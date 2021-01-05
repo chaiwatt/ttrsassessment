@@ -14,12 +14,12 @@ class FullTbpDebtPartnerController extends Controller
         $fulltbpdebtpartner->debtpartner = $request->debtpartner;
         $fulltbpdebtpartner->numproject = $request->numproject;
         $fulltbpdebtpartner->partnertaxid =$request->partnertaxid;
-        $fulltbpdebtpartner->totalyearsell = $request->totalyearsell;
+        $fulltbpdebtpartner->totalyearsell = str_replace(',', '', $request->totalyearsell);
         $fulltbpdebtpartner->percenttosale = $request->percenttosale;
         $fulltbpdebtpartner->businessyear = $request->businessyear;
         $fulltbpdebtpartner->save();
 
-        $fulltbpsells = FullTbpDebtPartner::where('full_tbp_id',$request->id)->get();
+        $fulltbpsells = FullTbpDebtPartner::where('full_tbp_id',$request->id)->orderBy('id','desc')->get();
         return response()->json($fulltbpsells);  
     }
     public function Get(Request $request){
@@ -33,11 +33,11 @@ class FullTbpDebtPartnerController extends Controller
             'debtpartner' => $request->debtpartner,
             'numproject' => $request->numproject,
             'partnertaxid' => $request->partnertaxid,
-            'totalyearsell' => $request->totalyearsell,
+            'totalyearsell' => str_replace(',', '', $request->totalyearsell),
             'percenttosale' => $request->percenttosale,
             'businessyear' => $request->businessyear,
         ]);
-        $fulltbpdebtpartners = FullTbpDebtPartner::where('full_tbp_id',$fulltbpid)->get();
+        $fulltbpdebtpartners = FullTbpDebtPartner::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
         return response()->json($fulltbpdebtpartners); 
     }
 
@@ -45,7 +45,7 @@ class FullTbpDebtPartnerController extends Controller
         $fulltbpdebtpartner = FullTbpDebtPartner::find($request->id);
         $fulltbpid = $fulltbpdebtpartner->full_tbp_id;
         $fulltbpdebtpartner->delete();
-        $fulltbpdebtpartners = FullTbpDebtPartner::where('full_tbp_id',$fulltbpid)->get();
+        $fulltbpdebtpartners = FullTbpDebtPartner::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
         return response()->json($fulltbpdebtpartners); 
     }
 }

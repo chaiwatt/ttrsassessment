@@ -424,7 +424,7 @@ function editCost(id,existing,need,approved,plan){
     })
 }
 
-function editROI(id,income,profit,reduce){
+function editROI(id,income,profit,reduce,directors){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/roi/edit`,
@@ -434,7 +434,8 @@ function editROI(id,income,profit,reduce){
           'id': id,
           'income': income,
           'profit': profit,
-          'reduce': reduce
+          'reduce': reduce,
+          'directors': directors
         },
         success: function(data) {
           resolve(data)

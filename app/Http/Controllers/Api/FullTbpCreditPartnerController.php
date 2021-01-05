@@ -13,12 +13,12 @@ class FullTbpCreditPartnerController extends Controller
         $fulltbpcreditpartner->full_tbp_id = $request->id;
         $fulltbpcreditpartner->creditpartner = $request->creditpartner;
         $fulltbpcreditpartner->partnertaxid =$request->partnertaxid;
-        $fulltbpcreditpartner->totalyearpurchase = $request->totalyearpurchase;
+        $fulltbpcreditpartner->totalyearpurchase = str_replace(',', '', $request->totalyearpurchase) ;
         $fulltbpcreditpartner->percenttopurchase = $request->percenttopurchase;
         $fulltbpcreditpartner->businessyear = $request->businessyear;
         $fulltbpcreditpartner->save();
 
-        $fulltbpcreditpartners = FullTbpCreditPartner::where('full_tbp_id',$request->id)->get();
+        $fulltbpcreditpartners = FullTbpCreditPartner::where('full_tbp_id',$request->id)->orderBy('id','desc')->get();
         return response()->json($fulltbpcreditpartners);  
     }
 
@@ -33,11 +33,11 @@ class FullTbpCreditPartnerController extends Controller
         $fulltbpcreditpartner->update([
             'creditpartner' => $request->creditpartner,
             'partnertaxid' => $request->partnertaxid,
-            'totalyearpurchase' => $request->totalyearpurchase,
+            'totalyearpurchase' => str_replace(',', '', $request->totalyearpurchase),
             'percenttopurchase' => $request->percenttopurchase,
             'businessyear' => $request->businessyear,
         ]);
-        $fulltbpcreditpartners = FullTbpCreditPartner::where('full_tbp_id',$fulltbpid)->get();
+        $fulltbpcreditpartners = FullTbpCreditPartner::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
         return response()->json($fulltbpcreditpartners); 
     }
 
@@ -45,7 +45,7 @@ class FullTbpCreditPartnerController extends Controller
         $fulltbpcreditpartner = FullTbpCreditPartner::find($request->id);
         $fulltbpid = $fulltbpcreditpartner->full_tbp_id;
         $fulltbpcreditpartner->delete();
-        $fulltbpcreditpartners = FullTbpCreditPartner::where('full_tbp_id',$fulltbpid)->get();
+        $fulltbpcreditpartners = FullTbpCreditPartner::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
         return response()->json($fulltbpcreditpartners); 
     }
 

@@ -34,7 +34,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ข้อความเพิ่มเติม<span class="text-danger">*</span></label>
-                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control"></textarea>
+                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control form-control-lg"></textarea>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มความเห็น JD</h5>
+                        <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเห็น JD</h5>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -60,8 +60,8 @@
                             <input type="text" id="minitbpid" hidden>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>ความเห็น JD</label>
-                                    <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control"></textarea>
+                                    <label>ข้อความเพิ่มเติม</label>
+                                    <textarea type="text" rows="5" id="messagebody" placeholder="ข้อความเพิ่มเติม แจ้งไปยัง Leader" class="form-control form-control-lg" ></textarea>
                                 </div>
                             </div>
                         </div>
@@ -120,10 +120,10 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">รายการขอรับการประเมิน</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                
                                 <span></span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -131,9 +131,6 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="width:50px">#</th> --}}
-                                        {{-- <th>วันที่ขอส่ง</th>  --}}
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>ความเห็น JD</th>
@@ -147,9 +144,6 @@
                                 <tbody>
                                     @foreach ($minitbps as $key => $minitbp)
                                     <tr>    
-                                        {{-- <td> {{$key+1}} </td> --}}
-                                        {{-- <td> {{$minitbp->updatedatth}} </td>  --}}
-                                        {{-- <td> {{$minitbp->businessplan->code}} </td>  --}}
                                         <td> {{$minitbp->project}} </td>  
                                         <td> {{$minitbp->businessplan->company->name}} </td> 
                                         <td> 
@@ -179,7 +173,6 @@
                                         <td> 
                                             <a type="button" href="{{asset($minitbp->attachment)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
                                             <a type="button" href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
-                                            {{-- <a href="{{route('dashboard.admin.project.minitbp.delete',['id' => $minitbp->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>                                
                                     </tr>
                                     @endforeach

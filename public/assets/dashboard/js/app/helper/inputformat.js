@@ -7,9 +7,45 @@ $(function() {
             numeralIntegerScale: 10
         })
     });	
+    $('.stringformat10').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [10],
+            delimiter: ''
+        })
+    });
+    $('.stringformat20').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [20],
+            delimiter: ''
+        })
+    });
+    $('.stringformat30').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [30],
+            delimiter: ''
+        })
+    });
+    $('.stringformat40').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [40],
+            delimiter: ''
+        })
+    });
+    $('.stringformat50').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [50],
+            delimiter: ''
+        })
+    });
     $('.stringformat60').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [60],
+            delimiter: ''
+        })
+    });
+    $('.stringformat200').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [200],
             delimiter: ''
         })
     });
@@ -41,6 +77,18 @@ $(function() {
         new Cleave(field, {
             numericOnly: true,
             blocks: [2]
+        })
+    });
+    $('.numeralformat3').toArray().forEach(function(field){
+        new Cleave(field, {
+            numericOnly: true,
+            blocks: [3]
+        })
+    });
+    $('.numeralformat4').toArray().forEach(function(field){
+        new Cleave(field, {
+            numericOnly: true,
+            blocks: [4]
         })
     });
     $('.decimalformat').toArray().forEach(function(field){

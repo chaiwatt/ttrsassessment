@@ -168,46 +168,46 @@ div.center {
     page-break-after: always;
 } 
 .font6{
-    font-size:6px;
+    font-size:6px !important;
 }
 .font8{
-    font-size:8px;
+    font-size:8px !important;
 }
 .font10{
-    font-size:10px;;
+    font-size:10px !important;
 }
 .font12{
-    font-size:12px;
+    font-size:12px !important;
 }
 .font14{
-    font-size:14px;
+    font-size:14px !important;
 }
 .font16{
-    font-size:16px;
+    font-size:16px !important;
 }
 .font18{
-    font-size:18px;
+    font-size:18px !important;
 }
 .font20{
-    font-size:20px;
+    font-size:20px !important;
 }
 .font22{
-    font-size:22px;
+    font-size:22px !important;
 }
 .font24{
-    font-size:24px;
+    font-size:24px !important;
 }
 .font26{
-    font-size:26px;
+    font-size:26px !important;
 }
 .font28{
-    font-size:28px;
+    font-size:28px !important;
 }
 .font30{
-    font-size:30px;
+    font-size:30px !important;
 }
 .font32{
-    font-size:32px;
+    font-size:32px !important;
 }
 .font34{
     font-size:34px;

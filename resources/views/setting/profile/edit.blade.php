@@ -293,7 +293,7 @@
 
 				<div class="modal-footer">
 					{{-- <button type="button" class="btn btn-link" data-dismiss="modal">Close</button> --}}
-					<button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button>
+					<button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">ปิด</button>
 				</div>
 			</div>
 		</div>
@@ -336,7 +336,7 @@
 	
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button> --}}
+					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">ปิด</button> --}}
 				</div>
 			</div>
 		</div>
@@ -542,22 +542,14 @@
 											<i class="icon-circle-down2"></i>
 										</button>
 									</div>
-									<div class="navbar-collapse text-center text-lg-left flex-wrap collapse" id="inbox-toolbar-toggle-single">
-										{{-- <div class="mt-3 mt-lg-0">
-											<div class="btn-group ml-3 mr-lg-3">
-												<button type="button" class="btn btn-light"><i class="icon-pencil7"></i> <span class="d-none d-lg-inline-block ml-2">ทำเครื่องหมายอ่านแล้ว</span></button>
-												<button type="button" class="btn btn-light"><i class="icon-bin"></i> <span class="d-none d-lg-inline-block ml-2">ลบที่เลือก</span></button>
-												
-											</div>
-										</div> --}}
-										
+									<div class="navbar-collapse text-center text-lg-left flex-wrap collapse" id="inbox-toolbar-toggle-single">									
 									</div>
 								</div>
 							</div>
 							<div class="table-responsive">
 								<table class="table table-inbox">
 									<tbody >										
-										@foreach ($messagereceives->reverse() as $messagereceive)
+										@foreach ($messagereceives as $messagereceive)
 										@php
 											$status = "";
 											if($messagereceive->message_read_status_id==1){
@@ -566,7 +558,6 @@
 										@endphp
 											<tr class="{{$status}} messagelink" data-id="{{$messagereceive->id}}">
 												<td class="table-inbox-checkbox ">
-													{{-- <input type="checkbox" class="form-input-styled" data-fouc> --}}
 													<a href="#">
 														@if ($messagereceive->message_priority_id == 2 )
 																<i class="icon-star-full2 text-warning-300"></i>
@@ -806,7 +797,6 @@
 										<thead>
 											<tr>
 												<th>ชื่อ</th>
-												{{-- <th >คำอธิบาย</th>                                --}}
 												<th >ค่าเดิม</th> 
 												<th >ค่าเปลี่ยนแปลง</th> 
 												<th >วันที่</th> 
@@ -817,7 +807,6 @@
 											@foreach ($activitylogs as $activitylog)
 											<tr>    
 												<td> {{$activitylog->log_name}} </td>
-												{{-- <td> {{$activitylog->description}} </td>        --}}
 													@foreach ($activitylog->properties as $item)
 														@foreach ($item as $key => $_item)
 														<td>{{$key}}: {{$_item}}</td> 
@@ -834,185 +823,9 @@
 						<!-- /profile info -->
 
 					</div>
-{{-- 
-					<div class="tab-pane fade" id="friends">
 
-						<!-- Profile info -->
-						<div class="card">
-							<div class="card-body">
-								<ul class="nav nav-tabs nav-tabs-highlight">
-									<li class="nav-item"><a href="#left-icon-friend" class="nav-link active" data-toggle="tab"><i class="icon-user-check mr-2"></i> เพื่อนของฉัน</a></li>
-									<li class="nav-item"><a href="#left-icon-friendrequest" class="nav-link" data-toggle="tab"><i class="icon-paperplane mr-2"></i> คำขอของฉัน</a></li>
-									<li class="nav-item"><a href="#left-icon-friendrequestcomming" class="nav-link" data-toggle="tab"><i class="icon-new mr-2"></i> ขอเป็นเพื่อนฉัน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2" id="friendrequestcomingcount">{{$friendrequestcomings->count()}}</span> @endif </a></li>
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane fade show active" id="left-icon-friend">
-										<div class="table-responsive">
-											<table class="table table-striped">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>ชื่อ-สกุล</th>    
-														<th>ประเภท</th>                         
-														<th style="width:150px">เพิ่มเติม</th>
-													</tr>
-												</thead>
-												<tbody id="friend_wrapper_tr"> 
-													@foreach ($friends as $key => $friend)
-														<tr>    
-															<td> {{$key+1}} </td>
-															<td> {{$friend->user->name}}  {{$friend->user->lastname}} </td>    
-															<td> {{$friend->user->usertype->name}} </td> 
-															<td> 
-																<a type="button" data-id="{{$friend->id}}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
-															</td>
-														</tr>
-													@endforeach
-												</tbody>
-											</table>      
-										</div>
-									</div>
-
-									<div class="tab-pane fade" id="left-icon-friendrequest">																							
-										<div class="row">
-											<div class="col-md-12">	
-						
-												<div class="table-responsive">
-													<table class="table table-striped">
-														<thead>
-															<tr>
-																<th>#</th>
-																<th>ชื่อ-สกุล</th>    
-																<th>ประเภท</th>  
-																<th>สถานะ</th>                          
-																<th style="width:150px">เพิ่มเติม</th>
-															</tr>
-														</thead>
-														<tbody id="requestfriend_wrapper_tr"> 
-															@foreach ($friendrequests as $key => $friendrequest)
-																<tr>    
-																	<td> {{$key+1}} </td>
-																	<td> {{$friendrequest->request->name}}   {{$friendrequest->request->lastname}} </td>    
-																	<td> {{$friendrequest->request->usertype->name}} </td> 
-																	<td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td> 
-																	<td> 
-																		<a type="button" data-id="{{$friendrequest->id}}" class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview"><i class="icon-trash danger"></i></a>
-																	</td>
-																</tr>
-															@endforeach
-														</tbody>
-													</table>      
-												</div>
-				
-											</div>      
-										</div>
-									</div>
-									<div class="tab-pane fade" id="left-icon-friendrequestcomming">																							
-										<div class="row">
-											<div class="col-md-12">	
-						
-												<div class="table-responsive">
-													<table class="table table-striped">
-														<thead>
-															<tr>
-																<th>#</th>
-																<th>ชื่อ-สกุล</th>    
-																<th>ประเภท</th>  
-																<th>สถานะ</th>                          
-																<th style="width:180px">เพิ่มเติม</th>
-															</tr>
-														</thead>
-														<tbody id="comingrequestfriend_wrapper_tr"> 
-															@foreach ($friendrequestcomings as $key => $friendrequestcoming)
-																<tr>    
-																	<td> {{$key+1}} </td>
-																	<td> {{$friendrequestcoming->requestcoming->name}}   {{$friendrequestcoming->requestcoming->lastname}} </td>    
-																	<td> {{$friendrequestcoming->requestcoming->usertype->name}} </td> 
-																	<td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td> 
-																	<td> 
-																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                       
-																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a>                                       
-																	</td>
-																</tr>
-															@endforeach
-														</tbody>
-													</table>      
-												</div>
-				
-											</div>      
-										</div>
-									</div>
-								</div>	
-
-							</div>
-						</div>
-						<!-- /profile info -->
-
-					</div> --}}
 				</div>
 				<!-- /left content -->
-
-
-				<!-- Right sidebar component -->
-				{{-- <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-lg-2 sidebar-expand-md">
-
-					<!-- Sidebar content -->
-					<div class="sidebar-content">
-						<div class="card">
-							<div class="card-header bg-transparent header-elements-inline">
-								<span class="card-title font-weight-semibold">ส่งข้อความ</span>
-								<div class="header-elements">
-									<div class="list-icons">
-										<a class="list-icons-item" data-action="collapse"></a>
-									</div>
-								</div>
-							</div>
-
-							<div class="card-body">
-								<div class="form-group">
-									<div class="form-group">
-										<div class="form-group">
-											<label>เพื่อน<span class="text-danger">*</span> <a href="" class="float-right" data-toggle="modal" data-target="#modal_user">&nbsp<i class="icon-add small" style="color:grey"></i></a></label>
-											<select name="friends[]" multiple="multiple" placeholder="เพื่อน"  class="form-control form-control-select2">
-												@foreach ($friends as $friend)
-												<option value="{{$friend->friend_id}}" > {{$friend->user->name}} </option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-								</div>
-							
-								<div class="form-group">
-									<label>เร่งด่วน<span class="text-danger">*</span></label>
-									<select name="messagepriority" id="organizationamphur" data-placeholder="เร่งด่วน" class="form-control form-control-select2">
-										@foreach ($messagepriorities as $messagepriority)                                                                
-											<option value="{{$messagepriority->id}}" > {{$messagepriority->name}} </option>
-										@endforeach   
-									</select>
-								</div>
-								<div class="form-group">
-									<textarea name="messagetosend" class="form-control mb-3" rows="7" cols="1" placeholder="ข้อความ"></textarea>
-								</div>
-								<div id="input_attachment_wrapper"></div>
-								<div class="form-group" id="attachment_wrapper">
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="input-group">													
-												<button id="btnuploadattachment" class="btn bg-grey-300" type="button" onclick="document.getElementById('attachment').click();">ไฟล์แนบ</button>													
-											</div>
-											<input type="file" style="display:none;" id="attachment" name="attachment"/>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<button type="submit" name="action" value="message" class="btn bg-blue btn-labeled btn-labeled-right ml-auto"><b><i class="icon-paperplane"></i></b> ส่งข้อความ</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> --}}
 			</div>
 		</form>
 

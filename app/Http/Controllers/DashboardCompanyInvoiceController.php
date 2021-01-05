@@ -141,11 +141,11 @@ class DashboardCompanyInvoiceController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>';
         $alertmessage->save();
 
         EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบผลการแจ้งการชำระเงิน','เรียนผู้ขอรับการประเมิน<br> กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('กรุณาตรวจสอบผลการแจ้งการชำระเงิน','กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ตรวจสอบ</a>',Auth::user()->id,$company->user_id);    
+        Message::sendMessage('กรุณาตรวจสอบผลการแจ้งการชำระเงิน','กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
         
 
        return redirect()->route('dashboard.company.project.invoice')->withSuccess('แจ้งการชำระเงินสำเร็จ');

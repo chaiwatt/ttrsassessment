@@ -16,12 +16,12 @@ class FullTbpSellStatusController extends Controller
         $fulltbpsellstatus = FullTbpSellStatus::find($request->id);
         $fulltbpid = $fulltbpsellstatus->full_tbp_id;
         $fulltbpsellstatus->update([
-            'present' => $request->present,
-            'past1' => $request->past1,
-            'past2' => $request->past2,
-            'past3' => $request->past3,
+            'present' => str_replace(',', '', $request->present),
+            'past1' => str_replace(',', '', $request->past1),
+            'past2' => str_replace(',', '', $request->past2),
+            'past3' => str_replace(',', '', $request->past3),
         ]);
-        $fulltbpsellstatuses = FullTbpSellStatus::where('full_tbp_id',$fulltbpid)->get();
+        $fulltbpsellstatuses = FullTbpSellStatus::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
         return response()->json($fulltbpsellstatuses); 
     }
 }

@@ -1,0 +1,12 @@
+.navbar-brand img {
+    height: 3rem;
+    display: block;
+}
+.navbar-brand{
+    padding-top: 0%;
+    padding-bottom: 0%;
+}
+.navbar{
+    padding-top: 4px;
+    padding-bottom: 4px;
+}

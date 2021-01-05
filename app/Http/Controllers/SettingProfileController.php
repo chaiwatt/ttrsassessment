@@ -69,7 +69,7 @@ class SettingProfileController extends Controller
         $friends = Friend::where('user_id',$auth->id)->get();
         $friendrequests = FriendRequest::where('from_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
         $friendrequestcomings = FriendRequest::where('to_id',$auth->id)->whereIn('friend_status_id',[2,4])->get();
-        $messagereceives = MessageBox::where('receiver_id',$auth->id)->paginate(10);
+        $messagereceives = MessageBox::where('receiver_id',$auth->id)->orderBy('id','desc')->paginate(10);
         $unreadmessages = MessageBox::where('receiver_id',$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::first();
         $experteducations = ExpertEducation::where('user_id',$auth->id)->get();

@@ -15,6 +15,7 @@ use App\Model\FullTbpResponsiblePerson;
 class FullTbpGeneralController extends Controller
 {
     public function Edit(Request $request){
+        // dd('ok');
         $fulltbp = FullTbp::find($request->id);
         FullTbpEmployee::where('full_tbp_id',$request->id)->first()->update([
             'department_qty' => $request->department_qty,
@@ -27,7 +28,8 @@ class FullTbpGeneralController extends Controller
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         Company::find($businessplan->company_id)->update([
-            'companyhistory' => $request->companyhistory
+            'companyhistory' => $request->companyhistory,
+            'business_type_id' => $request->businesstype
         ]);   
         $check = FullTbpResponsiblePerson::where('full_tbp_id',$request->id)->first();
         if(Empty($check)){

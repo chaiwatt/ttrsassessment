@@ -18,6 +18,7 @@ class CreateAlertMessagesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('target_user_id');
             $table->text('detail')->nullable();
+            $table->char('messagebox_id')->default(0);
             $table->timestamps();
         });
     }

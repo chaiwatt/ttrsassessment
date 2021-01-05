@@ -474,13 +474,13 @@
 												<div class="row">
 													<div class="col-md-6"> 
 														<div class="form-group">
-															<label>ประสบการณ์การทำงาน (ปี)</label>
+															<label>ประสบการณ์การทำงาน (ปี)<span class="text-danger">*</span></label>
 															<input type="text"  name="expereinceyear" value="{{old('expereinceyear') ?? $officer->expereinceyear}}"  placeholder="ประสบการณ์การทำงาน (ปี)" class="form-control form-control-lg numeralformat2">
 														</div>
 													</div>
 													<div class="col-md-6"> 
 														<div class="form-group">
-															<label>ประสบการณ์การทำงาน (เดือน)</label>
+															<label>ประสบการณ์การทำงาน (เดือน)<span class="text-danger">*</span></label>
 															<input type="text"  name="expereincemonth" value="{{old('expereincemonth') ?? $officer->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control form-control-lg numeralformat2">
 														</div>
 													</div>

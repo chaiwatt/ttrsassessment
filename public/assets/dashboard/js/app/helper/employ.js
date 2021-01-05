@@ -295,5 +295,25 @@ function deleteBoardAttachment(id){
     })
 }
 
+function searchEmploy(search,company){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/employ/search`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          company:company,
+          search : search
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 export {saveEmploy,getEmploy,editEmploy,addEmployEducation,addEmployExperience,addEmployTraining,deleteEmployEducation,
-  deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo,editEmployQuantity,deleteBoardAttachment,getEmployPosition}
+  deleteEmployExperience,deleteEmployTraining,getEmploys,deleteEmployInfo,editEmployQuantity,deleteBoardAttachment,getEmployPosition,searchEmploy}

@@ -37,8 +37,6 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
 $("#companygeneraldoc").on('change', function() {
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
-    console.log(file);
- 
     if (this.files[0].size/1024/1024*1000 > 2000 ){
         alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
@@ -172,6 +170,9 @@ $(document).on("click",".deletecompanyemploy",function(e){
 }); 
 
 $(document).on('click', '#btn_modal_add_employeducation', function(e) {
+    if($('#employeducationlevel').val() == '' || $('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyear').val() == ''){
+        return;
+    }
     Employ.addEmployEducation($('#employid').val(),$('#employeducationlevel').val(),$('#employeducationinstitute').val(),$('#employeducationmajor').val(),$('#employeducationyear').val()).then(data => {
         console.log(data);
         var html = '';
@@ -185,6 +186,7 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
             </tr>`
             });
          $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
+         $('#modal_add_employeducation').modal('hide');
     })
     // .catch(error => {})
 });
@@ -214,7 +216,9 @@ $(function () {
 });
 
 $(document).on('click', '#btn_modal_add_employexperience', function(e) {
-    console.log($('#employid').val());
+    if($('#employexperiencestartdate').val() == '' || $('#employexperienceenddate').val() == '' || $('#employexperiencecompany').val() == '' || $('#employexperiencebusinesstype').val() == '' || $('#employexperiencestartposition').val() == '' || $('#employexperienceendposition').val() == '' ){
+        return;
+    }
     Employ.addEmployExperience($('#employid').val(),$('#employexperiencestartdate').val(),$('#employexperienceenddate').val(),$('#employexperiencecompany').val(),$('#employexperiencebusinesstype').val(),$('#employexperiencestartposition').val(),$('#employexperienceendposition').val()).then(data => {
         console.log(data);
         var html = '';
@@ -229,12 +233,15 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
             </tr>`
             });
          $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
+         $('#modal_add_employexperience').modal('hide');
     })
     .catch(error => {})
 });
 
 $(document).on('click', '#btn_modal_add_employtraining', function(e) {
-    console.log($('#employid').val());
+    if($('#employtrainingdate').val() == '' || $('#employtrainingcourse').val() == '' ||$('#employtrainingowner').val() == '' ){
+        return;
+    }
     Employ.addEmployTraining($('#employid').val(),$('#employtrainingdate').val(),$('#employtrainingcourse').val(),$('#employtrainingowner').val()).then(data => {
         console.log(data);
         var html = '';
@@ -247,6 +254,7 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
             </tr>`
             });
          $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
+         $('#modal_add_employtraining').modal('hide');
     })
     .catch(error => {})
 });
@@ -366,36 +374,45 @@ $(document).on("click",".deleteemploytraining",function(e){
 }); 
 
 $(document).on('click', '#btnstckholder', function(e) {
-    Employ.getEmploys($(this).data('id')).then(data => {
-        console.log(data);
-        var html = ``;
-        var selectstockholder = `<label>รายชื่อพนักงาน</label><span class="text-danger">*</span><select id="selectstockholder_edit" data-placeholder="รายชื่อพนักงาน" class="form-control form-control-select2">`;
-        data.forEach(function (stock,index) {
-            selectstockholder += `<option value="${stock['id']}" >${stock['name']}</option>`
-            });
-            selectstockholder += `</select>`;
-        $("#stockholderselect_wrapper").html(selectstockholder);
-    })
-    .catch(error => {})
+    // Employ.getEmploys($(this).data('id')).then(data => {
+    //     console.log(data);
+    //     var html = ``;
+    //     var selectstockholder = `<label>รายชื่อพนักงาน</label><span class="text-danger">*</span><select id="selectstockholder_edit" data-placeholder="รายชื่อพนักงาน" class="form-control form-control-select2">`;
+    //     data.forEach(function (stock,index) {
+    //         selectstockholder += `<option value="${stock['id']}" >${stock['name']}</option>`
+    //         });
+    //         selectstockholder += `</select>`;
+    //     $("#stockholderselect_wrapper").html(selectstockholder);
+    // })
+    // .catch(error => {})
     $('#modal_add_stockholder').modal('show');
 });
 
 $(document).on('click', '#btn_modal_add_stockholder', function(e) {
-    StockHolder.addStockHolder($('#selectstockholder_edit').val(),$('#relationwithceo').val()).then(data => {
+    if($('#employsearch').val() == '' || $('#relationwithceo').val() == ''){
+        return;
+    }
+    StockHolder.addStockHolder($('#companyid').val(),$('#employsearch').val(),$('#relationwithceo').val()).then(data => {
         console.log(data);
         var html = ``;
         data.forEach(function (stockholder,index) {
             html += `<tr >                                        
-                <td> ${stockholder.companyemploy['name']} ${stockholder.companyemploy['lastname']}</td>                                            
-                <td> ${stockholder.relationwithceo} </td>                                           
+                <td> ${stockholder.name}</td>                                            
+                <td> ${stockholder.ceorelation} </td>                                           
                 <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-warning deletestockholder">ลบ</a> </td> 
             </tr>`
             });
-            console.log(html);
         $("#fulltbp_companystockholder_wrapper_tr").html(html);
+        $('#modal_add_stockholder').modal('hide');
     })
     .catch(error => {})
 });
+$(document).on('click', '.selectemploy', function(e) {
+    $('#employsearch').val($(this).html());
+    $("#employsearch_wrapper").html('');
+    $("#employsearch_wrapper").attr("hidden",true);
+});
+
 
 $(document).on("click",".deletestockholder",function(e){
     console.log($(this).data('id'));
@@ -415,12 +432,11 @@ $(document).on("click",".deletestockholder",function(e){
                 var html = ``;
                 data.forEach(function (stockholder,index) {
                     html += `<tr >                                        
-                        <td> ${stockholder.companyemploy['name']} ${stockholder.companyemploy['lastname']}</td>                                            
-                        <td> ${stockholder.relationwithceo} </td>                                           
+                        <td> ${stockholder.name}</td>                                            
+                        <td> ${stockholder.ceorelation} </td>                                           
                         <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-warning deletestockholder">ลบ</a> </td> 
                     </tr>`
                     });
-                    console.log(html);
                 $("#fulltbp_companystockholder_wrapper_tr").html(html);
             })
            .catch(error => {})
@@ -533,7 +549,9 @@ $(document).on('click', '#btnaddprojectechdev', function(e) {
 });
 
 $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
-    console.log($(this).data('id'));
+    if($('#tectdevleveltechnology').val() == '' || $('#tectdevleveltechnologypresent').val() == '' ||$('#tectdevleveltechnologyproject').val() == '' ){
+        return;
+    }
     Project.addTechDevLevel($(this).data('id'),$('#tectdevleveltechnology').val(),$('#tectdevleveltechnologypresent').val(),$('#tectdevleveltechnologyproject').val()).then(data => {
         console.log(data);
         var html = ``;
@@ -547,6 +565,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
             </tr>`
             });
          $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
+         $('#modal_add_tectdevlevel').modal('hide');
     })
     .catch(error => {})
 });
@@ -693,15 +712,15 @@ $(document).on('click', '#btnaddprojectcertify', function(e) {
     .catch(error => {})
 });
 $(document).on('change', '#certify', function(e) {
-// $("#certify").on('change', function() {
     var file = this.files[0];
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
+    formData.append('certifyname',$('#certifyname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/project/projectcertify/upload/add`,  //Server script to process data
             type: 'POST',
@@ -716,12 +735,13 @@ $(document).on('change', '#certify', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_certify_wrapper_tr").html(html);
+                 $('#modal_add_certify').modal('hide');
         }
     });
 });
@@ -746,7 +766,7 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -758,10 +778,9 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
     });
 }); 
 $(document).on('change', '#award', function(e) {
-// $("#award").on('change', function() {
     var file = this.files[0];
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     var formData = new FormData();
@@ -782,7 +801,7 @@ $(document).on('change', '#award', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -812,7 +831,7 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -824,10 +843,9 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
     });
 }); 
 $(document).on('change', '#standard', function(e) {
-// $("#standard").on('change', function() {
     var file = this.files[0];
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     var formData = new FormData();
@@ -848,7 +866,7 @@ $(document).on('change', '#standard', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -878,7 +896,7 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -895,11 +913,44 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
     $('.checkboxplan:checked').each(function(){
         data.push($(this).val());
       })
-      Project.addPlan($(this).data('id'),$('#plandetail').val(),data).then(data => {
+
+    if($('#plandetail').val() == '' || $('#ganttnummonth').val() == '' || $('#ganttyear').val() == '' || data.length == 0){
+        return;
+    }
+      Project.addPlan($(this).data('id'),$('#plandetail').val(),data,$('#ganttnummonth').val(),$('#ganttyear').val()).then(data => {
         var html = ``;
+        var th = ``;
+        data.allyears.forEach(function (year,i) {      
+            if(year != 0){
+                th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+            }
+        });
+        var tr = ``;
+        var minmonth = parseInt(data.minmonth);
+        var maxmonth = parseInt(data.maxmonth);
+        if(minmonth != 0  && maxmonth !=0){
+            console.log('hello ' + minmonth  + ' ' + maxmonth);
+            tr = `<tr>`;
+            for (let j = minmonth; j <= maxmonth; j++) {
+                tr += `<th style="width:5px;font-size:12px">${j}</th>`;
+            }
+            tr += `</tr>`;
+        }
+        
+        html += `<thead>
+                    <tr>
+                        <tr>
+                            <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
+                             ${th}
+                            <th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+                        </tr>
+                            ${tr}
+                    </tr>
+                </thead>`
+
         data.fulltbpprojecplans.forEach(function (plan,index) {
             var tdbody =``;
-            for (var k = 1; k <= 12; k++) {
+            for (var k = minmonth; k <= maxmonth; k++) {
                 if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
                     tdbody += `<td style="background-color:grey"></td>`;
                 }else{
@@ -915,7 +966,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                 </td>
             </tr>`
             });
-         $("#fulltbp_projectplan_wrapper_tr").html(html);
+         $("#table_gantt_wrapper").html(html);
    })
 });
 
@@ -923,18 +974,54 @@ $(document).on('click', '.editprojectplan', function(e) {
     $('#projectplan').val($(this).data('id'));
     Project.getPlan($(this).data('id')).then(data => {
         $('#plandetail_edit').val(data.fulltbpprojecplan['name']);
-        var html = ``;
-        for (var k = 1; k <= 12; k++) {
-            var check = ``;
-            if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k) != -1){
-                var check = `checked`;
-            }
-                html += `<div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" name="plans[]" value="${k}" class="custom-control-input checkboxplane_dit" id="checkboxedit${k}" ${check} >
-                        <label class="custom-control-label" for="checkboxedit${k}">${k}</label>
-                    </div>`
-        }
+        // var html = ``;
+        // var minmonth = parseInt(data.minmonth);
+        // var maxmonth = parseInt(data.maxmonth);
+        // for (var k = minmonth; k <= maxmonth; k++) {
+        //     var check = ``;
+        //     if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k) != -1){
+        //         var check = `checked`;
+        //     }
+        //         html += `<div class="custom-control custom-checkbox custom-control-inline">
+        //                 <input type="checkbox" name="plans[]" value="${k}" class="custom-control-input checkboxplane_dit" id="checkboxedit${k}" ${check} >
+        //                 <label class="custom-control-label" for="checkboxedit${k}">${k}</label>
+        //             </div>`
+        // }
+        //  $("#monthplan").html(html);
+
+        console.log(data.fulltbpprojectplantransactions);
+        
+         var html = ``;
+         var chkindex = 0;
+         for (let item = 0; item < 3; item++) {
+            // console.log(item);
+             html += `<div class="col-md-12">`
+             html += `<label ><u>ปี ${parseInt($('#ganttyear').val())+item}</u></label>
+                 <div class="form-group">`;
+                 for (let index = 0; index < 12; index++) {
+                    var check = ``;
+                     chkindex++;
+                     console.log(data.fulltbpprojectplantransactions.findIndex(x => x.month == chkindex) + ' ' + chkindex);
+                    if(data.fulltbpprojectplantransactions.findIndex(x => x.month == chkindex) != -1){
+                        check = `checked`;
+                    }
+                     html += `
+                     <div class="custom-control custom-checkbox custom-control-inline" style="width:45px">
+                         <input type="checkbox" name="plans[]" value="${chkindex}" class="custom-control-input checkboxplane_dit" id="checkboxedit${chkindex}" ${check} >
+                         <label class="custom-control-label" for="checkboxedit${chkindex}">${chkindex}</label>
+                     </div>`
+                 }
+             html += `</div></div>`
+         }
+         
+
          $("#monthplan").html(html);
+
+
+
+
+
+
     })
     .catch(error => {})
     $('#modal_edit_projectplan').modal('show');
@@ -946,11 +1033,39 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
         data.push($(this).val());
       })
     Project.editPlan($('#projectplan').val(),$('#plandetail_edit').val(),data).then(data => {
-        console.log(data);
         var html = ``;
+        var th = ``;
+        data.allyears.forEach(function (year,i) {      
+            if(year != 0){
+                th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+            }
+        });
+        var tr = ``;
+        var minmonth = parseInt(data.minmonth);
+        var maxmonth = parseInt(data.maxmonth);
+        if(minmonth != 0  && maxmonth !=0){
+            console.log('hello ' + minmonth  + ' ' + maxmonth);
+            tr = `<tr>`;
+            for (let j = minmonth; j <= maxmonth; j++) {
+                tr += `<th style="width: 5px;font-size:12px">${j}</th>`;
+            }
+            tr += `</tr>`;
+        }
+        
+        html += `<thead>
+                    <tr>
+                        <tr>
+                            <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
+                             ${th}
+                            <th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+                        </tr>
+                            ${tr}
+                    </tr>
+                </thead>`
+
         data.fulltbpprojecplans.forEach(function (plan,index) {
             var tdbody =``;
-            for (var k = 1; k <= 12; k++) {
+            for (var k = minmonth; k <= maxmonth; k++) {
                 if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
                     tdbody += `<td style="background-color:grey"></td>`;
                 }else{
@@ -966,7 +1081,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                 </td>
             </tr>`
             });
-         $("#fulltbp_projectplan_wrapper_tr").html(html);
+         $("#table_gantt_wrapper").html(html);
     })
     .catch(error => {})
 });
@@ -985,11 +1100,39 @@ $(document).on("click",".deleteprojectplan",function(e){
         }).then((result) => {
         if (result.value) {
             Project.deletePlan($(this).data('id')).then(data => {
-                
                 var html = ``;
+                var th = ``;
+                data.allyears.forEach(function (year,i) {      
+                    if(year != 0){
+                        th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                    }
+                });
+                var tr = ``;
+                var minmonth = parseInt(data.minmonth);
+                var maxmonth = parseInt(data.maxmonth);
+                if(minmonth != 0  && maxmonth !=0){
+                    console.log('hello ' + minmonth  + ' ' + maxmonth);
+                    tr = `<tr>`;
+                    for (let j = minmonth; j <= maxmonth; j++) {
+                        tr += `<th style="width: 5px;font-size:12px">${j}</th>`;
+                    }
+                    tr += `</tr>`;
+                }
+                
+                html += `<thead>
+                            <tr>
+                                <tr>
+                                    <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
+                                     ${th}
+                                    <th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+                                </tr>
+                                    ${tr}
+                            </tr>
+                        </thead>`
+        
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
-                    for (var k = 1; k <= 12; k++) {
+                    for (var k = minmonth; k <= maxmonth; k++) {
                         if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
                             tdbody += `<td style="background-color:grey"></td>`;
                         }else{
@@ -1005,7 +1148,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                         </td>
                     </tr>`
                     });
-                 $("#fulltbp_projectplan_wrapper_tr").html(html);
+                 $("#table_gantt_wrapper").html(html);
            })
            .catch(error => {})
         }
@@ -1015,6 +1158,7 @@ $(document).on("click",".deleteprojectplan",function(e){
 $(document).on('keyup', '.marketneedclass', function(e) {
     $('#marketneedtextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
+
 
 // $(document).on('keyup', '#marketneed_input', function(e) {
 //     if (e.keyCode === 13) {
@@ -1117,12 +1261,13 @@ $(document).on('click', '#btnaddmarketcompetitive', function(e) {
 });
 
 $(document).on('change', '#businessmodelcanvas', function(e) {
-    console.log($(this).data('id'));
+    if($('#bmcname').val() == ''){
+        return;
+    }
 
     var file = this.files[0];
-
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
 
@@ -1130,6 +1275,7 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
     formData.append('attachmenttype','1');
+    formData.append('docname',$('#bmcname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/market/attachment/add`,  //Server script to process data
             type: 'POST',
@@ -1144,12 +1290,13 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_businessmodelcanvas_wrapper_tr").html(html);
+                 $('#modal_add_bmc').modal('hide');
         }
     });
 
@@ -1188,18 +1335,21 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
     });
 }); 
 $(document).on('change', '#swotfile', function(e) {
-    console.log($(this).data('id'));
+    if($('#swotname').val() == ''){
+        return;
+    }
 
     var file = this.files[0];
 
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
     formData.append('attachmenttype','2');
+    formData.append('docname',$('#swotname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/market/attachment/add`,  //Server script to process data
             type: 'POST',
@@ -1220,6 +1370,7 @@ $(document).on('change', '#swotfile', function(e) {
                     </tr>`
                     });
                  $("#fulltbp_swot_wrapper_tr").html(html);
+                 $('#modal_add_swot').modal('hide');
         }
     });
 
@@ -1326,15 +1477,18 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
 });
 
 $(document).on('click', '#btn_modal_add_sell', function(e) {
+    if($('#productname').val() == '' || $('#sellpresent').val() == '' || $('#sellpast1').val() == '' || $('#sellpast2').val() == '' || $('#sellpast3').val() == ''){
+        return;
+    }
     Sell.addSell($(this).data('id'),$('#productname').val(),$('#sellpresent').val(),$('#sellpast1').val(),$('#sellpast2').val(),$('#sellpast3').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.name} </td>                            
-                <td> ${sell.present} </td>                         
-                <td> ${sell.past1} </td> 
-                <td> ${sell.past2} </td> 
-                <td> ${sell.past3} </td> 
+                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
@@ -1342,6 +1496,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
             </tr>`
             });
          $("#fulltbp_sell_wrapper_tr").html(html);
+         $('#modal_add_sell').modal('hide');
     })
     .catch(error => {})
 });
@@ -1365,10 +1520,10 @@ $(document).on("click",".deletesell",function(e){
                 data.forEach(function (sell,index) {
                     html += `<tr >                                        
                         <td> ${sell.name} </td>                            
-                        <td> ${sell.present} </td>                         
-                        <td> ${sell.past1} </td> 
-                        <td> ${sell.past2} </td> 
-                        <td> ${sell.past3} </td> 
+                        <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+                        <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                        <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                        <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
@@ -1396,15 +1551,18 @@ $(document).on('click', '.editsell', function(e) {
 });
 
 $(document).on('click', '#btn_modal_edit_sell', function(e) {
+    if($('#productnameedit').val() == '' || $('#sellpresentedit').val() == '' || $('#sellpastedit1').val() == '' || $('#sellpastedit2').val() == '' || $('#sellpastedit3').val() == ''){
+        return;
+    }
     Sell.editSell($('#sellid').val(),$('#productnameedit').val(),$('#sellpresentedit').val(),$('#sellpastedit1').val(),$('#sellpastedit2').val(),$('#sellpastedit3').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.name} </td>    
-                <td> ${sell.present} </td>                         
-                <td> ${sell.past1} </td> 
-                <td> ${sell.past2} </td> 
-                <td> ${sell.past3} </td>                                            
+                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                            
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
@@ -1412,6 +1570,7 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
             </tr>`
             });
          $("#fulltbp_sell_wrapper_tr").html(html);
+         $('#modal_edit_sell').modal('hide');
     })
     .catch(error => {})
 });
@@ -1435,10 +1594,10 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.name} </td>    
-                <td> ${sell.present} </td>                         
-                <td> ${sell.past1} </td> 
-                <td> ${sell.past2} </td> 
-                <td> ${sell.past3} </td>                                            
+                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                            
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
                 </td> 
@@ -1450,17 +1609,20 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
 });
 
 $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
+    if($('#debtpartner').val() == '' || $('#numproject').val() == '' || $('#debtpartnertaxid').val() == '' || $('#debttotalyearsell').val() == '' || $('#debtpercenttosale').val() == '' || $('#debtpartneryear').val() == ''){
+        return;
+    }
     Sell.addDebtPartner($(this).data('id'),$('#debtpartner').val(),$('#numproject').val(),$('#debtpartnertaxid').val(),$('#debttotalyearsell').val(),$('#debtpercenttosale').val(),$('#debtpartneryear').val()).then(data => {
         var html = ``;
         console.log(data);
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
-                <td> ${sell.numproject} </td>  
-                <td> ${sell.partnertaxid} </td>                         
-                <td> ${sell.totalyearsell} </td> 
-                <td> ${sell.percenttosale} </td> 
-                <td> ${sell.businessyear} </td> 
+                <td class="text-right"> ${sell.numproject} </td>  
+                <td class="text-right"> ${sell.partnertaxid} </td>                         
+                <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${sell.percenttosale} </td> 
+                <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
@@ -1468,6 +1630,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
             </tr>`
             });
          $("#fulltbp_debtpartner_wrapper_tr").html(html);
+         $('#modal_add_debtpartner').modal('hide');
     })
     .catch(error => {})
 });
@@ -1487,16 +1650,19 @@ $(document).on('click', '.editdebtpartner', function(e) {
 });
 
 $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
+    if($('#debtpartneredit').val() == '' || $('#numprojectedit').val() == '' || $('#debtpartnertaxidedit').val() == '' || $('#debttotalyearselledit').val() == '' || $('#debtpercenttosaleedit').val() == '' || $('#debtpartneryearedit').val() == ''){
+        return;
+    }
     Sell.editDebtPartner($('#debtpartnerid').val(),$('#debtpartneredit').val(),$('#numprojectedit').val(),$('#debtpartnertaxidedit').val(),$('#debttotalyearselledit').val(),$('#debtpercenttosaleedit').val(),$('#debtpartneryearedit').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
-                <td> ${sell.numproject} </td>  
-                <td> ${sell.partnertaxid} </td>                         
-                <td> ${sell.totalyearsell} </td> 
-                <td> ${sell.percenttosale} </td> 
-                <td> ${sell.businessyear} </td> 
+                <td class="text-right"> ${sell.numproject} </td>  
+                <td class="text-right"> ${sell.partnertaxid} </td>                         
+                <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${sell.percenttosale} </td> 
+                <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
@@ -1504,6 +1670,7 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
             </tr>`
             });
          $("#fulltbp_debtpartner_wrapper_tr").html(html);
+         $('#modal_edit_debtpartner').modal('hide');
     })
     .catch(error => {})
 });
@@ -1526,11 +1693,11 @@ $(document).on("click",".deletedebtpartner",function(e){
                 data.forEach(function (sell,index) {
                     html += `<tr >                                        
                         <td> ${sell.debtpartner} </td>
-                        <td> ${sell.numproject} </td>
-                        <td> ${sell.partnertaxid} </td>
-                        <td> ${sell.totalyearsell} </td>
-                        <td> ${sell.percenttosale} </td>
-                        <td> ${sell.businessyear} </td>
+                        <td class="text-right"> ${sell.numproject} </td>  
+                        <td class="text-right"> ${sell.partnertaxid} </td>                         
+                        <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                        <td class="text-right"> ${sell.percenttosale} </td> 
+                        <td class="text-right"> ${sell.businessyear} </td> 
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
@@ -1545,15 +1712,18 @@ $(document).on("click",".deletedebtpartner",function(e){
 });
 
 $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
+    if($('#creditpartner').val() == '' || $('#creditpartnertaxid').val() == '' || $('#credittotalyearsell').val() == '' || $('#creditpercenttosale').val() == '' || $('#creditpartneryear').val() == ''){
+        return;
+    }
     Sell.addCreditPartner($(this).data('id'),$('#creditpartner').val(),$('#creditpartnertaxid').val(),$('#credittotalyearsell').val(),$('#creditpercenttosale').val(),$('#creditpartneryear').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.creditpartner} </td>                            
-                <td> ${sell.partnertaxid} </td>  
-                <td> ${sell.totalyearpurchase} </td>                         
-                <td> ${sell.percenttopurchase} </td> 
-                <td> ${sell.businessyear} </td> 
+                <td class="text-right"> ${sell.partnertaxid} </td>  
+                <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
+                <td class="text-right"> ${sell.percenttopurchase} </td> 
+                <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
@@ -1561,6 +1731,7 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
             </tr>`
             });
          $("#fulltbp_creditpartner_wrapper_tr").html(html);
+         $('#modal_add_creditpartner').modal('hide');
     })
     .catch(error => {})
 });
@@ -1579,15 +1750,18 @@ $(document).on('click', '.editcreditpartner', function(e) {
 });
 
 $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
+    if($('#creditpartneredit').val() == '' || $('#creditpartnertaxidedit').val() == '' || $('#credittotalyearselledit').val() == '' || $('#creditpercenttosaleedit').val() == '' || $('#creditpartneryearedit').val() == ''){
+        return;
+    }
     Sell.editCreditPartner($('#creditpartnerid').val(),$('#creditpartneredit').val(),$('#creditpartnertaxidedit').val(),$('#credittotalyearselledit').val(),$('#creditpercenttosaleedit').val(),$('#creditpartneryearedit').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.creditpartner} </td>                            
-                <td> ${sell.partnertaxid} </td>  
-                <td> ${sell.totalyearpurchase} </td>                         
-                <td> ${sell.percenttopurchase} </td> 
-                <td> ${sell.businessyear} </td> 
+                <td class="text-right"> ${sell.partnertaxid} </td>  
+                <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
+                <td class="text-right"> ${sell.percenttopurchase} </td> 
+                <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
@@ -1595,6 +1769,7 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
             </tr>`
             });
          $("#fulltbp_creditpartner_wrapper_tr").html(html);
+         $('#modal_edit_creditpartner').modal('hide');
     })
     .catch(error => {})
 });
@@ -1617,10 +1792,10 @@ $(document).on("click",".deletecreditpartner",function(e){
                 data.forEach(function (sell,index) {
                     html += `<tr >                                        
                         <td> ${sell.creditpartner} </td>                            
-                        <td> ${sell.partnertaxid} </td>  
-                        <td> ${sell.totalyearpurchase} </td>                         
-                        <td> ${sell.percenttopurchase} </td> 
-                        <td> ${sell.businessyear} </td> 
+                        <td class="text-right"> ${sell.partnertaxid} </td>  
+                        <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
+                        <td class="text-right"> ${sell.percenttopurchase} </td> 
+                        <td class="text-right"> ${sell.businessyear} </td> 
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
@@ -1644,25 +1819,38 @@ $(document).on('click', '.editasset', function(e) {
         $('#assetspecificationedit').val(data.specification);
     })
     .catch(error => {})
+    if($(this).data('assetname') == 'ค่าที่ดิน'){
+        $('#unit').html('ตารางเมตร');
+    }else{
+        $('#unit').html('หน่วย')
+    }
     $('#modal_edit_asset').modal('show');
 });
 
 $(document).on('click', '#btn_modal_edit_asset', function(e) {
+    if($('#assetcostedit').val() == '' || $('#assetquantityedit').val() == '' || $('#assetpriceedit').val() == '' || $('#assetspecificationedit').val() == ''){
+        return;
+    }
     Sell.editAsset($('#assetid').val(),$('#assetcostedit').val(),$('#assetquantityedit').val(),$('#assetpriceedit').val(),$('#assetspecificationedit').val()).then(data => {
         var html = ``;
         data.forEach(function (asset,index) {
+            var checkspec = asset.specification;
+            if(checkspec == null){
+                var checkspec = '';
+            }
             html += `<tr >                                        
                 <td> ${asset.asset} </td>                            
-                <td> ${asset.cost} </td>  
+                <td> ${parseFloat(asset.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td> ${asset.quantity} </td>                         
-                <td> ${asset.price} </td> 
-                <td> ${asset.specification} </td> 
+                <td> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
+                <td> ${checkspec} </td> 
                 <td> 
                     <a type="button" data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
                 </td> 
             </tr>`
             });
          $("#fulltbp_asset_wrapper_tr").html(html);
+         $('#modal_edit_asset').modal('hide');
     })
     .catch(error => {})
 });
@@ -1678,18 +1866,22 @@ $(document).on('click', '.editinvestment', function(e) {
 });
 
 $(document).on('click', '#btn_modal_edit_investment', function(e) {
+    if($('#investmentcostedit').val() == ''){
+        return;
+    }
     Sell.editInvestment($('#investmentid').val(),$('#investmentcostedit').val()).then(data => {
         var html = ``;
         data.forEach(function (invesment,index) {
             html += `<tr >                                        
                 <td> ${invesment.investment} </td>                            
-                <td> ${invesment.cost} </td>  
+                <td> ${parseFloat(invesment.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td> 
                     <a type="button" data-id="${invesment.id}" class="btn btn-sm bg-info editinvestment">แก้ไข</a> 
                 </td> 
             </tr>`
             });
          $("#fulltbp_investment_wrapper_tr").html(html);
+         $('#modal_edit_investment').modal('hide');
     })
     .catch(error => {})
 });
@@ -1704,26 +1896,36 @@ $(document).on('click', '.editcost', function(e) {
         $('#costplanedit').val(data.plan);
     })
     .catch(error => {})
+    sourcetitle
+    $('#sourcetitle').html($(this).data('name'));
     $('#modal_edit_cost').modal('show');
 });
 
 $(document).on('click', '#btn_modal_edit_cost', function(e) {
+    if($('#costexistingedit').val() == '' || $('#costneededit').val() == '' || $('#costapprovededit').val() == '' || $('#costplanedit').val() == ''){
+        return;
+    }
     Sell.editCost($('#costid').val(),$('#costexistingedit').val(),$('#costneededit').val(),$('#costapprovededit').val(),$('#costplanedit').val()).then(data => {
         var html = ``;
         console.log(data);
         data.forEach(function (cost,index) {
+            var checkcostplan = cost.plan;
+            if(checkcostplan == null){
+                var checkcostplan = '';
+            }
             html += `<tr >                                        
                 <td> ${cost.costname} </td>                            
-                <td> ${cost.existing} </td>  
-                <td> ${cost.need} </td>  
-                <td> ${cost.approved} </td>  
-                <td> ${cost.plan} </td>
+                <td> ${parseFloat(cost.existing).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
+                <td> ${parseFloat(cost.need).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
+                <td> ${parseFloat(cost.approved).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
+                <td> ${checkcostplan} </td>
                 <td> 
                     <a type="button" data-id="${cost.id}" class="btn btn-sm bg-info editcost">แก้ไข</a> 
                 </td> 
             </tr>`
             });
          $("#fulltbp_cost_wrapper_tr").html(html);
+         $('#modal_edit_cost').modal('hide');
     })
     .catch(error => {})
 });
@@ -1827,8 +2029,8 @@ $(document).on('click', '#btneditquantityemploy', function(e) {
 
 $(document).on('change', '#organizeimg', function(e) {
     var file = this.files[0];
-    if (this.files[0].size/1024/1024*1000 > 2000 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
+        alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;
     }
     console.log(file);
@@ -1898,7 +2100,12 @@ $('.steps-basic').steps({
                 <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
             `);
 
-            Sell.editROI($('#fulltbpid').val(),$('#income').val(),$('#profit').val(),$('#reduce').val()).then(data => {
+            var selected_director = [];
+            $(".chkauthorizeddirector:checked").each(function(){
+                    selected_director.push($(this).val());
+            });
+
+            Sell.editROI($('#fulltbpid').val(),$('#income').val(),$('#profit').val(),$('#reduce').val(),JSON.stringify(selected_director)).then(data => {
                 $('#income').val(data.income);
                 $('#profit').val(data.profit);
                 $('#reduce').val(data.reduce);
@@ -1913,22 +2120,55 @@ $('.steps-basic').steps({
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
-        console.log();
         if(currentIndex == 3){
-            if($('#usersignature').val() == 2){
-                if (typeof $('#signatureimg').val() === 'undefined'){
-                    $("#signatureerror").attr("hidden",false);
-                    return;
-                }else{
-                    $("#signatureerror").attr("hidden",true);
+            if($('.chkauthorizeddirector').filter(':checked').length == 0){
+                Swal.fire({
+                    title: 'ผิดพลาด!',
+                    text: 'ยังไม่ได้เลือกผู้ลงนามในแบบฟอร์มแผนธุรกิจเทคโนโลยี',
+                });
+                return false; 
+            }else{
+                if($('#usersignature').val() == 2){
+                    var iserror = false;
+                    $(".chkauthorizeddirector:checked").each(function(){
+                        if($(this).data('id') == 1){
+                            iserror = true;
+                            console.log('found');
+                        }
+                    });
+                    if(iserror == true ){
+                        Swal.fire({
+                                title: 'ผิดพลาด!',
+                                text: 'มีผู้ลงนามที่ยังไม่ได้เพิ่มลายมือชื่อ',
+                            })
+                            return false;
+                    }
                 }
             }
+
+        }
+        if ($('#companyhistory').summernote('isEmpty'))
+        {
+            $("#companyhistoryerror").attr("hidden",false);
+            return;
+        }else{
+            $("#companyhistoryerror").attr("hidden",true);
         }
         form.validate().settings.ignore = ':disabled,:hidden';
         return form.valid();
     },
     onFinished: function (event, currentIndex) {
         alert('Form submitted.');
+    }
+});
+
+$(".chkauthorizeddirector").on('change', function() {
+    if($('.chkauthorizeddirector').filter(':checked').length > 3){
+        $(this).prop('checked', false);
+        Swal.fire({
+            title: 'ผิดพลาด!',
+            text: 'เลือกผู้ลงนามได้ไม่เกิน 3 คน',
+        });
     }
 });
 
@@ -2037,11 +2277,10 @@ $(document).on("click",".deleteprojectmember",function(e){
 });
 
 $(document).on('change', '#boardattachment', function(e) {
-    console.log($(this).data('id'));
+    // console.log($(this).data('id'));
     var file = this.files[0];
-
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     var formData = new FormData();
@@ -2106,10 +2345,8 @@ $(document).on("click",".deleteboardattachment",function(e){
 $(document).on('change', '#usersignature', function(e) {
     var usesignature = 1;
     if($(this).val() == 1){
-        $("#signature_wrapper").attr("hidden",true);
     }else{
         usesignature = 2;
-        $("#signature_wrapper").attr("hidden",false);
     }
     FullTbp.editSignature($('#fulltbpid').val(),usesignature).then(data => {
         console.log(data);
@@ -2221,14 +2458,16 @@ function submitNoAttachement(id){
 
 $(document).on('click', '#btnaddboard', function(e) {
     Employ.getEmployPosition().then(data => {
-        var selectemployposition = `<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
+        var selectemployposition = `<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">`;
         data.forEach(function (position,index) {
                 if(index <= 4){
                     selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
                 }
             });
         selectemployposition += `</select>`;
+        
         $("#employ_position_wrapper").html(selectemployposition);
+        $(".form-control-select2").select2();
     })
     .catch(error => {})
     $('#modal_add_employ').modal('show');
@@ -2246,7 +2485,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
             });
             selectprefix += `</select>`;
         $("#employprefix_wrapper").html(selectprefix);
-
+        $(".form-control-select2").select2();
         var selectemployposition = `<select id="employposition_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         data.employpositions.forEach(function (position,index) {
             var selected = '';
@@ -2306,6 +2545,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
 
 
         $("#employposition_wrapper").html(selectemployposition);
+        $(".form-control-select2").select2();
         $('#employid').val(data.employ['id'])
         $('#employname_edit').val(data.employ['name'])
         $('#employlastname_edit').val(data.employ['lastname'])
@@ -2328,12 +2568,16 @@ $(document).on('click', '#btnaddresearch', function(e) {
         });
         selectemployposition += `</select>`;
         $("#employ_position_research_wrapper").html(selectemployposition);
+        $(".form-control-select2").select2();
     })
     .catch(error => {})
     $('#modal_add_employ_research').modal('show');
 });
 
 $(document).on('click', '#btn_modal_add_employ', function(e) {
+    if($('#employname').val() == '' || $('#employlastname').val() == '' || $('#employposition').val() == '' || $('#employphone').val() == '' || $('#employworkphone').val() == '' || $('#employemail').val() == ''){
+        return;
+    }
     Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
         console.log(data);
         var html = ``;
@@ -2352,6 +2596,7 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
       
             });
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
+         $('#modal_add_employ').modal('hide');
     })
     .catch(error => {})
 });
@@ -2424,12 +2669,16 @@ $(document).on('click', '#btnaddprojectmember', function(e) {
             });
         selectemployposition += `</select>`;
         $("#employ_position_projectmember_wrapper").html(selectemployposition);
+        $(".form-control-select2").select2();
     })
     .catch(error => {})
     $('#modal_add_employ_projectmember').modal('show');
 });
 
 $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
+    if($('#employname_projectmember').val() == '' || $('#employlastname_projectmember').val() == '' || $('#employposition_projectmember').val() == '' || $('#employphone_projectmember').val() == '' || $('#employworkphone_projectmember').val() == '' || $('#employemail_projectmember').val() == '' ){
+        return;
+    }
     Employ.saveEmploy($('#employprefix_projectmember').val(),$('#employname_projectmember').val(),$('#employlastname_projectmember').val(),$('#employposition_projectmember').val(),$('#employphone_projectmember').val(),$('#employworkphone_projectmember').val(),$('#employemail_projectmember').val()).then(data => {
         console.log(data);
         var html = ``;
@@ -2447,6 +2696,7 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
                 }
             });
          $("#fulltbp_projectmember_wrapper_tr").html(html);
+         $('#modal_add_employ_projectmember').modal('hide');
     })
     .catch(error => {})
 });
@@ -2487,6 +2737,68 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
     });
 }); 
 
+$(document).on('keyup', '#employsearch', function(e) {
+    Employ.searchEmploy($(this).val(),$('#companyid').val()).then(data => {
+        console.log(data);
+        var html = ``;
+        data.forEach(function (employ,index) {
+            html += `<a href="#" class="dropdown-item selectemploy" data-id="${employ.id}">${employ.prefix['name']}${employ.name} ${employ.lastname}</a>`
+        });
+     if(data.length > 0){
+        $("#employsearch_wrapper").html(html);
+        $("#employsearch_wrapper").attr("hidden",false);
+     }else{
+        $("#employsearch_wrapper").html('');
+        $("#employsearch_wrapper").attr("hidden",true);
+     }
+
+    })
+   .catch(error => {})
+});
+
+$("#modal_add_stockholder").on("hidden.bs.modal", function () {
+    $("#employsearch_wrapper").html('');
+    $("#employsearch_wrapper").attr("hidden",true);
+});
+
+
+$("#ganttnummonth").on('change', function() {
+    if($(this).val() > 36){
+        $(this).val(36) ;
+    }
+});
+
+$(document).on('click', '#btn_add_projectplan', function(e) {
+    if($('#ganttnummonth').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ยังไม่ได้เลือกจำนวนเดือน!',
+            });
+        return;
+    }
+    var html = ``;
+    var chkindex = 0;
+    for (let item = 0; item < 3; item++) {
+        
+        html += `<div class="col-md-12">`
+        html += `<label ><u>ปี ${parseInt($('#ganttyear').val())+item}</u></label>
+            <div class="form-group">`;
+            for (let index = 0; index < 12; index++) {
+                chkindex++;
+                html += `
+                <div class="custom-control custom-checkbox custom-control-inline" style="width:45px">
+                    <input type="checkbox" name="plans[]" value="${chkindex}" class="custom-control-input checkboxplan" id="checkbox${chkindex}" >
+                    <label class="custom-control-label" for="checkbox${chkindex}">${chkindex}</label>
+                </div>`
+            }
+        html += `</div></div>`
+    }
+
+    $('#month_wrapper').html(html);
+
+
+    $('#modal_add_projectplan').modal('show');
+});
 
 	// Initialize validation
 	$('.steps-basic').validate({
@@ -2521,10 +2833,54 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
 	        else {
 	            error.insertAfter(element);
 	        }
-	    },
+        }, 
 	    rules: {
 	        email: {
 	            email: true
-	        }
-	    }
+            },
+            businesstype: {
+				required: true
+            }
+        },
+        messages: {
+			businesstype: {
+				required: 'กรุณาเลือกประเภทธุรกิจ'
+            },
+            department_qty: {
+				required: 'กรุณากรอกจำนวนบุคลากรทั้งหมด'
+            },
+            department1_qty: {
+				required: 'กรุณากรอกจำนวนผ่ายบริหาร'
+            },
+            department2_qty: {
+				required: 'กรุณากรอกจำนวนฝ่ายวิจัยและพัฒนา'
+            },
+            department3_qty: {
+				required: 'กรุณากรอกจำนวนฝ่ายผลิต/วิศวกรรม'
+            },
+            department4_qty: {
+				required: 'ผ่ายการตลาด'
+            },
+            department5_qty: {
+				required: 'กรุณากรอกพนักงานทั่วไป'
+            },
+            companyhistory: {
+				required: 'กรุณากรอกรายละเอียด'
+            },
+            responsiblename: {
+				required: 'กรุณากรอกชื่อ'
+            },
+            responsiblelastname: {
+				required: 'กรุณากรอกนามสกุล'
+            },
+            responsibleemail: {
+				required: 'กรุณากรอกอีเมล'
+            },
+            responsibleposition: {
+				required: 'กรุณากรอกตำแหน่ง'
+            },
+            responsiblephone: {
+				required: 'กรุณากรอกเบอร์โทรศัพท์'
+            },
+		}
 	});

@@ -16,7 +16,7 @@ class FullTbpMarketAttachmentController extends Controller
         $fullTbpmarketattachment = new FullTbpMarketAttachment();
         $fullTbpmarketattachment->attachmenttype = $request->attachmenttype;
         $fullTbpmarketattachment->full_tbp_id = $request->id;
-        $fullTbpmarketattachment->name = $file->getClientOriginalName();;
+        $fullTbpmarketattachment->name = $request->docname;
         $fullTbpmarketattachment->path = $filelocation;
         $fullTbpmarketattachment->save();
         $fullTbpmarketattachments = FullTbpMarketAttachment::where('full_tbp_id',$request->id)

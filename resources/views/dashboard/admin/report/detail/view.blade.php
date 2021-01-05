@@ -67,7 +67,7 @@
                                         </td>  
                                         <td> 
                                             <a href="{{asset($company->businessplan->minitbp->attachment)}}" class="btn-sm bg-info" target="_blank">ดาวน์โหลด PDF</a>
-                                            {{-- <a type="button" href="#" class="btn btn-sm bg-info">ดาวน์โหลด PDF</a> --}}
+                                           
                                         </td>  
                                         <td>
                                             -

@@ -18,10 +18,10 @@ class CreateFullTbpSellsTable extends Migration
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
             $table->string('name',120)->nullable();
-            $table->double('present',10,2)->default(0);
-            $table->double('past1',10,2)->default(0);
-            $table->double('past2',10,2)->default(0);
-            $table->double('past3',10,2)->default(0);
+            $table->double('present',15,2)->default(0);
+            $table->double('past1',15,2)->default(0);
+            $table->double('past2',15,2)->default(0);
+            $table->double('past3',15,2)->default(0);
             $table->timestamps();
         });
     }

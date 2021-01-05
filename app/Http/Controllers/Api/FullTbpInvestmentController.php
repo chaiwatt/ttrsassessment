@@ -17,7 +17,7 @@ class FullTbpInvestmentController extends Controller
         $fulltbpinvestment = FullTbpInvestment::find($request->id);
         $fulltbpid = $fulltbpinvestment->full_tbp_id;
         $fulltbpinvestment->update([
-            'cost' => $request->investment,
+            'cost' => str_replace(',', '', $request->investment),
         ]);
         $fulltbpinvestments = FullTbpInvestment::where('full_tbp_id',$fulltbpid)->get();
         return response()->json($fulltbpinvestments); 

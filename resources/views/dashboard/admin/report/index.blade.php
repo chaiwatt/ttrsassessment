@@ -235,12 +235,6 @@
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">รายการโครงการ</h6>
-                        {{-- <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                <i class="icon-calendar3 mr-2"></i>
-                                <span></span>
-                            </a>
-                        </div> --}}
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                 <i class="icon-calendar3 mr-2"></i>
@@ -255,12 +249,10 @@
                                     <tr>
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
-                                        {{-- <th>บริษัท</th> --}}
                                         <th>สถานะ</th>
                                         <th>วันนัดประชุมก่อนลงพื้นที่</th>
                                         <th>วันที่ประเมิน</th>
                                         <th>วันที่สรุปผลประเมิน</th>
-                                        {{-- <th style="width: 20px"><i class="icon-arrow-down12"></i></th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -268,13 +260,6 @@
                                     <tr> 
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> 
-                                            {{-- @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 4)
-                                                    <a class="text-info" href="{{route('dashboard.admin.project.minitbp.view',['id' => $fulltbp->minitbp->businessplan->minitbp->id])}}" class="breadcrumb-item">{{$fulltbp->minitbp->businessplan->minitbp->project}} </a>
-                                                @elseif($fulltbp->minitbp->businessplan->business_plan_status_id >= 4)
-                                                    <a class="text-info" href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->minitbp->businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$fulltbp->minitbp->businessplan->minitbp->project}} </a>
-                                                @else
-                                                    {{$fulltbp->minitbp->businessplan->minitbp->project}} 
-                                            @endif --}}
                                             <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                         </td>  
                                         <td> 
@@ -289,22 +274,6 @@
                                         <td> {{$fulltbp->briefingdate}} </td>  
                                         <td> {{$fulltbp->assessmentdate}} </td>  
                                         <td> {{$fulltbp->finalassessmentdate}} </td>  
-                                        {{-- <td class="text-right">
-                                            <div class="list-icons">
-                                                <div class="list-icons-item dropdown">
-                                                    <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-
-                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 4)
-                                                                
-                                                            @elseif($fulltbp->minitbp->businessplan->business_plan_status_id >= 4)
-                                                                
-                                                                <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> PDF</a>
-                                                        @endif 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>  --}}
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -392,7 +361,7 @@
                         <h6 class="card-title">วัตถุประสงค์ของการขอรับการประเมิน ปี2563</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                {{-- <i class="icon-calendar3 mr-2"></i> --}}
+                                
                                 <span></span>
                             </a>
                         </div>

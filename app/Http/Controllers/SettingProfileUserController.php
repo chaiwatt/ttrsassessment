@@ -184,6 +184,12 @@ class SettingProfileUserController extends Controller
                 $fulltbp->mini_tbp_id = $minitbp->id;
                 $fulltbp->save();
 
+                $fulltbpgantt = new FullTbpGantt();
+                $fulltbpgantt->full_tbp_id = $fulltbp->id;
+                $fulltbpgantt->startyear = intval(Carbon::now()->format('y'))+543 ;
+                $fulltbp->save();
+
+
                 $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
                 if($fulltbpcompanydocs->count() > 0){
                     foreach ($fulltbpcompanydocs as $key => $fulltbpcompanydoc) {

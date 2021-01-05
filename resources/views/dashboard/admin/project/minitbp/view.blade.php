@@ -74,7 +74,7 @@
 	
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button> --}}
+					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">ปิด</button> --}}
 				</div>
 			</div>
 		</div>
@@ -140,19 +140,19 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อบริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="companyname" id ="companyname" value="{{old('companyname') ?? $minitbp->businessplan->company->name}}" class="form-control required" readonly>
+											<input type="text" name ="companyname" id ="companyname" value="{{old('companyname') ?? $minitbp->businessplan->company->name}}" class="form-control form-control-lg required" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ที่อยู่บริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="address" id ="address" value="{{$user->company->companyaddress->first()->address}}" class="form-control required" readonly>
+											<input type="text" name ="address" id ="address" value="{{$user->company->companyaddress->first()->address}}" class="form-control form-control-lg required" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>จังหวัด<span class="text-danger">*</span></label>
-											<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2 required" disabled>
+											<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2 required" disabled>
 												<option value=""></option>
 												{{-- @foreach ($provinces as $province)
 													<option value="{{$province->id}}" @if($user->company->province_id == $province->id) selected @endif>{{$province->name}}</option> 
@@ -166,7 +166,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>อำเภอ<span class="text-danger">*</span></label>
-											<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2 required" disabled>
+											<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2 required" disabled>
 												{{-- @foreach ($amphurs as $amphur)                                                                
 													<option value="{{$amphur->id}}" @if ($user->company->amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
 												@endforeach    --}}
@@ -179,7 +179,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>ตำบล<span class="text-danger">*</span></label>
-											<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2 required" disabled>
+											<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2 required" disabled>
 												{{-- @foreach ($tambols as $tambol)                                                                
 													<option value="{{$tambol->id}}" @if ($user->company->tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
 												@endforeach     --}}
@@ -192,8 +192,8 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											{{-- <input type="text" name="postalcode" id="postalcode" value="{{$user->company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control required" readonly> --}}
-											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control required" readonly>
+											{{-- <input type="text" name="postalcode" id="postalcode" value="{{$user->company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required" readonly> --}}
+											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required" readonly>
 										</div>
 									</div>
 									<legend>
@@ -202,7 +202,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-											<select name="contactprefix" id="contactprefix" class="form-control form-control-select2 required" disabled>
+											<select name="contactprefix" id="contactprefix" class="form-control form-control-lg form-control-select2 required" disabled>
 												@foreach ($contactprefixes as $contactprefix)
 													<option value="{{$contactprefix->id}}" @if($minitbp->contactprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
 												@endforeach
@@ -212,20 +212,20 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name ="contactname" id ="contactname" value="{{old('contactname') ?? $minitbp->contactname}}" class="form-control required" readonly>
+											<input type="text" name ="contactname" id ="contactname" value="{{old('contactname') ?? $minitbp->contactname}}" class="form-control form-control-lg required" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name ="contactlastname" id ="contactlastname" value="{{old('contactlastname') ?? $minitbp->contactlastname}}" class="form-control required" readonly>
+											<input type="text" name ="contactlastname" id ="contactlastname" value="{{old('contactlastname') ?? $minitbp->contactlastname}}" class="form-control form-control-lg required" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ตำแหน่ง</label>
-											<input type="text" name ="contactposition" value="{{$minitbp->contactposition}}" class="form-control" readonly >
-											{{-- <select name="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-select2">
+											<input type="text" name ="contactposition" value="{{$minitbp->contactposition}}" class="form-control form-control-lg" readonly >
+											{{-- <select name="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-lg form-control-select2">
 												@foreach ($contactpositions as $contactposition)
 													<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
 												@endforeach
@@ -235,19 +235,19 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">เบอร์โทรศัพท์<span class="text-danger">*</span></label>
-											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $minitbp->contactphone}}" class="form-control required" readonly>
+											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $minitbp->contactphone}}" class="form-control form-control-lg required" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">อีเมล<span class="text-danger">*</span></label>
-											<input type="text" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $minitbp->contactemail}}" class="form-control required" readonly>
+											<input type="text" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $minitbp->contactemail}}" class="form-control form-control-lg required" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">เว็บไซต์</label>
-											<input type="text" name ="website" id ="website" value="{{old('website') ?? $minitbp->website}}" class="form-control" readonly>
+											<input type="text" name ="website" id ="website" value="{{old('website') ?? $minitbp->website}}" class="form-control form-control-lg" readonly>
 										</div>
 									</div>
 								</div>
@@ -260,7 +260,7 @@
 										<fieldset>	
 											<div class="form-group">
 												<label>ชื่อโครงการ/เทคโนโลยี<span class="text-danger">*</span></label>
-												<input type="text" id="project" name="project" value="{{old('project') ?? $minitbp->project}}"  placeholder="ชื่อโครงการ/เทคโนโลยี" class="form-control required" readonly >
+												<input type="text" id="project" name="project" value="{{old('project') ?? $minitbp->project}}"  placeholder="ชื่อโครงการ/เทคโนโลยี" class="form-control form-control-lg required" readonly >
 											</div>
 										</fieldset>
 									</div>
@@ -268,7 +268,7 @@
 										<fieldset>	
 											<div class="form-group">
 												<label>ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ (ถ้ามี)</label>
-												<input type="text" id="projecteng" name="projecteng" value="{{old('projecteng') ?? $minitbp->projecteng}}"  placeholder="ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ" class="form-control" readonly>
+												<input type="text" id="projecteng" name="projecteng" value="{{old('projecteng') ?? $minitbp->projecteng}}"  placeholder="ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ" class="form-control form-control-lg" readonly>
 											</div>
 										</fieldset>
 									</div>
@@ -278,7 +278,7 @@
 										<div class="form-group mb-3 mb-md-2">
 											<label class="font-weight-semibold">สิทธิประโยชน์ทางการเงิน (Finance)</label>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-12">
 													<div class="form-group">
 														<div class="form-check">
 															<label class="form-check-label">
@@ -289,17 +289,22 @@
 																<div class="col-md-6">
 																	<div class="form-group">
 																		<label for="">เลือกธนาคาร</label>
-																		<select name="bank" id="bank" class="form-control form-control-select2" disabled>
+																		<select name="bank" id="bank" class="form-control form-control-lg form-control-select2" disabled>
 																			@foreach ($banks as $bank)
 																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_id == $bank->id) selected @endif >{{$bank->name}}</option>
 																			@endforeach
 																		</select>
 																	</div>
+																	@if (@$minitbp->bank->name == 'อื่น ๆ โปรดระบุ')
+																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled>
+																		@else
+																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled hidden >
+																	@endif
 																</div>
 																<div class="col-md-6">
 																	<div class="form-group">
 																		<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																		<input type="number" name="finance1loan" id="finance1loan" value="{{old('finance1loan') ?? $minitbp->finance1_loan}}" class="form-control" readonly>
+																		<input type="text" name="finance1loan" id="finance1loan" value="{{old('finance1loan') ?? $minitbp->finance1_loan}}" class="form-control form-control-lg numeralformat10" readonly>
 																	</div>
 																</div>
 															</div>	
@@ -319,9 +324,6 @@
 															โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)
 														</label>
 													</div>
-												</div>
-	
-												<div class="col-md-6">
 													<div class="form-check">
 														<label class="form-check-label">
 															<input type="checkbox" name="finance4" id="finance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance4)) checked @endif data-fouc disabled>
@@ -331,24 +333,25 @@
 															<div class="col-md-4">
 																<div class="form-group">
 																	<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																	<input type="text" name ="finance4joint" id="finance4joint" class="form-control" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}" readonly>
+																	<input type="text" name ="finance4joint" id="finance4joint" class="form-control form-control-lg numeralformat10" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}" readonly>
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">สัดส่วนลงทุน บริษัท</label>
-																	<input type="number" name="finance4jointmin" id="finance4jointmin" class="form-control" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}" readonly>
+																	<label for="">สัดส่วนลงทุน บริษัท %</label>
+																	<input type="number" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}" readonly>
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">: สวทช</label>
-																	<input type="number" name="finance4jointmax" id="finance4jointmax" class="form-control" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}" readonly>
+																	<label for="">: สวทช %</label>
+																	<input type="number" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}" readonly>
 																</div>
 															</div>
 														</div>
 													</div>
 												</div>
+	
 											</div>
 										</div>
 									</div>
@@ -398,7 +401,7 @@
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for="">โปรดระบุ</label>
-																	<input type="text" name ="nonefinance5detail" id ="nonefinance5detail" class="form-control" value="{{old('nonefinance5detail') ?? $minitbp->nonefinance5_detail}}" readonly>
+																	<input type="text" name ="nonefinance5detail" id ="nonefinance5detail" class="form-control form-control-lg" value="{{old('nonefinance5detail') ?? $minitbp->nonefinance5_detail}}" readonly>
 																</div>
 															</div>
 														</div>
@@ -413,7 +416,7 @@
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for="">โปรดระบุ</label>
-																	<input type="text" name="nonefinance6detail" id="nonefinance6detail" class="form-control" value="{{old('nonefinance6detail') ?? $minitbp->nonefinance6_detail}}" readonly>
+																	<input type="text" name="nonefinance6detail" id="nonefinance6detail" class="form-control form-control-lg" value="{{old('nonefinance6detail') ?? $minitbp->nonefinance6_detail}}" readonly>
 																</div>
 															</div>
 														</div>
@@ -427,59 +430,61 @@
 							<h6>ข้อมูลผู้ลงนาม</h6>
 							<fieldset>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-12">
 										<div class="form-group">
-											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-											<select name="managerprefix" id="managerprefix" class="form-control form-control-select2" disabled>
-												@foreach ($contactprefixes as $contactprefix)
-													<option value="{{$contactprefix->id}}" @if($minitbp->managerprefix_id == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
-												@endforeach
-											</select>
-										</div>
+											{{-- <div class="col-md-12" > --}}
+												<div class="table-responsive">
+													<table class="table table-bordered table-striped">
+														<thead>
+															<tr class="bg-info">
+																<th style="width:50%">ผู้ลงนาม</th>
+																<th style="width:35%">ตำแหน่ง</th>
+															</tr>
+														</thead>
+														<tbody id="authorized_director_wrapper_tr"> 
+															@foreach ($authorizeddirectors as $authorizeddirector)
+															<tr >      
+																<td>
+																	<div class="form-check">
+																		<label class="form-check-label">
+																			@if (Empty($authorizeddirector->signature_id))
+																					<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
+																					@if ($authorizeddirector->usesignature == 2)
+																						checked
+																					@endif
+																					disabled >
+																				@else
+																					<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
+																					@if ($authorizeddirector->usesignature == 2)
+																						checked
+																					@endif
+																					disabled >
+																			@endif
+																			{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
+																		</label>
+																	</div>
+																</td>  
+                            																
+																<td> {{$authorizeddirector->employposition->name}}</td>      
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>
+											</div>
+										{{-- </div> --}}
 									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name ="managername" id ="managername" value="{{old('managername') ?? $minitbp->managername}}" class="form-control required" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name ="managerlastname" id="managerlastname" value="{{old('managerlastname') ?? $minitbp->managerlastname}}" class="form-control required" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
-											<select name="managerposition" id="managerposition" value="{{$minitbp->managerposition}}" id="" class="form-control form-control-select2 required" disabled>
-												@foreach ($contactpositions as $contactposition)
-													<option value="{{$contactposition->id}}" @if($minitbp->managerposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
+
+									{{-- <div class="col-md-6">
 										<div class="form-group">
 											<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
-											<select name="signature" id="usersignature" value="{{$minitbp->signature_status_id}}" id="" class="form-control form-control-select2" disabled>
+											<select name="signature" id="usersignature" value="{{$minitbp->signature_status_id}}" id="" class="form-control form-control-lg form-control-select2">
 												@foreach ($signaturestatuses as $signaturestatus)
 													<option value="{{$signaturestatus->id}}" @if($minitbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
 												@endforeach
 											</select>
 										</div>
-										{{-- <div class="form-group" id="signature_wrapper" @if($minitbp->signature_status_id == 1) hidden @endif>
-											<a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
-											<div class="col-md-12">
-												<div id='sigdiv'>
-													@if (!Empty(Auth::user()->signature))
-													<br>
-													<img src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" alt="">
-													@endif
-												</div>
-											</div>
-										</div> --}}
-									</div>
+									</div> --}}
 								</div>
 							</fieldset>
 								<h6>เสร็จสิ้น</h6>
@@ -523,8 +528,10 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
+
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 {{-- <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script> --}}
 <script>
 	var route = {

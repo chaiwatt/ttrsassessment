@@ -15,6 +15,7 @@ use App\Model\FullTbpCost;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
+use App\Model\FullTbpGantt;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
@@ -49,6 +50,11 @@ class AssessmentController extends Controller
 
                 $fulltbp = new FullTbp();
                 $fulltbp->mini_tbp_id = $minitbp->id;
+                $fulltbp->save();
+
+                $fulltbpgantt = new FullTbpGantt();
+                $fulltbpgantt->full_tbp_id = $fulltbp->id;
+                $fulltbpgantt->startyear = intval(Carbon::now()->format('y'))+543 ;
                 $fulltbp->save();
 
                 $fulltbpemployee = new FullTbpEmployee();
@@ -114,15 +120,15 @@ class AssessmentController extends Controller
                 // $messagebox->receiver_id = User::where('user_type_id',6)->first()->id;
                 // $messagebox->message_read_status_id = 1;
                 // $messagebox->save();
-
+                $company = Company::where('user_id',Auth::user()->id);
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
                 $alertmessage->detail = Company::where('user_id',$auth->id)->first()->name . 'ขอรับการประเมินใหม่ ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
                 $alertmessage->save();
                 
-                EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ขอรับการประเมินใหม่','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
-                Message::sendMessage('ขอรับการประเมินใหม่','เรียน JD<br> '. Company::where('user_id',Auth::user()->id)->first()->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+                EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ขอรับการประเมินใหม่','เรียน JD<br> บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS');
+                Message::sendMessage('ขอรับการประเมินใหม่','บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
             }
         }else{
             if($request->status == 1){

@@ -234,7 +234,7 @@ function deleteStandardAttachement(id){
     })
 }
 
-function addPlan(id,detail,month){
+function addPlan(id,detail,month,ganttnummonth,ganttyear){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/plan/add`,
@@ -244,6 +244,8 @@ function addPlan(id,detail,month){
           'id': id,
           'detail': detail,
           'months': month,
+          'startyear': ganttyear,
+          'numofmonth': ganttnummonth
         },
         success: function(data) {
           resolve(data)

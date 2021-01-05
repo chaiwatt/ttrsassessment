@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -29,6 +30,11 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user) { 
+        if($user->user_status_id == 2){
+            Auth::logout();
+            Session::flush();
+            return redirect()->route('login')->withError('บัญชีของคุณถูกระงับการใช้งาน');
+        }
          $baseurl =URL::to('/');
          $intendurl = redirect()->intended()->getTargetUrl();
          if(strcmp($intendurl,$baseurl) == 0){
@@ -72,4 +78,5 @@ class LoginController extends Controller
         }
         return $user;
     }
+
 }

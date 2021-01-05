@@ -28,7 +28,7 @@ class DashboardAdminProjectFullTbpAdminController extends Controller
         $evedithistory->detail = $request->detail;
         $evedithistory->save();
         if($auth->user_type_id != 6){
-            Message::sendMessage('มีการแก้ไข EV','เรียน JD<br> ได้มีการแก้ไข EV '. Ev::find($id)->name.' โดย ' . $auth->name . ' '. $auth->lastname . ' ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.admin.editev',['id' => $id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+            Message::sendMessage('มีการแก้ไข EV','มีการแก้ไข EV '. Ev::find($id)->name.' โดย ' . $auth->name . ' '. $auth->lastname . ' ได้ที่ <a href='.route('dashboard.admin.project.fulltbp.admin.editev',['id' => $id]).'>คลิกที่นี่</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
         }  
         return redirect()->back()->withSuccess('เพิ่มประวัติสำเร็จ');
     }

@@ -137,7 +137,7 @@ class DashboardAdminCalendarController extends Controller
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน สำหรับโครงการ'.$minitbp->project;
         $alertmessage->save();
  
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:นัดหมายการประเมิน ณ. สถานประกอบการ','เรียนผู้ประกอบการ <br> แจ้งนัดหมายการประเมิน ณ. สถานประกอบการ มีรายละเอียดดังนี้' .
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:นัดหมายการประเมิน ณ สถานประกอบการ','เรียนผู้ประกอบการ <br> แจ้งนัดหมายการประเมิน ณ สถานประกอบการ มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.

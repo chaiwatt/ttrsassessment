@@ -73,7 +73,7 @@
 	
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">เสร็จสิ้น</button> --}}
+					{{-- <button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">ปิด</button> --}}
 				</div>
 			</div>
 		</div>
@@ -215,24 +215,39 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name ="contactname" id ="contactname" value="{{old('contactname') ?? $minitbp->contactname}}" class="form-control form-control-lg stringformat60 required" >
+											@php
+											       $position = "ผู้ประสานงาน";
+													$name = $user->name;
+													$lastname = $user->lastname;
+												if($user->user_group_id == 1){ //นิติบุคคล
+													if(!Empty($minitbp->contactposition)){
+														$position = $minitbp->contactposition;
+													}
+												}else{ //บุคคลธรรมดา
+													$position = $user->position;
+													// if(!Empty($minitbp->contactposition)){
+													// 	$position = $minitbp->contactposition;
+													// }
+												}
+												if(!Empty($minitbp->contactname) || !Empty($minitbp->contactlastname) ){
+														$name = $minitbp->contactname;
+														$lastname = $minitbp->contactlastname;
+												}
+												// echo($minitbp->contactposition);
+											@endphp
+											<input type="text" name ="contactname" id ="contactname" value="{{$name}}" class="form-control form-control-lg stringformat60 required" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name ="contactlastname" id ="contactlastname" value="{{old('contactlastname') ?? $minitbp->contactlastname}}" class="form-control form-control-lg stringformat60 required" >
+											<input type="text" name ="contactlastname" id ="contactlastname" value="{{$lastname}}" class="form-control form-control-lg stringformat60 required" >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ตำแหน่ง</label>
-											<input type="text" name ="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" class="form-control form-control-lg stringformat60" >
-											{{-- <select name="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-lg form-control-select2">
-												@foreach ($contactpositions as $contactposition)
-													<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
-												@endforeach
-											</select> --}}
+											<input type="text" name ="contactposition" id="contactposition" value="{{$position}}" class="form-control form-control-lg stringformat60" >
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -297,7 +312,7 @@
 											<label class="font-weight-semibold"><u>สิทธิประโยชน์ทางการเงิน (Finance)</u></label>
 											<div class="row">
 												<div class="col-md-12">
-													{{-- <div class="form-group"> --}}
+													<div class="form-group">
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" name="finance1"  id="finance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance1)) checked @endif data-fouc>
@@ -328,52 +343,52 @@
 																</div>
 															</div>	
 														</div>
-													{{-- </div> --}}
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="finance2" id="finance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance2)) checked @endif  data-fouc>
-															ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)
-														</label>														
 													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="finance3" id="finance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance3)) checked @endif data-fouc>
-															โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)
-														</label>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="finance2" id="finance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance2)) checked @endif  data-fouc>
+																ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)
+															</label>														
+														</div>
 													</div>
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="finance4" id="finance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance4)) checked @endif data-fouc>
-															บริษัทร่วมทุน (สวทช.)
-														</label>
-														<div class="row" id="financediv2" style="margin-top: 5px" @if (Empty($minitbp->finance4_joint_min) || Empty($minitbp->finance4)) hidden @endif >
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="">วงเงินสินเชื่อที่ต้องการ</label>
-																	<input type="text" name ="finance4joint" id="finance4joint" class="form-control form-control-lg numeralformat10" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}">
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="finance3" id="finance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance3)) checked @endif data-fouc>
+																โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)
+															</label>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="finance4" id="finance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance4)) checked @endif data-fouc>
+																บริษัทร่วมทุน (สวทช.)
+															</label>
+															<div class="row" id="financediv2" style="margin-top: 5px" @if (Empty($minitbp->finance4_joint_min) || Empty($minitbp->finance4)) hidden @endif >
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<label for="">วงเงินสินเชื่อที่ต้องการ</label>
+																		<input type="text" name ="finance4joint" id="finance4joint" class="form-control form-control-lg numeralformat10" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}">
+																	</div>
 																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="">สัดส่วนลงทุน บริษัท %</label>
-																	<input type="text" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}">
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<label for="">สัดส่วนลงทุน บริษัท %</label>
+																		<input type="text" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}">
+																	</div>
 																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="">: สวทช. %</label>
-																	<input type="text" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}">
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<label for="">: สวทช. %</label>
+																		<input type="text" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}">
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-	
-												{{-- <div class="col-md-12">
-													
-												</div> --}}
 											</div>
 										</div>
 									</div>
@@ -385,60 +400,69 @@
 											<label class="font-weight-semibold"><u>สิทธิประโยชน์ที่ไม่ใช่การเงิน (Non-Finance)</u></label>
 											<div class="row">
 												<div class="col-md-6">
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance1" id="nonefinance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc>
-															โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย
-														</label>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance1" id="nonefinance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc>
+																โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย
+															</label>
+														</div>
 													</div>
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance2" id="nonefinance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance2)) checked @endif data-fouc>
-															รับรองสิทธิประโยชน์ทางภาษี
-														</label>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance2" id="nonefinance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance2)) checked @endif data-fouc>
+																รับรองสิทธิประโยชน์ทางภาษี
+															</label>
+														</div>
 													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance3" id="nonefinance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc>
-															โครงการ spin-off
-														</label>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance3" id="nonefinance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc>
+																โครงการ spin-off
+															</label>
+														</div>
 													</div>
 												</div>
 	
 												<div class="col-md-6">
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance4" id="nonefinance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc>
-															ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ
-														</label>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance4" id="nonefinance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc>
+																ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ
+															</label>
+														</div>
 													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" name="nonefinance5" id="nonefinance5" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance5)) checked @endif data-fouc >
-															โครงการสนับสนุนผู้ประกอบการภาครัฐ
-														</label>
-														<div class="row" id="nonefinancediv1" style="margin-top: 5px" @if (Empty($minitbp->nonefinance5_detail) || Empty($minitbp->nonefinance5)) hidden @endif>
-															<div class="col-md-12">
-																<div class="form-group">
-																	<label for="">โปรดระบุ</label>
-																	<input type="text" name ="nonefinance5detail" id ="nonefinance5detail" class="form-control form-control-lg" value="{{old('nonefinance5detail') ?? $minitbp->nonefinance5_detail}}">
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance5" id="nonefinance5" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance5)) checked @endif data-fouc >
+																โครงการสนับสนุนผู้ประกอบการภาครัฐ
+															</label>
+															<div class="row" id="nonefinancediv1" style="margin-top: 5px" @if (Empty($minitbp->nonefinance5_detail) || Empty($minitbp->nonefinance5)) hidden @endif>
+																<div class="col-md-12">
+																	<div class="form-group">
+																		<label for="">โปรดระบุ</label>
+																		<input type="text" name ="nonefinance5detail" id ="nonefinance5detail" class="form-control form-control-lg" value="{{old('nonefinance5detail') ?? $minitbp->nonefinance5_detail}}">
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
-	
-													<div class="form-check">
-														<label class="form-check-label">
-															<input type="checkbox" id="nonefinance6" name="nonefinance6" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance6)) checked @endif data-fouc>
-															อื่น ๆ
-														</label>
-														<div class="row" id="nonefinancediv2" style="margin-top: 5px"  @if (Empty($minitbp->nonefinance6_detail) || Empty($minitbp->nonefinance6) ) hidden @endif>
-															<div class="col-md-12">
-																<div class="form-group">
-																	<label for="">โปรดระบุ</label>
-																	<input type="text" name="nonefinance6detail" id="nonefinance6detail" class="form-control form-control-lg" value="{{old('nonefinance6detail') ?? $minitbp->nonefinance6_detail}}">
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" id="nonefinance6" name="nonefinance6" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance6)) checked @endif data-fouc>
+																อื่น ๆ
+															</label>
+															<div class="row" id="nonefinancediv2" style="margin-top: 5px"  @if (Empty($minitbp->nonefinance6_detail) || Empty($minitbp->nonefinance6) ) hidden @endif>
+																<div class="col-md-12">
+																	<div class="form-group">
+																		<label for="">โปรดระบุ</label>
+																		<input type="text" name="nonefinance6detail" id="nonefinance6detail" class="form-control form-control-lg" value="{{old('nonefinance6detail') ?? $minitbp->nonefinance6_detail}}">
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -455,18 +479,13 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											{{-- <div class="col-md-12" > --}}
-												{{-- <input type="text" name="authorizeddirector" id="authorizeddirector" value="{{$authorizeddirectors->count()}}" hidden > --}}
-												{{-- <label for="">รายชื่อกรรมการ/ผู้มีอำนาจลงนาม<span class="text-danger">*</span></label> --}}
-												{{-- <a href="#" type="button" id="btn_add_authorized_director" class="text-primary" >คลิกเพิ่ม</a> --}}
 												<div class="table-responsive">
 													<table class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
 																<th style="width:50%">เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน TTRS (Mini TBP)</th>
-																{{-- <th style="width:55%">ชื่อ  นามสกุล</th>  --}}
 																<th style="width:15%">ลายมือชื่อ</th> 
-																<th style="width:35%">ตำแหน่ง</th>   
-																{{-- <th style="width:20%">เพิ่มเติม</th>                                                                                    --}}
+																<th style="width:35%">ตำแหน่ง</th>
 															</tr>
 														</thead>
 														<tbody id="authorized_director_wrapper_tr"> 
@@ -499,11 +518,8 @@
 																		<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
 																@endif
 																</td>                                
-																{{-- <td> {{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}</td>                                             --}}
+																
 																<td> {{$authorizeddirector->employposition->name}}</td>      
-																{{-- <td> 
-																	<a type="button" data-id="{{$authorizeddirector->id}}" data-name="" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
-																</td> --}}
 															</tr>
 															@endforeach
 														</tbody>
@@ -513,56 +529,6 @@
 										{{-- </div> --}}
 									</div>
 
-									{{-- <div class="col-md-6">
-										<div class="form-group">
-											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-											@php
-												$checkprefic = $minitbp->managerprefix_id;
-												if($authorizeddirectors->count() > 0){
-													if($checkprefic == null){
-														$checkprefic = $authorizeddirectors->first()->prefix_id;
-													}
-												}
-											@endphp
-											<select name="managerprefix" id="managerprefix" class="form-control form-control-lg form-control-select2">
-												@foreach ($contactprefixes as $contactprefix)
-													<option value="{{$contactprefix->id}}" @if($checkprefic == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ชื่อ<span class="text-danger">*</span></label>
-											@if ($authorizeddirectors->count() > 0)
-													<input type="text" name ="managername" id ="managername" value="{{$authorizeddirectors->first()->name ?? $minitbp->managername}}" class="form-control form-control-lg required" >
-												@else
-													<input type="text" name ="managername" id ="managername" value="{{old('managername') ?? $minitbp->managername}}" class="form-control form-control-lg required" >
-											@endif
-											
-										</div>
-									</div> --}}
-									{{-- <div class="col-md-6">
-										<div class="form-group">
-											<label for="">นามสกุล<span class="text-danger">*</span></label>
-											@if ($authorizeddirectors->count() > 0)
-												<input type="text" name ="managerlastname" id="managerlastname" value="{{$authorizeddirectors->first()->lastname ?? $minitbp->managerlastname}}" class="form-control form-control-lg required" >
-											@else
-												<input type="text" name ="managerlastname" id="managerlastname" value="{{old('managerlastname') ?? $minitbp->managerlastname}}" class="form-control form-control-lg required" >
-											@endif
-											
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ตำแหน่ง<span class="text-danger">*</span></label>
-											<select name="managerposition" id="managerposition" value="{{$minitbp->managerposition}}" id="" class="form-control form-control-lg form-control-select2 required">
-												@foreach ($contactpositions as $contactposition)
-													<option value="{{$contactposition->id}}" @if($minitbp->managerposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div> --}}
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
@@ -675,7 +641,7 @@
 						title: 'ผิดพลาด!',
 						text: 'ยังไม่ได้เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน',
 					});
-        			return false; //not go next
+        			return false; 
 				}else{
 					if($('#usersignature').val() == 2){
 						var iserror = false;
@@ -793,6 +759,7 @@
 		},
 		
 	});
+
 	// Initialize validation
 	$('.step-minitbp').validate({
 	    ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
@@ -830,8 +797,82 @@
 	    rules: {
 	        email: {
 	            email: true
-	        }
-	    }
+	        },
+			finance1loan: {
+				required: function(element){
+					return $('#finance1').is(':checked') === true;
+				}
+			},
+			finance4joint: {
+				required: function(element){
+					return $('#finance4').is(':checked') === true;
+				}
+			},
+			finance4jointmin: {
+				required: function(element){
+					return $('#finance4').is(':checked') === true;
+				}
+			},
+			finance4jointmax: {
+				required: function(element){
+					return $('#finance4').is(':checked') === true;
+				}
+			},
+			nonefinance5detail: {
+				required: function(element){
+					return $('#nonefinance5').is(':checked') === true;
+				}
+			},
+			nonefinance6detail: {
+				required: function(element){
+					return $('#nonefinance6').is(':checked') === true;
+				}
+			}
+	    },
+		messages: {
+			project: {
+				required: 'กรุณากรอกชื่อโครงการ'
+			},			
+			finance1loan: {
+				required: 'กรุณากรอกวงเงินสินเชื่อที่ต้องการ'
+			},			
+			finance4joint: {
+				required: 'กรุณากรอกวงเงินสินเชื่อที่ต้องการ'
+			},			
+			finance4jointmin: {
+				required: 'กรุณากรอกสัดส่วนลงทุน บริษัท %'
+			},			
+			finance4jointmax: {
+				required: 'กรุณากรอกสวทช. %'
+			},			
+			nonefinance5detail: {
+				required: 'กรุณาระบุรายละเอียด'
+			},			
+			nonefinance6detail: {
+				required: 'กรุณาระบุรายละเอียด'
+			},			
+			companyname: {
+				required: 'กรุณากรอกชื่อบริษัท'
+			},			
+			address: {
+				required: 'กรุณากรอกที่อยู่บริษัท'
+			},			
+			postalcode: {
+				required: 'กรุณากรอกรหัสไปรษณีย์'
+			},			
+			contactname: {
+				required: 'กรุณากรอกชื่อ'
+			},			
+			contactlastname: {
+				required: 'กรุณากรอกนามสกุล'
+			},			
+			contactphone: {
+				required: 'กรุณากรอกเบอร์โทรศัพท์'
+			},			
+			contactemail: {
+				required: 'กรุณากรอกอีเมล'
+			}
+		}
 	});
 
 	$(".chkauthorizeddirector").on('change', function() {
