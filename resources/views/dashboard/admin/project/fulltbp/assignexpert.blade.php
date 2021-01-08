@@ -17,7 +17,7 @@
 					<div class="col-md-12">
                         <div class="form-group">
                             <label>ผู้เชี่ยวชาญ<span class="text-danger">*</span></label>
-                            <select id="expert" class="form-control form-control-select2">
+                            <select id="expert" class="form-control form-control-lg form-control-select2">
                                 <option value="">==เลือกผู้เชี่ยวชาญ==</option>
                                 @foreach ($experts as $expert)
                                     <option value="{{$expert->id}}" >{{$expert->name}} {{$expert->lastname}}</option> 
@@ -59,27 +59,27 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="left-icon-overview">
                                 <div class="form-group">
-                                    <textarea name="overview" id="overview" cols="30" rows="15" class="form-control" disabled></textarea>
+                                    <textarea name="overview" id="overview" cols="30" rows="15" class="form-control form-control-lg" disabled></textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-management">
                                 <div class="form-group">
-                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control" disabled></textarea>
+                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control form-control-lg" disabled></textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-technology">
                                 <div class="form-group">
-                                    <textarea name="technology" id="technology" cols="30" rows="15" class="form-control" disabled></textarea>
+                                    <textarea name="technology" id="technology" cols="30" rows="15" class="form-control form-control-lg" disabled></textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-marketing">
                                 <div class="form-group">
-                                    <textarea name="marketing" id="marketing" cols="30" rows="15" class="form-control" disabled></textarea>
+                                    <textarea name="marketing" id="marketing" cols="30" rows="15" class="form-control form-control-lg" disabled></textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-businessprospect">
                                 <div class="form-group">
-                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control" disabled></textarea>
+                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control form-control-lg" disabled></textarea>
                                 </div>
                             </div>
                         </div>

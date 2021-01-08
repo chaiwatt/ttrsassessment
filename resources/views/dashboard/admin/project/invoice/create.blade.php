@@ -54,7 +54,7 @@
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>บริษัท</label>
-                                        <select name="company" data-placeholder="บริษัท" class="form-control form-control-select2">
+                                        <select name="company" data-placeholder="บริษัท" class="form-control form-control-lg form-control-select2">
                                             @foreach ($companies as $company)
                                                 <option value="{{$company->id}}">{{$company->name}}</option> 
                                             @endforeach
@@ -64,79 +64,79 @@
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>รหัสลูกค้า/Customer ID</label>
-                                        <input type="text"  name="customer" value="{{old('customer')}}"  placeholder="รหัสลูกค้า/Customer ID" class="form-control">
+                                        <input type="text"  name="customer" value="{{old('customer')}}"  placeholder="รหัสลูกค้า/Customer ID" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่เอกสาร/Document No.</label>
-                                        <input type="text"  name="docno" value="{{old('docno')}}"  placeholder="เลขที่เอกสาร/Document No." class="form-control">
+                                        <input type="text"  name="docno" value="{{old('docno')}}"  placeholder="เลขที่เอกสาร/Document No." class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่ใบเสนอราคา/Quotation No.</label>
-                                        <input type="text"  name="quotationno" value="{{old('quotationno')}}"  placeholder="เลขที่ใบเสนอราคา/Quotation No." class="form-control">
+                                        <input type="text"  name="quotationno" value="{{old('quotationno')}}"  placeholder="เลขที่ใบเสนอราคา/Quotation No." class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่ใบสั่งซื้อ/Purchase Order No.</label>
-                                        <input type="text"  name="purchaseorderno" value="{{old('purchaseorderno')}}"  placeholder="เลขที่ใบสั่งซื้อ/Purchase Order No." class="form-control">
+                                        <input type="text"  name="purchaseorderno" value="{{old('purchaseorderno')}}"  placeholder="เลขที่ใบสั่งซื้อ/Purchase Order No." class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่ใบสั่งขาย/Sale Order No.</label>
-                                        <input type="text"  name="saleorderno" value="{{old('saleorderno')}}"  placeholder="เลขที่ใบสั่งขาย/Sale Order No." class="form-control">
+                                        <input type="text"  name="saleorderno" value="{{old('saleorderno')}}"  placeholder="เลขที่ใบสั่งขาย/Sale Order No." class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>วันที่ใบสั่งขาย/Sale Order Date</label>
-                                        <input type="text"  name="saleorderdate" id="saleorderdate" value="{{old('saleorderdate')}}"  placeholder="วันที่ใบสั่งขาย/Sale Order Date" class="form-control">
+                                        <input type="text"  name="saleorderdate" id="saleorderdate" value="{{old('saleorderdate')}}"  placeholder="วันที่ใบสั่งขาย/Sale Order Date" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่เอกสารอ้างอิง/Reference No.</label>
-                                        <input type="text"  name="refno" value="{{old('refno')}}"  placeholder="เลขที่เอกสารอ้างอิง/Reference No." class="form-control">
+                                        <input type="text"  name="refno" value="{{old('refno')}}"  placeholder="เลขที่เอกสารอ้างอิง/Reference No." class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>รายการ/Description</label>
-                                        <input type="text"  name="description" value="{{old('description')}}"  placeholder="รายการ/Description" class="form-control">
+                                        <input type="text"  name="description" value="{{old('description')}}"  placeholder="รายการ/Description" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>จำนวนเงิน/Amount (THB)</label>
-                                        <input type="number"  name="price" value="{{old('price')}}"  placeholder="จำนวนเงิน/Amount (THB)" class="form-control">
+                                        <input type="number"  name="price" value="{{old('price')}}"  placeholder="จำนวนเงิน/Amount (THB)" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Biller ID</label>
-                                        <input type="text"  name="billerid" value="{{old('billerid')}}"  placeholder="Biller ID" class="form-control">
+                                        <input type="text"  name="billerid" value="{{old('billerid')}}"  placeholder="Biller ID" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Branch ID</label>
-                                        <input type="text"  name="branchid" value="{{old('branchid')}}"  placeholder="Branch ID" class="form-control">
+                                        <input type="text"  name="branchid" value="{{old('branchid')}}"  placeholder="Branch ID" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Service Code</label>
-                                        <input type="text"  name="servicecode" value="{{old('servicecode')}}"  placeholder="Service Code" class="form-control">
+                                        <input type="text"  name="servicecode" value="{{old('servicecode')}}"  placeholder="Service Code" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Comp Code</label>
-                                        <input type="text"  name="compcode" value="{{old('compcode')}}"  placeholder="Comp Code" class="form-control">
+                                        <input type="text"  name="compcode" value="{{old('compcode')}}"  placeholder="Comp Code" class="form-control form-control-lg">
                                     </div>
                                 </div>
                             </div>

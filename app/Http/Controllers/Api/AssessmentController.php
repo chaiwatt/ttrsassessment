@@ -54,8 +54,8 @@ class AssessmentController extends Controller
 
                 $fulltbpgantt = new FullTbpGantt();
                 $fulltbpgantt->full_tbp_id = $fulltbp->id;
-                $fulltbpgantt->startyear = intval(Carbon::now()->format('y'))+543 ;
-                $fulltbp->save();
+                $fulltbpgantt->startyear = intval(Carbon::now()->year) + 543 ;
+                $fulltbpgantt->save();
 
                 $fulltbpemployee = new FullTbpEmployee();
                 $fulltbpemployee->full_tbp_id = $fulltbp->id;

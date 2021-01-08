@@ -256,14 +256,14 @@
 									</div>
 									
 									{{-- <div class="form-group"> --}}
-										<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล</button>
+										<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล</button>
 									{{-- </div> --}}
 									
 								</div>
 
 								<div class="tab-pane fade" id="left-icon-employeducation">
 									<div class="form-group">	
-										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
+										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
 									</div>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
@@ -273,7 +273,7 @@
 													<th>ชื่อสถานศึกษา</th>                                                                                    
 													<th>สาขาวิชาเอก</th>       
 													<th>ปีที่ศึกษา</th>  
-													<th>เพิ่มเติม</th>    
+													<th >เพิ่มเติม</th>    
 												</tr>
 											</thead>
 											<tbody id="fulltbp_companyemployeducation_wrapper_tr">    
@@ -284,7 +284,7 @@
 								</div>
 								<div class="tab-pane fade" id="left-icon-employexpereince">
 									<div class="form-group">	
-										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add"></i></a>
+										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add"></i></a>
 									</div>
 
 									<div class="table-responsive">
@@ -306,7 +306,7 @@
 								</div>
 								<div class="tab-pane fade" id="left-icon-attachment">
 									<div class="input-group">													
-										<label for="">เอกสารแนบ (ไฟล์ PDF ขนาดไม่เกิน 2 MB) <small>เช่น Resume, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่น ๆ</small> <button type="button" class="btn btn-warning btn-icon ml-2 btn-sm"  id="btnuploadboardattachment" onclick="document.getElementById('boardattachment').click();"><i class="icon-add mr-2"></i>อัปโหลด PDF</button></label>
+										<label for="">เอกสารแนบ (ไฟล์ PDF ขนาดไม่เกิน 2 MB) <small>เช่น Resume, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่น ๆ</small> <button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnuploadboardattachment" onclick="document.getElementById('boardattachment').click();"><i class="icon-add mr-2"></i>อัปโหลด PDF</button></label>
 									</div>
 									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="application/pdf"/>
 
@@ -325,7 +325,7 @@
 								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
 									<div class="form-group">	
-										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a>
+										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a>
 									</div>
 
 									<div class="table-responsive">
@@ -470,7 +470,7 @@
 						</div>
 						<div class="form-group">
 							<label>บริษัท</label><span class="text-danger">*</span>
-							<input type="text" id="employtrainingowner" placeholder="บริษัท" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employtrainingowner" placeholder="บริษัท" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 				</div>
@@ -495,7 +495,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>พนักงาน</label><span class="text-danger">*</span>
+							<label>ชื่อ-สกุล</label><span class="text-danger">*</span>
 							<input type="text" id="employsearch" class="form-control form-control-lg">
 							<div id="employsearch_wrapper" class="dropdown-menu" style="display: block; position: static; width: 100%; margin-top: 0; float: none; z-index: auto;" hidden>
 								
@@ -735,9 +735,6 @@
 						<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
 						<div class="row ml-2" id="month_wrapper">
 						</div>
-						{{-- <div class="form-group" >
-
-						</div> --}}
 					</div>
 					
 				</div>
@@ -774,12 +771,6 @@
 					<div class="col-md-12">
 						<label class="font-weight-semibold">เลือกเดือนที่ดำเนินการ</label>
 						<div class="form-group" id="monthplan">
-							{{-- @for ($i = 1; $i <= 12; $i++)
-							<div class="custom-control custom-checkbox custom-control-inline">
-								<input type="checkbox" name="plans[]" value="{{$i}}" class="custom-control-input checkboxplane_dit" id="checkbox{{$i}}" >
-								<label class="custom-control-label" for="checkbox{{$i}}">{{$i}}</label>
-							</div>
-							@endfor --}}
 						</div>
 					</div>
 					
@@ -1487,19 +1478,11 @@
 												<a data-toggle="collapse" class="text-default list-icons-item" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.1 ข้อมูลกิจการ</a>
 											</h6>
 										</div>
-		
-
-										{{-- <div class="card-header text-white header-elements-inline">
-											<h6 class="card-title"><a data-toggle="collapse" class="text-default" href="#accordion-item-group1">1.1 ข้อมูลกิจการ</a></h6>
-											<div class="header-elements">
-												<div class="list-icons">
-													<a class="list-icons-item text-teal" data-action="collapse"></a>
-												</div>
-											</div>
-										</div> --}}
+	
 
 										<div id="accordion-item-group1" class="collapse" data-parent="#accordion-group">
 											<div class="card-body">
+												<input type="text" id="pdfname" hidden >
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
@@ -1558,7 +1541,8 @@
 													</div> --}}
 													<div class="col-md-12">
 														<div class="form-group">
-															<label>แผนผังองค์กร (ไฟล์ jpg, png ขนาด 500 x 300px ไฟล์ขนาดไม่เกิน 1 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" onclick="document.getElementById('organizeimg').click();"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+															<label>แผนผังองค์กร (ไฟล์ jpg, png ขนาด 500 x 300px ไฟล์ขนาดไม่เกิน 1 MB)</label>
+															<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" onclick="document.getElementById('organizeimg').click();"><i class="icon-add mr-2"></i>อัปโหลด</button>
 															<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg" accept="image/*"/>
 															@if (!Empty($fulltbp->minitbp->businessplan->company->organizeimg))
 																<br>
@@ -1619,13 +1603,13 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) <span id="companyhistoryerror" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span> </label>
-															<textarea name="companyhistory" id="companyhistory" class="form-control form-control-lg" cols="3" rows="7" required>{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</textarea>
+															<textarea name="companyhistory" id="companyhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="7" required >{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</textarea>
 														</div>
 														
 														<div class="row">
 															<div class="col-md-12">	
 																<div class="input-group">													
-																	<label for="">แนบเอกสารข้อมูลทั่วไป (ไฟล์ pdf ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																	<label for="">แนบเอกสารข้อมูลทั่วไป (ไฟล์ pdf ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																</div>
 																<p><small><i>หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
 															</div>
@@ -1650,7 +1634,7 @@
 																					<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
 																					<td> 
 																						<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																						<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+																						<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcompanyprofileattachment">ลบ</a>                                       
 																					</td>
 																				</tr>
 																			@endforeach                            
@@ -1684,7 +1668,7 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col-md-12">	
-														<label for="">ข้อมูลผู้บริหารระดับสูง<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm"  id="btnaddboard"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+														<label for="">ข้อมูลผู้บริหารระดับสูง<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnaddboard"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
 																<thead>
@@ -1694,7 +1678,7 @@
 																		<th>โทรศัพท์</th>       
 																		<th>โทรศัพท์มือถือ</th>  
 																		<th>อีเมล</th>
-																		<th style="width:250px">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_companyemploy_wrapper_tr">    
@@ -1705,9 +1689,9 @@
 																			<td> {{$companyemploy->phone}} </td>                                            
 																			<td> {{$companyemploy->workphone}} </td> 
 																			<td> {{$companyemploy->email}} </td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
-																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a> 
+																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy">ลบ</a> 
 																			</td> 
 																		</tr>
 																	@endforeach                            
@@ -1718,14 +1702,14 @@
 												
 													{{-- <div class="row"> --}}
 														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลผู้ถือหุ้น<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" id="btnstckholder" data-id="{{$company->id}}"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<label for="">ข้อมูลผู้ถือหุ้น<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnstckholder" data-id="{{$company->id}}"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<div class="table-responsive">
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-สกุล</th>  
 																			<th>ความสัมพันธ์กับ CEO</th>
-																			<th style="width:200px">เพิ่มเติม</th>    
+																			<th class="hiddenelement" style="width:200px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_companystockholder_wrapper_tr">    
@@ -1733,7 +1717,7 @@
 																			<tr >                                        
 																				<td> {{$companystockholder->name}}</td> 
 																				<td> {{$companystockholder->ceorelation}} </td> 
-																				<td> <a type="button" data-id="{{$companystockholder->id}}" class="btn btn-sm bg-warning deletestockholder">ลบ</a> </td> 
+																				<td class="hiddenelement"> <a type="button" data-id="{{$companystockholder->id}}" class="btn btn-sm bg-warning hiddenelement deletestockholder">ลบ</a> </td> 
 																			</tr>
 																		@endforeach                            
 																	</tbody>
@@ -1744,7 +1728,7 @@
 													
 													{{-- <div class="row"> --}}
 														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลนักวิจัย<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<label for="">ข้อมูลนักวิจัย<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<div class="table-responsive">
 																<table class="table table-striped table-bordered">
 																	<thead>
@@ -1754,7 +1738,7 @@
 																			<th>โทรศัพท์</th>       
 																			<th>โทรศัพท์มือถือ</th>  
 																			<th>อีเมล</th>
-																			<th style="width:250px">เพิ่มเติม</th>    
+																			<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_researcher_wrapper_tr">    
@@ -1765,10 +1749,10 @@
 																				<td> {{$companyemploy->phone}} </td>                                            
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
-																				<td> 
+																				<td class="hiddenelement">  
 																					{{-- <a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> --}}
 																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning deletecompanyemploy_research">ลบ</a> 
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy_research">ลบ</a> 
 																				</td> 
 																			</tr>
 																		@endforeach                            
@@ -1778,7 +1762,7 @@
 														</div>
 														
 														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลทีมงานในโครงการ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" id="btnaddprojectmember"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<label for="">ข้อมูลทีมงานในโครงการ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddprojectmember"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<div class="table-responsive">
 																<table class="table table-striped table-bordered">
 																	<thead>
@@ -1788,7 +1772,7 @@
 																			<th>โทรศัพท์</th>       
 																			<th>โทรศัพท์มือถือ</th>  
 																			<th>อีเมล</th>
-																			<th style="width:250px">เพิ่มเติม</th>    
+																			<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_projectmember_wrapper_tr">    
@@ -1799,9 +1783,9 @@
 																				<td> {{$companyemploy->phone}} </td>                                            
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
-																				<td> 
+																				<td class="hiddenelement"> 
 																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning deletecompanyemploy_projectmember">ลบ</a> 
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy_projectmember">ลบ</a> 
 																				</td> 
 																			</tr>
 																		@endforeach                            
@@ -1861,20 +1845,20 @@
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประวัติการศึกษา</label>
-																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control form-control-lg" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->educationhistory!!}</textarea>
+																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->educationhistory!!}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประสบการณ์การทำงาน</label>
-																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control form-control-lg" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->experiencehistory!!}</textarea>
+																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->experiencehistory!!}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประวัติการฝึกอบรม</label>
 																
-																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control form-control-lg" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->traininghistory!!}</textarea>
+																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->traininghistory!!}</textarea>
 															</div>
 														</div>
 													{{-- </div> --}}
@@ -1925,7 +1909,7 @@
 																	<p><small><i>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและสังคม</i> </small></p>
 																	
 																	{{-- <input type="text" id="projectabtract_input" class="form-control form-control-lg projectabtractclass" > --}}
-																	<textarea name="" id="projectabtract_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
+																	<textarea name="" id="projectabtract_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
 																</div>
 																{{-- <div id="fulltbp_projectabtract_wrapper" style="border: dashed 1px #999999">
 																	@foreach ($fulltbpprojectabtractdetails as $fulltbpprojectabtractdetail)
@@ -1946,7 +1930,7 @@
 															<div class="form-group">
 																<label for="">ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ </label>
 																<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
-																<textarea name="" id="mainproduct_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
+																<textarea name="" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
 																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
@@ -1969,7 +1953,7 @@
 															<div class="form-group">
 																<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
 																<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
-																<textarea name="" id="productdetails_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
+																<textarea name="" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
@@ -2007,12 +1991,12 @@
 															<div class="form-group">
 																<label for="">การพัฒนาเทคโนโลยี</label> <span class="text-primary" id="projectechdevtextlength"></span>
 																<p><small><i>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</i> </small></p>
-																<textarea name="" id="projectechdev_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
+																<textarea name="" id="projectechdev_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">	
-																<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน(เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
 															</div>
 															<div class="table-responsive">
@@ -2031,7 +2015,7 @@
 																				<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																				<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																				<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
-																				<td> <a type="button" data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-warning deleteprojectechdevlevel">ลบ</a> </td> 
+																				<td> <a type="button" data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-warning hiddenelement deleteprojectechdevlevel">ลบ</a> </td> 
 																			</tr>
 																		@endforeach                            
 																	</tbody>
@@ -2043,7 +2027,7 @@
 															<div class="form-group">
 																<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																<p><small><i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i> </small></p>
-																<textarea name="" id="projectechdevproblem_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
+																<textarea name="" id="projectechdevproblem_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
 																{{-- <input type="text" id="projectechdevproblem_input" class="form-control form-control-lg projectechdevproblemclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_projectechdevproblem_wrapper" style="border: dashed 1px #999999">
@@ -2237,7 +2221,7 @@
 															
 																<div class="col-md-12 mt-4">	
 																	<div class="form-group">												
-																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_certify"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_certify"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																	</div>
 																	
 																</div>
@@ -2262,7 +2246,7 @@
 																						<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
 																						<td> 
 																							<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																							<a type="button" data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+																							<a type="button" data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcertifyattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
 																				@endforeach                            
@@ -2279,10 +2263,10 @@
 																	<div class="form-group">
 																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																		<p><small><i>เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</i> </small></p>
-																		<textarea name="" id="projectinnovation_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
+																		<textarea name="" id="projectinnovation_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
 																	</div>	
 																	<div class="form-group">												
-																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																	</div>
 																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
 																</div>
@@ -2303,7 +2287,7 @@
 																						<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
 																						<td> 
 																							<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																							<a type="button" data-id="{{$fulltbpprojectawardattachment->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+																							<a type="button" data-id="{{$fulltbpprojectawardattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpawardattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
 																				@endforeach                            
@@ -2321,11 +2305,11 @@
 																	<div class="form-group">
 																		<label for="">ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																		<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
-																		<textarea name="" id="projectstandard_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
+																		<textarea name="" id="projectstandard_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
 																	</div>	
 																	<div class="form-group">												
 																		
-																		<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																		<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																		
 																	</div>
 																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
@@ -2351,7 +2335,7 @@
 																						<td> {{$fulltbpprojectstandard->name}} </td>                                            
 																						<td> 
 																							<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																							<a type="button" data-id="{{$fulltbpprojectstandard->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+																							<a type="button" data-id="{{$fulltbpprojectstandard->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpstandardattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
 																				@endforeach                            
@@ -2402,27 +2386,26 @@
 														</div>
 														<div class="col-md-12">	
 															<div class="form-group">	
-																<button type="button" id ="btn_add_projectplan" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่มรายละเอียด</button>
+																<button type="button" id ="btn_add_projectplan" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่มรายละเอียด</button>
 															</div>
 														</div>
 														<div class="col-md-12">			
-														<div class="table-responsive" style="width: 100%">
-															<table class="table table-bordered" style="width:99.8%" id="table_gantt_wrapper">
+															<table class="table-bordered" style="width: 100%" id="table_gantt_wrapper">
 																<thead>
 																	<tr>
 																		<tr>
-																			<th rowspan="2" style="width: 450px">รายละเอียดการดำเนินงาน</th> 
+																			<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
 																			@foreach ($allyears as $key => $item)
 																				@if ($item != 0)
 																					<th colspan="{{$item}}" class="text-center">ปี {{$fulltbpgantt->startyear + $key}} </th> 
 																				@endif
 																			@endforeach
-																			<th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+																			<th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th> 
 																		</tr>
 																		@if ($minmonth != 0 && $maxmonth !=0)
 																			<tr >
 																				@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																					<th style="width:5px;font-size:12px">{{$i}}</th>
+																					<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">{{$i}}</th>
 																				@endfor
 																			</tr>
 																		@endif
@@ -2432,7 +2415,7 @@
 																<tbody >    
 																	@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
 																		<tr >                                        
-																			<td> {{$fulltbpprojectplan->name}} </td> 
+																			<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}} </td> 
 																			@for ($i = $minmonth; $i <= $maxmonth; $i++)
 																				@php
 																					$color = 'white';
@@ -2441,9 +2424,9 @@
 																						$color = 'grey';
 																					}
 																				@endphp
-																				<td style="background-color:{{$color}};width:5px;font-size:12px"> </td> 
+																				<td style="background-color:{{$color}};width: 40px !important;font-size:12px;padding:5px"></td> 
 																			@endfor															
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
 																				<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a> 
 																			</td> 
@@ -2451,7 +2434,6 @@
 																	@endforeach                            
 																</tbody>
 															</table>
-														</div>
 														</div>
 													</div>
 												</div>
@@ -2487,7 +2469,7 @@
 																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</li>
 																</ul>
 																</i> </small></p>
-															<textarea name="" id="analysis" class="form-control form-control-lg" cols="3" rows="10">{!!@$fulltbp->fulltbpmarketanalysis->detail!!}</textarea>
+															<textarea name="" id="analysis" class="form-control form-control-lg summernoteelement" cols="3" rows="10">{!!@$fulltbp->fulltbpmarketanalysis->detail!!}</textarea>
 														</div>
 													</div>
 
@@ -2495,11 +2477,11 @@
 														<div class="form-group">
 															<label for=""><u>Business Model Canvas</u></label>
 															<p><small><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i> </small></p>
-															<textarea name="" id="modelcanvas" class="form-control form-control-lg" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail!!}</textarea>
+															<textarea name="" id="modelcanvas" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail!!}</textarea>
 														</div>
 														<div class="col-md-12">	
 															<div class="input-group">													
-																<label for="">เอกสารแนบ Business Model Canvas (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_bmc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																<label for="">เอกสารแนบ Business Model Canvas (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_bmc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 															</div>
 															
 														</div>
@@ -2520,7 +2502,7 @@
 																				<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
 																				<td> 
 																					<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																					<a type="button" data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+																					<a type="button" data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpmodelcanvasattachment">ลบ</a>                                       
 																				</td>
 																			</tr>
 																		@endforeach                            
@@ -2533,12 +2515,12 @@
 															<div class="form-group">
 																<label for="" ><u>วิเคราะห์ศักยภาพทางการค้า</u></label>
 																<p><small><i>SWOT Analysis, Five Forces Analysis</i> </small></p>
-																<textarea name="" id="swot" class="form-control form-control-lg" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketswot->detail!!}</textarea>
+																<textarea name="" id="swot" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketswot->detail!!}</textarea>
 															</div>
 															<div class="col-md-12">	
 																<div class="input-group">													
 																	
-																	<label for="">SWOT Analysis, Five Forces Analysis (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_swot"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																	<label for="">SWOT Analysis, Five Forces Analysis (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_swot"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																</div>
 																
 															</div>
@@ -2561,7 +2543,7 @@
 																					<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
 																					<td> 
 																						<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																						<a type="button" data-id="{{$fullTbpmarketattachmentswot->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+																						<a type="button" data-id="{{$fullTbpmarketattachmentswot->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpswotattachment">ลบ</a>                                       
 																					</td>
 																				</tr>
 																			@endforeach                            
@@ -2588,7 +2570,7 @@
 												<div class="row">
 													<div class="col-md-12">	
 														<div class="form-group">	
-															<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p>
 														</div>
 														<div class="table-responsive">
@@ -2600,7 +2582,7 @@
 																		<th class="text-center">ปี {{$fulltbp->past1}}</th>                                                                                    
 																		<th class="text-center">ปี {{$fulltbp->past2}}</th>       
 																		<th class="text-center">ปี {{$fulltbp->past3}}</th>  
-																		<th class="text-center" style="width:150px">เพิ่มเติม</th>    
+																		<th class="text-center hiddenelement" style="width:150px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_sell_wrapper_tr">    
@@ -2611,9 +2593,9 @@
 																			<td class="text-right"> {{number_format($fulltbpsell->past1, 2)}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpsell->past2, 2)}}</td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpsell->past3, 2)}}</td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning deletesell">ลบ</a> 
+																				<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning hiddenelement deletesell">ลบ</a> 
 																			</td> 
 																		</tr>
 																	@endforeach                            
@@ -2634,7 +2616,7 @@
 																		<th class="text-center">ปี {{$fulltbp->past1}}</th>                                                                                    
 																		<th class="text-center">ปี {{$fulltbp->past2}}</th>       
 																		<th class="text-center" >ปี {{$fulltbp->past3}}</th>  
-																		<th style="width:150px">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_sellstatus_wrapper_tr">    
@@ -2645,7 +2627,7 @@
 																			<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}} </td> 
 																			<td class="text-right"> {{number_format($fulltbpsellstatus->past2, 2)}} </td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpsellstatus->past3, 2)}} </td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpsellstatus->id}}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
 																			</td> 
 																		</tr>
@@ -2672,7 +2654,7 @@
 												<div class="row">
 													<div class="col-md-12">
 														<div class="form-group">	
-															<label for=""><u>ลูกหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<label for=""><u>ลูกหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<p><small><i>ลูกหนี้การค้า</i> </small></p>
 														</div>
 														<div class="table-responsive">
@@ -2685,7 +2667,7 @@
 																		<th>ยอดขายต่อปี (บาท)</th>       
 																		<th>เปรียบเทียบกับยอดขาย (%)</th>  
 																		<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
-																		<th style="width:150px">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_debtpartner_wrapper_tr">    
@@ -2697,9 +2679,9 @@
 																			<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}} </td>                                            															
 																			<td class="text-right"> {{$fulltbpdebtpartner->percenttosale}} </td> 
 																			<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a> 
+																				<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletedebtpartner">ลบ</a> 
 																			</td> 
 																		</tr>
 																	@endforeach              
@@ -2709,7 +2691,7 @@
 													</div>
 													<div class="col-md-12 mt-4">
 														<div class="form-group">	
-															<label for=""><u>เจ้าหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm" data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<label for=""><u>เจ้าหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<p><small><i>เจ้าหนี้การค้า</i> </small></p>
 														</div>
 														<div class="table-responsive">
@@ -2721,7 +2703,7 @@
 																		<th>ยอดซื้อต่อปี (บาท)</th>       
 																		<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
 																		<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
-																		<th style="width:150px">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_creditpartner_wrapper_tr">    
@@ -2732,9 +2714,9 @@
 																			<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
 																			<td class="text-right"> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
 																			<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 
+																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletecreditpartner">ลบ</a> 
 																			</td> 
 																		</tr>
 																	@endforeach              
@@ -2776,7 +2758,7 @@
 																		<th>จำนวน (หน่วย)</th>       
 																		<th>ราคาต่อหน่วย (บาท)</th>  
 																		<th>ข้อมูลจำเพาะทางเทคนิค</th> 
-																		<th style="width:150px">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_asset_wrapper_tr">    
@@ -2787,7 +2769,7 @@
 																			<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
 																			<td> {{$fulltbpasset->specification}} </td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
 																			</td> 
 																		</tr>
@@ -2807,7 +2789,7 @@
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
 																		<th class="text-right">จำนวนเงิน (บาท)</th>                                                                                    
-																		<th style="width:150px">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_investment_wrapper_tr">    
@@ -2815,7 +2797,7 @@
 																		<tr >
 																			<td> {{$fulltbpinvestment->investment}}</td> 
 																			<td> {{number_format($fulltbpinvestment->cost, 2)}}</td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpinvestment->id}}" class="btn btn-sm bg-info editinvestment">แก้ไข</a>
 																			</td> 
 																		</tr>
@@ -2838,7 +2820,7 @@
 																		<th>เงินทุนที่เสนอขออนุมัติ</th>   
 																		<th>เงินทุนที่ได้รับการอนุมัติแล้ว</th>   
 																		<th>แผนการหาเงินทุนเพิ่ม</th>  
-																		<th style="width:150px">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_cost_wrapper_tr">    
@@ -2849,7 +2831,7 @@
 																			<td class="text-right"> {{number_format($fulltbpcost->need, 2)}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpcost->approved, 2)}}</td> 
 																			<td> {{$fulltbpcost->plan}} </td> 
-																			<td> 
+																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">แก้ไข</a>
 																			</td> 
 																		</tr>
@@ -2956,21 +2938,7 @@
 											@endforeach
 										</select>
 									</div>
-									{{-- <div class="form-group" id="signature_wrapper" @if($fulltbp->signature_status_id == 1) hidden @endif>
-										<a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
-										<div class="col-md-12">
-											<div id='sigdiv'>
-												@if (!Empty(Auth::user()->signature))
-												<br>
-												<img id="signatureimg" src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" alt="">
-												@endif
-												<span id="signatureerror" class="form-text text-danger" hidden >*ไม่พบลายมือชื่อ</span>
-											</div>
-										</div>
-									</div> --}}
 								</div>
-								
-								<!-- /accordion group -->
 		
 							</fieldset>
 							<h6>5.เสร็จสิ้น</h6>
@@ -2978,10 +2946,9 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<div style="width:100%;height:600px;" class="col-md-12 center"  >
-											{{-- <canvas id="the-canvas"></canvas> --}}
 											<div style="width:100%;height:600px;" id="example1"></div>
 										</div>
-										<input type="file" style="display:none;" id="fulltbppdf"/>
+										<input type="file" style="display:none;" id="fulltbppdf" accept="application/pdf"/>
 									</div>
 								</div>
 								<div class="col-md-12 " id="appceptagreement_wrapper">
@@ -3027,6 +2994,9 @@
 		submitstatus: "{{$minitbp->businessplan->business_plan_status_id}}",
 		refixstatus: "{{$fulltbp->refixstatus}}"
 	};
+
+	
+
 	$(document).ready(function() {
 		$(window).keydown(function(event){
 			if((event.keyCode == 13)) {
@@ -3034,6 +3004,8 @@
 				return false;
 			}
 		});
+
+		$('#pdfname').val("{{$fulltbp->attachment}}");
 		$('#companyhistory').summernote({
 			toolbar: false,
 			height: 200,
@@ -3090,10 +3062,19 @@
 			toolbar: false,
 			height: 200,
 		});
-		
+		if("{{$minitbp->businessplan->business_plan_status_id}}" == "4" || "{{$fulltbp->refixstatus}}" == "1" ){ 
+			$(".hiddenelement").attr("hidden",false);   
+		}else{
+			$(".hiddenelement").attr("hidden",true);   
+			$('.summernoteelement').next().find(".note-editable").attr("contenteditable", false);
+			$('.form-check-input-styled').prop("disabled", true);
+			$('.form-check-input-styled-primary').prop("disabled", true);
+			$('.form-control-select2').prop("disabled", true);
+			$('.form-control-lg').prop("disabled", true);
+		}
 	});
 	$(document).on('keyup', '#ganttnummonth', function(e) {
-		console.log('ddd');
+		// console.log('ddd');
 		// if($(this).val() > 36){
 		//     $(this).val(36);
 		// }

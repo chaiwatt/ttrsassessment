@@ -42,17 +42,17 @@
 											{{-- <div class="col-md-6">  
 												<div class="form-group">
 													<label>อีเมลผู้ใช้งาน<span class="text-danger">*</span></label>
-													<input type="text"  name="useremail" value="{{$user->email}}"  placeholder="อีเมล" class="form-control" disabled>
+													<input type="text"  name="useremail" value="{{$user->email}}"  placeholder="อีเมล" class="form-control form-control-lg" disabled>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<label>รหัสผ่านผู้ใช้งาน</label>
-												<input type="password" name="password" value="" data-placeholder="รหัสผ่าน" class="form-control">
+												<input type="password" name="password" value="" data-placeholder="รหัสผ่าน" class="form-control form-control-lg">
 											</div> --}}
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>คำนำหน้า<span class="text-danger">*</span></label>
-														<select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2">
+														<select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
 															@foreach ($prefixes as $prefix)
 																<option value="{{$prefix->id}}" @if ($user->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
 															@endforeach
@@ -62,19 +62,19 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>ชื่อ<span class="text-danger">*</span></label>
-														<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control">
+														<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>นามสกุล<span class="text-danger">*</span></label>
-														<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control">
+														<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>เลขบัตรประจำตัวประชาชน<span class="text-danger">*</span></label></span>
-														<input type="text" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control" >
+														<input type="text" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control form-control-lg" >
 														<small id="hidinvalid" class="form-text text-danger" hidden></small>
 													</div>
 												</div>
@@ -85,13 +85,13 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ที่อยู่</label><span class="text-danger">*</span>
-													<input type="text"  name="address" id="address"  value="{{$user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+													<input type="text"  name="address" id="address"  value="{{$user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>จังหวัด<span class="text-danger">*</span></label>
-													<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2">
+													<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
 														<option value=""></option>
 														@foreach ($provinces as $province)
 															<option value="{{$province->id}}" @if($user->province_id == $province->id) selected @endif>{{$province->name}}</option> 
@@ -102,7 +102,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>อำเภอ<span class="text-danger">*</span></label>
-													<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
+													<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
 														@foreach ($amphurs as $amphur)                                                                
 															<option value="{{$amphur->id}}" @if ($amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
 														@endforeach   
@@ -112,7 +112,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>ตำบล<span class="text-danger">*</span></label>
-													<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2">
+													<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
 														@foreach ($tambols as $tambol)                                                                
 															<option value="{{$tambol->id}}" @if ($tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
 														@endforeach    
@@ -122,7 +122,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode"  id="postalcode"  value="{{$user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+													<input type="text"  name="postalcode"  id="postalcode"  value="{{$user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg">
 												</div>
 											</div>
 											<legend>
@@ -131,13 +131,13 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ที่อยู่อื่น</label><span class="text-danger">*</span>
-													<input type="text"  name="address1" id="address1" value="{{$user->address1}}"  placeholder="ที่อยู่อื่น" class="form-control">
+													<input type="text"  name="address1" id="address1" value="{{$user->address1}}"  placeholder="ที่อยู่อื่น" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>จังหวัด<span class="text-danger">*</span></label>
-													<select name="province1" id="province1" data-placeholder="จังหวัด" class="form-control form-control-select2">
+													<select name="province1" id="province1" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
 														<option value=""></option>
 														@foreach ($provinces as $province)
 															<option value="{{$province->id}}" @if($user->province1_id == $province->id) selected @endif>{{$province->name}}</option> 
@@ -148,7 +148,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>อำเภอ<span class="text-danger">*</span></label>
-													<select name="amphur1" id="amphur1" data-placeholder="อำเภอ" class="form-control form-control-select2">
+													<select name="amphur1" id="amphur1" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
 														@foreach ($amphurs1 as $amphur1)                                                                
 															<option value="{{$amphur1->id}}" @if ($amphur1->id == $user->amphur1_id) selected @endif> {{$amphur1->name}} </option>
 														@endforeach   
@@ -158,7 +158,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>ตำบล<span class="text-danger">*</span></label>
-													<select name="tambol1" id="tambol1" data-placeholder="ตำบล" class="form-control form-control-select2">
+													<select name="tambol1" id="tambol1" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
 														@foreach ($tambols1 as $tambol1)                                                                
 															<option value="{{$tambol1->id}}" @if ($tambol1->id == $user->tambol1_id) selected @endif> {{$tambol1->name}} </option>
 														@endforeach    
@@ -168,7 +168,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode1" id="postalcode1" value="{{$user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+													<input type="text"  name="postalcode1" id="postalcode1" value="{{$user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg">
 												</div>
 											</div>
 											<legend>
@@ -177,59 +177,59 @@
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>โทรศัพท์<span class="text-danger">*</span></label>
-													<input type="text"  name="phone" value="{{$user->phone}}"  placeholder="โทรศัพท์" class="form-control">
+													<input type="text"  name="phone" value="{{$user->phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>อีเมล<span class="text-danger">*</span></label>
-													<input type="text"  name="email" value="{{$user->company->email}}"  placeholder="อีเมล" class="form-control">
+													<input type="text"  name="email" value="{{$user->company->email}}"  placeholder="อีเมล" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>เว็บไซต์</label>
-													<input type="text"  name="website" value="{{$user->website}}"  placeholder="เว็บไซต์" class="form-control">
+													<input type="text"  name="website" value="{{$user->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>พิกัดละติจูด (เช่น 14.076868486942407)<a href="https://google.com/maps/place/{{$user->lat}},{{$user->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a></label>
-													<input type="text"  name="lat" value="{{$user->lat}}"  placeholder="ละติจูด" class="form-control">
+													<input type="text"  name="lat" value="{{$user->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>พิกัดลองจิจูด (เช่น 100.60153839991285) </label>
 													{{-- <label>ลองติจูด<a href="https://google.com/maps/place/00,11" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label> --}}
-													<input type="text"  name="lng" value="{{$user->lng}}"  placeholder="ลองจิจูด" class="form-control">
-													{{-- <input type="text"  name="lng" value="{{$user->company->lng}}"  placeholder="ลองติจูด" class="form-control"> --}}
+													<input type="text"  name="lng" value="{{$user->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg">
+													{{-- <input type="text"  name="lng" value="{{$user->company->lng}}"  placeholder="ลองติจูด" class="form-control form-control-lg"> --}}
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ประเภทผู้เชี่ยวชาญ<span class="text-danger">*</span></label>
 													{{$officer->user_group_id}}
-													{{-- <input type="text"  name="experttype" value="{{$officer->user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly> --}}
-													<input type="text"  name="experttype" value="{{$user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control" readonly>
+													{{-- <input type="text"  name="experttype" value="{{$officer->user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control form-control-lg" readonly> --}}
+													<input type="text"  name="experttype" value="{{$user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control form-control-lg" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>หน่วยงานที่สังกัด<span class="text-danger">*</span></label>
-													<input type="text"  name="organization" value="{{$officer->organization}}"  placeholder="หน่วยงานที่สังกัด" class="form-control">
+													<input type="text"  name="organization" value="{{$officer->organization}}"  placeholder="หน่วยงานที่สังกัด" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ตำแหน่ง<span class="text-danger">*</span></label>
-													<input type="text"  name="position" value="{{$officer->position}}"  placeholder="ตำแหน่ง" class="form-control">
+													<input type="text"  name="position" value="{{$officer->position}}"  placeholder="ตำแหน่ง" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>วุติการศึกษาสูงสุด<span class="text-danger">*</span></label>
-													<select name="educationlevel" id="educationlevel" data-placeholder="วุติการศึกษาสูงสุด" class="form-control form-control-select2">
+													<select name="educationlevel" id="educationlevel" data-placeholder="วุติการศึกษาสูงสุด" class="form-control form-control-lg form-control-select2">
 														@foreach ($educationlevels as $educationlevel)                                                                
 															<option value="{{$educationlevel->id}}" @if ($educationlevel->id == $officer->education_level_id) selected @endif > {{$educationlevel->name}} </option>
 														@endforeach    
@@ -241,13 +241,13 @@
 													<div class="col-md-6"> 
 														<div class="form-group">
 															<label>ประสบการณ์การทำงาน (ปี)</label>
-															<input type="text"  name="expereinceyear" value="{{$officer->expereinceyear}}"  placeholder="ประสบการณ์การทำงาน (ปี)" class="form-control">
+															<input type="text"  name="expereinceyear" value="{{$officer->expereinceyear}}"  placeholder="ประสบการณ์การทำงาน (ปี)" class="form-control form-control-lg">
 														</div>
 													</div>
 													<div class="col-md-6"> 
 														<div class="form-group">
 															<label>ประสบการณ์การทำงาน (เดือน)</label>
-															<input type="text"  name="expereincemonth" value="{{$officer->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control">
+															<input type="text"  name="expereincemonth" value="{{$officer->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -255,7 +255,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>สาขาความเชี่ยวชาญ<span class="text-danger">*</span></label>
-													<select name="expertbranch" id="tambol" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-select2">
+													<select name="expertbranch" id="tambol" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
 														@foreach ($officerbanches as $officerbanch)                                                                
 															<option value="{{$officerbanch->id}}" @if ($officerbanch->id == $officer->officer_branch_id) selected @endif> {{$officerbanch->name}} </option>
 														@endforeach    
@@ -266,7 +266,7 @@
 												<div class="form-group">
 													<label>รูปถ่าย (ขนาด 500x500) px</label>
 													<div class="input-group">													
-														<input type="text" id="filename" class="form-control border-right-0" placeholder="รูปถ่าย"  >
+														<input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="รูปถ่าย"  >
 														<span class="input-group-append">
 															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																									
 														</span>	
@@ -488,7 +488,7 @@
 									<div class="form-group">
 										<div class="form-group">
 											<label>เพื่อน<span class="text-danger">*</span> <a href="" class="float-right" data-toggle="modal" data-target="#modal_user">&nbsp<i class="icon-add small" style="color:grey"></i></a></label>
-											<select name="friends[]" multiple="multiple" placeholder="เพื่อน"  class="form-control form-control-select2">
+											<select name="friends[]" multiple="multiple" placeholder="เพื่อน"  class="form-control form-control-lg form-control-select2">
 												@foreach ($friends as $friend)
 												<option value="{{$friend->friend_id}}" > {{$friend->user->name}} </option>
 												@endforeach
@@ -499,14 +499,14 @@
 							
 								<div class="form-group">
 									<label>เร่งด่วน<span class="text-danger">*</span></label>
-									<select name="messagepriority" id="organizationamphur" data-placeholder="เร่งด่วน" class="form-control form-control-select2">
+									<select name="messagepriority" id="organizationamphur" data-placeholder="เร่งด่วน" class="form-control form-control-lg form-control-select2">
 										@foreach ($messagepriorities as $messagepriority)                                                                
 											<option value="{{$messagepriority->id}}" > {{$messagepriority->name}} </option>
 										@endforeach   
 									</select>
 								</div>
 								<div class="form-group">
-									<textarea name="messagetosend" class="form-control mb-3" rows="7" cols="1" placeholder="ข้อความ"></textarea>
+									<textarea name="messagetosend" class="form-control form-control-lg mb-3" rows="7" cols="1" placeholder="ข้อความ"></textarea>
 								</div>
 								<div id="input_attachment_wrapper"></div>
 								<div class="form-group" id="attachment_wrapper">

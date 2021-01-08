@@ -16,7 +16,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-							<select id="employprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+							<select id="employprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 								@foreach ($prefixes as $prefix)
 									<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
 								@endforeach
@@ -26,19 +26,19 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="employname" placeholder="ชื่อ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control">
+							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่ง<span class="text-danger">*</span></label>
-							{{-- <select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">
+							{{-- <select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
 								@foreach ($employpositions as $employposition)
 									<option value="{{$employposition->id}}" >{{$employposition->name}}</option> 
 								@endforeach
@@ -49,19 +49,19 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
-							<input type="text" id="employphone" placeholder="เบอร์โทรศัพท์" class="form-control">
+							<input type="text" id="employphone" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
-							<input type="text" id="employworkphone" placeholder="โทรศัพท์มือถือ" class="form-control">
+							<input type="text" id="employworkphone" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
-							<input type="text" id="employemail" placeholder="อีเมล" class="form-control">
+							<input type="text" id="employemail" placeholder="อีเมล" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-							<select id="employprefix_research" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+							<select id="employprefix_research" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 								@foreach ($prefixes as $prefix)
 									<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
 								@endforeach
@@ -96,13 +96,13 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control">
+							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -114,19 +114,19 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
-							<input type="text" id="employphone_research" placeholder="เบอร์โทรศัพท์" class="form-control">
+							<input type="text" id="employphone_research" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
-							<input type="text" id="employworkphone_research" placeholder="โทรศัพท์มือถือ" class="form-control">
+							<input type="text" id="employworkphone_research" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
-							<input type="text" id="employemail_research" placeholder="อีเมล" class="form-control">
+							<input type="text" id="employemail_research" placeholder="อีเมล" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -151,7 +151,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-							<select id="employprefix_projectmember" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+							<select id="employprefix_projectmember" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 								@foreach ($prefixes as $prefix)
 									<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
 								@endforeach
@@ -161,13 +161,13 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control">
+							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -179,19 +179,19 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
-							<input type="text" id="employphone_projectmember" placeholder="เบอร์โทรศัพท์" class="form-control">
+							<input type="text" id="employphone_projectmember" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
-							<input type="text" id="employworkphone_projectmember" placeholder="โทรศัพท์มือถือ" class="form-control">
+							<input type="text" id="employworkphone_projectmember" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
-							<input type="text" id="employemail_projectmember" placeholder="อีเมล" class="form-control">
+							<input type="text" id="employemail_projectmember" placeholder="อีเมล" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -233,11 +233,11 @@
 
 									<div class="form-group">
 										<label>ชื่อ</label><span class="text-danger">*</span>
-										<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control">
+										<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg">
 									</div>
 									<div class="form-group">
 										<label>นามสกุล</label><span class="text-danger">*</span>
-										<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control">
+										<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg">
 									</div>
 									<div class="form-group">
 										<label>ตำแหน่ง</label>
@@ -245,15 +245,15 @@
 									</div>
 									<div class="form-group">
 										<label>โทรศัพท์</label><span class="text-danger">*</span>
-										<input type="text" id="employphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
+										<input type="text" id="employphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg">
 									</div>
 									<div class="form-group">
 										<label>โทรศัพท์มือถือ</label>
-										<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control">
+										<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg">
 									</div>
 									<div class="form-group">
 										<label>อีเมล</label><span class="text-danger">*</span>
-										<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control">
+										<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control form-control-lg">
 									</div>
 									
 									{{-- <div class="form-group">
@@ -369,25 +369,25 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ระดับ</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationlevel" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="employeducationlevel" placeholder="ชื่อ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อสถานศึกษา</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationinstitute" placeholder="นามสกุล" class="form-control">
+							<input type="text" id="employeducationinstitute" placeholder="นามสกุล" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>สาขาวิชาเอก</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationmajor" placeholder="ตำแหน่ง" class="form-control">
+							<input type="text" id="employeducationmajor" placeholder="ตำแหน่ง" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationyear" placeholder="ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)" class="form-control">
+							<input type="text" id="employeducationyear" placeholder="ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -414,28 +414,28 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ช่วงเวลาการทำงานเริ่มต้น</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencestartdate" placeholder="ช่วงเวลาการทำงานเริ่มต้น" class="form-control">
+							<input type="text" id="employexperiencestartdate" placeholder="ช่วงเวลาการทำงานเริ่มต้น" class="form-control form-control-lg">
 						</div>
 
 						<div class="form-group">
 							<label>ช่วงเวลาการทำงานสิ้นสุด</label><span class="text-danger">*</span>
-							<input type="text" id="employexperienceenddate" placeholder="ช่วงเวลาการทำงานสิ้นสุด" class="form-control">
+							<input type="text" id="employexperienceenddate" placeholder="ช่วงเวลาการทำงานสิ้นสุด" class="form-control form-control-lg">
 						</div>
 						<div class="form-group">
 							<label>บริษัท</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencecompany" placeholder="บริษัท" class="form-control">
+							<input type="text" id="employexperiencecompany" placeholder="บริษัท" class="form-control form-control-lg">
 						</div>
 						<div class="form-group">
 							<label>ประเภทธุรกิจ</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencebusinesstype" placeholder="ประเภทธุรกิจ" class="form-control">
+							<input type="text" id="employexperiencebusinesstype" placeholder="ประเภทธุรกิจ" class="form-control form-control-lg">
 						</div>
 						<div class="form-group">
 							<label>ตำแหน่งแรกเข้า</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencestartposition" placeholder="ตำแหน่งแรกเข้า" class="form-control">
+							<input type="text" id="employexperiencestartposition" placeholder="ตำแหน่งแรกเข้า" class="form-control form-control-lg">
 						</div>
 						<div class="form-group">
 							<label>ตำแหน่งล่าสุด</label><span class="text-danger">*</span>
-							<input type="text" id="employexperienceendposition" placeholder="ตำแหน่งล่าสุด" class="form-control">
+							<input type="text" id="employexperienceendposition" placeholder="ตำแหน่งล่าสุด" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -462,16 +462,16 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>วัน เดือน ปี</label><span class="text-danger">*</span>
-							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control">
+							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control form-control-lg">
 						</div>
 
 						<div class="form-group">
 							<label>หลักสูตร</label><span class="text-danger">*</span>
-							<input type="text" id="employtrainingcourse" placeholder="หลักสูตร" class="form-control">
+							<input type="text" id="employtrainingcourse" placeholder="หลักสูตร" class="form-control form-control-lg">
 						</div>
 						<div class="form-group">
 							<label>บริษัท</label><span class="text-danger">*</span>
-							<input type="text" id="employtrainingowner" placeholder="บริษัท" class="form-control">
+							<input type="text" id="employtrainingowner" placeholder="บริษัท" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -500,7 +500,7 @@
 						</div>
 						<div class="form-group">
 							<label>ความสัมพันธ์กับ CEO</label><span class="text-danger">*</span>
-							<input type="text" id="relationwithceo" placeholder="ความสัมพันธ์กับ CEO" class="form-control">
+							<input type="text" id="relationwithceo" placeholder="ความสัมพันธ์กับ CEO" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -526,15 +526,15 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายการ</label><span class="text-danger">*</span>
-							<input type="text" id="tectdevleveltechnology" placeholder="รายการ" class="form-control">
+							<input type="text" id="tectdevleveltechnology" placeholder="รายการ" class="form-control form-control-lg">
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีที่มีอยู่ในปัจจุบัน</label><span class="text-danger">*</span>
-							<input type="text" id="tectdevleveltechnologypresent" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control">
+							<input type="text" id="tectdevleveltechnologypresent" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control form-control-lg">
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีในโครงการ</label><span class="text-danger">*</span>
-							<input type="text" id="tectdevleveltechnologyproject" placeholder="เทคโนโลยีในโครงการ" class="form-control">
+							<input type="text" id="tectdevleveltechnologyproject" placeholder="เทคโนโลยีในโครงการ" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -560,7 +560,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อรางวัล</label><span class="text-danger">*</span>
-							<input type="text" id="awardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
+							<input type="text" id="awardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-12">	
@@ -592,7 +592,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ใบรับรองมาตรฐาน</label><span class="text-danger">*</span>
-							<input type="text" id="standardname" placeholder="ชื่อ" class="form-control">
+							<input type="text" id="standardname" placeholder="ชื่อ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-12">	
@@ -625,7 +625,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
-							<input type="text" id="plandetail" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control">
+							<input type="text" id="plandetail" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -668,7 +668,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียดการดำเนินงาน</label><span class="text-danger">*</span>
-							<input type="text" id="plandetail_edit" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control">
+							<input type="text" id="plandetail_edit" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control form-control-lg">
 						</div>
 					</div>
 				</div>
@@ -710,23 +710,23 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
-								<input type="text" id="productname" placeholder="รายการ" class="form-control">
+								<input type="text" id="productname" placeholder="รายการ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellpresent" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+								<input type="number" id="sellpresent" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpast1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+								<input type="number" id="sellpast1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpast2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+								<input type="number" id="sellpast2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpast3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+								<input type="number" id="sellpast3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -753,23 +753,23 @@
 							<input type="text" id="sellid" value="" hidden >
 							<div class="form-group">
 								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
-								<input type="text" id="productnameedit" placeholder="รายการ" class="form-control">
+								<input type="text" id="productnameedit" placeholder="รายการ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellpresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+								<input type="number" id="sellpresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+								<input type="number" id="sellpastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+								<input type="number" id="sellpastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+								<input type="number" id="sellpastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -796,23 +796,23 @@
 							<input type="text" id="sellstatusid" value="" hidden >
 							<div class="form-group">
 								<label>รายการ</label><span class="text-danger">*</span>
-								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control" readonly>
+								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control form-control-lg" readonly>
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control">
+								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control">
+								<input type="number" id="sellstatuspastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control">
+								<input type="number" id="sellstatuspastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control">
+								<input type="number" id="sellstatuspastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -838,27 +838,27 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="debtpartner" placeholder="ลูกหนี้การค้า" class="form-control" >
+								<input type="text" id="debtpartner" placeholder="ลูกหนี้การค้า" class="form-control form-control-lg" >
 							</div>
 							<div class="form-group">
 								<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-								<input type="number" id="numproject" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control">
+								<input type="number" id="numproject" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-								<input type="number" id="debtpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+								<input type="number" id="debtpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="debttotalyearsell" placeholder="ยอดขายต่อปี (บาท)" class="form-control">
+								<input type="number" id="debttotalyearsell" placeholder="ยอดขายต่อปี (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
-								<input type="number" id="debtpercenttosale" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control">
+								<input type="number" id="debtpercenttosale" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-								<input type="number" id="debtpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+								<input type="number" id="debtpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -885,27 +885,27 @@
 								<input type="text" id="debtpartnerid" value="" hidden >
 								<div class="form-group">
 									<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
-									<input type="text" id="debtpartneredit" placeholder="ลูกหนี้การค้า" class="form-control" >
+									<input type="text" id="debtpartneredit" placeholder="ลูกหนี้การค้า" class="form-control form-control-lg" >
 								</div>
 								<div class="form-group">
 									<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-									<input type="number" id="numprojectedit" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control">
+									<input type="number" id="numprojectedit" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control form-control-lg">
 								</div>
 								<div class="form-group">
 									<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-									<input type="number" id="debtpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+									<input type="number" id="debtpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg">
 								</div>
 								<div class="form-group">
 									<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
-									<input type="number" id="debttotalyearselledit" placeholder="ยอดขายต่อปี (บาท)" class="form-control">
+									<input type="number" id="debttotalyearselledit" placeholder="ยอดขายต่อปี (บาท)" class="form-control form-control-lg">
 								</div>
 								<div class="form-group">
 									<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
-									<input type="number" id="debtpercenttosaleedit" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control">
+									<input type="number" id="debtpercenttosaleedit" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control form-control-lg">
 								</div>
 								<div class="form-group">
 									<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-									<input type="number" id="debtpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+									<input type="number" id="debtpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg">
 								</div>
 							</div>
 						</div>
@@ -931,23 +931,23 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartner" placeholder="เจ้าหนี้การค้า" class="form-control" >
+								<input type="text" id="creditpartner" placeholder="เจ้าหนี้การค้า" class="form-control form-control-lg" >
 							</div>
 							<div class="form-group">
 								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+								<input type="number" id="creditpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="credittotalyearsell" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control">
+								<input type="number" id="credittotalyearsell" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpercenttosale" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control">
+								<input type="number" id="creditpercenttosale" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+								<input type="number" id="creditpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -974,23 +974,23 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartneredit" placeholder="เจ้าหนี้การค้า" class="form-control" >
+								<input type="text" id="creditpartneredit" placeholder="เจ้าหนี้การค้า" class="form-control form-control-lg" >
 							</div>
 							<div class="form-group">
 								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control">
+								<input type="number" id="creditpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="credittotalyearselledit" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control">
+								<input type="number" id="credittotalyearselledit" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpercenttosaleedit" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control">
+								<input type="number" id="creditpercenttosaleedit" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control">
+								<input type="number" id="creditpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -1018,23 +1018,23 @@
 							<input type="text" id="assetid" value="" hidden >
 							<div class="form-group">
 								<label>รายการ</label><span class="text-danger">*</span>
-								<input type="text" id="asset" placeholder="รายการ" class="form-control" readonly >
+								<input type="text" id="asset" placeholder="รายการ" class="form-control form-control-lg" readonly >
 							</div>
 							<div class="form-group">
 								<label>จำนวนเงิน (บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="assetcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control">
+								<input type="number" id="assetcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>จำนวน (ชิ้น)</label><span class="text-danger">*</span>
-								<input type="number" id="assetquantityedit" placeholder="จำนวน (ชิ้น)" class="form-control">
+								<input type="number" id="assetquantityedit" placeholder="จำนวน (ชิ้น)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ราคาต่อเครื่อง (บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="assetpriceedit" placeholder="ราคาต่อเครื่อง (บาท)" class="form-control">
+								<input type="number" id="assetpriceedit" placeholder="ราคาต่อเครื่อง (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
-								<input type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" class="form-control">
+								<input type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -1061,11 +1061,11 @@
 							<input type="text" id="investmentid" value="" hidden >
 							<div class="form-group">
 								<label>รายการ</label><span class="text-danger">*</span>
-								<input type="text" id="investment" placeholder="รายการ" class="form-control" readonly >
+								<input type="text" id="investment" placeholder="รายการ" class="form-control form-control-lg" readonly >
 							</div>
 							<div class="form-group">
 								<label>จำนวนเงิน (บาท)</label><span class="text-danger">*</span>
-								<input type="number" id="investmentcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control">
+								<input type="number" id="investmentcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -1092,23 +1092,23 @@
 							<input type="text" id="costid" value="" hidden >
 							<div class="form-group">
 								<label>แหล่งเงินทุน</label><span class="text-danger">*</span>
-								<input type="text" id="costnameedit" placeholder="แหล่งเงินทุน" class="form-control" readonly >
+								<input type="text" id="costnameedit" placeholder="แหล่งเงินทุน" class="form-control form-control-lg" readonly >
 							</div>
 							<div class="form-group">
 								<label>เงินทุนที่มีอยู่แล้ว</label><span class="text-danger">*</span>
-								<input type="number" id="costexistingedit" placeholder="เงินทุนที่มีอยู่แล้ว" class="form-control">
+								<input type="number" id="costexistingedit" placeholder="เงินทุนที่มีอยู่แล้ว" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>เงินทุนที่เสนอขออนุมัติ</label><span class="text-danger">*</span>
-								<input type="number" id="costneededit" placeholder="เงินทุนที่เสนอขออนุมัติ" class="form-control">
+								<input type="number" id="costneededit" placeholder="เงินทุนที่เสนอขออนุมัติ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>เงินทุนที่ได้รับการอนุมัติแล้ว</label><span class="text-danger">*</span>
-								<input type="number" id="costapprovededit" placeholder="เงินทุนที่ได้รับการอนุมัติแล้ว" class="form-control">
+								<input type="number" id="costapprovededit" placeholder="เงินทุนที่ได้รับการอนุมัติแล้ว" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>แผนการหาเงินทุนเพิ่ม</label><span class="text-danger">*</span>
-								<input type="text" id="costplanedit" placeholder="แผนการหาเงินทุนเพิ่ม" class="form-control">
+								<input type="text" id="costplanedit" placeholder="แผนการหาเงินทุนเพิ่ม" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -1134,7 +1134,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-							<input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
+							<input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-12">	
@@ -1168,7 +1168,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>คำนำหน้าชื่อ</label>
-									<select id="researcherfix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+									<select id="researcherfix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 										@foreach ($prefixes as $prefix)
 											<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
 										@endforeach
@@ -1178,13 +1178,13 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>ชื่อ</label>
-									<input type="text" id="researchername" placeholder="ชื่อ" class="form-control">
+									<input type="text" id="researchername" placeholder="ชื่อ" class="form-control form-control-lg">
 								</div>
 							</div>
 							<div class="col-md-5">
 								<div class="form-group">
 									<label>นามสกุล</label>
-									<input type="text" id="researcherlastname" placeholder="นามสกุล" class="form-control">
+									<input type="text" id="researcherlastname" placeholder="นามสกุล" class="form-control form-control-lg">
 								</div>
 							</div>
 						</div>
@@ -1193,15 +1193,15 @@
 					<div class="col-md-12">
 							<div class="form-group">
 								<label>ประวัติการศึกษา</label>
-								<input type="text" id="researchereducation" placeholder="ประวัติการศึกษา" class="form-control">
+								<input type="text" id="researchereducation" placeholder="ประวัติการศึกษา" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ประสบการณ์การทำงาน</label>
-								<input type="text" id="researcherexperience" placeholder="ประสบการณ์การทำงาน" class="form-control">
+								<input type="text" id="researcherexperience" placeholder="ประสบการณ์การทำงาน" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ประวัติการฝึกอบรม</label>
-								<input type="text" id="researchertraining" placeholder="ประวัติการฝึกอบรม" class="form-control">
+								<input type="text" id="researchertraining" placeholder="ประวัติการฝึกอบรม" class="form-control form-control-lg">
 							</div>
 					</div>
 				</div>
@@ -1230,7 +1230,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>คำนำหน้าชื่อ</label>
-									<select id="projectmemberfix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">
+									<select id="projectmemberfix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 										@foreach ($prefixes as $prefix)
 											<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
 										@endforeach
@@ -1240,13 +1240,13 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>ชื่อ</label>
-									<input type="text" id="projectmembername" placeholder="ชื่อ" class="form-control">
+									<input type="text" id="projectmembername" placeholder="ชื่อ" class="form-control form-control-lg">
 								</div>
 							</div>
 							<div class="col-md-5">
 								<div class="form-group">
 									<label>นามสกุล</label>
-									<input type="text" id="projectmemberlastname" placeholder="นามสกุล" class="form-control">
+									<input type="text" id="projectmemberlastname" placeholder="นามสกุล" class="form-control form-control-lg">
 								</div>
 							</div>
 						</div>
@@ -1255,15 +1255,15 @@
 					<div class="col-md-12">
 							<div class="form-group">
 								<label>ประวัติการศึกษา</label>
-								<input type="text" id="projectmembereducation" placeholder="ประวัติการศึกษา" class="form-control">
+								<input type="text" id="projectmembereducation" placeholder="ประวัติการศึกษา" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ประสบการณ์การทำงาน</label>
-								<input type="text" id="projectmemberexperience" placeholder="ประสบการณ์การทำงาน" class="form-control">
+								<input type="text" id="projectmemberexperience" placeholder="ประสบการณ์การทำงาน" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ประวัติการฝึกอบรม</label>
-								<input type="text" id="projectmembertraining" placeholder="ประวัติการฝึกอบรม" class="form-control">
+								<input type="text" id="projectmembertraining" placeholder="ประวัติการฝึกอบรม" class="form-control form-control-lg">
 							</div>
 					</div>
 				</div>
@@ -1365,13 +1365,13 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>ชื่อนิติบุคคล</label>
-															<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control" readonly>
+															<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control form-control-lg" readonly>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>ประเภทธุรกิจ</label>
-															<select name="businesstype" id="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-select2" data-fouc>
+															<select name="businesstype" id="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-lg form-control-select2" data-fouc>
 																@foreach ($businesstypes as $businesstype)
 																	<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
 																@endforeach
@@ -1382,38 +1382,38 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>ทะเบียนนิติบุคคลเลขที่</label>
-															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control" readonly>
+															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control form-control-lg" readonly>
 														</div>
 													</div>
 				
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>ปีที่จดทะเบียน</label>
-															<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control" readonly>
+															<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg" readonly>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>ทุนที่จดทะเบียน</label>
-															<input type="number" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control" readonly>
+															<input type="number" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control form-control-lg" readonly>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
-															<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+															<input type="number"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>วันที่ชำระทุนจดทะเบียน</label>
-															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
 														</div>
 													</div>
 													{{-- <div class="col-md-6">
 														<div class="form-group">
 															<label>วันที่ชำระทุนจดทะเบียน</label>
-															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" readonly>
+															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
 														</div>
 													</div> --}}
 													<div class="col-md-12">
@@ -1441,37 +1441,37 @@
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>จำนวนบุคลากรทั้งหมด</label>
-																	<input type="number" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control" readonly >
+																	<input type="number" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control form-control-lg" readonly >
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ผ่ายบริหาร</label>
-																	<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control" readonly>
+																	<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายวิจัยและพัฒนา</label>
-																	<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control" readonly>
+																	<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายผลิต/วิศวกรรม</label>
-																	<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control" readonly>
+																	<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ผ่ายการตลาด</label>
-																	<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control" readonly>
+																	<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>พนักงานทั่วไป</label>
-																	<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control" readonly>
+																	<input type="number" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 														</div>
@@ -1482,12 +1482,12 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </label> <span class="text-primary" id="companyprofiletextlength"></span>
-															{{-- <input type="text" id="companyprofile_input" class="form-control companyprofileclass" > --}}
-															<textarea name="companyhistory" id="companyhistory" class="form-control" cols="3" rows="7">{{$fulltbp->minitbp->businessplan->company->companyhistory}}</textarea>
+															{{-- <input type="text" id="companyprofile_input" class="form-control form-control-lg companyprofileclass" > --}}
+															<textarea name="companyhistory" id="companyhistory" class="form-control form-control-lg" cols="3" rows="7">{{$fulltbp->minitbp->businessplan->company->companyhistory}}</textarea>
 														</div>
 														{{-- <div id="fulltbp_companyprofile_wrapper" style="border: dashed 1px #999999">
 															@foreach ($fulltbpcompanyprofiledetails as $fulltbpcompanyprofiledetail)
-																<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control companyprofileclass" style="border: 0" >
+																<input type="text" name ="companyprofile[]" value="{{$fulltbpcompanyprofiledetail->line}}" class="form-control form-control-lg companyprofileclass" style="border: 0" >
 															@endforeach
 														</div>
 														<hr>	 --}}
@@ -1707,7 +1707,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>คำนำหน้าชื่อ</label>
-																<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2" disabled>
+																<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2" disabled>
 																	@foreach ($prefixes as $prefix)
 																		<option value="{{$prefix->id}}" 
 																			@if ($prefix->id == @$fulltbp->fulltbpresponsibleperson->prefix_id) selected @endif >{{$prefix->name}}</option> 
@@ -1718,58 +1718,58 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>ชื่อ</label>
-																<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name}}" placeholder="ชื่อ" class="form-control" readonly>
+																<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name}}" placeholder="ชื่อ" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>นามสกุล</label>
-																<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname}}" placeholder="นามสกุล" class="form-control" readonly>
+																<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>อีเมล</label>
-																<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email}}" placeholder="อีเมล" class="form-control" readonly>
+																<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email}}" placeholder="อีเมล" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>ตำแหน่ง</label>
-																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position}}" placeholder="ตำแหน่ง" class="form-control" readonly>
+																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position}}" placeholder="ตำแหน่ง" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>โทรศัพท์</label>
-																<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1}}" placeholder="เบอร์โทรศัพท์" class="form-control" readonly>
+																<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1}}" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label>โทรศัพท์มือถือ</label>
-																<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2}}" placeholder="โทรศัพท์มือถือ" class="form-control" readonly>
+																<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประวัติการศึกษา</label>
 																
-																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->educationhistory}}</textarea>
+																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control form-control-lg" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->educationhistory}}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประสบการณ์การทำงาน</label>
 																
-																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->experiencehistory}}</textarea>
+																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control form-control-lg" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->experiencehistory}}</textarea>
 															</div>
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
 																<label>ประวัติการฝึกอบรม</label>
 																
-																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->traininghistory}}</textarea>
+																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control form-control-lg" cols="3" rows="3">{{@$fulltbp->fulltbpresponsibleperson->traininghistory}}</textarea>
 															</div>
 														</div>
 													{{-- </div> --}}
@@ -1804,13 +1804,13 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="">ชื่อโครงการ<span class="text-danger">*</span></label>
-																<input type="text"  value="{{$minitbp->project}}" class="form-control" disabled>
+																<input type="text"  value="{{$minitbp->project}}" class="form-control form-control-lg" disabled>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="">ชื่อโครงการ (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-																<input type="text" value="{{$minitbp->projecteng}}" class="form-control" disabled>
+																<input type="text" value="{{$minitbp->projecteng}}" class="form-control form-control-lg" disabled>
 															</div>
 														</div>
 														<div class="col-md-12">
@@ -1819,12 +1819,12 @@
 																	<label for="">บทคัดย่อ </label> <span class="text-primary" id="projectabtracttextlength"></span>
 																	<p><small><i>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและสังคม</i> </small></p>
 																	
-																	{{-- <input type="text" id="projectabtract_input" class="form-control projectabtractclass" > --}}
-																	<textarea name="" id="projectabtract_input" class="form-control" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
+																	{{-- <input type="text" id="projectabtract_input" class="form-control form-control-lg projectabtractclass" > --}}
+																	<textarea name="" id="projectabtract_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
 																</div>
 																{{-- <div id="fulltbp_projectabtract_wrapper" style="border: dashed 1px #999999">
 																	@foreach ($fulltbpprojectabtractdetails as $fulltbpprojectabtractdetail)
-																		<input type="text" name ="projectabtract[]" value="{{$fulltbpprojectabtractdetail->line}}" class="form-control projectabtractclass" style="border: 0" >
+																		<input type="text" name ="projectabtract[]" value="{{$fulltbpprojectabtractdetail->line}}" class="form-control form-control-lg projectabtractclass" style="border: 0" >
 																	@endforeach
 																</div>
 																<div class="row">
@@ -1841,12 +1841,12 @@
 															<div class="form-group">
 																<label for="">ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ </label>
 																<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
-																<textarea name="" id="mainproduct_input" class="form-control" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
-																{{-- <input type="text" id="productdetails_input" class="form-control productdetailsclass" > --}}
+																<textarea name="" id="mainproduct_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
+																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
 																@foreach ($fulltbpproductdetails as $fulltbpproductdetail)
-																	<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control productdetailsclass" style="border: 0" >
+																	<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control form-control-lg productdetailsclass" style="border: 0" >
 																@endforeach
 															</div>
 															<div class="row">
@@ -1864,12 +1864,12 @@
 															<div class="form-group">
 																<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
 																<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
-																<textarea name="" id="productdetails_input" class="form-control" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
-																{{-- <input type="text" id="productdetails_input" class="form-control productdetailsclass" > --}}
+																<textarea name="" id="productdetails_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
+																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
 																@foreach ($fulltbpproductdetails as $fulltbpproductdetail)
-																	<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control productdetailsclass" style="border: 0" >
+																	<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control form-control-lg productdetailsclass" style="border: 0" >
 																@endforeach
 															</div>
 															<div class="row">
@@ -1902,12 +1902,12 @@
 															<div class="form-group">
 																<label for="">การพัฒนาเทคโนโลยี</label> <span class="text-primary" id="projectechdevtextlength"></span>
 																<p><small><i>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</i> </small></p>
-																<textarea name="" id="projectechdev_input" class="form-control" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
-																{{-- <input type="text" id="projectechdev_input" class="form-control projectechdevclass" > --}}
+																<textarea name="" id="projectechdev_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
+																{{-- <input type="text" id="projectechdev_input" class="form-control form-control-lg projectechdevclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_projectechdev_wrapper" style="border: dashed 1px #999999">
 																@foreach ($fulltbpprojecttechdevs as $fulltbpprojecttechdev)
-																	<input type="text" name ="projectechdev[]" value="{{$fulltbpprojecttechdev->line}}" class="form-control projectechdevclass" style="border: 0" >
+																	<input type="text" name ="projectechdev[]" value="{{$fulltbpprojecttechdev->line}}" class="form-control form-control-lg projectechdevclass" style="border: 0" >
 																@endforeach
 															</div>
 															<div class="row">
@@ -1953,12 +1953,12 @@
 															<div class="form-group">
 																<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																<p><small><i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i> </small></p>
-																<textarea name="" id="projectechdevproblem_input" class="form-control" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
-																{{-- <input type="text" id="projectechdevproblem_input" class="form-control projectechdevproblemclass" > --}}
+																<textarea name="" id="projectechdevproblem_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
+																{{-- <input type="text" id="projectechdevproblem_input" class="form-control form-control-lg projectechdevproblemclass" > --}}
 															</div>
 															{{-- <div id="fulltbp_projectechdevproblem_wrapper" style="border: dashed 1px #999999">
 																@foreach ($fulltbpprojecttechdevproblems as $fulltbpprojecttechdevproblem)
-																	<input type="text" name ="projectechdevproblem[]" value="{{$fulltbpprojecttechdevproblem->line}}" class="form-control projectechdevproblemclass" style="border: 0" >
+																	<input type="text" name ="projectechdevproblem[]" value="{{$fulltbpprojecttechdevproblem->line}}" class="form-control form-control-lg projectechdevproblemclass" style="border: 0" >
 																@endforeach
 															</div>
 															<div class="row">
@@ -1984,7 +1984,7 @@
 																			<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer1_qty}}" readonly>
+																						<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer1_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -1998,7 +1998,7 @@
 																			<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer2_qty}}" readonly>
+																						<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer2_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2014,7 +2014,7 @@
 																			<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer3_qty}}" readonly>
+																						<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer3_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2028,7 +2028,7 @@
 																			<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer4_qty}}" readonly>
+																						<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer4_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2044,7 +2044,7 @@
 																			<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer5_qty}}" readonly>
+																						<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer5_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2058,7 +2058,7 @@
 																			<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer6_qty}}" readonly>
+																						<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer6_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2083,7 +2083,7 @@
 																			<div class="row" id="cer7qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer7) || Empty(@$fulltbpprojectcertify->cer7_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer7_qty}}" readonly>
+																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer7_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2097,7 +2097,7 @@
 																			<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer8_qty}}" readonly>
+																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer8_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2113,7 +2113,7 @@
 																			<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer9_qty}}" readonly>
+																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer9_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2136,7 +2136,7 @@
 																			<div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" name="cer11qty" placeholder="จำนวน" class="form-control" value="{{$fulltbpprojectcertify->cer11_qty}}" readonly>
+																						<input type="text" name="cer11qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer11_qty}}" readonly>
 																					</div>
 																				</div>
 																			</div>
@@ -2189,7 +2189,7 @@
 																	<div class="form-group">
 																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																		<p><small><i>เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</i> </small></p>
-																		<textarea name="" id="projectinnovation_input" class="form-control" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
+																		<textarea name="" id="projectinnovation_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
 																	</div>	
 																	<div class="form-group">												
 																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label>
@@ -2231,7 +2231,7 @@
 																	<div class="form-group">
 																		<label for="">ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																		<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
-																		<textarea name="" id="projectstandard_input" class="form-control" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
+																		<textarea name="" id="projectstandard_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
 																	</div>	
 																	<div class="form-group">												
 																		{{-- <button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add"></i></button> --}}
@@ -2379,7 +2379,7 @@
 																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</li>
 																</ul>
 																</i> </small></p>
-															<textarea name="" id="analysis" class="form-control" cols="3" rows="10">{{@$fulltbp->fulltbpmarketanalysis->detail}}</textarea>
+															<textarea name="" id="analysis" class="form-control form-control-lg" cols="3" rows="10">{{@$fulltbp->fulltbpmarketanalysis->detail}}</textarea>
 														</div>
 													</div>
 
@@ -2387,7 +2387,7 @@
 														<div class="form-group">
 															<label for=""><u>Business Model Canvas</u></label>
 															<p><small><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i> </small></p>
-															<textarea name="" id="modelcanvas" class="form-control" cols="3" rows="5">{{@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail}}</textarea>
+															<textarea name="" id="modelcanvas" class="form-control form-control-lg" cols="3" rows="5">{{@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail}}</textarea>
 														</div>
 														<div class="col-md-12">	
 															<div class="input-group">													
@@ -2425,7 +2425,7 @@
 															<div class="form-group">
 																<label for="" ><u>วิเคราะห์ศักยภาพทางการค้า</u></label>
 																<p><small><i>SWOT Analysis, Five Forces Analysis</i> </small></p>
-																<textarea name="" id="swot" class="form-control" cols="3" rows="5">{{@$fulltbp->fulltbpmarketswot->detail}}</textarea>
+																<textarea name="" id="swot" class="form-control form-control-lg" cols="3" rows="5">{{@$fulltbp->fulltbpmarketswot->detail}}</textarea>
 															</div>
 															<div class="col-md-12">	
 																<div class="input-group">													
@@ -2773,15 +2773,15 @@
 															<fieldset>	
 																<div class="form-group">
 																	<label>ประมาณการรายได้ที่จะเพิ่มขึ้น (บาท)</label>
-																	<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control" readonly>
+																	<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control form-control-lg" readonly>
 																</div>
 																<div class="form-group">
 																	<label>ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น (บาท)</label>
-																	<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control" readonly>
+																	<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control form-control-lg" readonly>
 																</div>
 																<div class="form-group">
 																	<label>ประมาณการต้นทุนที่จะลดลง (บาท)</label>
-																	<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control" readonly>
+																	<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control form-control-lg" readonly>
 																</div>
 															</fieldset>
 														{{-- </div> --}}
@@ -2803,7 +2803,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
-										<select name="signature" id="usersignature" value="{{$fulltbp->signature_status_id}}" id="" class="form-control form-control-select2" disabled >
+										<select name="signature" id="usersignature" value="{{$fulltbp->signature_status_id}}" id="" class="form-control form-control-lg form-control-select2" disabled >
 											@foreach ($signaturestatuses as $signaturestatus)
 												<option value="{{$signaturestatus->id}}" @if($fulltbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
 											@endforeach

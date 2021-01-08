@@ -156,10 +156,19 @@
                                     </tr>
                                 </thead>
                                 <tbody id="timeline_wrapper_tr">
-
-                                </tbody>
-                            </table>      
+                                    @foreach ($timelinehistories as $timelinehistory)
+                                        <tr>
+                                            <td> {{$timelinehistory->createdatth}} </td>                            
+                                            <td> {!!$timelinehistory->details!!} </td>  
+                                        </tr>
+                                    @endforeach
+                                </tbody>  
+                            </table>   
                         </div>
+                        <div class="float-right mt-2">
+                            {{$timelinehistories->links()}} 
+                        </div>
+                         
                     </div>
                 </div>
             </div>
@@ -395,31 +404,31 @@
                     }).render();
                 }
             }).catch(error => {})
-            var html ='';
-            var infostatus = '';
-            getTimeLine("{{Auth::user()->id}}").then(data => {
-                    data.forEach(function (timeline,index) {
-                        var doctype = '';
-                        if(timeline.message_type == 1){
-                            doctype ='เอกสาร Mini TBP';
-                        }else if(timeline.message_type == 2){
-                            doctype ='แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)';
-                        }
-                        html += `<tr >                                        
-                            <td> ${timeline.createdatth} </td>                            
-                            <td> ${timeline.details} </td>     
+            // var html ='';
+            // var infostatus = '';
+            // getTimeLine("{{Auth::user()->id}}").then(data => {
+            //         data.forEach(function (timeline,index) {
+            //             var doctype = '';
+            //             if(timeline.message_type == 1){
+            //                 doctype ='เอกสาร Mini TBP';
+            //             }else if(timeline.message_type == 2){
+            //                 doctype ='แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)';
+            //             }
+            //             html += `<tr >                                        
+            //                 <td> ${timeline.createdatth} </td>                            
+            //                 <td> ${timeline.details} </td>     
                                            
                            
-                        </tr>`
-                        if(timeline.status == 0){
-                            infostatus += `<div class="alert alert-info alert-styled-left alert-dismissible">
-                                    <button type="button" id="alertmessage" data-id ="${timeline.id}" class="close" data-dismiss="alert"><span>&times;</span></button>${timeline.details}
-                            </div>`
-                        }
-                        });
-                     $("#timeline_wrapper_tr").html(html);
-                     $("#infostatus").html(infostatus);
-            }).catch(error => {})
+            //             </tr>`
+            //             if(timeline.status == 0){
+            //                 infostatus += `<div class="alert alert-info alert-styled-left alert-dismissible">
+            //                         <button type="button" id="alertmessage" data-id ="${timeline.id}" class="close" data-dismiss="alert"><span>&times;</span></button>${timeline.details}
+            //                 </div>`
+            //             }
+            //             });
+            //          $("#timeline_wrapper_tr").html(html);
+            //          $("#infostatus").html(infostatus);
+            // }).catch(error => {})
         });
 
     $(document).on('click', '#alertmessage', function(e) {
@@ -434,8 +443,6 @@
                 html += `<tr >                                        
                     <td> ${timeline.createdatth} </td>                            
                     <td> ${timeline.details} </td> 
-                                       
-                         
                 </tr>`
                 });
             $("#timeline_wrapper_tr").html(html);

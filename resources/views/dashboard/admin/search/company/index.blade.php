@@ -51,7 +51,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ประเภทการค้นหา</label><span class="text-danger">*</span>
-                                        <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-select2">
+                                        <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-lg form-control-select2">
                                             {{-- <option value="0000">===เลือก รายการ===</option> --}}
                                             <option value="1">ชื่อโครงการ</option>
                                             <option value="2">ชื่อบริษัท</option>
@@ -63,7 +63,7 @@
                                 </div>      
                                 <div id="searchindustrygroup_wrapper" class="col-md-6" hidden>
                                     <label>กลุ่มอุตสาหกรรม</label><span class="text-danger">*</span>
-                                    <select name="searchindustrygroup" id="searchindustrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-select2">
+                                    <select name="searchindustrygroup" id="searchindustrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
                                         <option value="0000">===เลือก กลุ่มอุตสาหกรรม===</option>
                                         @foreach ($industrygroups as $industrygroup)
                                             <option value="{{$industrygroup->id}}">{{$industrygroup->name}}</option> 
@@ -72,28 +72,28 @@
                                 </div>        
                                 <div id="isic_wrapper" class="col-md-6" hidden>
                                     <label>ISIC</label><span class="text-danger">*</span>
-                                    <select name="isic" id="isic" data-placeholder="ISIC" class="form-control form-control-select2">
+                                    <select name="isic" id="isic" data-placeholder="ISIC" class="form-control form-control-lg form-control-select2">
                                         <option value="0000">===เลือก ISIC===</option>
                                         @foreach ($isics as $isic)
                                             <option value="{{$isic->id}}">{{$isic->name}}</option> 
                                         @endforeach
                                     </select>
                                     <label class="mt-3">หมวดหมู่ย่อย</label><span class="text-danger">*</span>
-                                    <select name="searchisic" id="searchisic" data-placeholder="หมวดหมู่ย่อย" class="form-control form-control-select2">
+                                    <select name="searchisic" id="searchisic" data-placeholder="หมวดหมู่ย่อย" class="form-control form-control-lg form-control-select2">
 
                                     </select>
                                 </div>                    
                                 <div id="searchcompanyname_wrapper" class="col-md-6" hidden>
                                     <label>ชื่อบริษัท</label>
-                                    <input type="text"  name="searchcompanyname" id="searchcompanyname" value=""  placeholder="ชื่อบริษัท" class="form-control" >
+                                    <input type="text"  name="searchcompanyname" id="searchcompanyname" value=""  placeholder="ชื่อบริษัท" class="form-control form-control-lg" >
                                 </div>  
                                 <div id="searchprojectname_wrapper" class="col-md-6" >
                                     <label>ชื่อโครงการ</label>
-                                    <input type="text"  name="searchprojectname" id="searchprojectname" value=""  placeholder="ชื่อโครงการ" class="form-control" >
+                                    <input type="text"  name="searchprojectname" id="searchprojectname" value=""  placeholder="ชื่อโครงการ" class="form-control form-control-lg" >
                                 </div>     
                                 <div id="registeredcapital_wrapper" class="col-md-6" hidden>
                                     <label>ทุนจดทะเบียน</label><span class="text-danger">*</span>
-                                    <select name="searchregisteredcapital" id="searchregisteredcapital" data-placeholder="ทุนจดทะเบียน" class="form-control form-control-select2">
+                                    <select name="searchregisteredcapital" id="searchregisteredcapital" data-placeholder="ทุนจดทะเบียน" class="form-control form-control-lg form-control-select2">
                                         <option value="0000">===เลือก ทุนจดทะเบียน===</option>
                                         @foreach ($registeredcapitals as $registeredcapital)
                                             <option value="{{$registeredcapital->id}}">{{$registeredcapital->detail}}</option> 
@@ -102,7 +102,7 @@
                                 </div> 
                                 <div id="searchword_wrapper" class="col-md-6" hidden>
                                     <label>คำค้น</label>
-                                    <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control" >
+                                    <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control form-control-lg" >
                                 </div>
                             </div>
                     </div>

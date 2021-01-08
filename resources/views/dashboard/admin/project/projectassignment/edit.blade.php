@@ -62,7 +62,7 @@
                             {{-- <fieldset>	
                                 <div class="form-group">
 									<label for="">Leader<span class="text-danger">*</span></label>
-									<select name="leader" id="leader" value="{{$projectassignment->leader_id}}" id="" class="form-control form-control-select2">
+									<select name="leader" id="leader" value="{{$projectassignment->leader_id}}" id="" class="form-control form-control-lg form-control-select2">
                                         <option value="0">===เลือก Leader===</option>
                                         @foreach ($users as $user)
 											<option value="{{$user->id}}" @if($projectassignment->leader_id == $user->id) selected @endif >{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</option>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group">
 									<label for="">Co-Leader<span class="text-danger">*</span></label>
-                                    <select name="coleader" id="coleader" value="{{$projectassignment->coleader_id}}" id="" class="form-control form-control-select2">
+                                    <select name="coleader" id="coleader" value="{{$projectassignment->coleader_id}}" id="" class="form-control form-control-lg form-control-select2">
                                         <option value="0">===เลือก Co-Leader===</option>
 										@foreach ($users as $user)
 											<option value="{{$user->id}}" @if($projectassignment->coleader_id == $user->id) selected @endif >{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</option>

@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group" id="cluster_wrapper">
-                                            <select name="pillar" id="pillar" data-placeholder="Pillar" class="form-control form-control-select2" >
+                                            <select name="pillar" id="pillar" data-placeholder="Pillar" class="form-control form-control-lg form-control-select2" >
                                             </select> 
                                         </div>  
                                     </div>
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <select name="subpillar" id="subpillar" data-placeholder="Sub Pillar" class="form-control form-control-select2" >
+                                            <select name="subpillar" id="subpillar" data-placeholder="Sub Pillar" class="form-control form-control-lg form-control-select2" >
                                             </select>
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <select name="subpillarindex" id="subpillarindex" data-placeholder="Index" class="form-control form-control-select2" >
+                                            <select name="subpillarindex" id="subpillarindex" data-placeholder="Index" class="form-control form-control-lg form-control-select2" >
                                             </select>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">ประเภท Index</label>
-                                            <select name="indextype" id="indextype" data-placeholder="Index" class="form-control form-control-select2" >
+                                            <select name="indextype" id="indextype" data-placeholder="Index" class="form-control form-control-lg form-control-select2" >
                                             </select>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด A</label>
-                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control" >
+                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control form-control-lg" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -73,7 +73,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด B</label>
-                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control">
+                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด C</label>
-                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control">
+                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,7 +94,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด D</label>
-                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,7 +102,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด E</label>
-                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -110,7 +110,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด F</label>
-                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-group">
-                                                <select name="criteria" id="criteria" data-placeholder="Index" class="form-control form-control-select2" multiple >
+                                                <select name="criteria" id="criteria" data-placeholder="Index" class="form-control form-control-lg form-control-select2" multiple >
                                                 </select>
                                             </div>
                                         </div>
@@ -143,12 +143,12 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <label>Sub Cluster<span class="text-danger">*</span></label>
-                                        <select name="subcluster" id="subcluster" data-placeholder="Sub Cluster" class="form-control form-control-select2" >
+                                        <select name="subcluster" id="subcluster" data-placeholder="Sub Cluster" class="form-control form-control-lg form-control-select2" >
                                         </select> 
                                     </div>
                                     <div class="col-md-4">
                                         <label>Weight</label>
-                                        <input type="text"  name="subclusterweight" id="subclusterweight" value=""  placeholder="Weight" class="form-control">
+                                        <input type="text"  name="subclusterweight" id="subclusterweight" value=""  placeholder="Weight" class="form-control form-control-lg">
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Extra factor<span class="text-danger">*</span></label>
-                                        <select name="extrafactor" id="extrafactor" data-placeholder="Extra factor" class="form-control form-control-select2" multiple >
+                                        <select name="extrafactor" id="extrafactor" data-placeholder="Extra factor" class="form-control form-control-lg form-control-select2" multiple >
                                         </select> 
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>SubExtra factor<span class="text-danger">*</span></label>
-                                        <select name="subextrafactor" id="subextrafactor" data-placeholder="Sub Extra factor" class="form-control form-control-select2" multiple>
+                                        <select name="subextrafactor" id="subextrafactor" data-placeholder="Sub Extra factor" class="form-control form-control-lg form-control-select2" multiple>
                                         </select> 
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group" id="extra_criteria_wrapper">
-                                            <select name="extrapillar" id="extrapillar" data-placeholder="Pillar" class="form-control form-control-select2" >
+                                            <select name="extrapillar" id="extrapillar" data-placeholder="Pillar" class="form-control form-control-lg form-control-select2" >
                                             </select> 
                                         </div>  
                                     </div>
@@ -221,7 +221,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <select name="extrasubpillar" id="extrasubpillar" data-placeholder="Sub Pillar" class="form-control form-control-select2" >
+                                            <select name="extrasubpillar" id="extrasubpillar" data-placeholder="Sub Pillar" class="form-control form-control-lg form-control-select2" >
                                             </select>
                                         </div>
                                     </div>
@@ -233,7 +233,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <select name="extrasubpillarindex" id="extrasubpillarindex" data-placeholder="Index" class="form-control form-control-select2" >
+                                            <select name="extrasubpillarindex" id="extrasubpillarindex" data-placeholder="Index" class="form-control form-control-lg form-control-select2" >
                                             </select>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">ประเภท Indexfff</label>
-                                            <select name="indextype" id="indextype" data-placeholder="Index" class="form-control form-control-select2" >
+                                            <select name="indextype" id="indextype" data-placeholder="Index" class="form-control form-control-lg form-control-select2" >
                                             </select>
                                         </div>
                                     </div>
@@ -254,7 +254,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด A</label>
-                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control" >
+                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control form-control-lg" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,7 +262,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด B</label>
-                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control">
+                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,7 +270,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด C</label>
-                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control">
+                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -283,7 +283,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด D</label>
-                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -291,7 +291,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด E</label>
-                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -299,7 +299,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด F</label>
-                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -369,7 +369,7 @@
                     </ul> --}}
                     <div class="form-group">
                         <label>ชื่อรายการ</label>
-                        <input type="text"  name="name" id="name" value=""  placeholder="ชื่อรายการ" class="form-control">
+                        <input type="text"  name="name" id="name" value=""  placeholder="ชื่อรายการ" class="form-control form-control-lg">
                     </div>
                 </div>           
                 <div class="modal-footer">
@@ -391,7 +391,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>ชื่อรายการ</label>
-                            <input type="text"  name="extraitemname" id="extraitemname" value=""  placeholder="ชื่อรายการ" class="form-control">
+                            <input type="text"  name="extraitemname" id="extraitemname" value=""  placeholder="ชื่อรายการ" class="form-control form-control-lg">
                         </div>
                     </div>           
                     <div class="modal-footer">
@@ -414,7 +414,7 @@
                     <input type="text" id="subpillarindexid" hidden >
                     <div class="form-group">
                         <label>ค่า Weight</label>
-                        <input type="number"  name="weight" id="weight" value=""  placeholder="ค่า Weight" class="form-control">
+                        <input type="number"  name="weight" id="weight" value=""  placeholder="ค่า Weight" class="form-control form-control-lg">
                     </div>
                 </div>           
                 <div class="modal-footer">
@@ -436,7 +436,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Comment<span class="text-danger">*</span></label>
-                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Leader" class="form-control" ></textarea>
+                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Leader" class="form-control form-control-lg" ></textarea>
                         </div>
                     </div>
                 </div>         
@@ -518,25 +518,25 @@
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>ชื่อ EV</label>
-                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
+                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เวอร์ชั่น</label>
-                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
+                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Index</label>
-                                    <input type="number" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
+                                    <input type="number" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Extra</label>
-                                    <input type="number" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control">
+                                    <input type="number" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                         </div>
@@ -561,7 +561,7 @@
                         </div>
                         <div class="form-group">
                             <label>EV ในระบบ</label>
-                            <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-select2">
+                            <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
                                 <option value="0">==เลือกจาก EV ในระบบ==</option>
                                 @foreach ($evs as $_ev)
                                     <option value="{{$_ev->id}}" >

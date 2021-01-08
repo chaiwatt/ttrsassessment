@@ -1,5 +1,6 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
     {{-- modal_edit_fulltbp --}}
@@ -34,15 +35,15 @@
                         <hr>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>ข้อความเพิ่มเติม<span class="text-danger">*</span></label>
-                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control" ></textarea>
+                                <label id="messageshow">ข้อความเพิ่มเติม</label>
+                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control form-control-lg" ></textarea>
                             </div>
                         </div>
                     </div>
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_edit_fulltbp" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                    <button id="btn_modal_edit_fulltbp" class="btn bg-primary"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
                 </div>
             </div>
         </div>
@@ -61,7 +62,7 @@
                         <div class="col-md-12" >
                             <label>เลือกคณะกรรมการจากผู้ใช้</label>
                             <div class="form-group header-elements-md-inline">
-                                <select name="usermember" id="usermember" data-placeholder="เลือกคณะกรรมการจากผู้ใช้" class="form-control form-control-select2">
+                                <select name="usermember" id="usermember" data-placeholder="เลือกคณะกรรมการจากผู้ใช้" class="form-control form-control-lg form-control-select2">
                                 </select> 
                                 &nbsp;<button id="btn_modal_edit_projectmember" class="btn bg-teal" > เพิ่ม</button>
                             </div>
@@ -108,14 +109,14 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>หัวข้อ</label>
-                                    <input type="text" id="topic" placeholder="หัวข้อ" class="form-control" >
+                                    <input type="text" id="topic" placeholder="หัวข้อ" class="form-control form-control-lg" >
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ข้อความ<span class="text-danger">*</span></label>
-                                <textarea type="text" rows="5" id="messagebody" placeholder="ข้อความ" class="form-control"></textarea>
+                                <textarea type="text" rows="5" id="messagebody" placeholder="ข้อความ" class="form-control form-control-lg"></textarea>
                             </div>
                         </div>
                     </div>
@@ -142,20 +143,20 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>หัวข้อ</label>
-                                        <input type="text" id="topicmember" placeholder="หัวข้อ" class="form-control" >
+                                        <input type="text" id="topicmember" placeholder="หัวข้อ" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>ข้อความ<span class="text-danger">*</span></label>
-                                    <textarea type="text" rows="5" id="messagebodymember" placeholder="ข้อความ" class="form-control"></textarea>
+                                    <textarea type="text" rows="5" id="messagebodymember" placeholder="ข้อความ" class="form-control form-control-lg"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>ผู้รับ</label><span class="text-danger">*</span>
-                                    <select name="users[]" id="user" data-placeholder="ผู้รับ" class="form-control form-control-select2" multiple="multiple">
+                                    <select name="users[]" id="user" data-placeholder="ผู้รับ" class="form-control form-control-lg form-control-select2" multiple="multiple">
                                     </select>
                                 </div>
                             </div>
@@ -226,16 +227,12 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="width:50px">#</th> --}}
-                                        {{-- <th>วันที่ขอส่ง</th>  --}}
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
-                                        
-                                        {{-- <th>บริษัท</th> --}}
                                         <th>การอนุมัติ</th> 
+                                        <th>ผู้เชี่ยวชาญ</th> 
                                         <th>BOL</th> 
                                         <th>เกณฑ์การประเมิน</th> 
-                                        <th>ผู้เชี่ยวชาญ</th> 
+                                        
                                         <th>ทีมประเมิน</th>
                                         <th style="width: 20px"><i class="icon-arrow-down12"></i></th> 
                                                                   
@@ -245,7 +242,6 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>    
-                                                {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                                 <td> {{$fulltbp->minitbp->project}} </td>  
                                                 <td>    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
@@ -260,6 +256,21 @@
                                                             @endif       
                                                     @endif
                                                 </td>
+                                                <td> 
+                                                    @if ($fulltbp->expertassignments->count() > 0)
+                                                            @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                                                @else
+                                                                    @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
+                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                        @else
+                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
+                                                                    @endif
+                                                            @endif  
+                                                        @else
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
+                                                    @endif
+                                                </td> 
                                                 <td> 
                                                     @if ( $fulltbp->bol->count() != 0)
                                                             <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
@@ -305,22 +316,7 @@
                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
-                                                <th> 
-                                                    {{-- {{$fulltbp->expertassignments}} --}}
-                                                    @if ($fulltbp->expertassignments->count() > 0)
-                                                            @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
-                                                                @else
-                                                                    @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
-                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
-                                                                        @else
-                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
-                                                                    @endif
-                                                            @endif  
-                                                        @else
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
-                                                    @endif
-                                                </th> 
+
                                                 <td> 
                                                     <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                                 </td>
@@ -357,6 +353,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script>
     <script>
@@ -365,5 +362,9 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        $('#note').summernote({
+			toolbar: false,
+            height: 200,
+		});
     </script>
 @stop

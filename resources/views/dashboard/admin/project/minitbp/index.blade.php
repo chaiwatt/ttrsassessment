@@ -1,12 +1,13 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
     <div id="modal_edit_minitbp" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การอนุมัติ Mini TBP</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การอนุมัติแบบคำขอรับการประเมิน (Mini TBP)</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -33,7 +34,7 @@
                         <hr>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>ข้อความเพิ่มเติม<span class="text-danger">*</span></label>
+                                <label id="messageshow">ข้อความเพิ่มเติม</label>
                                 <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control form-control-lg"></textarea>
                             </div>
                         </div>
@@ -41,7 +42,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_edit_minitbp" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                    <button id="btn_modal_edit_minitbp" class="btn bg-primary"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
                 </div>
             </div>
         </div>
@@ -190,6 +191,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approveminitbphelper.js')}}"></script>
     <script>
         var route = {
@@ -207,7 +209,11 @@
             .catch(error => {}) 
         });
 
-        
+        $('#note').summernote({
+			toolbar: false,
+            height: 200,
+        });
+          
         $(document).on('click', '#btn_modal_add_jdmessage', function(e) {
             addJdMessage($('#minitbpid').val(),$('#messagebody').val()).then(data => {
                 $('#modal_add_jdmessage').modal('hide');

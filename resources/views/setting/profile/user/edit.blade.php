@@ -169,15 +169,18 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>ชื่อเอกสาร <small>เช่น หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</small></label><span class="text-danger">*</span>
+                                <label>ชื่อเอกสาร <small>เช่น หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</small><span class="text-danger">*</span></label>
                                 <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
                             </div>
                         </div>
                         <div class="col-md-12">	
                             <div class="input-group">													
-                                <button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
-                            </div>
-                            <input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc"/>
+								<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
+							</div>
+							<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc"/>
+							<div class="input-group">	
+								<label class="text-danger"><small>ไฟล์ PDF ขนาดไม่เกิน 2 MB</small></label>
+							</div> 
                         </div>
                     </div>
                 </div>           

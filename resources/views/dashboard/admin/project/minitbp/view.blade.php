@@ -107,149 +107,75 @@
             	<div class="card">
 
                 	<div class="card-body">
-						{{-- <ul class="nav nav-tabs nav-tabs-highlight">
-							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini TBP</a></li>
-							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ผู้รับผิดชอบ</a></li>
-							<li class="nav-item"><a href="#left-icon-manager" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ลงนาม</a></li>
-						</ul>
-						<form method="POST" action="{{route('dashboard.company.project.minitbp.editsave',['id'=>$minitbp->id])}}" enctype="multipart/form-data">
-							@csrf
-						<div class="tab-content">
-							<div class="tab-pane fade show active" id="left-icon-minitbp">
-								@csrf
 
-							</div>
-							<div class="tab-pane fade" id="left-icon-contact">
 
-							</div>
-							<div class="tab-pane fade" id="left-icon-manager">
-
-							</div>
-						</div>
-							<div class="text-right">
-								<button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-							</div>
-						</form> --}}
-
-						{{-- <form id="frmminitbp" method="POST" class="wizard-form step-minitbp" action="{{route('dashboard.company.project.minitbp.editsave',['id'=>$minitbp->id])}}" data-fouc> --}}
+						
 						<form id="frmminitbp" method="POST" class="wizard-form step-minitbp" action="" data-fouc>
 							@csrf
 							<h6>ผู้ยื่นแบบคำขอ</h6>
 							<fieldset>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ชื่อบริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="companyname" id ="companyname" value="{{old('companyname') ?? $minitbp->businessplan->company->name}}" class="form-control form-control-lg required" readonly>
+								<div class="row mb-2">
+									
+									<div class="col-md-12">	
+										<label><strong><u>ข้อมูลบริษัท</u></strong></label>
+										<div class="table-responsive">
+											<table class="table table-striped table-bordered">
+												<thead>
+													<tr class="bg-info">
+														<th style="width:200px">รายการ</th>                                                                                  
+														<th>รายละเอียด</th>
+													</tr>
+												</thead>
+												<tbody >    
+													<tr >                                        
+														<td>ชื่อบริษัท</td>
+														<td>{{@$minitbp->businessplan->company->name}}</td>
+													</tr>       
+													<tr >                                        
+														<td>ที่อยู่บริษัท</td>
+														<td>{{@$user->company->companyaddress->first()->address}} ตำบล{{$user->company->companyaddress->first()->tambol->name}} อำเภอ{{$user->company->companyaddress->first()->amphur->name}} จังหวัด{{$user->company->companyaddress->first()->province->name}} {{$user->company->companyaddress->first()->postalcode}}</td>
+													</tr>              
+												</tbody>
+											</table>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ที่อยู่บริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="address" id ="address" value="{{$user->company->companyaddress->first()->address}}" class="form-control form-control-lg required" readonly>
+									</div>   
+									
+									
+									<div class="col-md-12 mt-3">	
+										<label><strong><u>ข้อมูลผู้ยื่นแบบคำขอ</u></strong></label>
+										<div class="table-responsive">
+											<table class="table table-striped table-bordered">
+												<thead>
+													<tr class="bg-info">
+														<th style="width:200px">รายการ</th>                                                                                  
+														<th>รายละเอียด</th>
+													</tr>
+												</thead>
+												<tbody >    
+													<tr >                                        
+														<td>ชื่อ-สกุล</td>
+														<td>{{@$minitbp->prefix->name}}{{@$minitbp->contactname}} {{@$minitbp->contactlastname }}</td>
+													</tr>       
+													<tr >                                        
+														<td>ตำแหน่ง</td>
+														<td>{{@$minitbp->contactposition}}</td>
+													</tr>    
+													<tr >                                        
+														<td>เบอร์โทรศัพท์</td>
+														<td>{{@$minitbp->contactphone}}</td>
+													</tr>  
+													<tr >                                        
+														<td>อีเมล</td>
+														<td>{{@$minitbp->contactemail}}</td>
+													</tr>  
+													<tr >                                        
+														<td>เว็บไซต์</td>
+														<td>{{@$minitbp->website}}</td>
+													</tr>              
+												</tbody>
+											</table>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>จังหวัด<span class="text-danger">*</span></label>
-											<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2 required" disabled>
-												<option value=""></option>
-												{{-- @foreach ($provinces as $province)
-													<option value="{{$province->id}}" @if($user->company->province_id == $province->id) selected @endif>{{$province->name}}</option> 
-												@endforeach --}}
-												@foreach ($provinces as $province)
-													<option value="{{$province->id}}" @if($user->company->companyaddress->first()->province_id == $province->id) selected @endif>{{$province->name}}</option> 
-												@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>อำเภอ<span class="text-danger">*</span></label>
-											<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2 required" disabled>
-												{{-- @foreach ($amphurs as $amphur)                                                                
-													<option value="{{$amphur->id}}" @if ($user->company->amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
-												@endforeach    --}}
-												@foreach ($amphurs as $amphur)                                                                
-													<option value="{{$amphur->id}}" @if ($user->company->companyaddress->first()->amphur_id == $amphur->id) selected @endif> {{$amphur->name}} </option>
-												@endforeach   
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>ตำบล<span class="text-danger">*</span></label>
-											<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2 required" disabled>
-												{{-- @foreach ($tambols as $tambol)                                                                
-													<option value="{{$tambol->id}}" @if ($user->company->tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
-												@endforeach     --}}
-												@foreach ($tambols as $tambol)                                                                
-													<option value="{{$tambol->id}}" @if ($user->company->companyaddress->first()->tambol_id == $tambol->id) selected @endif> {{$tambol->name}} </option>
-												@endforeach   
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">  
-										<div class="form-group">
-											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											{{-- <input type="text" name="postalcode" id="postalcode" value="{{$user->company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required" readonly> --}}
-											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required" readonly>
-										</div>
-									</div>
-									<legend>
-										<label>ข้อมูลผู้ยื่นแบบคำขอ</label>
-									</legend>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-											<select name="contactprefix" id="contactprefix" class="form-control form-control-lg form-control-select2 required" disabled>
-												@foreach ($contactprefixes as $contactprefix)
-													<option value="{{$contactprefix->id}}" @if($minitbp->contactprefix == $contactprefix->id) selected @endif >{{$contactprefix->name}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name ="contactname" id ="contactname" value="{{old('contactname') ?? $minitbp->contactname}}" class="form-control form-control-lg required" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name ="contactlastname" id ="contactlastname" value="{{old('contactlastname') ?? $minitbp->contactlastname}}" class="form-control form-control-lg required" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">ตำแหน่ง</label>
-											<input type="text" name ="contactposition" value="{{$minitbp->contactposition}}" class="form-control form-control-lg" readonly >
-											{{-- <select name="contactposition" id="contactposition" value="{{$minitbp->contactposition}}" id="" class="form-control form-control-lg form-control-select2">
-												@foreach ($contactpositions as $contactposition)
-													<option value="{{$contactposition->id}}" @if($minitbp->contactposition_id == $contactposition->id) selected @endif >{{$contactposition->name}}</option>
-												@endforeach
-											</select> --}}
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">เบอร์โทรศัพท์<span class="text-danger">*</span></label>
-											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $minitbp->contactphone}}" class="form-control form-control-lg required" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">อีเมล<span class="text-danger">*</span></label>
-											<input type="text" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $minitbp->contactemail}}" class="form-control form-control-lg required" readonly>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label for="">เว็บไซต์</label>
-											<input type="text" name ="website" id ="website" value="{{old('website') ?? $minitbp->website}}" class="form-control form-control-lg" readonly>
-										</div>
-									</div>
+									</div>  
 								</div>
 							</fieldset>
 							<h6>ข้อมูล Mini TBP</h6>
@@ -427,66 +353,6 @@
 									</div>
 								</div>
 							</fieldset>
-							<h6>ข้อมูลผู้ลงนาม</h6>
-							<fieldset>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											{{-- <div class="col-md-12" > --}}
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
-														<thead>
-															<tr class="bg-info">
-																<th style="width:50%">ผู้ลงนาม</th>
-																<th style="width:35%">ตำแหน่ง</th>
-															</tr>
-														</thead>
-														<tbody id="authorized_director_wrapper_tr"> 
-															@foreach ($authorizeddirectors as $authorizeddirector)
-															<tr >      
-																<td>
-																	<div class="form-check">
-																		<label class="form-check-label">
-																			@if (Empty($authorizeddirector->signature_id))
-																					<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
-																					@if ($authorizeddirector->usesignature == 2)
-																						checked
-																					@endif
-																					disabled >
-																				@else
-																					<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
-																					@if ($authorizeddirector->usesignature == 2)
-																						checked
-																					@endif
-																					disabled >
-																			@endif
-																			{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
-																		</label>
-																	</div>
-																</td>  
-                            																
-																<td> {{$authorizeddirector->employposition->name}}</td>      
-															</tr>
-															@endforeach
-														</tbody>
-													</table>
-												</div>
-											</div>
-										{{-- </div> --}}
-									</div>
-
-									{{-- <div class="col-md-6">
-										<div class="form-group">
-											<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
-											<select name="signature" id="usersignature" value="{{$minitbp->signature_status_id}}" id="" class="form-control form-control-lg form-control-select2">
-												@foreach ($signaturestatuses as $signaturestatus)
-													<option value="{{$signaturestatus->id}}" @if($minitbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
-												@endforeach
-											</select>
-										</div>
-									</div> --}}
-								</div>
-							</fieldset>
 								<h6>เสร็จสิ้น</h6>
 								<fieldset>
 									<div class="col-md-12">
@@ -498,17 +364,6 @@
 											<input type="file" style="display:none;" id="minitbppdf"/>
 										</div>
 									</div>
-									<div class="col-md-12 " id="appceptagreement_wrapper">
-										<div class="form-group float-right">
-											<div class="form-check">
-												<label class="form-check-label">
-													<input type="checkbox" name="appceptagreement"  id="appceptagreement" class="form-check-input-styled-primary"  data-fouc disabled>
-													ข้าพเจ้าขอรับรองว่าข้อมูลทั้งหมดเป็นความจริงทุกประการ
-												</label>
-											</div>
-										</div>
-									</div>
-
 								</fieldset>
 						</form>
 
@@ -560,107 +415,15 @@
 		},
 		transitionEffect: 'fade',
 		autoFocus: true,
-		onStepChanging: function (event, currentIndex, newIndex) {
-			if (currentIndex > newIndex) {
-				return true;
-			}
-			if (currentIndex < newIndex) {
-				form.find('.body:eq(' + newIndex + ') label.error').remove();
-				form.find('.body:eq(' + newIndex + ') .error').removeClass('error');
-			}
-			form.validate().settings.ignore = ':disabled,:hidden';
-			return form.valid();
-		},
 		onFinishing: function (event, currentIndex) {
 			form.validate().settings.ignore = ':disabled';
 			return form.valid();
 		},
 		onStepChanged:function (event, currentIndex, newIndex) {
-			console.log('current step ' + currentIndex);
-			if(currentIndex == 3){
-				var hidden = '';
-				if(submitstatus !=2 && refixstatus == 0){
-					hidden = 'hidden';
-					$("#appceptagreement_wrapper").attr("hidden",true);
-				}
-				$(document).find(".actions ul").append(`
-					<li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-					<li class='libtn' ${hidden}><a href='#' id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
-				`);
-
-				if(submitstatus == 2 || refixstatus != 0){
-					var formData = new FormData();
-					formData.append('id',$('#minitbpid').val());
-					formData.append('project',$('#project').val());
-					formData.append('projecteng',$('#projecteng').val());
-					formData.append('finance1',$('#finance1').is(':checked') === true ? '1' : '');
-					formData.append('bank',$('#bank').val());
-					formData.append('finance1loan',$('#finance1loan').val());
-					formData.append('finance2',$('#finance2').is(':checked') === true ? '1' : '');
-					formData.append('finance3',$('#finance3').is(':checked') === true ? '1' : '');
-					formData.append('finance4',$('#finance4').is(':checked') === true ? '1' : '');
-					formData.append('finance4joint',$('#finance4joint').val());
-					formData.append('finance4jointmin',$('#finance4jointmin').val());
-					formData.append('finance4jointmax',$('#finance4jointmax').val());
-					formData.append('nonefinance1',$('#nonefinance1').is(':checked') === true ? '1' : '');
-					formData.append('nonefinance2',$('#nonefinance2').is(':checked') === true ? '1' : '');
-					formData.append('nonefinance3',$('#nonefinance3').is(':checked') === true ? '1' : '');
-					formData.append('nonefinance4',$('#nonefinance4').is(':checked') === true ? '1' : '');
-					formData.append('nonefinance5',$('#nonefinance5').is(':checked') === true ? '1' : '');
-					formData.append('nonefinance5detail',$('#nonefinance5detail').val());
-					formData.append('nonefinance6',$('#nonefinance6').is(':checked') === true ? '1' : '');
-					formData.append('nonefinance6detail',$('#nonefinance6detail').val());
-					formData.append('companyname',$('#companyname').val());
-					formData.append('address',$('#address').val());
-					formData.append('province',$('#province').val());
-					formData.append('amphur',$('#amphur').val());
-					formData.append('tambol',$('#tambol').val());
-					formData.append('postalcode',$('#postalcode').val());
-					formData.append('contactprefix',$('#contactprefix').val());
-					formData.append('contactname',$('#contactname').val());
-					formData.append('contactlastname',$('#contactlastname').val());
-					formData.append('contactposition',$('#contactposition').val());
-					formData.append('contactphone',$('#contactphone').val());
-					formData.append('contactemail',$('#contactemail').val());
-					formData.append('website',$('#website').val());
-					formData.append('managerprefix',$('#managerprefix').val());
-					formData.append('managername',$('#managername').val());
-					formData.append('managerlastname',$('#managerlastname').val());
-					formData.append('managerposition',$('#managerposition').val());
-					formData.append('signature',$('#usersignature').val());
-					
-					$.ajax({
-						url: `${route.url}/api/minitbp/editsave`,  //Server script to process data
-						type: 'POST',
-						headers: {"X-CSRF-TOKEN":route.token},
-						data: formData,
-						contentType: false,
-						processData: false,
-						success: function(data){
-							// console.log(data);
-							createPdf($('#minitbpid').val()).then(data => {
-								var pdfpath = route.url + '/'+ data;
-								var url = pdfpath;
-								$('#downloadpdf').attr('href', url);
-								PDFObject.embed(pdfpath, "#example1");
-							}).catch(error => {})
-						}
-					});
-				}else{
-					
-					createPdf($('#minitbpid').val()).then(data => {
-						var pdfpath = route.url + '/'+ data;
-						var url = pdfpath;
-						$('#downloadpdf').attr('href', url);
-						PDFObject.embed(pdfpath, "#example1");
-					}).catch(error => {})
-				}
-			
-			}else{
-				// console.log('why here');
-				$(".actions").find(".libtn").remove();
-			}
-		return true;
+			if(currentIndex == 2){
+			var pdfpath = "{{url('/')}}" + '/'+ "{{$minitbp->attachment}}";
+			PDFObject.embed(pdfpath, "#example1");
+		}
 		},
 		
 	});

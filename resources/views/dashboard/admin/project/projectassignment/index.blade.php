@@ -16,7 +16,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ความเห็น</label>
-                                <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control"></textarea>
+                                <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control form-control-lg"></textarea>
                             </div>
                         </div>
                     </div>

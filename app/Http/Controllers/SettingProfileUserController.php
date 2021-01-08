@@ -18,6 +18,7 @@ use App\Model\Province;
 use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
+use App\Model\FullTbpGantt;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use App\Model\IndustryGroup;
@@ -186,9 +187,8 @@ class SettingProfileUserController extends Controller
 
                 $fulltbpgantt = new FullTbpGantt();
                 $fulltbpgantt->full_tbp_id = $fulltbp->id;
-                $fulltbpgantt->startyear = intval(Carbon::now()->format('y'))+543 ;
-                $fulltbp->save();
-
+                $fulltbpgantt->startyear = intval(Carbon::now()->year) + 543 ;
+                $fulltbpgantt->save();
 
                 $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
                 if($fulltbpcompanydocs->count() > 0){

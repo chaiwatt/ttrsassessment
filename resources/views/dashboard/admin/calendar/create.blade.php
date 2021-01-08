@@ -66,7 +66,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>โครงการ</label><span class="text-danger">*</span>
-                                        <select name="fulltbp" id="fulltbp" data-placeholder="โครงการ" class="form-control form-control-select2">
+                                        <select name="fulltbp" id="fulltbp" data-placeholder="โครงการ" class="form-control form-control-lg form-control-select2">
                                            {{-- <option val="0">==เลือกโครงการ==</option> --}}
                                             @foreach ($fulltbps as $fulltbp)
                                                 <option value="{{$fulltbp->id}}">{{$fulltbp->minitbp->project}}</option> 
@@ -77,7 +77,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ประเภทปฏิทิน</label><span class="text-danger">*</span>
-                                        <select name="calendartype" data-placeholder="ประเภทปฏิทิน" class="form-control form-control-select2">
+                                        <select name="calendartype" data-placeholder="ประเภทปฏิทิน" class="form-control form-control-lg form-control-select2">
                                             @foreach ($calendartypes as $calendartype)
                                                 <option value="{{$calendartype->id}}">{{$calendartype->name}}</option> 
                                             @endforeach
@@ -87,7 +87,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
-                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-select2">
+                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-lg form-control-select2">
                                             @foreach ($isnotifies as $isnotify)
                                                 <option value="{{$isnotify->id}}">{{$isnotify->name}}</option> 
                                             @endforeach
@@ -99,19 +99,19 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>วันที่</label>
-                                        <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control" >
+                                        <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>เวลาเริ่ม</label>
-                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control" >
+                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>เวลาสิ้นสุด</label>
-                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control" >
+                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                             </div>
@@ -119,13 +119,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>สถานที่นัดหมาย</label>
-                                        <input type="text"  name="place" value=""  placeholder="สถานที่นัดหมาย" class="form-control" >
+                                        <input type="text"  name="place" value=""  placeholder="สถานที่นัดหมาย" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ห้อง</label>
-                                        <input type="text"  name="room" value="{{old('room')}}" placeholder="ห้อง" class="form-control" >
+                                        <input type="text"  name="room" value="{{old('room')}}" placeholder="ห้อง" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                             </div>
@@ -133,13 +133,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>รายละเอียด</label>
-                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control"></textarea>
+                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
-                                        <select name="users[]" id="user" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-select2" multiple="multiple">
+                                        <select name="users[]" id="user" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-lg form-control-select2" multiple="multiple">
                                         </select>
                                     </div>
                                 </div>

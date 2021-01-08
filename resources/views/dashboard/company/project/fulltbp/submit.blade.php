@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label>ไฟล์สแกน Full TBP</label>
                                     <div class="input-group">													
-                                        <input type="text" id="filename" class="form-control border-right-0" placeholder="ไฟล์สแกน Full TBP" >
+                                        <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="ไฟล์สแกน Full TBP" >
                                         <span class="input-group-append">
                                             <button class="btn bg-info" type="button" onclick="document.getElementById('attachment').click();">เลือกไฟล์</button>													
                                         </span>

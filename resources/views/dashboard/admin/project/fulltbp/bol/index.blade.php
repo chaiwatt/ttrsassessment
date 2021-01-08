@@ -15,7 +15,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-							<input type="text" id="docname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
+							<input type="text" id="docname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-12">	

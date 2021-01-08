@@ -36,17 +36,20 @@ class DashboardCompanyProjectMiniTBPController extends Controller
 {
     public function Index(){
         NotificationBubble::where('target_user_id',Auth::user()->id)
-                    ->where('notification_category_id',1)
-                    ->where('notification_sub_category_id',4)
+                    ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
+                    ->where('notification_sub_category_id',4) // notification_sub_category_id 4 = Mini TBP
                     ->where('status',0)->delete();
         $company = Company::where('user_id',Auth::user()->id)->first();
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         $minitbps = MiniTBP::where('business_plan_id',$businessplan->id)->get();
-        // return $businessplan;
         return view('dashboard.company.project.minitbp.index')->withMinitbps($minitbps);
     }
     public function Edit($id){
         $user = Auth::user();
+        NotificationBubble::where('target_user_id',$user->id)
+                        ->where('notification_category_id',1)       // notification_category_id 1 = โครงการ
+                        ->where('notification_sub_category_id',4)   // notification_sub_category_id 4 = Mini TBP
+                        ->where('status',0)->delete();
         $company = Company::where('user_id',$user->id)->first();
         $banks = ThaiBank::get();
         $minitbp = MiniTBP::find($id);
@@ -58,6 +61,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $amphurs = Amphur::where('province_id',$companyaddress->province_id)->get();
         $tambols = Tambol::where('amphur_id',$companyaddress->amphur_id)->get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
+
         return view('dashboard.company.project.minitbp.edit')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withCompany($company)

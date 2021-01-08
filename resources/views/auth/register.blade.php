@@ -86,9 +86,9 @@
                     <div class="form-group" id="vatwrapper" >
                         <input id="vatno" type="text" class="form-control form-control-lg numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
-                        <div class="form-control-feedback">
+                        {{-- <div class="form-control-feedback">
                             <i class="icon-user text-muted"></i>
-                        </div>
+                        </div> --}}
                         @error('vatno')
                             <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                         @enderror
@@ -200,7 +200,6 @@
                         });
                     },
                     viewports: {
-                        // verdict: ".pwstrength_viewport_verdict"
                         progress: ".pwstrength_viewport_progress"
                     },
                         showVerdictsInsideProgressBar: true
@@ -243,6 +242,7 @@
                 var expires = "expires="+ d.toUTCString();
                 document.cookie = cname + "=" + cvalue + "; " + expires;
             }
+
             var lastabcookie = getCookie('lastTab');
             $('.nav-tabs a[href="'+lastabcookie+'"]').tab('show');
             if(lastabcookie == '#login-tab2'){
@@ -252,6 +252,7 @@
             }else{
                 $('#user_type').val('1');
             }
+
             $(document).on('change', '#usergroup', function(e) {
                 if($(this).val() == 1){
                     setCookie('lastGroup', 1, 100);
@@ -259,7 +260,17 @@
                     setCookie('lastGroup', 2, 100);
                 }
             });
-            var lasusergroupcookie = getCookie('lastGroup');
+
+            $(document).on("change","input[type=radio]",function(){
+                var expert=$('[name="expert"]:checked').val();
+                if($(this).val() == 1){
+                    setCookie('experttype', 1, 100);
+                }else{
+                    setCookie('experttype', 2, 100);
+                }
+            });
+
+            var lasusergroupcookie = getCookie('lastGroup');  //นิติบุคคล บุคคลธรรมดา
             if(lasusergroupcookie == '' || lasusergroupcookie == 1){
                 $('#usergroup').val(1);
                 $('#usergroup').select2().trigger('change');
@@ -267,6 +278,9 @@
                 $('#usergroup').val(2);
                 $('#usergroup').select2().trigger('change');
             }
+
+            var expertvalue = getCookie('experttype');  //ผู้เชี่ยวชายภายนอก ภายใน
+            $("input[name='expert'][value='"+expertvalue+"']").prop('checked', true);
 
             function getCookie(cname) {
                 var name = cname + "=";

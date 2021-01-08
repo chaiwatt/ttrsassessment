@@ -106,36 +106,12 @@
             	<div class="card">
 
                 	<div class="card-body">
-						{{-- <ul class="nav nav-tabs nav-tabs-highlight">
-							<li class="nav-item"><a href="#left-icon-minitbp" class="nav-link active" data-toggle="tab"><i class="icon-stack3 mr-2"></i> ข้อมูล Mini TBP</a></li>
-							<li class="nav-item"><a href="#left-icon-contact" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ผู้รับผิดชอบ</a></li>
-							<li class="nav-item"><a href="#left-icon-manager" class="nav-link" data-toggle="tab"><i class="icon-user mr-2"></i> ข้อมูลผู้ลงนาม</a></li>
-						</ul>
-						<form method="POST" action="{{route('dashboard.company.project.minitbp.editsave',['id'=>$minitbp->id])}}" enctype="multipart/form-data">
-							@csrf
-						<div class="tab-content">
-							<div class="tab-pane fade show active" id="left-icon-minitbp">
-								@csrf
-
-							</div>
-							<div class="tab-pane fade" id="left-icon-contact">
-
-							</div>
-							<div class="tab-pane fade" id="left-icon-manager">
-
-							</div>
-						</div>
-							<div class="text-right">
-								<button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-							</div>
-						</form> --}}
-
-						{{-- <form id="frmminitbp" method="POST" class="wizard-form step-minitbp" action="{{route('dashboard.company.project.minitbp.editsave',['id'=>$minitbp->id])}}" data-fouc> --}}
 						<form id="frmminitbp" method="POST" class="wizard-form step-minitbp" action="" data-fouc>
 							@csrf
 							<h6>ผู้ยื่นแบบคำขอ</h6>
 							<fieldset>
 								<div class="row">
+									<input type="text" id="pdfname" hidden>
 									<legend>
 										<label><strong>ข้อมูลบริษัท</strong></label>
 									</legend>
@@ -538,19 +514,6 @@
 												@endforeach
 											</select>
 										</div>
-										{{-- <div class="form-group" id="signature_wrapper" @if($minitbp->signature_status_id == 1) hidden @endif>
-											<a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
-											<div class="col-md-12">
-												<div id='sigdiv'>
-													@if (!Empty(Auth::user()->signature))
-													<br>
-													<img id="signatureimg" src="{{asset(Auth::user()->signature)}}" style="width: 180px;height:45px" >
-													
-													@endif
-													<span id="signatureerror" class="form-text text-danger" hidden >*ไม่พบลายมือชื่อ</span>
-												</div>
-											</div>
-										</div> --}}
 									</div>
 								</div>
 							</fieldset>
@@ -559,7 +522,6 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<div style="width:100%;height:600px;" class="col-md-12 center"  >
-												{{-- <canvas id="the-canvas"></canvas> --}}
 												<div id="example1"></div>
 											</div>
 											<input type="file" style="display:none;" id="minitbppdf"/>
@@ -598,7 +560,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
-{{-- <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script> --}}
+
 <script>
 	var route = {
 		url: "{{ url('/') }}",
@@ -607,7 +569,16 @@
 	};
 	var submitstatus = "{{$minitbp->businessplan->business_plan_status_id}}";
 	var refixstatus = "{{$minitbp->refixstatus}}";
-	// Basic wizard setup
+
+
+	if(submitstatus == 2 || refixstatus == 1 ){ 
+			$('.form-control-lg').prop("disabled", false);  
+	}else{
+		$('.form-check-input-styled').prop("disabled", true);
+		$('.form-check-input-styled-primary').prop("disabled", true);
+		$('.form-control-lg').prop("disabled", true);
+	}
+
 	var form = $('.step-minitbp').show();
 	$('.step-minitbp').steps({
 		headerTag: 'h6',
@@ -621,7 +592,6 @@
 		},
 		enableFinishButton: false,
 		onFinished: function (event, currentIndex) {
-			// alert('Form submitted.');
 			$("#frmminitbp").submit();
 		},
 		transitionEffect: 'fade',
@@ -683,8 +653,8 @@
 					$(".chkauthorizeddirector:checked").each(function(){
 						selected_director.push($(this).val());
 				});
-
-				if(submitstatus == 2 || refixstatus != 0){
+				// if((submitstatus == 2 || refixstatus != 2) && refixstatus != 0){
+				if((submitstatus == 2 && refixstatus == 0) || (submitstatus == 3 && refixstatus == 1) ){
 					var formData = new FormData();
 					formData.append('id',$('#minitbpid').val());
 					formData.append('project',$('#project').val());
@@ -739,17 +709,23 @@
 								var pdfpath = route.url + '/'+ data;
 								var url = pdfpath;
 								$('#downloadpdf').attr('href', url);
+								$('#pdfname').val(data);
 								PDFObject.embed(pdfpath, "#example1");
 							}).catch(error => {})
 						}
 					});
 				}else{	
-					createPdf($('#minitbpid').val()).then(data => {
-						var pdfpath = route.url + '/'+ data;
-						var url = pdfpath;
-						$('#downloadpdf').attr('href', url);
-						PDFObject.embed(pdfpath, "#example1");
-					}).catch(error => {})
+					console.log('hi...');
+					var pdfpath = "{{url('/')}}" + '/'+ "{{$minitbp->attachment}}";
+					$('#pdfname').val("{{$minitbp->attachment}}");
+					PDFObject.embed(pdfpath, "#example1");
+
+					// createPdf($('#minitbpid').val()).then(data => {
+					// 	var pdfpath = route.url + '/'+ data;
+					// 	var url = pdfpath;
+					// 	$('#downloadpdf').attr('href', url);
+					// 	PDFObject.embed(pdfpath, "#example1");
+					// }).catch(error => {})
 				}
 			
 			}else{
@@ -933,8 +909,9 @@
 				if($('#usersignature').val() == 1){
 					$("#minitbppdf").trigger('click');
 				}else{
+					console.log(downloadpdf);
 					$("#spinicon").attr("hidden",false);
-					submitNoAttachement($('#minitbpid').val()).then(data => {
+					submitNoAttachement($('#minitbpid').val(),$('#pdfname').val()).then(data => {
 						$("#submitminitbp").attr("hidden",true);
 						$("#spinicon").attr("hidden",true);
 						$("#appceptagreement_wrapper").attr("hidden",true);
@@ -983,21 +960,21 @@
 					title: 'สำเร็จ...',
 					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
 				}).then((result) => {
-					// window.location.reload();
 					window.location.replace(`${route.url}/dashboard/company/report`);
 				});
 			}
 		});
 	});
 
-	function submitNoAttachement(id){
+	function submitNoAttachement(id,pdfname){
 		return new Promise((resolve, reject) => {
 			$.ajax({
 				url: `${route.url}/api/minitbp/submitnoattachement`,
 				type: 'POST',
 				headers: {"X-CSRF-TOKEN":route.token},
 				data: {
-				id : id
+				id : id,
+				pdfname : pdfname
 				},
 				success: function(data) {
 				resolve(data)

@@ -66,19 +66,19 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>วันที่</label>
-                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control" >
+                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ประเภทปฏิทิน</label>
-                                        <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฏิทิน" class="form-control" disabled>
+                                        <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฏิทิน" class="form-control form-control-lg" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
-                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-select2">
+                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-lg form-control-select2">
                                             @foreach ($isnotifies as $isnotify)
                                                 <option value="{{$isnotify->id}}" @if ($isnotify->id == $eventcalendar->isnotify_id) selected @endif>{{$isnotify->name}}</option> 
                                             @endforeach
@@ -90,13 +90,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลาเริ่ม</label>
-                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{$eventcalendar->starttime}}"  placeholder="เวลา" class="form-control" >
+                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{$eventcalendar->starttime}}"  placeholder="เวลา" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลาสิ้นสุด</label>
-                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{$eventcalendar->endtime}}"  placeholder="เวลา" class="form-control" >
+                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{$eventcalendar->endtime}}"  placeholder="เวลา" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                             </div>
@@ -104,13 +104,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>สถานที่</label>
-                                        <input type="text"  name="place"  value="{{$eventcalendar->place}}"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control" >
+                                        <input type="text"  name="place"  value="{{$eventcalendar->place}}"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ห้อง</label>
-                                        <input type="text"  name="room" value="{{$eventcalendar->room}}" placeholder="ห้อง" class="form-control" >
+                                        <input type="text"  name="room" value="{{$eventcalendar->room}}" placeholder="ห้อง" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                             </div>
@@ -118,14 +118,14 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>รายละเอียด</label>
-                                        {{-- <input type="text"  name="summary"  value="{{$eventcalendar->summary}}"  placeholder="รายละเอียด" class="form-control" > --}}
-                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control">{{$eventcalendar->summary}}</textarea>
+                                        {{-- <input type="text"  name="summary"  value="{{$eventcalendar->summary}}"  placeholder="รายละเอียด" class="form-control form-control-lg" > --}}
+                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg">{{$eventcalendar->summary}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
-                                        <select name="users[]" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-select2" multiple="multiple">
+                                        <select name="users[]" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-lg form-control-select2" multiple="multiple">
                                             @foreach ($users as $user)
                                                 <option value="{{$user->id}}"
                                                     @if (!Empty($eventcalendarattendees->where('user_id',$user->id)->first()))

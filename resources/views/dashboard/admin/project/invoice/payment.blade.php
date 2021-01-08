@@ -56,19 +56,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เลขที่เอกสาร<span class="text-danger">*</span></label>
-                                            <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="ชื่อ" class="form-control" readonly>
+                                            <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="ชื่อ" class="form-control form-control-lg" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>จำนวนเงิน<span class="text-danger">*</span></label>
-                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control" readonly >
+                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control form-control-lg" readonly >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>จ่ายผ่านธนาคาร<span class="text-danger">*</span></label>
-                                            <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-select2" disabled>
+                                            <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-lg form-control-select2" disabled>
                                                 @foreach ($banks as $bank)
                                                     <option value="{{$bank->id}}" 
                                                       @if ($bank->id == $invoicetransaction->bank_id ) selected @endif >{{$bank->name}}</option> 
@@ -79,19 +79,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>วันที่<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymentdate" id="paymentdate" value="{{$invoicetransaction->paymentdateth}}"  placeholder="วันที่" class="form-control" readonly>
+                                            <input type="text"  name="paymentdate" id="paymentdate" value="{{$invoicetransaction->paymentdateth}}"  placeholder="วันที่" class="form-control form-control-lg" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymenttime" value="{{$invoicetransaction->paymenttime}}" placeholder="เวลา" class="form-control" readonly>
+                                            <input type="text"  name="paymenttime" value="{{$invoicetransaction->paymenttime}}" placeholder="เวลา" class="form-control form-control-lg" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">เพิ่มเติม</label>
-                                            <textarea name="note" class="form-control" cols="3" rows="7" readonly >{{$invoicetransaction->note}}</textarea>
+                                            <textarea name="note" class="form-control form-control-lg" cols="3" rows="7" readonly >{{$invoicetransaction->note}}</textarea>
                                         </div>
                                     </div>
                                 {{-- </div> --}}

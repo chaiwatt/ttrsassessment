@@ -6,21 +6,23 @@ $(document).on('click', '#editapprove', function(e) {
     $('#modal_edit_fulltbp').modal('show');
 });
 
-// $('#my_radio_box').change(function(){
-//     if($("input[name='result']:checked").val()=='1'){
-//         console.log('1');
-//         $('#note').attr('readonly', true);
-//     }else{
-//         console.log('2');
-//         $('#note').attr('readonly', false);
-//     }
-// });
+$(document).on('change', '#my_radio_box', function(e) {
+  if($("input[name='result']:checked").val()=='1'){
+      $('#messageshow').html('ข้อความเพิ่มเติม');
+  }else{
+      $('#messageshow').html('ข้อความเพิ่มเติม<span class="text-danger">*</span>');
+  }
+});
 
 $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
+  var check = $("input[name='result']:checked").val();
+  if(check == 2 && $('#note').val() == ''){
+      return ;
+  }
+    $('#modal_edit_fulltbp').modal('hide');
     $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
     FullTbp.editApprove($('#fulltbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
         var html = ``;
-        console.log('ok test');
         window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
    }).catch(error => {})
 });

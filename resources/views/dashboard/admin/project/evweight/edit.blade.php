@@ -14,7 +14,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Comment<span class="text-danger">*</span></label>
-                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Admin" class="form-control" ></textarea>
+                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Admin" class="form-control form-control-lg" ></textarea>
                         </div>
                     </div>
                 </div>         

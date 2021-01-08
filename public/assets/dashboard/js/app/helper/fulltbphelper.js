@@ -922,7 +922,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
         var th = ``;
         data.allyears.forEach(function (year,i) {      
             if(year != 0){
-                th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                th += `<th colspan="${year}" class="text-center" style="width:50px !important;font-size:12px">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
             }
         });
         var tr = ``;
@@ -932,7 +932,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
             console.log('hello ' + minmonth  + ' ' + maxmonth);
             tr = `<tr>`;
             for (let j = minmonth; j <= maxmonth; j++) {
-                tr += `<th style="width:5px;font-size:12px">${j}</th>`;
+                tr += `<th class="text-center" style="width:40px !important;font-size:12px">${j}</th>`;
             }
             tr += `</tr>`;
         }
@@ -942,7 +942,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                         <tr>
                             <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
                              ${th}
-                            <th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+                            <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
                         </tr>
                             ${tr}
                     </tr>
@@ -1047,7 +1047,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
             console.log('hello ' + minmonth  + ' ' + maxmonth);
             tr = `<tr>`;
             for (let j = minmonth; j <= maxmonth; j++) {
-                tr += `<th style="width: 5px;font-size:12px">${j}</th>`;
+                tr += `<th class="text-center" style="width:40px !important;font-size:12px">${j}</th>`;
             }
             tr += `</tr>`;
         }
@@ -1057,7 +1057,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                         <tr>
                             <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
                              ${th}
-                            <th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+                            <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
                         </tr>
                             ${tr}
                     </tr>
@@ -1104,7 +1104,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                 var th = ``;
                 data.allyears.forEach(function (year,i) {      
                     if(year != 0){
-                        th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                        th += `<th colspan="${year}" class="text-center" >ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
                     }
                 });
                 var tr = ``;
@@ -1114,7 +1114,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                     console.log('hello ' + minmonth  + ' ' + maxmonth);
                     tr = `<tr>`;
                     for (let j = minmonth; j <= maxmonth; j++) {
-                        tr += `<th style="width: 5px;font-size:12px">${j}</th>`;
+                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${j}</th>`;
                     }
                     tr += `</tr>`;
                 }
@@ -1124,7 +1124,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                                 <tr>
                                     <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
                                      ${th}
-                                    <th rowspan="2" class="text-center" style="width: 150px">เพิ่มเติม</th> 
+                                    <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
                                 </tr>
                                     ${tr}
                             </tr>
@@ -2100,23 +2100,30 @@ $('.steps-basic').steps({
                 <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
             `);
 
-            var selected_director = [];
-            $(".chkauthorizeddirector:checked").each(function(){
-                    selected_director.push($(this).val());
-            });
-
-            Sell.editROI($('#fulltbpid').val(),$('#income').val(),$('#profit').val(),$('#reduce').val(),JSON.stringify(selected_director)).then(data => {
-                $('#income').val(data.income);
-                $('#profit').val(data.profit);
-                $('#reduce').val(data.reduce);
-                FullTbp.generatePdf($('#fulltbpid').val()).then(data => {
-                    var pdfpath = route.url + '/'+ data;
-                    var url = pdfpath;
-                    $('#downloadpdf').attr('href', url);
-                    PDFObject.embed(pdfpath, "#example1");
-                })
-            })
-            .catch(error => {})
+            if(route.submitstatus !=4 && (route.refixstatus == 0 || route.refixstatus == 2 )){
+                var pdfpath = route.url + '/'+ $('#pdfname').val();
+                // console.log();
+                // var pdf = "{{$fulltbp->attachment}}";
+                // $('#pdfname').val(pdf);
+                PDFObject.embed(pdfpath, "#example1");
+            }else{
+                var selected_director = [];
+                $(".chkauthorizeddirector:checked").each(function(){
+                        selected_director.push($(this).val());
+                });
+                Sell.editROI($('#fulltbpid').val(),$('#income').val(),$('#profit').val(),$('#reduce').val(),JSON.stringify(selected_director)).then(data => {
+                    $('#income').val(data.income);
+                    $('#profit').val(data.profit);
+                    $('#reduce').val(data.reduce);
+                    FullTbp.generatePdf($('#fulltbpid').val()).then(data => {
+                        var pdfpath = route.url + '/'+ data;
+                        var url = pdfpath;
+                        $('#pdfname').val(data);
+                        $('#downloadpdf').attr('href', url);
+                        PDFObject.embed(pdfpath, "#example1");
+                    })
+                }).catch(error => {})
+            }
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
@@ -2354,7 +2361,7 @@ $(document).on('change', '#usersignature', function(e) {
 });
 
 $(document).on('click', '#submitfulltbp', function(e) {
-    console.log($('#appceptagreement').is(':checked'));
+    // console.log($('#appceptagreement').is(':checked'));
     if($('#appceptagreement').is(':checked') === false){
         Swal.fire({
             title: 'ผิดพลาด!',
@@ -2383,22 +2390,23 @@ $(document).on('click', '#submitfulltbp', function(e) {
                 $("#fulltbppdf").trigger('click');
             }else{
                 $("#spinicon").attr("hidden",false);
-                submitNoAttachement($('#fulltbpid').val()).then(data => {
+                submitNoAttachement($('#fulltbpid').val(),$('#pdfname').val()).then(data => {
                     $("#submitfulltbp").attr("hidden",true);
                     $("#spinicon").attr("hidden",true);
                     $("#appceptagreement_wrapper").attr("hidden",true);
-                        var html = ``;
                         Swal.fire({
                             title: 'สำเร็จ...',
                             text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
-                        }).then((result) => {
-                            window.location.reload();
+                        }).then(() => {
+                            window.location.replace(`${route.url}/dashboard/company/report`);
                         });
+                        
                     })
                 .catch(error => {})
             }
         }
     });
+
 });
 
 $(document).on('change', '#fulltbppdf', function(e) {
@@ -2431,19 +2439,22 @@ $(document).on('change', '#fulltbppdf', function(e) {
             Swal.fire({
                 title: 'สำเร็จ...',
                 text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+            }).then(() => {
+                window.location.replace(`${route.url}/dashboard/company/report`);
             });
         }
     });
 });
 
-function submitNoAttachement(id){
+function submitNoAttachement(id,pdfname){
     return new Promise((resolve, reject) => {
         $.ajax({
             url: `${route.url}/api/fulltbp/submitwithnoattachement`,
             type: 'POST',
             headers: {"X-CSRF-TOKEN":route.token},
             data: {
-            id : id
+            id : id,
+            pdfname : pdfname
             },
             success: function(data) {
             resolve(data)

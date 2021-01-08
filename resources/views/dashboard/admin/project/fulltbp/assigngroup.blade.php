@@ -53,7 +53,7 @@
                             <fieldset>	
                                 <div class="form-group">
                                     <label for="">เกณฑ์การประเมิน<span class="text-danger">*</span></label>
-                                    <select name="criteriagroup" id="" class="form-control form-control-select2">
+                                    <select name="criteriagroup" id="" class="form-control form-control-lg form-control-select2">
                                         @foreach ($criteriagroups as $criteriagroup)
                                             <option value="{{$criteriagroup->id}}" @if($fulltbp->criteria_group_id == $criteriagroup->id) selected @endif >{{$criteriagroup->name}}</option>
                                         @endforeach

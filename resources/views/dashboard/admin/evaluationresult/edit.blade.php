@@ -64,71 +64,71 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>รหัสหน่วยงาน<span class="text-danger">*</span></label>
-                                            <input type="text" name="headercode" id="headercode" value="{{$evaluationresult->headercode}}"  placeholder="รหัสหน่วยงาน" class="form-control required">
+                                            <input type="text" name="headercode" id="headercode" value="{{$evaluationresult->headercode}}"  placeholder="รหัสหน่วยงาน" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>ชื่อ<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactname" id="contactname" value="{{$evaluationresult->contactname ?? $user->name}}"  placeholder="ชื่อ" class="form-control required">
+                                            <input type="text" name="contactname" id="contactname" value="{{$evaluationresult->contactname ?? $user->name}}"  placeholder="ชื่อ" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>นามสกุล<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactlastname" id="contactlastname" value="{{$evaluationresult->contactlastname ?? $user->lastname}}"  placeholder="นามสกุล" class="form-control required">
+                                            <input type="text" name="contactlastname" id="contactlastname" value="{{$evaluationresult->contactlastname ?? $user->lastname}}"  placeholder="นามสกุล" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>ตำแหน่ง<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactposition" id="contactposition" value="{{$evaluationresult->contactposition ?? $user->position}}"  placeholder="ตำแหน่ง" class="form-control required">
+                                            <input type="text" name="contactposition" id="contactposition" value="{{$evaluationresult->contactposition ?? $user->position}}"  placeholder="ตำแหน่ง" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เบอร์โทรศัพท์<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactphone" id="contactphone" value="{{$evaluationresult->contactphone ?? $generalinfo->phone1}}"  placeholder="เบอร์โทรศัพท์" class="form-control required">
+                                            <input type="text" name="contactphone" id="contactphone" value="{{$evaluationresult->contactphone ?? $generalinfo->phone1}}"  placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เบอร์ต่อ<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactphoneext" id="contactphoneext" value="{{$evaluationresult->contactphoneext}}"  placeholder="เบอร์ต่อ" class="form-control required">
+                                            <input type="text" name="contactphoneext" id="contactphoneext" value="{{$evaluationresult->contactphoneext}}"  placeholder="เบอร์ต่อ" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>โทรสาร<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactfax" id="contactfax" value="{{$evaluationresult->contactfax ?? $generalinfo->fax}}"  placeholder="โทรสาร" class="form-control required">
+                                            <input type="text" name="contactfax" id="contactfax" value="{{$evaluationresult->contactfax ?? $generalinfo->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactemail" id="contactemail" value="{{$evaluationresult->contactemail ?? $user->email}}"  placeholder="อีเมล" class="form-control required">
+                                            <input type="text" name="contactemail" id="contactemail" value="{{$evaluationresult->contactemail ?? $user->email}}"  placeholder="อีเมล" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-management">
                                 <div class="form-group">
-                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control">{{$evaluationresult->technoandinnovation}}</textarea>
+                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->technoandinnovation}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-technology">
                                 <div class="form-group">
-                                    <textarea name="technoandinnovation" id="technoandinnovation" cols="30" rows="15" class="form-control">{{$evaluationresult->technoandinnovation}}</textarea>
+                                    <textarea name="technoandinnovation" id="technoandinnovation" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->technoandinnovation}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-marketing">
                                 <div class="form-group">
-                                    <textarea name="marketability" id="marketability" cols="30" rows="15" class="form-control">{{$evaluationresult->marketability}}</textarea>
+                                    <textarea name="marketability" id="marketability" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->marketability}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-businessprospect">
                                 <div class="form-group">
-                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control">{{$evaluationresult->businessprospect}}</textarea>
+                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->businessprospect}}</textarea>
                                 </div>
                             </div>
                         </div>

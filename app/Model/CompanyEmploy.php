@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\MiniTBP;
+use App\Model\Signature;
 use App\Model\BusinessPlan;
 use App\Model\EmployPosition;
 use App\Model\EmployTraining;
@@ -12,6 +13,7 @@ use App\Model\EmployEducation;
 use App\Model\EmployExperience;
 use App\Model\FulltbpSignature;
 use App\Model\MinitbpSignature;
+use App\Model\FullTbpBoardAttachment;
 use Illuminate\Database\Eloquent\Model;
 
 class CompanyEmploy extends Model
@@ -39,6 +41,14 @@ class CompanyEmploy extends Model
     public function getEmploytrainingAttribute(){
         return EmployTraining::where('company_employ_id',$this->id)->get();
     } 
+    public function getFullTbpboardattachmentAttribute(){
+        return FullTbpBoardAttachment::where('company_employ_id',$this->id)->get();
+    } 
+
+    public function getSignatureAttribute(){
+        return Signature::find($this->signature_id);
+    } 
+    
 
     public function getUsesignatureAttribute(){
         $company = Company::find($this->company_id);
@@ -64,4 +74,5 @@ class CompanyEmploy extends Model
         }
         return $signature;
     } 
+ 
 }

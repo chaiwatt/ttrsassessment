@@ -59,25 +59,25 @@
                                     <div class="col-md-12">	
                                         <div class="form-group">
                                             <label>ชื่อ EV</label>
-                                            <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
+                                            <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     <div class="col-md-12">	
                                         <div class="form-group">
                                             <label>เปอร์เซนต์ Index</label>
-                                            <input type="number" name="percentindex" value="{{old('percentindex')}}"  placeholder="เปอร์เซนต์ Index" class="form-control">
+                                            <input type="number" name="percentindex" value="{{old('percentindex')}}"  placeholder="เปอร์เซนต์ Index" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     <div class="col-md-12">	
                                         <div class="form-group">
                                             <label>เปอร์เซนต์ Extra</label>
-                                            <input type="number" name="percentextra" value="{{old('percentextra')}}"  placeholder="เปอร์เซนต์ Extra" class="form-control">
+                                            <input type="number" name="percentextra" value="{{old('percentextra')}}"  placeholder="เปอร์เซนต์ Extra" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     <div class="col-md-12">	
                                         <div class="form-group">
                                             <label>เวอร์ชั่น</label>
-                                            <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                            <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                 </div>

@@ -59,7 +59,7 @@
                                 <fieldset>	
                                     <div class="form-group">
                                         <label>การจดทะเบียน<span class="text-danger">*</span></label>
-                                        <select name="businesstype" data-placeholder="การจดทะเบียน" class="form-control form-control-select2" disabled>
+                                        <select name="businesstype" data-placeholder="การจดทะเบียน" class="form-control form-control-lg form-control-select2" disabled>
                                             <option value=""></option>
                                                 @foreach ($businesstypes as $businesstype)
                                                     <option value="{{$businesstype->id}}" @if($company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
@@ -68,15 +68,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label>ชื่อกิจการ/บริษัท</label>
-                                        <input type="text"  name="company" value="{{$company->name}}"  placeholder="ชื่อกิจการ/บริษัท" class="form-control" readonly>
+                                        <input type="text"  name="company" value="{{$company->name}}"  placeholder="ชื่อกิจการ/บริษัท" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>หมายเลขประจำตัวผู้เสียภาษี</label>
-                                        <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="หมายเลขผู้เสียภาษี" class="form-control" readonly>
+                                        <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="หมายเลขผู้เสียภาษี" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>กลุ่มธุรกิจ<span class="text-danger">*</span></label>
-                                        <select name="industrygroup" data-placeholder="กลุ่มธุรกิจ" class="form-control form-control-select2" disabled>
+                                        <select name="industrygroup" data-placeholder="กลุ่มธุรกิจ" class="form-control form-control-lg form-control-select2" disabled>
                                             <option value=""></option>
                                                 @foreach ($industrygroups as $industrygroup)
                                                     <option value="{{$industrygroup->id}}" @if($company->industry_group_id == $industrygroup->id) selected @endif >{{$industrygroup->name}}</option> 
@@ -85,7 +85,7 @@
                                     </div>
                                     {{-- <div class="form-group">
                                         <label>ประเภททุนจดทะเบียน<span class="text-danger">*</span></label>
-                                        <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-select2" disabled>
+                                        <select name="registeredcapitaltype" data-placeholder="ประเภททุนจดทะเบียน" class="form-control form-control-lg form-control-select2" disabled>
                                             <option value=""></option>
                                                 @foreach ($registeredcapitaltypes as $registeredcapitaltype)
                                                     <option value="{{$registeredcapitaltype->id}}" @if($company->business_type_id == $registeredcapitaltype->id) selected @endif>{{$registeredcapitaltype->name}}: {{$registeredcapitaltype->detail}}</option> 
@@ -94,23 +94,23 @@
                                     </div> --}}
                                     <div class="form-group">
                                         <label>โทรศัพท์<span class="text-danger">*</span></label>
-                                        <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control" readonly>
+                                        <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>แฟ็กซ์<span class="text-danger">*</span></label>
-                                        <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="แฟ็กซ์" class="form-control" readonly>
+                                        <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="แฟ็กซ์" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>อีเมล<span class="text-danger">*</span></label>
-                                        <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control" readonly>
+                                        <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>ที่อยู่<span class="text-danger">*</span></label>
-                                        <input type="text"  name="address" value="{{$company->companyaddress->first()->address}}"  placeholder="ที่อยู่" class="form-control" readonly>
+                                        <input type="text"  name="address" value="{{$company->companyaddress->first()->address}}"  placeholder="ที่อยู่" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>จังหวัด<span class="text-danger">*</span></label>
-                                        <select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-select2" disabled>
+                                        <select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2" disabled>
                                             <option value=""></option>
                                             @foreach ($provinces as $province)
                                                 <option value="{{$province->id}}" @if($company->province_id == $province->id) selected @endif >{{$province->name}}</option> 
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>อำเภอ<span class="text-danger">*</span></label>
-                                        <select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-select2" disabled>
+                                        <select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2" disabled>
                                             @foreach ($amphurs as $amphur)                                                                
                                                 <option value="{{$amphur->id}}" @if ($amphur->id == $company->amphur_id) selected @endif > {{$amphur->name}} </option>
                                             @endforeach   
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>ตำบล<span class="text-danger">*</span></label>
-                                        <select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-select2" disabled>
+                                        <select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2" disabled>
                                             @foreach ($tambols as $tambol)                                                                
                                                 <option value="{{$tambol->id}}" @if ($tambol->id == $company->tambol_id) selected @endif > {{$tambol->name}} </option>
                                             @endforeach    
@@ -135,15 +135,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-                                        <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control" readonly>
+                                        <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>พิกัดละติจูด (เช่น 14.076868486942407)<span class="text-danger">*</span></label>
-                                        <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="พิกัดละติจูด" class="form-control" readonly>
+                                        <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="พิกัดละติจูด" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>พิกัดลองจิจูด (เช่น 100.60153839991285)<span class="text-danger">*</span> <a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer" >เปิดแผนที่</a> </label>
-                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองจิจูด" class="form-control" readonly>
+                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
                                         @if (!Empty($company->logo))

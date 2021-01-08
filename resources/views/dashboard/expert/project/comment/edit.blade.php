@@ -62,27 +62,27 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="left-icon-overview">
                                 <div class="form-group">
-                                    <textarea name="overview" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->overview}}</textarea>
+                                    <textarea name="overview" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->overview}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-management">
                                 <div class="form-group">
-                                    <textarea name="management" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->management}}</textarea>
+                                    <textarea name="management" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->management}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-technology">
                                 <div class="form-group">
-                                    <textarea name="technology" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->technology}}</textarea>
+                                    <textarea name="technology" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->technology}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-marketing">
                                 <div class="form-group">
-                                    <textarea name="marketing" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->marketing}}</textarea>
+                                    <textarea name="marketing" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->marketing}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-businessprospect">
                                 <div class="form-group">
-                                    <textarea name="businessprospect" id="" cols="30" rows="15" class="form-control">{{@$expertcomment->businessprospect}}</textarea>
+                                    <textarea name="businessprospect" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->businessprospect}}</textarea>
                                 </div>
                             </div>
                             {{-- <div class="tab-pane fade" id="left-icon-attachment">
@@ -91,7 +91,7 @@
                             {{-- <div class="tab-pane fade" id="left-icon-share">
                                 <div class="form-group">
                                     <label>เลือกผู้รับ</label><span class="text-danger">*</span>
-                                    <select id="users" data-placeholder="เลือกผู้รับ" class="form-control form-control-select2" multiple>
+                                    <select id="users" data-placeholder="เลือกผู้รับ" class="form-control form-control-lg form-control-select2" multiple>
                                         @foreach ($users as $user)
                                             <option value="{{$user->id}}" >{{$user->name}} {{$user->lastname}}</option> 
                                         @endforeach

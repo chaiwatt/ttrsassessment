@@ -55,19 +55,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เลขที่เอกสาร</label>
-                                            <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="เลขที่เอกสาร" class="form-control" readonly>
+                                            <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="เลขที่เอกสาร" class="form-control form-control-lg" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>จำนวนเงิน<span class="text-danger">*</span></label>
-                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control">
+                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>จ่ายผ่านธนาคาร<span class="text-danger">*</span></label>
-                                            <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-select2">
+                                            <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-lg form-control-select2">
                                                 @foreach ($banks as $bank)
                                                     <option value="{{$bank->id}}" 
                                                       @if ($bank->id == $invoicetransaction->bank_id ) selected @endif >{{$bank->name}}</option> 
@@ -78,20 +78,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>วันที่<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่" class="form-control">
+                                            <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymenttime" value="" placeholder="เวลา" class="form-control">
+                                            <input type="text"  name="paymenttime" value="" placeholder="เวลา" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เอกสารการจ่ายเงิน</label>
                                             <div class="input-group">													
-                                                <input type="text" id="filename" class="form-control border-right-0" placeholder="เอกสารการจ่ายเงิน"  >
+                                                <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="เอกสารการจ่ายเงิน"  >
                                                 <span class="input-group-append">
                                                     <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด</button>																																						
                                                 </span>
@@ -102,7 +102,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">เพิ่มเติม</label>
-                                            <textarea name="note" class="form-control" cols="3" rows="6">{{$invoicetransaction->note}}</textarea>
+                                            <textarea name="note" class="form-control form-control-lg" cols="3" rows="6">{{$invoicetransaction->note}}</textarea>
                                         </div>
                                     </div>
                                 {{-- </div> --}}

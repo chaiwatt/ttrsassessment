@@ -55,11 +55,11 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>หมายเลขแจ้งหนี้<span class="text-danger">*</span></label>
-                                            <input type="text"  name="invoice" value="{{$businessplanfeetransaction->invoiceno}}"  placeholder="ชื่อ" class="form-control" readonly>
+                                            <input type="text"  name="invoice" value="{{$businessplanfeetransaction->invoiceno}}"  placeholder="ชื่อ" class="form-control form-control-lg" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>จำนวนที่ชำระ<span class="text-danger">*</span></label>
-                                            <input type="text"  name="payment" value="{{$businessplanfeetransaction->feetype->price}}"  placeholder="นามสกุล" class="form-control" readonly>
+                                            <input type="text"  name="payment" value="{{$businessplanfeetransaction->feetype->price}}"  placeholder="นามสกุล" class="form-control form-control-lg" readonly>
                                         </div>
                                         <label class="d-block font-weight-semibold">เลือกวิธีการชำระเงิน<span class="text-danger">*</span></label>
                                         <div class="form-group mb-3 mb-md-2">     
@@ -88,13 +88,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>วันที่ชำระเงิน<span class="text-danger">*</span></label>
-                                                    <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่ชำระเงิน" class="form-control" >
+                                                    <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่ชำระเงิน" class="form-control form-control-lg" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>เวลา<span class="text-danger">*</span></label>
-                                                    <input type="text"  name="paymenttime" value=""  placeholder="เวลา" class="form-control" >
+                                                    <input type="text"  name="paymenttime" value=""  placeholder="เวลา" class="form-control form-control-lg" >
                                                 </div>
                                             </div>
                                         </div>    
@@ -108,7 +108,7 @@
                                         <div class="form-group">
                                             <label class="font-weight-semibold">เพิ่มเติม</label>
                                             <div class="input-group">	
-                                                <textarea name="note" id="" cols="30" rows="5" class="form-control"></textarea>											
+                                                <textarea name="note" id="" cols="30" rows="5" class="form-control form-control-lg"></textarea>											
                                             </div>
                                         </div>
                                     </fieldset>

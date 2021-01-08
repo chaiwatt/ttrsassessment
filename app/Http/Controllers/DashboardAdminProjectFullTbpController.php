@@ -12,6 +12,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Model\MessageBox;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
 use App\Model\AlertMessage;
@@ -20,6 +21,7 @@ use App\Model\BusinessType;
 use App\Model\CompanyBoard;
 use App\Model\EvCommentTab;
 use App\Model\FullTbpAsset;
+use App\Model\FullTbpGantt;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use App\Model\CriteriaGroup;
@@ -44,6 +46,7 @@ use App\Model\FullTbpMarketSize;
 use App\Model\FullTbpResearcher;
 use App\Model\FullTbpSellStatus;
 use App\Model\ProjectAssignment;
+use App\Model\StockHolderEmploy;
 use App\Model\CompanyStockHolder;
 use App\Model\FullTbpDebtPartner;
 use App\Model\FullTbpMarketShare;
@@ -104,7 +107,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $prefixes = Prefix::get();
         $employpositions = EmployPosition::get();
         $companyemploys = CompanyEmploy::where('company_id',$company->id)->get();
-        $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();
+        $companystockholders = StockHolderEmploy::where('company_id',$company->id)->get();
         $contactprefixes = Prefix::get();
         $contactpositions = UserPosition::get();
         $fulltbpprojectabtractdetails = FullTbpProjectAbtractDetail::where('full_tbp_id',$fulltbp->id)->get();
@@ -140,6 +143,56 @@ class DashboardAdminProjectFullTbpController extends Controller
                                             ->get();
         $fulltbpresearchers = FullTbpResearcher::where('full_tbp_id',$fulltbp->id)->get(); 
         $signaturestatuses = SignatureStatus::get();
+
+        $fulltbpprojectplantransactionarray =  FullTbpProjectPlanTransaction::where('full_tbp_id',$fulltbp->id)->distinct('month')->pluck('month')->toArray();
+        $minmonth = 0;
+        $maxmonth = 0;
+        $allyears = array(0, 0, 0);
+        if(count($fulltbpprojectplantransactionarray) != 0){
+            $minmonth = min($fulltbpprojectplantransactionarray);
+            $maxmonth = max($fulltbpprojectplantransactionarray);
+            $year1 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
+                return $n >= 1 && $n <= 12;
+            }); 
+            $year2 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
+                return $n >= 13 && $n <= 24;
+            });
+            $year3 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
+                return $n >= 25 && $n <= 36;
+            });
+            if(count($year1) != 0){
+                if(count($year2) != 0){
+                    $year1 = range(min($year1),12);
+                }else{
+                    $year1 = range(min($year1),max($year1));
+                }
+            }else{
+                $year1 = [];
+            }
+            
+            if(count($year2) != 0){
+                if(count($year1) != 0){
+                    $year2 = range(13,max($year2));
+                }else{
+                    $year2 = range(min($year2),max($year2));
+                }
+            }else{
+                $year2 = [];
+            }
+            if(count($year3) != 0){
+                if(count($year2) != 0){
+                    $year3 = range(25,max($year3));
+                }else{
+                    $year3 = range(min($year3),max($year3));
+                }
+            }else{
+                $year3 = [];
+            }
+            $allyears = array(count($year1), count($year2), count($year3));
+        }
+
+
+        $fulltbpgantt = FullTbpGantt::where('full_tbp_id',$fulltbp->id)->first();
         return view('dashboard.admin.project.fulltbp.view')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -183,7 +236,11 @@ class DashboardAdminProjectFullTbpController extends Controller
                                                 ->withFulltbpcompanydocs($fulltbpcompanydocs)
                                                 ->withTimelinehistories($timelinehistories)
                                                 ->withFulltbpresearchers($fulltbpresearchers)
-                                                ->withSignaturestatuses($signaturestatuses);
+                                                ->withSignaturestatuses($signaturestatuses)
+                                                ->withFulltbpgantt($fulltbpgantt)
+                                                ->withMaxmonth($maxmonth)
+                                                ->withMinmonth($minmonth)
+                                                ->withAllyears($allyears);
     }
 
     public function AssignGroup($id){
@@ -262,14 +319,21 @@ class DashboardAdminProjectFullTbpController extends Controller
             ]);
             $expertassignment = ExpertAssignment::find($request->id);
             $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
-            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a>',Auth::user()->id,User::find($expertassignment->user_id)->id);
+            
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a>',Auth::user()->id,User::find($expertassignment->user_id)->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $expertassignment->user_id;
+            $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ '.$minitbp->project .' ';
             $alertmessage->save();
+
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+
+            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
 
         }else{
             FullTbp::find($request->fulltbpid)->update([
@@ -306,15 +370,37 @@ class DashboardAdminProjectFullTbpController extends Controller
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
 
+            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ',$auth->id,$_user->id);
+
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $_company->user_id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติ';
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติ';
             $alertmessage->save();
 
-            EmailBox::send($_user->email,'TTRS:อนุมัติแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','เรียนผู้ประกอบการ<br><br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('กรอกข้อมูล Full TBP','แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ',Auth::user()->id,$_user->id);
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
 
+            $jduser = User::where('user_type_id',6)->first();
+
+            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี(Full TBP) โครงการ' . $minitbp->project .' ได้ผ่านการรับอนุมัติแล้ว',$auth->id,$jduser->id);
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $jduser->id;
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project;
+            $alertmessage->save();
+
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+
+            EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' ได้ผ่านการรับอนุมัติแล้ว จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS');
+            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ประกอบการ<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS');
+            
         }else{
             
             FullTbp::find($request->id)->update(
@@ -326,37 +412,42 @@ class DashboardAdminProjectFullTbpController extends Controller
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
             $timeLinehistory->details = $request->note;
-            $timeLinehistory->user_id = Auth::user()->id;
+            $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->message_type = 2;
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->save();
 
+            $messagebox = Message::sendMessage('แก้ไขข้อมูลแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a>',$auth->id,$_user->id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $_company->user_id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดแก้ไขแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ตามข้อแนะนำ ดังนี้<br><br>' .$request->note . '<br><br> <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a>';
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดแก้ไขแผนธุรกิจเทคโนโลยี (Full TBP) ตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br> <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a>';
             $alertmessage->save();
+
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
 
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $minitbp->business_plan_id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 5;
-            $notificationbubble->user_id = Auth::user()->id;
+            $notificationbubble->user_id = $auth->id;
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
-            EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูล Full TBP','เรียนผู้ประกอบการ<br><br> แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note.  ' <br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a><br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('แก้ไขข้อมูล Full TBP','แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br>' .$request->note. '<br><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$_user->id);
+            EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูลแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ประกอบการ<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a><br><br>ด้วยความนับถือ<br>TTRS');
+            
         }
         return response()->json($fulltbp); 
     }
     public function GetExpert(Request $request){
-        // $fulltbpids = ExpertAssignment::where('user_id',$request->id)->pluck('full_tbp_id')->toArray();
-        // $fulltbps = FullTbp::whereIn('id',$fulltbpids)->get();
         $expertassignments = ExpertAssignment::where('user_id',$request->id)->get();
         return response()->json($expertassignments); 
     }  
     public function NotifyJd(Request $request){
+        $auth = Auth::user();
         $fulltbp = FullTbp::find($request->fulltbpid);
         $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
         if(!Empty($request->users)){
@@ -365,23 +456,29 @@ class DashboardAdminProjectFullTbpController extends Controller
                 $user = User::find($_user);
                 $expert .= $user->name . ' ' . $user->lastname . '<br>';
             }
-            
+            $jduser = User::where('user_type_id',6)->first();
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br> เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a>',$auth->id,$jduser->id);
             $alertmessage = new AlertMessage();
-            $alertmessage->user_id = Auth::user()->id;
-            $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $jduser->id;
+            $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() . ' ตรวจสอบการมอบหมายผู้เชี่ยวชาญ สำหรับโครงการ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> ';
             $alertmessage->save();
+
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
 
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $minitbp->business_plan_id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 5;
-            $notificationbubble->user_id = Auth::user()->id;
-            $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $jduser->id;
             $notificationbubble->save();
 
-            EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ','เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ','Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br> เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+            EmailBox::send($jduser->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            
         }
         $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
         return response()->json($expertassignments); 
@@ -469,14 +566,20 @@ class DashboardAdminProjectFullTbpController extends Controller
         $notificationbubble->target_user_id = $projectassignment->leader_id;
         $notificationbubble->save();
 
+        $messagebox = Message::sendMessage('JD ได้พิจารณาผู้เชี่ยวชาญ โครงการ' . $minitbp->project . ' เสร็จแล้ว','JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
+        $alertmessage->messagebox_id = $messagebox->id;
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().  'JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a>' ;
         $alertmessage->save();
+
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
         
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:JD ได้พิจารณาผู้เชี่ยวชาญ โครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        
     }
 
     public function ExpertComment(Request $request){
@@ -576,26 +679,32 @@ class DashboardAdminProjectFullTbpController extends Controller
         $projectsmembers = ProjectMember::where('full_tbp_id',$id)->get();
 
         foreach ($projectsmembers as $key => $projectsmember) {
+            $messagebox = Message::sendMessage('สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project ,$auth->id,$projectsmember->user_id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =$projectsmember->user_id;
+            $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' สิ้นสุดโครงการ ' . $minitbp->project ;
             $alertmessage->save();
 
-            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:สิ้นสุดโครงการ','แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS');
-            Message::sendMessage('สิ้นสุดโครงการ','แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project ,$auth->id,$projectsmember->user_id);
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+
+            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS');  
         }
 
         $company = Company::find($businessplan->company_id);
-
+        $messagebox = Message::sendMessage('สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ'.$minitbp->project ,$auth->id,$company->user_id);
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id =$company->user_id;
+        $alertmessage->messagebox_id = $messagebox->id;
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' แจ้งสิ้นสุดโครงการ ' . $minitbp->project ;
         $alertmessage->save();
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:สิ้นสุดโครงการ','แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS');
-        Message::sendMessage('สิ้นสุดโครงการ','แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project ,$auth->id,$company->user_id);
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS');
+        
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;

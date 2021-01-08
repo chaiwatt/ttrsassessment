@@ -21,6 +21,7 @@ use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\FullTbpAsset;
+use App\Model\FullTbpGantt;
 use App\Model\IndustryGroup;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
@@ -124,21 +125,6 @@ class SettingUserCompanyController extends Controller
             'name' => $request->name,
             'lastname' => $request->lastname
         ]);
-        // return $company->id;
-        // BusinessPlan::where('company_id',$company->id)->first()->update([
-        //     'business_plan_status_id' => 2
-        // ]);
-        // $buninessplan = BusinessPlan::where('company_id',$company->id)->first();
-        // $minitbp = MiniTBP::where('business_plan_id',$buninessplan->id)->first();
-        // $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
-        // $projectmember = ProjectMember::where('full_tbp_id',$fulltbp->id)
-        //                             ->where('user_id',$auth->id)->first();
-        // if(Empty($projectmember)){
-        //     $projectmember = new ProjectMember();
-        //     $projectmember->full_tbp_id = $fulltbp->id;
-        //     $projectmember->user_id = User::where('user_type_id',6)->first()->id;
-        //     $projectmember->save();
-        // }
 
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         if(Empty($businessplan)){
@@ -157,6 +143,11 @@ class SettingUserCompanyController extends Controller
                 $fulltbp = new FullTbp();
                 $fulltbp->mini_tbp_id = $minitbp->id;
                 $fulltbp->save();
+
+                $fulltbpgantt = new FullTbpGantt();
+                $fulltbpgantt->full_tbp_id = $fulltbp->id;
+                $fulltbpgantt->startyear = intval(Carbon::now()->year) + 543 ;
+                $fulltbpgantt->save();
 
                 $fulltbpemployee = new FullTbpEmployee();
                 $fulltbpemployee->full_tbp_id = $fulltbp->id;

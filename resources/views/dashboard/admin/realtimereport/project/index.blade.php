@@ -27,7 +27,7 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>หัวข้อ</label>
-                                        <input type="text"  id="title" value=""  placeholder="หัวข้อ" class="form-control" readonly>
+                                        <input type="text"  id="title" value=""  placeholder="หัวข้อ" class="form-control form-control-lg" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -36,14 +36,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>สถานที่/ห้อง</label>
-                                    <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control" readonly>
+                                    <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control form-control-lg" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>ประเภท</label>
-                                        <input type="text" id="eventtype" value=""  placeholder="ประเภท" class="form-control" readonly>
+                                        <input type="text" id="eventtype" value=""  placeholder="ประเภท" class="form-control form-control-lg" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>วันที่</label>
-                                        <input type="text" id="eventdate" value=""  placeholder="วันที่" class="form-control" readonly>
+                                        <input type="text" id="eventdate" value=""  placeholder="วันที่" class="form-control form-control-lg" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>เวลาเริ่ม</label>
-                                        <input type="text" id="starttime" value=""  placeholder="เวลาเริ่ม" class="form-control" readonly>
+                                        <input type="text" id="starttime" value=""  placeholder="เวลาเริ่ม" class="form-control form-control-lg" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>ถึงเวลา</label>
-                                        <input type="text" id="endtime" value=""  placeholder="ถึงเวลา" class="form-control" readonly>
+                                        <input type="text" id="endtime" value=""  placeholder="ถึงเวลา" class="form-control form-control-lg" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>รายละเอียด</label>
-                                        <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control" readonly></textarea>
+                                        <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control form-control-lg" readonly></textarea>
                                     </div>
                                 </div>
                                     {{-- <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkjoinmetting" data-id="" data-on-color="success" data-off-color="danger" data-on-text="เข้าร่วมแล้ว" data-off-text="ไม่เข้าร่วม" class="form-check-input-switch"  > --}}
@@ -88,7 +88,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>การเข้าร่วม<span class="text-danger">*</span></label>
-                                    <select id="attendevent" class="form-control form-control-select2">
+                                    <select id="attendevent" class="form-control form-control-lg form-control-select2">
                                     </select>
                                 </div>
                             </div>

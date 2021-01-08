@@ -53,7 +53,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ประเภทการค้นหา</label><span class="text-danger">*</span>
-                                        <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-select2">
+                                        <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-lg form-control-select2">
                                             @foreach ($searchgroups as $searchgroup)
                                                 <option value="{{$searchgroup->id}}">{{$searchgroup->name}}</option> 
                                             @endforeach
@@ -62,7 +62,7 @@
                                 </div>    
                                 <div id="searchyear_wrapper" class="col-md-6">
                                     <label>ปี</label><span class="text-danger">*</span>
-                                    <select name="searchyear" id="searchyear" data-placeholder="ปี" class="form-control form-control-select2">
+                                    <select name="searchyear" id="searchyear" data-placeholder="ปี" class="form-control form-control-lg form-control-select2">
                                         <option value="0000">เลือกปี</option>
                                         @foreach ($years as $year)
                                             <option value="{{$year}}">{{$year}}</option> 
@@ -71,7 +71,7 @@
                                 </div>   
                                 <div id="searchindustrygroup_wrapper" class="col-md-6" hidden>
                                     <label>กลุ่มอุตสาหกรรม</label><span class="text-danger">*</span>
-                                    <select name="searchindustrygroup" id="searchindustrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-select2">
+                                    <select name="searchindustrygroup" id="searchindustrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
                                         {{-- <option value="0000">เลือกกลุ่มอุตสาหกรรม</option> --}}
                                         @foreach ($industrygroups as $industrygroup)
                                             <option value="{{$industrygroup->id}}">{{$industrygroup->name}}</option> 
@@ -80,7 +80,7 @@
                                 </div>     
                                 <div id="grage_wrapper" class="col-md-6" hidden>
                                     <label>เกรด</label><span class="text-danger">*</span>
-                                    <select name="searchgrade" id="searchgrade" data-placeholder="เกรด" class="form-control form-control-select2">
+                                    <select name="searchgrade" id="searchgrade" data-placeholder="เกรด" class="form-control form-control-lg form-control-select2">
                                         {{-- <option value="0000">เลือกกลุ่มอุตสาหกรรม</option> --}}
                                         @foreach ($grades as $grade)
                                             <option value="{{$grade->id}}">{{$grade->name}}</option> 
@@ -89,11 +89,11 @@
                                 </div>                        
                                 <div id="searchdate_wrapper" class="col-md-6" hidden>
                                     <label>วันที่</label>
-                                    <input type="text"  name="searchdate" id="searchdate" value=""  placeholder="วันที่" class="form-control" >
+                                    <input type="text"  name="searchdate" id="searchdate" value=""  placeholder="วันที่" class="form-control form-control-lg" >
                                 </div>
                                 <div id="searchword_wrapper" class="col-md-6" hidden>
                                     <label>คำค้น</label>
-                                    <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control" >
+                                    <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control form-control-lg" >
                                 </div>
                             </div>
                             <div class="text-right">
