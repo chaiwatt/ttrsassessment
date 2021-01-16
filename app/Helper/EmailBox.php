@@ -16,7 +16,7 @@ class EmailBox
             Mail::to($mailto)->send(new EmailSystem($data));
     } 
 
-    public static function emailSignature($mailto,$title,$message){
+    public static function emailSignature(){
         $data ='<span style="color:#6C6A6A;"><br>--
         <br>
         <br>Thailand Technology Rating Support and Service Center (TTRS)

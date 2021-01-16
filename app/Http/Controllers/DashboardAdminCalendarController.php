@@ -90,27 +90,27 @@ class DashboardAdminCalendarController extends Controller
           $eventcalendarattendee->user_id = $_user->id;
           $eventcalendarattendee->save();
       }
-      EmailBox::send($mails,'TTRS:นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+      EmailBox::send($mails,'TTRS:นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
       '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
       '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
       '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
       '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
       '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
       '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-      '<br><br>ด้วยความนับถือ<br>TTRS');
+      '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
       $fulltbp = FullTbp::find($request->fulltbp);
       $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
 
       foreach($request->users as $user){
           $_user = User::find($user);
-          Message::sendMessage('นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+          Message::sendMessage('นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
           '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
           '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
           '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
           '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
           '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
           '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-          '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+          '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
 
           $alertmessage = new AlertMessage();
           $alertmessage->user_id = $auth->id;
@@ -137,11 +137,11 @@ class DashboardAdminCalendarController extends Controller
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน สำหรับโครงการ'.$minitbp->project;
         $alertmessage->save();
  
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:นัดหมายการประเมิน ณ สถานประกอบการ','เรียนผู้ประกอบการ <br> แจ้งนัดหมายการประเมิน ณ สถานประกอบการ มีรายละเอียดดังนี้' .
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:นัดหมายการประเมิน ณ สถานประกอบการ','เรียนผู้ขอรับการประเมิน <br><br> แจ้งนัดหมายการประเมิน ณ สถานประกอบการ มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-        '<br><br>ด้วยความนับถือ<br>TTRS');
+        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
@@ -225,26 +225,26 @@ class DashboardAdminCalendarController extends Controller
         $mails[] = $_user->email;
     }
  
-    EmailBox::send($mails,'TTRS:นัดหมายการประชุม(แก้ไข)','เรียนท่านคณะกรรมการ <br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+    EmailBox::send($mails,'TTRS:นัดหมายการประชุม(แก้ไข)','เรียนท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
     '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
     '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
     '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
     '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
     '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-    '<br><br>ด้วยความนับถือ<br>TTRS');
+    '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
     foreach($updateguest_array as $user){
         $_user = User::find($user);
 
-        Message::sendMessage('นัดหมายการประชุม','TTRS:นัดหมายการประชุม(แก้ไข) เรียนท่านคณะกรรมการ <br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+        Message::sendMessage('นัดหมายการประชุม','TTRS:นัดหมายการประชุม(แก้ไข) เรียนท่านคณะกรรมการ <br><br>โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-        '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
@@ -268,23 +268,23 @@ class DashboardAdminCalendarController extends Controller
     }
 
     if ($mails > 0){
-        EmailBox::send($mails,'TTRS:ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br> โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+        EmailBox::send($mails,'TTRS:ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-        '<br><br>ด้วยความนับถือ<br>TTRS');
+        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     
         foreach($removeguest_array as $user){
             $_user = User::find($user);
-            Message::sendMessage('ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br> โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+            Message::sendMessage('ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
             '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
             '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
             '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-            '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+            '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
         }
     
     }
@@ -301,23 +301,23 @@ class DashboardAdminCalendarController extends Controller
         $mails[] = $_user->email;
     }
 
-    EmailBox::send($mails,'TTRS:ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการทุกท่าน <br> โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+    EmailBox::send($mails,'TTRS:ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการทุกท่าน <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
     '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
     '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
     '<br><strong>&nbsp;รายละเอียด:</strong> '.$eventcalendar->summary.
     '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
-    '<br><br>ด้วยความนับถือ<br>TTRS');
+    '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     $eventcalendar->delete();
     foreach($eventcalendars as $user){
         $_user = User::find($user);
-        Message::sendMessage('ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการทุกท่าน <br> โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+        Message::sendMessage('ยกเลิก นัดหมายการประชุม','เรียนท่านคณะกรรมการทุกท่าน <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
         '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
         '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$eventcalendar->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
-        '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
+        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
     }
     return redirect()->route('dashboard.admin.calendar')->withSuccess('ลบการสำเร็จ');
 

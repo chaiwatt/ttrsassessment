@@ -333,7 +333,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
         }else{
             FullTbp::find($request->fulltbpid)->update([
@@ -398,8 +398,8 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' ได้ผ่านการรับอนุมัติแล้ว จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS');
-            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ประกอบการ<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS');
+            EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' ได้ผ่านการรับอนุมัติแล้ว จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
         }else{
             
@@ -437,7 +437,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
-            EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูลแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ประกอบการ<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a><br><br>ด้วยความนับถือ<br>TTRS');
+            EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูลแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br><a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
         }
         return response()->json($fulltbp); 
@@ -477,7 +477,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             $notificationbubble->target_user_id = $jduser->id;
             $notificationbubble->save();
 
-            EmailBox::send($jduser->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+            EmailBox::send($jduser->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียน JD <br> Leader ได้มอบหมายให้ <br><br>' .$expert . ' <br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
         }
         $expertassignments = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)->get();
@@ -578,7 +578,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
         
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:JD ได้พิจารณาผู้เชี่ยวชาญ โครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br> JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS');
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:JD ได้พิจารณาผู้เชี่ยวชาญ โครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br><br> JD ได้พิจารณาผู้เชี่ยวชาญสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
     }
 
@@ -691,7 +691,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS');  
+            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
         }
 
         $company = Company::find($businessplan->company_id);
@@ -703,7 +703,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' แจ้งสิ้นสุดโครงการ ' . $minitbp->project ;
         $alertmessage->save();
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS');
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
 
         $timeLinehistory = new TimeLineHistory();
