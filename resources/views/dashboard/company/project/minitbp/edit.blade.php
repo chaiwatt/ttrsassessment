@@ -524,7 +524,7 @@
 											<div style="width:100%;height:600px;" class="col-md-12 center"  >
 												<div id="example1"></div>
 											</div>
-											<input type="file" style="display:none;" id="minitbppdf"/>
+											<input type="file" style="display:none;" id="minitbppdf" accept="application/pdf"/>
 										</div>
 									</div>
 									<div class="col-md-12 " id="appceptagreement_wrapper">
@@ -881,7 +881,7 @@
 	}
 
 	$(document).on('click', '#submitminitbp', function(e) {
-		console.log($('#appceptagreement').is(':checked'));
+		// console.log($('#appceptagreement').is(':checked'));
 		if($('#appceptagreement').is(':checked') === false){
 			Swal.fire({
 				title: 'ผิดพลาด!',
@@ -892,7 +892,7 @@
 		}
 		var text = 'ส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
 		if($('#usersignature').val() == 1){
-			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF ที่ลงลายมือชื่อเรียบร้อยแล้ว'
 		}
 		Swal.fire({
 			title: 'โปรดยืนยัน',

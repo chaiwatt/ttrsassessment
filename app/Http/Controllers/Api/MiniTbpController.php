@@ -18,6 +18,7 @@ use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
+use App\Model\TimeLineHistory;
 use App\Model\MinitbpSignature;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
@@ -288,16 +289,17 @@ class MiniTbpController extends Controller
             'business_plan_status_id' => 3
         ]);
         $minitbp = MiniTBP::find($id);
-        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find($minitbp->business_plan_id)->id)->first();
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $company = $minitbp->businessplan->company;
         if(Empty($projectassignment->leader_id)){
             $projectassignment = new ProjectAssignment();
             $projectassignment->full_tbp_id = FullTbp::where('mini_tbp_id',$minitbp->id)->first()->id;
-            $projectassignment->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
+            $projectassignment->business_plan_id = $businessplan->id;
             $projectassignment->save();
 
             $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
+            $notificationbubble->business_plan_id = $businessplan->id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 1;
             $notificationbubble->user_id = $auth->id;
@@ -316,6 +318,16 @@ class MiniTbpController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
+
+            $timeLinehistory = new TimeLineHistory();
+            $timeLinehistory->business_plan_id = $businessplan->id;
+            $timeLinehistory->details = 'ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP)';
+            $timeLinehistory->message_type = 1;
+            $timeLinehistory->owner_id = $auth->id;
+            $timeLinehistory->user_id = $auth->id;
+            $timeLinehistory->save();
+
+
             EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' บริษัท'. $company->name,'เรียน JD<br><br> บริษัท'. $company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature() . EmailBox::emailSignature());
             
         }else{
@@ -362,17 +374,18 @@ class MiniTbpController extends Controller
             'business_plan_status_id' => 3
         ]);
         $minitbp = MiniTBP::find($id);
-        $projectassignment = ProjectAssignment::where('business_plan_id',BusinessPlan::find($minitbp->business_plan_id)->id)->first();
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $company = $minitbp->businessplan->company;
         if(Empty($projectassignment->leader_id)){
             
             $projectassignment = new ProjectAssignment();
             $projectassignment->full_tbp_id = FullTbp::where('mini_tbp_id',$minitbp->id)->first()->id;
-            $projectassignment->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
+            $projectassignment->business_plan_id = $businessplan->id;
             $projectassignment->save();
 
             $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = BusinessPlan::find($minitbp->business_plan_id)->id;
+            $notificationbubble->business_plan_id = $businessplan->id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 1;
             $notificationbubble->user_id = $auth->id;
@@ -388,6 +401,14 @@ class MiniTbpController extends Controller
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' บริษัท'.$company->name. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>';
             $alertmessage->save();
             
+            $timeLinehistory = new TimeLineHistory();
+            $timeLinehistory->business_plan_id = $businessplan->id;
+            $timeLinehistory->details = 'ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP)';
+            $timeLinehistory->message_type = 1;
+            $timeLinehistory->owner_id = $auth->id;
+            $timeLinehistory->user_id = $auth->id;
+            $timeLinehistory->save();
+
             EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . 'บริษัท'. $company->name,'เรียน JD<br><br> บริษัท'. $company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โปรดตรวจสอบและแต่งตั้ง Leader ผู้รับผิดชอบโครงการ ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature() . EmailBox::emailSignature());
             
         }else{
