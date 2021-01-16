@@ -146,13 +146,13 @@ class FullTbpController extends Controller
             'status' => 2
         ]);
         
-        $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)' ;
+        $message = 'แผนธุรกิจเทคโนโลยี (Full TBP)' ;
         $fulltbp = FullTbp::find($request->id);
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
-            $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ที่มีการแก้ไข' ;
+            $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) ที่มีการแก้ไข' ;
         }
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
@@ -184,7 +184,7 @@ class FullTbpController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' โครงการ' . $minitbp->project,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a> <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' โครงการ' . $minitbp->project . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
    
     }
     
@@ -197,13 +197,13 @@ class FullTbpController extends Controller
             'attachment' => $filelocation
         ]);
         
-        $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)' ;
+        $message = 'แผนธุรกิจเทคโนโลยี (Full TBP)' ;
         $fulltbp = FullTbp::find($request->id);
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
-            $message = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ที่มีการแก้ไข' ;
+            $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) ที่มีการแก้ไข' ;
         }
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
@@ -234,7 +234,7 @@ class FullTbpController extends Controller
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' โครงการ' . $minitbp->project ,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>  <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' โครงการ' . $minitbp->project . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
         
     }
 

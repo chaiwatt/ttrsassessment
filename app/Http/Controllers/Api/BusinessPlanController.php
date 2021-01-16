@@ -53,7 +53,7 @@ class BusinessPlanController extends Controller
             $alertmessage->detailDateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คำขอประเมินธุรกิจได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้  ' ;
             $alertmessage->save();
 
-            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Mini TBP','เรียนผู้ขอรับการประเมิน<br><br> คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a> <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Mini TBP','เรียนผู้ขอรับการประเมิน<br><br> คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             Message::sendMessage('กรอกข้อมูล Mini TBP','คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a>',User::where('user_type_id',6)->first()->id,$_user->id);
 
         }
