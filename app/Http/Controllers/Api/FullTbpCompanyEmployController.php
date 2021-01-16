@@ -122,9 +122,16 @@ class FullTbpCompanyEmployController extends Controller
     }
     
     public function Search(Request $request){
+        // $companyemploys = CompanyEmploy::where('company_id',$request->company)
+        //                             ->where('name', 'like', '%' . $request->search . '%')
+        //                             ->orWhere('lastname', 'like', '%' . $request->search . '%')->get();
+        $search = $request->search;
         $companyemploys = CompanyEmploy::where('company_id',$request->company)
-                                    ->where('name', 'like', '%' . $request->search . '%')
-                                    ->orWhere('lastname', 'like', '%' . $request->search . '%')->get();
+                                    ->where(function($query) use ($search){
+                                        $query->where('name', 'like', '%' . $search . '%')
+                                              ->orWhere('lastname', 'like', '%' . $search . '%');
+                                    })->get();
+
         return response()->json($companyemploys); 
     }
 }

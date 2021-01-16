@@ -40,6 +40,8 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 
 Route::get('generate','PDFController@Generate')->name('generate');
 
+Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
+
 Route::get('', 'HomeController@Index')->name('landing.index');
 Route::get('front', 'HomeController@Front')->name('landing.front');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');

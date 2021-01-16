@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 class MailController extends Controller
 {
     public function Send(){
-        $mails = array("ttrsexpert1@gmail.com", "ttrsuser1@gmail.com", "ttrsexpert2@gmail.com");
+        $mails = array("ttrsuser1@gmail.com", "ttrsuser2@gmail.com");
 
         $data = [
         'sendermail' => env('MAIL_FROM_ADDRESS'),
