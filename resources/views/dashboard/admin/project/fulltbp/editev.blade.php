@@ -123,12 +123,16 @@
                             <h6>Criteria</h6>
                             <fieldset>
                                 <div class="row" id="criteria_wrapper">
-                                    <div class="col-md-12">
+                                    {{-- <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <select name="criteria" id="criteria" data-placeholder="Index" class="form-control form-control-lg form-control-select2" multiple >
                                                 </select>
                                             </div>
+                                        </div>
+                                    </div> --}}
+                                    <div class="col-md-12 mb-3">
+                                        <div class="row" id="chklist">
                                         </div>
                                     </div>
                                 </div>

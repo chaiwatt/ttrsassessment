@@ -76,10 +76,17 @@ $(document).on('change', '#subpillarindex', function(e) {
     $("#criteria_wrapper").attr("hidden",true);
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
         var html =``;
+        var html1 =``;
         data.forEach(function (subpillar,index) {
-                html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+                // html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+                html1 += `<div class="col-md-6"><div class="form-check">
+                        <input type="checkbox" id="${subpillar['id']}" class="form-check-input-styled">
+                            ${subpillar['name']}
+                        </div></div>`
             });
-        $("#criteria").html(html);
+        // $("#criteria").html(html);
+        $("#chklist").html(html1);
+        
         Pillar.getRelatedEv($('#evid').val()).then(data => {
             var html =``;
             data.forEach(function (ev,index) {
@@ -312,13 +319,9 @@ $('.steps-basic-extra').steps({
             if($('#extrasubpillarindex').val() == 0){
                 return false;
             }else{
-                // $("#extra_criteria_wrapper").attr("hidden",true);
-                // if($('#indextype').val() == 2){
-                    // $("#criteria_wrapper").attr("hidden",false);
                     if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == '' ||$('#gradef').val() == ''){
                         return false;
                     }
-                // }
                 return true;
             } 
         }else{
@@ -848,7 +851,7 @@ $(document).on('change', '#extrasubpillar', function(e) {
     // $('#indextype').val(1);
     // $('#indextype').select2().trigger('change');
     $(this).prop('selected',true);
-    // $("#extra_criteria_wrapper").attr("hidden",true);
+
     SubPillar.getSubPillarIndex($('#evid').val(),$(this).val()).then(data => {
         console.log(data);
         var html =``;
