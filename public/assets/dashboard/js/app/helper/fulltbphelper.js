@@ -2154,13 +2154,13 @@ $('.steps-basic').steps({
             }
 
         }
-        if ($('#companyhistory').summernote('isEmpty'))
-        {
-            $("#companyhistoryerror").attr("hidden",false);
-            return;
-        }else{
-            $("#companyhistoryerror").attr("hidden",true);
-        }
+        // if ($('#companyhistory').summernote('isEmpty'))
+        // {
+        //     $("#companyhistoryerror").attr("hidden",false);
+        //     return;
+        // }else{
+        //     $("#companyhistoryerror").attr("hidden",true);
+        // }
         form.validate().settings.ignore = ':disabled,:hidden';
         return form.valid();
     },
@@ -2849,49 +2849,49 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
 	        email: {
 	            email: true
             },
-            businesstype: {
-				required: true
-            }
+            // businesstype: {
+			// 	required: true
+            // }
         },
         messages: {
-			businesstype: {
-				required: 'กรุณาเลือกประเภทธุรกิจ'
-            },
-            department_qty: {
-				required: 'กรุณากรอกจำนวนบุคลากรทั้งหมด'
-            },
-            department1_qty: {
-				required: 'กรุณากรอกจำนวนผ่ายบริหาร'
-            },
-            department2_qty: {
-				required: 'กรุณากรอกจำนวนฝ่ายวิจัยและพัฒนา'
-            },
-            department3_qty: {
-				required: 'กรุณากรอกจำนวนฝ่ายผลิต/วิศวกรรม'
-            },
-            department4_qty: {
-				required: 'ผ่ายการตลาด'
-            },
-            department5_qty: {
-				required: 'กรุณากรอกพนักงานทั่วไป'
-            },
-            companyhistory: {
-				required: 'กรุณากรอกรายละเอียด'
-            },
-            responsiblename: {
-				required: 'กรุณากรอกชื่อ'
-            },
-            responsiblelastname: {
-				required: 'กรุณากรอกนามสกุล'
-            },
-            responsibleemail: {
-				required: 'กรุณากรอกอีเมล'
-            },
-            responsibleposition: {
-				required: 'กรุณากรอกตำแหน่ง'
-            },
-            responsiblephone: {
-				required: 'กรุณากรอกเบอร์โทรศัพท์'
-            },
+			// businesstype: {
+			// 	required: 'กรุณาเลือกประเภทธุรกิจ'
+            // },
+            // department_qty: {
+			// 	required: 'กรุณากรอกจำนวนบุคลากรทั้งหมด'
+            // },
+            // department1_qty: {
+			// 	required: 'กรุณากรอกจำนวนผ่ายบริหาร'
+            // },
+            // department2_qty: {
+			// 	required: 'กรุณากรอกจำนวนฝ่ายวิจัยและพัฒนา'
+            // },
+            // department3_qty: {
+			// 	required: 'กรุณากรอกจำนวนฝ่ายผลิต/วิศวกรรม'
+            // },
+            // department4_qty: {
+			// 	required: 'ผ่ายการตลาด'
+            // },
+            // department5_qty: {
+			// 	required: 'กรุณากรอกพนักงานทั่วไป'
+            // },
+            // companyhistory: {
+			// 	required: 'กรุณากรอกรายละเอียด'
+            // },
+            // responsiblename: {
+			// 	required: 'กรุณากรอกชื่อ'
+            // },
+            // responsiblelastname: {
+			// 	required: 'กรุณากรอกนามสกุล'
+            // },
+            // responsibleemail: {
+			// 	required: 'กรุณากรอกอีเมล'
+            // },
+            // responsibleposition: {
+			// 	required: 'กรุณากรอกตำแหน่ง'
+            // },
+            // responsiblephone: {
+			// 	required: 'กรุณากรอกเบอร์โทรศัพท์'
+            // },
 		}
 	});

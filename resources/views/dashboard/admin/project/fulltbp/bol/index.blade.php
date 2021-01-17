@@ -22,7 +22,7 @@
 						<div class="input-group">													
 							<button id="btnaddboldoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('boldoc').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="boldoc" name="boldoc"/>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="boldoc" name="boldoc" accept="application/pdf"/>
 					</div>
 				</div>
 			</div>           

@@ -27,7 +27,7 @@
                             <div class="input-group">													
                                 <button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
                             </div>
-                            <input type="file" style="display:none;" id="companydoc" data-id="{{$company->id}}" name="companydoc"/>
+                            <input type="file" style="display:none;" id="companydoc" data-id="{{$company->id}}" name="companydoc" accept="application/pdf"/>
                         </div>
                     </div>
                 </div>           
@@ -334,7 +334,7 @@
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																																						
                                             </span>
                                         </div>
-                                        <input type="file" style="display:none;" id="file" name="picture"/>
+                                        <input type="file" style="display:none;" id="file" name="picture" accept="image/*"/>
                                         @if (!Empty($company->logo))
                                         <br>
                                             <img src="{{asset($company->logo)}}" width="300" height="300" alt="">

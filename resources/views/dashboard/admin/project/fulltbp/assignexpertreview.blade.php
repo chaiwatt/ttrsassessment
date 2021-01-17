@@ -167,104 +167,148 @@
                 {{ $errors->first() }}
             </div>
         @endif
-        <div class="row">
-            {{-- <div class="col-md-12">
-                <div class="form-group">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr class="bg-info">
-                                        <th style="width:15px">เลือก</th>
-                                        <th >ชื่อ-สกุล</th>
-                                        <th >JD มอบหมาย</th>
-                                        <th >การตอบรับ</th>
-                                        <th >โครงการรับผิดชอบ</th> 
-                                        <th >กำลังดำเนินการ</th>    
-                                        <th >เสร็จสิ้น</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="authorized_director_wrapper_tr"> 
-                                    @foreach ($full as $key => $user)
-                                    <tr >  
-                                        <td><input type="check" name="leader" value="{{$user->id}}" class="form-check-input-styled leader" data-fouc @if($projectassignment->leader_id == $user->id) checked @endif  ></td>  
-                                        <td>{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</td>
-                                        <td>yy</td> 
-                                        <td>xx</td> 
-                                        <td>{{$user->projecthandle->count()}}</td>      
-                                        <td>{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
-                                        <td>{{$user->projecthandle->where('ststus',3)->count()}}</td> 
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+        <form method="POST" action="{{route('dashboard.admin.project.fulltbp.assignexpertreviewsave',['id' => $fulltbp->id])}}" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <div class="text-right">
-                            <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                        </div>
-                    </div>
-            </div> --}}
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr class="bg-info">
+                                            <th style="width:15px">เลือก</th>
+                                            <th >ชื่อ-สกุล</th>
+                                            <th >ตำแหน่ง</th>
+                                            <th >JD มอบหมาย</th>
+                                            <th >การตอบรับ</th>
+                                            <th >โครงการรับผิดชอบ</th> 
+                                            <th >กำลังดำเนินการ</th>    
+                                            <th >เสร็จสิ้น</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="authorized_director_wrapper_tr"> 
+                                        @foreach ($experts as $key => $user)
+                                            @php
+                                                $check = $user->IsExpert($fulltbp->id);
+                                                $isjd = 'expert';
+                                                if(Auth::user()->user_type_id !=6 )$isjd = '';
+                                            @endphp
+                                        <tr >  
+                                            <td>
+                                                <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
+                                                <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
+                                                @if (!Empty($check))
+                                                    @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1)
+                                                        hidden
+                                                    @endif
 
-
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group">	
-                            <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_expert"><i class="icon-add"></i></a>
-                            <br>
+                                                    checked 
+                                                @endif
+                                                ></td>  
+                                            <td>{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</td>
+                                            <td>
+                                                {{$user->usertype->name}} {{$user->expertType}}
+                                            </td> 
+                                            <td>
+                                                @if (!Empty($check))
+                                                    @if ($check->expert_assignment_status_id == 1)
+                                                        @if (Auth::user()->user_type_id == 6)
+                                                           <a href="#" type="button" data-id="{{$user->id}}" class="btn btn-sm bg-warning assingexpert"><i class="icon-spinner spinner mr-2" id="btnassign{{$user->id}}" hidden></i>มอบหมาย</a>
+                                                        @else
+                                                            <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่ได้มอบหมาย</span>
+                                                        @endif
+                                                            
+                                                    @elseif($check->expert_assignment_status_id == 2)
+                                                            <span class="badge badge-flat border-success text-success-600 rounded-0">มอบหมายแล้ว</span>
+                                                    @endif
+                                                @endif
+                                            </td> 
+                                            <td>
+                                                @if (!Empty($check))
+                                                    @if($check->expert_assignment_status_id == 2)
+                                                        @if ($check->accepted == 0)
+                                                            <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่ได้ตอบรับ</span>
+                                                        @elseif($check->accepted == 1) 
+                                                            <span class="badge badge-flat border-success text-success-600 rounded-0">ตอบรับแล้ว</span>
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            </td> 
+                                            <td>{{$user->projecthandle->count()}}</td>      
+                                            <td>{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
+                                            <td>{{$user->projecthandle->where('ststus',3)->count()}}</td> 
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th >ชื่อ-สกุล</th> 
-                                        @if (Auth::user()->user_type_id == 6 )
-                                            <th>การรับมอบหมาย</th> 
-                                        @endif     
-                                        <th>สถานะ</th> 
-                                        <th>การตอบรับ</th> 
-                                        <th>ความคิดเห็น</th> 
-                                        <th>เพิ่มเติม</th>                                                                 
-                                    </tr>
-                                </thead>
-                                <tbody id="expert_wrapper">
-                                    @foreach ($expertassignments as $key => $expertassignment)
-                                    <tr>    
-                                        <td class='userid' data-id='{{$expertassignment->user->id}}'> 
-                                            <a type="button" class="text-info expertworkload" data-id="{{$expertassignment->user_id}}">{{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</a>
-                                        </td> 
-                                        @if (Auth::user()->user_type_id == 6 )
-                                            <td> <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$expertassignment->id}}" hidden></i><input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
-                                        @endif
-                                        <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
-                                        <td> 
-                                            @if ($expertassignment->accepted == 0)
-                                                   <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span> 
-                                                @elseif($expertassignment->accepted == 1)
-                                                    <span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span> 
-                                                @elseif($expertassignment->accepted == 2)
-                                                    <span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>   
-                                            @endif
-                                        </td> 
-                                        <td>
-                                            @if (!Empty($expertassignment->expertcomment))
-                                                <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>                                                                           
-                                            @endif  
-                                        </td>
-                                        <td> 
-                                            <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-danger deleteexpert">ลบ</button>                                       
-                                        </td>                                
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>      
+                        <div class="form-group">
+                            <div class="text-right">
+                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                            </div>
                         </div>
-                    </div>
                 </div>
-            <!-- /striped rows -->
+    
+                {{-- <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">	
+                                <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_expert"><i class="icon-add"></i></a>
+                                <br>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th >ชื่อ-สกุล</th> 
+                                            @if (Auth::user()->user_type_id == 6 )
+                                                <th>การรับมอบหมาย</th> 
+                                            @endif     
+                                            <th>สถานะ</th> 
+                                            <th>การตอบรับ</th> 
+                                            <th>ความคิดเห็น</th> 
+                                            <th>เพิ่มเติม</th>                                                                 
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expert_wrapper">
+                                        @foreach ($expertassignments as $key => $expertassignment)
+                                        <tr>    
+                                            <td class='userid' data-id='{{$expertassignment->user->id}}'> 
+                                                <a type="button" class="text-info expertworkload" data-id="{{$expertassignment->user_id}}">{{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</a>
+                                            </td> 
+                                            @if (Auth::user()->user_type_id == 6 )
+                                                <td> <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$expertassignment->id}}" hidden></i><input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
+                                            @endif
+                                            <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
+                                            <td> 
+                                                @if ($expertassignment->accepted == 0)
+                                                       <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span> 
+                                                    @elseif($expertassignment->accepted == 1)
+                                                        <span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span> 
+                                                    @elseif($expertassignment->accepted == 2)
+                                                        <span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>   
+                                                @endif
+                                            </td> 
+                                            <td>
+                                                @if (!Empty($expertassignment->expertcomment))
+                                                    <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>                                                                           
+                                                @endif  
+                                            </td>
+                                            <td> 
+                                                <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-danger deleteexpert">ลบ</button>                                       
+                                            </td>                                
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>      
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
-        </div>
+        </form>
+ 
         <!-- /form layouts -->
         <div class="loader loader-default" data-text="กำลังบันทึก..."></div>
     </div>

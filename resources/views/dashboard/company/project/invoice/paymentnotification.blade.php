@@ -96,7 +96,7 @@
                                                     <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด</button>																																						
                                                 </span>
                                             </div>
-                                            <input type="file" style="display:none;" id="file" name="file"/>
+                                            <input type="file" style="display:none;" id="file" name="file" accept="application/pdf"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

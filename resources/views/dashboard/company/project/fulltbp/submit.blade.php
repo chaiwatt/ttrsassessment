@@ -61,7 +61,7 @@
                                             <button class="btn bg-info" type="button" onclick="document.getElementById('attachment').click();">เลือกไฟล์</button>													
                                         </span>
                                     </div>
-                                    <input type="file" style="display:none;" id="attachment" name="attachment"/>
+                                    <input type="file" style="display:none;" id="attachment" name="attachment" accept="application/pdf"/>
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">ส่ง Full TBP <i class="icon-paperplane ml-2"></i></button>

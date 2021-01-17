@@ -399,7 +399,7 @@
 														<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>
 													</span>
 											</div>
-											<input type="file" style="display:none;" id="file" name="picture"/>
+											<input type="file" style="display:none;" id="file" name="picture" accept="image/*"/>
 											@if (!Empty($user->company->logo))
 											<br>
 												<img src="{{asset($user->company->logo)}}" width="300" height="300" alt="">

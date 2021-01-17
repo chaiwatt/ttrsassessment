@@ -259,16 +259,16 @@
                                                 <td> 
                                                     @if ($fulltbp->expertassignments->count() > 0)
                                                             @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
                                                                 @else
                                                                     @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
-                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
                                                                         @else
-                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
+                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
                                                                     @endif
                                                             @endif  
                                                         @else
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
                                                     @endif
                                                 </td> 
                                                 <td> 

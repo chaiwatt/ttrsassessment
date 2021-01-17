@@ -62,6 +62,23 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return UserType::find($this->user_type_id);
     }
+
+    public function getExpertTypeAttribute()
+    {
+        if ($this->user_type_id == 3){
+            $check = ExpertDetail::where('user_id',$this->id)->first();
+            if($check->expert_type_id == 1){
+                return "";
+            }else if($check->expert_type_id == 2){
+                return "(ภายนอก)";
+            }
+        }else{
+            return "";
+        }
+
+        return UserType::find($this->user_type_id);
+    }
+
     public function getUserStatusAttribute()
     {
         return UserStatus::find($this->user_status_id);
@@ -92,6 +109,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return ExpertAssignment::where('user_id',$this->id)->where('expert_assignment_status_id',2)->get();
     }
 
+    public function IsExpert($fulltbpid)
+    {
+        return ExpertAssignment::where('user_id',$this->id)->where('full_tbp_id',$fulltbpid)->first();
+    }
+
     public function getUsergroupAttribute()
     {
         return UserGroup::find($this->user_group_id);
@@ -113,6 +135,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $fulltbpiduniques = array_unique(array_merge($expertassignmentfulltbparray,$leaderfulltbparray,$coleaderfulltbparray));
         return FullTbp::whereIn('id',$fulltbpiduniques)->get();
     }
+
     // public function getFulltbpexpertAttribute()
     // {
     //     $projectmemberarray = ProjectMember::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();

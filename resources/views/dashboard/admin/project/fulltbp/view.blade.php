@@ -305,7 +305,7 @@
 									<div class="input-group">													
 										<label for="">เอกสารแนบ</label>
 									</div>
-									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment"/>
+									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="application/pdf"/>
 
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
@@ -559,7 +559,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -591,7 +591,7 @@
 						<div class="input-group">													
 							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -1133,7 +1133,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc"/>
+						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc" accept="application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -1388,7 +1388,7 @@
 													<div class="col-md-12 mt-3">
 														<div class="form-group">
 															<label><strong><u>แผนผังองค์กร</u></strong></label>
-															<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg"/>
+															<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg" accept="image/*"/>
 															@if (!Empty($fulltbp->minitbp->businessplan->company->organizeimg))
 																<br>
 																<img id="organizeimgholder" src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" width="500" height="300" alt="">
@@ -2239,7 +2239,7 @@
 																	<div class="form-group">												
 																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</label>
 																	</div>
-																	<input type="file" style="display:none;" data-id="{{$fulltbpprojectcertify->id}}" id="certify" name="certify"/>
+																	<input type="file" style="display:none;" data-id="{{$fulltbpprojectcertify->id}}" id="certify" name="certify" accept="application/pdf"/>
 																</div>
 		
 																<div class="col-md-12" id="fulltbp_certify_wrapper" >	

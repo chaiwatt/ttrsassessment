@@ -177,7 +177,7 @@
                             <div class="input-group">													
 								<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
 							</div>
-							<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc"/>
+							<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc" accept="application/pdf"/>
 							<div class="input-group">	
 								<label class="text-danger"><small>ไฟล์ PDF ขนาดไม่เกิน 2 MB</small></label>
 							</div> 
@@ -327,7 +327,7 @@
 											  <button type="button" class="btn bg-primary" data-action="undo">ยกเลิก</button>
 											  <button type="button" class="btn bg-success save" data-action="save-png">บันทึก</button>								
 											</div>
-											<input type="file" style="display:none;" id="signature" name="picture"/>
+											<input type="file" style="display:none;" id="signature" name="picture" accept="image/*"/>
 										  </div>
 										</div>
 									  </div>
@@ -442,7 +442,7 @@
 						<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
 					@endif
 				</a>
-				<input type="file" style="display:none;" id="avatarimg" name="avatarimg"/>
+				<input type="file" style="display:none;" id="avatarimg" name="avatarimg" accept="image/*"/>
 			</div>
 			<div class="media-body text-white">
 				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>
@@ -454,7 +454,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcoverimg" class="btn btn-light border-transparent" type="button" onclick="document.getElementById('coverimg').click();"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</button>													
 						</div>
-						<input type="file" style="display:none;" id="coverimg" name="coverimg"/>
+						<input type="file" style="display:none;" id="coverimg" name="coverimg" accept="image/*"/>
 					</div>
 				</ul>
 			</div>
@@ -890,7 +890,7 @@
 														<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>
 													</span>
 											</div>
-											<input type="file" style="display:none;" id="file" name="picture"/>
+											<input type="file" style="display:none;" id="file" name="picture" accept="image/*"/>
 											@if (!Empty($user->company->logo))
 											<br>
 												<img src="{{asset($user->company->logo)}}" width="300" height="300" alt="">

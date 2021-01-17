@@ -192,7 +192,7 @@
                                             <div class="input-group">													
                                                 <button class="btn bg-info" id="btnuploadfeature" type="button" onclick="document.getElementById('file').click();">อัปโหลด Feature</button>													
                                             </div>
-                                            <input type="file" style="display:none;" id="file" name="feature"/>
+                                            <input type="file" style="display:none;" id="file" name="feature" accept="image/*"/>
                                             <br>
                                             <div class="col-md-12" id="feature_input_wrapper" >	</div>
                                             <div class="col-md-12" id="featurethumbnail_input_wrapper" ></div>

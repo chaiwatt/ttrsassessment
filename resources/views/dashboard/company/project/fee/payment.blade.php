@@ -103,7 +103,7 @@
                                             <div class="input-group">													
                                                 <button id="btnattach" class="btn btn-info" type="button" onclick="document.getElementById('attachment').click();"> เอกสารแนบ</button>													
                                             </div>
-                                            <input type="file" style="display:none;" id="attachment" name="attachment"/>
+                                            <input type="file" style="display:none;" id="attachment" name="attachment" accept="application/pdf"/>
                                         </div>
                                         <div class="form-group">
                                             <label class="font-weight-semibold">เพิ่มเติม</label>

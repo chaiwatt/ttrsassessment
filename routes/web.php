@@ -180,6 +180,8 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('deleteExpertfield','Api\ExpertController@DeleteExpertField')->name('api.expert.deleteExpertfield');    
             Route::post('addexpertdoc','Api\ExpertController@AddExpertDoc')->name('api.expert.addexpertdoc');     
             Route::post('deleteexpertdoc','Api\ExpertController@DeleteExpertDoc')->name('api.expert.deleteexpertdoc'); 
+            Route::post('assignexpert','Api\ExpertController@AssignExpert')->name('api.expert.assignexpert'); 
+            Route::post('jdassignexpert','Api\ExpertController@JdAssignExpert')->name('api.expert.jdassignexpert');
         });
 
         Route::group(['prefix' => 'businessplan'], function(){
@@ -533,6 +535,8 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('assigngroup/{id}','DashboardAdminProjectFullTbpController@AssignGroup')->name('dashboard.admin.project.fulltbp.assigngroup');           
                     Route::post('assigngroupsave/{id}','DashboardAdminProjectFullTbpController@AssignGroupSave')->name('dashboard.admin.project.fulltbp.assigngroupsave');                     
                     Route::get('assignexpert/{id}','DashboardAdminProjectFullTbpController@AssignExpert')->name('dashboard.admin.project.fulltbp.assignexpert');           
+                    Route::get('assignexpertreview/{id}','DashboardAdminProjectFullTbpController@AssignExpertReview')->name('dashboard.admin.project.fulltbp.assignexpertreview');   
+                    Route::post('assignexpertreviewsave/{id}','DashboardAdminProjectFullTbpController@AssignExpertReviewSave')->name('dashboard.admin.project.fulltbp.assignexpertreviewsave'); 
                     Route::post('assignexpertsave','DashboardAdminProjectFullTbpController@AssignExpertSave')->name('dashboard.admin.project.fulltbp.assignexpertsave');                     
                     Route::post('assignexpertdelete','DashboardAdminProjectFullTbpController@AssignExpertDelete')->name('dashboard.admin.project.fulltbp.assignexpertdelete');   
                     Route::post('editassignexpert','DashboardAdminProjectFullTbpController@EditAssignExpert')->name('dashboard.admin.project.fulltbp.editassignexpert');   

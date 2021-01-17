@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
+use Carbon\Carbon;
+use App\Model\Company;
+use App\Model\FullTbp;
+use App\Model\MiniTBP;
+use App\Helper\Message;
+use App\Helper\EmailBox;
 use App\Model\ExpertDoc;
+use App\Model\MessageBox;
 use App\Model\ExpertField;
+use App\Model\AlertMessage;
+use App\Model\BusinessPlan;
 use App\Model\ExpertDetail;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use App\Model\ExpertEducation;
+use App\Model\ExpertAssignment;
 use App\Model\ExpertExperience;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -64,4 +76,41 @@ class ExpertController extends Controller
         return response()->json($expertdocs); 
     }
     
+    public function AssignExpert(Request $request){
+        if($request->status == 1){
+            ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('user_id',$request->id)->delete();
+        }elseif($request->status == 2){
+            $check = ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('user_id',$request->id)->first();
+            if(Empty($check)){
+                $expertassignment = new ExpertAssignment();
+                $expertassignment->full_tbp_id = $request->fulltbpid;
+                $expertassignment->user_id = $request->id;
+                $expertassignment->expert_assignment_status_id = 1;
+                $expertassignment->save();
+            }
+        }  
+    }
+
+    public function JdAssignExpert(Request $request){
+            ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('user_id',$request->id)->first()->update([
+                'expert_assignment_status_id' => 2
+            ]);
+                $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
+                $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+                $company = Company::find($businessplan->company_id);
+                $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' บริษัท' . $company->name,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a>',Auth::user()->id,$request->id);
+    
+                $alertmessage = new AlertMessage();
+                $alertmessage->user_id = $auth->id;
+                $alertmessage->target_user_id = $expertassignment->user_id;
+                $alertmessage->messagebox_id = $messagebox->id;
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ '.$minitbp->project .' ';
+                $alertmessage->save();
+    
+                MessageBox::find($messagebox->id)->update([
+                    'alertmessage_id' => $alertmessage->id
+                ]);
+    
+                EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' บริษัท' . $company->name,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' บริษัท' . $company->name.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    }
 }

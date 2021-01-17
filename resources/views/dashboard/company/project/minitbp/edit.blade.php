@@ -61,7 +61,7 @@
 											  <button type="button" class="btn bg-primary" data-action="undo">ยกเลิก</button>
 											  <button type="button" class="btn bg-success save" data-action="save-png">บันทึก</button>								
 											</div>
-											<input type="file" style="display:none;" id="signature" name="picture"/>
+											<input type="file" style="display:none;" id="signature" name="picture" accept="image/*"/>
 										  </div>
 										</div>
 									  </div>

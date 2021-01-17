@@ -139,15 +139,68 @@ function doneAssignement(fulltbpid){
     })
 }
 
+
+$(document).on('change', '.expert', function(e) {
+  var status = 1;
+  if($(this).is(":checked")){
+      status = 2;
+  }
+  $("#spiniconcheck"+$(this).data('id')).attr("hidden",false);
+  assignExpert($(this).data('id'),status,route.fulltbpid).then(data => {
+    window.location.reload();
+   }).catch(error => {})
+});
+
 function assignExpert(id,status,fulltbpid){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/expert/assignexpert`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id,
+          'status': status,
+          'fulltbpid': fulltbpid
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+$(document).on('click', '.assingexpert', function(e) {
+  Swal.fire({
+    title: 'ยืนยัน!',
+    text: `ต้องการมอบหมายผู้เชี่ยวชาญ หรือไม่`,
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'ยืนยัน',
+    cancelButtonText: 'ยกเลิก',
+    closeOnConfirm: false,
+    closeOnCancel: false
+    }).then((result) => {
+    if (result.value) {
+        $("#btnassign"+$(this).data('id')).attr("hidden",false);
+        JdassignExpert($(this).data('id'),route.fulltbpid).then(data => {
+          window.location.reload();
+         }).catch(error => {})
+    }
+});
+});
+
+function JdassignExpert(id,fulltbpid){
     return new Promise((resolve, reject) => {
         $.ajax({
-          url: `${route.url}/dashboard/admin/project/fulltbp/editassignexpert`,
+          url: `${route.url}/api/expert/jdassignexpert`,
           type: 'POST',
           headers: {"X-CSRF-TOKEN":route.token},
           data: {
             'id': id,
-            'status': status,
             'fulltbpid': fulltbpid
           },
           success: function(data) {

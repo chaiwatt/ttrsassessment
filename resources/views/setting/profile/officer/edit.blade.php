@@ -157,7 +157,7 @@
 								<div class="input-group">													
 									<button id="btnuploadexpertdoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('expertdoc').click();" >อัปโหลด</button>													
 								</div>
-								<input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc"/>
+								<input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc" accept="application/pdf"/>
 							</div>
 						</div>
 					</div>           
@@ -188,7 +188,7 @@
 						<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
 					@endif
 				</a>
-				<input type="file" style="display:none;" id="avatarimg" name="avatarimg"/>
+				<input type="file" style="display:none;" id="avatarimg" name="avatarimg" accept="image/*"/>
 			</div>
 			<div class="media-body text-white">
 				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>
@@ -199,7 +199,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcoverimg" class="btn btn-light border-transparent" type="button" onclick="document.getElementById('coverimg').click();"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</button>													
 						</div>
-						<input type="file" style="display:none;" id="coverimg" name="coverimg"/>
+						<input type="file" style="display:none;" id="coverimg" name="coverimg" accept="image/*"/>
 					</div>
 				</ul>
 			</div>

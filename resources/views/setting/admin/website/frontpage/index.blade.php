@@ -66,7 +66,7 @@
                                             <div class="input-group">													
                                                 <button id ="_frontimg" class="btn bg-info" type="button" onclick="document.getElementById('frontimg').click();">อัปโหลดรูปพื้นหลัง</button>													
                                             </div>
-                                            <input type="file" style="display:none;" id="frontimg" name="frontimg"/>
+                                            <input type="file" style="display:none;" id="frontimg" name="frontimg" accept="image/*"/>
                                         </div>
                                         <div class="form-group">
                                             <img src="{{asset($frontpage->file)}}" class="img-fluid" alt="Responsive image">
@@ -76,7 +76,7 @@
                                             <div class="input-group">													
                                                 <button id="_btnimg" class="btn bg-info" type="button" onclick="document.getElementById('btnimg').click();">อัปโหลดรูปปุ่มกด</button>													
                                             </div>
-                                            <input type="file" style="display:none;" id="btnimg" name="btnimg"/>
+                                            <input type="file" style="display:none;" id="btnimg" name="btnimg" accept="image/*"/>
                                         </div>
                                         <div class="form-group">
                                             <img src="{{asset($frontpage->entersitebtn)}}" class="img-fluid" alt="Responsive image">

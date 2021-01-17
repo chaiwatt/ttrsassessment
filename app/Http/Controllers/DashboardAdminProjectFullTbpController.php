@@ -67,6 +67,7 @@ use App\Model\FullTbpMarketCompetitive;
 use Illuminate\Support\Facades\Storage;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Model\FullTbpProjectTechDevLevel;
+use App\Http\Requests\AssignExpertRequest;
 use App\Model\FullTbpCompanyProfileDetail;
 use App\Model\FullTbpProjectAbtractDetail;
 use App\Model\FullTbpProjectTechDevProblem;
@@ -265,6 +266,49 @@ class DashboardAdminProjectFullTbpController extends Controller
                                                         ->withFulltbp($fulltbp);
     }
 
+    public function AssignExpertReview($id){
+        $experts = User::where('user_type_id',3)->pluck('id')->toArray();
+        $officers = User::where('user_type_id',4)->pluck('id')->toArray();
+        $_experts = array_unique(array_merge($experts,$officers));
+     
+        $expertassignments = ExpertAssignment::where('full_tbp_id',$id)->get();
+        $leader = ProjectAssignment::where('full_tbp_id',$id)->pluck('leader_id')->toArray();
+        $coleader = ProjectAssignment::where('full_tbp_id',$id)->pluck('coleader_id')->toArray();
+        $expertassignmentarray = array_unique(array_merge($leader,$coleader)); 
+        $unique_array = array_diff($_experts, $expertassignmentarray);
+
+        $experts = User::whereIn('id',$unique_array)->get() ;
+        // return $experts;
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.admin.project.fulltbp.assignexpertreview')->withExpertassignments($expertassignments)
+                                                        ->withExperts($experts)
+                                                        ->withFulltbp($fulltbp);
+    }
+
+    public function AssignExpertReviewSave(AssignExpertRequest $request,$id){
+        ExpertAssignment::where('full_tbp_id',$id)->whereNotIn('user_id',$request->expert)->delete();
+        $existing_array = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
+        $unique_array = array_diff($request->expert,$existing_array);
+        if(count($unique_array) == 0){
+            return redirect()->back()->withSuccess('แก้ไขรายการสำเร็จ'); 
+        }
+
+        foreach ($unique_array as $key => $expert) {
+            $check = ExpertAssignment::where('full_tbp_id', $id)
+                                ->where('user_id',$expert)
+                                ->first();
+            if(Empty($check)){
+                $expertassignment = new ExpertAssignment();
+                $expertassignment->full_tbp_id = $id;
+                $expertassignment->user_id = $expert;
+                $expertassignment->expert_assignment_status_id = 1;
+                $expertassignment->save();
+
+            }
+        }
+        return redirect()->back()->withSuccess('เพิ่มผู้เชี่ยวชาญสำเร็จ'); 
+    }
+
     public function AssignExpertSave(Request $request){
         $check = ExpertAssignment::where('full_tbp_id', $request->fulltbpid)
                             ->where('user_id',$request->id)
@@ -333,7 +377,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
         }else{
             FullTbp::find($request->fulltbpid)->update([
@@ -364,13 +408,13 @@ class DashboardAdminProjectFullTbpController extends Controller
            
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
-            $timeLinehistory->details = 'แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติ';
+            $timeLinehistory->details = 'แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติ';
             $timeLinehistory->message_type = 2;
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
 
-            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ',$auth->id,$_user->id);
+            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ,'แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ',$auth->id,$_user->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -385,21 +429,21 @@ class DashboardAdminProjectFullTbpController extends Controller
 
             $jduser = User::where('user_type_id',6)->first();
 
-            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี(Full TBP) โครงการ' . $minitbp->project .' ได้ผ่านการรับอนุมัติแล้ว',$auth->id,$jduser->id);
+            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี(Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name ,$auth->id,$jduser->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $jduser->id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name;
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' ได้ผ่านการรับอนุมัติแล้ว จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name .' จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
         }else{
             
