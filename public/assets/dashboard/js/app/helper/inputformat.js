@@ -1,4 +1,11 @@
 $(function() {
+    $('.numeralformat2').toArray().forEach(function(field){
+        new Cleave(field, {
+            numeral: true,
+            numeralPositiveOnly: true,
+            numeralIntegerScale: 2
+        })
+    });	
     $('.numeralformat10').toArray().forEach(function(field){
         new Cleave(field, {
             numeral: true,

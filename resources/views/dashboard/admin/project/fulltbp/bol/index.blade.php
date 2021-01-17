@@ -73,7 +73,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เอกสาร BOL <a type="button" data-toggle="modal" data-target="#modal_add_bol"><i class="icon-add text-info"></i></a></h6>
+                        <h6 class="card-title">เอกสาร BOL <button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_bol"><i class="icon-add mr-2"></i>อัปโหลด</button></h6>
                     
                     </div>
                     <div class="card-body">

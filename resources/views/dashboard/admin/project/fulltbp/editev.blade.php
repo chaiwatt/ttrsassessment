@@ -65,7 +65,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด A</label>
-                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control form-control-lg" >
+                                                        <input type="text" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -73,7 +73,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด B</label>
-                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control form-control-lg">
+                                                        <input type="text" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด C</label>
-                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control form-control-lg">
+                                                        <input type="text" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,7 +94,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด D</label>
-                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control form-control-lg">
+                                                            <input type="text" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,7 +102,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด E</label>
-                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control form-control-lg">
+                                                            <input type="text" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -110,7 +110,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด F</label>
-                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg">
+                                                            <input type="text" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -530,13 +530,13 @@
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Index</label>
-                                    <input type="number" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Extra</label>
-                                    <input type="number" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                         </div>
@@ -690,12 +690,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js')}}"></script>
-{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/evhelper.js')}}"></script> --}}
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             usertypeid: "{{Auth::user()->user_type_id}}"
         };
+
     </script>
 @stop

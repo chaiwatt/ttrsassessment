@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use PDF;
 use App\User;
 use ZipArchive;
+use App\Model\Ev;
 use Carbon\Carbon;
 use App\Model\Company;
 use App\Model\FullTbp;
@@ -195,7 +196,10 @@ class FullTbpController extends Controller
         ]);
 
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-   
+        
+        Ev::where('full_tbp_id',$request->id)->first()->update([
+            'name' => $minitbp->project
+        ]);
     }
     
     public function SubmitWithNoAttachement(Request $request){
@@ -257,7 +261,9 @@ class FullTbpController extends Controller
 
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
         
+        Ev::where('full_tbp_id',$request->id)->first()->update([
+            'name' => $minitbp->project
+        ]);
     }
-
 
 }

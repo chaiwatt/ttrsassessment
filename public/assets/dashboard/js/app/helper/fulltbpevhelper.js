@@ -726,6 +726,7 @@ $(document).on('change', '#percentindex', function(e) {
 });
 
 $(document).on('keyup', '#percentindex', function(e) {
+    this.value = this.value.match(/^\d+\.?\d{0,2}/);
     if ($(this).val() > 100){
         $(this).val('100');
     }else if($(this).val() < 0){
@@ -735,6 +736,7 @@ $(document).on('keyup', '#percentindex', function(e) {
 });
 
 $(document).on('keyup', '#percentextra', function(e) {
+    this.value = this.value.match(/^\d+\.?\d{0,2}/);
     if ($(this).val() > 100){
         $(this).val('100');
     }else if($(this).val() < 0){
@@ -845,7 +847,6 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
 });
 
 $('.nav-tabs a').on('shown.bs.tab', function (e) {
-    // alert('Hello from the other siiiiiide!');
     if(route.usertypeid == 6)return;
     console.log($(e.target).attr("href"));
     if($(e.target).attr("href") == '#commenttab'){
@@ -853,7 +854,6 @@ $('.nav-tabs a').on('shown.bs.tab', function (e) {
     
         }).catch(error => {})
     }
-    // var previous_tab = e.relatedTarget;
 });
 
 $(document).on("click",".deletecomment",function(e){
@@ -886,3 +886,93 @@ $(document).on("click",".deletecomment",function(e){
         }
     });
 }); 
+
+$("#gradea").on('change', function() {
+    var gradea = parseInt($("#gradea").val());
+    var gradeb = parseInt($("#gradeb").val());
+    var gradec = parseInt($("#gradec").val());
+    var graded = parseInt($("#graded").val());
+    var gradee = parseInt($("#gradee").val());
+    var gradef = parseInt($("#gradef").val());
+    if((gradea < gradeb) || (gradea < gradec) ||(gradea < graded) ||(gradea < gradee) ||(gradea < gradef)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'เกรด A ไม่ถูกต้อง!',
+            });
+    }
+});
+
+$("#gradeb").on('change', function() {
+    var gradea = parseInt($("#gradea").val());
+    var gradeb = parseInt($("#gradeb").val());
+    var gradec = parseInt($("#gradec").val());
+    var graded = parseInt($("#graded").val());
+    var gradee = parseInt($("#gradee").val());
+    var gradef = parseInt($("#gradef").val());
+    if((gradeb > gradea) || (gradeb < gradec) ||(gradeb < graded) ||(gradeb < gradee) ||(gradeb < gradef)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'เกรด B ไม่ถูกต้อง!',
+            });
+    }
+});
+
+$("#gradec").on('change', function() {
+    var gradea = parseInt($("#gradea").val());
+    var gradeb = parseInt($("#gradeb").val());
+    var gradec = parseInt($("#gradec").val());
+    var graded = parseInt($("#graded").val());
+    var gradee = parseInt($("#gradee").val());
+    var gradef = parseInt($("#gradef").val());
+    if((gradec > gradea) || (gradec > gradeb) ||(gradec < graded) ||(gradec < gradee) ||(gradec < gradef)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'เกรด C ไม่ถูกต้อง!',
+            });
+    }
+});
+
+$("#graded").on('change', function() {
+    var gradea = parseInt($("#gradea").val());
+    var gradeb = parseInt($("#gradeb").val());
+    var gradec = parseInt($("#gradec").val());
+    var graded = parseInt($("#graded").val());
+    var gradee = parseInt($("#gradee").val());
+    var gradef = parseInt($("#gradef").val());
+    if((graded > gradea) || (graded > gradeb) ||(graded > gradec) ||(graded < gradee) ||(graded < gradef)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'เกรด D ไม่ถูกต้อง!',
+            });
+    }
+});
+
+$("#gradee").on('change', function() {
+    var gradea = parseInt($("#gradea").val());
+    var gradeb = parseInt($("#gradeb").val());
+    var gradec = parseInt($("#gradec").val());
+    var graded = parseInt($("#graded").val());
+    var gradee = parseInt($("#gradee").val());
+    var gradef = parseInt($("#gradef").val());
+    if((gradee > gradea) || (gradee > gradeb) ||(gradee > gradec) ||(gradee > graded) ||(gradee < gradef)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'เกรด E ไม่ถูกต้อง!',
+            });
+    }
+});
+
+$("#gradef").on('change', function() {
+    var gradea = parseInt($("#gradea").val());
+    var gradeb = parseInt($("#gradeb").val());
+    var gradec = parseInt($("#gradec").val());
+    var graded = parseInt($("#graded").val());
+    var gradee = parseInt($("#gradee").val());
+    var gradef = parseInt($("#gradef").val());
+    if((gradef > gradea) || (gradef > gradeb) ||(gradef > gradec) ||(gradef > graded) ||(gradef > gradee)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'เกรด F ไม่ถูกต้อง!',
+            });
+    }
+});
