@@ -6,6 +6,56 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
 @stop
 @section('content')
+
+<div id="modal_expertreject_reason" class="modal fade" style="overflow:hidden;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label id="messageshow">สาเหตุการไม่เข้าร่วมโครงการ</label>
+                            <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม สาเหตุการไม่เข้าร่วมโครงการ" class="form-control form-control-lg" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="modal-footer">
+                <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                <button id="btn_modal_expertreject_reason" class="btn bg-primary"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal_show_reason" class="modal fade" style="overflow:hidden;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div id="rejectreason_wrapper" style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:150px;width:100%;overflow: auto;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="modal-footer">
+                <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -105,11 +155,11 @@
                                         <td class="text-right"> 
                                             @if ($fulltbp->expertassignment->accepted == 0)
                                                     <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
-                                                    <a href="{{route('dashboard.expert.report.reject',['id' => $fulltbp->id])}}" class="btn btn-sm bg-danger">ปฎิเสธเข้าร่วม</a>
-                                                @elseif($fulltbp->expertassignment->accepted == 1)
-                                                     <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">PDF</a>
+                                                    <a href="{{route('dashboard.expert.report.reject',['id' => $fulltbp->id])}}" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
+                                                {{-- @elseif($fulltbp->expertassignment->accepted == 1)
+                                                     <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">PDF</a>--}}
                                                 @elseif($fulltbp->expertassignment->accepted == 2)
-                                                    <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปฎิเสธการเข้าร่วมหรือคลิกเพื่อเข้าร่วม</a>
+                                                    <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
                                             @endif
                                             
                                         </td> 
@@ -162,5 +212,70 @@
         token: $('meta[name="csrf-token"]').attr('content'),
         branchid: "{{Auth::user()->branch_id}}"
     };
+
+    $(document).on('click', '.reject', function(e) {
+        $('#btn_modal_expertreject_reason').data('id',$(this).data('id')); //setter
+        $('#modal_expertreject_reason').modal('show');
+    });
+
+    $(document).on('click', '#btn_modal_expertreject_reason', function(e) {
+        if($('#note').val() == '')return;
+        expertReject("{{Auth::user()->id}}",$(this).data('id'),$('#note').val()).then(data => {
+            window.location.reload();
+        })
+       .catch(error => {})
+    });
+
+    function expertReject(id,fulltbpid,note){
+        return new Promise((resolve, reject) => {
+            $.ajax({
+            url: `${route.url}/api/expert/expertreject`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+                'id': id,
+                'fulltbpid': fulltbpid,
+                'note': note
+            },
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(error) {
+                reject(error)
+            },
+            })
+        })
+    }
+
+    $(document).on('click', '.showreject', function(e) {
+        // $('#btn_modal_expertreject_reason').data('id',$(this).data('id')); //setter
+        showReject("{{Auth::user()->id}}",$(this).data('id')).then(data => {
+            console.log(data);
+            $('#rejectreason_wrapper').html(data);
+            $('#modal_show_reason').modal('show');
+        })
+        
+    });
+    // 
+
+    function showReject(id,fulltbpid){
+        return new Promise((resolve, reject) => {
+            $.ajax({
+            url: `${route.url}/api/expert/showreject`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+                'id': id,
+                'fulltbpid': fulltbpid
+            },
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(error) {
+                reject(error)
+            },
+            })
+        })
+    }
 </script>
 @stop

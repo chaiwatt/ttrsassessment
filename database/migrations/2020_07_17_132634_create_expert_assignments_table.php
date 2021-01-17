@@ -20,6 +20,7 @@ class CreateExpertAssignmentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('expert_assignment_status_id')->default(1);
             $table->char('accepted',1)->default(0);
+            $table->text('rejectreason')->nullable();
             $table->timestamps();
         });
     }

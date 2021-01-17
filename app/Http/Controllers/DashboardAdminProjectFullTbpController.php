@@ -277,9 +277,14 @@ class DashboardAdminProjectFullTbpController extends Controller
         $expertassignmentarray = array_unique(array_merge($leader,$coleader)); 
         $unique_array = array_diff($_experts, $expertassignmentarray);
 
-        $experts = User::whereIn('id',$unique_array)->get() ;
-        // return $experts;
         $fulltbp = FullTbp::find($id);
+        $experts = User::whereIn('id',$unique_array)->get() ;
+
+        if($fulltbp->assignexpert == 2){
+            $expertassignments = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
+            $experts = User::whereIn('id',$expertassignments)->get() ;
+        }
+
         return view('dashboard.admin.project.fulltbp.assignexpertreview')->withExpertassignments($expertassignments)
                                                         ->withExperts($experts)
                                                         ->withFulltbp($fulltbp);

@@ -182,6 +182,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('deleteexpertdoc','Api\ExpertController@DeleteExpertDoc')->name('api.expert.deleteexpertdoc'); 
             Route::post('assignexpert','Api\ExpertController@AssignExpert')->name('api.expert.assignexpert'); 
             Route::post('jdassignexpert','Api\ExpertController@JdAssignExpert')->name('api.expert.jdassignexpert');
+            Route::post('expertreject','Api\ExpertController@ExpertReject')->name('api.expert.expertreject');
+            Route::post('showreject','Api\ExpertController@ShowReject')->name('api.expert.showreject');
+            Route::post('jdconfirm','Api\ExpertController@JdConfirm')->name('api.expert.jdconfirm');
         });
 
         Route::group(['prefix' => 'businessplan'], function(){
@@ -501,6 +504,10 @@ Route::group(['middleware' => 'auth'], function(){
                 });
                 Route::group(['prefix' => 'detail'], function(){
                     Route::get('view/{id}','DashboardAdminReportDetailController@View')->name('dashboard.admin.report.detail.view');       
+                });
+                Route::group(['prefix' => 'expert'], function(){
+                    Route::get('accept/{id}','DashboardAdminReportExpertController@Accept')->name('dashboard.admin.report.expert.accept');       
+                    Route::post('reject/{id}','DashboardAdminReportExpertController@Reject')->name('dashboard.admin.report.expert.reject');  
                 });
             }); 
             Route::group(['prefix' => 'project'], function(){

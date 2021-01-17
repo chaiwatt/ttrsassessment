@@ -14,7 +14,8 @@ class ExpertAssignment extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
-    protected $appends = ['user','expertassignmentstatus','expertcomment','fulltbp'];
+    protected $appends = [];
+    // protected $appends = ['user','expertassignmentstatus','expertcomment','fulltbp'];
     public function getUserAttribute(){
         return User::find($this->user_id);
     }

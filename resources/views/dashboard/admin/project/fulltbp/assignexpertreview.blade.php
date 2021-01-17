@@ -127,7 +127,7 @@
             @if (Auth::user()->user_type_id != 6 )
                 <div class="header-elements d-none">
                     {{-- <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD</a> --}}
-                    <button id="sendtojd" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
+                    {{-- <button id="sendtojd" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button> --}}
                 </div>
             @endif    
         </div>
@@ -143,6 +143,30 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
 
+        </div>
+    </div>
+
+    <div id="modal_show_reason" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="rejectreason_wrapper" style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:150px;width:100%;overflow: auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /page header -->
@@ -176,7 +200,10 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
+                                            @if ($fulltbp->assignexpert != 2)
                                             <th style="width:15px">เลือก</th>
+                                            @endif
+                                            
                                             <th >ชื่อ-สกุล</th>
                                             <th >ตำแหน่ง</th>
                                             <th >JD มอบหมาย</th>
@@ -193,18 +220,25 @@
                                                 $isjd = 'expert';
                                                 if(Auth::user()->user_type_id !=6 )$isjd = '';
                                             @endphp
+                                        {{-- @if ($fulltbp->assignexpert == 2)
+                                            
+                                        @endif --}}
                                         <tr >  
-                                            <td>
-                                                <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
-                                                <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
-                                                @if (!Empty($check))
-                                                    @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1)
-                                                        hidden
-                                                    @endif
+                                            @if ($fulltbp->assignexpert != 2)
+                                                <td>
+                                                    <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
+                                                    <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
+                                                    @if (!Empty($check))
+                                                        @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1)
+                                                            hidden
+                                                        @endif
 
-                                                    checked 
-                                                @endif
-                                                ></td>  
+                                                        checked 
+                                                    @endif
+                                                    >
+                                                </td>  
+                                            @endif
+
                                             <td>{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</td>
                                             <td>
                                                 {{$user->usertype->name}} {{$user->expertType}}
@@ -230,6 +264,8 @@
                                                             <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่ได้ตอบรับ</span>
                                                         @elseif($check->accepted == 1) 
                                                             <span class="badge badge-flat border-success text-success-600 rounded-0">ตอบรับแล้ว</span>
+                                                        @elseif($check->accepted == 2)
+                                                            <a href="#" type="button"  data-id="{{$user->id}}" data-fulltbpid="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-info showreject">ปฏิเสธเข้าร่วม</a>
                                                         @endif
                                                     @endif
                                                 @endif
@@ -243,11 +279,21 @@
                                 </table>
                             </div>
                         </div>
+                        @if (Auth::user()->user_type_id == 4)
+                            <div class="form-group">
+                                <div class="text-right">
+                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                </div>
+                            </div>
+                        @endif
+                        @if (Auth::user()->user_type_id == 6 && $fulltbp->assignexpert !=2)
                         <div class="form-group">
                             <div class="text-right">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                <button type="button" id="jdconfirmteam" class="btn bg-teal">ยืนยันทีมผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
                             </div>
                         </div>
+                    @endif
+
                 </div>
     
                 {{-- <div class="col-md-12">
@@ -329,5 +375,73 @@
             usertypeid: "{{Auth::user()->user_type_id}}",
             fulltbpid: "{{$fulltbp->id}}",
         };
+
+        
+    $(document).on('click', '.showreject', function(e) {
+        showReject($(this).data('id'),$(this).data('fulltbpid')).then(data => {
+            // console.log(data);
+            $('#rejectreason_wrapper').html(data);
+            $('#modal_show_reason').modal('show');
+        })
+        
+    });
+    // 
+
+    function showReject(id,fulltbpid){
+        return new Promise((resolve, reject) => {
+            $.ajax({
+            url: `${route.url}/api/expert/showreject`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+                'id': id,
+                'fulltbpid': fulltbpid
+            },
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(error) {
+                reject(error)
+            },
+            })
+        })
+    }
+
+    $(document).on('click', '#jdconfirmteam', function(e) {
+        jdConfirmExpert("{{$fulltbp->id}}").then(data => {
+            if(data == ''){
+                Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'ไม่พบข้อมูลผู้เชี่ยวชาญที่ตอบรับ',
+            }).then((result) => {
+                window.location.reload();
+            });
+            }else{
+                window.location.reload();
+            }
+
+        })
+        
+    });
+    // 
+
+    function jdConfirmExpert(fulltbpid){
+        return new Promise((resolve, reject) => {
+            $.ajax({
+            url: `${route.url}/api/expert/jdconfirm`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+                'fulltbpid': fulltbpid
+            },
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(error) {
+                reject(error)
+            },
+            })
+        })
+    }
     </script>
 @stop

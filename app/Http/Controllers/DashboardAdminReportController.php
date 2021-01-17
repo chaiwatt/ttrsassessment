@@ -9,6 +9,7 @@ use App\Model\BusinessPlan;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
@@ -19,18 +20,23 @@ class DashboardAdminReportController extends Controller
     { 
         $this->middleware('auth'); 
         // 1=admin, 2=expert, 3=company 
-        $this->middleware('role:3,4,5,6'); 
+        // $this->middleware('role:3,4,5,6'); 
     }
     public function Index(){
         $auth = Auth::user();
         $fulltbps = FullTbp::get();
-        // return $fulltbps;
+
         if($auth->user_type_id == 4){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
                                             ->pluck('business_plan_id')->toArray();                               
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+            $fulltbparr = FullTbp::whereIn('mini_tbp_id', $minitbpids)->pluck('id')->toArray();
+
+            $expertarr = ExpertAssignment::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+            $uniquefulltbparr = array_unique(array_merge($expertarr,$fulltbparr));
+            $fulltbps = FullTbp::whereIn('id',$uniquefulltbparr)->get();
+            // return $expertassessmentarr;
         }else if($auth->user_type_id == 5){
             $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
             $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
@@ -40,7 +46,6 @@ class DashboardAdminReportController extends Controller
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->get();
 
-        
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
                                                 ->withAlertmessages($alertmessages)
