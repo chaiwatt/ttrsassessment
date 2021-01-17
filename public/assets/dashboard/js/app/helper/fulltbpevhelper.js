@@ -188,6 +188,36 @@ $('.steps-basic').steps({
                     $("#criteria_wrapper").attr("hidden",false);
                     if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == '' ||$('#gradef').val() == ''){
                         return false;
+                    }else{
+                        var gradea = parseInt($("#gradea").val());
+                        var gradeb = parseInt($("#gradeb").val());
+                        var gradec = parseInt($("#gradec").val());
+                        var graded = parseInt($("#graded").val());
+                        var gradee = parseInt($("#gradee").val());
+                        var gradef = parseInt($("#gradef").val());
+                        if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee) ||(gradea <= gradef)){
+                            return false;
+                        }
+                            
+                        if((gradeb >= gradea) || (gradeb <= gradec) ||(gradeb <= graded) ||(gradeb <= gradee) ||(gradeb <= gradef)){
+                            return false;
+                        }
+                    
+                        if((gradec >= gradea) || (gradec >= gradeb) ||(gradec <= graded) ||(gradec <= gradee) ||(gradec <= gradef)){
+                            return false;
+                        }
+                    
+                        if((graded >= gradea) || (graded >= gradeb) ||(graded >= gradec) ||(graded <= gradee) ||(graded <= gradef)){
+                            return false;
+                        }
+                    
+                        if((gradee >= gradea) || (gradee >= gradeb) ||(gradee >= gradec) ||(gradee >= graded) ||(gradee <= gradef)){
+                            return false;
+                        }
+                    
+                        if((gradef >= gradea) || (gradef >= gradeb) ||(gradef >= gradec) ||(gradef >= graded) ||(gradef >= gradee)){
+                            return false;
+                        }
                     }
                 }
                 return true;
@@ -894,12 +924,14 @@ $("#gradea").on('change', function() {
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
     var gradef = parseInt($("#gradef").val());
-    if((gradea < gradeb) || (gradea < gradec) ||(gradea < graded) ||(gradea < gradee) ||(gradea < gradef)){
+    if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee) ||(gradea <= gradef)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด A ไม่ถูกต้อง!',
             });
+        $("#gradea").val('');
     }
+    
 });
 
 $("#gradeb").on('change', function() {
@@ -909,11 +941,12 @@ $("#gradeb").on('change', function() {
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
     var gradef = parseInt($("#gradef").val());
-    if((gradeb > gradea) || (gradeb < gradec) ||(gradeb < graded) ||(gradeb < gradee) ||(gradeb < gradef)){
+    if((gradeb >= gradea) || (gradeb <= gradec) ||(gradeb <= graded) ||(gradeb <= gradee) ||(gradeb <= gradef)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด B ไม่ถูกต้อง!',
             });
+            $("#gradeb").val('');    
     }
 });
 
@@ -924,11 +957,12 @@ $("#gradec").on('change', function() {
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
     var gradef = parseInt($("#gradef").val());
-    if((gradec > gradea) || (gradec > gradeb) ||(gradec < graded) ||(gradec < gradee) ||(gradec < gradef)){
+    if((gradec >= gradea) || (gradec >= gradeb) ||(gradec <= graded) ||(gradec <= gradee) ||(gradec <= gradef)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด C ไม่ถูกต้อง!',
             });
+            $("#gradec").val('');    
     }
 });
 
@@ -939,11 +973,12 @@ $("#graded").on('change', function() {
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
     var gradef = parseInt($("#gradef").val());
-    if((graded > gradea) || (graded > gradeb) ||(graded > gradec) ||(graded < gradee) ||(graded < gradef)){
+    if((graded >= gradea) || (graded >= gradeb) ||(graded >= gradec) ||(graded <= gradee) ||(graded <= gradef)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด D ไม่ถูกต้อง!',
             });
+        $("#graded").val('');    
     }
 });
 
@@ -954,11 +989,12 @@ $("#gradee").on('change', function() {
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
     var gradef = parseInt($("#gradef").val());
-    if((gradee > gradea) || (gradee > gradeb) ||(gradee > gradec) ||(gradee > graded) ||(gradee < gradef)){
+    if((gradee >= gradea) || (gradee >= gradeb) ||(gradee >= gradec) ||(gradee >= graded) ||(gradee <= gradef)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด E ไม่ถูกต้อง!',
             });
+        $("#gradee").val('');    
     }
 });
 
@@ -969,10 +1005,11 @@ $("#gradef").on('change', function() {
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
     var gradef = parseInt($("#gradef").val());
-    if((gradef > gradea) || (gradef > gradeb) ||(gradef > gradec) ||(gradef > graded) ||(gradef > gradee)){
+    if((gradef >= gradea) || (gradef >= gradeb) ||(gradef >= gradec) ||(gradef >= graded) ||(gradef >= gradee)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด F ไม่ถูกต้อง!',
             });
+        $("#gradef").val('');    
     }
 });
