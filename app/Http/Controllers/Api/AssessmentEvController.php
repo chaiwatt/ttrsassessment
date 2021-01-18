@@ -28,29 +28,68 @@ use Illuminate\Support\Facades\Auth;
 class AssessmentEvController extends Controller
 {
     public function AddEvChecklist(Request $request){
+
+        // ExpertAssignment::where('full_tbp_id',$id)->whereNotIn('user_id',$request->expert)->delete();
+        // $existing_array = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
+        // $unique_array = array_diff($request->expert,$existing_array);
+ 
+
+        // dd($request->criterias);
+
+        CriteriaTransaction::where('ev_id',$request->evid)
+                            ->where('index_type_id',$request->indextype)
+                            ->where('pillar_id',$request->pillar)
+                            ->where('sub_pillar_id',$request->subpillar)
+                            ->where('sub_pillar_index_id',$request->subpillarindex)
+                            ->whereNotIn('criteria_id',$request->criterias)->delete();
+
         foreach($request->criterias as $criteria){
-            $criteriatransaction = new CriteriaTransaction();
-            $criteriatransaction->ev_id = $request->evid;
-            $criteriatransaction->index_type_id = $request->indextype;
-            $criteriatransaction->pillar_id = $request->pillar;
-            $criteriatransaction->sub_pillar_id = $request->subpillar;
-            $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
-            $criteriatransaction->criteria_id = $criteria;
-            $criteriatransaction->save();
+            $check = CriteriaTransaction::where('ev_id',$request->evid)
+                                    ->where('index_type_id',$request->indextype)
+                                    ->where('pillar_id',$request->pillar)
+                                    ->where('sub_pillar_id',$request->subpillar)
+                                    ->where('sub_pillar_index_id',$request->subpillarindex)
+                                    ->where('criteria_id',$criteria)->first();
+                if(Empty($check)){
+                    $criteriatransaction = new CriteriaTransaction();
+                    $criteriatransaction->ev_id = $request->evid;
+                    $criteriatransaction->index_type_id = $request->indextype;
+                    $criteriatransaction->pillar_id = $request->pillar;
+                    $criteriatransaction->sub_pillar_id = $request->subpillar;
+                    $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
+                    $criteriatransaction->criteria_id = $criteria;
+                    $criteriatransaction->save();
+                }
         }
 
-        $checklistgrading = new CheckListGrading();
-        $checklistgrading->ev_id = $request->evid;
-        $checklistgrading->pillar_id = $request->pillar;
-        $checklistgrading->sub_pillar_id = $request->subpillar;
-        $checklistgrading->sub_pillar_index_id = $request->subpillarindex;
-        $checklistgrading->gradea = $request->gradea;
-        $checklistgrading->gradeb = $request->gradeb;
-        $checklistgrading->gradec = $request->gradec;
-        $checklistgrading->graded = $request->graded;
-        $checklistgrading->gradee = $request->gradee;
-        $checklistgrading->gradef = $request->gradef;
-        $checklistgrading->save();
+ 
+        $check = CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$request->pillar)
+                                ->where('sub_pillar_id',$request->subpillar)
+                                ->where('sub_pillar_index_id',$request->subpillarindex)->first();
+        
+        if(Empty($check)){
+                $checklistgrading = new CheckListGrading();
+                $checklistgrading->ev_id = $request->evid;
+                $checklistgrading->pillar_id = $request->pillar;
+                $checklistgrading->sub_pillar_id = $request->subpillar;
+                $checklistgrading->sub_pillar_index_id = $request->subpillarindex;
+                $checklistgrading->gradea = $request->gradea;
+                $checklistgrading->gradeb = $request->gradeb;
+                $checklistgrading->gradec = $request->gradec;
+                $checklistgrading->graded = $request->graded;
+                $checklistgrading->gradee = $request->gradee;
+                $checklistgrading->save();
+        }else{
+                CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$request->pillar)
+                    ->where('sub_pillar_id',$request->subpillar)
+                    ->where('sub_pillar_index_id',$request->subpillarindex)->first()->update([
+                        'gradea' => $request->gradea,
+                        'gradeb' => $request->gradeb,
+                        'gradec' => $request->gradec,
+                        'graded' => $request->graded,
+                        'gradee' => $request->gradee,
+                    ]);
+        }
 
         $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)->where('sub_pillar_index_id',$request->subpillarindex)->first();
         if(Empty($pillaindexweigth)){

@@ -1,6 +1,6 @@
 
 
-function addEvCheckList(evid,indextype,pillar,subpillar,subpillarindex,criterias,gradea,gradeb,gradec,graded,gradee,gradef){
+function addEvCheckList(evid,indextype,pillar,subpillar,subpillarindex,criterias,gradea,gradeb,gradec,graded,gradee){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/assessment/ev/addevchecklist`,
@@ -17,8 +17,7 @@ function addEvCheckList(evid,indextype,pillar,subpillar,subpillarindex,criterias
             gradeb : gradeb,
             gradec : gradec,
             graded : graded,
-            gradee : gradee,
-            gradef : gradef
+            gradee : gradee
           },
           success: function(data) {
             resolve(data)

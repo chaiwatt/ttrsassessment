@@ -93,7 +93,7 @@ function getEv(evid){
                 console.log(numcheck)
                 if(_scores.length > 0){
                     var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-                    var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee'],checklistgrading['gradef']];
+                    var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee']];
                     let gradeis = 0;
                     for (let i = 0; i < grades.length; i++) {
                         if(numcheck >= grades[i]){

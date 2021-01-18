@@ -373,7 +373,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                             ->get()->sum('score');             
             $checklistgrading = CheckListGrading::where('ev_id',$criteriatransaction->ev_id)
                             ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)->first(); 
-            $grades=array($checklistgrading->gradea,$checklistgrading->gradeb,$checklistgrading->gradec,$checklistgrading->graded,$checklistgrading->gradee,$checklistgrading->gradef);    
+            $grades=array($checklistgrading->gradea,$checklistgrading->gradeb,$checklistgrading->gradec,$checklistgrading->graded,$checklistgrading->gradee);    
             $gradeis = 0;
             foreach ($grades as $key => $grade) {
                 if($numcheck >= $grade){

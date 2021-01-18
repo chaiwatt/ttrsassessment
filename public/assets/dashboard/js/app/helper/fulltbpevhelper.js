@@ -75,18 +75,22 @@ $(document).on('change', '#subpillarindex', function(e) {
     $(this).prop('selected',true);
     $("#criteria_wrapper").attr("hidden",true);
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
-        var html =``;
-        var html1 =``;
-        data.forEach(function (subpillar,index) {
-                // html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
-                html1 += `<div class="col-md-6"><div class="form-check">
-                        <input type="checkbox" id="${subpillar['id']}" class="form-check-input-styled">
-                            ${subpillar['name']}
-                        </div></div>`
+        $("#chklist").html('');
+        data.criterias.forEach(function (subpillarindex,index) {
+            var check = '';
+            var _check = data.criteriatransactions.find(x => x.criteria_id === subpillarindex['id']);
+            console.log(_check);
+            if (_check){
+                check = 'checked';
+            }
+            
+            $("#chklist").append(`<div class="col-md-6">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="${subpillarindex['id']}" value="${subpillarindex['id']}" ${check} > ${subpillarindex['name']}
+                                    </div>
+                                </div>`);
             });
-        // $("#criteria").html(html);
-        $("#chklist").html(html1);
-        
+    
         Pillar.getRelatedEv($('#evid').val()).then(data => {
             var html =``;
             data.forEach(function (ev,index) {
@@ -110,7 +114,6 @@ $(document).on('change', '#indextype', function(e) {
             $('#gradec').val(data.gradec);
             $('#graded').val(data.graded);
             $('#gradee').val(data.gradee);
-            $('#gradef').val(data.gradef);
         }
     }).catch(error => {})
   }
@@ -193,7 +196,7 @@ $('.steps-basic').steps({
                 $("#criteria_wrapper").attr("hidden",true);
                 if($('#indextype').val() == 2){
                     $("#criteria_wrapper").attr("hidden",false);
-                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == '' ||$('#gradef').val() == ''){
+                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == ''){
                         return false;
                     }else{
                         var gradea = parseInt($("#gradea").val());
@@ -201,30 +204,26 @@ $('.steps-basic').steps({
                         var gradec = parseInt($("#gradec").val());
                         var graded = parseInt($("#graded").val());
                         var gradee = parseInt($("#gradee").val());
-                        var gradef = parseInt($("#gradef").val());
-                        if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee) ||(gradea <= gradef)){
+                        if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee)){
                             return false;
                         }
                             
-                        if((gradeb >= gradea) || (gradeb <= gradec) ||(gradeb <= graded) ||(gradeb <= gradee) ||(gradeb <= gradef)){
+                        if((gradeb >= gradea) || (gradeb <= gradec) ||(gradeb <= graded) ||(gradeb <= gradee)){
                             return false;
                         }
                     
-                        if((gradec >= gradea) || (gradec >= gradeb) ||(gradec <= graded) ||(gradec <= gradee) ||(gradec <= gradef)){
+                        if((gradec >= gradea) || (gradec >= gradeb) ||(gradec <= graded) ||(gradec <= gradee)){
                             return false;
                         }
                     
-                        if((graded >= gradea) || (graded >= gradeb) ||(graded >= gradec) ||(graded <= gradee) ||(graded <= gradef)){
+                        if((graded >= gradea) || (graded >= gradeb) ||(graded >= gradec) ||(graded <= gradee)){
                             return false;
                         }
                     
-                        if((gradee >= gradea) || (gradee >= gradeb) ||(gradee >= gradec) ||(gradee >= graded) ||(gradee <= gradef)){
+                        if((gradee >= gradea) || (gradee >= gradeb) ||(gradee >= gradec) ||(gradee >= graded)){
                             return false;
                         }
-                    
-                        if((gradef >= gradea) || (gradef >= gradeb) ||(gradef >= gradec) ||(gradef >= graded) ||(gradef >= gradee)){
-                            return false;
-                        }
+                
                     }
                 }
                 return true;
@@ -240,7 +239,19 @@ $('.steps-basic').steps({
         if($('#indextype').val() == 1){
             AddGrading();
         }else{
-            AddCheckList();
+            var criterias = [];
+            $('#chklist :checked').each(function() {
+                criterias.push($(this).val());
+              });
+              if(criterias.length == 0){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'ยังไม่ได้เลือกรายการ!',
+                    });
+              }else{
+                AddCheckList(criterias);
+              }
+            
         }
     }
 });
@@ -319,7 +330,7 @@ $('.steps-basic-extra').steps({
             if($('#extrasubpillarindex').val() == 0){
                 return false;
             }else{
-                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == '' ||$('#gradef').val() == ''){
+                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == ''){
                         return false;
                     }
                 return true;
@@ -332,11 +343,6 @@ $('.steps-basic-extra').steps({
         return true;
     },
     onFinished: function (event, currentIndex) {
-        // if($('#indextype').val() == 1){
-            // AddGrading();
-        // }else{
-        //     AddCheckList();
-        // }
         Ev.addExtraEvGrading($('#evid').val(),1,$('#extrapillar').val(),$('#extrasubpillar').val(),$('#extrasubpillarindex').val()).then(data => {
             RenderTable(data,2);
             RowSpan("extracriteriatable");
@@ -352,14 +358,8 @@ $('.steps-basic-extra').steps({
 //     $('#clientname').html($(this).val());
 // });
 
-function AddCheckList(){
-    var criterias = [];
-    $("#criteria").each(function(i, sel){
-        var selectedVal = $(sel).val();
-        criterias =selectedVal;
-    });
-
-    Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val(),$('#gradef').val()).then(data => {
+function AddCheckList(criterias){
+    Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val()).then(data => {
          RenderTable(data,1);
          RowSpan("criteriatable");
          Pillar.getRelatedEv($('#evid').val()).then(data => {
@@ -427,7 +427,8 @@ function RenderTable(data,evtype){
     var html =``;
     data.forEach(function (criteria,index) {
         if(criteria.ev_type_id == evtype){
-            var criterianame = '-';
+            // var criterianame = '-';
+            var criterianame = criteria.subpillarindex['name'] + ' <small>(เกรด)</small>';
             if(criteria.criteria != null){
                 criterianame = criteria.criteria['name']
             }
@@ -926,8 +927,7 @@ $("#gradea").on('change', function() {
     var gradec = parseInt($("#gradec").val());
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
-    var gradef = parseInt($("#gradef").val());
-    if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee) ||(gradea <= gradef)){
+    if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee) ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด A ไม่ถูกต้อง!',
@@ -943,8 +943,7 @@ $("#gradeb").on('change', function() {
     var gradec = parseInt($("#gradec").val());
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
-    var gradef = parseInt($("#gradef").val());
-    if((gradeb >= gradea) || (gradeb <= gradec) ||(gradeb <= graded) ||(gradeb <= gradee) ||(gradeb <= gradef)){
+    if((gradeb >= gradea) || (gradeb <= gradec) ||(gradeb <= graded) ||(gradeb <= gradee) ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด B ไม่ถูกต้อง!',
@@ -959,8 +958,7 @@ $("#gradec").on('change', function() {
     var gradec = parseInt($("#gradec").val());
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
-    var gradef = parseInt($("#gradef").val());
-    if((gradec >= gradea) || (gradec >= gradeb) ||(gradec <= graded) ||(gradec <= gradee) ||(gradec <= gradef)){
+    if((gradec >= gradea) || (gradec >= gradeb) ||(gradec <= graded) ||(gradec <= gradee)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด C ไม่ถูกต้อง!',
@@ -975,8 +973,7 @@ $("#graded").on('change', function() {
     var gradec = parseInt($("#gradec").val());
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
-    var gradef = parseInt($("#gradef").val());
-    if((graded >= gradea) || (graded >= gradeb) ||(graded >= gradec) ||(graded <= gradee) ||(graded <= gradef)){
+    if((graded >= gradea) || (graded >= gradeb) ||(graded >= gradec) ||(graded <= gradee)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด D ไม่ถูกต้อง!',
@@ -991,8 +988,7 @@ $("#gradee").on('change', function() {
     var gradec = parseInt($("#gradec").val());
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
-    var gradef = parseInt($("#gradef").val());
-    if((gradee >= gradea) || (gradee >= gradeb) ||(gradee >= gradec) ||(gradee >= graded) ||(gradee <= gradef)){
+    if((gradee >= gradea) || (gradee >= gradeb) ||(gradee >= gradec) ||(gradee >= graded)){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'เกรด E ไม่ถูกต้อง!',
@@ -1000,19 +996,34 @@ $("#gradee").on('change', function() {
         $("#gradee").val('');    
     }
 });
+$(document).on("click","#toggletable",function(e){
+    $("#tda").html("ตั้งแต่ " + $("#gradea").val());
 
-$("#gradef").on('change', function() {
-    var gradea = parseInt($("#gradea").val());
-    var gradeb = parseInt($("#gradeb").val());
-    var gradec = parseInt($("#gradec").val());
-    var graded = parseInt($("#graded").val());
-    var gradee = parseInt($("#gradee").val());
-    var gradef = parseInt($("#gradef").val());
-    if((gradef >= gradea) || (gradef >= gradeb) ||(gradef >= gradec) ||(gradef >= graded) ||(gradef >= gradee)){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เกรด F ไม่ถูกต้อง!',
-            });
-        $("#gradef").val('');    
+    if ((parseInt($("#gradea").val())-parseInt($("#gradeb").val())) > 1) {
+        $("#tdb").html($("#gradeb").val() + '-' + (parseInt($("#gradea").val()-1)));
+    }else{
+        $("#tdb").html($("#gradeb").val());
     }
+
+    if ((parseInt($("#gradeb").val())-parseInt($("#gradec").val())) > 1) {
+        $("#tdc").html($("#gradec").val() + '-' + (parseInt($("#gradeb").val()-1)));
+    }else{
+        $("#tdc").html($("#gradec").val());
+    }
+
+    if ((parseInt($("#gradec").val())-parseInt($("#graded").val())) > 1) {
+        $("#tdd").html($("#graded").val() + '-' + (parseInt($("#gradec").val()-1)));
+    }else{
+        $("#tdd").html($("#graded").val());
+    }
+
+    if ((parseInt($("#graded").val())-parseInt($("#gradee").val())) > 1) {
+        $("#tde").html($("#gradee").val() + '-' + (parseInt($("#graded").val()-1)));
+    }else{
+        $("#tde").html($("#gradee").val());
+    }
+
+    // $("#te").html("<= " + parseInt($("#graded").val()-1));
+    $("#show").toggle();
+   $(this).html($("#show").is( ":visible" ) ? "ซ่อน" : "แสดง");
 });

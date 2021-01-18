@@ -25,7 +25,6 @@ class CreateCheckListGradingsTable extends Migration
             $table->integer('gradec')->default(0);
             $table->integer('graded')->default(0);
             $table->integer('gradee')->default(0);
-            $table->integer('gradef')->default(0);
             $table->timestamps();
         });
     }

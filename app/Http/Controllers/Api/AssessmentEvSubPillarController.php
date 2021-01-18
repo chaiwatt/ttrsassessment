@@ -30,7 +30,11 @@ class AssessmentEvSubPillarController extends Controller
 
     public function GetCriteria(Request $request){
         $criterias = Criteria::where('sub_pillar_index_id', $request->value)->get();
-        return response()->json($criterias); 
+        $criteriatransactions = CriteriaTransaction::where('ev_id', $request->evid)->get();
+        return response()->json(array(
+            "criterias" => $criterias,
+            "criteriatransactions" => $criteriatransactions
+        ));
     }
 
     public function DeleteSubPillar(Request $request){

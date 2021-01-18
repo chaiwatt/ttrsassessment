@@ -106,7 +106,7 @@ $('.steps-basic').steps({
                 $("#criteria_wrapper").attr("hidden",true);
                 if($('#indextype').val() == 2){
                     $("#criteria_wrapper").attr("hidden",false);
-                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == '' ||$('#gradef').val() == ''){
+                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == '' ){
                         return false;
                     }
                 }
@@ -136,7 +136,7 @@ function AddCheckList(){
         criterias =selectedVal;
     });
 
-    Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val(),$('#gradef').val()).then(data => {
+    Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val()).then(data => {
          RenderTable(data);
          RowSpan();
          Swal.fire({

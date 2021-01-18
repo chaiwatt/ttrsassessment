@@ -106,14 +106,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                {{-- <div class="col-md-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด F</label>
                                                             <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>

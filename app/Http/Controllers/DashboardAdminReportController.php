@@ -36,7 +36,7 @@ class DashboardAdminReportController extends Controller
             $expertarr = ExpertAssignment::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
             $uniquefulltbparr = array_unique(array_merge($expertarr,$fulltbparr));
             $fulltbps = FullTbp::whereIn('id',$uniquefulltbparr)->get();
-            // return $expertassessmentarr;
+
         }else if($auth->user_type_id == 5){
             $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
             $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();

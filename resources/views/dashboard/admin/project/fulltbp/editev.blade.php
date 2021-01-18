@@ -5,13 +5,13 @@
 @section('content')
     {{-- modal_add_clustergroup --}}
     <div id="modal_add_clustergroup" class="modal fade " style="overflow:hidden;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม Index Criteria</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body context-menu-one" id="criteriamodal">
+                <div class="modal-body context-menu-one " id="criteriamodal">
                     <input type="text" id="evid" value="{{$ev->id}}" hidden>
                     <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden>
                         <form class="wizard-form steps-basic " action="#" data-fouc>
@@ -108,15 +108,50 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label>เกรด F</label>
-                                                            <input type="text" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
-                                                        </div>
+                                                        <button type="button" id="toggletable" class="btn btn-sm bg-info" style="margin-top:35px">แสดง</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12" style="margin-top:-20px">
+                                        <div class="form-group">
+                                            <label for="" ><small class="text-danger">ให้กรอกเกรด A -> E</small></label>
+                                        </div>
+                                        <table class="table" id="show" style="display: none;margin-top:-10px">
+                                            <thead>
+                                                <tr class="bg-info">
+                                                    <th>เกรด</th>
+                                                    <th>จำนวนข้อ</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    <td>A</td>
+                                                    <td id="tda"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>B</td>
+                                                    <td id="tdb"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>C</td>
+                                                    <td id="tdc"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>D</td>
+                                                    <td id="tdd"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>E</td>
+                                                    <td id="tde"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    
                                 </div>
                             </fieldset>
     
