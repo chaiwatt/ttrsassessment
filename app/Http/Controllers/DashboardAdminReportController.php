@@ -33,7 +33,7 @@ class DashboardAdminReportController extends Controller
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
             $fulltbparr = FullTbp::whereIn('mini_tbp_id', $minitbpids)->pluck('id')->toArray();
 
-            $expertarr = ExpertAssignment::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+            $expertarr = ExpertAssignment::where('user_id',$auth->id)->where('expert_assignment_status_id',2)->pluck('full_tbp_id')->toArray();
             $uniquefulltbparr = array_unique(array_merge($expertarr,$fulltbparr));
             $fulltbps = FullTbp::whereIn('id',$uniquefulltbparr)->get();
 

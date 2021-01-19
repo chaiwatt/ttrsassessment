@@ -28,14 +28,6 @@ use Illuminate\Support\Facades\Auth;
 class AssessmentEvController extends Controller
 {
     public function AddEvChecklist(Request $request){
-
-        // ExpertAssignment::where('full_tbp_id',$id)->whereNotIn('user_id',$request->expert)->delete();
-        // $existing_array = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
-        // $unique_array = array_diff($request->expert,$existing_array);
- 
-
-        // dd($request->criterias);
-
         CriteriaTransaction::where('ev_id',$request->evid)
                             ->where('index_type_id',$request->indextype)
                             ->where('pillar_id',$request->pillar)

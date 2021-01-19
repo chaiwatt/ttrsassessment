@@ -291,13 +291,14 @@ class DashboardAdminProjectFullTbpController extends Controller
     }
 
     public function AssignExpertReviewSave(AssignExpertRequest $request,$id){
+        $auth = Auth::user();
         ExpertAssignment::where('full_tbp_id',$id)->whereNotIn('user_id',$request->expert)->delete();
         $existing_array = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
         $unique_array = array_diff($request->expert,$existing_array);
         if(count($unique_array) == 0){
             return redirect()->back()->withSuccess('แก้ไขรายการสำเร็จ'); 
         }
-
+        $experts = '';
         foreach ($unique_array as $key => $expert) {
             $check = ExpertAssignment::where('full_tbp_id', $id)
                                 ->where('user_id',$expert)
@@ -308,9 +309,33 @@ class DashboardAdminProjectFullTbpController extends Controller
                 $expertassignment->user_id = $expert;
                 $expertassignment->expert_assignment_status_id = 1;
                 $expertassignment->save();
-
+                
+                $user = User::find($expert);
+                $experts .= 'คุณ' . $user->name . ' ' . $user->lastname . '<br>';
             }
         }
+
+        $fulltbp = FullTbp::find($id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $_businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $_company = Company::find($_businessplan->company_id);
+        
+        $jduser = User::where('user_type_id',6)->first();
+
+        $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' บริษัท' . $_company->name,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a>',Auth::user()->id,User::find($expertassignment->user_id)->id);
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $jduser->id;
+        $alertmessage->messagebox_id = $messagebox->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .' บริษัท' . $_company->name;
+        $alertmessage->save();
+
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
+        EmailBox::send($jduser->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project  .' บริษัท' . $_company->name,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .' บริษัท' . $_company->name.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpert',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        
         return redirect()->back()->withSuccess('เพิ่มผู้เชี่ยวชาญสำเร็จ'); 
     }
 
