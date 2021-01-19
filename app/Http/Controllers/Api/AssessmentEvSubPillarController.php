@@ -9,6 +9,7 @@ use App\Model\SubPillar;
 use Illuminate\Http\Request;
 use App\Model\SubPillarIndex;
 use App\Model\CheckListGrading;
+use App\Model\PillaIndexWeigth;
 use App\Model\CriteriaTransaction;
 use App\Http\Controllers\Controller;
 
@@ -66,6 +67,12 @@ class AssessmentEvSubPillarController extends Controller
                     ->where('sub_pillar_id',$request->subpillarid)
                     ->where('sub_pillar_index_id',$request->subpillarindexid)
                     ->delete();
+
+        PillaIndexWeigth::where('ev_id',$request->evid)
+                    ->where('pillar_id',$request->pillarid)
+                    ->where('sub_pillar_id',$request->subpillarid)
+                    ->where('sub_pillar_index_id',$request->subpillarindexid)
+                    ->delete();            
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
                                                 ->orderBy('pillar_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')

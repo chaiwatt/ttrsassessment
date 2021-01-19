@@ -150,8 +150,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    
-                                    
                                 </div>
                             </fieldset>
     

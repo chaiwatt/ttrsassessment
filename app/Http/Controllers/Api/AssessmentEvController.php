@@ -103,6 +103,13 @@ class AssessmentEvController extends Controller
     }
 
     public function AddEvGrading(Request $request){
+        $check = CriteriaTransaction::where('ev_id',$request->evid)
+                                    ->where('index_type_id',$request->indextype)
+                                    ->where('pillar_id',$request->pillar)
+                                    ->where('sub_pillar_id',$request->subpillar)
+                                    ->where('sub_pillar_index_id',$request->subpillarindex)
+                                    ->first();
+        if(Empty($check)){
         $criteriatransaction = new CriteriaTransaction();
         $criteriatransaction->ev_id = $request->evid;
         $criteriatransaction->index_type_id = $request->indextype;
@@ -110,6 +117,7 @@ class AssessmentEvController extends Controller
         $criteriatransaction->sub_pillar_id = $request->subpillar;
         $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
         $criteriatransaction->save();
+        }
 
         $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)->where('sub_pillar_index_id',$request->subpillarindex)->first();
         if(Empty($pillaindexweigth)){
@@ -198,24 +206,57 @@ class AssessmentEvController extends Controller
             $new->criteria_id = $criteriatransaction->criteria_id;
             $new->save();
 
-            $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->newevid)->where('sub_pillar_index_id',$new->sub_pillar_index_id)->first();
-            if(!Empty($pillaindexweigth)){
-                $pillaindexweigth->delete();
-            }
-            $pillaindexweigthorg = PillaIndexWeigth::where('ev_id',$request->orgevid)
-                        ->where('pillar_id',$new->pillar_id)
-                        ->where('sub_pillar_id',$new->sub_pillar_id)
-                        ->where('sub_pillar_index_id',$new->sub_pillar_index_id)
-                        ->first();
-            $pillaindexweigth = new PillaIndexWeigth();
-            $pillaindexweigth->ev_id = $new->ev_id;
-            $pillaindexweigth->ev_type_id = $new->ev_type_id;
-            $pillaindexweigth->pillar_id = $pillaindexweigthorg->pillar_id;
-            $pillaindexweigth->sub_pillar_id = $pillaindexweigthorg->sub_pillar_id;
-            $pillaindexweigth->sub_pillar_index_id = $pillaindexweigthorg->sub_pillar_index_id;
-            $pillaindexweigth->weigth = $pillaindexweigthorg->weigth;
-            $pillaindexweigth->save();
+            // $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->newevid)->where('sub_pillar_index_id',$new->sub_pillar_index_id)->first();
+            // if(!Empty($pillaindexweigth)){
+            //     $pillaindexweigth->delete();
+            // }
+            // $pillaindexweigthorg = PillaIndexWeigth::where('ev_id',$request->orgevid)
+            //             ->where('pillar_id',$new->pillar_id)
+            //             ->where('sub_pillar_id',$new->sub_pillar_id)
+            //             ->where('sub_pillar_index_id',$new->sub_pillar_index_id)
+            //             ->first();
+
         }  
+
+        PillaIndexWeigth::where('ev_id',$request->newevid)->delete(); 
+
+        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->orgevid)
+                                            ->orderBy('pillar_id','asc')
+                                            ->orderBy('sub_pillar_id', 'asc')
+                                            ->orderBy('sub_pillar_index_id', 'asc')
+                                            ->get();
+        foreach ($pillaindexweigths as $key => $pillaindexweigth) {
+            $new = new PillaIndexWeigth();
+            $new->ev_id = $pillaindexweigth->ev_id;
+            $new->ev_type_id = $pillaindexweigth->ev_type_id;
+            $new->pillar_id = $pillaindexweigth->pillar_id;
+            $new->sub_pillar_id = $pillaindexweigth->sub_pillar_id;
+            $new->sub_pillar_index_id = $pillaindexweigth->sub_pillar_index_id;
+            $new->weigth = $pillaindexweigth->weigth;
+            $new->save();
+        }     
+        
+        CheckListGrading::where('ev_id',$request->newevid)->delete(); 
+
+        $checklistgradings = CheckListGrading::where('ev_id',$request->orgevid)
+                                            ->orderBy('pillar_id','asc')
+                                            ->orderBy('sub_pillar_id', 'asc')
+                                            ->orderBy('sub_pillar_index_id', 'asc')
+                                            ->get();
+        foreach ($checklistgradings as $key => $checklistgrading) {
+            $new = new CheckListGrading();
+            $new->ev_id = $checklistgrading->ev_id;
+            $new->pillar_id = $checklistgrading->pillar_id;
+            $new->sub_pillar_id = $checklistgrading->sub_pillar_id;
+            $new->sub_pillar_index_id = $checklistgrading->sub_pillar_index_id;
+            $new->gradea = $checklistgrading->gradea;
+            $new->gradeb = $checklistgrading->gradeb;
+            $new->gradec = $checklistgrading->gradec;
+            $new->graded = $checklistgrading->graded;
+            $new->gradee = $checklistgrading->gradee;
+            $new->save();
+        }  
+
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->newevid)
                                                 ->orderBy('pillar_id','asc')
                                                 ->orderBy('sub_pillar_id', 'asc')

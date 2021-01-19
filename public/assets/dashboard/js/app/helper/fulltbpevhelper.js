@@ -123,6 +123,7 @@ $('.steps-basic').steps({
     headerTag: 'h6',
     bodyTag: 'fieldset',
     transitionEffect: 'fade',
+    enableFinishButton: false,
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> กลับ',
@@ -130,7 +131,17 @@ $('.steps-basic').steps({
         finish: 'เพิ่มรายการ <i class="icon-arrow-right14 ml-2" />'
     },
     autoFocus: true,
+    onStepChanged:function (event, currentIndex, newIndex) {
+
+    },
     onStepChanging: function (event, currentIndex, newIndex) {
+        if(newIndex == 3){
+            $(document).find(".actions ul").append(`
+                <li class='libtn'><a href='#' id='addcriteria' class='btn bg-info' ><i class="icon-spinner spinner mr-2" id="spiniconcriteria" hidden></i>เพิ่มรายการ<i class='icon-floppy-disk ml-2' /></a></li>`);
+        }
+        if(newIndex != 3){
+            $(".actions").find(".libtn").remove();
+        }
         $('#tmpstepindex').val(newIndex);
         $('#criteriamodal').removeClass('context-menu-one'); 
         if(newIndex > 0){
@@ -173,7 +184,6 @@ $('.steps-basic').steps({
                 });
                 $('.context-menu-one').on('click', function(e){
                     // console.log('clicked', this);
-            
                 })    
             });
         }
@@ -236,23 +246,22 @@ $('.steps-basic').steps({
         return true;
     },
     onFinished: function (event, currentIndex) {
-        if($('#indextype').val() == 1){
-            AddGrading();
-        }else{
-            var criterias = [];
-            $('#chklist :checked').each(function() {
-                criterias.push($(this).val());
-              });
-              if(criterias.length == 0){
-                Swal.fire({
-                    title: 'ผิดพลาด...',
-                    text: 'ยังไม่ได้เลือกรายการ!',
-                    });
-              }else{
-                AddCheckList(criterias);
-              }
-            
-        }
+        // if($('#indextype').val() == 1){
+        //     AddGrading();
+        // }else{
+        //     var criterias = [];
+        //     $('#chklist :checked').each(function() {
+        //         criterias.push($(this).val());
+        //       });
+        //       if(criterias.length == 0){
+        //         Swal.fire({
+        //             title: 'ผิดพลาด...',
+        //             text: 'ยังไม่ได้เลือกรายการ!',
+        //             });
+        //       }else{
+        //         AddCheckList(criterias);
+        //       }
+        // }
     }
 });
 
@@ -268,6 +277,7 @@ $('.steps-basic-extra').steps({
     },
     autoFocus: true,
     onStepChanging: function (event, currentIndex, newIndex) {
+        
         $('#tmpstepindex').val(newIndex);
         $('#extracriteriamodal').removeClass('context-menu-one'); 
         if(newIndex > 0){
@@ -354,11 +364,31 @@ $('.steps-basic-extra').steps({
     }
 });
 
+$(document).on('click', '#addcriteria', function(e) {
+    // console.log('ok');
+    if($('#indextype').val() == 1){
+        AddGrading();
+    }else{
+        var criterias = [];
+        $('#chklist :checked').each(function() {
+            criterias.push($(this).val());
+          });
+          if(criterias.length == 0){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'ยังไม่ได้เลือกรายการ!',
+                });
+          }else{
+            AddCheckList(criterias);
+          }
+    }
+});
 // $(document).on('keyup', '#name', function(e) {
 //     $('#clientname').html($(this).val());
 // });
 
 function AddCheckList(criterias){
+    $("#spiniconcriteria").attr("hidden",false);
     Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val()).then(data => {
          RenderTable(data,1);
          RowSpan("criteriatable");
@@ -368,6 +398,7 @@ function AddCheckList(criterias){
                     html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
                 });
              $("#relateev").html(html);
+             $("#spiniconcriteria").attr("hidden",true);
              Swal.fire({
                 title: 'สำเร็จ...',
                 text: 'เพิ่มรายการสำเร็จ!',
@@ -377,9 +408,11 @@ function AddCheckList(criterias){
 }
 
 function AddGrading(){
+    $("#spiniconcriteria").attr("hidden",false);
     Ev.addEvGrading($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
         RenderTable(data,1);
         RowSpan("criteriatable");
+        $("#spiniconcriteria").attr("hidden",true);
          Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มรายการสำเร็จ!',
