@@ -14,6 +14,7 @@ use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ExtraCriteriaTransaction;
 
 class DashboardAdminProjectEvWeightController extends Controller
 {
@@ -54,16 +55,21 @@ class DashboardAdminProjectEvWeightController extends Controller
                                                 ->makeHidden('scoring');
         $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get()->makeHidden(['updated_at','created_at']);
         $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
-        $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
-        // $ev= Ev::find($request->evid);
+        $sumextraweigth = round(ExtraCriteriaTransaction::where('ev_id',$request->evid)->sum('weight'), 4); 
+        
+        $extracriteriatransactions = ExtraCriteriaTransaction::where('ev_id',$request->evid)
+                                                        ->orderBy('extra_category_id', 'asc')
+                                                        ->orderBy('extra_criteria_id', 'asc')
+                                                        ->get()
+                                                        ->append('extracategory')
+                                                        ->append('extracriteria');   
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "pillaindexweigths" => $pillaindexweigths,
             "sumweigth" => $sumweigth,
             "sumextraweigth" => $sumextraweigth,
-            // "ev" => $ev
+            "extracriteriatransactions" => $extracriteriatransactions
         ));
-
     }
 
     public function EditSave(Request $request){

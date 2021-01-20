@@ -24,6 +24,7 @@ use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ExtraCriteriaTransaction;
 
 class AssessmentEvController extends Controller
 {
@@ -184,7 +185,18 @@ class AssessmentEvController extends Controller
                                                     ->orderBy('sub_pillar_id', 'asc')
                                                     ->orderBy('sub_pillar_index_id', 'asc')
                                                     ->get();
-            return response()->json($criteriatransactions); 
+            $extracriteriatransactions = ExtraCriteriaTransaction::where('ev_id',$ev->id)
+                                                                ->orderBy('extra_category_id', 'asc')
+                                                                ->orderBy('extra_criteria_id', 'asc')
+                                                                ->get()
+                                                                ->append('extracategory')
+                                                                ->append('extracriteria');   
+            
+            return response()->json(array(
+                "criteriatransactions" => $criteriatransactions,
+                "extracriteriatransactions" => $extracriteriatransactions
+            ));                                       
+            // return response()->json($criteriatransactions); 
         }
     }
     public function CopyEv(Request $request){

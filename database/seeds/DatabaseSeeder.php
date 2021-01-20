@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(HomepagePillarsTableSeeder::class);
         $this->call(SearchGroupsTableSeeder::class);
         $this->call(HomepageServicesTableSeeder::class);
+        $this->call(ExtraCategoriesTableSeeder::class);
+        $this->call(ExtraCriteriasTableSeeder::class);
         $this->call(IsicTablesSeeder::class);
         $this->call(IsicSubsTablesSeeder::class);
         $this->call(CalendarTypesTableSeeder::class);

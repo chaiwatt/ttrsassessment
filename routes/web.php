@@ -69,6 +69,15 @@ Route::group(['prefix' => 'api'], function(){
             Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');            
         }); 
     }); 
+    Route::group(['prefix' => 'extra'], function(){
+        Route::post('getextracategory','Api\ExtraController@GetExtraCategory')->name('api.extra.getextracategory'); 
+        Route::post('getextra','Api\ExtraController@GetExtra')->name('api.extra.getextra'); 
+        Route::post('addextra','Api\ExtraController@AddExtra')->name('api.extra.addextra'); 
+        Route::post('addextra','Api\ExtraController@AddExtra')->name('api.extra.addextra'); 
+        Route::post('deletecategoryextratransaction','Api\ExtraController@DeleteCategoryExtraTransaction')->name('api.extra.deletecategoryextratransaction'); 
+        Route::post('deletecriteriaextratransaction','Api\ExtraController@DeleteCriteriaExtraTransaction')->name('api.extra.deletecriteriaextratransaction'); 
+        Route::post('editextraweight','Api\ExtraController@EditExtraWeight')->name('api.extra.editextraweight'); 
+    }); 
     Route::group(['prefix' => 'search'], function(){
         Route::group(['prefix' => 'project'], function(){
             Route::post('year','Api\SearchProjectController@Year')->name('api.search.project.year');            

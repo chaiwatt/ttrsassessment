@@ -240,120 +240,38 @@
                 <div class="modal-body context-menu-one" id="extracriteriamodal">
                     {{-- <input type="text" id="evid" value="{{$ev->id}}" hidden> --}}
                     {{-- <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden> --}}
-                        <form class="wizard-form steps-basic-extra" action="#" data-fouc>
-                            <h6>Pillar</h6>
-                            <fieldset>
+                        {{-- <div class="wizard-form steps-basic-extra" action="#" data-fouc> --}}
+                            <h6>Category</h6>
+                            {{-- <fieldset> --}}
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group" id="extra_criteria_wrapper">
-                                            <select name="extrapillar" id="extrapillar" data-placeholder="Pillar" class="form-control form-control-lg form-control-select2" >
+                                            <select name="extracategory" id="extracategory" data-placeholder="Category" class="form-control form-control-lg form-control-select2" >
                                             </select> 
                                         </div>  
                                     </div>
                                 </div>
-                            </fieldset>
+                            {{-- </fieldset> --}}
     
-                            <h6>Sub Pillar</h6>
-                            <fieldset>
+                            <h6>Extra Criteria</h6>
+                            {{-- <fieldset> --}}
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <select name="extrasubpillar" id="extrasubpillar" data-placeholder="Sub Pillar" class="form-control form-control-lg form-control-select2" >
+                                            <select name="extracriteria" id="extracriteria" data-placeholder="Extra Criteria" class="form-control form-control-lg form-control-select2" >
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                            </fieldset>
-    
-                            <h6>Index</h6>
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <select name="extrasubpillarindex" id="extrasubpillarindex" data-placeholder="Index" class="form-control form-control-lg form-control-select2" >
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="">ประเภท Indexfff</label>
-                                            <select name="indextype" id="indextype" data-placeholder="Index" class="form-control form-control-lg form-control-select2" >
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="row" id="grade_wrapper">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="form-group">
-                                                        <label>เกรด A</label>
-                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control form-control-lg" >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="form-group">
-                                                        <label>เกรด B</label>
-                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control form-control-lg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="form-group">
-                                                        <label>เกรด C</label>
-                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control form-control-lg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label>เกรด D</label>
-                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control form-control-lg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label>เกรด E</label>
-                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control form-control-lg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label>เกรด F</label>
-                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                            </fieldset>
-    
-                        </form>
+                            {{-- </fieldset> --}}
+                        </div>
                     {{-- </div> --}}
   
-                </div>           
-                {{-- <div class="modal-footer">
+                {{-- </div>            --}}
+                <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_clustergroup" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
-                </div> --}}
+                    <button id="btn_modal_add_extracriteria" class="btn bg-primary" ><i class="icon-arrow-right14 font-size-base mr-1"></i> เพิ่มรายการ</button>
+                </div>
             </div>
         </div>
     </div>
@@ -500,11 +418,14 @@
             </div>
             <div class="header-elements d-none">
                 <div class="d-flex justify-content-center">
-                    {{-- @if ($ev->status <= 1) --}}
-                        {{-- <div class="form-check ">
-                            <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif >
-                        </div>      --}}
-                    {{-- @endif --}}
+                    @if (($ev->status == 0 || $ev->refixstatus == 1) && Auth::user()->user_type_id != 6)
+                        <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
+                    @endif
+                    @if (($ev->status == 1 || $ev->refixstatus == 1))
+                        @if (Auth::user()->user_type_id == 6)
+                            <button id="approveevstageone" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>
@@ -586,131 +507,126 @@
 					<div class="card-body">
                         <input type="text" id="tmpstepindex" value="0" hidden>
                         <div class="text-right">
-                            @if (($ev->status == 0 || $ev->refixstatus == 1) && Auth::user()->user_type_id != 6)
-                                <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
-                            @endif
-                            @if (($ev->status == 1 || $ev->refixstatus == 1))
-                                @if (Auth::user()->user_type_id == 6)
-                                    <button id="approveevstageone" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
-                                @endif
-                            @endif
-                            {{--  <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ยังไม่ได้ส่ง" class="form-check-input-switch" @if ($ev->status != 0) checked @endif > --}}
                         </div>
-                        <div class="form-group">
-                            <label>EV ในระบบ</label>
-                            <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
-                                <option value="0">==เลือกจาก EV ในระบบ==</option>
-                                @foreach ($evs as $_ev)
-                                    <option value="{{$_ev->id}}" >
-                                        {{$_ev->name}}
-                                        @if (Empty($_ev->fulltbp))
-                                            (Template)
-                                            @else
-                                            ({{$_ev->fulltbp->minitbp->project}})
+                        <div class="row">
+                            <div class="col-md-12">	
+                                <div class="form-group">
+                                    <label>EV ในระบบ</label>
+                                    <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
+                                        <option value="0">==เลือกจาก EV ในระบบ==</option>
+                                        @foreach ($evs as $_ev)
+                                            <option value="{{$_ev->id}}" >
+                                                {{$_ev->name}}
+                                                @if (Empty($_ev->fulltbp))
+                                                    (Template)
+                                                    @else
+                                                    ({{$_ev->fulltbp->minitbp->project}})
+                                                @endif
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+        
+                                <ul class="nav nav-tabs nav-tabs-highlight ">
+                                    <li class="nav-item"><a href="#indextab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
+                                    <li class="nav-item"><a href="#extratab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
+                                    @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
+                                    <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
+                                    @endif
+                                </ul>
+        
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="indextab">
+                                        <div class="form-group">	
+                                            @if ($ev->status == 0 || $ev->refixstatus == 1)
+                                                <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" >เพิ่ม Index Criteria</button>
+                                            @endif
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="criteriatable">
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th>Pillar</th>  
+                                                        <th>Sub Pillar</th>   
+                                                        <th>Index</th>                                                                                
+                                                        <th>Criteria</th>  
+                                                    </tr>
+                                                </thead>
+                                                <div class="theme_tail theme_tail_circle loadprogress">
+                                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                                    <div class="pace_activity"></div>
+                                                </div> 
+                                                <tbody id="criteria_transaction_wrapper_tr"> 
+                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+        
+                                    <div class="tab-pane fade" id="extratab">
+                                        <div class="form-group">	
+                                            @if ($ev->status == 0 || $ev->refixstatus == 1)
+                                            <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" >เพิ่ม Extra Criteria</button>
+                                            @endif
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="extracriteriatable">
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th>Category</th>  
+                                                        <th>Extra Criteria</th>   
+                                                        {{-- <th>Index</th>                                                                                
+                                                        <th>Criteria</th>   --}}
+                                                    </tr>
+                                                </thead>
+                                                <div class="theme_tail theme_tail_circle loadprogress">
+                                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                                    <div class="pace_activity"></div>
+                                                </div> 
+                                                <tbody id="extra_criteria_transaction_wrapper_tr"> 
+                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="commenttab">
+                                        @if (Auth::user()->user_type_id == 6)
+                                        <div class="form-group">	
+                                            <a href="" class="btn btn-info btn-icon ml-2 btn-sm"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
+                                            <br>
+                                        </div>
                                         @endif
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <ul class="nav nav-tabs nav-tabs-highlight ">
-                            <li class="nav-item"><a href="#indextab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
-                            <li class="nav-item"><a href="#extratab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
-                            @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
-                            <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
-                            @endif
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="indextab">
-                                <div class="form-group">	
-                                    @if ($ev->status == 0 || $ev->refixstatus == 1)
-                                        <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
-                                    @endif
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="criteriatable">
-                                        <thead>
-                                            <tr class="bg-info">
-                                                <th>Pillar</th>  
-                                                <th>Sub Pillar</th>   
-                                                <th>Index</th>                                                                                
-                                                <th>Criteria</th>  
-                                            </tr>
-                                        </thead>
-                                        <div class="theme_tail theme_tail_circle loadprogress">
-                                            <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
-                                            <div class="pace_activity"></div>
-                                        </div> 
-                                        <tbody id="criteria_transaction_wrapper_tr"> 
-          
-                                        </tbody>
-                                    </table>
+        
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="criteriatable">
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th>วันที่</th>  
+                                                        <th>รายละเอียด</th>   
+                                                        @if (Auth::user()->user_type_id == 6)
+                                                            <th>เพิ่มเติม</th>
+                                                        @endif
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="ev_edit_history_wrapper_tr"> 
+                                                    @foreach ($evedithistories->reverse() as $evedithistory)
+                                                    <tr>
+                                                        <td>{{$evedithistory->thaidate}}</td>
+                                                        <td>{{$evedithistory->detail}}</td>
+                                                        @if (Auth::user()->user_type_id == 6)
+                                                        <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
+                                                        @endif
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="tab-pane fade" id="extratab">
-                                <div class="form-group">	
-                                    @if ($ev->status == 0 || $ev->refixstatus == 1)
-                                    <button type="button" class="btn btn-info btn-icon ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" ><i class="icon-add"></i></button>
-                                    @endif
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="extracriteriatable">
-                                        <thead>
-                                            <tr class="bg-info">
-                                                <th>Pillar</th>  
-                                                <th>Sub Pillar</th>   
-                                                <th>Index</th>                                                                                
-                                                <th>Criteria</th>  
-                                            </tr>
-                                        </thead>
-                                        <div class="theme_tail theme_tail_circle loadprogress">
-                                            <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
-                                            <div class="pace_activity"></div>
-                                        </div> 
-                                        <tbody id="extra_criteria_transaction_wrapper_tr"> 
-          
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="commenttab">
-                                @if (Auth::user()->user_type_id == 6)
-                                <div class="form-group">	
-                                    <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
-                                    <br>
-                                </div>
-                                @endif
-
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="criteriatable">
-                                        <thead>
-                                            <tr class="bg-info">
-                                                <th>วันที่</th>  
-                                                <th>รายละเอียด</th>   
-                                                @if (Auth::user()->user_type_id == 6)
-                                                    <th>เพิ่มเติม</th>
-                                                @endif
-                                            </tr>
-                                        </thead>
-                                        <tbody id="ev_edit_history_wrapper_tr"> 
-                                            @foreach ($evedithistories->reverse() as $evedithistory)
-                                            <tr>
-                                                <td>{{$evedithistory->thaidate}}</td>
-                                                <td>{{$evedithistory->detail}}</td>
-                                                @if (Auth::user()->user_type_id == 6)
-                                                <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
-                                                @endif
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-					</div>
+                        </div>          
+                    </div>
+                    
 				</div>
 				<!-- /multiple selection -->
             <!-- /striped rows -->
@@ -732,7 +648,9 @@
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            usertypeid: "{{Auth::user()->user_type_id}}"
+            usertypeid: "{{Auth::user()->user_type_id}}",
+            status: "{{$ev->status}}",
+            refixstatus: "{{$ev->refixstatus}}"
         };
 
     </script>

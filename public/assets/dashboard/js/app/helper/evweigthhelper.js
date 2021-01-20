@@ -1,17 +1,20 @@
 import * as Ev from './ev.js';
+import * as Extra from './extra.js';
 
 $(function() {
     getEv($('#evid').val()).then(data => {
-        // console.log(data);
-        RenderTable(data.criteriatransactions,1);
-        RenderTable(data.criteriatransactions,2);
+        console.log(data);
+        // RenderTable(data.criteriatransactions,1);
+        // RenderTable(data.criteriatransactions,2);
         RenderWeightTable(data.pillaindexweigths,1);
-        RenderWeightTable(data.pillaindexweigths,2);
+        // RenderWeightTable(data.pillaindexweigths,2);
+        RenderExtraTable(data.extracriteriatransactions);
+        
         $(".loadprogress").attr("hidden",true);
-        RowSpan("criteriatable");
-        RowSpan("extra_criteriatable");
+        // RowSpan("criteriatable");
+        // RowSpan("extra_criteriatable");
         RowSpanWeight("subpillarindex");
-        RowSpanWeight("extra_subpillarindex");
+        RowSpanExtra("extra_subpillarindex");
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
         $('#extraweight').html('(' + data.sumextraweigth.toFixed(3) + ')');
         
@@ -42,6 +45,21 @@ function getEv(evid){
  }).on('change', '.weigthvalue1', function(e) {
     var check = parseFloat($('#weight').html().replace(/[{()}]/g, ''));
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
+
+    var sum =0;
+    $('.weigthvalue1').each(function(){
+        var val = parseFloat($(this).val());
+        sum += val;
+    });
+    if(sum.toFixed(3) > 1){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ผลรวม Weight มากกว่า 1 !',
+            });
+            $(this).val($(this).data('old')) 
+            return;
+    }
+
     if(newval.toFixed(3) > 1){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -55,11 +73,43 @@ function getEv(evid){
     }).catch(error => {})
 });
 
-$(document).on('focusin', '.weigthvalue1', function(){
+// $(document).on('focusin', '.weigthvalue1', function(){
+//     $(this).data('old', $(this).val());
+//  }).on('change', '.weigthvalue2', function(e) {
+//     var check = parseFloat($('#extraweight').html().replace(/[{()}]/g, ''));
+//     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
+//     if(newval.toFixed(3) > 1){
+//         Swal.fire({
+//             title: 'ผิดพลาด...',
+//             text: 'ผลรวม Weight มากกว่า 1 !',
+//             });
+//             $(this).val($(this).data('old')) 
+//             return;
+//     }
+//     editWeight($(this).data('id'),$(this).val(),2).then(data => {
+//         $('#extraweight').html('(' + data.sumweigth.toFixed(3) + ')');
+//     }).catch(error => {})
+// });
+
+$(document).on('focusin', '.weigthvalue', function(){
     $(this).data('old', $(this).val());
- }).on('change', '.weigthvalue2', function(e) {
+ }).on('change', '.weigthvalue', function(e) {
     var check = parseFloat($('#extraweight').html().replace(/[{()}]/g, ''));
+    var sum =0;
+    $('.weigthvalue').each(function(){
+        var val = parseFloat($(this).val());
+        sum += val;
+    });
+    if(sum.toFixed(3) > 1){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ผลรวม Weight มากกว่า 1 !',
+            });
+            $(this).val($(this).data('old')) 
+            return;
+    }
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
+    // console.log(newval);
     if(newval.toFixed(3) > 1){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -68,10 +118,12 @@ $(document).on('focusin', '.weigthvalue1', function(){
             $(this).val($(this).data('old')) 
             return;
     }
-    editWeight($(this).data('id'),$(this).val(),2).then(data => {
-        $('#extraweight').html('(' + data.sumweigth.toFixed(3) + ')');
+    Extra.editExtraWeight($('#evid').val(),$(this).data('id'),$(this).val()).then(data => {
+        // console.log(data)
+        $('#extraweight').html('(' + parseFloat(data).toFixed(3) + ')');
     }).catch(error => {})
 });
+
 
 function editWeight(id,value,evtypeid){
     return new Promise((resolve, reject) => {
@@ -93,6 +145,8 @@ function editWeight(id,value,evtypeid){
         })
     })
   }
+
+
 
   function RenderTable(data,evtype){
     var html =``;
@@ -142,6 +196,7 @@ function RenderWeightTable(data,evtypeid){
                     </div>
                 </td>                           
             </tr>`
+            
         }
         });
         if(evtypeid == 1){
@@ -149,6 +204,54 @@ function RenderWeightTable(data,evtypeid){
         }else if(evtypeid == 2){
             $("#extra_subpillar_index_transaction_wrapper_tr").html(html);
         }
+}
+
+function RenderExtraTable(data){
+    var html =``;
+    var readonly =`readonly`;
+    // console.log($('#evstatus').val());
+    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
+        readonly =``;
+    }
+    if($('#evstatus').val() >= 4){
+        readonly =`readonly`;
+    }
+    data.forEach(function (criteria,index) {
+            html += `<tr > 
+            <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
+            <td> 
+            <div class="form-group">
+                <label>${criteria.extracriteria['name']}</label>
+                <input type="number" value="${criteria.weight}" data-id="${criteria.id} "class="form-control inputextraweigth weigthvalue" ${readonly}>
+            </div>
+        </td> 
+    </tr>`
+    });
+    console.log(html)
+        $("#extra_criteria_transaction_wrapper_tr").html(html);
+}
+
+function RowSpanExtra(tableid){
+    const table = document.getElementById(tableid);// document.querySelector('table');
+    let cell1 = "";
+    let cell2 = "";
+    for (let row of table.rows) {
+        const firstCell = row.cells[0];
+        const secondCell = row.cells[1];
+        if (cell1 === null || firstCell.innerText !== cell1.innerText) {
+            cell1 = firstCell;
+        } else {
+            cell1.rowSpan++;
+            firstCell.remove();
+        }
+        if (cell2 === null || secondCell.innerText !== cell2.innerText) {
+            cell2 = secondCell;
+        } else {
+            cell2.rowSpan++;
+            secondCell.remove();
+        }
+    }
 }
 
 function RowSpan(tableid){
@@ -366,7 +469,7 @@ function updateEvAdminStatus(id,value){
         }).catch(error => {})
     });
     var submitbutton = false;
-    // console.log('user ' + $('#evstatus').val() );
+
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1)) && route.usertypeid != 6){
         submitbutton = true;
     }

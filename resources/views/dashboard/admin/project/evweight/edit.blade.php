@@ -114,15 +114,14 @@
                                     @endif
                                 </div> --}}
                                 <ul class="nav nav-tabs nav-tabs-highlight indexweight">
-                                    <li class="nav-item"><a href="#detailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
-                                    <li class="nav-item"><a href="#weighttab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weigth <span id="weight"></span></a></li>
+                                    {{-- <li class="nav-item"><a href="#detailtab" class="nav-link" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}
+                                    <li class="nav-item"><a href="#weighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weigth <span id="weight"></span></a></li>
                                     @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
                                         <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
                                     @endif
                                 </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane fade show active" id="detailtab">
-                                        {{-- <input type="text" id="evid" value="{{$ev->id}}" hidden> --}}
+                                <div class="tab-content mb-2">
+                                    {{-- <div class="tab-pane fade show active" id="detailtab">
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped" id="criteriatable">
                                                 <thead>
@@ -142,12 +141,12 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    </div> --}}
         
-                                    <div class="tab-pane fade" id="weighttab">
+                                    <div class="tab-pane fade show active"" id="weighttab">
                                         <table class="table table-bordered table-striped" id="subpillarindex">
                                             <thead>
-                                                <tr>
+                                                <tr class="bg-info">
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
                                                     <th>Weigth</th>                                                                                
@@ -198,20 +197,22 @@
 							<fieldset>
                                 {{-- <input type="text" id="tmpstepindex" value="0" hidden> --}}
                                 <ul class="nav nav-tabs nav-tabs-highlight">
-                                    <li class="nav-item"><a href="#extradetailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
-                                    <li class="nav-item"><a href="#extraweighttab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i> กำหนด Weigth <span id="extraweight"></span></a></li>
+                                    {{-- <li class="nav-item"><a href="#extradetailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}
+                                    <li class="nav-item"><a href="#extraweighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i> กำหนด Weigth <span id="extraweight"></span></a></li>
                                 </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane fade show active" id="extradetailtab">
-                                        {{-- <input type="text" id="evid" value="{{$ev->id}}" hidden> --}}
+                                <div class="tab-content mb-2">
+                 
+        
+                                    <div class="tab-pane fade show active" id="extraweighttab">
+                       
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="extra_criteriatable">
+                                            <table class="table table-bordered table-striped" id="extra_subpillarindex">
                                                 <thead>
-                                                    <tr>
-                                                        <th>Pillar AAA</th>  
-                                                        <th>Sub Pillar</th>   
-                                                        <th>Index</th>                                                                                
-                                                        <th>Criteria</th>  
+                                                    <tr class="bg-info">
+                                                        <th>Category</th>  
+                                                        <th>Extra Criteria</th>   
+                                                        <th>Weight</th>                                                                                
+                                                        {{-- <th>Criteria</th>   --}}
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -223,21 +224,6 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
-        
-                                    <div class="tab-pane fade" id="extraweighttab">
-                                        <table class="table table-bordered table-striped" id="extra_subpillarindex">
-                                            <thead>
-                                                <tr>
-                                                    <th>Pillar BBB</th>  
-                                                    <th>Sub Pillar</th>   
-                                                    <th>Weigth</th>                                                                                
-                                                </tr>
-                                            </thead>
-                                            <tbody id="extra_subpillar_index_transaction_wrapper_tr"> 
-              
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
                             </fieldset>
