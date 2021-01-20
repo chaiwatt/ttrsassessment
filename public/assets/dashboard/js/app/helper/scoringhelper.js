@@ -140,6 +140,33 @@ function RenderTable(data,evtype){
     
 }
 
+
+function RenderExtraTable(data){
+    var html =``;
+    var readonly =`readonly`;
+    // console.log($('#evstatus').val());
+    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
+        readonly =``;
+    }
+    if($('#evstatus').val() >= 4){
+        readonly =`readonly`;
+    }
+    data.forEach(function (criteria,index) {
+            html += `<tr > 
+            <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
+            <td> 
+            <div class="form-group">
+                <label>${criteria.extracriteria['name']}</label>
+                <input type="number" value="${criteria.weight}" data-id="${criteria.id} "class="form-control inputextraweigth weigthvalue" ${readonly}>
+            </div>
+        </td> 
+    </tr>`
+    });
+    console.log(html)
+        $("#extra_criteria_transaction_wrapper_tr").html(html);
+}
+
 function RowSpan(tableid){
     const table = document.getElementById(tableid);// document.querySelector('table');
     let cell1 = "";
@@ -215,7 +242,6 @@ function RowSpanWeight(tableid){
 $(document).on('change', '.gradescore', function(e) {
     if(stepindex == 0){
         if($(this).val() !== 'A' && $(this).val() !== 'B' && $(this).val() !== 'C' && $(this).val() !== 'D' && $(this).val() !== 'E' && $(this).val() !== 'F'){
-            
             Swal.fire({
                 title: 'ผิดพลาด...',
                 text: 'กรอกเกรด A-F เท่านั้น!',

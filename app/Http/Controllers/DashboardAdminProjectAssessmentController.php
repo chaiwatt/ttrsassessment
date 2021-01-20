@@ -26,6 +26,7 @@ use App\Model\ProjectAssignment;
 use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
 use App\Model\CriteriaGroupTransaction;
+use App\Model\ExtraCriteriaTransaction;
 
 class DashboardAdminProjectAssessmentController extends Controller
 {
@@ -118,11 +119,18 @@ class DashboardAdminProjectAssessmentController extends Controller
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
                                     ->where('user_id',$request->userid)
                                     ->first(['ev_id', 'user_id']);  
+        $extracriteriatransactions = ExtraCriteriaTransaction::where('ev_id',$request->evid)
+                                    ->orderBy('extra_category_id', 'asc')
+                                    ->orderBy('extra_criteria_id', 'asc')
+                                    ->get()
+                                    ->append('extracategory')
+                                    ->append('extracriteria');   
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "sumweigth" => $sumweigth,
             "pillars" => $pillars,
             "scoringstatus" => $scoringstatus,
+            "extracriteriatransactions" => $extracriteriatransactions
         ));
     }
 
