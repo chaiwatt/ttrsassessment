@@ -114,7 +114,7 @@
             </div>           
             <div class="modal-footer">
                 <button class="btn btn-link "  data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                <button id="btn_modal_get_calendar"  class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                <button id="btn_modal_get_calendar"  class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i>บันทึก</button>
             </div>
         </div>
     </div>
@@ -140,7 +140,7 @@
             </div>           
             <div class="modal-footer">
                 <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                <button id="btn_modal_expertreject_reason" class="btn bg-primary"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                <button id="btn_modal_expertreject_reason" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
             </div>
         </div>
     </div>
@@ -490,7 +490,9 @@
 
     $(document).on('click', '#btn_modal_expertreject_reason', function(e) {
         if($('#note').val() == '')return;
+        $("#spinicon").attr("hidden",false);
         expertReject("{{Auth::user()->id}}",$(this).data('id'),$('#note').val()).then(data => {
+            $("#spinicon").attr("hidden",true);
             window.location.reload();
         })
        .catch(error => {})
@@ -520,7 +522,7 @@
     $(document).on('click', '.showreject', function(e) {
         // $('#btn_modal_expertreject_reason').data('id',$(this).data('id')); //setter
         showReject("{{Auth::user()->id}}",$(this).data('id')).then(data => {
-            console.log(data);
+            // console.log(data);
             $('#rejectreason_wrapper').html(data);
             $('#modal_show_reason').modal('show');
         })

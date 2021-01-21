@@ -1,17 +1,23 @@
 
+import * as Extra from './extra.js';
 var stepindex =0;
 $(function() {
     getEv($('#evid').val(),route.userid).then(data => {
-        // console.log(data);
+        
         RenderTable(data,1);
-        RenderTable(data,2);
+        //RenderTable(data,2);
+        RenderExtraTable(data.extracriteriatransactions,data.extrascoring);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
-        RowSpan("extra_criteriatable");
-        $('#sumofweight').html(data.sumweigth);
+        // RowSpan("extra_criteriatable");
+        // $('#sumofweight').html(data.sumweigth);
+        RowSpanExtra("extra_subpillarindex");
+        console.log(data.scoringstatus);
         if(jQuery.isEmptyObject(data.scoringstatus) ){
+            console.log('aa');
             $('.inpscore').prop("disabled", false);
         }else{
+            console.log('bb');
             $('.inpscore').prop("disabled", true);
         }
         
@@ -59,6 +65,7 @@ function RenderTable(data,evtype){
                     
                     var checkscore = criteria.scoring.filter(x => x.user_id == userid); 
                     if(typeof(checkscore[0]) != "undefined"){
+                        console.log(checkscore[0]);
                         var _scoring = checkscore[0];
                         if(_scoring['comment'] != null){comment = _scoring['comment'];}
                         if(_scoring['scoretype'] == 1){
@@ -67,8 +74,8 @@ function RenderTable(data,evtype){
                             checkvalue = "checked";
                         }
                     }
-                    var criterianame = `<label>กรอกเกรด/คะแนน</label>
-                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control inpscore gradescore">`;
+                    var criterianame = `<div class="form-group"><label>กรอกเกรด (A - E)</label>
+                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control form-control-lg inpscore gradescore"></div>`;
 
                     if(criteria.criteria != null){
                     criterianame = `<label class="form-check-label">
@@ -79,7 +86,7 @@ function RenderTable(data,evtype){
         
                     criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
-                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control inpscore comment">
+                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg inpscore comment">
                                         </div>
                                     </div>`;
 
@@ -106,7 +113,7 @@ function RenderTable(data,evtype){
                         warninglabel ='text-danger';
                     }
 
-                    var finalcriterianame = `<label>กรอกเกรด/คะแนน</label><input type="text" placeholder="" value="${finaltextvalue}" class="form-control ${warningtext}" disabled >`;
+                    var finalcriterianame = `<div class="form-group"><label>กรอกเกรด (A-E)</label><input type="text" placeholder="" value="${finaltextvalue}" class="form-control form-control-lg ${warningtext}" disabled ></div>`;
 
                     if(criteria.criteria != null){
                         finalcriterianame = `<label class="form-check-label">
@@ -117,9 +124,10 @@ function RenderTable(data,evtype){
         
                     finalcriterianame += `<div class="toggle" style="display:none;"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
-                                        <input type="text" value="${comment}" class="form-control" disabled>
+                                        <input type="text" value="${comment}" class="form-control form-control-lg" disabled>
                                         </div>
-                                    </div>`; 
+                                    </div>
+                                    `; 
                     html += `<tr > 
                     <td> ${criteria.pillar['name']}</td>                                            
                     <td> ${criteria.subpillar['name']}</td>    
@@ -141,30 +149,36 @@ function RenderTable(data,evtype){
 }
 
 
-function RenderExtraTable(data){
+function RenderExtraTable(data,scoring){
     var html =``;
-    var readonly =`readonly`;
-    // console.log($('#evstatus').val());
-    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
-        readonly =``;
-    }
-    if($('#evstatus').val() >= 4){
-        readonly =`readonly`;
-    }
-    data.forEach(function (criteria,index) {
+    var readonly =``;
+
+    data.forEach(function (criteriatransaction,index) {
+        var checkscore = scoring.filter(x => x.extra_critreria_transaction_id == criteriatransaction.id)[0]; 
+        var score = '';
+        var comment = '';
+            if(!jQuery.isEmptyObject(checkscore) ){
+                score = checkscore.scoring;
+                comment = checkscore.comment;
+            }
             html += `<tr > 
-            <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
-            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
+            <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteriatransaction.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
             <div class="form-group">
-                <label>${criteria.extracriteria['name']}</label>
-                <input type="number" value="${criteria.weight}" data-id="${criteria.id} "class="form-control inputextraweigth weigthvalue" ${readonly}>
+                <label>กรอกคะแนน (0-5)</label>
+                <input type="text" value="${score}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
             </div>
+            <div class="toggle" style="display:none;"><div class="form-group">
+            <label><i>ความเห็น</i></label>
+            <input type="text" value="${comment}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inpscore inputextracomment" >
+            </div>
+        </div>
         </td> 
     </tr>`
     });
-    console.log(html)
-        $("#extra_criteria_transaction_wrapper_tr").html(html);
+
+    $("#extra_criteria_transaction_wrapper_tr").html(html);
 }
 
 function RowSpan(tableid){
@@ -263,6 +277,28 @@ $(document).on('change', '.gradescore', function(e) {
         $('#weightsum'+$(this).data('subpillarindex')).val(data);
     }).catch(error => {})
 });
+
+$(document).on('change', '.inputextrascore', function(e) {
+    if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกคะแนน 0-5 เท่านั้น!',
+        })
+        $(this).val('');
+        return;
+    }  
+
+    Extra.addExtraScore($(this).data('id'),$('#evid').val(),$(this).val()).then(data => {
+        // $('#weightsum'+$(this).data('subpillarindex')).val(data);
+    }).catch(error => {})
+});
+
+$(document).on('change', '.inputextracomment', function(e) {
+    Extra.addExtraComment($(this).data('id'),$('#evid').val(),$(this).val()).then(data => {
+        // $('#weightsum'+$(this).data('subpillarindex')).val(data);
+    }).catch(error => {})
+});
+
 
 $(document).on('change', '.checkscore', function(e) {
     var state = 0;

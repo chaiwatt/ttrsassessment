@@ -115,7 +115,7 @@
                                 </div> --}}
                                 <ul class="nav nav-tabs nav-tabs-highlight indexweight">
                                     {{-- <li class="nav-item"><a href="#detailtab" class="nav-link" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}
-                                    <li class="nav-item"><a href="#weighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weigth <span id="weight"></span></a></li>
+                                    <li class="nav-item"><a href="#weighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weight <span id="weight"></span></a></li>
                                     @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
                                         <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
                                     @endif
@@ -149,7 +149,7 @@
                                                 <tr class="bg-info">
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
-                                                    <th>Weigth</th>                                                                                
+                                                    <th>Weight</th>                                                                                
                                                 </tr>
                                             </thead>
                                             <tbody id="subpillar_index_transaction_wrapper_tr"> 
@@ -198,7 +198,7 @@
                                 {{-- <input type="text" id="tmpstepindex" value="0" hidden> --}}
                                 <ul class="nav nav-tabs nav-tabs-highlight">
                                     {{-- <li class="nav-item"><a href="#extradetailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}
-                                    <li class="nav-item"><a href="#extraweighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i> กำหนด Weigth <span id="extraweight"></span></a></li>
+                                    <li class="nav-item"><a href="#extraweighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i> กำหนด Weight <span id="extraweight"></span></a></li>
                                 </ul>
                                 <div class="tab-content mb-2">
                  
@@ -246,6 +246,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/evweigthhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

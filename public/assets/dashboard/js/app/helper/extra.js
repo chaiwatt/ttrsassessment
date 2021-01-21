@@ -120,4 +120,47 @@ function editExtraWeight(evid,id,weight){
     })
 }
 
-export {getExtraCategory,getExtra,addExtra,deleteCategoryExtraTransaction,deleteCriteriaExtraTransaction,editExtraWeight}
+function addExtraScore(id,evid,score){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/extra/addscore`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id,
+          evid : evid,
+          score : score
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function addExtraComment(id,evid,comment){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/extra/addcomment`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id,
+          evid : evid,
+          comment : comment
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+
+export {getExtraCategory,getExtra,addExtra,deleteCategoryExtraTransaction,deleteCriteriaExtraTransaction,editExtraWeight,addExtraScore,addExtraComment}

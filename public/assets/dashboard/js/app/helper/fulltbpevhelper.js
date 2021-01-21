@@ -81,7 +81,7 @@ $(document).on('change', '#subpillarindex', function(e) {
         data.criterias.forEach(function (subpillarindex,index) {
             var check = '';
             var _check = data.criteriatransactions.find(x => x.criteria_id === subpillarindex['id']);
-            console.log(_check);
+            // console.log(_check);
             if (_check){
                 check = 'checked';
             }
@@ -134,7 +134,7 @@ $('.steps-basic').steps({
     },
     autoFocus: true,
     onStepChanged:function (event, currentIndex, newIndex) {
-        console.log(currentIndex);
+        // console.log(currentIndex);
         if(currentIndex != 3){
             $(".actions").find(".libtn").remove();
         }
@@ -351,7 +351,7 @@ $('.steps-basic-extra').steps({
     },
     onFinished: function (event, currentIndex) {
         Extra.addExtra($('#evid').val(),1,$('#extracategory').val(),$('#extracriteria').val()).then(data => {
-            console.log(data);
+            // console.log(data);
             // RenderTable(data,2);
             // RowSpan("extracriteriatable");
             //  Swal.fire({
@@ -503,7 +503,7 @@ function RenderExtraTable(data){
         }
 
     });
-    console.log(html)
+    // console.log(html)
         $("#extra_criteria_transaction_wrapper_tr").html(html);
 }
 
@@ -856,7 +856,7 @@ $(document).on('keyup', '#percentextra', function(e) {
 });
 
 $(document).on('click', '#updateev', function(e) {
-    console.log($("#extracriteriatable tr").length);
+    // console.log($("#extracriteriatable tr").length);
     if($("#criteriatable tr").length == 1){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -925,13 +925,13 @@ $(document).on('change', '#extracategory', function(e) {
 });
 
 $(document).on('change', '#extrasubpillar', function(e) {
-    console.log($(this).val());
+    // console.log($(this).val());
     // $('#indextype').val(1);
     // $('#indextype').select2().trigger('change');
     $(this).prop('selected',true);
 
     SubPillar.getSubPillarIndex($('#evid').val(),$(this).val()).then(data => {
-        console.log(data);
+        // console.log(data);
         var html =``;
         data.subpillarindexs.forEach(function (subpillar,index) {
                 html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
@@ -959,7 +959,7 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
 
 $('.nav-tabs a').on('shown.bs.tab', function (e) {
     if(route.usertypeid == 6)return;
-    console.log($(e.target).attr("href"));
+    // console.log($(e.target).attr("href"));
     if($(e.target).attr("href") == '#commenttab'){
         Ev.clearCommentTab($('#evid').val(),1).then(data => {
     
@@ -968,7 +968,7 @@ $('.nav-tabs a').on('shown.bs.tab', function (e) {
 });
 
 $(document).on("click",".deletecomment",function(e){
-    console.log($(this).data('id'));
+    // console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -982,7 +982,7 @@ $(document).on("click",".deletecomment",function(e){
         }).then((result) => {
         if (result.value) {
             Ev.deleteComment($(this).data('id')).then(data => {
-                console.log(data);
+                // console.log(data);
                 var html =``;
                 data.forEach(function (comment,index) {
                         html += `<tr > 

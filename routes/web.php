@@ -77,6 +77,8 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('deletecategoryextratransaction','Api\ExtraController@DeleteCategoryExtraTransaction')->name('api.extra.deletecategoryextratransaction'); 
         Route::post('deletecriteriaextratransaction','Api\ExtraController@DeleteCriteriaExtraTransaction')->name('api.extra.deletecriteriaextratransaction'); 
         Route::post('editextraweight','Api\ExtraController@EditExtraWeight')->name('api.extra.editextraweight'); 
+        Route::post('addscore','Api\ExtraController@AddScore')->name('api.extra.addscore'); 
+        Route::post('addcomment','Api\ExtraController@AddComment')->name('api.extra.addcomment'); 
     }); 
     Route::group(['prefix' => 'search'], function(){
         Route::group(['prefix' => 'project'], function(){

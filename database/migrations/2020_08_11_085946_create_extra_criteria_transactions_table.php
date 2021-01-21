@@ -24,6 +24,8 @@ class CreateExtraCriteriaTransactionsTable extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *

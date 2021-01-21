@@ -27,7 +27,7 @@
             </div>           
             <div class="modal-footer">
                 <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                <button id="btn_modal_expertreject_reason" class="btn bg-primary"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                <button id="btn_modal_expertreject_reason" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
             </div>
         </div>
     </div>
@@ -155,9 +155,7 @@
                                         <td class="text-right"> 
                                             @if ($fulltbp->expertassignment->accepted == 0)
                                                     <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
-                                                    <a href="{{route('dashboard.expert.report.reject',['id' => $fulltbp->id])}}" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
-                                                {{-- @elseif($fulltbp->expertassignment->accepted == 1)
-                                                     <a href="{{route('dashboard.expert.report.pdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">PDF</a>--}}
+                                                    <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
                                                 @elseif($fulltbp->expertassignment->accepted == 2)
                                                     <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
                                             @endif
@@ -220,7 +218,9 @@
 
     $(document).on('click', '#btn_modal_expertreject_reason', function(e) {
         if($('#note').val() == '')return;
+        $("#spinicon").attr("hidden",false);
         expertReject("{{Auth::user()->id}}",$(this).data('id'),$('#note').val()).then(data => {
+            $("#spinicon").attr("hidden",true);
             window.location.reload();
         })
        .catch(error => {})

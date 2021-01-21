@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\ExtraScoring;
 use App\Model\ExtraCategory;
 use App\Model\ExtraCriteria;
 use Illuminate\Http\Request;
@@ -82,5 +83,34 @@ class ExtraController extends Controller
         $sumweigth = ExtraCriteriaTransaction::where('ev_id',$request->evid)->sum('weight');   
                                     
         return $sumweigth;                         
+    }
+
+    public function AddScore(Request $request){  
+        $check = ExtraScoring::where('ev_id',$request->evid)->where('extra_critreria_transaction_id',$request->id)->first();
+        if(Empty($check)){
+            $extrascoring = new ExtraScoring();
+            $extrascoring->ev_id = $request->evid;
+            $extrascoring->extra_critreria_transaction_id = $request->id;
+            $extrascoring->scoring = $request->score;
+            $extrascoring->save();
+        }else{
+            $check->update([
+                'scoring' => $request->score
+            ]);
+        }
+    }
+    public function AddComment(Request $request){  
+        $check = ExtraScoring::where('ev_id',$request->evid)->where('extra_critreria_transaction_id',$request->id)->first();
+        if(Empty($check)){
+            $extrascoring = new ExtraScoring();
+            $extrascoring->ev_id = $request->evid;
+            $extrascoring->extra_critreria_transaction_id = $request->id;
+            $extrascoring->comment = $request->comment;
+            $extrascoring->save();
+        }else{
+            $check->update([
+                'comment' => $request->comment
+            ]);
+        }
     }
 }

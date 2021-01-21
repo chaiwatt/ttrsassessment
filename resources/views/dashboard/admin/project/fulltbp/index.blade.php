@@ -260,8 +260,8 @@
                                                     @if ($fulltbp->expertassignments->count() > 0)
                                                             @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
                                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
-                                                                @else
-                                                                    @if ($fulltbp->expertassignments->where('accepted',0)->count() > 0 || $fulltbp->expertassignments->where('accepted',2)->count() > 0)
+                                                                @elseif($fulltbp->expertassignments->where('expert_assignment_status_id',2)->count() > 0)
+                                                                    @if ($fulltbp->assignexpert !=2)
                                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
                                                                         @else
                                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>

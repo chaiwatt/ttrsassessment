@@ -14,6 +14,7 @@ use App\Model\Criteria;
 use App\Helper\EmailBox;
 use App\Model\FinalGrade;
 use App\Model\BusinessPlan;
+use App\Model\ExtraScoring;
 use App\Model\GradeSummary;
 use App\Model\ProjectGrade;
 use App\Model\ProjectMember;
@@ -124,13 +125,16 @@ class DashboardAdminProjectAssessmentController extends Controller
                                     ->orderBy('extra_criteria_id', 'asc')
                                     ->get()
                                     ->append('extracategory')
-                                    ->append('extracriteria');   
+                                    ->append('extracriteria'); 
+        $extrascoring = ExtraScoring::where('ev_id',$request->evid)
+                                    ->get();                             
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "sumweigth" => $sumweigth,
             "pillars" => $pillars,
             "scoringstatus" => $scoringstatus,
-            "extracriteriatransactions" => $extracriteriatransactions
+            "extracriteriatransactions" => $extracriteriatransactions,
+            "extrascoring" => $extrascoring
         ));
     }
 
@@ -408,6 +412,7 @@ class DashboardAdminProjectAssessmentController extends Controller
 
     public function EditComment(Request $request){
         $scoring = Scoring::where('criteria_transaction_id',$request->transactionid)
+                        ->where('user_id',Auth::user()->id)
                         ->whereNotNull('user_id')
                         ->first();
         if(!Empty($scoring)){

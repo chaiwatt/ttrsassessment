@@ -192,7 +192,7 @@ function RenderWeightTable(data,evtypeid){
                 <td> 
                     <div class="form-group">
                         <label>${pillaindex.subpillarindex['name']}</label>
-                        <input type="number" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control inputweigth weigthvalue${evtypeid}">
+                        <input type="text" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control inputweigth weigthvalue${evtypeid} decimalformat">
                     </div>
                 </td>                           
             </tr>`
@@ -223,7 +223,7 @@ function RenderExtraTable(data){
             <td> 
             <div class="form-group">
                 <label>${criteria.extracriteria['name']}</label>
-                <input type="number" value="${criteria.weight}" data-id="${criteria.id} "class="form-control inputextraweigth weigthvalue" ${readonly}>
+                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control inputextraweigth weigthvalue decimalformat" ${readonly} >
             </div>
         </td> 
     </tr>`

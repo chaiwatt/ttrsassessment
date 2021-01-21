@@ -73,10 +73,10 @@
                                 @csrf
                                 <h6>Index Weight</h6>
                                 <fieldset>
-                                    <div class="table-responsive">
+                                    <div class="table-responsive mb-2">
                                         <table class="table table-bordered table-striped" id="criteriatable">
                                             <thead>
-                                                <tr>
+                                                <tr class="bg-info">
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
                                                     <th>Index</th>                                                                                
@@ -99,17 +99,13 @@
                                 @if ($ev->percentextra > 0)
                                     <h6>Extra Weight</h6>
                                     <fieldset>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="extra_criteriatable">
+                                        <div class="table-responsive mb-2">
+                                            <table class="table table-bordered table-striped" id="extra_subpillarindex">
                                                 <thead>
-                                                    <tr>
-                                                        <th>Pillar</th>  
-                                                        <th>Sub Pillar</th>   
-                                                        <th>Index</th>                                                                                
-                                                        <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
-                                                        @if ($projectgrade->count() !=0)
-                                                            <th>Final</th>
-                                                        @endif
+                                                    <tr class="bg-info">
+                                                        <th>Category</th>  
+                                                        <th>Extra Criteria</th>   
+                                                        <th>Weight</th>                                                                                
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">
