@@ -13,7 +13,7 @@ class Scoring extends Model
 
     // protected $appends = ['user'];
 
-    // public function getUserAttribute(){
-    //     return User::find($this->user_id);
-    // } 
+    public function getUserAttribute(){
+        return User::find($this->user_id);
+    } 
 }

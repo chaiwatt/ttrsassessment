@@ -91,7 +91,7 @@
                             <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>
                             <form id="frmminitbp" method="POST" class="wizard-form step-evweight" action="" data-fouc>
                                 @csrf
-                                <h6>Index Weight</h6>
+                                <h6>Index Criteria</h6>
                                 <fieldset>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="criteriatable">
@@ -115,8 +115,41 @@
                                     </div>
                                 </fieldset>
                                 @if ($ev->percentextra > 0)
-                                <h6>Extra Weight</h6>
+                                <h6>Extra Criteria</h6>
                                 <fieldset>
+                                    {{-- <input type="text" id="tmpstepindex" value="0" hidden> --}}
+                                    <ul class="nav nav-tabs nav-tabs-highlight">
+                                        {{-- <li class="nav-item"><a href="#extradetailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}
+                                        <li class="nav-item"><a href="#extraweighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i> กรอกคะแนน <span id="extraweight"></span></a></li>
+                                    </ul>
+                                    <div class="tab-content mb-2">
+                     
+            
+                                        <div class="tab-pane fade show active" id="extraweighttab">
+                           
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped" id="extra_subpillarindex">
+                                                    <thead>
+                                                        <tr class="bg-info">
+                                                            <th>Category</th>  
+                                                            <th>Extra Criteria</th>   
+                                                            <th>Weight</th>                                                                                
+                                                            {{-- <th>Criteria</th>   --}}
+                                                        </tr>
+                                                    </thead>
+                                                    <div class="theme_tail theme_tail_circle loadprogress">
+                                                        <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                                        <div class="pace_activity"></div>
+                                                    </div> 
+                                                    <tbody id="extra_criteria_transaction_wrapper_tr"> 
+                      
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                {{-- <fieldset>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="extra_criteriatable">
                                             <thead>
@@ -136,7 +169,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </fieldset>
+                                </fieldset> --}}
                                 @endif
                             </form>
                     </div>
@@ -161,7 +194,8 @@
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            usertypeid: "{{Auth::user()->user_type_id}}"
+            usertypeid: "{{Auth::user()->user_type_id}}",
+            ev: "{{$ev}}"
         };
     </script>
 @stop

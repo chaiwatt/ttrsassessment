@@ -127,6 +127,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                                     ->append('extracategory')
                                     ->append('extracriteria'); 
         $extrascoring = ExtraScoring::where('ev_id',$request->evid)
+                                    ->where('user_id',Auth::user()->id)
                                     ->get();                             
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,

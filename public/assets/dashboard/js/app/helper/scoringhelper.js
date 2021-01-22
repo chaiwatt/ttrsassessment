@@ -1,6 +1,8 @@
 
 import * as Extra from './extra.js';
 var stepindex =0;
+var readonly = "";
+var disabled = "";
 $(function() {
     getEv($('#evid').val(),route.userid).then(data => {
         
@@ -11,14 +13,16 @@ $(function() {
         RowSpan("criteriatable");
         // RowSpan("extra_criteriatable");
         // $('#sumofweight').html(data.sumweigth);
-        RowSpanExtra("extra_subpillarindex");
-        console.log(data.scoringstatus);
+        // RowSpanExtra("extra_subpillarindex");
+        // console.log('dfsdf');
         if(jQuery.isEmptyObject(data.scoringstatus) ){
-            console.log('aa');
+            // console.log('aa');
             $('.inpscore').prop("disabled", false);
         }else{
-            console.log('bb');
+            // console.log('bb');
             $('.inpscore').prop("disabled", true);
+            readonly = "readonly";
+            disabled = "disabled";
         }
         
     }).catch(error => {})
@@ -65,7 +69,7 @@ function RenderTable(data,evtype){
                     
                     var checkscore = criteria.scoring.filter(x => x.user_id == userid); 
                     if(typeof(checkscore[0]) != "undefined"){
-                        console.log(checkscore[0]);
+                        // console.log(checkscore[0]);
                         var _scoring = checkscore[0];
                         if(_scoring['comment'] != null){comment = _scoring['comment'];}
                         if(_scoring['scoretype'] == 1){
@@ -75,18 +79,18 @@ function RenderTable(data,evtype){
                         }
                     }
                     var criterianame = `<div class="form-group"><label>กรอกเกรด (A - E)</label>
-                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control form-control-lg inpscore gradescore"></div>`;
+                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control form-control-lg inpscore gradescore" ${readonly}></div>`;
 
                     if(criteria.criteria != null){
                     criterianame = `<label class="form-check-label">
-                                        <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info inpscore checkscore" ${checkvalue}>
+                                        <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info inpscore checkscore" ${checkvalue} ${disabled}>
                                         ${criteria.criteria['name']}
                                     </label>`;
                     }
         
                     criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
-                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg inpscore comment">
+                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg inpscore comment" ${readonly}>
                                         </div>
                                     </div>`;
 
@@ -165,16 +169,16 @@ function RenderExtraTable(data,scoring){
             <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
             <td> ${criteriatransaction.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
-            <div class="form-group">
-                <label>กรอกคะแนน (0-5)</label>
-                <input type="text" value="${score}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
-            </div>
-            <div class="toggle" style="display:none;"><div class="form-group">
-            <label><i>ความเห็น</i></label>
-            <input type="text" value="${comment}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inpscore inputextracomment" >
-            </div>
-        </div>
-        </td> 
+                <div class="form-group">
+                        <label>กรอกคะแนน (0-5)</label>
+                        <input type="text" value="${score}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
+                    </div>
+                    <div class="toggle" style="display:none;"><div class="form-group">
+                        <label><i>ความเห็น</i></label>
+                        <input type="text" value="${comment}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inpscore inputextracomment" >
+                    </div>
+                </div>
+            </td> 
     </tr>`
     });
 

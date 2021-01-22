@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Model\ExtraScoring;
 use App\Model\ExtraCategory;
 use App\Model\ExtraCriteria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Model\ExtraCriteriaTransaction;
 
 class ExtraController extends Controller
@@ -86,10 +88,12 @@ class ExtraController extends Controller
     }
 
     public function AddScore(Request $request){  
-        $check = ExtraScoring::where('ev_id',$request->evid)->where('extra_critreria_transaction_id',$request->id)->first();
+        $auth = Auth::user();
+        $check = ExtraScoring::where('ev_id',$request->evid)->where('extra_critreria_transaction_id',$request->id)->where('user_id',$auth->id)->first();
         if(Empty($check)){
             $extrascoring = new ExtraScoring();
             $extrascoring->ev_id = $request->evid;
+            $extrascoring->user_id = $auth->id;
             $extrascoring->extra_critreria_transaction_id = $request->id;
             $extrascoring->scoring = $request->score;
             $extrascoring->save();
@@ -100,10 +104,12 @@ class ExtraController extends Controller
         }
     }
     public function AddComment(Request $request){  
-        $check = ExtraScoring::where('ev_id',$request->evid)->where('extra_critreria_transaction_id',$request->id)->first();
+        $auth = Auth::user();
+        $check = ExtraScoring::where('ev_id',$request->evid)->where('extra_critreria_transaction_id',$request->id)->where('user_id',$auth->id)->first();
         if(Empty($check)){
             $extrascoring = new ExtraScoring();
             $extrascoring->ev_id = $request->evid;
+            $extrascoring->user_id = Auth::user()->id;
             $extrascoring->extra_critreria_transaction_id = $request->id;
             $extrascoring->comment = $request->comment;
             $extrascoring->save();
@@ -112,5 +118,12 @@ class ExtraController extends Controller
                 'comment' => $request->comment
             ]);
         }
+    }
+
+    public function ShowConflictScore(Request $request){
+        $extrascorings = ExtraScoring::where('ev_id',$request->evid)
+                                            ->where('extra_critreria_transaction_id',$request->criteriaid)
+                                            ->get()->each->append('user');                              
+        return response()->json($extrascorings); 
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use App\User;
 use App\Model\ExtraCategory;
+
 use App\Model\ExtraCriteria;
 use Illuminate\Database\Eloquent\Model;
 

@@ -17,8 +17,8 @@ class CreateExtraScoringsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ev_id');
             $table->foreign('ev_id')->references('id')->on('evs')->onDelete('cascade');
-            $table->unsignedBigInteger('extra_critreria_transaction_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('extra_critreria_transaction_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->char('scoring',1)->default(1);
             $table->string('comment',250)->nullable();
             $table->timestamps();

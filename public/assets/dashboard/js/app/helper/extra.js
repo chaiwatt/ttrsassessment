@@ -162,5 +162,25 @@ function addExtraComment(id,evid,comment){
     })
 }
 
+function showConflictScore(criteriaid,evid){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/extra/showconflictscore`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          criteriaid : criteriaid,
+          evid : evid
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
 
-export {getExtraCategory,getExtra,addExtra,deleteCategoryExtraTransaction,deleteCriteriaExtraTransaction,editExtraWeight,addExtraScore,addExtraComment}
+
+export {getExtraCategory,getExtra,addExtra,deleteCategoryExtraTransaction,deleteCriteriaExtraTransaction,editExtraWeight,addExtraScore,addExtraComment,showConflictScore}

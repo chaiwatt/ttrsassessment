@@ -12,6 +12,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
 use App\Model\BusinessPlan;
+use App\Model\ExtraScoring;
 use App\Helper\GetEvPercent;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
@@ -24,6 +25,7 @@ use App\Model\InvoiceTransaction;
 use App\Model\CriteriaTransaction;
 use App\Model\SummaryExpertPercent;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ExtraCriteriaTransaction;
 
 class DashboardAdminAssessmentController extends Controller
 {
@@ -41,83 +43,114 @@ class DashboardAdminAssessmentController extends Controller
    }
 
    public function GetEv(Request $request){
-    $subpillarindexarray = Scoring::where('ev_id',$request->evid)
-                                ->distinct('sub_pillar_index_id')
-                                ->where('scoretype',2)
-                                ->whereNotNull('user_id')
-                                ->pluck('sub_pillar_index_id')
-                                ->toArray();
-    
-    $basearray = array();  
-    $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($request->evid)->full_tbp_id)->get();                              
-    foreach ($subpillarindexarray as $key => $subpillarindex) {
-        $scores = array();
-        $scores = Scoring::where('ev_id',$request->evid)
-                    ->where('sub_pillar_index_id',$subpillarindex)
-                    ->whereNotNull('user_id')
-                    ->pluck('criteria_transaction_id')
-                    ->toArray();    
-        $val_count = array_count_values($scores);
-        $repeat = $projectmembers->count();
-        $arrayrepeat = array();
-        foreach($scores as $v) {
-            if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
-        }
-        $basearray = array_merge($arrayrepeat,$basearray); 
-    }
-    
-    $subpillarindexarray = Scoring::where('ev_id',$request->evid)
-                    ->whereNotNull('user_id')
-                    ->distinct('sub_pillar_index_id')
-                    ->where('scoretype',1)
-                    ->pluck('sub_pillar_index_id')
-                    ->toArray();
-    foreach ($subpillarindexarray as $key => $subpillarindex) {
-        $scores = Scoring::where('ev_id',$request->evid)
-                    ->where('sub_pillar_index_id',$subpillarindex)
-                    ->whereNotNull('user_id')
-                    ->pluck('score')
-                    ->toArray();   
-            if(count(array_unique($scores)) != 1){
-                $basearray[] = Scoring::where('ev_id',$request->evid)
-                                    ->where('sub_pillar_index_id',$subpillarindex)
+        $subpillarindexarray = Scoring::where('ev_id',$request->evid)
+                                    ->distinct('sub_pillar_index_id')
+                                    ->where('scoretype',2)
                                     ->whereNotNull('user_id')
-                                    ->first()
-                                    ->criteria_transaction_id;
-            }   
-    }
+                                    ->pluck('sub_pillar_index_id')
+                                    ->toArray();
+        
+        $basearray = array();  
+        $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($request->evid)->full_tbp_id)->get();                              
+        foreach ($subpillarindexarray as $key => $subpillarindex) {
+            $scores = array();
+            $scores = Scoring::where('ev_id',$request->evid)
+                        ->where('sub_pillar_index_id',$subpillarindex)
+                        ->whereNotNull('user_id')
+                        ->pluck('criteria_transaction_id')
+                        ->toArray();    
+            $val_count = array_count_values($scores);
+            $repeat = $projectmembers->count();
+            $arrayrepeat = array();
+            foreach($scores as $v) {
+                if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
+            }
+            $basearray = array_merge($arrayrepeat,$basearray); 
+        }
+        
+        $subpillarindexarray = Scoring::where('ev_id',$request->evid)
+                        ->whereNotNull('user_id')
+                        ->distinct('sub_pillar_index_id')
+                        ->where('scoretype',1)
+                        ->pluck('sub_pillar_index_id')
+                        ->toArray();
+        foreach ($subpillarindexarray as $key => $subpillarindex) {
+            $scores = Scoring::where('ev_id',$request->evid)
+                        ->where('sub_pillar_index_id',$subpillarindex)
+                        ->whereNotNull('user_id')
+                        ->pluck('score')
+                        ->toArray();   
+                if(count(array_unique($scores)) != 1){
+                    $basearray[] = Scoring::where('ev_id',$request->evid)
+                                        ->where('sub_pillar_index_id',$subpillarindex)
+                                        ->whereNotNull('user_id')
+                                        ->first()
+                                        ->criteria_transaction_id;
+                }   
+        }
 
-    $criteriatransactions = CriteriaTransaction::whereIn('id',array_unique($basearray))
-                                                ->orderBy('pillar_id','asc')
-                                                ->orderBy('sub_pillar_id', 'asc')
-                                                ->orderBy('sub_pillar_index_id', 'asc')
-                                                ->get();
-
-        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
-        $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
-        $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
-        $pillars = Pillar::get();   
-        $evportions = EvType::get();   
+        $extraxcorings = ExtraScoring::where('ev_id',$request->evid)
+                                    ->distinct('extra_critreria_transaction_id')
+                                    ->pluck('extra_critreria_transaction_id')
+                                    ->toArray();
+        $totaluser = ExtraScoring::where('ev_id',$request->evid)
+                        ->distinct('sub_pillar_index_id')
+                        ->pluck('user_id')
+                        ->toArray(); 
     
-        $scores = Scoring::where('ev_id',$request->evid)
-                    ->whereNotNull('user_id')
-                    ->where('scoretype',2)
-                    ->get();
-        $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
+        $diffcriterias = array();
+        foreach ($extraxcorings as $key => $extraxcoring) {
+            $array = array();
+            $array = ExtraScoring::where('ev_id',$request->evid)
+                            ->where('extra_critreria_transaction_id',$extraxcoring)
+                            ->whereIn('user_id',$totaluser)
+                            ->pluck('scoring')->toArray();
+
+            if(count(array_unique($array)) !== 1){
+                array_push($diffcriterias, $extraxcoring);
+            }
+
+        }
+        // dd($diffcriterias);
+        $extracriteriatransactions = ExtraCriteriaTransaction::whereIn('id',$diffcriterias)
+                                                        ->orderBy('extra_category_id', 'asc')
+                                                        ->orderBy('extra_criteria_id', 'asc')
+                                                        ->get()
+                                                        ->append('extracategory')
+                                                        ->append('extracriteria');  
+        $criteriatransactions = CriteriaTransaction::whereIn('id',array_unique($basearray))
+                                                    ->orderBy('pillar_id','asc')
+                                                    ->orderBy('sub_pillar_id', 'asc')
+                                                    ->orderBy('sub_pillar_index_id', 'asc')
+                                                    ->get()
+                                                    ->makeHidden('scoring');
+
+        // $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
+        // $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
+        // $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
+        // $pillars = Pillar::get();   
+        // $evportions = EvType::get();   
+    
+        // $scores = Scoring::where('ev_id',$request->evid)
+        //             ->whereNotNull('user_id')
+        //             ->where('scoretype',2)
+        //             ->get();
+        // $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
         $fulltbp = FullTbp::find(Ev::find($request->evid)->full_tbp_id);
         $projectmembers = ProjectMember::where('full_tbp_id',$fulltbp->id)->get(); 
         $ev = Ev::find($request->evid);
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
-            "pillaindexweigths" => $pillaindexweigths,
-            "sumweigth" => $sumweigth,
-            "pillars" => $pillars,
-            "evportions" => $evportions,
-            "scores" => $scores,
-            "checklistgradings" => $checklistgradings,
-            "sumextraweigth" => $sumextraweigth,
+            // "pillaindexweigths" => $pillaindexweigths,
+            // "sumweigth" => $sumweigth,
+            // "pillars" => $pillars,
+            // "evportions" => $evportions,
+            // "scores" => $scores,
+            // "checklistgradings" => $checklistgradings,
+            // "sumextraweigth" => $sumextraweigth,
             "projectmembers" => $projectmembers,
-            "ev" => $ev
+            // "ev" => $ev,
+            "extracriteriatransactions" => $extracriteriatransactions
         ));
     }
 
@@ -290,7 +323,7 @@ class DashboardAdminAssessmentController extends Controller
                         ->whereNotNull('user_id')
                         ->where('scoretype',1)
                         ->where('sub_pillar_index_id',$criteriatransaction->sub_pillar_index_id)
-                        ->get();                       
+                        ->get()->each->append('user');                       
         return response()->json($scores); 
     }
 
@@ -303,7 +336,7 @@ class DashboardAdminAssessmentController extends Controller
         return response()->json($users); 
     }
 
-    public function UpdateScore(Request $request){
+    public function UpdateScore(Request $request){    
         if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
                 if($criteria['scoretype'] == 1){
@@ -346,6 +379,34 @@ class DashboardAdminAssessmentController extends Controller
                 }
             }
         }
+
+        if($request->extraarraylist != null){
+            $existingarray = array(); 
+            foreach ($request->extraarraylist as $key => $extracriteria) {
+                array_push($existingarray, $extracriteria['extracriteriatransactionid']);
+                $extrascore = new ExtraScoring();
+                $extrascore->ev_id = $extracriteria['evid'];
+                $extrascore->extra_critreria_transaction_id = $extracriteria['extracriteriatransactionid'];
+                $extrascore->scoring  = $extracriteria['value'];
+                $extrascore->save();
+            }
+
+            $extrascoringarray = ExtraScoring::where('ev_id',$request->evid)
+                        ->whereNotIn('extra_critreria_transaction_id',$existingarray)
+                        ->distinct('extra_critreria_transaction_id')
+                        ->pluck('extra_critreria_transaction_id')
+                        ->toArray();
+
+            foreach ($extrascoringarray as $key => $_extrascore) {
+                $check = ExtraScoring::where('ev_id',$request->evid)->where('extra_critreria_transaction_id',$_extrascore)->first();
+                $extrascore = new ExtraScoring();
+                $extrascore->ev_id = $check->ev_id;
+                $extrascore->extra_critreria_transaction_id = $check->extra_critreria_transaction_id;
+                $extrascore->scoring  = $check->scoring;
+                $extrascore->save();
+            }
+        }
+
         Ev::find($request->evid)->update([
             'status' => 5
         ]);
