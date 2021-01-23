@@ -3,8 +3,9 @@
 namespace App\Model;
 
 use App\User;
-use App\Model\ExtraCategory;
+use App\Model\ExtraScoring;
 
+use App\Model\ExtraCategory;
 use App\Model\ExtraCriteria;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,5 @@ class ExtraCriteriaTransaction extends Model
     public function getExtraCriteriaAttribute(){
         return ExtraCriteria::find($this->extra_criteria_id);
     }
-
 }
 

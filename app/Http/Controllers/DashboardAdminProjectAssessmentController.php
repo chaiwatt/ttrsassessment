@@ -147,125 +147,123 @@ class DashboardAdminProjectAssessmentController extends Controller
                                                 ->orderBy('sub_pillar_index_id', 'asc')
                                                 ->get()
                                                 ->makeHidden(['updated_at','created_at']);
-        GradeSummary::where('ev_id',$request->evid)->delete();
-        for ($i=1; $i <= 2; $i++) {                                       
-            $criteriatransactiongradings = CriteriaTransaction::where('ev_id',$request->evid)
-                                                    ->where('index_type_id',1)
-                                                    ->where('ev_type_id',$i)
-                                                    ->get();
-            
-            $pillars = Pillar::where('ev_type_id',$i)->get();
-            foreach ($criteriatransactiongradings as $key => $criteriatransactiongrading) {
-                foreach ($pillars as $key => $pillar) {
-                    $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)
-                                    ->where('pillar_id',$pillar->id)
-                                    ->where('sub_pillar_id',$criteriatransactiongrading->sub_pillar_id)
-                                    ->where('sub_pillar_index_id',$criteriatransactiongrading->sub_pillar_index_id)->first();
-                    if(!Empty($pillaindexweigth)){
-                        $inscore = Scoring::where('ev_id',$request->evid)
-                                        ->where('scoretype',1)
-                                        ->where('criteria_transaction_id',$criteriatransactiongrading->id)
-                                        ->where('sub_pillar_index_id',$criteriatransactiongrading->sub_pillar_index_id)
-                                        ->whereNull('user_id')->first();               
-                        if(!Empty($inscore)){
-                            if($inscore->score == 'A' || $inscore->score == '5'){
-                                $yourgrade = 5;
-                            }else if($inscore->score == 'B' || $inscore->score == '4'){
-                                $yourgrade = 4;
-                            }else if($inscore->score == 'C' || $inscore->score == '3'){
-                                $yourgrade = 3;
-                            }else if($inscore->score == 'D' || $inscore->score == '2'){
-                                $yourgrade = 2;
-                            }else if($inscore->score == 'E' || $inscore->score == '1'){
-                                $yourgrade = 1;
-                            }else{
-                                $yourgrade = 0;
-                            }            
-                            $gradesummary = new GradeSummary();
-                            $gradesummary->full_tbp_id = $ev->full_tbp_id;
-                            $gradesummary->ev_id = $ev->id;
-                            $gradesummary->ev_type_id = $i;
-                            $gradesummary->pillar_id = $pillar->id;
-                            $gradesummary->grade = $inscore->score;
-                            $gradesummary->weight = $pillaindexweigth->weigth;
-                            $gradesummary->weightsum = floatval($yourgrade) * floatval($pillaindexweigth->weigth);
-                            $gradesummary->save();
-                        }
-                    }
-                }
-            }
-
-            $uniquecriteriatransactionchecklists = CriteriaTransaction::where('ev_id',$request->evid)
-                                        ->where('index_type_id',2)
-                                        ->select('id')
-                                        ->groupBy('pillar_id')
-                                        ->groupBy('sub_pillar_id')
-                                        ->groupBy('sub_pillar_index_id')
-                                        ->get();
-            $pillars = Pillar::where('ev_type_id',$i)->get();
+        GradeSummary::where('ev_id',$request->evid)->delete();                                   
+        $criteriatransactiongradings = CriteriaTransaction::where('ev_id',$request->evid)
+                                                ->where('index_type_id',1)
+                                                ->where('ev_type_id',1)
+                                                ->get();
         
-            
-            foreach ($uniquecriteriatransactionchecklists as $key => $value) {
-                foreach ($pillars as $key => $pillar) {
-                    $demo = CriteriaTransaction::find($value->id);
-                    $count = CriteriaTransaction::where('ev_id',$request->evid)
-                                            ->where('pillar_id',$pillar->id)
-                                            ->where('sub_pillar_id',$demo->sub_pillar_id)
-                                            ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->pluck('id');
-                    if(count($count)>0){
-                        $inscore = Scoring::where('ev_id',$request->evid)->whereIn('criteria_transaction_id',$count)->whereNull('user_id')->pluck('criteria_transaction_id');
-                        $_transactions = CriteriaTransaction::whereIn('id',$inscore)->get();
-                        $_sumscore = 0;
-                        foreach ($_transactions as $key => $_transaction) {
-                            $_criteria = Criteria::find($_transaction->criteria_id);
-                            $name = $_criteria->name;
-                            preg_match('#\((.*?)\)#', $name, $match);
-                            if(!Empty($match[1])){
-                                preg_match('!\d+!',$match[1], $result);
-                                $_sumscore += intVal($result[0]);
-                            }else{
-                                $_sumscore += 1;
-                            }
-                        }
-
-                        $checklistgrading = CheckListGrading::where('ev_id',$request->evid)
-                                            ->where('pillar_id',$pillar->id)
-                                            ->where('sub_pillar_id',$demo->sub_pillar_id)
-                                            ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
-                    if(!Empty($checklistgrading)){
-                        $yourgrade = 0;
-
-                        if($_sumscore >= $checklistgrading->gradea){
+        $pillars = Pillar::where('ev_type_id',1)->get();
+        foreach ($criteriatransactiongradings as $key => $criteriatransactiongrading) {
+            foreach ($pillars as $key => $pillar) {
+                $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)
+                                ->where('pillar_id',$pillar->id)
+                                ->where('sub_pillar_id',$criteriatransactiongrading->sub_pillar_id)
+                                ->where('sub_pillar_index_id',$criteriatransactiongrading->sub_pillar_index_id)->first();
+                if(!Empty($pillaindexweigth)){
+                    $inscore = Scoring::where('ev_id',$request->evid)
+                                    ->where('scoretype',1)
+                                    ->where('criteria_transaction_id',$criteriatransactiongrading->id)
+                                    ->where('sub_pillar_index_id',$criteriatransactiongrading->sub_pillar_index_id)
+                                    ->whereNull('user_id')->first();               
+                    if(!Empty($inscore)){
+                        if($inscore->score == 'A' || $inscore->score == '5'){
                             $yourgrade = 5;
-                        }else if($_sumscore >= $checklistgrading->gradeb && $_sumscore < $checklistgrading->gradea){
+                        }else if($inscore->score == 'B' || $inscore->score == '4'){
                             $yourgrade = 4;
-                        }else if($_sumscore >= $checklistgrading->gradec && $_sumscore < $checklistgrading->gradeb){
+                        }else if($inscore->score == 'C' || $inscore->score == '3'){
                             $yourgrade = 3;
-                        }else if($_sumscore >= $checklistgrading->graded && $_sumscore < $checklistgrading->gradec){
+                        }else if($inscore->score == 'D' || $inscore->score == '2'){
                             $yourgrade = 2;
-                        }else if($_sumscore >= $checklistgrading->gradee && $_sumscore < $checklistgrading->graded){
+                        }else if($inscore->score == 'E' || $inscore->score == '1'){
                             $yourgrade = 1;
-                        }
-
-                        $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)
-                                                            ->where('pillar_id',$pillar->id)
-                                                            ->where('sub_pillar_id',$demo->sub_pillar_id)
-                                                            ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
-                        //    echo ('Pillar Id:' .$pillar->id. ' All: '. count($count)) . ' Select: ' . $inscore->count() . ' Grade: ' . $yourgrade . ' Weight: ' . $pillaindexweigth->weigth . '<br>';   
+                        }else{
+                            $yourgrade = 0;
+                        }            
                         $gradesummary = new GradeSummary();
                         $gradesummary->full_tbp_id = $ev->full_tbp_id;
                         $gradesummary->ev_id = $ev->id;
-                        $gradesummary->ev_type_id = $i;
+                        $gradesummary->ev_type_id = 1;
                         $gradesummary->pillar_id = $pillar->id;
-                        $gradesummary->grade = $yourgrade;
+                        $gradesummary->grade = $inscore->score;
                         $gradesummary->weight = $pillaindexweigth->weigth;
                         $gradesummary->weightsum = floatval($yourgrade) * floatval($pillaindexweigth->weigth);
                         $gradesummary->save();
-                        }
                     }
                 }
             }
-        }                        
+        }
+
+        $uniquecriteriatransactionchecklists = CriteriaTransaction::where('ev_id',$request->evid)
+                                    ->where('index_type_id',2)
+                                    ->select('id')
+                                    ->groupBy('pillar_id')
+                                    ->groupBy('sub_pillar_id')
+                                    ->groupBy('sub_pillar_index_id')
+                                    ->get();
+        $pillars = Pillar::where('ev_type_id',1)->get();
+    
+        foreach ($uniquecriteriatransactionchecklists as $key => $value) {
+            foreach ($pillars as $key => $pillar) {
+                $demo = CriteriaTransaction::find($value->id);
+                $count = CriteriaTransaction::where('ev_id',$request->evid)
+                                        ->where('pillar_id',$pillar->id)
+                                        ->where('sub_pillar_id',$demo->sub_pillar_id)
+                                        ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->pluck('id');
+                if(count($count)>0){
+                    $inscore = Scoring::where('ev_id',$request->evid)->whereIn('criteria_transaction_id',$count)->whereNull('user_id')->pluck('criteria_transaction_id');
+                    $_transactions = CriteriaTransaction::whereIn('id',$inscore)->get();
+                    $_sumscore = 0;
+                    foreach ($_transactions as $key => $_transaction) {
+                        $_criteria = Criteria::find($_transaction->criteria_id);
+                        $name = $_criteria->name;
+                        preg_match('#\((.*?)\)#', $name, $match);
+                        if(!Empty($match[1])){
+                            preg_match('!\d+!',$match[1], $result);
+                            $_sumscore += intVal($result[0]);
+                        }else{
+                            $_sumscore += 1;
+                        }
+                    }
+
+                    $checklistgrading = CheckListGrading::where('ev_id',$request->evid)
+                                        ->where('pillar_id',$pillar->id)
+                                        ->where('sub_pillar_id',$demo->sub_pillar_id)
+                                        ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
+                if(!Empty($checklistgrading)){
+                    $yourgrade = 0;
+
+                    if($_sumscore >= $checklistgrading->gradea){
+                        $yourgrade = 5;
+                    }else if($_sumscore >= $checklistgrading->gradeb && $_sumscore < $checklistgrading->gradea){
+                        $yourgrade = 4;
+                    }else if($_sumscore >= $checklistgrading->gradec && $_sumscore < $checklistgrading->gradeb){
+                        $yourgrade = 3;
+                    }else if($_sumscore >= $checklistgrading->graded && $_sumscore < $checklistgrading->gradec){
+                        $yourgrade = 2;
+                    }else if($_sumscore >= $checklistgrading->gradee && $_sumscore < $checklistgrading->graded){
+                        $yourgrade = 1;
+                    }
+
+                    $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)
+                                                        ->where('pillar_id',$pillar->id)
+                                                        ->where('sub_pillar_id',$demo->sub_pillar_id)
+                                                        ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
+                    //    echo ('Pillar Id:' .$pillar->id. ' All: '. count($count)) . ' Select: ' . $inscore->count() . ' Grade: ' . $yourgrade . ' Weight: ' . $pillaindexweigth->weigth . '<br>';   
+                    $gradesummary = new GradeSummary();
+                    $gradesummary->full_tbp_id = $ev->full_tbp_id;
+                    $gradesummary->ev_id = $ev->id;
+                    $gradesummary->ev_type_id = 1;
+                    $gradesummary->pillar_id = $pillar->id;
+                    $gradesummary->grade = $yourgrade;
+                    $gradesummary->weight = $pillaindexweigth->weigth;
+                    $gradesummary->weightsum = floatval($yourgrade) * floatval($pillaindexweigth->weigth);
+                    $gradesummary->save();
+                    }
+                }
+            }
+        }
+        // }                        
        
         $pillars = Pillar::get();
         $gradesummaryindex = GradeSummary::where('ev_id',$request->evid)->get();
@@ -288,9 +286,15 @@ class DashboardAdminProjectAssessmentController extends Controller
         $indexpercent = FinalGrade::where('ev_id',$request->evid)->where('pillar_id','<=',4)->sum('percent')/FinalGrade::where('ev_id',$request->evid)->where('pillar_id','<=',4)->count();
         $extrapercent = 0;
         if($ev->percentextra > 0){
-            $extrapercent = FinalGrade::where('ev_id',$request->evid)->where('pillar_id','>',4)->sum('percent')/FinalGrade::where('ev_id',$request->evid)->where('pillar_id','>',4)->count();
+            $extrascorings = ExtraScoring::where('ev_id',$request->evid)->whereNull('user_id')->get();
+            $sumscore = 0 ;
+            foreach ($extrascorings as $key => $extrascoring) {
+                $check = ExtraCriteriaTransaction::find($extrascoring->extra_critreria_transaction_id);
+                $sumscore += $extrascoring->scoring * $check->weight;
+            }
+            $extrapercent = $sumscore/5*100;
         }
-        
+ 
         $percent = floatval($indexpercent) * floatval($ev->percentindex)/100 + floatval($extrapercent) * floatval($ev->percentextra)/100 ;
         $grade = 0;
         if($percent >= 87){
@@ -327,13 +331,22 @@ class DashboardAdminProjectAssessmentController extends Controller
         $projectgrade->grade = $grade;
         $projectgrade->save();
         $projectgrade = ProjectGrade::where('ev_id',$ev->id)->first(['percent', 'grade']); 
-        // 
+        
+        $extracriteriatransactions = ExtraCriteriaTransaction::where('ev_id',$request->evid)
+                                                            ->orderBy('extra_category_id', 'asc')
+                                                            ->orderBy('extra_criteria_id', 'asc')
+                                                            ->get()
+                                                            ->append('extracategory')
+                                                            ->append('extracriteria');  
+        $extrascorings = ExtraScoring::where('ev_id',$request->evid)->whereNull('user_id')->get();                                                    
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "finalgrade" => $finalgrade,
             "pillars" => $pillars,
             "projectgrade" => $projectgrade,
-            "ev" => $ev
+            "ev" => $ev,
+            "extracriteriatransactions" => $extracriteriatransactions,
+            "extrascorings" => $extrascorings
         ));
     }
 

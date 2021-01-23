@@ -33,7 +33,6 @@ class DashboardAdminAssessmentController extends Controller
         $auth = Auth::user();
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
-        // return  $projectmembers;
         return view('dashboard.admin.assessment.index')->withFulltbps($fulltbps);
     }
    public function Edit($id){
@@ -111,7 +110,7 @@ class DashboardAdminAssessmentController extends Controller
             }
 
         }
-        // dd($diffcriterias);
+
         $extracriteriatransactions = ExtraCriteriaTransaction::whereIn('id',$diffcriterias)
                                                         ->orderBy('extra_category_id', 'asc')
                                                         ->orderBy('extra_criteria_id', 'asc')
@@ -125,31 +124,12 @@ class DashboardAdminAssessmentController extends Controller
                                                     ->get()
                                                     ->makeHidden('scoring');
 
-        // $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)->get();
-        // $sumweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',1)->sum('weigth'), 4); 
-        // $sumextraweigth = round(PillaIndexWeigth::where('ev_id',$request->evid)->where('ev_type_id',2)->sum('weigth'), 4); 
-        // $pillars = Pillar::get();   
-        // $evportions = EvType::get();   
-    
-        // $scores = Scoring::where('ev_id',$request->evid)
-        //             ->whereNotNull('user_id')
-        //             ->where('scoretype',2)
-        //             ->get();
-        // $checklistgradings = CheckListGrading::where('ev_id',$request->evid)->get(); 
         $fulltbp = FullTbp::find(Ev::find($request->evid)->full_tbp_id);
         $projectmembers = ProjectMember::where('full_tbp_id',$fulltbp->id)->get(); 
         $ev = Ev::find($request->evid);
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
-            // "pillaindexweigths" => $pillaindexweigths,
-            // "sumweigth" => $sumweigth,
-            // "pillars" => $pillars,
-            // "evportions" => $evportions,
-            // "scores" => $scores,
-            // "checklistgradings" => $checklistgradings,
-            // "sumextraweigth" => $sumextraweigth,
             "projectmembers" => $projectmembers,
-            // "ev" => $ev,
             "extracriteriatransactions" => $extracriteriatransactions
         ));
     }

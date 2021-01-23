@@ -237,37 +237,27 @@
                     <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่ม Extra Criteria</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body context-menu-one" id="extracriteriamodal">
-                    {{-- <input type="text" id="evid" value="{{$ev->id}}" hidden> --}}
-                    {{-- <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden> --}}
-                        {{-- <div class="wizard-form steps-basic-extra" action="#" data-fouc> --}}
-                            <h6>Category</h6>
-                            {{-- <fieldset> --}}
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group" id="extra_criteria_wrapper">
-                                            <select name="extracategory" id="extracategory" data-placeholder="Category" class="form-control form-control-lg form-control-select2" >
-                                            </select> 
-                                        </div>  
-                                    </div>
-                                </div>
-                            {{-- </fieldset> --}}
-    
-                            <h6>Extra Criteria</h6>
-                            {{-- <fieldset> --}}
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <select name="extracriteria" id="extracriteria" data-placeholder="Extra Criteria" class="form-control form-control-lg form-control-select2" >
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            {{-- </fieldset> --}}
+                <div class="modal-body context-menu-two_notuse" id="extracriteriamodal">
+                    <h6>Category</h6>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group" id="extra_criteria_wrapper">
+                                    <select name="extracategory" id="extracategory" data-placeholder="Category" class="form-control form-control-lg form-control-select2" >
+                                    </select> 
+                                </div>  
+                            </div>
                         </div>
-                    {{-- </div> --}}
-  
-                {{-- </div>            --}}
+
+                    <h6>Extra Criteria</h6>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select name="extracriteria" id="extracriteria" data-placeholder="Extra Criteria" class="form-control form-control-lg form-control-select2" >
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
                     <button id="btn_modal_add_extracriteria" class="btn bg-primary" ><i class="icon-arrow-right14 font-size-base mr-1"></i> เพิ่มรายการ</button>

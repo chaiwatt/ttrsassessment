@@ -322,13 +322,13 @@ class DashboardAdminProjectFullTbpController extends Controller
         
         $jduser = User::where('user_type_id',6)->first();
 
-        $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' บริษัท' . $_company->name,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a>',Auth::user()->id,User::find($expertassignment->user_id)->id);
+        $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' บริษัท' . $_company->name,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a>',Auth::user()->id,User::find($expertassignment->user_id)->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $jduser->id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .' บริษัท' . $_company->name;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .' บริษัท' . $_company->name;
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([

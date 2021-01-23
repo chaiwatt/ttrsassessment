@@ -114,26 +114,12 @@
 
                             </tbody>
                         </table>
-                        @if ($ev->percentextra > 0)
-                            <br>
-                            <table class="table table-bordered table-striped" id="extra_gradesummary">
-                                <thead>
-                                    <tr class="bg-info">
-                                        <th>Pillar (Extra)</th>  
-                                        <th style="width:30%">เปอร์เซนต์</th>                                                                                 
-                                    </tr>
-                                </thead>
-                                <tbody id="extra_gradesummary_wrapper_tr"> 
-
-                                </tbody>
-                            </table>
-                        @endif
                         <input type="text" id="evid" value="{{$ev->id}}" hidden>
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                             <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>
                             <form id="frmminitbp" method="POST" class="wizard-form step-evweight" action="" data-fouc>
                                 @csrf
-                                <h6>Index Weight</h6>
+                                <h6>Index Criteria</h6>
                                 <fieldset>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="criteriatable">
@@ -157,16 +143,16 @@
                                     </div>
                                 </fieldset>
                                 @if ($ev->percentextra > 0)
-                                <h6>Index Weight</h6>
+                                <h6>Extra Criteria</h6>
                                 <fieldset>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="extra_criteriatable">
+                                        <table class="table table-bordered table-striped" id="extra_subpillarindex">
                                             <thead>
-                                                <tr>
-                                                    <th>Pillar</th>  
-                                                    <th>Sub Pillar</th>   
-                                                    <th>Index</th>                                                                                
-                                                    <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                                <tr class="bg-info">
+                                                    <th>Category</th>  
+                                                    <th>Extra Criteria</th>   
+                                                    <th>Weight</th>                                                                                
+                                                    {{-- <th>Criteria</th>   --}}
                                                 </tr>
                                             </thead>
                                             <div class="theme_tail theme_tail_circle loadprogress">
@@ -174,7 +160,7 @@
                                                 <div class="pace_activity"></div>
                                             </div> 
                                             <tbody id="extra_criteria_transaction_wrapper_tr"> 
-            
+                
                                             </tbody>
                                         </table>
                                     </div>

@@ -5,14 +5,14 @@ $(function() {
         $('#showgrade').html(data.projectgrade.grade);
         sumGrade(data);
         RenderTable(data,1);
-        if(data.ev.percentextra > 0){
-            RenderTable(data,2);   
+        if(data.ev.percentextra > 0){ 
+            RenderExtraTable(data.extracriteriatransactions,data.extrascorings);
         }
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
-        if(data.ev.percentextra > 0){
-            RowSpan("extra_criteriatable");
-        }
+        // if(data.ev.percentextra > 0){
+        //     RowSpan("extra_criteriatable");
+        // }
         $('.inpscore').prop("disabled", true);
         
 
@@ -230,6 +230,28 @@ $(document).on('click', '#togglecomment', function(e) {
     
 }
 
+function RenderExtraTable(data,extrascorings){
+    var html =``;
+    data.forEach(function (criteriatransaction,index) {
+        var find = extrascorings.filter(function(result) {
+            return result.ev_id === criteriatransaction.ev_id && result.extra_critreria_transaction_id === criteriatransaction.id;
+          });
+          
+        //  console.log(find[0].scoring);
+            html += `<tr > 
+            <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteriatransaction.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
+            <td> 
+            <div class="form-group">
+                <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-id="${criteriatransaction.id}"><i class="icon-folder-open3"></i></a></label>
+                <input type="text" value="${find[0].scoring}" data-id="${criteriatransaction.id} "class="form-control inputextrascore weigthvalue decimalformat" readonly >
+            </div>
+       
+        </td> 
+    </tr>`
+    });
+    $("#extra_criteria_transaction_wrapper_tr").html(html);
+}
 
 function RowSpanWeight(tableid){
     const table = document.getElementById(tableid);// document.querySelector('table');
@@ -279,38 +301,7 @@ $('.step-evweight').steps({
     },
     enableFinishButton: false,
     onFinished: function (event, currentIndex) {
-        // $('.scoring').each(function() {
-        //     if($(this).val() == ''){
-        //         Swal.fire({
-        //             title: 'ผิดพลาด...',
-        //             text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
-        //             });
-        //         return;
-        //     }
-        // });
-        // var conflictarray = $(".scoring").map(function () {
-        //     var val = $(this).val();
-        //     if($(this).data('scoretype') == 2){
-        //         val = $(this).is(':checked');
-        //     }
-        //     return {
-        //         evid: $('#evid').val(),
-        //         criteriatransactionid: $(this).data('id'),
-        //         subpillarindex: $(this).data('subpillarindex'),
-        //         scoretype: $(this).data('scoretype'),
-        //         value: val
-        //       } 
-        // }).get();
-        // $("#spinicon").attr("hidden",false);
-        // updateScore(conflictarray,$('#evid').val()).then(data => {
-        //     $("#spinicon").attr("hidden",true);
-        //     Swal.fire({
-        //         title: 'สำเร็จ...',
-        //         text: 'สรุปคะแนนสำเร็จ!',
-        //         }).then((result) => {
-        //             window.location.replace(`${route.url}/dashboard/admin/assessment`);
-        //         });
-        // }).catch(error => {})
+
     },
     transitionEffect: 'fade',
     autoFocus: true,
@@ -319,25 +310,6 @@ $('.step-evweight').steps({
     },   
 });
 
-// function updateScore(arraylist,evid){
-//     return new Promise((resolve, reject) => {
-//         $.ajax({
-//         url: `${route.url}/dashboard/admin/assessment/updatescore`,
-//         type: 'POST',
-//         headers: {"X-CSRF-TOKEN":route.token},
-//         data: {
-//             arraylist : arraylist,
-//             evid : evid
-//         },
-//         success: function(data) {
-//             resolve(data)
-//         },
-//         error: function(error) {
-//             reject(error)
-//         },
-//         })
-//     })
-//   }
 
     // Initialize validation
     $('.step-evweight').validate({

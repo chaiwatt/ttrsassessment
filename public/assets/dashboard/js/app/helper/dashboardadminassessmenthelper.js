@@ -139,13 +139,6 @@ function getEv(evid){
 
 function RenderExtraTable(data){
     var html =``;
-    // var checkscore = scoring.filter(x => x.extra_critreria_transaction_id == criteriatransaction.id)[0]; 
-    // var score = '';
-    // var comment = '';
-    //     if(!jQuery.isEmptyObject(checkscore) ){
-    //         score = checkscore.scoring;
-    //         comment = checkscore.comment;
-    //     }
     data.forEach(function (criteriatransaction,index) {
             html += `<tr > 
             <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
@@ -159,8 +152,7 @@ function RenderExtraTable(data){
         </td> 
     </tr>`
     });
-    // console.log(html)
-        $("#extra_criteria_transaction_wrapper_tr").html(html);
+    $("#extra_criteria_transaction_wrapper_tr").html(html);
 }
 
 
