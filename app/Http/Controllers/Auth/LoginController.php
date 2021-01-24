@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Carbon\Carbon;
 use App\Model\Company;
+use App\Model\GeneralInfo;
 use App\Model\BusinessPlan;
 use App\Model\SocialAccount;
 use Illuminate\Http\Request;
@@ -30,6 +31,14 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user) { 
+        $generalinfo = GeneralInfo::first();
+        if($generalinfo->verify_expert_status_id == 2){
+            if(($user->user_type_id == 3 || $user->user_type_id == 4) && $user->verify_expert == 1){
+                Auth::logout();
+                Session::flush();
+                return redirect()->route('login')->withError('บัญชีของคุณยังไม่ได้เปิดใช้งาน');
+            }
+        }
         if($user->user_status_id == 2){
             Auth::logout();
             Session::flush();

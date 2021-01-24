@@ -15,6 +15,7 @@ use App\Model\OfficerDetail;
 use App\Model\ProjectMember;
 use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
+use App\Model\VerifyExpertStatus;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -63,6 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return UserType::find($this->user_type_id);
     }
 
+    public function getVerifyexpertstatusAttribute()
+    {
+        return VerifyExpertStatus::find($this->verify_expert)->name;
+    }
     public function getExpertTypeAttribute()
     {
         if ($this->user_type_id == 3){

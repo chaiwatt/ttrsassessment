@@ -33,18 +33,7 @@ class DashboardAdminProjectAssessmentController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        // $fulltbps = FullTbp::where('status',2)->get();
-        // if($auth->user_type_id < 6){
-        //     $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
-        //                                     ->orWhere('coleader_id',$auth->id)
-        //                                     ->pluck('business_plan_id')
-        //                                     ->toArray();
-        //     $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-        //     $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
-        // }
-       
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
-        // return $projectmembers;
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
     }
@@ -232,7 +221,6 @@ class DashboardAdminProjectAssessmentController extends Controller
                                         ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
                 if(!Empty($checklistgrading)){
                     $yourgrade = 0;
-
                     if($_sumscore >= $checklistgrading->gradea){
                         $yourgrade = 5;
                     }else if($_sumscore >= $checklistgrading->gradeb && $_sumscore < $checklistgrading->gradea){
@@ -249,7 +237,6 @@ class DashboardAdminProjectAssessmentController extends Controller
                                                         ->where('pillar_id',$pillar->id)
                                                         ->where('sub_pillar_id',$demo->sub_pillar_id)
                                                         ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->first();
-                    //    echo ('Pillar Id:' .$pillar->id. ' All: '. count($count)) . ' Select: ' . $inscore->count() . ' Grade: ' . $yourgrade . ' Weight: ' . $pillaindexweigth->weigth . '<br>';   
                     $gradesummary = new GradeSummary();
                     $gradesummary->full_tbp_id = $ev->full_tbp_id;
                     $gradesummary->ev_id = $ev->id;
@@ -262,8 +249,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                     }
                 }
             }
-        }
-        // }                        
+        }                    
        
         $pillars = Pillar::get();
         $gradesummaryindex = GradeSummary::where('ev_id',$request->evid)->get();

@@ -50,6 +50,7 @@ class CreateUsersTable extends Migration
             $table->string('lng',50)->nullable();
             $table->date('otp')->nullable();
             $table->char('isexpert',1)->default(1);
+            $table->char('verify_expert',1)->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

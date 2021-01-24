@@ -69,6 +69,9 @@ Route::group(['prefix' => 'api'], function(){
             Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');            
         }); 
     }); 
+    Route::group(['prefix' => 'user'], function(){
+        Route::post('updateverifyexpert','Api\UserController@UpdateVerifyExpert')->name('api.user.updateverifyexpert');            
+    }); 
     Route::group(['prefix' => 'extra'], function(){
         Route::post('getextracategory','Api\ExtraController@GetExtraCategory')->name('api.extra.getextracategory'); 
         Route::post('getextra','Api\ExtraController@GetExtra')->name('api.extra.getextra'); 

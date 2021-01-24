@@ -9,6 +9,7 @@ use App\Model\Province;
 use App\Model\GeneralInfo;
 use Illuminate\Http\Request;
 use App\Model\FrontPageStatus;
+use App\Model\VerifyExpertStatus;
 use Illuminate\Support\Facades\Auth;
 
 class SettingAdminSystemController extends Controller
@@ -21,11 +22,13 @@ class SettingAdminSystemController extends Controller
         $tambols = Tambol::where('amphur_id',$generalinfo->amphur_id)->get();
        
         $frontpagestatuses = FrontPageStatus::get();
+        $verifyexpertstatuses = VerifyExpertStatus::get();
         return view('setting.admin.system.index')->withProvinces($provinces)
                                                 ->withAmphurs($amphurs)
                                                 ->withTambols($tambols)
                                                 ->withGeneralinfo($generalinfo)
-                                                ->withFrontpagestatuses($frontpagestatuses);
+                                                ->withFrontpagestatuses($frontpagestatuses)
+                                                ->withVerifyexpertstatuses($verifyexpertstatuses);
     }
     public function Save(Request $request){
         $generalinfo = GeneralInfo::first();
@@ -68,6 +71,7 @@ class SettingAdminSystemController extends Controller
             'workdaytime' => $request->workdaytime,
             'sundaytime' => $request->sundaytime,
             'front_page_status_id' => $request->frontpage,
+            'verify_expert_status_id' => $request->verifyexpert,
             'consent' => $request->consent,
             'director' => $request->director
         ]);

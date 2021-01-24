@@ -100,34 +100,34 @@ class HomeController extends Controller
 
 
     public function DemoUser(){
-        $this->createUserTypeCompany(2,'กนกนันทร์','สุเชาว์อินทร์','ttrsuser1@npctestserver.com','9548853765681','0882514838','ไทยชนะรีสอร์ต');
-        $this->createUserTypePersonal(2,'จาริยา','รัชตาธิวัฒน์','ttrsuser2@npctestserver.com','5988162591551','0882514838','หนมเนยลำพูน');
-        $this->createUserTypeCompany(1,'อนุรักษ์','พันธ์งามตา','ttrsuser3@npctestserver.com','9955634503731','0882514838','ผัดไทยประตูป่า');
-        $this->createUserTypePersonal(1,'พงศกร','สุขปาน','ttrsuser4@npctestserver.com','9908968928636','0882514838','ลาบดีขมลำพูน');
-        $this->createUserTypeCompany(2,'พนิตา','สุภาพ','ttrsuser5@npctestserver.com','4789285689287','0882514838','ฟ้าใสหมูกระทะ');
+        $this->createUserTypeCompany(2,'กนกนันทร์','สุเชาว์อินทร์','ttrsuser1@npcsolution.com','9548853765681','0882514838','ไทยชนะรีสอร์ต');
+        $this->createUserTypePersonal(2,'จาริยา','รัชตาธิวัฒน์','ttrsuser2@npcsolution.com','5988162591551','0882514838','หนมเนยลำพูน');
+        $this->createUserTypeCompany(1,'อนุรักษ์','พันธ์งามตา','ttrsuser3@npcsolution.com','9955634503731','0882514838','ผัดไทยประตูป่า');
+        $this->createUserTypePersonal(1,'พงศกร','สุขปาน','ttrsuser4@npcsolution.com','9908968928636','0882514838','ลาบดีขมลำพูน');
+        $this->createUserTypeCompany(2,'พนิตา','สุภาพ','ttrsuser5@npcsolution.com','4789285689287','0882514838','ฟ้าใสหมูกระทะ');
 
-        $this->createOfficer(2,'จิตราพร','ทองคง','ttrsofficer1@npctestserver.com','4461544270681','0882514838');
-        $this->createOfficer(1,'เฉลิมเดช','ประพิณไพโรจน์','ttrsofficer2@npctestserver.com','1535149478362','0882514838');
-        $this->createOfficer(1,'ณภัทร','เครือทิวา','ttrsofficer3@npctestserver.com','4238469877497','0882514838');
-        $this->createOfficer(2,'ณัฏฐา','สุภาสนันท์','ttrsofficer4@npctestserver.com','5365417853982','0882514838');
-        $this->createOfficer(1,'ณัฐพงษ์','ธนโชติเจริญ์','ttrsofficer5@npctestserver.com','5069694503613','0882514838');
-        $this->createOfficer(1,'ศรัณย์','ศิริกําเนิด','ttrsofficer6@npctestserver.com','1951196420980','0882514838');
-        $this->createOfficer(2,'สุดคนึง','แววสูงเนิน','ttrsofficer7@npctestserver.com','1125545350575','0882514838');
-        $this->createOfficer(1,'สุภัทร','สวนจันทร์','ttrsofficer8@npctestserver.com','9085745215457','0882514838');
-        $this->createOfficer(2,'อรุณี','มัทนะไพศาล','ttrsofficer9@npctestserver.com','3767342497671','0882514838');
-        $this->createOfficer(2,'อาวัชนา','สุขรุ่งเรือง','ttrsofficer10@npctestserver.com','5469655619939','0882514838');
+        $this->createOfficer(2,'จิตราพร','ทองคง','ttrsofficer1@npcsolution.com','4461544270681','0882514838');
+        $this->createOfficer(1,'เฉลิมเดช','ประพิณไพโรจน์','ttrsofficer2@npcsolution.com','1535149478362','0882514838');
+        $this->createOfficer(1,'ณภัทร','เครือทิวา','ttrsofficer3@npcsolution.com','4238469877497','0882514838');
+        $this->createOfficer(2,'ณัฏฐา','สุภาสนันท์','ttrsofficer4@npcsolution.com','5365417853982','0882514838');
+        $this->createOfficer(1,'ณัฐพงษ์','ธนโชติเจริญ์','ttrsofficer5@npcsolution.com','5069694503613','0882514838');
+        $this->createOfficer(1,'ศรัณย์','ศิริกําเนิด','ttrsofficer6@npcsolution.com','1951196420980','0882514838');
+        $this->createOfficer(2,'สุดคนึง','แววสูงเนิน','ttrsofficer7@npcsolution.com','1125545350575','0882514838');
+        $this->createOfficer(1,'สุภัทร','สวนจันทร์','ttrsofficer8@npcsolution.com','9085745215457','0882514838');
+        $this->createOfficer(2,'อรุณี','มัทนะไพศาล','ttrsofficer9@npcsolution.com','3767342497671','0882514838');
+        $this->createOfficer(2,'อาวัชนา','สุขรุ่งเรือง','ttrsofficer10@npcsolution.com','5469655619939','0882514838');
 
-        $this->createExpert(2,'ทวีภรณ์','ศรีสุขคํา','expert1@npctestserver.com','5722071412821','0882514838',1);
-        $this->createExpert(1,'ธนาวุฒ','อาจกิจโกศล','expert2@npctestserver.com','7679341031763','0882514838',1);
-        $this->createExpert(1,'ธิติพันธุ์','วิชัยยา','expert3@npctestserver.com','6656955610531','0882514838',1);
-        $this->createExpert(2,'นิภาลัย','อริยชัยกุล','expert4@npctestserver.com','3752824031172','0882514838',1);
-        $this->createExpert(2,'ปฐวีณา','แก้วแจ้ง','expert5@npctestserver.com','3616568974934','0882514838',1);
-        $this->createExpert(2,'สุทิศา','ทับเหล็ก','expert6@npctestserver.com','3000237213103','0882514838',1);
+        $this->createExpert(2,'ทวีภรณ์','ศรีสุขคํา','expert1@npcsolution.com','5722071412821','0882514838',1);
+        $this->createExpert(1,'ธนาวุฒ','อาจกิจโกศล','expert2@npcsolution.com','7679341031763','0882514838',1);
+        $this->createExpert(1,'ธิติพันธุ์','วิชัยยา','expert3@npcsolution.com','6656955610531','0882514838',1);
+        $this->createExpert(2,'นิภาลัย','อริยชัยกุล','expert4@npcsolution.com','3752824031172','0882514838',1);
+        $this->createExpert(2,'ปฐวีณา','แก้วแจ้ง','expert5@npcsolution.com','3616568974934','0882514838',1);
+        $this->createExpert(2,'สุทิศา','ทับเหล็ก','expert6@npcsolution.com','3000237213103','0882514838',1);
 
-        $this->createExpert(2,'อรุณรัตน์','อาวัชนากร','expert7@npctestserver.com','1971486135480','0882514838',2);
-        $this->createExpert(2,'สุหฤทัย','เดชอุป','expert8@npctestserver.com','3075089204513','0882514838',2);
-        $this->createExpert(2,'สุขสันต์','ไชยรัตน์','expert9@npctestserver.com','7561895470261','0882514838',2);
-        $this->createExpert(2,'สิริพงษ์','กุลสุขรังสรรค์','expert10@npctestserver.com','8688825124759','0882514838',2);
+        $this->createExpert(2,'อรุณรัตน์','อาวัชนากร','expert7@npcsolution.com','1971486135480','0882514838',2);
+        $this->createExpert(2,'สุหฤทัย','เดชอุป','expert8@npcsolution.com','3075089204513','0882514838',2);
+        $this->createExpert(2,'สุขสันต์','ไชยรัตน์','expert9@npcsolution.com','7561895470261','0882514838',2);
+        $this->createExpert(2,'สิริพงษ์','กุลสุขรังสรรค์','expert10@npcsolution.com','8688825124759','0882514838',2);
         
     }
 

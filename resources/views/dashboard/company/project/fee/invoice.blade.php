@@ -47,6 +47,6 @@
     <body>
         <h2>{{ $title }}</h2>
         <p class="justifycenter"><span>{{$body}}</span></p>
-        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate('npctestserver.com')) !!} ">
+        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate('npcsolution.com')) !!} ">
     </body>
 </html>

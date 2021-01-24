@@ -67,7 +67,8 @@
                                         <th>#</th>
                                         <th>ชื่อ-สกุล</th> 
                                         <th>กลุ่ม</th>    
-                                        <th>ออนไลน์</th>     
+                                        <th>ออนไลน์</th>  
+                                        <th>Verify</th>    
                                         <th>สถานะ</th>                          
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
@@ -83,7 +84,16 @@
                                             @else
                                             <td> <span class="badge badge-mark border-danger mr-1"></span> {{$user->isonline()}} </td>  
                                         @endif  
-                                        
+                                        <td>
+                                            @if ($user->user_type_id == 3 || $user->user_type_id == 4)
+                                                @if ($user->verify_expert == 2)
+                                                        <button type="button" data-id="{{$user->id}}" data-status="{{$user->verify_expert}}" class="btn btn-sm bg-success user">ยืนยันแล้ว</button>
+                                                   @else 
+                                                        <button type="button" data-id="{{$user->id}}" data-status="{{$user->verify_expert}}" class="btn btn-sm bg-warning user">ไม่ได้ยืนยัน</button>
+                                                @endif
+                                                
+                                            @endif 
+                                        </td>
                                         @if ($user->user_status_id == 1)
                                                 <td><span class="badge badge-flat border-info text-info-600 rounded-0">{{$user->userstatus->name}}</span></td> 
                                            @else 
@@ -91,8 +101,8 @@
                                         @endif                                     
                                         
                                         <td> 
-                                            <a href="{{route('setting.admin.user.edit',['id' => $user->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.user.delete',['id' => $user->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.user.edit',['id' => $user->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.user.delete',['id' => $user->id])}}" data-name="" onclick="confirmation(event)" class=" btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach
@@ -109,6 +119,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/userhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -116,5 +127,19 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        $('#testtopictable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+    });
     </script>
 @stop

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Model\Company;
+use App\Helper\EmailBox;
 use App\Model\UserGroup;
 use App\Model\GeneralInfo;
 use App\Model\BusinessPlan;
@@ -66,12 +67,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        // dd($data['usergroup']);
-        // $group = 2;
         $experttype = 0;
-    //    if(!Empty($data['vatno'])){
-    //         $group =1;
-    //    }
         $usertype = 1;
         if($data['user_type'] == 2){
             $usertype = 4;
@@ -100,7 +96,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'verify_type' => GeneralInfo::first()->verify_type_id,
         ]);
-
+         $officertype = "ผู้เชี่ยวชาญ";
         if($user->user_type_id == 3){
             $xpertdetail = new ExpertDetail();
             $xpertdetail->user_id = $user->id;
@@ -108,6 +104,7 @@ class RegisterController extends Controller
             $xpertdetail->save();
         }
         if($user->user_type_id == 4){
+            $officertype = "เจ้าหน้าที TTRS";
             $xpertdetail = new OfficerDetail();
             $xpertdetail->user_id = $user->id;
             $xpertdetail->save();
@@ -118,6 +115,12 @@ class RegisterController extends Controller
         $companyname =  str_replace("บริษัท","",$companyname);
         $companyname =  str_replace("ห้างหุ้นส่วน","",$companyname);
         CreateCompany::createCompany($user,$companyname,$vatno,$businesstype);
+        $generalinfo = GeneralInfo::first();
+        if($generalinfo->verify_expert_status_id == 2){
+            if($user->user_type_id == 3 || $user->user_type_id == 4){
+                EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS: คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype,'เรียน JD<br><br> คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype.' กรุณาตรวจสอบ/Verify ได้ที่ <a href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            }  
+        }
         return $user ; 
     }
 
