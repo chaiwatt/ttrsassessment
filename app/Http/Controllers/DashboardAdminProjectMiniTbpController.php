@@ -26,6 +26,7 @@ use App\Model\TimeLineHistory;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 
 class DashboardAdminProjectMiniTbpController extends Controller
 {
@@ -147,6 +148,17 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
+
+            $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',2)->first();
+            if($projectstatustransaction->status == 1){
+                $projectstatustransaction->update([
+                    'status' => 2
+                ]);
+                $projectstatustransaction = new ProjectStatusTransaction();
+                $projectstatustransaction->mini_tbp_id = $minitbp->id;
+                $projectstatustransaction->project_flow_id = 3;
+                $projectstatustransaction->save();
+            }
             
         }else{
             MiniTBP::find($request->id)->update(

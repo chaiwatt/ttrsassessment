@@ -51,37 +51,11 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">รายการเจ้าหน้าที่ TTRS</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a> --}}
                         </div>
                     </div>
 					<div class="card-body">
                         <form method="POST" action="{{route('dashboard.admin.project.projectassignment.editsave',['id' => $projectassignment->id])}}" enctype="multipart/form-data">
                             @csrf
-                            {{-- <fieldset>	
-                                <div class="form-group">
-									<label for="">Leader<span class="text-danger">*</span></label>
-									<select name="leader" id="leader" value="{{$projectassignment->leader_id}}" id="" class="form-control form-control-lg form-control-select2">
-                                        <option value="0">===เลือก Leader===</option>
-                                        @foreach ($users as $user)
-											<option value="{{$user->id}}" @if($projectassignment->leader_id == $user->id) selected @endif >{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</option>
-										@endforeach
-									</select>
-                                </div>
-                                <div class="form-group">
-									<label for="">Co-Leader<span class="text-danger">*</span></label>
-                                    <select name="coleader" id="coleader" value="{{$projectassignment->coleader_id}}" id="" class="form-control form-control-lg form-control-select2">
-                                        <option value="0">===เลือก Co-Leader===</option>
-										@foreach ($users as $user)
-											<option value="{{$user->id}}" @if($projectassignment->coleader_id == $user->id) selected @endif >{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</option>
-										@endforeach
-									</select>
-								</div>
-
-                            </fieldset> --}}
-                       
-
                         <div class="col-md-12">
                             <div class="form-group">
                                     <div class="table-responsive">
@@ -121,8 +95,6 @@
                     </form>
 					</div>
 				</div>
-				<!-- /multiple selection -->
-            <!-- /striped rows -->
             </div>
         </div>
         <div id="main_wrapper" hidden>

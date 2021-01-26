@@ -245,10 +245,11 @@ function SendMailMember(id,users,topic,body){
     })
 }
 
-// $(document).on('click', '#downloadzipfulltbp', function(e) {
-//   FullTbp.downloadZipFullTbp($(this).data('id')).then(data => {
-//       console.log(data);
-//   })
-// });
+$(document).on('click', '.finishonsite', function(e) {
+  $("#spiniconfinishonsite"+$(this).data('id')).attr("hidden",false);
+  FullTbp.finishOnsite($(this).data('id')).then(data => {
+    window.location.reload();
+}).catch(error => {})
+});
 
 

@@ -135,7 +135,7 @@ class FullTbp extends Model
         return ExpertComment::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->first();
     } 
     public function getBriefingdateAttribute(){
-        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',1)->first();
+        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',1)->orderBy('id','desc')->first();
         if(!Empty($eventcalendar)){
             return DateConversion::engToThaiDate($eventcalendar->eventdate);
         }else{
@@ -143,7 +143,7 @@ class FullTbp extends Model
         }
     } 
     public function getAssessmentdateAttribute(){
-        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',2)->first();
+        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',2)->orderBy('id','desc')->first();
         if(!Empty($eventcalendar)){
             return DateConversion::engToThaiDate($eventcalendar->eventdate);
         }else{
@@ -151,7 +151,7 @@ class FullTbp extends Model
         }
     } 
     public function getFinalassessmentdateAttribute(){
-        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',3)->first();
+        $eventcalendar = EventCalendar::where('full_tbp_id',$this->id)->where('calendar_type_id',3)->orderBy('id','desc')->first();
         if(!Empty($eventcalendar)){
            return DateConversion::engToThaiDate($eventcalendar->eventdate);
         }else{

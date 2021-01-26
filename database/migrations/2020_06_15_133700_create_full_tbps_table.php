@@ -34,7 +34,7 @@ class CreateFullTbpsTable extends Migration
             $table->longText('standard')->nullable();
             $table->string('attachment',250)->nullable();
             $table->char('done_assessment',1)->default(0);
-            // $table->char('expert_assigned',1)->default(1);
+            $table->char('finished_onsite',1)->default(1);
             $table->timestamps();
         });
     }

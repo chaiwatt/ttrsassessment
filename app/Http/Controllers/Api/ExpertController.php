@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use App\Model\Ev;
 use Carbon\Carbon;
 use App\Model\Company;
 use App\Model\FullTbp;
@@ -25,6 +26,7 @@ use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 
 class ExpertController extends Controller
 {
@@ -169,6 +171,7 @@ class ExpertController extends Controller
         return ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('user_id',$request->id)->first()->rejectreason;
     }
     public function JdConfirm(Request $request){
+       $auth = Auth::user();
        $check = ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('accepted',1)->get();
        if($check->count() != 0){
             ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('accepted','!=',1)->delete();
@@ -196,8 +199,50 @@ class ExpertController extends Controller
             FullTbp::find($request->fulltbpid)->update([
                 'assignexpert' => 2
             ]);
+
+            $fulltbp = FullTbp::find($request->fulltbpid);
+            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+            $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+            $company = Company::find($businessplan->company_id);
+            $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+            
+            $messagebox =  Message::sendMessage('JD ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project,'JD ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' =>  $request->fulltbpid]).'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id =  $projectassignment->leader_id;
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' JD ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project;
+            $alertmessage->save();
+            
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:JD ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน Leader<br><br> JD ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project . ' บริษัท' . $company->name . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' =>  $request->fulltbpid]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            
+            $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first();
+            if($projectstatustransaction->status == 1){
+                $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
+                if($businessplan->business_plan_status_id == 6 && $fulltbp->assignexpert == 2 && $ev->status == 4){
+                    $projectstatustransaction->update([
+                        'status' => 2
+                    ]);
+                   $projectstatustransaction = new ProjectStatusTransaction();
+                   $projectstatustransaction->mini_tbp_id = $minitbp->id;
+                   $projectstatustransaction->project_flow_id = 4;
+                   $projectstatustransaction->save();
+
+                   $messagebox =  Message::sendMessage('สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $company->name ,'Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+                   $alertmessage = new AlertMessage();
+                   $alertmessage->user_id = $auth->id;
+                   $alertmessage->target_user_id =  $projectassignment->leader_id;
+                   $alertmessage->messagebox_id = $messagebox->id;
+                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป' ;
+                   $alertmessage->save();
+
+                   EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน Leader<br><br> Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project .  ' บริษัท' . $company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                
+                }
+            }
             return response()->json($expertassignments);
        }
+ 
     }
     
 }

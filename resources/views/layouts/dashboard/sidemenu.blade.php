@@ -52,7 +52,7 @@
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
             @endif
         </a></li>
-        @if (Auth::user()->user_type_id >= 5)
+        @if (Auth::user()->user_type_id == 5)
             <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',6)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>

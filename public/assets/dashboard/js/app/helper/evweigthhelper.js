@@ -43,6 +43,8 @@ function getEv(evid){
  $(document).on('focusin', '.weigthvalue1', function(){
     $(this).data('old', $(this).val());
  }).on('change', '.weigthvalue1', function(e) {
+    $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+
     var check = parseFloat($('#weight').html().replace(/[{()}]/g, ''));
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
 
@@ -53,7 +55,7 @@ function getEv(evid){
     });
     if(sum.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาดdd...',
             text: 'ผลรวม Weight มากกว่า 1 !',
             });
             $(this).val($(this).data('old')) 
@@ -94,6 +96,8 @@ function getEv(evid){
 $(document).on('focusin', '.weigthvalue', function(){
     $(this).data('old', $(this).val());
  }).on('change', '.weigthvalue', function(e) {
+    $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+    
     var check = parseFloat($('#extraweight').html().replace(/[{()}]/g, ''));
     var sum =0;
     $('.weigthvalue').each(function(){
@@ -112,7 +116,7 @@ $(document).on('focusin', '.weigthvalue', function(){
     // console.log(newval);
     if(newval.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาดdddd...',
             text: 'ผลรวม Weight มากกว่า 1 !',
             });
             $(this).val($(this).data('old')) 
@@ -192,7 +196,7 @@ function RenderWeightTable(data,evtypeid){
                 <td> 
                     <div class="form-group">
                         <label>${pillaindex.subpillarindex['name']}</label>
-                        <input type="text" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}"class="form-control inputweigth weigthvalue${evtypeid} decimalformat">
+                        <input type="text" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}" class="form-control form-control-lg inputweigth weigthvalue${evtypeid} decimalformat">
                     </div>
                 </td>                           
             </tr>`
@@ -205,6 +209,7 @@ function RenderWeightTable(data,evtypeid){
             $("#extra_subpillar_index_transaction_wrapper_tr").html(html);
         }
 }
+
 
 function RenderExtraTable(data){
     var html =``;
@@ -223,7 +228,7 @@ function RenderExtraTable(data){
             <td> 
             <div class="form-group">
                 <label>${criteria.extracriteria['name']}</label>
-                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control inputextraweigth weigthvalue decimalformat" ${readonly} >
+                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${readonly} >
             </div>
         </td> 
     </tr>`

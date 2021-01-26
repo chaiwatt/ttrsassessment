@@ -42,9 +42,6 @@
                         @else
                             <div class="d-flex justify-content-center">
                                 <div class="form-check ">
-                                    {{-- <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkevstatus" data-id="{{$ev->id}}" data-on-color="success" data-off-color="danger" data-on-text="ส่งแล้ว" data-off-text="ส่ง JD พิจารณา" class="form-check-input-switch" @if ($ev->status == 3) checked @endif > --}}
-                                    {{-- <button id="updateevstatus" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button> --}}
-                                    {{-- <button type="button" id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>นำส่ง JD fff<i class="icon-paperplane ml-2"></i></button> --}}
                                     @if (($ev->status == 3))
                                         @if (Auth::user()->user_type_id == 6)
                                             <button id="approveevstagetwo" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
@@ -103,46 +100,14 @@
                             <h6>Index Weight</h6>
 							<fieldset>
                                 <input type="text" id="tmpstepindex" value="0" hidden>
-                                {{-- <div class="text-right">
-                                    @if (($ev->status == 2 || $ev->refixstatus == 1) && Auth::user()->user_type_id != 6)
-                                        <button id="sendedittojd" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spiniconev" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
-                                    @endif
-                                    @if (($ev->status == 2))
-                                        @if (Auth::user()->user_type_id == 6)
-                                            <button id="approveevstagetwo" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
-                                        @endif
-                                    @endif
-                                </div> --}}
                                 <ul class="nav nav-tabs nav-tabs-highlight indexweight">
-                                    {{-- <li class="nav-item"><a href="#detailtab" class="nav-link" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}
+                                   
                                     <li class="nav-item"><a href="#weighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weight <span id="weight"></span></a></li>
                                     @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
                                         <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
                                     @endif
                                 </ul>
                                 <div class="tab-content mb-2">
-                                    {{-- <div class="tab-pane fade show active" id="detailtab">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="criteriatable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Pillar</th>  
-                                                        <th>Sub Pillar</th>   
-                                                        <th>Index</th>                                                                                
-                                                        <th>Criteria</th>  
-                                                    </tr>
-                                                </thead>
-                                                <div class="theme_tail theme_tail_circle loadprogress">
-                                                    <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
-                                                    <div class="pace_activity"></div>
-                                                </div> 
-                                                <tbody id="criteria_transaction_wrapper_tr"> 
-                  
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div> --}}
-        
                                     <div class="tab-pane fade show active"" id="weighttab">
                                         <table class="table table-bordered table-striped" id="subpillarindex">
                                             <thead>
@@ -195,16 +160,11 @@
                             @if ($ev->percentextra > 0)
                             <h6>Extra Weight</h6>
 							<fieldset>
-                                {{-- <input type="text" id="tmpstepindex" value="0" hidden> --}}
                                 <ul class="nav nav-tabs nav-tabs-highlight">
-                                    {{-- <li class="nav-item"><a href="#extradetailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}
                                     <li class="nav-item"><a href="#extraweighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i> กำหนด Weight <span id="extraweight"></span></a></li>
                                 </ul>
                                 <div class="tab-content mb-2">
-                 
-        
                                     <div class="tab-pane fade show active" id="extraweighttab">
-                       
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped" id="extra_subpillarindex">
                                                 <thead>
@@ -212,7 +172,6 @@
                                                         <th>Category</th>  
                                                         <th>Extra Criteria</th>   
                                                         <th>Weight</th>                                                                                
-                                                        {{-- <th>Criteria</th>   --}}
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -231,12 +190,10 @@
                         </form>   
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
-        <!-- /form layouts -->
     </div>
-    <!-- /content area -->
+
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>

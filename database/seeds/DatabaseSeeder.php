@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FeeTypesTableSeeder::class);
         $this->call(AllowAssessmentsTableSeeder::class);
         $this->call(NoneLegalEntityTypesTableSeeder::class);
+        $this->call(ProjectFlowsTableSeeder::class);
         $this->call(MessageReadStatusesTableSeeder::class);
         $this->call(FriendStatusesTableSeeder::class);
         $this->call(FrontPagStatusesTableSeeder::class);

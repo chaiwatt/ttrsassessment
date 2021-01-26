@@ -4,6 +4,36 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
+<style>
+      .blink {
+        animation: blinker 1s linear infinite;
+        color: #f5f8fa;
+        font-size: 15px;
+        font-weight: 100
+        /* font-weight: bold; */
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+      .blink-one {
+        animation: blinker-one 1s linear infinite;
+      }
+      @keyframes blinker-one {
+        0% {
+          opacity: 0;
+        }
+      }
+      .blink-two {
+        animation: blinker-two 1.4s linear infinite;
+      }
+      @keyframes blinker-two {
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -63,93 +93,106 @@
                         <form method="POST" action="{{route('dashboard.admin.calendar.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6">
+                                <div  class="col-md-12" id="toast" hidden>
+                                    <div class="mb-4">
+                                        <div class="toast bg-slate border-transparent" style="opacity: 1; max-width: none;">
+                                            <div class="toast-header bg-slate-600 border-bottom-slate-400">
+                                                <span class="font-weight-semibold mr-auto blink" style="font-size: 16px">ข้อแนะนำ</span>
+                                                <button type="button" class="close" data-dismiss="toast" id="closetoast">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+    
+                                            <div class="toast-body" style="font-size: 16px">
+                                               <span id="toastmessage"></span>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>โครงการ</label><span class="text-danger">*</span>
                                         <select name="fulltbp" id="fulltbp" data-placeholder="โครงการ" class="form-control form-control-lg form-control-select2">
-                                           {{-- <option val="0">==เลือกโครงการ==</option> --}}
+                                           <option value="0">==เลือกโครงการ==</option>
                                             @foreach ($fulltbps as $fulltbp)
                                                 <option value="{{$fulltbp->id}}">{{$fulltbp->minitbp->project}}</option> 
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>ประเภทปฏิทิน</label><span class="text-danger">*</span>
-                                        <select name="calendartype" data-placeholder="ประเภทปฏิทิน" class="form-control form-control-lg form-control-select2">
-                                            @foreach ($calendartypes as $calendartype)
-                                                <option value="{{$calendartype->id}}">{{$calendartype->name}}</option> 
-                                            @endforeach
-                                        </select>
+                                <div class="col-md-12" id="project_wrapper" hidden>
+                                    <div class="row" >
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>ประเภทปฏิทิน</label><span class="text-danger">*</span>
+                                                <select name="calendartype" id="calendartype" data-placeholder="ประเภทปฏิทิน" class="form-control form-control-lg form-control-select2">
+                                                    {{-- @foreach ($calendartypes as $calendartype)
+                                                        <option value="{{$calendartype->id}}">{{$calendartype->name}}</option> 
+                                                    @endforeach --}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
+                                                <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-lg form-control-select2">
+                                                    @foreach ($isnotifies as $key => $isnotify)
+                                                        <option value="{{$isnotify->id}}" @if ($key == 1) selected @endif >{{$isnotify->name}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>วันที่</label>
+                                                <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control form-control-lg" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>เวลาเริ่ม</label>
+                                                <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control form-control-lg" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>เวลาสิ้นสุด</label>
+                                                <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control form-control-lg" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>สถานที่นัดหมาย</label>
+                                                <input type="text"  name="place" value=""  placeholder="สถานที่นัดหมาย" class="form-control form-control-lg" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>ห้อง</label>
+                                                <input type="text"  name="room" value="{{old('room')}}" placeholder="ห้อง" class="form-control form-control-lg" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>รายละเอียด</label>
+                                                <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
+                                                <select name="users[]" id="user" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-lg form-control-select2" multiple="multiple">
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
-                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-lg form-control-select2">
-                                            @foreach ($isnotifies as $isnotify)
-                                                <option value="{{$isnotify->id}}">{{$isnotify->name}}</option> 
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    @if ($fulltbps->count() != 0)
+                                        <div class="text-right">
+                                            <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>วันที่</label>
-                                        <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control form-control-lg" >
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>เวลาเริ่ม</label>
-                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control form-control-lg" >
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>เวลาสิ้นสุด</label>
-                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control form-control-lg" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>สถานที่นัดหมาย</label>
-                                        <input type="text"  name="place" value=""  placeholder="สถานที่นัดหมาย" class="form-control form-control-lg" >
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>ห้อง</label>
-                                        <input type="text"  name="room" value="{{old('room')}}" placeholder="ห้อง" class="form-control form-control-lg" >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>รายละเอียด</label>
-                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
-                                        <select name="users[]" id="user" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-lg form-control-select2" multiple="multiple">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @if ($fulltbps->count() != 0)
-                                <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                                </div>
-                            @endif
                         </form>
                     </div>
                 </div>
@@ -200,6 +243,11 @@
             clearText: "เคลียร์",
             date: false,
         });
+
+        $(document).on('click', '#closetoast', function(e) {
+            $("#toast").attr("hidden",true);
+        });
+
 
     </script>
 @stop

@@ -64,6 +64,7 @@ use App\Model\FullTbpProjectStandard;
 use App\Model\FullTbpMarketAttachment;
 use App\Model\FullTbpMainProductDetail;
 use App\Model\FullTbpMarketCompetitive;
+use App\Model\ProjectStatusTransaction;
 use Illuminate\Support\Facades\Storage;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Model\FullTbpProjectTechDevLevel;
@@ -421,6 +422,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $fulltbp = FullTbp::find($request->id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $_businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$_businessplan->id)->first();
         $_company = Company::find($_businessplan->company_id);
         $_user = User::find($_company->user_id);
         if($request->val == 1){
@@ -475,6 +477,31 @@ class DashboardAdminProjectFullTbpController extends Controller
             EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name .' จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิณ ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
+            $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first();
+            if($projectstatustransaction->status == 1){
+                $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
+                if($_businessplan->business_plan_status_id == 6 && $fulltbp->assignexpert == 2 && $ev->status ==4){
+                    $projectstatustransaction->update([
+                        'status' => 2
+                    ]);
+                   $projectstatustransaction = new ProjectStatusTransaction();
+                   $projectstatustransaction->mini_tbp_id = $minitbp->id;
+                   $projectstatustransaction->project_flow_id = 4;
+                   $projectstatustransaction->save();
+
+                   $messagebox =  Message::sendMessage('สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name ,'Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+                   $alertmessage = new AlertMessage();
+                   $alertmessage->user_id = $auth->id;
+                   $alertmessage->target_user_id =  $projectassignment->leader_id;
+                   $alertmessage->messagebox_id = $messagebox->id;
+                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป' ;
+                   $alertmessage->save();
+
+                   EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name,'เรียน Leader<br><br> Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project .  ' บริษัท' . $_company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                
+                }
+            }
+
         }else{
             
             FullTbp::find($request->id)->update(

@@ -102,35 +102,6 @@ class CronSendmail extends Command
                         EmailBox::send($membermails,'TTRS:แจ้งเตือนลงคะแนนการประเมิน','เรียนท่านกรรมการ <br><br> ท่านยังไม่ได้ลงคะแนนการประเมิน ของโครงการ'.$minitbp->project.' กรุณาลงคะแนนก่อน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                     }
                 }
-                
-                // $date = Carbon::parse($eventcalendar->eventdate);
-                // if($date->isToday() == 1){
-                //     $ev = Ev::where('full_tbp_id',$eventcalendar->full_tbp_id)->first();
-                //     ProjectMember::whereNotIn('user_id',$scoringstatuses)->where('full_tbp_id',$eventcalendar->full_tbp_id)->delete();
-                //     $check = Scoring::where('ev_id',$ev->id)
-                //                     ->whereNull('user_id')
-                //                     ->get(); 
-                //     if($check->count() == 0){
-                //         $userid = Scoring::where('ev_id',$ev->id)
-                //                 ->whereNotNull('user_id')
-                //                 ->first()->user_id; 
-                //         $scorings = Scoring::where('ev_id',$ev->id)
-                //                 ->where('user_id',$userid)
-                //                 ->get(); 
-                //         foreach ($scorings as $key => $scoring) {
-                //             $new = new Scoring();
-                //             $new->ev_id = $scoring->ev_id;
-                //             $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
-                //             $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
-                //             $new->scoretype = $scoring->scoretype;
-                //             $new->score = $scoring->score;
-                //             $new->save();
-                //         } 
-                //         $fulltbp = FullTbp::find($eventcalendar->full_tbp_id)->update([
-                //             'done_assessment' => 1
-                //         ]);     
-                //     }
-                // }
             }
         } 
         $eventcalendars = EventCalendar::get();

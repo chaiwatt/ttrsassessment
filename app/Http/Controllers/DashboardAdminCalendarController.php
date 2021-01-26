@@ -61,6 +61,7 @@ class DashboardAdminCalendarController extends Controller
     }
     public function CreateSave(CreateCalendarRequest $request){
       $auth = Auth::user();
+      // $check = EventCalendar()->where('full_tbp_id',$request->fulltbp)
       $eventcalendar = new EventCalendar();
       $eventcalendar->full_tbp_id = $request->fulltbp;
       $eventcalendar->calendar_type_id = $request->calendartype;

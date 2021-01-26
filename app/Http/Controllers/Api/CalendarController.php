@@ -2,19 +2,51 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\Ev;
+use App\Model\FullTbp;
+use App\Model\MiniTBP;
+use App\Model\BusinessPlan;
+use App\Model\CalendarType;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 use App\Model\EventCalendarAttendeeStatus;
 
 class CalendarController extends Controller
 {
     public function GetParticipate(Request $request){
         $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
-        return response()->json($projectmembers);
+        $fulltbp = FullTbp::find($request->id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+
+        $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',4)->first();
+        $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id','>=',4)->count();
+
+        $flownothree = 1;
+        $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
+        if($businessplan->business_plan_status_id >= 6 && $fulltbp->assignexpert == 2 && $ev->status == 4){
+            $flownothree = 2;
+        }
+        $calendartypes = CalendarType::get();
+        $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id','>=',4)->count();
+        if($projectstatustransactions == 1){
+            $calendartypes = CalendarType::where('id','<=',2)->get();
+        }else if($projectstatustransactions == 2){
+            $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();
+        }
+
+        return response()->json(array(
+            "projectmembers" => $projectmembers,
+            "flownothree" => $flownothree,
+            "calendartypes" => $calendartypes,
+            "projectstatus" => $projectstatus
+        ));
     }
 
     public function GetEvent(Request $request){

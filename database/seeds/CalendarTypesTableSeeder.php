@@ -16,13 +16,10 @@ class CalendarTypesTableSeeder extends Seeder
                 'name' => 'นัดประชุม (briefing) ก่อนลงพื้นที่'
             ],
             [
-                'name' => 'นัดหมายการประเมิน'
+                'name' => 'นัดหมายประเมิน ณ สถานประกอบการ'
             ],
             [
                 'name' => 'นัดหมายสรุปผลการประเมิน'
-            ],
-            [
-                'name' => 'อื่น ๆ'
             ]
         ]);
     }

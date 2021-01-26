@@ -866,9 +866,9 @@ $(document).on('click', '#updateev', function(e) {
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกข้อมูลให้ครบทุก Pillar!',
-        }).then((result) => {
-            return;
         });
+        return;
+
     }
 
     if($("#criteriatable tr").length == 1){

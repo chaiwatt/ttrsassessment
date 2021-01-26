@@ -90,7 +90,6 @@
                             <table class="table text-nowrap" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th>วันที่ส่งขอประเมิน</th>  --}}
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
@@ -104,20 +103,24 @@
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
                                         <td>
-                                             @if ($fulltbp->allscoring == 0)
-                                                @if ($fulltbp->done_assessment != 0)
-                                                        @if ($fulltbp->ev->status == 5)
-                                                                <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn-sm bg-success">สรุปเกรด</a>
-                                                            @else
-                                                                <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ปรับปรุงคะแนน</a>
-                                                        @endif
-                                                    @else
-                                                    <span class="badge badge-flat border-warning text-warning-600">รอเวลา</span>
-                                                        
-                                                @endif     
-                                            @else   
-                                                    <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
-                                             @endif 
+                                            @if ($fulltbp->finished_onsite == 2)
+                                                @if ($fulltbp->allscoring == 0)
+                                                    @if ($fulltbp->done_assessment != 0)
+                                                            @if ($fulltbp->ev->status == 5)
+                                                                    <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn-sm bg-success">สรุปเกรด</a>
+                                                                @else
+                                                                    <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ปรับปรุงคะแนน</a>
+                                                            @endif
+                                                        @else
+                                                        <span class="badge badge-flat border-warning text-warning-600">รอเวลา</span>
+                                                            
+                                                    @endif     
+                                                @else   
+                                                        <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
+                                                @endif 
+                                            @else
+                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ยืนยันการลงพื้นที่</span>
+                                            @endif
                                         </td>                                
                                     </tr>
                                     @endforeach

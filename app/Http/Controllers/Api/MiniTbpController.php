@@ -12,10 +12,12 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\Signature;
 use App\Model\MessageBox;
+use App\Model\ProjectFlow;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\TimeLineHistory;
@@ -24,6 +26,7 @@ use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 use setasign\Fpdi\PdfParser\StreamReader;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
@@ -35,7 +38,6 @@ class MiniTbpController extends Controller
         if(Empty($minitbpcode)){
             $minitbpcode = 'PL-'.Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($request->id),3,0,STR_PAD_LEFT); 
         }
-        // echo($request->director);
         if(count(json_decode($request->director)) > 0){
             MinitbpSignature::where('mini_tbp_id',$request->id)->delete();
             foreach (json_decode($request->director) as $value) {
@@ -87,11 +89,6 @@ class MiniTbpController extends Controller
        
         Company::where('user_id',Auth::user()->id)->first()->update([
             'name' => $request->companyname,
-            // 'address' => $request->address,
-            // 'province_id' => $request->province,
-            // 'amphur_id' => $request->amphur,
-            // 'tambol_id' => $request->tambol,
-            // 'postalcode' => $request->postalcode
         ]);
         $minitbp = MiniTBP::find($request->id);
         return response()->json($minitbp);
@@ -117,7 +114,6 @@ class MiniTbpController extends Controller
             ],
             'default_font' => 'kanit',
         ]);
-        // $mpdf->SetCompression(false);
 
         $minitbpsignatures = MinitbpSignature::where('mini_tbp_id',$request->id)->get();
 
@@ -329,6 +325,24 @@ class MiniTbpController extends Controller
 
             EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' บริษัท'. $company->name,'เรียน JD<br><br> บริษัท'. $company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดตรวจสอบและแต่งตั้ง Leader ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature() . EmailBox::emailSignature());
             
+            $startdate = Carbon::now()->addDay(1);
+            $projectflows = ProjectFlow::get();
+            foreach ($projectflows as $key => $projectflow) {
+                $projectstatuse = new ProjectStatus();
+                $projectstatuse->mini_tbp_id = $minitbp->id;
+                $projectstatuse->project_flow_id = $projectflow->id;
+                $projectstatuse->duration = $projectflow->duration;
+                $projectstatuse->startdate = $startdate->toDateString();
+                $projectstatuse->enddate = $startdate->addDay(($projectflow->duration)-1);
+                $projectstatuse->save();
+                $startdate = $projectstatuse->enddate->addDay(1);
+            }
+    
+            $projectstatustransaction = new ProjectStatusTransaction();
+            $projectstatustransaction->mini_tbp_id = $minitbp->id;
+            $projectstatustransaction->project_flow_id = 1;
+            $projectstatustransaction->save();
+
         }else{
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->id;
@@ -409,6 +423,24 @@ class MiniTbpController extends Controller
             $timeLinehistory->save();
 
             EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' บริษัท'. $company->name,'เรียน JD<br><br> บริษัท'. $company->name . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . 'โปรดตรวจสอบและแต่งตั้ง Leader ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature() . EmailBox::emailSignature());
+            
+            $startdate = Carbon::now()->addDay(1);
+            $projectflows = ProjectFlow::get();
+            foreach ($projectflows as $key => $projectflow) {
+                $projectstatuse = new ProjectStatus();
+                $projectstatuse->mini_tbp_id = $minitbp->id;
+                $projectstatuse->project_flow_id = $projectflow->id;
+                $projectstatuse->duration = $projectflow->duration;
+                $projectstatuse->startdate = $startdate->toDateString();
+                $projectstatuse->enddate = $startdate->addDay(($projectflow->duration)-1);
+                $projectstatuse->save();
+                $startdate = $projectstatuse->enddate->addDay(1);
+            }
+    
+            $projectstatustransaction = new ProjectStatusTransaction();
+            $projectstatustransaction->mini_tbp_id = $minitbp->id;
+            $projectstatustransaction->project_flow_id = 1;
+            $projectstatustransaction->save();
             
         }else{
             $notificationbubble = new NotificationBubble();

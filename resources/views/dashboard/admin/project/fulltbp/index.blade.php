@@ -231,8 +231,8 @@
                                         <th>การอนุมัติ</th> 
                                         <th>ผู้เชี่ยวชาญ</th> 
                                         <th>BOL</th> 
-                                        <th>เกณฑ์การประเมิน</th> 
-                                        
+                                        <th>EV</th> 
+                                        <th>ลงพื้นที่แล้ว</th> 
                                         <th>ทีมประเมิน</th>
                                         <th style="width: 20px"><i class="icon-arrow-down12"></i></th> 
                                                                   
@@ -316,7 +316,17 @@
                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
-
+                                                <td>
+                                                    @if (!Empty($fulltbp->assessmentdate))
+                                                      @if ($fulltbp->finished_onsite == 1)
+                                                            <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยัน</button>
+                                                          @else
+                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                      @endif
+                                                       
+                                                    @endif
+                                                   
+                                                </td>
                                                 <td> 
                                                     <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                                 </td>
@@ -325,7 +335,6 @@
                                                         <div class="list-icons-item dropdown">
                                                             <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                
                                                                 <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> PDF</a>
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbp->id])}}" data-id="{{$fulltbp->id}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลดเอกสารแนบ</a>
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-eye2"></i> รายละเอียด</a>

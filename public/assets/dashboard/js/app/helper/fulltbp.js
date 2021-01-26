@@ -209,5 +209,24 @@ function downloadZipFullTbp(id){
     })
 }
 
-export {editApprove,editGeneral,addResearcher,deleteResearcher,editOverAll,editMarketPlan,generatePdf,editSignature,downloadZipFullTbp}
+function finishOnsite(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/finishonsite`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          id : id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {editApprove,editGeneral,addResearcher,deleteResearcher,editOverAll,editMarketPlan,generatePdf,editSignature,downloadZipFullTbp,finishOnsite}
 

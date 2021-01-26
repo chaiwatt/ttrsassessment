@@ -289,7 +289,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('editsignature','Api\FullTbpController@EditSignature')->name('api.fulltbp.editsignature');
             Route::post('submitwithattachement','Api\FullTbpController@SubmitWithattAchement')->name('api.fulltbp.submitwithattachement');
             Route::post('submitwithnoattachement','Api\FullTbpController@SubmitWithNoattAchement')->name('api.fulltbp.submitwithnoattachement'); 
-
+            Route::post('finishonsite','Api\FullTbpController@FinishOnsite')->name('api.fulltbp.finishonsite'); 
             Route::group(['prefix' => 'general'], function(){
                 Route::post('edit','Api\FullTbpGeneralController@Edit')->name('api.fulltbp.general.edit');           
                 Route::post('addresearcher','Api\FullTbpGeneralController@AddResearcher')->name('api.fulltbp.general.addresearcher');
