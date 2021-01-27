@@ -44,3 +44,31 @@ select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
     font-size:14px; 
 }
 
+.blink {
+    animation: blinker 1s linear infinite;
+    color: #f5f8fa;
+    font-size: 15px;
+    font-weight: 100
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  .blink-one {
+    animation: blinker-one 1s linear infinite;
+  }
+  @keyframes blinker-one {
+    0% {
+      opacity: 0;
+    }
+  }
+  .blink-two {
+    animation: blinker-two 1.4s linear infinite;
+  }
+  @keyframes blinker-two {
+    100% {
+      opacity: 0;
+    }
+  }
+

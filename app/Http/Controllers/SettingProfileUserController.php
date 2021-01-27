@@ -59,7 +59,6 @@ class SettingProfileUserController extends Controller
         $industrygroups = IndustryGroup::get();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
         $userpositions = UserPosition::get();
-        // $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
         $employpositions = EmployPosition::where('id', '<=',5)->get();
         return view('setting.profile.user.edit')->withUser($user)
@@ -77,8 +76,6 @@ class SettingProfileUserController extends Controller
                                             ->withEmploypositions($employpositions);
     }
     public function EditSave(EditProfileRequest $request, $id){
-        // return $request->registeredcapital;
-
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -160,7 +157,6 @@ class SettingProfileUserController extends Controller
 
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         if(Empty($businessplan)){
-            // if($request->status == 1){
                 $count = BusinessPlan::get()->count() + 1;
                 $auth = Auth::user();
                 $company = Company::where('user_id',$auth->id)->first();
@@ -236,14 +232,6 @@ class SettingProfileUserController extends Controller
                     $projectmember->user_id = User::where('user_type_id',6)->first()->id;
                     $projectmember->save();
                 }
-
-                // $notificationbubble = new NotificationBubble();
-                // $notificationbubble->business_plan_id = $businessplan->id;
-                // $notificationbubble->notification_category_id = 1;
-                // $notificationbubble->notification_sub_category_id = 2;
-                // $notificationbubble->user_id = $auth->id;
-                // $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
-                // $notificationbubble->save();
                 
                 $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
 
@@ -279,8 +267,7 @@ class SettingProfileUserController extends Controller
                 $fulltbpreturnofinvestment = new FullTbpReturnOfInvestment();
                 $fulltbpreturnofinvestment->full_tbp_id = $fulltbp->id;
                 $fulltbpreturnofinvestment->save();
-
-            // }
+                return redirect()->route('dashboard.company.project.minitbp.edit',['id'=>$minitbp->id])->withSuccess('บันทึกข้อมูลสำเร็จ สามารถกรอกแบบคำขอรับบริการประเมินขั้นในลำดับต่อไปได้'); 
         }else{
             if($request->status == 1){
                 $businessplan->where('company_id',$company->id)->first()->update([
@@ -291,8 +278,9 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
+            return redirect()->back()->withSuccess('แก้ไขข้อมูลสำเร็จ'); 
         }
 
-        return redirect()->back()->withSuccess('แก้ไขข้อมูลสำเร็จ'); 
+       
     }
 }

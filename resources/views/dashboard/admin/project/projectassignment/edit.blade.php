@@ -1,8 +1,10 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 @stop
+<style>
+
+</style>
 @section('content')
-    <!-- Page header -->
     <div class="page-header page-header-light">
         
         <div class="page-header-content header-elements-md-inline">
@@ -24,9 +26,7 @@
             </div>
         </div>
     </div>
-    <!-- /page header -->
 
-    <!-- Content area -->
     <div class="content">
         @if (Session::has('success'))
             <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
@@ -56,8 +56,27 @@
 					<div class="card-body">
                         <form method="POST" action="{{route('dashboard.admin.project.projectassignment.editsave',['id' => $projectassignment->id])}}" enctype="multipart/form-data">
                             @csrf
-                        <div class="col-md-12">
-                            <div class="form-group">
+                            @if (Empty($projectassignment->leader_id))
+                                <div  class="col-md-12" id="toast" >
+                                    <div class="mb-4">
+                                        <div class="toast bg-slate border-transparent" style="opacity: 1; max-width: none;">
+                                            <div class="toast-header bg-slate-600 border-bottom-slate-400">
+                                                <span class="font-weight-semibold mr-auto blink" style="font-size: 16px">ข้อแนะนำ</span>
+                                                <button type="button" class="close" data-dismiss="toast" id="closetoast">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="toast-body" style="font-size: 16px">
+                                                <span id="toastmessage">
+                                                    <span class="badge bg-success" style="font-size:16px">การมอบหมาย Leader และ Co-Leader</span> ของโครงการ{{$minitbp->project}} มีกำหนดถึงวันที่ {{$projectstatus->enddateth}} (จำนวน {{$projectstatus->duration}} วัน ตาม Control flow) กรุณามอบหมายในเสร็จสิ้นตาม Control flow
+                                                </span>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -90,9 +109,8 @@
                                         <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                     </div>
                                 </div>
-
-                        </div>
-                    </form>
+                            </div>
+                        </form>
 					</div>
 				</div>
             </div>
@@ -133,10 +151,6 @@
                         <div class="card-header header-elements-sm-inline">
                             <h6 class="card-title">รายการโครงการ</h6>
                             <div class="header-elements">
-                                {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                    
-                                    <span></span>
-                                </a> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -151,17 +165,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="fulltbp_wrapper_tr">
-                                        {{-- @foreach ($fulltbps as $fulltbp)
-                                            <td> {{$fulltbp->updatedatth}} </td> 
-                                            <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                            <td> {{$fulltbp->minitbp->project}} </td>  
-                                            <td> {{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </td>  
-                                            <td> 
-                                                <a href="{{route('dashboard.admin.report.search.view',['id' => $fulltbp->id])}}" class=" badge bg-primary">รายละเอียด</a>
-                                                <a href="{{route('dashboard.admin.report.search.pdf',['id' => $fulltbp->id])}}" class=" badge bg-teal">PDF</a>
-                                                <a href="{{route('dashboard.admin.report.search.excel',['id' => $fulltbp->id])}}" class=" badge bg-info">EXCEL</a>
-                                            </td> 
-                                        @endforeach --}}
                                     </tbody>
                                 </table>      
                             </div>
@@ -170,10 +173,7 @@
                 </div>
             </div>   
         </div>
-        
-        <!-- /form layouts -->
     </div>
-    <!-- /content area -->
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
@@ -187,6 +187,10 @@
 
     $("#attachment").on('change', function() {
         $("#filename").val(this.value);
+    });
+
+    $(document).on('click', '#closetoast', function(e) {
+        $("#toast").attr("hidden",true);
     });
 
 </script>

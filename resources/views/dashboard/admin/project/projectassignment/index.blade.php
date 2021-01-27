@@ -29,7 +29,6 @@
         </div>
     </div>
 
-    <!-- Page header -->
     <div class="page-header page-header-light">
         
         <div class="page-header-content header-elements-md-inline">
@@ -50,9 +49,7 @@
             </div>
         </div>
     </div>
-    <!-- /page header -->
 
-    <!-- Content area -->
     <div class="content">
         @if (Session::has('success'))
             <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
@@ -77,10 +74,6 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">รายการมอบหมาย</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -92,7 +85,7 @@
                                         <th>บริษัท</th>
                                         <th>ความเห็น JD</th>
                                         <th>Leader</th>
-                                        <th>Co-Leader</th>
+                                        {{-- <th>Co-Leader</th> --}}
                                         <th>สถานะ</th>
                                         @if (Auth::user()->user_type_id>=6)
                                             <th>เพิ่มเติม</th> 
@@ -103,7 +96,8 @@
                                     @foreach ($projectassignments as $key => $projectassignment)
                                     <tr>    
                                         <td> 
-                                                <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="text-info" target="_blank">{{$projectassignment->businessplan->minitbp->project}} </a>
+                                            <a href="#" data-toggle="modal" data-id="{{$projectassignment->id}}" class="controlflowicon"><i class="icon-circle2 text-success mr-2"></i></a>
+                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="text-info" target="_blank">{{$projectassignment->businessplan->minitbp->project}} </a>
                                         </td> 
                                         <td> 
                                             {{$projectassignment->businessplan->company->name}}
@@ -121,12 +115,11 @@
                                                 {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
                                             @endif
                                         </td>  
-                                        <td> 
+                                        {{-- <td> 
                                             @if (!Empty($projectassignment->coleader))
                                                 {{$projectassignment->coleader->prefix->name}}{{$projectassignment->coleader->name}} {{$projectassignment->coleader->lastname}}
                                             @endif
-                                           
-                                        </td> 
+                                        </td>  --}}
                                         <td>
                                             @if ($projectassignment->leader_id == null)
                                                 <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้มอบหมาย</span>
@@ -152,12 +145,10 @@
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
-        <!-- /form layouts -->
     </div>
-    <!-- /content area -->
+
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>

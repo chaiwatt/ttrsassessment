@@ -12,6 +12,7 @@ use App\Model\MessageBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\ProjectAssignment;
@@ -41,9 +42,12 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         $projectassignment = ProjectAssignment::find($id);
         $minitbp = MiniTBP::where('business_plan_id',BusinessPlan::find($projectassignment->business_plan_id)->id)->first();
         $users = User::where('user_type_id',4)->get();
+        $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',2)->first();
+
         return view('dashboard.admin.project.projectassignment.edit')->withProjectassignment($projectassignment)
                                                             ->withUsers($users)
-                                                            ->withMinitbp($minitbp);
+                                                            ->withMinitbp($minitbp)
+                                                            ->withProjectstatus($projectstatus);
     }
     public function EditSave(EditProjectAssignementRequest $request,$id){
         $auth = Auth::user();

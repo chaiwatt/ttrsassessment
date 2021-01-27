@@ -54,9 +54,6 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ปฏิทินกิจกรรม</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -118,7 +115,6 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>รายละเอียด</label>
-                                        {{-- <input type="text"  name="summary"  value="{{$eventcalendar->summary}}"  placeholder="รายละเอียด" class="form-control form-control-lg" > --}}
                                         <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg">{{$eventcalendar->summary}}</textarea>
                                     </div>
                                 </div>

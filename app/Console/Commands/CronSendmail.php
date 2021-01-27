@@ -153,7 +153,6 @@ class CronSendmail extends Command
                 $enddate = Carbon::createFromFormat('Y-m-d', $projectstatus->enddate);
                 $left = Carbon::parse(Carbon::now())->DiffInDays($enddate, false);
                 if ($left == 1){
-                    // return $left . " day remain. So, send email";
                     $this->mailByFlow($minitbp->id,$flow,$enddate);
                 }else{
                     // return $left . " days remains .So no need send mail out";

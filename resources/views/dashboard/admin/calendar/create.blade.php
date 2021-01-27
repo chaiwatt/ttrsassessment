@@ -4,36 +4,7 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
-<style>
-      .blink {
-        animation: blinker 1s linear infinite;
-        color: #f5f8fa;
-        font-size: 15px;
-        font-weight: 100
-        /* font-weight: bold; */
-      }
-      @keyframes blinker {
-        50% {
-          opacity: 0;
-        }
-      }
-      .blink-one {
-        animation: blinker-one 1s linear infinite;
-      }
-      @keyframes blinker-one {
-        0% {
-          opacity: 0;
-        }
-      }
-      .blink-two {
-        animation: blinker-two 1.4s linear infinite;
-      }
-      @keyframes blinker-two {
-        100% {
-          opacity: 0;
-        }
-      }
-    </style>
+
 @stop
 @section('content')
     <!-- Page header -->
@@ -57,9 +28,6 @@
             </div>
         </div>
     </div>
-    <!-- /page header -->
-
-    <!-- Content area -->
     <div class="content">
         @if (Session::has('success'))
             <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
@@ -84,9 +52,6 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ปฏิทินกิจกรรม</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -102,7 +67,6 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-    
                                             <div class="toast-body" style="font-size: 16px">
                                                <span id="toastmessage"></span>  
                                             </div>
@@ -126,9 +90,6 @@
                                             <div class="form-group">
                                                 <label>ประเภทปฏิทิน</label><span class="text-danger">*</span>
                                                 <select name="calendartype" id="calendartype" data-placeholder="ประเภทปฏิทิน" class="form-control form-control-lg form-control-select2">
-                                                    {{-- @foreach ($calendartypes as $calendartype)
-                                                        <option value="{{$calendartype->id}}">{{$calendartype->name}}</option> 
-                                                    @endforeach --}}
                                                 </select>
                                             </div>
                                         </div>
