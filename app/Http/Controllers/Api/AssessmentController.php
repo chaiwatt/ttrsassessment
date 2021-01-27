@@ -27,6 +27,7 @@ use App\Http\Controllers\Controller;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Model\BusinessPlanFeeTransaction;
 
@@ -142,5 +143,19 @@ class AssessmentController extends Controller
             }
         }
         return response()->json($businessplan);  
+    }
+
+    public function LetterSent(Request $request){
+        $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$request->id)->where('project_flow_id',7)->first();
+        if($projectstatustransaction->status == 1){
+            $projectstatustransaction->update([
+                'status' => 2
+            ]);
+            $projectstatustransaction = new ProjectStatusTransaction();
+            $projectstatustransaction->mini_tbp_id = $request->id;
+            $projectstatustransaction->project_flow_id = 8;
+            $projectstatustransaction->save();
+            DateConversion::addExtraDay($request->id,7);
+        }
     }
 }

@@ -498,7 +498,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                    $alertmessage->save();
 
                    EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name,'เรียน Leader<br><br> Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project .  ' บริษัท' . $_company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-                
+                   DateConversion::addExtraDay($minitbp->id,3);
                 }
             }
 
@@ -778,33 +778,33 @@ class DashboardAdminProjectFullTbpController extends Controller
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $projectsmembers = ProjectMember::where('full_tbp_id',$id)->get();
-
+        $company = Company::find($businessplan->company_id);
         foreach ($projectsmembers as $key => $projectsmember) {
-            $messagebox = Message::sendMessage('สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project ,$auth->id,$projectsmember->user_id);
+            $messagebox = Message::sendMessage('แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project . ' บริษัท' . $company->name,$auth->id,$projectsmember->user_id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =$projectsmember->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' สิ้นสุดโครงการ ' . $minitbp->project ;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' แจ้งสิ้นสุดโครงการ ' . $minitbp->project ;
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
+            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'เรียนท่านคณะกรรมการ <br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project. ' บริษัท' . $company->name .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
         }
 
-        $company = Company::find($businessplan->company_id);
-        $messagebox = Message::sendMessage('สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ'.$minitbp->project ,$auth->id,$company->user_id);
-        $alertmessage = new AlertMessage();
-        $alertmessage->user_id = $auth->id;
-        $alertmessage->target_user_id =$company->user_id;
-        $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' แจ้งสิ้นสุดโครงการ ' . $minitbp->project ;
-        $alertmessage->save();
+        // $company = Company::find($businessplan->company_id);
+        // $messagebox = Message::sendMessage('สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ'.$minitbp->project ,$auth->id,$company->user_id);
+        // $alertmessage = new AlertMessage();
+        // $alertmessage->user_id = $auth->id;
+        // $alertmessage->target_user_id =$company->user_id;
+        // $alertmessage->messagebox_id = $messagebox->id;
+        // $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' แจ้งสิ้นสุดโครงการ ' . $minitbp->project ;
+        // $alertmessage->save();
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        // EmailBox::send(User::find($company->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
 
         $timeLinehistory = new TimeLineHistory();
@@ -820,7 +820,13 @@ class DashboardAdminProjectFullTbpController extends Controller
         ]);
 
         EventCalendar::where('full_tbp_id',$id)->delete();
-
+        $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',8)->first();
+        if($projectstatustransaction->status == 1){
+            $projectstatustransaction->update([
+                'status' => 2
+            ]);
+            DateConversion::addExtraDay($minitbp->id,8);
+        }
         return redirect()->back()->withSuccess('สิ้นสุดโครงการ'.$minitbp->project.'สำเร็จ');
     }
 }

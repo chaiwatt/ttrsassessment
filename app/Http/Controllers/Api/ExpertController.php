@@ -237,7 +237,7 @@ class ExpertController extends Controller
                    $alertmessage->save();
 
                    EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน Leader<br><br> Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project .  ' บริษัท' . $company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-                
+                   DateConversion::addExtraDay($minitbp->id,3);
                 }
             }
             return response()->json($expertassignments);

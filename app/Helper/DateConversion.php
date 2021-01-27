@@ -2,6 +2,7 @@
 namespace App\Helper;
 
 use Carbon\Carbon;
+use App\Model\ProjectStatus;
 
 class DateConversion
 {
@@ -77,5 +78,21 @@ class DateConversion
     public static function thaiYearNow()
 	{
         return Carbon::today()->format('yy')+543;;
+    }
+
+    public static function addExtraDay($minitbpid,$flowid){
+        $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbpid)->where('project_flow_id',$flowid)->first();
+        $enddate = Carbon::createFromFormat('Y-m-d', $projectstatus->enddate);
+        $left = Carbon::parse(Carbon::now())->DiffInDays($enddate, false);
+        if($left < 0){
+            $extraday = $left*(-1);
+            $projectstatuses = ProjectStatus::where('mini_tbp_id',$minitbpid)->where('id','>',$projectstatus->id)->get();
+            foreach ($projectstatuses as $key => $projectstatus) {
+                $projectstatus->update([
+                    'startdate' => Carbon::createFromFormat('Y-m-d', $projectstatus->startdate)->addDays($extraday),
+                    'enddate' => Carbon::createFromFormat('Y-m-d', $projectstatus->enddate)->addDays($extraday)
+                ]);
+            }
+        }
     }
 }

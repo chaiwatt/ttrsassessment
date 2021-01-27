@@ -103,7 +103,7 @@
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
                                         <td>
-                                            @if ($fulltbp->finished_onsite == 2)
+                                            @if (!Empty($fulltbp->finalassessmentdate))
                                                 @if ($fulltbp->allscoring == 0)
                                                     @if ($fulltbp->done_assessment != 0)
                                                             @if ($fulltbp->ev->status == 5)
@@ -119,7 +119,7 @@
                                                         <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
                                                 @endif 
                                             @else
-                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ยืนยันการลงพื้นที่</span>
+                                                <span class="badge badge-flat border-warning text-warning-600">รอยืนยัน</span>
                                             @endif
                                         </td>                                
                                     </tr>

@@ -66,6 +66,7 @@
                                         <th>คะแนน</th>
                                         <th>เกรด</th>     
                                         <th>รายงานผล</th>    
+                                        <th>จดหมายผล</th>  
                                         <th>สิ้นสุดโครงการ</th>              
                                     </tr>
                                 </thead>
@@ -78,7 +79,6 @@
                                         <td> 
                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียดการแจ้งผล</a> 
                                             <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
-                                            {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-success">ดาวน์โหลด Certificate</a> --}}
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">ดาวน์โหลด Certificate</button>
                                                 <div class="dropdown-menu dropdown-menu-right">
@@ -87,13 +87,28 @@
                                                 </div>
                                             </div>
                                         </td> 
+                                        <td>
+                                            @if (!Empty($fulltbp->projectstatustransaction(7)))
+                                                    @if ($fulltbp->projectstatustransaction(7)->status == 2)  
+                                                            <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
+                                                        @elseif($fulltbp->projectstatustransaction(7)->status == 1)
+                                                            <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button>
+                                                    @endif  
+                                                @else
+                                                    <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
+                                            @endif
+                                        </td>
                                         <td> 
-                                           @if ($fulltbp->status != 3)
-                                                <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-teal">สิ้นสุดโครงการ</a>
-                                               @else
-                                                <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
-                                           @endif
-                                            
+                                            @if (!Empty($fulltbp->projectstatustransaction(8)))
+                                                    @if ($fulltbp->projectstatustransaction(8)->status == 2)
+                                                            <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
+                                                        @elseif($fulltbp->projectstatustransaction(8)->status == 1)
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-warning">สิ้นสุดโครงการ</a>
+                                                    @endif  
+                                                @else
+                                                    <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
+                                            @endif
+
                                         </td> 
                                     </tr>
                                     @endforeach
@@ -135,5 +150,46 @@
                 }
             });
         }
+        $(document).on("click",".confirmsendletter",function(e){
+            Swal.fire({
+                title: 'ยืนยัน!',
+                text: `ต้องการยืนยันรายการ หรือไม่`,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก',
+                closeOnConfirm: false,
+                closeOnCancel: false
+                }).then((result) => {
+                if (result.value) {
+                    LetterSent($(this).data('id')).then(data => {
+                        window.location.reload();
+                    })
+                .catch(error => {})
+                }
+            });
+        }); 
+
+        function LetterSent(id){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `${route.url}/api/assessment/lettersent`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    data: {
+                    id : id
+                    },
+                    success: function(data) {
+                    resolve(data)
+                    },
+                    error: function(error) {
+                    reject(error)
+                    },
+                })
+            })
+        }
+
+
     </script>
 @stop

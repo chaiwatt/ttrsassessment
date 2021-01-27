@@ -2,7 +2,7 @@
 @section('pageCss')
 @stop
 @section('content')
-    <!-- Page header -->
+  
     <div class="page-header page-header-light">
         
         <div class="page-header-content header-elements-md-inline">
@@ -23,9 +23,7 @@
             </div>
         </div>
     </div>
-    <!-- /page header -->
 
-    <!-- Content area -->
     <div class="content">
         @if (Session::has('success'))
             <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
@@ -51,90 +49,105 @@
                         <form method="POST" action="{{route('dashboard.company.project.invoice.paymentnotificationsave',['id' => $invoicetransaction->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
-                                {{-- <div class="col-md-12"> --}}
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>เลขที่เอกสาร</label>
-                                            <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="เลขที่เอกสาร" class="form-control form-control-lg" readonly>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>เลขที่เอกสาร</label>
+                                        <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="เลขที่เอกสาร" class="form-control form-control-lg" readonly>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>จำนวนเงิน<span class="text-danger">*</span></label>
-                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control form-control-lg">
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>จำนวนเงิน<span class="text-danger">*</span></label>
+                                        <input type="text"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control form-control-lg numeralformat10">
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>จ่ายผ่านธนาคาร<span class="text-danger">*</span></label>
-                                            <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-lg form-control-select2">
-                                                @foreach ($banks as $bank)
-                                                    <option value="{{$bank->id}}" 
-                                                      @if ($bank->id == $invoicetransaction->bank_id ) selected @endif >{{$bank->name}}</option> 
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>จ่ายผ่านธนาคาร<span class="text-danger">*</span></label>
+                                        <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($banks as $bank)
+                                                <option value="{{$bank->id}}" 
+                                                    @if ($bank->id == $invoicetransaction->bank_id ) selected @endif >{{$bank->name}}</option> 
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>วันที่<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่" class="form-control form-control-lg">
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>วันที่<span class="text-danger">*</span></label>
+                                        <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่" class="form-control form-control-lg">
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
-                                            <input type="text"  name="paymenttime" value="" placeholder="เวลา" class="form-control form-control-lg">
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
+                                        <input type="text"  name="paymenttime" value="" placeholder="เวลา" class="form-control form-control-lg timeformat">
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>เอกสารการจ่ายเงิน</label>
-                                            <div class="input-group">													
-                                                <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="เอกสารการจ่ายเงิน"  >
-                                                <span class="input-group-append">
-                                                    <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด</button>																																						
-                                                </span>
-                                            </div>
-                                            <input type="file" style="display:none;" id="file" name="file" accept="application/pdf"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>เอกสารการจ่ายเงิน</label>
+                                        <div class="input-group">													
+                                            <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="เอกสารการจ่ายเงิน"  >
+                                            <span class="input-group-append">
+                                                <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด</button>																																						
+                                            </span>
                                         </div>
+                                        <input type="file" style="display:none;" id="file" name="file" accept="application/pdf"/>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">เพิ่มเติม</label>
-                                            <textarea name="note" class="form-control form-control-lg" cols="3" rows="6">{{$invoicetransaction->note}}</textarea>
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">เพิ่มเติม</label>
+                                        <textarea name="note" class="form-control form-control-lg stringformat200" cols="3" rows="6">{{$invoicetransaction->note}}</textarea>
                                     </div>
-                                {{-- </div> --}}
+                                </div>
                             </div>
                             @if ($invoicetransaction->status == 1)
                                 <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             @endif
-
                         </form>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
-        <!-- /form layouts -->
     </div>
-    <!-- /content area -->
+
 @endsection
 @section('pageScript')
-<script>
-    $('#paymentdate').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        clearButton: true,
-        cancelText: "ยกเลิก",
-        okText: "ตกลง",
-        clearText: "เคลียร์",
-        time: false
-    });
-    $("#file").on('change', function() {
-        $("#filename").val(this.value);
-    });
-</script>
+    <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+    <script>
+        $('#paymentdate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+        });
+        $("#file").on('change', function() {
+            $("#filename").val(this.value);
+        });
+        function confirmsubmit(e) {
+            e.preventDefault();
+            var frm = e.target.form;
+            Swal.fire({
+                    title: 'ยืนยัน',
+                    text: `ต้องการยืนยันการชำระเงินหรือไม่? `,
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'บันทึก',
+                    cancelButtonText: 'ยกเลิก',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                if (result.value) {
+                    frm.submit();
+                }
+            });
+        }
+    </script>
 @stop

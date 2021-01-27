@@ -158,47 +158,19 @@
         };
         $(document).ready(function() {
             $('#management').summernote({
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ],
+                toolbar:false,
                 height: 300,
             });
             $('#technoandinnovation').summernote({
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ],
+                toolbar:false,
                 height: 300,
             });
             $('#marketability').summernote({
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ],
+                toolbar:false,
                 height: 300,
             });
             $('#businessprospect').summernote({
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ],
+                toolbar:false,
                 height: 300,
             });
         });

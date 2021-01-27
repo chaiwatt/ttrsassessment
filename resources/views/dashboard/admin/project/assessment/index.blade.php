@@ -49,9 +49,6 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ประเมินโครงการ</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -59,7 +56,6 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th>วันที่ส่งขอประเมิน</th>  --}}
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
@@ -68,19 +64,22 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
+                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 )
                                             <tr>    
-                                                {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                                 <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                                 <td> {{$fulltbp->minitbp->project}} </td>  
                                                 <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
                                                 <td> 
-                                                    @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
-                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-success">ส่งแล้ว</a>
+                                                    @if (!Empty($fulltbp->finalassessmentdate))
+                                                            @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
+                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-success">ส่งแล้ว</a>
+                                                                @else
+                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
+                                                            @endif
                                                         @else
-                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
+                                                            <span class="badge badge-flat border-warning text-warning-600">รอยืนยัน</span>
                                                     @endif
-                                                    
+
                                                 </td>                                
                                             </tr>
                                         @endif
@@ -92,7 +91,6 @@
                 </div>
             </div>
         </div>
-        <!-- /form layouts -->
     </div>
     <!-- /content area -->
 @endsection

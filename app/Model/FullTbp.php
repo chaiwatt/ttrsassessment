@@ -35,6 +35,7 @@ use App\Model\FullTbpMarketAnalysis;
 use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
 use App\Model\FullTbpResponsiblePerson;
+use App\Model\ProjectStatusTransaction;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Model\FullTbpProjectTechDevLevel;
@@ -251,7 +252,15 @@ class FullTbp extends Model
     public function getProjectgradeAttribute(){
         return ProjectGrade::where('full_tbp_id',$this->id)->first();
     }
-    
+    public function Projectstatustransaction($flowid){
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $check = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',$flowid)->first();
+        if(Empty($check)){
+            return null;
+        }else{
+            return $check;
+        }
+    }
 }
 
 

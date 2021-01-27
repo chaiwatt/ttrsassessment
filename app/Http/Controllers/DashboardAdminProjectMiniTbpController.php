@@ -158,6 +158,8 @@ class DashboardAdminProjectMiniTbpController extends Controller
                 $projectstatustransaction->mini_tbp_id = $minitbp->id;
                 $projectstatustransaction->project_flow_id = 3;
                 $projectstatustransaction->save();
+
+                DateConversion::addExtraDay($minitbp->id,2);
             }
             
         }else{

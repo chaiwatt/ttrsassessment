@@ -64,31 +64,31 @@
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>รหัสลูกค้า/Customer ID</label>
-                                        <input type="text"  name="customer" value="{{$invoicetransaction->customer}}"  placeholder="รหัสลูกค้า/Customer ID" class="form-control form-control-lg">
+                                        <input type="text"  name="customer" value="{{$invoicetransaction->customer}}"  placeholder="รหัสลูกค้า/Customer ID" class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่เอกสาร/Document No.</label>
-                                        <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="เลขที่เอกสาร/Document No." class="form-control form-control-lg">
+                                        <input type="text"  name="docno" value="{{$invoicetransaction->docno}}"  placeholder="เลขที่เอกสาร/Document No." class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่ใบเสนอราคา/Quotation No.</label>
-                                        <input type="text" name="quotationno" value="{{$invoicetransaction->quotationno}}"  placeholder="เลขที่ใบเสนอราคา/Quotation No." class="form-control form-control-lg">
+                                        <input type="text" name="quotationno" value="{{$invoicetransaction->quotationno}}"  placeholder="เลขที่ใบเสนอราคา/Quotation No." class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่ใบสั่งซื้อ/Purchase Order No.</label>
-                                        <input type="text"  name="purchaseorderno" value="{{$invoicetransaction->purchaseorderno}}"  placeholder="เลขที่ใบสั่งซื้อ/Purchase Order No." class="form-control form-control-lg">
+                                        <input type="text"  name="purchaseorderno" value="{{$invoicetransaction->purchaseorderno}}"  placeholder="เลขที่ใบสั่งซื้อ/Purchase Order No." class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่ใบสั่งขาย/Sale Order No.</label>
-                                        <input type="text"  name="saleorderno" value="{{$invoicetransaction->saleorderno}}"  placeholder="เลขที่ใบสั่งขาย/Sale Order No." class="form-control form-control-lg">
+                                        <input type="text"  name="saleorderno" value="{{$invoicetransaction->saleorderno}}"  placeholder="เลขที่ใบสั่งขาย/Sale Order No." class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
@@ -100,43 +100,43 @@
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>เลขที่เอกสารอ้างอิง/Reference No.</label>
-                                        <input type="text"  name="refno" value="{{$invoicetransaction->refno}}"  placeholder="เลขที่เอกสารอ้างอิง/Reference No." class="form-control form-control-lg">
+                                        <input type="text"  name="refno" value="{{$invoicetransaction->refno}}"  placeholder="เลขที่เอกสารอ้างอิง/Reference No." class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>รายการ/Description</label>
-                                        <input type="text"  name="description" value="{{$invoicetransaction->description}}"  placeholder="รายการ/Description" class="form-control form-control-lg">
+                                        <input type="text"  name="description" value="{{$invoicetransaction->description}}"  placeholder="รายการ/Description" class="form-control form-control-lg stringformat200">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>จำนวนเงิน/Amount (THB)</label>
-                                        <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน/Amount (THB)" class="form-control form-control-lg">
+                                        <input type="text"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน/Amount (THB)" class="form-control form-control-lg numeralformat10">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Biller ID</label>
-                                        <input type="text"  name="billerid" value="{{$invoicetransaction->billerid}}"  placeholder="Biller ID" class="form-control form-control-lg">
+                                        <input type="text"  name="billerid" value="{{$invoicetransaction->billerid}}"  placeholder="Biller ID" class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Branch ID</label>
-                                        <input type="text"  name="branchid" value="{{$invoicetransaction->branchid}}"  placeholder="Branch ID" class="form-control form-control-lg">
+                                        <input type="text"  name="branchid" value="{{$invoicetransaction->branchid}}"  placeholder="Branch ID" class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Service Code</label>
-                                        <input type="text"  name="servicecode" value="{{$invoicetransaction->servicecode}}"  placeholder="Service Code" class="form-control form-control-lg">
+                                        <input type="text"  name="servicecode" value="{{$invoicetransaction->servicecode}}"  placeholder="Service Code" class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>Comp Code</label>
-                                        <input type="text"  name="compcode" value="{{$invoicetransaction->compcode}}"  placeholder="Comp Code" class="form-control form-control-lg">
+                                        <input type="text"  name="compcode" value="{{$invoicetransaction->compcode}}"  placeholder="Comp Code" class="form-control form-control-lg stringformat30">
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +156,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 	<script>
         $('#saleorderdate').bootstrapMaterialDatePicker({
             format: 'DD/MM/YYYY',

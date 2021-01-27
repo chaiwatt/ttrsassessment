@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use App\Model\Company;
+use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Model\ThaiBank;
@@ -16,7 +17,9 @@ use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\InvoiceTransaction;
 use App\Model\NotificationBubble;
+use App\Helper\ThaiNumericConverter;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 use setasign\Fpdi\PdfParser\StreamReader;
 
 class DashboardAdminProjectInvoiceController extends Controller
@@ -166,7 +169,7 @@ class DashboardAdminProjectInvoiceController extends Controller
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>';
         $alertmessage->save();
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบรายการใบแจ้งหนี้','เรียนผู้ขอรับการประเมิน<br> กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบรายการใบแจ้งหนี้','เรียนผู้ขอรับการประเมิน<br><br> กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         Message::sendMessage('กรุณาตรวจสอบรายการใบแจ้งหนี้','กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
         
         InvoiceTransaction::find($request->id)->update([
@@ -187,6 +190,7 @@ class DashboardAdminProjectInvoiceController extends Controller
         $company = Company::find($invoicetransaction->company_id);
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
         $auth = Auth::user();
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $businessplan->id;
@@ -202,7 +206,7 @@ class DashboardAdminProjectInvoiceController extends Controller
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ยืนยันการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>';
         $alertmessage->save();
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:ยืนยันการชำระเงิน','เรียนผู้ขอรับการประเมิน<br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($company->user_id)->email,'TTRS:ยืนยันการชำระเงิน','เรียนผู้ขอรับการประเมิน<br><br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         Message::sendMessage('ยืนยันการชำระเงิน','ยืนยันการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
         
         InvoiceTransaction::find($id)->update([
@@ -211,6 +215,21 @@ class DashboardAdminProjectInvoiceController extends Controller
         BusinessPlan::where('company_id',$company->id)->first()->update([
             'business_plan_status_id' => 9
           ]);
+
+        $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',6)->first();
+        if($projectstatustransaction->status == 1){
+            $projectstatustransaction->update([
+                'status' => 2
+            ]);
+            $projectstatustransaction = new ProjectStatusTransaction();
+            $projectstatustransaction->mini_tbp_id = $minitbp->id;
+            $projectstatustransaction->project_flow_id = 7;
+            $projectstatustransaction->save();
+
+            $mailbody  ="เรียน คุณ".$fulltbp->fulltbpresponsibleperson->name ." ".$fulltbp->fulltbpresponsibleperson->lastname . " กรรมการผู้จัดการ บริษัท ". $fulltbp->minitbp->businessplan->company->name ."<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการเลขที่ " . ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code) . " เรื่อง" .$fulltbp->minitbp->project ." ของ บริษัท" . $fulltbp->minitbp->businessplan->company->name . " ความละเอียดทราบแล้วนั้น บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่งได้คะแนน " .ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')) . " คะแนน จากคะแนนเต็ม " .ThaiNumericConverter::toThaiNumeric('100') ." คะแนนคิดเป็นเกรดระดับ " . $fulltbp->projectgrade->grade ." โดยสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ จะจัดส่งหนังสือแจ้งผลการประเมินอย่างเป็นทางการในลำดับถัดไป";
+            EmailBox::send(User::find($company->user_id)->email,'TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            DateConversion::addExtraDay($minitbp->id,6);
+        }  
         return redirect()->route('dashboard.admin.project.invoice')->withSuccess('ยืนยันรายการสำเร็จ');
     }
 }

@@ -33,7 +33,7 @@ class CalendarController extends Controller
         if($businessplan->business_plan_status_id >= 6 && $fulltbp->assignexpert == 2 && $ev->status == 4){
             $flownothree = 2;
         }
-        $calendartypes = CalendarType::get();
+        $calendartypes = CalendarType::where('id',3)->get();
         $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id','>=',4)->count();
         if($projectstatustransactions == 1){
             $calendartypes = CalendarType::where('id','<=',2)->get();

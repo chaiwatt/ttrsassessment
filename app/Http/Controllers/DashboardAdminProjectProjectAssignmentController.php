@@ -107,6 +107,9 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
             $projectstatustransaction->mini_tbp_id = $minitbp->id;
             $projectstatustransaction->project_flow_id = 2;
             $projectstatustransaction->save();
+
+            DateConversion::addExtraDay($minitbp->id,1);
+
         }
 
         return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('การมอบหมายสำเร็จ');

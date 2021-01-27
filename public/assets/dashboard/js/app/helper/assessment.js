@@ -19,4 +19,5 @@ function addAssessment(companyid,status){
       })
 }
 
+
 export {addAssessment}

@@ -1,4 +1,10 @@
 $(function() {
+    $('.timeformat').toArray().forEach(function(field){
+        new Cleave(field, {
+            time: true,
+            timePattern: ['h', 'm']
+        })
+    });	
     $('.numeralformat2').toArray().forEach(function(field){
         new Cleave(field, {
             numeral: true,

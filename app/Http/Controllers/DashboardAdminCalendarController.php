@@ -91,7 +91,18 @@ class DashboardAdminCalendarController extends Controller
           $eventcalendarattendee->user_id = $_user->id;
           $eventcalendarattendee->save();
       }
-      EmailBox::send($mails,'TTRS:นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+      $fulltbp = FullTbp::find($request->fulltbp);
+      $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+      $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+      $company = Company::find($businessplan->company_id);
+
+      $messageheader = "นัดหมายการประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      if ($request->calendartype == 1) {
+        $messageheader = "นัดหมายการประชุมและ briefing ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      }else if ($request->calendartype == 1){
+        $messageheader = "นัดหมายการประชุมและรายละเอียดการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      }
+      EmailBox::send($mails,'TTRS:'.$messageheader,'เรียนท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
       '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
       '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
       '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
@@ -99,12 +110,11 @@ class DashboardAdminCalendarController extends Controller
       '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
       '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
       '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-      $fulltbp = FullTbp::find($request->fulltbp);
-      $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+
 
       foreach($request->users as $user){
           $_user = User::find($user);
-          Message::sendMessage('นัดหมายการประชุม','เรียนท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
+          Message::sendMessage($messageheader,'เรียนท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมายระบบ TTRS มีรายละเอียดดังนี้' .
           '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
           '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
           '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
@@ -116,7 +126,7 @@ class DashboardAdminCalendarController extends Controller
           $alertmessage = new AlertMessage();
           $alertmessage->user_id = $auth->id;
           $alertmessage->target_user_id = $_user->id;
-          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายการประชุมสำหรับโครงการ'.$minitbp->project;
+          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $messageheader. ' โครงการ'.$minitbp->project;
           $alertmessage->save();
     
           $notificationbubble = new NotificationBubble();
@@ -129,9 +139,6 @@ class DashboardAdminCalendarController extends Controller
       }
 
       if ($request->calendartype == 2) {
-        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
-        $company = Company::find($businessplan->company_id);
-
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $company->user_id;

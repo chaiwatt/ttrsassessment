@@ -26,6 +26,7 @@ use App\Model\CriteriaTransaction;
 use App\Model\SummaryExpertPercent;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ExtraCriteriaTransaction;
+use App\Model\ProjectStatusTransaction;
 
 class DashboardAdminAssessmentController extends Controller
 {
@@ -328,6 +329,7 @@ class DashboardAdminAssessmentController extends Controller
                                     ->first()->update([
                                         'score' => $criteria['value']
                                     ]); 
+
     
                 }elseif($criteria['scoretype'] == 2){
                     $scores = Scoring::where('ev_id',$criteria['evid'])
@@ -426,6 +428,20 @@ class DashboardAdminAssessmentController extends Controller
             $summaryexpertpercent->percent = GetEvPercent::getEvPercent($projectmember->user_id,$ev->full_tbp_id); 
             $summaryexpertpercent->save();
         }
+
+        $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();
+        if($projectstatustransaction->status == 1){
+            $projectstatustransaction->update([
+                'status' => 2
+            ]);
+            $projectstatustransaction = new ProjectStatusTransaction();
+            $projectstatustransaction->mini_tbp_id = $minitbp->id;
+            $projectstatustransaction->project_flow_id = 6;
+            $projectstatustransaction->save();
+
+            DateConversion::addExtraDay($minitbp->id,5);
+        }
+
     }
 
     public function Summary($id){

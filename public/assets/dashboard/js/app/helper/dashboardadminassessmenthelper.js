@@ -3,11 +3,7 @@ import * as Extra from './extra.js';
 var stepindex =0;
 $(function() {
     getEv($('#evid').val()).then(data => {
-        // console.log(data);
-        // return;
         RenderTable(data);
-        // RenderTable(data,2);
-        // 
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         RenderExtraTable(data.extracriteriatransactions);
@@ -43,31 +39,7 @@ function getEv(evid){
    function RenderTable(data){
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {
-            // if(criteria.ev_type_id == evtype){
-                // var textvalue = '';
-                // var checkvalue = '';
                 var comment = '';
-                // var raw = 0;
-                // if(criteria.scoring != null){
-                //     if(criteria.scoring['comment'] != null){comment = criteria.scoring['comment'];}
-                //     if(criteria.scoring['scoretype'] == 1){
-                //         textvalue = criteria.scoring['score'];
-                //         if(textvalue == 'A'){
-                //             raw = 5;
-                //         }else if(textvalue == 'B'){
-                //             raw = 4;
-                //         }else if(textvalue == 'C'){
-                //             raw = 3;
-                //         }else if(textvalue == 'D'){
-                //             raw = 2;
-                //         }else if(textvalue == 'E'){
-                //             raw = 1;
-                //         }
-                //     }else if(criteria.scoring['scoretype'] == 2){
-                //         checkvalue = "checked";
-                //     }
-                // }
-        
                 var criterianame = `<label>กรอกเกรด (A - E) <a href="#" data-toggle="modal" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
                                 <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring gradescore">
                                     `;
@@ -78,14 +50,6 @@ function getEv(evid){
                                         ${criteria.criteria['name']} <a href="#" data-toggle="modal" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
                                     </label>`;
                 }
-                // var indexpercent = (data.evportions.find(x => x.id === 1)['percent'])/100;
-                // var pillarpercent = (data.pillars.find(x => x.id === criteria.pillar['id'])['percent'])/100;
-                // var check = data.pillaindexweigths.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-                // var pillarweight = 0;
-                // if ( typeof(check) !== "undefined" && check !== null ) {
-                //     pillarweight = check['weigth'];
-                // }
-                // var weightsum = raw*indexpercent*pillarpercent*pillarweight;
         
                 criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
                                     <label><i>ความเห็น</i></label>
@@ -93,48 +57,15 @@ function getEv(evid){
                                     </div>
                                 </div>`;
         
-                // var _scores = data.scores.filter(x => x.sub_pillar_index_id === criteria.subpillarindex['id']); 
-                // const numcheck = _scores.map(item => item.score).reduce((prev, curr) => parseInt(prev) + parseInt(curr), 0);
-                // console.log(numcheck)
-                // if(_scores.length > 0){
-                //     var checklistgrading = data.checklistgradings.find(x => x.sub_pillar_index_id === criteria.subpillarindex['id']);
-                //     var grades = [checklistgrading['gradea'], checklistgrading['gradeb'], checklistgrading['gradec'], checklistgrading['graded'],checklistgrading['gradee']];
-                //     let gradeis = 0;
-                //     for (let i = 0; i < grades.length; i++) {
-                //         if(numcheck >= grades[i]){
-                //             gradeis = i;
-                //             break;
-                //         }
-                //     } 
-                //     if(gradeis == 0){
-                //         weightsum = 5*indexpercent*pillarpercent*pillarweight;
-                //     }else if(gradeis == 1){
-                //         weightsum = 4*indexpercent*pillarpercent*pillarweight;
-                //     }else if(gradeis == 2){
-                //         weightsum = 3*indexpercent*pillarpercent*pillarweight;
-                //     }else if(gradeis == 3){
-                //         weightsum = 2*indexpercent*pillarpercent*pillarweight;
-                //     }else if(gradeis == 4){
-                //         weightsum = 1*indexpercent*pillarpercent*pillarweight;
-                //     }
-                // }
-        
                 html += `<tr > 
                 <td> ${criteria.pillar['name']}</td>                                            
                 <td> ${criteria.subpillar['name']}</td>    
                 <td> ${criteria.subpillarindex['name']}</td>   
-                <td> ${criterianame} </td>     
-                                            
+                <td> ${criterianame} </td>                              
                 </tr>`
-            // }
         });
-    // }
-    // if(evtype == 1){
         $("#criteria_transaction_wrapper_tr").html(html);
-    // }else if(evtype == 2){
-    //     $("#extra_criteria_transaction_wrapper_tr").html(html);
-    // }
-    
+
 }
 
 function RenderExtraTable(data){
@@ -450,8 +381,6 @@ $('.step-evweight').steps({
                 value: val
               } 
         }).get();
-
-        // return conflictextraarray;
         
         $("#spinicon").attr("hidden",false);
         updateScore(conflictarray,conflictextraarray,$('#evid').val()).then(data => {

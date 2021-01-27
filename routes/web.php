@@ -34,6 +34,10 @@ Auth::routes();
 // Route::group(['prefix' => 'invoice'], function(){
 //     Route::get('','DashboardCompanyInvoiceController@SampleInvoice')->name('dashboard.company.project.voice');           
 // }); 
+
+Route::get('test/dailycheck', 'TestController@DailyFlowCheck')->name('test.dailycheck');
+Route::get('test/testadd', 'TestController@TestAdd')->name('test.testadd');
+
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
@@ -221,6 +225,7 @@ Route::group(['middleware' => 'auth'], function(){
         });
         Route::group(['prefix' => 'assessment'], function(){
             Route::post('add','Api\AssessmentController@Add')->name('api.assessment.add');     
+            Route::post('lettersent','Api\AssessmentController@LetterSent')->name('api.assessment.lettersent');  
             Route::group(['prefix' => 'cluster'], function(){
                 Route::post('get','Api\AssessmentClusterController@Get')->name('api.assessment.ev.get');          
             });  
