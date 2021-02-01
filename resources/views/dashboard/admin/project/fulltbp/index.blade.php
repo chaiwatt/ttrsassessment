@@ -54,13 +54,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แก้ไขคณะกรรมการ</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แก้ไขทีมผู้เชี่ยวชาญการประเมิน</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" >
-                            <label>เลือกคณะกรรมการจากผู้ใช้</label>
+                            <label>เลือกผู้เชี่ยวชาญ</label>
                             <div class="form-group header-elements-md-inline">
                                 <select name="usermember" id="usermember" data-placeholder="เลือกคณะกรรมการจากผู้ใช้" class="form-control form-control-lg form-control-select2">
                                 </select> 
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    คณะกรรมการปัจจุบัน
+                    ทีมผู้เชี่ยวชาญการประเมิน
                     <div class="row">
                         <div class="col-md-12" >
                             <div class="table-responsive">
@@ -169,6 +169,25 @@
                 </div>
             </div>
         </div>
+            {{-- modal_show_controlflow --}}
+    <div id="modal_show_controlflow" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Control Flow</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="text" id="minitbpid" hidden>
+                        <div class="col-md-12" id="flowlist_wrapper">
+
+                        </div>
+                    </div>
+                </div>           
+            </div>
+        </div>
+    </div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
@@ -242,7 +261,10 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>    
-                                                <td> {{$fulltbp->minitbp->project}} </td>  
+                                                <td> 
+                                                    <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
+                                                    {{$fulltbp->minitbp->project}} 
+                                                </td>  
                                                 <td>    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
                                                             <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
@@ -250,7 +272,8 @@
                                                             @if ($fulltbp->refixstatus == 0)
                                                                     <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                                 @elseif($fulltbp->refixstatus == 1)
-                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ส่งคืนแก้ไข</a>
+                                                                    {{-- <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
+                                                                    <span class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</span>
                                                                 @elseif($fulltbp->refixstatus == 2)
                                                                     <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                             @endif       
@@ -365,6 +388,7 @@
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

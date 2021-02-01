@@ -76,7 +76,25 @@
                 </div>
             </div>
         </div>
-
+            {{-- modal_show_controlflow --}}
+            <div id="modal_show_controlflow" class="modal fade" style="overflow:hidden;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Control Flow</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <input type="text" id="minitbpid" hidden>
+                                <div class="col-md-12" id="flowlist_wrapper">
+        
+                                </div>
+                            </div>
+                        </div>           
+                    </div>
+                </div>
+            </div>
     <!-- Page header -->
     <div class="page-header page-header-light">  
         <div class="page-header-content header-elements-md-inline">
@@ -145,7 +163,10 @@
                                 <tbody>
                                     @foreach ($minitbps as $key => $minitbp)
                                     <tr>    
-                                        <td> {{$minitbp->project}} </td>  
+                                        <td> 
+                                            <a href="#" data-toggle="modal" data-id="{{$minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
+                                            {{$minitbp->project}} 
+                                        </td>  
                                         <td> {{$minitbp->businessplan->company->name}} </td> 
                                         <td> 
                                             @if (Empty($minitbp->jdmessage))
@@ -193,6 +214,7 @@
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approveminitbphelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

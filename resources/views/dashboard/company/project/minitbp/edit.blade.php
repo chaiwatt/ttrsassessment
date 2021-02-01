@@ -103,8 +103,7 @@
         <div class="row">
             <div class="col-md-12">
 				<!-- Colors -->
-            	<div class="card">
-
+            	<div class="card border-top-info rounded-top-0">
                 	<div class="card-body">
 						<form id="frmminitbp" method="POST" class="wizard-form step-minitbp" action="" data-fouc>
 							@csrf

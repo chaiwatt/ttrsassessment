@@ -606,14 +606,6 @@ $(document).on('keyup', '.projectechdevproblemclass', function(e) {
     $('#projectechdevproblemtextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-// $(document).on('keyup', '#projectechdevproblem_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="projectechdevproblem[]" value="${$(this).val()}" class="form-control projectechdevproblemclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_projectechdevproblem_wrapper').append(html);
-//     }
-// });
-
 $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     var lines = $('input[name="projectechdevproblem[]"]').map(function(){ 
         return this.value; 
@@ -761,7 +753,6 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
         if (result.value) {
             Project.deleteCertifyAttachement($(this).data('id')).then(data => {
                 var html = ``;
-                // console.log(data);
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
@@ -973,24 +964,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
 $(document).on('click', '.editprojectplan', function(e) {
     $('#projectplan').val($(this).data('id'));
     Project.getPlan($(this).data('id')).then(data => {
-        $('#plandetail_edit').val(data.fulltbpprojecplan['name']);
-        // var html = ``;
-        // var minmonth = parseInt(data.minmonth);
-        // var maxmonth = parseInt(data.maxmonth);
-        // for (var k = minmonth; k <= maxmonth; k++) {
-        //     var check = ``;
-        //     if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k) != -1){
-        //         var check = `checked`;
-        //     }
-        //         html += `<div class="custom-control custom-checkbox custom-control-inline">
-        //                 <input type="checkbox" name="plans[]" value="${k}" class="custom-control-input checkboxplane_dit" id="checkboxedit${k}" ${check} >
-        //                 <label class="custom-control-label" for="checkboxedit${k}">${k}</label>
-        //             </div>`
-        // }
-        //  $("#monthplan").html(html);
-
-        console.log(data.fulltbpprojectplantransactions);
-        
+        $('#plandetail_edit').val(data.fulltbpprojecplan['name']);  
          var html = ``;
          var chkindex = 0;
          for (let item = 0; item < 3; item++) {
@@ -1013,15 +987,7 @@ $(document).on('click', '.editprojectplan', function(e) {
                  }
              html += `</div></div>`
          }
-         
-
          $("#monthplan").html(html);
-
-
-
-
-
-
     })
     .catch(error => {})
     $('#modal_edit_projectplan').modal('show');
@@ -1159,15 +1125,6 @@ $(document).on('keyup', '.marketneedclass', function(e) {
     $('#marketneedtextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-
-// $(document).on('keyup', '#marketneed_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="marketneed[]" value="${$(this).val()}" class="form-control marketneedclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_marketneed_wrapper').append(html);
-//     }
-// });
-
 $(document).on('click', '#btnaddmarketneed', function(e) {
     var lines = $('input[name="marketneed[]"]').map(function(){ 
         return this.value; 
@@ -1185,14 +1142,6 @@ $(document).on('click', '#btnaddmarketneed', function(e) {
 $(document).on('keyup', '.marketsizeclass', function(e) {
     $('#marketsizetextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
-
-// $(document).on('keyup', '#marketsize_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="marketsize[]" value="${$(this).val()}" class="form-control marketsizeclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_marketsize_wrapper').append(html);
-//     }
-// });
 
 $(document).on('click', '#btnaddmarketsize', function(e) {
     var lines = $('input[name="marketsize[]"]').map(function(){ 
@@ -1212,14 +1161,6 @@ $(document).on('keyup', '.marketshareclass', function(e) {
     $('#marketsharetextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-// $(document).on('keyup', '#marketshare_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="marketshare[]" value="${$(this).val()}" class="form-control marketshareclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_marketshare_wrapper').append(html);
-//     }
-// });
-
 $(document).on('click', '#btnaddmarketshare', function(e) {
     var lines = $('input[name="marketshare[]"]').map(function(){ 
         return this.value; 
@@ -1237,14 +1178,6 @@ $(document).on('click', '#btnaddmarketshare', function(e) {
 $(document).on('keyup', '.marketcompetitiveclass', function(e) {
     $('#marketcompetitivetextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
-
-// $(document).on('keyup', '#marketcompetitive_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="marketcompetitive[]" value="${$(this).val()}" class="form-control marketcompetitiveclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_marketcompetitive_wrapper').append(html);
-//     }
-// });
 
 $(document).on('click', '#btnaddmarketcompetitive', function(e) {
     var lines = $('input[name="marketcompetitive[]"]').map(function(){ 

@@ -12,9 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminReportDetailController extends Controller
 {
+    // public function __construct() 
+    // { 
+    //     $this->middleware(['auth', 'verified']);
+    //     $this->middleware('role:3,4,5,6'); 
+    // }
     public function View($id){
         $check = ProjectMember::where('user_id',Auth::user()->id)->first();
-        return  $check ;
+        // return  $check ;
         if(Empty($check)){
             return redirect()->back();
         }

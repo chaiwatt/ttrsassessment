@@ -35,8 +35,8 @@ Auth::routes();
 //     Route::get('','DashboardCompanyInvoiceController@SampleInvoice')->name('dashboard.company.project.voice');           
 // }); 
 
-Route::get('test/dailycheck', 'TestController@DailyFlowCheck')->name('test.dailycheck');
-Route::get('test/testadd', 'TestController@TestAdd')->name('test.testadd');
+// Route::get('test/dailycheck', 'TestController@DailyFlowCheck')->name('test.dailycheck');
+// Route::get('test/testadd', 'TestController@TestAdd')->name('test.testadd');
 
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
@@ -68,6 +68,9 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'controlflow'], function(){
+        Route::post('get','Api\ControlFlow@Get')->name('api.controlflow.get');            
+    }); 
     Route::group(['prefix' => 'report'], function(){
         Route::group(['prefix' => 'chart'], function(){
             Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');            
@@ -472,7 +475,7 @@ Route::group(['middleware' => 'auth'], function(){
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
-        Route::group(['prefix' => 'admin'], function(){
+        Route::group(['prefix' => 'admin', 'middleware' => ('role:3,4,5,6')], function(){
             Route::group(['prefix' => 'search'], function(){
                 Route::group(['prefix' => 'project'], function(){
                     Route::get('','DashboardAdminSearchProjectController@Index')->name('dashboard.admin.search.project');
@@ -683,7 +686,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('reject/{id}','DashboardExpertReportController@Reject')->name('dashboard.expert.report.reject'); 
             });    
         }); 
-        Route::group(['prefix' => 'company'], function(){
+        Route::group(['prefix' => 'company', 'middleware' => ('role:1,2')], function(){
             Route::group(['prefix' => 'report'], function(){
                 Route::get('','DashboardCompanyReportController@Index')->name('dashboard.company.report');    
                 Route::post('getevent','DashboardCompanyReportController@GetEvent')->name('dashboard.company.report.getevent');         

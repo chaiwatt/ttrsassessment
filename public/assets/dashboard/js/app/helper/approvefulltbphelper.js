@@ -19,18 +19,42 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
   if(check == 2 && $('#note').val() == ''){
       return ;
   }
-    $('#modal_edit_fulltbp').modal('hide');
-    $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
-    FullTbp.editApprove($('#fulltbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
-        var html = ``;
-        window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
-   }).catch(error => {})
+    if(check == 1){
+      Swal.fire({
+        title: 'ยืนยัน!',
+        text: `ต้องการอนุมัติ Full TBP หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+          $('#modal_edit_fulltbp').modal('hide');
+          $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
+          FullTbp.editApprove($('#fulltbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
+                var html = ``;
+                window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
+          }).catch(error => {})
+        }
+    });
+    }else if(check == 2){
+      $('#modal_edit_fulltbp').modal('hide');
+      $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
+      FullTbp.editApprove($('#fulltbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
+          var html = ``;
+          window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
+    }).catch(error => {})
+    }
+
+
 });
 
 $(document).on('click', '.projectmember', function(e) {
     $('#fulltbpid').val($(this).data('id'));
     getUsers($(this).data('id')).then(data => {
-        console.log(data);
         var html =``;
         var html1 =``;
         data.users.forEach(function (user,index) {
@@ -72,9 +96,7 @@ function getUsers(id){
 }
 
 $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
-    console.log($(this).val());
     addProjectMember($('#fulltbpid').val(),$('#usermember').val()).then(data => {
-        console.log(data);
         var html =``;
         var html1 =``;
         data.users.forEach(function (user,index) {
@@ -118,7 +140,6 @@ function addProjectMember(fulltbpid,userid){
 
 $(document).on('click', '.deleteprojectmember', function(e) {
     deleteProjectMember($(this).data('id'),$('#fulltbpid').val()).then(data => {
-        console.log(data);
         var html =``;
         var html1 =``;
         data.users.forEach(function (user,index) {
@@ -172,7 +193,6 @@ $(document).on('click', '#btn_modal_mailto_user', function(e) {
     $("#userspinicon").attr("hidden",false);
     SendMailUser($('#fulltbpid').val(),$('#topic').val(),$('#messagebody').val()).then(data => {
         $("#userspinicon").attr("hidden",true);
-        console.log(data);
         $('#modal_mailto_user').modal('hide');
     }).catch(error => {})
 });
@@ -218,7 +238,6 @@ $(document).on('click', '#btn_modal_mailto_member', function(e) {
   $("#memberspinicon").attr("hidden",false);
   SendMailMember($('#fulltbpid').val(),users,$('#topicmember').val(),$('#messagebodymember').val()).then(data => {
       $("#memberspinicon").attr("hidden",true);
-      console.log(data);
       $('#modal_mailto_member').modal('hide');
   }).catch(error => {})
 });

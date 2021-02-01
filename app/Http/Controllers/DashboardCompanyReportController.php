@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardCompanyReportController extends Controller
 {
-    public function __construct() 
-    { 
-        $this->middleware(['auth', 'verified']);
-        // $this->middleware('role:1,2'); 
-    }
     public function Index(){
         $auth = Auth::user();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();

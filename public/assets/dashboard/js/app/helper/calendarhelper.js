@@ -32,9 +32,9 @@ function Participate(id){
             var yearth = parseInt(orgdate[0])+543;
             var thaidate = orgdate[2] +'/'+ orgdate[1] +'/'+ yearth
             if(data.projectstatus.project_flow_id == 4){
-                $("#toastmessage").html(`โครงการ${$("#fulltbp option:selected").text()} มีกำหนดเสร็จสิ้น <span class="badge bg-success" style="font-size:16px">การประเมิน ณ สถานประกอบการ</span> ในวันที่ ${thaidate} (จำนวน ${data.projectstatus.duration} วัน ตาม Control flow) กรุณากำหนดปฏิทินให้อยู่ภายใน Control flow`);
+                $("#toastmessage").html(`โครงการ${$("#fulltbp option:selected").text()} มีกำหนดเสร็จสิ้น <span class="badge bg-success" style="font-size:16px">การประเมิน ณ สถานประกอบการ</span> ในวันที่ ${thaidate} (จำนวน ${data.projectstatus.duration} วัน ตาม Control Flow) กรุณากำหนดปฏิทินให้อยู่ภายใน Control Flow`);
             }else if(data.projectstatus.project_flow_id == 5){
-                $("#toastmessage").html(`โครงการ${$("#fulltbp option:selected").text()} มีกำหนดเสร็จสิ้น <span class="badge bg-success" style="font-size:16px">การลงคะแนนสรุปเกรด</span> ในวันที่ ${thaidate} (จำนวน ${data.projectstatus.duration} วัน ตาม Control flow) กรุณากำหนดปฏิทินให้อยู่ภายใน Control flow`);
+                $("#toastmessage").html(`โครงการ${$("#fulltbp option:selected").text()} มีกำหนดเสร็จสิ้น <span class="badge bg-success" style="font-size:16px">การลงคะแนนสรุปเกรด</span> ในวันที่ ${thaidate} (จำนวน ${data.projectstatus.duration} วัน ตาม Control Flow) กรุณากำหนดปฏิทินให้อยู่ภายใน Control Flow`);
             }
 
             $("#calendartype").html(html0);

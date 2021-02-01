@@ -82,7 +82,7 @@
                                         <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control form-control-lg" readonly></textarea>
                                     </div>
                                 </div>
-                                    {{-- <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkjoinmetting" data-id="" data-on-color="success" data-off-color="danger" data-on-text="เข้าร่วมแล้ว" data-off-text="ไม่เข้าร่วม" class="form-check-input-switch"  > --}}
+                                    
                                
                             </div>
                             <div class="col-md-12">
@@ -169,6 +169,26 @@
         </div>
     </div>
 </div>
+
+    {{-- modal_show_controlflow --}}
+    <div id="modal_show_controlflow" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Control Flow</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="text" id="minitbpid" hidden>
+                        <div class="col-md-12" id="flowlist_wrapper">
+
+                        </div>
+                    </div>
+                </div>           
+            </div>
+        </div>
+    </div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -330,6 +350,7 @@
                                     <tr> 
                                         {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                         <td> 
+                                            <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                             <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                         </td>  
                                         <td> 
@@ -476,6 +497,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
 <script>
     var route = {
         url: "{{ url('/') }}",

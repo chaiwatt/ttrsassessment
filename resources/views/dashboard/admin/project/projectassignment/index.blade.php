@@ -23,12 +23,30 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_jdmessage" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="userspinicon" hidden></i> เพิ่ม</button>
+                    <button id="btn_modal_add_jdmessage" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="userspinicon" hidden></i><span id="btnname">เพิ่ม</span> </button>
                 </div>
             </div>
         </div>
     </div>
+    {{-- modal_show_controlflow --}}
+    <div id="modal_show_controlflow" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Control Flow</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="text" id="minitbpid" hidden>
+                        <div class="col-md-12" id="flowlist_wrapper">
 
+                        </div>
+                    </div>
+                </div>           
+            </div>
+        </div>
+    </div>
     <div class="page-header page-header-light">
         
         <div class="page-header-content header-elements-md-inline">
@@ -96,7 +114,7 @@
                                     @foreach ($projectassignments as $key => $projectassignment)
                                     <tr>    
                                         <td> 
-                                            <a href="#" data-toggle="modal" data-id="{{$projectassignment->id}}" class="controlflowicon"><i class="icon-circle2 text-success mr-2"></i></a>
+                                            <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="text-info" target="_blank">{{$projectassignment->businessplan->minitbp->project}} </a>
                                         </td> 
                                         <td> 
@@ -152,6 +170,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
@@ -163,7 +182,9 @@
             getJdMessage($(this).data('id')).then(data => {
                 $('#messagebody').html(data.jdmessage);
                 $('#minitbpid').val($(this).data('id'));
-                
+                if(data.jdmessage !=  null){
+                    $('#btnname').html("แก้ไข");
+                }
                 $('#modal_add_jdmessage').modal('show');
             })
             .catch(error => {}) 

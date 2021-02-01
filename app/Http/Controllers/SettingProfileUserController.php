@@ -15,6 +15,7 @@ use App\Model\FullTbp;
 use App\Model\IsicSub;
 use App\Model\MiniTBP;
 use App\Model\Province;
+use App\Helper\EmailBox;
 use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
@@ -234,7 +235,6 @@ class SettingProfileUserController extends Controller
                 }
                 
                 $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
-
                 foreach ($sellstatus as $status) {
                     FullTbpSellStatus::create([
                         'full_tbp_id' => $fulltbp->id,
@@ -263,11 +263,10 @@ class SettingProfileUserController extends Controller
                         'costname' => $cost
                     ]);
                 }
-
                 $fulltbpreturnofinvestment = new FullTbpReturnOfInvestment();
                 $fulltbpreturnofinvestment->full_tbp_id = $fulltbp->id;
                 $fulltbpreturnofinvestment->save();
-                return redirect()->route('dashboard.company.project.minitbp.edit',['id'=>$minitbp->id])->withSuccess('บันทึกข้อมูลสำเร็จ สามารถกรอกแบบคำขอรับบริการประเมินขั้นในลำดับต่อไปได้'); 
+                return redirect()->route('dashboard.company.project.minitbp.edit',['id'=>$minitbp->id])->withSuccess('บันทึกข้อมูลสำเร็จ สามารถกรอกแบบคำขอรับบริการประเมินในลำดับต่อไปได้'); 
         }else{
             if($request->status == 1){
                 $businessplan->where('company_id',$company->id)->first()->update([
@@ -278,9 +277,8 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
+
             return redirect()->back()->withSuccess('แก้ไขข้อมูลสำเร็จ'); 
         }
-
-       
     }
 }

@@ -179,7 +179,7 @@ $(document).on('click', '.assingexpert', function(e) {
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
-    confirmButtonText: 'ยืนยัน',
+    confirmButtonText: 'ตกลง',
     cancelButtonText: 'ยกเลิก',
     closeOnConfirm: false,
     closeOnCancel: false

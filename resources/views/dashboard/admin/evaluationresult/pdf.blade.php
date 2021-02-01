@@ -59,7 +59,7 @@
                     <div ><strong>๔. ด้านความเป็นไปได้ทางธุรกิจ (Business Propect)</strong></div>
                     <div class="box bw600 text-justify">{!!$provider::FixBreak($evaluationresult->businessprospect)!!}</div>
                 </div>
-                <div class="box mt15">
+                <div class="box mt15" style="page-break-inside: avoid;">
                     <div class="ml70">อนึ่ง หากท่านต้องการสอบถามข้อมูลเพิ่มเติม โปรดติดต่อ คุณ{{$evaluationresult->contactname}} {{$evaluationresult->contactlastname}} ตำแหน่ง {{$evaluationresult->contactposition}}</div>
                      
                     <div class="ml30">หมายเลขโทรศัพท์ {{$thainumeric::toThaiNumeric($generalinfo->phone1)}} ต่อ {{$thainumeric::toThaiNumeric($generalinfo->contactphoneext)}} หรือ อีเมล {{$evaluationresult->contactemail}}</div>

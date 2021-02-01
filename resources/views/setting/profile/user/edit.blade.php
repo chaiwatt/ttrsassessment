@@ -869,7 +869,7 @@
 										</div>
 									</div>
 								<div class="col-md-12 text-right">
-									<button type="submit" name="action" value="personal" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+									<button type="submit" name="action" id="submitform" value="personal" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
 								</div>
 						</div>
 					</div>
@@ -900,6 +900,7 @@
             clearText: "เคลียร์",
             time: false
 		});
+
     </script>	
 @stop
 

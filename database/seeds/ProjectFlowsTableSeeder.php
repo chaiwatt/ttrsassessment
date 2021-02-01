@@ -14,19 +14,19 @@ class ProjectFlowsTableSeeder extends Seeder
         DB::table('project_flows')->insert([
             [
                 'name' => 'การมอบหมาย Leader และ Co -Lead',
-                'duration' => 6
-            ],
-            [
-                'name' => 'การพิจารณา Mini TBP',
-                'duration' => 6
-            ],
-            [
-                'name' => 'การพิจารณา Full TBP, การนำเสนอ Expert และการพัฒนา EV',
-                'duration' => 25
-            ],
-            [
-                'name' => 'การนัดหมายลงประเมิน',
                 'duration' => 3
+            ],
+            [
+                'name' => 'การอนุมัติ Mini TBP',
+                'duration' => 3
+            ],
+            [
+                'name' => 'การอนุมัติ Full TBP, การมอบหมายผู้เชี่ยวชาญ, การพัฒนา EV',
+                'duration' => 26
+            ],
+            [
+                'name' => 'การนัดหมายเพื่อประเมิน ณ สถานประกอบการ',
+                'duration' => 6
             ],
             [
                 'name' => 'การประเมินให้คะแนน และสรุปผล',
@@ -34,15 +34,15 @@ class ProjectFlowsTableSeeder extends Seeder
             ],
             [
                 'name' => 'ส่งผลการประเมินทางEmail /ระบบ',
-                'duration' => 1
+                'duration' => 2
             ],
             [
-                'name' => 'ส่งจม.แจ้งผลทางการ และใบ CER',
-                'duration' => 7
+                'name' => 'ส่งจดหมายแจ้งผลทางการ และพิมพ์ CERTIFICATE',
+                'duration' => 6
             ],
             [
                 'name' => 'โครงการประเมินแล้วเสร็จสิ้น/ระบุรายละเอียด',
-                'duration' => 1
+                'duration' => 2
             ]
         ]);
     }

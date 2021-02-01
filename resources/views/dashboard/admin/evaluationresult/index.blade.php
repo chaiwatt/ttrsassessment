@@ -77,10 +77,10 @@
                                         <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                         <td> {{@$fulltbp->projectgrade->grade}} </td> 
                                         <td> 
-                                            <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียดการแจ้งผล</a> 
+                                            <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียด</a> 
                                             <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">ดาวน์โหลด Certificate</button>
+                                                <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
                                                     <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item"><i class="icon-download"></i> ดาวน์โหลด</a>
@@ -140,7 +140,7 @@
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'ยืนยัน',
+                    confirmButtonText: 'ตกลง',
                     cancelButtonText: 'ยกเลิก',
                     closeOnConfirm: false,
                     closeOnCancel: false
@@ -157,7 +157,7 @@
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
-                confirmButtonText: 'ยืนยัน',
+                confirmButtonText: 'ตกลง',
                 cancelButtonText: 'ยกเลิก',
                 closeOnConfirm: false,
                 closeOnCancel: false

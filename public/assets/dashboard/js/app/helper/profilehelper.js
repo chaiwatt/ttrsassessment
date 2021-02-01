@@ -583,7 +583,7 @@ $(document).on("click","#getotp",function(e){
         type: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        confirmButtonText: 'ยืนยัน',
+        confirmButtonText: 'ตกลง',
         cancelButtonText: 'ยกเลิก',
         closeOnConfirm: false,
         closeOnCancel: false
@@ -620,7 +620,7 @@ $(document).on("click","#getotp",function(e){
                           autocapitalize: 'off'
                         },
                         showCancelButton: true,
-                        confirmButtonText: 'ยืนยัน',
+                        confirmButtonText: 'ตกลง',
                         cancelButtonText: 'ยกเลิก',
                         showLoaderOnConfirm: true,
                         preConfirm: (inp) => {

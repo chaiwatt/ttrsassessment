@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="toast-body" style="font-size: 16px">
                                                 <span id="toastmessage">
-                                                    <span class="badge bg-success" style="font-size:16px">การมอบหมาย Leader และ Co-Leader</span> ของโครงการ{{$minitbp->project}} มีกำหนดถึงวันที่ {{$projectstatus->enddateth}} (จำนวน {{$projectstatus->duration}} วัน ตาม Control flow) กรุณามอบหมายในเสร็จสิ้นตาม Control flow
+                                                    <span class="badge bg-success" style="font-size:16px">การมอบหมาย Leader และ Co-Leader</span> ของโครงการ{{$minitbp->project}} มีกำหนดถึงวันที่ {{$projectstatus->enddateth}} (จำนวน {{$projectstatus->duration}} วัน ตาม Control Flow) กรุณามอบหมายในเสร็จสิ้นภายในกำหนด
                                                 </span>  
                                             </div>
                                         </div>

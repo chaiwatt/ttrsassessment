@@ -75,24 +75,6 @@ function getEv(evid){
     }).catch(error => {})
 });
 
-// $(document).on('focusin', '.weigthvalue1', function(){
-//     $(this).data('old', $(this).val());
-//  }).on('change', '.weigthvalue2', function(e) {
-//     var check = parseFloat($('#extraweight').html().replace(/[{()}]/g, ''));
-//     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
-//     if(newval.toFixed(3) > 1){
-//         Swal.fire({
-//             title: 'ผิดพลาด...',
-//             text: 'ผลรวม Weight มากกว่า 1 !',
-//             });
-//             $(this).val($(this).data('old')) 
-//             return;
-//     }
-//     editWeight($(this).data('id'),$(this).val(),2).then(data => {
-//         $('#extraweight').html('(' + data.sumweigth.toFixed(3) + ')');
-//     }).catch(error => {})
-// });
-
 $(document).on('focusin', '.weigthvalue', function(){
     $(this).data('old', $(this).val());
  }).on('change', '.weigthvalue', function(e) {
@@ -116,7 +98,7 @@ $(document).on('focusin', '.weigthvalue', function(){
     // console.log(newval);
     if(newval.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาดdddd...',
+            title: 'ผิดพลาด...',
             text: 'ผลรวม Weight มากกว่า 1 !',
             });
             $(this).val($(this).data('old')) 
@@ -150,8 +132,6 @@ function editWeight(id,value,evtypeid){
     })
   }
 
-
-
   function RenderTable(data,evtype){
     var html =``;
     
@@ -180,14 +160,12 @@ function editWeight(id,value,evtypeid){
 function RenderWeightTable(data,evtypeid){
     var html =``;
     var readonly =`readonly`;
-    // console.log($('#evstatus').val());
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
         readonly =``;
     }
     if($('#evstatus').val() >= 4){
         readonly =`readonly`;
     }
-    // console.log(data);
     data.forEach(function (pillaindex,index) {
         if(pillaindex.ev_type_id == evtypeid){
             html += `<tr > 
@@ -214,7 +192,6 @@ function RenderWeightTable(data,evtypeid){
 function RenderExtraTable(data){
     var html =``;
     var readonly =`readonly`;
-    // console.log($('#evstatus').val());
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
         readonly =``;
     }
@@ -326,19 +303,6 @@ function RowSpanWeight(tableid){
         }
     }
 }
-
-    // $('#chkevstatus').on('change.bootstrapSwitch', function(e) {
-    //     var status = 2
-    //     if(e.target.checked==true){
-    //         status =3;
-    //     }     
-    //     console.log(status);   
-    //     $("#spinicon").attr("hidden",false);
-    //     updateEvAdminStatus($(this).data('id'),status).then(data => {
-    //         $("#spinicon").attr("hidden",true);
-    //     }).catch(error => {})
-    // });
-
     $(document).on('click', '#updateevstatus', function(e) { 
         $("#spinicon").attr("hidden",false);
         updateEvAdminStatus($(this).data('id'),3).then(data => {
@@ -366,19 +330,6 @@ function updateEvAdminStatus(id,value){
         })
     })
   }
-
-//    $(document).on('click', '#sendedittojd', function(e) {
-//         $("#spiniconev").attr("hidden",false);
-//         sendEditEv($(this).data('id')).then(data => {
-//             $("#spiniconev").attr("hidden",true);
-//             Swal.fire({
-//                 title: 'สำเร็จ...',
-//                 text: 'นำส่ง EV ให้ JD สำเร็จ!',
-//             }).then((result) => {
-//                 window.location.reload();
-//             });
-//         }).catch(error => {})
-//     });
 
     function sendEditEv(id){
         return new Promise((resolve, reject) => {

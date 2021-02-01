@@ -72,7 +72,7 @@ class DateConversion
     public static function thaiMonthNow()
 	{
 		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
-        $strMonthThai=$strMonthCut[Carbon::today()->format('m')];
+        $strMonthThai=$strMonthCut[intval(Carbon::today()->format('m'))];
         return $strMonthThai;
     }
     public static function thaiYearNow()
