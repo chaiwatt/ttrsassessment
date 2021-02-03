@@ -111,6 +111,7 @@ class DashboardExpertProjectFullTbpController extends Controller
                                             ->get();
         $fulltbpresearchers = FullTbpResearcher::where('full_tbp_id',$fulltbp->id)->get(); 
         $signaturestatuses = SignatureStatus::get();
+      
         return view('dashboard.admin.project.fulltbp.view')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)

@@ -5,8 +5,10 @@ namespace App\Model;
 use App\User;
 use App\Model\Amphur;
 use App\Model\Tambol;
+use App\Model\IsicSub;
 use App\Model\Province;
 use App\Helper\LogAction;
+use App\Model\Companysize;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\ExpertDetail;
@@ -14,6 +16,7 @@ use App\Model\CompanyEmploy;
 use App\Model\IndustryGroup;
 use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
+use App\Model\CompanyServiceType;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -74,5 +77,22 @@ class Company extends Model
     public function getBusinesstypeAttribute()
     {
         return BusinessType::find($this->business_type_id);
+    }
+
+    public function getCompanyServiceTypeAttribute()
+    {
+        return CompanyServiceType::find($this->company_service_type_id)->name;
+    }
+    public function getCompanysizeAttribute()
+    {
+        return Companysize::find($this->company_size_id)->name;
+    }
+    public function getIsicAttribute()
+    {
+        return Isic::find($this->isic_id);
+    }
+    public function getIsicsubAttribute()
+    {
+        return IsicSub::find($this->isic_sub_id);
     }
 }

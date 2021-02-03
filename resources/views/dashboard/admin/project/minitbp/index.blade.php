@@ -185,7 +185,8 @@
                                                         @if ($minitbp->refixstatus == 0)
                                                                 <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                             @elseif($minitbp->refixstatus == 1)
-                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a>
+                                                                {{-- <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
+                                                                <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a>
                                                             @elseif($minitbp->refixstatus == 2)
                                                                 <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                         @endif

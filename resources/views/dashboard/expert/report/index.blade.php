@@ -95,7 +95,7 @@
         <div id="alertmessage_wrapper">
             @foreach ($alertmessages->reverse() as $alertmessage)
                 <div class="alert alert-info alert-styled-left alert-dismissible">
-                    <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{{$alertmessage->detail}}
+                    <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{!!$alertmessage->detail!!}
                 </div>
             @endforeach
         </div>
@@ -133,7 +133,13 @@
                                         <td> {{$fulltbp->updatedatth}} </td> 
                                         {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                         <td>  
-                                            <a class="text-info" href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" >{{$fulltbp->minitbp->project}}</a>
+                                            {{-- <a class="text-info" href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" >{{$fulltbp->minitbp->project}}</a> --}}
+                                            @if ($fulltbp->expertassignment->accepted == 1)
+                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                            @else
+                                                {{$fulltbp->minitbp->project}}     
+                                            @endif
+                                            
                                         </td>  
                                         <td>  
                                             <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>

@@ -23,13 +23,13 @@ class CreateMiniTBPSTable extends Migration
             $table->string('projecteng',150)->nullable();
             $table->char('finance1',5)->nullable()->comment('ขอสินเชื่อ)');
             $table->unsignedBigInteger('thai_bank_id')->nullable();
-            $table->double('finance1_loan',15,0)->nullable();
+            $table->double('finance1_loan',15,0)->default(0);
             $table->char('finance2',5)->nullable()->comment('ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)');
             $table->char('finance3',5)->nullable()->comment('โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)');
             $table->char('finance4',5)->nullable()->comment('บริษัทร่วมทุน (สวทช.)');
-            $table->double('finance4_joint',15,0)->nullable();
-            $table->double('finance4_joint_min',15,0)->nullable();
-            $table->double('finance4_joint_max',15,0)->nullable();
+            $table->double('finance4_joint',15,0)->default(0);
+            $table->double('finance4_joint_min',15,0)->default(0);
+            $table->double('finance4_joint_max',15,0)->default(0);
             $table->char('nonefinance1',5)->nullable()->comment('โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย');
             $table->char('nonefinance2',5)->nullable()->comment('รับรองขอรับสิทธิประโยชน์ทางภาษี');
             $table->char('nonefinance3',5)->nullable()->comment('โครงการ spin off');

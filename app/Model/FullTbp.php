@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\User;
 use App\Model\Ev;
 use App\Model\Bol;
 use App\Model\Prefix;
@@ -108,7 +109,9 @@ class FullTbp extends Model
     public function getProjectmemberAttribute(){
         return ProjectMember::where('full_tbp_id',$this->id)->get();
     } 
-
+    public function getJduserAttribute(){
+        return User::where('user_type_id',6)->first();
+    } 
     public function getAllScoringAttribute(){
         $ev = Ev::where('full_tbp_id',$this->id)->first();
         
@@ -260,6 +263,16 @@ class FullTbp extends Model
         }else{
             return $check;
         }
+    }
+    public function Resultissuedate($flowid){
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $check = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',$flowid)->first();
+        if(!Empty($check)){
+            return DateConversion::engToThaiDate($check->created_at->toDateString());
+        }else{
+            return '';
+        }
+
     }
 }
 

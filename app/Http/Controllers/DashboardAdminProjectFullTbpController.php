@@ -810,8 +810,8 @@ class DashboardAdminProjectFullTbpController extends Controller
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
         $timeLinehistory->details = 'สิ้นสุดโครงการ';
-        $timeLinehistory->message_type = 2;
-        $timeLinehistory->owner_id = $company->user_id;
+        $timeLinehistory->message_type = 3;
+        $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 

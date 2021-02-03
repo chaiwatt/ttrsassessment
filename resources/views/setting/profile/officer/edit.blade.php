@@ -171,7 +171,7 @@
 	
 
 	<!-- Cover area -->
-	<div class="profile-cover">
+	{{-- <div class="profile-cover">
 		<div id="bgcover">
 			@if (!Empty($user->cover))
 				<div class="profile-cover-img" style="background-image: url({{asset($user->cover)}})"></div>
@@ -204,10 +204,10 @@
 				</ul>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 	<!-- /cover area -->
 	<!-- Profile navigation -->
-	<div class="navbar navbar-expand-lg navbar-light bg-light">
+	{{-- <div class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="text-center d-lg-none w-100">
 			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-second">
 				<i class="icon-menu7 mr-2"></i>
@@ -229,7 +229,7 @@
 			
 			</ul>
 		</div>
-	</div>
+	</div> --}}
 	<!-- /profile navigation -->
 
     <!-- Content area -->
@@ -260,7 +260,13 @@
 				{{-- <div class="tab-content w-100 order-2 order-md-1"> --}}
 					{{-- <div class="tab-pane fade" id="personalinfo"> --}}
 						<!-- personalinfo -->
-						<div class="card">
+						{{-- <div class="card"> --}}
+						<div class="card border-top-info rounded-top-1 mb-0">
+							{{-- <div class="card-header header-elements-sm-inline">
+								<h6 class="card-title">โปรไฟล์</h6>
+								<div class="header-elements">
+								</div>
+							</div> --}}
 							<div class="card-body">												
 										<div class="row">
 											{{-- <div class="col-md-6">  

@@ -134,7 +134,6 @@
                                                             <th>Category</th>  
                                                             <th>Extra Criteria</th>   
                                                             <th>Weight</th>                                                                                
-                                                            {{-- <th>Criteria</th>   --}}
                                                         </tr>
                                                     </thead>
                                                     <div class="theme_tail theme_tail_circle loadprogress">
@@ -149,27 +148,6 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                {{-- <fieldset>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="extra_criteriatable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Pillar</th>  
-                                                    <th>Sub Pillar</th>   
-                                                    <th>Index</th>                                                                                
-                                                    <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
-                                                </tr>
-                                            </thead>
-                                            <div class="theme_tail theme_tail_circle loadprogress">
-                                                <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
-                                                <div class="pace_activity"></div>
-                                            </div> 
-                                            <tbody id="extra_criteria_transaction_wrapper_tr"> 
-            
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </fieldset> --}}
                                 @endif
                             </form>
                     </div>

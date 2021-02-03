@@ -19,11 +19,13 @@ class DashboardAdminReportController extends Controller
     // public function __construct() 
     // { 
     //     $this->middleware(['auth', 'verified']);
-    //     $this->middleware('role:3,4,5,6'); 
+    //     $this->middleware('role:4,5,6'); 
     // }
     public function Index(){
         $auth = Auth::user();
-        $fulltbps = FullTbp::get();
+        $businessplanarr = BusinessPlan::where('business_plan_status_id','>',2)->pluck('id')->toArray();
+        $minitbparr = MiniTBP::whereIn('business_plan_id',$businessplanarr)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbparr)->get();
 
         if($auth->user_type_id == 4){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)

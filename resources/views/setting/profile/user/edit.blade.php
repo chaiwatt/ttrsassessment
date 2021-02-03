@@ -148,15 +148,11 @@
 				</div>
 
 				<div class="modal-footer">
-					{{-- <button type="button" class="btn btn-link" data-dismiss="modal">Close</button> --}}
 					<button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">ปิด</button>
 				</div>
 			</div>
 		</div>
 	</div>
-<!-- /modal with subtitle -->
-	<!-- Modal with subtitle -->
-
 
 	<div id="modal_add_companydoc" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog">
@@ -424,8 +420,90 @@
 			</div>
 		</div>
 	</div>
+
+		{{-- modal add position --}}
+		<div id="modal_company_size" class="modal fade" style="overflow:hidden;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;นิยามขนาดกิจการ</h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							
+							<div class="col-md-12">
+								การผลิต
+								<div class="table-responsive">
+									<table class="table table-bordered table-striped">
+										<thead>
+											<tr class="bg-info">
+												<th >ขนาด</th> 
+												<th >รายได้</th>                                                                                  
+											</tr>
+										</thead>
+										<tbody > 
+											<tr >                                        
+												<td>micro</td>                                            
+												<td>0 - 1.8 ล้านบาท</td>     
+											</tr>	
+											<tr >                                        
+												<td>S</td>                                            
+												<td>มากกว่า 1.8 - 100 ล้านบาท</td>     
+											</tr>	
+											<tr >                                        
+												<td>M</td>                                            
+												<td>มากกว่า 100 - 500 ล้านบาท</td>     
+											</tr>	
+											<tr >                                        
+												<td>L</td>                                            
+												<td>มากกว่า 500 ล้านบาท</td>     
+											</tr>	
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-2">
+							
+							<div class="col-md-12">
+								การบริการ
+								<div class="table-responsive">
+									<table class="table table-bordered table-striped">
+										<thead>
+											<tr class="bg-info">
+												<th >ขนาด</th> 
+												<th >รายได้</th>                                                                                  
+											</tr>
+										</thead>
+										<tbody > 
+											<tr >                                        
+												<td>micro</td>                                            
+												<td>0 - 1.8 ล้านบาท</td>     
+											</tr>	
+											<tr >                                        
+												<td>S</td>                                            
+												<td>มากกว่า 1.8 - 50 ล้านบาท</td>     
+											</tr>	
+											<tr >                                        
+												<td>M</td>                                            
+												<td>มากกว่า 50 - 300 ล้านบาท</td>     
+											</tr>	
+											<tr >                                        
+												<td>L</td>                                            
+												<td>มากกว่า 300 ล้านบาท</td>     
+											</tr>	
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>           
+				</div>
+			</div>
+		</div>
 	<!-- Cover area -->
-	<div class="profile-cover">
+	{{-- <div class="profile-cover">
 		<div id="bgcover">
 			@if (!Empty($user->cover))
 				<div class="profile-cover-img" style="background-image: url({{asset($user->cover)}})"></div>
@@ -446,7 +524,7 @@
 			</div>
 			<div class="media-body text-white">
 				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>
-				{{-- <span class="d-block">{{$user->userposition->name}}</span> --}}
+			
 			</div>
 			<div class="ml-md-3 mt-2 mt-md-0">
 				<ul class="list-inline list-inline-condensed mb-0">
@@ -459,10 +537,10 @@
 				</ul>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 	<!-- /cover area -->
 	<!-- Profile navigation -->
-	<div class="navbar navbar-expand-lg navbar-light bg-light">
+	{{-- <div class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="text-center d-lg-none w-100">
 			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-second">
 				<i class="icon-menu7 mr-2"></i>
@@ -482,7 +560,7 @@
 			
 			</ul>
 		</div>
-	</div>
+	</div> --}}
 
     <div class="content">
 		@if (Session::has('success'))
@@ -510,7 +588,7 @@
 			<input name="usergroup" value="{{$user->user_group_id}}" type="text" hidden>
 			<div class="d-flex align-items-start flex-column flex-md-row">
 				<input name="usergroup" value="{{$user->user_group_id}}" type="text" hidden>
-					<div class="card">
+					<div class="card border-top-info rounded-top-1 mb-0">
 						<div class="card-body">													
 							<div class="row">
 								@if (Auth::user()->user_group_id !=1)
@@ -624,6 +702,26 @@
 										<select name="industrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
 											@foreach ($industrygroups as $industrygroup)
 												<option value="{{$industrygroup->id}}" @if($user->company->industry_group_id == $industrygroup->id) selected @endif>{{$industrygroup->name}}</option> 
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>ประเภทกิจการ</label>
+										<select name="companyservicetype" data-placeholder="ประเภทกิจการ" class="form-control form-control-lg form-control-select2">
+											@foreach ($companyservicetypes as $companyservicetype)
+												<option value="{{$companyservicetype->id}}" @if($user->company->company_service_type_id == $companyservicetype->id) selected @endif>{{$companyservicetype->name}}</option> 
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>ขนาดกิจการ <a href="#" class="text-primary" data-toggle="modal" data-target="#modal_company_size">(ดูนิยาม)</a></label>
+										<select name="companysize" data-placeholder="ขนาดกิจการ" class="form-control form-control-lg form-control-select2">
+											@foreach ($companysizes as $companysize)
+												<option value="{{$companysize->id}}" @if($user->company->company_size_id == $companysize->id) selected @endif>{{$companysize->name}}</option> 
 											@endforeach
 										</select>
 									</div>

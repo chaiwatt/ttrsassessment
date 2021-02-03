@@ -249,8 +249,8 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>การอนุมัติ</th> 
                                         <th>ผู้เชี่ยวชาญ</th> 
-                                        <th>BOL</th> 
                                         <th>EV</th> 
+                                        <th>BOL</th> 
                                         <th>ลงพื้นที่แล้ว</th> 
                                         <th>ทีมประเมิน</th>
                                         <th style="width: 20px"><i class="icon-arrow-down12"></i></th> 
@@ -293,21 +293,14 @@
                                                         @else
                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
                                                     @endif
-                                                </td> 
-                                                <td> 
-                                                    @if ( $fulltbp->bol->count() != 0)
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
-                                                        @else
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
-                                                    @endif
-                                                </td>   
+                                                </td>  
                                                 <td> 
                                                     @if (!Empty($fulltbp->ev))
                                                         @php
                                                             $evstatus = 'ผ่านการอนุมัติ';
                                                             $style = 'badge badge-flat border-success text-success-600';
                                                             if($fulltbp->ev->status == 0){
-                                                                $evstatus = 'อยู่ระหว่าง Leader สร้าง EV';
+                                                                $evstatus = 'อยู่ระหว่างการสร้าง EV';
                                                                 $style = 'btn-sm bg-warning';
                                                             }elseif($fulltbp->ev->status == 1){
                                                                 if($fulltbp->ev->refixstatus == 0){
@@ -339,6 +332,13 @@
                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
+                                                <td> 
+                                                    @if ( $fulltbp->bol->count() != 0)
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
+                                                        @else
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
+                                                    @endif
+                                                </td>  
                                                 <td>
                                                     @if (!Empty($fulltbp->assessmentdate))
                                                       @if ($fulltbp->finished_onsite == 1)

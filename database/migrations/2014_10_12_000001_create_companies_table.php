@@ -28,6 +28,8 @@ class CreateCompaniesTable extends Migration
             $table->date('paidupcapitaldate')->nullable();
             $table->unsignedBigInteger('industry_group_id')->nullable();   
             $table->unsignedBigInteger('business_type_id')->nullable(); 
+            $table->unsignedBigInteger('company_service_type_id')->default(1); 
+            $table->unsignedBigInteger('company_size_id')->deafult(1); 
             $table->string('name',150)->nullable();
             $table->string('phone',20)->nullable();
             $table->string('fax',20)->nullable();

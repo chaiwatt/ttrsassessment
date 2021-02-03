@@ -16,6 +16,7 @@ use App\Model\IsicSub;
 use App\Model\MiniTBP;
 use App\Model\Province;
 use App\Helper\EmailBox;
+use App\Model\Companysize;
 use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
@@ -34,6 +35,7 @@ use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpSellStatus;
 use App\Model\AuthorizedDirector;
+use App\Model\CompanyServiceType;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +64,8 @@ class SettingProfileUserController extends Controller
         $userpositions = UserPosition::get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
         $employpositions = EmployPosition::where('id', '<=',5)->get();
+        $companyservicetypes = CompanyServiceType::get();
+        $companysizes = Companysize::get();
         return view('setting.profile.user.edit')->withUser($user)
                                             ->withPrefixes($prefixes)
                                             ->withProvinces($provinces)
@@ -74,7 +78,9 @@ class SettingProfileUserController extends Controller
                                             ->withFulltbpcompanydocs($fulltbpcompanydocs)
                                             ->withAuthorizeddirectors($authorizeddirectors)
                                             ->withUserpositions($userpositions)
-                                            ->withEmploypositions($employpositions);
+                                            ->withEmploypositions($employpositions)
+                                            ->withCompanysizes($companysizes)
+                                            ->withCompanyservicetypes($companyservicetypes);
     }
     public function EditSave(EditProfileRequest $request, $id){
         $auth = Auth::user();
@@ -130,6 +136,8 @@ class SettingProfileUserController extends Controller
             'paidupcapitaldate' => $paidupcapitaldate,
             'industry_group_id' => $request->industrygroup,
             'business_type_id' => $request->businesstype,
+            'company_service_type_id' => $request->companyservicetype,
+            'company_size_id' => $request->companysize,
             'phone' => $request->phone,
             'website' => $request->website,
             'fax' => $request->fax,

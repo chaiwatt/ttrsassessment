@@ -169,6 +169,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -240,6 +241,7 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

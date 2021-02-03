@@ -71,6 +71,7 @@ Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => 'controlflow'], function(){
         Route::post('get','Api\ControlFlow@Get')->name('api.controlflow.get');            
     }); 
+
     Route::group(['prefix' => 'report'], function(){
         Route::group(['prefix' => 'chart'], function(){
             Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');            
@@ -502,6 +503,8 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'realtimereport'], function(){
                 Route::group(['prefix' => 'project'], function(){
                     Route::get('','DashboardAdminRealtimeReportProjectController@Index')->name('dashboard.admin.realtimereport.project');
+                    Route::get('downloadexcel','DashboardAdminRealtimeReportProjectController@DownloadExcel')->name('dashboard.admin.realtimereport.downloadexcel');
+                    Route::get('bygrade','DashboardAdminRealtimeReportProjectController@ByGrade')->name('dashboard.admin.realtimereport.project.bygrade');
                 });
                 Route::group(['prefix' => 'grade'], function(){
                     Route::get('','DashboardAdminRealtimeReportGradeController@Index')->name('dashboard.admin.realtimereport.grade');

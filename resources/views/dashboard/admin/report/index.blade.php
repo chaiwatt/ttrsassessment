@@ -247,7 +247,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h1>
                         </div>
                         <div>
-                            จำนวนการยื่นขอประเมิน
+                            จำนวนสมัครสมาชิก
                         </div>
                     </div>
 
@@ -359,8 +359,6 @@
                                                 @else
                                                 <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                             @endif
-                                            
-
                                         </td>  
                                         <td> {{$fulltbp->briefingdate}} </td>  
                                         <td> {{$fulltbp->assessmentdate}} </td>  

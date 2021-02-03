@@ -207,7 +207,7 @@
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'active':''}}">โครงการ</a></li>
-        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.grade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.grade')?'active':''}}">โครงการตามเกรด</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.bygrade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.bygrade')?'active':''}}">โครงการตามเกรด</a></li>
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.industrygroup')?'active':''}}">โครงการตามกลุ่มอุตสาหกรรม</a></li>
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.download')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.download')?'active':''}}">ดาวน์โหลดเอกสาร</a></li>
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.visit')?'active':''}}">เข้าชมเว็ปไซต์</a></li>

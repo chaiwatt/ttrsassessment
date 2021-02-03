@@ -7,118 +7,6 @@
 
 @stop
 @section('content')
-{{-- modal_get_calendar --}}
-<div id="modal_get_calendar" class="modal fade" style="overflow:hidden;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฏิทิน</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <ul class="nav nav-tabs nav-tabs-highlight">
-                    <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
-                    <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i> ผู้เข้าร่วม</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="left-icon-tab1">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>หัวข้อ</label>
-                                        <input type="text"  id="title" value=""  placeholder="หัวข้อ" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>สถานที่/ห้อง</label>
-                                    <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control form-control-lg" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>ประเภท</label>
-                                        <input type="text" id="eventtype" value=""  placeholder="ประเภท" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>วันที่</label>
-                                        <input type="text" id="eventdate" value=""  placeholder="วันที่" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>เวลาเริ่ม</label>
-                                        <input type="text" id="starttime" value=""  placeholder="เวลาเริ่ม" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>ถึงเวลา</label>
-                                        <input type="text" id="endtime" value=""  placeholder="ถึงเวลา" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>รายละเอียด</label>
-                                        <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control form-control-lg" readonly></textarea>
-                                    </div>
-                                </div>
-                                    {{-- <i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><input type="checkbox" id="chkjoinmetting" data-id="" data-on-color="success" data-off-color="danger" data-on-text="เข้าร่วมแล้ว" data-off-text="ไม่เข้าร่วม" class="form-check-input-switch"  > --}}
-                               
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>การเข้าร่วม<span class="text-danger">*</span></label>
-                                    <select id="attendevent" class="form-control form-control-lg form-control-select2">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="left-icon-tab2">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="attendee_modal">
-                                <thead>
-                                    <tr>
-                                        <th>ชื่อ-สกุล</th>    
-                                        <th>สถานะ</th>                                                                               
-                                    </tr>
-                                </thead>
-                                <tbody id="attendee_modal_wrapper_tr"> 
-        
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>           
-            <div class="modal-footer">
-                <button class="btn btn-link "  data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                <button id="btn_modal_get_calendar"  class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
-            </div>
-        </div>
-    </div>
-</div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -149,35 +37,78 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการโครงการ</h6>
+                        <h6 class="card-title">ช่วงเวลาโครงการ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                <i class="icon-calendar3 mr-2"></i>
-                                <span></span>
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
-                                <thead>
-                                    <tr>
-                                        <th>เลขที่โครงการ</th> 
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>สถานะ</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="report_project_wrapper">
-
-                                </tbody>
-                            </table>      
+                        <form action="{{route('dashboard.admin.realtimereport.downloadexcel')}}" method="get">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ตั้งแต่วันที่</label>
+                                        <input type="text"  name="fromdate" id="fromdate" placeholder="ตั้งแต่วันที่" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ถึงวันที่</label>
+                                        <input type="text"  name="todate" id="todate"  placeholder="ถึงวันที่" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>  
+                                    <button type="submit" name="btnsubmit" value="search" class="btn btn-sm bg-teal float-right">ค้นหา</button>  
+                                </div>
+                            </div>        
+                        </form>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="testtopictable">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th>เลขที่โครงการ</th> 
+                                                <th>โครงการ</th> 
+                                                <th>บริษัท</th> 
+                                                <th class="text-right">สถานะ</th>
+                                                {{-- <th class="text-right">ดาวน์โหลด</th>  --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            @foreach ($fulltbps as $fulltbp)
+                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
+                                                    <tr>
+                                                        <td>{{$fulltbp->minitbp->businessplan->code}}</td>
+                                                        <td>{{$fulltbp->minitbp->project}}</td>
+                                                        <td>{{$fulltbp->minitbp->businessplan->company->name}}</td>
+                                                        <td class="text-right">
+                                                            @if ($fulltbp->status == 2)
+                                                                    <span class="badge badge-flat border-info text-info-600 rounded-0">กำลังดำเนินการ</span>
+                                                                @elseif($fulltbp->status == 3)
+                                                                    <span class="badge badge-flat border-success text-success-600 rounded-0">เสร็จสิ้น</span>
+                                                            @endif
+                                                        </td>
+                                                        {{-- <td><a href="" data-id="{{$fulltbp->minitbp->id}}" class="btn btn-sm bg-warning float-right">Excel</a>  </td> --}}
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>      
+                                </div>
+                            </div>
                         </div>
+                     
                     </div>
                 </div>
             </div>
+ 
         </div>
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
@@ -195,7 +126,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- <div class="row">
             <div class="col-md-12">
@@ -300,6 +231,23 @@
             }
             return stmonth;
         }
+
+        $('#fromdate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+        });
+        $('#todate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+		});
 </script>
 
 @stop

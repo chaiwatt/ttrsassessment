@@ -48,8 +48,6 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
           window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
     }).catch(error => {})
     }
-
-
 });
 
 $(document).on('click', '.projectmember', function(e) {

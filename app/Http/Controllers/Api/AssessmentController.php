@@ -19,6 +19,7 @@ use App\Model\FullTbpGantt;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
+use App\Model\TimeLineHistory;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpSellStatus;
 use App\Model\ProjectAssignment;
@@ -156,6 +157,15 @@ class AssessmentController extends Controller
             $projectstatustransaction->project_flow_id = 8;
             $projectstatustransaction->save();
             DateConversion::addExtraDay($request->id,7);
+
+            $auth = Auth::user();
+            $timeLinehistory = new TimeLineHistory();
+            $timeLinehistory->business_plan_id = MiniTBP::find($request->id)->business_plan_id;
+            $timeLinehistory->details = 'ยืนยันการส่งจดหมายแจ้งผล';
+            $timeLinehistory->message_type = 3;
+            $timeLinehistory->owner_id = $auth->id;
+            $timeLinehistory->user_id = $auth->id;
+            $timeLinehistory->save();
         }
     }
 }

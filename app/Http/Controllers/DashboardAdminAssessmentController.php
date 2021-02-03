@@ -18,6 +18,7 @@ use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
+use App\Model\TimeLineHistory;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
@@ -441,6 +442,14 @@ class DashboardAdminAssessmentController extends Controller
 
             DateConversion::addExtraDay($minitbp->id,5);
         }
+        $auth = Auth::user();
+        $timeLinehistory = new TimeLineHistory();
+        $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->details = 'สรุปผลการประเมินสำเร็จ';
+        $timeLinehistory->message_type = 3;
+        $timeLinehistory->owner_id = $auth->id;
+        $timeLinehistory->user_id = $auth->id;
+        $timeLinehistory->save();
 
     }
 
