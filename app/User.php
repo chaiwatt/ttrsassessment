@@ -2,15 +2,18 @@
 
 namespace App;
 
+use App\Model\Amphur;
 use App\Model\Prefix;
+use App\Model\Tambol;
 use App\Model\Company;
 use App\Model\FullTbp;
+use App\Model\Province;
 use App\Model\UserType;
 use App\Model\UserGroup;
+// use App\Model\UserPosition;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
 use App\Model\ExpertDetail;
-// use App\Model\UserPosition;
 use App\Model\OfficerDetail;
 use App\Model\ProjectMember;
 use App\Model\ExpertAssignment;
@@ -156,4 +159,17 @@ class User extends Authenticatable implements MustVerifyEmail
     //     $fulltbpids = array_unique(array_merge($projectmemberuniqueids,$projectassignmentuniqueids));
     //     return FullTbp::whereIn('id',$fulltbpids)->get();
     // }
+
+    public function Province($id)
+    {
+        return Province::find($id)->name;
+    }
+    public function Amphur($id)
+    {
+        return Amphur::find($id)->name;
+    }
+    public function Tambol($id)
+    {
+        return Tambol::find($id)->name;
+    }
 }

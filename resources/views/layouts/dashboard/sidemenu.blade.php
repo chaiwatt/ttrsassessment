@@ -206,8 +206,31 @@
         @endif
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'active':''}}">โครงการ</a></li>
-        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.bygrade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.bygrade')?'active':''}}">โครงการตามเกรด</a></li>
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'nav-item-expanded':''}}">
+            <a href="#" class="nav-link"><span>โครงการ</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="ทั่วไป">
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'active':''}}">ทั้งหมด</a></li>
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.bygrade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.bygrade')?'active':''}}">ตามเกรด</a></li>
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.byindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.byindustrygroup')?'active':''}}">ตามกลุ่มอุตสาหกรรม</a></li>
+            </ul>
+        </li>
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.officer')?'nav-item-expanded':''}}">
+            <a href="#" class="nav-link"><span>เจ้าหน้าที่ TTRS</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="ทั่วไป">
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.officer')?'active':''}}">ทั้งหมด</a></li>	
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.religion')?'active':''}}">ตามเกรด</a></li>										
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.religion')?'active':''}}">ตามกลุ่มอุตสาหกรรม</a></li>		
+            </ul>
+        </li>
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.dashboard')?'nav-item-expanded':''}}">
+            <a href="#" class="nav-link"><span>ผู้เชี่ยวชาญ</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="ทั่วไป">
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.prefix')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.prefix')?'active':''}}">โครงการ</a></li>	
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.religion')?'active':''}}">โครงการตามเกรด</a></li>										
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.religion')?'active':''}}">โครงการตามกลุ่มอุตสาหกรรม</a></li>		
+            </ul>
+        </li>
+       
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.industrygroup')?'active':''}}">โครงการตามกลุ่มอุตสาหกรรม</a></li>
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.download')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.download')?'active':''}}">ดาวน์โหลดเอกสาร</a></li>
         <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.visit')?'active':''}}">เข้าชมเว็ปไซต์</a></li>

@@ -44,19 +44,19 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('dashboard.admin.realtimereport.downloadexcel')}}" method="get">
+                        <form action="{{route('dashboard.admin.realtimereport.getproject')}}" method="get">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ตั้งแต่วันที่</label>
-                                        <input type="text"  name="fromdate" id="fromdate" placeholder="ตั้งแต่วันที่" class="form-control" required>
+                                        <input type="text"  name="fromdate" id="fromdate" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ถึงวันที่</label>
-                                        <input type="text"  name="todate" id="todate"  placeholder="ถึงวันที่" class="form-control" required>
+                                        <input type="text"  name="todate" id="todate"  placeholder="ถึงวันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

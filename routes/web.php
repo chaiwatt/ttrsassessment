@@ -503,8 +503,16 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'realtimereport'], function(){
                 Route::group(['prefix' => 'project'], function(){
                     Route::get('','DashboardAdminRealtimeReportProjectController@Index')->name('dashboard.admin.realtimereport.project');
-                    Route::get('downloadexcel','DashboardAdminRealtimeReportProjectController@DownloadExcel')->name('dashboard.admin.realtimereport.downloadexcel');
+                    Route::get('getproject','DashboardAdminRealtimeReportProjectController@GetProject')->name('dashboard.admin.realtimereport.getproject');
                     Route::get('bygrade','DashboardAdminRealtimeReportProjectController@ByGrade')->name('dashboard.admin.realtimereport.project.bygrade');
+                    Route::get('getprojectbygrade','DashboardAdminRealtimeReportProjectController@GetProjectByGrade')->name('dashboard.admin.realtimereport.project.getprojectbygrade');
+                    Route::get('byindustrygroup','DashboardAdminRealtimeReportProjectController@ByIndustryGroup')->name('dashboard.admin.realtimereport.project.byindustrygroup');
+                    Route::get('getprojectbyindustrygroup','DashboardAdminRealtimeReportProjectController@GetProjectByIndustrygroup')->name('dashboard.admin.realtimereport.project.getprojectbyindustrygroup');
+                });
+                Route::group(['prefix' => 'ttrsofficer'], function(){
+                    Route::get('','DashboardAdminRealtimeReportTTRSofficerController@Index')->name('dashboard.admin.realtimereport.officer');
+                    Route::get('getofficer','DashboardAdminRealtimeReportTTRSofficerController@GetOfficer')->name('dashboard.admin.realtimereport.getofficer');
+                    Route::get('singledownload/{id}','DashboardAdminRealtimeReportTTRSofficerController@SingleDownload')->name('dashboard.admin.realtimereport.singledownload');
                 });
                 Route::group(['prefix' => 'grade'], function(){
                     Route::get('','DashboardAdminRealtimeReportGradeController@Index')->name('dashboard.admin.realtimereport.grade');

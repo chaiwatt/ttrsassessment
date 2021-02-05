@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('dashboard.admin.realtimereport.project.getprojectbygrade')}}" method="get">
+                        <form action="{{route('dashboard.admin.realtimereport.project.getprojectbyindustrygroup')}}" method="get">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">
@@ -61,10 +61,10 @@
                                 </div>
                                 <div class="col-md-4">
 									<div class="form-group">
-										<label>เกรด</label>
-										<select name="grade" data-placeholder="เกรด" class="form-control form-control-lg form-control-select2">
-											@foreach ($grades as $grade)
-												<option value="{{$grade->id}}" >{{$grade->name}}</option> 
+										<label>กลุ่มอุตสาหกรรม</label>
+										<select name="industrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
+											@foreach ($industrygroups as $industrygroup)
+												<option value="{{$industrygroup->id}}" >{{$industrygroup->name}}</option> 
 											@endforeach
 										</select>
 									</div>

@@ -37,43 +37,27 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ช่วงเวลาโครงการ</h6>
+                        {{-- <h6 class="card-title">ช่วงเวลาโครงการ</h6> --}}
                         <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                            </a>
+                            {{-- <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('dashboard.admin.realtimereport.project.getprojectbygrade')}}" method="get">
+                        <form action="{{route('dashboard.admin.realtimereport.getofficer')}}" method="get">
                             @csrf
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>ตั้งแต่วันที่</label>
-                                        <input type="text"  name="fromdate" id="fromdate" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
+                                        <label>ค้นหา <small>(ชื่อ-สกุล, ตำแหน่ง, หน่วยงานที่สังกัด)</small></label>
+                                        <input type="text"  name="search" id="search" placeholder="ค้นหา" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>ถึงวันที่</label>
-                                        <input type="text" name="todate" id="todate"  placeholder="ถึงวันที่" class="form-control form-control-lg" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-									<div class="form-group">
-										<label>เกรด</label>
-										<select name="grade" data-placeholder="เกรด" class="form-control form-control-lg form-control-select2">
-											@foreach ($grades as $grade)
-												<option value="{{$grade->id}}" >{{$grade->name}}</option> 
-											@endforeach
-										</select>
-									</div>
-								</div>
                                 <div class="col-md-12">
                                     <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>  
                                     <button type="submit" name="btnsubmit" value="search" class="btn btn-sm bg-teal float-right">ค้นหา</button>  
                                 </div>
-                            </div>
+                            </div>        
                         </form>
                         <div class="row mt-3">
                             <div class="col-md-12">
@@ -81,28 +65,26 @@
                                     <table class="table table-striped" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th>เลขที่โครงการ</th> 
-                                                <th>โครงการ</th> 
-                                                <th>บริษัท</th> 
-                                                <th class="text-right">สถานะ</th>
+                                                <th>ชื่อ-สกุล</th> 
+                                                <th>ตำแหน่ง</th> 
+                                                <th>หน่วยงานที่สังกัด</th> 
+                                                <th>สาขาความเชี่ยวชาญ</th> 
+                                                <th>ประสบการณ์ทำงาน</th> 
+                                                <th class="text-right">รายบุคคล</th>
                                             </tr>
                                         </thead>
                                         <tbody >
-                                            @foreach ($fulltbps as $fulltbp)
-                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
-                                                    <tr>
-                                                        <td>{{$fulltbp->minitbp->businessplan->code}}</td>
-                                                        <td>{{$fulltbp->minitbp->project}}</td>
-                                                        <td>{{$fulltbp->minitbp->businessplan->company->name}}</td>
-                                                        <td class="text-right">
-                                                            @if ($fulltbp->status == 2)
-                                                                    <span class="badge badge-flat border-info text-info-600 rounded-0">กำลังดำเนินการ</span>
-                                                                @elseif($fulltbp->status == 3)
-                                                                    <span class="badge badge-flat border-success text-success-600 rounded-0">เสร็จสิ้น</span>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endif
+                                            @foreach ($officers as $officer)
+                                                <tr>
+                                                    <td>{{$officer->user->prefix->name}}{{$officer->user->name}}  {{$officer->user->lastname}}</td>
+                                                    <td>{{$officer->position}}</td>
+                                                    <td>{{$officer->organization}}</td>
+                                                    <td>{{$officer->expertbranch->name}}</td>
+                                                    <td>{{$officer->expereinceyear}} ปี {{$officer->expereincemonth}} เดือน</td>
+                                                    <td class="text-right"> 
+                                                        <a href="{{route('dashboard.admin.realtimereport.singledownload',['id' => $officer->user_id])}}" class=" btn btn-sm bg-info">ดาวน์โหลด</a>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>      
@@ -113,51 +95,8 @@
                     </div>
                 </div>
             </div>
- 
         </div>
-
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จำนวนโครงการต่อการยื่น ปี2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="reportproject_chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ข้อมูลย้อนหลัง ปี2561-2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="bar_chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- /form layouts -->
     </div>
-    <!-- /content area -->
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
