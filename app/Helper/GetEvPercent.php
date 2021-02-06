@@ -9,7 +9,7 @@ use App\Model\CriteriaTransaction;
 class GetEvPercent
 {
     public static function getEvPercent($userid,$fulltbpid){
-        $ev = Ev::where('full_tbp_id',$fulltbpid)->first();
+        $ev = Ev::where('full_tbp_id',$fulltbpid)->where('status','>=',5)->first();
         if(Empty($ev)){
             return 0;
         }
@@ -34,7 +34,7 @@ class GetEvPercent
     } 
     public static function getEvOverAveragePercent($userid){
         $fulltbparray = ProjectMember::where('user_id',$userid)->pluck('full_tbp_id')->toArray();
-        $evs = Ev::whereIn('full_tbp_id',$fulltbparray)->get();
+        $evs = Ev::whereIn('full_tbp_id',$fulltbparray)->where('status','>=',5)->get();
         $totalpercent = 0;
         foreach ($evs as $key => $ev) {
             $criteriatransactions = CriteriaTransaction::where('ev_id',$ev->id)->get();
@@ -64,7 +64,7 @@ class GetEvPercent
     }
     public static function getEvOverAveragePercentByPillar($userid,$pillarid){
         $fulltbparray = ProjectMember::where('user_id',$userid)->pluck('full_tbp_id')->toArray();
-        $evs = Ev::whereIn('full_tbp_id',$fulltbparray)->get();
+        $evs = Ev::whereIn('full_tbp_id',$fulltbparray)->where('status','>=',5)->get();
         $totalpercent = 0;
         foreach ($evs as $key => $ev) {
             $criteriatransactions = CriteriaTransaction::where('ev_id',$ev->id)->where('pillar_id',$pillarid)->get();

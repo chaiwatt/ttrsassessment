@@ -100,15 +100,15 @@
                                             </tr>
                                         </thead>
                                         <tbody >
-                                            @foreach ($officers as $officer)
+                                            @foreach ($expertdetails as $expert)
                                                 <tr>
-                                                    <td>{{$officer->user->prefix->name}}{{$officer->user->name}}  {{$officer->user->lastname}}</td>
-                                                    <td>{{$officer->position}}</td>
-                                                    <td>{{$officer->organization}}</td>
-                                                    <td>{{$officer->expertbranch->name}}</td>
-                                                    <td>{{$officer->expereinceyear}} ปี {{$officer->expereincemonth}} เดือน</td>
+                                                    <td>{{$expert->user->prefix->name}}{{$expert->user->name}}  {{$expert->user->lastname}}</td>
+                                                    <td>{{$expert->position}}</td>
+                                                    <td>{{$expert->organization}}</td>
+                                                    <td>{{$expert->expertbranch->name}}</td>
+                                                    <td>{{$expert->expereinceyear}} ปี {{$expert->expereincemonth}} เดือน</td>
                                                     <td class="text-right"> 
-                                                        <a href="{{route('dashboard.admin.realtimereport.singledownload',['id' => $officer->user_id])}}" class=" btn btn-sm bg-info">ดาวน์โหลด</a>
+                                                        <a href="{{route('dashboard.admin.realtimereport.singleexpertdownload',['id' => $expert->user_id])}}" class=" btn btn-sm bg-info">ดาวน์โหลด</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

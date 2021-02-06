@@ -27,7 +27,7 @@ class OfficerDetail extends Model
     }
     public function getExpertfieldAttribute()
     {
-        return ExpertField::where('id',$this->user_id)->get();
+        return ExpertField::where('user_id',$this->user_id)->get();
     }
     public function ProjectMember($id)
     {

@@ -28,10 +28,12 @@ class ReportTTRSSingleOfficerExport implements WithMultipleSheets
     
     public function sheets(): array
     {
-        $projectmembers = ProjectMember::where('user_id',$this->userid)->get();
         $sheets = [];
+        $projectmembers = ProjectMember::where('user_id',$this->userid)->get();
+        $officer = OfficerDetail::where('user_id',$this->userid)->first();
+        $sheets[] = new ReportTTRSSingleOfficerExportFirstSheet($officer->id);
         foreach ($projectmembers as $key => $projectmember) {
-            $sheets[] = new ReportTTRSSingleOfficerExportSheet($projectmember->full_tbp_id);
+            $sheets[] = new ReportTTRSSingleOfficerExportSheet($projectmember->full_tbp_id,$this->userid);
         }
         return $sheets; 
     }

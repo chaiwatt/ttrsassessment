@@ -27,6 +27,14 @@
             @php
                 $user = $officer->user;
                 $projectmemberbelongeds = $officer->projectmember($user->id) 
+                // $minitbp = $fulltbp->minitbp;
+                // $businessplan = $minitbp->businessplan;
+                // 
+                // $projectgrade = $fulltbp->projectgrade;
+                // $resultissuedate = $fulltbp->resultissuedate(8);
+                // $projectassignment = $businessplan->projectassignment;
+                // $projectmembers = $fulltbp->projectmember;
+                // $financemessagearr = array();
             @endphp
                 <tr>
                     <td>{{ $user->prefix->name }}{{ $user->name }}  {{ $user->lastname }}</td>
@@ -41,17 +49,24 @@
                     <td>{{ $officer->expertbranch->name }}</td>
                     <td>
                         @if ($officer->expertfield->count() > 0)
-                            @foreach ($officer->expertfield as $key => $expertfield)
+                            @foreach ($officer->Expertfield as $key => $expertfield)
                             อันดับที่ {{$key + 1}}. {{$expertfield->detail}} &nbsp;
                             @endforeach
                         @endif
                     </td>
                     <td>{{ $projectmemberbelongeds->count() }}</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercent($officer->user_id), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,1), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,2), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,3), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,4), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercent($user->id), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($user->id,1), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($user->id,2), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($user->id,3), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($user->id,4), 2) }} %</td>
+                    
+                    {{-- <td>{{ $businessplan->code }}</td>
+                    <td>{{ $minitbp->minitbp_code }}</td>
+                    <td>{{ $fulltbp->fulltbp_code }}</td>
+                    <td>{{ $minitbp->project }}</td>
+                    <td>{{ $company->name }}</td>
+                    <td>{{ $company->companyservicetype }}</td> --}}
         @endforeach
 
     </tbody>

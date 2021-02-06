@@ -514,6 +514,11 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('getofficer','DashboardAdminRealtimeReportTTRSofficerController@GetOfficer')->name('dashboard.admin.realtimereport.getofficer');
                     Route::get('singledownload/{id}','DashboardAdminRealtimeReportTTRSofficerController@SingleDownload')->name('dashboard.admin.realtimereport.singledownload');
                 });
+                Route::group(['prefix' => 'expert'], function(){
+                    Route::get('','DashboardAdminRealtimeReportTTRSExpertController@Index')->name('dashboard.admin.realtimereport.expert');
+                    Route::get('getexpert','DashboardAdminRealtimeReportTTRSExpertController@GetExpert')->name('dashboard.admin.realtimereport.getexpert');
+                    Route::get('singleexpertdownload/{id}','DashboardAdminRealtimeReportTTRSExpertController@SingleExpertDownload')->name('dashboard.admin.realtimereport.singleexpertdownload');
+                });
                 Route::group(['prefix' => 'grade'], function(){
                     Route::get('','DashboardAdminRealtimeReportGradeController@Index')->name('dashboard.admin.realtimereport.grade');
                 });
