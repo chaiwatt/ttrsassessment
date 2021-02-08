@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GradesTableSeeder::class);
         $this->call(HomepagePillarsTableSeeder::class);
         $this->call(SearchGroupsTableSeeder::class);
-        $this->call(HomepageServicesTableSeeder::class);
+        $this->call(HomepageServicesTableSeeder::class);   
+        $this->call(SounddexApiTableSeeder::class);
         $this->call(ExtraCategoriesTableSeeder::class);
         $this->call(ExtraCriteriasTableSeeder::class);
         $this->call(IsicTablesSeeder::class);

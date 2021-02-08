@@ -23,10 +23,10 @@
     </tr>
     </thead>
     <tbody>
-        @foreach($officers as $officer)
+        @foreach($experts as $expert)
             @php
-                $user = $officer->user;
-                $projectmemberbelongeds = $officer->projectmember($user->id) 
+                $user = $expert->user;
+                $projectmemberbelongeds = $expert->projectmember($user->id) 
             @endphp
                 <tr>
                     <td>{{ $user->prefix->name }}{{ $user->name }}  {{ $user->lastname }}</td>
@@ -34,24 +34,24 @@
                     <td>{{ $user->address1 }} ตำบล{{ $user->province($user->province1_id) }} อำเภอ{{ $user->amphur($user->amphur1_id) }} จังหวัด{{ $user->tambol($user->tambol1_id) }} รหัสไปรษณีย์ {{$user->postal1}}</td>
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $officer->position }}</td>
-                    <td>{{ $officer->organization }}</td>
-                    <td>{{ $officer->educationlevel->name }}</td>
-                    <td>{{ !Empty($officer->expereinceyear) ? $officer->expereinceyear :0 }} ปี {{ !Empty($officer->expereincemonth) ? $officer->expereincemonth :0 }} เดือน</td>
-                    <td>{{ $officer->expertbranch->name }}</td>
+                    <td>{{ $expert->position }}</td>
+                    <td>{{ $expert->organization }}</td>
+                    <td>{{ $expert->educationlevel->name }}</td>
+                    <td>{{ !Empty($expert->expereinceyear) ? $expert->expereinceyear :0 }} ปี {{ !Empty($expert->expereincemonth) ? $expert->expereincemonth :0 }} เดือน</td>
+                    <td>{{ $expert->expertbranch->name }}</td>
                     <td>
-                        @if ($officer->expertfield->count() > 0)
-                            @foreach ($officer->expertfield as $key => $expertfield)
+                        @if ($expert->expertfield->count() > 0)
+                            @foreach ($expert->expertfield as $key => $expertfield)
                             อันดับที่ {{$key + 1}}. {{$expertfield->detail}} &nbsp;
                             @endforeach
                         @endif
                     </td>
                     <td>{{ $projectmemberbelongeds->count() }}</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercent($officer->user_id), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,1), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,2), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,3), 2) }} %</td>
-                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($officer->user_id,4), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercent($expert->user_id), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($expert->user_id,1), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($expert->user_id,2), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($expert->user_id,3), 2) }} %</td>
+                    <td>{{ number_format($getpercent::getEvOverAveragePercentByPillar($expert->user_id,4), 2) }} %</td>
         @endforeach
 
     </tbody>

@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('dashboard.admin.realtimereport.getofficer')}}" method="get">
+                        <form action="{{route('dashboard.admin.realtimereport.getexpert')}}" method="get">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">

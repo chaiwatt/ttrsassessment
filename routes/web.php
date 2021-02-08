@@ -478,6 +478,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'dashboard'], function(){
         Route::group(['prefix' => 'admin', 'middleware' => ('role:3,4,5,6')], function(){
             Route::group(['prefix' => 'search'], function(){
+                Route::group(['prefix' => 'sounddex'], function(){
+                    Route::get('','DashboardAdminSearchSounddexController@Index')->name('dashboard.admin.search.sounddex');
+                });
                 Route::group(['prefix' => 'project'], function(){
                     Route::get('','DashboardAdminSearchProjectController@Index')->name('dashboard.admin.search.project');
                 });
@@ -518,6 +521,10 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('','DashboardAdminRealtimeReportTTRSExpertController@Index')->name('dashboard.admin.realtimereport.expert');
                     Route::get('getexpert','DashboardAdminRealtimeReportTTRSExpertController@GetExpert')->name('dashboard.admin.realtimereport.getexpert');
                     Route::get('singleexpertdownload/{id}','DashboardAdminRealtimeReportTTRSExpertController@SingleExpertDownload')->name('dashboard.admin.realtimereport.singleexpertdownload');
+                });
+                Route::group(['prefix' => 'website'], function(){
+                    Route::get('visit','DashboardAdminRealtimeReportWebsiteController@visit')->name('dashboard.admin.realtimereport.website.visit');
+                    
                 });
                 Route::group(['prefix' => 'grade'], function(){
                     Route::get('','DashboardAdminRealtimeReportGradeController@Index')->name('dashboard.admin.realtimereport.grade');
