@@ -190,8 +190,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Verify expert</label>
-                                        <select name="verifyexpert" data-placeholder="Verify expert" class="form-control form-control-lg form-control-select2">
+                                        <label>ยืนยันผู้เจ้าหน้าที่ TTRS /เชี่ยวชาญ</label>
+                                        <select name="verifyexpert" data-placeholder="ยืนยันผู้เจ้าหน้าที่ TTRS /เชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
                                             @foreach ($verifyexpertstatuses as $verifyexpertstatus)                                                                
                                                 <option value="{{$verifyexpertstatus->id}}" @if ($generalinfo->verify_expert_status_id == $verifyexpertstatus->id) selected @endif> {{$verifyexpertstatus->name}} </option>
                                             @endforeach   

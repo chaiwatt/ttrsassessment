@@ -65,7 +65,9 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <td>Pillar </td> 
+                                        <td>Sub Pillar </td>   
+                                        <td>Sub Pillar Index </td>   
                                         <th>Criteria</th>                             
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
@@ -73,11 +75,13 @@
                                 <tbody>
                                     @foreach ($criterias as $key => $criteria)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        <td> {{$criteria->subpillarindex->subpillar->pillar->name}} </td> 
+                                        <td> {{$criteria->subpillarindex->subpillar->name}} </td> 
+                                        <td> {{$criteria->subpillarindex->name}} </td>   
                                         <td> {{$criteria->name}} </td>                                         
                                         <td> 
-                                            <a href="{{route('setting.admin.assessment.criteria.edit',['id' => $criteria->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.criteria.delete',['id' => $criteria->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            {{-- <a href="{{route('setting.admin.assessment.criteria.edit',['id' => $criteria->id])}}" class="btn btn-sm bg-primary">แก้ไข</a> --}}
+                                            <a href="{{route('setting.admin.assessment.criteria.delete',['id' => $criteria->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

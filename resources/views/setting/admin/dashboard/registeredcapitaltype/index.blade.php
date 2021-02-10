@@ -80,8 +80,8 @@
                                         <td> {{$registeredcapitaltype->min}} </td>  
                                         <td> {{$registeredcapitaltype->max}} </td>  
                                         <td> 
-                                            <a href="{{route('setting.admin.dashboard.registeredcapitaltype.edit',['id' => $registeredcapitaltype->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.dashboard.registeredcapitaltype.delete',['id' => $registeredcapitaltype->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.dashboard.registeredcapitaltype.edit',['id' => $registeredcapitaltype->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.dashboard.registeredcapitaltype.delete',['id' => $registeredcapitaltype->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach --}}

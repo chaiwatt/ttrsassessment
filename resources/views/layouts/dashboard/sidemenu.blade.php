@@ -176,15 +176,15 @@
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.assessment')?'nav-item-expanded':''}}">
-            <a href="#" class="nav-link"><span>การประเมิน</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
-                <li class="nav-item"><a href="{{route('setting.admin.assessment.criteriagroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">เกณฑ์การประเมิน</a></li>		             
-                <li class="nav-item"><a href="{{route('setting.admin.assessment.ev')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.ev')?'active':''}}">EV Template</a></li>		             
+            <a href="#" class="nav-link"><span>EV</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="EV">
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.assessment.criteriagroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">เกณฑ์การประเมิน</a></li>		              --}}
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.assessment.ev')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.ev')?'active':''}}">EV Template</a></li>		              --}}
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.evportion')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.evportion')?'active':''}}">EV Portion</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.pillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.pillar')?'active':''}}">Pillar</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.subpillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.subpillar')?'active':''}}">Sub Pillar</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.subpillarindex')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.subpillarindex')?'active':''}}">Sub Pillar Index</a></li>		             
-                <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">criteria</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">Criteria</a></li>		             
             </ul>
         </li>
         @if (Auth::user()->user_type_id >= 5)

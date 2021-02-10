@@ -107,9 +107,9 @@
                                                 @if ($fulltbp->allscoring == 0)
                                                     @if ($fulltbp->done_assessment != 0)
                                                             @if ($fulltbp->ev->status == 5)
-                                                                    <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn-sm bg-success">สรุปเกรด</a>
+                                                                    <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn btn-sm bg-success">สรุปเกรด</a>
                                                                 @else
-                                                                    <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ปรับปรุงคะแนน</a>
+                                                                    <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปรับปรุงคะแนน</a>
                                                             @endif
                                                         @else
                                                         <span class="badge badge-flat border-warning text-warning-600">รอเวลา</span>

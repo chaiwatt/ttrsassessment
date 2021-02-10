@@ -75,8 +75,8 @@
                                         <td> {{$key+1}} </td>
                                         <td> {{$religion->name}} </td>                                         
                                         <td> 
-                                            <a href="{{route('setting.admin.dashboard.religion.edit',['id' => $religion->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.dashboard.religion.delete',['id' => $religion->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.dashboard.religion.edit',['id' => $religion->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.dashboard.religion.delete',['id' => $religion->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

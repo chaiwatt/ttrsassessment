@@ -270,28 +270,28 @@
                                                             <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                         @else
                                                             @if ($fulltbp->refixstatus == 0)
-                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
+                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                                 @elseif($fulltbp->refixstatus == 1)
-                                                                    {{-- <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
+                                                                    {{-- <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
                                                                     <span class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</span>
                                                                 @elseif($fulltbp->refixstatus == 2)
-                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                             @endif       
                                                     @endif
                                                 </td>
                                                 <td> 
                                                     @if ($fulltbp->expertassignments->count() > 0)
                                                             @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
                                                                 @elseif($fulltbp->expertassignments->where('expert_assignment_status_id',2)->count() > 0)
                                                                     @if ($fulltbp->assignexpert !=2)
-                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
                                                                         @else
                                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
                                                                     @endif
                                                             @endif  
                                                         @else
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
                                                     @endif
                                                 </td>  
                                                 <td> 
@@ -329,14 +329,14 @@
                                                             @endif
 
                                                         @else
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
+                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
                                                 <td> 
                                                     @if ( $fulltbp->bol->count() != 0)
                                                             <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
                                                         @else
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
                                                     @endif
                                                 </td>  
                                                 <td>

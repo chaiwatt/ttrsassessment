@@ -72,9 +72,9 @@
                                                 <td> 
                                                     @if (!Empty($fulltbp->finalassessmentdate))
                                                             @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
-                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-success">ส่งแล้ว</a>
+                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>
                                                                 @else
-                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
+                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
                                                             @endif
                                                         @else
                                                             <span class="badge badge-flat border-warning text-warning-600">รอยืนยัน</span>

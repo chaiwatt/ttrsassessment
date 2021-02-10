@@ -76,8 +76,8 @@
                                         <td> {{$key+1}} </td>
                                         <td> {{$tag->name}} </td>                                         
                                         <td> 
-                                            <a href="{{route('setting.admin.website.tag.edit',['id' => $tag->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.website.tag.delete',['id' => $tag->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.website.tag.edit',['id' => $tag->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.website.tag.delete',['id' => $tag->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

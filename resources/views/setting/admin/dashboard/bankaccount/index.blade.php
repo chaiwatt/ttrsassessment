@@ -82,8 +82,8 @@
                                         <td> {{$bankaccount->accountno}} </td>
                                         <td> {{$bankaccount->banktype->name}} </td>
                                         <td> 
-                                            <a href="{{route('setting.admin.dashboard.bankaccount.edit',['id' => $bankaccount->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.dashboard.bankaccount.delete',['id' => $bankaccount->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.dashboard.bankaccount.edit',['id' => $bankaccount->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.dashboard.bankaccount.delete',['id' => $bankaccount->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

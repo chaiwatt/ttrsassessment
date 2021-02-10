@@ -47,4 +47,8 @@ class SettingAdminAssessmentSubPillarIndexController extends Controller
         $subpillars = SubPillar::where('pillar_id',$request->pillar)->get();
         return response()->json($subpillars);
     }
+    public function GetSubPillarIndex(Request $request){
+        $subpillarindexs = SubPillarIndex::where('sub_pillar_id',$request->subpillar)->get();
+        return response()->json($subpillarindexs);
+    }
 }

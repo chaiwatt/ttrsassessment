@@ -85,15 +85,15 @@
                                         <td> {{$ev->fulltbp->minitbp->project}} </td>  
                                         <td> 
                                             @if (Auth::user()->user_type_id == 4)
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข Criteria</a>
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id])}}" class="btn btn-sm bg-info">แก้ไข Criteria</a>
                                                 @elseif(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $ev->id])}}" class="btn-sm bg-info">แก้ไข Criteria</a>
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $ev->id])}}" class="btn btn-sm bg-info">แก้ไข Criteria</a>
                                             @endif
                                             
                                         </td>     
                                         <td> 
-                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id])}}" class="btn-sm bg-primary">แก้ไข</a>
-                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.deleteev',['id' => $ev->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                       
+                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.deleteev',['id' => $ev->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>                             
                                     </tr>
                                     @endforeach

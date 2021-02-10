@@ -150,7 +150,7 @@
                                             @endif
                                         </td>
                                         <td> 
-                                            <a type="button" href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="btn-sm bg-info">เพิ่มเติม</a>
+                                            <a type="button" href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="btn btn-sm bg-info">เพิ่มเติม</a>
                                         </td>                               
                                     </tr>
                                     @endforeach

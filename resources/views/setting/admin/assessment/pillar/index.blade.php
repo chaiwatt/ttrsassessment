@@ -11,7 +11,7 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.assessment.pillar.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Pillar<b><i class="icon-plus3"></i></b></a>
+                {{-- <a href="{{route('setting.admin.assessment.pillar.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Pillar<b><i class="icon-plus3"></i></b></a> --}}
             </div>
         </div>
 
@@ -77,8 +77,8 @@
                                         <td> {{$pillar->name}} </td>  
                                         <td> {{$pillar->percent}} </td>                                    
                                         <td>   
-                                            <a href="{{route('setting.admin.assessment.pillar.edit',['id' => $pillar->id])}}" class="btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.pillar.delete',['id' => $pillar->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.assessment.pillar.edit',['id' => $pillar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.assessment.pillar.delete',['id' => $pillar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

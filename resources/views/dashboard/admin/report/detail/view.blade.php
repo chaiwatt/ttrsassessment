@@ -67,7 +67,7 @@
                                                 <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
                                             </td>  
                                             <td> 
-                                                <a href="{{asset($company->businessplan->minitbp->attachment)}}" class="btn-sm bg-info" target="_blank">ดาวน์โหลด PDF</a>
+                                                <a href="{{asset($company->businessplan->minitbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">ดาวน์โหลด PDF</a>
                                             </td>  
                                             <td>
                                                 -
@@ -79,7 +79,7 @@
                                                     <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
                                                 </td>  
                                                 <td> 
-                                                    <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn-sm bg-info" target="_blank">ดาวน์โหลด PDF</a>
+                                                    <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">ดาวน์โหลด PDF</a>
                                                 </td>  
                                                 <td>
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-teal">ดาวน์โหลดเอกสารแนบ</a>

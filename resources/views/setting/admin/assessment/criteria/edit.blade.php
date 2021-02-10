@@ -55,7 +55,7 @@
                             <fieldset>	
                                 <div class="form-group">
                                     <label>Criteria</label>
-                                    <input type="text"  name="criteria" value="{{$criteria->name}}"  placeholder="เกณฑ์การประเมิน" class="form-control">
+                                    <input type="text"  name="criteria" value="{{$criteria->name}}"  placeholder="เกณฑ์การประเมิน" class="form-control form-control-lg">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

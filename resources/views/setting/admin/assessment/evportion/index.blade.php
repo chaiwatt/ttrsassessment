@@ -74,7 +74,7 @@
                                         <td> {{$evtype->name}} </td>  
                                         <td> {{$evtype->percent}} </td>                                    
                                         <td>   
-                                            <a href="{{route('setting.admin.assessment.evportion.edit',['id' => $evtype->id])}}" class="btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.assessment.evportion.edit',['id' => $evtype->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                         </td>
                                     </tr>
                                     @endforeach

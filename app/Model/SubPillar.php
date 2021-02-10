@@ -13,4 +13,12 @@ class SubPillar extends Model
     public function getPillarAttribute(){
         return Pillar::find($this->pillar_id);
     } 
+
+    // public function Singlepillar($pillarid){
+
+    //     return Pillar::find($pillarid)->name;
+    // } 
+    // public function getSubpillarAttribute(){
+    //     return SubPillar::find($this->sub_pillar_id);
+    // } 
 }

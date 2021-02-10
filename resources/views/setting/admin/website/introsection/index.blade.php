@@ -82,8 +82,8 @@
                                         <td> {{$introsection->text2}} </td>
                                         <td> {{$introsection->texteng2}} </td>                                      
                                         <td> 
-                                            <a href="{{route('setting.admin.website.introsection.edit',['id' => $introsection->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.website.introsection.delete',['id' => $introsection->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.website.introsection.edit',['id' => $introsection->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.website.introsection.delete',['id' => $introsection->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

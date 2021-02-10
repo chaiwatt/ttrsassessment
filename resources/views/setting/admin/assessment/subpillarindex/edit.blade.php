@@ -56,7 +56,7 @@
                             <fieldset>	
                                 <div class="form-group" >
                                     <label>Pillar</label>
-                                        <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-select2" disabled>
+                                        <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-lg form-control-select2" disabled>
                                             @foreach ($pillars as $pillar)
                                             <option value="{{$pillar->id}}" @if ($subpillarindex->pillar->id == $pillar->id) selected @endif>{{$pillar->name}}</option>
                                             @endforeach
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Sub Pillar</label>
-                                        <select name="subpillar" id="subpillar" aria-placeholder="pillar" class="form-control form-control-select2">
+                                        <select name="subpillar" id="subpillar" aria-placeholder="pillar" class="form-control form-control-lg form-control-select2">
                                             @foreach ($subpillars as $subpillar)
                                             <option value="{{$subpillar->id}}" @if ($subpillarindex->subpillar->id == $subpillar->id) selected @endif>{{$subpillar->name}}</option>
                                             @endforeach
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Sub Pillar Index</label>
-                                    <input type="text" name="subpillarindex" value="{{$subpillarindex->name}}"  placeholder="subpillar" class="form-control">
+                                    <input type="text" name="subpillarindex" value="{{$subpillarindex->name}}"  placeholder="subpillar" class="form-control form-control-lg">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

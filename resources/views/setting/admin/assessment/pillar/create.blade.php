@@ -56,11 +56,11 @@
                             <fieldset>	
                                 <div class="form-group">
                                     <label>ชื่อ</label>
-                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ Pillar" class="form-control">
+                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ Pillar" class="form-control form-control-lg">
                                 </div>
                                 <div class="form-group">
                                     <label>ร้อยละ</label>
-                                    <input type="text" name="percent" value="{{old('percent')}}"  placeholder="ร้อยละ" class="form-control">
+                                    <input type="text" name="percent" value="{{old('percent')}}"  placeholder="ร้อยละ" class="form-control form-control-lg">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

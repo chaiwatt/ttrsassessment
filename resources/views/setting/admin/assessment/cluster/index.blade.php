@@ -78,11 +78,11 @@
                                         <td> {{$assessmentgroup->name}} </td>  
                                         <td> {{$assessmentgroup->version}} </td>  
                                         <td> 
-                                            <a href="{{route('setting.admin.assessment.ev.editcluster',['id' => $assessmentgroup->id])}}" class=" badge bg-primary">แก้ไข weight</a>
+                                            <a href="{{route('setting.admin.assessment.ev.editcluster',['id' => $assessmentgroup->id])}}" class="btn btn-sm bg-primary">แก้ไข weight</a>
                                         </td>                                    
                                         <td>   
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $assessmentgroup->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $assessmentgroup->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $assessmentgroup->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $assessmentgroup->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

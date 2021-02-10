@@ -76,8 +76,8 @@
                                         <td> {{$key+1}} </td>
                                         <td> {{$faqcategory->name}} </td>                                         
                                         <td> 
-                                            <a href="{{route('setting.admin.website.faqcategory.edit',['id' => $faqcategory->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.website.faqcategory.delete',['id' => $faqcategory->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.website.faqcategory.edit',['id' => $faqcategory->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.website.faqcategory.delete',['id' => $faqcategory->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

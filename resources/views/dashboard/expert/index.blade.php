@@ -183,8 +183,8 @@
                                         <td> บริษัท ทดสอบ จำกัด </td> 
                                         <td> <span class="badge badge-flat border-info text-info-600">รอรับยืนยัน</span>  </td>                                                            
                                         <td> 
-                                            <a href="" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     {{-- @foreach ($testtopics as $key => $testtopic)                                    

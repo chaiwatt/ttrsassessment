@@ -82,9 +82,9 @@
                                         <td> {{$criteriagroup->version}} </td> 
                                         <td> {{$criteriagroup->sumweight}} </td>                                        
                                         <td> 
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.editweight',['id' => $criteriagroup->id])}}" class=" badge bg-primary">แก้ไข weight</a>
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $criteriagroup->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $criteriagroup->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.editweight',['id' => $criteriagroup->id])}}" class="btn btn-sm bg-primary">แก้ไข weight</a>
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.edit',['id' => $criteriagroup->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.assessment.criteriagroup.delete',['id' => $criteriagroup->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

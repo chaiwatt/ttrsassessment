@@ -54,12 +54,37 @@
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
-                                    <label>Criteria</label>
-                                    <input type="text"  name="criteria" value="{{old('criteria')}}"  placeholder="เกณฑ์การประเมิน" class="form-control">
+                                    <label>Pillar</label>
+                                        <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-lg form-control-select2">
+                                            <option value="0">==เลือก Pillar==</option>
+                                            @foreach ($pillars as $pillar)
+                                                <option value="{{$pillar->id}}">{{$pillar->name}}</option>
+                                            @endforeach
+                                        </select>
                                 </div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                <div id="pillar_wrapper" hidden>
+                                    <div class="form-group">
+                                        <label>Sub Pillar</label>
+                                            <select name="subpillar" id="subpillar" aria-placeholder="subpillar" class="form-control form-control-lg form-control-select2">
+                                            </select>
+                                    </div>
                                 </div>
+                                <div id="sub_pillar_wrapper" hidden>
+                                    <div class="form-group">
+                                        <label>Sub Pillar Index</label>
+                                            <select name="subpillarindex" id="subpillarindex" aria-placeholder="subpillarindex" class="form-control form-control-lg form-control-select2">
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Criteria</label>
+                                        <input type="text"  name="criteria" value="{{old('criteria')}}"  placeholder="Criteria" class="form-control form-control-lg">
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                    </div>
+                                </div>
+                             
+                               
                             </fieldset>
                         </form>
 					</div>
@@ -73,4 +98,83 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script>
+         var route = {
+            url: "{{ url('/') }}",
+            token: $('meta[name="csrf-token"]').attr('content'),
+            branchid: "{{Auth::user()->branch_id}}"
+        };
+        $(document).on('change', '#pillar', function(e) {
+            //console.log($(this).val());
+            var html ='';
+            getSubpillar($(this).val()).then(data => {
+                html += `<option value="0" >===เลือกรายการ===</option>`
+                data.forEach(function (ev,index) {
+                        html += `<option value="${ev['id']}" >${ev['name']}</option>`
+                    });
+                if(data.length == 0){
+                    $("#pillar_wrapper").attr("hidden",true);
+                }else{
+                    $("#pillar_wrapper").attr("hidden",false);
+                }
+                $("#subpillar").html(html);
+
+            }).catch(error => {})
+        });
+
+        function getSubpillar(pillar){
+            return new Promise((resolve, reject) => {
+                    $.ajax({
+                    url: `${route.url}/setting/admin/assessment/subpillarindex/getsubpillar`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    data: {
+                        pillar : pillar
+                    },
+                    success: function(data) {
+                        resolve(data)
+                    },
+                    error: function(error) {
+                        reject(error)
+                    },
+                    })
+                })
+        }
+
+        $(document).on('change', '#subpillar', function(e) {
+            var html ='';
+            getSubpillarIndex($(this).val()).then(data => {
+                html += `<option value="0" >===เลือกรายการ===</option>`
+                data.forEach(function (ev,index) {
+                        html += `<option value="${ev['id']}" >${ev['name']}</option>`
+                    });
+                if(data.length == 0){
+                    $("#sub_pillar_wrapper").attr("hidden",true);
+                }else{
+                    $("#sub_pillar_wrapper").attr("hidden",false);
+                }
+                $("#subpillarindex").html(html);
+
+            }).catch(error => {})
+        });
+
+        function getSubpillarIndex(subpillar){
+            return new Promise((resolve, reject) => {
+                    $.ajax({
+                    url: `${route.url}/setting/admin/assessment/subpillarindex/getsubpillarindex`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    data: {
+                        subpillar : subpillar
+                    },
+                    success: function(data) {
+                        resolve(data)
+                    },
+                    error: function(error) {
+                        reject(error)
+                    },
+                    })
+                })
+        }
+</script>
 @stop

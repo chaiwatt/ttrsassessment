@@ -75,8 +75,8 @@
                                         <td> {{$businessplan->code}} </td> 
                                         <td> {{$businessplan->company->name}} </td>  
                                         <td> 
-                                            <a href="{{route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
-                                            <a href="{{route('dashboard.admin.project.businessplan.delete',['id' => $businessplan->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                       
+                                            <a href="{{route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                            <a href="{{route('dashboard.admin.project.businessplan.delete',['id' => $businessplan->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>                                
                                     </tr>
                                     @endforeach

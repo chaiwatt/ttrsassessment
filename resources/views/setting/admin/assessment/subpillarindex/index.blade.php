@@ -67,20 +67,20 @@
                                 <thead>
                                     <tr>
                                         <th>Pillar</th>                           
-                                        <th>SubPillar</th>
-                                        <th>SubPillar Index</th>
+                                        <th>Sub Pillar</th>
+                                        <th>Sub Pillar Index</th>
                                         <th style="width:200px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($subpillarindexes as $key => $subpillarindex)
                                     <tr>    
-                                        <td> {{$subpillarindex->pillar->name}} </td>  
+                                        <td> {{$subpillarindex->subpillar->pillar->name}} </td>  
                                         <td> {{$subpillarindex->subpillar->name}} </td>  
                                         <td> {{$subpillarindex->name}} </td> 
                                         <td>   
-                                            <a href="{{route('setting.admin.assessment.subpillarindex.edit',['id' => $subpillarindex->id])}}" class="btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.subpillarindex.delete',['id' => $subpillarindex->id])}}" data-name="" onclick="confirmation(event)" class="btn-sm bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.assessment.subpillarindex.edit',['id' => $subpillarindex->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.assessment.subpillarindex.delete',['id' => $subpillarindex->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

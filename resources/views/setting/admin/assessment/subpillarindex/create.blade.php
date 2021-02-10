@@ -56,7 +56,7 @@
                             <fieldset>	
                                 <div class="form-group">
                                     <label>Pillar</label>
-                                        <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-select2">
+                                        <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-lg form-control-select2">
                                             <option value="0">==เลือก Pillar==</option>
                                             @foreach ($pillars as $pillar)
                                                 <option value="{{$pillar->id}}">{{$pillar->name}}</option>
@@ -66,12 +66,12 @@
                                 <div id="pillar_wrapper" hidden>
                                     <div class="form-group">
                                         <label>Sub Pillar</label>
-                                            <select name="subpillar" id="subpillar" aria-placeholder="subpillar" class="form-control form-control-select2">
+                                            <select name="subpillar" id="subpillar" aria-placeholder="subpillar" class="form-control form-control-lg form-control-select2">
                                             </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Sub Pillar Index</label>
-                                        <input type="text" name="subpillarindex" value="{{old('subpillar')}}"  placeholder="subpillar" class="form-control">
+                                        <input type="text" name="subpillarindex" value="{{old('subpillar')}}"  placeholder="subpillar" class="form-control form-control-lg">
                                     </div>
                                     <div class="text-right">
                                         <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -100,6 +100,7 @@
         $(document).on('change', '#pillar', function(e) {
             var html ='';
             getSubpillar($(this).val()).then(data => {
+            html += `<option value="0" >===เลือกรายการ===</option>`
                 data.forEach(function (ev,index) {
                         html += `<option value="${ev['id']}" >${ev['name']}</option>`
                     });

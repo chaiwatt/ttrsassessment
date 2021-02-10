@@ -84,9 +84,9 @@
                                          
                                         
                                         <td> 
-                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class=" badge bg-info" target="_blank">หน้าเพจ</a>
-                                            <a href="{{route('setting.admin.website.page.edit',['id' => $page->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.website.page.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
+                                            <a href="{{route('setting.admin.website.page.edit',['id' => $page->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.website.page.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

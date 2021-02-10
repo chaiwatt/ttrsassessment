@@ -171,10 +171,10 @@
                                         <td> 
                                             @if (Empty($minitbp->jdmessage))
                                                     @if (Auth::user()->user_type_id == 6)
-                                                        <a href="#" data-id="{{$minitbp->businessplan->projectassignment->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                        <a href="#" data-id="{{$minitbp->businessplan->projectassignment->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
                                                     @endif
                                                 @else
-                                                    <a href="#" data-id="{{$minitbp->id}}" class="btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                                    <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                         </td>  
                                         @if (Auth::user()->user_type_id == 4)
@@ -183,19 +183,19 @@
                                                         <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                     @else
                                                         @if ($minitbp->refixstatus == 0)
-                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
+                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                             @elseif($minitbp->refixstatus == 1)
-                                                                {{-- <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
+                                                                {{-- <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
                                                                 <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a>
                                                             @elseif($minitbp->refixstatus == 2)
-                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                         @endif
                                                 @endif
                                             </td> 
                                         @endif
                                         <td> 
-                                            <a type="button" href="{{asset($minitbp->attachment)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
-                                            <a type="button" href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>
+                                            <a type="button" href="{{asset($minitbp->attachment)}}" class="btn btn-sm bg-teal">ดาวน์โหลด</a>
+                                            <a type="button" href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
                                         </td>                                
                                     </tr>
                                     @endforeach

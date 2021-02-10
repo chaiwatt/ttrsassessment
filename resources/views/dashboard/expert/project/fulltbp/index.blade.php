@@ -116,18 +116,18 @@
                                                 @elseif($fulltbp->expertassignment->accepted == 1)
                                                     <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-danger text-danger-600 acceptfulltbp">ปฏิเสธ</a>
                                                 @elseif($fulltbp->expertassignment->accepted == 0)
-                                                    <a href="#" data-id="{{$fulltbp->id}}" class="btn-sm bg-warning acceptfulltbp"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยอมรับ</a>
+                                                    <a href="#" data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning acceptfulltbp"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยอมรับ</a>
                                             @endif
                                         </td> 
                                         <td> 
                                             @if ($fulltbp->expertassignment->accepted > 1)
-                                                <a href="{{route('dashboard.expert.project.comment.edit',['fulltbpid' => $fulltbp->id])}}" class="btn-sm bg-info">ลงความเห็น</a>                                      
+                                                <a href="{{route('dashboard.expert.project.comment.edit',['fulltbpid' => $fulltbp->id])}}" class="btn btn-sm bg-info">ลงความเห็น</a>                                      
                                             @endif  
                                         </td> 
                                         <td> 
                                             @if ($fulltbp->expertassignment->accepted > 1)
-                                                <a href="{{asset($fulltbp->attachment)}}" class="btn-sm bg-teal">ดาวน์โหลด</a>
-                                                <a href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" class="btn-sm bg-primary">รายละเอียด</a>                                      
+                                                <a href="{{asset($fulltbp->attachment)}}" class="btn btn-sm bg-teal">ดาวน์โหลด</a>
+                                                <a href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>                                      
                                             @endif      
                                         </td>                                
                                     </tr>

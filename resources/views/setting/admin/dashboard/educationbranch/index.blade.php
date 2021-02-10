@@ -76,8 +76,8 @@
                                         <td> {{$key+1}} </td>
                                         <td> {{$educationbranch->name}} </td>                                         
                                         <td> 
-                                            <a href="{{route('setting.admin.dashboard.educationbranch.edit',['id' => $educationbranch->id])}}" class=" badge bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.dashboard.educationbranch.delete',['id' => $educationbranch->id])}}" data-name="" onclick="confirmation(event)" class=" badge bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.dashboard.educationbranch.edit',['id' => $educationbranch->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.dashboard.educationbranch.delete',['id' => $educationbranch->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

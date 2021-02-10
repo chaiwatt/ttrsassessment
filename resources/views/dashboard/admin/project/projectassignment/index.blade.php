@@ -122,9 +122,9 @@
                                         </td> 
                                         <td> 
                                             @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
-                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
                                                 @else
-                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                             
                                         </td>  
@@ -148,9 +148,9 @@
                                         @if (Auth::user()->user_type_id>=6)
                                             <td> 
                                                 @if ($projectassignment->leader_id == null)
-                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-primary">มอบหมาย</a>
+                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
                                                     @else
-                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn-sm bg-warning">แก้ไข</a>
+                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">แก้ไข</a>
                                                 @endif
                                                 
                                             </td>    

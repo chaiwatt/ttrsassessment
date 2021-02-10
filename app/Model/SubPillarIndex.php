@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\SubPillar;
 use Illuminate\Database\Eloquent\Model;
 
 class SubPillarIndex extends Model
