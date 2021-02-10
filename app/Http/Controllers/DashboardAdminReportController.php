@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminReportController extends Controller
 {
-    // public function __construct() 
-    // { 
-    //     $this->middleware(['auth', 'verified']);
-    //     $this->middleware('role:4,5,6'); 
-    // }
+    public function __construct() 
+    { 
+        $this->middleware(['auth', 'verified']);
+        // $this->middleware('role:4,5,6'); 
+    }
     public function Index(){
         $auth = Auth::user();
         $businessplanarr = BusinessPlan::where('business_plan_status_id','>',2)->pluck('id')->toArray();

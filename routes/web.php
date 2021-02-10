@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('temp');
 // });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 //  // Authentication Routes...
 //  Route::get('login2', 'Auth\LoginController@showLoginForm')->name('login');
