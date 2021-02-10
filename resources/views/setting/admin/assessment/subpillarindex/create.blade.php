@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label>Pillar</label>
                                         <select name="pillar" id="pillar" aria-placeholder="pillar" class="form-control form-control-lg form-control-select2">
-                                            <option value="0">==เลือก Pillar==</option>
+                                            <option value="0">===เลือก Pillar===</option>
                                             @foreach ($pillars as $pillar)
                                                 <option value="{{$pillar->id}}">{{$pillar->name}}</option>
                                             @endforeach
