@@ -16,7 +16,7 @@ class FeatureController extends Controller
         $img = Image::make($file);  
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),960,540,2);
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),960,540,1);
         $featureimage = new FeatureImage();
         $featureimage->name = $feature;
         $featureimage->save();

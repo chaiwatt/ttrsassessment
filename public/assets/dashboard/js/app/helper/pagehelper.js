@@ -260,7 +260,6 @@ $("#file").on('change', function() {
         return ;
     }
     var formData = new FormData();
-    // var file = this.files[0];
     formData.append('file',file);
         $.ajax({
             url: `${route.url}/api/feature/upload`,  //Server script to process data

@@ -33,6 +33,7 @@ use niklasravnsborg\LaravelPdf\Facades\Pdf;
 class MiniTbpController extends Controller
 {
     public function EditSave(Request $request){
+      
         $minitbp = MiniTBP::find($request->id);
         $minitbpcode = $minitbp->minitbp_code;
         if(Empty($minitbpcode)){
@@ -51,6 +52,16 @@ class MiniTbpController extends Controller
         if(!Empty($request->otherbank)){
             $otherbank = $request->otherbank;
         }
+       
+        $objecttive = 0;
+        if(($request->finance1 == '1' || $request->finance2 == '1' || $request->finance3 == '1' || $request->finance4 == '1') && ($request->nonefinance1 == '' && $request->nonefinance2 == '' && $request->nonefinance3 == '' && $request->nonefinance4 == '' && $request->nonefinance5 == '') ){
+            $objecttive = 1;
+        }else if(($request->finance1 == '' && $request->finance2 == '' && $request->finance3 == '' && $request->finance4 == '') && ($request->nonefinance1 == '1' || $request->nonefinance2 == '1' || $request->nonefinance3 == '1' || $request->nonefinance4 == '1' || $request->nonefinance5 == '1') ){
+            $objecttive = 2;
+        }else if(($request->finance1 == '1' || $request->finance2 == '1' || $request->finance3 || '1' || $request->finance4 == '1') && ($request->nonefinance1 == '1' || $request->nonefinance2 == '1' || $request->nonefinance3 == '1' || $request->nonefinance4 == '1' || $request->nonefinance5 == '1') ){
+            $objecttive = 3;
+        }
+
         MiniTBP::find($request->id)->update([
             'project' => $request->project,
             'projecteng' => $request->projecteng,
@@ -72,6 +83,7 @@ class MiniTbpController extends Controller
             'nonefinance5_detail' => $request->nonefinance5detail,
             'nonefinance6' => $request->nonefinance6,
             'nonefinance6_detail' => $request->nonefinance6detail,
+            'minitbp_objecttive' => $objecttive,
             'contactprefix' => $request->contactprefix,
             'contactname' => $request->contactname,
             'contactlastname' => $request->contactlastname,

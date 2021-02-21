@@ -38,6 +38,7 @@ class CreateMiniTBPSTable extends Migration
             $table->string('nonefinance5_detail',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบุ');
             $table->string('nonefinance6',250)->nullable()->comment('อื่น ๆ โปรดระบุ');
             $table->string('nonefinance6_detail',250)->nullable()->comment('อื่น ๆ โปรดระบุ');
+            $table->char('minitbp_objecttive',1)->default(1)->comment('1=finance 2=none-finance 3=both');
             $table->unsignedBigInteger('contactprefix')->nullable();
             $table->string('contactname',250)->nullable();
             $table->string('contactlastname',250)->nullable();

@@ -24,6 +24,7 @@ use App\Model\ProjectScoring;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
+use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
 use App\Model\CriteriaGroupTransaction;
@@ -33,6 +34,10 @@ class DashboardAdminProjectAssessmentController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
+        NotificationBubble::where('target_user_id',$auth->id)
+                        ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
+                        ->where('notification_sub_category_id',7) // notification_sub_category_id 7 = การลงคะแนน
+                        ->where('status',0)->delete();
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
@@ -93,6 +98,9 @@ class DashboardAdminProjectAssessmentController extends Controller
         '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
         '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
         '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+
+        // $ev = Ev::where('full_tbp_id',$id)->first();
+        // return view('dashboard.admin.assessment.summary')->withEv($ev);
         return redirect()->route('dashboard.admin.project.assessment')->withSuccess('ลงคะแนนสำเร็จ');
     }
 

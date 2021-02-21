@@ -36,6 +36,7 @@ class SettingAdminWebsiteMenuController extends Controller
             $menu->save();
             return redirect()->back()->withSuccess('เพิ่มเมนูสำเร็จ');
         }else if($request->action == 'edit'){
+            // return 'here';
             if(!Empty($request->menuid)){
                 Menu::find($request->menuid)->update([
                     'parent_id' => $request->parentmenu,

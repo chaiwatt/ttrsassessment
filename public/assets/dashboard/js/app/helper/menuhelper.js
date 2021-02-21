@@ -25,6 +25,7 @@ $(document).on('change', '#directmenu', function(e) {
         $('#menuthai').val(data.name);
         $('#menuenglish').val(data.engname);
         $('#menuid').val(data.id);
+        $('#url').val(data.url);
         // if(data.page_id !== null){
         //     $('#page option[value='+data.page_id+']').prop("selected", true).change();
         // }else{

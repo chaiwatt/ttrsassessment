@@ -78,7 +78,6 @@ class ReportTTRSSingleOfficerExportSheet implements
                 }else if($userscore->scoretype == 2){
                     array_push($criteriainfo, '1');
                     array_push($criteriainfo, '');
-                   
                 }
             }else{
                 array_push($criteriainfo, '0');
@@ -100,8 +99,6 @@ class ReportTTRSSingleOfficerExportSheet implements
             }
             array_push($scoreinfo, $criteriainfo);
         }
-
-    
        return [
             $scoreinfo 
         ];

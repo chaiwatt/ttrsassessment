@@ -22,11 +22,9 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class ReportSingleExpertExportSheet implements 
-                                        // FromQuery,
                                         FromArray,
                                         ShouldAutoSize, 
                                         WithTitle, 
-                                        // WithMapping, 
                                         WithHeadings,
                                         WithEvents
 {

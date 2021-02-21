@@ -121,27 +121,11 @@
                 </div>
             </div>
             <div class="col-md-7">
-                {{-- <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ปฏิทินนัดหมาย</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="fullcalendar"></div>
-                    </div>
-                </div> --}}
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">TimeLine</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a> --}}
+
                         </div>
                     </div>
                     <div class="card-body">
@@ -150,9 +134,7 @@
                                 <thead>
                                     <tr>
                                         <th>วันที่</th> 
-                                        <th>รายละเอียด</th> 
-                                        {{-- <th>ประเภท</th>  --}}
-                                        {{-- <th>โดย</th>                                                             --}}
+                                        <th>รายละเอียด</th>
                                     </tr>
                                 </thead>
                                 <tbody id="timeline_wrapper_tr">
@@ -209,36 +191,6 @@
     if(check.length!=0){
         datavalue = check
     }
-
-    // option = {
-    //     tooltip: {
-    //         formatter: '{a} <br/>{b} : {c}%'
-    //     },
-    //     textStyle: {
-	// 	    fontFamily: 'Kanit',
-	//     },
-    //     series: [
-    //         {
-    //             name: 'gauge',
-    //             type: 'gauge',
-    //             detail: {
-    //                 formatter: '{value}%'
-    //             },
-    //             min:0,
-    //             max:100,
-    //             startAngle:0,
-    //             endAngle:180,
-    //             clockwise:false,
-    //             // axisLabel: { textStyle: { color: 'auto' } },
-    //             data: [
-    //                 {
-    //                     value: datavalue, 
-    //                     name: "{{@$businessplans[0]->businessplanstatus->name}}"
-    //                 }
-    //             ]
-    //         }
-    //     ]
-    // };
 
     option = {
         textStyle: {
@@ -404,31 +356,6 @@
                     }).render();
                 }
             }).catch(error => {})
-            // var html ='';
-            // var infostatus = '';
-            // getTimeLine("{{Auth::user()->id}}").then(data => {
-            //         data.forEach(function (timeline,index) {
-            //             var doctype = '';
-            //             if(timeline.message_type == 1){
-            //                 doctype ='เอกสาร Mini TBP';
-            //             }else if(timeline.message_type == 2){
-            //                 doctype ='แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)';
-            //             }
-            //             html += `<tr >                                        
-            //                 <td> ${timeline.createdatth} </td>                            
-            //                 <td> ${timeline.details} </td>     
-                                           
-                           
-            //             </tr>`
-            //             if(timeline.status == 0){
-            //                 infostatus += `<div class="alert alert-info alert-styled-left alert-dismissible">
-            //                         <button type="button" id="alertmessage" data-id ="${timeline.id}" class="close" data-dismiss="alert"><span>&times;</span></button>${timeline.details}
-            //                 </div>`
-            //             }
-            //             });
-            //          $("#timeline_wrapper_tr").html(html);
-            //          $("#infostatus").html(infostatus);
-            // }).catch(error => {})
         });
 
     $(document).on('click', '#alertmessage', function(e) {

@@ -25,8 +25,15 @@
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-archive"></i> <span>โครงการ</span>
         @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
-            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+            @if ($sharenotificationbubbles->where('notification_category_id','1')->where('notification_sub_category_id','6')->count() > 0)
+                @if (Auth::user()->user_type_id == 5)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            @else
+                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+            @endif
         @endif
+
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
         @if (Auth::user()->user_type_id >=5)
@@ -157,6 +164,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.slide')?'active':''}}">ภาพสไลด์</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.introsection')?'active':''}}">Intro section</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าเพจ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.website.announce')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.announce')?'active':''}}">ประกาศ</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu.create')?'active':''}}">เมนู</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้าแรกพิเศษ</a></li>	
@@ -201,9 +209,9 @@
     @if (Auth::user()->user_type_id >=4)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span>
-        @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
+        {{-- @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
             <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">รายงาน</span>
-        @endif
+        @endif --}}
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'nav-item-expanded':''}}">
@@ -242,9 +250,9 @@
 
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.search')?'nav-item-expanded nav-item-open':''}}">
         <a href="#" class="nav-link"><i class="icon-search4"></i> <span>ค้นหา</span>
-            @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
+            {{-- @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ค้นหา</span>
-            @endif
+            @endif --}}
         </a>
         <ul class="nav nav-group-sub" data-submenu-title="ค้นหา">
             

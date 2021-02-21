@@ -43,7 +43,7 @@
                 {{ $errors->first() }}
             </div>
         @endif
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -100,38 +100,43 @@
                         <h6 class="card-title">รายการเจ้าหน้าที่ TTRS</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
+                        <div class="table-responsive" >
+                            <table class="table table-striped" id="officertable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อ-สกุล</th>
+                                        <th>ความเชี่ยวชาญ</th>
                                         <th>โครงการรับผิดชอบ</th> 
-                                        {{-- <th>เพิ่มเติม</th>  --}}
                                     </tr>
                                 </thead>
-                                <tbody id="reportsearch_wrapper">
+                                <tbody>
                                     @foreach ($officers as $officer)
                                     <tr>
                                         <td> 
                                             <a href="{{route('dashboard.admin.search.officer.profile',['id' => $officer->id])}}" class="text-info" target="_blank">{{$officer->name}} {{$officer->lastname}}</a>
                                         </td> 
+                                        <td>
+                                            {{$officer->officerbranch}}
+                                        </td>
                                         <td> 
                                             <ul class="list list-unstyled mb-0">
-                                                @foreach ($officer->fulltbpofficer as $fulltbp)
-                                                @php
-                                                    $color = "bg-grey-300";
-                                                    $status = "กำลังดำเนินการ";
-                                                    if($fulltbp->status == 3){
-                                                        $color = "bg-success-400";
-                                                        $status = "เสร็จสิ้น";
-                                                    }
-                                                @endphp
-                                                <li>
-                                                    <i class="icon-primitive-dot mr-2"></i>
-                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
-                                                    <span class="badge badge-pill {{$color}} ml-20 ml-md-0">{{$status}}</span>
-                                                </li>
-                                                @endforeach
+                                                @if (!empty($officer->projectbelongofficer))
+                                                    @foreach ($officer->projectbelongofficer as $fulltbp)
+                                                        @php
+                                                            $color = "bg-grey-300";
+                                                            $status = "กำลังดำเนินการ";
+                                                            if($fulltbp->status == 3){
+                                                                $color = "bg-success-400";
+                                                                $status = "เสร็จสิ้น";
+                                                            }
+                                                        @endphp
+                                                        <li>
+                                                            <i class="icon-primitive-dot mr-2"></i>
+                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                            <span class="badge badge-pill {{$color}} ml-20 ml-md-0">{{$status}}</span>
+                                                        </li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </td> 
                                         {{-- <td> yyy </td>   --}}
@@ -149,12 +154,26 @@
 @endsection
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/searchofficerhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
-
+        $('#officertable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
     </script>
 @stop

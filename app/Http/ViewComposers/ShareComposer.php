@@ -40,6 +40,7 @@ class ShareComposer
         $sharepages = Page::paginate(3);
         $sharefrontpage = FrontPage::first();
         $sharenotificationbubbles = NotificationBubble::where('target_user_id',@$auth->id)->where('status',0)->get();
+        // dd($sharenotificationbubbles);
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)
             ->withShareunreadmessages($shareunreadmessages)

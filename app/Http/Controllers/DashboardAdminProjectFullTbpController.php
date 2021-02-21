@@ -81,11 +81,10 @@ class DashboardAdminProjectFullTbpController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-        NotificationBubble::where('target_user_id',$auth->id)
-                        ->where('notification_category_id',1)
-                        ->where('notification_sub_category_id',5)
-                        ->where('status',0)->delete();                      
-        // $fulltbps = FullTbp::where('status',2)->get();
+        NotificationBubble::where('target_user_id',Auth::user()->id)
+                    ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
+                    ->where('notification_sub_category_id',5) // notification_sub_category_id 5 = Full TBP
+                    ->where('status',0)->delete();                  
         $fulltbps = FullTbp::get();
         if($auth->user_type_id < 5){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)

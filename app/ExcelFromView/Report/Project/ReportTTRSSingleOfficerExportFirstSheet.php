@@ -47,6 +47,7 @@ class ReportTTRSSingleOfficerExportFirstSheet implements
                 $_expertfield .= ' อันดับที่ ' . ($key + 1) . ' ' . $expertfield->detail ;
             }
        }
+       
        $user = $officer->user;
        $projectmemberbelongeds = $officer->projectmember($user->id);
        array_push($officerinfos, $user->prefix->name.$user->name . ' ' . $user->lastname);

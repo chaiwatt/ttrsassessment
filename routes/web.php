@@ -50,6 +50,7 @@ Route::get('', 'HomeController@Index')->name('landing.index');
 Route::get('front', 'HomeController@Front')->name('landing.front');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
 Route::get('blog', 'HomeController@Blog')->name('landing.blog');
+Route::get('announce', 'HomeController@announce')->name('landing.announce');
 Route::get('tag/{slug}', 'HomeController@Tag')->name('landing.tag');
 Route::get('cate/{slug}', 'HomeController@Category')->name('landing.cate');
 Route::get('search', 'HomeController@Search')->name('landing.search');
@@ -74,9 +75,18 @@ Route::group(['prefix' => 'api'], function(){
 
     Route::group(['prefix' => 'report'], function(){
         Route::group(['prefix' => 'chart'], function(){
-            Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');            
+            Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');    
+            Route::post('chartdata','Api\ReportChartController@ChartData')->name('api.report.chart.chartdata');         
         }); 
     }); 
+    Route::group(['prefix' => 'adminreport'], function(){
+        Route::group(['prefix' => 'download'], function(){
+            Route::get('numproject','Api\AdminReportController@NumProject')->name('api.adminreport.download.numproject');           
+            Route::get('projectgrade','Api\AdminReportController@ProjectGrade')->name('api.adminreport.download.projectgrade');   
+            Route::get('projectindustry','Api\AdminReportController@ProjectIndustry')->name('api.adminreport.download.projectindustry'); 
+            Route::get('projectobjective','Api\AdminReportController@ProjectObjective')->name('api.adminreport.download.projectobjective'); 
+        });            
+    });
     Route::group(['prefix' => 'user'], function(){
         Route::post('updateverifyexpert','Api\UserController@UpdateVerifyExpert')->name('api.user.updateverifyexpert');            
     }); 
@@ -886,6 +896,16 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'pagecategory'], function(){
                     Route::get('create','SettingAdminWebsitePageCategoryController@Create')->name('setting.admin.website.pagecategory.create'); 
                     Route::post('crud','SettingAdminWebsitePageCategoryController@Crud')->name('setting.admin.website.pagecategory.crud');
+                });
+                Route::group(['prefix' => 'announce'], function(){
+                    Route::get('','SettingAdminWebsiteAnnounceController@Index')->name('setting.admin.website.announce');           
+                    Route::get('create','SettingAdminWebsiteAnnounceController@Create')->name('setting.admin.website.announce.create'); 
+                    Route::post('upload','SettingAdminWebsiteAnnounceController@Upload')->name('setting.admin.website.announce.upload'); 
+                    Route::post('deleteattachment','SettingAdminWebsiteAnnounceController@DeleteattAchment')->name('setting.admin.website.announce.deleteattachment'); 
+                    Route::post('createsave','SettingAdminWebsiteAnnounceController@CreateSave')->name('setting.admin.website.announce.createsave'); 
+                    Route::get('edit/{id}','SettingAdminWebsiteAnnounceController@Edit')->name('setting.admin.website.announce.edit'); 
+                    Route::post('editsave/{id}','SettingAdminWebsiteAnnounceController@EditSave')->name('setting.admin.website.announce.editsave'); 
+                    Route::get('delete/{id}','SettingAdminWebsiteAnnounceController@Delete')->name('setting.admin.website.announce.delete'); 
                 });
                 Route::group(['prefix' => 'faqcategory'], function(){
                     Route::get('','SettingAdminWebsiteFaqCategoryController@Index')->name('setting.admin.website.faqcategory');           

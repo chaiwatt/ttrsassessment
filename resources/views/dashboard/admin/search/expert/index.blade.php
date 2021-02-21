@@ -43,7 +43,7 @@
                 {{ $errors->first() }}
             </div>
         @endif
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -52,7 +52,6 @@
                                     <div class="form-group">
                                         <label>ประเภทการค้นหา</label><span class="text-danger">*</span>
                                         <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-lg form-control-select2">
-                                            {{-- <option value="0000">===เลือก รายการ===</option> --}}
                                             <option value="0">ชื่อ-สกุล</option>
                                             <option value="1">สาขาความเชี่ยวชาญ</option>
                                             <option value="2">ชื่อโครงการ</option>
@@ -73,10 +72,6 @@
                                         @endforeach
                                     </select>
                                 </div> 
-                                {{-- <div id="searchprojectname_wrapper" class="col-md-6" hidden>
-                                    <label>ชื่อโครงการ</label>
-                                    <input type="text"  name="searchprojectname" id="searchprojectname" value=""  placeholder="ชื่อโครงการ" class="form-control form-control-lg" >
-                                </div>      --}}
                                 <div id="searchprojectname_wrapper" class="col-md-6" hidden >
                                     <label>โครงการ</label>
                                     <select name="searchprojectname" id="searchprojectname" data-placeholder="โครงการ" class="form-control form-control-lg form-control-select2">
@@ -98,11 +93,15 @@
                                     <label>คำค้น</label>
                                     <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control form-control-lg" >
                                 </div>
+                                <div class="col-md-12">
+                                    <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>  
+                                    <button type="submit" name="btnsubmit" value="search" class="btn btn-sm bg-teal float-right">ค้นหา</button>  
+                                </div>
                             </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -111,11 +110,11 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="experttable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อ-สกุล</th>
-                                        {{-- <th>ความเชี่ยวชาญ</th>  --}}
+                                        <th>ความเชี่ยวชาญ</th>
                                         <th>โครงการรับผิดชอบ</th> 
                                     </tr>
                                 </thead>
@@ -125,26 +124,31 @@
                                         <td> 
                                             <a href="{{route('dashboard.admin.search.expert.profile',['id' => $expert->id])}}" class="text-info" target="_blank">{{$expert->name}} {{$expert->lastname}}</a>
                                         </td> 
+                                        <td>
+                                            {{$expert->expertbranch}}
+                                        </td>
                                         <td> 
+                                            {{-- {{$expert->projectbelongexpert}} --}}
                                             <ul class="list list-unstyled mb-0">
-                                                @foreach ($expert->fulltbpexpert as $fulltbp)
-                                                @php
-                                                    $color = "bg-grey-300";
-                                                    $status = "กำลังดำเนินการ";
-                                                    if($fulltbp->status == 3){
-                                                        $color = "bg-success-400";
-                                                        $status = "เสร็จสิ้น";
-                                                    }
-                                                @endphp
-                                                <li>
-                                                    <i class="icon-primitive-dot mr-2"></i>
-                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
-                                                    <span class="badge badge-pill {{$color}} ml-20 ml-md-0">{{$status}}</span>
-                                                </li>
-                                                @endforeach
+                                                @if ($expert->projectbelongexpert->count() > 0))
+                                                    @foreach ($expert->projectbelongexpert as $fulltbp)
+                                                        @php
+                                                            $color = "bg-grey-300";
+                                                            $status = "กำลังดำเนินการ";
+                                                            if($fulltbp->status == 3){
+                                                                $color = "bg-success-400";
+                                                                $status = "เสร็จสิ้น";
+                                                            }
+                                                        @endphp
+                                                        <li>
+                                                            <i class="icon-primitive-dot mr-2"></i>
+                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                            <span class="badge badge-pill {{$color}} ml-20 ml-md-0">{{$status}}</span>
+                                                        </li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </td>  
-                                        {{-- <td> yyy </td>   --}}
                                     </tr>  
                                     @endforeach
                                 </tbody>
@@ -152,7 +156,6 @@
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
     </div>
@@ -165,6 +168,19 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
-
+        $('#experttable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
     </script>
 @stop

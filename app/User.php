@@ -13,6 +13,7 @@ use App\Model\UserGroup;
 // use App\Model\UserPosition;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
+use App\Model\ExpertBranch;
 use App\Model\ExpertDetail;
 use App\Model\OfficerDetail;
 use App\Model\ProjectMember;
@@ -91,10 +92,37 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return UserStatus::find($this->user_status_id);
     }
-    // public function getUserPositionAttribute()
-    // {
-    //     return UserPosition::find($this->user_position_id);
-    // }
+    public function getExpertBranchAttribute()
+    {
+        $expert = ExpertDetail::where('user_id',$this->id)->first();
+        return ExpertBranch::find($expert->expert_branch_id)->name;
+    }
+    public function getProjectBelongExpertAttribute()
+    {
+        $fulltbparr = ExpertAssignment::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();
+        $fulltbuniqueparr = array_unique($fulltbparr);
+        return FullTbp::whereIn('id',$fulltbuniqueparr)->get();
+    }
+    public function getOfficerBranchAttribute()
+    {
+        $officer = OfficerDetail::where('user_id',$this->id)->first();
+        return ExpertBranch::find($officer->officer_branch_id)->name;
+    }
+    public function getProjectBelongOfficerAttribute()
+    {
+        $projectleaderassingnmentarr = ProjectAssignment::where('leader_id',$this->id)->pluck('full_tbp_id')->toArray();
+        $projectcoleaderassingnmentarr = ProjectAssignment::where('coleader_id',$this->id)->pluck('full_tbp_id')->toArray();
+       
+        $jdandadmin = User::where('id',$this->id)->where('user_type_id','>=',5)->pluck('id')->toArray();
+
+        $projectmembers = ProjectMember::whereIn('user_id',$jdandadmin)->pluck('full_tbp_id')->toArray();
+
+        $fulltbparr = ExpertAssignment::where('user_id',$this->id)->pluck('full_tbp_id')->toArray();
+
+        $fulltbpiduniques = array_unique(array_merge($projectleaderassingnmentarr,$projectcoleaderassingnmentarr,$projectmembers,$fulltbparr));
+        return FullTbp::whereIn('id',$fulltbpiduniques)->get();
+    }
+
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);

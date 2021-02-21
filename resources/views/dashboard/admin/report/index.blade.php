@@ -250,55 +250,39 @@
                             จำนวนสมัครสมาชิก
                         </div>
                     </div>
-
                     <div class="container-fluid">
                         <div id="members-online"></div>
                     </div>
                 </div>
-             
-
             </div>
 
             <div class="col-lg-3">
-
-                <!-- Today's revenue -->
                 <div class="card bg-blue-400">
                     <div class="card-body">
                         <div class="d-flex">
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
                         </div>
-                        
                         <div>
                             จำนวนยื่น Mini Tbp
                         </div>
                     </div>
-
                     <div id="today-revenue"></div>
                 </div>
-                <!-- /today's revenue -->
-
             </div>
             <div class="col-lg-3">
-
-                <!-- Today's revenue -->
                 <div class="card bg-pink-400">
                     <div class="card-body">
                         <div class="d-flex">
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
                         </div>
-                        
                         <div>
                             จำนวนยื่น Full TBP
                         </div>
                     </div>
-
                     <div id="today-revenue"></div>
                 </div>
-                <!-- /today's revenue -->
-
             </div>
             <div class="col-lg-3">
-                <!-- Today's revenue -->
                 <div class="card bg-orange-400">
                     <div class="card-body">
                         <div class="d-flex">
@@ -322,18 +306,13 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">รายการโครงการ</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                <i class="icon-calendar3 mr-2"></i>
-                                <span></span>
-                            </a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-striped" >
                                 <thead>
                                     <tr>
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
                                         <th>สถานะ</th>
                                         <th>วันนัดประชุมก่อนลงพื้นที่</th>
@@ -344,45 +323,317 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $fulltbp)
-                                    @php
-                                        $check = Auth::user()->IsExpert($fulltbp->id);
-                                    @endphp
-                                    <tr> 
-                                        {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
-                                        <td> 
-                                            <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
-                                        </td>  
-                                        <td> 
-                                            @if ($fulltbp->status == 3)
-                                                    <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                                @else
-                                                <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                            @endif
-                                        </td>  
-                                        <td> {{$fulltbp->briefingdate}} </td>  
-                                        <td> {{$fulltbp->assessmentdate}} </td>  
-                                        <td> {{$fulltbp->finalassessmentdate}} </td>  
-                                        <td> 
-                                            @if (!Empty($check))
-                                                @if ($fulltbp->expertassignment->accepted == 0)
-                                                        <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
-                                                        <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
-                                                    @elseif($fulltbp->expertassignment->accepted == 2)
-                                                        <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                        @php
+                                            $check = Auth::user()->IsExpert($fulltbp->id);
+                                        @endphp
+                                        <tr> 
+                                            <td> 
+                                                <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
+                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                            </td>  
+                                            <td> 
+                                                @if ($fulltbp->status == 3)
+                                                        <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                                    @else
+                                                    <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                 @endif
-                                            @endif
-                                        </td> 
-                                    </tr>
+                                            </td>  
+                                            <td> {{$fulltbp->briefingdate}} </td>  
+                                            <td> {{$fulltbp->assessmentdate}} </td>  
+                                            <td> {{$fulltbp->finalassessmentdate}} </td>  
+                                            <td> 
+                                                @if (!Empty($check))
+                                                    @if ($fulltbp->expertassignment->accepted == 0)
+                                                            <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
+                                                            <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
+                                                        @elseif($fulltbp->expertassignment->accepted == 2)
+                                                            <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                    @endif
+                                                @endif
+                                            </td> 
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>      
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
+
+        @if (Auth::user()->user_type_id >= 5)
+        <div class="row">
+        @if ($numprojectcollections->count() > 0)
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">จำนวนโครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="numproject_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="numproject_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
+                                        <a href="#" data-toggle="modal" id="numproject_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="{{route('api.adminreport.download.numproject')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="chart-container">
+                                    <div class="chart has-fixed-height" id="participate_chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="testtopictable">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th style="width: 25%">ปีโครงการ</th> 
+                                                <th style="width: 25%">จำนวน Mini TBP</th>
+                                                <th style="width: 25%">จำนวน Full TBP</th>
+                                                <th style="width: 25%">ประเมินสำเร็จ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($numprojectcollections as $key => $numprojectcollection)
+                                            @if ($key <=5)
+                                                <tr> 
+                                                    <td> {{$numprojectcollection['year']}} </td>  
+                                                    <td> {{$numprojectcollection['minitpbs']}} </td>  
+                                                    <td> {{$numprojectcollection['fulltbps']}} </td>  
+                                                    <td> {{$numprojectcollection['finished']}} </td>  
+                                                </tr>
+                                            @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+            @if ($projectgradecollections->count() > 0)
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">จำนวนโครงการตามเกรดการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="project_grade_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="project_grade_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
+                                        <a href="#" data-toggle="modal" id="project_grade_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="{{route('api.adminreport.download.projectgrade')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="chart-container">
+                                    <div class="chart has-fixed-height" id="grade_chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="testtopictable">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th style="width: 10%">ปี</th> 
+                                                <th style="width: 9%">AAA</th> 
+                                                <th style="width: 9%">AA</th>
+                                                <th style="width: 9%">A</th>
+                                                <th style="width: 9%">BBB</th>
+                                                <th style="width: 9%">BB</th>
+                                                <th style="width: 9%">B</th>
+                                                <th style="width: 9%">CCC</th>
+                                                <th style="width: 9%">CC</th>
+                                                <th style="width: 9%">C</th>
+                                                <th style="width: 9%">D</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($projectgradecollections as $key => $projectgradecollection)
+                                               @if ($key <=5)
+                                                <tr> 
+                                                    <td> {{$projectgradecollection['year']}} </td>  
+                                                    <td> {{$projectgradecollection['AAA']}} </td>  
+                                                    <td> {{$projectgradecollection['AA']}} </td> 
+                                                    <td> {{$projectgradecollection['A']}} </td> 
+                                                    <td> {{$projectgradecollection['BBB']}} </td> 
+                                                    <td> {{$projectgradecollection['BB']}} </td> 
+                                                    <td> {{$projectgradecollection['B']}} </td> 
+                                                    <td> {{$projectgradecollection['CCC']}} </td> 
+                                                    <td> {{$projectgradecollection['CC']}} </td> 
+                                                    <td> {{$projectgradecollection['C']}} </td> 
+                                                    <td> {{$projectgradecollection['D']}} </td> 
+                                                </tr>
+                                               @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+         
+            @if ($projectindustrycollections->count() > 0)
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">โครงการตามกลุ่มอุตสาหกรรม ปี {{intVal(date("Y"))+543}}</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="project_industry_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="project_industry_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
+                                        <a href="#" data-toggle="modal" id="project_industry_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="{{route('api.adminreport.download.projectindustry')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="chart-container">
+                                    <div class="chart has-fixed-height" id="industrygroup_chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="testtopictable">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th style="width: 10%">ปี</th> 
+                                                <th style="width: 9%">Next-generation Automotive</th> 
+                                                <th style="width: 9%">Smart Electronics</th>
+                                                <th style="width: 9%">Affluent, Medical and Wellness Tourism</th>
+                                                <th style="width: 9%">Agriculture and Biotechnology</th>
+                                                <th style="width: 9%">Food for the Future</th>
+                                                <th style="width: 9%">Robotics</th>
+                                                <th style="width: 9%">Aviation and Logistics</th>
+                                                <th style="width: 9%">Biofuels and Biochemicals</th>
+                                                <th style="width: 9%">Digital</th>
+                                                <th style="width: 9%">Medical Hub</th>
+                                                <th style="width: 9%">Defense</th>
+                                                <th style="width: 9%">Education and Skill Development</th>
+                                                <th style="width: 9%">อื่นๆ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($projectindustrycollections as $key => $projectindustrycollection)
+                                               @if ($key <=5)
+                                                <tr> 
+                                                    <td> {{$projectindustrycollection['year']}} </td>  
+                                                    <td> {{$projectindustrycollection['automotive']}} </td>  
+                                                    <td> {{$projectindustrycollection['smartelectronic']}} </td> 
+                                                    <td> {{$projectindustrycollection['affluent']}} </td> 
+                                                    <td> {{$projectindustrycollection['agriculture']}} </td> 
+                                                    <td> {{$projectindustrycollection['food']}} </td> 
+                                                    <td> {{$projectindustrycollection['robotic']}} </td> 
+                                                    <td> {{$projectindustrycollection['aviation']}} </td> 
+                                                    <td> {{$projectindustrycollection['biofuel']}} </td> 
+                                                    <td> {{$projectindustrycollection['digital']}} </td> 
+                                                    <td> {{$projectindustrycollection['medical']}} </td> 
+                                                    <td> {{$projectindustrycollection['defense']}} </td> 
+                                                    <td> {{$projectindustrycollection['education']}} </td> 
+                                                    <td> {{$projectindustrycollection['other']}} </td> 
+                                                </tr>
+                                               @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+         
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">วัตถุประสงค์ของการขอรับการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="project_objective_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="project_objective_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
+                                        <a href="#" data-toggle="modal" id="project_objective_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="{{route('api.adminreport.download.projectobjective')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="chart-container">
+                                    <div class="chart has-fixed-height" id="financial_chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="testtopictable">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th style="width: 10%">ปี</th> 
+                                                <th style="width: 25%">ด้านการเงิน</th> 
+                                                <th style="width: 25%">ไม่ใช่ด้านการเงิน</th>
+                                                <th style="width: 40%">ด้านการเงินและไม่ใช่ด้านการเงิน</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($objecttivecollections as $key => $objecttivecollection)
+                                               @if ($key <=5)
+                                                <tr> 
+                                                    <td> {{$objecttivecollection['year']}} </td>  
+                                                    <td> {{$objecttivecollection['finance']}} </td>  
+                                                    <td> {{$objecttivecollection['nonfinance']}} </td> 
+                                                    <td> {{$objecttivecollection['bothobjecttive']}} </td> 
+                                                </tr>
+                                               @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>      
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -396,79 +647,6 @@
                     </div>
                     <div class="card-body">
                         <div class="fullcalendar-basic"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จำนวนโครงการต่อการยื่น ปี2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="participate_chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จำนวนโครงการตามเกรดการประเมิน ปี2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="grade_chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">โครงการตามกลุ่มอุตสาหกรรม ปี2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="industrygroup_chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">วัตถุประสงค์ของการขอรับการประเมิน ปี2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="financial_chart"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -502,6 +680,21 @@
         token: $('meta[name="csrf-token"]').attr('content'),
         branchid: "{{Auth::user()->branch_id}}"
     };
+
+    $('#maintable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
 
     $(document).on('click', '.reject', function(e) {
         $('#btn_modal_expertreject_reason').data('id',$(this).data('id')); //setter

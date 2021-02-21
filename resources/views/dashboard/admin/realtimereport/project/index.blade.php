@@ -50,13 +50,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ตั้งแต่วันที่</label>
-                                        <input type="text"  name="fromdate" id="fromdate" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
+                                        <input type="text"  name="fromdate" id="fromdate" value="{{Request::get('fromdate')}}" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ถึงวันที่</label>
-                                        <input type="text"  name="todate" id="todate"  placeholder="ถึงวันที่" class="form-control form-control-lg" required>
+                                        <input type="text"  name="todate" id="todate" placeholder="ถึงวันที่" value="{{Request::get('todate')}}" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -75,7 +75,6 @@
                                                 <th>โครงการ</th> 
                                                 <th>บริษัท</th> 
                                                 <th class="text-right">สถานะ</th>
-                                                {{-- <th class="text-right">ดาวน์โหลด</th>  --}}
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -101,53 +100,10 @@
                                 </div>
                             </div>
                         </div>
-                     
                     </div>
                 </div>
             </div>
- 
         </div>
-
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จำนวนโครงการต่อการยื่น ปี2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="reportproject_chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ข้อมูลย้อนหลัง ปี2561-2563</h6>
-                        <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chart has-fixed-height" id="bar_chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- /form layouts -->
     </div>
     <!-- /content area -->
 @endsection

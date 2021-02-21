@@ -7,7 +7,7 @@ $(document).on('change', '#searchgroup', function(e) {
     
     // if($(this).val() < 12){
         var selectedtedtext = $(this).find("option:selected").text();
-        console.log(selectedtedtext);
+        // console.log(selectedtedtext);
         if(selectedtedtext == 'สาขาความเชี่ยวชาญ'){
             $("#searchname_wrapper").attr("hidden",true);
             $("#searchexpertbranch_wrapper").attr("hidden",false);
@@ -34,11 +34,9 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#projectstatus_wrapper").attr("hidden",true);
         }
-
 });
 
 $(document).on('keyup', '#searchname', function(e) {
-    console.log($(this).val());
     SearchExpert.searchName($(this).val()).then(data => {
         createTable(data);
     })
@@ -47,7 +45,6 @@ $(document).on('keyup', '#searchname', function(e) {
 
 $(document).on('change', '#searchexpertbranch', function(e) {
     SearchExpert.searchBranch($(this).val()).then(data => {
-        console.log(data);
         createTable(data);
     })
     .catch(error => {})
@@ -97,7 +94,7 @@ function createTable(data){
         });
         html += `<tr >  
             <td> 
-                <a href="${route.url}/dashboard/admin/search/expert/profile/${expert.id}" class="text-info" target="_blank">${expert.name} ${expert.lastname} </a> 
+                <a href="${route.url}/dashboard/admin/search/expert/profile/${expert.id}" class="text-info" target="_blank">${expert.name} ${expert.lastname} ddd</a> 
             </td>                                                          
             <td> 
                 <ul class="list list-unstyled mb-0">

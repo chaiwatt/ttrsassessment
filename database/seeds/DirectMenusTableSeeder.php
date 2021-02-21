@@ -17,36 +17,42 @@ class DirectMenusTableSeeder extends Seeder
                 'slug' => 'หน้าหลัก',
                 'engname' => 'Home',
                 'engslug' => 'home',
+                'url' => '',
             ],
             [
                 'name' => 'ข่าว',
                 'slug' => 'ข่าว',
                 'engname' => 'News',
                 'engslug' => 'news',
+                'url' => 'blog',
             ],
             [
                 'name' => 'ประกาศ',
                 'slug' => 'ประกาศ',
                 'engname' => 'Announce',
                 'engslug' => 'announce',
+                'url' => 'announce',
             ],
             [
                 'name' => 'งานบริการ',
                 'slug' => 'งานบริการ',
                 'engname' => 'Services',
                 'engslug' => 'services',
+                'url' => 'services',
             ],
             [
                 'name' => 'เกี่ยวกับเรา',
                 'slug' => 'เกี่ยวกับเรา',
                 'engname' => 'About Us',
                 'engslug' => 'aboutus',
+                'url' => 'aboutus',
             ],
             [
                 'name' => 'ติดต่อเรา',
                 'slug' => 'ติดต่อเรา',
                 'engname' => 'Contact us',
                 'engslug' => 'contactus',
+                'url' => 'contact',
             ]
         ]);
     }

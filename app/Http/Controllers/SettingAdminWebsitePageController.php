@@ -204,11 +204,11 @@ class SettingAdminWebsitePageController extends Controller
             $pagetag->save(); 
         }
 
-        foreach ($request->gal as $key => $gal) {
-            PageImage::find($gal)->update([
-                'page_id' => $page->id
-            ]);
-        }
+        // foreach ($request->gal as $key => $gal) {
+        //     PageImage::find($gal)->update([
+        //         'page_id' => $page->id
+        //     ]);
+        // }
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
  

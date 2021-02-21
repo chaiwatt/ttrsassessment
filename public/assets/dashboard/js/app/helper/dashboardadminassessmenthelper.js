@@ -389,7 +389,8 @@ $('.step-evweight').steps({
                 title: 'สำเร็จ...',
                 text: 'สรุปคะแนนสำเร็จ!',
                 }).then((result) => {
-                    window.location.replace(`${route.url}/dashboard/admin/assessment`);
+                    // window.location.replace(`${route.url}/dashboard/admin/assessment`);
+                    window.location.replace(`${route.url}/dashboard/admin/assessment/summary/${$('#fulltbpid').val()}`);
                 });
         }).catch(error => {})
     },

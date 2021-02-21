@@ -19,9 +19,7 @@ use App\ExcelFromView\Report\Project\ReportTTRSSingleOfficerExportSheet;
 class ReportTTRSSingleOfficerExport implements WithMultipleSheets
 {
     use Exportable;
-
     protected $userid;
-
     function __construct($userid) {
            $this->userid = $userid;
     }

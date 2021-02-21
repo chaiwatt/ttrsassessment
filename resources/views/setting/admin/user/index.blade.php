@@ -52,31 +52,25 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">ผู้ใช้งานระบบ</h6>
-                        {{-- <div class="header-elements">
-                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <i class="icon-calendar3 mr-2"></i>
-                                <span></span>
-                            </a>
-                        </div> --}}
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        {{-- <th>#</th> --}}
                                         <th>ชื่อ-สกุล</th> 
                                         <th>กลุ่ม</th>    
                                         <th>ออนไลน์</th>  
                                         <th>Verify</th>    
                                         <th>สถานะ</th>                          
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        <th style="width:170px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $key => $user)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$user->prefix->name}}{{$user->name}}   {{$user->lastname}} </td>    
                                         <td> {{$user->usertype->name}} </td> 
                                         @if ($user->isonline() == 1)
@@ -140,6 +134,6 @@
                     'next': 'ถัดไป'
                 }
             }
-    });
+        });
     </script>
 @stop

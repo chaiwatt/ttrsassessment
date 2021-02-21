@@ -32,8 +32,8 @@ class DashboardAdminProjectMiniTbpController extends Controller
 {
     public function Index(){
         NotificationBubble::where('target_user_id',Auth::user()->id)
-                        ->where('notification_category_id',1)
-                        ->where('notification_sub_category_id',4)
+                        ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
+                        ->where('notification_sub_category_id',4) // notification_sub_category_id 4 = Mini TBP
                         ->where('status',0)->delete();
         $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
         // $businessplans = BusinessPlan::where('business_plan_status_id',3)->whereIn('id',$projectassignments)->pluck('id')->toArray();

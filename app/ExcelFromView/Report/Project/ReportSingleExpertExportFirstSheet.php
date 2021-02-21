@@ -38,8 +38,8 @@ class ReportSingleExpertExportFirstSheet implements
 
     public function array(): array
     {
-        $expertinfos = Array();
-        $expert = ExpertDetail::find($this->expertid);
+       $expertinfos = Array();
+       $expert = ExpertDetail::find($this->expertid);
        !Empty($expert->expereinceyear) ? $expereinceyear = $expert->expereinceyear : $expereinceyear = 0;
        !Empty($expert->expereincemonth) ? $expereincemonth = $expert->expereincemonth : $expereincemonth = 0;
        $_expertfield ='';
@@ -67,7 +67,6 @@ class ReportSingleExpertExportFirstSheet implements
        array_push($expertinfos, number_format(GetEvPercent::getEvOverAveragePercentByPillar($expert->user_id,2), 2) .' %');
        array_push($expertinfos, number_format(GetEvPercent::getEvOverAveragePercentByPillar($expert->user_id,3), 2) .' %');
        array_push($expertinfos, number_format(GetEvPercent::getEvOverAveragePercentByPillar($expert->user_id,4), 2) .' %');
-    
        return [
             $expertinfos 
         ];

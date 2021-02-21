@@ -105,6 +105,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
             'nonefinance5_detail' => $request->nonefinance5detail,
             'nonefinance6' => $request->nonefinance6,
             'nonefinance6_detail' => $request->nonefinance6detail,
+            // 'minitbp_objecttive' => 2,
             'contactprefix' => $request->contactprefix,
             'contactname' => $request->contactname,
             'contactlastname' => $request->contactlastname,

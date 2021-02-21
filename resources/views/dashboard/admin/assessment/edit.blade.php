@@ -86,6 +86,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden>
                         <input type="text" id="evid" value="{{$ev->id}}" hidden>
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                             <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>

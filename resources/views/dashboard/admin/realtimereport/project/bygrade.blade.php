@@ -50,13 +50,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ตั้งแต่วันที่</label>
-                                        <input type="text"  name="fromdate" id="fromdate" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
+                                        <input type="text"  name="fromdate" id="fromdate" value="{{Request::get('fromdate')}}" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ถึงวันที่</label>
-                                        <input type="text" name="todate" id="todate"  placeholder="ถึงวันที่" class="form-control form-control-lg" required>
+                                        <input type="text" name="todate" id="todate" value="{{Request::get('todate')}}" placeholder="ถึงวันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

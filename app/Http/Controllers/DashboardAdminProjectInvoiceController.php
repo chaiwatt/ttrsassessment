@@ -25,6 +25,11 @@ use setasign\Fpdi\PdfParser\StreamReader;
 class DashboardAdminProjectInvoiceController extends Controller
 {
     public function Index(){
+        $auth = Auth::user();
+        NotificationBubble::where('target_user_id',$auth->id)
+                ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
+                ->where('notification_sub_category_id',3) // notification_sub_category_id 3 = ใบแจ้งหนี้
+                ->where('status',0)->delete();
         $invoicetransactions = InvoiceTransaction::get();
         return view('dashboard.admin.project.invoice.index')->withInvoicetransactions($invoicetransactions);
     }

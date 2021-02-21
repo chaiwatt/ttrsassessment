@@ -259,4 +259,9 @@ class HomeController extends Controller
         $expertdetail->expert_type_id = $experttype;
         $expertdetail->save();
     }
+
+    public function Announce(){
+        return view('landing.announce');
+    }
+
 }
