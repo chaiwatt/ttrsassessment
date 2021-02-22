@@ -56,19 +56,19 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ชื่อการจดทะเบียน</label>
-                                            <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อการจดทะเบียน" class="form-control">
+                                            <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อการจดทะเบียน" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>รายละเอียด</label>
-                                            <input type="text"  name="detail" value="{{old('detail')}}"  placeholder="รายละเอียด" class="form-control">
+                                            <input type="text"  name="detail" value="{{old('detail')}}"  placeholder="รายละเอียด" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ทุนจดทะเบียนต่ำสุด</label>
-                                            <input type="text"  name="min" value="{{old('min')}}"  placeholder="ทุนจดทะเบียนต่ำสุด" class="form-control">
+                                            <input type="text"  name="min" value="{{old('min')}}"  placeholder="ทุนจดทะเบียนต่ำสุด" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ทุนจดทะเบียนสูงสุด</label>
-                                            <input type="text"  name="max" value="{{old('max')}}"  placeholder="ทุนจดทะเบียนสูงสุด" class="form-control">
+                                            <input type="text"  name="max" value="{{old('max')}}"  placeholder="ทุนจดทะเบียนสูงสุด" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

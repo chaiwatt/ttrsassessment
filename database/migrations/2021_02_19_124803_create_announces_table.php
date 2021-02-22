@@ -20,6 +20,7 @@ class CreateAnnouncesTable extends Migration
             $table->string('slug',150);
             $table->longText('content')->nullable();
             $table->unsignedBigInteger('page_status_id')->default('1');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

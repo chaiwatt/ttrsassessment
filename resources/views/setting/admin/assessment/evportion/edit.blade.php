@@ -56,11 +56,11 @@
                             <fieldset>	
                                 <div class="form-group">
                                     <label>ชื่อ</label>
-                                    <input type="text"  name="name" value="{{$evtype->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control">
+                                    <input type="text"  name="name" value="{{$evtype->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" class="form-control form-control-lg">
                                 </div>
                                 <div class="form-group">
                                     <label>ร้อยละ</label>
-                                    <input type="text" name="percent" value="{{$evtype->percent}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                    <input type="text" name="percent" value="{{$evtype->percent}}"  placeholder="เวอร์ชั่น" class="form-control form-control-lg">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

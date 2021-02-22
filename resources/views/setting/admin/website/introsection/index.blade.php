@@ -65,7 +65,7 @@
                             <table class="table table-striped" >
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        {{-- <th>#</th> --}}
                                         <th>ข้อความ1 (ภาษาไทย)</th>
                                         <th>ข้อความ1 (ภาษาอังกฤษ)</th>       
                                         <th>ข้อความ2 (ภาษาไทย)</th>
@@ -76,7 +76,7 @@
                                 <tbody>
                                     @foreach ($introsections as $key => $introsection)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$introsection->text1}} </td>   
                                         <td> {{$introsection->texteng1}} </td>  
                                         <td> {{$introsection->text2}} </td>

@@ -80,7 +80,7 @@ var NotyJgrowl = function() {
         // Confirmation
         $('#noty_confirm').on('click', function() {
             var notyConfirm = new Noty({
-                text: '<h6 class="mb-3">Please confirm your action</h6><label>Enter comment (optional)</label> <input type="text" class="form-control" placeholder="Enter comment">',
+                text: '<h6 class="mb-3">Please confirm your action</h6><label>Enter comment (optional)</label> <input type="text" class="form-control form-control-lg" placeholder="Enter comment">',
                 timeout: false,
                 modal: true,
                 layout: 'center',

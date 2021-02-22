@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ตำแหน่งผู้เชี่ยวชาญ</label>
-                                            <input type="text"  name="expertposition" value="{{$expertposition->name}}"  placeholder="ตำแหน่งผู้เชี่ยวชาญ" class="form-control">
+                                            <input type="text"  name="expertposition" value="{{$expertposition->name}}"  placeholder="ตำแหน่งผู้เชี่ยวชาญ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

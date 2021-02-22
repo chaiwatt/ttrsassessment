@@ -1,7 +1,7 @@
 <aside class="sidebar">
     <form method="GET" action="{{route('landing.search')}}" >
         <div class="input-group mb-3 pb-1">
-            <input class="form-control" name = "search" placeholder="ค้นหา..." id="s" type="text">
+            <input class="form-control form-control-lg" name = "search" placeholder="ค้นหา..." id="s" type="text">
             <span class="input-group-append">
                 <button type="submit" class="btn btn-dark text-1 p-2"><i class="fas fa-search m-2"></i></button>
             </span>

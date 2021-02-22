@@ -24,14 +24,14 @@
                 </div>
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                    <input id="email" type="email" class="form-control form-control-lg" name="email" value="{{ old('email') }}" required autofocus>
                     <div class="form-control-feedback">
                         <i class="icon-user text-muted"></i>
                     </div>
                 </div>
 
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input id="password" type="password" class="form-control" name="password" required>
+                    <input id="password" type="password" class="form-control form-control-lg" name="password" required>
                     <div class="form-control-feedback">
                         <i class="icon-lock2 text-muted"></i>
                     </div>

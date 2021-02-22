@@ -122,12 +122,12 @@
                     '<div class="daterangepicker-inputs">' +
                         '<div class="daterangepicker_input">' +
                             '<span class="start-date-label"></span>' +
-                            '<input class="form-control" type="text" name="daterangepicker_start" value="" />' +
+                            '<input class="form-control form-control-lg" type="text" name="daterangepicker_start" value="" />' +
                             '<i class="icon-calendar3"></i>' +
                         '</div>' +
                         '<div class="daterangepicker_input">' +
                             '<span class="end-date-label"></span>' +
-                            '<input class="form-control" type="text" name="daterangepicker_end" value="" />' +
+                            '<input class="form-control form-control-lg" type="text" name="daterangepicker_end" value="" />' +
                             '<i class="icon-calendar3"></i>' +
                         '</div>' +
                     '</div>' +

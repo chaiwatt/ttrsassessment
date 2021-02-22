@@ -56,11 +56,11 @@
                             <fieldset>	
                                 <div class="form-group">
                                     <label>ชื่อรายการ</label>
-                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อรายการ" class="form-control">
+                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อรายการ" class="form-control form-control-lg">
                                 </div>
                                 <div class="form-group">
                                     <label>เวอร์ชั่น</label>
-                                    <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                    <input type="text" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control form-control-lg">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

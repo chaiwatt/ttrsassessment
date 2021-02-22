@@ -66,7 +66,7 @@ $("#extrafactor").on('change', function() {
     var html = ``;
     for(var k = 0;k<$(this).val().length;k++){
            output += `<div class='col-md-4'><div class="form-group">
-                        <input type="text" name="extrafactorscore[]" id="extrafactor_score" data-id="${$(this).val()[k]}" class="form-control" placeholder="${$("#extrafactor option[value='"+$(this).val()[k]+"']").text()} score">
+                        <input type="text" name="extrafactorscore[]" id="extrafactor_score" data-id="${$(this).val()[k]}" class="form-control form-control-lg" placeholder="${$("#extrafactor option[value='"+$(this).val()[k]+"']").text()} score">
                       </div></div>`;
        
         SubExtrafactor.getSubExtraFactor($(this).val()[k]).then(data => {
@@ -101,7 +101,7 @@ $(document).on('change', '#subextrafactor', function(e) {
         // console.log($(this).val()[k]);
         output += `<div class="col-md-4">
                         <div class="form-group">
-                            <input type="text" name="subextrafactorscore[]" id="subextrafactor_score" data-extrafactor="${array[1]}" data-id="${array[0]}" class="form-control" placeholder="${$("#subextrafactor option[value='"+$(this).val()[k]+"']").text()} score">
+                            <input type="text" name="subextrafactorscore[]" id="subextrafactor_score" data-extrafactor="${array[1]}" data-id="${array[0]}" class="form-control form-control-lg" placeholder="${$("#subextrafactor option[value='"+$(this).val()[k]+"']").text()} score">
                         </div>
                     </div>`;
     }

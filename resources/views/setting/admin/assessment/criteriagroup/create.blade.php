@@ -55,7 +55,7 @@
                             <fieldset>	
                                 <div class="form-group">
                                     <label>ชื่อรายการ</label>
-                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อรายการ" class="form-control">
+                                    <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อรายการ" class="form-control form-control-lg">
                                 </div>
                                 <div class="form-group">
                                     <label>ประเภทธุรกิจ<span class="text-danger">*</span></label>
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>เวอร์ชั่น</label>
-                                    <input type="number" min="0.01" step="0.01" max="10000.00" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control">
+                                    <input type="number" min="0.01" step="0.01" max="10000.00" name="version" value="{{old('version')}}"  placeholder="เวอร์ชั่น" class="form-control form-control-lg">
                                 </div>
                                 <div class="form-group">
                                     <label>เลือกเกณฑ์<span class="text-danger">*</span></label>

@@ -65,7 +65,7 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        {{-- <th>#</th> --}}
                                         <th>ชื่อ</th>                               
                                         <th>หมวด</th>
                                         <th>จำนวนวิว</th>
@@ -76,7 +76,7 @@
                                 <tbody>
                                     @foreach ($pages as $key => $page)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$page->name}} </td>                                         
                                         <td> {{$page->pagecategory->name}} </td>  
                                         <td> {{$page->pageview->count()}} </td> 

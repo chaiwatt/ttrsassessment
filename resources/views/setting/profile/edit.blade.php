@@ -18,32 +18,32 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ตำแหน่ง</label><span class="text-danger">*</span>
-								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>หน่วยงาน/บริษัท</label><span class="text-danger">*</span>
-								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>รายละเอียดของประสบการณ์</label>
-								<textarea  id="expertexpiencedetail" rows="3"  placeholder="รายละเอียดของประสบการณ์" class="form-control"></textarea>
+								<textarea  id="expertexpiencedetail" rows="3"  placeholder="รายละเอียดของประสบการณ์" class="form-control form-control-lg"></textarea>
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปีที่เริ่ม</label><span class="text-danger">*</span>
-								<input type="number" maxlength="4" id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+								<input type="number" maxlength="4" id="fromyear" placeholder="ปีที่เริ่ม" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปี่ที่สิ้นสุด</label><span class="text-danger">*</span>
-								<input type="number" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+								<input type="number" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control form-control-lg" >
 							</div>
 						</div>
 					</div>
@@ -68,32 +68,32 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ตำแหน่ง</label><span class="text-danger">*</span>
-								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>หน่วยงาน/บริษัท</label><span class="text-danger">*</span>
-								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>รายละเอียดของประสบการณ์</label>
-								<textarea  id="expertexpiencedetail" rows="3"  placeholder="รายละเอียดของประสบการณ์" class="form-control"></textarea>
+								<textarea  id="expertexpiencedetail" rows="3"  placeholder="รายละเอียดของประสบการณ์" class="form-control form-control-lg"></textarea>
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปีที่เริ่ม</label><span class="text-danger">*</span>
-								<input type="number" maxlength="4" id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+								<input type="number" maxlength="4" id="fromyear" placeholder="ปีที่เริ่ม" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปี่ที่สิ้นสุด</label><span class="text-danger">*</span>
-								<input type="number" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+								<input type="number" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control form-control-lg" >
 							</div>
 						</div>
 					</div>
@@ -138,7 +138,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>สถาบันการศึกษา</label>
-								<input type="text" id="institute" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+								<input type="text" id="institute" placeholder="หน่วยงาน/บริษัท" class="form-control form-control-lg" >
 							</div>
 						</div>
 
@@ -155,7 +155,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปีพ.ศ.ที่จบการศึกษา</label><span class="text-danger">*</span>
-								<input type="number" maxlength="4" id="graduatedyear" placeholder="ปีที่จบการศึกษา" class="form-control" >
+								<input type="number" maxlength="4" id="graduatedyear" placeholder="ปีที่จบการศึกษา" class="form-control form-control-lg" >
 							</div>
 						</div>
 					</div>
@@ -180,32 +180,32 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ระดับการศึกษา</label><span class="text-danger">*</span>
-								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control" >
+								<input type="text"  id="expertexpienceposition" placeholder="ตำแหน่ง" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>สาขาวิชา/วิชาเอก</label><span class="text-danger">*</span>
-								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>สถาบันการศึกษา</label>
-								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control" >
+								<input type="text" id="expertexpiencecompany" placeholder="หน่วยงาน/บริษัท" class="form-control form-control-lg" >
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ประเทศ</label><span class="text-danger">*</span>
-								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control" >
+								<input type="text"  id="fromyear" placeholder="ปีที่เริ่ม" class="form-control form-control-lg" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ปีพ.ศ.ที่จบการศึกษา</label><span class="text-danger">*</span>
-								<input type="text" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control" >
+								<input type="text" maxlength="4" id="toyear" placeholder="ปี่ที่สิ้นสุด" class="form-control form-control-lg" >
 							</div>
 						</div>
 					</div>
@@ -263,7 +263,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ตำแหน่ง</label><span class="text-danger">*</span>
-								<input type="text" id="modalposition" placeholder="ตำแหน่ง" class="form-control" >
+								<input type="text" id="modalposition" placeholder="ตำแหน่ง" class="form-control form-control-lg" >
 							</div>
 						</div>
 					</div>
@@ -354,7 +354,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-                                <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
+                                <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg">
                             </div>
                         </div>
                         <div class="col-md-12">	
@@ -393,12 +393,12 @@
                             </div>
                             <div class="form-group">
                                 <label>ชื่อ</label><span class="text-danger">*</span>
-                                <input type="text" id="directorname" placeholder="ชื่อ" class="form-control">
+                                <input type="text" id="directorname" placeholder="ชื่อ" class="form-control form-control-lg">
                             </div>
 
                             <div class="form-group">
                                 <label>นามสกุล</label><span class="text-danger">*</span>
-                                <input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control">
+                                <input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control form-control-lg">
                             </div>
                         </div>
                     </div>
@@ -614,11 +614,11 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>สำนักงาน</label>
-															<input type="text" name="organizationname" value="{{$generalinfo->company}}" data-placeholder="สำนักงาน"class="form-control">
+															<input type="text" name="organizationname" value="{{$generalinfo->company}}" data-placeholder="สำนักงาน"class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
 															<label>ที่อยู่</label>
-															<input type="text" name="organizationaddress" value="{{$generalinfo->address}}" data-placeholder="คำนำหน้า" class="form-control">
+															<input type="text" name="organizationaddress" value="{{$generalinfo->address}}" data-placeholder="คำนำหน้า" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -655,7 +655,7 @@
 														</div>
 														<div class="col-md-6">
 															<label>รหัสไปรษณีย์</label>
-															<input type="text" name="organizationpostalcode" value="{{$generalinfo->postalcode}}" data-placeholder="รหัสไปรษณีย์" class="form-control">
+															<input type="text" name="organizationpostalcode" value="{{$generalinfo->postalcode}}" data-placeholder="รหัสไปรษณีย์" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -663,11 +663,11 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>โทรศัพท์1</label>
-															<input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล" class="form-control">
+															<input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล" class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
 															<label>โทรศัพท์2</label>
-															<input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="โทรศัพท์2" class="form-control">
+															<input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="โทรศัพท์2" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -675,11 +675,11 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>แฟ๊กซ์</label>
-															<input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control">
+															<input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
 															<label>อีเมล</label>
-															<input type="email" name="organizationemail" value="{{$generalinfo->email}}" data-placeholder="อีเมล" class="form-control">
+															<input type="email" name="organizationemail" value="{{$generalinfo->email}}" data-placeholder="อีเมล" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -694,11 +694,11 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>lineclint <a href="https://notify-bot.line.me/en/" target="_blank">ลิงก์</a></label>
-															<input type="text" name="lineclint" value="{{$generalinfo->client_id}}" data-placeholder="lineclint" class="form-control">
+															<input type="text" name="lineclint" value="{{$generalinfo->client_id}}" data-placeholder="lineclint" class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
 															<label>linesecret</label>
-															<input type="text" name="linesecret" value="{{$generalinfo->client_secret}}" data-placeholder="linesecret" class="form-control">
+															<input type="text" name="linesecret" value="{{$generalinfo->client_secret}}" data-placeholder="linesecret" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -706,11 +706,11 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>thaisms (sms คงเหลือ <span class="text-success">{{$smscredit}}</span> )</label>
-															<input type="text" name="thaisms" value="{{$generalinfo->thsmsuser}}" data-placeholder="thaisms" class="form-control">
+															<input type="text" name="thaisms" value="{{$generalinfo->thsmsuser}}" data-placeholder="thaisms" class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
 															<label>รหัสผ่าน thaisms</label>
-															<input type="password" name="thaismspassword" value="" data-placeholder="รหัสผ่าน thaisms" class="form-control">
+															<input type="password" name="thaismspassword" value="" data-placeholder="รหัสผ่าน thaisms" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -726,7 +726,7 @@
 														</div>
 														<div class="col-md-6">
 															<label>เวลาทำการ จันทร์-ศุกร์</label>
-															<input type="text" name="workdaytime" value="{{$generalinfo->workdaytime}}" data-placeholder="เวลาทำการ จันทร์-ศุกร์" class="form-control">
+															<input type="text" name="workdaytime" value="{{$generalinfo->workdaytime}}" data-placeholder="เวลาทำการ จันทร์-ศุกร์" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -734,11 +734,11 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>เวลาทำการ วันเสาร์</label>
-															<input type="text" name="saturdaytime" value="{{$generalinfo->saturdaytime}}" data-placeholder="เวลาทำการ วันเสาร์" class="form-control">
+															<input type="text" name="saturdaytime" value="{{$generalinfo->saturdaytime}}" data-placeholder="เวลาทำการ วันเสาร์" class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
 															<label>เวลาทำการ วันอาทิตย์</label>
-															<input type="text" name="sundaytime" value="{{$generalinfo->sundaytime}}" data-placeholder="เวลาทำการ วันอาทิตย์" class="form-control">
+															<input type="text" name="sundaytime" value="{{$generalinfo->sundaytime}}" data-placeholder="เวลาทำการ วันอาทิตย์" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -746,11 +746,11 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>Youtube</label>
-															<input type="text" name="youtube" value="{{$generalinfo->youtube}}" data-placeholder="Youtube" class="form-control">
+															<input type="text" name="youtube" value="{{$generalinfo->youtube}}" data-placeholder="Youtube" class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
 															<label>Facebook</label>
-															<input type="text" name="facebook" value="{{$generalinfo->facebook}}" data-placeholder="Facebook" class="form-control">
+															<input type="text" name="facebook" value="{{$generalinfo->facebook}}" data-placeholder="Facebook" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>

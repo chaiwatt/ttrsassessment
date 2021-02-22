@@ -56,7 +56,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ประเภทบัญชีเงินฝาก</label>
-                                            <input type="text"  name="banktype" value="{{$banktype->name}}"  placeholder="ประเภทบัญชีเงินฝาก" class="form-control">
+                                            <input type="text"  name="banktype" value="{{$banktype->name}}"  placeholder="ประเภทบัญชีเงินฝาก" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

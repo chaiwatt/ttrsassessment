@@ -65,7 +65,7 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        {{-- <th>#</th> --}}
                                         <th>ชื่อรายการ</th>
                                         <th>กลุ่มอุตสาหกรรม</th>   
                                         <th>เวอร์ชั่น</th>  
@@ -76,7 +76,7 @@
                                 <tbody>
                                     @foreach ($criteriagroups as $key => $criteriagroup)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$criteriagroup->name}} </td>  
                                         <td> {{$criteriagroup->industrygroup->name}} </td>  
                                         <td> {{$criteriagroup->version}} </td> 

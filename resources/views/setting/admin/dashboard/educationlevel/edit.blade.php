@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ระดับการศึกษา</label>
-                                            <input type="text"  name="educationlevel" value="{{$educationlevel->name}}"  placeholder="ระดับการศึกษา" class="form-control">
+                                            <input type="text"  name="educationlevel" value="{{$educationlevel->name}}"  placeholder="ระดับการศึกษา" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

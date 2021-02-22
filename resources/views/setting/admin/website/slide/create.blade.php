@@ -72,31 +72,31 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 1</label>
-                                            <input type="text"  name="textone" value="{{old('textone')}}"  placeholder="ข้อความที่ 1" class="form-control">
+                                            <input type="text"  name="textone" value="{{old('textone')}}"  placeholder="ข้อความที่ 1" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 1 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengone" value="{{old('textengone')}}"  placeholder="ข้อความที่ 1 ภาษาอังกฤษ" class="form-control">
+                                            <input type="text"  name="textengone" value="{{old('textengone')}}"  placeholder="ข้อความที่ 1 ภาษาอังกฤษ" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 2</label>
-                                            <input type="text"  name="texttwo" value="{{old('texttwo')}}"  placeholder="ข้อความที่ 2" class="form-control">
+                                            <input type="text"  name="texttwo" value="{{old('texttwo')}}"  placeholder="ข้อความที่ 2" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 2 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengtwo" value="{{old('textengtwo')}}"  placeholder="ข้อความที่ 2 ภาษาอังกฤษ" class="form-control">
+                                            <input type="text"  name="textengtwo" value="{{old('textengtwo')}}"  placeholder="ข้อความที่ 2 ภาษาอังกฤษ" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 3</label>
-                                            <input type="text"  name="textthree" value="{{old('textthree')}}"  placeholder="ข้อความที่ 3" class="form-control">
+                                            <input type="text"  name="textthree" value="{{old('textthree')}}"  placeholder="ข้อความที่ 3" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 3 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengthree" value="{{old('textengthree')}}"  placeholder="ข้อความที่ 3 ภาษาอังกฤษ" class="form-control">
+                                            <input type="text"  name="textengthree" value="{{old('textengthree')}}"  placeholder="ข้อความที่ 3 ภาษาอังกฤษ" class="form-control form-control-lg">
                                         </div> --}}
                                         <div class="form-group">
                                             <label>ลิงก์ URL</label>
-                                            <input type="text"  name="url" value="{{old('url')}}"  placeholder="ลิงก์ URL" class="form-control">
+                                            <input type="text"  name="url" value="{{old('url')}}"  placeholder="ลิงก์ URL" class="form-control form-control-lg">
                                         </div>
 										<div class="form-group">
 											<label>รูปสไลด์<span class="text-danger">*</span></label>

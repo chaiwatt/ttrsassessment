@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\Faq;
 use App\Model\Tag;
 use Carbon\Carbon;
 use App\Model\Page;
 use App\Model\Company;
 use App\Model\PageTag;
+use App\Model\Announce;
 use App\Model\PageView;
 use App\Model\PageImage;
 use App\Model\GeneralInfo;
@@ -19,6 +21,8 @@ use Jenssegers\Agent\Agent;
 use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
+use App\Model\AnnounceCategory;
+use App\Model\AnnounceAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
@@ -261,7 +265,44 @@ class HomeController extends Controller
     }
 
     public function Announce(){
-        return view('landing.announce');
+        $announces = Announce::where('page_status_id',1)->orderBy('id','desc')->paginate(10);
+        $announcecategories = AnnounceCategory::get();
+        return view('landing.announce')->withAnnounces($announces)
+                                    ->withAnnouncecategories($announcecategories);
     }
 
+    public function announcenews($slug)
+    {
+        $ip = \Request::getClientIp(true);
+        $agent = new Agent();
+        $announce = Announce::where('slug',$slug)->first();
+        if(Empty($announce)){
+            return abort(404);
+        }
+        $user = "";
+        if(Auth::check()){
+            $user = Auth::user()->id;
+        }
+        $announceattachments = AnnounceAttachment::where('announce_id',$announce->id)->get();
+        return view('landing.announcenews')->withAnnounce($announce)
+                                        ->withAnnounceattachments($announceattachments);
+    }
+
+    public function showannounce(Request $request){
+       $announces =  Announce::where('announce_category_id',$request->categoryid)->orderBy('id','desc')->get()->each->append('day')->each->append('month')->each->append('year')->each->append('announcecategory');
+        return response()->json($announces); 
+    }
+    public function searchannounce(Request $request){
+        $announcearray = Announce::where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('content', 'like', '%' . $request->search . '%')->pluck('id')->toArray();
+
+        $announces =  Announce::whereIn('id',$announcearray)->orderBy('id','desc')->get()->each->append('day')->each->append('month')->each->append('year')->each->append('announcecategory');
+         return response()->json($announces); 
+     }
+     public function faq(){
+        $faqs =  Faq::where('status',1)->orderBy('id','desc')->get();
+        return view('landing.faq')->withFaqs($faqs);
+    }
 }
+
+

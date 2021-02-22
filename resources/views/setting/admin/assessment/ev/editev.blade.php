@@ -64,7 +64,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด A</label>
-                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control" >
+                                                        <input type="number" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control form-control-lg" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,7 +72,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด B</label>
-                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control">
+                                                        <input type="number" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +80,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด C</label>
-                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control">
+                                                        <input type="number" min="0" id="gradec" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,7 +93,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด D</label>
-                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="graded" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -101,7 +101,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด E</label>
-                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="gradee" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,7 +109,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>เกรด F</label>
-                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control">
+                                                            <input type="number" min="0"  id="gradef" value=""  placeholder="ข้อ" class="form-control form-control-lg">
                                                         </div>
                                                     </div>
                                                 </div> --}}
@@ -147,7 +147,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>Weight</label>
-                                        <input type="text"  name="subclusterweight" id="subclusterweight" value=""  placeholder="Weight" class="form-control">
+                                        <input type="text"  name="subclusterweight" id="subclusterweight" value=""  placeholder="Weight" class="form-control form-control-lg">
                                     </div>
                                 </div>
                             </div>
@@ -241,11 +241,11 @@
 					<div class="card-body">
                         <div class="form-group">
                             <label>ชื่อรายการ</label>
-                            <input type="text"  name="name" id="name" value="{{$ev->name}}"  placeholder="ชื่อรายการ" class="form-control">
+                            <input type="text"  name="name" id="name" value="{{$ev->name}}"  placeholder="ชื่อรายการ" class="form-control form-control-lg">
                         </div>
                         <div class="form-group">
                             <label>เวอร์ชั่น</label>
-                            <input type="text" name="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control" readonly>
+                            <input type="text" name="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" class="form-control form-control-lg" readonly>
                         </div>
                         <div class="form-group">	
                             <button type="button" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>

@@ -20,7 +20,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ชื่อเอกสาร</label><span class="text-danger">*</span>
-                                <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control">
+                                <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg">
                             </div>
                         </div>
                         <div class="col-md-12">	
@@ -59,12 +59,12 @@
                             </div>
                             <div class="form-group">
                                 <label>ชื่อ</label><span class="text-danger">*</span>
-                                <input type="text" id="directorname" placeholder="ชื่อ" class="form-control">
+                                <input type="text" id="directorname" placeholder="ชื่อ" class="form-control form-control-lg">
                             </div>
 
                             <div class="form-group">
                                 <label>นามสกุล</label><span class="text-danger">*</span>
-                                <input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control">
+                                <input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control form-control-lg">
                             </div>
                         </div>
                     </div>
@@ -136,45 +136,45 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล<span class="text-danger">*</span> @else ชื่อสถานประกอบการ @endif</label>
-                                        <input type="text"  name="company" value="{{$company->name}}"  placeholder="@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล @else ชื่อสถานประกอบการ @endif" class="form-control">
+                                        <input type="text"  name="company" value="{{$company->name}}"  placeholder="@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล @else ชื่อสถานประกอบการ @endif" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>@if (Auth::user()->user_group_id == 1) เลขทะเบียนนิติบุคคล<span class="text-danger">*</span> @else เลขประจำตัวผู้เสียภาษีอากร @endif</label>
-                                        <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="@if (Auth::user()->user_group_id == 1) เลขทะเบียนนิติบุคคล @else เลขประจำตัวผู้เสียภาษีอากร @endif" class="form-control" readonly>
+                                        <input type="text"  name="vatno" value="{{$company->vatno}}"  placeholder="@if (Auth::user()->user_group_id == 1) เลขทะเบียนนิติบุคคล @else เลขประจำตัวผู้เสียภาษีอากร @endif" class="form-control form-control-lg" readonly>
                                     </div>
                                 </div>
                                 @if (Auth::user()->user_group_id == 2)
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เลขทะเบียนพาณิชย์</label>
-                                            <input type="number"  name="commercialregnumber" value="{{$company->commercialregnumber}}"  placeholder="เลขทะเบียนพาณิชย์" class="form-control" >
+                                            <input type="number"  name="commercialregnumber" value="{{$company->commercialregnumber}}"  placeholder="เลขทะเบียนพาณิชย์" class="form-control form-control-lg" >
                                         </div>
                                     </div>
                                 @endif
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ปีที่จดทะเบียน@if (Auth::user()->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
-                                        <input type="number" name="registeredyear" value="{{$registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control">
+                                        <input type="number" name="registeredyear" value="{{$registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ทุนจดทะเบียน@if (Auth::user()->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
-                                        <input type="number"  name="registeredcapital" value="{{$company->registeredcapital}}"  placeholder="ทุนจดทะเบียน" class="form-control" >
+                                        <input type="number"  name="registeredcapital" value="{{$company->registeredcapital}}"  placeholder="ทุนจดทะเบียน" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ทุนจดทะเบียนที่เรียกชำระแล้ว@if (Auth::user()->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
-                                        <input type="number"  name="paidupcapital" value="{{$company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control" >
+                                        <input type="number"  name="paidupcapital" value="{{$company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>วันที่ชำระทุนจดทะเบียน</label>
-                                        <input type="text"  name="paidupcapitaldate" id="paidupcapitaldate" value="{{$company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control" >
+                                        <input type="text"  name="paidupcapitaldate" id="paidupcapitaldate" value="{{$company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -210,33 +210,33 @@
                                 <div class="col-md-6"> 
                                     <div class="form-group">
                                         <label>โทรศัพท์<span class="text-danger">*</span></label>
-                                        <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control">
+                                        <input type="text"  name="phone" value="{{$company->phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">   
                                     <div class="form-group">
                                         <label>โทรสาร</label>
-                                        <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="โทรสาร" class="form-control">
+                                        <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-6">   
                                     <div class="form-group">
                                         <label>อีเมล<span class="text-danger">*</span></label>
-                                        <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control">
+                                        <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control form-control-lg">
                                     </div>
                                 </div> --}}
                                 @if (Auth::user()->user_group_id == 1)
                                     <div class="col-md-6">  
                                         <div class="form-group">
                                             <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control">
+                                            <input type="text"  name="email" value="{{$company->email}}"  placeholder="อีเมล" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                     @else
                                     <div class="col-md-6">  
                                         <div class="form-group">
                                             <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{Auth::user()->email}}"  placeholder="อีเมล" class="form-control" readonly>
+                                            <input type="text"  name="email" value="{{Auth::user()->email}}"  placeholder="อีเมล" class="form-control form-control-lg" readonly>
                                         </div>
                                     </div>
                                 @endif
@@ -257,7 +257,7 @@
                                             <div class="col-md-9">
                                                 <div class="form-group">
                                                     <label>ชื่อผู้ประสานงาน</label>
-                                                    <input type="text" name="name" value="{{Auth::user()->name}}" data-placeholder="ชื่อ"class="form-control">
+                                                    <input type="text" name="name" value="{{Auth::user()->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg">
                                                 </div>
                                             </div>
                                         </div>
@@ -265,7 +265,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>นามสกุลผู้ประสานงาน</label>
-                                            <input type="text" name="lastname" value="{{Auth::user()->lastname}}" data-placeholder="นามสกุล" class="form-control">
+                                            <input type="text" name="lastname" value="{{Auth::user()->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg">
                                         </div>
                                     </div>
                                 @endif
@@ -273,7 +273,7 @@
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>ที่อยู่บริษัท<span class="text-danger">*</span></label>
-                                        <input type="text"  name="address" value="{{$company->companyaddress->first()->address}}"  placeholder="ที่อยู่บริษัท" class="form-control">
+                                        <input type="text"  name="address" value="{{$company->companyaddress->first()->address}}"  placeholder="ที่อยู่บริษัท" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
@@ -310,19 +310,19 @@
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-                                        <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control">
+                                        <input type="text"  name="postalcode" value="{{$company->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>พิกัดละติจูด (เช่น 14.076868486942407)</label>
-                                        <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="ละติจูด" class="form-control">
+                                        <input type="text"  name="lat" value="{{$company->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
                                         <label>พิกัดลองจิจูด (เช่น 100.60153839991285)<a href="https://google.com/maps/place/{{$company->lat}},{{$company->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
-                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองจิจูด" class="form-control">
+                                        <input type="text"  name="lng" value="{{$company->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  

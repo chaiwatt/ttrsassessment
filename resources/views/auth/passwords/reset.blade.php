@@ -36,7 +36,7 @@
 
                         <div class="form-group">
                             <label>ยืนยันรหัสผ่าน:</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password">
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center">

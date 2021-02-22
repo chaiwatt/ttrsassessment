@@ -16,7 +16,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>หมวดหมู่</label><span class="text-danger">*</span>
-                                <input type="text" id="modalcreatecategory" placeholder="หมวดหมู่" class="form-control" >
+                                <input type="text" id="modalcreatecategory" placeholder="หมวดหมู่" class="form-control form-control-lg" >
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>หมวดหมู่</label><span class="text-danger">*</span>
-                                <input type="text" id="modalcategory_edit" placeholder="หมวดหมู่" class="form-control" >
+                                <input type="text" id="modalcategory_edit" placeholder="หมวดหมู่" class="form-control form-control-lg" >
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ป้ายกำกับ</label><span class="text-danger">*</span>
-                                <input type="text" id="modalcreatetag" placeholder="ป้ายกำกับ" class="form-control" >
+                                <input type="text" id="modalcreatetag" placeholder="ป้ายกำกับ" class="form-control form-control-lg" >
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ป้ายกำกับ</label><span class="text-danger">*</span>
-                                <input type="text" id="modaltag_edit" placeholder="ป้ายกำกับ" class="form-control" >
+                                <input type="text" id="modaltag_edit" placeholder="ป้ายกำกับ" class="form-control form-control-lg" >
                             </div>
                         </div>
                     </div>
@@ -165,11 +165,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>หัวเรื่อง<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control">
+                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
-                                            <textarea type="text"  name="description" value="{{old('description')}}"  rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control"></textarea>
+                                            <textarea type="text"  name="description" value="{{old('description')}}"  rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-group">                                                

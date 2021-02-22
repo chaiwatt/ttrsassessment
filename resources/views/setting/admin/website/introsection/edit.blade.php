@@ -56,19 +56,19 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ข้อความที่ 1 (ภาษาไทย)</label>
-                                            <input type="text"  name="textone" value="{{$introsection->text1}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control">
+                                            <input type="text"  name="textone" value="{{$introsection->text1}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 1 (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="textoneeng" value="{{$introsection->texteng1}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control">
+                                            <input type="text"  name="textoneeng" value="{{$introsection->texteng1}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 2 (ภาษาไทย)</label>
-                                            <input type="text"  name="texttwo" value="{{$introsection->text2}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control">
+                                            <input type="text"  name="texttwo" value="{{$introsection->text2}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่2 (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="texttwoeng" value="{{$introsection->texteng2}}"  placeholder="ข้อความที่ 2 (ภาษาอังกฤษ)" class="form-control">
+                                            <input type="text"  name="texttwoeng" value="{{$introsection->texteng2}}"  placeholder="ข้อความที่ 2 (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
 										<div class="form-group">
 											<label>รูปไอคอน<span class="text-danger">*</span></label>

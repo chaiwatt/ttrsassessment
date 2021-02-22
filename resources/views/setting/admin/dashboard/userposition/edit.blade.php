@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ตำแหน่งผู้ใช้งาน</label>
-                                            <input type="text"  name="userposition" value="{{$userposition->name}}"  placeholder="ตำแหน่งผู้ใช้งาน" class="form-control">
+                                            <input type="text"  name="userposition" value="{{$userposition->name}}"  placeholder="ตำแหน่งผู้ใช้งาน" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

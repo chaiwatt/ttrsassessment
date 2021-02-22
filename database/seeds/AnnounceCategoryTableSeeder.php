@@ -20,6 +20,9 @@ class AnnounceCategoryTableSeeder extends Seeder
             ],
             [
                 'name' => 'ประกาศรับสมัครงาน'
+            ],
+            [
+                'name' => 'ประกาศทั่วไป'
             ]
         ]);
     }

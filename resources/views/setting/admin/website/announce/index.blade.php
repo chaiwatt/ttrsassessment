@@ -67,23 +67,25 @@
                                     <tr>
                                         <th>ชื่อ</th>                               
                                         <th>หมวดประกาศ</th>
-                                        <th>จำนวนวิว</th>
-                                        <th style="width:180px">เพิ่มเติม</th>
+                                        <th>ผู้ประกาศ</th>
+                                        <th>สถานะ</th>
+                                        <th style="width:250px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($announces as $key => $announce)
+                                    @foreach ($announces as $key => $announce)
                                         <tr>    
-                                            <td> {{$announce->name}} </td>                                         
+                                            <td> {{$announce->title}} </td>                                         
                                             <td> {{$announce->announcecategory->name}} </td>  
-                                            <td> {{$announce->announvepageview->count()}} </td>                                                                         
+                                            <td> {{$announce->user->name}} {{$announce->user->lastname}}</td> 
+                                            <td> {{$announce->pagestatus->name}} </td>                                                                         
                                             <td> 
-                                                <a href="{{route('landing.announce',['slug' => $announce->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
+                                                <a href="{{route('landing.announcenews',['slug' => $announce->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
                                                 <a href="{{route('setting.admin.website.announce.edit',['id' => $announce->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                                 <a href="{{route('setting.admin.website.announce.delete',['id' => $announce->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                             </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>      
                         </div>

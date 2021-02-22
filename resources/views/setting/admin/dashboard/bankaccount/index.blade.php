@@ -65,7 +65,7 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        {{-- <th>#</th> --}}
                                         <th>ธนาคาร</th>   
                                         <th>ชื่อบัญชี</th>  
                                         <th>เลขที่บัญชี</th>                             
@@ -76,7 +76,7 @@
                                 <tbody>
                                     @foreach ($bankaccounts as $key => $bankaccount)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$bankaccount->bank}} </td> 
                                         <td> {{$bankaccount->name}} </td>                                         
                                         <td> {{$bankaccount->accountno}} </td>

@@ -47,7 +47,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ประกาศ</label><span class="text-danger">*</span>
-                                <input type="text" id="modalannounce_edit" placeholder="ประกาศ" class="form-control" >
+                                <input type="text" id="modalannounce_edit" placeholder="ประกาศ" class="form-control form-control-lg" >
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>หัวเรื่อง<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control">
+                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อมูลประกาศ<span class="text-danger">*</span></label>

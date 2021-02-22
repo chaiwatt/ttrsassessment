@@ -17,5 +17,6 @@ return [
     'submitanapplication' => 'ยื่นใบสมัคร',
     'fillouttheform' => 'กรอกแบบฟอร์ม',
     'preliminaryconsideration' => 'พิจารณาเบื้องต้น',
-    'assessment' => 'ตรวจประเมิน'
+    'assessment' => 'ตรวจประเมิน',
+    'news' => 'บทความล่าสุด',
 ];

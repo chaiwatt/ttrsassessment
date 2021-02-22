@@ -65,7 +65,7 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        {{-- <th>#</th> --}}
                                         <th>ชื่อหมวดหมู่</th>                               
                                         <th>slug</th>
                                         <th style="width:150px">เพิ่มเติม</th>
@@ -74,7 +74,7 @@
                                 <tbody>
                                     @foreach ($pagecategories as $key => $pagecategory)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$pagecategory->name}} </td>                                         
                                         <td> {{$pagecategory->slug}} </td>  
                                         <td> 

@@ -2,7 +2,7 @@
     <div class="container">
 
       <div class="section-title">
-        <h2 class="sarabun">ข่าวสารล่าสุด</h2>
+        <h2 class="sarabun">{{trans('lang.news')}}</h2>
       </div>
     
 

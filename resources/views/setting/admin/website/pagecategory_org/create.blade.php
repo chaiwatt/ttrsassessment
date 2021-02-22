@@ -56,7 +56,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>หมวดหมู่เพจ</label>
-                                            <input type="text"  name="pagecategory" value="{{old('pagecategory')}}"  placeholder="หมวดหมู่เพจ" class="form-control">
+                                            <input type="text"  name="pagecategory" value="{{old('pagecategory')}}"  placeholder="หมวดหมู่เพจ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

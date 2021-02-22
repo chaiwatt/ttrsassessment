@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>หมวดหมู่ faq</label>
-                                            <input type="text"  name="faqcategory" value="{{$faqcategory ->name}}"  placeholder="หมวดหมู่ faq" class="form-control">
+                                            <input type="text"  name="faqcategory" value="{{$faqcategory ->name}}"  placeholder="หมวดหมู่ faq" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

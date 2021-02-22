@@ -51,10 +51,14 @@ Route::get('front', 'HomeController@Front')->name('landing.front');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
 Route::get('blog', 'HomeController@Blog')->name('landing.blog');
 Route::get('announce', 'HomeController@announce')->name('landing.announce');
+Route::get('announcenews/{slug}', 'HomeController@announcenews')->name('landing.announcenews');
+Route::post('showannounce', 'HomeController@showannounce')->name('landing.showannounce');
+Route::post('searchannounce', 'HomeController@searchannounce')->name('landing.searchannounce');
 Route::get('tag/{slug}', 'HomeController@Tag')->name('landing.tag');
 Route::get('cate/{slug}', 'HomeController@Category')->name('landing.cate');
 Route::get('search', 'HomeController@Search')->name('landing.search');
 Route::get('change/{locale}', 'LanguageController@Change')->name('change');
+Route::get('faq', 'HomeController@faq')->name('landing.faq');
 Route::get('contact', 'HomeController@Contact')->name('landing.search');
 
 Route::post('addcontact', 'ContactInfoController@AddContact')->name('landing.addcontact');
@@ -915,6 +919,14 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','SettingAdminWebsiteFaqCategoryController@EditSave')->name('setting.admin.website.faqcategory.editsave'); 
                     Route::get('delete/{id}','SettingAdminWebsiteFaqCategoryController@Delete')->name('setting.admin.website.faqcategory.delete'); 
                 });
+                Route::group(['prefix' => 'faq'], function(){
+                    Route::get('','SettingAdminWebsiteFaqController@Index')->name('setting.admin.website.faq');           
+                    Route::get('create','SettingAdminWebsiteFaqController@Create')->name('setting.admin.website.faq.create'); 
+                    Route::post('createsave','SettingAdminWebsiteFaqController@CreateSave')->name('setting.admin.website.faq.createsave'); 
+                    Route::get('edit/{id}','SettingAdminWebsiteFaqController@Edit')->name('setting.admin.website.faq.edit'); 
+                    Route::post('editsave/{id}','SettingAdminWebsiteFaqController@EditSave')->name('setting.admin.website.faq.editsave'); 
+                    Route::get('delete/{id}','SettingAdminWebsiteFaqController@Delete')->name('setting.admin.website.faq.delete'); 
+                });
                 Route::group(['prefix' => 'tag'], function(){
                     Route::get('','SettingAdminWebsiteTagController@Index')->name('setting.admin.website.tag');           
                     Route::get('create','SettingAdminWebsiteTagController@Create')->name('setting.admin.website.tag.create'); 
@@ -970,9 +982,15 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'homepage'], function(){     
                     Route::group(['prefix' => 'service'], function(){     
                         Route::get('','SettingAdminWebsiteHomepageServiceController@Index')->name('setting.admin.website.homepage.service'); 
+                        Route::get('create','SettingAdminWebsiteHomepageServiceController@Create')->name('setting.admin.website.homepage.service.create'); 
+                        Route::get('edit/{id}','SettingAdminWebsiteHomepageServiceController@Edit')->name('setting.admin.website.homepage.service.edit');
+                        Route::post('createsave','SettingAdminWebsiteHomepageServiceController@CreateSave')->name('setting.admin.website.homepage.service.createsave'); 
+                        Route::post('editsave/{id}','SettingAdminWebsiteHomepageServiceController@EditSave')->name('setting.admin.website.homepage.service.editsave'); 
+                        Route::get('delete/{id}','SettingAdminWebsiteHomepageServiceController@Delete')->name('setting.admin.website.homepage.service.delete');
                     });
                     Route::group(['prefix' => 'pillar'], function(){     
-                        Route::get('','SettingAdminWebsiteHomepagePillarController@Index')->name('setting.admin.website.homepage.pillar'); 
+                        Route::get('','SettingAdminWebsiteHomepagePillarController@Edit')->name('setting.admin.website.homepage.pillar'); 
+                        Route::post('editsave','SettingAdminWebsiteHomepagePillarController@EditSave')->name('setting.admin.website.homepage.pillar.editsave'); 
                     });
                 });
             }); 

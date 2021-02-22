@@ -17,5 +17,6 @@ return [
     'submitanapplication' => 'Submit an application',
     'fillouttheform' => 'Fill out the form',
     'preliminaryconsideration' => 'Preliminary consideration',
-    'assessment' => 'Assessment'
+    'assessment' => 'Assessment',
+    'news' => 'News'
 ];

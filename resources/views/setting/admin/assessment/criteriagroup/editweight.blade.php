@@ -57,7 +57,7 @@
                                 @foreach ($criteriagrouptransactions as $criteriagrouptransaction)
                                     <div class="form-group">
                                         <label>{{$criteriagrouptransaction->criteria->name}}</label>
-                                        <input type="text"  name="weight[{{$criteriagrouptransaction->id}}]" value="{{$criteriagrouptransaction->weight}}"  placeholder="{{$criteriagrouptransaction->criteria->name}}" class="form-control">
+                                        <input type="text"  name="weight[{{$criteriagrouptransaction->id}}]" value="{{$criteriagrouptransaction->weight}}"  placeholder="{{$criteriagrouptransaction->criteria->name}}" class="form-control form-control-lg">
                                     </div>
                                 @endforeach
                                 <div class="text-right">

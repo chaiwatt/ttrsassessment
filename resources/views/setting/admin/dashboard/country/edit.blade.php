@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ประเทศ</label>
-                                            <input type="text"  name="country" value="{{$country->name}}"  placeholder="ประเทศ" class="form-control">
+                                            <input type="text"  name="country" value="{{$country->name}}"  placeholder="ประเทศ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

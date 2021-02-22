@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>สถานะโครงการ</label>
-                                            <input type="text"  name="businessplanstatus" value="{{$businessplanstatus->name}}"  placeholder="สถานะโครงการ" class="form-control">
+                                            <input type="text"  name="businessplanstatus" value="{{$businessplanstatus->name}}"  placeholder="สถานะโครงการ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

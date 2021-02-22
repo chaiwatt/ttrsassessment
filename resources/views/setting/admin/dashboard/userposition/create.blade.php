@@ -56,7 +56,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>เพิ่มตำแหน่งผู้ใช้งาน</label>
-                                            <input type="text"  name="userposition" value="{{old('userposition')}}"  placeholder="เพิ่มตำแหน่งผู้ใช้งาน" class="form-control">
+                                            <input type="text"  name="userposition" value="{{old('userposition')}}"  placeholder="เพิ่มตำแหน่งผู้ใช้งาน" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

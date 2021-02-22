@@ -159,14 +159,15 @@
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagestatus')?'active':''}}">สถานะเพจ</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagecategory')?'active':''}}">หมวดหมู่เพจ</a></li>
-                <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faqcategory')?'active':''}}">หมวดหมู่คำถามที่พบบ่อย</a></li>
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faqcategory')?'active':''}}">หมวดหมู่คำถามที่พบบ่อย</a></li> --}}
+                <li class="nav-item"><a href="{{route('setting.admin.website.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faq')?'active':''}}">คำถามที่พบบ่อย</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.tag')?'active':''}}">ป้ายกำกับ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.slide')?'active':''}}">ภาพสไลด์</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.introsection')?'active':''}}">Intro section</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าเพจ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.announce')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.announce')?'active':''}}">ประกาศ</a></li>	
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu.create')?'active':''}}">เมนู</a></li>	
-                <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	 --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้าแรกพิเศษ</a></li>	
                 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage')?'nav-item-expanded':''}}">
                     <a href="#" class="nav-link"><span>หน้าแรก (Homepage)</span></a>

@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>คำนำหน้า</label>
-                                            <input type="text"  name="prefix" value="{{$prefix->name}}"  placeholder="คำนำหน้า เช่น นาย นาง นางสาว" class="form-control">
+                                            <input type="text"  name="prefix" value="{{$prefix->name}}"  placeholder="คำนำหน้า เช่น นาย นาง นางสาว" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

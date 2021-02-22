@@ -71,7 +71,7 @@
                                     <div class="col-md-12">
                                        <div class="form-group">
                                           <label>ชื่อหมวดหมู่<span class="text-danger">*</span></label>
-                                          <input type="text" name="category" id="category" class="form-control">   
+                                          <input type="text" name="category" id="category" class="form-control form-control-lg">   
                                        </div>
                                     </div>
                                  </div>

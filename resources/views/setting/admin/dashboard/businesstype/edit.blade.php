@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ประเภทธุรกิจ</label>
-                                            <input type="text"  name="businesstype" value="{{$businesstype->name}}"  placeholder="ประเภทธุรกิจ" class="form-control">
+                                            <input type="text"  name="businesstype" value="{{$businesstype->name}}"  placeholder="ประเภทธุรกิจ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

@@ -61,17 +61,17 @@
             @csrf
             <div class="form-row">
               <div class="col-lg-6 form-group">
-                <input type="text" name="name" class="form-control" value="{{old('name')}}" placeholder="ชื่อ-สกุล"  />
+                <input type="text" name="name" class="form-control form-control-lg" value="{{old('name')}}" placeholder="ชื่อ-สกุล"  />
               </div>
               <div class="col-lg-6 form-group">
-                <input type="text" class="form-control" name="email" value="{{old('email')}}" placeholder="อีเมล"  />
+                <input type="text" class="form-control form-control-lg" name="email" value="{{old('email')}}" placeholder="อีเมล"  />
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="subject"  value="{{old('subject')}}" placeholder="หัวข้อ" />
+              <input type="text" class="form-control form-control-lg" name="subject"  value="{{old('subject')}}" placeholder="หัวข้อ" />
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="message" rows="5"  value="{{old('message')}}" placeholder="ข้อความ" ></textarea>
+              <textarea class="form-control form-control-lg" name="message" rows="5"  value="{{old('message')}}" placeholder="ข้อความ" ></textarea>
             </div>
             <div class="text-center"><button type="submit">ส่งข้อความ</button></div>
           </form>

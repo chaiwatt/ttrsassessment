@@ -38,7 +38,7 @@
             <li><i class="bx bx-chevron-right"></i> <a href="#">หน้าหลัก</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">ข่าวสาร</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">ประกาศ</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">งานบริการ</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">คำถามพบบ่อย</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">ติดต่อเรา</a></li>
           </ul>
         </div>

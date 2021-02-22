@@ -18,6 +18,8 @@
           @endif
         </div>
       @endforeach
-    <a href="{{route('register')}}" class="btn-get-started float-right" data-aos="fade-up" data-aos-delay="550">เริ่มต้นใช้งาน</a>
+      <div class="col-lg-12 text-center" >
+        <a href="{{route('register')}}" class="btn-get-started" data-aos="fade-up" data-aos-delay="550">เริ่มต้นใช้งาน</a>
+      </div>
   </div>
 </section>

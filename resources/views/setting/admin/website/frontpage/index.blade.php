@@ -55,11 +55,11 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>สีพื้น<span class="text-danger">*</span></label>
-                                            <input type="text"  name="bgcolor" value="{{$frontpage->bgcolor}}"  placeholder="สีพื้น" class="form-control">
+                                            <input type="text"  name="bgcolor" value="{{$frontpage->bgcolor}}"  placeholder="สีพื้น" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>เปอร์เซนต์ขนาดรูปพื้น<span class="text-danger">*</span></label>
-                                            <input type="text"  name="percent" value="{{$frontpage->percentimg}}"  placeholder="หัวเรื่อง" class="form-control">
+                                            <input type="text"  name="percent" value="{{$frontpage->percentimg}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>รูปพื้น (ขนาด 1200x857 px)<span class="text-danger">*</span></label>

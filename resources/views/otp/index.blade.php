@@ -18,7 +18,7 @@
             <form method="POST" action="{{ route('sms.verify') }}">
                 @csrf
                 <div class="form-group form-group-feedback form-group-feedback-left">
-                    <input type="number" class="form-control" name="otp" value="{{ old('otp') }}" required placeholder="รหัส otp">
+                    <input type="number" class="form-control form-control-lg" name="otp" value="{{ old('otp') }}" required placeholder="รหัส otp">
                     <div class="form-control-feedback">
                         <i class="icon-mobile3 text-muted"></i>
                     </div>

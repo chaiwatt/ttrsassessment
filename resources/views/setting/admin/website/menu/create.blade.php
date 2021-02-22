@@ -71,13 +71,13 @@
                                     <div class="col-md-12">
                                        <div class="form-group">
                                           <label>เมนูภาษาไทย<span class="text-danger">*</span></label>
-                                          <input type="text" name="menuthai" id="menuthai" class="form-control">   
+                                          <input type="text" name="menuthai" id="menuthai" class="form-control form-control-lg">   
                                        </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                            <label>เมนูภาษาอังกฤษ<span class="text-danger">*</span></label>
-                                           <input type="text" name="menuenglish" id="menuenglish" class="form-control">   
+                                           <input type="text" name="menuenglish" id="menuenglish" class="form-control form-control-lg">   
                                         </div>
                                      </div>
                                  </div>

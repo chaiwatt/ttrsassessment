@@ -13,3 +13,7 @@
 		
 		  <!-- Template Main JS File -->
 		  <script src="{{asset('assets/landing/js/main.js')}}"></script>
+
+		  @section('pageScript')
+	
+		  @show

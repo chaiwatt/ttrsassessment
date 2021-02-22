@@ -56,7 +56,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>เพิ่มสถานะการแสดงเพจ</label>
-                                            <input type="text"  name="pagestatus" value="{{old('pagestatus')}}"  placeholder="สถานะเพจ" class="form-control">
+                                            <input type="text"  name="pagestatus" value="{{old('pagestatus')}}"  placeholder="สถานะเพจ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

@@ -12,13 +12,8 @@
               <ol class="breadcrumb">
                 <i class="icofont-tags mt-2"></i> ป้ายกำกับ: &nbsp;
                 @foreach ($pagetags as $tag)
-                {{-- <a href="{{route('landing.tag',['slug' => $tag->tag->slug])}}">{{$tag->tag->name}}</a>&nbsp;--}}
                     <li class="breadcrumb-item"><a href="#">{{$tag->tag->name}}</a></li> 
                 @endforeach
-
-                {{-- <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-                <li class="breadcrumb-item"><a href="#">ข่าวสาร</a></li> --}}
-                {{-- <li class="breadcrumb-item active" aria-current="page">สวทช. จับมือ 3 พันธมิตรสร้างฐานข้อมูลสมุนไพร หนุนเอกชนใช้งานด้านเครื่องสำอาง</li> --}}
               </ol>
             </nav>
             </p>
@@ -29,8 +24,6 @@
               <hr>                 
               <p>{!!$page->content!!}</p>
             </div>
-       
-            <!-- the comment box -->
            
             <div class="well">
                 @if (Session::has('success'))
@@ -51,7 +44,7 @@
                 <form method="POST" action="{{route('blog.comment',['id' => $page->id])}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <textarea name="comment" class="form-control" rows="3"></textarea>
+                        <textarea name="comment" class="form-control form-control-lg" rows="3"></textarea>
                     </div>
                     <button type="submit" class=" btn btn-lg btn-info"><i class="fa fa-reply"></i> แสดงความเห็น</button>
                 </form>

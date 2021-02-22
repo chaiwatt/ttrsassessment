@@ -56,7 +56,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>กลุ่มอุตสาหกรรม</label>
-                                            <input type="text"  name="industrygroup" value="{{old('industrygroup')}}"  placeholder="กลุ่มอุตสาหกรรม" class="form-control">
+                                            <input type="text"  name="industrygroup" value="{{old('industrygroup')}}"  placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

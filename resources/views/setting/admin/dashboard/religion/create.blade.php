@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ศาสนา</label>
-                                            <input type="text"  name="religion" value="{{old('religion')}}"  placeholder="ศาสนา" class="form-control">
+                                            <input type="text"  name="religion" value="{{old('religion')}}"  placeholder="ศาสนา" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

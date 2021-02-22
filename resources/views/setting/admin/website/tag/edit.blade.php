@@ -57,7 +57,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ป้ายชื่อกำกับเพจ</label>
-                                            <input type="text"  name="tag" value="{{$tag ->name}}"  placeholder="ป้ายชื่อกำกับเพจ" class="form-control">
+                                            <input type="text"  name="tag" value="{{$tag ->name}}"  placeholder="ป้ายชื่อกำกับเพจ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>
                                 </div>

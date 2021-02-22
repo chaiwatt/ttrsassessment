@@ -72,31 +72,31 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 1 ภาษาไทย</label>
-                                            <input type="text"  name="textone" value="{{$slide->textone}}"  placeholder="ข้อความที่ 1 ภาษาไทย" class="form-control">
+                                            <input type="text"  name="textone" value="{{$slide->textone}}"  placeholder="ข้อความที่ 1 ภาษาไทย" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 1 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengone" value="{{$slide->textengone}}"  placeholder="ข้อความที่ 1 ภาษาอังกฤษ" class="form-control">
+                                            <input type="text"  name="textengone" value="{{$slide->textengone}}"  placeholder="ข้อความที่ 1 ภาษาอังกฤษ" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 2 ภาษาไทย</label>
-                                            <input type="text"  name="texttwo" value="{{$slide->texttwo}}"  placeholder="ข้อความที่ 2 ภาษาไทย" class="form-control">
+                                            <input type="text"  name="texttwo" value="{{$slide->texttwo}}"  placeholder="ข้อความที่ 2 ภาษาไทย" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 2 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengtwo" value="{{$slide->textengtwo}}"  placeholder="ข้อความที่ 2 ภาษาอังกฤษ" class="form-control">
+                                            <input type="text"  name="textengtwo" value="{{$slide->textengtwo}}"  placeholder="ข้อความที่ 2 ภาษาอังกฤษ" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 3 ภาษาไทย</label>
-                                            <input type="text"  name="textthree" value="{{$slide->textthree}}"  placeholder="ข้อความที่ 3 ภาษาไทย" class="form-control">
+                                            <input type="text"  name="textthree" value="{{$slide->textthree}}"  placeholder="ข้อความที่ 3 ภาษาไทย" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 3 ภาษาอังกฤษ</label>
-                                            <input type="text"  name="textengthree" value="{{$slide->textengthree}}"  placeholder="ข้อความที่ 3 ภาษาอังกฤษ" class="form-control">
+                                            <input type="text"  name="textengthree" value="{{$slide->textengthree}}"  placeholder="ข้อความที่ 3 ภาษาอังกฤษ" class="form-control form-control-lg">
                                         </div> --}}
                                         <div class="form-group">
                                             <label>ลิงก์ URL</label>
-                                            <input type="text"  name="url" value="{{$slide->url}}"  placeholder="ลิงก์ URL" class="form-control">
+                                            <input type="text"  name="url" value="{{$slide->url}}"  placeholder="ลิงก์ URL" class="form-control form-control-lg">
                                         </div>
 										<div class="form-group">
 											<label>รูปสไลด์<span class="text-danger">*</span></label>

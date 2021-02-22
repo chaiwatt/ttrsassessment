@@ -56,15 +56,15 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ธนาคาร</label>
-                                            <input type="text"  name="bank" value="{{$bankaccount->bank}}"  placeholder="ธนาคาร" class="form-control">
+                                            <input type="text"  name="bank" value="{{$bankaccount->bank}}"  placeholder="ธนาคาร" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ชื่อบัญชี</label>
-                                            <input type="text"  name="name" value="{{$bankaccount->name}}"  placeholder="ชื่อบัญชี" class="form-control">
+                                            <input type="text"  name="name" value="{{$bankaccount->name}}"  placeholder="ชื่อบัญชี" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>หมายเลขบัญชี</label>
-                                            <input type="text"  name="accountno" value="{{$bankaccount->accountno}}"  placeholder="หมายเลขบัญชี" class="form-control">
+                                            <input type="text"  name="accountno" value="{{$bankaccount->accountno}}"  placeholder="หมายเลขบัญชี" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>ประเภทบัญชีเงินฝาก</label>

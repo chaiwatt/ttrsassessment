@@ -159,7 +159,7 @@
                     <div class="form-group d-flex align-items-center">
                         <a href="#" data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
                     </div>
-                    <input id="user_type" type="text" class="form-control" name="user_type" hidden>
+                    <input id="user_type" type="text" class="form-control form-control-lg" name="user_type" hidden>
                     <div class="form-group">
                         <button type="submit" id="term" class="btn btn-primary btn-block" disabled>สมัครสมาชิก <i class="icon-circle-right2 ml-2"></i></button>
                     </div>

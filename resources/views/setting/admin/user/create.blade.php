@@ -63,11 +63,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ชื่อ<span class="text-danger">*</span></label>
-                                            <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ" class="form-control">
+                                            <input type="text"  name="name" value="{{old('name')}}"  placeholder="ชื่อ" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>นามสกุล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="lastname" value="{{old('lastname')}}"  placeholder="นามสกุล" class="form-control">
+                                            <input type="text"  name="lastname" value="{{old('lastname')}}"  placeholder="นามสกุล" class="form-control form-control-lg">
                                         </div>
 
                                         <div class="form-group">
@@ -80,11 +80,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{old('email')}}"  placeholder="อีเมล" class="form-control">
+                                            <input type="text"  name="email" value="{{old('email')}}"  placeholder="อีเมล" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>รหัสผ่าน<span class="text-danger">*</span></label>
-                                            <input type="password"  name="password" value="{{old('password')}}"  placeholder="รหัสผ่าน" class="form-control">
+                                            <input type="password"  name="password" value="{{old('password')}}"  placeholder="รหัสผ่าน" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
                                             <label>สถานะการใช้งาน<span class="text-danger">*</span></label>
