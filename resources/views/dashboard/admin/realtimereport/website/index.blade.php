@@ -70,7 +70,7 @@
                                 <tbody>
                                     @foreach ($directmenus as $key => $directmenu)
                                         <tr>    
-                                            <td> <a href="{{url('/').'/'.$directmenu->slug}}" class="text-info" target="_blank">{{$directmenu->name}}</a> </td>                                         
+                                            <td> <a href="{{url('/').'/'.$directmenu->url}}" class="text-info" target="_blank">{{$directmenu->name}}</a> </td>                                         
                                             <td> {{$directmenu->view}} </td> 
                                             <td> {{$directmenu->viewdate}} </td> 
                                         </tr>
