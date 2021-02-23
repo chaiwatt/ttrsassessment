@@ -22,37 +22,32 @@
         </div>
 
         <div class="col-lg-3 col-md-7 footer-links">
-          <h4>เวลาทำการ</h4>
+          <h4 style="font-family: Sarabun; font-weight:200">เวลาทำการ</h4>
            จันทร์-ศุกร์: <strong>{{$generalinfo->workdaytime}}</strong> 
           <br>
           อาทิตย์: <strong> {{$generalinfo->sundaytime}}</strong> 
-          <h4 class="mt-3">เวลาทำการ</h4>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4 style="font-family: Sarabun; font-weight:200">ติดต่อ</h4>
           โทรศัพท์: <strong>{{$generalinfo->phone1}}, {{$generalinfo->phone2}}</strong>
           <br>
           แฟ็กซ์: <strong>{{$generalinfo->fax}}</strong>
         </div>
 
         <div class="col-lg-2 col-md-5 footer-links">
-          <h4>เมนู ด่วน</h4>
+          <h4 style="font-family: Sarabun; font-weight:200">เมนู ด่วน</h4>
           <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">หน้าหลัก</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">ข่าวสาร</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">ประกาศ</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">คำถามพบบ่อย</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">ติดต่อเรา</a></li>
+            @foreach($directmenus as $key => $menu)
+            @if ($key == 0)
+                  <li><i class="bx bx-chevron-right"></i><a href="{{url('/').'/'.$menu->url}}" class="sarabun">@if (Config::get('app.locale') == 'th') {{ $menu->name }} @else {{ $menu->engname }} @endif</a></li>
+                @else
+                  <li ><i class="bx bx-chevron-right"></i><a href="{{url('/').'/'.$menu->url}}" class="sarabun">@if (Config::get('app.locale') == 'th') {{ $menu->name }} @else {{ $menu->engname }} @endif</a></li>
+            @endif
+          @endforeach
           </ul>
         </div>
-        
-
-        <div class="col-lg-4 col-md-6 footer-newsletter">
-          <h4>ศูนย์ช่วยเหลือ</h4>
-          <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-          <form action="" method="post">
-            <input type="email" name="email"><input type="submit" value="Subscribe">
-          </form>
-
-        </div>
-
       </div>
     </div>
   </div>
