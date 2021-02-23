@@ -13,6 +13,11 @@ class DirectMenu extends Model
 
     public function getViewdateAttribute(){
         $directmenu = DirectMenu::find($this->id);
-        return DateConversion::thaiDateTime($directmenu->updated_at);
+        if(!Empty($directmenu->updated_at)){
+            return DateConversion::thaiDateTime($directmenu->updated_at);
+        }else{
+            return '';
+        }
+        
     } 
 }
