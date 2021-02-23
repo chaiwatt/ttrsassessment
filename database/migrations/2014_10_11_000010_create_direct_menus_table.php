@@ -21,6 +21,7 @@ class CreateDirectMenusTable extends Migration
             $table->string('engslug',250)->nullable();
             $table->string('url',250)->nullable();
             $table->char('hide')->default(1)->comment('ซ่อน/แสดงเมนู');
+            $table->char('view',10)->default(0);
             $table->timestamps();
         });
     }

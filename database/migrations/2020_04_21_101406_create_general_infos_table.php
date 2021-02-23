@@ -46,6 +46,7 @@ class CreateGeneralInfosTable extends Migration
             $table->unsignedBigInteger('verify_type_id')->default(1);
             $table->unsignedBigInteger('front_page_status_id')->default(1);
             $table->unsignedBigInteger('verify_expert_status_id')->default(2);
+            // $table->char('pageview',10)->default(0);
             $table->timestamps();
         });
     }

@@ -42,6 +42,12 @@ class Page extends Model
     {
         return PageView::where('page_id',$this->id);
     }
+
+    public function getViewdateAttribute(){
+        $pageview = PageView::where('page_id',$this->id)->latest()->first();
+        return DateConversion::thaiDateTime($pageview->created_at);
+    } 
+
     public function getPageViewUniqueAttribute()
     {
         return PageView::where('page_id',$this->id)->select('ipaddress')->distinct()->get();

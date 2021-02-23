@@ -12,6 +12,7 @@ use App\Model\PageTag;
 use App\Model\Announce;
 use App\Model\PageView;
 use App\Model\PageImage;
+use App\Model\DirectMenu;
 use App\Model\GeneralInfo;
 use App\Model\ExpertDetail;
 use App\Model\FeatureImage;
@@ -34,6 +35,10 @@ class HomeController extends Controller
     public function Index()
     {
         $generalinfo = GeneralInfo::first();
+        $directmenu = DirectMenu::find(1);
+        $directmenu->update([
+            'view' => intVal($directmenu->view) +1
+        ]);
         if(Session::get('front') == 'active'){
             return $this->Front();
         }else if($generalinfo->front_page_status_id == 2){
@@ -93,15 +98,22 @@ class HomeController extends Controller
     }
     public function Blog()
     {
+        $directmenu = DirectMenu::find(2);
+        $directmenu->update([
+            'view' => intVal($directmenu->view) +1
+        ]);
         $pages = Page::paginate(10);
         return view('landing.blog')->withPages($pages);
     }
 
     public function Contact(){
+        $directmenu = DirectMenu::find(5);
+        $directmenu->update([
+            'view' => intVal($directmenu->view) +1
+        ]);
         $generalinfo = GeneralInfo::first();
         return view('landing.contact')->withGeneralinfo($generalinfo);
     }
-
 
     public function DemoUser(){
         $this->createUserTypeCompany(2,'กนกนันทร์','สุเชาว์อินทร์','ttrsuser1@npcsolution.com','9548853765681','0882514838','ไทยชนะรีสอร์ต');
@@ -265,6 +277,10 @@ class HomeController extends Controller
     }
 
     public function Announce(){
+        $directmenu = DirectMenu::find(3);
+        $directmenu->update([
+            'view' => intVal($directmenu->view) +1
+        ]);
         $announces = Announce::where('page_status_id',1)->orderBy('id','desc')->paginate(10);
         $announcecategories = AnnounceCategory::get();
         return view('landing.announce')->withAnnounces($announces)
@@ -300,6 +316,10 @@ class HomeController extends Controller
          return response()->json($announces); 
      }
      public function faq(){
+        $directmenu = DirectMenu::find(4);
+        $directmenu->update([
+            'view' => intVal($directmenu->view) +1
+        ]);
         $faqs =  Faq::where('status',1)->orderBy('id','desc')->get();
         return view('landing.faq')->withFaqs($faqs);
     }

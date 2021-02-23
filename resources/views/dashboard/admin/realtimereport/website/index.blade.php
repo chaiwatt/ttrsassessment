@@ -7,20 +7,20 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">หน้าเพจ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายงานหน้าเพจ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            <div class="header-elements d-none">
+            {{-- <div class="header-elements d-none">
                 <a href="{{route('setting.admin.website.page.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มหน้าเพจ<b><i class="icon-plus3"></i></b></a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <span class="breadcrumb-item active">หน้าเพจ</span>
+                    <span class="breadcrumb-item active">การเข้าชมเว็บไซต์</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -52,12 +52,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">หน้าเพจ</h6>
+                        <h6 class="card-title">การเข้าชมเว็บไซต์</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a> --}}
+
                         </div>
                     </div>
                     <div class="card-body">
@@ -65,27 +62,49 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th>#</th> --}}
-                                        <th>ชื่อ</th>                               
-                                        <th>หมวด</th>
-                                        <th>จำนวนวิว</th>
-                                        <th>Unique IP</th>
-                                        <th style="width:180px">เพิ่มเติม</th>
+                                        <th>หน้าเพจ</th>                               
+                                        <th style="width: 200px">จำนวนเข้าชม</th>
+                                        <th style="width: 250px">เข้าดูล่าสุด</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($directmenus as $key => $directmenu)
+                                        <tr>    
+                                            <td> <a href="{{url('/').'/'.$directmenu->slug}}" class="text-info" target="_blank">{{$directmenu->name}}</a> </td>                                         
+                                            <td> {{$directmenu->view}} </td> 
+                                            <td> {{$directmenu->viewdate}} </td> 
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">การเข้าชมเว็บไซต์</h6>
+                        <div class="header-elements">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="testtopictable">
+                                <thead>
+                                    <tr>
+                                        <th>หน้าเพจ</th>                               
+                                        <th style="width: 200px">จำนวนเข้าชม</th>
+                                        <th style="width: 250px">เข้าดูล่าสุด</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($pages as $key => $page)
                                     <tr>    
-                                        {{-- <td> {{$key+1}} </td> --}}
-                                        <td> {{$page->name}} </td>                                         
-                                        <td> {{$page->pagecategory->name}} </td>  
+                                        <td> <a href="{{route('landing.page',['slug' => $page->slug])}}" class="text-info" target="_blank">{{$page->name}}</a> </td>                                         
                                         <td> {{$page->pageview->count()}} </td> 
-                                        <td> {{$page->pageviewunique->count()}} </td> 
-                                        <td> 
-                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
-                                            <a href="{{route('setting.admin.website.page.edit',['id' => $page->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.website.page.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
-                                        </td>
+                                        <td> {{$page->viewdate}} </td> 
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -93,12 +112,9 @@
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
         </div>
-        <!-- /form layouts -->
     </div>
-    <!-- /content area -->
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
