@@ -23,17 +23,17 @@
 
         <div class="col-lg-3 col-md-7 footer-links">
           <h4 style="font-family: Sarabun; font-weight:200">เวลาทำการ</h4>
-           จันทร์-ศุกร์: <strong>{{$generalinfo->workdaytime}}</strong> 
+           จันทร์-ศุกร์: {{$generalinfo->workdaytime}}
           <br>
-          อาทิตย์: <strong> {{$generalinfo->sundaytime}}</strong> 
+          อาทิตย์: {{$generalinfo->sundaytime}}
 
         </div>
 
         <div class="col-lg-4 col-md-6 footer-newsletter">
           <h4 style="font-family: Sarabun; font-weight:200">ติดต่อ</h4>
-          โทรศัพท์: <strong>{{$generalinfo->phone1}}, {{$generalinfo->phone2}}</strong>
+          โทรศัพท์: {{$generalinfo->phone1}}, {{$generalinfo->phone2}}
           <br>
-          แฟ็กซ์: <strong>{{$generalinfo->fax}}</strong>
+          แฟ็กซ์: {{$generalinfo->fax}}
         </div>
 
         <div class="col-lg-2 col-md-5 footer-links">
@@ -54,7 +54,7 @@
 
   <div class="container">
     <div class="copyright">
-      &copy;สงวนลิขสิทธิ์ {{date('Y')}}  <strong><span>{{$generalinfo->company}}</span></strong>. 
+      &copy;สงวนลิขสิทธิ์ {{date('Y')}} <span>{{$generalinfo->company}}</span>. 
     </div>
   
   </div>
