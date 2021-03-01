@@ -33,7 +33,7 @@ class UseTypesTableSeeder extends Seeder
                 'group' => 'B'
             ],
             [
-                'name' => 'director',
+                'name' => 'JD',
                 'group' => 'C'
             ]
         ]);

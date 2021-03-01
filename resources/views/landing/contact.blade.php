@@ -17,7 +17,8 @@
           <div class="info-box">
             <i class="bx bx-map"></i>
             <h3>ศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยี</h3>
-            <p class="contact-p">{{$generalinfo->address}} ถนนพหลโยธิน ตำบล{{$generalinfo->tambol->name}} อำเภอ{{$generalinfo->amphur->name}} จังหวัด{{$generalinfo->province->name}} {{$generalinfo->postalcode}}</p>
+             {{-- <p class="contact-p">{{$generalinfo->address}} ตำบล{{$generalinfo->tambol->name}} อำเภอ{{$generalinfo->amphur->name}} จังหวัด{{$generalinfo->province->name}} {{$generalinfo->postalcode}}</p> --}}
+             <p class="contact-p">111 อุทยานวิทยาศาสตร์ประเทศไทย ถ.พหลโยธิน ตำบลคลองหนึ่ง <br>อำเภอคลองหลวง จังหวัดปทุมธานี 12120</p>
           </div>
         </div>
   
@@ -26,16 +27,16 @@
             <i class="bx bx-time"></i>
             <h3>เวลาทำการ</h3>
             <p>จันทร์-ศุกร์: {{$generalinfo->workdaytime}}<br>
-              เสาร์: {{$generalinfo->saturdaytime}}<br>
-              อาทิตย์: {{$generalinfo->sundaytime}}</p>
+              {{-- เสาร์: {{$generalinfo->saturdaytime}}<br> --}}
+              </p>
           </div>
         </div>
   
         <div class="col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
           <div class="info-box ">
             <i class="bx bx-phone-call"></i>
-            <h3>โทรฯ</h3>
-            <p>โทรศัพท์: {{$generalinfo->phone1}}, {{$generalinfo->phone2}} <br>
+            <h3>ติดต่อ</h3>
+            <p>โทรศัพท์: {{$generalinfo->phone1}} <br>
               แฟ็กซ์: {{$generalinfo->fax}}
               <br>
               อีเมล: {{$generalinfo->email}}</p>

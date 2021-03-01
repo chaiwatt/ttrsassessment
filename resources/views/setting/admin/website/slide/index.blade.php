@@ -19,6 +19,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
                     <span class="breadcrumb-item active">ภาพสไลด์</span>
                 </div>
 

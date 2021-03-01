@@ -32,13 +32,6 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user) { 
         $generalinfo = GeneralInfo::first();
-        if($generalinfo->verify_expert_status_id == 2){
-            if(($user->user_type_id == 3 || $user->user_type_id == 4) && $user->verify_expert == 1){
-                Auth::logout();
-                Session::flush();
-                return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ JD');
-            }
-        }
         if($user->user_status_id == 2){
             Auth::logout();
             Session::flush();
@@ -47,6 +40,13 @@ class LoginController extends Controller
          $baseurl =URL::to('/');
          $intendurl = redirect()->intended()->getTargetUrl();
          if(strcmp($intendurl,$baseurl) == 0){
+            if($generalinfo->verify_expert_status_id == 2){
+                if(($user->user_type_id == 3 || $user->user_type_id == 4) && $user->verify_expert == 1){
+                    Auth::logout();
+                    Session::flush();
+                    return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ JD');
+                }
+            }
             if($user->user_type_id >= 4){
                 return redirect()->route('dashboard.admin.report'); 
             }else if($user->user_type_id == 3){
@@ -87,5 +87,4 @@ class LoginController extends Controller
         }
         return $user;
     }
-
 }

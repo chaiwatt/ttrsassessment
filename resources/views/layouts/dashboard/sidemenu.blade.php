@@ -261,6 +261,7 @@
             <a href="#" class="nav-link"><span>ระบบ</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="ระบบ">
                 <li class="nav-item"><a href="{{route('setting.admin.system')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.system')?'active':''}}">ตั้งค่าระบบ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.system.projectflow')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.system.projectflow')?'active':''}}">Control Flow</a></li>		             
             </ul>
         </li>
         @endif

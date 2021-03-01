@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการ Pillar</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Control Flow</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                {{-- <a href="{{route('setting.admin.assessment.pillar.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Pillar<b><i class="icon-plus3"></i></b></a> --}}
+                
             </div>
         </div>
 
@@ -19,9 +19,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> EV</a>
-                    {{-- <a href="#" class="breadcrumb-item"> Pillar</a> --}}
-                    <span class="breadcrumb-item active">Pillar</span>
+                    <a href="#" class="breadcrumb-item"> ระบบ</a>
+                    <span class="breadcrumb-item active">Control Flow</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -53,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">Pillar</h6>
+                        <h6 class="card-title">Control Flow</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -66,19 +65,18 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>ชื่อรายการ</th>  
-                                        <th>ร้อยละ</th>                              
-                                        <th style="width:200px">เพิ่มเติม</th>
+                                        <th>Control Flow</th>      
+                                        <th>ระยะเวลา (วัน)</th>                           
+                                        <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pillars as $key => $pillar)
+                                    @foreach ($projectflows as $key => $projectflow)
                                     <tr>    
-                                        <td> {{$pillar->name}} </td>  
-                                        <td> {{$pillar->percent}} </td>                                    
-                                        <td>   
-                                            <a href="{{route('setting.admin.assessment.pillar.edit',['id' => $pillar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.pillar.delete',['id' => $pillar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                        <td> {{$projectflow->name}} </td>                                         
+                                        <td> {{$projectflow->duration}} </td> 
+                                        <td> 
+                                            <a href="{{route('setting.admin.system.projectflow.edit',['id' => $projectflow->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -87,6 +85,7 @@
                         </div>
                     </div>
                 </div>
+            <!-- /striped rows -->
             </div>
         </div>
         <!-- /form layouts -->
@@ -98,8 +97,7 @@
     <script>
         var route = {
             url: "{{ url('/') }}",
-            token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            token: $('meta[name="csrf-token"]').attr('content')
         };
     </script>
 @stop

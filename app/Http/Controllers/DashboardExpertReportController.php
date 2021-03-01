@@ -24,7 +24,6 @@ class DashboardExpertReportController extends Controller
     public function __construct() 
     { 
         $this->middleware(['auth', 'verified']);
-        // $this->middleware('role:3'); 
     }
     public function Index(){
         $auth = Auth::user();

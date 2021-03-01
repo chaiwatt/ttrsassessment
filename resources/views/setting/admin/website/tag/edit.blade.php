@@ -16,7 +16,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
+                    <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
                     <a href="{{route('setting.admin.website.tag')}}" class="breadcrumb-item"> ป้ายป้ายกำกับ</a>
                     <span class="breadcrumb-item active">แก้ไขป้ายกำกับ</span>
                 </div>

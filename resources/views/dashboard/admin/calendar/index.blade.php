@@ -11,7 +11,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการปฏิทินกิจกรรม</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ปฏิทินกิจกรรม</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
@@ -22,9 +22,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ปฏิทิน</a>
-                    <span class="breadcrumb-item active">รายการปฏิทินกิจกรรม</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ปฏิทิน</a>
+                    <span class="breadcrumb-item active">ปฏิทินกิจกรรม</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

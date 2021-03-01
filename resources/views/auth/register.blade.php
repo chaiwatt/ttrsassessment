@@ -23,15 +23,15 @@
             </div>
         </div>
     </div>
-    <div class="login-form wmin-xl-500">
+    <div class="login-form" style="width:600px">
         <div class="card mb-0">
             <div class="card mb-0">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                 <ul class="nav nav-tabs nav-justified alpha-grey mb-0" id="usertype">
-                    <li class="nav-item bg-info-300" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1">ผู้ขอรับการประเมิน</h6></a></li>
-                    <li class="nav-item bg-info-300" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1">เจ้าหน้าที่ TTRS</h6></a></li>
-                    <li class="nav-item bg-info-300" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1">ผู้เชี่ยวชาญ</h6></a></li>
+                    <li class="nav-item bg-info-300" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">ผู้ขอรับการประเมิน</span></h6></a></li>
+                    <li class="nav-item bg-teal-300" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">เจ้าหน้าที่ TTRS</h6></a></li>
+                    <li class="nav-item bg-warning-300" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">ผู้เชี่ยวชาญ</h6></a></li>
                 </ul>
                 
                 <div class="tab-content card-body">
@@ -43,9 +43,6 @@
         
                     </div>
                     <div class="tab-pane fade" id="login-tab2">
-                        {{-- <div class="text-center mb-0">
-                            <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
-                        </div> --}}
                         <div class="text-center mb-3 mb-md-2" style="font-size:40px">
                             สมัครสมาชิก
                         </div>
@@ -54,11 +51,7 @@
                         <div class="text-center mb-3 mb-md-2" style="font-size:40px">
                             สมัครสมาชิก
                         </div>
-                        {{-- <div class="text-center mb-0">
-                            <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
-                        </div> --}}
                         <div class="form-group mb-3 mb-md-2">
-                            {{-- <label class="d-block font-weight-semibold">ประเภทผู้เชี่ยวชาญ</label> --}}
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input-styled" name="expert" value="1" checked data-fouc>
@@ -69,7 +62,7 @@
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input-styled" name="expert" value="2" data-fouc>
-                                    ผู้เชี่ยวชาญนอก
+                                    ผู้เชี่ยวชาญภายนอก
                                 </label>
                             </div>
                         </div>
@@ -86,9 +79,6 @@
                     <div class="form-group" id="vatwrapper" >
                         <input id="vatno" type="text" class="form-control form-control-lg numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
-                        {{-- <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div> --}}
                         @error('vatno')
                             <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                         @enderror
@@ -161,7 +151,7 @@
                     </div>
                     <input id="user_type" type="text" class="form-control form-control-lg" name="user_type" hidden>
                     <div class="form-group">
-                        <button type="submit" id="term" class="btn btn-primary btn-block" disabled>สมัครสมาชิก <i class="icon-circle-right2 ml-2"></i></button>
+                        <button type="submit" id="term" class="btn btn-primary btn-block" disabled><span style="font-size: 18px">สมัครสมาชิก</span>  <i class="icon-circle-right2 ml-2"></i></button>
                     </div>
                 </div>
                 </form>

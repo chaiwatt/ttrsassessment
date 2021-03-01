@@ -20,8 +20,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item">ปฏิทิน</a>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ปฏิทิน</a>
+                    <a href="#" class="breadcrumb-item">ปฏิทินกิจกรรม</a>
                     <span class="breadcrumb-item active">เพิ่มปฏิทินกิจกรรม</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -50,7 +50,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ปฏิทินกิจกรรม</h6>
+                        {{-- <h6 class="card-title">ปฏิทินกิจกรรม</h6> --}}
                         <div class="header-elements">
                         </div>
                     </div>
@@ -112,13 +112,13 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>เวลาเริ่ม</label>
-                                                <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control form-control-lg" >
+                                                <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>เวลาสิ้นสุด</label>
-                                                <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control form-control-lg" >
+                                                <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -187,23 +187,23 @@
             time: false
         });
 
-        $('#eventtimestart').bootstrapMaterialDatePicker({
-            format: 'HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            date: false,
-        });
+        // $('#eventtimestart').bootstrapMaterialDatePicker({
+        //     format: 'HH:mm',
+        //     clearButton: true,
+        //     cancelText: "ยกเลิก",
+        //     okText: "ตกลง",
+        //     clearText: "เคลียร์",
+        //     date: false,
+        // });
         
-        $('#eventtimeend').bootstrapMaterialDatePicker({
-            format: 'HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            date: false,
-        });
+        // $('#eventtimeend').bootstrapMaterialDatePicker({
+        //     format: 'HH:mm',
+        //     clearButton: true,
+        //     cancelText: "ยกเลิก",
+        //     okText: "ตกลง",
+        //     clearText: "เคลียร์",
+        //     date: false,
+        // });
 
         $(document).on('click', '#closetoast', function(e) {
             $("#toast").attr("hidden",true);

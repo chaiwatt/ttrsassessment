@@ -16,9 +16,9 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> EV Portion</a>
-                    <a href="{{route('setting.admin.assessment.evportion')}}" class="breadcrumb-item"> รายการ EV Portion</a>
+                    <a href="#" class="breadcrumb-item"> EV</a>
+                    {{-- <a href="#" class="breadcrumb-item"> EV Portion</a> --}}
+                    <a href="{{route('setting.admin.assessment.evportion')}}" class="breadcrumb-item"> EV Portion</a>
                     <span class="breadcrumb-item active">{{$evtype->name}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

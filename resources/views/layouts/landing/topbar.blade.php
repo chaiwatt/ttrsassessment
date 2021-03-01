@@ -2,16 +2,16 @@
     <section id="topbar" class="d-none d-lg-block">
         <div class="container clearfix">
           <div class="contact-info float-left" id="color">
-            <i class="icofont-envelope"></i><a href="mailto:{{$generalinfo->email}}">{{$generalinfo->email}}</a>
-            <i class="icofont-phone"></i><a href="tel:0-256-7000">{{$generalinfo->phone1}}</a>
+            <i class="icofont-envelope"></i>{{$generalinfo->email}}
+            <i class="icofont-phone"></i>{{$generalinfo->phone1}}
     
              <!-- ======= Social-Links ======= -->
-            <a class="ml-4" href="{{$generalinfo->twitter}}" class="twitter"><i class="icofont-twitter"></i></a>
+            {{-- <a class="ml-4" href="{{$generalinfo->twitter}}" class="twitter"><i class="icofont-twitter"></i></a>
             <a href="{{$generalinfo->youtube}}" class="youtube"><i class="icofont-youtube"></i></a>
             <a href="{{$generalinfo->facebook}}" class="facebook"><i class="icofont-facebook"></i></a>
             <a href="{{$generalinfo->instagram}}" class="instagram"><i class="icofont-instagram"></i></a>
             <a href="{{$generalinfo->skype}}" class="skype"><i class="icofont-skype"></i></a>
-            <a href="{{$generalinfo->linkedin}}" class="linkedin"><i class="icofont-linkedin"></i></a>
+            <a href="{{$generalinfo->linkedin}}" class="linkedin"><i class="icofont-linkedin"></i></a> --}}
           </div>
           
           <div class="social-links float-right" >

@@ -18,8 +18,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="#" class="breadcrumb-item"> การมอบหมาย</a>
-                    <a href="{{route('dashboard.admin.project.projectassignment')}}" class="breadcrumb-item"> รายการมอบหมาย</a>
+                    {{-- <a href="#" class="breadcrumb-item"> การมอบหมาย</a> --}}
+                    <a href="{{route('dashboard.admin.project.projectassignment')}}" class="breadcrumb-item"> การมอบหมาย</a>
                     <span class="breadcrumb-item active">{{$minitbp->project}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

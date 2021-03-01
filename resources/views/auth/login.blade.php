@@ -12,6 +12,12 @@
             {{ Session::get('error') }}
         </div>
     @endif
+    @if ($errors->has('email'))
+        <div class="alert alert-warning alert-styled-left alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            อีเมลหรือรหัสผ่านไม่ถูกต้อง
+        </div>
+    @endif
     <div class="card mb-0">
         <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
@@ -19,6 +25,7 @@
                 {{-- <div class="text-center mb-0">
                     <i class="icon-lock icon-2x text-warning-400 border-warning-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
                 </div> --}}
+
                 <div class="text-center mb-3 mb-md-2" style="font-size:40px">
                     เข้าสู่ระบบ
                 </div>
@@ -40,13 +47,13 @@
                     {{-- <a href="login_password_recover.html" class="ml-auto">{{trans('lang.forgotpassword')}}</a> --}}
                     @if (Route::has('password.request'))
                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                        {{trans('lang.forgotpassword')}}
+                        <span style="font-size: 18px">  {{trans('lang.forgotpassword')}}</span>
                     </a>
                 @endif
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">{{trans('lang.login')}} <i class="icon-circle-right2 ml-2"></i></button>
+                    <button type="submit" class="btn btn-primary btn-block"><span style="font-size: 18px">{{trans('lang.login')}}</span> <i class="icon-circle-right2 ml-2"></i></button>
                 </div>
                 @if ($generalinfo->social_login_status == 2)
                     <div class="form-group text-center">
@@ -59,7 +66,7 @@
                 </div>
 
                 <div class="form-group">
-                    <a href="{{ route('register') }}" class="btn btn-light btn-block">{{trans('lang.register')}}</a>
+                    <a href="{{ route('register') }}" class="btn btn-light btn-block"><span style="font-size: 18px">{{trans('lang.register')}}</span></a>
                 </div>
             </form>
         </div>

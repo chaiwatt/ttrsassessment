@@ -412,7 +412,7 @@
     </div>
 
 	<!-- Cover area -->
-	<div class="profile-cover">
+	{{-- <div class="profile-cover">
 		<div id="bgcover">
 			@if (!Empty($user->cover))
 				<div class="profile-cover-img" style="background-image: url({{asset($user->cover)}})"></div>
@@ -445,10 +445,10 @@
 				</ul>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 	<!-- /cover area -->
 	<!-- Profile navigation -->
-	<div class="navbar navbar-expand-lg navbar-light bg-light">
+	{{-- <div class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="text-center d-lg-none w-100">
 			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-second">
 				<i class="icon-menu7 mr-2"></i>
@@ -463,10 +463,6 @@
 						<i class="icon-mail5 mr-2"></i>กล่องข้อความ @if ($unreadmessages->count()>0) <span class="badge badge-pill bg-success-400" id="newmessagecount1" >{{$unreadmessages->count()}}</span>@endif
 					</a>
 				</li>
-				{{-- <li class="nav-item">
-					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-user mr-2"></i>ข้อมูลส่วนตัว			
-					</a>
-				</li> --}}
 				@if (Auth::user()->user_type_id == 3)
 					<li class="nav-item">
 						<a href="#expertinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-medal-star mr-2"></i>ข้อมูลผู้เชี่ยวชาญ
@@ -484,18 +480,13 @@
 						<i class="icon-stack-text mr-2"></i>ข้อมูล Log
 					</a>
 				</li>
-				{{-- <li class="nav-item">
-					<a href="#friends" class="navbar-nav-link" data-toggle="tab">
-						<i class="icon-users mr-2"></i>เพื่อน @if ($friendrequestcomings->count() > 0) <span class="badge bg-warning badge-pill ml-2" id="_friendrequestcomingcount">{{$friendrequestcomings->count()}}</span> @endif
-					</a>
-				</li> --}}
 			</ul>
 
 			<ul class="navbar-nav">
 			
 			</ul>
 		</div>
-	</div>
+	</div> --}}
 	<!-- /profile navigation -->
 
     <!-- Content area -->

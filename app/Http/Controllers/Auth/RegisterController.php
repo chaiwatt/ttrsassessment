@@ -26,7 +26,33 @@ class RegisterController extends Controller
     {
          $generalinfo = GeneralInfo::first(); 
         if($generalinfo->verify_type_id == 1){
-            return 'dashboard/company/report';
+            if(Auth::user()->user_type_id <= 2){
+                return 'dashboard/company/report';
+            }else if(Auth::user()->user_type_id == 3){
+                if($generalinfo->verify_expert_status_id == 2){
+                    if(Auth::user()->verify_expert == 1){
+                        Auth::logout();
+                        Session::flush();
+                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ JD');
+                    }else{
+                        return 'dashboard/expert/report';
+                    }
+                }else{
+                    return 'dashboard/expert/report';
+                }
+            }else if(Auth::user()->user_type_id >= 4){
+                if($generalinfo->verify_expert_status_id == 2){
+                    if(Auth::user()->verify_expert == 1){
+                        Auth::logout();
+                        Session::flush();
+                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ JD');
+                    }else{
+                        return 'dashboard/admin/report';
+                    }
+                }else{
+                    return 'dashboard/admin/report';
+                }
+            }
         }else if($generalinfo->verify_type_id == 2){
             return 'line';
         }else if($generalinfo->verify_type_id == 3){
@@ -116,6 +142,7 @@ class RegisterController extends Controller
         $companyname =  str_replace("ห้างหุ้นส่วน","",$companyname);
         CreateCompany::createCompany($user,$companyname,$vatno,$businesstype);
         $generalinfo = GeneralInfo::first();
+        
         if($generalinfo->verify_expert_status_id == 2){
             if($user->user_type_id == 3 || $user->user_type_id == 4){
                 EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS: คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype,'เรียน JD<br><br> คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype.' กรุณาตรวจสอบ/Verify ได้ที่ <a href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());

@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">สถานะการแสดงเพจ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">สถานะเพจ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.pagestatus.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มสถานะการแสดงเพจ<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.website.pagestatus.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มสถานะเพจ<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -19,8 +19,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <span class="breadcrumb-item active">สถานะการแสดงเพจ</span>
+                    <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
+                    <span class="breadcrumb-item active">สถานะเพจ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">สถานะการแสดงเพจ</h6>
+                        <h6 class="card-title">สถานะเพจ</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -66,7 +66,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>สถานะการแสดงเพจ</th>                               
+                                        <th>สถานะเพจ</th>                               
                                         <th style="width:150px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>

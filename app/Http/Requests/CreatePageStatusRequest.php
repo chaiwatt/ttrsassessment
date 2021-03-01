@@ -25,7 +25,7 @@ class CreatePageStatusRequest extends FormRequest
     public function messages()
     {
       return  [
-            'pagestatus.required' => 'ยังไม่ได้กรอกสถานะการแสดงเพจ'
+            'pagestatus.required' => 'ยังไม่ได้กรอกสถานะเพจ'
       ]; 
     }
 }

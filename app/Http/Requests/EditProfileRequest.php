@@ -28,6 +28,7 @@ class EditProfileRequest extends FormRequest
             'phone' => 'required',
             'email' => 'required',
             'address' => 'required',
+            'postalcode' => 'required',
             'authorizeddirector' => 'required|not_in:0',
         ];
     }
@@ -51,6 +52,7 @@ class EditProfileRequest extends FormRequest
             'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
             'email.required' => 'ยังไม่ได้กรอกอีเมล',
             'address.required' => 'ยังไม่ได้กรอกที่อยู่',
+            'postalcode.required' => 'ยังไม่ได้กรอกรหัสไปรษณีย์',
             'authorizeddirector.required' => 'ยังไม่ได้เพิ่มรายชื่อกรรมการ/ผู้มีอำนาจลงนาม',
             'authorizeddirector.not_in' => 'ยังไม่ได้เพิ่มรายชื่อกรรมการ/ผู้มีอำนาจลงนาม',
       ]; 

@@ -15,7 +15,7 @@ class CreatePageStatusesTable extends Migration
     {
         Schema::create('page_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name',250)->comment('สถานะการแสดงเพจ เช่น แสดง/ซ่อน');
+            $table->string('name',250)->comment('สถานะเพจ เช่น แสดง/ซ่อน');
             $table->timestamps();
         });
     }

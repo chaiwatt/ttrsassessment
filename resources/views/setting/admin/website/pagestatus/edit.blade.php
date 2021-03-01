@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขสถานะการแสดงเพจ</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขสถานะเพจ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -16,9 +16,9 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.admin.website.pagestatus')}}" class="breadcrumb-item"> สถานะการแสดงเพจ</a>
-                    <span class="breadcrumb-item active">แก้ไขสถานะการแสดงเพจ</span>
+                    <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
+                    <a href="{{route('setting.admin.website.pagestatus')}}" class="breadcrumb-item"> สถานะเพจ</a>
+                    <span class="breadcrumb-item active">แก้ไขสถานะเพจ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -56,7 +56,7 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>สถานะการแสดงเพจ</label>
+                                            <label>สถานะเพจ</label>
                                             <input type="text"  name="pagestatus" value="{{$pagestatus ->name}}"  placeholder="สถานะเพจ" class="form-control form-control-lg">
                                         </div>
                                     </fieldset>

@@ -16,28 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-//  // Authentication Routes...
-//  Route::get('login2', 'Auth\LoginController@showLoginForm')->name('login');
-//  Route::post('login2', 'Auth\LoginController@login');
-//  Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-//  // Registration Routes...
-//  Route::get('register2', 'Auth\RegisterController@showRegistrationForm')->name('register');
-//  Route::post('register2', 'Auth\RegisterController@register');
-
-//  // Password Reset Routes...
-//  Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-//  Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-//  Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-//  Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-// Route::group(['prefix' => 'invoice'], function(){
-//     Route::get('','DashboardCompanyInvoiceController@SampleInvoice')->name('dashboard.company.project.voice');           
-// }); 
-
-// Route::get('test/dailycheck', 'TestController@DailyFlowCheck')->name('test.dailycheck');
-// Route::get('test/testadd', 'TestController@TestAdd')->name('test.testadd');
-
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
@@ -977,6 +955,11 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'system'], function(){     
                     Route::get('','SettingAdminSystemController@Index')->name('setting.admin.system'); 
                     Route::post('save','SettingAdminSystemController@Save')->name('setting.admin.system.save'); 
+                    Route::group(['prefix' => 'projectflow'], function(){
+                        Route::get('','SettingAdminProjectSystemFlowController@Index')->name('setting.admin.system.projectflow');           
+                        Route::get('edit/{id}','SettingAdminProjectSystemFlowController@Edit')->name('setting.admin.system.projectflow.edit'); 
+                        Route::post('editsave/{id}','SettingAdminProjectSystemFlowController@EditSave')->name('setting.admin.system.projectflow.editsave'); 
+                    });
                 });
                 Route::group(['prefix' => 'homepage'], function(){     
                     Route::group(['prefix' => 'service'], function(){     
@@ -992,6 +975,7 @@ Route::group(['middleware' => 'auth'], function(){
                         Route::post('editsave','SettingAdminWebsiteHomepagePillarController@EditSave')->name('setting.admin.website.homepage.pillar.editsave'); 
                     });
                 });
+
             }); 
             Route::group(['prefix' => 'user'], function(){
                 Route::get('','SettingAdminUserController@Index')->name('setting.admin.user');           
