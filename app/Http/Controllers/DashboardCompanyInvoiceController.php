@@ -151,4 +151,8 @@ class DashboardCompanyInvoiceController extends Controller
        return redirect()->route('dashboard.company.project.invoice')->withSuccess('แจ้งการชำระเงินสำเร็จ');
     }
 
+    public function Report(){
+        return 'ok';
+    }
+
 }

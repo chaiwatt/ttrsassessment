@@ -22,7 +22,7 @@ class DashboardCompanyReportController extends Controller
         $auth = Auth::user();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$auth->id)->first()->id)->get();
-        $timelinehistories = TimeLineHistory::where('owner_id',$auth->id)->orderBy('id','desc')->paginate(3);
+        $timelinehistories = TimeLineHistory::where('owner_id',$auth->id)->orderBy('id','desc')->paginate(5);
         return view('dashboard.company.report.index')->withBusinessplans($businessplans)
                                                 ->withAlertmessages($alertmessages)
                                                 ->withTimelinehistories($timelinehistories);

@@ -127,6 +127,10 @@
                                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                             @endif
                         </a></li>
+                        @if (Auth::user()->company->businessplan->business_plan_status_id >=  9)
+                            <li class="nav-item"><a href="{{route('dashboard.company.project.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">รายงานผล
+                            </a></li>
+                        @endif
                 @endif
             </ul>
         </li>

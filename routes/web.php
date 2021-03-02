@@ -717,6 +717,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('view/{id}','DashboardCompanyInvoiceController@View')->name('dashboard.company.project.invoice.view');   
                     Route::get('paymentnotification/{id}','DashboardCompanyInvoiceController@PaymentNotification')->name('dashboard.company.project.invoice.paymentnotification');   
                     Route::post('paymentnotificationsave/{id}','DashboardCompanyInvoiceController@PaymentNotificationSave')->name('dashboard.company.project.invoice.paymentnotificationsave');           
+                    Route::get('report','DashboardCompanyInvoiceController@Report')->name('dashboard.company.project.report'); 
                 }); 
                 Route::group(['prefix' => 'assessment'], function(){
                     Route::get('','DashboardCompanyProjectAssessmentController@Index')->name('dashboard.company.assessment');           
