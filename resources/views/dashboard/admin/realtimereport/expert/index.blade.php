@@ -102,7 +102,13 @@
                                         <tbody >
                                             @foreach ($expertdetails as $expert)
                                                 <tr>
-                                                    <td>{{$expert->user->prefix->name}}{{$expert->user->name}}  {{$expert->user->lastname}}</td>
+                                                    @php
+                                                        $userprefix = $expert->user->prefix->name;
+                                                        if($userprefix == 'อื่น ๆ'){
+                                                            $userprefix = $expert->user->alter_prefix;
+                                                        }
+                                                    @endphp 
+                                                    <td>{{$userprefix}}{{$expert->user->name}}  {{$expert->user->lastname}}</td>
                                                     <td>{{$expert->position}}</td>
                                                     <td>{{$expert->organization}}</td>
                                                     <td>{{$expert->expertbranch->name}}</td>

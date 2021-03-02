@@ -82,6 +82,7 @@ class SettingProfileExpertController extends Controller
         if(Empty($request->sameaddress)){
             $user->update([
                 'prefix_id' => $request->prefix,
+                'alter_prefix' => $request->alter_prefix,
                 'name' => $request->name,
                 'hid' => $request->hid,
                 'lastname' => $request->lastname,
@@ -105,6 +106,7 @@ class SettingProfileExpertController extends Controller
         }else{
             $user->update([
                 'prefix_id' => $request->prefix,
+                'alter_prefix' => $request->alter_prefix,
                 'name' => $request->name,
                 'hid' => $request->hid,
                 'lastname' => $request->lastname,

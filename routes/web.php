@@ -515,7 +515,10 @@ Route::group(['middleware' => 'auth'], function(){
                 });
                 Route::group(['prefix' => 'website'], function(){
                     Route::get('visit','DashboardAdminRealtimeReportWebsiteController@visit')->name('dashboard.admin.realtimereport.website.visit');
-                    
+                    Route::get('contact','DashboardAdminRealtimeReportWebsiteController@contact')->name('dashboard.admin.realtimereport.website.contact');
+                    Route::get('view/{id}','DashboardAdminRealtimeReportWebsiteController@view')->name('dashboard.admin.realtimereport.website.view');
+                    Route::get('delete/{id}','DashboardAdminRealtimeReportWebsiteController@delete')->name('dashboard.admin.realtimereport.website.delete');
+                    Route::post('update/{id}','DashboardAdminRealtimeReportWebsiteController@update')->name('dashboard.admin.realtimereport.website.update');
                 });
                 Route::group(['prefix' => 'grade'], function(){
                     Route::get('','DashboardAdminRealtimeReportGradeController@Index')->name('dashboard.admin.realtimereport.grade');

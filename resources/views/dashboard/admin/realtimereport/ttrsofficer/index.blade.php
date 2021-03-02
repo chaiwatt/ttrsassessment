@@ -99,7 +99,13 @@
                                         <tbody >
                                             @foreach ($officers as $officer)
                                                 <tr>
-                                                    <td>{{$officer->user->prefix->name}}{{$officer->user->name}}  {{$officer->user->lastname}}</td>
+                                                    @php
+                                                        $userprefix = $officer->user->prefix->name;
+                                                            if($userprefix == 'อื่น ๆ'){
+                                                            $userprefix = $officer->user->alter_prefix;
+                                                        }
+                                                    @endphp
+                                                    <td>{{$userprefix}}{{$officer->user->name}}  {{$officer->user->lastname}}</td>
                                                     <td>{{$officer->position}}</td>
                                                     <td>{{$officer->organization}}</td>
                                                     <td>{{$officer->expertbranch->name}}</td>

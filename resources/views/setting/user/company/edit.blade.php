@@ -248,8 +248,11 @@
                                                 <div class="form-group">
                                                     <label>คำนำหน้าผู้ประสานงาน<span class="text-danger">*</span></label>
                                                     <select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2">
-                                                        @foreach ($prefixes as $prefix)
+                                                        @foreach ($prefixes as $key => $prefix)
+                                                            @if ($key+1 != $prefixes->count())
                                                             <option value="{{$prefix->id}}" @if (Auth::user()->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
+                                                            @endif
+                                                           
                                                         @endforeach
                                                     </select>
                                                 </div>

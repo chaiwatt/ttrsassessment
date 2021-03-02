@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('prefix_id')->default(1);
+            $table->string('alter_prefix')->nullable();
             $table->unsignedBigInteger('user_status_id')->default(1);
             // $table->unsignedBigInteger('user_position_id')->default(1);
             $table->char('hid',13)->nullable();

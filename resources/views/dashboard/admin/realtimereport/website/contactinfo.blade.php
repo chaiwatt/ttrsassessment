@@ -7,17 +7,22 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ลงคะแนน</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ข้อมูลการติดต่อ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
+            {{-- <div class="header-elements d-none">
+                <a href="{{route('setting.admin.website.page.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มหน้าเพจ<b><i class="icon-plus3"></i></b></a>
+            </div> --}}
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <span class="breadcrumb-item active">ลงคะแนน</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
+                    <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
+                    <span class="breadcrumb-item active">ข้อมูลการติดต่อ</span>
                 </div>
+
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -47,8 +52,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ลงคะแนนโครงการ</h6>
+                        <h6 class="card-title">ข้อมูลการติดต่อ</h6>
                         <div class="header-elements">
+
                         </div>
                     </div>
                     <div class="card-body">
@@ -56,35 +62,29 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>เลขที่โครงการ</th> 
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th>เพิ่มเติม</th>                       
+                                        <th>หัวข้อ</th>                               
+                                        <th>ผู้ติดต่อ</th>
+                                        <th>อีเมล</th>
+                                        <th style="width:200px">สถานะ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($fulltbps as $key => $fulltbp)
-                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 )
-                                            <tr>    
-                                                <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                                <td> {{$fulltbp->minitbp->project}} </td>  
-                                                <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                                <td> 
-                                                    @if (!Empty($fulltbp->finalassessmentdate))
-                                                            @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
-                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>
-                                                                @else
-                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
-                                                            @endif
-                                                        @else
-                                                            <span class="badge badge-flat border-warning text-warning-600">รอยืนยัน</span>
-                                                    @endif
-
-                                                </td>                                
-                                            </tr>
-                                        @endif
+                                    @foreach ($contactinfos as $key => $contactinfo)
+                                        <tr>    
+                                            <td> {{$contactinfo->subject}} </td> 
+                                            <td> {{$contactinfo->name}} </td> 
+                                            <td> {{$contactinfo->email}} </td> 
+                                            @if ($contactinfo->status == 1)
+                                                    <td> <a href="{{route('dashboard.admin.realtimereport.website.view',['id' => $contactinfo->id ])}}" class="btn btn-sm btn-warning">อ่าน</a>  
+                                                    <a href="{{route('dashboard.admin.realtimereport.website.delete',['id' => $contactinfo->id ])}}"  onclick="confirmation(event)" class="btn btn-sm btn-danger">ลบ</a> </td> 
+                                                @else
+                                                    <td> <a href="{{route('dashboard.admin.realtimereport.website.view',['id' => $contactinfo->id ])}}" class="btn btn-sm btn-success">อ่านแล้ว</a> 
+                                                        <a href="{{route('dashboard.admin.realtimereport.website.delete',['id' => $contactinfo->id ])}}"  onclick="confirmation(event)" class="btn btn-sm btn-danger">ลบ</a> </td> 
+                                            @endif
+                                        </tr>
                                     @endforeach
                                 </tbody>
+                                {{$contactinfos->links()}}
                             </table>      
                         </div>
                     </div>
@@ -92,7 +92,6 @@
             </div>
         </div>
     </div>
-    <!-- /content area -->
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>

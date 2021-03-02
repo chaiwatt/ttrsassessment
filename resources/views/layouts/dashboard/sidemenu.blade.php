@@ -167,6 +167,7 @@
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.website.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website.visit')?'active':''}}">การเข้าชมเว็บไซต์</a></li>
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.website.contact')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website.contact')?'active':''}}">ข้อมูลการติดต่อ</a></li>
             </ul>
         </li>
         {{-- <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.industrygroup')?'active':''}}">โครงการตามกลุ่มอุตสาหกรรม</a></li> --}}

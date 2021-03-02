@@ -188,6 +188,7 @@ class MiniTbpController extends Controller
 
         $projectname = $minitbp->project;
         $projectnameeng = (!Empty($minitbp->projecteng))?$minitbp->projecteng:'';
+
         $mpdf->UseTemplate($tplId);
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->prefix->name . $minitbp->contactname . ' ' .$minitbp->contactlastname .'</span>', 69, 79, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:25px;heigh:100px;text-align:center;display:block;">'.DateConversion::shortThaiDate($minitbp->created_at,'d').'</div>',171, 34.8, 150, 90, 'auto');

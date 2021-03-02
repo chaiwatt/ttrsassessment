@@ -177,6 +177,7 @@ class SettingProfileController extends Controller
                 $user = User::find($userid);
                 $user->update([
                     'prefix_id' => $request->prefix,
+                    'alter_prefix' => $request->alter_prefix,
                     'name' => $request->name,
                     'lastname' => $request->lastname
                 ]);
@@ -199,6 +200,7 @@ class SettingProfileController extends Controller
                 $user = User::find($userid);
                 $user->update([
                     'prefix_id' => $request->prefix,
+                    'alter_prefix' => $request->alter_prefix,
                     'name' => $request->name,
                     'lastname' => $request->lastname,
                     'hid' => $request->hid,
@@ -244,6 +246,7 @@ class SettingProfileController extends Controller
             }
             $user->update([
                 'prefix_id' => $request->prefix,
+                'alter_prefix' => $request->alter_prefix,
                 'name' => $request->name,
                 'lastname' => $request->lastname,
                 'hid' => $request->hid,

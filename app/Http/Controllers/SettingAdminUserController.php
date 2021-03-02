@@ -111,6 +111,7 @@ class SettingAdminUserController extends Controller
         }
         User::find($id)->update([
             'prefix_id' => $request->prefix,
+            'alter_prefix' => $request->alter_prefix,
             'name' => $request->name,
             'lastname' => $request->lastname,
             'user_type_id' => $request->usertype,

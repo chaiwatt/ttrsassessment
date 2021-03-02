@@ -15,7 +15,6 @@ class ContactInfoController extends Controller
         $contactinfo->subject = $request->subject;
         $contactinfo->message = $request->message;
         $contactinfo->save();
-
         return redirect()->back()->withSuccess('ขอบคุณ เราได้รับข้อความแล้ว');
     }
 }

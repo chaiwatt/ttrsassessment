@@ -71,7 +71,13 @@
                                     @foreach ($users as $key => $user)
                                     <tr>    
                                         {{-- <td> {{$key+1}} </td> --}}
-                                        <td> {{$user->prefix->name}}{{$user->name}}   {{$user->lastname}} </td>    
+                                        @php
+                                            $userprefix = $user->prefix->name;
+                                                if($userprefix == 'อื่น ๆ'){
+                                                $userprefix = $user->alter_prefix;
+                                            }
+                                        @endphp
+                                        <td> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
                                         <td> {{$user->usertype->name}} </td> 
                                         @if ($user->isonline() == 1)
                                             <td> <span class="badge badge-mark border-success mr-1"></span> <span class="badge badge-flat border-success text-success-600">ออนไลน์</span> </td>  

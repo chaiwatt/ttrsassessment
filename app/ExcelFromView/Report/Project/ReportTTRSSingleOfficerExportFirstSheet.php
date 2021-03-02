@@ -50,7 +50,11 @@ class ReportTTRSSingleOfficerExportFirstSheet implements
        
        $user = $officer->user;
        $projectmemberbelongeds = $officer->projectmember($user->id);
-       array_push($officerinfos, $user->prefix->name.$user->name . ' ' . $user->lastname);
+       $userprefix = $user->prefix->name;
+       if($userprefix == 'อื่น ๆ'){
+        $userprefix = $user->alter_prefix;
+       }
+       array_push($officerinfos, $userprefix.$user->name . ' ' . $user->lastname);
        array_push($officerinfos, $user->address . ' ตำบล'. $user->province($user->province_id) . ' อำเภอ'. $user->amphur($user->amphur_id) . ' จังหวัด' . $user->tambol($user->tambol_id) . ' รหัสไปรษณีย์ ' . $user->postal);
        array_push($officerinfos, $user->address1 . ' ตำบล'. $user->province($user->province1_id) . ' อำเภอ'. $user->amphur($user->amphur1_id) . ' จังหวัด' . $user->tambol($user->tambol1_id) . ' รหัสไปรษณีย์ ' . $user->postal1);
        array_push($officerinfos, $user->phone);

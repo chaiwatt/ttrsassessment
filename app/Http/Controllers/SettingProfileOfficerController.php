@@ -73,6 +73,7 @@ class SettingProfileOfficerController extends Controller
         if(Empty($request->sameaddress)){
             $user->update([
                 'prefix_id' => $request->prefix,
+                'alter_prefix' => $request->alter_prefix,
                 'name' => $request->name,
                 'hid' => $request->hid,
                 'lastname' => $request->lastname,
@@ -96,6 +97,7 @@ class SettingProfileOfficerController extends Controller
         }else{
             $user->update([
                 'prefix_id' => $request->prefix,
+                'alter_prefix' => $request->alter_prefix,
                 'name' => $request->name,
                 'hid' => $request->hid,
                 'lastname' => $request->lastname,

@@ -189,6 +189,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         if(strlen($firstparagraph) > 180){
             $projectname = substr_replace( $minitpb->project, '<br>', strlen($firstparagraph), 0 );
         }
+
         $mpdf->UseTemplate($tplId);
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitpb->prefix->name . $minitpb->contactname . ' ' .$minitpb->contactlastname .'</span>', 69, 79, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitpb->created_at,'d').'</span>',172, 34.8, 150, 90, 'auto');

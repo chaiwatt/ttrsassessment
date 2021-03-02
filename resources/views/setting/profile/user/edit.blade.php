@@ -595,11 +595,21 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>คำนำหน้า<span class="text-danger">*</span></label>
-											<select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
+											<select name="prefix"  id="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
 												@foreach ($prefixes as $prefix)
 													<option value="{{$prefix->id}}" @if ($user->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
 												@endforeach
 											</select>
+										</div>
+									</div>
+									<div class="col-md-6" id="alter_prefix_wrapper" 
+									@if (Empty($user->alter_prefix))
+									hidden
+								@endif
+									>
+										<div class="form-group">
+											<label>คำนำหน้า อื่น</label>
+											<input type="text" name="alter_prefix" id="alter_prefix" value="{{$user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -774,8 +784,11 @@
 												<div class="form-group">
 													<label>คำนำหน้า<span class="text-danger">*</span></label>
 													<select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
-														@foreach ($prefixes as $prefix)
-															<option value="{{$prefix->id}}" @if ($user->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
+														@foreach ($prefixes as $key => $prefix)
+															@if ($key+1 != $prefixes->count())
+																<option value="{{$prefix->id}}" @if ($user->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
+															@endif
+															
 														@endforeach
 													</select>
 												</div>
@@ -990,6 +1003,14 @@
         $("#file").on('change', function() {
             $("#filename").val(this.value);
         });
+		$("#prefix").on('change', function() {
+			if(this.value == 5){
+				$("#alter_prefix_wrapper").attr("hidden",false);
+			}else{
+				$("#alter_prefix_wrapper").attr("hidden",true);
+				$("#alter_prefix").val('');
+			}
+        });
         $('#paidupcapitaldate').bootstrapMaterialDatePicker({
             format: 'DD/MM/YYYY',
             clearButton: true,
@@ -998,7 +1019,6 @@
             clearText: "เคลียร์",
             time: false
 		});
-
     </script>	
 @stop
 

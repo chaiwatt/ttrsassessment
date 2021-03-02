@@ -1609,7 +1609,7 @@
 														<div class="row">
 															<div class="col-md-12">	
 																<div class="input-group">													
-																	<label for="">แนบเอกสารข้อมูลทั่วไป (ไฟล์ pdf ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																	<label for="">แนบเอกสารข้อมูลทั่วไป (ไฟล์ pdf ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm " data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																</div>
 																<p><small><i>หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่น ๆ</i> </small></p>
 															</div>

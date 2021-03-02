@@ -29,7 +29,13 @@
                 $projectmemberbelongeds = $expert->projectmember($user->id) 
             @endphp
                 <tr>
-                    <td>{{ $user->prefix->name }}{{ $user->name }}  {{ $user->lastname }}</td>
+                    @php
+                        $userprefix = $user->prefix->name;
+                        if($userprefix == 'อื่น ๆ'){
+                            $userprefix = $user->alter_prefix;
+                        }
+                    @endphp 
+                    <td>{{ $userprefix }}{{ $user->name }}  {{ $user->lastname }}</td>
                     <td>{{ $user->address }} ตำบล{{ $user->province($user->province_id) }} อำเภอ{{ $user->amphur($user->amphur_id) }} จังหวัด{{ $user->tambol($user->tambol_id) }} รหัสไปรษณีย์ {{$user->postal}}</td>
                     <td>{{ $user->address1 }} ตำบล{{ $user->province($user->province1_id) }} อำเภอ{{ $user->amphur($user->amphur1_id) }} จังหวัด{{ $user->tambol($user->tambol1_id) }} รหัสไปรษณีย์ {{$user->postal1}}</td>
                     <td>{{ $user->phone }}</td>

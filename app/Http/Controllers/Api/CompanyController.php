@@ -88,6 +88,7 @@ class CompanyController extends Controller
         }
         CompanyEmploy::find($request->id)->update([
             'prefix_id' => $request->prefix,
+            'alter_prefix' => $request->alter_prefix,
             'name' => $request->name,
             'lastname' => $request->lastname,
             'employ_position_id' => $request->position,

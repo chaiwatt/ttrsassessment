@@ -152,7 +152,7 @@
 													</tr>
 												</thead>
 												<tbody >    
-													<tr >                                        
+													<tr >                                       
 														<td>ชื่อ-สกุล</td>
 														<td>{{@$minitbp->prefix->name}}{{@$minitbp->contactname}} {{@$minitbp->contactlastname }}</td>
 													</tr>       

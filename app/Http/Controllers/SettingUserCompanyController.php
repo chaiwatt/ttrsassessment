@@ -122,6 +122,7 @@ class SettingUserCompanyController extends Controller
         $user = Auth::user();
         $user->update([
             'prefix_id' => $request->prefix,
+            'alter_prefix' => $request->alter_prefix,
             'name' => $request->name,
             'lastname' => $request->lastname
         ]);

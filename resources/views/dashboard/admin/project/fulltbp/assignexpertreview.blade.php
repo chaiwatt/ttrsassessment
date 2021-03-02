@@ -238,8 +238,13 @@
                                                     >
                                                 </td>  
                                             @endif
-
-                                            <td>{{$user->prefix->name}}{{$user->name}} {{$user->lastname}}</td>
+                                            @php
+                                            $userprefix = $user->prefix->name;
+                                            if($userprefix == 'อื่น ๆ'){
+                                                $userprefix = $user->alter_prefix;
+                                            }
+                                            @endphp
+                                            <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}</td>
                                             <td>
                                                 {{$user->usertype->name}} {{$user->expertType}}
                                             </td> 
