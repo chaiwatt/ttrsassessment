@@ -30,6 +30,26 @@ use App\Model\ProjectStatusTransaction;
 class AssessmentEvController extends Controller
 {
     public function AddEvChecklist(Request $request){
+
+        $check_grade = CriteriaTransaction::where('ev_id',$request->evid)
+            ->where('index_type_id',1)
+            ->where('pillar_id',$request->pillar)
+            ->where('sub_pillar_id',$request->subpillar)
+            ->where('sub_pillar_index_id',$request->subpillarindex)
+            ->first();
+
+        if(!Empty($check_grade)){
+            $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
+                            ->orderBy('pillar_id','asc')
+                            ->orderBy('sub_pillar_id', 'asc')
+                            ->orderBy('sub_pillar_index_id', 'asc')
+                            ->get();
+
+            return response()->json(array(
+                                "criteriatransactions" => $criteriatransactions,
+                                "result" => '0'
+                            ));                
+        }
         CriteriaTransaction::where('ev_id',$request->evid)
                             ->where('index_type_id',$request->indextype)
                             ->where('pillar_id',$request->pillar)
@@ -62,27 +82,27 @@ class AssessmentEvController extends Controller
                                 ->where('sub_pillar_index_id',$request->subpillarindex)->first();
         
         if(Empty($check)){
-                $checklistgrading = new CheckListGrading();
-                $checklistgrading->ev_id = $request->evid;
-                $checklistgrading->pillar_id = $request->pillar;
-                $checklistgrading->sub_pillar_id = $request->subpillar;
-                $checklistgrading->sub_pillar_index_id = $request->subpillarindex;
-                $checklistgrading->gradea = $request->gradea;
-                $checklistgrading->gradeb = $request->gradeb;
-                $checklistgrading->gradec = $request->gradec;
-                $checklistgrading->graded = $request->graded;
-                $checklistgrading->gradee = $request->gradee;
-                $checklistgrading->save();
+            $checklistgrading = new CheckListGrading();
+            $checklistgrading->ev_id = $request->evid;
+            $checklistgrading->pillar_id = $request->pillar;
+            $checklistgrading->sub_pillar_id = $request->subpillar;
+            $checklistgrading->sub_pillar_index_id = $request->subpillarindex;
+            $checklistgrading->gradea = $request->gradea;
+            $checklistgrading->gradeb = $request->gradeb;
+            $checklistgrading->gradec = $request->gradec;
+            $checklistgrading->graded = $request->graded;
+            $checklistgrading->gradee = $request->gradee;
+            $checklistgrading->save();
         }else{
-                CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$request->pillar)
-                    ->where('sub_pillar_id',$request->subpillar)
-                    ->where('sub_pillar_index_id',$request->subpillarindex)->first()->update([
-                        'gradea' => $request->gradea,
-                        'gradeb' => $request->gradeb,
-                        'gradec' => $request->gradec,
-                        'graded' => $request->graded,
-                        'gradee' => $request->gradee,
-                    ]);
+            CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$request->pillar)
+                ->where('sub_pillar_id',$request->subpillar)
+                ->where('sub_pillar_index_id',$request->subpillarindex)->first()->update([
+                    'gradea' => $request->gradea,
+                    'gradeb' => $request->gradeb,
+                    'gradec' => $request->gradec,
+                    'graded' => $request->graded,
+                    'gradee' => $request->gradee,
+                ]);
         }
 
         $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)->where('sub_pillar_index_id',$request->subpillarindex)->first();
@@ -101,10 +121,35 @@ class AssessmentEvController extends Controller
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
                                                 ->get();
-        return response()->json($criteriatransactions); 
+
+        return response()->json(array(
+            "criteriatransactions" => $criteriatransactions,
+            "result" => '1'
+        ));                                           
+        // return response()->json($criteriatransactions); 
     }
 
     public function AddEvGrading(Request $request){
+
+        $check_list = CriteriaTransaction::where('ev_id',$request->evid)
+            ->where('index_type_id',2)
+            ->where('pillar_id',$request->pillar)
+            ->where('sub_pillar_id',$request->subpillar)
+            ->where('sub_pillar_index_id',$request->subpillarindex)
+            ->get();
+
+        if($check_list->count() > 0){
+            $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
+            ->orderBy('pillar_id','asc')
+            ->orderBy('sub_pillar_id', 'asc')
+            ->orderBy('sub_pillar_index_id', 'asc')
+            ->get();
+            return response()->json(array(
+                "criteriatransactions" => $criteriatransactions,
+                "result" => '0'
+            ));  
+        }
+
         $check = CriteriaTransaction::where('ev_id',$request->evid)
                                     ->where('index_type_id',$request->indextype)
                                     ->where('pillar_id',$request->pillar)
@@ -112,13 +157,22 @@ class AssessmentEvController extends Controller
                                     ->where('sub_pillar_index_id',$request->subpillarindex)
                                     ->first();
         if(Empty($check)){
-        $criteriatransaction = new CriteriaTransaction();
-        $criteriatransaction->ev_id = $request->evid;
-        $criteriatransaction->index_type_id = $request->indextype;
-        $criteriatransaction->pillar_id = $request->pillar;
-        $criteriatransaction->sub_pillar_id = $request->subpillar;
-        $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
-        $criteriatransaction->save();
+        $check_list = CriteriaTransaction::where('ev_id',$request->evid)
+            ->where('index_type_id',2)
+            ->where('pillar_id',$request->pillar)
+            ->where('sub_pillar_id',$request->subpillar)
+            ->where('sub_pillar_index_id',$request->subpillarindex)
+            ->get();
+            if($check_list->count() == 0){
+                $criteriatransaction = new CriteriaTransaction();
+                $criteriatransaction->ev_id = $request->evid;
+                $criteriatransaction->index_type_id = $request->indextype;
+                $criteriatransaction->pillar_id = $request->pillar;
+                $criteriatransaction->sub_pillar_id = $request->subpillar;
+                $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
+                $criteriatransaction->save();
+            }
+
         }
 
         $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)->where('sub_pillar_index_id',$request->subpillarindex)->first();
@@ -137,7 +191,11 @@ class AssessmentEvController extends Controller
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
                                                 ->get();
-        return response()->json($criteriatransactions); 
+        return response()->json(array(
+            "criteriatransactions" => $criteriatransactions,
+            "result" => '1'
+        )); 
+        // return response()->json($criteriatransactions); 
     }
     public function AddExtraEvGrading(Request $request){
         $criteriatransaction = new CriteriaTransaction();

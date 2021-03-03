@@ -382,40 +382,57 @@ $(document).on('click', '#addcriteria', function(e) {
           }
     }
 });
-// $(document).on('keyup', '#name', function(e) {
-//     $('#clientname').html($(this).val());
-// });
 
 function AddCheckList(criterias){
     $("#spiniconcriteria").attr("hidden",false);
     Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val()).then(data => {
-         RenderTable(data);
+         RenderTable(data.criteriatransactions);
          RowSpan("criteriatable");
-         Pillar.getRelatedEv($('#evid').val()).then(data => {
-            var html =``;
-            data.forEach(function (ev,index) {
-                    html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+         if(data.result == 1){
+            Pillar.getRelatedEv($('#evid').val()).then(data => {
+                var html =``;
+                data.forEach(function (ev,index) {
+                        html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                    });
+                 $("#relateev").html(html);
+                 $("#spiniconcriteria").attr("hidden",true);
+                 Swal.fire({
+                    title: 'สำเร็จ...',
+                    text: 'เพิ่มรายการสำเร็จ!',
+                    });
+            }).catch(error => {})
+         }else{
+            $("#spiniconcriteria").attr("hidden",true);
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'มี Subpillar ในรายการเกรดแล้ว!',
                 });
-             $("#relateev").html(html);
-             $("#spiniconcriteria").attr("hidden",true);
-             Swal.fire({
-                title: 'สำเร็จ...',
-                text: 'เพิ่มรายการสำเร็จ!',
-                });
-        }).catch(error => {})
+            
+         }
+         
+
     }).catch(error => {})
 }
 
 function AddGrading(){
     $("#spiniconcriteria").attr("hidden",false);
     Ev.addEvGrading($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
-        RenderTable(data);
+        RenderTable(data.criteriatransactions);
         RowSpan("criteriatable");
         $("#spiniconcriteria").attr("hidden",true);
-         Swal.fire({
-            title: 'สำเร็จ...',
-            text: 'เพิ่มรายการสำเร็จ!',
-            });
+        if(data.result == 1){
+            
+            Swal.fire({
+               title: 'สำเร็จ...',
+               text: 'เพิ่มรายการสำเร็จ!',
+               });
+        }else{
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'มี Subpillar ในรายการ Checklist แล้ว!!',
+                });
+        }
+
     }).catch(error => {})
 }
 
@@ -583,13 +600,19 @@ $(document).on('click', '.deletepillar', function(e) {
         }).then((result) => {
         if (result.value) {
             Pillar.deletePillar($('#evid').val(),$(this).data('pillar')).then(data => {
-                RenderTable(data.criteriatransactions);
-                RowSpan("criteriatable");
-                RenderExtra(data.extracriteriatransactions);
-                RowSpan("extracriteriatable");
-                 Swal.fire({
+                // RenderTable(data.criteriatransactions);
+                // RowSpan("criteriatable");
+                // RenderExtra(data.extracriteriatransactions);
+                // RowSpan("extracriteriatable");
+                //  Swal.fire({
+                //     title: 'สำเร็จ...',
+                //     text: 'ลบรายการสำเร็จ!',
+                //     });
+                Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
                     });
             })
             .catch(error => {})
@@ -650,13 +673,19 @@ $(document).on('click', '.deletesubpillar', function(e) {
         }).then((result) => {
         if (result.value) {
             SubPillar.deleteSubPillar($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar')).then(data => {
-                RenderTable(data.criteriatransactions);
-                RowSpan("criteriatable");
-                RenderExtra(data.extracriteriatransactions);
-                RowSpan("extracriteriatable");
-                 Swal.fire({
+                // RenderTable(data.criteriatransactions);
+                // RowSpan("criteriatable");
+                // RenderExtra(data.extracriteriatransactions);
+                // RowSpan("extracriteriatable");
+                //  Swal.fire({
+                //     title: 'สำเร็จ...',
+                //     text: 'ลบรายการสำเร็จ!',
+                //     });
+                Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
                     });
             })
             .catch(error => {})
@@ -679,13 +708,19 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
         }).then((result) => {
         if (result.value) {
             SubPillar.deleteSubPillarIndex($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar'),$(this).data('subpillarindex')).then(data => {
-                RenderTable(data.criteriatransactions);
-                RowSpan("criteriatable");
-                RenderExtra(data.extracriteriatransactions);
-                RowSpan("extracriteriatable");
-                 Swal.fire({
+                // RenderTable(data.criteriatransactions);
+                // RowSpan("criteriatable");
+                // RenderExtra(data.extracriteriatransactions);
+                // RowSpan("extracriteriatable");
+                //  Swal.fire({
+                //     title: 'สำเร็จ...',
+                //     text: 'ลบรายการสำเร็จ!',
+                //     });
+                Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
                     });
             })
             .catch(error => {})
@@ -1135,11 +1170,13 @@ $(document).on('click', '.deletecategorytransaction', function(e) {
         }).then((result) => {
         if (result.value) {
             Extra.deleteCategoryExtraTransaction($('#evid').val(),$(this).data('categoryid')).then(data => {
-                RenderExtraTable(data);
-                RowSpanExtra("extracriteriatable");
+                // RenderExtraTable(data);
+                // RowSpanExtra("extracriteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
                     });
             })
             .catch(error => {})
@@ -1163,11 +1200,17 @@ $(document).on('click', '.deletetriteriatransaction', function(e) {
         }).then((result) => {
         if (result.value) {
             Extra.deleteCriteriaExtraTransaction($('#evid').val(),$(this).data('categoryid'),$(this).data('criteriaid')).then(data => {
-                RenderExtraTable(data);
-                RowSpanExtra("extracriteriatable");
-                 Swal.fire({
+                // RenderExtraTable(data);
+                // RowSpanExtra("extracriteriatable");
+                //  Swal.fire({
+                //     title: 'สำเร็จ...',
+                //     text: 'ลบรายการสำเร็จ!',
+                //     });
+                Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
                     });
             })
             .catch(error => {})
