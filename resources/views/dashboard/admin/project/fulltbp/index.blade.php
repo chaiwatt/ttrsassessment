@@ -322,13 +322,29 @@
                                                                 $style = 'btn-sm bg-pink';
                                                             }
                                                         @endphp
-                                                            @if (Auth::user()->user_type_id == 4 || Auth::user()->user_type_id == 6)
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
-                                                                @elseif(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.admin.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
-                                                            @endif
-
-                                                        @else
+            
+                                                        @if (Auth::user()->user_type_id == 4)
+                                                                @if ($fulltbp->ev->status == 0)
+                                                                        <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
+                                                                    @else
+                                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                @endif
+                                                            @elseif(Auth::user()->user_type_id == 5)
+                                                                @if ($fulltbp->ev->status < 2)
+                                                                        <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
+                                                                    @else
+                                                                        <a type="button" href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                @endif
+                                                            @elseif(Auth::user()->user_type_id == 6)
+                                                                @if ($fulltbp->ev->status == 0)
+                                                                        <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
+                                                                    @elseif($fulltbp->ev->status == 3)
+                                                                        <a type="button" href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                    @else   
+                                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                @endif
+                                                        @endif
+                                                    @else
                                                             <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
