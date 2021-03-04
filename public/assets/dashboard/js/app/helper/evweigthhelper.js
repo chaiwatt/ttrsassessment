@@ -363,9 +363,9 @@ function updateEvAdminStatus(id,value){
         if(route.usertypeid == 6)return;
         // console.log($(e.target).attr("href"));
         if($(e.target).attr("href") == '#commenttab'){
-            Ev.clearCommentTab($('#evid').val(),2).then(data => {
+            // Ev.clearCommentTab($('#evid').val(),2).then(data => {
         
-            }).catch(error => {})
+            // }).catch(error => {})
         }
     })
 
@@ -467,13 +467,15 @@ function updateEvAdminStatus(id,value){
             // $("#sendedittojd").trigger("click");
             $("#spiniconsendjd").attr("hidden",false);
             sendEditEv($('#evid').val()).then(data => {
-                $("#spiniconsendjd").attr("hidden",true);
-                Swal.fire({
-                    title: 'สำเร็จ...',
-                    text: 'นำส่ง EV ให้ JD สำเร็จ!',
-                }).then((result) => {
-                    window.location.reload();
-                });
+                Ev.clearCommentTab($('#evid').val(),2).then(data => {
+                    $("#spiniconsendjd").attr("hidden",true);
+                    Swal.fire({
+                        title: 'สำเร็จ...',
+                        text: 'นำส่ง EV ให้ JD สำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
+                    });
+                }).catch(error => {})
             }).catch(error => {})
 		},
 		transitionEffect: 'fade',

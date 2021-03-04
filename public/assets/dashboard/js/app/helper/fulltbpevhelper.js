@@ -927,13 +927,15 @@ $(document).on('click', '#updateev', function(e) {
     }
     $("#spinicon").attr("hidden",false);
     Ev.updateEvStatus($(this).data('id')).then(data => {
-        $("#spinicon").attr("hidden",true);
-        Swal.fire({
-            title: 'สำเร็จ...',
-            text: 'นำส่ง EV สำเร็จ!',
-        }).then((result) => {
-            window.location.reload();
-        });
+        Ev.clearCommentTab($('#evid').val(),1).then(data => {
+            $("#spinicon").attr("hidden",true);
+            Swal.fire({
+                title: 'สำเร็จ...',
+                text: 'นำส่ง EV สำเร็จ!',
+            }).then((result) => {
+                window.location.reload();
+            });
+        }).catch(error => {})
     }).catch(error => {})
 });
 function onlyUnique(value, index, self) {
@@ -1000,9 +1002,9 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
 $('.nav-tabs a').on('shown.bs.tab', function (e) {
     if(route.usertypeid == 6)return;
     if($(e.target).attr("href") == '#commenttab'){
-        Ev.clearCommentTab($('#evid').val(),1).then(data => {
+        // Ev.clearCommentTab($('#evid').val(),1).then(data => {
     
-        }).catch(error => {})
+        // }).catch(error => {})
     }
 });
 

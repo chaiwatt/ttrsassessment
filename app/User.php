@@ -130,6 +130,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $count;
     }
 
+    public function isProjectmember()
+    {
+        $count = ProjectMember::where('user_id',Auth::user()->id)->count();
+        return $count;
+    }
+
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);

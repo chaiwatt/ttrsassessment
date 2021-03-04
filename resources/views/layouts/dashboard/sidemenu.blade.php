@@ -60,6 +60,7 @@
                     @endif
                 </a></li>	
             @endif
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
         @endif
 
         @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0)
@@ -76,8 +77,10 @@
             </a></li>
         @endif
 
-
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
+        @if (Auth::user()->user_type_id == 4 && Auth::user()->isProjectmember() != 0)
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
+        @endif
+        
     </ul>
     </li>
     

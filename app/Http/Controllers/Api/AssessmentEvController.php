@@ -331,10 +331,6 @@ class AssessmentEvController extends Controller
 
     public function UpdateEvStatus(Request $request){
         $auth = Auth::user();
-        // $status = 1;
-        // if($request->chkevstatus == 1){
-        //     $status = 2;
-        // }
         Ev::find($request->id)->update([
             'status' => 1
         ]);

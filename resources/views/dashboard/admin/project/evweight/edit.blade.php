@@ -44,7 +44,9 @@
                                 <div class="form-check ">
                                     @if (($ev->status == 3))
                                         @if (Auth::user()->user_type_id == 6)
-                                            <button id="approveevstagetwo" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
+                                            @if ($evcommenttabs->count() == 0)
+                                                <button id="approveevstagetwo" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>อนุมัติ EV<i class="icon-paperplane ml-2"></i></button>
+                                            @endif
                                         @endif
                                     @endif
                                 </div>
@@ -104,7 +106,7 @@
                                    
                                     <li class="nav-item"><a href="#weighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weight <span id="weight"></span></a></li>
                                     @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
-                                        <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
+                                        <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment ให้แก้ไข@if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
                                     @endif
                                 </ul>
                                 <div class="tab-content mb-2">

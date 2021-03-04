@@ -294,69 +294,13 @@
                         @if (Auth::user()->user_type_id == 6 && $fulltbp->assignexpert !=2)
                         <div class="form-group">
                             <div class="text-right">
-                                <button type="button" id="jdconfirmteam" class="btn bg-teal">ยืนยันทีมผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
+                                <button type="button" id="jdconfirmteam" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ยืนยันทีมผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
                             </div>
                         </div>
                     @endif
 
                 </div>
     
-                {{-- <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">	
-                                <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_expert"><i class="icon-add"></i></a>
-                                <br>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th >ชื่อ-สกุล</th> 
-                                            @if (Auth::user()->user_type_id == 6 )
-                                                <th>การรับมอบหมาย</th> 
-                                            @endif     
-                                            <th>สถานะ</th> 
-                                            <th>การตอบรับ</th> 
-                                            <th>ความคิดเห็น</th> 
-                                            <th>เพิ่มเติม</th>                                                                 
-                                        </tr>
-                                    </thead>
-                                    <tbody id="expert_wrapper">
-                                        @foreach ($expertassignments as $key => $expertassignment)
-                                        <tr>    
-                                            <td class='userid' data-id='{{$expertassignment->user->id}}'> 
-                                                <a type="button" class="text-info expertworkload" data-id="{{$expertassignment->user_id}}">{{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</a>
-                                            </td> 
-                                            @if (Auth::user()->user_type_id == 6 )
-                                                <td> <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$expertassignment->id}}" hidden></i><input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 
-                                            @endif
-                                            <td> {{$expertassignment->expertassignmentstatus->name}}</td> 
-                                            <td> 
-                                                @if ($expertassignment->accepted == 0)
-                                                       <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span> 
-                                                    @elseif($expertassignment->accepted == 1)
-                                                        <span class="badge badge-flat border-success text-success-600">ตอบรับการเข้าร่วมแล้ว</span> 
-                                                    @elseif($expertassignment->accepted == 2)
-                                                        <span class="badge badge-flat border-danger text-danger-600">ปฎิเสธการเข้าร่วม</span>   
-                                                @endif
-                                            </td> 
-                                            <td>
-                                                @if (!Empty($expertassignment->expertcomment))
-                                                    <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>                                                                           
-                                                @endif  
-                                            </td>
-                                            <td> 
-                                                <button type="button" data-id="{{$expertassignment->id}}" class="btn btn-sm bg-danger deleteexpert">ลบ</button>                                       
-                                            </td>                                
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>      
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </form>
  
@@ -413,6 +357,7 @@
     }
 
     $(document).on('click', '#jdconfirmteam', function(e) {
+        $("#spinicon").attr("hidden",false);
         jdConfirmExpert("{{$fulltbp->id}}").then(data => {
             if(data == ''){
                 Swal.fire({
