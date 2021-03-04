@@ -120,7 +120,6 @@ $('.steps-basic').steps({
         return true;
     },
     onFinished: function (event, currentIndex) {
-        console.log('ok');
         if($('#indextype').val() == 1){
             AddGrading();
         }else{
@@ -128,6 +127,7 @@ $('.steps-basic').steps({
         }
     }
 });
+
 
 function AddCheckList(){
     var criterias = [];

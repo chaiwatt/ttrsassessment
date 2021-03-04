@@ -316,14 +316,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     @foreach ($fulltbps as $fulltbp)
                                         @php
                                             $check = Auth::user()->IsExpert($fulltbp->id);
                                         @endphp
                                         <tr> 
-                                            <td> 
-                                                <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                            <td>
+                                                @if (Empty($fulltbp->expertassignment))
+                                                        <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
+                                                        <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                    @else
+                                                        @if ($fulltbp->expertassignment->accepted == 1)
+                                                            <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
+                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                        @else
+                                                            {{$fulltbp->minitbp->project}}
+                                                        @endif
+                                                @endif          
                                             </td>  
                                             <td> 
                                                 @if ($fulltbp->status == 3)

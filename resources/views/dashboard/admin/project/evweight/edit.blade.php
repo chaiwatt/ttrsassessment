@@ -108,7 +108,7 @@
                                     @endif
                                 </ul>
                                 <div class="tab-content mb-2">
-                                    <div class="tab-pane fade show active"" id="weighttab">
+                                    <div class="tab-pane fade show active" id="weighttab">
                                         <table class="table table-bordered table-striped" id="subpillarindex">
                                             <thead>
                                                 <tr class="bg-info">

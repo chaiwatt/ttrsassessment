@@ -42,56 +42,92 @@
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
             </a></li> 
-        @endif
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้</a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
-            @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-            @endif
-        </a></li>	
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
-            @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-            @endif
-        </a></li>
-        @if (Auth::user()->user_type_id == 5)
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',6)->count() > 0)
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้</a></li>	
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
             </a></li>	
-        @endif
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
-    </ul>
-    </li>
-    @if (Auth::user()->user_type_id ==4)
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
-        <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฏิทิน</span>
-            @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-            @endif
-        </a>
-        <ul class="nav nav-group-sub" data-submenu-title="ปฏิทิน">
-            <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฏิทิน
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',8)->count() > 0)
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
             </a></li>
-        </ul>
+            @if (Auth::user()->user_type_id == 5)
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight
+                    @if ($sharenotificationbubbles->where('notification_sub_category_id',6)->count() > 0)
+                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                    @endif
+                </a></li>	
+            @endif
+        @endif
+
+        @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0)
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้</a></li>	
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a></li>	
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a></li>
+        @endif
+
+
+        <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
+    </ul>
     </li>
+    
+    @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0 )
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
+            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฏิทิน</span>
+                @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a>
+            <ul class="nav nav-group-sub" data-submenu-title="ปฏิทิน">
+                <li class="nav-item"><a href="{{route('dashboard.admin.calendar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'active':''}}">ปฏิทิน
+                    @if ($sharenotificationbubbles->where('notification_sub_category_id',8)->count() > 0)
+                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                    @endif
+                </a></li>
+            </ul>
+        </li>
     @endif
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
-    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span></a>
-    <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">สรุปคะแนน</a></li>
-    </ul>
-    </li>
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
-    <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
-    <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
-        <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน</a></li>
-    </ul>
-    </li>
+
+        @if (Auth::user()->user_type_id >= 5)
+            <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
+            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span></a>
+                <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
+                    <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">สรุปคะแนน</a></li>
+                </ul>
+            </li>
+            <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
+                <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
+                <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
+                    <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน</a></li>
+                </ul>
+            </li>
+            @elseif(Auth::user()->user_type_id == 4)
+                @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0 )
+                    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
+                    <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
+                            <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">สรุปคะแนน</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
+                        <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
+                            <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน</a></li>
+                        </ul>
+                    </li>
+                @endif
+        @endif
+
     @endif
 
     @if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
@@ -137,12 +173,9 @@
     @endif
     @endif
 
-    @if (Auth::user()->user_type_id >=4)
+    @if (Auth::user()->user_type_id >=5)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span>
-        {{-- @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
-            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">รายงาน</span>
-        @endif --}}
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'nav-item-expanded':''}}">
@@ -157,8 +190,6 @@
             <a href="#" class="nav-link"><span>เจ้าหน้าที่ TTRS</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เจ้าหน้าที่ TTRS">
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.officer')?'active':''}}">เจ้าหน้าที่ TTRS</a></li>	
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.religion')?'active':''}}">ตามวุฒิการศึกษา</a></li>										 --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.dashboard.religion')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.religion')?'active':''}}">ตามสาขาความเชี่ยวชาญ</a></li>		 --}}
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.expert')?'nav-item-expanded':''}}">
@@ -174,17 +205,13 @@
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.website.contact')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website.contact')?'active':''}}">ข้อมูลการติดต่อ</a></li>
             </ul>
         </li>
-        {{-- <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.industrygroup')?'active':''}}">โครงการตามกลุ่มอุตสาหกรรม</a></li> --}}
-        {{-- <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.download')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.download')?'active':''}}">ดาวน์โหลดเอกสาร</a></li> --}}
-        {{-- <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.visit')?'active':''}}">เข้าชมเว็ปไซต์</a></li> --}}
+     
     </ul>
     </li>
 
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.search')?'nav-item-expanded nav-item-open':''}}">
         <a href="#" class="nav-link"><i class="icon-search4"></i> <span>ค้นหา</span>
-            {{-- @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ค้นหา</span>
-            @endif --}}
+         
         </a>
         <ul class="nav nav-group-sub" data-submenu-title="ค้นหา">
             

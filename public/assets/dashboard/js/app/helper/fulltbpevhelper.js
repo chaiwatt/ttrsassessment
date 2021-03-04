@@ -3,7 +3,7 @@ import * as Pillar from './pillar.js';
 import * as SubPillar from './subpillar.js';
 import * as PillaIndexWeigth from './pillaindexweigth.js';
 import * as Extra from './extra.js';
-
+var countchecklist = 0;
 var globalNewIndex = 0;
 $( document ).ready(function() {
     Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
@@ -72,16 +72,17 @@ $(document).on('change', '#subpillar', function(e) {
 });
 
 $(document).on('change', '#subpillarindex', function(e) {
+    countchecklist = 0;
     $('#indextype').val(1);
     $('#indextype').select2().trigger('change');
     $(this).prop('selected',true);
     $("#criteria_wrapper").attr("hidden",true);
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
         $("#chklist").html('');
+        countchecklist = data.criterias.length;
         data.criterias.forEach(function (subpillarindex,index) {
             var check = '';
             var _check = data.criteriatransactions.find(x => x.criteria_id === subpillarindex['id']);
-            // console.log(_check);
             if (_check){
                 check = 'checked';
             }
@@ -372,10 +373,11 @@ $(document).on('click', '#addcriteria', function(e) {
         $('#chklist :checked').each(function() {
             criterias.push($(this).val());
           });
-          if(criterias.length == 0){
+          //  var gradea = parseInt($("#gradea").val());
+          if((criterias.length == 0) || (criterias.length < parseInt($("#gradea").val()))){
             Swal.fire({
                 title: 'ผิดพลาด...',
-                text: 'ยังไม่ได้เลือกรายการ!',
+                text: 'ยังไม่ได้เลือกรายการหรือรายการที่เลือกน้อยกว่าเกรด A !',
                 });
           }else{
             AddCheckList(criterias);
@@ -405,7 +407,7 @@ function AddCheckList(criterias){
             $("#spiniconcriteria").attr("hidden",true);
             Swal.fire({
                 title: 'ผิดพลาด...',
-                text: 'มี Subpillar ในรายการเกรดแล้ว!',
+                text: 'รายการ Criteria มีใน EV แล้ว!',
                 });
             
          }
@@ -429,7 +431,7 @@ function AddGrading(){
         }else{
             Swal.fire({
                 title: 'ผิดพลาด...',
-                text: 'มี Subpillar ในรายการ Checklist แล้ว!!',
+                text: 'รายการ Criteria มีใน EV แล้ว!',
                 });
         }
 
@@ -449,9 +451,10 @@ $(document).on('click', '#btn_modal_exisingev', function(e) {
     $(".loadprogress").attr("hidden",false);
     Ev.copyEv($('#existingev').val(),$('#evid').val()).then(data => {
         Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
-            $(".loadprogress").attr("hidden",true);
-            RenderTable(data);
-            RowSpan("criteriatable");
+            window.location.reload();
+            // $(".loadprogress").attr("hidden",true);
+            // RenderTable(data);
+            // RowSpan("criteriatable");
         }).catch(error => {})
     }).catch(error => {})
 });
@@ -903,25 +906,22 @@ $(document).on('click', '#updateev', function(e) {
             text: 'กรุณากรอกข้อมูลให้ครบทุก Pillar!',
         });
         return;
-
     }
 
     if($("#criteriatable tr").length == 1){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ยังไม่ได้เพิ่ม Criteria!',
-        }).then((result) => {
-            return;
-        });
+        })
+        return;
     }else{
         if($('#percentextra').val() > 0){
             if($("#extracriteriatable tr").length == 1){
                 Swal.fire({
                     title: 'ผิดพลาด...',
                     text: 'ยังไม่ได้เพิ่ม Extra Criteria!',
-                }).then((result) => {
-                    return;
-                });
+                })
+                return;
             }
         }
     }
@@ -1020,7 +1020,6 @@ $(document).on("click",".deletecomment",function(e){
         }).then((result) => {
         if (result.value) {
             Ev.deleteComment($(this).data('id')).then(data => {
-                // console.log(data);
                 var html =``;
                 data.forEach(function (comment,index) {
                         html += `<tr > 
@@ -1042,6 +1041,15 @@ $("#gradea").on('change', function() {
     var gradec = parseInt($("#gradec").val());
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
+    if(gradea > countchecklist){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'เกรด A มีจำนวนมากกว่ารายการ Checklist!',
+            });
+        $("#gradea").val('');
+        return;
+    }
+
     if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee) ){
         Swal.fire({
             title: 'ผิดพลาด...',

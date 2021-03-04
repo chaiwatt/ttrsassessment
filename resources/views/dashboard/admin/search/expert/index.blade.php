@@ -130,7 +130,7 @@
                                         <td> 
                                             {{-- {{$expert->projectbelongexpert}} --}}
                                             <ul class="list list-unstyled mb-0">
-                                                @if ($expert->projectbelongexpert->count() > 0))
+                                                @if ($expert->projectbelongexpert->count() > 0)
                                                     @foreach ($expert->projectbelongexpert as $fulltbp)
                                                         @php
                                                             $color = "bg-grey-300";

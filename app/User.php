@@ -20,6 +20,7 @@ use App\Model\ProjectMember;
 use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\VerifyExpertStatus;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -121,6 +122,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
         $fulltbpiduniques = array_unique(array_merge($projectleaderassingnmentarr,$projectcoleaderassingnmentarr,$projectmembers,$fulltbparr));
         return FullTbp::whereIn('id',$fulltbpiduniques)->get();
+    }
+
+    public function isLeader()
+    {
+        $count = ProjectAssignment::where('leader_id',Auth::user()->id)->count();
+        return $count;
     }
 
     public function isOnline()

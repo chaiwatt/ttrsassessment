@@ -2784,15 +2784,15 @@
 															<fieldset>	
 																<div class="form-group">
 																	<label>ประมาณการรายได้ที่จะเพิ่มขึ้น (บาท)</label>
-																	<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat10" >
+																	<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat10" readonly>
 																</div>
 																<div class="form-group">
 																	<label>ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น (บาท)</label>
-																	<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat10" >
+																	<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat10" readonly>
 																</div>
 																<div class="form-group">
 																	<label>ประมาณการต้นทุนที่จะลดลง (บาท)</label>
-																	<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control form-control-lg numeralformat10" >
+																	<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control form-control-lg numeralformat10" readonly>
 																</div>
 															</fieldset>
 													</div>
