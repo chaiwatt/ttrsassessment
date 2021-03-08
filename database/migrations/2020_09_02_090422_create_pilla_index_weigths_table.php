@@ -23,6 +23,7 @@ class CreatePillaIndexWeigthsTable extends Migration
             $table->unsignedBigInteger('sub_pillar_index_id');
             $table->float('weigth',8,4)->default(0);
             $table->float('sumweigth',8,4)->default(0);
+            $table->string('comment',250)->nullable();
             $table->timestamps();
         });
     }

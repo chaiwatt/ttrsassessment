@@ -460,7 +460,7 @@
             <div class="col-md-12">
                 <div class="card">
 					<div class="card-body">
-                        {{-- <input type="text" id="evstatus" value="{{$ev->status}}" hidden> --}}
+                        <input type="text" id="evstatus" value="{{$ev->status}}" hidden >
                         {{-- <div class="text-right">
                             <button id="editev" class="btn bg-primary">แก้ไขข้อมูล<i class="icon-floppy-disk ml-2"></i></button>
                         </div> --}}
@@ -468,25 +468,25 @@
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>ชื่อ EV</label>
-                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" @if ($ev->status > 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เวอร์ชั่น</label>
-                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" @if ($ev->status > 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Index</label>
-                                    <input type="text" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status > 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Extra</label>
-                                    <input type="text" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status == 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status > 1 || $ev->refixstatus != 0) @endif class="form-control form-control-lg" readonly>
                                 </div>
                             </div>
                         </div>
@@ -502,23 +502,26 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">	
-                                <div class="form-group">
-                                    <label>EV ในระบบ</label>
-                                    <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
-                                        <option value="0">==เลือกจาก EV ในระบบ==</option>
-                                        @foreach ($evs as $_ev)
-                                            <option value="{{$_ev->id}}" >
-                                                {{$_ev->name}}
-                                                @if (Empty($_ev->fulltbp))
-                                                    (Template)
-                                                    @else
-                                                    ({{$_ev->fulltbp->minitbp->project}})
-                                                @endif
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-        
+
+                                @if ($ev->status <= 2)
+                                    <div class="form-group">
+                                        <label>EV ในระบบ</label>
+                                        <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
+                                            <option value="0">==เลือกจาก EV ในระบบ==</option>
+                                            @foreach ($evs as $_ev)
+                                                <option value="{{$_ev->id}}" >
+                                                    {{$_ev->name}}
+                                                    @if (Empty($_ev->fulltbp))
+                                                        (Template)
+                                                        @else
+                                                        ({{$_ev->fulltbp->minitbp->project}})
+                                                    @endif
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+
                                 <ul class="nav nav-tabs nav-tabs-highlight ">
                                     <li class="nav-item"><a href="#indextab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
                                     <li class="nav-item"><a href="#extratab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
@@ -530,11 +533,10 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="indextab">
                                         <div class="form-group">	
-                                           
                                             @if (Auth::user()->user_type_id == 6)
-                                                @if ($ev->status < 2)
-                                                    <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" >เพิ่ม Index Criteria</button>
-                                                @endif
+                                                    @if ($ev->status < 2)
+                                                        <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" >เพิ่ม Index Criteria</button>
+                                                    @endif
                                                     
                                                 @else
                                                     @if ($ev->status == 0 || $ev->refixstatus == 1)
@@ -549,7 +551,7 @@
                                                         <th>Pillar</th>  
                                                         <th>Sub Pillar</th>   
                                                         <th>Index</th>                                                                                
-                                                        <th>Criteria</th>  
+                                                        <th>Criteria <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a></th>  
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -575,8 +577,6 @@
                                                     <tr class="bg-info">
                                                         <th>Category</th>  
                                                         <th>Extra Criteria</th>   
-                                                        {{-- <th>Index</th>                                                                                
-                                                        <th>Criteria</th>   --}}
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -590,7 +590,7 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="commenttab">
-                                        @if (Auth::user()->user_type_id == 6)
+                                        @if (Auth::user()->user_type_id == 6 && $ev->status < 4)
                                         <div class="form-group">	
                                             <a href="" class="btn btn-info btn-icon ml-2 btn-sm"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
                                             <br>
@@ -613,8 +613,13 @@
                                                     <tr>
                                                         <td>{{$evedithistory->thaidate}}</td>
                                                         <td>{{$evedithistory->detail}}</td>
-                                                        @if (Auth::user()->user_type_id == 6)
-                                                        <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
+                                                        @if (Auth::user()->user_type_id == 6 )
+                                                        @if ($ev->status < 4)
+                                                                <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
+                                                            @else
+                                                                <td></td>
+                                                        @endif
+                                                        
                                                         @endif
                                                     </tr>
                                                     @endforeach

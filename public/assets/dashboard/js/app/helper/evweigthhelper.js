@@ -1,18 +1,12 @@
 import * as Ev from './ev.js';
 import * as Extra from './extra.js';
-
+var commentreadonly =``;
 $(function() {
     getEv($('#evid').val()).then(data => {
-        console.log(data);
-        // RenderTable(data.criteriatransactions,1);
-        // RenderTable(data.criteriatransactions,2);
+        // console.log(data);
         RenderWeightTable(data.pillaindexweigths,1);
-        // RenderWeightTable(data.pillaindexweigths,2);
         RenderExtraTable(data.extracriteriatransactions);
-        
         $(".loadprogress").attr("hidden",true);
-        // RowSpan("criteriatable");
-        // RowSpan("extra_criteriatable");
         RowSpanWeight("subpillarindex");
         RowSpanExtra("extra_subpillarindex");
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
@@ -154,7 +148,6 @@ function editWeight(id,value,evtypeid){
     }else if(evtype == 2){
         $("#extra_criteria_transaction_wrapper_tr").html(html);
     }
-    
 }
 
 function RenderWeightTable(data,evtypeid){
@@ -163,10 +156,14 @@ function RenderWeightTable(data,evtypeid){
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
         readonly =``;
     }
-    if($('#evstatus').val() >= 4){
-        readonly =`readonly`;
+   if($('#evstatus').val() >= 4){
+        commentreadonly =`readonly`;
     }
     data.forEach(function (pillaindex,index) {
+        var comment = '';
+        if(pillaindex.comment){
+            comment = pillaindex.comment;
+        }
         if(pillaindex.ev_type_id == evtypeid){
             html += `<tr > 
                 <td> ${pillaindex.pillar['name']}</td>                                            
@@ -176,11 +173,17 @@ function RenderWeightTable(data,evtypeid){
                         <label>${pillaindex.subpillarindex['name']}</label>
                         <input type="text" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}" class="form-control form-control-lg inputweigth weigthvalue${evtypeid} decimalformat">
                     </div>
+                    <div class="toggle" style="display:none;">
+                        <div class="form-group" style="margin-top:5px">
+                            <label><i>ความเห็น</i></label>
+                            <input type="text" data-id="${pillaindex.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadonly} >
+                        </div>
+                    </div>
                 </td>                           
             </tr>`
-            
         }
         });
+        
         if(evtypeid == 1){
             $("#subpillar_index_transaction_wrapper_tr").html(html);
         }else if(evtypeid == 2){
@@ -192,26 +195,40 @@ function RenderWeightTable(data,evtypeid){
 function RenderExtraTable(data){
     var html =``;
     var readonly =`readonly`;
+   
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
         readonly =``;
     }
     if($('#evstatus').val() >= 4){
-        readonly =`readonly`;
+        commentreadonly =`readonly`;
     }
     data.forEach(function (criteria,index) {
+        var comment = '';
+        if(criteria.weightcomment){
+            comment = criteria.weightcomment;
+        }
+        if($('#evstatus').val() >= 4){
+            // commentreadonly =`readonly`;
+        }
             html += `<tr > 
             <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
             <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
             <div class="form-group">
                 <label>${criteria.extracriteria['name']}</label>
-                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${readonly} >
+                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${commentreadonly} >
+                <div class="toggle" style="display:none;">
+                    <div class="form-group" style="margin-top:5px">
+                        <label><i>ความเห็น</i></label>
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadonly} >
+                    </div>
+                </div>
             </div>
         </td> 
     </tr>`
     });
     console.log(html)
-        $("#extra_criteria_transaction_wrapper_tr").html(html);
+    $("#extra_criteria_transaction_wrapper_tr").html(html);
 }
 
 function RowSpanExtra(tableid){
@@ -361,7 +378,6 @@ function updateEvAdminStatus(id,value){
 
     $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
         if(route.usertypeid == 6)return;
-        // console.log($(e.target).attr("href"));
         if($(e.target).attr("href") == '#commenttab'){
             // Ev.clearCommentTab($('#evid').val(),2).then(data => {
         
@@ -369,18 +385,6 @@ function updateEvAdminStatus(id,value){
         }
     })
 
-    // $('.nav-tabs a').on('shown.bs.tab', function (e) {
-    //     console.log($(e.target).attr("href"));
-    //     if(route.usertypeid == 6)return;
-    //     console.log($(e.target).attr("href"));
-    //     if($(e.target).attr("href") == '#commenttab'){
-    //         Ev.clearCommentTab($('#evid').val(),2).then(data => {
-        
-    //         }).catch(error => {})
-    //     }
-    //     // var previous_tab = e.relatedTarget;
-    // });
-    
     $(document).on("click",".deletecomment",function(e){
         // console.log($(this).data('id'));
         Swal.fire({
@@ -464,7 +468,6 @@ function updateEvAdminStatus(id,value){
                     return ;
                 }
             }  
-            // $("#sendedittojd").trigger("click");
             $("#spiniconsendjd").attr("hidden",false);
             sendEditEv($('#evid').val()).then(data => {
                 Ev.clearCommentTab($('#evid').val(),2).then(data => {
@@ -528,3 +531,19 @@ function updateEvAdminStatus(id,value){
 	        }
 	    }
 	});
+
+    $(document).on('change', '.comment', function(e) {
+        Ev.editWeightComment($(this).data('id'),$(this).val()).then(data => {
+        }).catch(error => {})
+    });
+
+    $(document).on('change', '.extracomment', function(e) {
+        Ev.editExtraWeightcomment($(this).data('id'),$(this).val()).then(data => {
+        }).catch(error => {})
+    });
+
+    $(document).on('click', '#togglecomment', function(e) {
+        $('.toggle').toggle();
+     });
+    
+     

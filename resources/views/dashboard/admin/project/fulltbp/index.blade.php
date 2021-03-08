@@ -324,11 +324,11 @@
                                                         @endphp
             
                                                         @if (Auth::user()->user_type_id == 4)
-                                                                @if ($fulltbp->ev->status == 0)
-                                                                        <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
-                                                                    @else
+                                                                {{-- @if ($fulltbp->ev->status == 0) --}}
+                                                                        {{-- <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
+                                                                    @else --}}
                                                                         <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
-                                                                @endif
+                                                                {{-- @endif --}}
                                                             @elseif(Auth::user()->user_type_id == 5)
                                                                 @if ($fulltbp->ev->status < 2)
                                                                         <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>

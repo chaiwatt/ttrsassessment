@@ -20,6 +20,8 @@ class CreateExtraCriteriaTransactionsTable extends Migration
             $table->unsignedBigInteger('extra_category_id');
             $table->unsignedBigInteger('extra_criteria_id');
             $table->double('weight',10,5)->default(0);
+            $table->string('extracomment',250)->nullable();
+            $table->string('weightcomment',250)->nullable();
             $table->timestamps();
         });
     }

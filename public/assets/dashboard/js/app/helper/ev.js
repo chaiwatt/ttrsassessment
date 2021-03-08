@@ -309,5 +309,89 @@ function approveEvStageTwo(id){
       })
   })
 }
+
+function editCriteriaTransactionComment(transactionid,comment){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/assessment/ev/editcriteriatransactioncomment`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          transactionid : transactionid,
+          comment : comment
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function editExtraCriteriaTransactionComment(transactionid,comment){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/assessment/ev/editextracriteriatransactioncomment`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          transactionid : transactionid,
+          comment : comment
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function editWeightComment(transactionid,comment){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/assessment/ev/editweightcomment`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          transactionid : transactionid,
+          comment : comment
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+function editExtraWeightcomment(transactionid,comment){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/assessment/ev/editextraweightcomment`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          transactionid : transactionid,
+          comment : comment
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+
+
 export {addEvCheckList,addEvGrading,getEv,getEvByFullTbp,copyEv,updateEvStatus,getEvCheckList,editEv,addExtraEvGrading,approveEvStageOne,
-  addCommentStageOne,deleteComment,clearCommentTab,addCommentStageTwo,approveEvStageTwo}
+  addCommentStageOne,deleteComment,clearCommentTab,addCommentStageTwo,approveEvStageTwo,editCriteriaTransactionComment,editWeightComment,
+  editExtraCriteriaTransactionComment,editExtraWeightcomment}

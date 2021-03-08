@@ -116,7 +116,7 @@
                                                 <tr class="bg-info">
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
-                                                    <th>Weight</th>                                                                                
+                                                    <th>Weight <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a></th>                                                                                
                                                 </tr>
                                             </thead>
                                             <tbody id="subpillar_index_transaction_wrapper_tr"> 
@@ -173,7 +173,7 @@
                                                     <tr class="bg-info">
                                                         <th>Category</th>  
                                                         <th>Extra Criteria</th>   
-                                                        <th>Weight</th>                                                                                
+                                                        <th>Weight </th>                                                                                
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">

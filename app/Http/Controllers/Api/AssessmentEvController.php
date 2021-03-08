@@ -30,6 +30,11 @@ use App\Model\ProjectStatusTransaction;
 class AssessmentEvController extends Controller
 {
     public function AddEvChecklist(Request $request){
+        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)
+                                            ->orderBy('pillar_id','asc')
+                                            ->orderBy('sub_pillar_id', 'asc')
+                                            ->orderBy('sub_pillar_index_id', 'asc')
+                                            ->get()->makeHidden('pillar')->makeHidden('subpillar')->makeHidden('subpillarindex');
         $check_grade = CriteriaTransaction::where('ev_id',$request->evid)
                                     ->where('index_type_id',1)
                                     ->where('pillar_id',$request->pillar)
@@ -44,6 +49,7 @@ class AssessmentEvController extends Controller
         if(!Empty($check_grade)){
             return response()->json(array(
                                 "criteriatransactions" => $criteriatransactions,
+                                "pillaindexweigths" => $pillaindexweigths,
                                 "result" => '0'
                             ));                
         }
@@ -73,6 +79,7 @@ class AssessmentEvController extends Controller
             }else{
                 return response()->json(array(
                     "criteriatransactions" => $criteriatransactions,
+                    "pillaindexweigths" => $pillaindexweigths,
                     "result" => '0'
                 ));  
             }
@@ -124,13 +131,18 @@ class AssessmentEvController extends Controller
                                                 ->get();
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
+            "pillaindexweigths" => $pillaindexweigths,
             "result" => '1'
         ));                                           
         // return response()->json($criteriatransactions); 
     }
 
     public function AddEvGrading(Request $request){
-
+        $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)
+                                        ->orderBy('pillar_id','asc')
+                                        ->orderBy('sub_pillar_id', 'asc')
+                                        ->orderBy('sub_pillar_index_id', 'asc')
+                                        ->get()->makeHidden('pillar')->makeHidden('subpillar')->makeHidden('subpillarindex');
         $check_list = CriteriaTransaction::where('ev_id',$request->evid)
             ->where('index_type_id',2)
             ->where('pillar_id',$request->pillar)
@@ -145,6 +157,7 @@ class AssessmentEvController extends Controller
         if($check_list->count() > 0){
             return response()->json(array(
                 "criteriatransactions" => $criteriatransactions,
+                "pillaindexweigths" => $pillaindexweigths,
                 "result" => '0'
             ));  
         }
@@ -174,6 +187,7 @@ class AssessmentEvController extends Controller
         }else{
             return response()->json(array(
                 "criteriatransactions" => $criteriatransactions,
+                "pillaindexweigths" => $pillaindexweigths,
                 "result" => '0'
             )); 
         }
@@ -196,11 +210,12 @@ class AssessmentEvController extends Controller
                                                 ->get();
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
+            "pillaindexweigths" => $pillaindexweigths,
             "result" => '1'
         )); 
-        // return response()->json($criteriatransactions); 
     }
     public function AddExtraEvGrading(Request $request){
+        
         $criteriatransaction = new CriteriaTransaction();
         $criteriatransaction->ev_id = $request->evid;
         $criteriatransaction->ev_type_id = 2;
@@ -253,12 +268,17 @@ class AssessmentEvController extends Controller
                                                                 ->get()
                                                                 ->append('extracategory')
                                                                 ->append('extracriteria');   
+            $pillaindexweigths = PillaIndexWeigth::where('ev_id',$ev->id)
+                                                                ->orderBy('pillar_id','asc')
+                                                                ->orderBy('sub_pillar_id', 'asc')
+                                                                ->orderBy('sub_pillar_index_id', 'asc')
+                                                                ->get()->makeHidden('pillar')->makeHidden('subpillar')->makeHidden('subpillarindex');
             
             return response()->json(array(
                 "criteriatransactions" => $criteriatransactions,
-                "extracriteriatransactions" => $extracriteriatransactions
+                "extracriteriatransactions" => $extracriteriatransactions,
+                "pillaindexweigths" => $pillaindexweigths
             ));                                       
-            // return response()->json($criteriatransactions); 
         }
     }
     public function CopyEv(Request $request){
@@ -755,5 +775,32 @@ class AssessmentEvController extends Controller
             }
         }
     }
+
+    public function EditCriteriaTransactionComment(Request $request){
+        CriteriaTransaction::find($request->transactionid)->update([
+            'comment' => $request->comment
+        ]);
+        return ; 
+    }
+    public function EditExtraCriteriaTransactionComment(Request $request){
+        ExtraCriteriaTransaction::find($request->transactionid)->update([
+            'extracomment' => $request->comment
+        ]);
+        return ; 
+    }
+    public function EditWeightcomment(Request $request){
+        PillaIndexWeigth::find($request->transactionid)->update([
+            'comment' => $request->comment
+        ]);
+        return ; 
+    }
+    public function EditExtraWeightcomment(Request $request){
+        ExtraCriteriaTransaction::find($request->transactionid)->update([
+            'weightcomment' => $request->comment
+        ]);
+        return ; 
+    }
+
+    
     
 }

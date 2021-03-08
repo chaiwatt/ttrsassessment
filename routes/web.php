@@ -256,6 +256,12 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('editapprove','Api\AssessmentEvController@EditApprove')->name('api.assessment.ev.editapprove');
                 Route::post('sendeditev','Api\AssessmentEvController@SendEditEv')->name('api.assessment.ev.sendeditev');
                 Route::post('getevchecklist','Api\AssessmentEvController@GetEvCheckList')->name('api.assessment.ev.getevchecklist');
+                Route::post('editcriteriatransactioncomment','Api\AssessmentEvController@EditCriteriaTransactionComment')->name('api.assessment.ev.editcriteriatransactioncomment');
+                Route::post('editextracriteriatransactioncomment','Api\AssessmentEvController@EditExtraCriteriaTransactionComment')->name('api.assessment.ev.editextracriteriatransactioncomment');
+                
+                Route::post('editweightcomment','Api\AssessmentEvController@EditWeightcomment')->name('api.assessment.ev.editweightcomment');
+                Route::post('editextraweightcomment','Api\AssessmentEvController@EditExtraWeightcomment')->name('api.assessment.ev.editextraweightcomment');
+                
                 Route::group(['prefix' => 'pillar'], function(){
                     Route::post('getpillar','Api\AssessmentEvPillarController@GetPillar')->name('api.assessment.ev.pillar.getpillar');          
                     Route::post('deletepillar','Api\AssessmentEvPillarController@DeletePillar')->name('api.assessment.ev.pillar.deletepillar'); 

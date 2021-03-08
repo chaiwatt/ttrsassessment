@@ -23,6 +23,7 @@ class CreateCriteriaTransactionsTable extends Migration
             $table->unsignedBigInteger('sub_pillar_index_id');
             $table->unsignedBigInteger('criteria_id')->nullable();
             $table->unsignedBigInteger('index_type_id');
+            $table->string('comment',250)->nullable();
             $table->timestamps();
         });
     }

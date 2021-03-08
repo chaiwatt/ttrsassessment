@@ -5,10 +5,10 @@ import * as PillaIndexWeigth from './pillaindexweigth.js';
 import * as Extra from './extra.js';
 var countchecklist = 0;
 var globalNewIndex = 0;
-$( document ).ready(function() {
+var readonly = "";
+$(function() {
     Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
-        // console.log(data);
-        RenderTable(data.criteriatransactions);
+        RenderTable(data.criteriatransactions,data.pillaindexweigths);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         RenderExtraTable(data.extracriteriatransactions);
@@ -388,7 +388,7 @@ $(document).on('click', '#addcriteria', function(e) {
 function AddCheckList(criterias){
     $("#spiniconcriteria").attr("hidden",false);
     Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val()).then(data => {
-         RenderTable(data.criteriatransactions);
+         RenderTable(data.criteriatransactions,data.pillaindexweigths);
          RowSpan("criteriatable");
          if(data.result == 1){
             Pillar.getRelatedEv($('#evid').val()).then(data => {
@@ -419,11 +419,10 @@ function AddCheckList(criterias){
 function AddGrading(){
     $("#spiniconcriteria").attr("hidden",false);
     Ev.addEvGrading($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
-        RenderTable(data.criteriatransactions);
-        RowSpan("criteriatable");
+         RenderTable(data.criteriatransactions,data.pillaindexweigths);
+         RowSpan("criteriatable");
         $("#spiniconcriteria").attr("hidden",true);
         if(data.result == 1){
-            
             Swal.fire({
                title: 'สำเร็จ...',
                text: 'เพิ่มรายการสำเร็จ!',
@@ -452,9 +451,6 @@ $(document).on('click', '#btn_modal_exisingev', function(e) {
     Ev.copyEv($('#existingev').val(),$('#evid').val()).then(data => {
         Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
             window.location.reload();
-            // $(".loadprogress").attr("hidden",true);
-            // RenderTable(data);
-            // RowSpan("criteriatable");
         }).catch(error => {})
     }).catch(error => {})
 });
@@ -475,9 +471,9 @@ function RenderModalTable(data){
         });
     $("#criteria_transaction_modal_wrapper_tr").html(html);
 }
-function RenderTable(data){
+function RenderTable(criterias,pillaindexweigths){
     var html =``;
-    data.forEach(function (criteria,index) {
+    criterias.forEach(function (criteria,index) {
         var criterianame = criteria.subpillarindex['name'] + ' <small>(เกรด)</small>';
         if(criteria.criteria != null){
             criterianame = criteria.criteria['name']
@@ -486,24 +482,45 @@ function RenderTable(data){
         if(subpillarindex == null){
             subpillarindex = "-";
         }
-
+        var find = pillaindexweigths.filter(function(result) {
+            return result.ev_id == $('#evid').val() && result.pillar_id == criteria.pillar['id']  && result.sub_pillar_id == criteria.subpillar['id']  && result.sub_pillar_index_id == criteria.subpillarindex['id'];
+          });
+        var weightval = '';
+        if ($('#evstatus').val() >= 4) {
+            if(find[0].weigth){
+                weightval = `(weight = ` + find[0].weigth + `)`;
+            } 
+            readonly = "readonly";
+        }
+        var comment = '';
+        if(criteria.comment){
+            comment = criteria.comment;
+        }
         if(route.status == 0 || route.refixstatus == 1){
             html += `<tr > 
             <td> ${criteria.pillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" class="text-grey-300 pillarname deletepillar"><i class="icon-trash"></i></a></td>                                            
             <td> ${criteria.subpillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
-            <td> ${subpillarindex} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
-            <td> ${criterianame} </td>                                            
+            <td> ${subpillarindex} ${weightval}<a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
+            <td> 
+                ${criterianame} 
+            </td>                                            
             </tr>`
         }else{
             html += `<tr > 
             <td> ${criteria.pillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" class="text-grey-300 pillarname"></a></td>                                            
             <td> ${criteria.subpillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 "></a></td>    
-            <td> ${subpillarindex} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 "></a></td>   
-            <td> ${criterianame} </td>                                            
+            <td> ${subpillarindex} ${weightval}<a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 "></a></td>   
+            <td> 
+                ${criterianame} 
+                <div class="toggle" style="display:none;">
+                    <div class="form-group" style="margin-top:5px">
+                        <label><i>ความเห็น</i></label>
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${readonly} >
+                    </div>
+                </div>
+            </td>                                            
             </tr>`
         }
-
-
     });
         $("#criteria_transaction_wrapper_tr").html(html);
 }
@@ -511,15 +528,33 @@ function RenderTable(data){
 function RenderExtraTable(data){
     var html =``;
     data.forEach(function (criteria,index) {
+        var weightval = '';
+        if ($('#evstatus').val() >= 4) {
+            if(criteria.weight){
+                weightval = `(weight = ` + criteria.weight + `)`;
+            } 
+            readonly = "readonly";
+        }
+        var comment = '';
+        if(criteria.extracomment){
+            comment = criteria.extracomment;
+        }
         if(route.status == 0 || route.refixstatus == 1){
             html += `<tr > 
-            <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300 deletecategorytransaction"><i class="icon-trash"></i></a></td>                
+            <td> ${criteria.extracategory['name']} ${weightval}<a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300 deletecategorytransaction"><i class="icon-trash"></i></a></td>                
             <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 deletetriteriatransaction"><i class="icon-trash"></i></a></td>                                            
             </tr>`
         }else{
             html += `<tr > 
-            <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
-            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300"></a></td>                                            
+            <td> ${criteria.extracategory['name']} ${weightval}<a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300"></a>
+                <div class="toggle" style="display:none;">
+                    <div class="form-group" style="margin-top:5px">
+                        <label><i>ความเห็น</i></label>
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${readonly} >
+                    </div>
+                </div>
+            </td>                                            
             </tr>`
         }
 
@@ -603,14 +638,6 @@ $(document).on('click', '.deletepillar', function(e) {
         }).then((result) => {
         if (result.value) {
             Pillar.deletePillar($('#evid').val(),$(this).data('pillar')).then(data => {
-                // RenderTable(data.criteriatransactions);
-                // RowSpan("criteriatable");
-                // RenderExtra(data.extracriteriatransactions);
-                // RowSpan("extracriteriatable");
-                //  Swal.fire({
-                //     title: 'สำเร็จ...',
-                //     text: 'ลบรายการสำเร็จ!',
-                //     });
                 Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -676,14 +703,6 @@ $(document).on('click', '.deletesubpillar', function(e) {
         }).then((result) => {
         if (result.value) {
             SubPillar.deleteSubPillar($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar')).then(data => {
-                // RenderTable(data.criteriatransactions);
-                // RowSpan("criteriatable");
-                // RenderExtra(data.extracriteriatransactions);
-                // RowSpan("extracriteriatable");
-                //  Swal.fire({
-                //     title: 'สำเร็จ...',
-                //     text: 'ลบรายการสำเร็จ!',
-                //     });
                 Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -711,14 +730,6 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
         }).then((result) => {
         if (result.value) {
             SubPillar.deleteSubPillarIndex($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar'),$(this).data('subpillarindex')).then(data => {
-                // RenderTable(data.criteriatransactions);
-                // RowSpan("criteriatable");
-                // RenderExtra(data.extracriteriatransactions);
-                // RowSpan("extracriteriatable");
-                //  Swal.fire({
-                //     title: 'สำเร็จ...',
-                //     text: 'ลบรายการสำเร็จ!',
-                //     });
                 Swal.fire({
                     title: 'สำเร็จ...',
                     text: 'ลบรายการสำเร็จ!',
@@ -1228,3 +1239,16 @@ $(document).on('click', '.deletetriteriatransaction', function(e) {
     });
 });
 
+$(document).on('change', '.comment', function(e) {
+    Ev.editCriteriaTransactionComment($(this).data('id'),$(this).val()).then(data => {
+    }).catch(error => {})
+});
+
+$(document).on('change', '.extracomment', function(e) {
+    Ev.editExtraCriteriaTransactionComment($(this).data('id'),$(this).val()).then(data => {
+    }).catch(error => {})
+});
+
+$(document).on('click', '#togglecomment', function(e) {
+    $('.toggle').toggle();
+ });
