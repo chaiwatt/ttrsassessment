@@ -485,13 +485,21 @@ function RenderTable(criterias,pillaindexweigths){
         var find = pillaindexweigths.filter(function(result) {
             return result.ev_id == $('#evid').val() && result.pillar_id == criteria.pillar['id']  && result.sub_pillar_id == criteria.subpillar['id']  && result.sub_pillar_index_id == criteria.subpillarindex['id'];
           });
+        var commentreadlonly = '';
         var weightval = '';
+        if(route.usertypeid != 6 ){
+            commentreadlonly = "readonly";
+        }
         if ($('#evstatus').val() >= 4) {
             if(find[0].weigth){
                 weightval = `(weight = ` + find[0].weigth + `)`;
             } 
             readonly = "readonly";
         }
+        if ($('#evstatus').val() >= 2) {
+            commentreadlonly = "readonly";
+        }
+
         var comment = '';
         if(criteria.comment){
             comment = criteria.comment;
@@ -503,6 +511,12 @@ function RenderTable(criterias,pillaindexweigths){
             <td> ${subpillarindex} ${weightval}<a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
             <td> 
                 ${criterianame} 
+                <div class="toggle" style="display:none;">
+                    <div class="form-group" style="margin-top:5px">
+                        <label><i>ความเห็น</i></label>
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadlonly} >
+                    </div>
+                </div>
             </td>                                            
             </tr>`
         }else{
@@ -515,7 +529,7 @@ function RenderTable(criterias,pillaindexweigths){
                 <div class="toggle" style="display:none;">
                     <div class="form-group" style="margin-top:5px">
                         <label><i>ความเห็น</i></label>
-                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${readonly} >
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadlonly} >
                     </div>
                 </div>
             </td>                                            
@@ -529,12 +543,21 @@ function RenderExtraTable(data){
     var html =``;
     data.forEach(function (criteria,index) {
         var weightval = '';
+        var commentreadlonly = '';
+        if(route.usertypeid != 6 ){
+            commentreadlonly = "readonly";
+        }
+
         if ($('#evstatus').val() >= 4) {
             if(criteria.weight){
                 weightval = `(weight = ` + criteria.weight + `)`;
             } 
-            readonly = "readonly";
+            commentreadlonly = "readonly";
         }
+        if ($('#evstatus').val() >= 2) {
+            commentreadlonly = "readonly";
+        }
+
         var comment = '';
         if(criteria.extracomment){
             comment = criteria.extracomment;
@@ -542,7 +565,15 @@ function RenderExtraTable(data){
         if(route.status == 0 || route.refixstatus == 1){
             html += `<tr > 
             <td> ${criteria.extracategory['name']} ${weightval}<a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300 deletecategorytransaction"><i class="icon-trash"></i></a></td>                
-            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 deletetriteriatransaction"><i class="icon-trash"></i></a></td>                                            
+            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 deletetriteriatransaction"><i class="icon-trash"></i></a>
+                <div class="toggle" style="display:none;">
+                    <div class="form-group" style="margin-top:5px">
+                        <label><i>ความเห็น</i></label>
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadlonly} >
+                    </div>
+                </div>
+            
+            </td>                                            
             </tr>`
         }else{
             html += `<tr > 
@@ -551,7 +582,7 @@ function RenderExtraTable(data){
                 <div class="toggle" style="display:none;">
                     <div class="form-group" style="margin-top:5px">
                         <label><i>ความเห็น</i></label>
-                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${readonly} >
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadlonly} >
                     </div>
                 </div>
             </td>                                            
@@ -1002,12 +1033,26 @@ $(document).on('change', '#extrasubpillar', function(e) {
 
 
 $(document).on('click', '#btn_modal_add_comment', function(e) {
-    $("#addcommentspinicon").attr("hidden",false);
-    Ev.addCommentStageOne($('#evid').val(),$('#comment').val()).then(data => {
-        $("#addcommentspinicon").attr("hidden",true);
-        $('#modal_add_comment').modal('hide');
-        window.location.reload();
-    }).catch(error => {})
+    Swal.fire({
+        title: 'ยืนยัน!',
+        text: `ต้องการส่งคืนให้ Leader แก้ไขหรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            $("#addcommentspinicon").attr("hidden",false);
+            Ev.addCommentStageOne($('#evid').val(),$('#comment').val()).then(data => {
+                $("#addcommentspinicon").attr("hidden",true);
+                $('#modal_add_comment').modal('hide');
+                window.location.reload();
+            }).catch(error => {})
+        }
+    });
 });
 
 $('.nav-tabs a').on('shown.bs.tab', function (e) {

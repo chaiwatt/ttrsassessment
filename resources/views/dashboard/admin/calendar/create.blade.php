@@ -171,6 +171,8 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+
     <script>
         var route = {
             url: "{{ url('/') }}",

@@ -145,7 +145,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             'saleorderdate' => DateConversion::thaiToEngDate($request->saleorderdate),
             'refno' => $request->refno,
             'description' => $request->description,
-            'price' => $request->price,
+            'price' => str_replace( ',', '', $request->price),
             'billerid' => $request->billerid,
             'branchid' => $request->branchid,
             'servicecode' => $request->servicecode,
@@ -153,6 +153,7 @@ class DashboardAdminProjectInvoiceController extends Controller
         ]);
         return redirect()->route('dashboard.admin.project.invoice')->withSuccess('แก้ไขรายการสำเร็จ');
     }
+
 
     public function UpdateStatus(Request $request){
         $invoicetransaction = InvoiceTransaction::find($request->id);

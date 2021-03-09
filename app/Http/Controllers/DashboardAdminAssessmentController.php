@@ -319,7 +319,7 @@ class DashboardAdminAssessmentController extends Controller
     }
 
     public function UpdateScore(Request $request){    
-        if($request->arraylist != null){
+        // if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
                 if($criteria['scoretype'] == 1){
                     $scores = Scoring::where('ev_id',$criteria['evid'])
@@ -361,10 +361,9 @@ class DashboardAdminAssessmentController extends Controller
                     }                
                 }
             }
-        }
-
-        if($request->extraarraylist != null){
-            $existingarray = array(); 
+        // }
+         $existingarray = array(); 
+         if($request->extraarraylist != null){
             foreach ($request->extraarraylist as $key => $extracriteria) {
                 array_push($existingarray, $extracriteria['extracriteriatransactionid']);
                 $extrascore = new ExtraScoring();
@@ -373,7 +372,7 @@ class DashboardAdminAssessmentController extends Controller
                 $extrascore->scoring  = $extracriteria['value'];
                 $extrascore->save();
             }
-
+          }
             $extrascoringarray = ExtraScoring::where('ev_id',$request->evid)
                         ->whereNotIn('extra_critreria_transaction_id',$existingarray)
                         ->distinct('extra_critreria_transaction_id')
@@ -388,7 +387,7 @@ class DashboardAdminAssessmentController extends Controller
                 $extrascore->scoring  = $check->scoring;
                 $extrascore->save();
             }
-        }
+        // }
 
         Ev::find($request->evid)->update([
             'status' => 5

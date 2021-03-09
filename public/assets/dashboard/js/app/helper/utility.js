@@ -27,7 +27,7 @@ function confirmsubmit(e,data) {
             type: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'บันทึก',
+            confirmButtonText: 'ตกลง',
             cancelButtonText: 'ยกเลิก',
             closeOnConfirm: false,
             closeOnCancel: false

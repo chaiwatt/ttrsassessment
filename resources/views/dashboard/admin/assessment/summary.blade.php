@@ -117,11 +117,11 @@
                         <input type="text" id="evid" value="{{$ev->id}}" hidden>
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                             <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>
-                            <form id="frmminitbp" method="POST" class="wizard-form step-evweight" action="" data-fouc>
+                            <form id="frmminitbp" method="POST" class="wizard-form step-evweight"  action="" data-fouc>
                                 @csrf
                                 <h6>Index Criteria</h6>
                                 <fieldset>
-                                    <div class="table-responsive">
+                                    <div class="table-responsive mb-3">
                                         <table class="table table-bordered table-striped" id="criteriatable">
                                             <thead>
                                                 <tr>
@@ -145,14 +145,13 @@
                                 @if ($ev->percentextra > 0)
                                 <h6>Extra Criteria</h6>
                                 <fieldset>
-                                    <div class="table-responsive">
+                                    <div class="table-responsive mb-3">
                                         <table class="table table-bordered table-striped" id="extra_subpillarindex">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th>Category</th>  
                                                     <th>Extra Criteria</th>   
                                                     <th>Weight</th>                                                                                
-                                                    {{-- <th>Criteria</th>   --}}
                                                 </tr>
                                             </thead>
                                             <div class="theme_tail theme_tail_circle loadprogress">

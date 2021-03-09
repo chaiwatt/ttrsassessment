@@ -20,7 +20,7 @@
                 </div>         
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_comment" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="addcommentspinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                    <button id="btn_modal_add_comment" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="addcommentspinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> ส่งคืน</button>
                 </div>
             </div>
         </div>
@@ -106,7 +106,9 @@
                                    
                                     <li class="nav-item"><a href="#weighttab" class="nav-link active" data-toggle="tab"><i class="icon-mention mr-2"></i>กำหนด Weight <span id="weight"></span></a></li>
                                     @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
-                                        <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment ให้แก้ไข@if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
+                                        <li class="nav-item">
+                                            <a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>ส่งคืนแก้ไข@if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a>
+                                        </li>
                                     @endif
                                 </ul>
                                 <div class="tab-content mb-2">
@@ -125,9 +127,10 @@
                                         </table>
                                     </div>
                                     <div class="tab-pane fade" id="commenttab">
-                                        @if (Auth::user()->user_type_id == 6)
+                                        @if (Auth::user()->user_type_id == 6 && $ev->status < 4)
                                         <div class="form-group">	
-                                            <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
+                                            {{-- <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a> --}}
+                                            <a class="btn bg-warning" data-toggle="modal" data-target="#modal_add_comment">ส่งคืนแก้ไข</a>
                                             <br>
                                         </div>
                                         @endif
@@ -149,7 +152,11 @@
                                                         <td>{{$evedithistory->thaidate}}</td>
                                                         <td>{{$evedithistory->detail}}</td>
                                                         @if (Auth::user()->user_type_id == 6)
-                                                        <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
+                                                        <td>
+                                                            @if ($ev->status < 4)
+                                                                <a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a>
+                                                            @endif
+                                                        </td>
                                                         @endif
                                                     </tr>
                                                     @endforeach

@@ -116,7 +116,7 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>เลขที่โครงการ</th> 
+                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         {{-- <th>ชื่อโครงการ</th>  --}}
                                         <th>โครงการ</th>
                                         <th>สถานะ</th>
@@ -130,7 +130,7 @@
                                 <tbody>
                                     @foreach ($fulltbps as $fulltbp)
                                     <tr>
-                                        <td> {{$fulltbp->updatedatth}} </td> 
+                                        {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                         <td>  
                                             {{-- <a class="text-info" href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" >{{$fulltbp->minitbp->project}}</a> --}}

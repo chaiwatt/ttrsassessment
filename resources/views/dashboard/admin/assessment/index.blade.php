@@ -98,31 +98,34 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                    <tr>    
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                        <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                        <td>
-                                            @if (!Empty($fulltbp->finalassessmentdate))
-                                                @if ($fulltbp->allscoring == 0)
-                                                    @if ($fulltbp->done_assessment != 0)
-                                                            @if ($fulltbp->ev->status == 5)
-                                                                    <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn btn-sm bg-success">สรุปเกรด</a>
+                                        @if (!Empty($fulltbp->finalassessmentdate))
+                                            <tr>    
+                                                <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                <td> {{$fulltbp->minitbp->project}} </td>  
+                                                <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                                <td>
+                                                    {{-- @if (!Empty($fulltbp->finalassessmentdate)) --}}
+                                                        @if ($fulltbp->allscoring == 0)
+                                                            @if ($fulltbp->done_assessment != 0)
+                                                                    @if ($fulltbp->ev->status == 5)
+                                                                            <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn btn-sm bg-success">สรุปเกรด</a>
+                                                                        @else
+                                                                            <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปรับปรุงคะแนน</a>
+                                                                    @endif
                                                                 @else
-                                                                    <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปรับปรุงคะแนน</a>
-                                                            @endif
-                                                        @else
-                                                        <span class="badge badge-flat border-warning text-warning-600">รอเวลา</span>
-                                                            
-                                                    @endif     
-                                                @else   
-                                                        <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
-                                                @endif 
-                                            @else
-                                                <span class="badge badge-flat border-warning text-warning-600">รอยืนยัน</span>
-                                            @endif
-                                        </td>                                
-                                    </tr>
+                                                                <span class="badge badge-flat border-warning text-warning-600">รอเวลาสรุปคะแนน ({{@$fulltbp->finalassessmentdate}})</span>
+                                                                    
+                                                            @endif     
+                                                        @else   
+                                                                <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
+                                                        @endif 
+                                                    {{-- @else
+                                                        <span class="badge badge-flat border-warning text-warning-600">รอยืนยัน</span>
+                                                    @endif --}}
+                                                </td>                                
+                                            </tr>
+                                        @endif
+
                                     @endforeach
                                 </tbody>
                             </table>      

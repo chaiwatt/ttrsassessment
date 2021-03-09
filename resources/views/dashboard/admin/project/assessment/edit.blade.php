@@ -80,7 +80,7 @@
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
                                                     <th>Index</th>                                                                                
-                                                    <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                                    <th>Criteria <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
                                                     @if ($projectgrade->count() !=0)
                                                         <th>Final</th>
                                                     @endif

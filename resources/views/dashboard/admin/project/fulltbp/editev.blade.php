@@ -387,7 +387,7 @@
                 </div>         
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_comment" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="addcommentspinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                    <button id="btn_modal_add_comment" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="addcommentspinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> ส่งคืน</button>
                 </div>
             </div>
         </div>
@@ -461,6 +461,7 @@
                 <div class="card">
 					<div class="card-body">
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden >
+                        {{-- {{$ev->refixstatus}} --}}
                         {{-- <div class="text-right">
                             <button id="editev" class="btn bg-primary">แก้ไขข้อมูล<i class="icon-floppy-disk ml-2"></i></button>
                         </div> --}}
@@ -503,7 +504,7 @@
                         <div class="row">
                             <div class="col-md-12">	
 
-                                @if ($ev->status <= 2)
+                                @if ($ev->status == 0)
                                     <div class="form-group">
                                         <label>EV ในระบบ</label>
                                         <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
@@ -526,7 +527,7 @@
                                     <li class="nav-item"><a href="#indextab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
                                     <li class="nav-item"><a href="#extratab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
                                     @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
-                                    <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>JD Comment ให้แก้ไข @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
+                                    <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>ส่งคืนแก้ไข @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
                                     @endif
                                 </ul>
         
@@ -551,7 +552,7 @@
                                                         <th>Pillar</th>  
                                                         <th>Sub Pillar</th>   
                                                         <th>Index</th>                                                                                
-                                                        <th>Criteria <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a></th>  
+                                                        <th>Criteria <a href="#" data-toggle="modal" class="text-white" id="togglecomment"><i class="icon-comments"></i></a></th>  
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">
@@ -590,9 +591,10 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="commenttab">
-                                        @if (Auth::user()->user_type_id == 6 && $ev->status < 4)
+                                        @if (Auth::user()->user_type_id == 6 && $ev->status < 2)
                                         <div class="form-group">	
-                                            <a href="" class="btn btn-info btn-icon ml-2 btn-sm"  data-toggle="modal" data-target="#modal_add_comment"><i class="icon-add"></i></a>
+                                           
+                                            <button class="btn bg-warning" data-toggle="modal" data-target="#modal_add_comment">ส่งคืนแก้ไข</button>
                                             <br>
                                         </div>
                                         @endif

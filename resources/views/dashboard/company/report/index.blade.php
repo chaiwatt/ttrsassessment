@@ -42,8 +42,40 @@
                 </div>
             @endforeach
         </div>
-
         @if (@$businessplans->first()->business_plan_status_id > 2)
+            @if (@$businessplans->first()->business_plan_status_id >=  9)
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card bg-teal-400">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h1 class="font-weight-semibold mb-0">{{@$businessplans->first()->minitbp->fulltbp->projectgrade->percent}}</h1>
+                                </div>
+                                <div>
+                                    ผลคะแนนการประเมิน
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div id="members-online"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card bg-blue-400">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h1 class="font-weight-semibold mb-0">{{@$businessplans->first()->minitbp->fulltbp->projectgrade->grade}}</h1>
+                                </div>
+                                <div>
+                                    ระดับเกรดการประเมิน
+                                </div>
+                            </div>
+                            <div id="today-revenue"></div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -56,6 +88,9 @@
                         </div>
                     </div>
                     <div class="card-body">
+                    
+
+        
                         <div class="table-responsive">
                             <table class="table table-striped" id="testtopictable">
                                 <thead>

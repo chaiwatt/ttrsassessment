@@ -343,56 +343,70 @@ $('.step-evweight').steps({
     },
     enableFinishButton: submitbutton,
     onFinished: function (event, currentIndex) {
-        var noblank = true;
-        $('.scoring').each(function() {
-            if($(this).val() == ''){
-                noblank = false;
-                return;
+        Swal.fire({
+            title: 'คำเตือน!',
+            text: `ต้องการบันทึกผลสรุปคะแนน หรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                var noblank = true;
+                $('.scoring').each(function() {
+                    if($(this).val() == ''){
+                        noblank = false;
+                        return;
+                    }
+                });
+        
+                if (noblank == false){
+                    Swal.fire({
+                        title: 'ผิดพลาด...',
+                        text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+                    })
+                    return;
+                };
+        
+                var conflictarray = $(".scoring").map(function () {
+                    var val = $(this).val();
+                    if($(this).data('scoretype') == 2){
+                        val = $(this).is(':checked');
+                    }
+                    return {
+                        evid: $('#evid').val(),
+                        criteriatransactionid: $(this).data('id'),
+                        subpillarindex: $(this).data('subpillarindex'),
+                        scoretype: $(this).data('scoretype'),
+                        value: val
+                      } 
+                }).get();
+        
+                var conflictextraarray = $(".inputextrascore").map(function () {
+                    var val = $(this).val();
+                    return {
+                        evid: $('#evid').val(),
+                        extracriteriatransactionid: $(this).data('id'),
+                        value: val
+                      } 
+                }).get();
+        
+                $("#spinicon").attr("hidden",false);
+                updateScore(conflictarray,conflictextraarray,$('#evid').val()).then(data => {
+                    $("#spinicon").attr("hidden",true);
+                    Swal.fire({
+                        title: 'สำเร็จ...',
+                        text: 'สรุปคะแนนสำเร็จ!',
+                        }).then((result) => {
+                            window.location.replace(`${route.url}/dashboard/admin/assessment/summary/${$('#fulltbpid').val()}`);
+                        });
+                }).catch(error => {})
             }
         });
 
-        if (noblank == false){
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
-            })
-            return;
-        };
-
-        var conflictarray = $(".scoring").map(function () {
-            var val = $(this).val();
-            if($(this).data('scoretype') == 2){
-                val = $(this).is(':checked');
-            }
-            return {
-                evid: $('#evid').val(),
-                criteriatransactionid: $(this).data('id'),
-                subpillarindex: $(this).data('subpillarindex'),
-                scoretype: $(this).data('scoretype'),
-                value: val
-              } 
-        }).get();
-
-        var conflictextraarray = $(".inputextrascore").map(function () {
-            var val = $(this).val();
-            return {
-                evid: $('#evid').val(),
-                extracriteriatransactionid: $(this).data('id'),
-                value: val
-              } 
-        }).get();
-        
-        $("#spinicon").attr("hidden",false);
-        updateScore(conflictarray,conflictextraarray,$('#evid').val()).then(data => {
-            $("#spinicon").attr("hidden",true);
-            Swal.fire({
-                title: 'สำเร็จ...',
-                text: 'สรุปคะแนนสำเร็จ!',
-                }).then((result) => {
-                    // window.location.replace(`${route.url}/dashboard/admin/assessment`);
-                    window.location.replace(`${route.url}/dashboard/admin/assessment/summary/${$('#fulltbpid').val()}`);
-                });
-        }).catch(error => {})
     },
     transitionEffect: 'fade',
     autoFocus: true,

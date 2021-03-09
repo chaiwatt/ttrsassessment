@@ -54,11 +54,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;แก้ไขทีมผู้เชี่ยวชาญการประเมิน</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ทีมผู้เชี่ยวชาญการประเมิน</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
+                    <div class="row" id="addusermodal">
                         <div class="col-md-12" >
                             <label>เลือกผู้เชี่ยวชาญ</label>
                             <div class="form-group header-elements-md-inline">
@@ -67,7 +67,8 @@
                                 &nbsp;<button id="btn_modal_edit_projectmember" class="btn bg-teal" > เพิ่ม</button>
                             </div>
                         </div>
-                    </div>
+                    </div>  
+
                     ทีมผู้เชี่ยวชาญการประเมิน
                     <div class="row">
                         <div class="col-md-12" >
@@ -251,9 +252,9 @@
                                         <th>ผู้เชี่ยวชาญ</th> 
                                         <th>EV</th> 
                                         <th>BOL</th> 
-                                        <th>ลงพื้นที่แล้ว</th> 
+                                        <th>ลงพื้นที่</th> 
                                         <th>ทีมประเมิน</th>
-                                        <th style="width: 20px"><i class="icon-arrow-down12"></i></th> 
+                                        {{-- <th style="width: 20px"><i class="icon-arrow-down12"></i></th>  --}}
                                                                   
                                     </tr>
                                 </thead>
@@ -263,7 +264,8 @@
                                             <tr>    
                                                 <td> 
                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                    {{$fulltbp->minitbp->project}} 
+                                                    {{-- {{$fulltbp->minitbp->project}}  --}}
+                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                 </td>  
                                                 <td>    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
@@ -324,11 +326,7 @@
                                                         @endphp
             
                                                         @if (Auth::user()->user_type_id == 4)
-                                                                {{-- @if ($fulltbp->ev->status == 0) --}}
-                                                                        {{-- <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
-                                                                    @else --}}
-                                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
-                                                                {{-- @endif --}}
+                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                             @elseif(Auth::user()->user_type_id == 5)
                                                                 @if ($fulltbp->ev->status < 2)
                                                                         <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
@@ -357,19 +355,29 @@
                                                 </td>  
                                                 <td>
                                                     @if (!Empty($fulltbp->assessmentdate))
-                                                      @if ($fulltbp->finished_onsite == 1)
-                                                            <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยัน</button>
-                                                          @else
-                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
-                                                      @endif
-                                                       
+                                                        @if ($fulltbp->finished_onsite == 1)
+                                                                <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยันการลงพื้นที่</button>
+                                                            @else
+                                                                <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                        @endif
+                                                       @else
+                                                       @if (Auth::user()->user_type_id == 4)
+                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
+                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                                @else
+                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                            @endif
+                                                           @else
+                                                                <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                       @endif
+                                                        
                                                     @endif
                                                    
                                                 </td>
                                                 <td> 
                                                     <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                                 </td>
-                                                <td class="text-right">
+                                                {{-- <td class="text-right">
                                                     <div class="list-icons">
                                                         <div class="list-icons-item dropdown">
                                                             <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
@@ -384,7 +392,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </td>                              
+                                                </td>                               --}}
                                             </tr>
                                         @endif
                                     @endforeach
@@ -409,7 +417,8 @@
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            branchid: "{{Auth::user()->branch_id}}",
+            businessplanstatus: "{{$fulltbp->minitbp->businessplan->business_plan_status_id}}",
         };
         $('#note').summernote({
 			toolbar: false,

@@ -78,7 +78,10 @@
                                                 <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                 <td> {{@$fulltbp->projectgrade->grade}} </td> 
                                                 <td> 
-                                                    <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียด</a> 
+                                                    @if(@$fulltbp->projectstatustransaction(8)->status != 2)
+                                                        <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียด</a>
+                                                    @endif  
+                                                     
                                                     <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
@@ -154,7 +157,7 @@
         $(document).on("click",".confirmsendletter",function(e){
             Swal.fire({
                 title: 'ยืนยัน!',
-                text: `ต้องการยืนยันรายการ หรือไม่`,
+                text: `ยืนยันการส่งจดหมายแล้ว หรือไม่`,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

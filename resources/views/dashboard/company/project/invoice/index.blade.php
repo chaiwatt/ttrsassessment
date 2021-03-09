@@ -82,14 +82,17 @@
                                                     <span class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</span>
                                                 @elseif($invoicetransaction->status == 2)
                                                     <span class="badge badge-flat border-info text-info-600 rounded-0">รอการตรวจสอบ</span>
-                                                    {{-- <a href="{{route('dashboard.company.project.invoice.paymentnotification',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งการจ่ายเงิน</a> --}}
+                                                    
                                                 @elseif($invoicetransaction->status == 1)
                                                     <a href="{{route('dashboard.company.project.invoice.paymentnotification',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งการจ่ายเงิน</a>
                                                 @else                                       
                                             @endif
                                         </td> 
-                                        <td style="text-align: right"> 
+                                        <td style="text-align: right">
+                                            @if($invoicetransaction->status == 1)
                                             <a href="{{route('dashboard.company.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">ดาวน์โหลดใบแจ้งหนี้</a>
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

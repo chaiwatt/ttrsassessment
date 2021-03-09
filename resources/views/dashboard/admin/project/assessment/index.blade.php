@@ -64,7 +64,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 )
+                                    {{$fulltbp->finalassessmentdate}}
+                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                             <tr>    
                                                 <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                                 <td> {{$fulltbp->minitbp->project}} </td>  
@@ -77,9 +78,21 @@
                                                                     <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
                                                             @endif
                                                         @else
-                                                            <span class="badge badge-flat border-warning text-warning-600">รอยืนยัน</span>
-                                                    @endif
+                                                        @if ($fulltbp->finished_onsite == 0)
+                                                            <span class="badge badge-flat border-warning text-warning-600">รอ Leader ยืนยันลงพื้นที่</span>
+                                                        @else
+                                                            
+                                                            @if (Auth::user()->user_type_id == 4)
+                                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
+                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                                                @endif
+                                                                    
+                                                                @else
+                                                                    <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
+                                                            @endif
 
+                                                        @endif        
+                                                    @endif
                                                 </td>                                
                                             </tr>
                                         @endif

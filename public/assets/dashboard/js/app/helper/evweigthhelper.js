@@ -156,9 +156,10 @@ function RenderWeightTable(data,evtypeid){
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
         readonly =``;
     }
-   if($('#evstatus').val() >= 4){
+   if($('#evstatus').val() >= 4 || route.usertypeid != 6){
         commentreadonly =`readonly`;
     }
+ 
     data.forEach(function (pillaindex,index) {
         var comment = '';
         if(pillaindex.comment){
@@ -199,7 +200,7 @@ function RenderExtraTable(data){
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
         readonly =``;
     }
-    if($('#evstatus').val() >= 4){
+    if($('#evstatus').val() >= 4 || route.usertypeid != 6){
         commentreadonly =`readonly`;
     }
     data.forEach(function (criteria,index) {
@@ -207,16 +208,13 @@ function RenderExtraTable(data){
         if(criteria.weightcomment){
             comment = criteria.weightcomment;
         }
-        if($('#evstatus').val() >= 4){
-            // commentreadonly =`readonly`;
-        }
             html += `<tr > 
             <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
             <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
             <div class="form-group">
                 <label>${criteria.extracriteria['name']}</label>
-                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${commentreadonly} >
+                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${readonly} >
                 <div class="toggle" style="display:none;">
                     <div class="form-group" style="margin-top:5px">
                         <label><i>ความเห็น</i></label>
@@ -368,12 +366,26 @@ function updateEvAdminStatus(id,value){
       }
 
       $(document).on('click', '#btn_modal_add_comment', function(e) {
-        $("#addcommentspinicon").attr("hidden",false);
-        Ev.addCommentStageTwo($('#evid').val(),$('#comment').val()).then(data => {
-            $("#addcommentspinicon").attr("hidden",true);
-            $('#modal_add_comment').modal('hide');
-            window.location.reload();
-        }).catch(error => {})
+        Swal.fire({
+            title: 'ยืนยัน!',
+            text: `ต้องการส่งคืนให้ Admin แก้ไขหรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                $("#addcommentspinicon").attr("hidden",false);
+                Ev.addCommentStageTwo($('#evid').val(),$('#comment').val()).then(data => {
+                    $("#addcommentspinicon").attr("hidden",true);
+                    $('#modal_add_comment').modal('hide');
+                    window.location.reload();
+                }).catch(error => {})
+            }
+        });
     });
 
     $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
@@ -446,40 +458,57 @@ function updateEvAdminStatus(id,value){
 		},
 		enableFinishButton: submitbutton,
 		onFinished: function (event, currentIndex) {
-            $('.inputweigth').each(function() {
-                if($(this).val() == ''){
-                    $(this).val(0);
+
+            Swal.fire({
+                title: 'ยืนยัน!',
+                text: `ต้องการนำส่ง JD หรือไม่`,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก',
+                closeOnConfirm: false,
+                closeOnCancel: false
+                }).then((result) => {
+                    if (result.value) {
+                        $('.inputweigth').each(function() {
+                            if($(this).val() == ''){
+                                $(this).val(0);
+                            }
+                        });
+            
+                        if(parseFloat($('#weight').html().replace(/[{()}]/g, '')) != 1){
+                            Swal.fire({
+                                title: 'ผิดพลาด...',
+                                text: 'ผลรวม Index Weight ไม่เท่ากับ 1',
+                            })
+                            return ;
+                        }
+                        if($('#percentextra').val() > 0){
+                            if(parseFloat($('#extraweight').html().replace(/[{()}]/g, '')) != 1){
+                                Swal.fire({
+                                    title: 'ผิดพลาด...',
+                                    text: 'ผลรวม Extra Weight ไม่เท่ากับ 1',
+                                })
+                                return ;
+                            }
+                        }  
+                        $("#spiniconsendjd").attr("hidden",false);
+                        sendEditEv($('#evid').val()).then(data => {
+                            Ev.clearCommentTab($('#evid').val(),2).then(data => {
+                                $("#spiniconsendjd").attr("hidden",true);
+                                Swal.fire({
+                                    title: 'สำเร็จ...',
+                                    text: 'นำส่ง JD สำเร็จ!',
+                                }).then((result) => {
+                                    window.location.reload();
+                                });
+                            }).catch(error => {})
+                        }).catch(error => {})
                 }
             });
 
-            if(parseFloat($('#weight').html().replace(/[{()}]/g, '')) != 1){
-                Swal.fire({
-                    title: 'ผิดพลาด...',
-                    text: 'ผลรวม Index Weight ไม่เท่ากับ 1',
-                })
-                return ;
-            }
-            if($('#percentextra').val() > 0){
-                if(parseFloat($('#extraweight').html().replace(/[{()}]/g, '')) != 1){
-                    Swal.fire({
-                        title: 'ผิดพลาด...',
-                        text: 'ผลรวม Extra Weight ไม่เท่ากับ 1',
-                    })
-                    return ;
-                }
-            }  
-            $("#spiniconsendjd").attr("hidden",false);
-            sendEditEv($('#evid').val()).then(data => {
-                Ev.clearCommentTab($('#evid').val(),2).then(data => {
-                    $("#spiniconsendjd").attr("hidden",true);
-                    Swal.fire({
-                        title: 'สำเร็จ...',
-                        text: 'นำส่ง EV ให้ JD สำเร็จ!',
-                    }).then((result) => {
-                        window.location.reload();
-                    });
-                }).catch(error => {})
-            }).catch(error => {})
+
 		},
 		transitionEffect: 'fade',
 		autoFocus: true,

@@ -69,9 +69,8 @@ function RenderTable(data,evtype){
                     
                     var checkscore = criteria.scoring.filter(x => x.user_id == userid); 
                     if(typeof(checkscore[0]) != "undefined"){
-                        // console.log(checkscore[0]);
                         var _scoring = checkscore[0];
-                        if(_scoring['comment'] != null){comment = _scoring['comment'];}
+                        if(_scoring['comment']){comment = _scoring['comment'];}
                         if(_scoring['scoretype'] == 1){
                             textvalue = _scoring['score'];
                         }else if(_scoring['scoretype'] == 2){
@@ -100,14 +99,14 @@ function RenderTable(data,evtype){
                     var finalcheckscore = criteria.scoring.filter(x => x.user_id == null); 
                     if(typeof(finalcheckscore[0]) != "undefined"){
                         var _finalscoring = finalcheckscore[0];
-                        if(_finalscoring['comment'] != null){finaltextvalue = _scoring['comment'];}
+                        if(_finalscoring['comment']){finaltextvalue = _scoring['comment'];}
                         if(_finalscoring['scoretype'] == 1){
                             finaltextvalue = _finalscoring['score'];
                         }else if(_finalscoring['scoretype'] == 2){
                             finalcheckvalue = "checked";
                         }
                     }
-
+                    // console.log(comment);
                     var warningtext ='';
                     var warninglabel ='';
                     if(finaltextvalue != textvalue){
@@ -163,7 +162,7 @@ function RenderExtraTable(data,scoring){
         var comment = '';
             if(!jQuery.isEmptyObject(checkscore) ){
                 score = checkscore.scoring;
-                comment = checkscore.comment;
+                if(checkscore.comment){comment = checkscore.comment;}
             }
             html += `<tr > 
             <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
@@ -293,13 +292,12 @@ $(document).on('change', '.inputextrascore', function(e) {
     }  
 
     Extra.addExtraScore($(this).data('id'),$('#evid').val(),$(this).val()).then(data => {
-        // $('#weightsum'+$(this).data('subpillarindex')).val(data);
+
     }).catch(error => {})
 });
 
 $(document).on('change', '.inputextracomment', function(e) {
     Extra.addExtraComment($(this).data('id'),$('#evid').val(),$(this).val()).then(data => {
-        // $('#weightsum'+$(this).data('subpillarindex')).val(data);
     }).catch(error => {})
 });
 
@@ -418,42 +416,56 @@ $('.step-evweight').steps({
     },
     enableFinishButton: submitbutton,
     onFinished: function (event, currentIndex) {
-        var noblank = true;
-        $('.gradescore').each(function() {
-            if($(this).val() == ''){
-                noblank = false;
-                return;
+        Swal.fire({
+            title: 'คำเตือน!',
+            text: `ต้องการนำส่งคะแนน หรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                var noblank = true;
+                $('.gradescore').each(function() {
+                    if($(this).val() == ''){
+                        noblank = false;
+                        return;
+                    }
+                });
+        
+                if (noblank == false){
+                    Swal.fire({
+                        title: 'ผิดพลาด...',
+                        text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+                    })
+                    return;
+                };
+                $("#spinicon").attr("hidden",false);
+                updateScoringStatus($('#evid').val(),1).then(data => {
+                    if(jQuery.isEmptyObject(data) ){
+                        $('.inpscore').prop("disabled", false);
+                    }else{
+                        $('.inpscore').prop("disabled", true);
+                    }
+                    $("#spinicon").attr("hidden",true);
+                    Swal.fire({
+                        title: 'สำเร็จ...',
+                        text: 'นำส่งคะแนนสำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
+                    });
+                }).catch(error => {})
             }
         });
 
-        if (noblank == false){
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
-            })
-            return;
-        };
 
-        $("#spinicon").attr("hidden",false);
-        updateScoringStatus($('#evid').val(),1).then(data => {
-            if(jQuery.isEmptyObject(data) ){
-                $('.inpscore').prop("disabled", false);
-            }else{
-                $('.inpscore').prop("disabled", true);
-            }
-            $("#spinicon").attr("hidden",true);
-            Swal.fire({
-                title: 'สำเร็จ...',
-                text: 'นำส่งคะแนนสำเร็จ!',
-            }).then((result) => {
-                window.location.reload();
-            });
-        }).catch(error => {})
     },
     transitionEffect: 'fade',
     autoFocus: true,
     onStepChanged:function (event, currentIndex, newIndex) {
-        // console.log('current step ' + currentIndex);
         stepindex = currentIndex;
         return true;
     },   

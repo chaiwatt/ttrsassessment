@@ -4,12 +4,14 @@
 @endphp
 
 {{-- @if ($test == 1) --}}
-    @if (Auth::user()->user_type_id ==3)
+    @if (Auth::user()->user_type_id == 3)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-stats-bars2"></i> <span>แดชบอร์ด</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">รายงาน</a></li>
-        <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>								
+        @if (Auth::user()->expertdetail->expert_type_id == 1)
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>								
+        @endif
     </ul>
     </li>
     @endif
@@ -19,7 +21,6 @@
     <a href="#" class="nav-link"><i class="icon-stats-bars2"></i> <span>แดชบอร์ด</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.admin.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'active':''}}">หน้าแรก</a></li>     
-        {{-- <li class="nav-item"><a href="{{route('dashboard.admin.report.search')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report.search')?'active':''}}">ค้นหา</a></li>      --}}
     </ul>
     </li>
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
@@ -166,10 +167,7 @@
                                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                             @endif
                         </a></li>
-                        @if (Auth::user()->company->businessplan->business_plan_status_id >=  9)
-                            <li class="nav-item"><a href="{{route('dashboard.company.project.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">รายงานผล
-                            </a></li>
-                        @endif
+
                 @endif
             </ul>
         </li>
@@ -222,7 +220,6 @@
             <li class="nav-item"><a href="{{route('dashboard.admin.search.company')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.company')?'active':''}}">ผู้รับการประเมิน</a></li>
             <li class="nav-item"><a href="{{route('dashboard.admin.search.expert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.expert')?'active':''}}">ผู้เชี่ยวชาญ</a></li>
             <li class="nav-item"><a href="{{route('dashboard.admin.search.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.officer')?'active':''}}">เจ้าหน้าที่ TTRS</a></li>
-            {{-- <li class="nav-item"><a href="{{route('dashboard.admin.search.sounddex')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.sounddex')?'active':''}}">Soundex</a></li> --}}
         </ul>
     </li>
     @endif

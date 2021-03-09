@@ -90,7 +90,10 @@
                                         <td>
                                             <a href="{{route('dashboard.admin.project.invoice.edit',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">รายละเอียด</a>
                                             <a href="{{route('dashboard.admin.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                                            @if ($invoicetransaction->status == 1)
                                             <a href="{{route('dashboard.admin.project.invoice.delete',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">ลบ</a>
+                                            @endif
+                                            
                                         </td>    
                                     </tr>
                                     @endforeach

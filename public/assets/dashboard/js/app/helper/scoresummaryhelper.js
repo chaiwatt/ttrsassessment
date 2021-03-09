@@ -6,13 +6,12 @@ $(function() {
         sumGrade(data);
         RenderTable(data,1);
         if(data.ev.percentextra > 0){ 
+            //console.log(data.extrascorings);
             RenderExtraTable(data.extracriteriatransactions,data.extrascorings);
         }
-        $(".loadprogress").attr("hidden",true);
-        RowSpan("criteriatable");
-        // if(data.ev.percentextra > 0){
-        //     RowSpan("extra_criteriatable");
-        // }
+         $(".loadprogress").attr("hidden",true);
+         RowSpan("criteriatable");
+
         $('.inpscore').prop("disabled", true);
         
 

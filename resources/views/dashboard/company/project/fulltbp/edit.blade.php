@@ -3071,6 +3071,8 @@
 			$('.form-check-input-styled-primary').prop("disabled", true);
 			$('.form-control-select2').prop("disabled", true);
 			$('.form-control-lg').prop("disabled", true);
+			$('#companydocname').prop("disabled", false);
+			
 		}
 	});
 	$(document).on('keyup', '#ganttnummonth', function(e) {

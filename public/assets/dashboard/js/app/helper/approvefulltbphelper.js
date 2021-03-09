@@ -55,15 +55,24 @@ $(document).on('click', '.projectmember', function(e) {
     getUsers($(this).data('id')).then(data => {
         var html =``;
         var html1 =``;
-        data.users.forEach(function (user,index) {
-            html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
-        });
+        if (route.businessplanstatus < 7) {
+          data.users.forEach(function (user,index) {
+              html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
+          });
+        }else{
+          $("#addusermodal").attr("hidden",true);
+        }
+
         data.projectmembers.forEach(function (projectmember,index) {
+          var deleteaction = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>`;
+          if (route.businessplanstatus > 7) {
+            deleteaction ='';
+          }
             html1 += `<tr >                                        
                         <td> ${projectmember.user['name']}</td>                            
                         <td> ${projectmember.user['lastname']} </td>     
                         <td>   
-                            <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>
+                            ${deleteaction}
                         </td>
                     </tr>`
             });
