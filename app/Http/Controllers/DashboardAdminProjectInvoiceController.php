@@ -71,9 +71,7 @@ class DashboardAdminProjectInvoiceController extends Controller
                         base_path('public/assets/dashboard/fonts/'),
                     ]
                 ),
-            [
-                'tempDir' => base_path('public/storage')
-            ],
+            'tempDir' => base_path('public/storage'),
             'fontdata' => $fontData + [
                 'opun' => [
                     'R'  => 'thsarabunnew-webfont.ttf',    
