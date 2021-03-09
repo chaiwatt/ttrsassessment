@@ -116,6 +116,9 @@ class MiniTbpController extends Controller
             'fontDir' => array_merge($fontDirs, [
                 base_path('public/assets/dashboard/fonts/'),
             ]),
+            [
+                'tempDir' => base_path('public/storage')
+            ],
             'fontdata' => $fontData + [
                 'kanit' => [
                     'R'  => 'thsarabunnew-webfont.ttf',    
