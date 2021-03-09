@@ -107,9 +107,7 @@ class DashboardAdminEvaluationResultController extends Controller
                         base_path('public/assets/dashboard/fonts/'),
                     ]
                 ),
-            [
-                'tempDir' => base_path('public/storage')
-            ],
+                'tempDir' => base_path('public/storage'),
             'fontdata' => $fontData + [
                 'kittithada' => [
                     'R'  => 'PSL-Kittithada.ttf',    
