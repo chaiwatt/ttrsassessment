@@ -271,9 +271,9 @@ class MiniTbpController extends Controller
         }
         
         // $mpdf->Output();
-        $path = public_path("storage/uploads/");
-        $randname = str_random(10);
-        $mpdf->Output($path . $randname.'.pdf');
+         $path = public_path("storage/uploads/");
+         $randname = str_random(10);
+         $mpdf->Output($path . $randname.'.pdf');
         return 'storage/uploads/'.$randname.'.pdf' ;
     }
 

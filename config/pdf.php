@@ -29,7 +29,7 @@ return [
                 ]
             ],
 	'auto_language_detection'  => false,
-	'temp_dir'               => base_path('public/storage/'),
+	'temp_dir'               => base_path('public/storage'),
 	'pdfa' 			=> false,
 	'pdfaauto' 		=> false,
 	'justifyB4br' 	=> false,
