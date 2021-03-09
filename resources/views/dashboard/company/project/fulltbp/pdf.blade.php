@@ -152,7 +152,7 @@
                                             <th style="width:25%" style="font-size:13px">ระดับ</th>
                                             <th style="width:35%" style="font-size:13px">ชื่อสถานศึกษา</th>
                                             <th style="width:20%" style="font-size:13px">สาขาวิชาเอก</th>
-                                            <th style="width:20%" style="font-size:13px">ปีที่ศึกษา<pre>(เริ่มต้น-สิ้นสุด)</pre></th>
+                                            <th style="width:20%" style="font-size:13px">ปีที่ศึกษา<pre style="font-family: THSarabunNew">(เริ่มต้น-สิ้นสุด)</pre></th>
                                         <tr>
                                     </thead>
                                     <tbody>
@@ -247,7 +247,7 @@
                                                     <th style="width:25%">ระดับ</th>
                                                     <th style="width:35%">ชื่อสถานศึกษา</th>
                                                     <th style="width:20%">สาขาวิชาเอก</th>
-                                                    <th style="width:20%">ปีที่ศึกษา<pre>(เริ่มต้น-สิ้นสุด)</pre></th>
+                                                    <th style="width:20%">ปีที่ศึกษา<pre style="font-family: THSarabunNew">(เริ่มต้น-สิ้นสุด)</pre></th>
                                                 <tr>
                                             </thead>
                                             <tbody>
@@ -363,7 +363,7 @@
                                                     <th style="width:25%;font-size:13px">ระดับ</th>
                                                     <th style="width:35%;font-size:13px">ชื่อสถานศึกษา</th>
                                                     <th style="width:20%;font-size:13px">สาขาวิชาเอก</th>
-                                                    <th style="width:20%;font-size:13px">ปีที่ศึกษา<pre>(เริ่มต้น-สิ้นสุด)</pre></th>
+                                                    <th style="width:20%;font-size:13px">ปีที่ศึกษา<pre style="font-family: THSarabunNew">(เริ่มต้น-สิ้นสุด)</pre></th>
                                                 <tr>
                                             </thead>
                                             <tbody>
@@ -501,29 +501,29 @@
                                 <tbody>
                                     <tr>
                                         <td style="font-size:13px;padding-top:10px;border-bottom: none !important;">
-                                            <div class="ml5 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer1)) checked="checked" @endif > ได้รับการจดสิทธิบัตรการประดิษฐ์<pre>&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer1_qty}})</pre></div>
+                                            <div class="ml5 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer1)) checked="checked" @endif > ได้รับการจดสิทธิบัตรการประดิษฐ์<pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer1_qty}})</pre></div>
                                            
                                         </td>
                                         <td style="font-size:13px;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer3)) checked="checked" @endif> ได้รับการจดสิทธิบัตรการออกแบบ <pre>&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer3_qty}})</pre> </div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer3)) checked="checked" @endif> ได้รับการจดสิทธิบัตรการออกแบบ <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer3_qty}})</pre> </div>
     
                                         </td>
                                         <td style="font-size:13px;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer5)) checked="checked" @endif> ได้รับการจดอนุสิทธิบัตร <pre>&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer5_qty}})</pre></div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer5)) checked="checked" @endif> ได้รับการจดอนุสิทธิบัตร <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer5_qty}})</pre></div>
                                            
                                         </td> 
                                     </tr>
                                     <tr>
                                         <td style="font-size:13px;border-top: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer2)) checked="checked" @endif> ยื่นจดสิทธิบัตรการประดิษฐ์ <pre>&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer2_qty}})</pre> </div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer2)) checked="checked" @endif> ยื่นจดสิทธิบัตรการประดิษฐ์ <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer2_qty}})</pre> </div>
                                         </td>
                                         <td style="font-size:13px;border-top: none !important;">
                                        
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer4)) checked="checked" @endif> ยื่นจดสิทธิบัตรการออกแบบ <pre>&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer4_qty}})</pre> </div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer4)) checked="checked" @endif> ยื่นจดสิทธิบัตรการออกแบบ <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer4_qty}})</pre> </div>
                                         </td>
                                         <td style="font-size:13px;border-top: none !important;">
                                            
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer6)) checked="checked" @endif> ยื่นจดอนุสิทธิบัตร <pre>&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer6_qty}})</pre></div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer6)) checked="checked" @endif> ยื่นจดอนุสิทธิบัตร <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer6_qty}})</pre></div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -688,11 +688,11 @@
                         <thead>
                             <tr>
                                 <th style="width:30%;font-size:13px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
-                                <th style="width:15%;font-size:13px">จำนวนผลิตภัณฑ์<pre>หรือโครงการ</pre></th> 
-                                <th style="width:15%;font-size:13px">เลขทะเบียน<pre>นิติบุคคล</pre></th>                                                                                    
-                                <th style="width:10%;font-size:13px">ยอดขายต่อปี<pre>(บาท)</pre></th>       
-                                <th style="width:15%;font-size:13px">เปรียบเทียบกับ<pre>ยอดขาย (%)</pre></th>  
-                                <th style="width:15%;font-size:13px">จำนวนปีที่ทำ<pre>ธุรกิจร่วมกัน(ปี)</pre></th> 
+                                <th style="width:15%;font-size:13px">จำนวนผลิตภัณฑ์<pre style="font-family: THSarabunNew">หรือโครงการ</pre></th> 
+                                <th style="width:15%;font-size:13px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
+                                <th style="width:10%;font-size:13px">ยอดขายต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
+                                <th style="width:15%;font-size:13px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดขาย (%)</pre></th>  
+                                <th style="width:15%;font-size:13px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
                             <tr>
                         </thead>
                         <tbody>
@@ -715,10 +715,10 @@
                         <thead>
                             <tr>
                                 <th style="width:30%;font-size:13px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
-                                <th style="width:20%;font-size:13px">เลขทะเบียน<pre>นิติบุคคล</pre></th>                                                                                    
-                                <th style="width:20%;font-size:13px">ยอดซื้อต่อปี<pre>(บาท)</pre></th>       
-                                <th style="width:15%;font-size:13px">เปรียบเทียบกับยอดซื้อ<pre>(%)</pre></th>  
-                                <th style="width:15%;font-size:13px">จำนวนปีที่ทำ<pre>ธุรกิจร่วมกัน(ปี)</pre></th> 
+                                <th style="width:20%;font-size:13px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
+                                <th style="width:20%;font-size:13px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
+                                <th style="width:15%;font-size:13px">เปรียบเทียบกับยอดซื้อ<pre style="font-family: THSarabunNew">(%)</pre></th>  
+                                <th style="width:15%;font-size:13px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
                             <tr>
                         </thead>
                         <tbody>
@@ -747,9 +747,9 @@
                             <thead>
                                 <tr>
                                     <th style="width:30%;font-size:13px">รายการ</th>  
-                                    <th style="width:15%;font-size:13px">จำนวนเงิน <pre>(บาท)</pre></th>                                                                                    
+                                    <th style="width:15%;font-size:13px">จำนวนเงิน <pre style="font-family: THSarabunNew">(บาท)</pre></th>                                                                                    
                                     <th style="width:15%;font-size:13px">จำนวน(ชิ้น)</th>       
-                                    <th style="width:15%;font-size:13px">ราคาต่อเครื่อง<pre>(บาท)</pre></th>  
+                                    <th style="width:15%;font-size:13px">ราคาต่อเครื่อง<pre style="font-family: THSarabunNew">(บาท)</pre></th>  
                                     <th style="width:25%;font-size:13px">ข้อมูลจำเพาะทางเทคนิค</th> 
                                 <tr>
                             </thead>
@@ -806,9 +806,9 @@
                             <tr>
                                 <th style="width:30%;font-size:13px">รายการ</th>  
                                 <th style="width:15%;font-size:13px">เงินทุนที่มีอยู่แล้ว</th>                                                                                    
-                                <th style="width:15%;font-size:13px">เงินทุนที่เสนอ<pre>ขออนุมัติ</pre> </th>   
-                                <th style="width:15%;font-size:13px">เงินทุนที่ได้รับ<pre>การอนุมัติแล้ว</pre></th>   
-                                <th style="width:25%;font-size:13px">แผนการหา <pre>เงินทุนเพิ่ม</pre></th>   
+                                <th style="width:15%;font-size:13px">เงินทุนที่เสนอ<pre style="font-family: THSarabunNew">ขออนุมัติ</pre> </th>   
+                                <th style="width:15%;font-size:13px">เงินทุนที่ได้รับ<pre style="font-family: THSarabunNew">การอนุมัติแล้ว</pre></th>   
+                                <th style="width:25%;font-size:13px">แผนการหา <pre style="font-family: THSarabunNew">เงินทุนเพิ่ม</pre></th>   
                             <tr>
                         </thead>
                         <tbody>
