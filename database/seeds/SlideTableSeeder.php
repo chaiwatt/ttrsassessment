@@ -22,7 +22,7 @@ class SlideTableSeeder extends Seeder
                 // 'textthree' => 'เพิ่มเติม',
                 // 'textengthree' => 'Read More',
                 'name' => 'slide1.png',
-                'file' => '/assets/landing/img/slides/slide01.png',
+                'file' => '/assets/landing/img/slides/sl1.png',
             ],
             [
                 // 'slide_status_id' => 1,
@@ -34,7 +34,7 @@ class SlideTableSeeder extends Seeder
                 // 'textthree' => 'เพิ่มเติม',
                 // 'textengthree' => 'Read More',
                 'name' => 'slide2.png',
-                'file' => '/assets/landing/img/slides/slide02.png',
+                'file' => '/assets/landing/img/slides/sl2.png',
             ]
         ]);
     }
