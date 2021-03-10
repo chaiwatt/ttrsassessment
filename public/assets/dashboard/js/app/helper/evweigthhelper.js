@@ -429,16 +429,30 @@ function updateEvAdminStatus(id,value){
     }); 
 
     $(document).on('click', '#approveevstagetwo', function(e) {
-        $("#spinicon").attr("hidden",false);
-        Ev.approveEvStageTwo($(this).data('id')).then(data => {
-            $("#spinicon").attr("hidden",true);
-            Swal.fire({
-                title: 'สำเร็จ...',
-                text: 'EV ได้รับการอนุมัติแล้ว',
+        Swal.fire({
+            title: 'อนุมัติ EV!',
+            text: `ต้องการอนุมัติ EV หรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
             }).then((result) => {
-                window.location.reload();
-            });
-        }).catch(error => {})
+            if (result.value) {
+                $("#spinicon").attr("hidden",false);
+                Ev.approveEvStageTwo($(this).data('id')).then(data => {
+                    $("#spinicon").attr("hidden",true);
+                    Swal.fire({
+                        title: 'สำเร็จ...',
+                        text: 'EV ได้รับการอนุมัติแล้ว',
+                    }).then((result) => {
+                        window.location.reload();
+                    });
+                }).catch(error => {})
+            }
+        });
     });
     var submitbutton = false;
 

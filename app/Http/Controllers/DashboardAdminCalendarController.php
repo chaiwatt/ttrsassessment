@@ -121,7 +121,7 @@ class DashboardAdminCalendarController extends Controller
           '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
           '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
           '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-          '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
+          '<br><br>ด้วยความนับถือ<br>TTRS' ,Auth::user()->id,$_user->id);
 
           $alertmessage = new AlertMessage();
           $alertmessage->user_id = $auth->id;
@@ -252,7 +252,7 @@ class DashboardAdminCalendarController extends Controller
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
+        '<br><br>ด้วยความนับถือ<br>TTRS' ,Auth::user()->id,$_user->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
@@ -292,7 +292,7 @@ class DashboardAdminCalendarController extends Controller
             '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
             '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
             '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-            '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
+            '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
         }
     
     }
@@ -325,7 +325,7 @@ class DashboardAdminCalendarController extends Controller
         '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$eventcalendar->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
-        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature(),Auth::user()->id,$_user->id);
+        '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
     }
     return redirect()->route('dashboard.admin.calendar')->withSuccess('ลบการสำเร็จ');
 

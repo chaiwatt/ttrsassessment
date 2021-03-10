@@ -107,7 +107,7 @@
                     <div class="ml20 mt0" style="font-size:13px">1.2 เลขทะเบียนนิติบุคคล : {{$fulltbp->minitbp->businessplan->company->vatno}} </div> 
                     <div class="ml20 mt0" style="font-size:13px">1.3 ปีที่จดทะเบียน : พ.ศ. {{Empty($fulltbp->minitbp->businessplan->company->registeredyear) ? '-' : $fulltbp->minitbp->businessplan->company->registeredyear}}</div>
                     <div class="ml20 mt0" style="font-size:13px">1.4 ทุนจดทะเบียน : {{number_format($fulltbp->minitbp->businessplan->company->registeredcapital,2)}} บาท</div>
-                    <div class="ml20 mt0" style="font-size:13px">1.5 ทุนจดทะเบียนที่เรียกชำระแล้ว: : {{number_format($fulltbp->minitbp->businessplan->company->paidupcapital,2)}} บาท เมื่อวันที่:	{{Empty($fulltbp->minitbp->businessplan->company->paidupcapitaldate) ? '-' : $fulltbp->minitbp->businessplan->company->paidupcapitaldate}}</div>
+                    <div class="ml20 mt0" style="font-size:13px">1.5 ทุนจดทะเบียนที่เรียกชำระแล้ว: : {{number_format($fulltbp->minitbp->businessplan->company->paidupcapital,2)}} บาท เมื่อวันที่:	{{Empty($fulltbp->minitbp->businessplan->company->paidupcapitaldate) ? '-' : $fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}</div>
                     <div class="ml20 mt0" style="font-size:13px">1.6 แผนผังองค์กร (Organization Chart)	
                         <div class="box bw500 bh300 border borderdotted mt5 ml70 mb20 center">
                             <img src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" class="bw500 bh300" alt="">
@@ -226,6 +226,7 @@
                         @endif
                     </div>
                     <div class="ml20 mt20" style="font-size:13px"><strong>1.11 ข้อมูลทีมบริหาร (CTO, CFO, COO, และ CMO)</strong>
+                        {{-- {{$companyboards}} --}}
                         @if ($companyboards->count() > 0)
                             @foreach ($companyboards as $key => $companyemboard)
                             <div style="page-break-inside: avoid;">
@@ -701,7 +702,7 @@
                                     <tr>
                                         <td style="font-size:13px"> {{$fulltbpdebtpartner->debtpartner}}</td> 
                                         <td style="font-size:13px"> {{$fulltbpdebtpartner->numproject}} </td> 
-                                        <td style="font-size:13px"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
+                                        <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->totalyearsell,2)}}</td>                                            															
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->percenttosale,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->businessyear,2)}}</td> 
@@ -726,7 +727,7 @@
                                 @foreach ($fulltbp->fulltbpcreditpartner as $fulltbpcreditpartner)
                                     <tr>
                                         <td style="font-size:13px"> {{$fulltbpcreditpartner->creditpartner}}</td> 
-                                        <td style="font-size:13px"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+                                        <td style="font-size:13px;text-align: right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->totalyearpurchase,2)}}</td>                                            															
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->percenttopurchase,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->businessyear,2)}}</td> 
@@ -740,7 +741,7 @@
                     <div class="box bw650  mt20 " style="background-color: #bdd6ee;">
                         <div style="font-size:13px"><strong>4. ข้อมูลทางด้านการเงิน</strong></div>
                     </div>
-                    <div class="box bw650  mt20" >
+                    <div class="box bw650  mt20" style="page-break-inside: avoid;">
                         <div class="ml30 " style="font-size:13px"><strong>4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินลงทุนทั้งหมดของโครงการ</strong></div>
                         <div style="font-size:13px"><strong>เงินลงทุนในสินทรัพย์ถาวรของโครงการ</strong></div>
                         <table class="mt0  border tbwrap">
@@ -759,9 +760,9 @@
                                         <tr>
                                             <td style="font-size:13px"> {{$fulltbpasset->asset}}</td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpasset->cost,2)}}</td> 
-                                            <td style="font-size:13px"> {{$fulltbpasset->quantity}}</td>                                            															
+                                            <td style="font-size:13px;text-align: right"> {{$fulltbpasset->quantity}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpasset->price,2)}}</td> 
-                                            <td style="font-size:13px"> {{$fulltbpasset->businessyear}}</td> 
+                                            <td style="font-size:13px"> {{$fulltbpasset->specification}}</td> 
                                         </tr>   
                                     @endforeach
                                     <tr>
@@ -777,65 +778,70 @@
                     </div>
                 </div>
                 <div class="box bw650  mt20" >
-                    <div  class="mt10" style="font-size:13px"><strong>เงินลงทุนสำหรับดำเนินการของโครงการ</strong></div>
-                    <table class="mt0  border tbwrap">
-                        <thead>
-                            <tr>
-                                <th style="width:80%;font-size:13px">รายการ</th>  
-                                <th style="width:20%;font-size:13px">จำนวนเงิน (บาท)</th>  
-                            <tr>
-                        </thead>
-                        <tbody>
-                            @if ($fulltbp->fulltbpinvestment->count() > 0)
-                                @foreach ($fulltbp->fulltbpinvestment as $fulltbpinvestment)
-                                    <tr>
-                                        <td style="font-size:13px"> {{$fulltbpinvestment->investment}}</td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpinvestment->cost,2)}}</td> 
-                                    </tr>   
-                                @endforeach
+                    <div  class="mt10" style="font-size:13px;page-break-inside: avoid;"><strong>เงินลงทุนสำหรับดำเนินการของโครงการ</strong>
+                        <table class="mt0  border tbwrap">
+                            <thead>
                                 <tr>
-                                    <td class="center" style="font-size:13px"><strong>รวม</strong> </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpinvestment->sum('cost'),2)}} </td> 
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
-                    <div  class="mt10" style="font-size:13px"><strong>แหล่งเงินทุนของโครงการ</strong></div>
-                    <table class="mt0  border">
-                        <thead>
-                            <tr>
-                                <th style="width:30%;font-size:13px">รายการ</th>  
-                                <th style="width:15%;font-size:13px">เงินทุนที่มีอยู่แล้ว</th>                                                                                    
-                                <th style="width:15%;font-size:13px">เงินทุนที่เสนอ<pre style="font-family: THSarabunNew">ขออนุมัติ</pre> </th>   
-                                <th style="width:15%;font-size:13px">เงินทุนที่ได้รับ<pre style="font-family: THSarabunNew">การอนุมัติแล้ว</pre></th>   
-                                <th style="width:25%;font-size:13px">แผนการหา <pre style="font-family: THSarabunNew">เงินทุนเพิ่ม</pre></th>   
-                            <tr>
-                        </thead>
-                        <tbody>
-                            @if ($fulltbp->fulltbpcost->count() > 0)
-                                @foreach ($fulltbp->fulltbpcost as $fulltbpcost)
-                                    <tr>
-                                        <td style="font-size:13px"> {{$fulltbpcost->costname}}</td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->existing,2)}}</td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->need,2)}}</td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->approved,2)}}</td> 
-                                        <td style="font-size:13px"> {{$fulltbpcost->plan}}</td>
-                                    </tr>   
-                                @endforeach
+                                    <th style="width:80%;font-size:13px">รายการ</th>  
+                                    <th style="width:20%;font-size:13px">จำนวนเงิน (บาท)</th>  
                                 <tr>
-                                    <td class="center" style="font-size:13px"><strong>รวม</strong> </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('existing'),2)}} </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('need'),2)}} </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('approved'),2)}} </td> 
-                                    <td style="font-size:13px"> </td> 
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
-                    <div class="ml30 mt20" style="font-size:13px"><strong>4.2 ประมาณการผลตอบแทนจากการลงทุน </strong></div>
-                    <div class="ml30" style="font-size:13px">- ประมาณการรายได้ที่จะเพิ่มขึ้น  {{number_format($fulltbp->fulltbpreturnofinvestment->income,2)}} บาท</div>
-                    <div class="ml30" style="font-size:13px">- ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น {{number_format($fulltbp->fulltbpreturnofinvestment->profit,2)}} บาท</div>
-                    <div class="ml30" style="font-size:13px">- ประมาณการต้นทุนที่จะลดลง {{number_format($fulltbp->fulltbpreturnofinvestment->reduce,2)}} บาท</div>
+                            </thead>
+                            <tbody>
+                                @if ($fulltbp->fulltbpinvestment->count() > 0)
+                                    @foreach ($fulltbp->fulltbpinvestment as $fulltbpinvestment)
+                                        <tr>
+                                            <td style="font-size:13px"> {{$fulltbpinvestment->investment}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpinvestment->cost,2)}}</td> 
+                                        </tr>   
+                                    @endforeach
+                                    <tr>
+                                        <td class="center" style="font-size:13px"><strong>รวม</strong> </td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpinvestment->sum('cost'),2)}} </td> 
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <div  class="mt10" style="font-size:13px;page-break-inside: avoid;"><strong>แหล่งเงินทุนของโครงการ</strong>
+                        <table class="mt0  border">
+                            <thead>
+                                <tr>
+                                    <th style="width:30%;font-size:13px">รายการ</th>  
+                                    <th style="width:15%;font-size:13px">เงินทุนที่มีอยู่แล้ว</th>                                                                                    
+                                    <th style="width:15%;font-size:13px">เงินทุนที่เสนอ<pre style="font-family: THSarabunNew">ขออนุมัติ</pre> </th>   
+                                    <th style="width:15%;font-size:13px">เงินทุนที่ได้รับ<pre style="font-family: THSarabunNew">การอนุมัติแล้ว</pre></th>   
+                                    <th style="width:25%;font-size:13px">แผนการหา <pre style="font-family: THSarabunNew">เงินทุนเพิ่ม</pre></th>   
+                                <tr>
+                            </thead>
+                            <tbody>
+                                @if ($fulltbp->fulltbpcost->count() > 0)
+                                    @foreach ($fulltbp->fulltbpcost as $fulltbpcost)
+                                        <tr>
+                                            <td style="font-size:13px"> {{$fulltbpcost->costname}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->existing,2)}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->need,2)}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->approved,2)}}</td> 
+                                            <td style="font-size:13px"> {{$fulltbpcost->plan}}</td>
+                                        </tr>   
+                                    @endforeach
+                                    <tr>
+                                        <td class="center" style="font-size:13px"><strong>รวม</strong> </td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('existing'),2)}} </td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('need'),2)}} </td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('approved'),2)}} </td> 
+                                        <td style="font-size:13px"> </td> 
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="page-break-inside: avoid;">
+                        <div class="ml30 mt20" style="font-size:13px"><strong>4.2 ประมาณการผลตอบแทนจากการลงทุน </strong></div>
+                        <div class="ml30" style="font-size:13px">- ประมาณการรายได้ที่จะเพิ่มขึ้น  {{number_format($fulltbp->fulltbpreturnofinvestment->income,2)}} บาท</div>
+                        <div class="ml30" style="font-size:13px">- ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น {{number_format($fulltbp->fulltbpreturnofinvestment->profit,2)}} บาท</div>
+                        <div class="ml30" style="font-size:13px">- ประมาณการต้นทุนที่จะลดลง {{number_format($fulltbp->fulltbpreturnofinvestment->reduce,2)}} บาท</div>
+                    </div>
+
                 </div>
         </div>
         <div class="box ml50 bw650  mt20 " style="page-break-inside: avoid;">

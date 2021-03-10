@@ -132,6 +132,7 @@ class DashboardAdminReportController extends Controller
         $projectgradecollections = collect($projectgrades);
         $projectindustrycollections = collect($projectindustrys);
         $objecttivecollections = collect($objectives);
+     
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
                                                 ->withAlertmessages($alertmessages)

@@ -37,6 +37,11 @@ class DashboardAdminProjectEvWeightController extends Controller
     }
 
     public function Edit($id){
+        $auth = Auth::user();
+        NotificationBubble::where('target_user_id',$auth->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',6)
+                        ->where('status',0)->delete();
         $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',2)->get();
         $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('stage',2)->get();
         $ev = Ev::find($id);

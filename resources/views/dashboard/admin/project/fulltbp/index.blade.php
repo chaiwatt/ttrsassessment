@@ -252,7 +252,7 @@
                                         <th>ผู้เชี่ยวชาญ</th> 
                                         <th>EV</th> 
                                         <th>BOL</th> 
-                                        <th>ลงพื้นที่</th> 
+                                        <th>สถานะ</th> 
                                         <th>ทีมประเมิน</th>
                                         {{-- <th style="width: 20px"><i class="icon-arrow-down12"></i></th>  --}}
                                                                   
@@ -355,22 +355,36 @@
                                                 </td>  
                                                 <td>
                                                     @if (!Empty($fulltbp->assessmentdate))
-                                                        @if ($fulltbp->finished_onsite == 1)
-                                                                <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยันการลงพื้นที่</button>
-                                                            @else
-                                                                <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
-                                                        @endif
-                                                       @else
-                                                       @if (Auth::user()->user_type_id == 4)
-                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
-                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                            @if ($fulltbp->finished_onsite == 1)
+                                                                    <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยันการลงพื้นที่</button>
                                                                 @else
-                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id}} --}}
+
+                                                                @if (Auth::user()->user_type_id == 4)
+                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
+                                                                                <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                                                            @elseif($fulltbp->minitbp->businessplan->business_plan_status_id == 7) 
+                                                                                <span class="badge badge-flat border-info text-info-600">ลงคะแนนการประเมิน</span>
+                                                                        @endif
+
+                                                                    @else
+                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
+                                                                                <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
+                                                                            @elseif($fulltbp->minitbp->businessplan->business_plan_status_id == 7) 
+                                                                                <span class="badge badge-flat border-info text-info-600">ลงคะแนนการประเมิน</span>
+                                                                        @endif
+                                                                @endif 
                                                             @endif
-                                                           @else
-                                                                <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
-                                                       @endif
-                                                        
+                                                       @else
+                                                            @if (Auth::user()->user_type_id == 4)
+                                                                    @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
+                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                                        @else
+                                                                            <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                    @endif
+                                                                @else
+                                                                        <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                            @endif
                                                     @endif
                                                    
                                                 </td>

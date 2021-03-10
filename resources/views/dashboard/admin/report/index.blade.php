@@ -318,44 +318,47 @@
                                 <tbody>
                                     
                                     @foreach ($fulltbps as $fulltbp)
-                                        @php
-                                            $check = Auth::user()->IsExpert($fulltbp->id);
-                                        @endphp
-                                        <tr> 
-                                            <td>
-                                                @if (Empty($fulltbp->expertassignment))
-                                                        <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                        <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
-                                                    @else
-                                                        @if ($fulltbp->expertassignment->accepted == 1)
+                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 2)
+                                            @php
+                                                $check = Auth::user()->IsExpert($fulltbp->id);
+                                            @endphp
+                                            <tr> 
+                                                <td>
+                                                    @if (Empty($fulltbp->expertassignment))
                                                             <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                             <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                         @else
-                                                            {{$fulltbp->minitbp->project}}
-                                                        @endif
-                                                @endif          
-                                            </td>  
-                                            <td> 
-                                                @if ($fulltbp->status == 3)
-                                                        <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                                    @else
-                                                    <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                                @endif
-                                            </td>  
-                                            <td> {{$fulltbp->briefingdate}} </td>  
-                                            <td> {{$fulltbp->assessmentdate}} </td>  
-                                            <td> {{$fulltbp->finalassessmentdate}} </td>  
-                                            <td> 
-                                                @if (!Empty($check))
-                                                    @if ($fulltbp->expertassignment->accepted == 0)
-                                                            <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
-                                                            <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
-                                                        @elseif($fulltbp->expertassignment->accepted == 2)
-                                                            <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                            @if ($fulltbp->expertassignment->accepted == 1)
+                                                                <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
+                                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                            @else
+                                                                {{$fulltbp->minitbp->project}}
+                                                            @endif
+                                                    @endif          
+                                                </td>  
+                                                <td> 
+                                                    @if ($fulltbp->status == 3)
+                                                            <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                                        @else
+                                                        <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                     @endif
-                                                @endif
-                                            </td> 
-                                        </tr>
+                                                </td>  
+                                                <td> {{$fulltbp->briefingdate}} </td>  
+                                                <td> {{$fulltbp->assessmentdate}} </td>  
+                                                <td> {{$fulltbp->finalassessmentdate}} </td>  
+                                                <td> 
+                                                    @if (!Empty($check))
+                                                        @if ($fulltbp->expertassignment->accepted == 0)
+                                                                <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
+                                                                <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
+                                                            @elseif($fulltbp->expertassignment->accepted == 2)
+                                                                <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                        @endif
+                                                    @endif
+                                                </td> 
+                                            </tr>
+                                        @endif
+ 
                                     @endforeach
                                 </tbody>
                             </table>      

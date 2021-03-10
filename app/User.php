@@ -130,6 +130,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $count;
     }
 
+    public function isProjectLeader($fulltbpid)
+    {
+        $count = ProjectAssignment::where('leader_id',Auth::user()->id)->where('full_tbp_id',$fulltbpid)->first();
+        if(!Empty($count)){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+
     public function isProjectmember()
     {
         $count = ProjectMember::where('user_id',Auth::user()->id)->count();

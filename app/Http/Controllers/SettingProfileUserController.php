@@ -275,7 +275,7 @@ class SettingProfileUserController extends Controller
                 $fulltbpreturnofinvestment = new FullTbpReturnOfInvestment();
                 $fulltbpreturnofinvestment->full_tbp_id = $fulltbp->id;
                 $fulltbpreturnofinvestment->save();
-                return redirect()->route('dashboard.company.project.minitbp.edit',['id'=>$minitbp->id])->withSuccess('บันทึกข้อมูลสำเร็จ สามารถกรอกแบบคำขอรับบริการประเมินในลำดับต่อไปได้'); 
+                return redirect()->route('dashboard.company.project.minitbp.edit',['id'=>$minitbp->id])->withSuccess('บันทึกข้อมูลสำเร็จ กรุณากรอกแบบคำขอเพื่อขอรับการประเมินธุรกิจ'); 
         }else{
             if($request->status == 1){
                 $businessplan->where('company_id',$company->id)->first()->update([

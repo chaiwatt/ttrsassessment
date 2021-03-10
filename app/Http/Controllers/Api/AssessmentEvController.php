@@ -440,13 +440,13 @@ class AssessmentEvController extends Controller
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
 
-        $notificationbubble = new NotificationBubble();
-        $notificationbubble->business_plan_id = $businessplan->id;
-        $notificationbubble->notification_category_id = 1;
-        $notificationbubble->notification_sub_category_id = 6;
-        $notificationbubble->user_id = $auth->id;
-        $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
-        $notificationbubble->save();
+        // $notificationbubble = new NotificationBubble();
+        // $notificationbubble->business_plan_id = $businessplan->id;
+        // $notificationbubble->notification_category_id = 1;
+        // $notificationbubble->notification_sub_category_id = 6;
+        // $notificationbubble->user_id = $auth->id;
+        // $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
+        // $notificationbubble->save();
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
@@ -476,13 +476,13 @@ class AssessmentEvController extends Controller
             $businessplan = BusinessPlan::find($minitbp->business_plan_id);
 
             foreach ($projectsmembers as $key => $projectsmember) {
-                $notificationbubble = new NotificationBubble();
-                $notificationbubble->business_plan_id = $businessplan->id;
-                $notificationbubble->notification_category_id = 1;
-                $notificationbubble->notification_sub_category_id = 6;
-                $notificationbubble->user_id = $auth->id;
-                $notificationbubble->target_user_id = $projectsmember->user_id;
-                $notificationbubble->save();
+                // $notificationbubble = new NotificationBubble();
+                // $notificationbubble->business_plan_id = $businessplan->id;
+                // $notificationbubble->notification_category_id = 1;
+                // $notificationbubble->notification_sub_category_id = 6;
+                // $notificationbubble->user_id = $auth->id;
+                // $notificationbubble->target_user_id = $projectsmember->user_id;
+                // $notificationbubble->save();
 
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
@@ -495,13 +495,13 @@ class AssessmentEvController extends Controller
             }
 
             $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
-            $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = $businessplan->id;
-            $notificationbubble->notification_category_id = 1;
-            $notificationbubble->notification_sub_category_id = 6;
-            $notificationbubble->user_id = $auth->id;
-            $notificationbubble->target_user_id = $projectassignment->leader_id;
-            $notificationbubble->save();
+            // $notificationbubble = new NotificationBubble();
+            // $notificationbubble->business_plan_id = $businessplan->id;
+            // $notificationbubble->notification_category_id = 1;
+            // $notificationbubble->notification_sub_category_id = 6;
+            // $notificationbubble->user_id = $auth->id;
+            // $notificationbubble->target_user_id = $projectassignment->leader_id;
+            // $notificationbubble->save();
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -568,22 +568,22 @@ class AssessmentEvController extends Controller
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
 
-        $notificationbubble = new NotificationBubble();
-        $notificationbubble->business_plan_id = $businessplan->id;
-        $notificationbubble->notification_category_id = 1;
-        $notificationbubble->notification_sub_category_id = 6;
-        $notificationbubble->user_id = $auth->id;
-        $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
-        $notificationbubble->save();
+        // $notificationbubble = new NotificationBubble();
+        // $notificationbubble->business_plan_id = $businessplan->id;
+        // $notificationbubble->notification_category_id = 1;
+        // $notificationbubble->notification_sub_category_id = 6;
+        // $notificationbubble->user_id = $auth->id;
+        // $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
+        // $notificationbubble->save();
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' มีการแก้ไข Ev ของโครงการ ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a> ';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' Admin ได้กำหนด weight ของโครงการ ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a> ';
         $alertmessage->save();
 
-        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br><br> Admin ได้แก้ไข EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        Message::sendMessage('ตรวจสอบ EV','Admin ได้แก้ไข EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br><br> Admin ได้กำหนด weight ของโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        Message::sendMessage('ตรวจสอบ EV','Admin ได้กำหนด weight ของโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
 
         return response()->json($ev);  
     }
@@ -706,7 +706,7 @@ class AssessmentEvController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =$projectsmember->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). 'ให้แก้ไข EV ของโครงการ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a> ';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ให้แก้ไข EV ของโครงการ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a> ';
             $alertmessage->save();
 
             EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แก้ไข EV','เรียน Admin<br> JD ได้ตรวจ EV สำหรับโครงการ '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
@@ -732,13 +732,13 @@ class AssessmentEvController extends Controller
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $company = Company::find($businessplan->company_id);
         foreach ($projectsmembers as $key => $projectsmember) {
-            $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = $businessplan->id;
-            $notificationbubble->notification_category_id = 1;
-            $notificationbubble->notification_sub_category_id = 6;
-            $notificationbubble->user_id = $auth->id;
-            $notificationbubble->target_user_id = $projectsmember->user_id;
-            $notificationbubble->save();
+            // $notificationbubble = new NotificationBubble();
+            // $notificationbubble->business_plan_id = $businessplan->id;
+            // $notificationbubble->notification_category_id = 1;
+            // $notificationbubble->notification_sub_category_id = 6;
+            // $notificationbubble->user_id = $auth->id;
+            // $notificationbubble->target_user_id = $projectsmember->user_id;
+            // $notificationbubble->save();
             
             $messagebox = Message::sendMessage('EV โครงการ' . $minitbp->project.' บริษัท' . $company->name .' ผ่านการอนุมัติ','JD ได้อนุมัติ EV โครงการ' . $minitbp->project.' บริษัท' . $company->name .' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectsmember->user_id);
             $alertmessage = new AlertMessage();

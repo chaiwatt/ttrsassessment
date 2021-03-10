@@ -64,38 +64,44 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                    {{$fulltbp->finalassessmentdate}}
-                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
-                                            <tr>    
-                                                <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                                <td> {{$fulltbp->minitbp->project}} </td>  
-                                                <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                                <td> 
-                                                    @if (!Empty($fulltbp->finalassessmentdate))
-                                                            @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
-                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>
-                                                                @else
-                                                                    <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
-                                                            @endif
-                                                        @else
-                                                        @if ($fulltbp->finished_onsite == 0)
-                                                            <span class="badge badge-flat border-warning text-warning-600">รอ Leader ยืนยันลงพื้นที่</span>
-                                                        @else
-                                                            
-                                                            @if (Auth::user()->user_type_id == 4)
-                                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
-                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                        @if ($fulltbp->finished_onsite != 1)
+                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
+                                                <tr>    
+                                                    <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                    <td> {{$fulltbp->minitbp->project}} </td>  
+                                                    <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                                    <td> 
+                                                        @if (!Empty($fulltbp->finalassessmentdate))
+                                                                @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
+                                                                        <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>
+                                                                    @else
+                                                                        <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
                                                                 @endif
-                                                                    
-                                                                @else
-                                                                    <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
-                                                            @endif
+                                                            @else
+                                                            @if ($fulltbp->finished_onsite == 0)
+                                                                <span class="badge badge-flat border-warning text-warning-600">รอ Leader ยืนยันลงพื้นที่</span>
+                                                            @else
+                                                                
+                                                                @if (Auth::user()->user_type_id == 4)
+                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
+                                                                            @if (Auth::user()->isProjectLeader($fulltbp->id) == 0)
+                                                                                <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
+                                                                                @else
+                                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                                                            @endif
+                                                                            
+                                                                        @endif
+                                                                    @else
+                                                                        <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
+                                                                @endif
 
-                                                        @endif        
-                                                    @endif
-                                                </td>                                
-                                            </tr>
+                                                            @endif        
+                                                        @endif
+                                                    </td>                                
+                                                </tr>
+                                            @endif
                                         @endif
+
                                     @endforeach
                                 </tbody>
                             </table>      
