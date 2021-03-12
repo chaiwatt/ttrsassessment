@@ -72,7 +72,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($invoicetransactions as $key => $invoicetransaction)
-                                        @if (Auth::user()->isProjectLeader($$invoicetransaction->company->businessplan->minitbp->fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
+                                        @if (Auth::user()->isProjectLeader($invoicetransaction->company->businessplan->minitbp->fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                             <tr>    
                                                 <td> {{$invoicetransaction->issuedateth}} </td>  
                                                 <td> {{$invoicetransaction->company->name}} </td> 
