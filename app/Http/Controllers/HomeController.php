@@ -24,9 +24,11 @@ use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
 use App\Model\AnnounceCategory;
 use App\Model\AnnounceAttachment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 
 
@@ -323,6 +325,16 @@ class HomeController extends Controller
         $faqs =  Faq::where('status',1)->orderBy('id','desc')->get();
         return view('landing.faq')->withFaqs($faqs);
     }
+
+    public function Test(){
+        // $columns = Schema::getColumnListing('full_tbps');
+        // return $columns;
+        $tableColumnInfos = DB::select('SHOW FULL COLUMNS FROM business_plans');
+            foreach ($tableColumnInfos as $tableColumnInfo) {
+            echo $tableColumnInfo->Field . ' ' . $tableColumnInfo->Comment . '<br>'; 
+        }
+    }
+
 }
 
 
