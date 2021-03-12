@@ -83,7 +83,7 @@
                                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">เขียนบทวิเคราะห์</a>
                                                         @endif  
                                                         
-                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">บทวิเคราะห์ (PDF)</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a>
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
                                                             <div class="dropdown-menu dropdown-menu-right">
@@ -98,7 +98,7 @@
                                                                         <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
                                                                     @elseif($fulltbp->projectstatustransaction(7)->status == 1)
                                                                     @if (Auth::user()->user_type_id == 4)
-                                                                            <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมายแจ้งผล</button>
+                                                                            <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button>
                                                                     @else 
                                                                             {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
                                                                             <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>

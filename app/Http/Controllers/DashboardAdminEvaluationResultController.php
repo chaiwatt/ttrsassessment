@@ -71,7 +71,7 @@ class DashboardAdminEvaluationResultController extends Controller
             'marketability' => $request->marketability,
             'businessprospect' => $request->businessprospect
         ]);
-        return redirect()->back()->withSuccess('แก้ไขข้อมูลการแจ้งผลสำเร็จ');
+        return redirect()->route('dashboard.admin.evaluationresult')->withSuccess('เพิ่มบทวิเคราะห์สำเร็จ');
     }
 
     public function Pdf($id){
