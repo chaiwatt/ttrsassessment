@@ -73,53 +73,55 @@
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8)
-                                            <tr>    
-                                                <td> {{$fulltbp->minitbp->project}} </td> 
-                                                <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
-                                                <td> {{@$fulltbp->projectgrade->grade}} </td> 
-                                                <td> 
-                                                    @if(@$fulltbp->projectstatustransaction(8)->status != 2)
-                                                        <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียด</a>
-                                                    @endif  
-                                                     
-                                                    <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
-                                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item"><i class="icon-download"></i> ดาวน์โหลด</a>
+                                            @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
+                                                <tr>    
+                                                    <td> {{$fulltbp->minitbp->project}} </td> 
+                                                    <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
+                                                    <td> {{@$fulltbp->projectgrade->grade}} </td> 
+                                                    <td> 
+                                                        @if(@$fulltbp->projectstatustransaction(8)->status != 2)
+                                                            <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียด</a>
+                                                        @endif  
+                                                        
+                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
+                                                                <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item"><i class="icon-download"></i> ดาวน์โหลด</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td> 
-                                                <td>
-                                                    @if (!Empty($fulltbp->projectstatustransaction(7)))
-                                                            @if ($fulltbp->projectstatustransaction(7)->status == 2)  
-                                                                    <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
-                                                                @elseif($fulltbp->projectstatustransaction(7)->status == 1)
-                                                                @if (Auth::user()->user_type_id == 4)
-                                                                        <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมายแจ้งผล</button>
-                                                                   @else 
-                                                                        {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
-                                                                        <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>
-                                                                @endif
-                                                                   
-                                                            @endif  
-                                                        @else
-                                                            <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
-                                                    @endif
-                                                </td>
-                                                <td> 
-                                                    @if (!Empty($fulltbp->projectstatustransaction(8)))
-                                                            @if ($fulltbp->projectstatustransaction(8)->status == 2)
-                                                                    <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
-                                                                @elseif($fulltbp->projectstatustransaction(8)->status == 1)
-                                                                    <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-warning">สิ้นสุดโครงการ</a>
-                                                            @endif  
-                                                        @else
-                                                            <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
-                                                    @endif
-                                                </td> 
-                                        </tr>
+                                                    </td> 
+                                                    <td>
+                                                        @if (!Empty($fulltbp->projectstatustransaction(7)))
+                                                                @if ($fulltbp->projectstatustransaction(7)->status == 2)  
+                                                                        <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
+                                                                    @elseif($fulltbp->projectstatustransaction(7)->status == 1)
+                                                                    @if (Auth::user()->user_type_id == 4)
+                                                                            <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมายแจ้งผล</button>
+                                                                    @else 
+                                                                            {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
+                                                                            <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>
+                                                                    @endif
+                                                                    
+                                                                @endif  
+                                                            @else
+                                                                <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
+                                                        @endif
+                                                    </td>
+                                                    <td> 
+                                                        @if (!Empty($fulltbp->projectstatustransaction(8)))
+                                                                @if ($fulltbp->projectstatustransaction(8)->status == 2)
+                                                                        <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
+                                                                    @elseif($fulltbp->projectstatustransaction(8)->status == 1)
+                                                                        <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-warning">สิ้นสุดโครงการ</a>
+                                                                @endif  
+                                                            @else
+                                                                <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
+                                                        @endif
+                                                    </td> 
+                                            </tr>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </tbody>
