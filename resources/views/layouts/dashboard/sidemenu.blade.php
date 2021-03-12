@@ -10,7 +10,11 @@
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">รายงาน</a></li>
         @if (Auth::user()->expertdetail->expert_type_id == 1)
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>								
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a></li>								
         @endif
     </ul>
     </li>
@@ -43,7 +47,11 @@
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
             </a></li> 
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้</a></li>	
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
+                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+            @endif
+            </a></li>	
             <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
@@ -61,11 +69,19 @@
                     @endif
                 </a></li>	
             @endif
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน</a></li>	 
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a></li>	 
         @endif
 
         @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0)
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้</a></li>	
+            <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้
+                @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a></li>	
             <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
@@ -162,12 +178,13 @@
                             @endif
                         </a></li>
                     @endif
+                    @if (Auth::user()->company->businessplan->business_plan_status_id >= 8)
                         <li class="nav-item"><a href="{{route('dashboard.company.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">ใบแจ้งหนี้
                             @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
                                 <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                             @endif
                         </a></li>
-
+                    @endif
                 @endif
             </ul>
         </li>

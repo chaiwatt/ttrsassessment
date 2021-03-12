@@ -171,21 +171,33 @@ class FullTbp extends Model
     }  
 
     public function getCompanyemployAttribute(){
-        return CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        return CompanyEmploy::where('company_id',$company->id)->where('employ_position_id',1)->first();
     }  
 
     public function getEmployeducationAttribute(){
-        $ceo = CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $ceo = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id',1)->first();
         return EmployEducation::where('company_employ_id',@$ceo->id)->get();
     }  
 
     public function getEmployexperienceAttribute(){
-        $ceo = CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $ceo = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id',1)->first();
         return EmployExperience::where('company_employ_id',@$ceo->id)->get();
     } 
     
     public function getEmploytrainingAttribute(){
-        $ceo = CompanyEmploy::where('full_tbp_id',$this->id)->where('employ_position_id',1)->first();
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $ceo = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id',1)->first();
         return EmployTraining::where('company_employ_id',@$ceo->id)->get();
     } 
        

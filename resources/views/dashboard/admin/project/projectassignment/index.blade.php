@@ -147,12 +147,13 @@
                                         </td>
                                         @if (Auth::user()->user_type_id>=6)
                                             <td> 
-                                                @if ($projectassignment->leader_id == null)
-                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
-                                                    @else
-                                                         <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">แก้ไข</a>
-                                                @endif
-                                                
+                                                @if (@$projectassignment->businessplan->minitbp->fulltbp->projectstatustransaction(8)->status != 2)
+                                                    @if ($projectassignment->leader_id == null)
+                                                            <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
+                                                        @else
+                                                            <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">แก้ไข</a>
+                                                    @endif
+                                                @endif 
                                             </td>    
                                         @endif
                                

@@ -95,7 +95,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $company = Company::where('user_id',Auth::user()->id)->first();
         $prefixes = Prefix::get();
         $employpositions = EmployPosition::get();
-        $companyemploys = CompanyEmploy::where('company_id',$company->id)->get();
+        $companyemploys = CompanyEmploy::where('company_id',$company->id)->orderBy('employ_position_id','asc')->get();
         $companystockholders = StockHolderEmploy::where('company_id',$company->id)->get();
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $contactprefixes = Prefix::get();
@@ -264,8 +264,8 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
         $ceo = CompanyEmploy::where('full_tbp_id',$id)->where('employ_position_id',1)->first();
-        $companyboards = CompanyEmploy::where('full_tbp_id',$id)->where('employ_position_id','<=',5)->where('id','!=',$ceo->id)->get();
-        $companyemploys = CompanyEmploy::where('full_tbp_id',$id)->where('employ_position_id','>',5)->where('id','!=',$ceo->id)->get();
+        $companyboards = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->where('id','!=',$ceo->id)->get();
+        $companyemploys = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','>',5)->where('id','!=',$ceo->id)->get();
         $fulltbpgantt = FullTbpGantt::where('full_tbp_id',$fulltbp->id)->first();
         $fulltbpprojectplantransactionarray =  FullTbpProjectPlanTransaction::where('full_tbp_id',$id)->distinct('month')->pluck('month')->toArray();
         

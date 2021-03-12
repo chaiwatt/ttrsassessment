@@ -1475,7 +1475,8 @@
 									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a data-toggle="collapse" class="text-default list-icons-item" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.1 ข้อมูลกิจการ</a>
+												{{-- <a data-toggle="collapse" class="text-default list-icons-item" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.1 ข้อมูลกิจการ</a> --}}
+												<a data-action="collapse" data-toggle="collapse" >1.1 ข้อมูลกิจการ</a>
 											</h6>
 										</div>
 	
@@ -1643,14 +1644,7 @@
 																</div>
 															</div>      
 														</div>
-														{{-- <div class="row">
-															<div class="col-md-12">	
-																<div class="form-group">
-																	<br>
-																	<button type="button" id="btnaddcompanyprofile" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกประวัติบริษัท</button>
-																</div>
-															</div>
-														</div>	 --}}
+
 													</div>
 												</div>
 											</div>
@@ -1660,7 +1654,8 @@
 									<div class="card mb-0 border-top-success rounded-top-0 rounded-0 border-y-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.2 ข้อมูลบุคลากร</a>
+												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.2 ข้อมูลบุคลากร</a> --}}
+												<a data-action="collapse" data-toggle="collapse" >1.2 ข้อมูลบุคลากร</a>
 											</h6>
 										</div>
 		
@@ -1673,16 +1668,16 @@
 															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
-																		<th>ชื่อ-สกุล</th>  
-																		<th>ตำแหน่ง</th>                                                                                    
-																		<th>โทรศัพท์</th>       
-																		<th>โทรศัพท์มือถือ</th>  
-																		<th>อีเมล</th>
-																		<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
+																		<th style="width:25%">ชื่อ-สกุล</th>  
+																		<th style="width:19%">ตำแหน่ง</th>                                                                                    
+																		<th style="width:5%">โทรศัพท์</th>       
+																		<th style="width:5%">โทรศัพท์มือถือ</th>  
+																		<th style="width:8%">อีเมล</th>
+																		<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_companyemploy_wrapper_tr">    
-																	@foreach ($companyemploys->where('employ_position_id','<=',5)->reverse() as $companyemploy)
+																	@foreach ($companyemploys->where('employ_position_id','<=',5) as $companyemploy)
 																		<tr >                                        
 																			<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
 																			<td> {{$companyemploy->employposition->name}} </td> 
@@ -1690,7 +1685,7 @@
 																			<td> {{$companyemploy->workphone}} </td> 
 																			<td> {{$companyemploy->email}} </td> 
 																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
+																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy">ลบ</a> 
 																			</td> 
 																		</tr>
@@ -1733,12 +1728,12 @@
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th>ชื่อ-สกุล</th>  
-																			<th>ตำแหน่ง</th>                                                                                    
-																			<th>โทรศัพท์</th>       
-																			<th>โทรศัพท์มือถือ</th>  
-																			<th>อีเมล</th>
-																			<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
+																			<th style="width:25%">ชื่อ-สกุล</th>  
+																			<th style="width:19%">ตำแหน่ง</th>                                                                                    
+																			<th style="width:5%">โทรศัพท์</th>       
+																			<th style="width:5%">โทรศัพท์มือถือ</th>  
+																			<th style="width:8%">อีเมล</th>
+																			<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>     
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_researcher_wrapper_tr">    
@@ -1750,8 +1745,8 @@
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
 																				<td class="hiddenelement">  
-																					{{-- <a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> --}}
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
+																					{{-- <a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> --}}
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy_research">ลบ</a> 
 																				</td> 
 																			</tr>
@@ -1767,12 +1762,12 @@
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th>ชื่อ-สกุล</th>  
-																			<th>ตำแหน่ง</th>                                                                                    
-																			<th>โทรศัพท์</th>       
-																			<th>โทรศัพท์มือถือ</th>  
-																			<th>อีเมล</th>
-																			<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
+																			<th style="width:25%">ชื่อ-สกุล</th>  
+																			<th style="width:20%">ตำแหน่ง</th>                                                                                    
+																			<th style="width:10%">โทรศัพท์</th>       
+																			<th style="width:10%">โทรศัพท์มือถือ</th>  
+																			<th style="width:10%">อีเมล</th>
+																			<th class="hiddenelement" style="width:15%">เพิ่มเติม</th>     
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_projectmember_wrapper_tr">    
@@ -1784,7 +1779,7 @@
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
 																				<td class="hiddenelement"> 
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a>
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy_projectmember">ลบ</a> 
 																				</td> 
 																			</tr>
@@ -1883,7 +1878,8 @@
 										<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
 											<div class="card-header">
 												<h6 class="card-title">
-													<a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.1 ข้อมูลทั่วไป</a>
+													{{-- <a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.1 ข้อมูลทั่วไป</a> --}}
+													<a data-action="collapse" data-toggle="collapse" >2.1 ข้อมูลทั่วไป</a>
 												</h6>
 											</div>
 
@@ -1980,7 +1976,8 @@
 										<div class="card mb-0 rounded-0 border-y-0">
 											<div class="card-header">
 												<h6 class="card-title">
-													<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.2 ข้อมูลเทคโนโลยี</a>
+													{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.2 ข้อมูลเทคโนโลยี</a> --}}
+													<a data-action="collapse" data-toggle="collapse" >2.2 ข้อมูลเทคโนโลยี</a>
 												</h6>
 											</div>
 
@@ -2357,7 +2354,8 @@
 										<div class="card rounded-top-0">
 											<div class="card-header">
 												<h6 class="card-title">
-													<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.3 แผนการดำเนินงาน (Gantt Chart)</a>
+													{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.3 แผนการดำเนินงาน (Gantt Chart)</a> --}}
+													<a data-action="collapse" data-toggle="collapse" >2.3 แผนการดำเนินงาน (Gantt Chart)</a>
 												</h6>
 											</div>
 
@@ -2451,7 +2449,8 @@
 									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.1 ข้อมูลด้านการตลาด</a>
+												{{-- <a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.1 ข้อมูลด้านการตลาด</a> --}}
+												<a data-action="collapse" data-toggle="collapse" >3.1 ข้อมูลด้านการตลาด</a>
 											</h6>
 										</div>
 
@@ -2561,7 +2560,8 @@
 									<div class="card mb-0 rounded-0 border-y-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.2 ข้อมูลยอดขายของบริษัท</a>
+												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.2 ข้อมูลยอดขายของบริษัท</a> --}}
+												<a data-action="collapse" data-toggle="collapse" >3.2 ข้อมูลยอดขายของบริษัท</a>
 											</h6>
 										</div>
 
@@ -2578,11 +2578,11 @@
 																<thead>
 																	<tr class="bg-info">
 																		<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
-																		<th class="text-center">ปี {{$fulltbp->past1+1}}</th> 
-																		<th class="text-center">ปี {{$fulltbp->past1}}</th>                                                                                    
-																		<th class="text-center">ปี {{$fulltbp->past2}}</th>       
-																		<th class="text-center">ปี {{$fulltbp->past3}}</th>  
-																		<th class="text-center hiddenelement" style="width:150px">เพิ่มเติม</th>    
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
+																		<th class="text-center hiddenelement" style="width: 10%">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_sell_wrapper_tr">    
@@ -2612,11 +2612,11 @@
 																<thead>
 																	<tr  class="bg-info">
 																		<th>ประเภทยอดขาย</th>  
-																		<th class="text-center">ปี {{$fulltbp->past1+1}}</th> 
-																		<th class="text-center">ปี {{$fulltbp->past1}}</th>                                                                                    
-																		<th class="text-center">ปี {{$fulltbp->past2}}</th>       
-																		<th class="text-center" >ปี {{$fulltbp->past3}}</th>  
-																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
+																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
+																		<th class="hiddenelement" style="width: 10%">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_sellstatus_wrapper_tr">    
@@ -2645,7 +2645,8 @@
 									<div class="card rounded-top-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.3 ข้อมูลคู่ค้าหลักทางธุรกิจ</a>
+												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.3 ข้อมูลคู่ค้าหลักทางธุรกิจ</a> --}}
+												<a data-action="collapse" data-toggle="collapse" >3.3 ข้อมูลคู่ค้าหลักทางธุรกิจ</a>
 											</h6>
 										</div>
 
@@ -2738,7 +2739,8 @@
 									<div class="card border-top-info rounded-top-1 mb-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</a>
+												{{-- <a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</a> --}}
+												<a data-action="collapse" data-toggle="collapse" >4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</a>
 											</h6>
 										</div>
 										<div id="accordion-item-group1" class="collapse" data-parent="#accordion-group">
@@ -2848,7 +2850,8 @@
 									<div class="card mb-0 rounded-0 border-y-0">
 										<div class="card-header">
 											<h6 class="card-title">
-												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.2 ประมาณการผลตอบแทนจากการลงทุน</a>
+												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.2 ประมาณการผลตอบแทนจากการลงทุน</a> --}}
+												<a data-action="collapse" data-toggle="collapse" >4.2 ประมาณการผลตอบแทนจากการลงทุน</a>
 											</h6>
 										</div>
 

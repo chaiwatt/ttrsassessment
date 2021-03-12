@@ -23,6 +23,7 @@ use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
 use App\Model\InvoiceTransaction;
+use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use App\Model\SummaryExpertPercent;
 use Illuminate\Support\Facades\Auth;
@@ -318,7 +319,8 @@ class DashboardAdminAssessmentController extends Controller
         return response()->json($users); 
     }
 
-    public function UpdateScore(Request $request){    
+    public function UpdateScore(Request $request){   
+        $auth = Auth::user(); 
         // if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
                 if($criteria['scoretype'] == 1){
@@ -398,6 +400,15 @@ class DashboardAdminAssessmentController extends Controller
         BusinessPlan::find($minitbp->business_plan_id)->update([
             'business_plan_status_id' => 8
         ]);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $businessplan->id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 3;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $projectassignment->leader_id;
+        $notificationbubble->save();
 
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
@@ -441,7 +452,7 @@ class DashboardAdminAssessmentController extends Controller
 
             DateConversion::addExtraDay($minitbp->id,5);
         }
-        $auth = Auth::user();
+        
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
         $timeLinehistory->details = 'สรุปผลการประเมินสำเร็จ';

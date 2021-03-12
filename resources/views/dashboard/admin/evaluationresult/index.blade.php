@@ -96,7 +96,13 @@
                                                             @if ($fulltbp->projectstatustransaction(7)->status == 2)  
                                                                     <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
                                                                 @elseif($fulltbp->projectstatustransaction(7)->status == 1)
-                                                                    <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button>
+                                                                @if (Auth::user()->user_type_id == 4)
+                                                                        <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมายแจ้งผล</button>
+                                                                   @else 
+                                                                        {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
+                                                                        <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>
+                                                                @endif
+                                                                   
                                                             @endif  
                                                         @else
                                                             <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>

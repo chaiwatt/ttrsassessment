@@ -39,7 +39,6 @@ class FullTbpController extends Controller
 {
 
     public function GeneratePdf(Request $request){
-       
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $segment = new \Segment();
         $fulltbp = FullTbp::find($request->id);
@@ -53,10 +52,10 @@ class FullTbpController extends Controller
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
-        $ceo = CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id',1)->first();
+        $ceo = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id',1)->first();
         $companyboards = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->where('id','!=',@$ceo->id)->get();
-        // dd(CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id','<=',5)->get());
-        $companyemploys = CompanyEmploy::where('full_tbp_id',$request->id)->where('employ_position_id','>',5)->where('id','!=',@$ceo->id)->get();
+        // dd($companyboards);
+        $companyemploys = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','>',5)->where('id','!=',@$ceo->id)->get();
         $companyhistory = $segment->get_segment_array($company->companyhistory);
         $companystockholders = StockHolderEmploy::where('company_id',$company->id)->get();
 

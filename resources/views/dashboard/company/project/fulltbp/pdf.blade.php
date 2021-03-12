@@ -149,7 +149,7 @@
                                 <table class="mt5  border tbwrap" >
                                     <thead>
                                         <tr>
-                                            <th style="width:25%" style="font-size:13px">ระดับ</th>
+                                            <th style="font-size:13px;width:100px">ระดับ</th>
                                             <th style="width:35%" style="font-size:13px">ชื่อสถานศึกษา</th>
                                             <th style="width:20%" style="font-size:13px">สาขาวิชาเอก</th>
                                             <th style="width:20%" style="font-size:13px">ปีที่ศึกษา<pre style="font-family: THSarabunNew">(เริ่มต้น-สิ้นสุด)</pre></th>
@@ -175,7 +175,7 @@
                                 <table class="mt5  tbwrap" >
                                     <thead>
                                         <tr>
-                                            <th style="font-size:13px">เริ่มต้น</th>
+                                            <th style="font-size:13px;width:100px">เริ่มต้น</th>
                                             <th style="font-size:13px">สิ้นสุด</th>
                                             <th style="font-size:13px">บริษัท</th>
                                             <th style="font-size:13px">ประเภทธุรกิจ</th>
@@ -205,9 +205,9 @@
                                 <table class="mt5  border tbwrap" >
                                     <thead>
                                         <tr>
-                                            <th style="width:25%" style="font-size:13px">วัน เดือน ปี</th>
+                                            <th style="font-size:13px;width:100px">วัน เดือน ปี</th>
                                             <th style="font-size:13px">หลักสูตร</th>
-                                            <th style="width:40%" style="font-size:13px">หน่วยงานผู้จัด</th>
+                                            <th style="font-size:13px">หน่วยงานผู้จัด</th>
                                         <tr>
                                     </thead>
                                     <tbody>
@@ -241,7 +241,7 @@
                             </div>
 
                                 @if ($companyemboard->employeducation->count() > 0)
-                                    <div class="ml30 mt20"><strong>ประวัติการศึกษา</strong>
+                                    <div class="ml30 mt20" style="page-break-inside: avoid;"><strong>ประวัติการศึกษา</strong>
                                         <table class="mt5  border tbwrap" >
                                             <thead>
                                                 <tr>
@@ -267,7 +267,7 @@
                                     </div>
                                 @endif
                                 @if ($companyemboard->employexperience->count() > 0)
-                                    <div class="ml30 mt20"><strong>ประวัติการทำงาน</strong>
+                                    <div class="ml30 mt20" style="page-break-inside: avoid;"><strong>ประวัติการทำงาน</strong>
                                         <table class="mt5  tbwrap" >
                                             <thead>
                                                 <tr>
@@ -297,7 +297,7 @@
                                     </div>
                                 @endif
                                 @if ($companyemboard->employtraining->count() > 0)
-                                    <div class="ml30 mt20"><strong>ประวัติการฝึกอบรม</strong>
+                                    <div class="ml30 mt20" style="page-break-inside: avoid;"><strong>ประวัติการฝึกอบรม</strong>
                                         <table class="mt5  border tbwrap" >
                                             <thead>
                                                 <tr>
@@ -350,14 +350,14 @@
                                     @if ($companyemploys->count() > 1)
                                     <div class="ml30 mt10" style="font-size:13px"><strong><u>ลำดับที่ {{$key +1}}</u></strong></div>
                                     @endif
-                                    <div class="ml30 mt0" style="font-size:13px"> ชื่อ-นามสกุลee : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</div>
+                                    <div class="ml30 mt0" style="font-size:13px"> ชื่อ-นามสกุล : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</div>
                                     <div class="ml30 mt0" style="font-size:13px"> ตำแหน่ง : {{$companyemploy->employposition->name}}</div>
                                     <div class="ml30 mt0" style="font-size:13px"> โทรศัพท์ : {{$companyemploy->workphone}}</div>
                                     <div class="ml30 mt0" style="font-size:13px"> โทรศัพท์มือถือ : {{$companyemploy->phone}}</div>
                                     <div class="ml30 mt0" style="font-size:13px"> อีเมล : {{$companyemploy->email}}</div>
                                 </div>
                                 @if ($companyemploy->employeducation->count() > 0)
-                                    <div class="ml30 mt20"><strong>ประวัติการศึกษา</strong>
+                                    <div class="ml30 mt20" style="page-break-inside: avoid;"><strong>ประวัติการศึกษา</strong>
                                         <table class="mt5  border tbwrap" >
                                             <thead>
                                                 <tr>
@@ -384,7 +384,7 @@
                                     </div>
                                 @endif
                                 @if ($companyemploy->employexperience->count() > 0)
-                                    <div class="ml30 mt20" style="font-size:13px"><strong>ประวัติการทำงาน</strong>
+                                    <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ประวัติการทำงาน</strong>
                                         <table class="mt5  tbwrap" >
                                             <thead>
                                                 <tr>
@@ -415,7 +415,7 @@
                                     </div>
                                 @endif
                                 @if ($companyemploy->employtraining->count() > 0)
-                                    <div class="ml30 mt20" style="font-size:13px"><strong>ประวัติการฝึกอบรม</strong>
+                                    <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ประวัติการฝึกอบรม</strong>
                                         <table class="mt5  border tbwrap" >
                                             <thead>
                                                 <tr>

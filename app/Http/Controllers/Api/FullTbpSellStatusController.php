@@ -21,7 +21,8 @@ class FullTbpSellStatusController extends Controller
             'past2' => str_replace(',', '', $request->past2),
             'past3' => str_replace(',', '', $request->past3),
         ]);
-        $fulltbpsellstatuses = FullTbpSellStatus::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
+        // $fulltbpsellstatuses = FullTbpSellStatus::where('full_tbp_id',$fulltbpid)->orderBy('id','desc')->get();
+        $fulltbpsellstatuses = FullTbpSellStatus::where('full_tbp_id',$fulltbpid)->get();
         return response()->json($fulltbpsellstatuses); 
     }
 }

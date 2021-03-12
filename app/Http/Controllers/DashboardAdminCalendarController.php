@@ -16,6 +16,7 @@ use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\CalendarType;
 use App\Model\EventCalendar;
+use App\Model\ProjectMember;
 use Google_Service_Calendar;
 use Illuminate\Http\Request;
 use App\Helper\DateConversion;
@@ -126,7 +127,7 @@ class DashboardAdminCalendarController extends Controller
           $alertmessage = new AlertMessage();
           $alertmessage->user_id = $auth->id;
           $alertmessage->target_user_id = $_user->id;
-          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $messageheader. ' โครงการ'.$minitbp->project;
+          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '. $messageheader. ' โครงการ'.$minitbp->project;
           $alertmessage->save();
     
           $notificationbubble = new NotificationBubble();
@@ -162,6 +163,18 @@ class DashboardAdminCalendarController extends Controller
         BusinessPlan::find($minitbp->business_plan_id)->update([
           'business_plan_status_id' => 7
         ]);
+
+        $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbp)->get();
+        
+        foreach ($projectmembers as $key => $projectmember) {
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 7;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $projectmember->user_id;
+            $notificationbubble->save();
+        }
       }
       return redirect()->route('dashboard.admin.calendar')->withSuccess('เพิ่มรายการสำเร็จ');
   }

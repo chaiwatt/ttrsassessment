@@ -316,7 +316,7 @@
                                                                     $style = 'btn-sm bg-indigo';
                                                                 }
                                                             }elseif($fulltbp->ev->status == 2){
-                                                                $evstatus = 'อยู่ระหว่าง Admin พิจารณาและกำหนด Weight';
+                                                                $evstatus = 'อยู่ระหว่าง Admin กำหนด Weight';
                                                                 $style = 'btn-sm bg-pink';
                                                             }
                                                             elseif($fulltbp->ev->status == 3){
@@ -356,7 +356,11 @@
                                                 <td>
                                                     @if (!Empty($fulltbp->assessmentdate))
                                                             @if ($fulltbp->finished_onsite == 1)
-                                                                    <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยันการลงพื้นที่</button>
+                                                                    @if (Auth::user()->user_type_id == 4)
+                                                                        <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยันการลงพื้นที่</button>
+                                                                    @else
+                                                                        <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ยืนยันการลงพื้นที่</span>
+                                                                    @endif
                                                                 @else
                                                                 {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id}} --}}
 
