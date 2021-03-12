@@ -80,10 +80,10 @@
                                                     <td> {{@$fulltbp->projectgrade->grade}} </td> 
                                                     <td> 
                                                         @if(@$fulltbp->projectstatustransaction(8)->status != 2)
-                                                            <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">รายละเอียด</a>
+                                                            <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">เขียนบทวิเคราะห์</a>
                                                         @endif  
                                                         
-                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">เอกสารแจ้งผล</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">บทวิเคราะห์ (PDF)</a>
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
                                                             <div class="dropdown-menu dropdown-menu-right">
