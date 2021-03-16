@@ -13,6 +13,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'ผู้ประกอบการยื่นใบสมัครในระบบ TTRS',
                 'descriptioneng' => 'English description for Registration process',
                 'icon' => '/assets/landing/img/register/1.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/1.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/1.png',
                 'link' => ''
             ],
             [
@@ -21,7 +23,9 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'กรอกแบบฟอร์มและส่งเอกสารเพิ่มเติมตามที่แจ้งในระบบ',
                 'descriptioneng' => 'English description for Fill out the form',
                 'icon' => '/assets/landing/img/register/2.png',
-                'link' => ''
+                'link' => '',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/2.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/2.png',
             ],
             [
                 'titlethai' => 'พิจารณาเบื้องต้น',
@@ -29,7 +33,9 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'ผู้เชี่ยวชาญพิจารณาเบื้องต้น',
                 'descriptioneng' => 'English description for Preliminary consideration',
                 'icon' => '/assets/landing/img/register/3.png',
-                'link' => ''
+                'link' => '',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/3.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/3.png',
             ],
             [
                 'titlethai' => 'ตรวจประเมิน',
@@ -37,7 +43,9 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'ตรวจประเมินการใช้เทคโนโลยีและการประกอบธุรกิจ',
                 'descriptioneng' => 'English description for Assessment',
                 'icon' => '/assets/landing/img/register/4.png',
-                'link' => ''
+                'link' => '',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/4.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/4.png',
             ],
             [
                 'titlethai' => 'เข้าสู่ระบบการประเมิน',
@@ -45,7 +53,9 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'เข้าสู่ระบบการประเมินเทคโนโลยี',
                 'descriptioneng' => 'English description for Enter the assessment process',
                 'icon' => '/assets/landing/img/register/5.png',
-                'link' => ''
+                'link' => '',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/5.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/5.png',
             ],
             [
                 'titlethai' => 'การจัดอันดับเทคโนโลยี',
@@ -53,7 +63,9 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'การจัดอันดับเทคโนโลยีและออกใบรับรอง',
                 'descriptioneng' => 'English description for Rating',
                 'icon' => '/assets/landing/img/register/6.png',
-                'link' => ''
+                'link' => '',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/6.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/6.png',
             ] 
         ]);
     }

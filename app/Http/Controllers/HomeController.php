@@ -50,6 +50,25 @@ class HomeController extends Controller
             return $this->Front();
         }
     }
+    
+    public function Index2()
+    {
+        // $generalinfo = GeneralInfo::first();
+        // $directmenu = DirectMenu::find(1);
+        // return $directmenu;
+        // $directmenu->update([
+        //     'view' => intVal($directmenu->view) +1
+        // ]);
+        // if(Session::get('front') == 'active'){
+        //     return $this->Front();
+        // }else if($generalinfo->front_page_status_id == 2){
+        //     Session::put('front', 'active');
+        //     return view('front');
+        // }else{
+        //     return $this->Front();
+        // }
+        return view('landing2.index');
+    }
 
     public function Page($slug)
     {
