@@ -4,7 +4,7 @@
 <head>
         <!-- meta tag -->
         <meta charset="utf-8">
-        <title>Braintech - IT Solutions and Technology Startup HTML Template</title>
+        <title>TTRS - TTRS rating</title>
         <meta name="description" content="">
         <!-- responsive tag -->
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -67,27 +67,27 @@
                                       <ul>
                                           <li>
                                               <i class="flaticon-email"></i>
-                                              <a href="mailto:support@rstheme.com">support@rstheme.com</a>
+                                              <a href="mailto:support@rstheme.com">{{$generalinfo->email}}</a>
                                           </li>
                                           <li>
                                               <i class="flaticon-call"></i>
-                                              <a href="tel:++1(990)999–5554"> +1 (990) 999–5554</a>
+                                              <a href="tel:++1(990)999–5554">{{$generalinfo->phone1}}</a>
                                           </li>
-                                          <li>
+                                          {{-- <li>
                                               <i class="flaticon-location"></i>
                                               05 kandi BR. New York
-                                          </li>
+                                          </li> --}}
                                       </ul>
                                    </div>
                                </div>
                                <div class="col-lg-4 text-right">
                                    <div class="toolbar-sl-share">
                                        <ul>
-                                            <li class="opening"> <em><i class="flaticon-clock"></i> 08:00am-6:00pm</em> </li>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                            {{-- <li class="opening"> <em><i class="flaticon-clock"></i> 08:00am-6:00pm</em> </li> --}}
+                                            <li><a href="#"><i class="fa fa-facebook"></i>เข้าสู่ระบบ</a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i>ไทย</a></li>
+                                            {{-- <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li> --}}
                                        </ul>
                                    </div>
                                </div>
@@ -185,7 +185,7 @@
                                     We are leading technology solutions providing company all over the world doing over 40 years.
                                 </p>
                                 <ul class="banner-btn">
-                                    <li><a class="readon started" href="about.htmweb-development.html">Get Started</a></li>
+                                    <li><a class="readon started" href="about.htmweb-development.html">เพิ่มเติม</a></li>
                                     <li>
                                         <div class="rs-videos">
                                             <div class="animate-border white-color">
@@ -217,7 +217,7 @@
 
                     @foreach ($homepageservices as $key => $homepageservice)
                         <div class="col-lg-4 col-md-6 mb-20">
-                            <div class="services-item pink-bg">
+                            <div class="services-item {{$homepageservice->cardcolor}}">
                                 <div class="services-icon">
                                     <div class="image-part">
                                         <img class="main-img" src="{{asset($homepageservice->iconnormal)}}" alt="">
@@ -337,13 +337,13 @@
                           <div class="col-lg-4 pr-40 md-pr-15 md-pb-80">
                               <div class="process-wrap md-center">
                                   <div class="sec-title mb-30">
-                                      <div class="sub-text new">Working Process</div>
+                                      <div class="sub-text new">4 PILLARS</div>
                                       <h2 class="title white-color">
-                                          Our Working Process -  How We Work For Our Customers
+                                          4 หมวดการประเมิน
                                       </h2>
                                   </div>
                                   <div class="btn-part mt-40">
-                                      <a class="readon started" href="#">Contact Us</a>
+                                      <a class="readon started" href="#">เพิ่มเติม</a>
                                   </div>
                               </div>
                           </div>
@@ -356,7 +356,7 @@
                                                   1
                                               </div>
                                               <div class="number-title">
-                                                  <h3 class="title"> Discovery</h3>
+                                                  <h3 class="title"> Management</h3>
                                               </div>
                                               <p class="number-txt">  Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
                                           </div>
@@ -369,7 +369,7 @@
                                                   2
                                               </div>
                                               <div class="number-title">
-                                                  <h3 class="title">Planning</h3>
+                                                  <h3 class="title">Technology</h3>
                                               </div>
                                               <p class="number-txt">Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
                                           </div>
@@ -382,7 +382,7 @@
                                                   3
                                               </div>
                                               <div class="number-title">
-                                                  <h3 class="title">Execute</h3>
+                                                  <h3 class="title">Marketability</h3>
                                               </div>
                                               <p class="number-txt">Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
                                           </div>
@@ -395,7 +395,7 @@
                                                   4
                                               </div>
                                               <div class="number-title">
-                                                  <h3 class="title">Deliver</h3>
+                                                  <h3 class="title">Business Prospect</h3>
                                               </div>
                                               <p class="number-txt">Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
                                           </div>
@@ -407,164 +407,18 @@
                   </div>
               </div>
             </div>
-            <!-- Process Section End -->
-
-
-            <!-- Choose Section Start -->
-            <div class="rs-why-choose pt-120 pb-120 md-pt-75 md-pb-80">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 md-pb-60">
-                            <div class="sec-title mb-40">
-                                <div class="sub-text style4-bg">Why Choose Us</div>
-                                <h2 class="title pb-20">
-                                    We Create Result-Oriented Dynamic Applications
-                                </h2>
-                                <div class="desc">
-                                   Over 25 years working in IT services developing software applications and mobile apps for clients all over the world.
-                                </div>
-                            </div>
-                            {{-- <img class="dance2" src="{{asset('assets/landing2/images/process/circle.png')}}" alt="images"> --}}
-                            <div class="services-wrap mb-25">
-                                <div class="services-icon">
-                                    <img src="{{asset('assets/landing2/images/choose/icons/1.png')}}" alt="">
-                                </div>
-                                <div class="services-text">
-                                    <h3 class="title"><a href="#">First Growing Process</a></h3>
-                                    <p class="services-txt">  At vero eos et accusamus etiusto odio praesentium.</p>
-                                </div>
-                            </div>
-                            <div class="services-wrap mb-25">
-                                <div class="services-icon">
-                                    <img src="{{asset('assets/landing2/images/choose/icons/2.png')}}" alt="">
-                                </div>
-                                <div class="services-text">
-                                    <h3 class="title"><a href="#">Clean code</a></h3>
-                                    <p class="services-txt">  At vero eos et accusamus etiusto odio praesentium.</p>
-                                </div>
-                            </div>
-                            <div class="services-wrap">
-                                <div class="services-icon">
-                                    <img src="{{asset('assets/landing2/images/choose/icons/3.png')}}" alt="">
-                                </div>
-                                <div class="services-text">
-                                    <h3 class="title"><a href="#">Well Documentation</a></h3>
-                                    <p class="services-txt">  At vero eos et accusamus etiusto odio praesentium.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                           <div class="image-part">
-                               <img src="{{asset('assets/landing2/images/choose/1.png')}}" alt="">
-                           </div>
-                           <div class="animation">
-                               <div class="top-shape">
-                                   <img class="dance" src="{{asset('assets/landing2/images/choose/dotted-2.png')}}" alt="images">
-                               </div>
-                               <div class="bottom-shape">
-                                   <img class="dance2" src="{{asset('assets/landing2/images/choose/dotted-1.png')}}" alt="images">
-                               </div>
-                           </div> 
-                        </div> 
-                    </div>
-                </div>
-            </div>
-            <!-- Choose Section End -->
-         
-
-            <!-- Project Section Start -->
-            <div id="rs-portfolio" class="rs-project style3 pt-120 pb-120 md-pt-75 md-pb-80">
-                <div class="container-fluid">
-                    <div class="sec-title2 text-center mb-45">
-                        <span class="sub-text white-color">Projects</span>
-                        <h2 class="title title2 white-color">
-                           Our Recent Launched Projects Available into Market
-                        </h2>
-                    </div>
-                    <div class="rs-carousel owl-carousel" data-loop="true" data-items="4" data-margin="30" data-autoplay="true" data-hoverpause="true" data-autoplay-timeout="5000" data-smart-speed="800" data-dots="false" data-nav="false" data-nav-speed="false" data-center-mode="false" data-mobile-device="1" data-mobile-device-nav="false" data-mobile-device-dots="false" data-ipad-device="3" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="2" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="4" data-md-device-nav="true" data-md-device-dots="false">
-                        <div class="project-item">
-                            <div class="project-img">
-                                <a href="#"><img src="{{asset('assets/landing2/images/project/main-home/1.jpg')}}" alt="images"></a>
-                            </div>
-                            <div class="project-content">
-                                <div class="portfolio-inner">
-                                    <h3 class="title"><a href="case-stublog-details.html">Project Design</a></h3>
-                                    <span class="category"><a href="case-stublog-details.html">IT Technology</a></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-item">
-                            <div class="project-img">
-                                <a href="#"><img src="{{asset('assets/landing2/images/project/main-home/2.jpg')}}" alt="images"></a>
-                            </div>
-                            <div class="project-content">
-                                <div class="portfolio-inner">
-                                    <h3 class="title"><a href="case-stublog-details.html">Growth Strategies</a></h3>
-                                    <span class="category"><a href="case-stublog-details.html">IT Technology</a></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-item">
-                            <div class="project-img">
-                                <a href="#"><img src="{{asset('assets/landing2/images/project/main-home/3.jpg')}}" alt="images"></a>
-                            </div>
-                            <div class="project-content">
-                                <div class="portfolio-inner">
-                                    <h3 class="title"><a href="case-stublog-details.html">latform Integration</a></h3>
-                                    <span class="category"><a href="case-stublog-details.html">IT Technology</a></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-item">
-                            <div class="project-img">
-                                <a href="#"><img src="{{asset('assets/landing2/images/project/main-home/4.jpg')}}" alt="images"></a>
-                            </div>
-                            <div class="project-content">
-                                <div class="portfolio-inner">
-                                    <h3 class="title"><a href="case-stublog-details.html">Innovative Interfaces</a></h3>
-                                    <span class="category"><a href="case-stublog-details.html">IT Technology</a></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-item">
-                            <div class="project-img">
-                                <a href="#"><img src="{{asset('assets/landing2/images/project/main-home/5.jpg')}}" alt="images"></a>
-                            </div>
-                            <div class="project-content">
-                                <div class="portfolio-inner">
-                                    <h3 class="title"><a href="case-stublog-details.html">Product Engineering</a></h3>
-                                    <span class="category"><a href="case-stublog-details.html">IT Technology</a></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-item">
-                            <div class="project-img">
-                                <a href="#"><img src="{{asset('assets/landing2/images/project/main-home/6.jpg')}}" alt="images"></a>
-                            </div>
-                            <div class="project-content">
-                                <div class="portfolio-inner">
-                                    <h3 class="title"><a href="case-stublog-details.html">Analytic Solutions</a></h3>
-                                    <span class="category"><a href="case-stublog-details.html">IT Technology</a></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Project Section End -->
-
+            <!-- Process Section End -->       
 
             <!-- Blog Section Start -->
             <div id="rs-blog" class="rs-blog pt-110 pb-120 md-pt-75 md-pb-80">
                 <div class="container">  
                     <div class="sec-title2 text-center mb-30">
-                        <span class="sub-text">Blogs</span>
                             <h2 class="title testi-title">
-                                Latest Tips &Tricks
+                                {{trans('lang.news')}}
                             </h2>
-                        <div class="desc">
+                        {{-- <div class="desc">
                             We've been building creative tools together for over a decade and have a deep appreciation for software applications
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-hoverpause="true" data-autoplay-timeout="5000" data-smart-speed="800" data-dots="false" data-nav="false" data-nav-speed="false" data-center-mode="false" data-mobile-device="1" data-mobile-device-nav="false" data-mobile-device-dots="false" data-ipad-device="2" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="2" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="3" data-md-device-nav="false" data-md-device-dots="false">
                         <div class="blog-item">
@@ -673,336 +527,6 @@
                 </div>
             </div>
             <!-- Blog Section End -->
-
-            <!-- Team Section Start -->
-            <div id="rs-team" class="rs-team onepage-style2 pt-120 pb-120 md-pt-90 md-pb-90"> 
-                <div class="sec-title2 text-center mb-30">
-                    <span class="sub-text style-bg white-color">Team</span>
-                    <h2 class="xs-pl-20 xs-pr-10 title white-color">
-                        Expert IT Consultants
-                    </h2>
-                </div>               
-                <div class="container">
-                    <div class="container"> 
-                        <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-hoverpause="true" data-autoplay-timeout="5000" data-smart-speed="800" data-dots="false" data-nav="false" data-nav-speed="false" data-center-mode="false" data-mobile-device="1" data-mobile-device-nav="false" data-mobile-device-dots="true" data-ipad-device="2" data-ipad-device-nav="false" data-ipad-device-dots="true" data-ipad-device2="1" data-ipad-device-nav2="false" data-ipad-device-dots2="true" data-md-device="3" data-md-device-nav="false" data-md-device-dots="true">
-                            <div class="team-item-wrap">
-                                <div class="team-wrap">
-                                    <div class="image-inner">
-                                        <a href="#"><img src="{{asset('assets/landing2/images/team/style1/1.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h4 class="person-name"><a href="single-team.html">Makhaia Antitni</a></h4>
-                                    <span class="designation">President & CEO</span>
-                                    <ul class="team-social">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="team-item-wrap">
-                                <div class="team-wrap">
-                                    <div class="image-inner">
-                                        <a href="#"><img src="{{asset('assets/landing2/images/team/style1/2.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h4 class="person-name"><a href="single-team.html">Corey Anderson</a></h4>
-                                    <span class="designation">CEO & Founder</span>
-                                    <ul class="team-social">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="team-item-wrap">
-                                <div class="team-wrap">
-                                    <div class="image-inner">
-                                        <a href="#"><img src="{{asset('assets/landing2/images/team/style1/3.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h4 class="person-name"><a href="single-team.html">Masud Rana</a></h4>
-                                    <span class="designation">Web Developer</span>
-                                    <ul class="team-social">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="team-item-wrap">
-                                <div class="team-wrap">
-                                    <div class="image-inner">
-                                        <a href="#"><img src="{{asset('assets/landing2/images/team/style1/4.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h4 class="person-name"><a href="single-team.html">Najmul Huda</a></h4>
-                                    <span class="designation">Digital Marketer</span>
-                                    <ul class="team-social">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="team-item-wrap">
-                                <div class="team-wrap">
-                                    <div class="image-inner">
-                                        <a href="#"><img src="{{asset('assets/landing2/images/team/style1/5.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h4 class="person-name"><a href="single-team.html">Rushali Rumi</a></h4>
-                                    <span class="designation">Design Lead</span>
-                                    <ul class="team-social">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="team-item-wrap">
-                                <div class="team-wrap">
-                                    <div class="image-inner">
-                                        <a href="#"><img src="{{asset('assets/landing2/images/team/style1/6.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h4 class="person-name"><a href="single-team.html">Abu Sayed</a></h4>
-                                    <span class="designation">App Developer</span>
-                                    <ul class="team-social">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="team-item-wrap">
-                                <div class="team-wrap">
-                                    <div class="image-inner">
-                                        <a href="#"><img src="{{asset('assets/landing2/images/team/style1/7.jpg')}}" alt=""></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h4 class="person-name"><a href="single-team.html">Sonia Akhter</a></h4>
-                                    <span class="designation">Graphic Artist</span>
-                                    <ul class="team-social">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-            <!-- Team Section End -->
-
-            <!-- Testimonial Section Start -->
-            <div class="rs-testimonial main-home style4 pt-120 pb-120 md-pt-75 md-pb-80">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 md-pb-40">
-                            <div class="testi-image">
-                               <img src="{{asset('assets/landing2/images/testimonial/testimonial-2.png')}}" alt="testimonial"> 
-                            </div> 
-                        </div>
-                        <div class="col-lg-6 pl-50 md-pl-15">
-                            <div class="sec-title mb-50">
-                                <div class="sub-text style4-bg left testi">Testimonials</div>
-                                <h2 class="title pb-20">
-                                    What Customer Saying
-                                </h2>
-                                <div class="desc">
-                                   Over 25 years working in IT services developing software applications and mobile apps for clients all over the world.
-                                </div>
-                            </div>
-                            <div class="rs-carousel owl-carousel" 
-                                data-loop="true" 
-                                data-items="1" 
-                                data-margin="30" 
-                                data-autoplay="true" 
-                                data-hoverpause="true" 
-                                data-autoplay-timeout="5000" 
-                                data-smart-speed="800" 
-                                data-dots="true" 
-                                data-nav="false" 
-                                data-nav-speed="false" 
-
-                                data-md-device="1" 
-                                data-md-device-nav="false" 
-                                data-md-device-dots="false" 
-                                data-center-mode="false"
-
-                                data-ipad-device2="1" 
-                                data-ipad-device-nav2="false" 
-                                data-ipad-device-dots2="false"
-
-                                data-ipad-device="1" 
-                                data-ipad-device-nav="false" 
-                                data-ipad-device-dots="true" 
-
-                                data-mobile-device="1" 
-                                data-mobile-device-nav="false" 
-                                data-mobile-device-dots="false">
-                                <div class="testi-item">
-                                    <div class="author-desc">           
-                                        <div class="desc"><img class="quote" src="{{asset('assets/landing2/images/testimonial/main-home/quote2.png')}}" alt="">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway.</div>
-                                    </div>
-                                    <div class="testimonial-content">
-                                        <div class="author-img">
-                                            <img src="{{asset('assets/landing2/images/testimonial/main-home/1.jpg')}}" alt="">
-                                        </div>
-                                        <div class="author-part">
-                                            <a class="name" href="#">Mariya Khan</a>
-                                            <span class="designation">CEO, Brick Consulting</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="testi-item">
-                                    <div class="author-desc">           
-                                        <div class="desc"><img class="quote" src="{{asset('assets/landing2/images/testimonial/main-home/quote2.png')}}" alt="">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway.</div>
-                                    </div>
-                                    <div class="testimonial-content">
-                                        <div class="author-img">
-                                            <img src="{{asset('assets/landing2/images/testimonial/main-home/2.jpg')}}" alt="">
-                                        </div>
-                                        <div class="author-part">
-                                            <a class="name" href="#">Sonia Akther</a>
-                                            <span class="designation">CEO, Keen IT Solution</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="testi-item">
-                                    <div class="author-desc">           
-                                        <div class="desc"><img class="quote" src="{{asset('assets/landing2/images/testimonial/main-home/quote2.png')}}" alt="">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway.</div>
-                                    </div>
-                                    <div class="testimonial-content">
-                                        <div class="author-img">
-                                            <img src="{{asset('assets/landing2/images/testimonial/main-home/3.jpg')}}" alt="">
-                                        </div>
-                                        <div class="author-part">
-                                            <a class="name" href="#">Felando</a>
-                                            <span class="designation">Web Developer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="testi-item">
-                                    <div class="author-desc">           
-                                        <div class="desc"><img class="quote" src="{{asset('assets/landing2/images/testimonial/main-home/quote2.png')}}" alt="">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway.</div>
-                                    </div>
-                                    <div class="testimonial-content">
-                                        <div class="author-img">
-                                            <img src="{{asset('assets/landing2/images/testimonial/main-home/4.jpg')}}" alt="">
-                                        </div>
-                                        <div class="author-part">
-                                            <a class="name" href="#">Neymar Vuya</a>
-                                            <span class="designation">Arist</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Testimonial Section End -->
-
-            <!-- Contact Section Start -->
-            <div id="rs-contact" class="rs-contact gray-color pt-120 md-pt-80">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4">
-                           <div class="contact-box">
-                                <div class="sec-title mb-45">
-                                    <span class="sub-text new-text white-color">Let's Talk</span>
-                                    <h2 class="title white-color">Speak With Expert Engineers.</h2>
-                                </div>
-                               <div class="address-box mb-25">
-                                   <div class="address-icon">
-                                       <i class="fa fa-home"></i>
-                                   </div>
-                                   <div class="address-text">
-                                        <span class="label">Email:</span>
-                                        <a href="tel:123222-8888">(123) 222-8888</a>
-                                   </div>
-                               </div>
-                               <div class="address-box mb-25">
-                                   <div class="address-icon">
-                                       <i class="fa fa-phone"></i>
-                                   </div>
-                                   <div class="address-text">
-                                       <span class="label">Phone:</span>
-                                       <a href="#">support@rstheme.com</a>
-                                   </div>
-                               </div>
-                               <div class="address-box">
-                                   <div class="address-icon">
-                                       <i class="fa fa-map-marker"></i>
-                                   </div>
-                                   <div class="address-text">
-                                       <span class="label">Address:</span>
-                                       <div class="desc">New Jesrsy, 1201, USA</div>
-                                   </div>
-                               </div>
-                           </div>
-                        </div> 
-                        <div class="col-lg-8 pl-70 md-pl-15 md-mt-40">
-                            <div class="contact-widget onepage-style">
-                               <div class="sec-title2 mb-40">
-                                   <span class="sub-text contact mb-15">Get In Touch</span>
-                                   <h2 class="title testi-title">Fill The Form Below</h2>
-
-                               </div>
-                                <div id="form-messages"></div>
-                                <form id="contact-form" method="post" action="https://rstheme.com/products/html/braintech/mailer.php">
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="name" name="name" placeholder="Name" required="">
-                                            </div> 
-                                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="email" name="email" placeholder="E-Mail" required="">
-                                            </div>   
-                                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="phone" name="phone" placeholder="Phone Number" required="">
-                                            </div>   
-                                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="Website" name="subject" placeholder="Your Website" required="">
-                                            </div>
-                                      
-                                            <div class="col-lg-12 mb-30">
-                                                <textarea class="from-control" id="message" name="message" placeholder="Your message Here" required=""></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="btn-part">
-                                            <div class="form-group mb-0">
-                                                <input class="readon learn-more submit" type="submit" value="Submit Now">
-                                            </div>
-                                        </div>  
-                                    </fieldset>
-                                </form> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- <div class="map-canvas pt-120 md-pt-70">
-                    <iframe src="https://maps.google.com/maps?q=rstheme&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
-                </div>  --}}
-            </div>
-            <!-- Contact Section Start -->
 
             <!-- Partner Start -->
             <div class="rs-partner pt-80 pb-70" style="margin-top:20px">

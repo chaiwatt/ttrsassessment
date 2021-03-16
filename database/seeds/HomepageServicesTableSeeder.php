@@ -15,6 +15,7 @@ class HomepageServicesTableSeeder extends Seeder
                 'icon' => '/assets/landing/img/register/1.png',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/1.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/1.png',
+                'cardcolor' => '',
                 'link' => ''
             ],
             [
@@ -26,6 +27,7 @@ class HomepageServicesTableSeeder extends Seeder
                 'link' => '',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/2.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/2.png',
+                'cardcolor' => 'pink-bg',
             ],
             [
                 'titlethai' => 'พิจารณาเบื้องต้น',
@@ -36,6 +38,7 @@ class HomepageServicesTableSeeder extends Seeder
                 'link' => '',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/3.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/3.png',
+                'cardcolor' => 'aqua-bg',
             ],
             [
                 'titlethai' => 'ตรวจประเมิน',
@@ -46,6 +49,7 @@ class HomepageServicesTableSeeder extends Seeder
                 'link' => '',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/4.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/4.png',
+                'cardcolor' => 'paste-bg',
             ],
             [
                 'titlethai' => 'เข้าสู่ระบบการประเมิน',
@@ -56,6 +60,7 @@ class HomepageServicesTableSeeder extends Seeder
                 'link' => '',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/5.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/5.png',
+                'cardcolor' => 'purple-bg',
             ],
             [
                 'titlethai' => 'การจัดอันดับเทคโนโลยี',
@@ -66,6 +71,7 @@ class HomepageServicesTableSeeder extends Seeder
                 'link' => '',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/6.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/6.png',
+                'cardcolor' => 'green-bg',
             ] 
         ]);
     }
