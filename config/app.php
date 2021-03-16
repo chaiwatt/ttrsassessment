@@ -170,6 +170,7 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        App\Providers\DropboxServiceProvider::class,
         /*
          * Package Service Providers...
          */

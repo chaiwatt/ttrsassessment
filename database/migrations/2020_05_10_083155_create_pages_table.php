@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreatePagesTable extends Migration
 {
@@ -26,6 +27,7 @@ class CreatePagesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('blogsidebarimage_id')->nullable();
             $table->unsignedBigInteger('bloghomepageimage_id')->nullable();
+            $table->date('publicdate')->default(Carbon::now()->toDateString());
             $table->timestamps();
         });
     }

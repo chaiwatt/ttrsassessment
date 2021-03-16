@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\User;
 use App\Model\Ev;
 use Carbon\Carbon;
+use App\Model\Page;
 use App\Model\Pillar;
 use App\Model\Company;
 use App\Model\FullTbp;
@@ -141,6 +142,7 @@ class CronSendmail extends Command
             }
         }
         $this->DailyFlowCheck();
+
     }
 
     public function DailyFlowCheck(){

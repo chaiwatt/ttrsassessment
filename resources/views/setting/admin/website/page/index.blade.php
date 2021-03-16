@@ -70,7 +70,7 @@
                                         <th>หมวด</th>
                                         <th>จำนวนวิว</th>
                                         <th>Unique IP</th>
-                                        <th style="width:180px">เพิ่มเติม</th>
+                                        <th style="width:250px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -153,7 +153,7 @@
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
-                                    <fieldset>	
+                                    {{-- <fieldset>	 --}}
                                         <div class="form-group">
                                             <label>เมนู</label>
                                                 <select name="menu" placeholder="เมนู" class="form-control form-control-select2">
@@ -226,16 +226,27 @@
                                             </div>
                                             <input type="file" style="display:none;" id="singlefile" />
                                         </div> --}}
-                                        <div class="form-group">
-                                            <label>สถานะการแสดง</label>
-                                            <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
-                                                @foreach ($pagestatuses as $pagestatus)
-                                                    <option value="{{$pagestatus->id}}" >{{$pagestatus->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </fieldset>
+                                       
+                                   
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สถานะการแสดง</label>
+                                        <select name="status" id="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                            @foreach ($pagestatuses as $pagestatus)
+                                                <option value="{{$pagestatus->id}}" >{{$pagestatus->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+        
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>กำหนดวันแสดง</label>
+                                        <input type="text"  name="publicdate" value="{{$defaultpublicdate}}" id="publicdate" placeholder="กำหนดวันแสดง" class="form-control form-control-lg" >
+                                    </div>
+                                </div>
+                                 {{-- </fieldset> --}}
                             </div>
                             <div class="text-right">
                                 <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -265,6 +276,27 @@
     });
     $("#file").on('change', function() {
         $("#filename").val(this.value);
+    });
+
+    $('#publicdate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+        });
+
+    $(document).on('change', '#status', function(e) {
+        console.log($(this).val());
+        if($(this).val() == 1){
+            // $("#publicdate").("hidden",false);
+            $( "#publicdate" ).prop( "disabled", false );
+        }else{
+            $("#publicdate").val('');
+            // $("#publicdate").("disabled",true);
+            $( "#publicdate" ).prop( "disabled", true );
+        }
     });
 
 </script>

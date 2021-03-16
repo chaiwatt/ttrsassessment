@@ -22,7 +22,13 @@
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>
+                                        @if ($message == 'passwords.user')
+                                                {{ __('ไม่พบอีเมลนี้ในระบบ') }}
+                                            @else
+                                                {{ $message }}
+                                        @endif
+                                        </strong>
                                     </span>
                                 @enderror
                         </div>

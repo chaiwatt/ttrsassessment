@@ -78,7 +78,10 @@ class Page extends Model
     {
         return FeatureImageThumbnail::find($this->bloghomepageimage_id);
     }
- 
+    public function getPublicdatethAttribute()
+    {
+        return DateConversion::engToThaiDate($this->publicdate);
+    }
 }
 
 

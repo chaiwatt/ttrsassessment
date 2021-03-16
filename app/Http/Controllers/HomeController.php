@@ -104,7 +104,9 @@ class HomeController extends Controller
         $directmenu->update([
             'view' => intVal($directmenu->view) +1
         ]);
-        $pages = Page::paginate(10);
+ 
+        $pages = Page::where('page_status_id',1)->whereDate('publicdate', '<=', Carbon::now()->toDateTimeString())->paginate(10);
+     
         return view('landing.blog')->withPages($pages);
     }
 

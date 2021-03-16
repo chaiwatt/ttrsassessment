@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Image;
 use App\Model\Tag;
+use Carbon\Carbon;
 use App\Model\Menu;
 use App\Model\Page;
 use App\Helper\Crop;
@@ -13,6 +14,7 @@ use App\Helper\CreateSlug;
 use App\Model\FeatureImage;
 use App\Model\PageCategory;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use App\Model\SummernoteImage;
 use App\Helper\CreateDirectory;
 use App\Model\FeatureImageThumbnail;
@@ -38,10 +40,12 @@ class SettingAdminWebsitePageController extends Controller
         $pagestatuses = PageStatus::get();
         $tags = Tag::get();
         $menus = Menu::get();
+        $defaultpublicdate = Carbon::today()->format('d') . '/' . Carbon::today()->format('m') . '/' . (Carbon::today()->format('Y') + 543);
         return view('setting.admin.website.page.create')->withPagecategories($pagecategories)
                                                     ->withPagestatuses($pagestatuses)
                                                     ->withTags($tags)
-                                                    ->withMenus($menus);
+                                                    ->withMenus($menus)
+                                                    ->withDefaultpublicdate($defaultpublicdate);
     }
     public function CreateSave(CreatePageRequest $request){
         $dom = new \DomDocument();
@@ -66,6 +70,9 @@ class SettingAdminWebsitePageController extends Controller
         $page = new Page();
         $page->page_category_id = $request->pagecategory;
         $page->page_status_id = $request->status;
+        if(!Empty($request->publicdate)){
+            $page->publicdate = DateConversion::thaiToEngDate($request->publicdate) ;
+        }
         $page->name = $request->title;
         $page->slug = CreateSlug::createSlug($request->title);
         $page->header = $request->description;
@@ -122,6 +129,7 @@ class SettingAdminWebsitePageController extends Controller
                                                     ->withPageimages($pageimages);
     }
     public function EditSave(EditPageRequest $request,$id){
+        // return $request->publicdate;
         $detail=$request->content;
         $dom = new \domdocument();
         $dom->loadHtml('<?xml encoding="UTF-8">'.$detail);
@@ -174,13 +182,17 @@ class SettingAdminWebsitePageController extends Controller
             $exist_feature_image_id = $request->featureinp;
             $exist_feature_image_thumbnail_id =  $request->featurethumbnailinp;
         }
-
+        $publicdate =  $page->publicdate;
+        if(!Empty($request->publicdate)){
+            $publicdate = DateConversion::thaiToEngDate($request->publicdate) ;
+        }
         $page->update([
             'page_category_id' => $request->pagecategory,
             'page_status_id' => $request->status,
             'name' => $request->title,
             'slug' => CreateSlug::createSlug($request->title),
             'header' => $request->description, 
+            'publicdate' => $publicdate, 
             'content' => $detail, 
             'feature_image_id' => $exist_feature_image_id, 
             'feature_image_thumbnail_id' => $exist_feature_image_thumbnail_id
