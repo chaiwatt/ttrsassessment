@@ -16,7 +16,7 @@
                             </h2>
                         </div>
                         <div class="btn-part mt-40">
-                            <a class="readon started" href="{{route('register')}}">เพิ่มเติม</a>
+                            <a class="readon started" href="{{route('register')}}">สมัคร</a>
                         </div>
                     </div>
                 </div>

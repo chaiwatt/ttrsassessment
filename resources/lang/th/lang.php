@@ -18,5 +18,5 @@ return [
     'fillouttheform' => 'กรอกแบบฟอร์ม',
     'preliminaryconsideration' => 'พิจารณาเบื้องต้น',
     'assessment' => 'ตรวจประเมิน',
-    'news' => 'บทความล่าสุด',
+    'news' => 'ข่าวล่าสุด',
 ];

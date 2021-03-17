@@ -112,5 +112,8 @@
                 </div>
             </div>
          </div>
+         <div class="btn-part mt-40" style="text-align: center">
+            <a class="readon started" href="{{route('register')}}">ข่าวทั้งหมด</a>
+        </div>
     </div>
 </div>
