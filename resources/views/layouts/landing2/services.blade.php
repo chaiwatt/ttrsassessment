@@ -23,7 +23,7 @@
                                 <p  id="sarabun" class="description sarabun">{{$homepageservice->descriptionthai}}</p> --}}
 
                                 <div class="services-text">
-                                    <h3 class="title"><a href="web-development.html">{{$homepageservice->titlethai}}</a></h3>
+                                    <h3 class="title"><a href="{{route('register')}}">{{$homepageservice->titlethai}}</a></h3>
                                 </div>
                                 <div class="services-desc">
                                     <p>

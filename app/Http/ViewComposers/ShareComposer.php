@@ -1,12 +1,14 @@
 <?php 
 namespace App\Http\ViewComposers; 
 use Auth; 
+use App\Model\Faq;
 use App\Model\Tag;
 use App\Model\Menu;
 use App\Model\Page;
 use App\Model\Slide;
 use App\Model\FrontPage;
 use App\Model\DirectMenu;
+use App\Model\HeaderText;
 use App\Model\MessageBox;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
@@ -40,7 +42,8 @@ class ShareComposer
         $sharepages = Page::paginate(3);
         $sharefrontpage = FrontPage::first();
         $sharenotificationbubbles = NotificationBubble::where('target_user_id',@$auth->id)->where('status',0)->get();
-        // dd($sharenotificationbubbles);
+        $sharefaqs = Faq::get();
+        $shareheadertext = HeaderText::first();
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)
             ->withShareunreadmessages($shareunreadmessages)
@@ -53,6 +56,8 @@ class ShareComposer
             ->withSharenotificationbubbles($sharenotificationbubbles)
             ->withSharefrontpage($sharefrontpage)
             ->withHomepageservices($homepageservices)
-            ->withHomepagepillar($homepagepillar);
+            ->withHomepagepillar($homepagepillar)
+            ->withSharefaqs($sharefaqs)
+            ->withShareheadertext($shareheadertext);
     }
 }

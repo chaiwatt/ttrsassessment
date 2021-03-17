@@ -4,9 +4,19 @@
             <div class="col-lg-6">
                 <div class="banner-content">
                    {{-- <div class="sub-title">Secure & Clean Code</div> --}}
-                   <h1 class="title">Thailand Technology Rating Support and Service (TTRS)</h1>
+                   <h1 class="title">
+                    @if (Config::get('app.locale') == 'th')
+                        {{$shareheadertext->titleth}}
+                    @else
+                        {{$shareheadertext->titleeng}}
+                    @endif
+                   </h1>
                     <p class="desc">
-                        ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS
+                        @if (Config::get('app.locale') == 'th')
+                            {{$shareheadertext->detailth}}
+                        @else
+                            {{$shareheadertext->detaileng}}
+                        @endif
                     </p>
                     <ul class="banner-btn">
                         <li><a class="readon started" href="{{route('register')}}">สมัคร</a></li>

@@ -12,11 +12,22 @@
                         <div class="sec-title mb-30">
                             <div class="sub-text new">4 PILLARS</div>
                             <h2 class="title white-color">
-                                4 หมวดการประเมิน
+                                
+                                @if (Config::get('app.locale') == 'th')
+                                    4 หมวดการประเมิน
+                                @else
+                                    4 Pillars
+                                @endif
                             </h2>
                         </div>
                         <div class="btn-part mt-40">
-                            <a class="readon started" href="{{route('register')}}">สมัคร</a>
+                            <a class="readon started" href="{{route('register')}}">
+                                @if (Config::get('app.locale') == 'th')
+                                    สมัคร
+                                @else
+                                    Apply
+                                @endif
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +42,14 @@
                                     <div class="number-title">
                                         <h3 class="title"> Management</h3>
                                     </div>
-                                    <p class="number-txt">  Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
+                                    <p class="number-txt">  
+                                        @if (Config::get('app.locale') == 'th')
+                                            {{$homepagepillar->pillardescriptionthai1}}
+                                        @else
+                                            {{$homepagepillar->pillardescriptioneng1}}
+                                        @endif
+                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas. --}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +62,14 @@
                                     <div class="number-title">
                                         <h3 class="title">Technology</h3>
                                     </div>
-                                    <p class="number-txt">Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
+                                    <p class="number-txt">
+                                        @if (Config::get('app.locale') == 'th')
+                                            {{$homepagepillar->pillardescriptionthai2}}
+                                        @else
+                                            {{$homepagepillar->pillardescriptioneng2}}
+                                        @endif
+                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas. --}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +82,14 @@
                                     <div class="number-title">
                                         <h3 class="title">Marketability</h3>
                                     </div>
-                                    <p class="number-txt">Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
+                                    <p class="number-txt">
+                                        @if (Config::get('app.locale') == 'th')
+                                            {{$homepagepillar->pillardescriptionthai3}}
+                                        @else
+                                            {{$homepagepillar->pillardescriptioneng3}}
+                                        @endif
+                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas. --}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +102,13 @@
                                     <div class="number-title">
                                         <h3 class="title">Business Prospect</h3>
                                     </div>
-                                    <p class="number-txt">Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p>
+                                    <p class="number-txt">
+                                        @if (Config::get('app.locale') == 'th')
+                                            {{$homepagepillar->pillardescriptionthai4}}
+                                        @else
+                                            {{$homepagepillar->pillardescriptioneng4}}
+                                        @endif
+                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p> --}}
                                 </div>
                             </div>
                         </div>

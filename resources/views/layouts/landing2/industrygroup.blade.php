@@ -12,7 +12,7 @@
                         กลุ่มอุตสาหกรรมที่ขอรับการประเมิน
                     </h2>
                     <div class="desc">
-                       Over 25 years working in IT services developing software applications and mobile apps for clients all over the world.
+                        กลุ่มอุตสาหกรรมที่ขอรับการประเมิน
                     </div>
                 </div>
                 <!-- Skillbar Section Start -->

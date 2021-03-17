@@ -21,48 +21,28 @@
                 </div> --}}
                <div class="faq-content">
                    <div id="accordion" class="accordion">
-                      <div class="card">
-                          <div class="card-header">
-                              <a class="card-link collapsed" data-toggle="collapse" href="#collapseOne"  aria-expanded="false">Where should I incorporate my business?</a>
-                          </div>
-                          <div id="collapseOne" class="collapse" data-parent="#accordion">
-                              <div class="card-body">
-                                    Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Impress clients new and existing with elite construction brochures. Impress clients.
-                              </div>
-                          </div>
-                      </div>
+                       @foreach ($sharefaqs as $key => $faq)
                        <div class="card">
-                           <div class="card-header">
-                               <a class="card-link collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false">Where should I incorporate my business?</a>
-                           </div>
-                           <div id="collapseTwo" class="collapse" data-parent="#accordion" style="">
-                               <div class="card-body">
-                                    Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Impress clients new and existing with elite construction brochures. Impress clients.
-                               </div>
-                           </div>
-                       </div>
-                       <div class="card">
-                           <div class="card-header">
-                              
-                               <a class="card-link collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false">How can I safely use cleaning chemicals?</a>
-                           </div>
-                           <div id="collapseThree" class="collapse" data-parent="#accordion" style="">
-                               <div class="card-body">
-                                   Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Impress clients new and existing with elite construction brochures. Impress clients.
-                               </div>
-                           </div>
-                       </div>     
-                       <div class="card">
-                           <div class="card-header">
-                              
-                               <a class="card-link collapsed" data-toggle="collapse" href="#collapsefour" aria-expanded="false">What type of company is measured?</a>
-                           </div>
-                           <div id="collapsefour" class="collapse" data-parent="#accordion" style="">
-                               <div class="card-body">
-                                    Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Impress clients new and existing with elite construction brochures. Impress clients.
-                               </div>
-                           </div>
-                       </div>
+                            <div class="card-header">
+                                <a class="card-link collapsed" data-toggle="collapse" href="#collapse{{$key}}"  aria-expanded="false">
+                                    @if (Config::get('app.locale') == 'th')
+                                        {{$faq->title}}
+                                    @else
+                                        {{$faq->titleeng}}
+                                    @endif
+                                </a>
+                            </div>
+                            <div id="collapse{{$key}}" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    @if (Config::get('app.locale') == 'th')
+                                        {{$faq->body}}
+                                    @else
+                                        {{$faq->bodyeng}}
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                       @endforeach
                    </div>
                </div>
            </div>  

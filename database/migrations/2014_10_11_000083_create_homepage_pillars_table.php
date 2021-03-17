@@ -23,6 +23,21 @@ class CreateHomepagePillarsTable extends Migration
             $table->text('pillarimage2',250)->nullable();
             $table->text('pillarimage3',250)->nullable();
             $table->text('pillarimage4',250)->nullable();
+
+            $table->text('pillarheader1',250)->nullable();
+            $table->text('pillarheader2',250)->nullable();
+            $table->text('pillarheader3',250)->nullable();
+            $table->text('pillarheader4',250)->nullable();
+
+            $table->text('pillardescriptionthai1',250)->nullable();
+            $table->text('pillardescriptioneng1',250)->nullable();
+            $table->text('pillardescriptionthai2',250)->nullable();
+            $table->text('pillardescriptioneng2',250)->nullable();
+            $table->text('pillardescriptionthai3',250)->nullable();
+            $table->text('pillardescriptioneng3',250)->nullable();
+            $table->text('pillardescriptionthai4',250)->nullable();
+            $table->text('pillardescriptioneng4',250)->nullable();
+
             $table->timestamps();
         });
     }

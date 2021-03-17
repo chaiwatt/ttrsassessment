@@ -16,6 +16,18 @@ class HomepagePillarsTableSeeder extends Seeder
                 'pillarimage2' => '/assets/landing/img/4p/02.png',
                 'pillarimage3' => '/assets/landing/img/4p/03.png',
                 'pillarimage4' => '/assets/landing/img/4p/04.png',
+                'pillarheader1' => 'Management',
+                'pillarheader2' => 'Technology',
+                'pillarheader3' => 'Marketability',
+                'pillarheader4' => 'Business Prospect',
+                'pillardescriptionthai1' => 'Management คำอธิบายภาษาไทย',
+                'pillardescriptioneng1' => 'Management description in english',
+                'pillardescriptionthai2' => 'Technology คำอธิบายภาษาไทย',
+                'pillardescriptioneng2' => 'Technology description in english',
+                'pillardescriptionthai3' => 'Marketability คำอธิบายภาษาไทย',
+                'pillardescriptioneng3' => 'Marketability description in english',
+                'pillardescriptionthai4' => 'Business Prospect คำอธิบายภาษาไทย',
+                'pillardescriptioneng4' => 'Business Prospect description in english',
             ]
         ]);
     }

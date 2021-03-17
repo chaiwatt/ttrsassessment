@@ -27,8 +27,26 @@
                        <div class="toolbar-sl-share">
                            <ul>
                                 {{-- <li class="opening"> <em><i class="flaticon-clock"></i> 08:00am-6:00pm</em> </li> --}}
-                                <li><a href="#" style="; font-size:16px"><i class="fa fa-sign-in" aria-hidden="true"></i> เข้าสู่ระบบ</a></li>
-                                <li><a href="#"><i class="fas fa-language"></i> ไทย</a></li>
+                                <li>
+                                    @if (!Auth::check())
+                                        <a href="{{route('login')}}" ><i class="fa fa-sign-in" aria-hidden="true"></i> 
+                                        {{trans('lang.login')}}
+                                    @else
+                                        <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> 
+                                        {{trans('lang.signout')}}
+                                    {{-- <a href="{{route('logout')}}" class="linkedin sarabun" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icofont-logout"></i> {{trans('lang.signout')}}</a> --}}
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    @endif
+                                </a></li>
+                                
+                                @if (Config::get('app.locale') == 'th')
+                                    <li><a href="{{route('change',['locale' => 'en'])}}"><i class="fa fa-reply-all"></i> ไทย</a></li>
+                                @else
+                                    <li><a href="{{route('change',['locale' => 'th'])}}"><i class="fa fa-reply-all"></i> English</a></li>
+                                @endif
+                               
                                 {{-- <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li> --}}
                            </ul>
