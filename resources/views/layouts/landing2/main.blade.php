@@ -84,8 +84,8 @@
                                    <div class="toolbar-sl-share">
                                        <ul>
                                             {{-- <li class="opening"> <em><i class="flaticon-clock"></i> 08:00am-6:00pm</em> </li> --}}
-                                            <li><a href="#"><i class="fa fa-facebook"></i>เข้าสู่ระบบ</a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i>ไทย</a></li>
+                                            <li><a href="#" style="; font-size:16px"><i class="fa fa-sign-in" aria-hidden="true"></i> เข้าสู่ระบบ</a></li>
+                                            <li><a href="#"><i class="fas fa-language"></i> ไทย</a></li>
                                             {{-- <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
                                             <li><a href="#"><i class="fa fa-instagram"></i></a></li> --}}
                                        </ul>
@@ -117,17 +117,17 @@
                                         <div class="main-menu">
                                             <nav class="rs-menu pr-70 md-pr-0">
                                                 <ul id="onepage-menu" class="nav-menu">
-                                                    <li> <a href="#rs-header">Home</a></li>
-                                                    <li><a href="#rs-about">About</a></li>
-                                                    <li><a href="#rs-services">Services</a></li>
-                                                    <li><a href="#rs-portfolio">Portfolio</a></li>
-                                                    <li><a href="#rs-team">Team</a></li>
-                                                    <li><a href="#rs-blog">Blog</a></li>
-                                                    <li><a href="#rs-contact">Contact</a></li>
+                                                    <li> <a href="#rs-header" style="font-family: kanit; font-weight:200; font-size:20px">หน้าแรก</a></li>
+                                                    <li><a href="#rs-about" style="font-family: kanit; font-weight:200;font-size:20px">About</a></li>
+                                                    <li><a href="#rs-services" style="font-family: kanit; font-weight:200;font-size:20px">บริการ</a></li>
+                                                    <li><a href="#rs-portfolio" style="font-family: kanit; font-weight:200;font-size:20px">Portfolio</a></li>
+                                                    <li><a href="#rs-team" style="font-family: kanit; font-weight:200;font-size:20px">Team</a></li>
+                                                    <li><a href="#rs-blog" style="font-family: kanit; font-weight:200;font-size:20px">ข่าว</a></li>
+                                                    <li><a href="#rs-contact" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li>
                                                 </ul> <!-- //.nav-menu -->
                                             </nav>                                     
                                         </div> <!-- //.main-menu -->
-                                        <div class="expand-btn-inner search-icon hidden-md">
+                                        {{-- <div class="expand-btn-inner search-icon hidden-md">
                                             <ul>
                                                 <li class="sidebarmenu-search">
                                                     <a class="hidden-xs rs-search" data-target=".search-modal" data-toggle="modal" href="#">
@@ -135,7 +135,7 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                        </div>                                
+                                        </div>                                 --}}
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                                   </div>
 
                                   <div class="btn-part mt-55">
-                                      <a class="readon started" href="#">Learn-More</a>
+                                      <a class="readon started" href="#">เพิ่มเติม</a>
                                   </div>
                               </div>
                            </div>
@@ -621,9 +621,9 @@
                             <div class="footer-logo mb-30">
                                 <a href="index.html"><img src="{{asset('assets/landing2/images/logo-dark.png')}}" alt=""></a>
                             </div>
-                              <div class="textwidget pb-30"><p>Sedut perspiciatis unde omnis iste natus error sitlutem acc usantium doloremque denounce with illo inventore veritatis</p>
+                              <div class="textwidget pb-30"><p>111 อุทยานวิทยาศาสตร์ประเทศไทย <br>ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120 </p>
                               </div>
-                              <ul class="footer-social md-mb-30">  
+                              {{-- <ul class="footer-social md-mb-30">  
                                   <li> 
                                       <a href="#" target="_blank"><span><i class="fa fa-facebook"></i></span></a> 
                                   </li>
@@ -638,50 +638,44 @@
                                       <a href="# " target="_blank"><span><i class="fa fa-instagram"></i></span></a> 
                                   </li>
                                                                            
-                              </ul>
+                              </ul> --}}
                         </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 pl-45 md-pl-15 md-mb-30">
-                            <h3 class="widget-title">IT Services</h3>
-                            <ul class="site-map">
-                                <li><a href="software-development.html">Software Development</a></li>
-                                <li><a href="web-development.html">Web Development</a></li>
-                                <li><a href="case-studies-single.html">Analytic Solutions</a></li>
-                                <li><a href="cloud-and-devops.html">Cloud and DevOps</a></li>
-                                <li><a href="product-design.html">Project Design</a></li>
-                            </ul>
+                        <div class="col-lg-3 col-md-12 col-sm-12">
+                            <h3 class="widget-title">เวลาทำการ</h3>
+                            <p class="widget-desc">จันทร์-ศุกร์: {{$generalinfo->workdaytime}}</p>
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 md-mb-30">
-                            <h3 class="widget-title">Contact Info</h3>
+                            <h3 class="widget-title">ติดต่อ</h3>
                             <ul class="address-widget">
-                                <li>
+                                {{-- <li>
                                     <i class="flaticon-location"></i>
                                     <div class="desc">374 FA Tower, William S Blvd 2721, IL, USA</div>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <i class="flaticon-call"></i>
                                     <div class="desc">
-                                       <a href="tel:(+880)155-69569">(+880)155-69569</a>
+                                       <a href="tel:(+880)155-69569">{{$generalinfo->phone1}}</a>
                                     </div>
                                 </li>
                                 <li>
                                     <i class="flaticon-email"></i>
                                     <div class="desc">
-                                        <a href="mailto:support@rstheme.com">support@rstheme.com</a>
+                                        <a href="mailto:support@rstheme.com">{{$generalinfo->email}}</a>
                                     </div>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <i class="flaticon-clock-1"></i>
                                     <div class="desc">
                                         Opening Hours: 10:00 - 18:00   
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12">
                             <h3 class="widget-title">Newsletter</h3>
-                            <p class="widget-desc">We denounce with righteous and in and dislike men who are so beguiled and demo realized.</p>
+                            {{-- <p class="widget-desc">We denounce with righteous and in and dislike men who are so beguiled and demo realized.</p> --}}
                             <p>
-                                <input type="email" name="EMAIL" placeholder="Your email address" required="">
+                                <input type="email" name="EMAIL" placeholder="อีเมล" required="">
                                 <em class="paper-plane"><input type="submit" value="Sign up"></em>
                                 <i class="flaticon-send"></i>
                             </p>
@@ -690,9 +684,9 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="container">                    
-                    <div class="row y-middle">
-                        <div class="col-lg-6 text-right md-mb-10 order-last">
+                <div class="container" style="text-align:center">                    
+                    {{-- <div class="row y-middle"> --}}
+                        {{-- <div class="col-lg-6 text-right md-mb-10 order-last">
                             <ul class="copy-right-menu">
                                 <li><a href="index.html">Home</a></li>
                                 <li><a href="about.html">About</a></li>
@@ -700,13 +694,13 @@
                                 <li><a href="shop.html">Shop</a></li>
                                 <li><a href="faq.html">FAQs</a></li>
                             </ul>
-                        </div>
-                        <div class="col-lg-6">
+                        </div> --}}
+                        <div class="col-lg-12">
                             <div class="copyright">
-                                <p>&copy; 2021 All Rights Reserved. Developed By <a href="http://rstheme.com/">RSTheme</a></p>
+                                <p>&copy; สงวนลิขสิทธิ์ {{date('Y')}} <span>{{$generalinfo->company}}</span> </p>
                             </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </div>
         </footer>
