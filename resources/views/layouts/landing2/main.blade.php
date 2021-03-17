@@ -118,12 +118,11 @@
                                             <nav class="rs-menu pr-70 md-pr-0">
                                                 <ul id="onepage-menu" class="nav-menu">
                                                     <li> <a href="#rs-header" style="font-family: kanit; font-weight:200; font-size:20px">หน้าแรก</a></li>
-                                                    <li><a href="#rs-about" style="font-family: kanit; font-weight:200;font-size:20px">About</a></li>
                                                     <li><a href="#rs-services" style="font-family: kanit; font-weight:200;font-size:20px">บริการ</a></li>
-                                                    <li><a href="#rs-portfolio" style="font-family: kanit; font-weight:200;font-size:20px">Portfolio</a></li>
-                                                    <li><a href="#rs-team" style="font-family: kanit; font-weight:200;font-size:20px">Team</a></li>
+                                                    <li><a href="#rs-about" style="font-family: kanit; font-weight:200;font-size:20px">กลุ่มอุตสาหกรรม</a></li>
                                                     <li><a href="#rs-blog" style="font-family: kanit; font-weight:200;font-size:20px">ข่าว</a></li>
-                                                    <li><a href="#rs-contact" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li>
+                                                    <li><a href="#rs-team" style="font-family: kanit; font-weight:200;font-size:20px">Faq</a></li>
+                                                    <li><a href="#rs-footer" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li>
                                                 </ul> <!-- //.nav-menu -->
                                             </nav>                                     
                                         </div> <!-- //.main-menu -->
@@ -179,13 +178,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="banner-content">
-                               <div class="sub-title">Secure & Clean Code</div>
-                               <h1 class="title">We Manage Your All In All Digital Services</h1>
+                               {{-- <div class="sub-title">Secure & Clean Code</div> --}}
+                               <h1 class="title">Thailand Technology Rating Support and Service (TTRS)</h1>
                                 <p class="desc">
-                                    We are leading technology solutions providing company all over the world doing over 40 years.
+                                    ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS
                                 </p>
                                 <ul class="banner-btn">
-                                    <li><a class="readon started" href="about.htmweb-development.html">เพิ่มเติม</a></li>
+                                    <li><a class="readon started" href="{{route('register')}}">สมัคร</a></li>
                                     <li>
                                         <div class="rs-videos">
                                             <div class="animate-border white-color">
@@ -312,7 +311,7 @@
                                   </div>
 
                                   <div class="btn-part mt-55">
-                                      <a class="readon started" href="#">เพิ่มเติม</a>
+                                      <a class="readon started" href="{{route('register')}}">เพิ่มเติม</a>
                                   </div>
                               </div>
                            </div>
@@ -343,7 +342,7 @@
                                       </h2>
                                   </div>
                                   <div class="btn-part mt-40">
-                                      <a class="readon started" href="#">เพิ่มเติม</a>
+                                      <a class="readon started" href="{{route('register')}}">เพิ่มเติม</a>
                                   </div>
                               </div>
                           </div>
@@ -435,7 +434,7 @@
                                </ul>
                                <h3 class="blog-title"><a href="blog-details.html">Necessity May Give Us Your Best Virtual Court System</a></h3>
                                <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                               <div class="blog-button"><a href="blog-details.html">Learn More</a></div>
+                               <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
                             </div>
                         </div>
                         <div class="blog-item">
@@ -452,7 +451,7 @@
                                </ul>
                                <h3 class="blog-title"><a href="blog-details.html">Tech Products That Makes Its Easier to Stay at Home</a></h3>
                                <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                               <div class="blog-button"><a href="blog-details.html">Learn More</a></div>
+                               <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
                             </div>
                         </div>
                         <div class="blog-item">
@@ -469,7 +468,7 @@
                                </ul>
                                <h3 class="blog-title"><a href="blog-details.html">Open Source Job Report Show More Openings Fewer</a></h3>
                                <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                               <div class="blog-button"><a href="blog-details.html">Learn More</a></div>
+                               <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
                             </div>
                         </div>
                         <div class="blog-item">
@@ -486,7 +485,7 @@
                                </ul>
                                <h3 class="blog-title"><a href="blog-details.html">Types of Social Proof What its Makes Them Effective</a></h3>
                                <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                               <div class="blog-button"><a href="blog-details.html">Learn More</a></div>
+                               <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
                             </div>
                         </div>
                         <div class="blog-item">
@@ -503,7 +502,7 @@
                                </ul>
                                <h3 class="blog-title"><a href="blog-details.html">Tech Firms Support Huawei Restriction, Balk at Cost</a></h3>
                                <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                               <div class="blog-button"><a href="blog-details.html">Learn More</a></div>
+                               <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
                             </div>
                         </div>
                         <div class="blog-item">
@@ -520,7 +519,7 @@
                                </ul>
                                <h3 class="blog-title"><a href="blog-details.html">Servo Project Joins The Linux Foundation Fold Desco</a></h3>
                                <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                               <div class="blog-button"><a href="blog-details.html">Learn More</a></div>
+                               <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
                             </div>
                         </div>
                      </div>
