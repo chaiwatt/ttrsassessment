@@ -13,11 +13,13 @@ use App\Model\MessageBox;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
 use App\Model\PageCategory;
+use App\Model\IndustryGroup;
 use App\Model\WebsiteLayout;
 use App\Model\HomepagePillar;
 use App\Helper\GoogleCalendar;
 use App\Model\HomepageService;
 use App\Model\NotificationBubble;
+use App\Model\HomepageIndustryGroupText;
 
 
 class ShareComposer 
@@ -44,6 +46,10 @@ class ShareComposer
         $sharenotificationbubbles = NotificationBubble::where('target_user_id',@$auth->id)->where('status',0)->get();
         $sharefaqs = Faq::get();
         $shareheadertext = HeaderText::first();
+        $shareindustrygroups = IndustryGroup::orderBy('companybelong','desc')->get();
+        $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
+          // $industrygroups = IndustryGroup::with('companies')->get();
+        // dd($shareindustrygroups); 
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)
             ->withShareunreadmessages($shareunreadmessages)
@@ -58,6 +64,8 @@ class ShareComposer
             ->withHomepageservices($homepageservices)
             ->withHomepagepillar($homepagepillar)
             ->withSharefaqs($sharefaqs)
-            ->withShareheadertext($shareheadertext);
+            ->withShareheadertext($shareheadertext)
+            ->withShareindustrygroups($shareindustrygroups)
+            ->withSharehomepageindustrygrouptext($sharehomepageindustrygrouptext);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\Company;
 use App\Helper\LogAction;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -21,5 +22,10 @@ class IndustryGroup extends Model
     public function getDescriptionForEvent(string $eventName): string
     {
         return LogAction::logAction('กลุ่มอุตสาหกรรม',$eventName);
+    }
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class,'industry_group_id');
     }
 }

@@ -89,9 +89,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EducationBranchesTableSeeder::class);
         $this->call(EducationLevelsTableSeeder::class);
         $this->call(IndustryGroupsTableSeeder::class);
-        // $this->call(IndustryGroupByIsicsTableSeeder::class);
         $this->call(FaqsTableSeeder::class);
-        
         $this->call(RegisteredCapitalTypesSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CriteriaGroupsTableSeeder::class);
@@ -105,14 +103,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CheckListGradingsTableSeeder::class);
         $this->call(PillaIndexWeigthsTableSeeder::class);
         $this->call(HeaderTextsTableSeeder::class);
+        $this->call(HomepageIndustryGroupTextsSeeder::class);
         
-        
-        // $this->call(PillarIndexWeigthsTableSeeder::class);
-        // $this->call(FriendRequestsTableSeeder::class);
-        // $this->call(FriendsTableSeeder::class);
-        // $this->call(MessageBoxesTableSeeder::class);
-        // $this->call(MessageReceivesTableSeeder::class);
-        // $this->call(MessageBoxAttachmentsTableSeeder::class);
+
     }
 }
 

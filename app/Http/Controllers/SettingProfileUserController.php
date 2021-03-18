@@ -122,6 +122,19 @@ class SettingProfileUserController extends Controller
         }else if($reg >= 5000000 && $reg < 10000000){
             $_registeredcapital = 3;
         }
+
+        $oldindustrygroupid = $company->industry_group_id;
+        $industrygroup = IndustryGroup::find($oldindustrygroupid);
+        if(!Empty($industrygroup->companybelong)){
+            $industrygroup->update([
+                'companybelong' => (intVal($industrygroup->companybelong) - 1)
+            ]);
+        }
+        $industrygroup = IndustryGroup::find($request->industrygroup);
+        IndustryGroup::find($request->industrygroup)->update([
+            'companybelong' => (intVal($industrygroup->companybelong) + 1)
+        ]);
+
         $company->update([
             'name' => $request->company,
             'vatno' => $request->vatno,
@@ -144,6 +157,8 @@ class SettingProfileUserController extends Controller
             'email' => $request->email,
             'logo' => $filelocation,
         ]);
+
+
 
         CompanyAddress::where('company_id',$company->id)->first()->update([
             'address' => $request->address,

@@ -32,6 +32,11 @@ class Company extends Model
     protected static $logName = 'ประเภทการจดทะเบียน';
     protected static $logOnlyDirty = true;
     
+    public function industrygroup()
+    {
+        return $this->belongsTo(IndustryGroup::class,'id');
+    }
+
     public function getDescriptionForEvent(string $eventName): string
     {
         return LogAction::logAction('ประเภทการจดทะเบียน',$eventName);

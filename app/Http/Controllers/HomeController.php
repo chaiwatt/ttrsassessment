@@ -19,6 +19,7 @@ use App\Model\FeatureImage;
 use App\Model\IntroSection;
 use App\Model\PageCategory;
 use Jenssegers\Agent\Agent;
+use App\Model\IndustryGroup;
 use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
@@ -350,10 +351,15 @@ class HomeController extends Controller
     public function Test(){
         // $columns = Schema::getColumnListing('full_tbps');
         // return $columns;
-        $tableColumnInfos = DB::select('SHOW FULL COLUMNS FROM business_plans');
-            foreach ($tableColumnInfos as $tableColumnInfo) {
-            echo $tableColumnInfo->Field . ' ' . $tableColumnInfo->Comment . '<br>'; 
-        }
+        // $tableColumnInfos = DB::select('SHOW FULL COLUMNS FROM business_plans');
+        //     foreach ($tableColumnInfos as $tableColumnInfo) {
+        //     echo $tableColumnInfo->Field . ' ' . $tableColumnInfo->Comment . '<br>'; 
+        // }
+        $industrygroups = IndustryGroup::with('companies')->get();
+        return  $industrygroups;
+
+        $company = Company::with('industrygroup')->find(3);
+        return  $company;
     }
 
 }
