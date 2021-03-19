@@ -9,7 +9,7 @@
         <div class="row">
 
         @foreach ($homepageservices as $key => $homepageservice)
-            <div class="col-lg-4 col-md-6 mb-20">
+            <div class="col-lg-4 col-md-6 mb-20" data-aos="fade-up" data-aos-delay="{{($key + 1)*100}}">
                 <div class="services-item {{$homepageservice->cardcolor}}">
                     <div class="services-icon">
                         <div class="image-part">
@@ -49,10 +49,22 @@
                              {{sprintf('%02d', $key+1)}}
                          </div>
                     </div>
+                    
                 </div> 
              </div>
           @endforeach 
+    
+        </div>
+        <div class="getStart text-right" >
 
+            <a class="readon started" href="about.htmweb-development.html">
+                
+                @if (Config::get('app.locale') == 'th')
+                    สมัคร
+                @else
+                    Get Started
+                @endif
+            </a>
         </div>
     </div>
 </div>

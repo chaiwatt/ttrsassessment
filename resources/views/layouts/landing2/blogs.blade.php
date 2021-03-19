@@ -10,23 +10,11 @@
         </div>
         <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-hoverpause="true" data-autoplay-timeout="5000" data-smart-speed="800" data-dots="false" data-nav="false" data-nav-speed="false" data-center-mode="false" data-mobile-device="1" data-mobile-device-nav="false" data-mobile-device-dots="false" data-ipad-device="2" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="2" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="3" data-md-device-nav="false" data-md-device-dots="false">
             @foreach ($sharepages as $page)
-                {{-- <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-5"> <img src="{{asset(@$page->sidebarimage->name)}}" class="img-responsive"></div>
-                        <div class="col-md-7">
-                            <h3 class="sarabun">{{$page->name}}</h3>
-                            <i class="icofont-calendar"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}} &nbsp; <i class="icofont-eye"></i> เข้าดู: {{$page->pageview->count()}}
-                            <p class="mt-2">{{$page->header}}...</p>
-                            <a class="btn  btn-info" href="{{route('landing.page',['slug' => $page->slug])}}">ดูเพิ่มเติม</a>
-                    </div>
-                    </div>
-                    <hr>
-                </div> --}}
                 <div class="blog-item">
                     <div class="image-wrap">
                         <a href="#"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
                         <ul class="post-categories">
-                            <li><a href="blog-details.html">{{@$page->pageCategory->name}}</a></li>
+                            <li><a href="#">{{@$page->pageCategory->name}}</a></li>
                         </ul>
                     </div>
                     <div class="blog-content">
@@ -34,9 +22,9 @@
                            <li class="date"><i class="fa fa-calendar-check-o"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}</li>
                            <li class="admin"><i class="fa fa-eye"></i>  เข้าดู: {{$page->pageview->count()}}</li>
                        </ul>
-                       <h3 class="blog-title"><a href="blog-details.html">{{@$page->name}}</a></h3>
+                       <h3 class="blog-title"><a href="{{route('landing.page',['slug' => $page->slug])}}">{{@$page->name}}</a></h3>
                        <p class="desc">{{@$page->header}}...</p>
-                       <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
+                       <div class="blog-button"><a href="{{route('landing.page',['slug' => $page->slug])}}">เพิ่มเติม</a></div>
                     </div>
                 </div>
             @endforeach

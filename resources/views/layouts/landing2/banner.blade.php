@@ -4,14 +4,14 @@
             <div class="col-lg-6">
                 <div class="banner-content">
                    {{-- <div class="sub-title">Secure & Clean Code</div> --}}
-                   <h1 class="title">
-                    @if (Config::get('app.locale') == 'th')
-                        {{$shareheadertext->titleth}}
-                    @else
-                        {{$shareheadertext->titleeng}}
-                    @endif
+                   <h1 class="title title-animate">
+                        @if (Config::get('app.locale') == 'th')
+                            {{$shareheadertext->titleth}}
+                        @else
+                            {{$shareheadertext->titleeng}}
+                        @endif
                    </h1>
-                    <p class="desc">
+                    <p class="desc desc-animate">
                         @if (Config::get('app.locale') == 'th')
                             {{$shareheadertext->detailth}}
                         @else
@@ -41,5 +41,5 @@
             </div>
         </div>
     </div>           
-    <img class="d-none d-md-block images-part" src="{{asset('assets/landing2/images/banner/banner-3.png')}}" alt="">
+    <img class="d-none d-md-block images-part img-animate m-40" src="{{asset('assets/landing2/images/banner/banner-3.png')}}" alt="">
 </div>

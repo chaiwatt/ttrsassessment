@@ -25,11 +25,12 @@ Route::get('generate','PDFController@Generate')->name('generate');
 Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
 
 Route::get('test', 'HomeController@Test')->name('test');
-Route::get('', 'HomeController@Index')->name('landing.index');
-Route::get('landing2', 'HomeController@Index2')->name('landing2.index');
+Route::get('landing', 'HomeController@Index')->name('landing.index');
+Route::get('', 'HomeController@Index2')->name('landing2.index');
 Route::get('front', 'HomeController@Front')->name('landing.front');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
 Route::get('blog', 'HomeController@Blog')->name('landing.blog');
+Route::get('news', 'HomeController@News')->name('landing.news');
 Route::get('announce', 'HomeController@announce')->name('landing.announce');
 Route::get('announcenews/{slug}', 'HomeController@announcenews')->name('landing.announcenews');
 Route::post('showannounce', 'HomeController@showannounce')->name('landing.showannounce');

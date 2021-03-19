@@ -22,7 +22,7 @@
                <div class="faq-content">
                    <div id="accordion" class="accordion">
                        @foreach ($sharefaqs as $key => $faq)
-                       <div class="card">
+                       <div class="card" data-aos="fade-right" data-aos-delay="{{($key + 1)*100}}">
                             <div class="card-header">
                                 <a class="card-link collapsed" data-toggle="collapse" href="#collapse{{$key}}"  aria-expanded="false">
                                     @if (Config::get('app.locale') == 'th')
