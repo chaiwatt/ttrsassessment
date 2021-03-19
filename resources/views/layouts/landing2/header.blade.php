@@ -24,7 +24,7 @@
                        </div>
                    </div>
                    <div class="col-lg-4 text-right">
-                       <div class="toolbar-sl-share">
+                       <div class="toolbar-sl-share ">
                            <ul>
                                 {{-- <li class="opening"> <em><i class="flaticon-clock"></i> 08:00am-6:00pm</em> </li> --}}
                                 <li>
@@ -32,20 +32,33 @@
                                         <a href="{{route('login')}}" ><i class="fa fa-sign-in" aria-hidden="true"></i> 
                                         {{trans('lang.login')}}
                                     @else
+                                        @if (Auth::user()->user_type_id >= 4)
+                                            <a href="{{route('dashboard.admin.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                        @elseif(Auth::user()->user_type_id == 3)
+                                            <a href="{{route('dashboard.expert.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                        @else
+                                            <a href="{{route('dashboard.company.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                        @endif
+
+                                        &nbsp
                                         <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> 
-                                        {{trans('lang.signout')}}
-                                    {{-- <a href="{{route('logout')}}" class="linkedin sarabun" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icofont-logout"></i> {{trans('lang.signout')}}</a> --}}
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                                {{trans('lang.signout')}}
+                                            
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                            @endif
+                                        </a>
+                            </li>
+                                <li>
+                                    @if (Config::get('app.locale') == 'th')
+                                        <li><a href="{{route('change',['locale' => 'en'])}}"><i class="fa fa-reply-all"></i> ไทย</a></li>
+                                    @else
+                                        <li><a href="{{route('change',['locale' => 'th'])}}"><i class="fa fa-reply-all"></i> English</a></li>
                                     @endif
-                                </a></li>
+                                </li>
                                 
-                                @if (Config::get('app.locale') == 'th')
-                                    <li><a href="{{route('change',['locale' => 'en'])}}"><i class="fa fa-reply-all"></i> ไทย</a></li>
-                                @else
-                                    <li><a href="{{route('change',['locale' => 'th'])}}"><i class="fa fa-reply-all"></i> English</a></li>
-                                @endif
+                              
                                
                                 {{-- <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li> --}}
