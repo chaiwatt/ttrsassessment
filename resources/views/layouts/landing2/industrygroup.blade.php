@@ -1,4 +1,4 @@
-<div id="rs-about" class="rs-about style2 pt-110 pb-120 md-pt-75 md-pb-80">
+<div id="rs-industrygrop" class="rs-about style2 pt-110 pb-120 md-pt-75 md-pb-80">
     <div class="image-part">
        <img src="{{asset('assets/landing2/images/about/about-4.png')}}" alt="about"> 
     </div> 
@@ -37,7 +37,13 @@
                                 {{$shareindustrygroups[0]->nameeng}}
                             @endif
                         </span>
-                      <div class="skillbar" data-percent="{{round($shareindustrygroups[0]->companybelong/$total*100)}}">
+                        @php
+                            $percent0 = 0;
+                            if($total != 0){
+                                $percent0 = round($shareindustrygroups[0]->companybelong/$total*100);
+                            }
+                        @endphp
+                      <div class="skillbar" data-percent="{{$percent0}}">
                           <p class="skillbar-bar"></p>
                           <span class="skill-bar-percent"></span> 
                       </div>
@@ -49,7 +55,13 @@
                             {{$shareindustrygroups[1]->nameeng}}
                         @endif
                       </span>
-                      <div class="skillbar" data-percent="{{round($shareindustrygroups[1]->companybelong/$total*100)}}">
+                      @php
+                        $percent1 = 0;
+                            if($total != 0){
+                                $percent1 = round($shareindustrygroups[1]->companybelong/$total*100);
+                            }
+                        @endphp
+                      <div class="skillbar" data-percent="{{$percent1}}">
                           <p class="skillbar-bar paste-bg"></p>
                           <span class="skill-bar-percent"></span> 
                       </div>
@@ -61,8 +73,13 @@
                             {{$shareindustrygroups[2]->nameeng}}
                         @endif
                       </span>
-                      
-                      <div class="skillbar" data-percent="{{round($shareindustrygroups[2]->companybelong/$total*100)}}">
+                      @php
+                        $percent2 = 0;
+                            if($total != 0){
+                                $percent2 = round($shareindustrygroups[2]->companybelong/$total*100);
+                            }
+                        @endphp
+                      <div class="skillbar" data-percent="{{$percent2}}">
                           <p class="skillbar-bar blue-bg"></p>
                           <span class="skill-bar-percent"></span> 
                       </div>    
@@ -74,8 +91,13 @@
                             {{$shareindustrygroups[3]->nameeng}}
                         @endif
                       </span>
-                      
-                      <div class="skillbar" data-percent="{{round($shareindustrygroups[3]->companybelong/$total*100)}}">
+                      @php
+                      $percent3 = 0;
+                          if($total != 0){
+                              $percent3= round($shareindustrygroups[3]->companybelong/$total*100);
+                          }
+                      @endphp
+                      <div class="skillbar" data-percent="{{$percent3}}">
                           <p class="skillbar-bar pink-bg"></p>
                           <span class="skill-bar-percent"></span> 
                       </div>

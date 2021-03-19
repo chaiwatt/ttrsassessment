@@ -104,6 +104,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PillaIndexWeigthsTableSeeder::class);
         $this->call(HeaderTextsTableSeeder::class);
         $this->call(HomepageIndustryGroupTextsSeeder::class);
+        $this->call(DirectMenu2sTableSeeder::class);
         
 
     }

@@ -80,10 +80,10 @@
                                     <ul id="onepage-menu" class="nav-menu">
                                         <li> <a href="#rs-header" style="font-family: kanit; font-weight:200; font-size:20px">หน้าแรก</a></li>
                                         <li><a href="#rs-services" style="font-family: kanit; font-weight:200;font-size:20px">การลงทะเบียน</a></li>
-                                        <li><a href="#rs-about" style="font-family: kanit; font-weight:200;font-size:20px">กลุ่มอุตสาหกรรม</a></li>
+                                        <li><a href="#rs-industrygrop" style="font-family: kanit; font-weight:200;font-size:20px">กลุ่มอุตสาหกรรม</a></li>
                                         <li><a href="#rs-blog" style="font-family: kanit; font-weight:200;font-size:20px">ข่าว</a></li>
                                         <li><a href="#rs-faq" style="font-family: kanit; font-weight:200;font-size:20px">คำถามพบบ่อย</a></li>
-                                        <li><a href="#rs-footer" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li>
+                                        <li><a href="#rs-contact" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li>
                                     </ul> <!-- //.nav-menu -->
                                 </nav>                                     
                             </div> <!-- //.main-menu -->

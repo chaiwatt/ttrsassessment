@@ -1,4 +1,4 @@
-<footer id="rs-footer" class="rs-footer">
+<footer id="rs-contact" class="rs-footer">
     <div class="footer-top">
         <div class="container">
             <div class="row">

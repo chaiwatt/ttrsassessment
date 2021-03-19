@@ -13,8 +13,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'ผู้ประกอบการยื่นใบสมัครในระบบ TTRS',
                 'descriptioneng' => 'English description for Registration process',
                 'icon' => '/assets/landing/img/register/1.png',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/1.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/1.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/01.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/01.png',
                 'cardcolor' => '',
                 'link' => ''
             ],
@@ -25,8 +25,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptioneng' => 'English description for Fill out the form',
                 'icon' => '/assets/landing/img/register/2.png',
                 'link' => '',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/2.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/2.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/02.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/02.png',
                 'cardcolor' => 'pink-bg',
             ],
             [
@@ -36,8 +36,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptioneng' => 'English description for Preliminary consideration',
                 'icon' => '/assets/landing/img/register/3.png',
                 'link' => '',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/3.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/3.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/03.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/03.png',
                 'cardcolor' => 'aqua-bg',
             ],
             [
@@ -47,8 +47,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptioneng' => 'English description for Assessment',
                 'icon' => '/assets/landing/img/register/4.png',
                 'link' => '',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/4.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/4.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/04.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/04.png',
                 'cardcolor' => 'paste-bg',
             ],
             [
@@ -58,8 +58,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptioneng' => 'English description for Enter the assessment process',
                 'icon' => '/assets/landing/img/register/5.png',
                 'link' => '',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/5.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/5.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/05.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/05.png',
                 'cardcolor' => 'purple-bg',
             ],
             [
@@ -69,8 +69,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptioneng' => 'English description for Rating',
                 'icon' => '/assets/landing/img/register/6.png',
                 'link' => '',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/6.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/6.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/06.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/06.png',
                 'cardcolor' => 'green-bg',
             ] 
         ]);
