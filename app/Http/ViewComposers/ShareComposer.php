@@ -49,7 +49,7 @@ class ShareComposer
         $shareheadertext = HeaderText::first();
         $shareindustrygroups = IndustryGroup::orderBy('companybelong','desc')->get();
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
-        $directmenu2 = DirectMenu2::get();
+        $directmenus2 = DirectMenu2::get();
           // $industrygroups = IndustryGroup::with('companies')->get();
         // dd($shareindustrygroups); 
         $view->withGeneralinfo($generalinfo)
@@ -69,6 +69,6 @@ class ShareComposer
             ->withShareheadertext($shareheadertext)
             ->withShareindustrygroups($shareindustrygroups)
             ->withSharehomepageindustrygrouptext($sharehomepageindustrygrouptext)
-            ->withDirectmenu2($directmenu2);
+            ->withDirectmenus2($directmenus2);
     }
 }

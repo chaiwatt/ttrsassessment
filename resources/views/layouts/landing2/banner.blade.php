@@ -19,11 +19,18 @@
                         @endif
                     </p>
                     <ul class="banner-btn">
-                        <li><a class="readon started" href="{{route('register')}}">สมัคร</a></li>
+                        <li><a class="readon started" href="{{route('register')}}">
+                            
+                            @if (Config::get('app.locale') == 'th')
+                                สมัคร
+                            @else
+                                Apply
+                            @endif
+                        </a></li>
                         <li>
                             <div class="rs-videos">
                                 <div class="animate-border white-color">
-                                    <a class="popup-border popup-videos" href="https://www.youtube.com/watch?v=4Lp7YZilTrU">
+                                    <a class="popup-border popup-videos" href=" {{$shareheadertext->youtube}}">
                                         <i class="fa fa-play"></i>
                                     </a>
                                 </div>

@@ -19,6 +19,7 @@ class CreateHeaderTextsTable extends Migration
             $table->string('titleeng',250);
             $table->string('detailth',250);
             $table->string('detaileng',250);
+            $table->string('youtube',250);
             $table->timestamps();
         });
     }

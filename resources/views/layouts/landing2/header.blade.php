@@ -78,12 +78,21 @@
                             <div class="main-menu">
                                 <nav class="rs-menu pr-70 md-pr-0">
                                     <ul id="onepage-menu" class="nav-menu">
-                                        <li> <a href="#rs-header" style="font-family: kanit; font-weight:200; font-size:20px">หน้าแรก</a></li>
+                                        @foreach($directmenus2 as $key => $menu)
+                                            {{-- <li ><a href="{{url('/').'/'.$menu->url}}" class="sarabun">@if (Config::get('app.locale') == 'th') {{ $menu->name }} @else {{ $menu->engname }} @endif</a></li> --}}
+                                            
+                                            @if (Config::get('app.locale') == 'th')
+                                                <li> <a href="{{$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                            @else
+                                                <li> <a href="{{$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                            @endif
+                                        @endforeach
+                                        {{-- <li> <a href="#rs-header" style="font-family: kanit; font-weight:200; font-size:20px">หน้าแรก</a></li>
                                         <li><a href="#rs-services" style="font-family: kanit; font-weight:200;font-size:20px">การลงทะเบียน</a></li>
                                         <li><a href="#rs-industrygrop" style="font-family: kanit; font-weight:200;font-size:20px">กลุ่มอุตสาหกรรม</a></li>
                                         <li><a href="#rs-blog" style="font-family: kanit; font-weight:200;font-size:20px">ข่าว</a></li>
                                         <li><a href="#rs-faq" style="font-family: kanit; font-weight:200;font-size:20px">คำถามพบบ่อย</a></li>
-                                        <li><a href="#rs-contact" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li>
+                                        <li><a href="#rs-contact" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li> --}}
                                     </ul> <!-- //.nav-menu -->
                                 </nav>                                     
                             </div> <!-- //.main-menu -->
