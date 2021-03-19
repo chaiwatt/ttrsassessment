@@ -10,6 +10,7 @@ use App\Model\FrontPage;
 use App\Model\DirectMenu;
 use App\Model\HeaderText;
 use App\Model\MessageBox;
+use App\Model\DirectMenu2;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
 use App\Model\PageCategory;
@@ -48,6 +49,7 @@ class ShareComposer
         $shareheadertext = HeaderText::first();
         $shareindustrygroups = IndustryGroup::orderBy('companybelong','desc')->get();
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
+        $directmenu2 = DirectMenu2::get();
           // $industrygroups = IndustryGroup::with('companies')->get();
         // dd($shareindustrygroups); 
         $view->withGeneralinfo($generalinfo)
@@ -66,6 +68,7 @@ class ShareComposer
             ->withSharefaqs($sharefaqs)
             ->withShareheadertext($shareheadertext)
             ->withShareindustrygroups($shareindustrygroups)
-            ->withSharehomepageindustrygrouptext($sharehomepageindustrygrouptext);
+            ->withSharehomepageindustrygrouptext($sharehomepageindustrygrouptext)
+            ->withDirectmenu2($directmenu2);
     }
 }
