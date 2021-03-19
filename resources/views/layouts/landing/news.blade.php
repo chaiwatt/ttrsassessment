@@ -13,7 +13,7 @@
           @endphp
           <div class="col-md-4 d-flex " data-aos="fade-up" data-aos-delay="{{$datadelay}}">
                 <div class="card mb-3">
-                    <img class="card-img-top" src="{{asset($page->homepageblogimage->name)}}" alt="Amanda Shah">
+                    <img class="card-img-top" src="{{asset(@$page->homepageblogimage->name)}}" alt="Amanda Shah">
                     <div class="card-body py-3">
                         <h5 class="mb-0 sarabun">{{$page->name}}</h5>
                         <span class="sarabun">{{$page->pageCategory->name}}</span>

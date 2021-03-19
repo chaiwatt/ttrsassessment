@@ -12,7 +12,7 @@
       @foreach ($pages as $page)
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-5"> <img src="{{asset($page->sidebarimage->name)}}" class="img-responsive"></div>
+                <div class="col-md-5"> <img src="{{asset(@$page->sidebarimage->name)}}" class="img-responsive"></div>
                 <div class="col-md-7">
                     <h3 class="sarabun">{{$page->name}}</h3>
                     <i class="icofont-calendar"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}} &nbsp; <i class="icofont-eye"></i> เข้าดู: {{$page->pageview->count()}}
