@@ -9,108 +9,42 @@
             </div> --}}
         </div>
         <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-hoverpause="true" data-autoplay-timeout="5000" data-smart-speed="800" data-dots="false" data-nav="false" data-nav-speed="false" data-center-mode="false" data-mobile-device="1" data-mobile-device-nav="false" data-mobile-device-dots="false" data-ipad-device="2" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="2" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="3" data-md-device-nav="false" data-md-device-dots="false">
-            <div class="blog-item">
-                <div class="image-wrap">
-                    <a href="#"><img src="{{asset('assets/landing2/images/blog/main-home/1.jpg')}}" alt=""></a>
-                    <ul class="post-categories">
-                        <li><a href="blog-details.html">Software Development</a></li>
-                    </ul>
+            @foreach ($sharepages as $page)
+                {{-- <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-5"> <img src="{{asset(@$page->sidebarimage->name)}}" class="img-responsive"></div>
+                        <div class="col-md-7">
+                            <h3 class="sarabun">{{$page->name}}</h3>
+                            <i class="icofont-calendar"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}} &nbsp; <i class="icofont-eye"></i> เข้าดู: {{$page->pageview->count()}}
+                            <p class="mt-2">{{$page->header}}...</p>
+                            <a class="btn  btn-info" href="{{route('landing.page',['slug' => $page->slug])}}">ดูเพิ่มเติม</a>
+                    </div>
+                    </div>
+                    <hr>
+                </div> --}}
+                <div class="blog-item">
+                    <div class="image-wrap">
+                        <a href="#"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
+                        <ul class="post-categories">
+                            <li><a href="blog-details.html">{{@$page->pageCategory->name}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="blog-content">
+                       <ul class="blog-meta">
+                           <li class="date"><i class="fa fa-calendar-check-o"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}</li>
+                           <li class="admin"><i class="fa fa-eye"></i>  เข้าดู: {{$page->pageview->count()}}</li>
+                       </ul>
+                       <h3 class="blog-title"><a href="blog-details.html">{{@$page->name}}</a></h3>
+                       <p class="desc">{{@$page->header}}...</p>
+                       <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
+                    </div>
                 </div>
-                <div class="blog-content">
-                   <ul class="blog-meta">
-                       <li class="date"><i class="fa fa-calendar-check-o"></i> 16 Nov 2020</li>
-                       <li class="admin"><i class="fa fa-user-o"></i> admin</li>
-                   </ul>
-                   <h3 class="blog-title"><a href="blog-details.html">Necessity May Give Us Your Best Virtual Court System</a></h3>
-                   <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                   <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
-                </div>
-            </div>
-            <div class="blog-item">
-                <div class="image-wrap">
-                    <a href="#"><img src="{{asset('assets/landing2/images/blog/main-home/2.jpg')}}" alt=""></a>
-                    <ul class="post-categories">
-                        <li><a href="blog-details.html"> Web Development</a></li>
-                    </ul>
-                </div>
-                <div class="blog-content">
-                   <ul class="blog-meta">
-                       <li class="date"><i class="fa fa-calendar-check-o"></i> 20 December 2020</li>
-                       <li class="admin"><i class="fa fa-user-o"></i> admin</li>
-                   </ul>
-                   <h3 class="blog-title"><a href="blog-details.html">Tech Products That Makes Its Easier to Stay at Home</a></h3>
-                   <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                   <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
-                </div>
-            </div>
-            <div class="blog-item">
-                <div class="image-wrap">
-                    <a href="#"><img src="{{asset('assets/landing2/images/blog/main-home/3.jpg')}}" alt=""></a>
-                    <ul class="post-categories">
-                        <li><a href="blog-details.html">It Services</a></li>
-                    </ul>
-                </div>
-                <div class="blog-content">
-                   <ul class="blog-meta">
-                       <li class="date"><i class="fa fa-calendar-check-o"></i> 22 December 2020</li>
-                       <li class="admin"><i class="fa fa-user-o"></i> admin</li>
-                   </ul>
-                   <h3 class="blog-title"><a href="blog-details.html">Open Source Job Report Show More Openings Fewer</a></h3>
-                   <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                   <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
-                </div>
-            </div>
-            <div class="blog-item">
-                <div class="image-wrap">
-                    <a href="#"><img src="{{asset('assets/landing2/images/blog/main-home/4.jpg')}}" alt=""></a>
-                    <ul class="post-categories">
-                        <li><a href="blog-details.html">Artifical Intelligence</a></li>
-                    </ul>
-                </div>
-                <div class="blog-content">
-                   <ul class="blog-meta">
-                       <li class="date"><i class="fa fa-calendar-check-o"></i> 26 December 2020</li>
-                       <li class="admin"><i class="fa fa-user-o"></i> admin</li>
-                   </ul>
-                   <h3 class="blog-title"><a href="blog-details.html">Types of Social Proof What its Makes Them Effective</a></h3>
-                   <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                   <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
-                </div>
-            </div>
-            <div class="blog-item">
-                <div class="image-wrap">
-                    <a href="#"><img src="{{asset('assets/landing2/images/blog/main-home/5.jpg')}}" alt=""></a>
-                    <ul class="post-categories">
-                        <li><a href="blog-details.html">Digital Technology</a></li>
-                    </ul>
-                </div>
-                <div class="blog-content">
-                   <ul class="blog-meta">
-                       <li class="date"><i class="fa fa-calendar-check-o"></i> 28 December 2020</li>
-                       <li class="admin"><i class="fa fa-user-o"></i> admin</li>
-                   </ul>
-                   <h3 class="blog-title"><a href="blog-details.html">Tech Firms Support Huawei Restriction, Balk at Cost</a></h3>
-                   <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                   <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
-                </div>
-            </div>
-            <div class="blog-item">
-                <div class="image-wrap">
-                    <a href="#"><img src="{{asset('assets/landing2/images/blog/main-home/6.jpg')}}" alt=""></a>
-                    <ul class="post-categories">
-                        <li><a href="blog-details.html">It Services</a></li>
-                    </ul>
-                </div>
-                <div class="blog-content">
-                   <ul class="blog-meta">
-                       <li class="date"><i class="fa fa-calendar-check-o"></i> 30 December 2020</li>
-                       <li class="admin"><i class="fa fa-user-o"></i> admin</li>
-                   </ul>
-                   <h3 class="blog-title"><a href="blog-details.html">Servo Project Joins The Linux Foundation Fold Desco</a></h3>
-                   <p class="desc">We denounce with righteous indige nation and dislike men who are so beguiled...</p>
-                   <div class="blog-button"><a href="blog-details.html">เพิ่มเติม</a></div>
-                </div>
-            </div>
+            @endforeach
+            
+
+
+   
+    
          </div>
          <div class="btn-part mt-40" style="text-align: center">
             <a class="readon started" href="{{route('register')}}">
