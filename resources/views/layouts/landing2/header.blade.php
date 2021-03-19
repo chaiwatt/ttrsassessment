@@ -76,8 +76,8 @@
                     <div class="col-lg-3">
                         <div class="logo-part">
                             <a href="index.html">
-                                <img class="normal-logo" src="{{asset('assets/landing2/images/logo-light.png')}}" alt="logo">  
-                                <img class="sticky-logo" src="{{asset('assets/landing2/images/logo-dark.png')}}" alt="logo">
+                                <img class="normal-logo" src="{{asset($generalinfo->logo)}}" alt="logo">  
+                                <img class="sticky-logo" src="{{asset($generalinfo->logo)}}" alt="logo">
                             </a>
                         </div>
                         <div class="mobile-menu">
@@ -130,7 +130,7 @@
     <nav class="right_menu_togle hidden-md">
         <div class="close-btn"><span id="nav-close" class="text-center"><i class="fa fa-close"></i></span></div>
         <div class="canvas-logo">
-            <a href="index.html"><img src="{{asset('assets/landing2/images/logo-dark.png')}}" alt="logo"></a>
+            <a href="index.html"><img src="{{asset($generalinfo->logo)}}" alt="logo"></a>
         </div>
         <div class="offcanvas-text">
             <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English.</p>
