@@ -15,6 +15,7 @@
         "fruitcake/laravel-cors": "^1.0",
         "google/apiclient": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
+        "htmlmin/htmlmin": "^8.0",
         "intervention/image": "^2.5",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^7.0",

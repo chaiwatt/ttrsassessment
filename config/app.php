@@ -243,6 +243,7 @@ return [
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
     ],
 
 ];
