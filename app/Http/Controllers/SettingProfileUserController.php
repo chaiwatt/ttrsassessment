@@ -92,22 +92,23 @@ class SettingProfileUserController extends Controller
         $company = Company::where('user_id',$auth->id)->first();
         $file = $request->picture; 
         $filelocation = $company->logo;
-        if(!Empty($file)){   
-            $extension_picture = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png');     
-            if( in_array($file->getClientOriginalExtension(), $extension_picture) ){
-                if(!Empty($company->logo)){
-                    @unlink($company->logo);
-                }
-                $name = $file->getClientOriginalName();
-                $file = $request->picture;
-                $img = Image::make($file);  
-                $fname=str_random(10).".".$file->getClientOriginalExtension();
-                $filelocation = "storage/uploads/company/".$fname;
-                Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
-            }else{
-                return redirect()->back()->withError('รูปแบบไฟล์ภาพไม่ถูกต้อง'); 
-            }
-        }
+        // if(!Empty($file)){   
+        //     $extension_picture = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png');     
+        //     if( in_array($file->getClientOriginalExtension(), $extension_picture) ){
+        //         if(!Empty($company->logo)){
+        //             @unlink($company->logo);
+        //         }
+        //         $name = $file->getClientOriginalName();
+        //         $file = $request->picture;
+        //         $img = Image::make($file);  
+        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //         $filelocation = "storage/uploads/company/".$fname;
+        //         Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+        //     }else{
+        //         return redirect()->back()->withError('รูปแบบไฟล์ภาพไม่ถูกต้อง'); 
+        //     }
+        // }
+        
         $paidupcapitaldate=null;
         if(!Empty($request->paidupcapitaldate)){
             $paidupcapitaldate=DateConversion::thaiToEngDate($request->paidupcapitaldate);
@@ -134,7 +135,7 @@ class SettingProfileUserController extends Controller
         IndustryGroup::find($request->industrygroup)->update([
             'companybelong' => (intVal($industrygroup->companybelong) + 1)
         ]);
-
+        
         $company->update([
             'name' => $request->company,
             'vatno' => $request->vatno,
@@ -181,7 +182,9 @@ class SettingProfileUserController extends Controller
         ]);
 
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        
         if(Empty($businessplan)){
+            
                 $count = BusinessPlan::get()->count() + 1;
                 $auth = Auth::user();
                 $company = Company::where('user_id',$auth->id)->first();
@@ -210,9 +213,11 @@ class SettingProfileUserController extends Controller
                 $fulltbpgantt->full_tbp_id = $fulltbp->id;
                 $fulltbpgantt->startyear = intval(Carbon::now()->year) + 543 ;
                 $fulltbpgantt->save();
-
+                
                 $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
+               
                 if($fulltbpcompanydocs->count() > 0){
+                    
                     foreach ($fulltbpcompanydocs as $key => $fulltbpcompanydoc) {
                         $filename = basename($fulltbpcompanydoc->path); 
                         File::copy(public_path($fulltbpcompanydoc->path),public_path("storage/uploads/fulltbp/companyprofile/attachment/".$filename));
@@ -223,7 +228,7 @@ class SettingProfileUserController extends Controller
                         $fulltbpcompanyprofileattachment->save();
                     }
                 }
-
+              
                 $ev = new Ev();
                 $ev->full_tbp_id = $fulltbp->id;
                 $ev->save();

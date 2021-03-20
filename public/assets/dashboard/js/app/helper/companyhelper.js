@@ -33,7 +33,7 @@ $(document).on('change', '#isic', function(e) {
 $("#companydoc").on('change', function() {
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
-    console.log(file);
+    // console.log(file);
     if (this.files[0].size/1024/1024*1000 > 2000 ){
         alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
