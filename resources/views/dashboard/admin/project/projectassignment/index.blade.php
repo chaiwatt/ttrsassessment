@@ -181,7 +181,7 @@
                 $('#messagebody').html(data.jdmessage);
                 $('#minitbpid').val($(this).data('id'));
                 if ($(this).data('statusid') > 9) {
-                    $("#btnname").attr("hidden",true);
+                    $("#btn_modal_add_jdmessage").attr("hidden",true);
                 }
                 if(data.jdmessage !=  null){
                     $('#btnname').html("แก้ไข");
