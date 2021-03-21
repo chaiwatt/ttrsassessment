@@ -141,8 +141,17 @@ $('.steps-basic').steps({
     },
     onStepChanging: function (event, currentIndex, newIndex) {
         if(newIndex == 3){
-            $(document).find(".actions ul").append(`
-            <li class='libtn'><a href='#' id='addcriteria' class='btn bg-primary' ><i class="icon-spinner spinner mr-2" id="spiniconcriteria" hidden></i>เพิ่มรายการ<i class='icon-arrow-right14 ml-2' /></a></li>`);
+            if($('#indextype').val() == 2){
+                if($('#gradea').val() == 0 && $('#gradeb').val() == 0 && $('#gradec').val() == 0 && $('#graded').val() == 0 && $('#gradee').val() == 0 ){
+                    return false;
+                 }else{
+                    $(document).find(".actions ul").append(`
+                    <li class='libtn'><a href='#' id='addcriteria' class='btn bg-primary' ><i class="icon-spinner spinner mr-2" id="spiniconcriteria" hidden></i>เพิ่มรายการ<i class='icon-arrow-right14 ml-2' /></a></li>`);
+                 }
+            }else{
+                $(document).find(".actions ul").append(`
+                <li class='libtn'><a href='#' id='addcriteria' class='btn bg-primary' ><i class="icon-spinner spinner mr-2" id="spiniconcriteria" hidden></i>เพิ่มรายการ<i class='icon-arrow-right14 ml-2' /></a></li>`);
+            }
         }
 
         $('#tmpstepindex').val(newIndex);
@@ -208,8 +217,10 @@ $('.steps-basic').steps({
             }else{
                 $("#criteria_wrapper").attr("hidden",true);
                 if($('#indextype').val() == 2){
+                    console.log('index2');
                     $("#criteria_wrapper").attr("hidden",false);
-                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' ||$('#gradee').val() == ''){
+                    if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' || $('#gradee').val() == ''
+                     || ($('#gradea').val() == 0 && $('#gradeb').val() == 0 && $('#gradec').val() == 0 && $('#graded').val() == 0 && $('#gradee').val() == 0 )){
                         return false;
                     }else{
                         var gradea = parseInt($("#gradea").val());
@@ -373,7 +384,6 @@ $(document).on('click', '#addcriteria', function(e) {
         $('#chklist :checked').each(function() {
             criterias.push($(this).val());
           });
-          //  var gradea = parseInt($("#gradea").val());
           if((criterias.length == 0) || (criterias.length < parseInt($("#gradea").val()))){
             Swal.fire({
                 title: 'ผิดพลาด...',
@@ -997,7 +1007,14 @@ $(document).on('click', '#approveevstageone', function(e) {
 });
 
 $(document).on('click', '#btnaddextracriteria', function(e) {
-    // console.log('ok');
+    // console.log('extra');
+    if($('#percentextra').val() == 0){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ยังไม่ได้กำหนดเปอร์เซนต์ Extra!',
+        })
+        return;
+    }
     Extra.getExtraCategory($('#evid').val()).then(data => {
         var html ='<option value="0" >==เลือกรายการ==</option>';
         data.forEach(function (category,index) {

@@ -121,23 +121,22 @@
                                             {{$projectassignment->businessplan->company->name}}
                                         </td> 
                                         <td> 
-                                            @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
-                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                            @if ($projectassignment->businessplan->business_plan_status_id < 9)
+                                                    @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
+                                                            <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                        @else
+                                                            <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                                    @endif
                                                 @else
                                                     <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
-                                            @endif
-                                            
+                                            @endif 
                                         </td>  
                                         <td> 
                                             @if (!Empty($projectassignment->leader))
                                                 {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
                                             @endif
                                         </td>  
-                                        {{-- <td> 
-                                            @if (!Empty($projectassignment->coleader))
-                                                {{$projectassignment->coleader->prefix->name}}{{$projectassignment->coleader->name}} {{$projectassignment->coleader->lastname}}
-                                            @endif
-                                        </td>  --}}
+
                                         <td>
                                             @if ($projectassignment->leader_id == null)
                                                 <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้มอบหมาย</span>
@@ -151,7 +150,9 @@
                                                     @if ($projectassignment->leader_id == null)
                                                             <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
                                                         @else
+                                                          @if ($projectassignment->businessplan->business_plan_status_id < 9)
                                                             <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">แก้ไข</a>
+                                                          @endif 
                                                     @endif
                                                 @endif 
                                             </td>    

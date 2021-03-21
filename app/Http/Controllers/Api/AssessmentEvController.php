@@ -5,17 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use App\Model\Ev;
 use Carbon\Carbon;
+use App\Model\Pillar;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Model\SubPillar;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\EvCommentTab;
 use App\Model\EvEditHistory;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Model\SubPillarIndex;
 use App\Helper\DateConversion;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
@@ -30,6 +33,10 @@ use App\Model\ProjectStatusTransaction;
 class AssessmentEvController extends Controller
 {
     public function AddEvChecklist(Request $request){
+        $subpillarindex = SubPillarIndex::find($request->subpillarindex);
+        $subpillar = SubPillar::find($subpillarindex->sub_pillar_id);
+        $pillar = Pillar::find($subpillar->pillar_id);
+
         $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)
                                             ->orderBy('pillar_id','asc')
                                             ->orderBy('sub_pillar_id', 'asc')
@@ -37,8 +44,8 @@ class AssessmentEvController extends Controller
                                             ->get()->makeHidden('pillar')->makeHidden('subpillar')->makeHidden('subpillarindex');
         $check_grade = CriteriaTransaction::where('ev_id',$request->evid)
                                     ->where('index_type_id',1)
-                                    ->where('pillar_id',$request->pillar)
-                                    ->where('sub_pillar_id',$request->subpillar)
+                                    ->where('pillar_id',$pillar->id)
+                                    ->where('sub_pillar_id',$subpillar->id)
                                     ->where('sub_pillar_index_id',$request->subpillarindex)
                                     ->first();
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
@@ -55,24 +62,24 @@ class AssessmentEvController extends Controller
         }
         CriteriaTransaction::where('ev_id',$request->evid)
                             ->where('index_type_id',$request->indextype)
-                            ->where('pillar_id',$request->pillar)
-                            ->where('sub_pillar_id',$request->subpillar)
+                            ->where('pillar_id',$pillar->id)
+                            ->where('sub_pillar_id',$subpillar->id)
                             ->where('sub_pillar_index_id',$request->subpillarindex)
                             ->whereNotIn('criteria_id',$request->criterias)->delete();
 
         foreach($request->criterias as $criteria){
             $check = CriteriaTransaction::where('ev_id',$request->evid)
                                     ->where('index_type_id',$request->indextype)
-                                    ->where('pillar_id',$request->pillar)
-                                    ->where('sub_pillar_id',$request->subpillar)
+                                    ->where('pillar_id',$pillar->id)
+                                    ->where('sub_pillar_id',$subpillar->id)
                                     ->where('sub_pillar_index_id',$request->subpillarindex)
                                     ->where('criteria_id',$criteria)->first();
             if(Empty($check)){
                 $criteriatransaction = new CriteriaTransaction();
                 $criteriatransaction->ev_id = $request->evid;
                 $criteriatransaction->index_type_id = $request->indextype;
-                $criteriatransaction->pillar_id = $request->pillar;
-                $criteriatransaction->sub_pillar_id = $request->subpillar;
+                $criteriatransaction->pillar_id = $pillar->id;
+                $criteriatransaction->sub_pillar_id = $subpillar->id;
                 $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
                 $criteriatransaction->criteria_id = $criteria;
                 $criteriatransaction->save();
@@ -85,15 +92,15 @@ class AssessmentEvController extends Controller
             }
         }
 
-        $check = CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$request->pillar)
-                                ->where('sub_pillar_id',$request->subpillar)
+        $check = CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$pillar->id)
+                                ->where('sub_pillar_id',$subpillar->id)
                                 ->where('sub_pillar_index_id',$request->subpillarindex)->first();
         
         if(Empty($check)){
             $checklistgrading = new CheckListGrading();
             $checklistgrading->ev_id = $request->evid;
-            $checklistgrading->pillar_id = $request->pillar;
-            $checklistgrading->sub_pillar_id = $request->subpillar;
+            $checklistgrading->pillar_id = $pillar->id;
+            $checklistgrading->sub_pillar_id = $subpillar->id;
             $checklistgrading->sub_pillar_index_id = $request->subpillarindex;
             $checklistgrading->gradea = $request->gradea;
             $checklistgrading->gradeb = $request->gradeb;
@@ -102,8 +109,8 @@ class AssessmentEvController extends Controller
             $checklistgrading->gradee = $request->gradee;
             $checklistgrading->save();
         }else{
-            CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$request->pillar)
-                ->where('sub_pillar_id',$request->subpillar)
+            CheckListGrading::where('ev_id',$request->evid)->where('pillar_id',$pillar->id)
+                ->where('sub_pillar_id',$subpillar->id)
                 ->where('sub_pillar_index_id',$request->subpillarindex)->first()->update([
                     'gradea' => $request->gradea,
                     'gradeb' => $request->gradeb,
@@ -117,8 +124,8 @@ class AssessmentEvController extends Controller
         if(Empty($pillaindexweigth)){
             $pillaindexweigth = new PillaIndexWeigth();
             $pillaindexweigth->ev_id = $request->evid;
-            $pillaindexweigth->pillar_id = $request->pillar;
-            $pillaindexweigth->sub_pillar_id = $request->subpillar;
+            $pillaindexweigth->pillar_id = $pillar->id;
+            $pillaindexweigth->sub_pillar_id = $subpillar->id;
             $pillaindexweigth->sub_pillar_index_id = $request->subpillarindex;
             $pillaindexweigth->weigth = 0;
             $pillaindexweigth->save();
@@ -134,10 +141,13 @@ class AssessmentEvController extends Controller
             "pillaindexweigths" => $pillaindexweigths,
             "result" => '1'
         ));                                           
-        // return response()->json($criteriatransactions); 
     }
 
     public function AddEvGrading(Request $request){
+        $subpillarindex = SubPillarIndex::find($request->subpillarindex);
+        $subpillar = SubPillar::find($subpillarindex->sub_pillar_id);
+        $pillar = Pillar::find($subpillar->pillar_id);
+
         $pillaindexweigths = PillaIndexWeigth::where('ev_id',$request->evid)
                                         ->orderBy('pillar_id','asc')
                                         ->orderBy('sub_pillar_id', 'asc')
@@ -145,8 +155,8 @@ class AssessmentEvController extends Controller
                                         ->get()->makeHidden('pillar')->makeHidden('subpillar')->makeHidden('subpillarindex');
         $check_list = CriteriaTransaction::where('ev_id',$request->evid)
             ->where('index_type_id',2)
-            ->where('pillar_id',$request->pillar)
-            ->where('sub_pillar_id',$request->subpillar)
+            ->where('pillar_id',$pillar->id)
+            ->where('sub_pillar_id',$subpillar->id)
             ->where('sub_pillar_index_id',$request->subpillarindex)
             ->get();
         $criteriatransactions = CriteriaTransaction::where('ev_id',$request->evid)
@@ -164,23 +174,23 @@ class AssessmentEvController extends Controller
 
         $check = CriteriaTransaction::where('ev_id',$request->evid)
                                     ->where('index_type_id',$request->indextype)
-                                    ->where('pillar_id',$request->pillar)
-                                    ->where('sub_pillar_id',$request->subpillar)
+                                    ->where('pillar_id',$pillar->id)
+                                    ->where('sub_pillar_id',$subpillar->id)
                                     ->where('sub_pillar_index_id',$request->subpillarindex)
                                     ->first();
         if(Empty($check)){
             $check_list = CriteriaTransaction::where('ev_id',$request->evid)
                                     ->where('index_type_id',2)
-                                    ->where('pillar_id',$request->pillar)
-                                    ->where('sub_pillar_id',$request->subpillar)
+                                    ->where('pillar_id',$pillar->id)
+                                    ->where('sub_pillar_id',$subpillar->id)
                                     ->where('sub_pillar_index_id',$request->subpillarindex)
                                     ->get();
             if($check_list->count() == 0){
                 $criteriatransaction = new CriteriaTransaction();
                 $criteriatransaction->ev_id = $request->evid;
                 $criteriatransaction->index_type_id = $request->indextype;
-                $criteriatransaction->pillar_id = $request->pillar;
-                $criteriatransaction->sub_pillar_id = $request->subpillar;
+                $criteriatransaction->pillar_id = $pillar->id;
+                $criteriatransaction->sub_pillar_id = $subpillar->id;
                 $criteriatransaction->sub_pillar_index_id = $request->subpillarindex;
                 $criteriatransaction->save();
             }
@@ -196,8 +206,8 @@ class AssessmentEvController extends Controller
         if(Empty($pillaindexweigth)){
             $pillaindexweigth = new PillaIndexWeigth();
             $pillaindexweigth->ev_id = $request->evid;
-            $pillaindexweigth->pillar_id = $request->pillar;
-            $pillaindexweigth->sub_pillar_id = $request->subpillar;
+            $pillaindexweigth->pillar_id = $pillar->id;
+            $pillaindexweigth->sub_pillar_id = $subpillar->id;
             $pillaindexweigth->sub_pillar_index_id = $request->subpillarindex;
             $pillaindexweigth->weigth = 0;
             $pillaindexweigth->save();

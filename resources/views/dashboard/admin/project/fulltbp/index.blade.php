@@ -58,7 +58,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="row" id="addusermodal">
+                    {{-- <div class="row" id="addusermodal">
                         <div class="col-md-12" >
                             <label>เลือกผู้เชี่ยวชาญ</label>
                             <div class="form-group header-elements-md-inline">
@@ -67,7 +67,7 @@
                                 &nbsp;<button id="btn_modal_edit_projectmember" class="btn bg-teal" > เพิ่ม</button>
                             </div>
                         </div>
-                    </div>  
+                    </div>   --}}
 
                     ทีมผู้เชี่ยวชาญการประเมิน
                     <div class="row">
@@ -78,7 +78,7 @@
                                         <tr>
                                             <th>ชื่อ</th> 
                                             <th>นามสกุล</th> 
-                                            <th>เพิ่มเติม</th>                                                                                   
+                                            {{-- <th>เพิ่มเติม</th>                                                                                    --}}
                                         </tr>
                                     </thead>
                                     <tbody id="usermember_wrapper_tr"> 

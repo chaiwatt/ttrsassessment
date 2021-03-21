@@ -55,13 +55,14 @@ $(document).on('click', '.projectmember', function(e) {
     getUsers($(this).data('id')).then(data => {
         var html =``;
         var html1 =``;
-        if (route.businessplanstatus < 7) {
-          data.users.forEach(function (user,index) {
-              html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
-          });
-        }else{
-          $("#addusermodal").attr("hidden",true);
-        }
+
+        // if (route.businessplanstatus < 7) {
+        //   data.users.forEach(function (user,index) {
+        //       html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
+        //   });
+        // }else{
+        //   $("#addusermodal").attr("hidden",true);
+        // }
 
         data.projectmembers.forEach(function (projectmember,index) {
           var deleteaction = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>`;
@@ -71,14 +72,18 @@ $(document).on('click', '.projectmember', function(e) {
             html1 += `<tr >                                        
                         <td> ${projectmember.user['name']}</td>                            
                         <td> ${projectmember.user['lastname']} </td>     
-                        <td>   
-                            ${deleteaction}
-                        </td>
                     </tr>`
+            // html1 += `<tr >                                        
+            //         <td> ${projectmember.user['name']}</td>                            
+            //         <td> ${projectmember.user['lastname']} </td>     
+            //         <td>   
+            //             ${deleteaction}
+            //         </td>
+            //     </tr>`
             });
        
         $("#usermember_wrapper_tr").html(html1);
-        $("#usermember").html(html);
+        // $("#usermember").html(html);
         $('#modal_edit_projectmember').modal('show');
    }).catch(error => {})
 });
