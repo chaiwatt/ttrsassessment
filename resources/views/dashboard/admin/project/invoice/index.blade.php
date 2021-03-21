@@ -11,7 +11,9 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('dashboard.admin.project.invoice.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มใบแจ้งหนี้<b><i class="icon-plus3"></i></b></a>
+                @if (Auth::user()->isLeader > 0)
+                    <a href="{{route('dashboard.admin.project.invoice.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มใบแจ้งหนี้<b><i class="icon-plus3"></i></b></a>
+                @endif
             </div>
         </div>
 
