@@ -483,6 +483,7 @@ function updateEvAdminStatus(id,value){
                 closeOnCancel: false
                 }).then((result) => {
                     if (result.value) {
+                        $tempchk = 0;
                         $('.inputweigth').each(function() {
                             if($(this).val() == '' || $(this).val() == 0){
                                 //$(this).val(0);
@@ -490,10 +491,14 @@ function updateEvAdminStatus(id,value){
                                     title: 'ผิดพลาด...',
                                     text: 'กรอก Weight ไม่ครบ หรือกรอกค่า Weight เป็น 0',
                                 })
+                                $tempchk = 1;
                                 return ;
                             }
                         });
             
+                        if ($tempchk == 1) {
+                            return ;
+                        }
                         if(parseFloat($('#weight').html().replace(/[{()}]/g, '')) != 1){
                             Swal.fire({
                                 title: 'ผิดพลาด...',
