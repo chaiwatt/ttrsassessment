@@ -488,7 +488,7 @@ function updateEvAdminStatus(id,value){
                                 //$(this).val(0);
                                 Swal.fire({
                                     title: 'ผิดพลาด...',
-                                    text: 'ต้องกรอก Index Weight ให้ครบทุกรายการ',
+                                    text: 'กรอก Weight ไม่ครบ หรือกรอกค่า Weight เป็น 0',
                                 })
                                 return ;
                             }
