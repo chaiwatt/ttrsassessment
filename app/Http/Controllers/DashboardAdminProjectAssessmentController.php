@@ -266,7 +266,7 @@ class DashboardAdminProjectAssessmentController extends Controller
             $check = GradeSummary::where('ev_id',$request->evid)->where('pillar_id',$pillar->id)->get();
             if($check->count() > 0){
                 $totalweightsum = GradeSummary::where('ev_id',$request->evid)->where('pillar_id',$pillar->id)->sum('weightsum')/5;
-                $totalweight = GradeSummary::where('ev_id',$request->evid)->where('pillar_id',$pillar->id)->sum('weight');              
+                   $totalweight = GradeSummary::where('ev_id',$request->evid)->where('pillar_id',$pillar->id)->sum('weight');              
                 $_percent = 0;
                 if($totalweight != 0){
                     $_percent = $totalweightsum/$totalweight*100;

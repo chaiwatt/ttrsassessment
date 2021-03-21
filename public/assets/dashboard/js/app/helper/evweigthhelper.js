@@ -89,7 +89,6 @@ $(document).on('focusin', '.weigthvalue', function(){
             return;
     }
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
-    // console.log(newval);
     if(newval.toFixed(3) > 1){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -99,7 +98,6 @@ $(document).on('focusin', '.weigthvalue', function(){
             return;
     }
     Extra.editExtraWeight($('#evid').val(),$(this).data('id'),$(this).val()).then(data => {
-        // console.log(data)
         $('#extraweight').html('(' + parseFloat(data).toFixed(3) + ')');
     }).catch(error => {})
 });
@@ -487,7 +485,12 @@ function updateEvAdminStatus(id,value){
                     if (result.value) {
                         $('.inputweigth').each(function() {
                             if($(this).val() == ''){
-                                $(this).val(0);
+                                //$(this).val(0);
+                                Swal.fire({
+                                    title: 'ผิดพลาด...',
+                                    text: 'ต้องกรอก Index Weight ให้ครบทุกรายการ',
+                                })
+                                return ;
                             }
                         });
             
