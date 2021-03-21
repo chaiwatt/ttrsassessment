@@ -484,7 +484,7 @@ function updateEvAdminStatus(id,value){
                 }).then((result) => {
                     if (result.value) {
                         $('.inputweigth').each(function() {
-                            if($(this).val() == ''){
+                            if($(this).val() == '' || $(this).val() == 0){
                                 //$(this).val(0);
                                 Swal.fire({
                                     title: 'ผิดพลาด...',
