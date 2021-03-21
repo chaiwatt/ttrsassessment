@@ -49,7 +49,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                                     ->where('user_id',$userid)
                                     ->first(); 
         $user = User::find($userid);   
-        $projectgrade = ProjectGrade::where('full_tbp_id',$fulltbp->id)->get();                         
+        $projectgrade = ProjectGrade::where('full_tbp_id',$fulltbp->id)->where('percent','!=',0)->get();                         
         return view('dashboard.admin.project.assessment.edit')->withEv($ev)
                                                             ->withScoringstatus($scoringstatus)
                                                             ->withUser($user)
