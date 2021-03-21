@@ -121,15 +121,11 @@
                                             {{$projectassignment->businessplan->company->name}}
                                         </td> 
                                         <td> 
-                                            @if ($projectassignment->businessplan->business_plan_status_id < 9)
-                                                    @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
-                                                            <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
-                                                        @else
-                                                            <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
-                                                    @endif
+                                            @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
+                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
                                                 @else
-                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
-                                            @endif 
+                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                            @endif
                                         </td>  
                                         <td> 
                                             @if (!Empty($projectassignment->leader))
@@ -184,6 +180,9 @@
             getJdMessage($(this).data('id')).then(data => {
                 $('#messagebody').html(data.jdmessage);
                 $('#minitbpid').val($(this).data('id'));
+                if ($(this).data('statusid') > 9) {
+                    $("#btnname").attr("hidden",true);
+                }
                 if(data.jdmessage !=  null){
                     $('#btnname').html("แก้ไข");
                 }

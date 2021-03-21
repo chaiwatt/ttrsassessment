@@ -389,6 +389,9 @@
                                                                 @else
                                                                         <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
                                                             @endif
+                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
+                                                                <span class="badge badge-flat border-pink text-pink-600">ดำเนินการเสร็จสิ้น</span>
+                                                            @endif
                                                     @endif
                                                    
                                                 </td>
