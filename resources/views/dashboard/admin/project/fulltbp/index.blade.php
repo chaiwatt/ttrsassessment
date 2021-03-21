@@ -382,16 +382,24 @@
                                                        @else
                                                             @if (Auth::user()->user_type_id == 4)
                                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
+                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
+                                                                            <span class="badge badge-flat border-success text-success-600">ดำเนินการเสร็จสิ้น</span>
+                                                                        @else
                                                                             <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                                    @endif
+                                                                           
                                                                         @else
                                                                             <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
                                                                     @endif
                                                                 @else
+                                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
+                                                                        <span class="badge badge-flat border-success text-success-600">ดำเนินการเสร็จสิ้น</span>
+                                                                    @else
                                                                         <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                @else
+                                                                       
                                                             @endif
-                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                <span class="badge badge-flat border-pink text-pink-600">ดำเนินการเสร็จสิ้น</span>
-                                                            @endif
+                                                           
                                                     @endif
                                                    
                                                 </td>
