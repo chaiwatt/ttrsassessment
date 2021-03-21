@@ -49,7 +49,7 @@ class BusinessPlanStatusSeeder extends Seeder
                 'progress' => 90
             ],
             [
-                'name' => 'ดำเนินการแล้วเสร็จ',
+                'name' => 'สิ้นสุดโครงการ',
                 'progress' => 100
             ],
         ]);

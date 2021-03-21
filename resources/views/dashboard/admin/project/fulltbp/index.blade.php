@@ -383,7 +383,7 @@
                                                             @if (Auth::user()->user_type_id == 4)
                                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ดำเนินการเสร็จสิ้น</a>
+                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
                                                                         @else
                                                                             <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
                                                                         @endif
@@ -393,7 +393,7 @@
                                                                     @endif
                                                                 @else
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ดำเนินการเสร็จสิ้น</a>
+                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
                                                                         @else
                                                                             <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
                                                                         @endif
