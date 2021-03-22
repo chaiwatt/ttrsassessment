@@ -39,13 +39,13 @@
                         <li>
                             <i class="flaticon-call"></i>
                             <div class="desc">
-                               <a href="tel:(+880)155-69569">{{$generalinfo->phone1}}</a>
+                               <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}}</a>
                             </div>
                         </li>
                         <li>
                             <i class="flaticon-email"></i>
                             <div class="desc">
-                                <a href="mailto:support@rstheme.com">{{$generalinfo->email}}</a>
+                                <a href="mailto:{{$generalinfo->email}}">{{$generalinfo->email}}</a>
                             </div>
                         </li>
                         {{-- <li>

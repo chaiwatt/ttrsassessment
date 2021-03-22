@@ -10,11 +10,11 @@
                           <ul>
                               <li>
                                   <i class="flaticon-email"></i>
-                                  <a href="mailto:support@rstheme.com">{{$generalinfo->email}}</a>
+                                  <a href="mailto:{{$generalinfo->email}}">{{$generalinfo->email}}</a>
                               </li>
                               <li>
                                   <i class="flaticon-call"></i>
-                                  <a href="tel:++1(990)999–5554">{{$generalinfo->phone1}}</a>
+                                  <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}}</a>
                               </li>
                               {{-- <li>
                                   <i class="flaticon-location"></i>
