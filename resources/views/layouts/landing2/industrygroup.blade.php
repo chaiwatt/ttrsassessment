@@ -30,7 +30,7 @@
                       @php
                           $total = $shareindustrygroups->sum('companybelong');
                       @endphp
-                      <span class="skillbar-title">
+                      <span class="skillbar-title" style="font-size: 16px">
                             @if (Config::get('app.locale') == 'th')
                                 {{$shareindustrygroups[0]->nameth}}
                             @else
@@ -48,7 +48,7 @@
                           <span class="skill-bar-percent"></span> 
                       </div>
                       <!-- Start Skill Bar -->
-                      <span class="skillbar-title">
+                      <span class="skillbar-title" style="font-size: 16px">
                         @if (Config::get('app.locale') == 'th')
                             {{$shareindustrygroups[1]->nameth}}
                         @else
@@ -66,7 +66,7 @@
                           <span class="skill-bar-percent"></span> 
                       </div>
                       <!-- Start Skill Bar -->
-                      <span class="skillbar-title">
+                      <span class="skillbar-title" style="font-size: 16px">
                         @if (Config::get('app.locale') == 'th')
                             {{$shareindustrygroups[2]->nameth}}
                         @else
@@ -84,7 +84,7 @@
                           <span class="skill-bar-percent"></span> 
                       </div>    
                       <!-- Start Skill Bar -->
-                      <span class="skillbar-title">
+                      <span class="skillbar-title" style="font-size: 16px">
                         @if (Config::get('app.locale') == 'th')
                             {{$shareindustrygroups[3]->nameth}}
                         @else
