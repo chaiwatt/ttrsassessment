@@ -59,9 +59,17 @@
                                             <input type="text"  name="title" value="{{$faq->title}}"  placeholder="คำถาม" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
+                                            <label>คำถาม(English)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="titleeng" value="{{$faq->titleeng}}"  placeholder="คำถาม" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="form-group">
                                             <label>คำตอบ<span class="text-danger">*</span></label>
 											<textarea name="body" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->body}}</textarea>
-                                        </div>                               
+                                        </div>    
+                                        <div class="form-group">
+                                            <label>คำตอบ(English)<span class="text-danger">*</span></label>
+											<textarea name="bodyeng" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->bodyeng}}</textarea>
+                                        </div>                            
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
                                             <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">

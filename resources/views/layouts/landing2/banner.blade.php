@@ -41,5 +41,5 @@
             </div>
         </div>
     </div>           
-    <img class="d-none d-md-block images-part img-animate m-40" src="{{asset('assets/landing2/images/banner/banner-3.png')}}" alt="">
+    <img class="d-none d-md-block images-part img-animate m-40 responsive" src="{{asset('assets/landing2/images/about/about_ss1.png')}}" style="width: 550px;height: 550px;object-fit: cover;" alt="">
 </div>

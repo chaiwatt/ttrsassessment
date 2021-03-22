@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-12 col-sm-12 footer-widget">
                     <div class="footer-logo mb-30">
-                        <a href="index.html"><img src="{{asset('assets/landing2/images/logo-dark.png')}}" alt=""></a>
+                        <a href="index.html"><img src="{{asset($generalinfo->logo)}}" alt=""></a>
                     </div>
                       <div class="textwidget pb-30"><p>111 อุทยานวิทยาศาสตร์ประเทศไทย <br>ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120 </p>
                       </div>

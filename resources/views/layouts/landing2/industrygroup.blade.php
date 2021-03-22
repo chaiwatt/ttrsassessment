@@ -1,6 +1,6 @@
 <div id="rs-industrygrop" class="rs-about style2 pt-110 pb-120 md-pt-75 md-pb-80">
     <div class="image-part">
-       <img src="{{asset('assets/landing2/images/about/about-4.png')}}" data-aos="fade-right" alt="about"> 
+       <img src="{{asset('assets/landing2/images/about/group.png')}}" data-aos="fade-right" alt="about"> 
     </div> 
     <div class="container">
         <div class="row">

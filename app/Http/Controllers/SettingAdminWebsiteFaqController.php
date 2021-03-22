@@ -21,7 +21,10 @@ class SettingAdminWebsiteFaqController extends Controller
         $faq = new Faq();
         $faq->title = $request->title;
         $faq->body = $request->body;
+        $faq->titleeng = $request->titleeng;
+        $faq->bodyeng = $request->bodyeng;
         $faq->status = $request->status;
+        
         $faq->save();
         return redirect()->route('setting.admin.website.faq')->withSuccess('เพิ่มคำถามที่พบบ่อยสำเร็จ');
     }
@@ -35,6 +38,8 @@ class SettingAdminWebsiteFaqController extends Controller
         Faq::find($id)->update([
             'title' => $request->title,
             'body' => $request->body,
+            'titleeng' => $request->titleeng,
+            'bodyeng' => $request->bodyeng,
             'status' => $request->status
         ]);
         return redirect()->route('setting.admin.website.faq')->withSuccess('แก้ไขคำถามที่พบบ่อยสำเร็จ');

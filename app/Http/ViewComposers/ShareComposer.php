@@ -30,28 +30,23 @@ class ShareComposer
         $auth = Auth::user();
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::get()->first();
-        // $directmenus = Menu::where('parent_id', 0)->get();
-        // $sharepages = Page::take(5)->get();
         $directmenus = DirectMenu::get();
         $websitelayouts = WebsiteLayout::where('status', 1)->get();
-        // $slides = Slide::where('slide_status_id', 1)->get();
         $slides = Slide::get();
         $tags = Tag::get();
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
-        // $time = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
         $homepageservices = HomepageService::get();
         $homepagepillar = HomepagePillar::first();
         $sharepages = Page::paginate(3);
         $sharefrontpage = FrontPage::first();
         $sharenotificationbubbles = NotificationBubble::where('target_user_id',@$auth->id)->where('status',0)->get();
-        $sharefaqs = Faq::get();
+        $sharefaqs = Faq::where('status',1)->get();
         $shareheadertext = HeaderText::first();
         $shareindustrygroups = IndustryGroup::orderBy('companybelong','desc')->get();
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
         $directmenus2 = DirectMenu2::get();
-          // $industrygroups = IndustryGroup::with('companies')->get();
-        // dd($shareindustrygroups); 
+
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)
             ->withShareunreadmessages($shareunreadmessages)
