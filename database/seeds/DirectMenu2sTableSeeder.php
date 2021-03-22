@@ -20,8 +20,8 @@ class DirectMenu2sTableSeeder extends Seeder
                 'url' => '#rs-header',
             ],
             [
-                'name' => 'บริการ',
-                'slug' => 'บริการ',
+                'name' => 'ขั้นตอนการบริการ',
+                'slug' => 'ขั้นตอนการบริการ',
                 'engname' => 'Service',
                 'engslug' => 'service',
                 'url' => '#rs-services',
