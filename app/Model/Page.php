@@ -45,7 +45,13 @@ class Page extends Model
 
     public function getViewdateAttribute(){
         $pageview = PageView::where('page_id',$this->id)->latest()->first();
-        return DateConversion::thaiDateTime($pageview->created_at);
+       
+
+        if(!Empty($pageview->created_at)){
+            return DateConversion::thaiDateTime($pageview->created_at);
+        }else{
+            return '';
+        }
     } 
 
     public function getPageViewUniqueAttribute()

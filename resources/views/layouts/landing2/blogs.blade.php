@@ -28,14 +28,10 @@
                     </div>
                 </div>
             @endforeach
-            
 
-
-   
-    
          </div>
          <div class="btn-part mt-40" style="text-align: center">
-            <a class="readon started" href="{{route('register')}}">
+            <a class="readon started" href="{{route('landing.news')}}">
                 @if (Config::get('app.locale') == 'th')
                     ข่าวทั้งหมด
                 @else

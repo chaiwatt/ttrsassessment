@@ -96,7 +96,7 @@
                                         <input type="file" style="display:none;" id="file" name="file" accept="application/pdf"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">เพิ่มเติม</label>
                                         <textarea name="note" class="form-control form-control-lg stringformat200" cols="3" rows="6">{{$invoicetransaction->note}}</textarea>

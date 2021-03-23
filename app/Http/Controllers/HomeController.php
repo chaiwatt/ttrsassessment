@@ -71,6 +71,11 @@ class HomeController extends Controller
         return view('landing2.index');
     }
 
+    public function News()
+    {
+        return view('landing2.news.index');
+    }
+
     public function Page($slug)
     {
         $ip = \Request::getClientIp(true);

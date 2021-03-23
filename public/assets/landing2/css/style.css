@@ -2436,6 +2436,7 @@ blockquote cite:before {
   background: transparent;
   padding: 13px 0;
 }
+
 .full-width-header .rs-header.style3 .menu-area .logo-part a .sticky-logo {
   display: none;
 }
@@ -2472,7 +2473,7 @@ blockquote cite:before {
   display: none;
 }
 .full-width-header .rs-header.style3 .menu-area.sticky {
-  background: #ffffff;
+  background: #ffffff !important;
 }
 .full-width-header .rs-header.style3 .menu-area.sticky .logo-part a .sticky-logo {
   display: block;
@@ -3054,7 +3055,7 @@ body .search-modal .close:hover {
   background-size: cover !important;
 }
 .rs-breadcrumbs .breadcrumbs-inner {
-  padding: 140px 0 150px;
+  padding: 100px 0 90px;
 }
 .rs-breadcrumbs .breadcrumbs-inner .page-title {
   font-size: 48px;
@@ -3062,6 +3063,7 @@ body .search-modal .close:hover {
   line-height: 56px;
   margin-bottom: 5px;
   color: #ffffff;
+  text-shadow: 1px 4px 2px rgba(0, 0, 0, 0.25);
 }
 .rs-breadcrumbs .breadcrumbs-inner .page-title.new-title {
   margin: 0 auto;
@@ -3104,7 +3106,10 @@ body .search-modal .close:hover {
   background: url(assets/images/breadcrumbs/3.jpg);
 }
 .rs-breadcrumbs.img4 {
-  background: url(assets/images/breadcrumbs/4.jpg);
+  background: url(../images/breadcrumbs/4.jpg);
+}
+.rs-breadcrumbs.img5 {
+  background:linear-gradient(360deg, #03218f5e 100%, #0e72e4 100%),url(../images/ttrs.png);
 }
 /* ------------------------------------
     05. Slider Section CSS
@@ -3616,7 +3621,7 @@ body .search-modal .close:hover {
   background-image: linear-gradient(100deg, #03228f 34%, #0e73e4 100%);
   border-radius: 0px 0px 0px 270px;
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
-  padding: 300px 0px 270px 0px;
+  padding: 250px 0px 270px 0px;
   position: relative;
 }
 .rs-banner.style3 .banner-content {

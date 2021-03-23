@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;700&display=swap');
 
 .signIn {
     padding: 10px 20px 10px 20px;
@@ -173,6 +173,18 @@ font-size: 14px;
 
 }
 
+.bg-transparent{
+  background-image: linear-gradient(90deg, #03228f 10%, #0e73e4 100%) !important; 
+}
+
+.pd-140{
+  padding-top: 140px;
+}
+
+
+
+
+
 @media(max-width:1366px) {
   
 .h1{
@@ -264,4 +276,9 @@ font-size: 12px;
 .mt-3{
   text-align: center;
 }
+
+.pd-140{
+  padding-top: 90px;
+}
+
 }

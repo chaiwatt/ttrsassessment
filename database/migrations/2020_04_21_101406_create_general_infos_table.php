@@ -17,6 +17,7 @@ class CreateGeneralInfosTable extends Migration
             $table->id();
             $table->string('company',150)->comment('ชื่อหน่วยงาน เช่น สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ');
             $table->string('logo',250)->nullable();
+            $table->string('logo2',250)->nullable();
             $table->string('phone1',50)->nullable();
             $table->string('phone2',50)->nullable();
             $table->string('fax',50)->nullable();

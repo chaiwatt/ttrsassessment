@@ -57,11 +57,7 @@
                                         <li><a href="{{route('change',['locale' => 'th'])}}"><i class="fa fa-reply-all"></i> English</a></li>
                                     @endif
                                 </li>
-                                
-                              
-                               
-                                {{-- <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li> --}}
+                        
                            </ul>
                        </div>
                    </div>
@@ -75,8 +71,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3">
                         <div class="logo-part">
-                            <a href="index.html">
-                                <img class="normal-logo" src="{{asset($generalinfo->logo)}}" alt="logo">  
+                            <a href="{{url('')}}">
+                                <img class="normal-logo" src="{{asset($generalinfo->logo2)}}" alt="logo">  
                                 <img class="sticky-logo" src="{{asset($generalinfo->logo)}}" alt="logo">
                             </a>
                         </div>
@@ -100,24 +96,10 @@
                                                 <li> <a href="{{$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
                                             @endif
                                         @endforeach
-                                        {{-- <li> <a href="#rs-header" style="font-family: kanit; font-weight:200; font-size:20px">หน้าแรก</a></li>
-                                        <li><a href="#rs-services" style="font-family: kanit; font-weight:200;font-size:20px">การลงทะเบียน</a></li>
-                                        <li><a href="#rs-industrygrop" style="font-family: kanit; font-weight:200;font-size:20px">กลุ่มอุตสาหกรรม</a></li>
-                                        <li><a href="#rs-blog" style="font-family: kanit; font-weight:200;font-size:20px">ข่าว</a></li>
-                                        <li><a href="#rs-faq" style="font-family: kanit; font-weight:200;font-size:20px">คำถามพบบ่อย</a></li>
-                                        <li><a href="#rs-contact" style="font-family: kanit; font-weight:200;font-size:20px">ติดต่อ</a></li> --}}
-                                    </ul> <!-- //.nav-menu -->
+
+                                    </ul> 
                                 </nav>                                     
-                            </div> <!-- //.main-menu -->
-                            {{-- <div class="expand-btn-inner search-icon hidden-md">
-                                <ul>
-                                    <li class="sidebarmenu-search">
-                                        <a class="hidden-xs rs-search" data-target=".search-modal" data-toggle="modal" href="#">
-                                            <i class="flaticon-search"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>                                 --}}
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -150,6 +132,9 @@
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
             </ul>
         </div>
+
     </nav>
     <!-- Canvas Menu end -->
+    
 </div>
+
