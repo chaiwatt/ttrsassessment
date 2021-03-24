@@ -229,7 +229,6 @@
                                             <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
 
                                             <li class="Post-cate" style="margin-left: 10px; margin-top:10px">
-                                                {{Request::url()}}
                                                 @php
                                                     $url = 'https://www.facebook.com/plugins/share_button.php?href='.Request::url().'&layout=button&size=small&appId=418295982223884&width=61&height=20';
                                                 @endphp
