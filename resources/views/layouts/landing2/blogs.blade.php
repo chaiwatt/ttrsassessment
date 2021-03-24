@@ -12,9 +12,9 @@
             @foreach ($sharepages as $page)
                 <div class="blog-item">
                     <div class="image-wrap">
-                        <a href="#"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
+                        <a href="{{route('landing.page',['slug' => $page->slug])}}"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
                         <ul class="post-categories">
-                            <li><a href="#">{{@$page->pageCategory->name}}</a></li>
+                            <li><a href="{{route('landing.page',['slug' => $page->slug])}}">{{@$page->pageCategory->name}}</a></li>
                         </ul>
                     </div>
                     <div class="blog-content">
