@@ -7,7 +7,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">คำถามที่พบบ่อย</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่ม Service</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="{{route('setting.admin.website.page')}}" class="breadcrumb-item"> คำถามที่พบบ่อย</a>
-                    <span class="breadcrumb-item active">คำถามที่พบบ่อย</span>
+                    <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
+                    <a href="{{route('setting.admin.website.homepage.service')}}" class="breadcrumb-item"> Service</a>
+                    <span class="breadcrumb-item active">เพิ่ม Service</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -49,40 +50,39 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.homepage.banner.editsave',['id' => $faq->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.homepage.service.editsave',['id' => $homepageservice->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
-                                    <fieldset>	
                                         <div class="form-group">
-                                            <label>คำถาม<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{$faq->title}}"  placeholder="คำถาม" class="form-control form-control-lg">
+                                            <label>Title<span class="text-danger">*</span></label>
+                                            <input type="text"  name="titlethai" value="{{$homepageservice->titlethai}}"  placeholder="Title" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>คำถาม(English)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="titleeng" value="{{$faq->titleeng}}"  placeholder="คำถาม" class="form-control form-control-lg">
+                                            <label>Title (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="titleeng" value="{{$homepageservice->titleeng}}"  placeholder="Title (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                        </div>                             
+                                        <div class="form-group">
+                                            <label>Description<span class="text-danger">*</span></label>
+                                            <input type="text"  name="descriptionthai" value="{{$homepageservice->descriptionthai}}"  placeholder="Description" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>คำตอบ<span class="text-danger">*</span></label>
-											<textarea name="body" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->body}}</textarea>
-                                        </div>    
-                                        <div class="form-group">
-                                            <label>คำตอบ(English)<span class="text-danger">*</span></label>
-											<textarea name="bodyeng" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->bodyeng}}</textarea>
-                                        </div>                            
-                                        <div class="form-group">
-                                            <label>สถานะการแสดง</label>
-                                            <select name="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
-                                                @foreach ($statuses as $status)
-                                                    <option value="{{$status->id}}"
-                                                        @if ($status->id == $faq->status)
-                                                            selected
-                                                        @endif
-                                                        >{{$status->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label>Description (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="Description (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
-                                    </fieldset>
+                                        <div class="form-group">
+                                            <label>ลิงค์</label>
+                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ลิงค์" class="form-control form-control-lg">
+                                        </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button href="#" id="avatar"  type="button" class="btn btn-sm btn-info" onclick="document.getElementById('iconimg').click();">แนบไฟล์รูป</button><span class="text-danger"> *</span>
+                                        <input type="file" style="display:none;" id="iconimg" name="iconimg" accept="image/*"/>
+                                    </div>         
+                                    <div class="form-group">
+                                        <img src="{{asset($homepageservice->icon)}}" alt="">
+                                    </div>
                                 </div>
                             </div>
                             <div class="text-right">
@@ -104,6 +104,15 @@
         url: "{{ url('/') }}",
         token: $('meta[name="csrf-token"]').attr('content')
     };
+
+
+$("#iconimg").on('change', function() {
+    var file = this.files[0];
+        if (this.files[0].size/1024/1024*1000 > 1000 ){
+            alert('ไฟล์ขนาดมากกว่า 1 MB');
+            return ;
+        }
+    $('#avatar').html('แนบไฟล์รูป [1]');
 });
 </script>
 @stop

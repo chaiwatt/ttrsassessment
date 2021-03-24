@@ -975,17 +975,30 @@ Route::group(['middleware' => 'auth'], function(){
                     });
                 });
                 Route::group(['prefix' => 'homepage'], function(){     
+                    // Route::group(['prefix' => 'service'], function(){     
+                    //     Route::get('','SettingAdminWebsiteHomepageServiceController@Index')->name('setting.admin.website.homepage.service'); 
+                    //     Route::get('create','SettingAdminWebsiteHomepageServiceController@Create')->name('setting.admin.website.homepage.service.create'); 
+                    //     Route::get('edit/{id}','SettingAdminWebsiteHomepageServiceController@Edit')->name('setting.admin.website.homepage.service.edit');
+                    //     Route::post('createsave','SettingAdminWebsiteHomepageServiceController@CreateSave')->name('setting.admin.website.homepage.service.createsave'); 
+                    //     Route::post('editsave/{id}','SettingAdminWebsiteHomepageServiceController@EditSave')->name('setting.admin.website.homepage.service.editsave'); 
+                    //     Route::get('delete/{id}','SettingAdminWebsiteHomepageServiceController@Delete')->name('setting.admin.website.homepage.service.delete');
+                    // });
+                    Route::group(['prefix' => 'pillar'], function(){     
+                        Route::get('edit','SettingAdminWebsiteHomepagePillarController@Edit')->name('setting.admin.website.homepage.pillar'); 
+                        Route::post('editsave','SettingAdminWebsiteHomepagePillarController@EditSave')->name('setting.admin.website.homepage.pillar.editsave'); 
+                    });
+                    Route::group(['prefix' => 'banner'], function(){     
+                        Route::get('','SettingAdminWebsiteHomepageBannerController@Edit')->name('setting.admin.website.homepage.banner'); 
+                        Route::post('editsave','SettingAdminWebsiteHomepageBannerController@EditSave')->name('setting.admin.website.homepage.banner.editsave'); 
+                    });
                     Route::group(['prefix' => 'service'], function(){     
                         Route::get('','SettingAdminWebsiteHomepageServiceController@Index')->name('setting.admin.website.homepage.service'); 
-                        Route::get('create','SettingAdminWebsiteHomepageServiceController@Create')->name('setting.admin.website.homepage.service.create'); 
-                        Route::get('edit/{id}','SettingAdminWebsiteHomepageServiceController@Edit')->name('setting.admin.website.homepage.service.edit');
-                        Route::post('createsave','SettingAdminWebsiteHomepageServiceController@CreateSave')->name('setting.admin.website.homepage.service.createsave'); 
+                        Route::get('edit/{id}','SettingAdminWebsiteHomepageServiceController@Edit')->name('setting.admin.website.homepage.service.edit'); 
                         Route::post('editsave/{id}','SettingAdminWebsiteHomepageServiceController@EditSave')->name('setting.admin.website.homepage.service.editsave'); 
-                        Route::get('delete/{id}','SettingAdminWebsiteHomepageServiceController@Delete')->name('setting.admin.website.homepage.service.delete');
                     });
-                    Route::group(['prefix' => 'pillar'], function(){     
-                        Route::get('','SettingAdminWebsiteHomepagePillarController@Edit')->name('setting.admin.website.homepage.pillar'); 
-                        Route::post('editsave','SettingAdminWebsiteHomepagePillarController@EditSave')->name('setting.admin.website.homepage.pillar.editsave'); 
+                    Route::group(['prefix' => 'industryugroup'], function(){     
+                        Route::get('','SettingAdminWebsiteHomepageIndustryugroupController@Edit')->name('setting.admin.website.homepage.industryugroup'); 
+                        Route::post('editsave','SettingAdminWebsiteHomepageIndustryugroupController@EditSave')->name('setting.admin.website.homepage.industryugroup.editsave'); 
                     });
                 });
 

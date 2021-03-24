@@ -20,6 +20,7 @@ use App\Model\HomepagePillar;
 use App\Helper\GoogleCalendar;
 use App\Model\HomepageService;
 use App\Model\NotificationBubble;
+use App\Model\HomepagePillarSection;
 use App\Model\HomepageIndustryGroupText;
 
 
@@ -37,8 +38,8 @@ class ShareComposer
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
         $homepageservices = HomepageService::get();
-        $homepagepillar = HomepagePillar::first();
-        $sharepages = Page::paginate(3);
+        $homepagepillar = HomepagePillarSection::first();
+        $sharepages = Page::orderBy('id','desc')->paginate(3);
         $sharefrontpage = FrontPage::first();
         $sharenotificationbubbles = NotificationBubble::where('target_user_id',@$auth->id)->where('status',0)->get();
         $sharefaqs = Faq::where('status',1)->get();

@@ -26,13 +26,14 @@ class DatabaseSeeder extends Seeder
         $this->call(StockHoldersTableSeeder::class);
         $this->call(BankTypesTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
+        $this->call(CardColorsTableSeeder::class);
         $this->call(EventCalendarAttendeeStatusesTableSeeder::class);
         $this->call(AnnounceCategoryTableSeeder::class);
         $this->call(CompanyServiceTypesTableSeeder::class);
         $this->call(CompanysizesTableSeeder::class);
         $this->call(VerifyExpertStatusTableSeeder::class);
         $this->call(GradesTableSeeder::class);
-        $this->call(HomepagePillarsTableSeeder::class);
+        $this->call(HomepagePillarSectionsTableSeeder::class);
         $this->call(SearchGroupsTableSeeder::class);
         $this->call(HomepageServicesTableSeeder::class);   
         $this->call(SounddexApiTableSeeder::class);

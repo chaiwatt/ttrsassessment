@@ -10,9 +10,9 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Service</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            {{-- <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.introsection.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Intro section<b><i class="icon-plus3"></i></b></a>
-            </div> --}}
+            <div class="header-elements d-none">
+                <a href="{{route('setting.admin.website.homepage.service.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Service<b><i class="icon-plus3"></i></b></a>
+            </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="{{route('setting.admin.website.homepage.service')}}" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
+                    <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
                     <span class="breadcrumb-item active">Service</span>
                 </div>
 
@@ -53,7 +53,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ภาพสไลด์</h6>
+                        <h6 class="card-title">หน้าเพจ</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -63,24 +63,24 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" >
+                            <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>ข้อความ (ภาษาไทย)</th>
-                                        <th>ข้อความอธิบาย (ภาษาไทย)</th>                            
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        <th>Title</th>                               
+                                        <th>Desctiption</th>
+                                        <th style="width:250px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($homepageservices as $key => $homepageservice)
-                                    <tr>   
-                                        <td> {{$homepageservice->titlethai}} </td>   
-                                        <td> {{$homepageservice->descriptionthai}} </td>                                   
-                                        <td> 
-                                            <a href="{{route('setting.admin.website.homepage.service.edit',['id' => $homepageservice->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                         
-                                        </td>
-                                    </tr>
+                                        <tr>    
+                                            <td> {{$homepageservice->titlethai}} </td>                                         
+                                            <td> {{$homepageservice->descriptionthai}} </td>                                                                         
+                                            <td> 
+                                                <a href="{{route('setting.admin.website.homepage.service.edit',['id' => $homepageservice->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                                <a href="{{route('setting.admin.website.homepage.service.delete',['id' => $homepageservice->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>      

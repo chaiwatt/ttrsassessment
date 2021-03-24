@@ -15,11 +15,12 @@ class CreateHomepageIndustryGroupTextsTable extends Migration
     {
         Schema::create('homepage_industry_group_texts', function (Blueprint $table) {
             $table->id();
-            $table->string('titleth',250);
-            $table->string('titleeng',250);
-            $table->string('subtitleth',250);
-            $table->string('subtitleeng',250);
-            $table->string('url',250);
+            $table->string('titleth',250)->nullable();
+            $table->string('titleeng',250)->nullable();
+            $table->string('subtitleth',250)->nullable();
+            $table->string('subtitleeng',250)->nullable();
+            $table->string('picture',250)->nullable();
+            $table->string('url',250)->nullable();
             $table->timestamps();
         });
     }

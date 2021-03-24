@@ -10,13 +10,19 @@
                 <div class="col-lg-4 pr-40 md-pr-15 md-pb-80">
                     <div class="process-wrap md-center">
                         <div class="sec-title mb-30">
-                            <div class="sub-text new">4 PILLARS</div>
-                            <h2 class="title white-color">
-                                
+                            <div class="sub-text new">
                                 @if (Config::get('app.locale') == 'th')
-                                    4 หมวดการประเมิน
+                                    {{$homepagepillar->textth1}}
                                 @else
-                                    4 Pillars
+                                    {{$homepagepillar->texteng1}}
+                                @endif
+
+                            </div>
+                            <h2 class="title white-color">     
+                                @if (Config::get('app.locale') == 'th')
+                                    {{$homepagepillar->textth2}}
+                                @else
+                                    {{$homepagepillar->texteng2}}
                                 @endif
                             </h2>
                         </div>
@@ -40,15 +46,20 @@
                                         1
                                     </div>
                                     <div class="number-title">
-                                        <h3 class="title"> Management</h3>
+                                        <h3 class="title">
+                                            @if (Config::get('app.locale') == 'th')
+                                                {{$homepagepillar->pillartitleth1}}
+                                            @else
+                                                {{$homepagepillar->pillartitleeng1}}
+                                            @endif
+                                        </h3>
                                     </div>
                                     <p class="number-txt">  
                                         @if (Config::get('app.locale') == 'th')
-                                            {{$homepagepillar->pillardescriptionthai1}}
+                                            {{$homepagepillar->pillardescth1}}
                                         @else
-                                            {{$homepagepillar->pillardescriptioneng1}}
+                                            {{$homepagepillar->pillardesceng1}}
                                         @endif
-                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas. --}}
                                     </p>
                                 </div>
                             </div>
@@ -60,15 +71,20 @@
                                         2
                                     </div>
                                     <div class="number-title">
-                                        <h3 class="title">Technology</h3>
+                                        <h3 class="title">
+                                            @if (Config::get('app.locale') == 'th')
+                                            {{$homepagepillar->pillartitleth2}}
+                                        @else
+                                            {{$homepagepillar->pillartitleeng2}}
+                                        @endif
+                                        </h3>
                                     </div>
                                     <p class="number-txt">
                                         @if (Config::get('app.locale') == 'th')
-                                            {{$homepagepillar->pillardescriptionthai2}}
+                                            {{$homepagepillar->pillardescth2}}
                                         @else
-                                            {{$homepagepillar->pillardescriptioneng2}}
+                                            {{$homepagepillar->pillardesceng2}}
                                         @endif
-                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas. --}}
                                     </p>
                                 </div>
                             </div>
@@ -80,15 +96,20 @@
                                         3
                                     </div>
                                     <div class="number-title">
-                                        <h3 class="title">Marketability</h3>
+                                        <h3 class="title">
+                                            @if (Config::get('app.locale') == 'th')
+                                                {{$homepagepillar->pillartitleth3}}
+                                            @else
+                                                {{$homepagepillar->pillartitleeng3}}
+                                            @endif
+                                        </h3>
                                     </div>
                                     <p class="number-txt">
                                         @if (Config::get('app.locale') == 'th')
-                                            {{$homepagepillar->pillardescriptionthai3}}
+                                            {{$homepagepillar->pillardescth3}}
                                         @else
-                                            {{$homepagepillar->pillardescriptioneng3}}
+                                            {{$homepagepillar->pillardesceng3}}
                                         @endif
-                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas. --}}
                                     </p>
                                 </div>
                             </div>
@@ -100,15 +121,20 @@
                                         4
                                     </div>
                                     <div class="number-title">
-                                        <h3 class="title">Business Prospect</h3>
+                                        <h3 class="title">
+                                            @if (Config::get('app.locale') == 'th')
+                                                {{$homepagepillar->pillartitleth4}}
+                                            @else
+                                                {{$homepagepillar->pillartitleeng4}}
+                                            @endif
+                                        </h3>
                                     </div>
                                     <p class="number-txt">
                                         @if (Config::get('app.locale') == 'th')
-                                            {{$homepagepillar->pillardescriptionthai4}}
+                                            {{$homepagepillar->pillardescth4}}
                                         @else
-                                            {{$homepagepillar->pillardescriptioneng4}}
+                                            {{$homepagepillar->pillardesceng4}}
                                         @endif
-                                        {{-- Quisque placerat vitae lacus ut scelerisque. Fusce luctus odio ac nibh luctus, in porttitor theo lacus egestas.</p> --}}
                                 </div>
                             </div>
                         </div>

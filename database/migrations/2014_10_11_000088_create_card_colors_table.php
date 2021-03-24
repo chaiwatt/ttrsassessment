@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHeaderTextsTable extends Migration
+class CreateCardColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateHeaderTextsTable extends Migration
      */
     public function up()
     {
-        Schema::create('header_texts', function (Blueprint $table) {
+        Schema::create('card_colors', function (Blueprint $table) {
             $table->id();
-            $table->string('titleth',250);
-            $table->string('titleeng',250);
-            $table->string('detailth',250);
-            $table->string('detaileng',250);
-            $table->string('imgbanner',250);
-            $table->string('youtube',250);
+            $table->string('name',250);
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateHeaderTextsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('header_texts');
+        Schema::dropIfExists('card_colors');
     }
 }

@@ -1,13 +1,13 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-<link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 @stop
 @section('content')
     <!-- Page header -->
     <div class="page-header page-header-light">
+        
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เพิ่ม Service</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไข Service</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,9 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
-                    <a href="{{route('setting.admin.website.homepage.service')}}" class="breadcrumb-item"> Service</a>
-                    <span class="breadcrumb-item active">เพิ่ม Service</span>
+                    <a href="{{route('setting.admin.website.homepage.service')}}" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
+                    {{-- <span class="breadcrumb-item active">แก้ไข Intro section</span> --}}
+                    <span class="breadcrumb-item active">Service</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -54,36 +54,72 @@
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
+                                    <fieldset>	
                                         <div class="form-group">
-                                            <label>Title<span class="text-danger">*</span></label>
-                                            <input type="text"  name="titlethai" value="{{$homepageservice->titlethai}}"  placeholder="Title" class="form-control form-control-lg">
+                                            <label>ข้อความ (ภาษาไทย)</label>
+                                            <input type="text"  name="titlethai" value="{{$homepageservice->titlethai}}"  placeholder="ข้อความที่ (ภาษาไทย)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>Title (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="titleeng" value="{{$homepageservice->titleeng}}"  placeholder="Title (ภาษาอังกฤษ)" class="form-control form-control-lg">
-                                        </div>                             
-                                        <div class="form-group">
-                                            <label>Description<span class="text-danger">*</span></label>
-                                            <input type="text"  name="descriptionthai" value="{{$homepageservice->descriptionthai}}"  placeholder="Description" class="form-control form-control-lg">
+                                            <label>ข้อความ (ภาษาอังกฤษ)</label>
+                                            <input type="text"  name="titleeng" value="{{$homepageservice->titleeng}}"  placeholder="ข้อความที่ (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>Description (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="Description (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <label>ข้อความอธิบาย (ภาษาไทย)</label>
+                                            <input type="text"  name="descriptionthai" value="{{$homepageservice->descriptionthai}}"  placeholder="ข้อความอธิบาย (ภาษาไทย)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>ลิงค์</label>
-                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ลิงค์" class="form-control form-control-lg">
+                                            <label>ข้อความอธิบาย (ภาษาอังกฤษ)</label>
+                                            <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
+                                        <div class="form-group">
+                                            <label>ลิงก์</label>
+                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>เลือกสีพื้น</label>
+                                            <select name="cardcolor"  placeholder="เลือกสีพื้น" class="form-control form-control-select2">
+                                              @foreach($cardcolors as $key => $cardcolor)
+                                                  <option value="{{$cardcolor->id}}" >{{$cardcolor->name}}</option>
+                                              @endforeach
+                                          </select>
+                                         </div>
+ 
+										<div class="form-group">
+											<label>Icon ปกติ<span class="text-danger">*</span></label>
+											<div class="input-group">													
+												<input type="text" id="_iconnormal" class="form-control border-right-0" placeholder="รูปไอคอน" disabled>
+												<span class="input-group-append">
+													<button class="btn bg-info" type="button" onclick="document.getElementById('iconnormal').click();">อัปโหลดรูป</button>													
+												</span>
+											</div>
+											<input type="file" style="display:none;" id="iconnormal" name="iconnormal" accept="image/*"/>
+                                        </div>
+                                        <div class="row">	
+                                            <div class="col-md-12">
+                                                <img class="img-responsive" src="{{asset($homepageservice->iconnormal)}}" style="width:100px;width:100px" >
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+											<label>Icon Hover<span class="text-danger">*</span></label>
+											<div class="input-group">													
+												<input type="text" id="_iconhover" class="form-control border-right-0" placeholder="รูปไอคอน" disabled>
+												<span class="input-group-append">
+													<button class="btn bg-info" type="button" onclick="document.getElementById('iconhover').click();">อัปโหลดรูป</button>													
+												</span>
+											</div>
+											<input type="file" style="display:none;" id="iconhover" name="iconhover" accept="image/*"/>
+                                        </div>
+                                        <div class="row">	
+                                            <div class="col-md-12">
+                                                <img class="img-responsive" src="{{asset($homepageservice->iconhover)}}" style="width:100px;width:100px" >
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </fieldset>
+                                    
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <button href="#" id="avatar"  type="button" class="btn btn-sm btn-info" onclick="document.getElementById('iconimg').click();">แนบไฟล์รูป</button><span class="text-danger"> *</span>
-                                        <input type="file" style="display:none;" id="iconimg" name="iconimg" accept="image/*"/>
-                                    </div>         
-                                    <div class="form-group">
-                                        <img src="{{asset($homepageservice->icon)}}" alt="">
-                                    </div>
-                                </div>
+                                
                             </div>
                             <div class="text-right">
                                 <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -91,6 +127,7 @@
                         </form>
                     </div>
                 </div>
+            <!-- /striped rows -->
             </div>
         </div>
         <!-- /form layouts -->
@@ -98,21 +135,12 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-
-<script  type="text/javascript">
-	var route = {
-        url: "{{ url('/') }}",
-        token: $('meta[name="csrf-token"]').attr('content')
-    };
-
-
-$("#iconimg").on('change', function() {
-    var file = this.files[0];
-        if (this.files[0].size/1024/1024*1000 > 1000 ){
-            alert('ไฟล์ขนาดมากกว่า 1 MB');
-            return ;
-        }
-    $('#avatar').html('แนบไฟล์รูป [1]');
-});
-</script>
+    <script type="text/javascript">
+        $("#iconnormal").on('change', function() {
+            $("#_iconnormal").val(this.value);
+        });
+        $("#iconhover").on('change', function() {
+            $("#_iconhover").val(this.value);
+        });
+    </script>
 @stop

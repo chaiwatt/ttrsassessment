@@ -1,7 +1,6 @@
 <div id="rs-services" class="rs-services style3 pt-110 pb-120 md-pt-75 md-pb-80">
     <div class="container">
         <div class="sec-title2 text-center mb-45">
-            {{-- <span class="sub-text">Services</span> --}}
             <h2 class="title testi-title">
                 {{trans('lang.registrationprocess')}}
             </h2>
@@ -10,7 +9,7 @@
 
         @foreach ($homepageservices as $key => $homepageservice)
             <div class="col-lg-4 col-md-6 mb-20" data-aos="fade-up" data-aos-delay="{{($key + 1)*100}}">
-                <div class="services-item {{$homepageservice->cardcolor}}">
+                <div class="services-item {{$homepageservice->cardcolor->name}}">
                     <div class="services-icon">
                         <div class="image-part">
                             <img class="main-img" src="{{asset($homepageservice->iconnormal)}}" alt="">
@@ -19,11 +18,8 @@
                     </div>
                     <div class="services-content">
                         @if (Config::get('app.locale') == 'th')
-                                {{-- <h4 class="title sarabun"><a href="{{$homepageservice->link}}">{{$homepageservice->titlethai}}</a></h4>
-                                <p  id="sarabun" class="description sarabun">{{$homepageservice->descriptionthai}}</p> --}}
-
                                 <div class="services-text">
-                                    <h3 class="title"><a href="{{route('register')}}">{{$homepageservice->titlethai}}</a></h3>
+                                    <h3 class="title"><a href="{{url('').'/'.$homepageservice->link}}">{{$homepageservice->titlethai}}</a></h3>
                                 </div>
                                 <div class="services-desc">
                                     <p>
@@ -31,10 +27,8 @@
                                     </p>
                                 </div>
                             @else
-                                {{-- <h4 class="title sarabun"><a href="">{{$homepageservice->titleeng}}</a></h4>
-                                <p  id="sarabun" class="description sarabun">{{$homepageservice->descriptioneng}}</p> --}}
                                 <div class="services-text">
-                                    <h3 class="title"><a href="web-development.html">{{$homepageservice->titleeng}}</a></h3>
+                                    <h3 class="title"><a href="{{url('').'/'.$homepageservice->link}}">{{$homepageservice->titleeng}}</a></h3>
                                 </div>
                                 <div class="services-desc">
                                     <p>
@@ -57,7 +51,7 @@
         </div>
         <div class="getStart text-right" >
 
-            <a class="readon started" href="about.htmweb-development.html">
+            <a class="readon started" href="{{route('login')}}">
                 
                 @if (Config::get('app.locale') == 'th')
                     สมัคร

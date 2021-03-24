@@ -1,6 +1,6 @@
 <div id="rs-industrygrop" class="rs-about style2 pt-110 pb-120 md-pt-75 md-pb-80">
     <div class="image-part">
-       <img src="{{asset('assets/landing2/images/about/group.png')}}" data-aos="fade-right" alt="about"> 
+       <img src="{{asset($sharehomepageindustrygrouptext->picture)}}" data-aos="fade-right" alt="about"> 
     </div> 
     <div class="container">
         <div class="row">
@@ -103,7 +103,7 @@
                       </div>
 
                       <div class="btn-part mt-55">
-                          <a class="readon started" href="{{route('register')}}">
+                          <a class="readon started" href="{{url('').'/'.$sharehomepageindustrygrouptext->url}}">
                             @if (Config::get('app.locale') == 'th')
                                 เพิ่มเติม
                             @else

@@ -15,8 +15,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'icon' => '/assets/landing/img/register/1.png',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/01.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/01.png',
-                'cardcolor' => '',
-                'link' => ''
+                'cardcolor_id' => 1,
+                'link' => 'register'
             ],
             [
                 'titlethai' => 'กรอกแบบฟอร์ม',
@@ -24,10 +24,10 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'กรอกแบบฟอร์มและส่งเอกสารเพิ่มเติมตามที่แจ้งในระบบ',
                 'descriptioneng' => 'English description for Fill out the form',
                 'icon' => '/assets/landing/img/register/2.png',
-                'link' => '',
+                'link' => 'register',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/02.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/02.png',
-                'cardcolor' => 'pink-bg',
+                'cardcolor_id' => 2,
             ],
             [
                 'titlethai' => 'พิจารณาเบื้องต้น',
@@ -35,10 +35,10 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'ผู้เชี่ยวชาญพิจารณาเบื้องต้น',
                 'descriptioneng' => 'English description for Preliminary consideration',
                 'icon' => '/assets/landing/img/register/3.png',
-                'link' => '',
+                'link' => 'register',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/03.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/03.png',
-                'cardcolor' => 'aqua-bg',
+                'cardcolor_id' => 3,
             ],
             [
                 'titlethai' => 'ตรวจประเมิน',
@@ -46,10 +46,10 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'ตรวจประเมินการใช้เทคโนโลยีและการประกอบธุรกิจ',
                 'descriptioneng' => 'English description for Assessment',
                 'icon' => '/assets/landing/img/register/4.png',
-                'link' => '',
+                'link' => 'register',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/04.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/04.png',
-                'cardcolor' => 'paste-bg',
+                'cardcolor_id' => 4,
             ],
             [
                 'titlethai' => 'เข้าสู่ระบบการประเมิน',
@@ -57,10 +57,10 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'เข้าสู่ระบบการประเมินเทคโนโลยี',
                 'descriptioneng' => 'English description for Enter the assessment process',
                 'icon' => '/assets/landing/img/register/5.png',
-                'link' => '',
+                'link' => 'register',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/05.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/05.png',
-                'cardcolor' => 'purple-bg',
+                'cardcolor_id' => 5,
             ],
             [
                 'titlethai' => 'การจัดอันดับเทคโนโลยี',
@@ -68,10 +68,10 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptionthai' => 'การจัดอันดับเทคโนโลยีและออกใบรับรอง',
                 'descriptioneng' => 'English description for Rating',
                 'icon' => '/assets/landing/img/register/6.png',
-                'link' => '',
+                'link' => 'register',
                 'iconnormal' => '/assets/landing2/images/services/style2/main-img/06.png',
                 'iconhover' => '/assets/landing2/images/services/style2/hover-img/06.png',
-                'cardcolor' => 'green-bg',
+                'cardcolor_id' => 6,
             ] 
         ]);
     }

@@ -73,7 +73,8 @@ class HomeController extends Controller
 
     public function News()
     {
-        return view('landing2.news.index');
+        $pages = Page::orderBy('id','desc')->paginate(5);
+        return view('landing2.news.index')->withPages($pages);
     }
 
     public function Page($slug)
@@ -96,15 +97,43 @@ class HomeController extends Controller
         $pageview->browser = $agent->browser();
         $pageview->ipaddress = $ip;
         $pageview->save();
-        
-        $pagetags = PageTag::where('page_id',$page->id)->get();
-        $pageimages = PageImage::where('page_id',$page->id)->get();
-        $pages = Page::take(5)->get();
-        return view('landing.single')->withPage($page)
-                                ->withPagetags($pagetags)
-                                ->withPageimages($pageimages)
-                                ->withPages($pages);
+
+        $pages = Page::orderBy('id','desc')->paginate(5);
+        $page = Page::where('slug',$slug)->first();
+        if(Empty($page)){
+            return abort(404);
+        }
+        return view('landing2.single')->withPage($page)->withPages($pages);
     }
+    // public function Page($slug)
+    // {
+    //     $ip = \Request::getClientIp(true);
+    //     $agent = new Agent();
+    //     $page = Page::where('slug',$slug)->first();
+    //     if(Empty($page)){
+    //         return abort(404);
+    //     }
+    //     $user = "";
+    //     if(Auth::check()){
+    //         $user = Auth::user()->id;
+    //     }
+    //     $pageview = new PageView();
+    //     $pageview->page_id = $page->id;
+    //     $pageview->user_id = $user ;
+    //     $pageview->device = $agent->device();
+    //     $pageview->platform = $agent->platform();
+    //     $pageview->browser = $agent->browser();
+    //     $pageview->ipaddress = $ip;
+    //     $pageview->save();
+        
+    //     $pagetags = PageTag::where('page_id',$page->id)->get();
+    //     $pageimages = PageImage::where('page_id',$page->id)->get();
+    //     $pages = Page::take(5)->get();
+    //     return view('landing.single')->withPage($page)
+    //                             ->withPagetags($pagetags)
+    //                             ->withPageimages($pageimages)
+    //                             ->withPages($pages);
+    // }
     public function Tag($slug)
     {
         $tag = Tag::where('slug',$slug)->first();
