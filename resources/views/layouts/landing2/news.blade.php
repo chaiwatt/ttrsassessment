@@ -131,11 +131,18 @@
                                         <nav class="rs-menu pr-70 md-pr-0">
                                             <ul id="onepage-menu" class="nav-menu">
                                                 @foreach($directmenus2 as $key => $menu)
-                                                    {{-- <li ><a href="{{url('/').'/'.$menu->url}}" class="sarabun">@if (Config::get('app.locale') == 'th') {{ $menu->name }} @else {{ $menu->engname }} @endif</a></li> --}}
                                                     @if (Config::get('app.locale') == 'th')
-                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                        @if ($key == 0)
+                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                            @else
+                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                        @endif
                                                     @else
-                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                        @if ($key == 0)
+                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                            @else
+                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                        @endif
                                                     @endif
                                                 @endforeach
         
