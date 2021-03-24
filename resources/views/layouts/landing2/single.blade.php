@@ -229,7 +229,13 @@
                                             <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
 
                                             <li class="Post-cate" style="margin-left: 10px; margin-top:10px">
-                                                <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&appId=516325532583570&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                                {{Request::url()}}
+                                                @php
+                                                    $url = 'https://www.facebook.com/plugins/share_button.php?href='.Request::url().'&layout=button&size=small&appId=418295982223884&width=61&height=20';
+                                                @endphp
+                                                {{-- <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&appId=167217544577729&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> --}}
+                                                {{-- <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fsanook.com&layout=button&size=small&appId=418295982223884&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> --}}
+                                                <iframe src="{{$url}}" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                                             </li>
                                             {{-- <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&appId=516325532583570&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> --}}
                                         </ul>
