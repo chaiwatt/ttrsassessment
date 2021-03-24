@@ -222,16 +222,23 @@
                                                     <i class="fa fa-book"></i>
                                                     <a href="#">{{@$page->pageCategory->name}}</a>
                                                     <!-- Go to www.addthis.com/dashboard to customize your tools -->
-
+                                                    
 
                                                 </div>
                                             </li>
                                             <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
+
+                                            <li class="Post-cate" style="margin-left: 10px; margin-top:10px">
+                                                <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&appId=516325532583570&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                            </li>
+                                            {{-- <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&appId=516325532583570&width=61&height=20" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> --}}
                                         </ul>
+                                       
                                         <p>
                                             {{$page->content}}
                                             
                                         </p>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -313,7 +320,7 @@
          <!-- modernizr js -->
          @include('layouts.landing2.js')
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-605aa0e2e70137c1"></script>
+{{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-605aa0e2e70137c1"></script> --}}
 
     </body>
 
