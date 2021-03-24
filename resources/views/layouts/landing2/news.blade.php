@@ -234,12 +234,12 @@
                     </div>
                     <div class="col-lg-4 col-md-12 order-last">
                         <div class="widget-area">
-                            <div class="search-widget mb-50">
+                            {{-- <div class="search-widget mb-50">
                                 <div class="search-wrap">
                                     <input type="search" placeholder="ค้นหา..." name="s" class="search-input" value="">
                                     <button type="submit" value="Search"><i class="flaticon-search"></i></button>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="recent-posts mb-50">
                                 <div class="widget-title">
                                     <h3 class="title">ข่าวล่าสุด</h3>

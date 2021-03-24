@@ -214,6 +214,9 @@
                                                 <div class="tag-line">
                                                     <i class="fa fa-book"></i>
                                                     <a href="#">{{@$page->pageCategory->name}}</a>
+                                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+
                                                 </div>
                                             </li>
                                             <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
@@ -302,6 +305,9 @@
         {{-- {{asset('assets/landing2/css/responsive.css')}} --}}
          <!-- modernizr js -->
          @include('layouts.landing2.js')
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-605aa0e2e70137c1"></script>
+
     </body>
 
 </html>

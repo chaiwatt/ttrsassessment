@@ -78,7 +78,7 @@
                                         <td> {{$pillar->percent}} </td>                                    
                                         <td>   
                                             <a href="{{route('setting.admin.assessment.pillar.edit',['id' => $pillar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.assessment.pillar.delete',['id' => $pillar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            {{-- <a href="{{route('setting.admin.assessment.pillar.delete',['id' => $pillar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>
                                     </tr>
                                     @endforeach
