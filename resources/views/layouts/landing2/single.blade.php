@@ -205,11 +205,12 @@
                     <div class="col-lg-8 pr-35 md-pr-15">
                         <div class="row">
                             <div class="col-lg-12">
+                                
+                                
                                 <div class="blog-details">
-                                    <div class="bs-img mb-35">
-                                        <a href="#"><img src="{{asset($page->featureimage->name)}}" alt=""></a>
-                                    </div>
+                                   
                                     <div class="blog-full">
+                                        <h2>{{$page->name}}</h2>
                                         <ul class="single-post-meta">
                                             <li>
                                                 <span class="p-date"><i class="fa fa-calendar-check-o"></i>โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}  </span>
@@ -221,9 +222,6 @@
                                                 <div class="tag-line">
                                                     <i class="fa fa-book"></i>
                                                     <a href="#">{{@$page->pageCategory->name}}</a>
-                                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                                    
-
                                                 </div>
                                             </li>
                                             <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
@@ -237,6 +235,12 @@
                                             </li>
                                             
                                         </ul>
+                                    </div>
+                                    <div class="bs-img mb-35">
+                                        <a href="#"><img src="{{asset($page->featureimage->name)}}" alt=""></a>
+                                    </div>
+                                    <div class="blog-full">
+                                     
                                        
                                         <p>
                                             {{$page->content}}
