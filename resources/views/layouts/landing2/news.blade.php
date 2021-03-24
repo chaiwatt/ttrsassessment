@@ -164,9 +164,9 @@
                     <a href="index.html"><img src="assets/images/logo-dark.png" alt="logo"></a>
                 </div>
                 <div class="offcanvas-text">
-                    <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here, content here’, making it look like readable English.</p>
+                    <p>111 อุทยานวิทยาศาสตร์ประเทศไทย ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120</p>
                 </div>
-                <div class="canvas-contact">
+                {{-- <div class="canvas-contact">
                     <h5 class="canvas-contact-title">Contact Info</h5>
                     <ul class="contact">
                         <li><i class="fa fa-globe"></i>Middle Badda, Dhaka, BD</li>
@@ -180,7 +180,7 @@
                         <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
-                </div>
+                </div> --}}
             </nav>
             <!-- Canvas Menu end -->
         </div>
