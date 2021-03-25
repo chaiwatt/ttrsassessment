@@ -22,9 +22,9 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 
 Route::get('generate','PDFController@Generate')->name('generate');
 
-Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
+// Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
 
-Route::get('test', 'HomeController@Test')->name('test');
+// Route::get('test', 'HomeController@Test')->name('test');
 Route::get('landing', 'HomeController@Index')->name('landing.index');
 Route::get('', 'HomeController@Index2')->name('landing2.index');
 Route::get('front', 'HomeController@Front')->name('landing.front');
