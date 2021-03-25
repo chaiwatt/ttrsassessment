@@ -81,7 +81,7 @@ class RegisterController extends Controller
         [
             'name.required' => 'ยังไม่ได้กรอกชื่อ',
             'lastname.required' => 'ยังไม่ได้กรอกนามสกุล',
-            'vatno.required' => 'ยังไม่ได้กรอกเลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน',
+            'vatno.required' => 'ยังไม่ได้กรอกเลขประจำตัวผู้เสียภาษีอากร/บัตรประจำตัวประชาชน',
             'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
             'email.required' => 'ยังไม่ได้กรอกอีเมล',
             'password.required' => 'ยังไม่ได้กรอกรหัสผ่าน',

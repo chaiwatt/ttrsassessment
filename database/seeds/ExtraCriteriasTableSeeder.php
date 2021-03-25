@@ -14,15 +14,15 @@ class ExtraCriteriasTableSeeder extends Seeder
         DB::table('extra_criterias')->insert([
             [
                 'extra_category_id' => 1,
-                'name' => 'Extra อย1',
+                'name' => 'Extra อย.1',
             ],
             [
                 'extra_category_id' => 1,
-                'name' => 'Extra อย2',
+                'name' => 'Extra อย.2',
             ],
             [
                 'extra_category_id' => 1,
-                'name' => 'Extra อย3',
+                'name' => 'Extra อย.3',
             ],
             [
                 'extra_category_id' => 2,

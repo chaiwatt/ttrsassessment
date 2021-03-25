@@ -13,10 +13,10 @@ class ExtraCategoriesTableSeeder extends Seeder
     {
         DB::table('extra_categories')->insert([
             [
-                'name' => 'อย'
+                'name' => 'อย.'
             ],
             [
-                'name' => 'มอก'
+                'name' => 'มอก.'
             ],
             [
                 'name' => 'Bank'

@@ -38,7 +38,7 @@ class EditProfileExpertRequest extends FormRequest
         'name.required' => 'ยังไม่ได้กรอกชื่อ',
         'lastname.required' => 'ยังไม่ได้กรอกนามสกุล',
         'hid.required' => 'ยังไม่ได้กรอกเลขบัตรประจำตัวประชาชน',
-        'address.required' => 'ยังไม่ได้กรอกที่อยู่ตามบัตรประชาชน',
+        'address.required' => 'ยังไม่ได้กรอกที่อยู่ตามบัตรประจำตัวประชาชน',
         'province.required' => 'ยังไม่ได้เลือกจังหวัด',
         'amphur.required' => 'ยังไม่ได้เลือกอำเภอ',
         'tambol.required' => 'ยังไม่ได้เลือกตำบล',

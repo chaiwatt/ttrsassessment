@@ -18,11 +18,11 @@ class ExtraFactorsTableSeeder extends Seeder
             ],
             [
                 'sub_cluster_id' => 2,
-                'name' => 'มอก',
+                'name' => 'มอก.',
             ],
             [
                 'sub_cluster_id' => 2,
-                'name' => 'อย',
+                'name' => 'อย.',
             ],
             [
                 'sub_cluster_id' => 2,

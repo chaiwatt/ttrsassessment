@@ -85,7 +85,7 @@ class ReportTTRSSingleOfficerExportFirstSheet implements
     {
         return [
             'ชื่อ-สกุล',
-            'ที่อยู่ตามบัตรประชาชน',
+            'ที่อยู่ตามบัตรประจำตัวประชาชน',
             'ที่อยู่ที่ติดต่อได้',
             'โทรศัพท์',
             'อีเมล',

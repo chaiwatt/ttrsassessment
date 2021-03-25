@@ -77,7 +77,7 @@
                     </div>
     
                     <div class="form-group" id="vatwrapper" >
-                        <input id="vatno" type="text" class="form-control form-control-lg numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประชาชน" >
+                        <input id="vatno" type="text" class="form-control form-control-lg numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประจำตัวประชาชน" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
                         @error('vatno')
                             <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>

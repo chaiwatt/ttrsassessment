@@ -12,7 +12,7 @@ class HidController extends Controller
         $arrresult = array();
         if(strlen( $request->hid ) != 13){ 
             $arrresult[] = array(
-                'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากรูปแบบไม่ถูกต้อง', 
+                'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประจำตัวประชาชนนี้ได้ เนื่องจากรูปแบบไม่ถูกต้อง', 
                 'success' => false
             );
         }
@@ -24,20 +24,20 @@ class HidController extends Controller
                 $check = User::where('hid' , $request->hid)->first();
                 if( !empty($check) ){
                     $arrresult[] = array(
-                        'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากมีอยู่ในระบบแล้ว', 
+                        'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประจำตัวประชาชนนี้ได้ เนื่องจากมีอยู่ในระบบแล้ว', 
                         'success' => false
                     );
                 }
                 else{
                     $arrresult[] = array(
-                        'message' => 'สามารถใช้รหัสบัตรประชาชนนี้ได้', 
+                        'message' => 'สามารถใช้รหัสบัตรประจำตัวประชาชนนี้ได้', 
                         'success' => true
                     );
                 }
             }
             else{
                 $arrresult[] = array(
-                    'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประชาชนนี้ได้ เนื่องจากรูปแบบไม่ถูกต้อง', 
+                    'message' => 'ผิดพลาด ไม่สามารถใช้รหัสบัตรประจำตัวประชาชนนี้ได้ เนื่องจากรูปแบบไม่ถูกต้อง', 
                     'success' => false
                 );
             }

@@ -40,7 +40,7 @@ class EditProfileRequest extends FormRequest
             'lastname.required' => 'ยังไม่ได้กรอกนามสกุล',
             'hid.required_if' => 'ยังไม่ได้กรอกหมายเลขบัตรประจำตัวประชาชน',
             'hid.digits_between' => 'รูปแบบหมายเลขบัตรประจำตัวประชาชนไม่ถูกต้อง',
-            'hid.numeric' => 'รูปแบบหมายเลขบัตรประชาชนไม่ถูกต้อง',
+            'hid.numeric' => 'รูปแบบหมายเลขบัตรประจำตัวประชาชนไม่ถูกต้อง',
             'vatno.required_if' => 'ยังไม่ได้กรอกเลขทะเบียนนิติบุคคล',
             'registeredyear.required_if' => 'ยังไม่ได้กรอกปีที่จดทะเบียน',
             'registeredyear.numeric' => 'รูปแบบปีที่จดทะเบียนไม่ถูกต้อง',

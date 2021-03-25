@@ -299,7 +299,7 @@
 													</div>
 												</div>
 										<legend>
-											<label for="">ที่อยู่ตามบัตรประชาชน</label>
+											<label for="">ที่อยู่ตามบัตรประจำตัวประชาชน</label>
 										</legend>		 
 
 											<div class="col-md-6">  
