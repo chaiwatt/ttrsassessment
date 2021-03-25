@@ -231,7 +231,7 @@
                                                     $url = 'https://www.facebook.com/plugins/share_button.php?href='.Request::url().'&layout=button&size=small&appId=418295982223884&width=61&height=20';
                                                 @endphp
                                                 
-                                                <iframe src="{{$url}}" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                                {{-- <iframe src="{{$url}}" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> --}}
                                             </li>
                                             
                                         </ul>
