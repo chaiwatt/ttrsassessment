@@ -10,9 +10,9 @@
                 <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ความก้าวหน้าโครงการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            <div class="header-elements d-none">
+            {{-- <div class="header-elements d-none">
                 <a href="{{route('setting.admin.dashboard.businessplanstatus.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มความก้าวหน้าโครงการ<b><i class="icon-plus3"></i></b></a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -77,7 +77,7 @@
                                         <td> {{$businessplanstatus->name}} </td>                                         
                                         <td> 
                                             <a href="{{route('setting.admin.dashboard.businessplanstatus.edit',['id' => $businessplanstatus->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.dashboard.businessplanstatus.delete',['id' => $businessplanstatus->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            {{-- <a href="{{route('setting.admin.dashboard.businessplanstatus.delete',['id' => $businessplanstatus->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>
                                     </tr>
                                     @endforeach
