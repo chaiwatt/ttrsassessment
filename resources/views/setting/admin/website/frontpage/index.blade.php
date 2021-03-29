@@ -71,7 +71,7 @@
                                         <div class="form-group">
                                             <img src="{{asset($frontpage->file)}}" class="img-fluid" alt="Responsive image">
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>รูปปุ่มกด (ขนาด 600x128 px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button id="_btnimg" class="btn bg-info" type="button" onclick="document.getElementById('btnimg').click();">อัปโหลดรูปปุ่มกด</button>													
@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="form-group">
                                             <img src="{{asset($frontpage->entersitebtn)}}" class="img-fluid" alt="Responsive image">
-                                        </div>
+                                        </div> --}}
                                     </fieldset>
                                 </div>
                             </div>

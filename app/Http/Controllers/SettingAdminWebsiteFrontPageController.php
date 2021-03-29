@@ -25,12 +25,12 @@ class SettingAdminWebsiteFrontPageController extends Controller
             $frontimg->move("storage/uploads/landing/frontpage" , $new_name);
             $frontimglocation = "storage/uploads/landing/frontpage/".$new_name;
         }
-        if(!Empty($btnimg)){
-            @unlink($frontpage->entersitebtn);
-            $new_name = str_random(10).".".$frontimg->getClientOriginalExtension();
-            $btnimg->move("storage/uploads/landing/frontpage" , $new_name);
-            $btnimglocation = "storage/uploads/landing/frontpage/".$new_name;
-        }
+        // if(!Empty($btnimg)){
+        //     @unlink($frontpage->entersitebtn);
+        //     $new_name = str_random(10).".".$frontimg->getClientOriginalExtension();
+        //     $btnimg->move("storage/uploads/landing/frontpage" , $new_name);
+        //     $btnimglocation = "storage/uploads/landing/frontpage/".$new_name;
+        // }
         $frontpage->update([
             'file' => $frontimglocation,
             'entersitebtn' => $btnimglocation,

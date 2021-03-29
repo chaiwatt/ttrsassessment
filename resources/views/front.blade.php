@@ -9,12 +9,11 @@
     <style>
         body{
             padding: 0;
-            /* margin: 20; */
             background-color:#{{$sharefrontpage->bgcolor}};
         }
-        .fit { /* set relative picture size */
-            max-width: 100%;
-            max-height: 100%;
+        .fit { 
+            max-width: {{$sharefrontpage->percent}}%;
+            max-height: {{$sharefrontpage->percent}}%;
         }
         .center {
             position: absolute;
@@ -27,7 +26,7 @@
     </style>
 </head>
 <body >
-    <a href="{{ route('landing.front') }}"><img class="center fit" src="{{asset($sharefrontpage->file)}}" alt="Front Image" ></a>
+    <a href="{{ route('landing.front') }}"><img class="center fit" src="{{asset($sharefrontpage->file)}}" alt="Bill Board" ></a>
     
      {{-- <br>
     <a href="{{ route('landing.front') }}"><img class="center" src="{{asset($sharefrontpage->entersitebtn)}}" style="max-width: 12%;max-height: 12%" alt="Paris" class="center"></a>  --}}
