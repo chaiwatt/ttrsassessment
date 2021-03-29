@@ -7,8 +7,10 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 
 class DashboardAdminReportDetailController extends Controller
 {
@@ -25,7 +27,13 @@ class DashboardAdminReportDetailController extends Controller
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
         $projectmembers = ProjectMember::where('full_tbp_id',$fulltbp->id)->get();
+
+        $projectstatuses = ProjectStatus::where('mini_tbp_id',$minitbp->id)->get();
+        $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->get();
+
         return view('dashboard.admin.report.detail.view')->withCompany($company)
-                                                        ->withProjectmembers($projectmembers);
+                                                        ->withProjectmembers($projectmembers)
+                                                        ->withProjectstatustransactions($projectstatustransactions)
+                                                        ->withProjectstatuses($projectstatuses);
     }
 }

@@ -68,5 +68,6 @@ class DashboardAdminRealtimeReportTTRSofficerController extends Controller
     public function SingleDownload($id){
         return Excel::download(new ReportTTRSSingleOfficerExport($id), 'project.xlsx');
     }
+    
 
 }

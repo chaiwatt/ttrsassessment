@@ -55,6 +55,7 @@ class DashboardAdminReportController extends Controller
         $objectives = Array();
         $years = BusinessPlan::latest()->get()->map(function($user){ return $user['created_at']->year; })->unique()->sort()->toArray();
         foreach ($years as $key => $year) {
+
              $projecteachyear = Array();
              $projectgrade = Array();
              $projectindustry = Array();

@@ -1,18 +1,3 @@
-{{-- @extends('layouts.login')
-    @section('content')
-        <div class="card mb-0">
-            <div class="card-body">
-                    test
-                    <div class="form-group">
-                        <a href="{{ route('landing.splash') }}" class="btn btn-light btn-block">{{trans('lang.register')}}</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endsection
- --}}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,24 +9,28 @@
     <style>
         body{
             padding: 0;
-            margin: 20;
+            /* margin: 20; */
             background-color:#{{$sharefrontpage->bgcolor}};
         }
         .fit { /* set relative picture size */
-            max-width: {{$sharefrontpage->percentimg}}%;
-            max-height: {{$sharefrontpage->percentimg}}%;
+            max-width: 100%;
+            max-height: 100%;
         }
         .center {
-            display: block;
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             margin: auto;
         }
     </style>
 </head>
 <body >
+    <a href="{{ route('landing.front') }}"><img class="center fit" src="{{asset($sharefrontpage->file)}}" alt="Front Image" ></a>
     
-    <img class="center fit" src="{{asset($sharefrontpage->file)}}" alt="Front Image" class="center">
-    <br>
-    <a href="{{ route('landing.front') }}"><img class="center" src="{{asset($sharefrontpage->entersitebtn)}}" style="max-width: 12%;max-height: 12%" alt="Paris" class="center"></a>
+     {{-- <br>
+    <a href="{{ route('landing.front') }}"><img class="center" src="{{asset($sharefrontpage->entersitebtn)}}" style="max-width: 12%;max-height: 12%" alt="Paris" class="center"></a>  --}}
    
 </body>
 </html>

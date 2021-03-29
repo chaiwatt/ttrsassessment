@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- favicon -->
         <link rel="apple-touch-icon" href="apple-touch-icon.html">
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/landing2/images/fav.png')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/landing2/images/favicon.png')}}">
         <!-- Bootstrap v4.4.1 css -->
 
         @include('layouts.landing2.css')
@@ -226,12 +226,9 @@
                                             </li>
                                             <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
 
-                                            <li class="Post-cate" style="margin-left: 10px; margin-top:10px">
-                                                @php
-                                                    $url = 'https://www.facebook.com/plugins/share_button.php?href='.Request::url().'&layout=button&size=small&appId=418295982223884&width=61&height=20';
-                                                @endphp
-                                                
-                                                {{-- <iframe src="{{$url}}" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> --}}
+                                            <li class="Post-cate" style="margin-left: 10px;">
+                                                <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a>
+                                                {{-- <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 'http://goo.gl/dS52U', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a> --}} 
                                             </li>
                                             
                                         </ul>
@@ -240,8 +237,6 @@
                                         <a href="#"><img src="{{asset($page->featureimage->name)}}" alt=""></a>
                                     </div>
                                     <div class="blog-full">
-                                     
-                                       
                                         <p>
                                             {{$page->content}}
                                             
@@ -328,8 +323,13 @@
          <!-- modernizr js -->
          @include('layouts.landing2.js')
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
-{{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-605aa0e2e70137c1"></script> --}}
-
+        <script>
+            function fbShare(url, title, descr, winWidth, winHeight) {
+                var winTop = (screen.height / 2) - (winHeight / 2);
+                var winLeft = (screen.width / 2) - (winWidth / 2);
+                window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url , 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            }
+        </script>
     </body>
 
 </html>

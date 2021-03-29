@@ -54,20 +54,20 @@ class HomeController extends Controller
     
     public function Index2()
     {
-        // $generalinfo = GeneralInfo::first();
-        // $directmenu = DirectMenu::find(1);
-        // return $directmenu;
-        // $directmenu->update([
-        //     'view' => intVal($directmenu->view) +1
-        // ]);
-        // if(Session::get('front') == 'active'){
-        //     return $this->Front();
-        // }else if($generalinfo->front_page_status_id == 2){
-        //     Session::put('front', 'active');
-        //     return view('front');
-        // }else{
-        //     return $this->Front();
-        // }
+        $generalinfo = GeneralInfo::first();
+        if(Session::get('front') == 'active'){
+            return $this->Front();
+        }else if($generalinfo->front_page_status_id == 2){
+            Session::put('front', 'active');
+            return view('front');
+        }else{
+            return $this->Front();
+        }
+        return view('landing2.index');
+    }
+
+    public function Front()
+    {
         return view('landing2.index');
     }
 
@@ -147,11 +147,7 @@ class HomeController extends Controller
     // return view('landing.search')->withPages($pages);
     return view('landing.single');
     }
-    public function Front()
-    {
-        $introsections = IntroSection::get();
-        return view('landing.index')->withIntrosections($introsections);
-    }
+
     public function Blog()
     {
         $directmenu = DirectMenu::find(2);

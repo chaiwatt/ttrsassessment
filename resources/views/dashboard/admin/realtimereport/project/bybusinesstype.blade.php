@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">โครงการทั้งหมด</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">โครงการตามประเภทธุรกิจ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
                     <span class="breadcrumb-item active">โครงการ</span>
-                    <span class="breadcrumb-item active">ทั้งหมด</span>
+                    <span class="breadcrumb-item active">ตามประเภทธุรกิจ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -45,26 +45,37 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('dashboard.admin.realtimereport.getproject')}}" method="get">
+                        <form action="{{route('dashboard.admin.realtimereport.project.getprojectbybusinesstype')}}" method="get">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ตั้งแต่วันที่</label>
-                                        <input type="text"  name="fromdate" id="fromdate" value="{{Request::get('fromdate')}}" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
+                                        <input type="text"  name="fromdate" value="{{Request::get('fromdate')}}" id="fromdate" placeholder="ตั้งแต่วันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ถึงวันที่</label>
-                                        <input type="text"  name="todate" id="todate" placeholder="ถึงวันที่" value="{{Request::get('todate')}}" class="form-control form-control-lg" required>
+                                        <input type="text" name="todate" id="todate" value="{{Request::get('todate')}}" placeholder="ถึงวันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+									<div class="form-group">
+										<label>ประเภทธุรกิจ</label>
+										<select name="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-lg form-control-select2">
+											@foreach ($businesstypes as $businesstype)
+												{{-- <option value="{{$industrygroup->id}}" >{{$industrygroup->name}}</option>  --}}
+                                                <option value="{{$businesstype->id}}" @if ($businesstype->id == Request::get('businesstype')) selected @endif >{{$businesstype->name}}</option> 
+											@endforeach
+										</select>
+									</div>
+								</div>
                                 <div class="col-md-12">
                                     <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>  
                                     <button type="submit" name="btnsubmit" value="search" class="btn btn-sm bg-teal float-right">ค้นหา</button>  
                                 </div>
-                            </div>        
+                            </div>
                         </form>
                         <hr>
                         <div class="row mt-3">
@@ -93,7 +104,6 @@
                                                                     <span class="badge badge-flat border-success text-success-600 rounded-0">เสร็จสิ้น</span>
                                                             @endif
                                                         </td>
-                                                        {{-- <td><a href="" data-id="{{$fulltbp->minitbp->id}}" class="btn btn-sm bg-warning float-right">Excel</a>  </td> --}}
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -102,10 +112,53 @@
                                 </div>
                             </div>
                         </div>
+                     
                     </div>
                 </div>
             </div>
+ 
         </div>
+
+        {{-- <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">จำนวนโครงการต่อการยื่น ปี2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="reportproject_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        {{-- <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">ข้อมูลย้อนหลัง ปี2561-2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="bar_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+        <!-- /form layouts -->
     </div>
     <!-- /content area -->
 @endsection

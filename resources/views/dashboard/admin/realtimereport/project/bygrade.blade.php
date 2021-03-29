@@ -63,9 +63,10 @@
                                 <div class="col-md-4">
 									<div class="form-group">
 										<label>เกรด</label>
-										<select name="grade" data-placeholder="เกรด" class="form-control form-control-lg form-control-select2">
+										<select name="grade" data-placeholder="เกรด" value="{{old('grade')}}"  class="form-control form-control-lg form-control-select2">
 											@foreach ($grades as $grade)
-												<option value="{{$grade->id}}" >{{$grade->name}}</option> 
+												{{-- <option value="{{$grade->id}}" >{{$grade->name}}</option>  --}}
+                                                <option value="{{$grade->id}}" @if ($grade->id == Request::get('grade')) selected @endif >{{$grade->name}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -76,10 +77,11 @@
                                 </div>
                             </div>
                         </form>
+                        <hr>
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="testtopictable">
+                                    <table class="table table-striped" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th>เลขที่โครงการ</th> 
@@ -177,39 +179,39 @@
 
 
         // Initialize
-        $('.daterange').daterangepicker(
-            {
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment(),
-                minDate: '01/01/2015',
-                maxDate: '12/31/2050',
-                dateLimit: { days: 60 },
-                ranges: {
-                    'วันนี้': [moment(), moment()],
-                    'เมื่อวาน': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'สัปดาห์ที่ผ่านมา': [moment().subtract(6, 'days'), moment()],
-                    // 'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'เดือนนี้': [moment().startOf('month'), moment().endOf('month')],
-                    'เดือนที่ผ่านมา': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                opens: $('html').attr('dir') == 'rtl' ? 'right' : 'left',
-                applyClass: 'btn-sm bg-slate-600 btn-block',
-                cancelClass: 'btn-sm btn-light btn-block',
-                locale: {
-                    format: 'MM/DD/YYYY',
-                    startLabel: 'เริ่มวันที่',
-                    endLabel: 'ถึงวันที่',
-                    applyLabel: 'ตกลง',
-                    cancelLabel: 'ยกเลิก',
-                    customRangeLabel: 'กำหนดเอง',
-                    direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
-                }
-            },
-            function(start, end) {               
-                $('.daterange span').html(start.format('D') + ' ' + thaiMonth(start.format('MM')) + ' - ' + end.format('D') + ' ' + thaiMonth(end.format('MM')));
-            }
-        );
-        $('.daterange span').html(moment().subtract(29, 'days').format('D') + ' ' + thaiMonth(moment().subtract(29, 'days').format('MM')) + ' - ' + moment().format('D') + ' ' + thaiMonth(moment().format('MM')));
+        // $('.daterange').daterangepicker(
+        //     {
+        //         startDate: moment().subtract(29, 'days'),
+        //         endDate: moment(),
+        //         minDate: '01/01/2015',
+        //         maxDate: '12/31/2050',
+        //         dateLimit: { days: 60 },
+        //         ranges: {
+        //             'วันนี้': [moment(), moment()],
+        //             'เมื่อวาน': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        //             'สัปดาห์ที่ผ่านมา': [moment().subtract(6, 'days'), moment()],
+        //             // 'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        //             'เดือนนี้': [moment().startOf('month'), moment().endOf('month')],
+        //             'เดือนที่ผ่านมา': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        //         },
+        //         opens: $('html').attr('dir') == 'rtl' ? 'right' : 'left',
+        //         applyClass: 'btn-sm bg-slate-600 btn-block',
+        //         cancelClass: 'btn-sm btn-light btn-block',
+        //         locale: {
+        //             format: 'MM/DD/YYYY',
+        //             startLabel: 'เริ่มวันที่',
+        //             endLabel: 'ถึงวันที่',
+        //             applyLabel: 'ตกลง',
+        //             cancelLabel: 'ยกเลิก',
+        //             customRangeLabel: 'กำหนดเอง',
+        //             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
+        //         }
+        //     },
+        //     function(start, end) {               
+        //         $('.daterange span').html(start.format('D') + ' ' + thaiMonth(start.format('MM')) + ' - ' + end.format('D') + ' ' + thaiMonth(end.format('MM')));
+        //     }
+        // );
+        // $('.daterange span').html(moment().subtract(29, 'days').format('D') + ' ' + thaiMonth(moment().subtract(29, 'days').format('MM')) + ' - ' + moment().format('D') + ' ' + thaiMonth(moment().format('MM')));
 
         function thaiMonth($check){
             var stmonth = 'มกราคม';
@@ -257,6 +259,20 @@
             clearText: "เคลียร์",
             time: false
 		});
+        $('#searchtable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
 </script>
 
 @stop

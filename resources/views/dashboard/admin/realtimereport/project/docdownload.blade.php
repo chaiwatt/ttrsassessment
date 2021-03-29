@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">โครงการทั้งหมด</span></h4>
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">ดาวน์โหลดเอกสาร</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
                     <span class="breadcrumb-item active">โครงการ</span>
-                    <span class="breadcrumb-item active">ทั้งหมด</span>
+                    <span class="breadcrumb-item active">ดาวน์โหลดเอกสาร</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -38,14 +38,14 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">ช่วงเวลาโครงการ</h6>
+                        <h6 class="card-title">เลือกช่วงเวลา</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('dashboard.admin.realtimereport.getproject')}}" method="get">
+                        <form action="{{route('dashboard.admin.realtimereport.project.getdocdownload')}}" method="get">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -57,14 +57,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ถึงวันที่</label>
-                                        <input type="text"  name="todate" id="todate" placeholder="ถึงวันที่" value="{{Request::get('todate')}}" class="form-control form-control-lg" required>
+                                        <input type="text" name="todate" id="todate" value="{{Request::get('todate')}}" placeholder="ถึงวันที่" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>  
                                     <button type="submit" name="btnsubmit" value="search" class="btn btn-sm bg-teal float-right">ค้นหา</button>  
                                 </div>
-                            </div>        
+                            </div>
                         </form>
                         <hr>
                         <div class="row mt-3">
@@ -73,39 +73,71 @@
                                     <table class="table table-striped" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th>เลขที่โครงการ</th> 
-                                                <th>โครงการ</th> 
-                                                <th>บริษัท</th> 
-                                                <th class="text-right">สถานะ</th>
+                                                <th>เอกสาร</th> 
+                                                <th>ผู้ดาวน์โหลด</th> 
+                                                <th class="text-right">วันที่ดาวน์โหลด</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
-                                            @foreach ($fulltbps as $fulltbp)
-                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
-                                                    <tr>
-                                                        <td>{{$fulltbp->minitbp->businessplan->code}}</td>
-                                                        <td>{{$fulltbp->minitbp->project}}</td>
-                                                        <td>{{$fulltbp->minitbp->businessplan->company->name}}</td>
-                                                        <td class="text-right">
-                                                            @if ($fulltbp->status == 2)
-                                                                    <span class="badge badge-flat border-info text-info-600 rounded-0">กำลังดำเนินการ</span>
-                                                                @elseif($fulltbp->status == 3)
-                                                                    <span class="badge badge-flat border-success text-success-600 rounded-0">เสร็จสิ้น</span>
-                                                            @endif
-                                                        </td>
-                                                        {{-- <td><a href="" data-id="{{$fulltbp->minitbp->id}}" class="btn btn-sm bg-warning float-right">Excel</a>  </td> --}}
-                                                    </tr>
-                                                @endif
+                                            @foreach ($downloadstats as $downloadstat)
+                                                <tr>
+                                                    <td>{{$downloadstat->document}}</td>
+                                                    <td>{{$downloadstat->user->name}} {{$downloadstat->user->lastname}}</td>
+                                                    <td class="text-right">{{$downloadstat->created_at}}</td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>      
                                 </div>
                             </div>
                         </div>
+                     
                     </div>
                 </div>
             </div>
+ 
         </div>
+
+        {{-- <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">จำนวนโครงการต่อการยื่น ปี2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="reportproject_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        {{-- <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">ข้อมูลย้อนหลัง ปี2561-2563</h6>
+                        <div class="header-elements">
+                            <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" id="bar_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+        <!-- /form layouts -->
     </div>
     <!-- /content area -->
 @endsection
@@ -114,7 +146,7 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/moment/moment.min.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/pickers/daterangepicker.js')}}"></script>
+{{-- <script src="{{asset('assets/dashboard/js/plugins/pickers/daterangepicker.js')}}"></script> --}}
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/reportprojecthelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script>
@@ -126,39 +158,8 @@
 
 
         // Initialize
-        // $('.daterange').daterangepicker(
-        //     {
-        //         startDate: moment().subtract(29, 'days'),
-        //         endDate: moment(),
-        //         minDate: '01/01/2015',
-        //         maxDate: '12/31/2050',
-        //         dateLimit: { days: 60 },
-        //         ranges: {
-        //             'วันนี้': [moment(), moment()],
-        //             'เมื่อวาน': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        //             'สัปดาห์ที่ผ่านมา': [moment().subtract(6, 'days'), moment()],
-        //             // 'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        //             'เดือนนี้': [moment().startOf('month'), moment().endOf('month')],
-        //             'เดือนที่ผ่านมา': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        //         },
-        //         opens: $('html').attr('dir') == 'rtl' ? 'right' : 'left',
-        //         applyClass: 'btn-sm bg-slate-600 btn-block',
-        //         cancelClass: 'btn-sm btn-light btn-block',
-        //         locale: {
-        //             format: 'MM/DD/YYYY',
-        //             startLabel: 'เริ่มวันที่',
-        //             endLabel: 'ถึงวันที่',
-        //             applyLabel: 'ตกลง',
-        //             cancelLabel: 'ยกเลิก',
-        //             customRangeLabel: 'กำหนดเอง',
-        //             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
-        //         }
-        //     },
-        //     function(start, end) {               
-        //         $('.daterange span').html(start.format('D') + ' ' + thaiMonth(start.format('MM')) + ' - ' + end.format('D') + ' ' + thaiMonth(end.format('MM')));
-        //     }
-        // );
-        // $('.daterange span').html(moment().subtract(29, 'days').format('D') + ' ' + thaiMonth(moment().subtract(29, 'days').format('MM')) + ' - ' + moment().format('D') + ' ' + thaiMonth(moment().format('MM')));
+
+        $('.daterange span').html(moment().subtract(29, 'days').format('D') + ' ' + thaiMonth(moment().subtract(29, 'days').format('MM')) + ' - ' + moment().format('D') + ' ' + thaiMonth(moment().format('MM')));
 
         function thaiMonth($check){
             var stmonth = 'มกราคม';
@@ -209,7 +210,6 @@
         $('#searchtable').DataTable( {
             "paging":   true,
             "ordering": true,
-            "order": [[ 0, 'desc' ]],
             "info":     false,
             "pageLength" : 50,
             "language": {

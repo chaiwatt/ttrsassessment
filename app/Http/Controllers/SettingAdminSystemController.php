@@ -73,7 +73,9 @@ class SettingAdminSystemController extends Controller
             'front_page_status_id' => $request->frontpage,
             'verify_expert_status_id' => $request->verifyexpert,
             'consent' => $request->consent,
-            'director' => $request->director
+            'director' => $request->director,
+            'watermark' => $request->watermark,
+            'watermarktext' => $request->watermarktext
         ]);
         return redirect()->back()->withSuccess('แก้ไขสำเร็จ');
     }

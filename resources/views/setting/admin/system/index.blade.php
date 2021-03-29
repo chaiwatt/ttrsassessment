@@ -186,7 +186,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ผู้อำนวยการ/ผู้มีอำนาจลงนาม</label>
-                                        <input type="text" name="director" value="{{$generalinfo->director}}" data-placeholder="Facebook" class="form-control form-control-lg">
+                                        <input type="text" name="director" value="{{$generalinfo->director}}" data-placeholder="ผู้อำนวยการ/ผู้มีอำนาจลงนาม" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -197,6 +197,21 @@
                                                 <option value="{{$verifyexpertstatus->id}}" @if ($generalinfo->verify_expert_status_id == $verifyexpertstatus->id) selected @endif> {{$verifyexpertstatus->name}} </option>
                                             @endforeach   
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ใช้ลายน้ำ PDF (Mini TBP & Full TBP)</label>
+                                        <select name="watermark" data-placeholder="ใช้ลายน้ำ PDF (Mini TBP & Full TBP)" class="form-control form-control-lg form-control-select2">                                                             
+                                            <option value="0" @if ($generalinfo->watermark == 0) selected @endif>ไม่ใช้</option>
+                                            <option value="1" @if ($generalinfo->watermark == 1) selected @endif>ใช้</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ลายน้ำ PDF (Mini TBP & Full TBP)</label>
+                                        <input type="text" name="watermarktext" value="{{$generalinfo->watermarktext}}" data-placeholder="ลายน้ำ PDF (Mini TBP & Full TBP)" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-12">

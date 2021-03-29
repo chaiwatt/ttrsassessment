@@ -49,7 +49,7 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-md-12">
+            {{-- <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">การเข้าชมเว็บไซต์</h6>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">

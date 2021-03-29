@@ -12,6 +12,7 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\Signature;
 use App\Model\MessageBox;
+use App\Model\GeneralInfo;
 use App\Model\ProjectFlow;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
@@ -127,6 +128,14 @@ class MiniTbpController extends Controller
             ],
             'default_font' => 'kanit',
         ]);
+        $generalinfo = GeneralInfo::first();
+        if($generalinfo->watermark == 1){
+            $mpdf->SetWatermarkText($generalinfo->watermarktext);
+            $mpdf->watermarkTextAlpha = 0.1;
+            $mpdf->watermarkImageAlpha = 0.5;
+            $mpdf->watermarkAngle = 45;
+            $mpdf->showWatermarkText = true; 
+        }
 
         $minitbpsignatures = MinitbpSignature::where('mini_tbp_id',$request->id)->get();
 

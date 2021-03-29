@@ -408,7 +408,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($numprojectcollections as $key => $numprojectcollection)
+                                            @foreach ($numprojectcollections->reverse() as $key => $numprojectcollection)
                                             @if ($key <=5)
                                                 <tr> 
                                                     <td> {{$numprojectcollection['year']}} </td>  
@@ -473,7 +473,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($projectgradecollections as $key => $projectgradecollection)
+                                            @foreach ($projectgradecollections->reverse() as $key => $projectgradecollection)
                                                @if ($key <=5)
                                                 <tr> 
                                                     <td> {{$projectgradecollection['year']}} </td>  
@@ -549,7 +549,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($projectindustrycollections as $key => $projectindustrycollection)
+                                            @foreach ($projectindustrycollections->reverse() as $key => $projectindustrycollection)
                                                @if ($key <=5)
                                                 <tr> 
                                                     <td> {{$projectindustrycollection['year']}} </td>  
@@ -618,7 +618,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($objecttivecollections as $key => $objecttivecollection)
+                                                @foreach ($objecttivecollections->reverse() as $key => $objecttivecollection)
                                                 @if ($key <=5)
                                                     <tr> 
                                                         <td> {{$objecttivecollection['year']}} </td>  

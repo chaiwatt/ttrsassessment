@@ -202,6 +202,9 @@
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'active':''}}">ทั้งหมด</a></li>
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.bygrade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.bygrade')?'active':''}}">ตามเกรด</a></li>
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.byindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.byindustrygroup')?'active':''}}">ตามกลุ่มอุตสาหกรรม</a></li>
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.bybusinesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.bybusinesstype')?'active':''}}">ตามประเภทธุรกิจ</a></li>
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.regcapital')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.regcapital')?'active':''}}">ตามทุนจดทะเบียน</a></li>
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.docdownload')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.docdownload')?'active':''}}">ดาวน์โหลดเอกสาร</a></li>
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.officer')?'nav-item-expanded':''}}">
@@ -277,7 +280,7 @@
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.announce')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.announce')?'active':''}}">ประกาศ</a></li>	 --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu.create')?'active':''}}">เมนู</a></li>	
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	 --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้าแรกพิเศษ</a></li>	 --}}
+                <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้าแรกพิเศษ</a></li>	
                 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage')?'nav-item-expanded':''}}">
                     <a href="#" class="nav-link"><span>หน้าแรก (Homepage)</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">

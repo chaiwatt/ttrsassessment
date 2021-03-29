@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ExcelFromView\Report\Admin;
+namespace App\ExcelFromView\Report\Project;
 
 use App\User;
 use Carbon\Carbon;
@@ -22,36 +22,37 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ReportNumprojectExport implements 
+class ReportNumprojectExportFirstSheet implements 
                                         ShouldAutoSize, 
                                         WithTitle, 
                                         FromArray,
                                         WithHeadings,
                                         WithEvents
 {
-    protected $projectname;
 
-    function __construct() {
+    protected $projectname;
+    protected $years;
+    function __construct($_years) {
            $this->projectname = 'จำนวนโครงการ';
+           $this->years = $_years;
     }
 
     public function array(): array
     {
-       $numprojects = Array();
-       $years = array_reverse(BusinessPlan::latest()->get()->map(function($user){ return $user['created_at']->year; })->unique()->sort()->toArray());
-       foreach ($years as $key => $year) {
-            $projecteachyear = Array();
+        $projectinfos = Array();
+        foreach ($this->years as $key => $year) {
+            $singleproject = Array();
             $minitpbs = BusinessPlan::whereYear('created_at',$year)->where('business_plan_status_id','>=',4)->count();
             $fulltbps = BusinessPlan::whereYear('created_at',$year)->where('business_plan_status_id','>=',6)->count();
             $finished = BusinessPlan::whereYear('created_at',$year)->where('business_plan_status_id','>=',8)->count();
-            array_push($projecteachyear,($year+543));
-            array_push($projecteachyear,$minitpbs);
-            array_push($projecteachyear,$fulltbps);
-            array_push($projecteachyear,$finished);
-            array_push($numprojects,$projecteachyear);
-       }
+            array_push($singleproject,($year+543));
+            array_push($singleproject,$minitpbs);
+            array_push($singleproject,$fulltbps);
+            array_push($singleproject,$finished);
+            array_push($projectinfos,$singleproject);
+        }
        return [
-            $numprojects 
+            $projectinfos 
         ];
     }
 
@@ -59,24 +60,27 @@ class ReportNumprojectExport implements
     {
         return $this->projectname;
     }
-
     public function headings(): array
     {
         return [
             'ปีโครงการ',
             'จำนวน Mini TBP',
             'จำนวน Full TBP',
-            'ประเมินสำเร็จ'
+            'ประเมินสำเร็จ',
         ];
     }
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $event->sheet->getStyle('A1:D1')->applyFromArray([
+                $event->sheet->getStyle('A1:C1')->applyFromArray([
                     'font' => [
                         'bold' => true
                     ],
+                    // 'fill' => [
+                    //     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    //     'color' => ['argb' => 'FFFF0000'],
+                    // ]
                 ]);
             }
         ];

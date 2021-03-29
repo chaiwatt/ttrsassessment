@@ -57,13 +57,24 @@
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12">
-                    <h3 class="widget-title">Newsletter</h3>
+                    <h3 class="widget-title">Site map</h3>
                     {{-- <p class="widget-desc">We denounce with righteous and in and dislike men who are so beguiled and demo realized.</p> --}}
-                    <p>
+                    {{-- <p>
                         <input type="email" name="EMAIL" placeholder="อีเมล" required="">
                         <em class="paper-plane"><input type="submit" value="Sign up"></em>
                         <i class="flaticon-send"></i>
-                    </p>
+                    </p> --}}
+                    {{-- <div class="row y-middle">  --}}
+                        {{-- <div class="col-lg-12 text-left"> --}}
+                            <ul class="copy-right-menu" >
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="faq.html">FAQs</a></li>
+                            </ul>
+                        {{-- </div> --}}
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>

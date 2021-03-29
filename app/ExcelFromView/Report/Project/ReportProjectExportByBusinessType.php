@@ -13,15 +13,15 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ReportProjectExportByIndustryGroup implements FromView,ShouldAutoSize
+class ReportProjectExportByBusinessType implements FromView,ShouldAutoSize
 {
     protected $startdate;
     protected $enddate;
-    protected $industrygroup;
-    function __construct($startdate,$enddate,$industrygroup) {
+    protected $businesstype;
+    function __construct($startdate,$enddate,$businesstype) {
            $this->startdate = $startdate;
            $this->enddate = $enddate;
-           $this->industrygroup = $industrygroup;
+           $this->businesstype = $businesstype;
     }
     public function view(): View
     {
@@ -29,7 +29,7 @@ class ReportProjectExportByIndustryGroup implements FromView,ShouldAutoSize
                 ->toDateTimeString();
         $end_date = Carbon::parse($this->enddate)
                 ->toDateTimeString();
-        $companies = Company::where('industry_group_id',$this->industrygroup)->pluck('id')->toArray();
+        $companies = Company::where('business_type_id',$this->businesstype)->pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
         $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereBetween('created_at', [$this->startdate, $this->enddate])->orderBy('id','desc')->get();

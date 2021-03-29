@@ -12,6 +12,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
+use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\FullTbpGantt;
@@ -124,7 +125,19 @@ class FullTbpController extends Controller
             'fulltbpsignatures' => $fulltbpsignatures
         ];
 
-        $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf', $data);
+        $generalinfo = GeneralInfo::first();
+        if($generalinfo->watermark == 1){
+            $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf',$data,[],[
+                'watermark' => $generalinfo->watermarktext,
+                'show_watermark' => true
+            ]);
+        }else{
+            $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf',$data,[],[
+                'watermark' => 'เอกสารสำคัญปกปิด(Private & Confidential)',
+                'show_watermark' => false
+            ]);
+        }
+
         $path = public_path("storage/uploads/");
         $randname = str_random(10);
         $pdf->save($path.$randname.'.pdf');

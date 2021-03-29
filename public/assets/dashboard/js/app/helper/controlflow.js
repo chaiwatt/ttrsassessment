@@ -36,7 +36,7 @@ $(document).on('click', '.controlflowicon', function(e) {
                 if(transaction.status == 1){
                     if(projectstatus.project_flow_id == 3){
                         // การอนุมัติ Full TBP, การมอบหมายผู้เชี่ยวชาญ, การพัฒนา EV
-                        console.log(projectstatus.controlflowstage3approve[2]);
+                        //console.log(projectstatus.controlflowstage3approve[2]);
                         var fulltbpicon = `<i class="icon-watch2 text-pink-300"></i>`;
                         var experticon = `<i class="icon-watch2 text-pink-300"></i>`;
                         var evicon = `<i class="icon-watch2 text-pink-300"></i>`;

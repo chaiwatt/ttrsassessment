@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- favicon -->
         <link rel="apple-touch-icon" href="apple-touch-icon.html">
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/landing2/images/fav.png')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/landing2/images/favicon.png')}}">
         <!-- Bootstrap v4.4.1 css -->
 
         @include('layouts.landing2.css')

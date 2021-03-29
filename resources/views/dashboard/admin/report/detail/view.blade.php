@@ -46,6 +46,37 @@
         @endif
         <div class="row">
             <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">รายงานสถานะ</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th >รายการ</th> 
+                                        <th >วันที่กำหนด</th>
+                                        <th>สถานะ</th> 
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    @foreach ($projectstatuses as $projectstatus)
+                                        <tr>
+                                            <td>{{$projectstatus->projectflow}}</td>
+                                            <td>{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
+                                            <td>
+                                               {!!$projectstatus->projectstatustransaction($projectstatus->project_flow_id,$company->businessplan->minitbp->id)!!}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
                 @if ($company->businessplan->business_plan_status_id >=3)
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
@@ -67,7 +98,7 @@
                                                 <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
                                             </td>  
                                             <td> 
-                                                <a href="{{asset($company->businessplan->minitbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">ดาวน์โหลด PDF</a>
+                                                <a href="{{asset($company->businessplan->minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank">ดาวน์โหลด PDF</a>
                                             </td>  
                                             <td>
                                                 -
@@ -79,10 +110,10 @@
                                                     <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
                                                 </td>  
                                                 <td> 
-                                                    <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">ดาวน์โหลด PDF</a>
+                                                    <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
                                                 </td>  
                                                 <td>
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-teal">ดาวน์โหลดเอกสารแนบ</a>
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-teal downloadlink">ดาวน์โหลดเอกสารแนบ</a>
                                                 </td>                                       
                                             </tr> 
                                         @endif 
@@ -134,18 +165,31 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" >
                                     <thead>
                                         <tr>
-                                            <th style="width:300px">คะแนน</th> 
-                                            <th style="width:300px">เกรด</th>
+                                            <th style="width:200px">คะแนน</th> 
+                                            <th style="width:200px">เกรด</th>
+                                            <th >จดหมายแจ้งผล</th>
+                                            <th >Certificate</th>
                                             <th>รายงานผล</th> 
                                         </tr>
                                     </thead>
                                     <tbody >
                                         <tr>
                                             <td>{{number_format(@$company->businessplan->minitbp->fulltbp->projectgrade->percent, 2, '.', '')}}</td>  
-                                            <td>{{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}</td>    
+                                            <td>{{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}</td>
+                                            
+                                            <td> <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a></td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item"><i class="icon-download"></i> ดาวน์โหลด</a>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <a type="button" href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
                                             </td>                                     
@@ -161,6 +205,8 @@
     </div>
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/downloadstat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

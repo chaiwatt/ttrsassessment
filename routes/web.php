@@ -22,7 +22,7 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 
 Route::get('generate','PDFController@Generate')->name('generate');
 
-// Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
+Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
 
 // Route::get('test', 'HomeController@Test')->name('test');
 Route::get('landing', 'HomeController@Index')->name('landing.index');
@@ -54,6 +54,9 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'download'], function(){
+        Route::post('add','Api\DownloadController@Add')->name('api.download.add');            
+    }); 
     Route::group(['prefix' => 'controlflow'], function(){
         Route::post('get','Api\ControlFlow@Get')->name('api.controlflow.get');            
     }); 
@@ -511,6 +514,12 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('getprojectbygrade','DashboardAdminRealtimeReportProjectController@GetProjectByGrade')->name('dashboard.admin.realtimereport.project.getprojectbygrade');
                     Route::get('byindustrygroup','DashboardAdminRealtimeReportProjectController@ByIndustryGroup')->name('dashboard.admin.realtimereport.project.byindustrygroup');
                     Route::get('getprojectbyindustrygroup','DashboardAdminRealtimeReportProjectController@GetProjectByIndustrygroup')->name('dashboard.admin.realtimereport.project.getprojectbyindustrygroup');
+                    Route::get('bybusinesstype','DashboardAdminRealtimeReportProjectController@ByBusinessType')->name('dashboard.admin.realtimereport.project.bybusinesstype');
+                    Route::get('getprojectbybusinesstype','DashboardAdminRealtimeReportProjectController@GetProjectByBusinessType')->name('dashboard.admin.realtimereport.project.getprojectbybusinesstype');
+                    Route::get('regcapital','DashboardAdminRealtimeReportProjectController@ByRegCapital')->name('dashboard.admin.realtimereport.project.regcapital');
+                    Route::get('getprojectbyregcapital','DashboardAdminRealtimeReportProjectController@GetProjectByRegCapital')->name('dashboard.admin.realtimereport.project.getprojectbyregcapital');
+                    Route::get('docdownload','DashboardAdminRealtimeReportProjectController@DocDownload')->name('dashboard.admin.realtimereport.project.docdownload');
+                    Route::get('getdocdownload','DashboardAdminRealtimeReportProjectController@GetDocDownload')->name('dashboard.admin.realtimereport.project.getdocdownload');
                 });
                 Route::group(['prefix' => 'ttrsofficer'], function(){
                     Route::get('','DashboardAdminRealtimeReportTTRSofficerController@Index')->name('dashboard.admin.realtimereport.officer');

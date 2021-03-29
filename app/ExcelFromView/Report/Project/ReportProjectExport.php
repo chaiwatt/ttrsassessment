@@ -28,7 +28,7 @@ class ReportProjectExport implements FromView,ShouldAutoSize
                 ->toDateTimeString();
 
         return view('dashboard.admin.realtimereport.project.download', [
-            'fulltbps' => FullTbp::whereBetween('created_at',[$start_date,$end_date])->get()
+            'fulltbps' => FullTbp::whereBetween('created_at',[$start_date,$end_date])->orderBy('id','desc')->get()
         ]);
     }
 }
