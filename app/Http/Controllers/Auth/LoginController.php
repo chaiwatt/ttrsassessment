@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Carbon\Carbon;
 use App\Model\Company;
+use App\Model\UserLog;
 use App\Model\GeneralInfo;
 use App\Model\BusinessPlan;
 use App\Model\SocialAccount;
 use Illuminate\Http\Request;
 use App\Helper\CreateCompany;
+use App\Helper\CreateUserLog;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +34,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user) { 
         $generalinfo = GeneralInfo::first();
+        CreateUserLog::createlog('เข้าสู่ระบบ');
         if($user->user_status_id == 2){
             Auth::logout();
             Session::flush();
@@ -86,5 +89,12 @@ class LoginController extends Controller
             CreateCompany::createCompany($user,'','',5);
         }
         return $user;
+    }
+    public function logout(Request $request)
+    {
+        CreateUserLog::createlog('ออกจากระบบ');
+        Auth::logout();
+        Session::flush();
+        return redirect()->route('landing2.index');
     }
 }
