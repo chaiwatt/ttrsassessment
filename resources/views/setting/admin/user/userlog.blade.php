@@ -58,8 +58,8 @@
                             <table class="table table-striped" id="userlogtable">
                                 <thead>
                                     <tr>
-                                        <th>วันที่</th>
-                                        <th>ชื่อ-สกุล</th> 
+                                        <th style="width:25%">วันที่</th>
+                                        <th style="width:30%">ชื่อ-สกุล</th> 
                                         <th>Log</th>    
                                     </tr>
                                 </thead>
@@ -69,8 +69,6 @@
                                         <td>{{$userlog->createdatth}}</td>
                                         <td> {{$userlog->user->prefix->name}}{{$userlog->user->name}} {{$userlog->user->lastname}} </td>    
                                         <td> {{$userlog->document}} </td> 
-                                        
-                                      
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -443,6 +443,25 @@ $('.step-evweight').steps({
                     })
                     return;
                 };
+
+                // inppercentextra
+                if($("#inppercentextra").val() != ''){
+                    $('.extravalue').each(function() {
+                        if($(this).val() == ''){
+                            noblank = false;
+                            return;
+                        }
+                    });
+            
+                    if (noblank == false){
+                        Swal.fire({
+                            title: 'ผิดพลาด...',
+                            text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+                        })
+                        return;
+                    };
+                }
+
                 $("#spinicon").attr("hidden",false);
                 updateScoringStatus($('#evid').val(),1).then(data => {
                     if(jQuery.isEmptyObject(data) ){
