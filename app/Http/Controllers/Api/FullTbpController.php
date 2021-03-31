@@ -19,6 +19,7 @@ use App\Model\FullTbpGantt;
 use App\Model\CompanyEmploy;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
 use App\Model\TimeLineHistory;
@@ -216,6 +217,9 @@ class FullTbpController extends Controller
         Ev::where('full_tbp_id',$request->id)->first()->update([
             'name' => $minitbp->project
         ]);
+
+        CreateUserLog::createLog('ส่ง' . $message);
+
     }
     
     public function SubmitWithNoAttachement(Request $request){
@@ -280,6 +284,8 @@ class FullTbpController extends Controller
         Ev::where('full_tbp_id',$request->id)->first()->update([
             'name' => $minitbp->project
         ]);
+
+        CreateUserLog::createLog('ส่ง' . $message);
     }
 
 
@@ -332,6 +338,7 @@ class FullTbpController extends Controller
 
             DateConversion::addExtraDay($minitbp->id,4);
         }
+        CreateUserLog::createLog('ยืนยันการลงพื้นที่ โครงการ' . $minitbp->project);
     }
 
 }

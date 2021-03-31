@@ -26,6 +26,7 @@ use App\Model\CompanyEmploy;
 use App\Model\IndustryGroup;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Model\CompanyAddress;
 use App\Model\EmployPosition;
 use App\Helper\DateConversion;
@@ -83,6 +84,7 @@ class SettingProfileUserController extends Controller
                                             ->withCompanyservicetypes($companyservicetypes);
     }
     public function EditSave(EditProfileRequest $request, $id){
+        CreateUserLog::createLog('แก้ไขข้อมูลโปรไฟล์');
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -158,8 +160,6 @@ class SettingProfileUserController extends Controller
             'email' => $request->email,
             'logo' => $filelocation,
         ]);
-
-
 
         CompanyAddress::where('company_id',$company->id)->first()->update([
             'address' => $request->address,

@@ -18,6 +18,7 @@ use App\Model\BusinessPlan;
 use App\Model\ExpertDetail;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Model\ExpertEducation;
 use App\Model\ExpertAssignment;
@@ -119,6 +120,8 @@ class ExpertController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
+            CreateUserLog::createLog('มอบหมาย '.$expert->name . ' ' .$expert->lastname.' เป็นผู้เชี่ยวชาญในโครงการ' . $minitbp->project);
+
             EmailBox::send($expert->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' บริษัท' . $company->name,'เรียนคุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' บริษัท' . $company->name.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     }
 
@@ -163,7 +166,7 @@ class ExpertController extends Controller
         $alertmessage->save();
         
         EmailBox::send($jduser->email,'TTRS:ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน JD<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project . ' บริษัท' . $company->name . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        
+        CreateUserLog::createLog('ปฎิเสธเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
         return redirect()->route('dashboard.expert.report')->withSuccess('คุณปฎิเสธเข้าร่วมโครงการแล้ว');
 
     }
@@ -240,6 +243,7 @@ class ExpertController extends Controller
                    DateConversion::addExtraDay($minitbp->id,3);
                 }
             }
+            CreateUserLog::createLog('ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
             return response()->json($expertassignments);
        }
  

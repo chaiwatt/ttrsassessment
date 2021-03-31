@@ -18,6 +18,7 @@ use App\Model\ExpertBranch;
 use App\Model\ExpertDetail;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Model\EducationLevel;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\AuthorizedDirector;
@@ -136,7 +137,7 @@ class SettingProfileExpertController extends Controller
             'expereinceyear' => $request->expereinceyear,
             'expereincemonth' => $request->expereincemonth
         ]);
-
+        CreateUserLog::createLog('แก้ไขข้อมูลโปรไฟล์');
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 
     }
 }

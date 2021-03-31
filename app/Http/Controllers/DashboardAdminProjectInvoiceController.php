@@ -14,6 +14,7 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Model\InvoiceTransaction;
 use App\Model\NotificationBubble;
@@ -56,6 +57,11 @@ class DashboardAdminProjectInvoiceController extends Controller
         $invoicetransaction->servicecode = $request->servicecode;
         $invoicetransaction->compcode = $request->compcode;
         $invoicetransaction->save();
+
+        $company = Company::find($request->company);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        CreateUserLog::createLog('สร้าง Invoice โครงการ' . MiniTBP::where('business_plan_id',$businessplan->id)->first()->project);
+
         return redirect()->route('dashboard.admin.project.invoice')->withSuccess('สร้างรายการสำเร็จ');
     }
 
@@ -149,6 +155,9 @@ class DashboardAdminProjectInvoiceController extends Controller
             'servicecode' => $request->servicecode,
             'compcode' => $request->compcode
         ]);
+        $company = Company::find(InvoiceTransaction::find($id)->company_id);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        CreateUserLog::createLog('แก้ไข Invoice โครงการ' . MiniTBP::where('business_plan_id',$businessplan->id)->first()->project);
         return redirect()->route('dashboard.admin.project.invoice')->withSuccess('แก้ไขรายการสำเร็จ');
     }
 
@@ -175,7 +184,7 @@ class DashboardAdminProjectInvoiceController extends Controller
 
         EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบรายการใบแจ้งหนี้','เรียนผู้ขอรับการประเมิน<br><br> กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         Message::sendMessage('กรุณาตรวจสอบรายการใบแจ้งหนี้','กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
-        
+        CreateUserLog::createLog('ส่งใบแจ้งหนี้ โครงการ' . $minitbp->project);
         InvoiceTransaction::find($request->id)->update([
             'status' => $request->status
         ]);
@@ -234,6 +243,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             EmailBox::send(User::find($company->user_id)->email,'TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             DateConversion::addExtraDay($minitbp->id,6);
         }  
+        CreateUserLog::createLog('ยืนยันการชำระเงินค่าธรรมเนียม โครงการ' . $minitbp->project);
         return redirect()->route('dashboard.admin.project.invoice')->withSuccess('ยืนยันรายการสำเร็จ');
     }
 }

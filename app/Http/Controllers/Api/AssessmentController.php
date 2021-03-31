@@ -17,6 +17,7 @@ use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
 use App\Model\FullTbpGantt;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
 use App\Model\TimeLineHistory;
@@ -167,5 +168,7 @@ class AssessmentController extends Controller
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
         }
+        $minitbp = MiniTBP::find($request->id);
+        CreateUserLog::createLog('ยืนยันส่งจดหมายแจ้งผล โครงการ' . $minitbp->project);
     }
 }

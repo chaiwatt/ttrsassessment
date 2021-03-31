@@ -14,6 +14,7 @@ use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
@@ -115,7 +116,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
             DateConversion::addExtraDay($minitbp->id,1);
 
         }
-
+        CreateUserLog::createLog('มอบหมาย Leader และ Co-Leader โครงการ' . $minitbp->project);
         return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('การมอบหมายสำเร็จ');
     }
     public function GetWorkLoadLeader(Request $request){

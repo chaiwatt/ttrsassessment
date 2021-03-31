@@ -357,20 +357,40 @@
     }
 
     $(document).on('click', '#jdconfirmteam', function(e) {
-        $("#spinicon").attr("hidden",false);
-        jdConfirmExpert("{{$fulltbp->id}}").then(data => {
-            if(data == ''){
-                Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'ไม่พบข้อมูลผู้เชี่ยวชาญที่ตอบรับ',
+        Swal.fire({
+            title: 'คำเตือน!',
+            text: `ต้องการยืนยันทีมผู้เชี่ยวชาญ หรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
             }).then((result) => {
-                window.location.reload();
-            });
-            }else{
-                window.location.reload();
+            if (result.value) {
+                $("#spinicon").attr("hidden",false);
+                    jdConfirmExpert("{{$fulltbp->id}}").then(data => {
+                        if(data == ''){
+                            Swal.fire({
+                            title: 'ผิดพลาด...',
+                            text: 'ไม่พบข้อมูลผู้เชี่ยวชาญที่ตอบรับ',
+                        }).then((result) => {
+                            window.location.reload();
+                        });
+                        }else{
+                            window.location.reload();
+                        }
+                    })
+               .catch(error => {})
             }
+        });
 
-        })
+
+
+
+
+
         
     });
     // 

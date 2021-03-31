@@ -25,10 +25,11 @@ use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
+
 use App\Model\CompanyAddress;
 
 use App\Helper\DateConversion;
-
 use App\Model\SignatureStatus;
 use App\Model\EvaluationResult;
 use App\Model\ProjectAssignment;
@@ -71,6 +72,8 @@ class DashboardAdminEvaluationResultController extends Controller
             'marketability' => $request->marketability,
             'businessprospect' => $request->businessprospect
         ]);
+        $fulltbp = FullTbp::find(EvaluationResult::find($id)->full_tbp_id);
+        CreateUserLog::createLog('เพิ่ม/แก้ไขบทวิเคราะห์ โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project);
         return redirect()->route('dashboard.admin.evaluationresult')->withSuccess('เพิ่มบทวิเคราะห์สำเร็จ');
     }
 

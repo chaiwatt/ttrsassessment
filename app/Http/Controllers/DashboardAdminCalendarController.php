@@ -19,6 +19,7 @@ use App\Model\EventCalendar;
 use App\Model\ProjectMember;
 use Google_Service_Calendar;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Helper\GoogleCalendar;
 use App\Model\TimeLineHistory;
@@ -176,6 +177,8 @@ class DashboardAdminCalendarController extends Controller
             $notificationbubble->save();
         }
       }
+
+      CreateUserLog::createLog('สร้างปฎิทินกิจกรรม ' . $messageheader );
       return redirect()->route('dashboard.admin.calendar')->withSuccess('เพิ่มรายการสำเร็จ');
   }
   public function Edit($id){
@@ -309,7 +312,7 @@ class DashboardAdminCalendarController extends Controller
         }
     
     }
-
+    CreateUserLog::createLog('แก้ไขปฎิทินกิจกรรม โครงการ' . $minitbp->project );
     return redirect()->route('dashboard.admin.calendar')->withSuccess('แก้ไขรายการสำเร็จ');
   }
   public function Delete($id){
@@ -340,6 +343,7 @@ class DashboardAdminCalendarController extends Controller
         '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
         '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
     }
+    CreateUserLog::createLog('ลบปฎิทินกิจกรรม');
     return redirect()->route('dashboard.admin.calendar')->withSuccess('ลบการสำเร็จ');
 
   }

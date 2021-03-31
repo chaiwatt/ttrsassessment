@@ -20,6 +20,7 @@ use App\Model\ProjectGrade;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Model\ProjectScoring;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
@@ -452,7 +453,10 @@ class DashboardAdminProjectAssessmentController extends Controller
         }     
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
                                     ->where('user_id',Auth::user()->id)
-                                    ->first();                  
+                                    ->first();   
+        $ev = Ev::find($request->evid)  ; 
+        $fulltbp = FullTbp::find($ev->full_tbp_id);                         
+        CreateUserLog::createLog('นำส่งคะแนน โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project);                                           
         return response()->json($scoringstatus); 
     }
     

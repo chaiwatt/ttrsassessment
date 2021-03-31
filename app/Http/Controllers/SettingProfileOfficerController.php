@@ -14,6 +14,7 @@ use App\Model\ExpertField;
 use App\Model\ExpertBranch;
 use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Model\EducationLevel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -129,7 +130,7 @@ class SettingProfileOfficerController extends Controller
             'expereinceyear' => $request->expereinceyear,
             'expereincemonth' => $request->expereincemonth
         ]);
-
+        CreateUserLog::createLog('แก้ไขข้อมูลโปรไฟล์');
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 
     }
 }

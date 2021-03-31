@@ -947,63 +947,92 @@ $(document).on('keyup', '#percentextra', function(e) {
 });
 
 $(document).on('click', '#updateev', function(e) {
-    var pillarnames = $('.pillarname').map(function() {
-        return $(this).data('pillar');
-    }).toArray();
-    
-    var unique = pillarnames.filter(onlyUnique);
-    if(unique.length != 4){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบทุก Pillar!',
-        });
-        return;
-    }
-
-    if($("#criteriatable tr").length == 1){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'ยังไม่ได้เพิ่ม Criteria!',
-        })
-        return;
-    }else{
-        if($('#percentextra').val() > 0){
-            if($("#extracriteriatable tr").length == 1){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการนำส่ง EV หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            var pillarnames = $('.pillarname').map(function() {
+                return $(this).data('pillar');
+            }).toArray();
+            
+            var unique = pillarnames.filter(onlyUnique);
+            if(unique.length != 4){
                 Swal.fire({
                     title: 'ผิดพลาด...',
-                    text: 'ยังไม่ได้เพิ่ม Extra Criteria!',
-                })
+                    text: 'กรุณากรอกข้อมูลให้ครบทุก Pillar!',
+                });
                 return;
             }
+        
+            if($("#criteriatable tr").length == 1){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'ยังไม่ได้เพิ่ม Criteria!',
+                })
+                return;
+            }else{
+                if($('#percentextra').val() > 0){
+                    if($("#extracriteriatable tr").length == 1){
+                        Swal.fire({
+                            title: 'ผิดพลาด...',
+                            text: 'ยังไม่ได้เพิ่ม Extra Criteria!',
+                        })
+                        return;
+                    }
+                }
+            }
+            $("#spinicon").attr("hidden",false);
+            Ev.updateEvStatus($(this).data('id')).then(data => {
+                Ev.clearCommentTab($('#evid').val(),1).then(data => {
+                    $("#spinicon").attr("hidden",true);
+                    Swal.fire({
+                        title: 'สำเร็จ...',
+                        text: 'นำส่ง EV สำเร็จ!',
+                    }).then((result) => {
+                        window.location.reload();
+                    });
+                }).catch(error => {})
+            }).catch(error => {})
         }
-    }
-    $("#spinicon").attr("hidden",false);
-    Ev.updateEvStatus($(this).data('id')).then(data => {
-        Ev.clearCommentTab($('#evid').val(),1).then(data => {
-            $("#spinicon").attr("hidden",true);
-            Swal.fire({
-                title: 'สำเร็จ...',
-                text: 'นำส่ง EV สำเร็จ!',
-            }).then((result) => {
-                window.location.reload();
-            });
-        }).catch(error => {})
-    }).catch(error => {})
+    });
 });
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 $(document).on('click', '#approveevstageone', function(e) {
-    $("#spinicon").attr("hidden",false);
-    Ev.approveEvStageOne($(this).data('id')).then(data => {
-        $("#spinicon").attr("hidden",true);
-        Swal.fire({
-            title: 'สำเร็จ...',
-            text: 'Admin สามารถกำหนด Weight ในขั้นตอนถัดไป!',
+
+    Swal.fire({
+        title: 'ยืนยัน!',
+        text: `ต้องการอนุมัติ EV หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
         }).then((result) => {
-            window.location.reload();
-        });
-    }).catch(error => {})
+        if (result.value) {
+            $("#spinicon").attr("hidden",false);
+            Ev.approveEvStageOne($(this).data('id')).then(data => {
+                $("#spinicon").attr("hidden",true);
+                Swal.fire({
+                    title: 'สำเร็จ...',
+                    text: 'Admin สามารถกำหนด Weight ในขั้นตอนถัดไป!',
+                }).then((result) => {
+                    window.location.reload();
+                });
+            }).catch(error => {})
+        }
+    });
 });
 
 $(document).on('click', '#btnaddextracriteria', function(e) {

@@ -8,6 +8,7 @@ use App\Model\Tambol;
 use App\Model\Province;
 use App\Model\GeneralInfo;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Model\FrontPageStatus;
 use App\Model\VerifyExpertStatus;
 use Illuminate\Support\Facades\Auth;
@@ -77,6 +78,7 @@ class SettingAdminSystemController extends Controller
             'watermark' => $request->watermark,
             'watermarktext' => $request->watermarktext
         ]);
+        CreateUserLog::createLog('แก้ไขการตั้งค่าระบบ');
         return redirect()->back()->withSuccess('แก้ไขสำเร็จ');
     }
 }

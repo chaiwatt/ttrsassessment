@@ -15,6 +15,7 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Model\EvaluationResult;
 use App\Model\ProjectAssignment;
@@ -145,6 +146,7 @@ class DashboardCompanyInvoiceController extends Controller
         EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบผลการแจ้งการชำระเงิน','เรียนผู้ขอรับการประเมิน<br><br> กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         Message::sendMessage('กรุณาตรวจสอบผลการแจ้งการชำระเงิน','กรุณาตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
         
+        CreateUserLog::createLog('แจ้งการชำระเงินใบแจ้งหนี้ โครงการ' . $minitbp->project);
 
        return redirect()->route('dashboard.company.project.invoice')->withSuccess('แจ้งการชำระเงินสำเร็จ');
     }

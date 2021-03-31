@@ -30,6 +30,7 @@ use App\Model\EventCalendar;
 use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Helper\DateConversion;
@@ -343,7 +344,8 @@ class DashboardAdminProjectFullTbpController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
         EmailBox::send($jduser->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project  .' บริษัท' . $_company->name,'เรียน JD <br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .' บริษัท' . $_company->name.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        
+        CreateUserLog::createLog('มอบหมายผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
+
         return redirect()->back()->withSuccess('เพิ่มผู้เชี่ยวชาญสำเร็จ'); 
     }
 
@@ -416,7 +418,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             ]);
 
             EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-
+   
         }else{
             FullTbp::find($request->fulltbpid)->update([
                 'assignexpert' => '1'
@@ -508,7 +510,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                    DateConversion::addExtraDay($minitbp->id,3);
                 }
             }
-
+            CreateUserLog::createLog('อนุมัติ Full TBP โครงการ' . $minitbp->project);
         }else{
             
             FullTbp::find($request->id)->update(
@@ -546,7 +548,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             $notificationbubble->save();
 
             EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูลแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            
+            CreateUserLog::createLog('ส่งคืน Full TBP โครงการ' . $minitbp->project);
         }
         return response()->json($fulltbp); 
     }
@@ -836,6 +838,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             ]);
             DateConversion::addExtraDay($minitbp->id,8);
         }
+        CreateUserLog::createLog('ยืนยันสิ้นสุดโครงการ โครงการ' . $minitbp->project);
         return redirect()->back()->withSuccess('สิ้นสุดโครงการ'.$minitbp->project.'สำเร็จ');
     }
 }

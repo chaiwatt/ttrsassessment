@@ -470,7 +470,6 @@ function updateEvAdminStatus(id,value){
 		},
 		enableFinishButton: submitbutton,
 		onFinished: function (event, currentIndex) {
-
             Swal.fire({
                 title: 'ยืนยัน!',
                 text: `ต้องการนำส่ง JD หรือไม่`,

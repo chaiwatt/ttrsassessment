@@ -17,6 +17,7 @@ use App\Helper\GetEvPercent;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Model\TimeLineHistory;
 use App\Model\CheckListGrading;
@@ -460,7 +461,7 @@ class DashboardAdminAssessmentController extends Controller
         $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
-
+        CreateUserLog::createLog('สรุปคะแนน โครงการ' . $minitbp->project);
     }
 
     public function Summary($id){
