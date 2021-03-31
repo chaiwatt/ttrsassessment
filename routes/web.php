@@ -1014,6 +1014,7 @@ Route::group(['middleware' => 'auth'], function(){
             }); 
             Route::group(['prefix' => 'user'], function(){
                 Route::get('','SettingAdminUserController@Index')->name('setting.admin.user');           
+                Route::get('log','SettingAdminUserController@Log')->name('setting.admin.userlog');  
                 Route::get('create','SettingAdminUserController@Create')->name('setting.admin.user.create'); 
                 Route::post('createsave','SettingAdminUserController@CreateSave')->name('setting.admin.user.createsave'); 
                 Route::get('edit/{id}','SettingAdminUserController@Edit')->name('setting.admin.user.edit'); 

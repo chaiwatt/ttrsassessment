@@ -296,6 +296,7 @@
             <a href="#" class="nav-link"><span>ผู้ใช้งานระบบ</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('setting.admin.user')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.user')?'active':''}}">ผู้ใช้งาน</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.userlog')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.userlog')?'active':''}}">Log</a></li>		             
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.assessment')?'nav-item-expanded':''}}">

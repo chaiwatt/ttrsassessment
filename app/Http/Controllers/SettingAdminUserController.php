@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use App\Model\Prefix;
+use App\Model\UserLog;
 use App\Model\UserType;
 use App\Model\UserStatus;
 use App\Model\ExpertDetail;
@@ -126,5 +127,11 @@ class SettingAdminUserController extends Controller
         return redirect()->route('setting.admin.user')->withSuccess('ลบผู้ใช้งานสำเร็จ');
     }
 
+    public function Log(){
+        // $users = User::where('id','!=',Auth::user()->id)->get();
+        $userlogs = UserLog::get();
+        // return $userlogs;
+        return view('setting.admin.user.userlog')->withUserlogs($userlogs);
+    }
 
 }

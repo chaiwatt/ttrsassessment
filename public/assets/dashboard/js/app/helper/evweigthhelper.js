@@ -1,16 +1,18 @@
 import * as Ev from './ev.js';
 import * as Extra from './extra.js';
 var commentreadonly =``;
+
 $(function() {
     getEv($('#evid').val()).then(data => {
-        // console.log(data);
+        $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
+        $('#extraweight').html('(' + data.sumextraweigth.toFixed(3) + ')');
         RenderWeightTable(data.pillaindexweigths,1);
         RenderExtraTable(data.extracriteriatransactions);
         $(".loadprogress").attr("hidden",true);
         RowSpanWeight("subpillarindex");
         RowSpanExtra("extra_subpillarindex");
-        $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
-        $('#extraweight').html('(' + data.sumextraweigth.toFixed(3) + ')');
+     
+  
         
     }).catch(error => {})
 });
@@ -364,6 +366,9 @@ function updateEvAdminStatus(id,value){
       }
 
       $(document).on('click', '#btn_modal_add_comment', function(e) {
+        if($('#comment').val() == ''){
+            return;
+        }
         Swal.fire({
             title: 'ยืนยัน!',
             text: `ต้องการส่งคืนให้ Admin แก้ไขหรือไม่`,
@@ -498,6 +503,7 @@ function updateEvAdminStatus(id,value){
                         if (tempchk == 1) {
                             return ;
                         }
+                        
                         if(parseFloat($('#weight').html().replace(/[{()}]/g, '')) != 1){
                             Swal.fire({
                                 title: 'ผิดพลาด...',

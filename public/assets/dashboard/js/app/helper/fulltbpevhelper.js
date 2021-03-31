@@ -1079,6 +1079,9 @@ $(document).on('change', '#extrasubpillar', function(e) {
 
 
 $(document).on('click', '#btn_modal_add_comment', function(e) {
+    if($('#comment').val() == ''){
+        return;
+    }
     Swal.fire({
         title: 'ยืนยัน!',
         text: `ต้องการส่งคืนให้ Leader แก้ไขหรือไม่`,
