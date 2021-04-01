@@ -123,7 +123,7 @@
                     </div>
                     <div id="pwd-container">
                         <div class="form-group form-group-feedback form-group-feedback-left" >
-                            <input id="password" type="password" class="form-control form-control-lg engonly @error('password') is-invalid @enderror" name="password" title="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร">
+                            <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร">
                             <div class="form-control-feedback">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
@@ -135,7 +135,7 @@
                         </div>
         
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input id="password-confirm" type="password" class="form-control engonly form-control-lg" name="password_confirmation" title="ใช้ได้เฉพาะตัวอักษรและภาษาอังกฤษเท่านั้น" placeholder="ยืนยันรหัสผ่าน">
+                            <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ใช้ได้เฉพาะตัวอักษรและภาษาอังกฤษเท่านั้น" placeholder="ยืนยันรหัสผ่าน">
                             <div class="form-control-feedback ">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
@@ -159,7 +159,7 @@
                         <a href="{{ route('login') }}" class="btn btn-light btn-block"><span style="font-size: 18px">{{trans('lang.login')}}</span></a>
                     </div>
 
-                    
+
                 </div>
                 </form>
             </div>
