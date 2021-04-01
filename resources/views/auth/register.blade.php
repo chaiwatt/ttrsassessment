@@ -153,6 +153,11 @@
                     <div class="form-group">
                         <button type="submit" id="term" class="btn btn-primary btn-block" disabled><span style="font-size: 18px">สมัครสมาชิก</span>  <i class="icon-circle-right2 ml-2"></i></button>
                     </div>
+                    <hr>
+
+                    <div class="form-group">
+                        <a href="{{ route('login') }}" class="btn btn-light btn-block"><span style="font-size: 18px">{{trans('lang.login')}}</span></a>
+                    </div>
                 </div>
                 </form>
             </div>
