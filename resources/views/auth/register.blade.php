@@ -158,6 +158,8 @@
                     <div class="form-group">
                         <a href="{{ route('login') }}" class="btn btn-light btn-block"><span style="font-size: 18px">{{trans('lang.login')}}</span></a>
                     </div>
+
+                    
                 </div>
                 </form>
             </div>
