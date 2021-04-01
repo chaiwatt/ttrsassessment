@@ -134,7 +134,7 @@ class FullTbpController extends Controller
             ]);
         }else{
             $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf',$data,[],[
-                'watermark' => 'เอกสารสำคัญปกปิด(Private & Confidential)',
+                'watermark' => 'เอกสารสำคัญปกปิด (Private & Confidential)',
                 'show_watermark' => false
             ]);
         }

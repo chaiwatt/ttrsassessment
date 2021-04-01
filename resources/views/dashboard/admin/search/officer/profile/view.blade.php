@@ -228,8 +228,8 @@
 											</div>
 											<div class="col-md-6">  
 												<div class="form-group">
-													<label>วุติการศึกษาสูงสุด<span class="text-danger">*</span></label>
-													<select name="educationlevel" id="educationlevel" data-placeholder="วุติการศึกษาสูงสุด" class="form-control form-control-lg form-control-select2">
+													<label>วุฒิการศึกษาสูงสุด<span class="text-danger">*</span></label>
+													<select name="educationlevel" id="educationlevel" data-placeholder="วุฒิการศึกษาสูงสุด" class="form-control form-control-lg form-control-select2">
 														@foreach ($educationlevels as $educationlevel)                                                                
 															<option value="{{$educationlevel->id}}" @if ($educationlevel->id == $officer->education_level_id) selected @endif > {{$educationlevel->name}} </option>
 														@endforeach    
@@ -316,7 +316,7 @@
 													{{-- <div class="col-md-12" > --}}
 														<label for="">เอกสารแนบ  </label>
 													{{-- <a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertdoc">คลิกเพิ่ม</a>  --}}
-													<p><small>(Resume, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่น ๆ)</small></p> 
+													<p><small>(ประวัติย่อ, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่นๆ)</small></p> 
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">
 																<thead>

@@ -303,7 +303,7 @@
 																			@endforeach
 																		</select>
 																	</div>
-																	@if (@$minitbp->bank->name == 'อื่น ๆ โปรดระบุ')
+																	@if (@$minitbp->bank->name == 'อื่นๆ โปรดระบุ')
 																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" >
 																		@else
 																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" hidden >
@@ -430,7 +430,7 @@
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="nonefinance6" name="nonefinance6" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance6)) checked @endif data-fouc>
-																อื่น ๆ
+																อื่นๆ
 															</label>
 															<div class="row" id="nonefinancediv2" style="margin-top: 5px"  @if (Empty($minitbp->nonefinance6_detail) || Empty($minitbp->nonefinance6) ) hidden @endif>
 																<div class="col-md-12">

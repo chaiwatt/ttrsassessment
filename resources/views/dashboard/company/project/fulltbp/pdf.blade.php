@@ -40,7 +40,7 @@
 
         <div class="wrapper">
             <htmlpagefooter name="page-footer">
-                <div class=" right" alt="" style="font-size:11px">F-CO-TTRS-02 rev0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>เอกสารสำคัญปกปิด(Private & Confidential)</strong>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{PAGENO}/{nb}</div>
+                <div class=" right" alt="" style="font-size:11px">F-CO-TTRS-02 rev0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>เอกสารสำคัญปกปิด (Private & Confidential)</strong>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{PAGENO}/{nb}</div>
              </htmlpagefooter>
             <div class="container" >
                 <div class="box"  >
@@ -546,7 +546,7 @@
                                     </tr >
                                     <tr>
                                         <td colspan="3" style="font-size:13px;border-top: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer11)) checked="checked" @endif> อื่น ๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer11_qty}} )</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer11)) checked="checked" @endif> อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer11_qty}} )</div>
                                         </td>
                                     </tr>  
                                 </tbody>
@@ -620,7 +620,7 @@
                     <div class="ml50" style="font-size:13px"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
                     <div class="ml30" style="font-size:13px" ><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></div>
-                    <div style="font-size:13px">ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย: บาท)</div>
+                    <div style="font-size:13px">ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
@@ -652,7 +652,7 @@
                             @endif
                         </tbody>
                     </table>
-                    <div class="mt20" style="font-size:13px">สถานะยอดขาย (สถานะยอดขาย 3 ปีย้อนหลัง) (หน่วย: บาท)</div>
+                    <div class="mt20" style="font-size:13px">(สถานะยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
@@ -684,7 +684,7 @@
                             @endif
                         </tbody>
                     </table>
-                    <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : ลูกหนี้การค้า (หน่วย: บาท)</div>
+                    <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : ลูกหนี้การค้า (หน่วย : บาท)</div>
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
@@ -711,7 +711,7 @@
                             @endif
                         </tbody>
                     </table>
-                    <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : เจ้าหนี้การค้า (หน่วย: บาท)</div>
+                    <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : เจ้าหนี้การค้า (หน่วย : บาท)</div>
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
@@ -749,7 +749,7 @@
                                 <tr>
                                     <th style="width:30%;font-size:13px">รายการ</th>  
                                     <th style="width:15%;font-size:13px">จำนวนเงิน <pre style="font-family: THSarabunNew">(บาท)</pre></th>                                                                                    
-                                    <th style="width:15%;font-size:13px">จำนวน(ชิ้น)</th>       
+                                    <th style="width:15%;font-size:13px">จำนวน(หน่วย)</th>       
                                     <th style="width:15%;font-size:13px">ราคาต่อเครื่อง<pre style="font-family: THSarabunNew">(บาท)</pre></th>  
                                     <th style="width:25%;font-size:13px">ข้อมูลจำเพาะทางเทคนิค</th> 
                                 <tr>

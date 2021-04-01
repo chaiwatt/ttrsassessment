@@ -713,8 +713,8 @@
 								<input type="text" id="productname" placeholder="รายการ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellpresent" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control form-control-lg">
+								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellpresent" placeholder="ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
@@ -756,8 +756,8 @@
 								<input type="text" id="productnameedit" placeholder="รายการ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellpresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control form-control-lg">
+								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellpresentedit" placeholder="ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
@@ -799,8 +799,8 @@
 								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control form-control-lg" readonly>
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขายปีปัจจุบัน({{$fulltbp->presentyear}})" class="form-control form-control-lg">
+								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
@@ -1025,8 +1025,8 @@
 								<input type="number" id="assetcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>จำนวน (ชิ้น)</label><span class="text-danger">*</span>
-								<input type="number" id="assetquantityedit" placeholder="จำนวน (ชิ้น)" class="form-control form-control-lg">
+								<label>จำนวน (หน่วย)</label><span class="text-danger">*</span>
+								<input type="number" id="assetquantityedit" placeholder="จำนวน (หน่วย)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>ราคาต่อเครื่อง (บาท)</label><span class="text-danger">*</span>
@@ -1338,7 +1338,7 @@
 					<div class="card-body">
 					<input type="text" id="fulltbpid" value="{{$fulltbp->id}}" hidden>
 						<form class="wizard-form steps-basic" action="#" data-fouc>
-							<h6>1.ข้อมูลทั่วไป</h6>
+							<h6>ข้อมูลทั่วไป</h6>
 
 							<fieldset>
 								<div id="accordion-group">
@@ -1787,7 +1787,7 @@
 
 							
 
-							<h6>2.ภาพรวมโครงการที่ขอรับประเมิน</h6>
+							<h6>ภาพรวมโครงการที่ขอรับประเมิน</h6>
 							<fieldset>
 							
 									<div id="accordion-group">
@@ -1923,7 +1923,7 @@
 															<div class="form-group">	
 																{{-- <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add"></i></a> --}}
 																<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์</label>
-																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน(เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
+																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน (เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
 															</div>
 															<div class="table-responsive">
 																<table class="table table-striped table-bordered">
@@ -2131,7 +2131,7 @@
 																		<div class="form-check">
 																			<label class="form-check-label">
 																				<input type="checkbox" id="cer11" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer11)) checked @endif data-fouc disabled>
-																				อื่น ๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI)ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม
+																				อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม
 																			</label>
 																			<div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
 																				<div class="col-md-9">
@@ -2355,7 +2355,7 @@
 
 							</fieldset>
 
-							<h6>3.ความเป็นไปได้ด้านการตลาดแผนสู่เชิงพาณิชย์</h6>
+							<h6>ความเป็นไปได้ด้านการตลาดแผนสู่เชิงพาณิชย์</h6>
 							<fieldset>
 								<div id="accordion-group">
 									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
@@ -2516,8 +2516,8 @@
 													
 													<div class="col-md-12 mt-4">
 														{{-- <div class="form-group">	 --}}
-															<label for=""><u>สถานะยอดขาย (สถานะยอดขาย 3 ปีย้อนหลัง)</u> </label>
-															<small><i>สถานะยอดขาย (สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
+															<label for=""><u>(สถานะยอดขาย 3 ปีย้อนหลัง)</u> </label>
+															<small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
 														{{-- </div> --}}
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
@@ -2644,7 +2644,7 @@
 								<!-- /accordion group -->
 		
 							</fieldset>
-							<h6>4.ข้อมูลทางด้านการเงิน</h6>
+							<h6>ข้อมูลทางด้านการเงิน</h6>
 							<fieldset>	
 								<div id="accordion-group">
 									<div class="card border-top-info rounded-top-1 mb-0">
@@ -2667,7 +2667,7 @@
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
 																		<th>จำนวนเงิน (บาท)</th>                                                                                    
-																		<th>จำนวน (ชิ้น)</th>       
+																		<th>จำนวน (หน่วย)</th>       
 																		<th>ราคาต่อเครื่อง (บาท)</th>  
 																		<th>ข้อมูลจำเพาะทางเทคนิค</th> 
 																		{{-- <th style="width:120px">เพิ่มเติม</th>     --}}
@@ -2826,7 +2826,7 @@
 								<!-- /accordion group -->
 		
 							</fieldset>
-							<h6>5.เสร็จสิ้น</h6>
+							<h6>เสร็จสิ้น</h6>
 							<fieldset>
 								<div class="col-md-12">
 									<div class="form-group">

@@ -82,7 +82,7 @@
                 array_push($nonefinancemessagearr,"โครงการสนับสนุนผู้ประกอบการภาครัฐ ดังรายละเอียด " . $minitbp->nonefinance5_detail);
             }
             if(!Empty($minitbp->nonefinance6)){
-                array_push($nonefinancemessagearr,"อื่น ๆ ดังรายละเอียด " . $minitbp->nonefinance6_detail);
+                array_push($nonefinancemessagearr,"อื่นๆ ดังรายละเอียด " . $minitbp->nonefinance6_detail);
             }
         @endphp
         @if ($businessplan->business_plan_status_id > 2)

@@ -9,7 +9,7 @@
         <th>อีเมล</th>
         <th>หน่วยงานที่สังกัด</th>
         <th>ตำแหน่ง</th>
-        <th>วุติการศึกษาสูงสุด</th>
+        <th>วุฒิการศึกษาสูงสุด</th>
         <th>ประสบการณ์การทำงาน</th>
         <th>สาขาความเชี่ยวชาญ</th>
         <th>ระดับความเชี่ยวชาญ</th>
@@ -31,7 +31,7 @@
                 <tr>
                     @php
                         $userprefix = $user->prefix->name;
-                        if($userprefix == 'อื่น ๆ'){
+                        if($userprefix == 'อื่นๆ'){
                             $userprefix = $user->alter_prefix;
                         }
                     @endphp 

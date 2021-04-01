@@ -94,7 +94,7 @@
                                                 <tr >  
                                                     @php
                                                         $userprefix = $user->prefix->name;
-                                                        if($userprefix == 'อื่น ๆ'){
+                                                        if($userprefix == 'อื่นๆ'){
                                                             $userprefix = $user->alter_prefix;
                                                         }
                                                     @endphp 

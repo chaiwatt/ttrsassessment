@@ -131,7 +131,7 @@
                                 <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                             @enderror
                             {{-- <small class="form-text text-right pwstrength_viewport_verdict"></small> --}}
-    
+                            
                         </div>
         
                         <div class="form-group form-group-feedback form-group-feedback-left">
@@ -186,6 +186,8 @@
                 var options = {};
                 options.ui = {
                     container: "#pwd-container",
+                    // showStatus: true,
+                    // showProgressBar: false,
                     addRule: function (name, method, score, active) {
                         this.each(function (idx, el) {
                             var options = $(el).data("pwstrength");

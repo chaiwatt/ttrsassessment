@@ -101,7 +101,7 @@
                                                 <tr>
                                                     @php
                                                         $userprefix = $officer->user->prefix->name;
-                                                            if($userprefix == 'อื่น ๆ'){
+                                                            if($userprefix == 'อื่นๆ'){
                                                             $userprefix = $officer->user->alter_prefix;
                                                         }
                                                     @endphp
