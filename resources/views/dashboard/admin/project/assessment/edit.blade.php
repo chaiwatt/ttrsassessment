@@ -97,6 +97,7 @@
                                     </div>
                                 </fieldset>
                                 @if ($ev->percentextra > 0)
+                                <input type="text" id="inppercentextra" value="{{$ev->percentextra}}" hidden>
                                     <h6>Extra Weight</h6>
                                     <fieldset>
                                         <div class="table-responsive mb-2">

@@ -500,6 +500,7 @@ class MiniTbpController extends Controller
             'jdmessage' => $request->message
         ]);
         $minitbp = MiniTBP::find($request->id);
+        CreateUserLog::createLog('เพิ่มความเห็น โครงการ' . $minitbp->project );
         return response()->json($minitbp);
     }
 }

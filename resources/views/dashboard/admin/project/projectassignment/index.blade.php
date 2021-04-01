@@ -195,6 +195,9 @@
 
         
         $(document).on('click', '#btn_modal_add_jdmessage', function(e) {
+            if($('#messagebody').val() == ''){
+                return;
+            }
             addJdMessage($('#minitbpid').val(),$('#messagebody').val()).then(data => {
                 $('#modal_add_jdmessage').modal('hide');
                 window.location.reload();
