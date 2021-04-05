@@ -23,7 +23,7 @@
 <body class="bg-slate-800">
 
 	<!-- Page content -->
-	<div class="page-content" style="background-image: url('{{asset('assets/dashboard/images/auth/bg.png')}}');background-size:cover;background-repeat:no-repeat;box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.7);">
+	<div class="page-content" style="background-image: url('{{asset('assets/dashboard/images/auth/bgimg.png')}}');background-size:cover;background-repeat:no-repeat;box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.7);">
 
 		<!-- Main content -->
 		<div class="content-wrapper">
