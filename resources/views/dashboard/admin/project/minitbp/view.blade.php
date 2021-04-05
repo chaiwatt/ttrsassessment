@@ -453,7 +453,7 @@
 		labels: {
 			previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
 			next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
-			finish: 'ดำเนินการต่อ <i class="icon-arrow-right14 ml-2" />'
+			finish: 'ดำเนินการ <i class="icon-arrow-right14 ml-2" />'
 		},
 		enableFinishButton: true,
 		onFinished: function (event, currentIndex) {
