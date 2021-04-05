@@ -52,9 +52,9 @@
                             </li>
                                 <li>
                                     @if (Config::get('app.locale') == 'th')
-                                        <li><a href="{{route('change',['locale' => 'en'])}}"><i class="fa fa-reply-all"></i> ไทย</a></li>
+                                        <li><a href="{{route('change',['locale' => 'en'])}}" class="thai-font"><img class="flag" src="{{asset('assets/landing2/images/flag/thflag.png')}}" alt=""> ไทย</a></li>
                                     @else
-                                        <li><a href="{{route('change',['locale' => 'th'])}}"><i class="fa fa-reply-all"></i> English</a></li>
+                                        <li><a href="{{route('change',['locale' => 'th'])}}" class="thai-font"><img class="flag" src="{{asset('assets/landing2/images/flag/usflag.png')}}" alt=""> English</a></li>
                                     @endif
                                 </li>
                         

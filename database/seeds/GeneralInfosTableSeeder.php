@@ -18,7 +18,7 @@ class GeneralInfosTableSeeder extends Seeder
                 'phone1' => '0-2564-7000',
                 'phone2' => '0-2564-8000',
                 'fax' => '0-2564-7001-5',
-                'email' => 'info@nstda.or.th',
+                'email' => 'ttrs@nstda.or.th',
                 'youtube' => 'https://youtube.com',
                 'facebook' => 'https://facebook.com',
                 'twitter' => 'https://twitter.com',

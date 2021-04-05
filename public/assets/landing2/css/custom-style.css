@@ -78,7 +78,7 @@
 
 
 #hero{
-  background:linear-gradient(360deg, #03218fc0 100%, #0e72e4 100%),url(../images/ttrs1.png);
+  background:linear-gradient(360deg, #03218fc0 100%, #0e72e4 100%),url(../images/ttrs.png);
   opacity: 100%;
   background-size: cover;
   background-position:center;
@@ -180,12 +180,47 @@ font-size: 14px;
 .pd-140{
   padding-top: 140px;
 }
+.ul-list{
+  padding-top: 20px;
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+}
+
+
+.li-list{
+  padding-left: 20px;
+  font-family: 'Kanit', sans-serif !important;
+}
+
+.site-map{
+  padding: 15px 140px 15px 140px;
+}
+.siteHead{
+  padding-top: 35px;
+  margin: 0 !important;
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+.hideSign-up{
+  display: none !important;
+}
+.flag{
+  width: 24px;
+  padding-right: 6px;
+  margin-top: -1px;
+}
 
 
 
-
-
-@media(max-width:1366px) {
+@media(max-width:1280px) {
+  .flag{
+    width: 32px;
+    padding-right: 6px;
+    border-radius: 10px;
+  }
+ 
   
 .h1{
   font-family: 'Josefin Sans', sans-serif;
