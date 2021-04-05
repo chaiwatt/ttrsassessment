@@ -51,7 +51,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">รายการมอบหมาย</span></h4>
+                <h4> <span class="font-weight-semibold">รายการมอบหมาย</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -118,13 +118,30 @@
                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="text-info" target="_blank">{{$projectassignment->businessplan->minitbp->project}} </a>
                                         </td> 
                                         <td> 
-                                            {{$projectassignment->businessplan->company->name}}
+                                            @php
+                                                $company = $projectassignment->businessplan->company;
+                                                $company_name = (!Empty($company->name))?$company->name:'';
+                                                $bussinesstype = $company->business_type_id;
+                                                $fullcompanyname = $company_name;
+                                                if($bussinesstype == 1){
+                                                    $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+                                                }else if($bussinesstype == 2){
+                                                    $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+                                                }else if($bussinesstype == 3){
+                                                    $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+                                                }else if($bussinesstype == 4){
+                                                    $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+                                                }else{
+                                                    $fullcompanyname = $projectassignment->businessplan->company->name; 
+                                                }
+                                            @endphp
+                                            {{$fullcompanyname}}
                                         </td> 
                                         <td> 
                                             @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
-                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                    <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
                                                 @else
-                                                    <a type="button" href="#" data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                                    <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                         </td>  
                                         <td> 
@@ -144,10 +161,10 @@
                                             <td> 
                                                 @if (@$projectassignment->businessplan->minitbp->fulltbp->projectstatustransaction(8)->status != 2)
                                                     @if ($projectassignment->leader_id == null)
-                                                            <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
+                                                            <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
                                                         @else
                                                           @if ($projectassignment->businessplan->business_plan_status_id < 9)
-                                                            <a type="button" href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">แก้ไข</a>
+                                                            <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">แก้ไข</a>
                                                           @endif 
                                                     @endif
                                                 @endif 

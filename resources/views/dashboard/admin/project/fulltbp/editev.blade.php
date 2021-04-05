@@ -398,7 +398,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">EV Template: {{$ev->name}}
+                <h4> <span class="font-weight-semibold">EV Template: {{$ev->name}}
                 @if ($ev->status != 0)
                   <span class="text-success">(นำส่งแล้ว)</span> 
                 @endif

@@ -15,7 +15,6 @@ use App\Model\FullTbpResponsiblePerson;
 class FullTbpGeneralController extends Controller
 {
     public function Edit(Request $request){
-        // dd('ok');
         $fulltbp = FullTbp::find($request->id);
         FullTbpEmployee::where('full_tbp_id',$request->id)->first()->update([
             'department_qty' => $request->department_qty,

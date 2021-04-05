@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แจ้งการจ่ายเงิน @if ($invoicetransaction->status == 3)<span class="text-success">(ยืนยันจ่ายเงินแล้ว)</span> @endif    
+                <h4> <span class="font-weight-semibold">แจ้งการจ่ายเงิน @if ($invoicetransaction->status == 3)<span class="text-success">(ยืนยันจ่ายเงินแล้ว)</span> @endif    
                 </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

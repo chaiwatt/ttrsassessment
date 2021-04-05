@@ -193,7 +193,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</span></h4>
+                <h4> <span class="font-weight-semibold">แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -253,7 +253,7 @@
                                         <th>EV</th> 
                                         <th>BOL</th> 
                                         <th>สถานะ</th> 
-                                        <th>ทีมประเมิน</th>
+                                        {{-- <th>ทีมประเมิน</th> --}}
                                         {{-- <th style="width: 20px"><i class="icon-arrow-down12"></i></th>  --}}
                                                                   
                                     </tr>
@@ -284,16 +284,16 @@
                                                 <td> 
                                                     @if ($fulltbp->expertassignments->count() > 0)
                                                             @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
-                                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                                                    <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
                                                                 @elseif($fulltbp->expertassignments->where('expert_assignment_status_id',2)->count() > 0)
                                                                     @if ($fulltbp->assignexpert !=2)
-                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                            <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
                                                                         @else
-                                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
+                                                                            <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
                                                                     @endif
                                                             @endif  
                                                         @else
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
+                                                            <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
                                                     @endif
                                                 </td>  
                                                 <td> 
@@ -343,7 +343,7 @@
                                                                 @endif
                                                         @endif
                                                     @else
-                                                            <a type="button" href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
                                                 <td> 
@@ -402,9 +402,9 @@
                                                     @endif
                                                    
                                                 </td>
-                                                <td> 
+                                                {{-- <td> 
                                                     <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td class="text-right">
                                                     <div class="list-icons">
                                                         <div class="list-icons-item dropdown">
@@ -446,7 +446,6 @@
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}",
-            businessplanstatus: "{{$fulltbp->minitbp->businessplan->business_plan_status_id}}",
         };
         $('#note').summernote({
 			toolbar: false,

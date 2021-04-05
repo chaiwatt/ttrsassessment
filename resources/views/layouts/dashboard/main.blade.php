@@ -29,7 +29,12 @@
     @show
 </head>
 
-<body>
+{{-- <body class="sidebar-xs"> --}}
+<body 
+	@if ($generalinfo->togglebar == 1)
+		class="sidebar-xs"
+	@endif
+>
 	<!-- Main navbar -->
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
@@ -43,15 +48,16 @@
 				<i class="icon-tree5"></i>
 			</button>
 			<button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
-				<i class="icon-paragraph-justify3"></i>
+				<i class="icon-paragraph-justify3 "></i>
 			</button>
 		</div>
 
 		<div class="collapse navbar-collapse" id="navbar-mobile">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
-						<i class="icon-paragraph-justify3"></i>
+					{{-- <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block"> --}}
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block" data-popup="tooltip-demo" title="คลิกเพื่อขยาย" data-placement="left" data-container="body" data-trigger="hover">
+						<i class="icon-paragraph-justify3 togglebar"></i>
 					</a>
 				</li>
 			</ul>
@@ -151,44 +157,38 @@
 		<!-- /main content -->
 	</div>
 
+
 	<script src="{{asset('assets/dashboard/js/main/jquery.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/main/jquery-ui.min.js')}}"></script>	
 	<script src="{{asset('assets/dashboard/js/main/bootstrap.bundle.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/loaders/blockui.min.js')}}"></script>
-
+	<script src="{{asset('assets/dashboard/js/app/helper/togglebarstatus.js')}}"></script>
 	<script src="{{ asset('assets/dashboard/js/plugins/momentjs/moment.js') }}"></script> <!-- Moment Plugin Js -->
 	<script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
-	{{-- <script src="{{ asset('assets/dashboard/js/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script> --}}
+	
 	<script src="{{ asset('assets/dashboard/js/plugins/materialdatetimepickerth/js/materialDateTimePicker.js') }}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/forms/selects/select2.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/handsontable.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/forms/styling/uniform.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script>
-	{{-- <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave-phone.th.js')}}"></script> --}}
-
 
 	<script src="{{asset('assets/dashboard/js/plugins/datatables/datatables.min.js')}}"></script>
-	{{-- <script src="{{asset('assets/dashboard/js/plugins/datatable/js/dataTables.bootstrap4.min.js')}}"></script> --}}
-	{{-- <script src="{{asset('assets/dashboard/js/plugins/datatable/buttons/dataTables.buttons.min.js')}}"></script>
-	<script src="{{asset('assets/dashboard/js/plugins/datatable/buttons/buttons.bootstrap4.min.js')}}"></script>
-	<script src="{{asset('assets/dashboard/js/plugins/datatable/ajax/jszip.min.js')}}"></script>
-	<script src="{{asset('assets/dashboard/js/plugins/datatable/ajax/pdfmake.min.js')}}"></script>
-	<script src="{{asset('assets/dashboard/js/plugins/datatable/ajax/vfs_fonts.js')}}"></script>
-	<script src="{{asset('assets/dashboard/js/plugins/datatable/buttons/buttons.html5.min.js')}}"></script>
-	<script src="{{asset('assets/dashboard/js/plugins/datatable/buttons/buttons.print.min.js')}}"></script>
-	<script src="{{asset('assets/dashboard/js/plugins/datatable/buttons/buttons.colVis.min.js')}}"></script> --}}
 
 	<script src="{{asset('assets/dashboard/js/app.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/demo_pages/form_layouts.js')}}"></script>
 
+	<script>
+		var route = {
+			 url: "{{ url('/') }}",
+			 token: $('meta[name="csrf-token"]').attr('content')
+		 };
+	 </script>
 
 	@section('pageScript')
 	
 	@show
 	
-	<script>
 
-	</script>
 </body>
 </html>
 

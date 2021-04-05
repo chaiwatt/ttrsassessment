@@ -99,7 +99,7 @@ class ReportProjectIndustryExport implements
             'Medical Hub',
             'Defense',
             'Education and Skill Development',
-            'อื่น ๆ'
+            'อื่นๆ'
         ];
     }
     public function registerEvents(): array

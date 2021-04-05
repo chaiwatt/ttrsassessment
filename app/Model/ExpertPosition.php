@@ -13,9 +13,9 @@ class ExpertPosition extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['name'];
-    protected static $logName = 'ตำแหน่ง Expert';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['name'];
+    // protected static $logName = 'ตำแหน่ง Expert';
+    // protected static $logOnlyDirty = true;
     
     public function getDescriptionForEvent(string $eventName): string
     {

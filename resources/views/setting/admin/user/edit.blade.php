@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แก้ไขผู้ใช้งานระบบ</span></h4>
+                <h4> <span class="font-weight-semibold">แก้ไขผู้ใช้งานระบบ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -55,7 +55,7 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>คำนำหน้า<span class="text-danger">*</span></label>
-                                            <select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2">
+                                            <select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2" disabled>
                                                 @foreach ($prefixes as $prefix)
                                                     <option value="{{$prefix->id}}" @if($user->prefix_id == $prefix->id) selected @endif>{{$prefix->name}}</option> 
                                                 @endforeach
@@ -63,11 +63,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ชื่อ<span class="text-danger">*</span></label>
-                                            <input type="text"  name="name" value="{{$user->name}}"  placeholder="ชื่อ" class="form-control form-control-lg">
+                                            <input type="text"  name="name" value="{{$user->name}}"  placeholder="ชื่อ" class="form-control form-control-lg" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>นามสกุล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="lastname" value="{{$user->lastname}}"  placeholder="นามสกุล" class="form-control form-control-lg">
+                                            <input type="text"  name="lastname" value="{{$user->lastname}}"  placeholder="นามสกุล" class="form-control form-control-lg" readonly>
                                         </div>
 
                                         <div class="form-group">
@@ -80,19 +80,19 @@
                                         </div>
                                         <div class="form-group" id="experttype_wrapper" hidden>
                                             <label>ประเภทผู้เชี่ยวชาญ</label>
-                                            <select name="experttype" id="experttype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
+                                            <select name="experttype" id="experttype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" disabled>
                                                 <option value="1" >ผู้เชี่ยวชาญภายใน</option> 
                                                 <option value="2" >ผู้เชี่ยวชาญภายนอก</option> 
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{$user->email}}"  placeholder="อีเมล" class="form-control form-control-lg">
+                                            <input type="text"  name="email" value="{{$user->email}}"  placeholder="อีเมล" class="form-control form-control-lg" readonly>
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>รหัสผ่าน<span class="text-danger">*</span></label>
-                                            <input type="password"  name="password" value="{{old('password')}}"  placeholder="รหัสผ่าน" class="form-control form-control-lg">
-                                        </div>
+                                            <input type="password"  name="password" value="{{old('password')}}"  placeholder="รหัสผ่าน" class="form-control form-control-lg" readonly>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label>สถานะการใช้งาน<span class="text-danger">*</span></label>
                                             <select name="userstatus" data-placeholder="สถานะการใช้งาน" class="form-control form-control-select2" >

@@ -36,7 +36,7 @@ class CreateFullTbpProjectCertifiesTable extends Migration
             $table->char('cer9',1)->comment('ความลับทางการค้า')->nullable();
             $table->char('cer9_qty',3)->nullable();
             $table->char('cer10',1)->comment('ซื้อหรือต่อยอดทรัพย์สินทางปัญญา')->nullable();
-            $table->char('cer11',1)->comment('อื่น ๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม')->nullable();
+            $table->char('cer11',1)->comment('อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม')->nullable();
             $table->char('cer11_qty',3)->nullable();
             $table->timestamps();
         });

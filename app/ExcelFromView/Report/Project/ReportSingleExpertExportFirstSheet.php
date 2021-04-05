@@ -51,7 +51,7 @@ class ReportSingleExpertExportFirstSheet implements
        $user = $expert->user;
        $projectmemberbelongeds = $expert->projectmember($user->id);
        $userprefix = $user->prefix->name;
-       if($userprefix == 'อื่น ๆ'){
+       if($userprefix == 'อื่นๆ'){
         $userprefix = $user->alter_prefix;
        }
        array_push($expertinfos, $userprefix.$user->name . ' ' . $user->lastname);

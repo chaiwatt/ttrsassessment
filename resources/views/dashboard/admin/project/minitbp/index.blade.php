@@ -15,13 +15,14 @@
                         <input type="text" id="minitbpid" hidden>
                         <form id="my_radio_box">
                             <div class="col-md-12">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-input-styled" name="result" value="1" checked data-fouc>
-                                        อนุมัติ
-                                    </label>
-                                </div>
-            
+                                @if (Auth::user()->user_type_id == 4)
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-input-styled" name="result" value="1" checked data-fouc>
+                                            อนุมัติ
+                                        </label>
+                                    </div>
+                                @endif
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-input-styled" name="result" value="2" data-fouc>
@@ -62,7 +63,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>ข้อความเพิ่มเติม</label>
-                                    <textarea type="text" rows="5" id="messagebody" placeholder="ข้อความเพิ่มเติม แจ้งไปยัง Leader" class="form-control form-control-lg" ></textarea>
+                                    <textarea type="text" rows="5" id="messagebody" placeholder="ข้อความเพิ่มเติม แจ้งไปยัง Leader" class="form-control form-control-lg" @if (Auth::user()->user_type_id != 6) readonly @endif></textarea>
                                 </div>
                             </div>
                         </div>
@@ -95,11 +96,46 @@
                     </div>
                 </div>
             </div>
+
+    <div id="modal_show_reviselog" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายการแก้ไข</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>รายละเอียด</th> 
+                                            <th>ให้แก้ไขโดย</th>
+                                            <th>วันที่</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reviselog_wrapper_tr"> 
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page header -->
     <div class="page-header page-header-light">  
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แบบคำขอรับการประเมิน (Mini TBP)</span></h4>
+                <h4> <span class="font-weight-semibold">แบบคำขอรับการประเมิน (Mini TBP)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -153,7 +189,7 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
                                         <th>ความเห็น JD</th>
-                                        @if (Auth::user()->user_type_id == 4)
+                                        @if (Auth::user()->user_type_id >= 4)
                                             <th>การอนุมัติ</th> 
                                         @endif
                                         
@@ -165,9 +201,29 @@
                                     <tr>    
                                         <td> 
                                             <a href="#" data-toggle="modal" data-id="{{$minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                            {{$minitbp->project}} 
+                                            {{-- {{$minitbp->project}}  --}}
+                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">{{$minitbp->project}}</a>
                                         </td>  
-                                        <td> {{$minitbp->businessplan->company->name}} </td> 
+                                        <td> 
+                                            @php
+                                                $company = $minitbp->businessplan->company;
+                                                $company_name = (!Empty($company->name))?$company->name:'';
+                                                $bussinesstype = $company->business_type_id;
+                                                $fullcompanyname = $company_name;
+                                                if($bussinesstype == 1){
+                                                    $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+                                                }else if($bussinesstype == 2){
+                                                    $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+                                                }else if($bussinesstype == 3){
+                                                    $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+                                                }else if($bussinesstype == 4){
+                                                    $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+                                                }else{
+                                                    $fullcompanyname = $minitbp->businessplan->company->name; 
+                                                }
+                                            @endphp
+                                            {{$fullcompanyname}} 
+                                        </td> 
                                         <td> 
                                             @if (Empty($minitbp->jdmessage))
                                                     @if (Auth::user()->user_type_id == 6)
@@ -177,25 +233,34 @@
                                                     <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                         </td>  
-                                        @if (Auth::user()->user_type_id == 4)
+                                        @if (Auth::user()->user_type_id >= 4)
                                             <td> 
                                                 @if ($minitbp->businessplan->business_plan_status_id > 3)
                                                         <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                        @if ($minitbp->reviselog->count() > 0)
+                                                            <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
+                                                        @endif
                                                     @else
                                                         @if ($minitbp->refixstatus == 0)
-                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
+                                                                <a href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                             @elseif($minitbp->refixstatus == 1)
-                                                                {{-- <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
-                                                                <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a>
+                                                                {{-- <a  href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
+                                                                    <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a>
+                                                                @if ($minitbp->reviselog->count() > 0)
+                                                                    <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
+                                                                @endif
                                                             @elseif($minitbp->refixstatus == 2)
-                                                                <a type="button" href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                                <a  href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                                @if ($minitbp->reviselog->count() > 0)
+                                                                    <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
+                                                                @endif
                                                         @endif
                                                 @endif
                                             </td> 
                                         @endif
                                         <td> 
-                                            <a type="button" href="{{asset($minitbp->attachment)}}" class="btn btn-sm bg-teal">ดาวน์โหลด</a>
-                                            <a type="button" href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                            <a  href="{{asset($minitbp->attachment)}}" class="btn btn-sm bg-teal">ดาวน์โหลด</a>
+                                            <a  href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
                                         </td>                                
                                     </tr>
                                     @endforeach

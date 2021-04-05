@@ -9,7 +9,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">การมอบหมาย Leader: {{$minitbp->project}}</span></h4>
+                <h4> <span class="font-weight-semibold">การมอบหมาย : {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -47,9 +47,41 @@
         @endif
         <div class="row">
             <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">รายงานสถานะ</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th >รายการ</th> 
+                                        <th >วันที่กำหนด</th>
+                                        <th>สถานะ</th> 
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    @foreach ($projectstatuses as $_projectstatus)
+                                        <tr>
+                                            <td>{{$_projectstatus->projectflow}}</td>
+                                            <td>{{$_projectstatus->startdateth}} - {{$_projectstatus->enddateth}}</td>
+                                            <td>
+                                               {!!$_projectstatus->projectstatustransaction($_projectstatus->project_flow_id,$projectstatus->mini_tbp_id)!!}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
 				<div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการเจ้าหน้าที่ TTRS</h6>
+                        <h6 class="card-title">Dashboard - Work load</h6>
                         <div class="header-elements">
                         </div>
                     </div>
@@ -57,7 +89,7 @@
                         <form method="POST" action="{{route('dashboard.admin.project.projectassignment.editsave',['id' => $projectassignment->id])}}" enctype="multipart/form-data">
                             @csrf
                             @if (Empty($projectassignment->leader_id))
-                                <div  class="col-md-12" id="toast" >
+                                <div  class="col-md-12" id="toast">
                                     <div class="mb-4">
                                         <div class="toast bg-slate border-transparent" style="opacity: 1; max-width: none;">
                                             <div class="toast-header bg-slate-600 border-bottom-slate-400">
@@ -68,8 +100,7 @@
                                             </div>
                                             <div class="toast-body" style="font-size: 16px">
                                                 <span id="toastmessage">
-                                                    <span class="badge bg-success" style="font-size:16px">การมอบหมาย Leader และ Co-Leader</span> ของโครงการ{{$minitbp->project}} มีกำหนดถึงวันที่ {{$projectstatus->enddateth}} (จำนวน {{$projectstatus->duration}} วัน ตาม Control Flow) กรุณามอบหมายในเสร็จสิ้นภายในกำหนด
-                                                </span>  
+                                                    <span class="badge bg-success" style="font-size:16px">การมอบหมาย Leader และ Co-Leader</span> ของโครงการ{{$minitbp->project}} มีกำหนดจำนวน {{$projectstatus->duration}} วัน โปรดดำเนินการให้เสร็จสิ้น ภายในวันที่ {{$projectstatus->enddateth}}</span>  
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +113,7 @@
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width:15px">Leader</th>
-                                                    <th style="width:15px">Coleader</th>
+                                                    <th style="width:15px">Co Leader</th>
                                                     <th >ชื่อ สกุล</th>
                                                     <th >โครงการรับผิดชอบ</th> 
                                                     <th >กำลังดำเนินการ</th>    

@@ -5,15 +5,32 @@ namespace App\Model;
 use App\Model\Prefix;
 use App\Model\FullTbp;
 use App\Model\ThaiBank;
+use App\Model\ReviseLog;
+use App\Helper\LogAction;
 use App\Model\BusinessPlan;
 use App\Helper\DateConversion;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class MiniTBP extends Model
 {
+    use LogsActivity;
+    
     protected $fillable = [];
     protected $guarded = [];
     protected $appends = ['businessplan','prefix','bank'];
+
+protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance2', 'finance3', 'finance4', 'nonefinance1', 'nonefinance2', 'nonefinance3', 'nonefinance4', 'nonefinance5', 'nonefinance6',
+'contactname','contactlastname','contactphone','contactemail','contactposition','website'];
+    protected static $logName = 'Mini TBP';
+
+    protected static $logOnlyDirty = true;
+
+    // public function getDescriptionForEvent(string $eventName): string
+    // {
+    //     return LogAction::logAction('Mini TBP',$eventName);
+    // }
 
     public function getBusinessPlanAttribute(){
         return BusinessPlan::find($this->business_plan_id);
@@ -38,5 +55,10 @@ class MiniTBP extends Model
 
     public function getFulltbpAttribute(){
         return FullTbp::where('mini_tbp_id',$this->id)->first();
+    }
+
+    public function getReviselogAttribute(){
+        // return ReviseLog::where('mini_tbp_id',$this->id)->where('user_id',Auth::user()->id)->where('doctype',1)->get();
+        return ReviseLog::where('mini_tbp_id',$this->id)->where('doctype',1)->get();
     }
 }

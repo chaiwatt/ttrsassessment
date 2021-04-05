@@ -13,9 +13,9 @@ class RegisteredCapitalType extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['name','detail','min','max'];
-    protected static $logName = 'ประเภทการจดทะเบียน';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['name','detail','min','max'];
+    // protected static $logName = 'ประเภทการจดทะเบียน';
+    // protected static $logOnlyDirty = true;
     
     public function getDescriptionForEvent(string $eventName): string
     {

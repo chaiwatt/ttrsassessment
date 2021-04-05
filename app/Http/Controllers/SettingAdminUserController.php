@@ -11,6 +11,7 @@ use App\Model\UserStatus;
 use App\Model\ExpertDetail;
 use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
+use App\Helper\CreateUserLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\CreateUserRequest;
@@ -63,14 +64,7 @@ class SettingAdminUserController extends Controller
                                     ->withUser($user);
     }
     public function EditSave(CreateUserRequest $request,$id){
-        // return  $request->usertype;
         $user = User::find($id);
-        if(!Hash::check( $request->password,$user->password)){
-            $user->update([
-                'password' => Hash::make($request->password)
-            ]);
-        }
-
         if($user->user_type_id == 1){
            if($request->usertype == 3){ //change user -> expert
                 $experttype = 1;
@@ -79,7 +73,7 @@ class SettingAdminUserController extends Controller
                 }
                 $xpertdetail = new ExpertDetail();
                 $xpertdetail->user_id = $user->id;
-                $xpertdetail->expert_type_id = $experttype;
+                // $xpertdetail->expert_type_id = $experttype;
                 $xpertdetail->save();
            }else if($request->usertype > 3){ //change user -> ttrs officer
                 $officerdetail = new OfficerDetail();
@@ -106,19 +100,21 @@ class SettingAdminUserController extends Controller
                     }
                     $xpertdetail = new ExpertDetail();
                     $xpertdetail->user_id = $user->id;
-                    $xpertdetail->expert_type_id = $experttype;
+                    // $xpertdetail->expert_type_id = $experttype;
                     $xpertdetail->save();
                }
         }
         User::find($id)->update([
-            'prefix_id' => $request->prefix,
-            'alter_prefix' => $request->alter_prefix,
-            'name' => $request->name,
-            'lastname' => $request->lastname,
+            // 'prefix_id' => $request->prefix,
+            // 'alter_prefix' => $request->alter_prefix,
+            // 'name' => $request->name,
+            // 'lastname' => $request->lastname,
             'user_type_id' => $request->usertype,
             'user_status_id' => $request->userstatus,
-            'email' => $request->email
+            // 'email' => $request->email
         ]);
+
+        CreateUserLog::createLog('แก้ไขข้อมูลผู้ใช้งาน (' . $user->name . ' ' . $user->lastname .')');
 
         return redirect()->route('setting.admin.user')->withSuccess('แก้ไขผู้ใช้งานสำเร็จ');
     }

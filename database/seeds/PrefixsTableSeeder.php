@@ -25,7 +25,7 @@ class PrefixsTableSeeder extends Seeder
             'name' =>'คุณ'
             ],
             [
-            'name' =>'อื่น ๆ'
+            'name' =>'อื่นๆ'
             ],
             // [
             // 'name' =>'คุณหญิง'

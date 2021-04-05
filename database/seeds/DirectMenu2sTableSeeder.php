@@ -53,6 +53,13 @@ class DirectMenu2sTableSeeder extends Seeder
                 'engname' => 'Contact us',
                 'engslug' => 'contactus',
                 'url' => '#rs-contact',
+            ],
+            [
+                'name' => 'เข้าสู่ระบบ',
+                'slug' => 'เข้าสู่ระบบ',
+                'engname' => 'LoginAndLogout',
+                'engslug' => 'LoginAndLogout',
+                'url' => '#',
             ]
         ]);
     }

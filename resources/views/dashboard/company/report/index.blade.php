@@ -10,7 +10,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">
+            <h4> <span class="font-weight-semibold">
                 @if (Empty(Auth::user()->company->name))
                         รายงาน : ยังไม่ได้ตั้งค่า
                     @else
@@ -19,6 +19,11 @@
             </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
+            @if ($businessplans->count() == 0)
+                <div class="header-elements d-none">
+                    <a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">ตั้งค่าโปรไฟล์ ก่อนขอรับการประเมิน</span></a>
+                </div>
+            @endif
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -146,11 +151,7 @@
                                     <div class="chart has-fixed-height" style="margin-top:-40px; " id="progress_chart"></div>
                                 </div>
                             </div>
-                            <div class="col-md-12" style="text-align: center">
-                                @if ($businessplans->count() == 0)
-                                    <a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="btn bg-warning">ตั้งค่าโปรไฟล์ ก่อนขอรับการประเมิน</a>
-                                @endif
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

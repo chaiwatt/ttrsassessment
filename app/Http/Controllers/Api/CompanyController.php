@@ -25,12 +25,22 @@ class CompanyController extends Controller
     }
 
     public function AddAuthorizedDirector(Request $request){
+        $otherposition = '';
+        $otherprefix = '';
+        if(!Empty($request->otherposition)){
+            $otherposition = $request->otherposition;
+        }
+        if(!Empty($request->otherprefix)){
+            $otherprefix = $request->otherprefix;
+        }
         $companyemploy = new CompanyEmploy();
         $companyemploy->company_id = $request->id;
         $companyemploy->prefix_id = $request->prefix;
+        $companyemploy->otherprefix = $otherprefix;
         $companyemploy->name = $request->name;
         $companyemploy->lastname = $request->lastname;
         $companyemploy->employ_position_id = $request->position;
+        $companyemploy->otherposition = $otherposition;
         $companyemploy->signature_id = $request->signature;
         $companyemploy->save();
         $companyemploys = CompanyEmploy::where('company_id',$request->id)->where('employ_position_id', '<=',5)->orderBy('id','desc')->get();
@@ -78,6 +88,14 @@ class CompanyController extends Controller
     }
 
     public function EditAuthorizedDirector(Request $request){
+        $otherposition = '';
+        $otherprefix = '';
+        if(!Empty($request->otherposition)){
+            $otherposition = $request->otherposition;
+        }
+        if(!Empty($request->otherprefix)){
+            $otherprefix = $request->otherprefix;
+        }
         $signature = CompanyEmploy::find($request->id)->signature_id;
         if(!Empty($request->signature)){
             if(!Empty($signature)){
@@ -88,10 +106,11 @@ class CompanyController extends Controller
         }
         CompanyEmploy::find($request->id)->update([
             'prefix_id' => $request->prefix,
-            'alter_prefix' => $request->alter_prefix,
+            'otherprefix' => $otherprefix,
             'name' => $request->name,
             'lastname' => $request->lastname,
             'employ_position_id' => $request->position,
+            'otherposition' => $otherposition,
             'signature_id' => $signature
         ]);
         $companyid = CompanyEmploy::find($request->id)->company_id;

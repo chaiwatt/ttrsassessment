@@ -12,31 +12,45 @@ $(document).on('click', '.controlflowicon', function(e) {
 
             var updatedat = new Date();
             var icon = ``;
-
-            var startdate = new Date(projectstatus.startdate),
-            month_start = '' + (startdate.getMonth() + 1),
-            day_start = '' + startdate.getDate(),
-            year_start = startdate.getFullYear();
+            var arraystartdate = projectstatus.startdate.split('-');
+            // console.log(arraystartdate);
+            //var startdate = new Date(projectstatus.startdate);
+           var month_start = parseInt(arraystartdate[1])+1; //'' + (startdate.getMonth() + 1);
+           var day_start = parseInt(arraystartdate[2]);//'' + startdate.getDate();
+           var year_start = parseInt(arraystartdate[0]);//startdate.getFullYear();
            
-            var _enddate = new Date(projectstatus.enddate),
-            month_end= '' + (_enddate.getMonth() + 1),
-            day_end = '' + _enddate.getDate(),
-            year_end = _enddate.getFullYear();
+            // var _enddate = new Date(projectstatus.enddate),
+            // month_end= '' + (_enddate.getMonth() + 1),
+            // day_end = '' + _enddate.getDate(),
+            // year_end = _enddate.getFullYear();
+            var arrayenddate = projectstatus.enddate.split('-');
+            var month_end = parseInt(arrayenddate[1])+1;
+            var day_end = parseInt(arrayenddate[2]);
+            var year_end = parseInt(arrayenddate[0]);
 
             $details = projectstatus.projectflow;
             if(typeof(transaction) != "undefined"){
-                var d = new Date(transaction.updated_at),
-                month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
-                year = d.getFullYear();
-                var tmp = year+'-'+month+'-'+day;
+
+                var arrayupdatedate = projectstatus.updated_at.split('-');
+                var month = parseInt(arrayupdatedate[1]);
+                var day = parseInt(arrayupdatedate[2]);
+                var year = parseInt(arrayupdatedate[0]);
+
+                var tmp = month+'/'+day+'/'+year;
                 var updatedat = new Date(tmp);
-                var diffintime = enddate.getTime() - updatedat.getTime(); 
+
+                var month_end = parseInt(arrayenddate[1])+1;
+                var day_end = parseInt(arrayenddate[2]);
+                var year_end = parseInt(arrayenddate[0]);
+
+                var str = arrayenddate[1]+'/'+arrayenddate[2]+'/'+arrayenddate[0];
+                var _enddate = new Date(str);
+
+
+                var diffintime = _enddate.getTime() - updatedat.getTime(); 
                 var diffinday = Math.floor((diffintime / (1000 * 3600 * 24))); 
                 if(transaction.status == 1){
                     if(projectstatus.project_flow_id == 3){
-                        // การอนุมัติ Full TBP, การมอบหมายผู้เชี่ยวชาญ, การพัฒนา EV
-                        //console.log(projectstatus.controlflowstage3approve[2]);
                         var fulltbpicon = `<i class="icon-watch2 text-pink-300"></i>`;
                         var experticon = `<i class="icon-watch2 text-pink-300"></i>`;
                         var evicon = `<i class="icon-watch2 text-pink-300"></i>`;

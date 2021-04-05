@@ -51,7 +51,7 @@ class ReportTTRSSingleOfficerExportFirstSheet implements
        $user = $officer->user;
        $projectmemberbelongeds = $officer->projectmember($user->id);
        $userprefix = $user->prefix->name;
-       if($userprefix == 'อื่น ๆ'){
+       if($userprefix == 'อื่นๆ'){
         $userprefix = $user->alter_prefix;
        }
        array_push($officerinfos, $userprefix.$user->name . ' ' . $user->lastname);

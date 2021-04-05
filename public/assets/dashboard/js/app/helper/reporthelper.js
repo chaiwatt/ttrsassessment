@@ -35,7 +35,7 @@
             'Medical Hub',
             'Defense',
             'Education and Skill Development',
-            'อื่น ๆ'
+            'อื่นๆ'
         ]
 
         var  objectivelegend = [

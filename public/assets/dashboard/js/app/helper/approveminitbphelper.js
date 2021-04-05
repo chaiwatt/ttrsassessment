@@ -47,11 +47,42 @@ $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
                 window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
         }).catch(error => {})
       }
-
-
-
-
-
-
 });
+
+$(document).on('click', '.showlog', function(e) {
+    var html ='';
+    getReviseLog($(this).data('id')).then(data => {   
+        data.forEach(function (log,index) {
+            html += `<tr >                                        
+                <td> ${log.message} </td>    
+                <td> ${log.user} </td>                                         
+                <td> ${log.createdatth} </td>                                          
+                
+            </tr>`
+            });
+        $("#reviselog_wrapper_tr").html(html);
+        $('#modal_show_reviselog').modal('show');
+    }).catch(error => {})
+    
+});
+
+function getReviseLog(minitbpid){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+        url: `${route.url}/api/minitbp/getreviselog`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+            minitbpid : minitbpid
+        },
+        success: function(data) {
+            resolve(data)
+        },
+        error: function(error) {
+            reject(error)
+        },
+        })
+    })
+  }
+
 

@@ -22,7 +22,7 @@ use App\Model\HomepageService;
 use App\Model\NotificationBubble;
 use App\Model\HomepagePillarSection;
 use App\Model\HomepageIndustryGroupText;
-
+use Jenssegers\Agent\Agent;
 
 class ShareComposer 
 { 
@@ -47,6 +47,7 @@ class ShareComposer
         $shareindustrygroups = IndustryGroup::orderBy('companybelong','desc')->get();
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
         $directmenus2 = DirectMenu2::get();
+        $shareagent  = new Agent();
 
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)
@@ -65,6 +66,7 @@ class ShareComposer
             ->withShareheadertext($shareheadertext)
             ->withShareindustrygroups($shareindustrygroups)
             ->withSharehomepageindustrygrouptext($sharehomepageindustrygrouptext)
-            ->withDirectmenus2($directmenus2);
+            ->withDirectmenus2($directmenus2)
+            ->withShareagent($shareagent);
     }
 }

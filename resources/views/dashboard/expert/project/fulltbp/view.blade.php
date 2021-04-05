@@ -1280,7 +1280,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เอกสาร Full TBP : {{$fulltbp->minitbp->project}}</span></h4>
+                <h4> <span class="font-weight-semibold">เอกสาร Full TBP : {{$fulltbp->minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			{{-- <div class="text-right">
@@ -2224,19 +2224,19 @@
 															{{-- </div> --}}
 
 															<br>
-															<legend><label for=""><strong>ใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ</strong> </label></legend>
+															<legend><label for=""><strong>ใบรับรองมาตรฐานต่างๆ ที่ได้รับ</strong> </label></legend>
 
 															<div class="row">
 																<div class="col-md-12">	
 																	<div class="form-group">
 																		<label for="">ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
-																		<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
+																		<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
 																		<textarea name="" id="projectstandard_input" class="form-control form-control-lg" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
 																	</div>	
 																	<div class="form-group">												
 																		{{-- <button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add"></i></button> --}}
 																		<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label>
-																		{{-- <p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p> --}}
+																		{{-- <p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p> --}}
 																	</div>
 																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="application/pdf"/>
 																</div>
@@ -2251,7 +2251,7 @@
 																		<table class="table table-striped table-bordered">
 																			<thead>
 																				<tr class="bg-info">
-																					<th>เอกสารใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ</th>                                                                                  
+																					<th>เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ</th>                                                                                  
 																					<th style="width:200px">ดาวน์โหลด</th>
 																				</tr>
 																			</thead>

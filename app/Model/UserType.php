@@ -13,9 +13,9 @@ class UserType extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['name'];
-    protected static $logName = 'ประเภทผู้ใช้งาน';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['name'];
+    // protected static $logName = 'ประเภทผู้ใช้งาน';
+    // protected static $logOnlyDirty = true;
     
     public function getDescriptionForEvent(string $eventName): string
     {

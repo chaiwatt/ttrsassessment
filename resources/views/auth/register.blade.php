@@ -77,7 +77,7 @@
                     </div>
     
                     <div class="form-group" id="vatwrapper" >
-                        <input id="vatno" type="text" class="form-control form-control-lg numeralformath13 @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประจำตัวประชาชน" >
+                        <input id="vatno" type="text" maxlength="13" class="form-control form-control-lg allownumericwithoutdecimal @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประจำตัวประชาชน" >
                         <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
                         @error('vatno')
                             <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
@@ -113,7 +113,7 @@
                     </div>
     
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="phone" type="phone" class="form-control form-control-lg numeralformathphone @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์มือถือ">
+                        <input id="phone" type="text" maxlength="10" class="form-control form-control-lg allownumericwithoutdecimal @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์โทรศัพท์มือถือ">
                         <div class="form-control-feedback">
                             <i class="icon-phone2 text-muted"></i>
                         </div>
@@ -121,21 +121,26 @@
                             <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div id="pwd-container">
-                        <div class="form-group form-group-feedback form-group-feedback-left" >
-                            <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร">
+                        
+                        <div class="input-group form-group form-group-feedback form-group-feedback-left" >
+                            <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
                             <div class="form-control-feedback">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
+                            
                             @error('password')
                                 <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                             @enderror
                             {{-- <small class="form-text text-right pwstrength_viewport_verdict"></small> --}}
-    
+                            <span class="input-group-append">
+                                <button class="btn btn-light" type="button" id="genpassword" >สุ่มรหัสผ่าน</button>
+                            </span>
                         </div>
         
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ใช้ได้เฉพาะตัวอักษรและภาษาอังกฤษเท่านั้น" placeholder="ยืนยันรหัสผ่าน">
+                            <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
                             <div class="form-control-feedback ">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
@@ -153,7 +158,10 @@
                     <div class="form-group">
                         <button type="submit" id="term" class="btn btn-primary btn-block" disabled><span style="font-size: 18px">สมัครสมาชิก</span>  <i class="icon-circle-right2 ml-2"></i></button>
                     </div>
-                    <hr>
+                    {{-- <hr> --}}
+                    <div class="form-group text-center text-muted content-divider">
+                        <span class="px-2">{{trans('lang.hasaccount')}}</span>
+                    </div>
 
                     <div class="form-group">
                         <a href="{{ route('login') }}" class="btn btn-light btn-block"><span style="font-size: 18px">{{trans('lang.login')}}</span></a>
@@ -171,9 +179,9 @@
         <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/pwstrength/pwstrength.js')}}"></script>
-        <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
-        <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script>
-        <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+        {{-- <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script> --}}
         <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
         <script>
                 var route = {
@@ -298,12 +306,48 @@
                     $(this).val('')
                     Swal.fire({
                         title: 'ผิดพลาด...',
-                        text: 'ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร',
+                        text: 'ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร',
                     }).then((result) => {});
                     return false;
                 }
         });
 
+        $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
+           $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+        
+        $(document).on('click', '#genpassword', function(e) {
+            var genpass = password_generator(10);
+            $('#password').val(genpass);
+            $('#password-confirm').val(genpass);
+            $('#password').keyup();
+        });
+
+        function password_generator( len ) {
+            var length = (len)?(len):(10);
+            var string = "abcdefghijklmnopqrstuvwxyz"; //to upper 
+            var numeric = '0123456789';
+            var punctuation = '@$&_-';
+            var password = "";
+            var character = "";
+            var crunch = true;
+            while( password.length<length ) {
+                entity1 = Math.ceil(string.length * Math.random()*Math.random());
+                entity2 = Math.ceil(numeric.length * Math.random()*Math.random());
+                entity3 = Math.ceil(punctuation.length * Math.random()*Math.random());
+                hold = string.charAt( entity1 );
+                hold = (password.length%2==0)?(hold.toUpperCase()):(hold);
+                character += hold;
+                character += numeric.charAt( entity2 );
+                character += punctuation.charAt( entity3 );
+                password = character;
+            }
+            password=password.split('').sort(function(){return 0.5-Math.random()}).join('');
+            return password.substr(0,len);
+        }
         </script>	
     @stop
 

@@ -14,6 +14,7 @@ use App\Helper\Message;
 use App\Model\Province;
 use App\Model\ThaiBank;
 use App\Helper\EmailBox;
+use App\Model\ReviseLog;
 use App\Model\MessageBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
@@ -28,6 +29,7 @@ use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ProjectStatusTransaction;
+use Spatie\Activitylog\Models\Activity;
 
 class DashboardAdminProjectMiniTbpController extends Controller
 {
@@ -62,6 +64,46 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $amphurs = Amphur::where('province_id',$user->province_id)->get();
         $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
+        $activitylogs = Activity::causedBy($user)->where('log_name','Mini TBP')->orderBy('id','desc')->get();
+// return  $activitylogs;
+        $check =false;
+        $totalchange = 0;
+        $oddarray = array();
+        $evenarray = array();
+        $logarray = array();
+        $updatedate = '';
+        foreach ($activitylogs as $key => $activity) {
+
+            $i = 0;
+            foreach ($activity->properties as $properties) {
+                foreach ($properties as $_key => $property) { 
+                    $updatedate = DateConversion::thaiDateTime($activity->created_at,'full');
+                    if( $i < count($properties)){
+                        // echo (count($properties)) . '<br>';
+                        $temp = array("key" => $_key,"property" => $property);
+                        array_push($evenarray,$temp);
+                    }else{
+                        // echo ($_key .' ' .$property). '<br>';;
+                        $_temp = array("key" => $_key,"property" => $property);
+                        array_push($oddarray,$_temp);
+                    }
+                    $i++;
+                    $check = true;
+                }
+            }
+            if($check == true){
+                break;
+            }
+        }
+
+        $i =0;
+      
+        foreach ($oddarray as $key => $e) {
+           $temp = array("key" => $this->changekeyname($e['key']),"new" => $this->checkval($evenarray[$i]['property']),"old" =>  $this->checkval($e['property']),"edit" =>  $updatedate);
+           array_push($logarray,$temp);
+           $i ++;
+        }
+        $logcollections = collect($logarray);
         return view('dashboard.admin.project.minitbp.view')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withContactprefixes($contactprefixes)
@@ -73,8 +115,62 @@ class DashboardAdminProjectMiniTbpController extends Controller
                                                 ->withProvinces($provinces)
                                                 ->withAmphurs($amphurs)
                                                 ->withTambols($tambols)
-                                                ->withAuthorizeddirectors($authorizeddirectors);
+                                                ->withAuthorizeddirectors($authorizeddirectors)
+                                                ->withActivitylogs($activitylogs)
+                                                ->withLogcollections($logcollections);
     }
+
+    public function changekeyname($name){
+        if($name == 'project'){
+            return 'ชื่อโครงการ/เทคโนโลยี';
+        }elseif($name == 'projecteng'){
+            return 'ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ';
+        }elseif($name == 'finance1'){
+            return 'ขอสินเชื่อกับธนาคาร';
+        }elseif($name == 'finance2'){
+            return 'ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)';
+        }elseif($name == 'finance3'){
+            return 'โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)';
+        }elseif($name == 'finance4'){
+            return 'บริษัทร่วมทุน (สวทช.)';
+        }elseif($name == 'nonefinance1'){
+            return 'โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย';
+        }elseif($name == 'nonefinance2'){
+            return 'รับรองสิทธิประโยชน์ทางภาษี';
+        }elseif($name == 'nonefinance3'){
+            return 'โครงการ spin-off';
+        }elseif($name == 'nonefinance4'){
+            return 'ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ';
+        }elseif($name == 'nonefinance5'){
+            return 'โครงการสนับสนุนผู้ประกอบการภาครัฐ';
+        }elseif($name == 'contactname'){
+            return 'ชื่อผู้ยื่นแบบคำขอ';
+        }elseif($name == 'contactlastname'){
+            return 'สกุลผู้ยื่นแบบคำขอ';
+        }elseif($name == 'contactphone'){
+            return 'เบอร์โทรศัพท์ผู้ยื่นแบบคำขอ';
+        }elseif($name == 'contactemail'){
+            return 'อีเมล์ผู้ยื่นแบบคำขอ';
+        }elseif($name == 'contactposition'){
+            return 'ตำแหน่งผู้ยื่นแบบคำขอ';
+        }elseif($name == 'website'){
+            return 'เว็บไซต์';
+        }
+    }
+
+    public function checkval($val){
+        if($val == '1'){
+            return 'เลือกใหม่';
+        }elseif(Empty($val)){
+            return '-';
+        }else{
+            return $val;
+        }
+    }
+
+
+    
+
     public function Approve($id){
         $minitbp = MiniTBP::find($id);
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
@@ -196,6 +292,13 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ให้แก้ไขแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br><a href="'.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>' ; 
             $alertmessage->save();
+
+            $reviselog = new ReviseLog();
+            $reviselog->mini_tbp_id = $minitbp->id;
+            $reviselog->user_id = $auth->id;
+            $reviselog->message = $request->note;
+            $reviselog->doctype = 1;
+            $reviselog->save();
 
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id

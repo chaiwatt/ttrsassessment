@@ -13,9 +13,9 @@ class UserStatus extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['name'];
-    protected static $logName = 'สถานะการใช้งาน';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['name'];
+    // protected static $logName = 'สถานะการใช้งาน';
+    // protected static $logOnlyDirty = true;
     public function getDescriptionForEvent(string $eventName): string
     {
         return LogAction::logAction('สถานะการใช้งาน',$eventName);

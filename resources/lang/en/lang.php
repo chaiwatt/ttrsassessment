@@ -6,6 +6,7 @@ return [
     'login' => 'Log In',
     'forgotpassword' => 'Forgot Password',
     'noaccount' => 'No account yet',
+    'hasaccount' => 'Already has an account',
     'signout' => 'Sign Out',
     'emailus' => 'SEND US AN EMAIL',
     'callus' => 'CALL US',

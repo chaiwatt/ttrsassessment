@@ -121,7 +121,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">มอบหมายผู้เชี่ยวชาญ </span></h4>
+                <h4> <span class="font-weight-semibold">มอบหมายผู้เชี่ยวชาญ </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             @if (Auth::user()->user_type_id != 6 )
@@ -240,7 +240,7 @@
                                             @endif
                                             @php
                                             $userprefix = $user->prefix->name;
-                                            if($userprefix == 'อื่น ๆ'){
+                                            if($userprefix == 'อื่นๆ'){
                                                 $userprefix = $user->alter_prefix;
                                             }
                                             @endphp

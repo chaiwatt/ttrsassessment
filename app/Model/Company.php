@@ -28,9 +28,9 @@ class Company extends Model
     protected $guarded = [];
     protected $appends = ['companyaddress'];
 
-    protected static $logAttributes = ['industry_group_id','business_type_id','name','phone','fax','email','address','province_id','amphur_id','tambol_id','postalcode'];
-    protected static $logName = 'ประเภทการจดทะเบียน';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['industry_group_id','business_type_id','name','phone','fax','email','address','province_id','amphur_id','tambol_id','postalcode'];
+    // protected static $logName = 'ประเภทการจดทะเบียน';
+    // protected static $logOnlyDirty = true;
     
     public function industrygroup()
     {

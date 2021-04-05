@@ -48,6 +48,7 @@ class CreateGeneralInfosTable extends Migration
             $table->unsignedBigInteger('front_page_status_id')->default(1);
             $table->unsignedBigInteger('verify_expert_status_id')->default(2);
             $table->char('watermark',1)->default(0);
+            $table->char('togglebar',1)->default(1);
             $table->string('watermarktext',250)->default('เอกสารสำคัญปกปิด (Private & Confidential)');
             // $table->char('pageview',10)->default(0);
             $table->timestamps();

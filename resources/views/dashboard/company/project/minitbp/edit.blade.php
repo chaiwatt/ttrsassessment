@@ -13,7 +13,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">แบบคำขอรับบริการประเมิน TTRS (Mini TBP)</span></h4>
+                <h4> <span class="font-weight-semibold">แบบคำขอรับบริการประเมิน TTRS (Mini TBP)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			<div class="header-elements d-none">
@@ -112,7 +112,7 @@
 								<div class="row">
 									<input type="text" id="pdfname" hidden>
 									<legend>
-										<label><strong>ข้อมูลบริษัท</strong></label>
+										<label style="font-size: 16px"><strong>ข้อมูลบริษัท</strong></label>
 									</legend>
 									<div class="col-md-6">
 										<div class="form-group">
@@ -164,7 +164,7 @@
 										</div>
 									</div>
 									<legend>
-										<label><strong>ข้อมูลผู้ยื่นแบบคำขอ</strong></label>
+										<label style="font-size: 16px"><strong >ข้อมูลผู้ยื่นแบบคำขอ</strong></label>
 									</legend>
 									<div class="col-md-6">
 										<div class="form-group">
@@ -280,7 +280,7 @@
 								</div>
 								<div class="row">
 									<legend>
-										<label><strong>วัตถุประสงค์ของการยื่นขอรับบริการประเมิน TTRS (สามารถเลือกได้มากกว่า 1 ข้อ)</strong></label>
+										<label style="font-size: 16px"><strong>วัตถุประสงค์ของการยื่นขอรับบริการประเมิน TTRS (สามารถเลือกได้มากกว่า 1 ข้อ)</strong></label>
 									</legend>
 									<div class="col-md-12">
 										<div class="form-group mb-3 mb-md-2">
@@ -350,14 +350,14 @@
 																</div>
 																<div class="col-md-4">
 																	<div class="form-group">
-																		<label for="">สัดส่วนลงทุน บริษัท %</label>
+																		<label for="">สัดส่วนลงทุนของบริษัทและผู้ถือหุ้นอื่น %</label>
 																		<input type="text" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}">
 																	</div>
 																</div>
 																<div class="col-md-4">
 																	<div class="form-group">
-																		<label for="">: สวทช. %</label>
-																		<input type="text" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}">
+																		<label for="">สัดส่วนการลงทุนของสวทช. %</label>
+																		<input type="text" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}} readonly">
 																	</div>
 																</div>
 															</div>
@@ -465,37 +465,50 @@
 														</thead>
 														<tbody id="authorized_director_wrapper_tr"> 
 															@foreach ($authorizeddirectors as $authorizeddirector)
-															<tr >      
-																<td>
-																	<div class="form-check">
-																		<label class="form-check-label">
-																			@if (Empty($authorizeddirector->signature_id))
-																					<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
-																					@if ($authorizeddirector->usesignature == 2)
-																						checked
-																					@endif
-																					>
-																				@else
-																					<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
-																					@if ($authorizeddirector->usesignature == 2)
-																						checked
-																					@endif
-																					>
-																			@endif
-																			{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
-																		</label>
-																	</div>
-																</td>  
-																<td>
-																@if (Empty($authorizeddirector->signature_id))
-																		<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>
-																	@else
-																		<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
-																@endif
-																</td>                                
-																
-																<td> {{$authorizeddirector->employposition->name}}</td>      
-															</tr>
+																<tr >      
+																	<td>
+																		<div class="form-check">
+																			<label class="form-check-label">
+																				@if (Empty($authorizeddirector->signature_id))
+																						<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
+																						@if ($authorizeddirector->usesignature == 2)
+																							checked
+																						@endif
+																						>
+																					@else
+																						<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
+																						@if ($authorizeddirector->usesignature == 2)
+																							checked
+																						@endif
+																						>
+																				@endif
+																				{{-- {{$authorizeddirector->prefix->name}} --}}
+																				
+																				@if ($authorizeddirector->prefix->name == 'อื่นๆ')
+																						{{$authorizeddirector->otherprefix}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
+																					@else
+																						{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
+																				@endif
+																				
+																			</label>
+																		</div>
+																	</td>  
+																	<td>
+																	@if (Empty($authorizeddirector->signature_id))
+																			<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>
+																		@else
+																			<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
+																	@endif
+																	</td>                                
+																	
+																	<td> 
+																		@if ($authorizeddirector->prefix->name == 'อื่นๆ')
+																				{{$authorizeddirector->otherprefix}}
+																			@else
+																				{{$authorizeddirector->employposition->name}}
+																		@endif
+																		</td>      
+																</tr>
 															@endforeach
 														</tbody>
 													</table>
@@ -556,7 +569,8 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.min.js')}}"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.5/pdfobject.min.js"></script> --}}
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 
@@ -858,6 +872,10 @@
 				text: 'เลือกผู้ลงนามได้ไม่เกิน 3 คน',
 			});
 		}
+	});
+
+	$("#finance4jointmin").on('keyup', function() {
+		$("#finance4jointmax").val(100-$("#finance4jointmin").val());
 	});
 
 	function createPdf(id){

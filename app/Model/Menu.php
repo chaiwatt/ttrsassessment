@@ -13,9 +13,9 @@ class Menu extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['name','slug','engname','engslug','url','parent_id','hide'];
-    protected static $logName = 'เมนูเว็บไซต์';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['name','slug','engname','engslug','url','parent_id','hide'];
+    // protected static $logName = 'เมนูเว็บไซต์';
+    // protected static $logOnlyDirty = true;
     
     public function getDescriptionForEvent(string $eventName): string
     {

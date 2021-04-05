@@ -171,7 +171,7 @@
                         </div>
                         <div class="col-md-12">	
                             <div class="input-group">													
-								<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
+								<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 float-left" type="button" onclick="document.getElementById('companydoc').click();" ><i class="icon-upload4 mr-2"></i>อัปโหลด</button>													
 							</div>
 							<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc" accept="application/pdf"/>
 							<div class="input-group">	
@@ -189,7 +189,7 @@
     </div>
     {{-- modal_add_authorized_director --}}
     <div id="modal_add_authorized_director" class="modal fade" style="overflow:hidden;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้มีอำนาจลงนาม</h5>
@@ -205,6 +205,10 @@
                                         <option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
                                     @endforeach
                                 </select>
+                            </div>
+							<div class="form-group" id="otherprefix_wrapper" hidden>
+                                <label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
+                                <input type="text" id="otherprefix" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
                             </div>
                             <div class="form-group">
                                 <label>ชื่อ</label><span class="text-danger">*</span>
@@ -225,9 +229,12 @@
 									@endforeach
 								</select>
 							</div>
-							
+							<div class="form-group" id="otherposition_wrapper" hidden>
+                                <label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
+                                <input type="text" id="otherposition" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+                            </div>
 							<div class="form-group">
-								<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
+								<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ</a>
 								<div class="col-md-12">
 									<div id='sigdiv'>
 										{{-- @if (!Empty($user->signature))
@@ -250,7 +257,7 @@
 
 	   {{-- modal_edit_authorized_director --}}
 	   <div id="modal_edit_authorized_director" class="modal fade" style="overflow:hidden;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้มีอำนาจลงนาม</h5>
@@ -264,6 +271,10 @@
                                 <label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
                                 <select id="directorprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
                                 </select>
+                            </div>
+							<div class="form-group" id="otherprefix_edit_wrapper" hidden>
+                                <label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
+                                <input type="text" id="otherprefix_edit" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
                             </div>
                             <div class="form-group">
                                 <label>ชื่อ</label><span class="text-danger">*</span>
@@ -280,9 +291,13 @@
 								<select id="directorposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
 								</select>
 							</div>
+							<div class="form-group" id="otherposition_edit_wrapper" hidden>
+                                <label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
+                                <input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+                            </div>
 							{{-- <input name="signatureid" id="signatureid" type="text" hidden> --}}
 							<div class="form-group">
-								<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
+								<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
 								<div class="col-md-12 mt-2">
 									<div id='sigdiv_edit'>
 										
@@ -315,13 +330,18 @@
 									<div id="signature-pad" class="signature-pad" style="text-align: center">
 										<canvas width="400" height="100" style="border: dashed 1px"></canvas>
 										<div class="signature-pad--footer">
-										<p>ลายมือชื่อ</p>
+										<p>ลงลายมือชื่อ ที่นี่</p>
 										  <div class="signature-pad--actions">
 											<div>
-											  <button type="button" class="btn bg-teal clear" onclick="document.getElementById('signature').click();">อัปโหลด</button>
-											  <button type="button" class="btn bg-primary clear" data-action="clear">เคลียร์</button>
-											  <button type="button" class="btn bg-primary" data-action="undo">ยกเลิก</button>
-											  <button type="button" class="btn bg-success save" data-action="save-png">บันทึก</button>								
+											  <button type="button" class="btn bg-teal save" data-action="save-png"><i class="icon-floppy-disk mr-2"></i>บันทึก</button>
+											  <button type="button" class="btn bg-primary" data-action="undo" hidden>ยกเลิก</button>
+											  <button type="button" class="btn bg-primary clear" data-action="clear"><i class="icon-trash-alt mr-2"></i>ล้างข้อมูล</button>
+											  
+											  	
+											  <div class="form-group text-center text-muted content-divider mb-2 mt-2">
+												<span class="px-2">หรืออัปโหลดลายมือชื่อจากไฟล์</span>
+											  </div>
+											   <button type="button" class="btn btn-light clear" onclick="document.getElementById('signature').click();"><i class="icon-folder-upload mr-2"></i>อัปโหลด</button>							
 											</div>
 											<input type="file" style="display:none;" id="signature" name="picture" accept="image/*"/>
 										  </div>
@@ -402,13 +422,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>พิกัดละติจูด (เช่น 14.076868486942407)</label>
-								<input type="text" id="lat" placeholder="ละติจูด" class="form-control form-control-lg" >
+								<input type="text" id="lat" placeholder="ละติจูด" class="form-control form-control-lg allownumericwithdecimal" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>พิกัดลองจิจูด (เช่น 100.60153839991285)</label>
-								<input type="text" id="lng" placeholder="ลองจิจูด" class="form-control form-control-lg" >
+								<input type="text" id="lng" placeholder="ลองจิจูด" class="form-control form-control-lg allownumericwithdecimal" >
 							</div>
 						</div>
 					</div>
@@ -502,66 +522,6 @@
 				</div>
 			</div>
 		</div>
-	<!-- Cover area -->
-	{{-- <div class="profile-cover">
-		<div id="bgcover">
-			@if (!Empty($user->cover))
-				<div class="profile-cover-img" style="background-image: url({{asset($user->cover)}})"></div>
-			@else
-				<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
-			@endif
-		</div>
-		<div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
-			<div class="mr-md-3 mb-2 mb-md-0">
-				<a href="#" id="avatar"  type="button" onclick="document.getElementById('avatarimg').click();" class="profile-thumb">
-					@if (!Empty($user->picture))
-						<img src="{{asset($user->picture)}}" class="border-white rounded-circle" width="48" height="48" alt="">
-					@else
-						<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
-					@endif
-				</a>
-				<input type="file" style="display:none;" id="avatarimg" name="avatarimg" accept="image/*"/>
-			</div>
-			<div class="media-body text-white">
-				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>
-			
-			</div>
-			<div class="ml-md-3 mt-2 mt-md-0">
-				<ul class="list-inline list-inline-condensed mb-0">
-					<div class="form-group">
-						<div class="input-group">													
-							<button id="btnuploadcoverimg" class="btn btn-light border-transparent" type="button" onclick="document.getElementById('coverimg').click();"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</button>													
-						</div>
-						<input type="file" style="display:none;" id="coverimg" name="coverimg" accept="image/*"/>
-					</div>
-				</ul>
-			</div>
-		</div>
-	</div> --}}
-	<!-- /cover area -->
-	<!-- Profile navigation -->
-	{{-- <div class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="text-center d-lg-none w-100">
-			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-second">
-				<i class="icon-menu7 mr-2"></i>
-				Profile navigation
-			</button>
-		</div>
-
-		<div class="navbar-collapse collapse" id="navbar-second">
-			<ul class="nav navbar-nav">
-
-				<li class="nav-item">
-					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-user mr-2"></i>ข้อมูลส่วนตัว</a>
-				</li>
-			</ul>
-
-			<ul class="navbar-nav">
-			
-			</ul>
-		</div>
-	</div> --}}
-
     <div class="content">
 		@if (Session::has('success'))
 			<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
@@ -641,7 +601,39 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล<span class="text-danger">*</span> @else ชื่อสถานประกอบการ @endif</label></span>
-										<input type="text" name="company" value="{{$user->company->name}}"  class="form-control form-control-lg stringformat60">
+										<input type="text" name="company" value="{{$user->company->name}}" class="form-control form-control-lg stringformat60">
+									</div>
+								</div>
+
+								<div class="col-md-6">                                          
+									<div class="form-group">
+										<label>ประเภทธุรกิจ</label>
+										<select name="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-lg form-control-select2">
+											@foreach ($businesstypes as $key => $businesstype)
+											@if (Auth::user()->user_group_id == 1)
+												@if ($key != 5)
+													<option value="{{$businesstype->id}}" 
+														@if ($businesstype->id == $user->company->business_type_id) 
+																selected 
+															@else
+																@if (old('businesstype') == $businesstype->id) selected @endif
+														@endif >{{$businesstype->name}}
+													</option> 
+												@endif
+											@else
+												@if ($key == 5)
+													<option value="{{$businesstype->id}}" 
+														@if ($businesstype->id == $user->company->business_type_id) 
+																selected 
+															@else
+																@if (old('businesstype') == $businesstype->id) selected @endif
+														@endif >{{$businesstype->name}}
+													</option> 
+												@endif
+											@endif
+
+											@endforeach
+										</select>
 									</div>
 								</div>
 
@@ -691,7 +683,14 @@
 										<label>หมวดหมู่หลัก ISIC</label>
 										<select name="isic" id="isic" data-placeholder="หมวดหมู่หลัก ISIC" class="form-control form-control-lg form-control-select2">
 											@foreach ($isics as $isic)
-												<option value="{{$isic->id}}" @if($user->company->isic_id == $isic->id) selected @endif>{{$isic->name}}</option> 
+											{{-- @if (old('gender') == 'male') selected="selected" @endif --}}
+												<option value="{{$isic->id}}" 
+													@if ($user->company->isic_id == $isic->id) 
+													 	selected 
+													 @else
+													 	@if (old('isic') == $isic->id) selected @endif
+													@endif>{{$isic->name}}
+												</option> 
 											@endforeach
 										</select>
 									</div>
@@ -701,7 +700,12 @@
 										<label>หมวดหมู่ย่อย ISIC</label>
 										<select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-lg form-control-select2">
 											@foreach ($isicsubs as $isicsub)
-												<option value="{{$isicsub->id}}" @if($user->company->isic_sub_id == $isicsub->id) selected @endif>{{$isicsub->name}}</option> 
+												<option value="{{$isicsub->id}}" 
+													@if($user->company->isic_sub_id == $isicsub->id) 
+															selected 
+														@else
+															{{-- @if (old('subisic') == $isicsub->id) selected @endif --}}
+													@endif>{{$isicsub->name}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -711,7 +715,12 @@
 										<label>กลุ่มอุตสาหกรรม<span class="text-danger">*</span></label>
 										<select name="industrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
 											@foreach ($industrygroups as $industrygroup)
-												<option value="{{$industrygroup->id}}" @if($user->company->industry_group_id == $industrygroup->id) selected @endif>{{$industrygroup->name}}</option> 
+												<option value="{{$industrygroup->id}}" 
+													@if($user->company->industry_group_id == $industrygroup->id) 
+															selected 
+														@else
+															@if (old('industrygroup') == $industrygroup->id) selected @endif
+													@endif>{{$industrygroup->name}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -721,7 +730,12 @@
 										<label>ประเภทกิจการ</label>
 										<select name="companyservicetype" data-placeholder="ประเภทกิจการ" class="form-control form-control-lg form-control-select2">
 											@foreach ($companyservicetypes as $companyservicetype)
-												<option value="{{$companyservicetype->id}}" @if($user->company->company_service_type_id == $companyservicetype->id) selected @endif>{{$companyservicetype->name}}</option> 
+												<option value="{{$companyservicetype->id}}" 
+													@if($user->company->company_service_type_id == $companyservicetype->id) 
+															selected 
+														@else
+															@if (old('companyservicetype') == $companyservicetype->id) selected @endif
+													@endif>{{$companyservicetype->name}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -731,7 +745,12 @@
 										<label>ขนาดกิจการ <a href="#" class="text-primary" data-toggle="modal" data-target="#modal_company_size">(ดูนิยาม)</a></label>
 										<select name="companysize" data-placeholder="ขนาดกิจการ" class="form-control form-control-lg form-control-select2">
 											@foreach ($companysizes as $companysize)
-												<option value="{{$companysize->id}}" @if($user->company->company_size_id == $companysize->id) selected @endif>{{$companysize->name}}</option> 
+												<option value="{{$companysize->id}}" 
+													@if($user->company->company_size_id == $companysize->id) 
+															selected
+														@else
+															@if (old('companysize') == $companysize->id) selected @endif	 
+													@endif>{{$companysize->name}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -745,13 +764,13 @@
 												$phone = Auth::user()->phone;
 											}
 										@endphp
-										<input type="text"  name="phone" value="{{$phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+										<input type="text"  name="phone" value="{{old('phone') ?? $phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
 									</div>
 								</div>
 								<div class="col-md-6">   
 									<div class="form-group">
 										<label>โทรสาร</label>
-										<input type="text"  name="fax" value="{{$user->company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathphone">
+										<input type="text"  name="fax" value="{{old('fax') ?? $user->company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathphone">
 									</div>
 								</div>
 								<div class="col-md-6">  
@@ -763,20 +782,20 @@
 												$email = Auth::user()->email;
 											}
 										@endphp
-										<input type="text"  name="email" value="{{$email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat60">
+										<input type="text"  name="email" value="{{old('email') ?? $email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat60">
 									</div>
 								</div>
 								<div class="col-md-6">  
 									<div class="form-group">
-										<label>เว็ปไซต์</label>
-										<input type="text"  name="website" value="{{$user->company->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat60">
+										<label>เว็บไซต์</label>
+										<input type="text"  name="website" value="{{old('website') ?? $user->company->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat60">
 									</div>
 								</div>
 								@if ($user->user_group_id == 1)
 								<div class="col-md-12">  
-									<legend>
-										<label><strong>ผู้ประสานงาน</strong></label>
-									</legend>
+									{{-- <legend> --}}
+										<label><strong style="font-size: 16px">ผู้ประสานงาน</strong></label>
+									{{-- </legend> --}}
 								</div>
 									<div class="col-md-6">
 										<div class="row">
@@ -786,7 +805,12 @@
 													<select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
 														@foreach ($prefixes as $key => $prefix)
 															@if ($key+1 != $prefixes->count())
-																<option value="{{$prefix->id}}" @if ($user->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
+																<option value="{{$prefix->id}}" 
+																	@if ($user->prefix_id == $prefix->id) 
+																			selected 
+																		@else	
+																			@if (old('prefix') == $prefix->id) selected @endif	 
+																	@endif >{{$prefix->name}}</option> 
 															@endif
 															
 														@endforeach
@@ -810,7 +834,7 @@
 								@endif
 								<div class="col-md-12">  
 									<legend>
-										<label for=""><strong>ที่อยู่</strong> <a href="#" class="text-primary" data-toggle="modal" data-target="#modal_add_address">คลิกเพิ่มที่อยู่อื่นๆ</a></label>
+										<label for="" style="font-size: 16px"><strong>ที่อยู่</strong> <a href="#" class="text-primary" data-toggle="modal" data-target="#modal_add_address">คลิกเพิ่มที่อยู่อื่นๆ</a></label>
 									</legend>
 								</div>
 
@@ -829,7 +853,12 @@
 											<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
 												<option value=""></option>
 												@foreach ($provinces as $province)
-													<option value="{{$province->id}}" @if($companyaddress->province_id == $province->id) selected @endif>{{$province->name}}</option> 
+													<option value="{{$province->id}}" 
+														@if($companyaddress->province_id == $province->id) 
+																selected 
+															@else	
+																@if (old('province') == $province->id) selected @endif
+														@endif>{{$province->name}}</option> 
 												@endforeach
 											</select>
 										</div>
@@ -839,7 +868,12 @@
 											<label>อำเภอ<span class="text-danger">*</span></label>
 											<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
 												@foreach ($amphurs as $amphur)                                                                
-													<option value="{{$amphur->id}}" @if ($companyaddress->amphur_id == $amphur->id) selected @endif> {{$amphur->name}} </option>
+													<option value="{{$amphur->id}}" 
+														@if ($companyaddress->amphur_id == $amphur->id) 
+																selected 
+															@else
+																@if (old('amphur') == $amphur->id) selected @endif
+														@endif> {{$amphur->name}} </option>
 												@endforeach   
 											</select>
 										</div>
@@ -849,7 +883,12 @@
 											<label>ตำบล<span class="text-danger">*</span></label>
 											<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
 												@foreach ($tambols as $tambol)                                                                
-													<option value="{{$tambol->id}}" @if ($companyaddress->tambol_id == $tambol->id) selected @endif> {{$tambol->name}} </option>
+													<option value="{{$tambol->id}}" 
+														@if ($companyaddress->tambol_id == $tambol->id) 
+																selected
+															@else	
+																@if (old('tambol') == $amphur->id) selected @endif
+														@endif> {{$tambol->name}} </option>
 												@endforeach    
 											</select>
 										</div>
@@ -863,13 +902,13 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>พิกัดละติจูด (เช่น 14.076868486942407)<a href="https://google.com/maps/place/{{$companyaddress->lat}},{{$companyaddress->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
-											<input type="text"  name="lat" value="{{$companyaddress->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg decimalformat">
+											<input type="text"  name="lat" value="{{$companyaddress->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg allownumericwithdecimal">
 										</div>
 									</div>
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>พิกัดลองจิจูด (เช่น 100.60153839991285)</label>
-											<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg decimalformat">
+											<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg allownumericwithdecimal">
 										</div>
 									</div>
 									<div class="col-md-12" id="other_address_wrapper" @if ($user->company->companyaddress->count() == 1) hidden @endif>
@@ -929,8 +968,22 @@
 												<tbody id="authorized_director_wrapper_tr"> 
 													@foreach ($authorizeddirectors->reverse() as $authorizeddirector)
 													<tr >                                        
-														<td> {{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}</td>                                            
-														<td> {{$authorizeddirector->employposition->name}}</td> 
+														<td> 
+															@if ($authorizeddirector->prefix->name == 'อื่นๆ')
+																	{{$authorizeddirector->otherprefix}}
+																@else
+																	{{$authorizeddirector->prefix->name}}
+															@endif
+
+															{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}</td>                                            
+														<td> 
+															@if ($authorizeddirector->employ_position_id == 5)
+																	{{$authorizeddirector->otherposition}}
+																@else
+																	{{$authorizeddirector->employposition->name}}
+															@endif
+																
+														</td> 
 														<td>
 															@if (Empty($authorizeddirector->signature_id))
 																	<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>
@@ -969,7 +1022,7 @@
 														<tr >                                        
 															<td> {{$fulltbpcompanydoc->name}}</td>                                            
 															<td> 
-																<a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+																<a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
 																<a type="button" data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
 															</td>
 														</tr>
@@ -995,6 +1048,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/specialinputformat.js')}}"></script>
     <script>
     	var route = {
 			url: "{{ url('/') }}",

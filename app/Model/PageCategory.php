@@ -13,9 +13,9 @@ class PageCategory extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['name','slug'];
-    protected static $logName = 'หมวดหมู่เพจ';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['name','slug'];
+    // protected static $logName = 'หมวดหมู่เพจ';
+    // protected static $logOnlyDirty = true;
     
     public function getDescriptionForEvent(string $eventName): string
     {

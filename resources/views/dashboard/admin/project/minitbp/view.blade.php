@@ -13,7 +13,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-			    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เอกสาร Mini TBP : {{$minitbp->project}}</span></h4>
+			    <h4> <span class="font-weight-semibold">เอกสาร Mini TBP : {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			<div class="header-elements d-none">
@@ -129,7 +129,26 @@
 												<tbody >    
 													<tr >                                        
 														<td>ชื่อบริษัท</td>
-														<td>{{@$minitbp->businessplan->company->name}}</td>
+														<td>
+															@php
+																$company = $minitbp->businessplan->company;
+																$company_name = (!Empty($company->name))?$company->name:'';
+																$bussinesstype = $company->business_type_id;
+																$fullcompanyname = $company_name;
+																if($bussinesstype == 1){
+																	$fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+																}else if($bussinesstype == 2){
+																	$fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+																}else if($bussinesstype == 3){
+																	$fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+																}else if($bussinesstype == 4){
+																	$fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+																}else{
+																	$fullcompanyname = $minitbp->businessplan->company->name; 
+																}
+															@endphp
+															{{$fullcompanyname}}
+														</td>
 													</tr>       
 													<tr >                                        
 														<td>ที่อยู่บริษัท</td>
@@ -142,7 +161,7 @@
 									
 									
 									<div class="col-md-12 mt-3">	
-										<label><strong><u>ข้อมูลผู้ยื่นแบบคำขอ</u></strong></label>
+										<label><strong ><u>ข้อมูลผู้ยื่นแบบคำขอ</u></strong></label>
 										<div class="table-responsive">
 											<table class="table table-striped table-bordered">
 												<thead>
@@ -264,13 +283,13 @@
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">สัดส่วนลงทุน บริษัท %</label>
+																	<label for="">สัดส่วนลงทุนของบริษัทและผู้ถือหุ้นอื่น %</label>
 																	<input type="number" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}" readonly>
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">: สวทช %</label>
+																	<label for="">สัดส่วนการลงทุนของสวทช. %</label>
 																	<input type="number" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}" readonly>
 																</div>
 															</div>
@@ -353,18 +372,46 @@
 									</div>
 								</div>
 							</fieldset>
-								<h6>เสร็จสิ้น</h6>
-								<fieldset>
-									<div class="col-md-12">
-										<div class="form-group">
-											<div style="width:100%;height:600px;" class="col-md-12 center"  >
-												{{-- <canvas id="the-canvas"></canvas> --}}
-												<div id="example1"></div>
-											</div>
-											<input type="file" style="display:none;" id="minitbppdf" accept="application/pdf"/>
-										</div>
+							<h6>การแก้ไขล่าสุด</h6>
+							<fieldset>
+								<div class="col-md-12 mb-2">
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered">
+											<thead>
+												<tr class="bg-info">
+													<th>วันที่</th>
+													<th>รายการ</th>                                                                                  
+													<th>เดิม</th>
+													<th>ใหม่</th>
+												</tr>
+											</thead>
+											<tbody >  
+												@foreach ($logcollections as $key => $activity)
+													<tr>
+														@if ($key == 0)
+															<td rowspan="{{$logcollections->count()+1}}" >{{$activity['edit']}}</td>
+														@endif
+														<td>{{$activity['key']}}</td>
+														<td>{{$activity['old']}}</td>
+														<td>{{$activity['new']}}</td>
+													</tr>
+												@endforeach  
+											</tbody>
+										</table>
 									</div>
-								</fieldset>
+								</div>
+							</fieldset>
+							<h6>เสร็จสิ้น</h6>
+							<fieldset>
+								<div class="col-md-12">
+									<div class="form-group">
+										<div style="width:100%;height:600px;" class="col-md-12 center"  >
+											<div id="example1"></div>
+										</div>
+										<input type="file" style="display:none;" id="minitbppdf" accept="application/pdf"/>
+									</div>
+								</div>
+							</fieldset>
 						</form>
 
 					</div>
@@ -406,12 +453,13 @@
 		labels: {
 			previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
 			next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
-			finish: 'บันทึก <i class="icon-arrow-right14 ml-2" />'
+			finish: 'ดำเนินการต่อ <i class="icon-arrow-right14 ml-2" />'
 		},
-		enableFinishButton: false,
+		enableFinishButton: true,
 		onFinished: function (event, currentIndex) {
-			// alert('Form submitted.');
-			$("#frmminitbp").submit();
+			//  alert('Form submitted.');
+			 window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
+			// $("#frmminitbp").submit();
 		},
 		transitionEffect: 'fade',
 		autoFocus: true,

@@ -7,6 +7,7 @@ import * as Project from './project.js';
 import * as Company from './company.js'
 
 var a=0;
+$('#companydocname').val(null);
 $(document).on("click","#btn_modal_expertexpience",function(e){
     if($("#expertexpienceposition").val() == '' || $("#expertexpiencecompany").val() == '' || $("#expertexpiencedetail").val() == '' || $("#fromyear").val() == '' || $("#toyear").val() == ''){
         return;
@@ -468,20 +469,18 @@ $("#coverimg").on('change', function() {
     var formData = new FormData();
     formData.append('file',file);
 
-    $.ajax({
-        url: `${route.url}/api/coverimage/add`,  //Server script to process data
-        type: 'POST',
-        headers: {"X-CSRF-TOKEN":route.token},
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(data){
-            var html = `<div class="profile-cover-img" style="background-image: url(${route.url}/${data.cover})"></div>`;
-            $("#bgcover").html(html);
-    }
-});
-
-
+        $.ajax({
+            url: `${route.url}/api/coverimage/add`,  //Server script to process data
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                var html = `<div class="profile-cover-img" style="background-image: url(${route.url}/${data.cover})"></div>`;
+                $("#bgcover").html(html);
+        }
+    });
 });
 
 $("#avatarimg").on('change', function() {
@@ -704,7 +703,9 @@ $("#hid").on('change', function() {
 }
 
 
-$("#companydoc").on('change', function() {
+// $("#companydoc").on('change', function() {
+$(document).on("change","#companydoc",function(e){
+
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
     console.log(file);
@@ -730,13 +731,14 @@ $("#companydoc").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_companydoc_wrapper_tr").html(html);
                  $('#modal_add_companydoc').modal('hide');
+               
         }
     });
 });
@@ -760,7 +762,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -773,11 +775,20 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
 });
 
 $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
-    console.log($('#directorposition').val());
     if($('#directorname').val() =='' || $('#directorlastname').val() =='' || $('#directorposition').val() == ''){
         return ;
     }
-    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#directorname').val(),$('#directorlastname').val(),$('#directorposition').val(),$('#signatureid').val()).then(data => {
+    if($('#directorposition').val() == 5){
+        if($('#otherposition').val() == ''){
+            return ;
+        }
+    }
+    if($("#directorprefix option:selected").text() == 'อื่นๆ'){
+        if($('#otherprefix').val() == ''){
+            return ;
+        }
+    } 
+    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#otherprefix').val(),$('#directorname').val(),$('#directorlastname').val(),$('#directorposition').val(),$('#signatureid').val(),$('#otherposition').val()).then(data => {
         var html = ``;
         //
         data.forEach(function (director,index) {
@@ -785,9 +796,17 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
             if(director.signature_id != null){
                 check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
             }
+            var otherposition = director.employposition['name'];
+            if(director.employ_position_id == 5){
+                otherposition = director.otherposition;
+            }
+            var prefix = director.prefix['name'];
+            if(prefix == 'อื่นๆ'){
+                prefix = director.otherprefix;
+            }
             html += `<tr >                                        
-                <td> ${director.prefix['name']}${director.name}  ${director.lastname} </td>                                            
-                <td> ${director.employposition['name']} </td>  
+               <td> ${prefix}${director.name}  ${director.lastname} </td>                                          
+                <td> ${otherposition} </td>  
                 <td>
                     ${check}
                 </td>   
@@ -804,7 +823,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
     .catch(error => {})
 });
 
-function addAuthorizedDirector(id,prefix,name,lastname,position,signature) {
+function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,signature,otherposition) {
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/company/addauthorizeddirector`,
@@ -814,10 +833,12 @@ function addAuthorizedDirector(id,prefix,name,lastname,position,signature) {
           data: {
             id : id,
             prefix : prefix,
+            otherprefix : otherprefix,
             name : name,
             lastname : lastname,
             position : position,
-            signature : signature
+            signature : signature,
+            otherposition : otherposition,
           },
           success: function(data) {
             resolve(data)
@@ -849,9 +870,17 @@ function addAuthorizedDirector(id,prefix,name,lastname,position,signature) {
                     if(director.signature_id != null){
                         check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
                     }
+                    var otherposition = director.employposition['name'];
+                    if(director.employ_position_id == 5){
+                        otherposition = director.otherposition;
+                    }
+                    var prefix = director.prefix['name'];
+                    if(prefix == 'อื่นๆ'){
+                        prefix = director.otherprefix;
+                    }
                     html += `<tr >                                        
-                        <td> ${director.prefix['name']}${director.name}  ${director.lastname} </td>                                            
-                        <td> ${director.employposition['name']} </td>  
+                    <td> ${prefix}${director.name}  ${director.lastname} </td>                                            
+                        <td> ${otherposition} </td>  
                         <td>
                             ${check}
                         </td>   
@@ -1024,7 +1053,6 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
     getAuthorizedDirector($(this).data('id')).then(data => {
         var html =``;
         var html1 =``;
-        // console.log(data.companyemploy['employ_position_id']);
         data.employpositions.forEach(function (position,index) {
                 var selectposition = '';
                 if(position.id == data.companyemploy['employ_position_id']){
@@ -1039,6 +1067,10 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                 selectprefix = 'selected';
             }
             html1 += `<option value="${prefix['id']}" ${selectprefix}>${prefix['name']}</option>`
+
+
+
+
         });
         
         if(data.$signature != ''){            
@@ -1053,6 +1085,20 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
         $("#directorprefix_edit").html(html1);
         $("#authorized_director_id").val(data.companyemploy['id']);
         
+        if(data.companyemploy['employ_position_id'] == 5){
+            $("#otherposition_edit_wrapper").attr("hidden",false);
+            $("#otherposition_edit").val(data.companyemploy['otherposition']);
+        }else{
+            $("#otherposition_edit_wrapper").attr("hidden",true);
+        }
+
+        if(data.companyemploy['prefix']['name'] == 'อื่นๆ'){
+            $("#otherprefix_edit_wrapper").attr("hidden",false);
+            $("#otherprefix_edit").val(data.companyemploy['otherprefix']);
+        }else{
+            $("#otherprefix_edit_wrapper").attr("hidden",true);
+        }
+
         $('#modal_edit_authorized_director').modal('show');
     }).catch(error => {}) 
 });
@@ -1078,7 +1124,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
       }
 
 
-      function editAuthorizedDirector(id,prefix,name,lastname,position,signature) {
+      function editAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,signature,otherposition) {
         return new Promise((resolve, reject) => {
             $.ajax({
               url: `${route.url}/api/company/editauthorizeddirector`,
@@ -1091,7 +1137,9 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                 name : name,
                 lastname : lastname,
                 position : position,
-                signature : signature
+                signature : signature,
+                otherposition : otherposition,
+                otherprefix : otherprefix
               },
               success: function(data) {
                 resolve(data)
@@ -1103,10 +1151,22 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
           })
       }
 
-      
+    //   directorposition_edit
 
       $(document).on('click', '#btn_modal_edit_authorized_director', function(e) {
-        editAuthorizedDirector($('#authorized_director_id').val(),$('#directorprefix_edit').val(),$('#directorname_edit').val(),$('#directorlastname_edit').val(),$('#directorposition_edit').val(),$('#signatureid').val()).then(data => {
+
+        if($('#directorposition_edit').val() == 5){
+            if($('#otherposition_edit').val() == ''){
+                return ;
+            }
+        }
+        if($("#directorprefix_edit option:selected").text() == 'อื่นๆ'){
+            if($('#otherprefix_edit').val() == ''){
+                return ;
+            }
+        }
+
+        editAuthorizedDirector($('#authorized_director_id').val(),$('#directorprefix_edit').val(),$('#otherprefix_edit').val(),$('#directorname_edit').val(),$('#directorlastname_edit').val(),$('#directorposition_edit').val(),$('#signatureid').val(),$('#otherposition_edit').val()).then(data => {
             var html = ``;
             console.log(data);
             data.forEach(function (director,index) {
@@ -1114,9 +1174,17 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                 if(director.signature_id){
                     check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
                 }
+                var otherposition = director.employposition['name'];
+                if(director.employ_position_id == 5){
+                    otherposition = director.otherposition;
+                }
+                var prefix = director.prefix['name'];
+                if(prefix == 'อื่นๆ'){
+                    prefix = director.otherprefix;
+                }
                 html += `<tr >                                        
-                    <td> ${director.prefix['name']}${director.name}  ${director.lastname} </td>                                            
-                    <td> ${director.employposition['name']} </td>  
+                    <td> ${prefix}${director.name}  ${director.lastname} </td>                                            
+                    <td> ${otherposition} </td>  
                     <td>
                         ${check}
                     </td>   
@@ -1131,3 +1199,41 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
         })
         .catch(error => {})
     });
+
+
+    $(document).on('change', '#directorposition', function(e) {
+        if($(this).val() == 5){
+            $("#otherposition_wrapper").attr("hidden",false);
+        }else{
+            $("#otherposition_wrapper").attr("hidden",true);
+            $('#otherposition').val('');
+        }
+    });
+
+    $(document).on('change', '#directorposition_edit', function(e) {
+        if($(this).val() == 5){
+            $("#otherposition_edit_wrapper").attr("hidden",false);
+        }else{
+            $("#otherposition_edit_wrapper").attr("hidden",true);
+        }
+    });
+  
+    $(document).on('change', '#directorprefix', function(e) {
+        if($("#directorprefix option:selected").text() == 'อื่นๆ'){
+            $("#otherprefix_wrapper").attr("hidden",false);
+        }else{
+            $("#otherprefix_wrapper").attr("hidden",true);
+            $('#otherprefix').val('');
+        }
+    });
+
+    $(document).on('change', '#directorprefix_edit', function(e) {
+        if($("#directorprefix_edit option:selected").text() == 'อื่นๆ'){
+            $("#otherprefix_edit_wrapper").attr("hidden",false);
+        }else{
+            $("#otherprefix_edit_wrapper").attr("hidden",true);
+            // $('#otherprefix_edit').val('');
+        }
+    });
+    
+    

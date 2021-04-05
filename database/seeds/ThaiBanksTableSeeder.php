@@ -70,7 +70,7 @@ class ThaiBanksTableSeeder extends Seeder
                 'name' => 'ธนาคารอาคารสงเคราะห์'
             ],
             [
-                'name' => 'อื่น ๆ โปรดระบุ'
+                'name' => 'อื่นๆ โปรดระบุ'
             ]
         ]);
     }

@@ -82,6 +82,7 @@
                             </a>
                         </div>
                     </div>
+                    
                     <div class="col-lg-9 text-right"> 
                         <div class="rs-menu-area">
                             <div class="main-menu">
@@ -92,13 +93,39 @@
                                                 @if ($key == 0)
                                                         <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                     @else
-                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                        @if ($menu->name != 'เข้าสู่ระบบ')
+                                                                    <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                            @else
+                                                                @if ($shareagent->isPhone() == 1)
+                                                                    <li>
+                                                                        @if (!Auth::check())
+                                                                            <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
+                                                                        @else
+                                                                            @if (Auth::user()->user_type_id >= 4)
+                                                                                <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                            @elseif(Auth::user()->user_type_id == 3)
+                                                                                <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                            @else
+                                                                                <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                            @endif
+                                                                        @endif
+                                                                    </li>
+                                                                @endif
+                                                        @endif
+                                                       
                                                 @endif
                                             @else
                                                 @if ($key == 0)
                                                         <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
                                                     @else
+                                                    @if ($menu->name != 'เข้าสู่ระบบ')
                                                         <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                    @else
+                                                        @if ($shareagent->isPhone() == 1)
+                                                            <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
+                                                        @endif
+                                                    @endif
+                                                        
                                                 @endif
                                             @endif
                                         @endforeach

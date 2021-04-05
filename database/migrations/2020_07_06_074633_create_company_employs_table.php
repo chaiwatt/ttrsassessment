@@ -19,9 +19,11 @@ class CreateCompanyEmploysTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->unsignedBigInteger('full_tbp_id')->nullable();
             $table->unsignedBigInteger('prefix_id')->nullable();
+            $table->string('otherprefix',120)->nullable();
             $table->string('name',120)->nullable();
             $table->string('lastname',120)->nullable();
             $table->unsignedBigInteger('employ_position_id')->nullable();
+            $table->string('otherposition',120)->nullable();
             $table->string('phone',12)->nullable();
             $table->string('workphone',12)->nullable();
             $table->string('email',120)->nullable();

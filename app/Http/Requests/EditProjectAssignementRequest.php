@@ -20,7 +20,7 @@ class EditProjectAssignementRequest extends FormRequest
     {
         return [
             'leader' => 'required',
-            'coleader' => 'required',
+            // 'coleader' => 'required',
             
         ];
     }
@@ -28,7 +28,7 @@ class EditProjectAssignementRequest extends FormRequest
     {
       return  [
         'leader.required' => 'ยังไม่ได้เลือก Leader',
-        'coleader.required' => 'ยังไม่ได้เลือก CoLeader',
+        // 'coleader.required' => 'ยังไม่ได้เลือก Co-Leader',
       ]; 
     }
 }

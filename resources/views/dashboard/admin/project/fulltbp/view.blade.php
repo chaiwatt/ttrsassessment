@@ -1272,7 +1272,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">เอกสาร Full TBP : {{$fulltbp->minitbp->project}}</span></h4>
+                <h4> <span class="font-weight-semibold">เอกสาร Full TBP : {{$fulltbp->minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 			</div>
 			{{-- <div class="text-right">
@@ -2302,12 +2302,12 @@
 																	</div>
 																</div>      
 															<br>
-															<legend><label for=""><strong>ใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ</strong> </label></legend>
+															<legend><label for=""><strong>ใบรับรองมาตรฐานต่างๆ ที่ได้รับ</strong> </label></legend>
 
 															<div class="row">
 																<div class="col-md-12">
 																	<label> <u>ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</u></label>
-																	<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
+																	<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
 																	<div class="form-group">
 																		<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->standard!!}</div>
 																	</div>
@@ -2319,7 +2319,7 @@
 																		<table class="table table-striped table-bordered">
 																			<thead>
 																				<tr class="bg-info">
-																					<th>เอกสารใบรับรองมาตรฐานต่าง ๆ ที่ได้รับ</th>                                                                                  
+																					<th>เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ</th>                                                                                  
 																					<th style="width:200px">ดาวน์โหลด</th>
 																				</tr>
 																			</thead>

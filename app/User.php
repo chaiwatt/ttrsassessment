@@ -41,11 +41,12 @@ class User extends Authenticatable implements MustVerifyEmail
     // protected $appends = ['usertype','fulltbpexpert','fulltbpofficer'];
     protected $appends = ['usertype'];
 
-    protected static $ignoreChangedAttributes = ['password'];
-    protected static $logAttributesToIgnore = [ 'password'];
-    protected static $logAttributes = ['prefix_id', 'name', 'lastname', 'user_type_id', 'user_status_id', 'email', 'password'];
-    protected static $logName = 'ผู้ใช้งาน';
-    protected static $logOnlyDirty = true;
+    // protected static $ignoreChangedAttributes = ['password'];
+    // protected static $logAttributesToIgnore = [ 'password'];
+    // protected static $logAttributes = ['prefix_id', 'name', 'lastname', 'user_type_id', 'user_status_id', 'email', 'password'];
+    // protected static $logName = 'ผู้ใช้งาน';
+
+    // protected static $logOnlyDirty = true;
 
     public function getDescriptionForEvent(string $eventName): string
     {

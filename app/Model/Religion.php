@@ -13,9 +13,9 @@ class Religion extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected static $logAttributes = ['name'];
-    protected static $logName = 'ศาสนา';
-    protected static $logOnlyDirty = true;
+    // protected static $logAttributes = ['name'];
+    // protected static $logName = 'ศาสนา';
+    // protected static $logOnlyDirty = true;
     
     public function getDescriptionForEvent(string $eventName): string
     {

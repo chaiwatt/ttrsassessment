@@ -54,6 +54,9 @@ Route::group(['prefix' => 'social'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'togglebar'], function(){
+        Route::post('save','Api\ToggleBarController@Save')->name('api.togglebar.save');            
+    }); 
     Route::group(['prefix' => 'download'], function(){
         Route::post('add','Api\DownloadController@Add')->name('api.download.add');            
     }); 
@@ -475,7 +478,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('submitnoattachement','Api\MiniTbpController@SubmitNoAttachement')->name('api.minitbp.submitnoattachement');
             Route::post('addjdmessage','Api\MiniTbpController@AddJdMessage')->name('api.minitbp.addjdmessage');
             Route::post('getjdmessage','Api\MiniTbpController@GetJdMessage')->name('api.minitbp.getjdmessage');
-            
+            Route::post('getreviselog','Api\MiniTbpController@GetReviseLog')->name('api.minitbp.getreviselog');
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){
@@ -977,6 +980,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::group(['prefix' => 'system'], function(){     
                     Route::get('','SettingAdminSystemController@Index')->name('setting.admin.system'); 
                     Route::post('save','SettingAdminSystemController@Save')->name('setting.admin.system.save'); 
+                    // Route::post('savetoglebar','SettingAdminSystemController@SaveToggleBar')->name('setting.admin.system.savetoglebar'); 
                     Route::group(['prefix' => 'projectflow'], function(){
                         Route::get('','SettingAdminProjectSystemFlowController@Index')->name('setting.admin.system.projectflow');           
                         Route::get('edit/{id}','SettingAdminProjectSystemFlowController@Edit')->name('setting.admin.system.projectflow.edit'); 

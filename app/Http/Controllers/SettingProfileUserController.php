@@ -19,6 +19,7 @@ use App\Helper\EmailBox;
 use App\Model\Companysize;
 use App\Model\FullTbpCost;
 use App\Model\BusinessPlan;
+use App\Model\BusinessType;
 use App\Model\FullTbpAsset;
 use App\Model\FullTbpGantt;
 use App\Model\UserPosition;
@@ -67,6 +68,7 @@ class SettingProfileUserController extends Controller
         $employpositions = EmployPosition::where('id', '<=',5)->get();
         $companyservicetypes = CompanyServiceType::get();
         $companysizes = Companysize::get();
+        $businesstypes = BusinessType::get();
         return view('setting.profile.user.edit')->withUser($user)
                                             ->withPrefixes($prefixes)
                                             ->withProvinces($provinces)
@@ -81,7 +83,8 @@ class SettingProfileUserController extends Controller
                                             ->withUserpositions($userpositions)
                                             ->withEmploypositions($employpositions)
                                             ->withCompanysizes($companysizes)
-                                            ->withCompanyservicetypes($companyservicetypes);
+                                            ->withCompanyservicetypes($companyservicetypes)
+                                            ->withBusinesstypes($businesstypes);
     }
     public function EditSave(EditProfileRequest $request, $id){
         CreateUserLog::createLog('แก้ไขข้อมูลโปรไฟล์');
@@ -306,8 +309,7 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
-
-            return redirect()->back()->withSuccess('แก้ไขข้อมูลสำเร็จ'); 
+            return redirect()->back()->withSuccess('แก้ไขข้อมูลโปรไฟล์สำเร็จ'); 
         }
     }
 }
