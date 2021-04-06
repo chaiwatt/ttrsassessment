@@ -2290,6 +2290,7 @@
 																		<div class="form-group">	
 																			<button type="button" id ="btn_add_projectplan" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่มรายละเอียด</button>
 																		</div>
+																		<label for=""><strong>ถ้าต้องการเปลี่ยนลำดับรายละเอียดการดำเนินงานให้คลิกที่รายการแล้วลากขึ้นหรือลง</strong></label>
 																	</div>
 																	<div class="col-md-12">			
 																		<table class="table-bordered" style="width: 100%" id="table_gantt_wrapper">
@@ -2865,6 +2866,7 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/tablednd/jquery.tablednd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
@@ -2961,6 +2963,26 @@
 			$('#companydocname').prop("disabled", false);
 			
 		}
+
+		$("#table_gantt_wrapper").tableDnD();
+        // Make a nice striped effect on the table
+        // table_2 = $("#table-2");
+        // table_2.find("tr:even").addClass("alt");
+        // // Initialise the second table specifying a dragClass and an onDrop function that will display an alert
+        // table_2.tableDnD({
+        //     onDragClass: "myDragClass",
+        //     onDrop: function(table, row) {
+        //         var rows = table.tBodies[0].rows;
+        //         var debugStr = "Row dropped was "+row.id+". New order: ";
+        //         for (var i=0; i<rows.length; i++) {
+        //             debugStr += rows[i].id+" ";
+        //         }
+        //         $(table).parent().find('.result').text(debugStr);
+        //     },
+        //     onDragStart: function(table, row) {
+        //         $(table).parent().find('.result').text("Started dragging row "+row.id);
+        //     }
+        // });
 	});
 	$(document).on('keyup', '#ganttnummonth', function(e) {
 		// console.log('ddd');

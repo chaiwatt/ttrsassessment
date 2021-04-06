@@ -959,7 +959,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
         html += `<thead>
                     <tr>
                         <tr>
-                            <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
+                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
                              ${th}
                             <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
                         </tr>
@@ -977,7 +977,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                 } 
             }
             html += `<tr >                                        
-                <td> ${plan.name} </td>                                            
+                <td style="padding:5px"> ${plan.name} </td>                                            
                     ${tdbody}
                 <td> 
                 <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
@@ -986,6 +986,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
             </tr>`
             });
          $("#table_gantt_wrapper").html(html);
+         $("#table_gantt_wrapper").tableDnD();
    })
 });
 
@@ -1049,7 +1050,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
         html += `<thead>
                     <tr>
                         <tr>
-                            <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
+                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
                              ${th}
                             <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
                         </tr>
@@ -1067,7 +1068,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                 } 
             }
             html += `<tr >                                        
-                <td> ${plan.name} </td>                                            
+                <td style="padding:5px"> ${plan.name} </td>                                            
                     ${tdbody}
                 <td> 
                 <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
@@ -1076,6 +1077,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
             </tr>`
             });
          $("#table_gantt_wrapper").html(html);
+         $("#table_gantt_wrapper").tableDnD();
     })
     .catch(error => {})
 });
@@ -1116,7 +1118,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                 html += `<thead>
                             <tr>
                                 <tr>
-                                    <th rowspan="2">รายละเอียดการดำเนินงาน</th> 
+                                    <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
                                      ${th}
                                     <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
                                 </tr>
@@ -1134,7 +1136,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                         } 
                     }
                     html += `<tr >                                        
-                        <td> ${plan.name} </td>                                            
+                        <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
                         <td> 
                         <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
@@ -1143,6 +1145,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                     </tr>`
                     });
                  $("#table_gantt_wrapper").html(html);
+                 $("#table_gantt_wrapper").tableDnD();
            })
            .catch(error => {})
         }

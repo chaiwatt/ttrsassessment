@@ -15,6 +15,7 @@ class CreateFullTbpProjectPlansTable extends Migration
     {
         Schema::create('full_tbp_project_plans', function (Blueprint $table) {
             $table->id();
+            $table->char('itemorder',2)->default(1);
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
             $table->string('name',250);
