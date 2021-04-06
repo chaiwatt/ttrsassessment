@@ -12,10 +12,9 @@
                 @endif
 
                 {{ __('กรุณายืนยันการใช้งานผ่านอีเมล ') }}
-                {{ __('ถ้าคุณไม่ได้รับอีเมล') }},
                 <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                     @csrf
-                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('กรุณาคลิกเพื่อขอรับการยืนยันใหม่') }}</button>.
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('ถ้าคุณไม่ได้รับอีเมล กรุณาคลิกเพื่อขอรับการยืนยันใหม่') }}</button>.
                 </form>
             </div>
         </div>

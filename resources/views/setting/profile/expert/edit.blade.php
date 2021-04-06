@@ -294,7 +294,7 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label>เลขบัตรประจำตัวประชาชน<span class="text-danger">*</span></label></span>
-														<input type="text" name="hid" id="hid" value="{{old('hid') ?? $user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control form-control-lg numeralformath13" >
+														<input type="text" name="hid" id="hid" value="{{old('hid') ?? $user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control form-control-lg numeralformath13" readonly>
 														<small id="hidinvalid" class="form-text text-danger" hidden></small>
 													</div>
 												</div>
