@@ -17,7 +17,7 @@
                         <table class="table table-bordered table-striped" id="criteriatable_modal">
                             <thead>
                                 <tr>
-                                    <th>ชื่อ-สกุล</th>                                                                                   
+                                    <th>ชื่อ-นามสกุล</th>                                                                                   
                                     <th>Score</th>  
                                 </tr>
                             </thead>

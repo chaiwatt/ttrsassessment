@@ -179,7 +179,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th >ชื่อ-สกุล</th> 
+                                        <th >ชื่อ-นามสกุล</th> 
                                         @if (Auth::user()->user_type_id == 6 )
                                             <th>การรับมอบหมาย</th> 
                                         @endif     

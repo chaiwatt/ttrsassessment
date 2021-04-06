@@ -62,7 +62,7 @@
             @csrf
             <div class="form-row">
               <div class="col-lg-6 form-group">
-                <input type="text" name="name" class="form-control form-control-lg" value="{{old('name')}}" placeholder="ชื่อ-สกุล"  />
+                <input type="text" name="name" class="form-control form-control-lg" value="{{old('name')}}" placeholder="ชื่อ-นามสกุล"  />
               </div>
               <div class="col-lg-6 form-group">
                 <input type="text" class="form-control form-control-lg" name="email" value="{{old('email')}}" placeholder="อีเมล"  />

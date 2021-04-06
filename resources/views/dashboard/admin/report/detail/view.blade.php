@@ -135,7 +135,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th style="width:600px">ชื่อ-สกุล</th> 
+                                            <th style="width:600px">ชื่อ-นามสกุล</th> 
                                             <th>ความแม่นยำ</th> 
                                             <th>การลงคะแนน</th> 
                                         </tr>

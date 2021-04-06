@@ -27,7 +27,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchword_wrapper").attr("hidden",true);
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#projectstatus_wrapper").attr("hidden",false);
-        }if(selectedtedtext == 'ชื่อ-สกุล'){
+        }if(selectedtedtext == 'ชื่อ-นามสกุล'){
             $("#searchname_wrapper").attr("hidden",false);
             $("#searchexpertbranch_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);

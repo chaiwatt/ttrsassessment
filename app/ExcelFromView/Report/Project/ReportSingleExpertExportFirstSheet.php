@@ -83,7 +83,7 @@ class ReportSingleExpertExportFirstSheet implements
     public function headings(): array
     {
         return [
-            'ชื่อ-สกุล',
+            'ชื่อ-นามสกุล',
             'ที่อยู่ตามบัตรประจำตัวประชาชน',
             'ที่อยู่ที่ติดต่อได้',
             'โทรศัพท์',

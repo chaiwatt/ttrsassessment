@@ -1559,7 +1559,7 @@
 															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
-																		<th>ชื่อ-สกุล</th>  
+																		<th>ชื่อ-นามสกุล</th>  
 																		<th>ตำแหน่ง</th>                                                                                    
 																		<th>โทรศัพท์</th>       
 																		<th>โทรศัพท์มือถือ</th>  
@@ -1593,7 +1593,7 @@
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th>ชื่อ-สกุล</th>  
+																			<th>ชื่อ-นามสกุล</th>  
 																			<th>ความสัมพันธ์กับ CEO</th>
 																			{{-- <th style="width:200px">เพิ่มเติม</th>     --}}
 																		</tr>
@@ -1619,7 +1619,7 @@
 																{{-- <table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th>ชื่อ-สกุล</th>  
+																			<th>ชื่อ-นามสกุล</th>  
 																			<th>ประวัติการศึกษา</th>
 																			<th>ประสบการณ์การทำงาน</th>
 																			<th>ประวัติการฝึกอบรม</th>
@@ -1641,7 +1641,7 @@
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th>ชื่อ-สกุล</th>  
+																			<th>ชื่อ-นามสกุล</th>  
 																			<th>ตำแหน่ง</th>                                                                                    
 																			<th>โทรศัพท์</th>       
 																			<th>โทรศัพท์มือถือ</th>  
@@ -1674,7 +1674,7 @@
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th>ชื่อ-สกุล</th>  
+																			<th>ชื่อ-นามสกุล</th>  
 																			<th>ตำแหน่ง</th>                                                                                    
 																			<th>โทรศัพท์</th>       
 																			<th>โทรศัพท์มือถือ</th>  

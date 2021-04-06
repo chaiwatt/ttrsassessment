@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <label>ประเภทการค้นหา</label><span class="text-danger">*</span>
                                         <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-lg form-control-select2">
-                                            <option value="0">ชื่อ-สกุล</option>
+                                            <option value="0">ชื่อ-นามสกุล</option>
                                             <option value="1">สาขาความเชี่ยวชาญ</option>
                                             <option value="2">ชื่อโครงการ</option>
                                             <option value="3">สถานะโครงการ</option>
@@ -60,8 +60,8 @@
                                     </div>
                                 </div>    
                                 <div id="searchname_wrapper" class="col-md-6">
-                                    <label>ชื่อ-สกุล</label>
-                                    <input type="text"  name="searchname" id="searchname" value=""  placeholder="ชื่อ-สกุล" class="form-control form-control-lg" >
+                                    <label>ชื่อ-นามสกุล</label>
+                                    <input type="text"  name="searchname" id="searchname" value=""  placeholder="ชื่อ-นามสกุล" class="form-control form-control-lg" >
                                 </div>  
                                 <div id="searchexpertbranch_wrapper" class="col-md-6" hidden>
                                     <label>สาขาความเชี่ยวชาญ</label><span class="text-danger">*</span>
@@ -113,7 +113,7 @@
                             <table class="table table-striped" id="experttable">
                                 <thead>
                                     <tr>
-                                        <th>ชื่อ-สกุล</th>
+                                        <th>ชื่อ-นามสกุล</th>
                                         <th>ความเชี่ยวชาญ</th>
                                         <th>โครงการรับผิดชอบ</th> 
                                     </tr>

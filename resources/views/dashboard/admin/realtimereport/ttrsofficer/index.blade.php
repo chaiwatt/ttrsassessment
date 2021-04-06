@@ -50,8 +50,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                        
-                                        <label>ค้นหา ชื่อ-สกุล</label>
-                                        <input type="text"  name="search" id="search" placeholder="ค้นหา ชื่อ-สกุล" value="{{Request::get('search')}}" class="form-control form-control-lg" >
+                                        <label>ค้นหา ชื่อ-นามสกุล</label>
+                                        <input type="text"  name="search" id="search" placeholder="ค้นหา ชื่อ-นามสกุล" value="{{Request::get('search')}}" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -88,7 +88,7 @@
                                     <table class="table table-striped" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th>ชื่อ-สกุล</th> 
+                                                <th>ชื่อ-นามสกุล</th> 
                                                 <th>ตำแหน่ง</th> 
                                                 <th>หน่วยงานที่สังกัด</th> 
                                                 <th>สาขาความเชี่ยวชาญ</th> 

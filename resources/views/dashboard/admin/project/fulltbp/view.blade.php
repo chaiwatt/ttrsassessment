@@ -1614,7 +1614,7 @@
 															<table class="table table-striped table-bordered">
 																<thead>
 																	<tr class="bg-info">
-																		<th>ชื่อ-สกุล</th>  
+																		<th>ชื่อ-นามสกุล</th>  
 																		<th style="width:30%">ความสัมพันธ์กับ CEO</th>
 																	</tr>
 																</thead>
@@ -1897,7 +1897,7 @@
 																</thead>
 																<tbody >    
 																	<tr >                                        
-																		<td>ชื่อ-สกุล</td>
+																		<td>ชื่อ-นามสกุล</td>
 																		<td>{{@$fulltbp->fulltbpresponsibleperson->prefix->name}}{{@$fulltbp->fulltbpresponsibleperson->name}} {{@$fulltbp->fulltbpresponsibleperson->lastname}}</td>
 																	</tr>       
 																	<tr >                                        

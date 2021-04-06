@@ -28,7 +28,7 @@ class CreateContactInfoRequest extends FormRequest
     public function messages()
     {
       return  [
-            'name.required' => 'ยังไม่ได้กรอกชื่อ-สกุล',
+            'name.required' => 'ยังไม่ได้กรอกชื่อ-นามสกุล',
             'email.required' => 'ยังไม่ได้กรอกอีเมล์',
             'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง',
             'subject.required' => 'ยังไม่ได้กรอกหัวข้อ',

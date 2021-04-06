@@ -59,7 +59,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width:25%">วันที่</th>
-                                        <th style="width:30%">ชื่อ-สกุล</th> 
+                                        <th style="width:30%">ชื่อ-นามสกุล</th> 
                                         <th>Log</th>    
                                     </tr>
                                 </thead>

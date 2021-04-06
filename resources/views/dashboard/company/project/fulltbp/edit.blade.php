@@ -262,6 +262,7 @@
 								</div>
 
 								<div class="tab-pane fade" id="left-icon-employeducation">
+									<span class="text-danger">*กรุณาบันทึกวุฒิการศึกษาสูงสุดก่อน แล้วเรียงลำดับลงมา</span>
 									<div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
 									</div>
@@ -283,6 +284,7 @@
 
 								</div>
 								<div class="tab-pane fade" id="left-icon-employexpereince">
+									<span class="text-danger">*กรุณาบันทึกประสบการณ์ทำงานจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span>
 									<div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add"></i></a>
 									</div>
@@ -324,6 +326,7 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
+									<span class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span>
 									<div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a>
 									</div>
@@ -495,7 +498,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>ชื่อ-สกุล</label><span class="text-danger">*</span>
+							<label>ชื่อ-นามสกุล</label><span class="text-danger">*</span>
 							<input type="text" id="employsearch" class="form-control form-control-lg">
 							<div id="employsearch_wrapper" class="dropdown-menu" style="display: block; position: static; width: 100%; margin-top: 0; float: none; z-index: auto;" hidden>
 								
@@ -1468,310 +1471,191 @@
 					<input type="text" id="companyid" value="{{$company->id}}" hidden>
 					<input type="text" id="fulltbpid" value="{{$fulltbp->id}}" hidden>
 						<form class="wizard-form steps-basic" action="#" data-fouc>
-							<h6>ข้อมูลทั่วไป</h6>
-
+							<h6>1.ข้อมูลทั่วไป</h6>
 							<fieldset>
 								<div id="accordion-group">
-									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
-										<div class="card-header">
-											<h6 class="card-title">
-												{{-- <a data-toggle="collapse" class="text-default list-icons-item" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.1 ข้อมูลกิจการ</a> --}}
-												<a data-action="collapse" data-toggle="collapse" >1.1 ข้อมูลกิจการ</a>
-											</h6>
-										</div>
-	
 
-										<div id="accordion-item-group1" class="collapse" data-parent="#accordion-group">
-											<div class="card-body">
-												<input type="text" id="pdfname" hidden >
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>ชื่อนิติบุคคล</label>
-															<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control form-control-lg" readonly>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>ประเภทธุรกิจ</label>
-															<select name="businesstype" id="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-lg form-control-select2" data-fouc>
-																<option value="" >==เลือกรายการ==</option> 
-																@foreach ($businesstypes as $businesstype)
-																	<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
-																@endforeach
-															</select>
-														</div>
-													</div>
-				
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>ทะเบียนนิติบุคคลเลขที่</label>
-															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control form-control-lg" readonly>
-														</div>
-													</div>
-				
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>ปีที่จดทะเบียน</label>
-															<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg" readonly>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>ทุนที่จดทะเบียน</label>
-															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control form-control-lg" readonly>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>ทุนจดทะเบียนที่เรียกชำระแล้ว</label>
-															<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label>วันที่ชำระทุนจดทะเบียน</label>
-															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
-														</div>
-													</div>
-													{{-- <div class="col-md-6">
-														<div class="form-group">
-															<label>วันที่ชำระทุนจดทะเบียน</label>
-															<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
-														</div>
-													</div> --}}
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>แผนผังองค์กร (ไฟล์ jpg, png ขนาด 500 x 300px ไฟล์ขนาดไม่เกิน 1 MB)</label>
-															<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" onclick="document.getElementById('organizeimg').click();"><i class="icon-add mr-2"></i>อัปโหลด</button>
-															<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg" accept="image/*"/>
-															@if (!Empty($fulltbp->minitbp->businessplan->company->organizeimg))
-																<br>
-																<img id="organizeimgholder" src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" width="500" height="300" alt="">
-																@else
-																<br>
-																<img id="organizeimgholder" src="{{asset('assets/dashboard/images/orgimg.png')}}" width="500" height="300" alt="">
-																
-															@endif
-														</div>
-													</div>
-													<legend>
-														<label for=""><strong>รายการบุคลากร</strong></label>
-													</legend>
-													<div class="col-md-12">
-														<div class="row">
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label>จำนวนบุคลากรทั้งหมด</label>
-																	<input type="text" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control form-control-lg numeralformat4" required >
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label>ผ่ายบริหาร</label>
-																	<input type="text" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control form-control-lg numeralformat4" required>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label>ฝ่ายวิจัยและพัฒนา</label>
-																	<input type="text" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control form-control-lg numeralformat4" required>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label>ฝ่ายผลิต/วิศวกรรม</label>
-																	<input type="text" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control form-control-lg numeralformat4" required>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label>ผ่ายการตลาด</label>
-																	<input type="text" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control form-control-lg numeralformat4" required>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label>พนักงานทั่วไป</label>
-																	<input type="text" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control form-control-lg numeralformat4" required>
-																</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card card-body border-top-info-400">
+												<div class="card-body">
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label ><strong>1.1) ชื่อนิติบุคคล</strong></label>
+																<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->name}}"  placeholder="ชื่อนิติบุคคล" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
-													</div>
-													<legend>
-														<label for="">ประวัติบริษัท</label>
-													</legend>
-													<div class="col-md-12">
-														<div class="form-group">
-															<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) <span id="companyhistoryerror" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span> </label>
-															<textarea name="companyhistory" id="companyhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="7" required >{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</textarea>
-														</div>
-														
-														<div class="row">
-															<div class="col-md-12">	
-																<div class="input-group">													
-																	<label for="">แนบเอกสารข้อมูลทั่วไป (ไฟล์ pdf ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm " data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
-																</div>
-																<p><small><i>หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ</i> </small></p>
-															</div>
-														</div>			
-														<div class="row">	
-															<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
+														<div class="col-md-6">
+															<div class="form-group">
+																<label><strong>1.2) ทะเบียนนิติบุคคลเลขที่</strong></label>
+																<input type="text" value="{{$fulltbp->minitbp->businessplan->company->vatno}}"  placeholder="เลขทะเบียนนิติบุคคล" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
-														<div class="row">
-															<div class="col-md-12">	
-																<div class="table-responsive">
-																	<table class="table table-striped table-bordered">
-																		<thead>
-																			<tr class="bg-info">
-																				<th>เอกสารแนบ</th>                                                                                  
-																				<th style="width:200px">ดาวน์โหลด</th>
-																			</tr>
-																		</thead>
-																		<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
-																			@foreach ($fulltbpcompanyprofileattachments->reverse() as $fulltbpcompanyprofileattachment)
-																				<tr >                                        
-																					<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
-																					<td> 
-																						<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																						<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcompanyprofileattachment">ลบ</a>                                       
-																					</td>
-																				</tr>
-																			@endforeach                            
-																		</tbody>
-																	</table>
-																</div>
-															</div>      
+														<div class="col-md-6">
+															<div class="form-group">
+																<label><strong>1.3) ปีที่จดทะเบียน</strong></label>
+																<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg" readonly>
+															</div>
 														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label><strong>1.4) ทุนที่จดทะเบียน</strong></label>
+																<input type="text" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control form-control-lg" readonly>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label><strong>1.5) ทุนจดทะเบียนที่เรียกชำระแล้ว</strong></label>
+																<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label><strong>วันที่ชำระทุนจดทะเบียน</strong></label>
+																<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="form-group">
+																<label><strong>1.6) แผนผังองค์กร (Organization Chart) </strong>(ไฟล์ jpg, png ขนาด 600 x 400px ขนาดไม่เกิน 1 MB)</label>
+																<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" onclick="document.getElementById('organizeimg').click();"><i class="icon-add mr-2"></i>อัปโหลด</button>
+																	<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg" accept="image/*"/>
+																<div class="text-center">
+																	
+																	@if (!Empty($fulltbp->minitbp->businessplan->company->organizeimg))
+																		<br>
+																		<img id="organizeimgholder" src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" width="500" height="300" alt="">
+																		@else
+																		<br>
+																		<img id="organizeimgholder" src="{{asset('assets/dashboard/images/orgimg.png')}}" width="500" height="300" alt="">
+																		
+																	@endif
+																</div>
 
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-		
-									<div class="card mb-0 border-top-success rounded-top-0 rounded-0 border-y-0">
-										<div class="card-header">
-											<h6 class="card-title">
-												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.2 ข้อมูลบุคลากร</a> --}}
-												<a data-action="collapse" data-toggle="collapse" >1.2 ข้อมูลบุคลากร</a>
-											</h6>
-										</div>
-		
-										<div id="accordion-item-group2" class="collapse" data-parent="#accordion-group">
-											<div class="card-body">
-												<div class="row">
-													<div class="col-md-12">	
-														<label for="">ข้อมูลผู้บริหารระดับสูง<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnaddboard"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
-																<thead>
-																	<tr class="bg-info">
-																		<th style="width:25%">ชื่อ-สกุล</th>  
-																		<th style="width:19%">ตำแหน่ง</th>                                                                                    
-																		<th style="width:5%">โทรศัพท์</th>       
-																		<th style="width:5%">โทรศัพท์มือถือ</th>  
-																		<th style="width:8%">อีเมล</th>
-																		<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>    
-																	</tr>
-																</thead>
-																<tbody id="fulltbp_companyemploy_wrapper_tr">    
-																	@foreach ($companyemploys->where('employ_position_id','<=',5) as $companyemploy)
-																		<tr >                                        
-																			<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
-																			<td> {{$companyemploy->employposition->name}} </td> 
-																			<td> {{$companyemploy->phone}} </td>                                            
-																			<td> {{$companyemploy->workphone}} </td> 
-																			<td> {{$companyemploy->email}} </td> 
-																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																				<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy">ลบ</a> 
-																			</td> 
-																		</tr>
-																	@endforeach                            
-																</tbody>
-															</table>
-														</div>
-													</div>
-												
-													{{-- <div class="row"> --}}
-														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลผู้ถือหุ้น<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnstckholder" data-id="{{$company->id}}"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
-																	<thead>
-																		<tr class="bg-info">
-																			<th>ชื่อ-สกุล</th>  
-																			<th>ความสัมพันธ์กับ CEO</th>
-																			<th class="hiddenelement" style="width:200px">เพิ่มเติม</th>    
-																		</tr>
-																	</thead>
-																	<tbody id="fulltbp_companystockholder_wrapper_tr">    
-																		@foreach ($companystockholders->reverse() as $companystockholder)
-																			<tr >                                        
-																				<td> {{$companystockholder->name}}</td> 
-																				<td> {{$companystockholder->ceorelation}} </td> 
-																				<td class="hiddenelement"> <a type="button" data-id="{{$companystockholder->id}}" class="btn btn-sm bg-warning hiddenelement deletestockholder">ลบ</a> </td> 
-																			</tr>
-																		@endforeach                            
-																	</tbody>
-																</table>
 															</div>
 														</div>
-													{{-- </div> --}}
+														<legend>
+															<label for="" style="font-size: 16px"><strong>1.7) รายการบุคลากร</strong></label>
+														</legend>
+														<div class="col-md-12">
+															<div class="row">
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<label>จำนวนบุคลากรทั้งหมด</label>
+																		<input type="text" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control form-control-lg numeralformat4" required >
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<label>ผ่ายบริหาร</label>
+																		<input type="text" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control form-control-lg numeralformat4" required>
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<label>ฝ่ายวิจัยและพัฒนา</label>
+																		<input type="text" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control form-control-lg numeralformat4" required>
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<label>ฝ่ายผลิต/วิศวกรรม</label>
+																		<input type="text" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control form-control-lg numeralformat4" required>
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<label>ผ่ายการตลาด</label>
+																		<input type="text" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control form-control-lg numeralformat4" required>
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<label>พนักงานทั่วไป</label>
+																		<input type="text" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control form-control-lg numeralformat4" required>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label><strong>1.8) ประเภทธุรกิจ</strong></label>
+																<select name="businesstype" id="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-lg form-control-select2" data-fouc>
+																	<option value="" >==เลือกรายการ==</option> 
+																	@foreach ($businesstypes as $businesstype)
+																		<option value="{{$businesstype->id}}" @if($fulltbp->minitbp->businessplan->company->business_type_id == $businesstype->id) selected @endif >{{$businesstype->name}}</option> 
+																	@endforeach
+																</select>
+															</div>
+														</div>
+					
 													
-													{{-- <div class="row"> --}}
+			
+														<div class="col-md-12">
+															<label><strong>1.9) ประวัติบริษัท (Company Profile)</strong></label>
+															<div class="form-group">
+																<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) <span id="companyhistoryerror" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span> </label>
+																<textarea name="companyhistory" id="companyhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="7" required >{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</textarea>
+															</div>
+															
+															<div class="row">
+																<div class="col-md-12">	
+																	<div class="input-group">													
+																		<label for="">แนบเอกสารข้อมูลทั่วไปของบริษัท <i>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ ไฟล์ pdf ขนาดไม่เกิน 2 MB)</i><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm " data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																	</div>
+																	
+																</div>
+															</div>			
+															<div class="row">	
+																<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">	
+																	<div class="table-responsive">
+																		<table class="table table-striped table-bordered">
+																			<thead>
+																				<tr class="bg-info">
+																					<th>เอกสารแนบ</th>                                                                                  
+																					<th style="width:200px">เพิ่มเติม</th>
+																				</tr>
+																			</thead>
+																			<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
+																				@foreach ($fulltbpcompanyprofileattachments->reverse() as $fulltbpcompanyprofileattachment)
+																					<tr >                                        
+																						<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
+																						<td> 
+																							<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																							<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+																						</td>
+																					</tr>
+																				@endforeach                            
+																			</tbody>
+																		</table>
+																	</div>
+																</div>      
+															</div>
+	
+														</div>
+
+												
 														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลนักวิจัย<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<label for=""><strong>1.10 - 1.11) ข้อมูลผู้บริหารระดับสูง (CEO, CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</strong><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnaddboard"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<div class="table-responsive">
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th style="width:25%">ชื่อ-สกุล</th>  
+																			<th style="width:25%">ชื่อ-นามสกุล</th>  
 																			<th style="width:19%">ตำแหน่ง</th>                                                                                    
 																			<th style="width:5%">โทรศัพท์</th>       
 																			<th style="width:5%">โทรศัพท์มือถือ</th>  
 																			<th style="width:8%">อีเมล</th>
-																			<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>     
+																			<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
-																	<tbody id="fulltbp_researcher_wrapper_tr">    
-																		@foreach ($companyemploys->where('employ_position_id',6)->reverse() as $companyemploy)
-																			<tr >                                        
-																				<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
-																				<td> {{$companyemploy->employposition->name}} </td> 
-																				<td> {{$companyemploy->phone}} </td>                                            
-																				<td> {{$companyemploy->workphone}} </td> 
-																				<td> {{$companyemploy->email}} </td> 
-																				<td class="hiddenelement">  
-																					{{-- <a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> --}}
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy_research">ลบ</a> 
-																				</td> 
-																			</tr>
-																		@endforeach                            
-																	</tbody>
-																</table>
-															</div>
-														</div>
-														
-														<div class="col-md-12 mt-3">	
-															<label for="">ข้อมูลทีมงานในโครงการ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddprojectmember"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
-																	<thead>
-																		<tr class="bg-info">
-																			<th style="width:25%">ชื่อ-สกุล</th>  
-																			<th style="width:20%">ตำแหน่ง</th>                                                                                    
-																			<th style="width:10%">โทรศัพท์</th>       
-																			<th style="width:10%">โทรศัพท์มือถือ</th>  
-																			<th style="width:10%">อีเมล</th>
-																			<th class="hiddenelement" style="width:15%">เพิ่มเติม</th>     
-																		</tr>
-																	</thead>
-																	<tbody id="fulltbp_projectmember_wrapper_tr">    
-																		@foreach ($companyemploys->where('employ_position_id','>',6)->reverse() as $companyemploy)
+																	<tbody id="fulltbp_companyemploy_wrapper_tr">    
+																		@foreach ($companyemploys->where('employ_position_id','<=',5) as $companyemploy)
 																			<tr >                                        
 																				<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
 																				<td> {{$companyemploy->employposition->name}} </td> 
@@ -1780,7 +1664,7 @@
 																				<td> {{$companyemploy->email}} </td> 
 																				<td class="hiddenelement"> 
 																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-warning hiddenelement deletecompanyemploy_projectmember">ลบ</a> 
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy">ลบ</a> 
 																				</td> 
 																			</tr>
 																		@endforeach                            
@@ -1788,80 +1672,183 @@
 																</table>
 															</div>
 														</div>
-													<br>
-														<legend class="mt-2"><label for=""><strong>ข้อมูลผู้รับผิดชอบหลักในโครงการ</strong> </label></legend>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label>คำนำหน้าชื่อ</label>
-																<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
-																	@foreach ($prefixes as $prefix)
-																		<option value="{{$prefix->id}}" 
-																			@if ($prefix->id == @$fulltbp->fulltbpresponsibleperson->prefix_id) selected @endif >{{$prefix->name}}</option> 
-																	@endforeach
-																</select>
+													
+														{{-- <div class="row"> --}}
+															<div class="col-md-12 mt-3">	
+																<label for=""><strong>1.12) บัญชีรายชื่อผู้ถือหุ้น</strong><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnstckholder" data-id="{{$company->id}}"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>ชื่อ-นามสกุล</th>  
+																				<th>ความสัมพันธ์กับ CEO</th>
+																				<th class="hiddenelement" style="width:200px">เพิ่มเติม</th>    
+																			</tr>
+																		</thead>
+																		<tbody id="fulltbp_companystockholder_wrapper_tr">    
+																			@foreach ($companystockholders->reverse() as $companystockholder)
+																				<tr >                                        
+																					<td> {{$companystockholder->name}}</td> 
+																					<td> {{$companystockholder->ceorelation}} </td> 
+																					<td class="hiddenelement"> <a type="button" data-id="{{$companystockholder->id}}" class="btn btn-sm bg-danger hiddenelement deletestockholder">ลบ</a> </td> 
+																				</tr>
+																			@endforeach                            
+																		</tbody>
+																	</table>
+																</div>
 															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label>ชื่อ</label>
-																<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name ?? Auth::user()->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat20"  required>
+														{{-- </div> --}}
+														
+														{{-- <div class="row"> --}}
+															<div class="col-md-12 mt-3">	
+																<label for=""><strong>1.13) ข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</strong><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th style="width:25%">ชื่อ-นามสกุล</th>  
+																				<th style="width:19%">ตำแหน่ง</th>                                                                                    
+																				<th style="width:5%">โทรศัพท์</th>       
+																				<th style="width:5%">โทรศัพท์มือถือ</th>  
+																				<th style="width:8%">อีเมล</th>
+																				<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>     
+																			</tr>
+																		</thead>
+																		<tbody id="fulltbp_researcher_wrapper_tr">    
+																			@foreach ($companyemploys->where('employ_position_id',6)->reverse() as $companyemploy)
+																				<tr >                                        
+																					<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
+																					<td> {{$companyemploy->employposition->name}} </td> 
+																					<td> {{$companyemploy->phone}} </td>                                            
+																					<td> {{$companyemploy->workphone}} </td> 
+																					<td> {{$companyemploy->email}} </td> 
+																					<td class="hiddenelement">  
+																						{{-- <a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> --}}
+																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
+																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
+																					</td> 
+																				</tr>
+																			@endforeach                            
+																		</tbody>
+																	</table>
+																</div>
 															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label>นามสกุล</label>
-																<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname ?? Auth::user()->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" required>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label>อีเมล</label>
-																<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat30" required>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label>ตำแหน่ง</label>
-																<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->position}}" placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat20" required>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label>โทรศัพท์</label>
-																<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1 ?? Auth::user()->phone}}" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone" required>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label>โทรศัพท์มือถือ</label>
-																<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2 ?? Auth::user()->phone}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone" required>
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="form-group">
-																<label>ประวัติการศึกษา</label>
-																<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->educationhistory!!}</textarea>
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="form-group">
-																<label>ประสบการณ์การทำงาน</label>
-																<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->experiencehistory!!}</textarea>
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="form-group">
-																<label>ประวัติการฝึกอบรม</label>
+															
+															{{-- <div class="col-md-12 mt-3">	
+																<label for="">ข้อมูลทีมงานในโครงการ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddprojectmember"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th style="width:25%">ชื่อ-นามสกุล</th>  
+																				<th style="width:20%">ตำแหน่ง</th>                                                                                    
+																				<th style="width:10%">โทรศัพท์</th>       
+																				<th style="width:10%">โทรศัพท์มือถือ</th>  
+																				<th style="width:10%">อีเมล</th>
+																				<th class="hiddenelement" style="width:15%">เพิ่มเติม</th>     
+																			</tr>
+																		</thead>
+																		<tbody id="fulltbp_projectmember_wrapper_tr">    
+																			@foreach ($companyemploys->where('employ_position_id','>',6)->reverse() as $companyemploy)
+																				<tr >                                        
+																					<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
+																					<td> {{$companyemploy->employposition->name}} </td> 
+																					<td> {{$companyemploy->phone}} </td>                                            
+																					<td> {{$companyemploy->workphone}} </td> 
+																					<td> {{$companyemploy->email}} </td> 
+																					<td class="hiddenelement"> 
+																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
+																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_projectmember">ลบ</a> 
+																					</td> 
+																				</tr>
+																			@endforeach                            
+																		</tbody>
+																	</table>
+																</div>
+															</div> --}}
+														{{-- <br>
+															<legend class="mt-2"><label for=""><strong>ข้อมูลผู้รับผิดชอบหลักในโครงการ</strong> </label></legend> --}}
+															
+															<div class="col-md-12 mt-3">
 																
-																<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->traininghistory!!}</textarea>
+																<div class="form-group">
+																	<label for=""><strong>1.14) ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong> </label>
+																</div>
 															</div>
-														</div>
-													{{-- </div> --}}
+															<div class="col-md-6">
+																
+																<div class="form-group">
+																	<label>คำนำหน้าชื่อ</label>
+																	<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
+																		@foreach ($prefixes as $prefix)
+																			<option value="{{$prefix->id}}" 
+																				@if ($prefix->id == @$fulltbp->fulltbpresponsibleperson->prefix_id) selected @endif >{{$prefix->name}}</option> 
+																		@endforeach
+																	</select>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>ชื่อ</label>
+																	<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name ?? Auth::user()->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat20"  required>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>นามสกุล</label>
+																	<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname ?? Auth::user()->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" required>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>อีเมล</label>
+																	<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat30" required>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>ตำแหน่ง</label>
+																	<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->position}}" placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat20" required>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>โทรศัพท์</label>
+																	<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1 ?? Auth::user()->phone}}" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone" required>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>โทรศัพท์มือถือ</label>
+																	<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2 ?? Auth::user()->phone}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone" required>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label>ประวัติการศึกษา</label>
+																	<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->educationhistory!!}</textarea>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label>ประสบการณ์การทำงาน</label>
+																	<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->experiencehistory!!}</textarea>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label>ประวัติการฝึกอบรม</label>
+																	
+																	<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->traininghistory!!}</textarea>
+																</div>
+															</div>
+													</div>
+													
 												</div>
 											</div>
+										<!-- /striped rows -->
 										</div>
 									</div>
-		
 								
 								</div>
 								<!-- /accordion group -->
@@ -1871,265 +1858,210 @@
 
 							
 
-							<h6>ภาพรวมโครงการที่ขอรับประเมิน</h6>
+							<h6>2. ภาพรวมโครงการที่ขอรับประเมิน</h6>
 							<fieldset>
 							
 									<div id="accordion-group">
-										<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
-											<div class="card-header">
-												<h6 class="card-title">
-													{{-- <a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.1 ข้อมูลทั่วไป</a> --}}
-													<a data-action="collapse" data-toggle="collapse" >2.1 ข้อมูลทั่วไป</a>
-												</h6>
-											</div>
 
-											<div id="accordion-item-group1" class="collapse" data-parent="#accordion-group">
-												<div class="card-body">
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="">ชื่อโครงการ<span class="text-danger">*</span></label>
-																<input type="text"  value="{{$minitbp->project}}" class="form-control form-control-lg" disabled>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="">ชื่อโครงการ (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-																<input type="text" value="{{$minitbp->projecteng}}" class="form-control form-control-lg" disabled>
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="form-group">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="card card-body border-top-info-400">
+													<div class="card-body">
+														<div class="row">
+															<div class="col-md-6">
 																<div class="form-group">
-																	<label for="">บทคัดย่อ </label> <span class="text-primary" id="projectabtracttextlength"></span>
-																	<p><small><i>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและสังคม</i> </small></p>
+																	<label for=""><strong>2.1) ชื่อโครงการ</strong></label>
+																	<input type="text"  value="{{$minitbp->project}}" class="form-control form-control-lg" disabled>
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for=""><strong>2.2) ชื่อโครงการ (ภาษาอังกฤษ)</strong></label>
+																	<input type="text" value="{{$minitbp->projecteng}}" class="form-control form-control-lg" disabled>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<div class="form-group">
+																		<label for=""><strong>2.3) บทคัดย่อโครงการ </strong></label> <span class="text-primary" id="projectabtracttextlength"></span>
+																		<p>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและสังคม</p>
+																		
+																		{{-- <input type="text" id="projectabtract_input" class="form-control form-control-lg projectabtractclass" > --}}
+																		<textarea name="" id="projectabtract_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
+																	</div>
+																	{{-- <div id="fulltbp_projectabtract_wrapper" style="border: dashed 1px #999999">
+																		@foreach ($fulltbpprojectabtractdetails as $fulltbpprojectabtractdetail)
+																			<input type="text" name ="projectabtract[]" value="{{$fulltbpprojectabtractdetail->line}}" class="form-control form-control-lg projectabtractclass" style="border: 0" >
+																		@endforeach
+																	</div>
+																	<div class="row">
+																		<div class="col-md-12">	
+																			<div class="form-group">
+																				<br>
+																				<button type="button" id="btnaddprojectabtract" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกบทคัดย่อ</button>
+																			</div>
+																		</div>
+																	</div> --}}
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ</strong> </label>
+																	<p>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</p>
+																	<textarea name="" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
+																
+																</div>
+
+	
+															</div>
+	
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ</strong> </label> <span class="text-primary" id="productdetailstextlength"></span>
+																	<p>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</p>
+																	<textarea name="" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																	
-																	{{-- <input type="text" id="projectabtract_input" class="form-control form-control-lg projectabtractclass" > --}}
-																	<textarea name="" id="projectabtract_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
 																</div>
-																{{-- <div id="fulltbp_projectabtract_wrapper" style="border: dashed 1px #999999">
-																	@foreach ($fulltbpprojectabtractdetails as $fulltbpprojectabtractdetail)
-																		<input type="text" name ="projectabtract[]" value="{{$fulltbpprojectabtractdetail->line}}" class="form-control form-control-lg projectabtractclass" style="border: 0" >
-																	@endforeach
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label for=""><strong><u>2.6) ข้อมูลเทคโนโลยี</u></strong></label>
 																</div>
-																<div class="row">
-																	<div class="col-md-12">	
-																		<div class="form-group">
-																			<br>
-																			<button type="button" id="btnaddprojectabtract" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกบทคัดย่อ</button>
-																		</div>
-																	</div>
-																</div> --}}
 															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="form-group">
-																<label for="">ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ </label>
-																<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
-																<textarea name="" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
-																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
-															</div>
-															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
-																@foreach ($fulltbpproductdetails as $fulltbpproductdetail)
-																	<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control form-control-lg productdetailsclass" style="border: 0" >
-																@endforeach
-															</div>
-															<div class="row">
-																<div class="col-md-12">	
-																	<div class="form-group">
-																		<br>
-																		<button type="button" id="btnaddproductdetails" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกจุดเด่นผลิตภัณฑ์หลัก</button>
-																	</div>
+
+															<div class="col-md-12" >
+																<div class="form-group">
+																	<label for=""><strong>2.6.1) การพัฒนาเทคโนโลยี</strong></label> <span class="text-primary" id="projectechdevtextlength"></span>
+																	<p>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</p>
+																	<textarea name="" id="projectechdev_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
 																</div>
-															</div> --}}
-
-														</div>
-
-														<div class="col-md-12">
-															<div class="form-group">
-																<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
-																<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i> </small></p>
-																<textarea name="" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
-																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
 															</div>
-															{{-- <div id="fulltbp_productdetails_wrapper" style="border: dashed 1px #999999">
-																@foreach ($fulltbpproductdetails as $fulltbpproductdetail)
-																	<input type="text" name ="productdetails[]" value="{{$fulltbpproductdetail->line}}" class="form-control form-control-lg productdetailsclass" style="border: 0" >
-																@endforeach
-															</div>
-															<div class="row">
-																<div class="col-md-12">	
-																	<div class="form-group">
-																		<br>
-																		<button type="button" id="btnaddproductdetails" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกจุดเด่นผลิตภัณฑ์หลัก</button>
-																	</div>
+															<div class="col-md-12">
+																<div class="form-group">	
+																	<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์ <i>(ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน (เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ)</i><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	
 																</div>
-															</div> --}}
-
-														</div>
-
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="card mb-0 rounded-0 border-y-0">
-											<div class="card-header">
-												<h6 class="card-title">
-													{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.2 ข้อมูลเทคโนโลยี</a> --}}
-													<a data-action="collapse" data-toggle="collapse" >2.2 ข้อมูลเทคโนโลยี</a>
-												</h6>
-											</div>
-
-											<div id="accordion-item-group2" class="collapse" data-parent="#accordion-group">
-												<div class="card-body">
-													<div class="row">
-														<div class="col-md-12">
-															<div class="form-group">
-																<label for="">การพัฒนาเทคโนโลยี</label> <span class="text-primary" id="projectechdevtextlength"></span>
-																<p><small><i>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</i> </small></p>
-																<textarea name="" id="projectechdev_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
-															</div>
-														</div>
-														<div class="col-md-12">
-															<div class="form-group">	
-																<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน (เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
-															</div>
-															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
-																	<thead>
-																		<tr class="bg-info">
-																			<th>รายการ</th>  
-																			<th>เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
-																			<th>เทคโนโลยีในโครงการ</th>
-																			<th>เพิ่มเติม</th>    
-																		</tr>
-																	</thead>
-																	<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
-																		@foreach ($fulltbpprojecttechdevlevels->reverse() as $fulltbpprojecttechdevlevel)
-																			<tr >                                        
-																				<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
-																				<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
-																				<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
-																				<td> <a type="button" data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-warning hiddenelement deleteprojectechdevlevel">ลบ</a> </td> 
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>รายการ</th>  
+																				<th>เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
+																				<th>เทคโนโลยีในโครงการ</th>
+																				<th>เพิ่มเติม</th>    
 																			</tr>
-																		@endforeach                            
-																	</tbody>
-																</table>
-															</div>
-															<br>
-														</div>
-														<div class="col-md-12">
-															<div class="form-group">
-																<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
-																<p><small><i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i> </small></p>
-																<textarea name="" id="projectechdevproblem_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
-																{{-- <input type="text" id="projectechdevproblem_input" class="form-control form-control-lg projectechdevproblemclass" > --}}
-															</div>
-															{{-- <div id="fulltbp_projectechdevproblem_wrapper" style="border: dashed 1px #999999">
-																@foreach ($fulltbpprojecttechdevproblems as $fulltbpprojecttechdevproblem)
-																	<input type="text" name ="projectechdevproblem[]" value="{{$fulltbpprojecttechdevproblem->line}}" class="form-control form-control-lg projectechdevproblemclass" style="border: 0" >
-																@endforeach
-															</div>
-															<div class="row">
-																<div class="col-md-12">	
-																	<div class="form-group">
-																		<br>
-																		<button type="button" id="btnaddprojectechdevproblem" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกอุปสรรคความเสี่ยง</button>
-																	</div>
+																		</thead>
+																		<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
+																			@foreach ($fulltbpprojecttechdevlevels->reverse() as $fulltbpprojecttechdevlevel)
+																				<tr >                                        
+																					<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
+																					<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
+																					<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
+																					<td> <a type="button" data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-danger hiddenelement deleteprojectechdevlevel">ลบ</a> </td> 
+																				</tr>
+																			@endforeach                            
+																		</tbody>
+																	</table>
 																</div>
-															</div>	 --}}
-														</div>
-														<legend><label for=""><strong>การจัดการด้านทรัพย์สินทางปัญญา</strong> </label></legend>
-														<div class="col-md-12">
-															<div class="form-group mb-3 mb-md-2">
-																<label class="font-weight-semibold"><u>สิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</u></label>
-																<div class="row">
-																	<div class="col-md-4">
-																		<div class="form-check">
-																			<label class="form-check-label">
-																				<input type="checkbox" id="cer1" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer1)) checked @endif data-fouc >
-																				ได้รับการจดสิทธิบัตรการประดิษฐ์
-																			</label>
-																			<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
-																				<div class="col-md-9">
-																					<div class="form-group">
-																						<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer1_qty}}">
+																<br>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี (<i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i>)</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
+																	<textarea name="" id="projectechdevproblem_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
+																
+																</div>
+															</div>
+															<div class="col-md-12">
+																<label for=""><strong>2.6.2) การจัดการด้านทรัพย์สินทางปัญญา</strong> </label>
+																<div class="form-group mb-3 mb-md-2">
+																	<label class="font-weight-semibold"><u>สิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</u></label>
+																	<div class="row">
+																		<div class="col-md-4">
+																			<div class="form-check">
+																				<label class="form-check-label">
+																					<input type="checkbox" id="cer1" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer1)) checked @endif data-fouc >
+																					ได้รับการจดสิทธิบัตรการประดิษฐ์
+																				</label>
+																				<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer1_qty}}">
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+							
+																			<div class="form-check">
+																				<label class="form-check-label">
+																					<input type="checkbox" id="cer2" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer2)) checked @endif data-fouc >
+																					ยื่นจดสิทธิบัตรการประดิษฐ์
+																				</label>
+																				<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer2_qty}}">
+																						</div>
 																					</div>
 																				</div>
 																			</div>
 																		</div>
-						
-																		<div class="form-check">
-																			<label class="form-check-label">
-																				<input type="checkbox" id="cer2" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer2)) checked @endif data-fouc >
-																				ยื่นจดสิทธิบัตรการประดิษฐ์
-																			</label>
-																			<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
-																				<div class="col-md-9">
-																					<div class="form-group">
-																						<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer2_qty}}">
+							
+																		<div class="col-md-4">
+																			<div class="form-check">
+																				<label class="form-check-label">
+																					<input type="checkbox" id="cer3" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer3)) checked @endif data-fouc >
+																					ได้รับการจดสิทธิบัตรการออกแบบ
+																				</label>
+																				<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer3_qty}}">
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+							
+																			<div class="form-check">
+																				<label class="form-check-label">
+																					<input type="checkbox" id="cer4" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer4)) checked @endif data-fouc >
+																					ยื่นจดสิทธิบัตรการออกแบบ
+																				</label>
+																				<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer4_qty}}">
+																						</div>
 																					</div>
 																				</div>
 																			</div>
 																		</div>
-																	</div>
-						
-																	<div class="col-md-4">
-																		<div class="form-check">
-																			<label class="form-check-label">
-																				<input type="checkbox" id="cer3" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer3)) checked @endif data-fouc >
-																				ได้รับการจดสิทธิบัตรการออกแบบ
-																			</label>
-																			<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
-																				<div class="col-md-9">
-																					<div class="form-group">
-																						<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer3_qty}}">
+				
+																		<div class="col-md-4">
+																			<div class="form-check">
+																				<label class="form-check-label">
+																					<input type="checkbox" id="cer5" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer5)) checked @endif data-fouc >
+																					ได้รับการจดอนุสิทธิบัตร
+																				</label>
+																				<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer5_qty}}">
+																						</div>
 																					</div>
 																				</div>
 																			</div>
-																		</div>
-						
-																		<div class="form-check">
-																			<label class="form-check-label">
-																				<input type="checkbox" id="cer4" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer4)) checked @endif data-fouc >
-																				ยื่นจดสิทธิบัตรการออกแบบ
-																			</label>
-																			<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
-																				<div class="col-md-9">
-																					<div class="form-group">
-																						<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer4_qty}}">
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-			
-																	<div class="col-md-4">
-																		<div class="form-check">
-																			<label class="form-check-label">
-																				<input type="checkbox" id="cer5" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer5)) checked @endif data-fouc >
-																				ได้รับการจดอนุสิทธิบัตร
-																			</label>
-																			<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
-																				<div class="col-md-9">
-																					<div class="form-group">
-																						<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer5_qty}}">
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-						
-																		<div class="form-check">
-																			<label class="form-check-label">
-																				<input type="checkbox" id="cer6" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer6)) checked @endif data-fouc >
-																				ยื่นจดอนุสิทธิบัตร
-																			</label>
-																			<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
-																				<div class="col-md-9">
-																					<div class="form-group">
-																						<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer6_qty}}">
+							
+																			<div class="form-check">
+																				<label class="form-check-label">
+																					<input type="checkbox" id="cer6" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer6)) checked @endif data-fouc >
+																					ยื่นจดอนุสิทธิบัตร
+																				</label>
+																				<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
+																					<div class="col-md-9">
+																						<div class="form-group">
+																							<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer6_qty}}">
+																						</div>
 																					</div>
 																				</div>
 																			</div>
@@ -2137,12 +2069,7 @@
 																	</div>
 																</div>
 															</div>
-														</div>
-														
-														<div class="col-md-12">
-															<br>
-															{{-- <hr> --}}
-															<div class="form-group mb-3 mb-md-2">
+															<div class="col-md-12">
 																<label class="font-weight-semibold"><u>ลิขสิทธิ์/เครื่องหมายการค้า</u></label>
 																<div class="row">
 																	<div class="col-md-4">
@@ -2213,62 +2140,50 @@
 																			</div>
 																		</div>
 																	</div>
+																	<div class="col-md-12 mt-4">	
+																		<div class="form-group">												
+																			<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_certify"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																		</div>
+																	</div>
+																	<div class="col-md-12" id="fulltbp_certify_wrapper" >	
+																	</div>
+																															
+																	<div class="col-md-12">	
+																		<div class="table-responsive">
+																			<table class="table table-striped table-bordered">
+																				<thead>
+																					<tr class="bg-info">
+																						<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
+																						<th style="width:200px">ดาวน์โหลด</th>
+																					</tr>
+																				</thead>
+																				<tbody id="fulltbp_certify_wrapper_tr">    
+																					@foreach ($fulltbpprojectcertifyattachments->reverse() as $fulltbpprojectcertifyattachment)
+																						<tr >                                        
+																							<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
+																							<td> 
+																								<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																								<a type="button" data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcertifyattachment">ลบ</a>                                       
+																							</td>
+																						</tr>
+																					@endforeach                            
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>  
 																</div>
 															</div>
-															
-																<div class="col-md-12 mt-4">	
-																	<div class="form-group">												
-																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_certify"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
-																	</div>
+															<div class="col-md-12 mt-3">
+																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> </label>
+																<div class="form-group">
+																	<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
 																	
+																	<textarea name="" id="projectinnovation_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
+																</div>	
+																<div class="form-group">												
+																	<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																</div>
-															
-															
-																<div class="col-md-12" id="fulltbp_certify_wrapper" >	
-																</div>
-															{{-- </div> --}}
-															{{-- <div class="row"> --}}
-																<div class="col-md-12">	
-																	<div class="table-responsive">
-																		<table class="table table-striped table-bordered">
-																			<thead>
-																				<tr class="bg-info">
-																					<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
-																					<th style="width:200px">ดาวน์โหลด</th>
-																				</tr>
-																			</thead>
-																			<tbody id="fulltbp_certify_wrapper_tr">    
-																				@foreach ($fulltbpprojectcertifyattachments->reverse() as $fulltbpprojectcertifyattachment)
-																					<tr >                                        
-																						<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
-																						<td> 
-																							<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-																							<a type="button" data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcertifyattachment">ลบ</a>                                       
-																						</td>
-																					</tr>
-																				@endforeach                            
-																			</tbody>
-																		</table>
-																	</div>
-																</div>      
-															{{-- </div> --}}
-
-															<br>
-															<legend><label for=""><strong>รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> </label></legend>
-															
-																<div class="col-md-12">
-																	<div class="form-group">
-																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
-																		<p><small><i>เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</i> </small></p>
-																		<textarea name="" id="projectinnovation_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
-																	</div>	
-																	<div class="form-group">												
-																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_award"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
-																	</div>
-																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
-																</div>
-																<div class="col-md-12" id="fulltbp_award_wrapper" >	
-																</div>
+																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award"/>
 																<div class="col-md-12">	
 																	<div class="table-responsive">
 																		<table class="table table-striped table-bordered">
@@ -2291,32 +2206,22 @@
 																			</tbody>
 																		</table>
 																	</div>
-																</div>      
-															{{-- </div> --}}
-
-															<br>
-															<legend><label for=""><strong>ใบรับรองมาตรฐานต่างๆ ที่ได้รับ</strong> </label></legend>
-
-															<div class="row">
-																<div class="col-md-12">	
-																	<div class="form-group">
-																		<label for="">ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
-																		<p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p>
-																		<textarea name="" id="projectstandard_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
-																	</div>	
-																	<div class="form-group">												
-																		
-																		<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
-																		
-																	</div>
-																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
+																</div>  
+															</div>
+															<div class="col-md-12 mt-3">	
+																<label for=""><strong>2.6.4) ใบรับรองมาตรฐานต่างๆ ที่ได้รับ ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</strong> </label><span class="text-primary" id="projectechdevproblemtextlength"></span>
+																<div class="form-group">
+																	
+																	<textarea name="" id="projectstandard_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
+																</div>	
+																<div class="form-group">												
+																	
+																	<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																	
 																</div>
-															</div>																								
-															<div class="row">	
+																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
 																<div class="col-md-12" id="fulltbp_standard_wrapper" >	
 																</div>
-															</div>
-															<div class="row">
 																<div class="col-md-12">	
 																	<div class="table-responsive">
 																		<table class="table table-striped table-bordered">
@@ -2339,124 +2244,112 @@
 																			</tbody>
 																		</table>
 																	</div>
-																</div>      
+																</div> 
 															</div>
 
 
-
-
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="card rounded-top-0">
-											<div class="card-header">
-												<h6 class="card-title">
-													{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.3 แผนการดำเนินงาน (Gantt Chart)</a> --}}
-													<a data-action="collapse" data-toggle="collapse" >2.3 แผนการดำเนินงาน (Gantt Chart)</a>
-												</h6>
-											</div>
-
-											<div id="accordion-item-group3" class="collapse" data-parent="#accordion-group">
-												<div class="card-body">
-													<div class="row">
-														<div class="col-md-6">	
-															<div class="form-group">
-																<label for="">ปีที่เริ่มดำเนินงาน<span class="text-danger">*</span></label>
-																@php
-																	$currentyear = date('Y')+543;
-																@endphp
-																<select name="ganttyear" id="ganttyear" class="form-control form-control-lg form-control-select2">
-																	@for ($i = -2; $i <= 2; $i++)
-																	<option value="{{$currentyear + $i}}" @if (($currentyear + $i) == $fulltbpgantt->startyear) selected @endif >{{$currentyear + $i}}</option>
-																	@endfor
-																</select>
-															</div>
-														</div>
-														
-														<div class="col-md-6">	
-															<div class="form-group">
-																<label for="">จำนวนเดือนที่ดำเนินงาน<span class="text-danger">*</span></label>
-																<input type="text" id="ganttnummonth" value="{{$fulltbpgantt->numofmonth}}" class="form-control form-control-lg numeralformat2">
-															</div>
-														</div>
-														<div class="col-md-12">	
-															<div class="form-group">	
-																<button type="button" id ="btn_add_projectplan" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่มรายละเอียด</button>
-															</div>
-														</div>
-														<div class="col-md-12">			
-															<table class="table-bordered" style="width: 100%" id="table_gantt_wrapper">
-																<thead>
-																	<tr>
-																		<tr>
-																			<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
-																			@foreach ($allyears as $key => $item)
-																				@if ($item != 0)
-																					<th colspan="{{$item}}" class="text-center">ปี {{$fulltbpgantt->startyear + $key}} </th> 
-																				@endif
-																			@endforeach
-																			<th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th> 
-																		</tr>
-																		@if ($minmonth != 0 && $maxmonth !=0)
-																			<tr >
-																				@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																					<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">{{$i}}</th>
+															<div class="col-md-12 mt-3">	
+																<label for=""><strong>2.7) แผนการดำเนินงาน (Gantt Chart)</strong> </label><span class="text-primary" id="projectechdevproblemtextlength"></span>
+																<div class="row">
+																	<div class="col-md-6">	
+																		<div class="form-group">
+																			<label for="">ปีที่เริ่มดำเนินงาน<span class="text-danger">*</span></label>
+																			@php
+																				$currentyear = date('Y')+543;
+																			@endphp
+																			<select name="ganttyear" id="ganttyear" class="form-control form-control-lg form-control-select2">
+																				@for ($i = -2; $i <= 2; $i++)
+																				<option value="{{$currentyear + $i}}" @if (($currentyear + $i) == $fulltbpgantt->startyear) selected @endif >{{$currentyear + $i}}</option>
 																				@endfor
-																			</tr>
-																		@endif
-																	</tr>
-																</thead>
-																
-																<tbody >    
-																	@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
-																		<tr >                                        
-																			<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}} </td> 
-																			@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																				@php
-																					$color = 'white';
-																					$check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
-																					if (!Empty($check)) {
-																						$color = 'grey';
-																					}
-																				@endphp
-																				<td style="background-color:{{$color}};width: 40px !important;font-size:12px;padding:5px"></td> 
-																			@endfor															
-																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a> 
-																			</td> 
-																		</tr>
-																	@endforeach                            
-																</tbody>
-															</table>
+																			</select>
+																		</div>
+																	</div>
+																	
+																	<div class="col-md-6">	
+																		<div class="form-group">
+																			<label for="">จำนวนเดือนที่ดำเนินงาน<span class="text-danger">*</span></label>
+																			<input type="text" id="ganttnummonth" value="{{$fulltbpgantt->numofmonth}}" class="form-control form-control-lg numeralformat2">
+																		</div>
+																	</div>
+																	<div class="col-md-12">	
+																		<div class="form-group">	
+																			<button type="button" id ="btn_add_projectplan" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่มรายละเอียด</button>
+																		</div>
+																	</div>
+																	<div class="col-md-12">			
+																		<table class="table-bordered" style="width: 100%" id="table_gantt_wrapper">
+																			<thead>
+																				<tr>
+																					<tr>
+																						<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+																						@foreach ($allyears as $key => $item)
+																							@if ($item != 0)
+																								<th colspan="{{$item}}" class="text-center">ปี {{$fulltbpgantt->startyear + $key}} </th> 
+																							@endif
+																						@endforeach
+																						<th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th> 
+																					</tr>
+																					@if ($minmonth != 0 && $maxmonth !=0)
+																						<tr >
+																							@for ($i = $minmonth; $i <= $maxmonth; $i++)
+																								<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">{{$i}}</th>
+																							@endfor
+																						</tr>
+																					@endif
+																				</tr>
+																			</thead>
+																			
+																			<tbody >    
+																				@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+																					<tr >                                        
+																						<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}} </td> 
+																						@for ($i = $minmonth; $i <= $maxmonth; $i++)
+																							@php
+																								$color = 'white';
+																								$check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+																								if (!Empty($check)) {
+																									$color = 'grey';
+																								}
+																							@endphp
+																							<td style="background-color:{{$color}};width: 40px !important;font-size:12px;padding:5px"></td> 
+																						@endfor															
+																						<td class="hiddenelement"> 
+																							<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+																							<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a> 
+																						</td> 
+																					</tr>
+																				@endforeach                            
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															
+															</div>
+
 														</div>
 													</div>
 												</div>
+											<!-- /striped rows -->
 											</div>
 										</div>
+
+
 									</div>
 									<!-- /accordion group -->
-			
-
 							</fieldset>
 
-							<h6>ความเป็นไปได้ด้านการตลาดแผนสู่เชิงพาณิชย์</h6>
+							<h6>3. ความเป็นไปได้ด้านการตลาดแผนสู่เชิงพาณิชย์</h6>
 							<fieldset>
 								<div id="accordion-group">
-									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
-										<div class="card-header">
-											<h6 class="card-title">
-												{{-- <a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.1 ข้อมูลด้านการตลาด</a> --}}
-												<a data-action="collapse" data-toggle="collapse" >3.1 ข้อมูลด้านการตลาด</a>
-											</h6>
-										</div>
-
-										<div id="accordion-item-group1" class="collapse" data-parent="#accordion-group">
-											<div class="card-body">
-												<div class="row">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card border-top-info rounded-top-1 mb-0 mb-3">
+												<div class="card-body">
+													<div class="col-md-12">	
+														<div class="form-group">
+															<label for=""><strong>3.1) ข้อมูลด้านการตลาด</strong></label>
+														</div>
+													</div>
 													<div class="col-md-12">	
 														<div class="form-group">
 															<label for=""><u>Market Analysis</u> </label>
@@ -2471,7 +2364,6 @@
 															<textarea name="" id="analysis" class="form-control form-control-lg summernoteelement" cols="3" rows="10">{!!@$fulltbp->fulltbpmarketanalysis->detail!!}</textarea>
 														</div>
 													</div>
-
 													<div class="col-md-12">	
 														<div class="form-group">
 															<label for=""><u>Business Model Canvas</u></label>
@@ -2549,7 +2441,157 @@
 																		</tbody>
 																	</table>
 																</div>
-															</div>      
+															</div>  
+															
+															<div class="col-md-12 mt-3">	
+																<label for=""><strong>3.2) ข้อมูลยอดขายของบริษัท</strong> </label>
+															</div>
+															
+															<div class="col-md-12">	
+																<div class="form-group">	
+																	<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
+																</div>
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
+																				<th class="text-center hiddenelement" style="width: 10%">เพิ่มเติม</th>    
+																			</tr>
+																		</thead>
+																		<tbody id="fulltbp_sell_wrapper_tr">    
+																			@foreach ($fulltbpsells->reverse() as $fulltbpsell)
+																				<tr>                                        
+																					<td> {{$fulltbpsell->name}}</td> 
+																					<td class="text-right"> {{number_format($fulltbpsell->present, 2)}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpsell->past1, 2)}}</td> 
+																					<td class="text-right"> {{number_format($fulltbpsell->past2, 2)}}</td>                                            															
+																					<td class="text-right"> {{number_format($fulltbpsell->past3, 2)}}</td> 
+																					<td class="hiddenelement"> 
+																						<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
+																						<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning hiddenelement deletesell">ลบ</a> 
+																					</td> 
+																				</tr>
+																			@endforeach                            
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															
+															<div class="col-md-12 mt-4">
+																<label for=""><u>(สถานะยอดขาย 3 ปีย้อนหลัง)</u> </label>
+																<small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr  class="bg-info">
+																				<th>ประเภทยอดขาย</th>  
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
+																				<th class="hiddenelement" style="width: 10%">เพิ่มเติม</th>    
+																			</tr>
+																		</thead>
+																		<tbody id="fulltbp_sellstatus_wrapper_tr">    
+																			@foreach ($fulltbpsellstatuses as $fulltbpsellstatus)
+																				<tr >                                        
+																					<td> {{$fulltbpsellstatus->name}}</td> 
+																					<td class="text-right"> {{number_format($fulltbpsellstatus->present, 2)}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpsellstatus->past2, 2)}} </td>                                            															
+																					<td class="text-right"> {{number_format($fulltbpsellstatus->past3, 2)}} </td> 
+																					<td class="hiddenelement"> 
+																						<a type="button" data-id="{{$fulltbpsellstatus->id}}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
+																					</td> 
+																				</tr>
+																			@endforeach                            
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															<div class="col-md-12 mt-3">
+																<div class="form-group">
+																	<label for=""><strong>คู่ค้าหลักทางธุรกิจของโครงการ</strong> </label>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group">	
+																	<label for=""><u>ลูกหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	{{-- <p><small><i>ลูกหนี้การค้า</i> </small></p> --}}
+																</div>
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>คู่ค้าหลักของธุรกิจ</th>  
+																				<th>จำนวนผลิตภัณฑ์/โครงการ</th> 
+																				<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
+																				<th>ยอดขายต่อปี (บาท)</th>       
+																				<th>เปรียบเทียบกับยอดขาย (%)</th>  
+																				<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
+																				<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
+																			</tr>
+																		</thead>
+																		<tbody id="fulltbp_debtpartner_wrapper_tr">    
+																			@foreach ($fulltbpdebtpartners->reverse() as $fulltbpdebtpartner)
+																				<tr>
+																					<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
+																					<td class="text-right"> {{$fulltbpdebtpartner->numproject}} </td> 
+																					<td class="text-right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}} </td>                                            															
+																					<td class="text-right"> {{$fulltbpdebtpartner->percenttosale}} </td> 
+																					<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
+																					<td class="hiddenelement"> 
+																						<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
+																						<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletedebtpartner">ลบ</a> 
+																					</td> 
+																				</tr>
+																			@endforeach              
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															<div class="col-md-12 mt-4">
+																<div class="form-group">	
+																	<label for=""><u>เจ้าหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	{{-- <p><small><i>เจ้าหนี้การค้า</i> </small></p> --}}
+																</div>
+																<div class="table-responsive">
+																	<table class="table table-striped table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>คู่ค้าหลักของธุรกิจ</th>  
+																				<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
+																				<th>ยอดซื้อต่อปี (บาท)</th>       
+																				<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
+																				<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
+																				<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
+																			</tr>
+																		</thead>
+																		<tbody id="fulltbp_creditpartner_wrapper_tr">    
+																			@foreach ($fulltbpcreditpartners->reverse() as $fulltbpcreditpartner)
+																				<tr >
+																					<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
+																					<td class="text-right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
+																					<td class="text-right"> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
+																					<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
+																					<td class="hiddenelement"> 
+																						<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
+																						<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletecreditpartner">ลบ</a> 
+																					</td> 
+																				</tr>
+																			@endforeach              
+																		</tbody>
+																	</table>
+																</div>
+															</div>
 														</div>													
 													</div>
 												</div>
@@ -2557,199 +2599,33 @@
 										</div>
 									</div>
 
-									<div class="card mb-0 rounded-0 border-y-0">
-										<div class="card-header">
-											<h6 class="card-title">
-												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.2 ข้อมูลยอดขายของบริษัท</a> --}}
-												<a data-action="collapse" data-toggle="collapse" >3.2 ข้อมูลยอดขายของบริษัท</a>
-											</h6>
-										</div>
 
-										<div id="accordion-item-group2" class="collapse" data-parent="#accordion-group">
-											<div class="card-body">
-												<div class="row">
-													<div class="col-md-12">	
-														<div class="form-group">	
-															<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-															<p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p>
-														</div>
-														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
-																<thead>
-																	<tr class="bg-info">
-																		<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
-																		<th class="text-center hiddenelement" style="width: 10%">เพิ่มเติม</th>    
-																	</tr>
-																</thead>
-																<tbody id="fulltbp_sell_wrapper_tr">    
-																	@foreach ($fulltbpsells->reverse() as $fulltbpsell)
-																		<tr>                                        
-																			<td> {{$fulltbpsell->name}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpsell->present, 2)}} </td> 
-																			<td class="text-right"> {{number_format($fulltbpsell->past1, 2)}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpsell->past2, 2)}}</td>                                            															
-																			<td class="text-right"> {{number_format($fulltbpsell->past3, 2)}}</td> 
-																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning hiddenelement deletesell">ลบ</a> 
-																			</td> 
-																		</tr>
-																	@endforeach                            
-																</tbody>
-															</table>
-														</div>
-													</div>
-													
-													<div class="col-md-12 mt-4">
-														<label for=""><u>(สถานะยอดขาย 3 ปีย้อนหลัง)</u> </label>
-														<small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
-														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
-																<thead>
-																	<tr  class="bg-info">
-																		<th>ประเภทยอดขาย</th>  
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
-																		<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
-																		<th class="hiddenelement" style="width: 10%">เพิ่มเติม</th>    
-																	</tr>
-																</thead>
-																<tbody id="fulltbp_sellstatus_wrapper_tr">    
-																	@foreach ($fulltbpsellstatuses as $fulltbpsellstatus)
-																		<tr >                                        
-																			<td> {{$fulltbpsellstatus->name}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpsellstatus->present, 2)}} </td> 
-																			<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}} </td> 
-																			<td class="text-right"> {{number_format($fulltbpsellstatus->past2, 2)}} </td>                                            															
-																			<td class="text-right"> {{number_format($fulltbpsellstatus->past3, 2)}} </td> 
-																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpsellstatus->id}}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
-																			</td> 
-																		</tr>
-																	@endforeach                            
-																</tbody>
-															</table>
-														</div>
-													</div>
+						
+
 								
-												</div>
-											</div>
-										</div>
-									</div>
 
-									<div class="card rounded-top-0">
-										<div class="card-header">
-											<h6 class="card-title">
-												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.3 ข้อมูลคู่ค้าหลักทางธุรกิจ</a> --}}
-												<a data-action="collapse" data-toggle="collapse" >3.3 ข้อมูลคู่ค้าหลักทางธุรกิจ</a>
-											</h6>
-										</div>
-
-										<div id="accordion-item-group3" class="collapse" data-parent="#accordion-group">
-											<div class="card-body">
-												<div class="row">
-													<div class="col-md-12">
-														<div class="form-group">	
-															<label for=""><u>ลูกหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-															<p><small><i>ลูกหนี้การค้า</i> </small></p>
-														</div>
-														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
-																<thead>
-																	<tr class="bg-info">
-																		<th>คู่ค้าหลักของธุรกิจ</th>  
-																		<th>จำนวนผลิตภัณฑ์/โครงการ</th> 
-																		<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
-																		<th>ยอดขายต่อปี (บาท)</th>       
-																		<th>เปรียบเทียบกับยอดขาย (%)</th>  
-																		<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
-																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
-																	</tr>
-																</thead>
-																<tbody id="fulltbp_debtpartner_wrapper_tr">    
-																	@foreach ($fulltbpdebtpartners->reverse() as $fulltbpdebtpartner)
-																		<tr>
-																			<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
-																			<td class="text-right"> {{$fulltbpdebtpartner->numproject}} </td> 
-																			<td class="text-right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
-																			<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}} </td>                                            															
-																			<td class="text-right"> {{$fulltbpdebtpartner->percenttosale}} </td> 
-																			<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
-																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletedebtpartner">ลบ</a> 
-																			</td> 
-																		</tr>
-																	@endforeach              
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="col-md-12 mt-4">
-														<div class="form-group">	
-															<label for=""><u>เจ้าหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-															<p><small><i>เจ้าหนี้การค้า</i> </small></p>
-														</div>
-														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
-																<thead>
-																	<tr class="bg-info">
-																		<th>คู่ค้าหลักของธุรกิจ</th>  
-																		<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
-																		<th>ยอดซื้อต่อปี (บาท)</th>       
-																		<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
-																		<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
-																		<th class="hiddenelement" style="width:150px">เพิ่มเติม</th>    
-																	</tr>
-																</thead>
-																<tbody id="fulltbp_creditpartner_wrapper_tr">    
-																	@foreach ($fulltbpcreditpartners->reverse() as $fulltbpcreditpartner)
-																		<tr >
-																			<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
-																			<td class="text-right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
-																			<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
-																			<td class="text-right"> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
-																			<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
-																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletecreditpartner">ลบ</a> 
-																			</td> 
-																		</tr>
-																	@endforeach              
-																</tbody>
-															</table>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+								
 								</div>
 								<!-- /accordion group -->
 		
 							</fieldset>
-							<h6>ข้อมูลทางด้านการเงิน</h6>
+							<h6>4. ข้อมูลทางด้านการเงิน</h6>
 							<fieldset>	
 								<div id="accordion-group">
-									<div class="card border-top-info rounded-top-1 mb-0">
-										<div class="card-header">
-											<h6 class="card-title">
-												{{-- <a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</a> --}}
-												<a data-action="collapse" data-toggle="collapse" >4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</a>
-											</h6>
-										</div>
-										<div id="accordion-item-group1" class="collapse" data-parent="#accordion-group">
-											<div class="card-body">
-												<div class="row">
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card border-top-info rounded-top-1 mb-0">
+												<div class="card-body">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label for=""><strong>4.1) เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</strong></label>
+														</div>
+													</div>
 													<div class="col-md-12">
 														<div class="form-group">
 															<label for=""><u>เงินลงทุนในสินทรัพย์ถาวรของโครงการ</u></label>
-															<p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p>
+															{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p> --}}
 														</div>
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
@@ -2783,7 +2659,7 @@
 													<div class="col-md-12 mt-2" >
 														<div class="form-group">
 															<label for=""><u>เงินลงทุนสำหรับดำเนินการของโครงการ</u></label>
-															<p><small><i>ตารางแสดงรายละเอียดเงินลงทุนสำหรับดำเนินการของโครงการ</i> </small></p>
+															{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนสำหรับดำเนินการของโครงการ</i> </small></p> --}}
 														</div>
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
@@ -2842,23 +2718,8 @@
 															</table>
 														</div>
 													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="card mb-0 rounded-0 border-y-0">
-										<div class="card-header">
-											<h6 class="card-title">
-												{{-- <a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.2 ประมาณการผลตอบแทนจากการลงทุน</a> --}}
-												<a data-action="collapse" data-toggle="collapse" >4.2 ประมาณการผลตอบแทนจากการลงทุน</a>
-											</h6>
-										</div>
-
-										<div id="accordion-item-group2" class="collapse" data-parent="#accordion-group">
-											<div class="card-body">
-												<div class="row">
-													<div class="col-md-12">
+													<div class="col-md-12 mt-3">
+														<label for=""><strong>4.2) ประมาณการผลตอบแทนจากการลงทุน</strong></label>
 														<fieldset>	
 															<div class="form-group">
 																<label>ประมาณการรายได้ที่จะเพิ่มขึ้น (บาท)</label>
@@ -2876,8 +2737,13 @@
 													</div>
 												</div>
 											</div>
+										<!-- /striped rows -->
 										</div>
 									</div>
+
+
+									
+
 								</div>
 								<br>
 							 <strong>ผู้ลงนามในแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</strong>	

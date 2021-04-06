@@ -15,7 +15,7 @@
                     <table class="table table-bordered table-striped" id="criteriatable_modal">
                         <thead>
                             <tr>
-                                <th>ชื่อ-สกุล</th>                                                                                   
+                                <th>ชื่อ-นามสกุล</th>                                                                                   
                             </tr>
                         </thead>
                         <tbody id="pending_user_modal_wrapper_tr"> 
