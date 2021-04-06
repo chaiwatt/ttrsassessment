@@ -15,7 +15,7 @@ import * as FullTbp from './fulltbp.js';
 //         $('#fulltbp_companyprofile_wrapper').append(html);
 //     }
 // });
-
+// var dataid = 0;
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
@@ -53,7 +53,7 @@ $("#companygeneraldoc").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                // console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -65,6 +65,11 @@ $("#companygeneraldoc").on('change', function() {
                     </tr>`
                     });
                  $("#fulltbp_companyprofile_attachment_wrapper_tr").html(html);
+                 if(data.length > 0){
+                    $("#fulltbp_companyprofile_attachment_wrapper").attr("hidden",false);
+                 }else{
+                    $("#fulltbp_companyprofile_attachment_wrapper").attr("hidden",true);
+                 }
                  $('#modal_add_companydoc').modal('hide');
         }
     });
@@ -98,6 +103,11 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
                     </tr>`
                     });
                  $("#fulltbp_companyprofile_attachment_wrapper_tr").html(html);
+                 if(data.length > 0){
+                    $("#fulltbp_companyprofile_attachment_wrapper").attr("hidden",false);
+                 }else{
+                    $("#fulltbp_companyprofile_attachment_wrapper").attr("hidden",true);
+                 }
            })
            .catch(error => {})
         }
@@ -117,11 +127,17 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                 <td> ${employ.phone} </td>                                            
                 <td> ${employ.workphone} </td> 
                 <td> ${employ.email} </td> 
-                <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td>  
+                <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
             </tr>`
             });
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
+         if(data.length > 0){
+            $("#fulltbp_companyemploy_wrapper").attr("hidden",false);
+            $("#fulltbp_companyemploy_wrapper_error").attr("hidden",true);
+         }else{
+            $("#fulltbp_companyemploy_wrapper").attr("hidden",true);
+         }
          Swal.fire({
             title: 'สำเร็จ...',
             text: 'แก้ไขข้อมูลบุคลากรสำเร็จ!',
@@ -156,12 +172,18 @@ $(document).on("click",".deletecompanyemploy",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td>  
+                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                         </tr>`
                         }
                     });
                  $("#fulltbp_companyemploy_wrapper_tr").html(html);
+                 if(data.length > 0){
+                    $("#fulltbp_companyemploy_wrapper").attr("hidden",false);
+                    $("#fulltbp_companyemploy_wrapper_error").attr("hidden",true);
+                 }else{
+                    $("#fulltbp_companyemploy_wrapper").attr("hidden",true);
+                 }
             })
            .catch(error => {})
         }
@@ -399,10 +421,16 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
             html += `<tr >                                        
                 <td> ${stockholder.name}</td>                                            
                 <td> ${stockholder.ceorelation} </td>                                           
-                <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-warning deletestockholder">ลบ</a> </td> 
+                <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
             </tr>`
             });
         $("#fulltbp_companystockholder_wrapper_tr").html(html);
+        if(data.length > 0){
+            $("#fulltbp_companystockholder_wrapper").attr("hidden",false);
+            $("#fulltbp_companystockholder_wrapper_error").attr("hidden",true);
+         }else{
+            $("#fulltbp_companystockholder_wrapper").attr("hidden",true);
+         }
         $('#modal_add_stockholder').modal('hide');
     })
     .catch(error => {})
@@ -434,7 +462,7 @@ $(document).on("click",".deletestockholder",function(e){
                     html += `<tr >                                        
                         <td> ${stockholder.name}</td>                                            
                         <td> ${stockholder.ceorelation} </td>                                           
-                        <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-warning deletestockholder">ลบ</a> </td> 
+                        <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
                     </tr>`
                     });
                 $("#fulltbp_companystockholder_wrapper_tr").html(html);
@@ -561,7 +589,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td> 
-                <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
+                <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
             });
          $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
@@ -592,7 +620,7 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
                         <td> ${techdevlevel.presenttechnology} </td> 
                         <td> ${techdevlevel.projecttechnology} </td>                                            
                         <td> 
-                        <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-warning deleteprojectechdevlevel">ลบ</a>  </td> 
+                        <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
                     </tr>`
                     });
                  $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
@@ -953,7 +981,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                     ${tdbody}
                 <td> 
                 <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a>                                       
+                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                 </td>
             </tr>`
             });
@@ -1043,7 +1071,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                     ${tdbody}
                 <td> 
                 <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a>                                       
+                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                 </td>
             </tr>`
             });
@@ -1110,7 +1138,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                             ${tdbody}
                         <td> 
                         <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a>                                       
+                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1424,7 +1452,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1459,7 +1487,7 @@ $(document).on("click",".deletesell",function(e){
                         <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1498,7 +1526,7 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                            
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletesell">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1558,7 +1586,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1598,7 +1626,7 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1633,7 +1661,7 @@ $(document).on("click",".deletedebtpartner",function(e){
                         <td class="text-right"> ${sell.businessyear} </td> 
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletedebtpartner">ลบ</a>
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1659,7 +1687,7 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1697,7 +1725,7 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
+                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1731,7 +1759,7 @@ $(document).on("click",".deletecreditpartner",function(e){
                         <td class="text-right"> ${sell.businessyear} </td> 
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a>
+                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -2060,7 +2088,8 @@ $('.steps-basic').steps({
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
-        if(currentIndex == 3){
+        if(currentIndex == 3 && newIndex == 4){
+            // console.log(newIndex);
             if($('.chkauthorizeddirector').filter(':checked').length == 0){
                 Swal.fire({
                     title: 'ผิดพลาด!',
@@ -2073,7 +2102,6 @@ $('.steps-basic').steps({
                     $(".chkauthorizeddirector:checked").each(function(){
                         if($(this).data('id') == 1){
                             iserror = true;
-                            console.log('found');
                         }
                     });
                     if(iserror == true ){
@@ -2087,13 +2115,149 @@ $('.steps-basic').steps({
             }
 
         }
-        // if ($('#companyhistory').summernote('isEmpty'))
-        // {
-        //     $("#companyhistoryerror").attr("hidden",false);
-        //     return;
-        // }else{
-        //     $("#companyhistoryerror").attr("hidden",true);
-        // }
+        if ($('#companyhistory').summernote('isEmpty'))
+        {
+            $("#companyhistoryerror").attr("hidden",false);
+            return;
+        }else{
+            $("#companyhistoryerror").attr("hidden",true);
+        }
+
+        var fulltbp_companyemploy_wrapper_tr = $('#fulltbp_companyemploy_wrapper_tr tr').length;
+        if(fulltbp_companyemploy_wrapper_tr == 0){
+            $("#fulltbp_companyemploy_wrapper_error").attr("hidden",false);
+            return false;
+        }else{
+            $("#fulltbp_companyemploy_wrapper_error").attr("hidden",true);
+        }
+
+        var fulltbp_companystockholder_wrapper_tr = $('#fulltbp_companystockholder_wrapper_tr tr').length;
+        if(fulltbp_companystockholder_wrapper_tr == 0){
+            $("#fulltbp_companystockholder_wrapper_error").attr("hidden",false);
+            return false;
+        }else{
+            $("#fulltbp_companystockholder_wrapper_error").attr("hidden",true);
+        }
+       
+        var fulltbp_researcher_wrapper_tr = $('#fulltbp_researcher_wrapper_tr tr').length;
+        if(fulltbp_researcher_wrapper_tr == 0){
+            $("#fulltbp_researcher_wrapper_error").attr("hidden",false);
+            return false;
+        }else{
+            $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
+        }
+
+        if ($('#responsibleeducationhistory').summernote('isEmpty'))
+        {
+            $("#responsibleeducationhistory_error").attr("hidden",false);
+            return false;;
+        }else{
+            $("#responsibleeducationhistory_error").attr("hidden",true);
+        }
+
+        if ($('#responsibleexperiencehistory').summernote('isEmpty'))
+        {
+            $("#responsibleexperiencehistory_error").attr("hidden",false);
+            return false;;
+        }else{
+            $("#responsibleexperiencehistory_error").attr("hidden",true);
+        }
+
+        if ($('#responsibletraininghistory').summernote('isEmpty'))
+        {
+            $("#responsibletraininghistory_error").attr("hidden",false);
+            return false;;
+        }else{
+            $("#responsibletraininghistory_error").attr("hidden",true);
+        }
+
+        // console.log(currentIndex);
+        if(currentIndex == 1){
+            if ($('#projectabtract_input').summernote('isEmpty'))
+            {
+                $("#projectabtract_input_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#projectabtract_input_error").attr("hidden",true);
+            }
+
+            if ($('#mainproduct_input').summernote('isEmpty'))
+            {
+                $("#mainproduct_input_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#mainproduct_input_error").attr("hidden",true);
+            }
+
+            if ($('#productdetails_input').summernote('isEmpty'))
+            {
+                $("#productdetails_input_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#productdetails_input_error").attr("hidden",true);
+            }
+
+            if ($('#projectechdev_input').summernote('isEmpty'))
+            {
+                $("#projectechdev_input_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#projectechdev_input_error").attr("hidden",true);
+            }
+            if ($('#projectechdevproblem_input').summernote('isEmpty'))
+            {
+                $("#projectechdevproblem_input_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#projectechdevproblem_input_error").attr("hidden",true);
+            }
+            if ($('#projectinnovation_input').summernote('isEmpty'))
+            {
+                $("#projectinnovation_input_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#projectinnovation_input_error").attr("hidden",true);
+            }
+            if ($('#projectstandard_input').summernote('isEmpty'))
+            {
+                $("#projectstandard_input_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#projectstandard_input_error").attr("hidden",true);
+            }
+            var ganttchart_wrapper_tr = $('#table_gantt_wrapper tr').length;
+
+            if(ganttchart_wrapper_tr <= 2){
+                $("#ganttchart_wrapper_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#ganttchart_wrapper_error").attr("hidden",true);
+            }
+        }else if(currentIndex == 2){
+            if ($('#analysis').summernote('isEmpty'))
+            {
+                $("#analysis_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#analysis_error").attr("hidden",true);
+            }
+            if ($('#modelcanvas').summernote('isEmpty'))
+            {
+                $("#modelcanvas_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#modelcanvas_error").attr("hidden",true);
+            }
+            if ($('#swot').summernote('isEmpty'))
+            {
+                $("#swot_error").attr("hidden",false);
+                return false;;
+            }else{
+                $("#swot_error").attr("hidden",true);
+            }
+        }
+
+
         form.validate().settings.ignore = ':disabled,:hidden';
         return form.valid();
     },
@@ -2122,11 +2286,17 @@ $(document).on('click', '#btn_modal_add_researcher', function(e) {
                 <td> ${researcher.experience} </td>     
                 <td> ${researcher.training} </td>  
                 <td> 
-                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteresearcher">ลบ</a>                                       
+                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
                 </td>
             </tr>`
             });
          $("#fulltbp_researcher_wrapper_tr").html(html);
+         if(data.length > 0){
+            $("#fulltbp_researcher_wrapper").attr("hidden",false);
+            $("#fulltbp_researcher_wrapper_error").attr("hidden",false);
+         }else{
+            $("#fulltbp_researcher_wrapper").attr("hidden",true);
+         }
    })
    .catch(error => {})
 });
@@ -2141,7 +2311,7 @@ $(document).on('click', '#btn_modal_add_projectmember', function(e) {
                 <td> ${researcher.experience} </td>     
                 <td> ${researcher.training} </td>  
                 <td> 
-                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteprojectmember">ลบ</a>                                       
+                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteprojectmember">ลบ</a>                                       
                 </td>
             </tr>`
             });
@@ -2172,11 +2342,17 @@ $(document).on("click",".deleteresearcher",function(e){
                         <td> ${researcher.experience} </td>     
                         <td> ${researcher.training} </td>  
                         <td> 
-                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteresearcher">ลบ</a>                                       
+                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_researcher_wrapper_tr").html(html);
+                 if(data.length > 0){
+                    $("#fulltbp_researcher_wrapper").attr("hidden",false);
+                    $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
+                 }else{
+                    $("#fulltbp_researcher_wrapper").attr("hidden",true);
+                 }
            })
            .catch(error => {})
         }
@@ -2205,7 +2381,7 @@ $(document).on("click",".deleteprojectmember",function(e){
                         <td> ${researcher.experience} </td>     
                         <td> ${researcher.training} </td>  
                         <td> 
-                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-warning deleteresearcher">ลบ</a>                                       
+                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -2418,6 +2594,7 @@ $(document).on('click', '#btnaddboard', function(e) {
 });
 
 $(document).on('click', '.editEmployinfo', function(e) {
+     
     Employ.getEmploy($(this).data('id')).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         data.prefixes.forEach(function (prefix,index) {
@@ -2502,6 +2679,92 @@ $(document).on('click', '.editEmployinfo', function(e) {
     $('#modal_edit_employ').modal('show');
 });
 
+function modaltrigger(id) {
+     
+    Employ.getEmploy(id).then(data => {
+        var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        data.prefixes.forEach(function (prefix,index) {
+            var selected = '';
+            if(data.employ['prefix_id'] == prefix['id']){
+                selected = 'selected';
+            }
+            selectprefix += `<option value="${prefix['id']}" ${selected} >${prefix['name']}</option>`
+            });
+            selectprefix += `</select>`;
+        $("#employprefix_wrapper").html(selectprefix);
+        $(".form-control-select2").select2();
+        var selectemployposition = `<select id="employposition_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        data.employpositions.forEach(function (position,index) {
+            var selected = '';
+            if(data.employ['employ_position_id'] == position['id']){
+                selected = 'selected';
+            }
+            selectemployposition += `<option value="${position['id']}" ${selected} >${position['name']}</option>`
+            });
+            selectemployposition += `</select>`;
+
+        var employeducationtable = '';
+        data.employeducations.forEach(function (education,index) {
+            employeducationtable += `<tr >                                        
+                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${education.employeducationinstitute} </td> 
+                <td> ${education.employeducationmajor} </td>                                            
+                <td> ${education.employeducationyear} </td> 
+                <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
+            </tr>`
+            });
+        $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
+
+        var experiencetable = '';
+        data.employexperiences.forEach(function (experience,index) {
+            experiencetable += `<tr >                                        
+                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                <td> ${experience.company} </td> 
+                <td> ${experience.businesstype} </td>                                            
+                <td> ${experience.startposition} </td> 
+                <td> ${experience.endposition} </td> 
+                <td> <a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a> </td> 
+            </tr>`
+            });
+         $("#fulltbp_companyemployexperience_wrapper_tr").html(experiencetable);
+
+         var trainingtable = '';
+         data.employtrainings.forEach(function (training,index) {
+            trainingtable += `<tr >                                        
+                 <td> ${training.trainingdateth}</td>                                            
+                 <td> ${training.course} </td> 
+                 <td> ${training.owner} </td>                                            
+                 <td> <a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a> </td> 
+             </tr>`
+             });
+          $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
+        var attachment  = '';
+          data.fullTbpboardattachments.forEach(function (boardattachment,index) {
+            attachment += `<tr >                                        
+                  <td> ${boardattachment.name}</td>                                                                                      
+                  <td> 
+                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                    <a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a> 
+                  </td> 
+              </tr>`
+              });
+           $("#fulltbp_board_attachment_wrapper_tr").html(attachment);
+
+
+        $("#employposition_wrapper").html(selectemployposition);
+        $(".form-control-select2").select2();
+        $('#employid').val(data.employ['id'])
+        $('#employname_edit').val(data.employ['name'])
+        $('#employlastname_edit').val(data.employ['lastname'])
+        $('#employphone_edit').val(data.employ['phone'])
+        $('#employworkphone_edit').val(data.employ['workphone']) 
+        $('#employemail_edit').val(data.employ['email']) 
+        
+    })
+    .catch(error => {})
+    $('#modal_edit_employ').modal('show');
+};
+
 $(document).on('click', '#btnaddresearch', function(e) {
     Employ.getEmployPosition().then(data => {
         var selectemployposition = `<select id="employposition_research" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
@@ -2524,51 +2787,72 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
     }
     Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
         console.log(data);
+       var dataid = 0;
         var html = ``;
         data.forEach(function (employ,index) {
             if(employ.employ_position_id < 6 ){
+                dataid = employ.id;
                 html += `<tr >                                        
                     <td> ${employ.name}${employ.lastname} </td>                                            
                     <td> ${employ.employposition['name']} </td> 
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                    <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy">ลบ</a>  </td> 
+                    <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
                 </tr>`
             }
       
             });
+
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
+         if(data.length > 0){
+            $("#fulltbp_companyemploy_wrapper").attr("hidden",false);
+            $("#fulltbp_companyemploy_wrapper_error").attr("hidden",true);
+         }else{
+            $("#fulltbp_companyemploy_wrapper").attr("hidden",true);
+         }
          $('#modal_add_employ').modal('hide');
+         modaltrigger(dataid);
+        //  $(".editEmployinfo").trigger("click");
+        //  jQuery('.editEmployinfo')[0].click();
+         //
     })
     .catch(error => {})
 });
 
 $(document).on('click', '#btn_modal_add_employ_research', function(e) {
     Employ.saveEmploy($('#employprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
-        console.log(data);
+        var dataid = 0;
         var html = ``;
         data.forEach(function (employ,index) {
                 if(employ.employ_position_id == 6){
+                    dataid = employ.id;
                     html += `<tr >                                        
                         <td> ${employ.name} ${employ.lastname} </td>                                            
                         <td> ${employ.employposition['name']} </td> 
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_research">ลบ</a>  </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                     </tr>`
                 }
             });
          $("#fulltbp_researcher_wrapper_tr").html(html);
+         if(data.length > 0){
+            $("#fulltbp_researcher_wrapper").attr("hidden",false);
+            $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
+         }else{
+            $("#fulltbp_researcher_wrapper").attr("hidden",true);
+         }
+         modaltrigger(dataid);
     })
     .catch(error => {})
 });
 
 $(document).on("click",".deletecompanyemploy_research",function(e){
-    console.log($(this).data('id'));
+    // console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -2591,12 +2875,18 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_research">ลบ</a>  </td> 
+                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                         </tr>`
                     }
                 });
                 $("#fulltbp_researcher_wrapper_tr").html(html);
+                if(data.length > 0){
+                    $("#fulltbp_researcher_wrapper").attr("hidden",false);
+                    $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
+                 }else{
+                    $("#fulltbp_researcher_wrapper").attr("hidden",true);
+                 }
             })
            .catch(error => {})
         }
@@ -2634,8 +2924,8 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_projectmember">ลบ</a>  </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                     </tr>`
                 }
             });
@@ -2669,8 +2959,8 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">เพิ่มเติมข้อมูลส่วนตัว</a> 
-                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-warning deletecompanyemploy_projectmember">ลบ</a>  </td> 
+                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                         </tr>`
                     }
                 });
@@ -2790,41 +3080,47 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
 			// businesstype: {
 			// 	required: 'กรุณาเลือกประเภทธุรกิจ'
             // },
-            // department_qty: {
-			// 	required: 'กรุณากรอกจำนวนบุคลากรทั้งหมด'
-            // },
-            // department1_qty: {
-			// 	required: 'กรุณากรอกจำนวนผ่ายบริหาร'
-            // },
-            // department2_qty: {
-			// 	required: 'กรุณากรอกจำนวนฝ่ายวิจัยและพัฒนา'
-            // },
-            // department3_qty: {
-			// 	required: 'กรุณากรอกจำนวนฝ่ายผลิต/วิศวกรรม'
-            // },
-            // department4_qty: {
-			// 	required: 'ผ่ายการตลาด'
-            // },
-            // department5_qty: {
-			// 	required: 'กรุณากรอกพนักงานทั่วไป'
-            // },
-            // companyhistory: {
-			// 	required: 'กรุณากรอกรายละเอียด'
-            // },
-            // responsiblename: {
-			// 	required: 'กรุณากรอกชื่อ'
-            // },
-            // responsiblelastname: {
-			// 	required: 'กรุณากรอกนามสกุล'
-            // },
-            // responsibleemail: {
-			// 	required: 'กรุณากรอกอีเมล'
-            // },
-            // responsibleposition: {
-			// 	required: 'กรุณากรอกตำแหน่ง'
-            // },
-            // responsiblephone: {
-			// 	required: 'กรุณากรอกเบอร์โทรศัพท์'
-            // },
+            department_qty: {
+				required: 'กรุณากรอกจำนวนบุคลากรทั้งหมด'
+            },
+            department1_qty: {
+				required: 'กรุณากรอกจำนวนผ่ายบริหาร'
+            },
+            department2_qty: {
+				required: 'กรุณากรอกจำนวนฝ่ายวิจัยและพัฒนา'
+            },
+            department3_qty: {
+				required: 'กรุณากรอกจำนวนฝ่ายผลิต/วิศวกรรม'
+            },
+            department4_qty: {
+				required: 'ผ่ายการตลาด'
+            },
+            department5_qty: {
+				required: 'กรุณากรอกพนักงานทั่วไป'
+            },
+            companyhistory: {
+				required: 'กรุณากรอกรายละเอียด'
+            },
+            responsiblename: {
+				required: 'กรุณากรอกชื่อผู้รับผิดชอบหลักในโครงการ'
+            },
+            responsiblelastname: {
+				required: 'กรุณากรอกนามสกุลผู้รับผิดชอบหลักในโครงการ'
+            },
+            responsibleemail: {
+				required: 'กรุณากรอกอีเมลผู้รับผิดชอบหลักในโครงการ'
+            },
+            responsibleposition: {
+				required: 'กรุณากรอกตำแหน่งผู้รับผิดชอบหลักในโครงการ'
+            },
+            responsiblephone: {
+				required: 'กรุณากรอกเบอร์โทรศัพท์ผู้รับผิดชอบหลักในโครงการ'
+            },
+            responsibleworkphone: {
+				required: 'กรุณากรอกเบอร์โทรศัพท์มือถือผู้รับผิดชอบหลักในโครงการ'
+            },
+            ganttnummonth: {
+				required: 'กรุณากรอกจำนวนเดือน Gantt Chart'
+            }
 		}
 	});

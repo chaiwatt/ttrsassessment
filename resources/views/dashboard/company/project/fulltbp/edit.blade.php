@@ -17,7 +17,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
 							<select id="employprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
@@ -27,37 +27,37 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
 							<input type="text" id="employname" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
 							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่ง<span class="text-danger">*</span></label>
 							<div id="employ_position_wrapper"></div>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
@@ -82,7 +82,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
 							<select id="employprefix_research" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
@@ -92,37 +92,37 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
 							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
 							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่ง<span class="text-danger">*</span></label>
 							<div id="employ_position_research_wrapper"></div>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone_research" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone_research" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail_research" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
@@ -147,7 +147,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
 							<select id="employprefix_projectmember" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
@@ -157,37 +157,37 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
 							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
 							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่ง<span class="text-danger">*</span></label>
 							<div id="employ_position_projectmember_wrapper"></div>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone_projectmember" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone_projectmember" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail_projectmember" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
@@ -225,38 +225,59 @@
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="left-icon-employinfo">
 									<input type="text" id="employid" value="" hidden>
-									<div class="form-group">
-										<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-										<div id="employprefix_wrapper"></div>
+									<div class="row">
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+											<div id="employprefix_wrapper"></div>
+										</div>
+										</div>
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>ชื่อ</label><span class="text-danger">*</span>
+											<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
+										</div>
+										</div>
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>นามสกุล</label><span class="text-danger">*</span>
+											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
+										</div>
+										</div>
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>ตำแหน่ง</label>
+											<div id="employposition_wrapper"></div>
+										</div>
+										</div>
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>โทรศัพท์</label><span class="text-danger">*</span>
+											<input type="text" id="employphone_edit" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+										</div>
+										</div>
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>โทรศัพท์มือถือ</label>
+											<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+										</div>
+										</div>
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>อีเมล</label><span class="text-danger">*</span>
+											<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
+										</div>
+										</div>
+										<div class="col-md-12">
+											{{-- <div class="form-group"> --}}
+												<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล</button>
+											{{-- </div> --}}
+											</div>
 									</div>
-
-									<div class="form-group">
-										<label>ชื่อ</label><span class="text-danger">*</span>
-										<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
-									</div>
-									<div class="form-group">
-										<label>นามสกุล</label><span class="text-danger">*</span>
-										<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
-									</div>
-									<div class="form-group">
-										<label>ตำแหน่ง</label>
-										<div id="employposition_wrapper"></div>
-									</div>
-									<div class="form-group">
-										<label>โทรศัพท์</label><span class="text-danger">*</span>
-										<input type="text" id="employphone_edit" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
-									</div>
-									<div class="form-group">
-										<label>โทรศัพท์มือถือ</label>
-										<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone">
-									</div>
-									<div class="form-group">
-										<label>อีเมล</label><span class="text-danger">*</span>
-										<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
-									</div>
+							
 									
 									{{-- <div class="form-group"> --}}
-										<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล</button>
+										
 									{{-- </div> --}}
 									
 								</div>
@@ -1518,7 +1539,7 @@
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
-																<label><strong>1.6) แผนผังองค์กร (Organization Chart) </strong>(ไฟล์ jpg, png ขนาด 600 x 400px ขนาดไม่เกิน 1 MB)</label>
+																<label><strong>1.6) แผนผังองค์กร (Organization Chart)</strong><span class="text-danger">*</span> (ไฟล์ jpg, png ขนาด 600 x 400px ขนาดไม่เกิน 1 MB)</label>
 																<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" onclick="document.getElementById('organizeimg').click();"><i class="icon-add mr-2"></i>อัปโหลด</button>
 																	<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg" accept="image/*"/>
 																<div class="text-center">
@@ -1529,50 +1550,49 @@
 																		@else
 																		<br>
 																		<img id="organizeimgholder" src="{{asset('assets/dashboard/images/orgimg.png')}}" width="500" height="300" alt="">
-																		
 																	@endif
 																</div>
 
 															</div>
 														</div>
 														<legend>
-															<label for="" style="font-size: 16px"><strong>1.7) รายการบุคลากร</strong></label>
+															<label for="" style="font-size: 16px"><strong>1.7) รายการบุคลากร</strong><span class="text-danger">*</span></label>
 														</legend>
 														<div class="col-md-12">
 															<div class="row">
 																<div class="col-md-3">
 																	<div class="form-group">
-																		<label>จำนวนบุคลากรทั้งหมด</label>
+																		<label>จำนวนบุคลากรทั้งหมด</label><span class="text-danger">*</span>
 																		<input type="text" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control form-control-lg numeralformat4" required >
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
-																		<label>ผ่ายบริหาร</label>
+																		<label>ผ่ายบริหาร</label><span class="text-danger">*</span>
 																		<input type="text" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
-																		<label>ฝ่ายวิจัยและพัฒนา</label>
+																		<label>ฝ่ายวิจัยและพัฒนา</label><span class="text-danger">*</span>
 																		<input type="text" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
-																		<label>ฝ่ายผลิต/วิศวกรรม</label>
+																		<label>ฝ่ายผลิต/วิศวกรรม</label><span class="text-danger">*</span>
 																		<input type="text" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
-																		<label>ผ่ายการตลาด</label>
+																		<label>ผ่ายการตลาด</label><span class="text-danger">*</span>
 																		<input type="text" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
-																		<label>พนักงานทั่วไป</label>
+																		<label>พนักงานทั่วไป</label><span class="text-danger">*</span>
 																		<input type="text" name ="department5_qty" id ="department5_qty" value="{{$fulltbpemployee->department5_qty}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
@@ -1580,7 +1600,7 @@
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
-																<label><strong>1.8) ประเภทธุรกิจ</strong></label>
+																<label><strong>1.8) ประเภทธุรกิจ</strong></label><span class="text-danger">*</span>
 																<select name="businesstype" id="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-lg form-control-select2" data-fouc>
 																	<option value="" >==เลือกรายการ==</option> 
 																	@foreach ($businesstypes as $businesstype)
@@ -1590,10 +1610,9 @@
 															</div>
 														</div>
 					
-													
-			
+												
 														<div class="col-md-12">
-															<label><strong>1.9) ประวัติบริษัท (Company Profile)</strong></label>
+															<label><strong>1.9) ประวัติบริษัท (Company Profile)</strong></label><span class="text-danger">*</span>
 															<div class="form-group">
 																<label for="">รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) <span id="companyhistoryerror" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span> </label>
 																<textarea name="companyhistory" id="companyhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="7" required >{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</textarea>
@@ -1604,15 +1623,11 @@
 																	<div class="input-group">													
 																		<label for="">แนบเอกสารข้อมูลทั่วไปของบริษัท <i>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ ไฟล์ pdf ขนาดไม่เกิน 2 MB)</i><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm " data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																	</div>
-																	
 																</div>
 															</div>			
-															<div class="row">	
-																<div class="col-md-12" id="fulltbp_companyprofile_attachment_wrapper" >	
-																</div>
-															</div>
-															<div class="row">
-																<div class="col-md-12">	
+															
+															<div class="row" id="fulltbp_companyprofile_attachment_wrapper" @if ($fulltbpcompanyprofileattachments->count() == 0) hidden @endif>
+																<div class="col-md-12" >	
 																	<div class="table-responsive">
 																		<table class="table table-striped table-bordered">
 																			<thead>
@@ -1641,8 +1656,9 @@
 
 												
 														<div class="col-md-12 mt-3">	
-															<label for=""><strong>1.10 - 1.11) ข้อมูลผู้บริหารระดับสูง (CEO, CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</strong><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnaddboard"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-															<div class="table-responsive">
+															<label for=""><strong>1.10 - 1.11) ข้อมูลผู้บริหารระดับสูง (CEO, CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnaddboard"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+															<span id="fulltbp_companyemploy_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลผู้บริหารระดับสูง (CEO, CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</span>
+															<div class="table-responsive" id="fulltbp_companyemploy_wrapper" @if ($companyemploys->where('employ_position_id','<=',5)->count() == 0) hidden @endif>
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
@@ -1675,8 +1691,9 @@
 													
 														{{-- <div class="row"> --}}
 															<div class="col-md-12 mt-3">	
-																<label for=""><strong>1.12) บัญชีรายชื่อผู้ถือหุ้น</strong><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnstckholder" data-id="{{$company->id}}"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-																<div class="table-responsive">
+																<label for=""><strong>1.12) บัญชีรายชื่อผู้ถือหุ้น</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnstckholder" data-id="{{$company->id}}"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																<span id="fulltbp_companystockholder_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มบัญชีรายชื่อผู้ถือหุ้น</span>
+																<div class="table-responsive" id="fulltbp_companystockholder_wrapper" @if ($companystockholders->count() == 0) hidden @endif>
 																	<table class="table table-striped table-bordered">
 																		<thead>
 																			<tr class="bg-info">
@@ -1701,8 +1718,9 @@
 														
 														{{-- <div class="row"> --}}
 															<div class="col-md-12 mt-3">	
-																<label for=""><strong>1.13) ข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</strong><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-																<div class="table-responsive">
+																<label for=""><strong>1.13) ข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																<span id="fulltbp_researcher_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</span>
+																<div class="table-responsive" id="fulltbp_researcher_wrapper" @if ($companyemploys->where('employ_position_id',6)->count() == 0) hidden @endif>
 																	<table class="table table-striped table-bordered">
 																		<thead>
 																			<tr class="bg-info">
@@ -1772,13 +1790,13 @@
 															<div class="col-md-12 mt-3">
 																
 																<div class="form-group">
-																	<label for=""><strong>1.14) ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong> </label>
+																	<label for=""><strong>1.14) ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong></label><span class="text-danger">*</span>
 																</div>
 															</div>
 															<div class="col-md-6">
 																
 																<div class="form-group">
-																	<label>คำนำหน้าชื่อ</label>
+																	<label>คำนำหน้าชื่อ</label><span class="text-danger">*</span>
 																	<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 																		@foreach ($prefixes as $prefix)
 																			<option value="{{$prefix->id}}" 
@@ -1789,55 +1807,60 @@
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label>ชื่อ</label>
-																	<input type="text" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name ?? Auth::user()->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat20"  required>
+																	<label>ชื่อ</label><span class="text-danger">*</span>
+																	<input type="text" name="responsiblename" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name ?? Auth::user()->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat20"  required>
+																</div>
+																{{-- <div class="form-group">
+																	<label>ฝ่ายผลิต/วิศวกรรม</label><span class="text-danger">*</span>
+																	<input type="text" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control form-control-lg numeralformat4" required>
+																</div> --}}
+															</div>
+															{{-- </div> --}}
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label>นามสกุล</label><span class="text-danger">*</span>
+																	<input type="text" name="responsiblelastname" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname ?? Auth::user()->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" required>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label>นามสกุล</label>
-																	<input type="text" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname ?? Auth::user()->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" required>
+																	<label>อีเมล</label><span class="text-danger">*</span>
+																	<input type="text" name="responsibleemail" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat30" required>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label>อีเมล</label>
-																	<input type="text" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat30" required>
+																	<label>ตำแหน่ง</label><span class="text-danger">*</span>
+																	<input type="text" name="responsibleposition" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->position}}" placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat20" required>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label>ตำแหน่ง</label>
-																	<input type="text" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->position}}" placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat20" required>
+																	<label>โทรศัพท์</label><span class="text-danger">*</span>
+																	<input type="text" name="responsiblephone" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1 ?? Auth::user()->phone}}" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone" required>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
-																	<label>โทรศัพท์</label>
-																	<input type="text" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1 ?? Auth::user()->phone}}" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone" required>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group">
-																	<label>โทรศัพท์มือถือ</label>
-																	<input type="text" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2 ?? Auth::user()->phone}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone" required>
+																	<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
+																	<input type="text" name="responsibleworkphone" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2 ?? Auth::user()->phone}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone" required>
 																</div>
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label>ประวัติการศึกษา</label>
+																	<label>ประวัติการศึกษา <span id="responsibleeducationhistory_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label><span class="text-danger">*</span>
 																	<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->educationhistory!!}</textarea>
 																</div>
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label>ประสบการณ์การทำงาน</label>
+																	<label>ประสบการณ์การทำงาน <span id="responsibleexperiencehistory_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label><span class="text-danger">*</span>
 																	<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->experiencehistory!!}</textarea>
 																</div>
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label>ประวัติการฝึกอบรม</label>
+																	<label>ประวัติการฝึกอบรม <span id="responsibletraininghistory_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label><span class="text-danger">*</span>
 																	
 																	<textarea name="responsibletraininghistory" id="responsibletraininghistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->traininghistory!!}</textarea>
 																</div>
@@ -1883,32 +1906,19 @@
 															<div class="col-md-12">
 																<div class="form-group">
 																	<div class="form-group">
-																		<label for=""><strong>2.3) บทคัดย่อโครงการ </strong></label> <span class="text-primary" id="projectabtracttextlength"></span>
+																		<label for=""><strong>2.3) บทคัดย่อโครงการ </strong></label><span class="text-danger">*</span> <span class="text-primary" id="projectabtracttextlength"></span><span id="projectabtract_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
 																		<p>ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและสังคม</p>
 																		
-																		{{-- <input type="text" id="projectabtract_input" class="form-control form-control-lg projectabtractclass" > --}}
-																		<textarea name="" id="projectabtract_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
+																		
+																		<textarea name="projectabtract_input" id="projectabtract_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
 																	</div>
-																	{{-- <div id="fulltbp_projectabtract_wrapper" style="border: dashed 1px #999999">
-																		@foreach ($fulltbpprojectabtractdetails as $fulltbpprojectabtractdetail)
-																			<input type="text" name ="projectabtract[]" value="{{$fulltbpprojectabtractdetail->line}}" class="form-control form-control-lg projectabtractclass" style="border: 0" >
-																		@endforeach
-																	</div>
-																	<div class="row">
-																		<div class="col-md-12">	
-																			<div class="form-group">
-																				<br>
-																				<button type="button" id="btnaddprojectabtract" data-id="{{$fulltbp->id}}" class="btn bg-teal float-right" >บันทึกบทคัดย่อ</button>
-																			</div>
-																		</div>
-																	</div> --}}
 																</div>
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ</strong> </label>
+																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span><span id="mainproduct_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
 																	<p>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</p>
-																	<textarea name="" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
+																	<textarea name="mainproduct_input" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
 																
 																</div>
 
@@ -1917,9 +1927,9 @@
 	
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ</strong> </label> <span class="text-primary" id="productdetailstextlength"></span>
+																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ</strong> </label><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span><span id="productdetails_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
 																	<p>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</p>
-																	<textarea name="" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
+																	<textarea name="productdetails_input" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																	
 																</div>
 															</div>
@@ -1931,17 +1941,18 @@
 
 															<div class="col-md-12" >
 																<div class="form-group">
-																	<label for=""><strong>2.6.1) การพัฒนาเทคโนโลยี</strong></label> <span class="text-primary" id="projectechdevtextlength"></span>
+																	<label for=""><strong>2.6.1) การพัฒนาเทคโนโลยี</strong></label> <span class="text-primary" id="projectechdevtextlength"></span><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span><span id="projectechdev_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
 																	<p>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</p>
 																	<textarea name="" id="projectechdev_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
 																</div>
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">	
-																	<label for="">รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์ <i>(ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน (เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ)</i><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><u>รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์</u><i>(ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน (เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ)</i><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	
 																</div>
-																<div class="table-responsive">
+																<div class="table-responsive" id="fulltbp_projectechdevlevel_wrapper" >
+																	
 																	<table class="table table-striped table-bordered">
 																		<thead>
 																			<tr class="bg-info">
@@ -1967,7 +1978,7 @@
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี (<i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i>)</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
+																	<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี (<i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i>)</label> <span class="text-primary" id="projectechdevproblemtextlength"></span><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span><span id="projectechdevproblem_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
 																	<textarea name="" id="projectechdevproblem_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
 																
 																</div>
@@ -2176,7 +2187,7 @@
 															<div class="col-md-12 mt-3">
 																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> </label>
 																<div class="form-group">
-																	<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label> <span class="text-primary" id="projectechdevproblemtextlength"></span>
+																	<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label><span class="text-danger">*<span id="projectinnovation_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
 																	
 																	<textarea name="" id="projectinnovation_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
 																</div>	
@@ -2209,14 +2220,16 @@
 																</div>  
 															</div>
 															<div class="col-md-12 mt-3">	
-																<label for=""><strong>2.6.4) ใบรับรองมาตรฐานต่างๆ ที่ได้รับ ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</strong> </label><span class="text-primary" id="projectechdevproblemtextlength"></span>
+																<label for=""><strong>2.6.4) ใบรับรองมาตรฐานต่างๆ ที่ได้รับ ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</strong> </label><span class="text-danger">*</span><span id="projectstandard_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
 																<div class="form-group">
 																	
 																	<textarea name="" id="projectstandard_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
 																</div>	
+
+															
 																<div class="form-group">												
 																	
-																	<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
+																	<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ (ไฟล์ PDF ขนาดไม่เกิน 2 MB)</label><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_standard"><i class="icon-add mr-2"></i>อัปโหลด</button>
 																	
 																</div>
 																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard"/>
@@ -2250,7 +2263,9 @@
 
 															<div class="col-md-12 mt-3">	
 																<label for=""><strong>2.7) แผนการดำเนินงาน (Gantt Chart)</strong> </label><span class="text-primary" id="projectechdevproblemtextlength"></span>
+																<span id="ganttchart_wrapper_error" class="form-text text-danger"  hidden >*กรุณาแผนการดำเนินงาน (Gantt Chart)</span>
 																<div class="row">
+																	
 																	<div class="col-md-6">	
 																		<div class="form-group">
 																			<label for="">ปีที่เริ่มดำเนินงาน<span class="text-danger">*</span></label>
@@ -2268,7 +2283,7 @@
 																	<div class="col-md-6">	
 																		<div class="form-group">
 																			<label for="">จำนวนเดือนที่ดำเนินงาน<span class="text-danger">*</span></label>
-																			<input type="text" id="ganttnummonth" value="{{$fulltbpgantt->numofmonth}}" class="form-control form-control-lg numeralformat2">
+																			<input type="text" name="ganttnummonth" id="ganttnummonth" value="{{$fulltbpgantt->numofmonth}}" class="form-control form-control-lg numeralformat2" required>
 																		</div>
 																	</div>
 																	<div class="col-md-12">	
@@ -2299,7 +2314,7 @@
 																				</tr>
 																			</thead>
 																			
-																			<tbody >    
+																			<tbody id="ganttchart_wrapper_tr">    
 																				@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
 																					<tr >                                        
 																						<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}} </td> 
@@ -2352,7 +2367,7 @@
 													</div>
 													<div class="col-md-12">	
 														<div class="form-group">
-															<label for=""><u>Market Analysis</u> </label>
+															<label for=""><u>Market Analysis</u> </label><span class="text-danger">*</span>
 															<p><small><i>อธิบายความเป็นไปได้ทางการตลาดของผลิตภัณฑ์หรือบริการในโครงการ และ ระบุแผนงานในการนำผลลัพธ์ของโครงการออกสู่เชิงพาณิชย์ (ประมาณ 1-3 หน้า) โดยให้ข้อมูลในประเด็นต่างๆ ดังนี้ 
 																<ul>
 																	<li>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs/Market requirements)</li>
@@ -2361,14 +2376,16 @@
 																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</li>
 																</ul>
 																</i> </small></p>
+																<span id="analysis_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 															<textarea name="" id="analysis" class="form-control form-control-lg summernoteelement" cols="3" rows="10">{!!@$fulltbp->fulltbpmarketanalysis->detail!!}</textarea>
 														</div>
 													</div>
 													<div class="col-md-12">	
 														<div class="form-group">
-															<label for=""><u>Business Model Canvas</u></label>
-															<p><small><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i> </small></p>
-															<textarea name="" id="modelcanvas" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail!!}</textarea>
+															<label for=""><u>Business Model Canvas</u></label><span class="text-danger">*</span>
+															<p><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i></p>
+															<span id="modelcanvas_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
+															<textarea name="modelcanvas" id="modelcanvas" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail!!}</textarea>
 														</div>
 														<div class="col-md-12">	
 															<div class="input-group">													
@@ -2404,9 +2421,10 @@
 														<br>
 														<div class="col-md-12">	
 															<div class="form-group">
-																<label for="" ><u>วิเคราะห์ศักยภาพทางการค้า</u></label>
-																<p><small><i>SWOT Analysis, Five Forces Analysis</i> </small></p>
-																<textarea name="" id="swot" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketswot->detail!!}</textarea>
+																<label for="" ><u>วิเคราะห์ศักยภาพทางการค้า</u></label><span class="text-danger">*</span>
+																<p><i>SWOT Analysis, Five Forces Analysis</i></p>
+																<span id="swot_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
+																<textarea name="swot" id="swot" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketswot->detail!!}</textarea>
 															</div>
 															<div class="col-md-12">	
 																<div class="input-group">													
