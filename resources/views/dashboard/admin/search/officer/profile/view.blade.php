@@ -247,7 +247,7 @@
 													<div class="col-md-6"> 
 														<div class="form-group">
 															<label>ประสบการณ์การทำงาน (เดือน)</label>
-															<input type="text"  name="expereincemonth" value="{{$officer->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control form-control-lg">
+															<input type="text" id="expereincemonth" name="expereincemonth" value="{{$officer->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>
@@ -556,6 +556,13 @@
             clearText: "เคลียร์",
             time: false
         });
+
+		$(document).on('keyup', '#expereincemonth', function(e) {
+			console.log($(this).val());
+			if($(this).val() > 12 ){
+				$(this).val(12);
+			}
+		});
     </script>	
 @stop
 

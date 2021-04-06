@@ -2150,29 +2150,7 @@ $('.steps-basic').steps({
             $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
         }
 
-        if ($('#responsibleeducationhistory').summernote('isEmpty'))
-        {
-            $("#responsibleeducationhistory_error").attr("hidden",false);
-            return false;;
-        }else{
-            $("#responsibleeducationhistory_error").attr("hidden",true);
-        }
 
-        if ($('#responsibleexperiencehistory').summernote('isEmpty'))
-        {
-            $("#responsibleexperiencehistory_error").attr("hidden",false);
-            return false;;
-        }else{
-            $("#responsibleexperiencehistory_error").attr("hidden",true);
-        }
-
-        if ($('#responsibletraininghistory').summernote('isEmpty'))
-        {
-            $("#responsibletraininghistory_error").attr("hidden",false);
-            return false;;
-        }else{
-            $("#responsibletraininghistory_error").attr("hidden",true);
-        }
 
         // console.log(currentIndex);
         if(currentIndex == 1){

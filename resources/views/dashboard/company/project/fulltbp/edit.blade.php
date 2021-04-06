@@ -1846,19 +1846,19 @@
 																	<input type="text" name="responsibleworkphone" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2 ?? Auth::user()->phone}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone" required>
 																</div>
 															</div>
-															<div class="col-md-12">
+															<div class="col-md-12" hidden>
 																<div class="form-group">
 																	<label>ประวัติการศึกษา <span id="responsibleeducationhistory_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label><span class="text-danger">*</span>
 																	<textarea name="responsibleeducationhistory" id="responsibleeducationhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->educationhistory!!}</textarea>
 																</div>
 															</div>
-															<div class="col-md-12">
+															<div class="col-md-12" hidden>
 																<div class="form-group">
 																	<label>ประสบการณ์การทำงาน <span id="responsibleexperiencehistory_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label><span class="text-danger">*</span>
 																	<textarea name="responsibleexperiencehistory" id="responsibleexperiencehistory"  class="form-control form-control-lg summernoteelement" cols="3" rows="3">{!!@$fulltbp->fulltbpresponsibleperson->experiencehistory!!}</textarea>
 																</div>
 															</div>
-															<div class="col-md-12">
+															<div class="col-md-12" hidden>
 																<div class="form-group">
 																	<label>ประวัติการฝึกอบรม <span id="responsibletraininghistory_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label><span class="text-danger">*</span>
 																	

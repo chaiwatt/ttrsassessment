@@ -459,7 +459,12 @@
 													<label>วุฒิการศึกษาสูงสุด<span class="text-danger">*</span></label>
 													<select name="educationlevel" id="educationlevel" data-placeholder="วุฒิการศึกษาสูงสุด" class="form-control form-control-lg form-control-select2">
 														@foreach ($educationlevels as $educationlevel)                                                                
-															<option value="{{$educationlevel->id}}" @if ($educationlevel->id == $expert->education_level_id) selected @endif > {{$educationlevel->name}} </option>
+															<option value="{{$educationlevel->id}}" 
+																@if ($educationlevel->id == $expert->education_level_id) 
+																		selected 
+																	@else	
+																		@if (old('educationlevel') == $educationlevel->id) selected @endif
+																@endif > {{$educationlevel->name}} </option>
 														@endforeach     
 													</select>
 												</div>
@@ -475,7 +480,7 @@
 													<div class="col-md-6"> 
 														<div class="form-group">
 															<label>ประสบการณ์การทำงาน (เดือน)</label>
-															<input type="text"  name="expereincemonth" value="{{old('expereincemonth') ?? $expert->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control form-control-lg numeralformat2">
+															<input type="text" id="expereincemonth" name="expereincemonth" value="{{old('expereincemonth') ?? $expert->expereincemonth}}"  placeholder="ประสบการณ์การทำงาน (เดือน)" class="form-control form-control-lg numeralformat2">
 														</div>
 													</div>
 												</div>
@@ -485,7 +490,12 @@
 													<label>สาขาความเชี่ยวชาญ<span class="text-danger">*</span></label>
 													<select name="expertbranch" id="tambol" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
 														@foreach ($expertbranches as $expertbranch)                                                                
-															<option value="{{$expertbranch->id}}" @if ($expertbranch->id == $expert->expert_branch_id) selected @endif> {{$expertbranch->name}} </option>
+															<option value="{{$expertbranch->id}}" 
+																@if ($expertbranch->id == $expert->expert_branch_id) 
+																		selected 
+																	@else	
+																		@if (old('expertbranch') == $expertbranch->id) selected @endif
+																@endif> {{$expertbranch->name}} </option>
 														@endforeach      
 													</select>
 												</div>
@@ -594,6 +604,13 @@
             clearText: "เคลียร์",
             time: false
         });
+
+		$(document).on('keyup', '#expereincemonth', function(e) {
+			console.log($(this).val());
+			if($(this).val() > 12 ){
+				$(this).val(12);
+			}
+		});
     </script>	
 @stop
 

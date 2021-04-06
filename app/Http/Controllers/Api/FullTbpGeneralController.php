@@ -41,9 +41,9 @@ class FullTbpGeneralController extends Controller
             $fulltbpresponsibleperson->position = $request->responsibleposition;
             $fulltbpresponsibleperson->phone1 = $request->responsiblephone;
             $fulltbpresponsibleperson->phone2 = $request->responsibleworkphone;
-            $fulltbpresponsibleperson->educationhistory = $request->responsibleeducationhistory;
-            $fulltbpresponsibleperson->experiencehistory = $request->responsibleexperiencehistory;
-            $fulltbpresponsibleperson->traininghistory = $request->responsibletraininghistory;
+            // $fulltbpresponsibleperson->educationhistory = $request->responsibleeducationhistory;
+            // $fulltbpresponsibleperson->experiencehistory = $request->responsibleexperiencehistory;
+            // $fulltbpresponsibleperson->traininghistory = $request->responsibletraininghistory;
             $fulltbpresponsibleperson->save();
         }else{
             FullTbpResponsiblePerson::where('full_tbp_id',$request->id)->first()->update([
@@ -54,9 +54,9 @@ class FullTbpGeneralController extends Controller
                 'position' => $request->responsibleposition,
                 'phone1' => $request->responsiblephone,
                 'phone2' => $request->responsibleworkphone,
-                'educationhistory' => $request->responsibleeducationhistory,
-                'experiencehistory' => $request->responsibleexperiencehistory,
-                'traininghistory' => $request->responsibletraininghistory,
+                // 'educationhistory' => $request->responsibleeducationhistory,
+                // 'experiencehistory' => $request->responsibleexperiencehistory,
+                // 'traininghistory' => $request->responsibletraininghistory,
             ]);
         }
     }
