@@ -165,7 +165,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>ชื่อเอกสาร <small>เช่น หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ</small><span class="text-danger">*</span></label>
+                                <label>ชื่อเอกสาร <small>เช่น หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ</small><span class="text-danger">*</span></label>
                                 <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
                             </div>
                         </div>
@@ -1007,7 +1007,7 @@
 									<div class="form-group">
 											<label for="">แนบเอกสาร </label>
 										<a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">อัปโหลดเอกสารแนบ</a> 
-										<p><small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small></p>
+										<p><small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small></p>
 										
 											<div class="table-responsive">
 												<table class="table table-bordered table-striped">

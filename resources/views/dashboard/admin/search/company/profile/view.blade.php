@@ -364,7 +364,7 @@
 											{{-- <div class="col-md-12" > --}}
 												<label for="">แนบเอกสารข้อมูลทั่วไป  </label>
 											{{-- <a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">อัปโหลดเอกสารแนบ</a>  --}}
-											<p><small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small></p>
+											<p><small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small></p>
 											
 												<div class="table-responsive">
 													<table class="table table-bordered table-striped">

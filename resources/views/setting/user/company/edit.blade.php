@@ -380,7 +380,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">เอกสารแนบ  </label>
-                                    <a href="#" id="btnuploadcompanydoc" class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนารับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small>
+                                    <a href="#" id="btnuploadcompanydoc" class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">คลิกเพิ่ม</a> <small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12" >
