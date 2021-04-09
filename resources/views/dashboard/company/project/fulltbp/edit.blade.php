@@ -27,6 +27,12 @@
 							</select>
 						</div>
 					</div>
+					<div class="col-md-6" id="otherprefix_wrapper" hidden>
+						<div class="form-group">
+							<label>ระบุคำนำหน้าชื่อ</label>
+							<input type="text" id="otherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
+						</div>
+					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
@@ -43,6 +49,12 @@
 						<div class="form-group">
 							<label>ตำแหน่ง<span class="text-danger">*</span></label>
 							<div id="employ_position_wrapper"></div>
+						</div>
+					</div>
+					<div class="col-md-6" id="employ_otherposition_wrapper" hidden>
+						<div class="form-group">
+							<label>ตำแหน่ง โปรดระบุ</label><span class="text-danger">*</span>
+							<input type="text" id="otherboardposition" placeholder="ตำแหน่ง โปรดระบุ" class="form-control form-control-lg">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -87,9 +99,18 @@
 							<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
 							<select id="employprefix_research" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 								@foreach ($prefixes as $prefix)
+								    @if ($prefix->name != 'อื่นๆ')
 									<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+									@endif
+									
 								@endforeach
 							</select>
+						</div>
+					</div>
+					<div class="col-md-6" id="otherprefix_research_wrapper" hidden>
+						<div class="form-group">
+							<label>ระบุคำนำหน้าชื่อ</label>
+							<input type="text" id="otherprefix_research" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -163,6 +184,12 @@
 							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
+					<div class="col-md-6" id="otherprefix_projectmember_wrapper" hidden>
+						<div class="form-group">
+							<label>ระบุคำนำหน้าชื่อ</label>
+							<input type="text" id="otherprefix_projectmember" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
+						</div>
+					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
@@ -227,29 +254,35 @@
 									<input type="text" id="employid" value="" hidden>
 									<div class="row">
 										<div class="col-md-4">
-										<div class="form-group">
-											<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-											<div id="employprefix_wrapper"></div>
+											<div class="form-group">
+												<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+												<div id="employprefix_wrapper"></div>
+											</div>
 										</div>
+										<div class="col-md-4" id="get_otherprefix_wrapper" hidden>
+											<div class="form-group">
+												<label>ระบุคำนำหน้าชื่อ</label>
+												<input type="text" id="getotherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat20" >
+											</div>
 										</div>
 										<div class="col-md-4">
-										<div class="form-group">
-											<label>ชื่อ</label><span class="text-danger">*</span>
-											<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
-										</div>
+											<div class="form-group">
+												<label>ชื่อ</label><span class="text-danger">*</span>
+												<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat20" >
+											</div>
 										</div>
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>นามสกุล</label><span class="text-danger">*</span>
-											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
+											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" >
 										</div>
 										</div>
-										<div class="col-md-4">
+										{{-- <div class="col-md-4">
 										<div class="form-group">
 											<label>ตำแหน่ง</label>
 											<div id="employposition_wrapper"></div>
 										</div>
-										</div>
+										</div> --}}
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>โทรศัพท์</label><span class="text-danger">*</span>
@@ -270,7 +303,7 @@
 										</div>
 										<div class="col-md-12">
 											{{-- <div class="form-group"> --}}
-												<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไขข้อมูล</button>
+												<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-pencil font-size-base mr-1"></i> แก้ไข</button>
 											{{-- </div> --}}
 											</div>
 									</div>
@@ -283,9 +316,10 @@
 								</div>
 
 								<div class="tab-pane fade" id="left-icon-employeducation">
-									<span class="text-danger">*กรุณาบันทึกวุฒิการศึกษาสูงสุดก่อน แล้วเรียงลำดับลงมา</span>
+									
 									<div class="form-group">	
-										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
+										<a href="" class="btn btn-warning btn-icon btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add mr-2"></i>เพิ่ม</a>
+										
 									</div>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
@@ -305,9 +339,10 @@
 
 								</div>
 								<div class="tab-pane fade" id="left-icon-employexpereince">
-									<span class="text-danger">*กรุณาบันทึกประสบการณ์ทำงานจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span>
+									{{-- <span class="text-danger">*กรุณาบันทึกประสบการณ์ทำงานจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span> --}}
 									<div class="form-group">	
-										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add"></i></a>
+										<a href="" class="btn btn-warning btn-icon btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add mr-2"></i>เพิ่ม</a>
+										
 									</div>
 
 									<div class="table-responsive">
@@ -338,7 +373,7 @@
 											<thead class="bg-info">
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
-													<th style="width:200px">ดาวน์โหลด</th>
+													<th style="width:200px">เพิ่มเติม</th>
 												</tr>
 											</thead>
 											<tbody id="fulltbp_board_attachment_wrapper_tr">                             
@@ -347,9 +382,10 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
-									<span class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span>
+									{{-- <span class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span> --}}
 									<div class="form-group">	
-										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a>
+										{{-- <a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a> --}}
+										<a href="" class="btn btn-warning btn-icon btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add mr-2"></i>เพิ่ม</a>
 									</div>
 
 									<div class="table-responsive">
@@ -390,9 +426,23 @@
 				<div class="row">
 					<label for="" class="text-danger">*กรุณาบันทึกวุฒิการศึกษาสูงสุดก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
-						<div class="form-group">
+						{{-- <div class="form-group">
 							<label>ระดับ</label><span class="text-danger">*</span>
 							<input type="text" id="employeducationlevel" placeholder="ระดับ" class="form-control form-control-lg stringformat20">
+						</div> --}}
+						<div class="form-group">
+							<label>ระดับการศึกษา</label>
+							<select id="educationlevel" data-placeholder="ระดับการศึกษา" class="form-control form-control-lg form-control-select2">
+								@foreach ($educationlevels as $educationlevel)
+									<option value="{{$educationlevel->id}}" >{{$educationlevel->name}}</option> 
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="col-md-12" id="othereducationlevel_wrapper" hidden>
+						<div class="form-group">
+							<label>ระบุระดับการศึกษา</label><span class="text-danger">*</span>
+							<input type="text" id="othereducationlevel" placeholder="ระบุระดับการศึกษา" class="form-control form-control-lg stringformat30">
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -436,13 +486,13 @@
 					<label for="" class="text-danger">*กรุณาบันทึกประสบการณ์ทำงานจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>ช่วงเวลาการทำงานเริ่มต้น</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencestartdate" placeholder="ช่วงเวลาการทำงานเริ่มต้น" class="form-control form-control-lg">
+							<label>ปีทำงานเริ่มต้น</label><span class="text-danger">*</span>
+							<input type="text" id="employexperiencestartdate" placeholder="ปีทำงานเริ่มต้น" class="form-control form-control-lg numeralformatyear">
 						</div>
 
 						<div class="form-group">
-							<label>ช่วงเวลาการทำงานสิ้นสุด</label><span class="text-danger">*</span>
-							<input type="text" id="employexperienceenddate" placeholder="ช่วงเวลาการทำงานสิ้นสุด" class="form-control form-control-lg">
+							<label>ปีการทำงานสิ้นสุด</label><span class="text-danger">*</span>
+							<input type="text" id="employexperienceenddate" placeholder="ปีการทำงานสิ้นสุด" class="form-control form-control-lg numeralformatyear">
 						</div>
 						<div class="form-group">
 							<label>บริษัท</label><span class="text-danger">*</span>
@@ -1540,6 +1590,7 @@
 														<div class="col-md-12">
 															<div class="form-group">
 																<label><strong>1.6) แผนผังองค์กร (Organization Chart)</strong><span class="text-danger">*</span> (ไฟล์ jpg, png ขนาด 600 x 400px ขนาดไม่เกิน 1 MB)</label>
+																<span id="organizationcharterror" class="form-text text-danger mb-2" hidden >*กรุณาเพิ่มแผนผังองค์กร</span>
 																<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" onclick="document.getElementById('organizeimg').click();"><i class="icon-add mr-2"></i>อัปโหลด</button>
 																	<input type="file" style="display:none;" id="organizeimg" data-id="{{$fulltbp->minitbp->businessplan->company->id}}" name="organizeimg" accept="image/*"/>
 																<div class="text-center">
@@ -1555,9 +1606,9 @@
 
 															</div>
 														</div>
-														<legend>
+														<div class="col-md-12">
 															<label for="" style="font-size: 16px"><strong>1.7) รายการบุคลากร</strong><span class="text-danger">*</span></label>
-														</legend>
+														</div>
 														<div class="col-md-12">
 															<div class="row">
 																<div class="col-md-3">
@@ -1641,7 +1692,7 @@
 																					<tr >                                        
 																						<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
 																						<td> 
-																							<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																							<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																							<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcompanyprofileattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
@@ -1673,8 +1724,21 @@
 																	<tbody id="fulltbp_companyemploy_wrapper_tr">    
 																		@foreach ($companyemploys->where('employ_position_id','<=',5) as $companyemploy)
 																			<tr >                                        
-																				<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
-																				<td> {{$companyemploy->employposition->name}} </td> 
+																				<td> 
+																					@if ($companyemploy->prefix->name == 'อื่นๆ')
+																						{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}}
+																						@else
+																						{{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}
+																					@endif
+																					</td> 
+																				<td> 
+																					@if ($companyemploy->employposition->name == 'อื่นๆ')
+																					{{$companyemploy->otherposition}} 
+																						@else
+																						{{$companyemploy->employposition->name}} 
+																					@endif
+																					
+																				</td> 
 																				<td> {{$companyemploy->phone}} </td>                                            
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
@@ -1735,7 +1799,7 @@
 																		<tbody id="fulltbp_researcher_wrapper_tr">    
 																			@foreach ($companyemploys->where('employ_position_id',6)->reverse() as $companyemploy)
 																				<tr >                                        
-																					<td> {{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
+																					<td> {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
 																					<td> {{$companyemploy->employposition->name}} </td> 
 																					<td> {{$companyemploy->phone}} </td>                                            
 																					<td> {{$companyemploy->workphone}} </td> 
@@ -2173,7 +2237,7 @@
 																						<tr >                                        
 																							<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
 																							<td> 
-																								<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																								<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																								<a type="button" data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcertifyattachment">ลบ</a>                                       
 																							</td>
 																						</tr>
@@ -2209,7 +2273,7 @@
 																					<tr>                                        
 																						<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
 																						<td> 
-																							<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																							<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																							<a type="button" data-id="{{$fulltbpprojectawardattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpawardattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
@@ -2249,7 +2313,7 @@
 																					<tr >                                        
 																						<td> {{$fulltbpprojectstandard->name}} </td>                                            
 																						<td> 
-																							<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																							<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																							<a type="button" data-id="{{$fulltbpprojectstandard->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpstandardattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
@@ -2410,7 +2474,7 @@
 																			<tr >                                        
 																				<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
 																				<td> 
-																					<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																					<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																					<a type="button" data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpmodelcanvasattachment">ลบ</a>                                       
 																				</td>
 																			</tr>
@@ -2452,7 +2516,7 @@
 																				<tr >                                        
 																					<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
 																					<td> 
-																						<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																						<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																						<a type="button" data-id="{{$fullTbpmarketattachmentswot->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpswotattachment">ลบ</a>                                       
 																					</td>
 																				</tr>
@@ -2965,30 +3029,10 @@
 		}
 
 		$("#table_gantt_wrapper").tableDnD();
-        // Make a nice striped effect on the table
-        // table_2 = $("#table-2");
-        // table_2.find("tr:even").addClass("alt");
-        // // Initialise the second table specifying a dragClass and an onDrop function that will display an alert
-        // table_2.tableDnD({
-        //     onDragClass: "myDragClass",
-        //     onDrop: function(table, row) {
-        //         var rows = table.tBodies[0].rows;
-        //         var debugStr = "Row dropped was "+row.id+". New order: ";
-        //         for (var i=0; i<rows.length; i++) {
-        //             debugStr += rows[i].id+" ";
-        //         }
-        //         $(table).parent().find('.result').text(debugStr);
-        //     },
-        //     onDragStart: function(table, row) {
-        //         $(table).parent().find('.result').text("Started dragging row "+row.id);
-        //     }
-        // });
+
 	});
 	$(document).on('keyup', '#ganttnummonth', function(e) {
-		// console.log('ddd');
-		// if($(this).val() > 36){
-		//     $(this).val(36);
-		// }
+	
 	});
 </script>
 @stop

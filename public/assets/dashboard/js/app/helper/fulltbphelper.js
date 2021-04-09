@@ -59,7 +59,7 @@ $("#companygeneraldoc").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -71,6 +71,8 @@ $("#companygeneraldoc").on('change', function() {
                     $("#fulltbp_companyprofile_attachment_wrapper").attr("hidden",true);
                  }
                  $('#modal_add_companydoc').modal('hide');
+                 $('#companydocname').val('')
+                 this.files[0].val('');
         }
     });
 });
@@ -97,7 +99,7 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -114,10 +116,8 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
     });
 }); 
 
-
 $(document).on('click', '#btn_edit_employ', function(e) {
-    console.log($(this).data('id'));
-    Employ.editEmploy($('#employid').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {
+    Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {
         console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
@@ -192,15 +192,27 @@ $(document).on("click",".deletecompanyemploy",function(e){
 }); 
 
 $(document).on('click', '#btn_modal_add_employeducation', function(e) {
-    if($('#employeducationlevel').val() == '' || $('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyear').val() == ''){
+    
+ 
+    if($('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyear').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
-    Employ.addEmployEducation($('#employid').val(),$('#employeducationlevel').val(),$('#employeducationinstitute').val(),$('#employeducationmajor').val(),$('#employeducationyear').val()).then(data => {
+    console.log($('#educationlevel').val())
+   
+    Employ.addEmployEducation($('#employid').val(),$('#educationlevel').val(),$('#othereducationlevel').val(),$('#employeducationinstitute').val(),$('#employeducationmajor').val(),$('#employeducationyear').val()).then(data => {
         console.log(data);
         var html = '';
         data.forEach(function (education,index) {
+            var educationlevel = education.employeducationlevel;
+            if(educationlevel == 'อื่นๆ'){
+                educationlevel = education.otheremployeducationlevel;
+            }
             html += `<tr >                                        
-                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
                 <td> ${education.employeducationyear} </td> 
@@ -213,32 +225,36 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
     // .catch(error => {})
 });
 
-$(function () {
-    $('#employexperiencestartdate').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        clearButton: true,
-        weekStart: 1,
-        cancelText: "ยกเลิก",
-        okText: "ตกลง",
-        clearText: "เคลียร์",
-        time: false
-    });
-});
+// $(function () {
+//     $('#employexperiencestartdate').bootstrapMaterialDatePicker({
+//         format: 'DD/MM/YYYY',
+//         clearButton: true,
+//         weekStart: 1,
+//         cancelText: "ยกเลิก",
+//         okText: "ตกลง",
+//         clearText: "เคลียร์",
+//         time: false
+//     });
+// });
 
-$(function () {
-    $('#employexperienceenddate').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        clearButton: true,
-        weekStart: 1,
-        cancelText: "ยกเลิก",
-        okText: "ตกลง",
-        clearText: "เคลียร์",
-        time: false
-    });
-});
+// $(function () {
+//     $('#employexperienceenddate').bootstrapMaterialDatePicker({
+//         format: 'DD/MM/YYYY',
+//         clearButton: true,
+//         weekStart: 1,
+//         cancelText: "ยกเลิก",
+//         okText: "ตกลง",
+//         clearText: "เคลียร์",
+//         time: false
+//     });
+// });
 
 $(document).on('click', '#btn_modal_add_employexperience', function(e) {
     if($('#employexperiencestartdate').val() == '' || $('#employexperienceenddate').val() == '' || $('#employexperiencecompany').val() == '' || $('#employexperiencebusinesstype').val() == '' || $('#employexperiencestartposition').val() == '' || $('#employexperienceendposition').val() == '' ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบนะ!',
+        });
         return;
     }
     Employ.addEmployExperience($('#employid').val(),$('#employexperiencestartdate').val(),$('#employexperienceenddate').val(),$('#employexperiencecompany').val(),$('#employexperiencebusinesstype').val(),$('#employexperiencestartposition').val(),$('#employexperienceendposition').val()).then(data => {
@@ -246,7 +262,7 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
         var html = '';
         data.forEach(function (experience,index) {
             html += `<tr >                                        
-                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                <td> ${experience.startdate} - ${experience.enddate}</td>                                            
                 <td> ${experience.company} </td> 
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
@@ -262,6 +278,10 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
 
 $(document).on('click', '#btn_modal_add_employtraining', function(e) {
     if($('#employtrainingdate').val() == '' || $('#employtrainingcourse').val() == '' ||$('#employtrainingowner').val() == '' ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Employ.addEmployTraining($('#employid').val(),$('#employtrainingdate').val(),$('#employtrainingcourse').val(),$('#employtrainingowner').val()).then(data => {
@@ -346,7 +366,7 @@ $(document).on("click",".deleteemployexperience",function(e){
                 console.log(data);
                 data.forEach(function (experience,index) {
                     html += `<tr >                                        
-                        <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                        <td> ${experience.startdate} - ${experience.enddate}</td>                                            
                         <td> ${experience.company} </td> 
                         <td> ${experience.businesstype} </td>                                            
                         <td> ${experience.startposition} </td> 
@@ -412,6 +432,10 @@ $(document).on('click', '#btnstckholder', function(e) {
 
 $(document).on('click', '#btn_modal_add_stockholder', function(e) {
     if($('#employsearch').val() == '' || $('#relationwithceo').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     StockHolder.addStockHolder($('#companyid').val(),$('#employsearch').val(),$('#relationwithceo').val()).then(data => {
@@ -578,6 +602,10 @@ $(document).on('click', '#btnaddprojectechdev', function(e) {
 
 $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
     if($('#tectdevleveltechnology').val() == '' || $('#tectdevleveltechnologypresent').val() == '' ||$('#tectdevleveltechnologyproject').val() == '' ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Project.addTechDevLevel($(this).data('id'),$('#tectdevleveltechnology').val(),$('#tectdevleveltechnologypresent').val(),$('#tectdevleveltechnologyproject').val()).then(data => {
@@ -755,13 +783,14 @@ $(document).on('change', '#certify', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_certify_wrapper_tr").html(html);
                  $('#modal_add_certify').modal('hide');
+                 $('#certifyname').val('')
         }
     });
 });
@@ -785,7 +814,7 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -820,13 +849,15 @@ $(document).on('change', '#award', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_award_wrapper_tr").html(html);
                  $('#modal_add_award').modal('hide');
+                 
+                 $('#awardname').val('')
         }
     });
 });
@@ -850,7 +881,7 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -885,13 +916,14 @@ $(document).on('change', '#standard', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_standard_wrapper_tr").html(html);
                  $('#modal_add_standard').modal('hide');
+                 $('#standardname').val('')
         }
     });
 });
@@ -915,7 +947,7 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -934,6 +966,10 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
       })
 
     if($('#plandetail').val() == '' || $('#ganttnummonth').val() == '' || $('#ganttyear').val() == '' || data.length == 0){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
       Project.addPlan($(this).data('id'),$('#plandetail').val(),data,$('#ganttnummonth').val(),$('#ganttyear').val()).then(data => {
@@ -1254,7 +1290,7 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1287,7 +1323,7 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1328,7 +1364,7 @@ $(document).on('change', '#swotfile', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1360,7 +1396,7 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1397,7 +1433,7 @@ $(document).on('change', '#financialplan', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1428,7 +1464,7 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1442,6 +1478,10 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
 
 $(document).on('click', '#btn_modal_add_sell', function(e) {
     if($('#productname').val() == '' || $('#sellpresent').val() == '' || $('#sellpast1').val() == '' || $('#sellpast2').val() == '' || $('#sellpast3').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.addSell($(this).data('id'),$('#productname').val(),$('#sellpresent').val(),$('#sellpast1').val(),$('#sellpast2').val(),$('#sellpast3').val()).then(data => {
@@ -1516,6 +1556,10 @@ $(document).on('click', '.editsell', function(e) {
 
 $(document).on('click', '#btn_modal_edit_sell', function(e) {
     if($('#productnameedit').val() == '' || $('#sellpresentedit').val() == '' || $('#sellpastedit1').val() == '' || $('#sellpastedit2').val() == '' || $('#sellpastedit3').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.editSell($('#sellid').val(),$('#productnameedit').val(),$('#sellpresentedit').val(),$('#sellpastedit1').val(),$('#sellpastedit2').val(),$('#sellpastedit3').val()).then(data => {
@@ -1574,6 +1618,10 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
 
 $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
     if($('#debtpartner').val() == '' || $('#numproject').val() == '' || $('#debtpartnertaxid').val() == '' || $('#debttotalyearsell').val() == '' || $('#debtpercenttosale').val() == '' || $('#debtpartneryear').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.addDebtPartner($(this).data('id'),$('#debtpartner').val(),$('#numproject').val(),$('#debtpartnertaxid').val(),$('#debttotalyearsell').val(),$('#debtpercenttosale').val(),$('#debtpartneryear').val()).then(data => {
@@ -1615,6 +1663,10 @@ $(document).on('click', '.editdebtpartner', function(e) {
 
 $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
     if($('#debtpartneredit').val() == '' || $('#numprojectedit').val() == '' || $('#debtpartnertaxidedit').val() == '' || $('#debttotalyearselledit').val() == '' || $('#debtpercenttosaleedit').val() == '' || $('#debtpartneryearedit').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.editDebtPartner($('#debtpartnerid').val(),$('#debtpartneredit').val(),$('#numprojectedit').val(),$('#debtpartnertaxidedit').val(),$('#debttotalyearselledit').val(),$('#debtpercenttosaleedit').val(),$('#debtpartneryearedit').val()).then(data => {
@@ -1677,6 +1729,10 @@ $(document).on("click",".deletedebtpartner",function(e){
 
 $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
     if($('#creditpartner').val() == '' || $('#creditpartnertaxid').val() == '' || $('#credittotalyearsell').val() == '' || $('#creditpercenttosale').val() == '' || $('#creditpartneryear').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.addCreditPartner($(this).data('id'),$('#creditpartner').val(),$('#creditpartnertaxid').val(),$('#credittotalyearsell').val(),$('#creditpercenttosale').val(),$('#creditpartneryear').val()).then(data => {
@@ -1715,6 +1771,10 @@ $(document).on('click', '.editcreditpartner', function(e) {
 
 $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
     if($('#creditpartneredit').val() == '' || $('#creditpartnertaxidedit').val() == '' || $('#credittotalyearselledit').val() == '' || $('#creditpercenttosaleedit').val() == '' || $('#creditpartneryearedit').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.editCreditPartner($('#creditpartnerid').val(),$('#creditpartneredit').val(),$('#creditpartnertaxidedit').val(),$('#credittotalyearselledit').val(),$('#creditpercenttosaleedit').val(),$('#creditpartneryearedit').val()).then(data => {
@@ -1793,6 +1853,10 @@ $(document).on('click', '.editasset', function(e) {
 
 $(document).on('click', '#btn_modal_edit_asset', function(e) {
     if($('#assetcostedit').val() == '' || $('#assetquantityedit').val() == '' || $('#assetpriceedit').val() == '' || $('#assetspecificationedit').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.editAsset($('#assetid').val(),$('#assetcostedit').val(),$('#assetquantityedit').val(),$('#assetpriceedit').val(),$('#assetspecificationedit').val()).then(data => {
@@ -1831,6 +1895,10 @@ $(document).on('click', '.editinvestment', function(e) {
 
 $(document).on('click', '#btn_modal_edit_investment', function(e) {
     if($('#investmentcostedit').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.editInvestment($('#investmentid').val(),$('#investmentcostedit').val()).then(data => {
@@ -1867,6 +1935,10 @@ $(document).on('click', '.editcost', function(e) {
 
 $(document).on('click', '#btn_modal_edit_cost', function(e) {
     if($('#costexistingedit').val() == '' || $('#costneededit').val() == '' || $('#costapprovededit').val() == '' || $('#costplanedit').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
     Sell.editCost($('#costid').val(),$('#costexistingedit').val(),$('#costneededit').val(),$('#costapprovededit').val(),$('#costplanedit').val()).then(data => {
@@ -1933,7 +2005,7 @@ $(document).on('change', '#companydoc', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1964,7 +2036,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -2009,9 +2081,10 @@ $(document).on('change', '#organizeimg', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                // console.log(data)
                 var imgpath = route.url + '/'+ data.organizeimg;
                 $("#organizeimgholder").attr("src", imgpath);
+                $("#organizationcharterror").attr("hidden",true);
                 //organizeimgholder
         }
     });
@@ -2059,16 +2132,19 @@ $('.steps-basic').steps({
                 hidden = 'hidden';
                 $("#appceptagreement_wrapper").attr("hidden",true);
             }
+            // $(document).find(".actions ul").append(`
+            //     <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
+            //     <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
+            // `);
+
             $(document).find(".actions ul").append(`
-                <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-                <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
+            <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
+            
             `);
 
             if(route.submitstatus !=4 && (route.refixstatus == 0 || route.refixstatus == 2 )){
                 var pdfpath = route.url + '/'+ $('#pdfname').val();
-                // console.log();
-                // var pdf = "{{$fulltbp->attachment}}";
-                // $('#pdfname').val(pdf);
+
                 PDFObject.embed(pdfpath, "#example1");
             }else{
                 var selected_director = [];
@@ -2118,6 +2194,17 @@ $('.steps-basic').steps({
             }
 
         }
+
+    //    console.log($('#organizeimgholder').prop('src')) ; //orgimg.png
+
+       if ($('#organizeimgholder').prop('src').includes("orgimg.png") == true)
+       {
+           $("#organizationcharterror").attr("hidden",false);
+           return;
+       }else{
+           $("#organizationcharterror").attr("hidden",true);
+       }
+
         if ($('#companyhistory').summernote('isEmpty'))
         {
             $("#companyhistoryerror").attr("hidden",false);
@@ -2397,7 +2484,7 @@ $(document).on('change', '#boardattachment', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+      
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -2427,7 +2514,7 @@ $(document).on("click",".deleteboardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                             <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -2558,6 +2645,13 @@ function submitNoAttachement(id,pdfname){
 
 
 $(document).on('click', '#btnaddboard', function(e) {
+    $('#employname').val('') ;
+    $('#employlastname').val('');
+    $('#employposition').val('');
+    $('#employphone').val('');
+    $('#employworkphone').val('');
+    $('#employemail').val('');
+
     Employ.getEmployPosition().then(data => {
         var selectemployposition = `<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">`;
         data.forEach(function (position,index) {
@@ -2575,7 +2669,7 @@ $(document).on('click', '#btnaddboard', function(e) {
 });
 
 $(document).on('click', '.editEmployinfo', function(e) {
-     
+   
     Employ.getEmploy($(this).data('id')).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         data.prefixes.forEach(function (prefix,index) {
@@ -2584,9 +2678,16 @@ $(document).on('click', '.editEmployinfo', function(e) {
                 selected = 'selected';
             }
             selectprefix += `<option value="${prefix['id']}" ${selected} >${prefix['name']}</option>`
+            if(data.employ['prefix_id'] == '5'){
+                $("#get_otherprefix_wrapper").attr("hidden",false);
+                $("#getotherprefix").val(data.employ['otherprefix']);
+            }else{
+                $("#get_otherprefix_wrapper").attr("hidden",true);
+            }
             });
             selectprefix += `</select>`;
         $("#employprefix_wrapper").html(selectprefix);
+
         $(".form-control-select2").select2();
         var selectemployposition = `<select id="employposition_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         data.employpositions.forEach(function (position,index) {
@@ -2611,9 +2712,10 @@ $(document).on('click', '.editEmployinfo', function(e) {
         $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
 
         var experiencetable = '';
+        
         data.employexperiences.forEach(function (experience,index) {
             experiencetable += `<tr >                                        
-                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                <td> ${experience.startdate} - ${experience.enddate}</td>                                            
                 <td> ${experience.company} </td> 
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
@@ -2638,7 +2740,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
                   <td> 
-                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                     <a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a> 
                   </td> 
               </tr>`
@@ -2699,7 +2801,7 @@ function modaltrigger(id) {
         var experiencetable = '';
         data.employexperiences.forEach(function (experience,index) {
             experiencetable += `<tr >                                        
-                <td> ${experience.startdateth} - ${experience.enddateth}</td>                                            
+                <td> ${experience.startdate} - ${experience.enddate}</td>                                            
                 <td> ${experience.company} </td> 
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
@@ -2724,7 +2826,7 @@ function modaltrigger(id) {
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
                   <td> 
-                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                     <a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a> 
                   </td> 
               </tr>`
@@ -2750,7 +2852,7 @@ $(document).on('click', '#btnaddresearch', function(e) {
     Employ.getEmployPosition().then(data => {
         var selectemployposition = `<select id="employposition_research" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
         data.forEach(function (position,index) {
-            if(index == 5){
+            if(index >= 5){
                 selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
             }
         });
@@ -2764,17 +2866,26 @@ $(document).on('click', '#btnaddresearch', function(e) {
 
 $(document).on('click', '#btn_modal_add_employ', function(e) {
     if($('#employname').val() == '' || $('#employlastname').val() == '' || $('#employposition').val() == '' || $('#employphone').val() == '' || $('#employworkphone').val() == '' || $('#employemail').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
-    Employ.saveEmploy($('#employprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
+    Employ.saveEmploy($('#employprefix').val(),$('#otherprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#otherboardposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
         console.log(data);
        var dataid = 0;
         var html = ``;
+       
         data.forEach(function (employ,index) {
             if(employ.employ_position_id < 6 ){
+                var prefix = employ.prefix['name'];
+                if(prefix = 'อื่นๆ'){
+                    prefix = employ.otherprefix;
+                }
                 dataid = employ.id;
                 html += `<tr >                                        
-                    <td> ${employ.name}${employ.lastname} </td>                                            
+                    <td> ${prefix}${employ.name}${employ.lastname} </td>                                            
                     <td> ${employ.employposition['name']} </td> 
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
@@ -2803,7 +2914,7 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
 });
 
 $(document).on('click', '#btn_modal_add_employ_research', function(e) {
-    Employ.saveEmploy($('#employprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
+    Employ.saveEmploy($('#employprefix_research').val(),$('#otherprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),'',$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
         var dataid = 0;
         var html = ``;
         data.forEach(function (employ,index) {
@@ -2892,9 +3003,13 @@ $(document).on('click', '#btnaddprojectmember', function(e) {
 
 $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
     if($('#employname_projectmember').val() == '' || $('#employlastname_projectmember').val() == '' || $('#employposition_projectmember').val() == '' || $('#employphone_projectmember').val() == '' || $('#employworkphone_projectmember').val() == '' || $('#employemail_projectmember').val() == '' ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
         return;
     }
-    Employ.saveEmploy($('#employprefix_projectmember').val(),$('#employname_projectmember').val(),$('#employlastname_projectmember').val(),$('#employposition_projectmember').val(),$('#employphone_projectmember').val(),$('#employworkphone_projectmember').val(),$('#employemail_projectmember').val()).then(data => {
+    Employ.saveEmploy($('#employprefix_projectmember').val(),$('#otherprefix_projectmember').val(),$('#employname_projectmember').val(),$('#employlastname_projectmember').val(),$('#employposition_projectmember').val(),'',$('#employphone_projectmember').val(),$('#employworkphone_projectmember').val(),$('#employemail_projectmember').val()).then(data => {
         console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
@@ -3105,3 +3220,37 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             }
 		}
 	});
+
+    $("#employprefix").on('change', function() {
+        if($("#employprefix option:selected").text() == 'อื่นๆ'){
+            $("#otherprefix_wrapper").attr("hidden",false);
+        } else{
+            $("#otherprefix_wrapper").attr("hidden",true);
+        }
+    });
+
+    // $("#employprefix_edit").on('change', function() {
+    $(document).on('change', '#employprefix_edit', function(e) {
+        if($("#employprefix_edit option:selected").text() == 'อื่นๆ'){
+            $("#get_otherprefix_wrapper").attr("hidden",false);
+        } else{
+            $("#get_otherprefix_wrapper").attr("hidden",true);
+        }
+    });
+    $(document).on('change', '#employposition', function(e) {
+        if($("#employposition option:selected").text() == 'อื่นๆ'){
+            $("#employ_otherposition_wrapper").attr("hidden",false);
+        } else{
+            $("#employ_otherposition_wrapper").attr("hidden",true);
+        }
+    });
+
+    $(document).on('change', '#educationlevel', function(e) {
+        if($("#educationlevel option:selected").text() == 'อื่นๆ'){
+            $("#othereducationlevel_wrapper").attr("hidden",false);
+        } else{
+            $("#othereducationlevel_wrapper").attr("hidden",true);
+        }
+    });
+    
+    

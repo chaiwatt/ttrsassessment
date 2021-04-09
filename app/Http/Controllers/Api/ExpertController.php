@@ -50,13 +50,26 @@ class ExpertController extends Controller
         $expertfield->order = $request->expertfieldnum;
         $expertfield->detail = $request->expertfielddetail;
         $expertfield->save();
-        $expertfields = ExpertField::where('user_id',$auth->id)->get();
+        $expertfields = ExpertField::where('user_id',$auth->id)->orderBy('order','asc')->get();
         return response()->json($expertfields);  
+    }
+    public function GetExpertField(Request $request){
+        $expertfield = ExpertField::find($request->id);
+        return response()->json($expertfield);  
     }
     public function DeleteExpertField(Request $request){
         $expertdetail = ExpertField::find($request->id)->delete();
         $expertfields = ExpertField::where('user_id',Auth::user()->id)->get();
         return response()->json($expertfields);  
+    }
+    public function EditExpertField(Request $request){
+        $auth = Auth::user();
+        ExpertField::find($request->id)->update([
+            'order' => $request->expertfieldnum,
+            'detail' => $request->expertfielddetail
+        ]);
+        $expertfields = ExpertField::where('user_id',$auth->id)->orderBy('order','asc')->get();
+        return response()->json($expertfields); 
     }
     public function AddExpertDoc(Request $request){
         $auth = Auth::user();

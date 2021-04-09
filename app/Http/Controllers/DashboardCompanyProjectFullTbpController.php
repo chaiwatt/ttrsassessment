@@ -23,6 +23,7 @@ use App\Model\FullTbpGantt;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
+use App\Model\EducationLevel;
 use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Helper\DateConversion;
@@ -182,6 +183,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $fulltbpresearchers = FullTbpResearcher::where('full_tbp_id',$fulltbp->id)->get(); 
         $signaturestatuses = SignatureStatus::get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
+        $educationlevels = EducationLevel::get();
         return view('dashboard.company.project.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -225,12 +227,12 @@ class DashboardCompanyProjectFullTbpController extends Controller
                                                 ->withFulltbpcompanydocs($fulltbpcompanydocs)
                                                 ->withFulltbpresearchers($fulltbpresearchers)
                                                 ->withSignaturestatuses($signaturestatuses)
-                                                // ->withFulltbpprojectplantransactions($fulltbpprojectplantransactions)
                                                 ->withFulltbpgantt($fulltbpgantt)
                                                 ->withMinmonth($minmonth)
                                                 ->withMaxmonth($maxmonth)
                                                 ->withAllyears($allyears)
-                                                ->withAuthorizeddirectors($authorizeddirectors);
+                                                ->withAuthorizeddirectors($authorizeddirectors)
+                                                ->withEducationlevels($educationlevels);
     }
 
     public function EditSave(Request $request,$id){

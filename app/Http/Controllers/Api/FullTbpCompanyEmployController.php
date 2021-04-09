@@ -29,10 +29,12 @@ class FullTbpCompanyEmployController extends Controller
         $companyemploy->full_tbp_id = $fulltpb->id;
         $companyemploy->company_id = $company->id;
         $companyemploy->prefix_id = $request->prefix;
+        $companyemploy->otherprefix = $request->otherprefix;
         $companyemploy->name = $request->name;
         $companyemploy->stockholder_id = '1';
         $companyemploy->lastname = $request->lastname;
         $companyemploy->employ_position_id = $request->position;
+        $companyemploy->otherposition = $request->otherposition;
         $companyemploy->phone = $request->phone;
         $companyemploy->workphone = $request->workphone;
         $companyemploy->email = $request->email;
@@ -67,6 +69,8 @@ class FullTbpCompanyEmployController extends Controller
 
     public function Edit(Request $request){      
         CompanyEmploy::find($request->id)->update([
+            'prefix_id' => $request->prefix,
+            'otherprefix' => $request->otherprefix,
             'name' => $request->name,
             'lastname' => $request->lastname,
             'employ_position_id' => $request->position,

@@ -209,14 +209,26 @@ font-size: 14px;
 .flag{
   width: 24px;
   padding-right: 6px;
-  margin-top: -1px;
+  margin-top: -3px;
+}
+
+.bgStyle3{
+  background-image: linear-gradient(100deg, #011049 34%, #064b9b 100%) !important;
+}
+.bgProcess{
+  background-image: linear-gradient(100deg, #011049 34%, #064b9b 100%) !important;
+}
+.bgProject{
+  background-image: linear-gradient(100deg, #011049 34%, #064b9b 100%) !important;
 }
 
 
 
-@media(max-width:1280px) {
+
+
+@media(max-width:1220px) {
   .flag{
-    width: 32px;
+    width: 45px;
     padding-right: 6px;
     border-radius: 10px;
   }

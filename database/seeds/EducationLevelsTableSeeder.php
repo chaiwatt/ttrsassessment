@@ -20,6 +20,9 @@ class EducationLevelsTableSeeder extends Seeder
             ],
             [
                 'name' => 'ปริญญาเอก'
+            ],
+            [
+                'name' => 'อื่นๆ'
             ]
         ]);
     }

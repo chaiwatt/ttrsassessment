@@ -43,65 +43,7 @@
                 {{ $errors->first() }}
             </div>
         @endif
-        {{-- <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>ประเภทการค้นหา</label><span class="text-danger">*</span>
-                                        <select name="searchgroup" id="searchgroup" data-placeholder="ประเภทการค้นหา" class="form-control form-control-lg form-control-select2">
-                                            <option value="0">ชื่อ-นามสกุล</option>
-                                            <option value="1">สาขาความเชี่ยวชาญ</option>
-                                            <option value="2">ชื่อโครงการ</option>
-                                            <option value="3">สถานะโครงการ</option>
-                                        </select>
-                                    </div>
-                                </div>    
-                                <div id="searchname_wrapper" class="col-md-6">
-                                    <label>ชื่อ-นามสกุล</label>
-                                    <input type="text"  name="searchname" id="searchname" value=""  placeholder="ชื่อ-นามสกุล" class="form-control form-control-lg" >
-                                </div>  
-                                <div id="searchexpertbranch_wrapper" class="col-md-6" hidden>
-                                    <label>สาขาความเชี่ยวชาญ</label><span class="text-danger">*</span>
-                                    <select name="searchexpertbranch" id="searchexpertbranch" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก สาขาความเชี่ยวชาญ===</option>
-                                        @foreach ($expertbranches as $expertbranch)
-                                            <option value="{{$expertbranch->id}}">{{$expertbranch->name}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div> 
-                                <div id="searchprojectname_wrapper" class="col-md-6" hidden >
-                                    <label>โครงการ</label>
-                                    <select name="searchprojectname" id="searchprojectname" data-placeholder="โครงการ" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก โครงการ===</option>
-                                        @foreach ($minitbps as $minitbp)
-                                            <option value="{{$minitbp->id}}">{{$minitbp->project}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div id="projectstatus_wrapper" class="col-md-6" hidden>
-                                    <label>สถานะโครงการ</label><span class="text-danger">*</span>
-                                    <select name="searchprojectstatus" id="searchprojectstatus" data-placeholder="สถานะโครงการ" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก สถานะโครงการ===</option>
-                                        <option value="2">กำลังดำเนินการ</option>
-                                        <option value="3">สิ้นสุดโครงการ</option>
-                                    </select>
-                                </div>        
-                                <div id="searchword_wrapper" class="col-md-6" hidden>
-                                    <label>คำค้น</label>
-                                    <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control form-control-lg" >
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>  
-                                    <button type="submit" name="btnsubmit" value="search" class="btn btn-sm bg-teal float-right">ค้นหา</button>  
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

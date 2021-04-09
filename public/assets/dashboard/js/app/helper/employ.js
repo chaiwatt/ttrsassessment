@@ -1,4 +1,4 @@
-function saveEmploy(prefix,name,lastname,position,phone,workphone,email){
+function saveEmploy(prefix,otherprefix,name,lastname,position,otherposition,phone,workphone,email){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/fulltbp/employ/add`,
@@ -6,9 +6,11 @@ function saveEmploy(prefix,name,lastname,position,phone,workphone,email){
           headers: {"X-CSRF-TOKEN":route.token},
           data: {
             prefix : prefix,
+            otherprefix : otherprefix,
             name : name,
             lastname :lastname,
             position :position,
+            otherposition : otherposition,
             phone :phone,
             workphone :workphone,
             email :email
@@ -61,7 +63,7 @@ function getEmployPosition(id){
     })
 }
 
-function editEmploy(id,name,lastname,position,phone,workphone,email){
+function editEmploy(id,prefix,otherprefix,name,lastname,position,phone,workphone,email){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/employ/edit`,
@@ -69,6 +71,8 @@ function editEmploy(id,name,lastname,position,phone,workphone,email){
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
           id:id,
+          prefix : prefix,
+          otherprefix : otherprefix,
           name : name,
           lastname :lastname,
           position :position,
@@ -105,7 +109,7 @@ function deleteEmployInfo(id){
     })
 }
 
-function addEmployEducation(id,employeducationlevel,employeducationinstitute,employeducationmajor,employeducationyear){
+function addEmployEducation(id,employeducationlevel,othereducationlevel,employeducationinstitute,employeducationmajor,employeducationyear){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/employ/education/add`,
@@ -114,6 +118,7 @@ function addEmployEducation(id,employeducationlevel,employeducationinstitute,emp
         data: {
           id:id,
           employeducationlevel : employeducationlevel,
+          othereducationlevel : othereducationlevel,
           employeducationinstitute :employeducationinstitute,
           employeducationmajor :employeducationmajor,
           employeducationyear :employeducationyear,

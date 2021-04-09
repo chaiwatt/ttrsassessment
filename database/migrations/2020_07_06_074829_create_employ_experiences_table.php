@@ -21,8 +21,8 @@ class CreateEmployExperiencesTable extends Migration
             $table->string('businesstype',120)->nullable();
             $table->string('startposition',120)->nullable();
             $table->string('endposition',120)->nullable();
-            $table->date('startdate')->nullable();
-            $table->date('enddate')->nullable();
+            $table->string('startdate')->nullable();
+            $table->string('enddate')->nullable();
             $table->timestamps();
         });
     }

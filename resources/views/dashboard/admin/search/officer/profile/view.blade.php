@@ -559,8 +559,8 @@
 
 		$(document).on('keyup', '#expereincemonth', function(e) {
 			console.log($(this).val());
-			if($(this).val() > 12 ){
-				$(this).val(12);
+			if($(this).val() > 11 ){
+				$(this).val(11);
 			}
 		});
     </script>	

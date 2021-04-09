@@ -10,14 +10,14 @@ class EmployExperience extends Model
     protected $fillable = [];
     protected $guarded = [];
 
-    protected $appends = ['startdateth','enddateth'];
+    // protected $appends = ['startdateth','enddateth'];
 
-    public function getStartdateThAttribute()
-    {
-        return DateConversion::engToThaiDate($this->startdate);
-    }
-    public function getEnddateThAttribute()
-    {
-        return DateConversion::engToThaiDate($this->enddate);
-    }
+    // public function getStartdateThAttribute()
+    // {
+    //     return DateConversion::engToThaiDate($this->startdate);
+    // }
+    // public function getEnddateThAttribute()
+    // {
+    //     return DateConversion::engToThaiDate($this->enddate);
+    // }
 }

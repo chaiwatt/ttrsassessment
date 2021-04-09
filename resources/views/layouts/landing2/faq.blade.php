@@ -1,4 +1,4 @@
-<div id="rs-faq" class="rs-faq rs-project style3 gray-color pt-50 md-pb-395 pb-50 md-pt-90 ">
+<div id="rs-faq" class="rs-faq rs-project style3 bgProject gray-color pt-50 md-pb-395 pb-50 md-pt-90 ">
     <div class="container">
         {{-- <div class="sec-title2 text-center mt-30"> --}}
    

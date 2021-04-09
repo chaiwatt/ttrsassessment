@@ -670,37 +670,37 @@
               convertMonth: function (month)
               {
                  if(month == "JAN"){
-                     return "มค.";
+                     return "ม.ค.";
                   }else if(month == "FEB"){
-                     return "กพ.";
+                     return "ก.พ.";
                   }else if(month == "MAR"){
-                     return "มีค.";
+                     return "มี.ค.";
                   }
                   else if(month == "APR"){
-                     return "เมษ.";
+                     return "เม.ษ.";
                   }
                   else if(month == "MAY"){
-                     return "พค.";
+                     return "พ.ค.";
                   }
                   else if(month == "JUN"){
-                     return "มิย.";
+                     return "มิ.ย.";
                   }
                   else if(month == "JUL"){
-                     return "กค.";
+                     return "ก.ค.";
                   }
                   else if(month == "AUG"){
-                     return "สค.";
+                     return "ส.ค.";
                   }
                   else if(month == "SEP"){
-                     return "กย.";
+                     return "ก.ย.";
                   }
                   else if(month == "OCT"){
-                     return "ตค.";
+                     return "ต.ค.";
                   }
                   else if(month == "NOV"){
-                     return "พย.";
+                     return "พ.ย.";
                   }else if(month == "DEC"){
-                     return "ธค.";
+                     return "ธ.ค.";
                   }else{
                      return month ;
                   }

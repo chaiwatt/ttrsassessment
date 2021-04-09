@@ -18,6 +18,7 @@ class CreateEmployEducationTable extends Migration
             $table->unsignedBigInteger('company_employ_id');
             $table->foreign('company_employ_id')->references('id')->on('company_employs')->onDelete('cascade');
             $table->string('employeducationlevel',120)->nullable();
+            $table->string('otheremployeducationlevel',120)->nullable();
             $table->string('employeducationinstitute',120)->nullable();
             $table->string('employeducationmajor',120)->nullable();
             $table->string('employeducationyear',120)->nullable();

@@ -197,55 +197,70 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-                                <select id="directorprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
-                                    @foreach ($prefixes as $prefix)
-                                        <option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
-                                    @endforeach
-                                </select>
-                            </div>
-							<div class="form-group" id="otherprefix_wrapper" hidden>
-                                <label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
-                                <input type="text" id="otherprefix" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
-                            </div>
-                            <div class="form-group">
-                                <label>ชื่อ</label><span class="text-danger">*</span>
-                                <input type="text" id="directorname" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
-                            </div>
-
-                            <div class="form-group">
-                                <label>นามสกุล</label><span class="text-danger">*</span>
-                                <input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+                        {{-- <div class="col-md-12"> --}}
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+									<select id="directorprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
+										@foreach ($prefixes as $prefix)
+											<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+										@endforeach
+									</select>
+								</div>
 							</div>
 
-							<div class="form-group">
-                                <label>ตำแหน่ง</label><span class="text-danger">*</span>
-								<select id="directorposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
-									<option value=""></option>
-									@foreach ($employpositions as $employposition)
-										<option value="{{$employposition->id}}" >{{$employposition->name}}</option> 
-									@endforeach
-								</select>
+							<div class="col-md-6" id="otherprefix_wrapper" hidden>
+								<div class="form-group" >
+									<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
+									<input type="text" id="otherprefix" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
+								</div>
 							</div>
-							<div class="form-group" id="otherposition_wrapper" hidden>
-                                <label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
-                                <input type="text" id="otherposition" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
-                            </div>
-							<div class="form-group">
-								<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ</a>
-								<div class="col-md-12">
-									<div id='sigdiv'>
-										{{-- @if (!Empty($user->signature))
-										<br>
-										<img src="{{asset($user->signature)}}" style="width: 180px;height:45px" alt="">
-										@endif --}}
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>ชื่อ</label><span class="text-danger">*</span>
+									<input type="text" id="directorname" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+						
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>นามสกุล</label><span class="text-danger">*</span>
+									<input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+             
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>ตำแหน่ง</label><span class="text-danger">*</span>
+									<select id="directorposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
+										<option value=""></option>
+										@foreach ($employpositions as $employposition)
+											<option value="{{$employposition->id}}" >{{$employposition->name}}</option> 
+										@endforeach
+									</select>
+								</div>
+							</div>
+						
+							<div class="col-md-6">
+								<div class="form-group" id="otherposition_wrapper" hidden>
+									<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
+									<input type="text" id="otherposition" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+						
+							<div class="col-md-12">
+								<div class="form-group">
+									<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ</a>
+									<div class="col-md-12">
+										<div id='sigdiv'>
+										</div>
 									</div>
 								</div>
 							</div>
+							
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
@@ -265,46 +280,80 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12">
-							<input type="text" id="authorized_director_id" hidden>
-                            <div class="form-group">
-                                <label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-                                <select id="directorprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
-                                </select>
-                            </div>
-							<div class="form-group" id="otherprefix_edit_wrapper" hidden>
-                                <label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
-                                <input type="text" id="otherprefix_edit" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
-                            </div>
-                            <div class="form-group">
-                                <label>ชื่อ</label><span class="text-danger">*</span>
-                                <input type="text" id="directorname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
-                            </div>
+                        {{-- <div class="col-md-12"> --}}
 
-                            <div class="form-group">
-                                <label>นามสกุล</label><span class="text-danger">*</span>
-                                <input type="text" id="directorlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+							<div class="col-md-6" >
+								<input type="text" id="authorized_director_id" hidden>
+								<div class="form-group">
+									<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+									<select id="directorprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
+									</select>
+								</div>
 							</div>
 
-							<div class="form-group">
-                                <label>ตำแหน่ง</label><span class="text-danger">*</span>
-								<select id="directorposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
-								</select>
+
+
+							<div class="col-md-6" id="otherprefix_edit_wrapper" hidden>
+								<div class="form-group" >
+									<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
+									<input type="text" id="otherprefix_edit" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
+								</div>
 							</div>
-							<div class="form-group" id="otherposition_edit_wrapper" hidden>
-                                <label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
-                                <input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
-                            </div>
-							{{-- <input name="signatureid" id="signatureid" type="text" hidden> --}}
-							<div class="form-group">
-								<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
-								<div class="col-md-12 mt-2">
-									<div id='sigdiv_edit'>
-										
+							
+
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>ชื่อ</label><span class="text-danger">*</span>
+									<input type="text" id="directorname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+
+
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>นามสกุล</label><span class="text-danger">*</span>
+									<input type="text" id="directorlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+
+                    
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>ตำแหน่ง</label><span class="text-danger">*</span>
+									<select id="directorposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
+									</select>
+								</div>
+							</div>
+
+						
+
+							<div class="col-md-6" id="otherposition_edit_wrapper" hidden>
+
+								<div class="form-group" >
+									<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
+									<input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
+									<div class="col-md-12 mt-2">
+										<div id='sigdiv_edit'>
+											
+										</div>
 									</div>
 								</div>
 							</div>
-                        </div>
+
+
+
+
+                        {{-- </div> --}}
                     </div>
                 </div>           
                 <div class="modal-footer">
@@ -611,7 +660,7 @@
 										<select name="businesstype" data-placeholder="ประเภทธุรกิจ" class="form-control form-control-lg form-control-select2">
 											@foreach ($businesstypes as $key => $businesstype)
 											@if (Auth::user()->user_group_id == 1)
-												@if ($key != 5)
+												@if ($key < 4)
 													<option value="{{$businesstype->id}}" 
 														@if ($businesstype->id == $user->company->business_type_id) 
 																selected 
@@ -621,7 +670,7 @@
 													</option> 
 												@endif
 											@else
-												@if ($key == 5)
+												@if ($key >= 4)
 													<option value="{{$businesstype->id}}" 
 														@if ($businesstype->id == $user->company->business_type_id) 
 																selected 
@@ -680,10 +729,9 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>หมวดหมู่หลัก ISIC</label>
+										<label>หมวดหมู่หลัก ISIC </label>
 										<select name="isic" id="isic" data-placeholder="หมวดหมู่หลัก ISIC" class="form-control form-control-lg form-control-select2">
 											@foreach ($isics as $isic)
-											{{-- @if (old('gender') == 'male') selected="selected" @endif --}}
 												<option value="{{$isic->id}}" 
 													@if ($user->company->isic_id == $isic->id) 
 													 	selected 
@@ -697,14 +745,14 @@
 								</div>
 								<div class="col-md-6">                                          
 									<div class="form-group">
-										<label>หมวดหมู่ย่อย ISIC</label>
+										<label>หมวดหมู่ย่อย ISIC {{old('subisic')}} </label>
 										<select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-lg form-control-select2">
 											@foreach ($isicsubs as $isicsub)
 												<option value="{{$isicsub->id}}" 
 													@if($user->company->isic_sub_id == $isicsub->id) 
 															selected 
 														@else
-															{{-- @if (old('subisic') == $isicsub->id) selected @endif --}}
+														@if (old('subisic') == $isicsub->id) selected @endif
 													@endif>{{$isicsub->name}}</option> 
 											@endforeach
 										</select>
@@ -1054,6 +1102,45 @@
 			url: "{{ url('/') }}",
 			token: $('meta[name="csrf-token"]').attr('content'),
         };
+
+		var isiccate = "{{$user->company->isic_id}}";
+		if(isiccate == ''){
+			var isicval = "{{old('isic')}}";
+			var subisicval = "{{old('subisic')}}";
+			console.log(isicval + " " + subisicval + ' ' + route.url);
+			getSubIsic(parseInt(isicval)).then(data => {
+				var html = ``;
+				data.subisics.forEach(function (subisic,index) {
+					var select ='';
+					if(subisicval == subisic['id']){
+						select = 'selected'
+					}
+					html +=`<option value="${subisic['id']}" ${select}>${subisic['name']}</option>`
+					});
+				$("#subisic").html(html);
+			})
+			.catch(error => {})
+		}
+
+		function getSubIsic(id){
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/api/company/getsubisic`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					id : id
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
+
         $("#file").on('change', function() {
             $("#filename").val(this.value);
         });

@@ -1,4 +1,4 @@
-<div class="rs-banner style3 pt-100 pb-100">
+<div class="rs-banner style3 bgStyle3 pt-100 pb-100">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">

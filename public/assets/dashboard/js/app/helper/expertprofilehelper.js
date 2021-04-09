@@ -1,28 +1,55 @@
 
 import * as Expert from './expert.js'
 import * as Geo from './location.js'
-
+var globaldata = [];
 $("#btn_modal_add_expertfield").on('click', function() {
-   Expert.addExpertfield($('#expertfieldnum').val(),$('#expertfielddetail').val()).then(data => {
-       if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == '')return;
-       var html ='';
-       data.forEach(function (expertdoc,index) {
-        html += `<tr >                                        
-            <td> ${expertdoc.order} </td>                                            
-            <td> ${expertdoc.detail} </td> 
-            <td> 
-                <a type="button" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield">ลบ</a>                                       
-            </td>
-        </tr>`
+    if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
         });
-     $("#expertfield_wrapper_tr").html(html);
-     if(data.length > 0){
-        $("#inpexpertfield").val(data.length);
-     }else{
-        $("#inpexpertfield").val('');
-     }
-     
-    }).catch(error => {})
+        return;
+    }
+    var cellIndexMapping = { 0: true };
+    var data = [];
+    
+    $("#expertfield_wrapper tr").each(function(rowIndex) {
+        $(this).find("td").each(function(cellIndex) {
+            if (cellIndexMapping[cellIndex])
+                data.push(parseInt($(this).text()));
+        });
+    });
+
+    if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
+        });
+        return;
+    }else{
+        Expert.addExpertfield($('#expertfieldnum').val(),$('#expertfielddetail').val()).then(data => {
+            if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == '')return;
+            var html ='';
+            data.forEach(function (expertdoc,index) {
+             html += `<tr >                                        
+                 <td> ${expertdoc.order} </td>                                            
+                 <td> ${expertdoc.detail} </td> 
+                 <td> 
+                 <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
+                 <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                        
+                 </td>
+             </tr>`
+             });
+          $("#expertfield_wrapper_tr").html(html);
+          if(data.length > 0){
+             $("#inpexpertfield").val(data.length);
+          }else{
+             $("#inpexpertfield").val('');
+          }
+          $('#modal_add_expertfield').modal('hide');
+         }).catch(error => {})
+    }
+
 });
 
 $(document).on("click",".deleteexpertfield",function(e){
@@ -46,7 +73,8 @@ $(document).on("click",".deleteexpertfield",function(e){
                         <td> ${expertdoc.order} </td>                                            
                         <td> ${expertdoc.detail} </td> 
                         <td> 
-                            <a type="button" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield">ลบ</a>                                       
+                        <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
+                        <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                       
                         </td>
                     </tr>`
                     });
@@ -63,7 +91,67 @@ $(document).on("click",".deleteexpertfield",function(e){
     });
 }); 
 
+$(document).on("click",".editexpertfield",function(e){
+    var cellIndexMapping = { 0: true };
+    
+    globaldata = [];
+    $("#expertfield_wrapper tr").each(function(rowIndex) {
+        $(this).find("td").each(function(cellIndex) {
+            if (cellIndexMapping[cellIndex])
+                globaldata.push(parseInt($(this).text()));
+        });
+    });
+    $("#expertfieldid").val($(this).data('id')); 
+        Expert.getExpertfield($(this).data('id')).then(data => {
+            $("#expertfieldnum_edit").val(data.order);     
+            $("#expertfielddetail_edit").val(data.detail); 
+            $("#currentid").val(data.order); 
+            
+            $('#modal_edit_expertfield').modal('show');
+        })
+    .catch(error => {})
 
+}); 
+$("#btn_modal_edit_expertfield").on('click', function() {
+    if($('#expertfieldnum_edit').val() == '' || $('#expertfielddetail_edit').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
+        return;
+    }
+console.log($('#currentid').val());
+    if(globaldata.indexOf(parseInt($('#expertfieldnum_edit').val())) != -1 && (parseInt($('#expertfieldnum_edit').val()) != parseInt($('#currentid').val()))){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
+        });
+        return;
+    }else{
+        Expert.editExpertfield( $("#expertfieldid").val(),$('#expertfieldnum_edit').val(),$('#expertfielddetail_edit').val()).then(data => {
+           
+            var html ='';
+            data.forEach(function (expertdoc,index) {
+             html += `<tr >                                        
+                 <td> ${expertdoc.order} </td>                                            
+                 <td> ${expertdoc.detail} </td> 
+                 <td> 
+                     <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
+                     <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                                                              
+                 </td>
+             </tr>`
+             });
+          $("#expertfield_wrapper_tr").html(html);
+          if(data.length > 0){
+             $("#inpexpertfield").val(data.length);
+          }else{
+             $("#inpexpertfield").val('');
+          }
+          $('#modal_edit_expertfield').modal('hide');
+         }).catch(error => {})
+    }
+
+});
 $("#expertdoc").on('change', function() {
     if($('#expertdocname').val() == '')return ;
     var file = this.files[0];
@@ -121,8 +209,8 @@ $(document).on("click",".deleteexpertdoc",function(e){
                     html += `<tr >                                        
                         <td> ${expertdoc.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
+                            <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary" data-toggle="modal">ดาวน์โหลด</a>
+                            <a type="button" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc" data-toggle="modal">ลบ</a>                                       
                         </td>
                     </tr>`
                     });

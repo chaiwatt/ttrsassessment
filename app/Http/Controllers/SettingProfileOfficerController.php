@@ -34,7 +34,7 @@ class SettingProfileOfficerController extends Controller
         $officerbanches = ExpertBranch::get();
         $educationlevels = EducationLevel::get();
         $officer = OfficerDetail::where('user_id',$userid)->first();
-        $officerfields = ExpertField::where('user_id',$user->id)->get();
+        $officerfields = ExpertField::where('user_id',$user->id)->orderBy('order','asc')->get();
         $officerdocs = ExpertDoc::where('user_id',$user->id)->get();
         
         return view('setting.profile.officer.edit')->withUser($user)

@@ -201,7 +201,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('deleteexperience','Api\ExpertController@DeleteExperience')->name('api.expert.deleteexperience');    
             Route::post('deleteeducation','Api\ExpertController@DeleteEducation')->name('api.expert.deleteeducation');        
             Route::post('addExpertfield','Api\ExpertController@AddExpertField')->name('api.expert.addExpertfield');    
-            Route::post('deleteExpertfield','Api\ExpertController@DeleteExpertField')->name('api.expert.deleteExpertfield');    
+            Route::post('getExpertfield','Api\ExpertController@GetExpertField')->name('api.expert.getExpertfield');    
+            Route::post('deleteExpertfield','Api\ExpertController@DeleteExpertField')->name('api.expert.deleteExpertfield');   
+            Route::post('editExpertfield','Api\ExpertController@EditExpertField')->name('api.expert.editExpertfield');
             Route::post('addexpertdoc','Api\ExpertController@AddExpertDoc')->name('api.expert.addexpertdoc');     
             Route::post('deleteexpertdoc','Api\ExpertController@DeleteExpertDoc')->name('api.expert.deleteexpertdoc'); 
             Route::post('assignexpert','Api\ExpertController@AssignExpert')->name('api.expert.assignexpert'); 

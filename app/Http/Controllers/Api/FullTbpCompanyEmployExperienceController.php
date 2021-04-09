@@ -16,8 +16,8 @@ class FullTbpCompanyEmployExperienceController extends Controller
         $employexperience->businesstype = $request->employexperiencebusinesstype;
         $employexperience->startposition = $request->employexperiencestartposition;
         $employexperience->endposition = $request->employexperienceendposition;
-        $employexperience->startdate = DateConversion::thaiToEngDate($request->employexperiencestartdate);
-        $employexperience->enddate = DateConversion::thaiToEngDate($request->employexperienceenddate);
+        $employexperience->startdate = $request->employexperiencestartdate;
+        $employexperience->enddate = $request->employexperienceenddate;
         $employexperience->save();
         $employexperiences = EmployExperience::where('company_employ_id',$request->id)->get();
         return response()->json($employexperiences); 

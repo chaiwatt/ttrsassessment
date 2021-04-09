@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Model\EducationLevel;
 use App\Model\EmployEducation;
 use App\Http\Controllers\Controller;
 
 class FullTbpCompanyEmployEducationController extends Controller
 {
     public function Add(Request $request){
+        $educationlevel = EducationLevel::find($request->employeducationlevel)->name;
         $employeducation = new EmployEducation();
         $employeducation->company_employ_id = $request->id;
-        $employeducation->employeducationlevel = $request->employeducationlevel;
+        $employeducation->employeducationlevel =  $educationlevel;
+        $employeducation->otheremployeducationlevel = $request->othereducationlevel ;
         $employeducation->employeducationinstitute = $request->employeducationinstitute;
         $employeducation->employeducationmajor = $request->employeducationmajor;
         $employeducation->employeducationyear = $request->employeducationyear;

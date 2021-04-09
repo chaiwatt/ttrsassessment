@@ -132,12 +132,46 @@
 					</div>           
 					<div class="modal-footer">
 						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-						<button id="btn_modal_add_expertfield" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+						<button id="btn_modal_add_expertfield" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	
+				{{-- modal edit_expertfield --}}
+				<div id="modal_edit_expertfield" class="modal fade" style="overflow:hidden;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเชี่ยวชาญ</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<input type="text" id="expertfieldid" hidden>
+									<input type="text" id="currentid" hidden>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ลำดับ (ให้กรอกตัวเลข เช่น 1)</label><span class="text-danger">*</span>
+											<input type="ลำดับ"  id="expertfieldnum_edit" placeholder="ลำดับ" class="form-control form-control-lg numeralformat2" >
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>ความเชี่ยวชาญ</label><span class="text-danger">*</span>
+											<input type="text" id="expertfielddetail_edit" placeholder="ความเชี่ยวชาญ" class="form-control form-control-lg" >
+										</div>
+									</div>
+								</div>
+							</div>           
+							<div class="modal-footer">
+								<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+								<button id="btn_modal_edit_expertfield" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
 		<div id="modal_add_expertdoc" class="modal fade" style="overflow:hidden;">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -171,65 +205,7 @@
 	
 
 	<!-- Cover area -->
-	{{-- <div class="profile-cover">
-		<div id="bgcover">
-			@if (!Empty($user->cover))
-				<div class="profile-cover-img" style="background-image: url({{asset($user->cover)}})"></div>
-			@else
-				<div class="profile-cover-img" style="background-image: url({{asset('assets/dashboard/images/cover.jpg')}})"></div>
-			@endif
-		</div>
-		<div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
-			<div class="mr-md-3 mb-2 mb-md-0">
-				<a href="#" id="avatar"  type="button" onclick="document.getElementById('avatarimg').click();" class="profile-thumb">
-					@if (!Empty($user->picture))
-						<img src="{{asset($user->picture)}}" class="border-white rounded-circle" width="48" height="48" alt="">
-					@else
-						<img src="{{asset('assets/dashboard/images/user.jpg')}}" class="border-white rounded-circle" width="48" height="48" alt="">
-					@endif
-				</a>
-				<input type="file" style="display:none;" id="avatarimg" name="avatarimg" accept="image/*"/>
-			</div>
-			<div class="media-body text-white">
-				<h1 class="mb-0">{{$user->name}} {{$user->lastname}}</h1>
-			</div>
-			<div class="ml-md-3 mt-2 mt-md-0">
-				<ul class="list-inline list-inline-condensed mb-0">
-					<div class="form-group">
-						<div class="input-group">													
-							<button id="btnuploadcoverimg" class="btn btn-light border-transparent" type="button" onclick="document.getElementById('coverimg').click();"><i class="icon-file-picture mr-2"></i> รูปหน้าปก</button>													
-						</div>
-						<input type="file" style="display:none;" id="coverimg" name="coverimg" accept="image/*"/>
-					</div>
-				</ul>
-			</div>
-		</div>
-	</div> --}}
-	<!-- /cover area -->
-	<!-- Profile navigation -->
-	{{-- <div class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="text-center d-lg-none w-100">
-			<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-second">
-				<i class="icon-menu7 mr-2"></i>
-				Profile navigation
-			</button>
-		</div>
 
-		<div class="navbar-collapse collapse" id="navbar-second">
-			<ul class="nav navbar-nav">
-
-				<li class="nav-item">
-					<a href="#personalinfo" class="navbar-nav-link" data-toggle="tab"><i class="icon-user mr-2"></i>ข้อมูลส่วนตัว			
-					</a>
-				</li>
-
-			</ul>
-
-			<ul class="navbar-nav">
-			
-			</ul>
-		</div>
-	</div> --}}
 	<!-- /profile navigation -->
 
     <!-- Content area -->
@@ -507,7 +483,7 @@
 													<label for="">ความเชี่ยวชาญ<span class="text-danger">*</span></label>
 													<a href="#" id="btnexpertfield"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertfield">คลิกเพิ่ม</a>
 														<div class="table-responsive">
-															<table class="table table-bordered table-striped">
+															<table class="table table-bordered table-striped" id="expertfield_wrapper">
 																<thead>
 																	<tr class="bg-info">
 																		<th style="width:10%">ลำดับ</th> 
@@ -521,7 +497,8 @@
 																			<td> {{$expertfield->order}}</td>                                            
 																			<td> {{$expertfield->detail}}</td>    
 																			<td> 
-																				<a type="button" data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield">ลบ</a>                                       
+																				<a href="#" data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>  
+																				<a href="#" data-id="{{$expertfield->id}}" data-toggle="modal" class="btn btn-sm bg-info editexpertfield">แก้ไข</a>                                                                            
 																			</td>
 																		</tr>
 																	@endforeach
@@ -607,8 +584,8 @@
 
 		$(document).on('keyup', '#expereincemonth', function(e) {
 			console.log($(this).val());
-			if($(this).val() > 12 ){
-				$(this).val(12);
+			if($(this).val() > 11 ){
+				$(this).val(11);
 			}
 		});
     </script>	

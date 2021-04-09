@@ -1,5 +1,5 @@
 <div class="gray-color">
-    <div class="rs-process modify1 pt-160 pb-120 md-pt-75 md-pb-80">
+    <div class="rs-process modify1 bgProcess pt-160 pb-120 md-pt-75 md-pb-80">
         <div class="shape-animation">
             <div class="shape-process">
                 <img class="dance2" src="{{asset('assets/landing2/images/process/circle.png')}}" alt="images">
