@@ -37,6 +37,7 @@ function addProduct(lines,id){
       })
     })
 }
+
 function addProductDetail(lines,id){
   return new Promise((resolve, reject) => {
       $.ajax({
@@ -335,5 +336,24 @@ function deleteCompanydoc(id){
     })
 }
 
+function getMonth(fulltbpid){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/plan/getmonth`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'fulltbpid': fulltbpid
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 export {addAbtract,addProduct,addProductDetail,addTechDev,addTechDevLevel,deleteTechDevLevel,addTechDevProblem,
-  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc}
+  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc,getMonth}

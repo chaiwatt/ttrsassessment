@@ -11,8 +11,15 @@ use App\Model\FullTbpProjectPlanTransaction;
 class FullTbpProjectPlanController extends Controller
 {
     public function Add(Request $request){
+        $fulltbpprojecplanarr = FullTbpProjectPlan::where('full_tbp_id',$request->id)->pluck('itemorder')->toArray();
+        $max = 1;
+        if(count($fulltbpprojecplanarr) != 0){
+            $max = max($fulltbpprojecplanarr) + 1;
+        }
+
         $fulltbpprojecplan = new FullTbpProjectPlan();
         $fulltbpprojecplan->full_tbp_id = $request->id;
+        $fulltbpprojecplan->itemorder = $max;
         $fulltbpprojecplan->name = $request->detail;
         $fulltbpprojecplan->save();
         foreach($request->months as $month){
@@ -22,7 +29,7 @@ class FullTbpProjectPlanController extends Controller
             $fulltbpprojectplantransaction->month =  $month;
             $fulltbpprojectplantransaction->save();
         }
-        $fulltbpprojecplans = FullTbpProjectPlan::where('full_tbp_id',$request->id)->get();
+        $fulltbpprojecplans = FullTbpProjectPlan::where('full_tbp_id',$request->id)->orderBy('itemorder','asc')->get();
         $projecplanids = FullTbpProjectPlan::where('full_tbp_id',$request->id)->pluck('id')->toArray();
         $fulltbpprojectplantransactions = FullTbpProjectPlanTransaction::whereIn('project_plan_id',$projecplanids)->get();
         FullTbpGantt::where('full_tbp_id',$request->id)->first()->update([
@@ -165,7 +172,7 @@ class FullTbpProjectPlanController extends Controller
             'name' => $request->detail
         ]);
         
-        $fulltbpprojecplans = FullTbpProjectPlan::where('full_tbp_id',$fulltbpprojectplan->full_tbp_id)->get();
+        $fulltbpprojecplans = FullTbpProjectPlan::where('full_tbp_id',$fulltbpprojectplan->full_tbp_id)->orderBy('itemorder','asc')->get();
         $projecplanids = FullTbpProjectPlan::where('full_tbp_id',$fulltbpprojectplan->full_tbp_id)->pluck('id')->toArray();
         $fulltbpprojectplantransactions = FullTbpProjectPlanTransaction::whereIn('project_plan_id',$projecplanids)->get();
 
@@ -228,7 +235,7 @@ class FullTbpProjectPlanController extends Controller
         $fulltbpprojectplan = FullTbpProjectPlan::find($request->id);
         $fulltbpid = $fulltbpprojectplan->full_tbp_id;
         $fulltbpprojectplan->delete();
-        $fulltbpprojecplans = FullTbpProjectPlan::where('full_tbp_id',$fulltbpid)->get();
+        $fulltbpprojecplans = FullTbpProjectPlan::where('full_tbp_id',$fulltbpid)->orderBy('itemorder','asc')->get();
         $projecplanids = FullTbpProjectPlan::where('full_tbp_id',$fulltbpid)->pluck('id')->toArray();
         $fulltbpprojectplantransactions = FullTbpProjectPlanTransaction::whereIn('project_plan_id',$projecplanids)->get();
 
@@ -287,4 +294,16 @@ class FullTbpProjectPlanController extends Controller
             "allyears" => $allyears
         ));
     }
+    public function updateGanttOrder(Request $request){
+        foreach ($request->order as $key => $item) {
+            FullTbpProjectPlan::find($item)->update([
+                'itemorder' => $key+1
+            ]);
+        }
+    }
+    public function GetMonth(Request $request){
+        $months= FullTbpProjectPlanTransaction::where('full_tbp_id',$request->fulltbpid)->pluck('month')->toArray();
+        return response()->json($months); 
+    }
+    
 }

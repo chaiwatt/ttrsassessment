@@ -16,6 +16,8 @@ import * as FullTbp from './fulltbp.js';
 //     }
 // });
 // var dataid = 0;
+
+
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
@@ -25,7 +27,7 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
         return this.value; 
     }).get();
     CompanyProfile.addCompanyProfile(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มประวัติบริษัทสำเร็จ!',
@@ -53,7 +55,7 @@ $("#companygeneraldoc").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                // console.log(data)
+                // //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -118,7 +120,7 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
 
 $(document).on('click', '#btn_edit_employ', function(e) {
     Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
             html += `<tr >                                        
@@ -149,7 +151,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
 
 
 $(document).on("click",".deletecompanyemploy",function(e){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -201,10 +203,10 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
         });
         return;
     }
-    console.log($('#educationlevel').val())
+    //console.log($('#educationlevel').val())
    
     Employ.addEmployEducation($('#employid').val(),$('#educationlevel').val(),$('#othereducationlevel').val(),$('#employeducationinstitute').val(),$('#employeducationmajor').val(),$('#employeducationyear').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = '';
         data.forEach(function (education,index) {
             var educationlevel = education.employeducationlevel;
@@ -258,7 +260,7 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
         return;
     }
     Employ.addEmployExperience($('#employid').val(),$('#employexperiencestartdate').val(),$('#employexperienceenddate').val(),$('#employexperiencecompany').val(),$('#employexperiencebusinesstype').val(),$('#employexperiencestartposition').val(),$('#employexperienceendposition').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = '';
         data.forEach(function (experience,index) {
             html += `<tr >                                        
@@ -285,7 +287,7 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
         return;
     }
     Employ.addEmployTraining($('#employid').val(),$('#employtrainingdate').val(),$('#employtrainingcourse').val(),$('#employtrainingowner').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = '';
         data.forEach(function (training,index) {
             html += `<tr >                                        
@@ -314,7 +316,7 @@ $(function () {
 });
 
 $(document).on("click",".deleteemployeducation",function(e){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -329,7 +331,7 @@ $(document).on("click",".deleteemployeducation",function(e){
         if (result.value) {
             Employ.deleteEmployEducation($(this).data('id')).then(data => {
                 var html = ``;
-                console.log(data);
+                //console.log(data);
             data.forEach(function (education,index) {
             html += `<tr >                                        
                 <td> ${education.employeducationlevel} </td>                                            
@@ -348,7 +350,7 @@ $(document).on("click",".deleteemployeducation",function(e){
 }); 
 
 $(document).on("click",".deleteemployexperience",function(e){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -363,7 +365,7 @@ $(document).on("click",".deleteemployexperience",function(e){
         if (result.value) {
             Employ.deleteEmployExperience($(this).data('id')).then(data => {
                 var html = ``;
-                console.log(data);
+                //console.log(data);
                 data.forEach(function (experience,index) {
                     html += `<tr >                                        
                         <td> ${experience.startdate} - ${experience.enddate}</td>                                            
@@ -383,7 +385,7 @@ $(document).on("click",".deleteemployexperience",function(e){
 }); 
 
 $(document).on("click",".deleteemploytraining",function(e){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -398,7 +400,7 @@ $(document).on("click",".deleteemploytraining",function(e){
         if (result.value) {
             Employ.deleteEmployTraining($(this).data('id')).then(data => {
                 var html = ``;
-                console.log(data);
+                //console.log(data);
                 data.forEach(function (training,index) {
                     html += `<tr >                                        
                         <td> ${training.trainingdateth}</td>                                            
@@ -417,7 +419,7 @@ $(document).on("click",".deleteemploytraining",function(e){
 
 $(document).on('click', '#btnstckholder', function(e) {
     // Employ.getEmploys($(this).data('id')).then(data => {
-    //     console.log(data);
+    //     //console.log(data);
     //     var html = ``;
     //     var selectstockholder = `<label>รายชื่อพนักงาน</label><span class="text-danger">*</span><select id="selectstockholder_edit" data-placeholder="รายชื่อพนักงาน" class="form-control form-control-select2">`;
     //     data.forEach(function (stock,index) {
@@ -439,7 +441,7 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
         return;
     }
     StockHolder.addStockHolder($('#companyid').val(),$('#employsearch').val(),$('#relationwithceo').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = ``;
         data.forEach(function (stockholder,index) {
             html += `<tr >                                        
@@ -467,7 +469,7 @@ $(document).on('click', '.selectemploy', function(e) {
 
 
 $(document).on("click",".deletestockholder",function(e){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -513,7 +515,7 @@ $(document).on('click', '#btnaddprojectabtract', function(e) {
         return this.value; 
     }).get();
     Project.addAbtract(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มบทคัดย่อสำเร็จ!',
@@ -539,7 +541,7 @@ $(document).on('click', '#btnaddmainproduct', function(e) {
         return this.value; 
     }).get();
     Project.addProduct(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มรายละเอียดผลิตภัณฑ์สำเร็จ!',
@@ -565,7 +567,7 @@ $(document).on('click', '#btnaddproductdetails', function(e) {
         return this.value; 
     }).get();
     Project.addProductDetail(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มจุดเด่นผลิตภัณฑ์สำเร็จ!',
@@ -591,7 +593,7 @@ $(document).on('click', '#btnaddprojectechdev', function(e) {
         return this.value; 
     }).get();
     Project.addTechDev(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มการพัฒนาเทคโนโลยีสำเร็จ!',
@@ -609,7 +611,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
         return;
     }
     Project.addTechDevLevel($(this).data('id'),$('#tectdevleveltechnology').val(),$('#tectdevleveltechnologypresent').val(),$('#tectdevleveltechnologyproject').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = ``;
         data.forEach(function (techdevlevel,index) {
             html += `<tr >                                        
@@ -627,7 +629,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
 });
 
 $(document).on("click",".deleteprojectechdevlevel",function(e){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -667,7 +669,7 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
         return this.value; 
     }).get();
     Project.addTechDevProblem(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มปัญหาและอุปสรรคสำเร็จ!',
@@ -751,7 +753,7 @@ $(document).on('change', '#cer11', function(e) {
 
 $(document).on('click', '#btnaddprojectcertify', function(e) {
     Project.editProjectCertify($(this).data('id'),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'อัพเดทสำเร็จ!',
@@ -777,7 +779,7 @@ $(document).on('change', '#certify', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -843,7 +845,7 @@ $(document).on('change', '#award', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -910,7 +912,7 @@ $(document).on('change', '#standard', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -972,58 +974,82 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
         });
         return;
     }
-      Project.addPlan($(this).data('id'),$('#plandetail').val(),data,$('#ganttnummonth').val(),$('#ganttyear').val()).then(data => {
-        var html = ``;
-        var th = ``;
-        data.allyears.forEach(function (year,i) {      
-            if(year != 0){
-                th += `<th colspan="${year}" class="text-center" style="width:50px !important;font-size:12px">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
-            }
-        });
-        var tr = ``;
-        var minmonth = parseInt(data.minmonth);
-        var maxmonth = parseInt(data.maxmonth);
-        if(minmonth != 0  && maxmonth !=0){
-            console.log('hello ' + minmonth  + ' ' + maxmonth);
-            tr = `<tr>`;
-            for (let j = minmonth; j <= maxmonth; j++) {
-                tr += `<th class="text-center" style="width:40px !important;font-size:12px">${j}</th>`;
-            }
-            tr += `</tr>`;
-        }
-        
-        html += `<thead>
-                    <tr>
-                        <tr>
-                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
-                             ${th}
-                            <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
-                        </tr>
-                            ${tr}
-                    </tr>
-                </thead>`
 
-        data.fulltbpprojecplans.forEach(function (plan,index) {
-            var tdbody =``;
-            for (var k = minmonth; k <= maxmonth; k++) {
-                if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
-                    tdbody += `<td style="background-color:grey"></td>`;
-                }else{
-                    tdbody += `<td style="background-color:white"></td>`;
-                } 
-            }
-            html += `<tr >                                        
-                <td style="padding:5px"> ${plan.name} </td>                                            
-                    ${tdbody}
-                <td> 
-                <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
-                </td>
-            </tr>`
+    var unique =[];
+    Project.getMonth($(this).data('id')).then(_data => {
+        var _all = _data.concat(data); 
+         unique = _all.filter((v, i, a) => a.indexOf(v) === i);
+  
+         var min = Math.min.apply(Math, unique.map(i=>Number(i)));
+         var max = Math.max.apply(Math, unique.map(i=>Number(i)));
+        // //console.log(max-min+1);
+         if((max-min+1) <= parseInt($("#ganttnummonth").val())){
+            Project.addPlan($(this).data('id'),$('#plandetail').val(),data,$('#ganttnummonth').val(),$('#ganttyear').val()).then(data => {
+                var html = ``;
+                var th = ``;
+                data.allyears.forEach(function (year,i) {      
+                    if(year != 0){
+                        th += `<th colspan="${year}" class="text-center" style="width:50px !important;font-size:12px">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                    }
+                });
+                var tr = ``;
+                var minmonth = parseInt(data.minmonth);
+                var maxmonth = parseInt(data.maxmonth);
+                if(minmonth != 0  && maxmonth !=0){
+                    tr = `<tr>`;
+                    for (let j = minmonth; j <= maxmonth; j++) {
+                        var full = j % 12;
+                        if(full == 0){
+                            full = 12;
+                        }
+                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${full}</th>`;
+                    }
+                    tr += `</tr>`;
+                }
+                
+                html += `<thead>
+                            <tr>
+                                <tr>
+                                    <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                     ${th}
+                                    <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
+                                </tr>
+                                    ${tr}
+                            </tr>
+                        </thead>`
+        
+                data.fulltbpprojecplans.forEach(function (plan,index) {
+                    var tdbody =``;
+                    var _count = 1;
+                    for (var k = minmonth; k <= maxmonth; k++) {
+                        if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
+                            tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${_count}</td>`;
+                        }else{
+                            tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
+                        } 
+                        _count ++;
+                    }
+                    html += `<tr >                                        
+                        <td style="padding:5px"> ${plan.name} </td>                                            
+                            ${tdbody}
+                        <td style="width:180px"> 
+                        <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#table_gantt_wrapper").html(html);
+                 $("#table_gantt_wrapper").tableDnD();
+           })
+         }else{
+                Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
             });
-         $("#table_gantt_wrapper").html(html);
-         $("#table_gantt_wrapper").tableDnD();
-   })
+         }
+    })
+   .catch(error => {})
+
 });
 
 $(document).on('click', '.editprojectplan', function(e) {
@@ -1033,21 +1059,21 @@ $(document).on('click', '.editprojectplan', function(e) {
          var html = ``;
          var chkindex = 0;
          for (let item = 0; item < 3; item++) {
-            // console.log(item);
+            // //console.log(item);
              html += `<div class="col-md-12">`
-             html += `<label ><u>ปี ${parseInt($('#ganttyear').val())+item}</u></label>
+             html += `<label ><u><strong>ปี ${parseInt($('#ganttyear').val())+item}</strong></u></label>
                  <div class="form-group">`;
                  for (let index = 0; index < 12; index++) {
                     var check = ``;
                      chkindex++;
-                     console.log(data.fulltbpprojectplantransactions.findIndex(x => x.month == chkindex) + ' ' + chkindex);
+                     //console.log(data.fulltbpprojectplantransactions.findIndex(x => x.month == chkindex) + ' ' + chkindex);
                     if(data.fulltbpprojectplantransactions.findIndex(x => x.month == chkindex) != -1){
                         check = `checked`;
                     }
                      html += `
                      <div class="custom-control custom-checkbox custom-control-inline" style="width:45px">
                          <input type="checkbox" name="plans[]" value="${chkindex}" class="custom-control-input checkboxplane_dit" id="checkboxedit${chkindex}" ${check} >
-                         <label class="custom-control-label" for="checkboxedit${chkindex}">${chkindex}</label>
+                         <label class="custom-control-label" for="checkboxedit${chkindex}">${index+1}</label>
                      </div>`
                  }
              html += `</div></div>`
@@ -1063,59 +1089,87 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
     $('.checkboxplane_dit:checked').each(function(){
         data.push($(this).val());
       })
-    Project.editPlan($('#projectplan').val(),$('#plandetail_edit').val(),data).then(data => {
-        var html = ``;
-        var th = ``;
-        data.allyears.forEach(function (year,i) {      
-            if(year != 0){
-                th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
-            }
-        });
-        var tr = ``;
-        var minmonth = parseInt(data.minmonth);
-        var maxmonth = parseInt(data.maxmonth);
-        if(minmonth != 0  && maxmonth !=0){
-            console.log('hello ' + minmonth  + ' ' + maxmonth);
-            tr = `<tr>`;
-            for (let j = minmonth; j <= maxmonth; j++) {
-                tr += `<th class="text-center" style="width:40px !important;font-size:12px">${j}</th>`;
-            }
-            tr += `</tr>`;
-        }
-        
-        html += `<thead>
-                    <tr>
-                        <tr>
-                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
-                             ${th}
-                            <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
-                        </tr>
-                            ${tr}
-                    </tr>
-                </thead>`
 
-        data.fulltbpprojecplans.forEach(function (plan,index) {
-            var tdbody =``;
-            for (var k = minmonth; k <= maxmonth; k++) {
-                if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
-                    tdbody += `<td style="background-color:grey"></td>`;
-                }else{
-                    tdbody += `<td style="background-color:white"></td>`;
-                } 
-            }
-            html += `<tr >                                        
-                <td style="padding:5px"> ${plan.name} </td>                                            
-                    ${tdbody}
-                <td> 
-                <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                    <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
-                </td>
-            </tr>`
+
+      Project.getMonth($(this).data('id')).then(_data => {
+        var _all = _data.concat(data); 
+        var unique = _all.filter((v, i, a) => a.indexOf(v) === i);
+  
+         var min = Math.min.apply(Math, unique.map(i=>Number(i)));
+         var max = Math.max.apply(Math, unique.map(i=>Number(i)));
+         console.log(max + ' ' + min);
+
+         if((max-min+1) <= parseInt($("#ganttnummonth").val())){
+            Project.editPlan($('#projectplan').val(),$('#plandetail_edit').val(),data).then(data => {
+                var html = ``;
+                var th = ``;
+                data.allyears.forEach(function (year,i) {      
+                    if(year != 0){
+                        th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                    }
+                });
+                var tr = ``;
+                var minmonth = parseInt(data.minmonth);
+                var maxmonth = parseInt(data.maxmonth);
+                if(minmonth != 0  && maxmonth !=0){
+                    
+                    tr = `<tr>`;
+                    for (let j = minmonth; j <= maxmonth; j++) {
+                        var full = j % 12;
+                        if(full == 0){
+                            full = 12;
+                        }
+                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${full}</th>`;
+                    }
+                    tr += `</tr>`;
+                }
+                
+                html += `<thead>
+                            <tr>
+                                <tr>
+                                    <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                     ${th}
+                                    <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
+                                </tr>
+                                    ${tr}
+                            </tr>
+                        </thead>`
+        
+                data.fulltbpprojecplans.forEach(function (plan,index) {
+                    var tdbody =``;
+                    var _count = 1;
+                    for (var k = minmonth; k <= maxmonth; k++) {
+                        if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
+                            tdbody += `<td style="background-color:grey;width: 30px !important;font-size:12px;padding:5px;text-align:center">${_count}</td>`;
+                        }else{
+                            tdbody += `<td style="background-color:white;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
+                        } 
+                        _count ++;
+                    }
+                    html += `<tr >                                        
+                        <td style="padding:5px"> ${plan.name} </td>                                            
+                            ${tdbody}
+                        <td style="width:180px"> 
+                            <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
+                        </td>
+                    </tr>`
+                    });
+                 $("#table_gantt_wrapper").html(html);
+                 $("#table_gantt_wrapper").tableDnD();
+            })
+            .catch(error => {})
+         }else{
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
             });
-         $("#table_gantt_wrapper").html(html);
-         $("#table_gantt_wrapper").tableDnD();
-    })
-    .catch(error => {})
+         }
+      });
+
+
+
+
 });
             
 $(document).on("click",".deleteprojectplan",function(e){
@@ -1143,10 +1197,14 @@ $(document).on("click",".deleteprojectplan",function(e){
                 var minmonth = parseInt(data.minmonth);
                 var maxmonth = parseInt(data.maxmonth);
                 if(minmonth != 0  && maxmonth !=0){
-                    console.log('hello ' + minmonth  + ' ' + maxmonth);
+                    
                     tr = `<tr>`;
                     for (let j = minmonth; j <= maxmonth; j++) {
-                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${j}</th>`;
+                        var full = j % 12;
+                        if(full == 0){
+                            full = 12;
+                        }
+                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${full}</th>`;
                     }
                     tr += `</tr>`;
                 }
@@ -1164,17 +1222,19 @@ $(document).on("click",".deleteprojectplan",function(e){
         
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
+                    var _count = 1;
                     for (var k = minmonth; k <= maxmonth; k++) {
                         if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
-                            tdbody += `<td style="background-color:grey"></td>`;
+                            tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${_count}</td>`;
                         }else{
-                            tdbody += `<td style="background-color:white"></td>`;
+                            tdbody += `<td style="background-color:white;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
+                        _count ++;
                     }
                     html += `<tr >                                        
                         <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
-                        <td> 
+                        <td style="width:180px"> 
                         <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
                             <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
@@ -1197,7 +1257,7 @@ $(document).on('click', '#btnaddmarketneed', function(e) {
         return this.value; 
     }).get();
     Market.addNeed(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market need สำเร็จ!',
@@ -1215,7 +1275,7 @@ $(document).on('click', '#btnaddmarketsize', function(e) {
         return this.value; 
     }).get();
     Market.addSize(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market size สำเร็จ!',
@@ -1233,7 +1293,7 @@ $(document).on('click', '#btnaddmarketshare', function(e) {
         return this.value; 
     }).get();
     Market.addShare(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market share สำเร็จ!',
@@ -1251,7 +1311,7 @@ $(document).on('click', '#btnaddmarketcompetitive', function(e) {
         return this.value; 
     }).get();
     Market.addCompetitive(lines,$(this).data('id')).then(data => {
-        console.log(data);
+        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market competitive สำเร็จ!',
@@ -1284,7 +1344,7 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1317,7 +1377,7 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
         }).then((result) => {
         if (result.value) {
             Market.deleteMarketAttachment($(this).data('id'),'1').then(data => {
-                console.log(data);
+                //console.log(data);
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1358,7 +1418,7 @@ $(document).on('change', '#swotfile', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1390,7 +1450,7 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
         }).then((result) => {
         if (result.value) {
             Market.deleteMarketAttachment($(this).data('id'),'2').then(data => {
-                console.log(data);
+                //console.log(data);
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1427,7 +1487,7 @@ $(document).on('change', '#financialplan', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1458,7 +1518,7 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
         }).then((result) => {
         if (result.value) {
             Market.deleteMarketAttachment($(this).data('id'),'3').then(data => {
-                console.log(data);
+                //console.log(data);
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1626,7 +1686,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
     }
     Sell.addDebtPartner($(this).data('id'),$('#debtpartner').val(),$('#numproject').val(),$('#debtpartnertaxid').val(),$('#debttotalyearsell').val(),$('#debtpercenttosale').val(),$('#debtpartneryear').val()).then(data => {
         var html = ``;
-        console.log(data);
+        //console.log(data);
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
@@ -1943,7 +2003,7 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
     }
     Sell.editCost($('#costid').val(),$('#costexistingedit').val(),$('#costneededit').val(),$('#costapprovededit').val(),$('#costplanedit').val()).then(data => {
         var html = ``;
-        console.log(data);
+        //console.log(data);
         data.forEach(function (cost,index) {
             var checkcostplan = cost.plan;
             if(checkcostplan == null){
@@ -1982,7 +2042,7 @@ $(document).on('change', '#companydoc', function(e) {
 // $("#companydoc").on('change', function() {
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
-    console.log(file);
+    //console.log(file);
     if (this.files[0].size/1024/1024*1000 > 1000 ){
         alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;
@@ -1999,7 +2059,7 @@ $(document).on('change', '#companydoc', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -2069,7 +2129,7 @@ $(document).on('change', '#organizeimg', function(e) {
         alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;
     }
-    console.log(file);
+    //console.log(file);
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
@@ -2081,7 +2141,7 @@ $(document).on('change', '#organizeimg', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                // console.log(data)
+                // //console.log(data)
                 var imgpath = route.url + '/'+ data.organizeimg;
                 $("#organizeimgholder").attr("src", imgpath);
                 $("#organizationcharterror").attr("hidden",true);
@@ -2108,21 +2168,21 @@ $('.steps-basic').steps({
             $(".actions").find(".libtn").remove();
             FullTbp.editGeneral($('#fulltbpid').val(),$('#businesstype').val(),$('#department_qty').val(),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val(),
             $('#companyhistory').val(),$('#responsibleprefix').val(),$('#responsiblename').val(),$('#responsiblelastname').val(),$('#responsibleposition').val(),$('#responsibleemail').val(),$('#responsiblephone').val(),$('#responsibleworkphone').val(),$('#responsibleeducationhistory').val(),$('#responsibleexperiencehistory').val(),$('#responsibletraininghistory').val()).then(data => {
-                console.log(data);
+                //console.log(data);
             })
             .catch(error => {})
         }else if(currentIndex == 2){
             $(".actions").find(".libtn").remove();
             FullTbp.editOverAll($('#fulltbpid').val(),$('#projectabtract_input').val(),$('#productdetails_input').val(),$('#projectechdev_input').val(),$('#projectechdevproblem_input').val(),$('#mainproduct_input').val(),$('#projectinnovation_input').val(),$('#projectstandard_input').val()).then(data => {
                 Project.editProjectCertify($('#fulltbpid').val(),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
-                    console.log(data);
+                    //console.log(data);
                 })
                 .catch(error => {})
             })  
         }else if(currentIndex == 3){
             $(".actions").find(".libtn").remove();
             FullTbp.editMarketPlan($('#fulltbpid').val(),$('#analysis').val(),$('#modelcanvas').val(),$('#swot').val()).then(data => {
-                console.log(data);
+                //console.log(data);
             })
             
             .catch(error => {})
@@ -2132,16 +2192,11 @@ $('.steps-basic').steps({
                 hidden = 'hidden';
                 $("#appceptagreement_wrapper").attr("hidden",true);
             }
-            // $(document).find(".actions ul").append(`
-            //     <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-            //     <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
-            // `);
-
             $(document).find(".actions ul").append(`
-            <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-            
+                <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
+                <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
             `);
-
+            
             if(route.submitstatus !=4 && (route.refixstatus == 0 || route.refixstatus == 2 )){
                 var pdfpath = route.url + '/'+ $('#pdfname').val();
 
@@ -2168,7 +2223,7 @@ $('.steps-basic').steps({
     },
     onStepChanging: function (event, currentIndex, newIndex) {
         if(currentIndex == 3 && newIndex == 4){
-            // console.log(newIndex);
+            // //console.log(newIndex);
             if($('.chkauthorizeddirector').filter(':checked').length == 0){
                 Swal.fire({
                     title: 'ผิดพลาด!',
@@ -2195,7 +2250,7 @@ $('.steps-basic').steps({
 
         }
 
-    //    console.log($('#organizeimgholder').prop('src')) ; //orgimg.png
+    //    //console.log($('#organizeimgholder').prop('src')) ; //orgimg.png
 
        if ($('#organizeimgholder').prop('src').includes("orgimg.png") == true)
        {
@@ -2239,7 +2294,7 @@ $('.steps-basic').steps({
 
 
 
-        // console.log(currentIndex);
+        // //console.log(currentIndex);
         if(currentIndex == 1){
             if ($('#projectabtract_input').summernote('isEmpty'))
             {
@@ -2461,7 +2516,7 @@ $(document).on("click",".deleteprojectmember",function(e){
 });
 
 $(document).on('change', '#boardattachment', function(e) {
-    // console.log($(this).data('id'));
+    // //console.log($(this).data('id'));
     var file = this.files[0];
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         alert('ไฟล์ขนาดมากกว่า 2 MB');
@@ -2478,7 +2533,7 @@ $(document).on('change', '#boardattachment', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -2533,12 +2588,12 @@ $(document).on('change', '#usersignature', function(e) {
         usesignature = 2;
     }
     FullTbp.editSignature($('#fulltbpid').val(),usesignature).then(data => {
-        console.log(data);
+        //console.log(data);
     })
 });
 
 $(document).on('click', '#submitfulltbp', function(e) {
-    // console.log($('#appceptagreement').is(':checked'));
+    // //console.log($('#appceptagreement').is(':checked'));
     if($('#appceptagreement').is(':checked') === false){
         Swal.fire({
             title: 'ผิดพลาด!',
@@ -2598,7 +2653,7 @@ $(document).on('change', '#fulltbppdf', function(e) {
     var formData = new FormData();
     formData.append('attachment',file);
     formData.append('id',$('#fulltbpid').val());
-    console.log($('#fulltbpid').val());
+    //console.log($('#fulltbpid').val());
     $.ajax({
         url: `${route.url}/api/fulltbp/submitwithattachement`,  //Server script to process data
         type: 'POST',
@@ -2873,7 +2928,7 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
         return;
     }
     Employ.saveEmploy($('#employprefix').val(),$('#otherprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#otherboardposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
-        console.log(data);
+        //console.log(data);
        var dataid = 0;
         var html = ``;
        
@@ -2944,7 +2999,7 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
 });
 
 $(document).on("click",".deletecompanyemploy_research",function(e){
-    // console.log($(this).data('id'));
+    // //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -3010,7 +3065,7 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
         return;
     }
     Employ.saveEmploy($('#employprefix_projectmember').val(),$('#otherprefix_projectmember').val(),$('#employname_projectmember').val(),$('#employlastname_projectmember').val(),$('#employposition_projectmember').val(),'',$('#employphone_projectmember').val(),$('#employworkphone_projectmember').val(),$('#employemail_projectmember').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
                 if(employ.employ_position_id > 6){
@@ -3032,7 +3087,7 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
 });
 
 $(document).on("click",".deletecompanyemploy_projectmember",function(e){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -3069,7 +3124,7 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
 
 $(document).on('keyup', '#employsearch', function(e) {
     Employ.searchEmploy($(this).val(),$('#companyid').val()).then(data => {
-        console.log(data);
+        //console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
             html += `<a href="#" class="dropdown-item selectemploy" data-id="${employ.id}">${employ.prefix['name']}${employ.name} ${employ.lastname}</a>`
@@ -3111,21 +3166,22 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
     for (let item = 0; item < 3; item++) {
         
         html += `<div class="col-md-12">`
-        html += `<label ><u>ปี ${parseInt($('#ganttyear').val())+item}</u></label>
+        html += `<label ><u><strong>ปี ${parseInt($('#ganttyear').val())+item}</strong></u></label>
             <div class="form-group">`;
             for (let index = 0; index < 12; index++) {
                 chkindex++;
                 html += `
                 <div class="custom-control custom-checkbox custom-control-inline" style="width:45px">
                     <input type="checkbox" name="plans[]" value="${chkindex}" class="custom-control-input checkboxplan" id="checkbox${chkindex}" >
-                    <label class="custom-control-label" for="checkbox${chkindex}">${chkindex}</label>
+                    <label class="custom-control-label" for="checkbox${chkindex}">${index+1}</label>
                 </div>`
             }
         html += `</div></div>`
     }
 
     $('#month_wrapper').html(html);
-
+    $('#plandetail').val('');
+    
 
     $('#modal_add_projectplan').modal('show');
 });

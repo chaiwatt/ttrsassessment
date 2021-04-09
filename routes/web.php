@@ -403,6 +403,8 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('get','Api\FullTbpProjectPlanController@Get')->name('api.fulltbp.project.plan.get'); 
                     Route::post('edit','Api\FullTbpProjectPlanController@Edit')->name('api.fulltbp.project.plan.edit');           
                     Route::post('delete','Api\FullTbpProjectPlanController@Delete')->name('api.fulltbp.project.plan.delete');
+                    Route::post('updateganttorder','Api\FullTbpProjectPlanController@updateGanttOrder')->name('api.fulltbp.project.plan.updateganttorder');
+                    Route::post('getmonth','Api\FullTbpProjectPlanController@GetMonth')->name('api.fulltbp.project.plan.getmonth');
                 });
             }); 
             Route::group(['prefix' => 'market'], function(){

@@ -852,7 +852,7 @@
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_edit_projectplan" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+				<button id="btn_modal_edit_projectplan" class="btn bg-primary" data-id="{{$fulltbp->id}}" data-dismiss="modal"><i class="icon-pencil font-size-base mr-1"></i> แก้ไข</button>
 			</div>
 		</div>
 	</div>
@@ -2372,17 +2372,30 @@
 																					@if ($minmonth != 0 && $maxmonth !=0)
 																						<tr >
 																							@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																								<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">{{$i}}</th>
+																								<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">
+																									@php
+																										$full = 12;
+																										if($i%12 == 0){
+																											echo (12);
+																										}else{
+																											echo($i%12);
+																										}
+																									@endphp
+																								</th>
 																							@endfor
 																						</tr>
 																					@endif
 																				</tr>
 																			</thead>
 																			
-																			<tbody id="ganttchart_wrapper_tr">    
+																			<tbody id="ganttchart_wrapper_tr">  
 																				@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
-																					<tr >                                        
-																						<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}} </td> 
+																				
+																					<tr id= "{{$fulltbpprojectplan->id}}" >                                        
+																						<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
+																						@php
+																							$_count = 1;
+																						@endphp
 																						@for ($i = $minmonth; $i <= $maxmonth; $i++)
 																							@php
 																								$color = 'white';
@@ -2391,11 +2404,18 @@
 																									$color = 'grey';
 																								}
 																							@endphp
-																							<td style="background-color:{{$color}};width: 40px !important;font-size:12px;padding:5px"></td> 
+																							<td style="background-color:{{$color}};width: 30px !important;font-size:12px;padding:5px;text-align:center">
+																								@if ($color == 'grey')
+																								 {{$_count}}
+																								@endif
+																							</td> 
+																							@php
+																								$_count++;
+																							@endphp
 																						@endfor															
-																						<td class="hiddenelement"> 
+																						<td class="hiddenelement" style="width:180px"> 
 																							<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-																							<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-warning deleteprojectplan">ลบ</a> 
+																							<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a> 
 																						</td> 
 																					</tr>
 																				@endforeach                            
@@ -3028,7 +3048,53 @@
 			
 		}
 
-		$("#table_gantt_wrapper").tableDnD();
+	    var orgrow = [];
+		var newrow = [];
+		table_2 = $("#table_gantt_wrapper");
+        table_2.tableDnD({
+            onDrop: function(table, row) {
+                var rows = table.tBodies[0].rows;
+                for (var i=0; i<rows.length; i++) {
+					newrow.push(rows[i].id);
+                }
+				console.log(newrow);
+				var fulltbpid = "{{$fulltbp->id}}";
+				updateGanttOrder(newrow,fulltbpid).then(data => {
+					console.log(data);
+				})
+				.catch(error => {})
+
+            },
+            onDragStart: function(table, row) {
+				orgrow = [];
+				newrow = [];
+				var rows = table.tBodies[0].rows;
+                for (var i=0; i<rows.length; i++) {
+					orgrow.push(rows[i].id);
+                }
+				console.log(orgrow);
+            }
+        });
+
+		function updateGanttOrder(order,fulltbpid){
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/api/fulltbp/project/plan/updateganttorder`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					'order': order,
+					'fulltbpid': fulltbpid,
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
 
 	});
 	$(document).on('keyup', '#ganttnummonth', function(e) {
