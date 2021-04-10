@@ -1269,7 +1269,7 @@
 							</div>
 							<div class="form-group">
 								<label>แผนการหาเงินทุนเพิ่ม</label><span class="text-danger">*</span>
-								<input type="text" id="costplanedit" placeholder="แผนการหาเงินทุนเพิ่ม" class="form-control form-control-lg ">
+								<input type="text" id="costplanedit" placeholder="แผนการหาเงินทุนเพิ่ม" class="form-control form-control-lg numeralformat10">
 							</div>
 						</div>
 					</div>
@@ -1805,7 +1805,6 @@
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
 																					<td class="hiddenelement">  
-																						{{-- <a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> --}}
 																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
 																					</td> 
@@ -2006,13 +2005,13 @@
 															<div class="col-md-12" >
 																<div class="form-group">
 																	<label for=""><strong>2.6.1) การพัฒนาเทคโนโลยี</strong></label> <span class="text-primary" id="projectechdevtextlength"></span><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span><span id="projectechdev_input_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span></label>
-																	<p>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ (ประมาณ 1-3 หน้า)</p>
+																	<p>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ </p>
 																	<textarea name="" id="projectechdev_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
 																</div>
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">	
-																	<label for=""><u>รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์</u><i>(ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน (เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ)</i><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><u>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	
 																</div>
 																<div class="table-responsive" id="fulltbp_projectechdevlevel_wrapper" >
@@ -2058,10 +2057,11 @@
 																					<input type="checkbox" id="cer1" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer1)) checked @endif data-fouc >
 																					ได้รับการจดสิทธิบัตรการประดิษฐ์
 																				</label>
+																				<span id="cer1qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																				<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer1_qty}}">
+																							<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer1_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2072,10 +2072,11 @@
 																					<input type="checkbox" id="cer2" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer2)) checked @endif data-fouc >
 																					ยื่นจดสิทธิบัตรการประดิษฐ์
 																				</label>
+																				<span id="cer2qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																				<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer2_qty}}">
+																							<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer2_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2088,10 +2089,11 @@
 																					<input type="checkbox" id="cer3" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer3)) checked @endif data-fouc >
 																					ได้รับการจดสิทธิบัตรการออกแบบ
 																				</label>
+																				<span id="cer3qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																				<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer3_qty}}">
+																							<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer3_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2102,10 +2104,11 @@
 																					<input type="checkbox" id="cer4" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer4)) checked @endif data-fouc >
 																					ยื่นจดสิทธิบัตรการออกแบบ
 																				</label>
+																				<span id="cer4qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																				<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer4_qty}}">
+																							<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer4_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2118,10 +2121,11 @@
 																					<input type="checkbox" id="cer5" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer5)) checked @endif data-fouc >
 																					ได้รับการจดอนุสิทธิบัตร
 																				</label>
+																				<span id="cer5qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																				<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer5_qty}}">
+																							<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer5_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2132,10 +2136,11 @@
 																					<input type="checkbox" id="cer6" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer6)) checked @endif data-fouc >
 																					ยื่นจดอนุสิทธิบัตร
 																				</label>
+																				<span id="cer6qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																				<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer6_qty}}">
+																							<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer6_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2153,10 +2158,11 @@
 																				<input type="checkbox" id="cer7" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer7)) checked @endif data-fouc >
 																				ลิขสิทธิ์
 																			</label>
+																			<span id="cer7qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																			<div class="row" id="cer7qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer7) || Empty(@$fulltbpprojectcertify->cer7_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer7_qty}}">
+																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer7_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2167,10 +2173,11 @@
 																				<input type="checkbox" id="cer8" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer8)) checked @endif data-fouc >
 																				เครื่องหมายการค้า
 																			</label>
+																			<span id="cer8qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																			<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer8_qty}}">
+																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer8_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2183,10 +2190,11 @@
 																				<input type="checkbox" id="cer9" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer9)) checked @endif data-fouc >
 																				ความลับทางการค้า
 																			</label>
+																			<span id="cer9qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																			<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer9_qty}}">
+																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer9_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2199,6 +2207,7 @@
 																			</label>
 																		</div>
 																	</div>
+																	
 			
 																	<div class="col-md-4">
 																		<div class="form-check">
@@ -2206,10 +2215,11 @@
 																				<input type="checkbox" id="cer11" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer11)) checked @endif data-fouc >
 																				อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม
 																			</label>
+																			<span id="cer11qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
 																			<div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" name="cer11qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{0 ?? $fulltbpprojectcertify->cer11_qty}}">
+																						<input type="text" id="cer11qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer11_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2327,7 +2337,8 @@
 
 															<div class="col-md-12 mt-3">	
 																<label for=""><strong>2.7) แผนการดำเนินงาน (Gantt Chart)</strong> </label><span class="text-primary" id="projectechdevproblemtextlength"></span>
-																<span id="ganttchart_wrapper_error" class="form-text text-danger"  hidden >*กรุณาแผนการดำเนินงาน (Gantt Chart)</span>
+																<span id="ganttchart_wrapper_error" class="form-text text-danger mb-2"  hidden >*กรุณาแผนการดำเนินงาน (Gantt Chart)</span>
+																<span id="notmatch_wrapper_error" class="form-text text-danger mb-2"  hidden >*จำนวนเดือนที่ดำเนินงานไม่เท่ากับจำนวนเดือนในแผนงาน</span>
 																<div class="row">
 																	
 																	<div class="col-md-6">	
@@ -2355,6 +2366,7 @@
 																			<button type="button" id ="btn_add_projectplan" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่มรายละเอียด</button>
 																		</div>
 																		<label for=""><strong>ถ้าต้องการเปลี่ยนลำดับรายละเอียดการดำเนินงานให้คลิกที่รายการแล้วลากขึ้นหรือลง</strong></label>
+																		
 																	</div>
 																	<div class="col-md-12">			
 																		<table class="table-bordered" style="width: 100%" id="table_gantt_wrapper">
@@ -2421,6 +2433,7 @@
 																				@endforeach                            
 																			</tbody>
 																		</table>
+																		<input type="text" id="maxrow" value="{{@$_count-1}}" hidden>
 																	</div>
 																</div>
 															
@@ -2453,7 +2466,7 @@
 													<div class="col-md-12">	
 														<div class="form-group">
 															<label for=""><u>Market Analysis</u> </label><span class="text-danger">*</span>
-															<p><small><i>อธิบายความเป็นไปได้ทางการตลาดของผลิตภัณฑ์หรือบริการในโครงการ และ ระบุแผนงานในการนำผลลัพธ์ของโครงการออกสู่เชิงพาณิชย์ (ประมาณ 1-3 หน้า) โดยให้ข้อมูลในประเด็นต่างๆ ดังนี้ 
+															<p><small><i>อธิบายความเป็นไปได้ทางการตลาดของผลิตภัณฑ์หรือบริการในโครงการ และ ระบุแผนงานในการนำผลลัพธ์ของโครงการออกสู่เชิงพาณิชย์  โดยให้ข้อมูลในประเด็นต่างๆ ดังนี้ 
 																<ul>
 																	<li>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs/Market requirements)</li>
 																	<li>ระบุและให้รายละเอียดเกี่ยวกับตลาดภายในและนอกประเทศ (Market size)</li>
@@ -2560,10 +2573,13 @@
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
 																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th> 
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th> 
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
+																				                                                                                   
+																				      
+																				
 																				<th class="text-center hiddenelement" style="width: 10%">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
@@ -2571,10 +2587,13 @@
 																			@foreach ($fulltbpsells->reverse() as $fulltbpsell)
 																				<tr>                                        
 																					<td> {{$fulltbpsell->name}}</td> 
-																					<td class="text-right"> {{number_format($fulltbpsell->present, 2)}} </td> 
-																					<td class="text-right"> {{number_format($fulltbpsell->past1, 2)}}</td> 
-																					<td class="text-right"> {{number_format($fulltbpsell->past2, 2)}}</td>                                            															
 																					<td class="text-right"> {{number_format($fulltbpsell->past3, 2)}}</td> 
+																					<td class="text-right"> {{number_format($fulltbpsell->past2, 2)}}</td>  
+																					<td class="text-right"> {{number_format($fulltbpsell->past1, 2)}}</td> 
+																					<td class="text-right"> {{number_format($fulltbpsell->present, 2)}} </td> 
+																				
+																					                                          															
+																				
 																					<td class="hiddenelement"> 
 																						<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
 																						<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning hiddenelement deletesell">ลบ</a> 
@@ -2594,10 +2613,11 @@
 																		<thead>
 																			<tr  class="bg-info">
 																				<th>ประเภทยอดขาย</th>  
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th> 
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>  
+																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>    
 																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>                                                                                    
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>       
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
+
 																				<th class="hiddenelement" style="width: 10%">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
@@ -2605,10 +2625,10 @@
 																			@foreach ($fulltbpsellstatuses as $fulltbpsellstatus)
 																				<tr >                                        
 																					<td> {{$fulltbpsellstatus->name}}</td> 
-																					<td class="text-right"> {{number_format($fulltbpsellstatus->present, 2)}} </td> 
-																					<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}} </td> 
-																					<td class="text-right"> {{number_format($fulltbpsellstatus->past2, 2)}} </td>                                            															
 																					<td class="text-right"> {{number_format($fulltbpsellstatus->past3, 2)}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpsellstatus->past2, 2)}} </td>  
+																					<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpsellstatus->present, 2)}} </td> 
 																					<td class="hiddenelement"> 
 																						<a type="button" data-id="{{$fulltbpsellstatus->id}}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
 																					</td> 
@@ -2811,7 +2831,7 @@
 																			<td class="text-right"> {{number_format($fulltbpcost->existing, 2)}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpcost->need, 2)}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpcost->approved, 2)}}</td> 
-																			<td> {{$fulltbpcost->plan}} </td> 
+																			<td class="text-right"> {{number_format($fulltbpcost->plan, 2)}}</td> 
 																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">แก้ไข</a>
 																			</td> 

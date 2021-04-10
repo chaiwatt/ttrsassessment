@@ -681,6 +681,7 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
 $(document).on('change', '#cer1', function(e) {
     if($(this).is(":checked")){
         $("#cer1qtydiv").attr("hidden",false);
+        $("#cer1qty").val(1);
     }else{
         $("#cer1qtydiv").attr("hidden",true);
     }
@@ -688,6 +689,7 @@ $(document).on('change', '#cer1', function(e) {
 $(document).on('change', '#cer2', function(e) {
     if($(this).is(":checked")){
         $("#cer2qtydiv").attr("hidden",false);
+        $("#cer2qty").val(1);
     }else{
         $("#cer2qtydiv").attr("hidden",true);
     }
@@ -695,6 +697,7 @@ $(document).on('change', '#cer2', function(e) {
 $(document).on('change', '#cer3', function(e) {
     if($(this).is(":checked")){
         $("#cer3qtydiv").attr("hidden",false);
+        $("#cer3qty").val(1);
     }else{
         $("#cer3qtydiv").attr("hidden",true);
     }
@@ -702,6 +705,7 @@ $(document).on('change', '#cer3', function(e) {
 $(document).on('change', '#cer4', function(e) {
     if($(this).is(":checked")){
         $("#cer4qtydiv").attr("hidden",false);
+        $("#cer4qty").val(1);
     }else{
         $("#cer4qtydiv").attr("hidden",true);
     }
@@ -709,6 +713,7 @@ $(document).on('change', '#cer4', function(e) {
 $(document).on('change', '#cer5', function(e) {
     if($(this).is(":checked")){
         $("#cer5qtydiv").attr("hidden",false);
+        $("#cer5qty").val(1);
     }else{
         $("#cer5qtydiv").attr("hidden",true);
     }
@@ -716,6 +721,7 @@ $(document).on('change', '#cer5', function(e) {
 $(document).on('change', '#cer6', function(e) {
     if($(this).is(":checked")){
         $("#cer6qtydiv").attr("hidden",false);
+        $("#cer6qty").val(1);
     }else{
         $("#cer6qtydiv").attr("hidden",true);
     }
@@ -723,6 +729,7 @@ $(document).on('change', '#cer6', function(e) {
 $(document).on('change', '#cer7', function(e) {
     if($(this).is(":checked")){
         $("#cer7qtydiv").attr("hidden",false);
+        $("#cer7qty").val(1);
     }else{
         $("#cer7qtydiv").attr("hidden",true);
     }
@@ -730,6 +737,7 @@ $(document).on('change', '#cer7', function(e) {
 $(document).on('change', '#cer8', function(e) {
     if($(this).is(":checked")){
         $("#cer8qtydiv").attr("hidden",false);
+        $("#cer8qty").val(1);
     }else{
         $("#cer8qtydiv").attr("hidden",true);
     }
@@ -737,13 +745,16 @@ $(document).on('change', '#cer8', function(e) {
 $(document).on('change', '#cer9', function(e) {
     if($(this).is(":checked")){
         $("#cer9qtydiv").attr("hidden",false);
+        $("#cer9qty").val(1);
     }else{
         $("#cer9qtydiv").attr("hidden",true);
     }
 });
 $(document).on('change', '#cer11', function(e) {
     if($(this).is(":checked")){
+        // console.log('11');
         $("#cer11qtydiv").attr("hidden",false);
+        $("#cer11qty").val(1);
     }else{
         $("#cer11qtydiv").attr("hidden",true);
     }
@@ -1017,7 +1028,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                                     ${tr}
                             </tr>
                         </thead>`
-        
+                 var maxrow = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
@@ -1027,7 +1038,9 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                         }else{
                             tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
+                        maxrow = _count;
                         _count ++;
+                        
                     }
                     html += `<tr >                                        
                         <td style="padding:5px"> ${plan.name} </td>                                            
@@ -1038,6 +1051,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                         </td>
                     </tr>`
                     });
+                    $("#maxrow").val(maxrow);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
            })
@@ -1134,7 +1148,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                                     ${tr}
                             </tr>
                         </thead>`
-        
+                var maxrow = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
@@ -1144,7 +1158,9 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                         }else{
                             tdbody += `<td style="background-color:white;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
+                        maxrow = _count;
                         _count ++;
+                       
                     }
                     html += `<tr >                                        
                         <td style="padding:5px"> ${plan.name} </td>                                            
@@ -1155,6 +1171,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                         </td>
                     </tr>`
                     });
+                 $("#maxrow").val(maxrow);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
             })
@@ -1219,7 +1236,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                                     ${tr}
                             </tr>
                         </thead>`
-        
+                var maxrow = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
@@ -1229,7 +1246,9 @@ $(document).on("click",".deleteprojectplan",function(e){
                         }else{
                             tdbody += `<td style="background-color:white;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
+                        maxrow = _count;
                         _count ++;
+                        
                     }
                     html += `<tr >                                        
                         <td style="padding:5px"> ${plan.name} </td>                                            
@@ -1240,6 +1259,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                         </td>
                     </tr>`
                     });
+                 $("#maxrow").val(maxrow);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
            })
@@ -1548,11 +1568,11 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
         var html = ``;
         data.forEach(function (sell,index) {
             html += `<tr >                                        
-                <td> ${sell.name} </td>                            
+                <td> ${sell.name} </td>    
+                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>    
+                <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
+                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                     
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
@@ -1583,11 +1603,14 @@ $(document).on("click",".deletesell",function(e){
                 var html = ``;
                 data.forEach(function (sell,index) {
                     html += `<tr >                                        
-                        <td> ${sell.name} </td>                            
-                        <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                        <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                        <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                        <td> ${sell.name} </td> 
                         <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
+                        <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
+                        <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+                        <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+                     
+                       
+                         
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
@@ -1627,10 +1650,13 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.name} </td>    
-                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                            
+                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+              
+               
+                                                           
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
@@ -1661,11 +1687,14 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
         var html = ``;
         data.forEach(function (sell,index) {
             html += `<tr >                                        
-                <td> ${sell.name} </td>    
-                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td> ${sell.name} </td>   
+                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                            
+                <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
+              
+      
+                                                          
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
                 </td> 
@@ -2223,7 +2252,6 @@ $('.steps-basic').steps({
     },
     onStepChanging: function (event, currentIndex, newIndex) {
         if(currentIndex == 3 && newIndex == 4){
-            // //console.log(newIndex);
             if($('.chkauthorizeddirector').filter(':checked').length == 0){
                 Swal.fire({
                     title: 'ผิดพลาด!',
@@ -2249,8 +2277,6 @@ $('.steps-basic').steps({
             }
 
         }
-
-    //    //console.log($('#organizeimgholder').prop('src')) ; //orgimg.png
 
        if ($('#organizeimgholder').prop('src').includes("orgimg.png") == true)
        {
@@ -2292,9 +2318,6 @@ $('.steps-basic').steps({
             $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
         }
 
-
-
-        // //console.log(currentIndex);
         if(currentIndex == 1){
             if ($('#projectabtract_input').summernote('isEmpty'))
             {
@@ -2327,6 +2350,7 @@ $('.steps-basic').steps({
             }else{
                 $("#projectechdev_input_error").attr("hidden",true);
             }
+
             if ($('#projectechdevproblem_input').summernote('isEmpty'))
             {
                 $("#projectechdevproblem_input_error").attr("hidden",false);
@@ -2334,6 +2358,103 @@ $('.steps-basic').steps({
             }else{
                 $("#projectechdevproblem_input_error").attr("hidden",true);
             }
+
+           if($("#cer1").is(":checked") == true){
+                if(parseInt($("#cer1qty").val()) < 1){
+                    $("#cer1qtydiv").attr("hidden",false);
+                    $("#cer1qty_error").attr("hidden",false);
+                    return;
+                }
+           }else{
+                $("#cer1qty_error").attr("hidden",true);
+           }
+
+           if($("#cer2").is(":checked") == true){
+                if(parseInt($("#cer2qty").val()) < 1){
+                    $("#cer2qtydiv").attr("hidden",false);
+                    $("#cer2qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer2qty_error").attr("hidden",true);
+            }
+
+            if($("#cer3").is(":checked") == true){
+                if(parseInt($("#cer3qty").val()) < 1){
+                    $("#cer3qtydiv").attr("hidden",false);
+                    $("#cer3qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer3qty_error").attr("hidden",true);
+            }
+
+            if($("#cer4").is(":checked") == true){
+                if(parseInt($("#cer4qty").val()) < 1){
+                    $("#cer4qtydiv").attr("hidden",false);
+                    $("#cer4qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer4qty_error").attr("hidden",true);
+            }
+            if($("#cer5").is(":checked") == true){
+                if(parseInt($("#cer5qty").val()) < 1){
+                    $("#cer5qtydiv").attr("hidden",false);
+                    $("#cer5qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer5qty_error").attr("hidden",true);
+            }
+            if($("#cer6").is(":checked") == true){
+                if(parseInt($("#cer6qty").val()) < 1){
+                    $("#cer6qtydiv").attr("hidden",false);
+                    $("#cer6qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer6qty_error").attr("hidden",true);
+            }
+            if($("#cer7").is(":checked") == true){
+                if(parseInt($("#cer7qty").val()) < 1){
+                    $("#cer7qtydiv").attr("hidden",false);
+                    $("#cer7qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer7qty_error").attr("hidden",true);
+            }
+            if($("#cer8").is(":checked") == true){
+                if(parseInt($("#cer8qty").val()) < 1){
+                    $("#cer8qtydiv").attr("hidden",false);
+                    $("#cer8qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer8qty_error").attr("hidden",true);
+            }
+            if($("#cer9").is(":checked") == true){
+                if(parseInt($("#cer9qty").val()) < 1){
+                    $("#cer9qtydiv").attr("hidden",false);
+                    $("#cer9qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer9qty_error").attr("hidden",true);
+            }
+            if($("#cer11").is(":checked") == true){
+                if(parseInt($("#cer11qty").val()) < 1){
+                    $("#cer11qtydiv").attr("hidden",false);
+                    $("#cer11qty_error").attr("hidden",false);
+                    return;
+                }
+            }else{
+                    $("#cer11qty_error").attr("hidden",true);
+            }
+
+
+
             if ($('#projectinnovation_input').summernote('isEmpty'))
             {
                 $("#projectinnovation_input_error").attr("hidden",false);
@@ -2341,6 +2462,7 @@ $('.steps-basic').steps({
             }else{
                 $("#projectinnovation_input_error").attr("hidden",true);
             }
+
             if ($('#projectstandard_input').summernote('isEmpty'))
             {
                 $("#projectstandard_input_error").attr("hidden",false);
@@ -2348,6 +2470,7 @@ $('.steps-basic').steps({
             }else{
                 $("#projectstandard_input_error").attr("hidden",true);
             }
+
             var ganttchart_wrapper_tr = $('#table_gantt_wrapper tr').length;
 
             if(ganttchart_wrapper_tr <= 2){
@@ -2356,6 +2479,14 @@ $('.steps-basic').steps({
             }else{
                 $("#ganttchart_wrapper_error").attr("hidden",true);
             }
+
+            if(parseInt($("#maxrow").val()) != parseInt($("#ganttnummonth").val())){
+                $("#notmatch_wrapper_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#notmatch_wrapper_error").attr("hidden",true);
+            }
+
         }else if(currentIndex == 2){
             if ($('#analysis').summernote('isEmpty'))
             {
@@ -3308,5 +3439,73 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             $("#othereducationlevel_wrapper").attr("hidden",true);
         }
     });
-    
-    
+    $("#cer1qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer1qty_error").attr("hidden",true);
+        }else{
+            $("#cer1qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer2qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer2qty_error").attr("hidden",true);
+        }else{
+            $("#cer2qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer3qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer3qty_error").attr("hidden",true);
+        }else{
+            $("#cer3qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer4qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer4qty_error").attr("hidden",true);
+        }else{
+            $("#cer4qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer5qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer5qty_error").attr("hidden",true);
+        }else{
+            $("#cer5qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer6qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer6qty_error").attr("hidden",true);
+        }else{
+            $("#cer6qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer7qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer7qty_error").attr("hidden",true);
+        }else{
+            $("#cer7qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer8qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer8qty_error").attr("hidden",true);
+        }else{
+            $("#cer8qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer9qty").on('keyup', function() {       
+        if(parseInt($(this).val()) > 0){
+            $("#cer9qty_error").attr("hidden",true);
+        }else{
+            $("#cer9qty_error").attr("hidden",false);
+        }
+    });
+    $("#cer11qty").on('keyup', function() {     
+        if(parseInt($(this).val()) > 0){
+            $("#cer11qty_error").attr("hidden",true);
+        }else{
+            $("#cer11qty_error").attr("hidden",false);
+        }
+    });

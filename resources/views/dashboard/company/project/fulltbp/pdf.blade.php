@@ -102,8 +102,8 @@
                 <div class="box bw650  mt20 " style="background-color: #bdd6ee;">
                     <div style="font-size:13px"><strong>1. ข้อมูลทั่วไป</strong></div>
                 </div>
-                <div class="box bw650  mt20" >
-                    <div class="ml20 mt-10" style="font-size:13px">1.1 ชื่อนิติบุคคล : {{$fullname}} </div>
+                <div class="box bw650  mt20" >                     
+                    <div class="ml20 mt-10" style="font-size:13px">1.1 ชื่อนิติบุคคล : {{$fullname}}</div>
                     <div class="ml20 mt0" style="font-size:13px">1.2 เลขทะเบียนนิติบุคคล : {{$fulltbp->minitbp->businessplan->company->vatno}} </div> 
                     <div class="ml20 mt0" style="font-size:13px">1.3 ปีที่จดทะเบียน : พ.ศ. {{Empty($fulltbp->minitbp->businessplan->company->registeredyear) ? '-' : $fulltbp->minitbp->businessplan->company->registeredyear}}</div>
                     <div class="ml20 mt0" style="font-size:13px">1.4 ทุนจดทะเบียน : {{number_format($fulltbp->minitbp->businessplan->company->registeredcapital,2)}} บาท</div>
@@ -502,51 +502,51 @@
                                 <tbody>
                                     <tr>
                                         <td style="font-size:13px;padding-top:10px;border-bottom: none !important;">
-                                            <div class="ml5 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer1)) checked="checked" @endif > ได้รับการจดสิทธิบัตรการประดิษฐ์<pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer1_qty}})</pre></div>
+                                            <div class="ml5 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer1)) checked="checked" @endif > ได้รับการจดสิทธิบัตรการประดิษฐ์ @if ($fulltbp->fulltbpprojectcertify->cer1_qty > 0) <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer1_qty}})</pre> @endif</div>
                                            
                                         </td>
                                         <td style="font-size:13px;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer3)) checked="checked" @endif> ได้รับการจดสิทธิบัตรการออกแบบ <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer3_qty}})</pre> </div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer3)) checked="checked" @endif> ได้รับการจดสิทธิบัตรการออกแบบ @if($fulltbp->fulltbpprojectcertify->cer3_qty>0) <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer3_qty}})</pre>@endif  </div>
     
                                         </td>
                                         <td style="font-size:13px;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer5)) checked="checked" @endif> ได้รับการจดอนุสิทธิบัตร <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer5_qty}})</pre></div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer5)) checked="checked" @endif> ได้รับการจดอนุสิทธิบัตร @if($fulltbp->fulltbpprojectcertify->cer5_qty>0) <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer5_qty}})</pre>@endif </div>
                                            
                                         </td> 
                                     </tr>
                                     <tr>
                                         <td style="font-size:13px;border-top: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer2)) checked="checked" @endif> ยื่นจดสิทธิบัตรการประดิษฐ์ <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer2_qty}})</pre> </div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer2)) checked="checked" @endif> ยื่นจดสิทธิบัตรการประดิษฐ์ @if($fulltbp->fulltbpprojectcertify->cer2_qty>0) <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer2_qty}})</pre> @endif  </div>
                                         </td>
                                         <td style="font-size:13px;border-top: none !important;">
                                        
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer4)) checked="checked" @endif> ยื่นจดสิทธิบัตรการออกแบบ <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer4_qty}})</pre> </div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer4)) checked="checked" @endif> ยื่นจดสิทธิบัตรการออกแบบ @if($fulltbp->fulltbpprojectcertify->cer4_qty>0) <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer4_qty}})</pre> @endif  </div>
                                         </td>
                                         <td style="font-size:13px;border-top: none !important;">
                                            
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer6)) checked="checked" @endif> ยื่นจดอนุสิทธิบัตร <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer6_qty}})</pre></div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer6)) checked="checked" @endif> ยื่นจดอนุสิทธิบัตร @if($fulltbp->fulltbpprojectcertify->cer6_qty>0) <pre style="font-family: THSarabunNew">&emsp;(จำนวน: {{$fulltbp->fulltbpprojectcertify->cer6_qty}})</pre>@endif </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:13px;padding-top:10px;border-right: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer7)) checked="checked" @endif> ลิขสิทธิ์ (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer7_qty}} )</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer7)) checked="checked" @endif> ลิขสิทธิ์ @if($fulltbp->fulltbpprojectcertify->cer7_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer7_qty}} )@endif</div>
                                             
                                         </td>
                                         <td colspan="2"  style="font-size:13px;padding-top:10px;border-left: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer9)) checked="checked" @endif> ความลับทางการค้า (จำนวน:  )</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer9)) checked="checked" @endif> ความลับทางการค้า</div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:13px;border-right: none !important;border-top: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer8)) checked="checked" @endif> เครื่องหมายการค้า (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer8_qty}} )</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer8)) checked="checked" @endif> เครื่องหมายการค้า @if($fulltbp->fulltbpprojectcertify->cer8_qty > 0)  (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer8_qty}} ) @endif</div>
                                         </td>
                                         <td colspan="2"  style="font-size:13px;border-left: none !important;border-top: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer10)) checked="checked" @endif> ซื้อหรือต่อยอดทรัพย์สินทางปัญญา (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer9_qty}} )</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer10)) checked="checked" @endif> ซื้อหรือต่อยอดทรัพย์สินทางปัญญา @if($fulltbp->fulltbpprojectcertify->cer9_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer9_qty}} )@endif</div>
                                         </td>
                                     </tr >
                                     <tr>
                                         <td colspan="3" style="font-size:13px;border-top: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer11)) checked="checked" @endif> อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer11_qty}} )</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer11)) checked="checked" @endif> อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม @if($fulltbp->fulltbpprojectcertify->cer11_qty > 0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer11_qty}} )@endif</div>
                                         </td>
                                     </tr>  
                                 </tbody>
@@ -625,10 +625,10 @@
                         <thead>
                             <tr>
                                 <th style="width:40%;font-size:13px">ยอดขายแยกตามประเภทผลิตภัณฑ์/บริการ</th>
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th>  
                                 <th style="width:15%;font-size:13px">{{$fulltbp->past1 +1 }}</th>
-                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th>                                                                                    
-                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th>       
-                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th>  
                             <tr>
                         </thead>
                         <tbody>
@@ -636,18 +636,18 @@
                                 @foreach ($fulltbp->fulltbpsell as $fulltbpsell)
                                     <tr>
                                         <td style="font-size:13px"> {{$fulltbpsell->name}}</td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->present,2)}} </td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past1,2)}} </td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past2,2)}}</td>                                            															
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past3,2)}}</td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past2,2)}}</td>  
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past1,2)}} </td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->present,2)}} </td>       
                                     </tr>   
                                 @endforeach
                                 <tr>
                                     <td class="center"><strong>รวมยอดขาย</strong> </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('present'),2)}} </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('past1'),2)}} </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('past2'),2)}}</td>                                            															
                                     <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('past3'),2)}}</td> 
+                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('past2'),2)}}</td> 
+                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('past1'),2)}} </td>   
+                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('present'),2)}} </td>    
                                 </tr>
                             @endif
                         </tbody>
@@ -657,29 +657,29 @@
                         <thead>
                             <tr>
                                 <th style="width:40%;font-size:13px">ระยะเวลา</th>
-                                <th style="width:15%;font-size:13px">{{$fulltbp->past1+1}}</th>
-                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th>                                                                                    
-                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th>       
-                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th>  
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th>   
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1+1}}</th>   
                             <tr>
                         </thead>
                         <tbody>
                             @if ($fulltbp->fulltbpsellstatus->count() > 0)
                                 @foreach ($fulltbp->fulltbpsellstatus as $fulltbpsellstatus)
                                     <tr>
-                                        <td style="font-size:13px">{!!$provider::FixBreak($fulltbpsellstatus->name)!!}</td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->present,2)}} </td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past1,2)}} </td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past2,2)}}</td>                                            															
+                                        <td style="font-size:13px">{!!$provider::FixBreak($fulltbpsellstatus->name)!!}</td>
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past3,2)}}</td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past2,2)}}</td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past1,2)}} </td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->present,2)}} </td> 
                                     </tr>   
                                 @endforeach
                                 <tr>
                                     <td class="center"><strong>รวมยอดขาย</strong> </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsellstatus->sum('present'),2)}} </td> 
+                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsellstatus->sum('past3'),2)}}</td>
+                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsellstatus->sum('past2'),2)}}</td>  
                                     <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsellstatus->sum('past1'),2)}} </td> 
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsellstatus->sum('past2'),2)}}</td>                                            															
-                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsellstatus->sum('past3'),2)}}</td> 
+                                    <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsellstatus->sum('present'),2)}} </td> 
                                 </tr>
                             @endif
                         </tbody>
@@ -782,7 +782,7 @@
                         <table class="mt0  border tbwrap">
                             <thead>
                                 <tr>
-                                    <th style="width:80%;font-size:13px">รายการ</th>  
+                                    <th style="width:80%;font-size:13px">รายการ </th>  
                                     <th style="width:20%;font-size:13px">จำนวนเงิน (บาท)</th>  
                                 <tr>
                             </thead>
@@ -821,7 +821,7 @@
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->existing,2)}}</td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->need,2)}}</td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcost->approved,2)}}</td> 
-                                            <td style="font-size:13px"> {{$fulltbpcost->plan}}</td>
+                                            <td style="font-size:13px;text-align: right"> {{number_format($fulltbpcost->plan,2)}}</td>
                                         </tr>   
                                     @endforeach
                                     <tr>
@@ -829,7 +829,7 @@
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('existing'),2)}} </td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('need'),2)}} </td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('approved'),2)}} </td> 
-                                        <td style="font-size:13px"> </td> 
+                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpcost->sum('plan'),2)}} </td> 
                                     </tr>
                                 @endif
                             </tbody>
@@ -867,16 +867,18 @@
                             <tr>
                                 <td class="" style="width:1px; text-align: right;border: none;font-size:13px">ลงชื่อ</td>
                                 <td class="" style="width: 200px;text-align: center;border: none;font-size:13px">
-                                    {{$fulltbpsignature->companyemploy->prefix->name}}{{$fulltbpsignature->companyemploy->name}} {{$fulltbpsignature->companyemploy->lastname}}
+                                    {{-- {{$fulltbpsignature->companyemploy->prefix->name}}{{$fulltbpsignature->companyemploy->name}} {{$fulltbpsignature->companyemploy->lastname}} --}}
+                                    @if ($fulltbp->signature_status_id == 2)
+                                        <img src="{{asset($fulltbpsignature->companyemploy->signature->path)}}" alt="Girl in a jacket" width="100" height="40">
+                                    @endif
                                 </td>
                                 <td class="" style="width: 1px;border: none;font-size:13px">ผู้ขอรับการประเมิน</td>
                             </tr>
                             <tr>
                                 <td class="" style="width: 1px; text-align: right;padding-top:15px;border: none;">(</td>
                                 <td class="" style="width: 200px;text-align: center;padding-top:15px;border: none;">
-                                    @if ($fulltbp->signature_status_id == 2)
-                                        <img src="{{asset($fulltbpsignature->companyemploy->signature->path)}}" alt="Girl in a jacket" width="100" height="40">
-                                    @endif
+                                   
+                                    {{$fulltbpsignature->companyemploy->prefix->name}}{{$fulltbpsignature->companyemploy->name}} {{$fulltbpsignature->companyemploy->lastname}}
                                 </td>
                                 <td class="" style="width: 1px;text-align: left;padding-top:15px;border: none;">)</td>
                             </tr>

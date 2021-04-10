@@ -1042,6 +1042,11 @@ function deleteAddress(id){
 }
 
 $(document).on('click', '#btn_add_authorized_director', function(e) {
+    $("#clearpad").trigger("click");
+    $('select#directorprefix').val(1).select2();
+    $('select#directorposition').val(1).select2();
+    $('#directorname').val('');
+    $('#directorlastname').val('');
     $('#signature_type').val('1');
     $('#signatureid').val('');
     $("#sigdiv").html('');

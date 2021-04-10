@@ -384,7 +384,7 @@
 											<div>
 											  <button type="button" class="btn bg-teal save" data-action="save-png"><i class="icon-floppy-disk mr-2"></i>บันทึก</button>
 											  <button type="button" class="btn bg-primary" data-action="undo" hidden>ยกเลิก</button>
-											  <button type="button" class="btn bg-primary clear" data-action="clear"><i class="icon-trash-alt mr-2"></i>ล้างข้อมูล</button>
+											  <button type="button" class="btn bg-primary clear" data-action="clear" id="clearpad"><i class="icon-trash-alt mr-2"></i>ล้างข้อมูล</button>
 											  
 											  	
 											  <div class="form-group text-center text-muted content-divider mb-2 mt-2">

@@ -526,7 +526,7 @@
 																		<tr >                                        
 																			<td> {{$expertdoc->name}}</td>                                            
 																			<td> 
-																				<a href="{{asset($expertdoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+																				<a href="{{asset($expertdoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
 																				<a type="button" data-id="{{$expertdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
 																			</td>
 																		</tr>
