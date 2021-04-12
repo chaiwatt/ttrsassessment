@@ -38,6 +38,7 @@ class CreateCompaniesTable extends Migration
             $table->string('logo',250)->nullable();
             $table->string('organizeimg',250)->nullable();
             $table->longText('companyhistory')->nullable();
+            $table->char('saveprofile',1)->default(0);
             $table->timestamps();
         });
     }

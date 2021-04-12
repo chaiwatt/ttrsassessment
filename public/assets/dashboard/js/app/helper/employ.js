@@ -63,7 +63,7 @@ function getEmployPosition(id){
     })
 }
 
-function editEmploy(id,prefix,otherprefix,name,lastname,position,phone,workphone,email){
+function editEmploy(id,prefix,otherprefix,name,lastname,phone,workphone,email){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/employ/edit`,
@@ -75,7 +75,7 @@ function editEmploy(id,prefix,otherprefix,name,lastname,position,phone,workphone
           otherprefix : otherprefix,
           name : name,
           lastname :lastname,
-          position :position,
+          // position :position,
           phone :phone,
           workphone :workphone,
           email :email
@@ -109,7 +109,7 @@ function deleteEmployInfo(id){
     })
 }
 
-function addEmployEducation(id,employeducationlevel,othereducationlevel,employeducationinstitute,employeducationmajor,employeducationyear){
+function addEmployEducation(id,employeducationlevel,othereducationlevel,employeducationinstitute,employeducationmajor,employeducationyearstart,employeducationyearend){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/employ/education/add`,
@@ -121,7 +121,8 @@ function addEmployEducation(id,employeducationlevel,othereducationlevel,employed
           othereducationlevel : othereducationlevel,
           employeducationinstitute :employeducationinstitute,
           employeducationmajor :employeducationmajor,
-          employeducationyear :employeducationyear,
+          employeducationyearstart :employeducationyearstart,
+          employeducationyearend :employeducationyearend
         },
         success: function(data) {
           resolve(data)

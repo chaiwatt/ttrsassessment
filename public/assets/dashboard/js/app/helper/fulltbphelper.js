@@ -8,16 +8,6 @@ import * as Market from './market.js';
 import * as Sell from './sell.js';
 import * as FullTbp from './fulltbp.js';
 
-// $(document).on('keyup', '#companyprofile_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="companyprofile[]" value="${$(this).val()}" class="form-control companyprofileclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_companyprofile_wrapper').append(html);
-//     }
-// });
-// var dataid = 0;
-
-
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
@@ -27,7 +17,6 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
         return this.value; 
     }).get();
     CompanyProfile.addCompanyProfile(lines,$(this).data('id')).then(data => {
-        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มประวัติบริษัทสำเร็จ!',
@@ -55,7 +44,6 @@ $("#companygeneraldoc").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                // //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -78,9 +66,6 @@ $("#companygeneraldoc").on('change', function() {
         }
     });
 });
-
-
-
 
 $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
     Swal.fire({
@@ -119,21 +104,59 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
 }); 
 
 $(document).on('click', '#btn_edit_employ', function(e) {
-    Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employposition_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {
-        //console.log(data);
+    if($('#employname_edit').val() == '' || $('#employlastname_edit').val() == '' || $('#employphone_edit').val() == '' || $('#employworkphone_edit').val() == '' || $('#employemail_edit').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
+        return;
+    }
+
+    Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {   
         var html = ``;
         data.forEach(function (employ,index) {
-            html += `<tr >                                        
-                <td> ${employ.name}${employ.lastname} </td>                                            
-                <td> ${employ.employposition['name']} </td> 
-                <td> ${employ.phone} </td>                                            
-                <td> ${employ.workphone} </td> 
-                <td> ${employ.email} </td> 
-                <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
-            </tr>`
+            var prefix = employ.prefix['name'];
+            var position = employ.employposition['name'];
+            if(prefix == 'อื่นๆ'){
+                prefix = employ.otherprefix;
+            }	
+            if(position == 'อื่นๆ'){
+                position = employ.otherposition;
+            }	
+
+            if($('#employtype').val() == 'employee'){
+                if(employ.employ_position_id > 5){
+                    html += `<tr >                                        
+                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                        <td> ${position} </td> 
+                        <td> ${employ.phone} </td>                                            
+                        <td> ${employ.workphone} </td> 
+                        <td> ${employ.email} </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                    </tr>`
+                 }
+             }else if($('#employtype').val() == 'board'){
+                 if(employ.employ_position_id <= 5){
+                    html += `<tr >                                        
+                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                        <td> ${position} </td> 
+                        <td> ${employ.phone} </td>                                            
+                        <td> ${employ.workphone} </td> 
+                        <td> ${employ.email} </td> 
+                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                    </tr>`
+                 }
+             }
+
             });
-         $("#fulltbp_companyemploy_wrapper_tr").html(html);
+         if($('#employtype').val() == 'employee'){
+            $("#fulltbp_researcher_wrapper_tr").html(html);
+         }else if($('#employtype').val() == 'board'){
+            $("#fulltbp_companyemploy_wrapper_tr").html(html);
+         }
+        
          if(data.length > 0){
             $("#fulltbp_companyemploy_wrapper").attr("hidden",false);
             $("#fulltbp_companyemploy_wrapper_error").attr("hidden",true);
@@ -146,12 +169,10 @@ $(document).on('click', '#btn_edit_employ', function(e) {
             });
     })
     .catch(error => {})
-    // $('#modal_edit_employ').modal('show');
 });
 
 
 $(document).on("click",".deletecompanyemploy",function(e){
-    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -168,9 +189,17 @@ $(document).on("click",".deletecompanyemploy",function(e){
                 var html = ``;
                 data.forEach(function (employ,index) {
                     if(employ.employ_position_id < 6 ){
+                        var prefix = employ.prefix['name'];
+                        var position = employ.employposition['name'];
+                        if(prefix == 'อื่นๆ'){
+                            prefix = employ.otherprefix;
+                        }	
+                        if(position == 'อื่นๆ'){
+                            position = employ.otherposition;
+                        }	
                         html += `<tr >                                        
-                            <td> ${employ.name}${employ.lastname} </td>                                            
-                            <td> ${employ.employposition['name']} </td> 
+                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td> ${position} </td> 
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
@@ -190,23 +219,24 @@ $(document).on("click",".deletecompanyemploy",function(e){
            .catch(error => {})
         }
     });
-
 }); 
 
 $(document).on('click', '#btn_modal_add_employeducation', function(e) {
-    
- 
-    if($('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyear').val() == ''){
+    if($('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyearstart').val() == '' || $('#employeducationyearend').val() == ''){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกข้อมูลให้ครบ!',
         });
         return;
+    }else if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
+        });
+        return;
     }
-    //console.log($('#educationlevel').val())
    
-    Employ.addEmployEducation($('#employid').val(),$('#educationlevel').val(),$('#othereducationlevel').val(),$('#employeducationinstitute').val(),$('#employeducationmajor').val(),$('#employeducationyear').val()).then(data => {
-        //console.log(data);
+    Employ.addEmployEducation($('#employid').val(),$('#educationlevel').val(),$('#othereducationlevel').val(),$('#employeducationinstitute').val(),$('#employeducationmajor').val(),$('#employeducationyearstart').val(),$('#employeducationyearend').val()).then(data => {
         var html = '';
         data.forEach(function (education,index) {
             var educationlevel = education.employeducationlevel;
@@ -217,50 +247,42 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
                 <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
-                <td> ${education.employeducationyear} </td> 
+                <td> ${education.employeducationyearstart} - ${education.employeducationyearend} </td> 
                 <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
             </tr>`
             });
          $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
          $('#modal_add_employeducation').modal('hide');
     })
-    // .catch(error => {})
 });
 
-// $(function () {
-//     $('#employexperiencestartdate').bootstrapMaterialDatePicker({
-//         format: 'DD/MM/YYYY',
-//         clearButton: true,
-//         weekStart: 1,
-//         cancelText: "ยกเลิก",
-//         okText: "ตกลง",
-//         clearText: "เคลียร์",
-//         time: false
-//     });
-// });
+$(document).on('click', '#btnaddemployee', function(e) {
+    $('select#educationlevel').val(1).select2();
+    $('#othereducationlevel').val('');
+    $('#employeducationinstitute').val('');
+    $('#employeducationmajor').val('');
+    $('#employeducationyearstart').val('');
+    $('#employeducationyearend').val('');
+    $("#othereducationlevel_wrapper").attr("hidden",true);
+    $('#modal_add_employeducation').modal('show');
+});
 
-// $(function () {
-//     $('#employexperienceenddate').bootstrapMaterialDatePicker({
-//         format: 'DD/MM/YYYY',
-//         clearButton: true,
-//         weekStart: 1,
-//         cancelText: "ยกเลิก",
-//         okText: "ตกลง",
-//         clearText: "เคลียร์",
-//         time: false
-//     });
-// });
 
 $(document).on('click', '#btn_modal_add_employexperience', function(e) {
     if($('#employexperiencestartdate').val() == '' || $('#employexperienceenddate').val() == '' || $('#employexperiencecompany').val() == '' || $('#employexperiencebusinesstype').val() == '' || $('#employexperiencestartposition').val() == '' || $('#employexperienceendposition').val() == '' ){
         Swal.fire({
             title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบนะ!',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
+        return;
+    }else if(parseInt($('#employexperiencestartdate').val()) > parseInt($('#employexperienceenddate').val())){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
         });
         return;
     }
     Employ.addEmployExperience($('#employid').val(),$('#employexperiencestartdate').val(),$('#employexperienceenddate').val(),$('#employexperiencecompany').val(),$('#employexperiencebusinesstype').val(),$('#employexperiencestartposition').val(),$('#employexperienceendposition').val()).then(data => {
-        //console.log(data);
         var html = '';
         data.forEach(function (experience,index) {
             html += `<tr >                                        
@@ -274,6 +296,12 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
             });
          $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
          $('#modal_add_employexperience').modal('hide');
+         $('#employexperiencestartdate').val('');
+         $('#employexperienceenddate').val('');
+         $('#employexperiencecompany').val('');
+         $('#employexperiencebusinesstype').val('');
+         $('#employexperiencestartposition').val('');
+         $('#employexperienceendposition').val('');
     })
     .catch(error => {})
 });
@@ -287,7 +315,6 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
         return;
     }
     Employ.addEmployTraining($('#employid').val(),$('#employtrainingdate').val(),$('#employtrainingcourse').val(),$('#employtrainingowner').val()).then(data => {
-        //console.log(data);
         var html = '';
         data.forEach(function (training,index) {
             html += `<tr >                                        
@@ -299,6 +326,9 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
             });
          $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
          $('#modal_add_employtraining').modal('hide');
+         $('#employtrainingdate').val('');
+         $('#employtrainingcourse').val('');
+         $('#employtrainingowner').val('');
     })
     .catch(error => {})
 });
@@ -316,7 +346,6 @@ $(function () {
 });
 
 $(document).on("click",".deleteemployeducation",function(e){
-    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -331,10 +360,13 @@ $(document).on("click",".deleteemployeducation",function(e){
         if (result.value) {
             Employ.deleteEmployEducation($(this).data('id')).then(data => {
                 var html = ``;
-                //console.log(data);
             data.forEach(function (education,index) {
+                var educationlevel = education.employeducationlevel;
+                if(educationlevel == 'อื่นๆ'){
+                    educationlevel = education.otheremployeducationlevel;
+                }
             html += `<tr >                                        
-                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                     <td> ${education.employeducationmajor} </td>                                            
                     <td> ${education.employeducationmajor} </td> 
@@ -350,7 +382,6 @@ $(document).on("click",".deleteemployeducation",function(e){
 }); 
 
 $(document).on("click",".deleteemployexperience",function(e){
-    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -365,7 +396,6 @@ $(document).on("click",".deleteemployexperience",function(e){
         if (result.value) {
             Employ.deleteEmployExperience($(this).data('id')).then(data => {
                 var html = ``;
-                //console.log(data);
                 data.forEach(function (experience,index) {
                     html += `<tr >                                        
                         <td> ${experience.startdate} - ${experience.enddate}</td>                                            
@@ -385,7 +415,6 @@ $(document).on("click",".deleteemployexperience",function(e){
 }); 
 
 $(document).on("click",".deleteemploytraining",function(e){
-    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -400,7 +429,6 @@ $(document).on("click",".deleteemploytraining",function(e){
         if (result.value) {
             Employ.deleteEmployTraining($(this).data('id')).then(data => {
                 var html = ``;
-                //console.log(data);
                 data.forEach(function (training,index) {
                     html += `<tr >                                        
                         <td> ${training.trainingdateth}</td>                                            
@@ -418,17 +446,8 @@ $(document).on("click",".deleteemploytraining",function(e){
 }); 
 
 $(document).on('click', '#btnstckholder', function(e) {
-    // Employ.getEmploys($(this).data('id')).then(data => {
-    //     //console.log(data);
-    //     var html = ``;
-    //     var selectstockholder = `<label>รายชื่อพนักงาน</label><span class="text-danger">*</span><select id="selectstockholder_edit" data-placeholder="รายชื่อพนักงาน" class="form-control form-control-select2">`;
-    //     data.forEach(function (stock,index) {
-    //         selectstockholder += `<option value="${stock['id']}" >${stock['name']}</option>`
-    //         });
-    //         selectstockholder += `</select>`;
-    //     $("#stockholderselect_wrapper").html(selectstockholder);
-    // })
-    // .catch(error => {})
+    $('#employsearch').val('');
+    $('#relationwithceo').val('');
     $('#modal_add_stockholder').modal('show');
 });
 
@@ -441,7 +460,6 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
         return;
     }
     StockHolder.addStockHolder($('#companyid').val(),$('#employsearch').val(),$('#relationwithceo').val()).then(data => {
-        //console.log(data);
         var html = ``;
         data.forEach(function (stockholder,index) {
             html += `<tr >                                        
@@ -469,7 +487,6 @@ $(document).on('click', '.selectemploy', function(e) {
 
 
 $(document).on("click",".deletestockholder",function(e){
-    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -502,20 +519,12 @@ $(document).on('keyup', '.projectabtractclass', function(e) {
     $('#projectabtracttextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-// $(document).on('keyup', '#projectabtract_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="projectabtract[]" value="${$(this).val()}" class="form-control projectabtractclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_projectabtract_wrapper').append(html);
-//     }
-// });
 
 $(document).on('click', '#btnaddprojectabtract', function(e) {
     var lines = $('input[name="projectabtract[]"]').map(function(){ 
         return this.value; 
     }).get();
     Project.addAbtract(lines,$(this).data('id')).then(data => {
-        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มบทคัดย่อสำเร็จ!',
@@ -528,20 +537,11 @@ $(document).on('keyup', '.mainproductclass', function(e) {
     $('#mainproducttextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-// $(document).on('keyup', '#mainproduct_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="mainproduct[]" value="${$(this).val()}" class="form-control mainproductclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_mainproduct_wrapper').append(html);
-//     }
-// });
-
 $(document).on('click', '#btnaddmainproduct', function(e) {
     var lines = $('input[name="mainproduct[]"]').map(function(){ 
         return this.value; 
     }).get();
     Project.addProduct(lines,$(this).data('id')).then(data => {
-        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มรายละเอียดผลิตภัณฑ์สำเร็จ!',
@@ -554,20 +554,11 @@ $(document).on('keyup', '.productdetailsclass', function(e) {
     $('#productdetailstextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-// $(document).on('keyup', '#productdetails_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="productdetails[]" value="${$(this).val()}" class="form-control productdetailsclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_productdetails_wrapper').append(html);
-//     }
-// });
-
 $(document).on('click', '#btnaddproductdetails', function(e) {
     var lines = $('input[name="productdetails[]"]').map(function(){ 
         return this.value; 
     }).get();
     Project.addProductDetail(lines,$(this).data('id')).then(data => {
-        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มจุดเด่นผลิตภัณฑ์สำเร็จ!',
@@ -580,20 +571,11 @@ $(document).on('keyup', '.projectechdevclass', function(e) {
     $('#projectechdevtextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
 
-// $(document).on('keyup', '#projectechdev_input', function(e) {
-//     if (e.keyCode === 13) {
-//         var html = `<input type="text" name ="projectechdev[]" value="${$(this).val()}" class="form-control projectechdevclass" style="border: 0" >`;
-//         $(this).val('');
-//         $('#fulltbp_projectechdev_wrapper').append(html);
-//     }
-// });
-
 $(document).on('click', '#btnaddprojectechdev', function(e) {
     var lines = $('input[name="projectechdev[]"]').map(function(){ 
         return this.value; 
     }).get();
     Project.addTechDev(lines,$(this).data('id')).then(data => {
-        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มการพัฒนาเทคโนโลยีสำเร็จ!',
@@ -611,7 +593,6 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
         return;
     }
     Project.addTechDevLevel($(this).data('id'),$('#tectdevleveltechnology').val(),$('#tectdevleveltechnologypresent').val(),$('#tectdevleveltechnologyproject').val()).then(data => {
-        //console.log(data);
         var html = ``;
         data.forEach(function (techdevlevel,index) {
             html += `<tr >                                        
@@ -629,7 +610,6 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
 });
 
 $(document).on("click",".deleteprojectechdevlevel",function(e){
-    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -668,8 +648,7 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     var lines = $('input[name="projectechdevproblem[]"]').map(function(){ 
         return this.value; 
     }).get();
-    Project.addTechDevProblem(lines,$(this).data('id')).then(data => {
-        //console.log(data);
+    Project.addTechDevProblem(lines,$(this).data('id')).then(data => {;
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่มปัญหาและอุปสรรคสำเร็จ!',
@@ -752,7 +731,6 @@ $(document).on('change', '#cer9', function(e) {
 });
 $(document).on('change', '#cer11', function(e) {
     if($(this).is(":checked")){
-        // console.log('11');
         $("#cer11qtydiv").attr("hidden",false);
         $("#cer11qty").val(1);
     }else{
@@ -764,7 +742,6 @@ $(document).on('change', '#cer11', function(e) {
 
 $(document).on('click', '#btnaddprojectcertify', function(e) {
     Project.editProjectCertify($(this).data('id'),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
-        //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'อัพเดทสำเร็จ!',
@@ -790,7 +767,6 @@ $(document).on('change', '#certify', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -856,7 +832,6 @@ $(document).on('change', '#award', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -923,7 +898,6 @@ $(document).on('change', '#standard', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -993,7 +967,6 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
   
          var min = Math.min.apply(Math, unique.map(i=>Number(i)));
          var max = Math.max.apply(Math, unique.map(i=>Number(i)));
-        // //console.log(max-min+1);
          if((max-min+1) <= parseInt($("#ganttnummonth").val())){
             Project.addPlan($(this).data('id'),$('#plandetail').val(),data,$('#ganttnummonth').val(),$('#ganttyear').val()).then(data => {
                 var html = ``;
@@ -1073,14 +1046,12 @@ $(document).on('click', '.editprojectplan', function(e) {
          var html = ``;
          var chkindex = 0;
          for (let item = 0; item < 3; item++) {
-            // //console.log(item);
              html += `<div class="col-md-12">`
              html += `<label ><u><strong>ปี ${parseInt($('#ganttyear').val())+item}</strong></u></label>
                  <div class="form-group">`;
                  for (let index = 0; index < 12; index++) {
                     var check = ``;
                      chkindex++;
-                     //console.log(data.fulltbpprojectplantransactions.findIndex(x => x.month == chkindex) + ' ' + chkindex);
                     if(data.fulltbpprojectplantransactions.findIndex(x => x.month == chkindex) != -1){
                         check = `checked`;
                     }
@@ -1277,7 +1248,6 @@ $(document).on('click', '#btnaddmarketneed', function(e) {
         return this.value; 
     }).get();
     Market.addNeed(lines,$(this).data('id')).then(data => {
-        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market need สำเร็จ!',
@@ -1295,7 +1265,6 @@ $(document).on('click', '#btnaddmarketsize', function(e) {
         return this.value; 
     }).get();
     Market.addSize(lines,$(this).data('id')).then(data => {
-        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market size สำเร็จ!',
@@ -1313,7 +1282,6 @@ $(document).on('click', '#btnaddmarketshare', function(e) {
         return this.value; 
     }).get();
     Market.addShare(lines,$(this).data('id')).then(data => {
-        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market share สำเร็จ!',
@@ -1331,7 +1299,6 @@ $(document).on('click', '#btnaddmarketcompetitive', function(e) {
         return this.value; 
     }).get();
     Market.addCompetitive(lines,$(this).data('id')).then(data => {
-        // //console.log(data);
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'เพิ่ม Market competitive สำเร็จ!',
@@ -1364,7 +1331,6 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1397,7 +1363,6 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
         }).then((result) => {
         if (result.value) {
             Market.deleteMarketAttachment($(this).data('id'),'1').then(data => {
-                //console.log(data);
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1438,7 +1403,6 @@ $(document).on('change', '#swotfile', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1470,7 +1434,6 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
         }).then((result) => {
         if (result.value) {
             Market.deleteMarketAttachment($(this).data('id'),'2').then(data => {
-                //console.log(data);
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1507,7 +1470,6 @@ $(document).on('change', '#financialplan', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1538,7 +1500,6 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
         }).then((result) => {
         if (result.value) {
             Market.deleteMarketAttachment($(this).data('id'),'3').then(data => {
-                //console.log(data);
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -1608,9 +1569,6 @@ $(document).on("click",".deletesell",function(e){
                         <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                         <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
                         <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                     
-                       
-                         
                         <td> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                             <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
@@ -1653,10 +1611,7 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-              
-               
-                                                           
+                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                     
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
@@ -1691,10 +1646,7 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past3).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-              
-      
-                                                          
+                <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                   
                 <td> 
                     <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
                 </td> 
@@ -1715,7 +1667,6 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
     }
     Sell.addDebtPartner($(this).data('id'),$('#debtpartner').val(),$('#numproject').val(),$('#debtpartnertaxid').val(),$('#debttotalyearsell').val(),$('#debtpercenttosale').val(),$('#debtpartneryear').val()).then(data => {
         var html = ``;
-        //console.log(data);
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
@@ -2032,7 +1983,6 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
     }
     Sell.editCost($('#costid').val(),$('#costexistingedit').val(),$('#costneededit').val(),$('#costapprovededit').val(),$('#costplanedit').val()).then(data => {
         var html = ``;
-        //console.log(data);
         data.forEach(function (cost,index) {
             var checkcostplan = cost.plan;
             if(checkcostplan == null){
@@ -2068,10 +2018,8 @@ $(document).on('click', '#btnaddreturnofinvestment', function(e) {
     .catch(error => {})
 });
 $(document).on('change', '#companydoc', function(e) {
-// $("#companydoc").on('change', function() {
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
-    //console.log(file);
     if (this.files[0].size/1024/1024*1000 > 1000 ){
         alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;
@@ -2088,7 +2036,6 @@ $(document).on('change', '#companydoc', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -2158,7 +2105,6 @@ $(document).on('change', '#organizeimg', function(e) {
         alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;
     }
-    //console.log(file);
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
@@ -2170,11 +2116,9 @@ $(document).on('change', '#organizeimg', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                // //console.log(data)
                 var imgpath = route.url + '/'+ data.organizeimg;
                 $("#organizeimgholder").attr("src", imgpath);
                 $("#organizationcharterror").attr("hidden",true);
-                //organizeimgholder
         }
     });
 });
@@ -2197,21 +2141,18 @@ $('.steps-basic').steps({
             $(".actions").find(".libtn").remove();
             FullTbp.editGeneral($('#fulltbpid').val(),$('#businesstype').val(),$('#department_qty').val(),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val(),
             $('#companyhistory').val(),$('#responsibleprefix').val(),$('#responsiblename').val(),$('#responsiblelastname').val(),$('#responsibleposition').val(),$('#responsibleemail').val(),$('#responsiblephone').val(),$('#responsibleworkphone').val(),$('#responsibleeducationhistory').val(),$('#responsibleexperiencehistory').val(),$('#responsibletraininghistory').val()).then(data => {
-                //console.log(data);
             })
             .catch(error => {})
         }else if(currentIndex == 2){
             $(".actions").find(".libtn").remove();
             FullTbp.editOverAll($('#fulltbpid').val(),$('#projectabtract_input').val(),$('#productdetails_input').val(),$('#projectechdev_input').val(),$('#projectechdevproblem_input').val(),$('#mainproduct_input').val(),$('#projectinnovation_input').val(),$('#projectstandard_input').val()).then(data => {
                 Project.editProjectCertify($('#fulltbpid').val(),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
-                    //console.log(data);
                 })
                 .catch(error => {})
             })  
         }else if(currentIndex == 3){
             $(".actions").find(".libtn").remove();
             FullTbp.editMarketPlan($('#fulltbpid').val(),$('#analysis').val(),$('#modelcanvas').val(),$('#swot').val()).then(data => {
-                //console.log(data);
             })
             
             .catch(error => {})
@@ -2647,7 +2588,6 @@ $(document).on("click",".deleteprojectmember",function(e){
 });
 
 $(document).on('change', '#boardattachment', function(e) {
-    // //console.log($(this).data('id'));
     var file = this.files[0];
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         alert('ไฟล์ขนาดมากกว่า 2 MB');
@@ -2664,7 +2604,6 @@ $(document).on('change', '#boardattachment', function(e) {
             contentType: false,
             processData: false,
             success: function(data){
-                //console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -2719,12 +2658,11 @@ $(document).on('change', '#usersignature', function(e) {
         usesignature = 2;
     }
     FullTbp.editSignature($('#fulltbpid').val(),usesignature).then(data => {
-        //console.log(data);
+
     })
 });
 
 $(document).on('click', '#submitfulltbp', function(e) {
-    // //console.log($('#appceptagreement').is(':checked'));
     if($('#appceptagreement').is(':checked') === false){
         Swal.fire({
             title: 'ผิดพลาด!',
@@ -2784,7 +2722,6 @@ $(document).on('change', '#fulltbppdf', function(e) {
     var formData = new FormData();
     formData.append('attachment',file);
     formData.append('id',$('#fulltbpid').val());
-    //console.log($('#fulltbpid').val());
     $.ajax({
         url: `${route.url}/api/fulltbp/submitwithattachement`,  //Server script to process data
         type: 'POST',
@@ -2831,12 +2768,18 @@ function submitNoAttachement(id,pdfname){
 
 
 $(document).on('click', '#btnaddboard', function(e) {
+    
+    $('select#employposition').val(1).select2();
+    $('select#employprefix').val(1).select2();
     $('#employname').val('') ;
     $('#employlastname').val('');
-    $('#employposition').val('');
+    $('#otherboardposition').val('');
     $('#employphone').val('');
+    $('#otherprefix').val('');
     $('#employworkphone').val('');
     $('#employemail').val('');
+    $("#otherprefix_wrapper").attr("hidden",true);
+    $("#employ_otherposition_wrapper").attr("hidden",true);
 
     Employ.getEmployPosition().then(data => {
         var selectemployposition = `<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">`;
@@ -2851,11 +2794,42 @@ $(document).on('click', '#btnaddboard', function(e) {
         $(".form-control-select2").select2();
     })
     .catch(error => {})
+ 
     $('#modal_add_employ').modal('show');
 });
 
+
+
 $(document).on('click', '.editEmployinfo', function(e) {
-   
+    $('select#employposition').val(1).select2();
+    $('select#employprefix').val(1).select2();
+    $('#employname').val('') ;
+    $('#employlastname').val('');
+    $('#otherboardposition').val('');
+    $('#employphone').val('');
+    $('#otherprefix').val('');
+    $('#employworkphone').val('');
+    $('#employemail').val('');
+    $("#otherprefix_wrapper").attr("hidden",true);
+    $("#employ_otherposition_wrapper").attr("hidden",true);
+    $("#othereducationlevel_wrapper").attr("hidden",true);
+    $('#fulltbp_companyemployeducation_wrapper_tr').html('');
+    $('#fulltbp_companyemployexperience_wrapper_tr').html('');
+    $('#fulltbp_companyemploytraining_wrapper_tr').html('');
+    $('#fulltbp_board_attachment_wrapper_tr').html('');
+    $('#employinfo_tab').removeClass("active");
+    $('#employeducation_tab').removeClass("active");
+    $('#employexpereince_tab').removeClass("active");
+    $('#employtraining_tab').removeClass("active");
+    $('#attachment_tab').removeClass("active");
+    $('#employinfo_tab').addClass("active");
+    $('#left-icon-employinfo').removeClass("show active");
+    $('#left-icon-employinfo').addClass("show active");
+    $('#left-icon-employeducation').removeClass("show active");
+    $('#left-icon-employexpereince').removeClass("show active");
+    $('#left-icon-employtraining').removeClass("show active");
+    $('#left-icon-attachment').removeClass("show active");
+
     Employ.getEmploy($(this).data('id')).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         data.prefixes.forEach(function (prefix,index) {
@@ -2887,11 +2861,15 @@ $(document).on('click', '.editEmployinfo', function(e) {
 
         var employeducationtable = '';
         data.employeducations.forEach(function (education,index) {
+            var educationlevel = education.employeducationlevel;
+            if(educationlevel == 'อื่นๆ'){
+                educationlevel = education.otheremployeducationlevel;
+            }
             employeducationtable += `<tr >                                        
-                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
-                <td> ${education.employeducationyear} </td> 
+                <td> ${education.employeducationyearstart} - ${education.employeducationyearend}  </td> 
                 <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
             </tr>`
             });
@@ -2942,14 +2920,43 @@ $(document).on('click', '.editEmployinfo', function(e) {
         $('#employphone_edit').val(data.employ['phone'])
         $('#employworkphone_edit').val(data.employ['workphone']) 
         $('#employemail_edit').val(data.employ['email']) 
-        
+        $('#employtype').val($(this).data('type')) 
     })
     .catch(error => {})
     $('#modal_edit_employ').modal('show');
 });
 
 function modaltrigger(id) {
-     
+    
+    $('select#employposition').val(1).select2();
+    $('select#employprefix').val(1).select2();
+    $('#employname').val('') ;
+    $('#employlastname').val('');
+    $('#otherboardposition').val('');
+    $('#employphone').val('');
+    $('#otherprefix').val('');
+    $('#employworkphone').val('');
+    $('#employemail').val('');
+    $("#otherprefix_wrapper").attr("hidden",true);
+    $("#employ_otherposition_wrapper").attr("hidden",true);
+    $("#othereducationlevel_wrapper").attr("hidden",true);
+    $('#fulltbp_companyemployeducation_wrapper_tr').html('');
+    $('#fulltbp_companyemployexperience_wrapper_tr').html('');
+    $('#fulltbp_companyemploytraining_wrapper_tr').html('');
+    $('#fulltbp_board_attachment_wrapper_tr').html('');
+    $('#employinfo_tab').removeClass("active");
+    $('#employeducation_tab').removeClass("active");
+    $('#employexpereince_tab').removeClass("active");
+    $('#employtraining_tab').removeClass("active");
+    $('#attachment_tab').removeClass("active");
+    $('#employinfo_tab').addClass("active");
+    $('#left-icon-employinfo').removeClass("show active");
+    $('#left-icon-employinfo').addClass("show active");
+    $('#left-icon-employeducation').removeClass("show active");
+    $('#left-icon-employexpereince').removeClass("show active");
+    $('#left-icon-employtraining').removeClass("show active");
+    $('#left-icon-attachment').removeClass("show active");
+
     Employ.getEmploy(id).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         data.prefixes.forEach(function (prefix,index) {
@@ -2974,11 +2981,15 @@ function modaltrigger(id) {
 
         var employeducationtable = '';
         data.employeducations.forEach(function (education,index) {
+            var educationlevel = education.employeducationlevel;
+            if(educationlevel == 'อื่นๆ'){
+                educationlevel = education.otheremployeducationlevel;
+            }
             employeducationtable += `<tr >                                        
-                <td> ${education.employeducationlevel} </td>                                            
+                <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
-                <td> ${education.employeducationyear} </td> 
+                <td> ${education.employeducationyearstart} - ${education.employeducationyearend} </td> 
                 <td> <a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a> </td> 
             </tr>`
             });
@@ -3035,6 +3046,14 @@ function modaltrigger(id) {
 };
 
 $(document).on('click', '#btnaddresearch', function(e) {
+    
+    $('select#employprefix_research').val(1).select2();
+    $('#employname_research').val('');
+    $('#employlastname_research').val('');
+    $('#employphone_research').val('');
+    $('#employworkphone_research').val('');
+    $('#employemail_research').val('');
+
     Employ.getEmployPosition().then(data => {
         var selectemployposition = `<select id="employposition_research" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
         data.forEach(function (position,index) {
@@ -3059,20 +3078,22 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
         return;
     }
     Employ.saveEmploy($('#employprefix').val(),$('#otherprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#otherboardposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
-        //console.log(data);
        var dataid = 0;
         var html = ``;
-       
         data.forEach(function (employ,index) {
             if(employ.employ_position_id < 6 ){
                 var prefix = employ.prefix['name'];
-                if(prefix = 'อื่นๆ'){
+                var position = employ.employposition['name'];
+                if(prefix == 'อื่นๆ'){
                     prefix = employ.otherprefix;
                 }
+                if(position == 'อื่นๆ'){
+                    position = employ.otherposition;
+                }	
                 dataid = employ.id;
                 html += `<tr >                                        
-                    <td> ${prefix}${employ.name}${employ.lastname} </td>                                            
-                    <td> ${employ.employposition['name']} </td> 
+                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td> ${position} </td> 
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
@@ -3092,23 +3113,28 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
          }
          $('#modal_add_employ').modal('hide');
          modaltrigger(dataid);
-        //  $(".editEmployinfo").trigger("click");
-        //  jQuery('.editEmployinfo')[0].click();
-         //
     })
     .catch(error => {})
 });
 
 $(document).on('click', '#btn_modal_add_employ_research', function(e) {
-    Employ.saveEmploy($('#employprefix_research').val(),$('#otherprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),'',$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
+    Employ.saveEmploy($('#employprefix_research').val(),$('#otherprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),"",$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
         var dataid = 0;
         var html = ``;
         data.forEach(function (employ,index) {
-                if(employ.employ_position_id == 6){
+                if(employ.employ_position_id >= 6){
                     dataid = employ.id;
+                    var prefix = employ.prefix['name'];
+                    var position = employ.employposition['name'];
+                    if(prefix == 'อื่นๆ'){
+                        prefix = employ.otherprefix;
+                    }
+                    if(position == 'อื่นๆ'){
+                        position = employ.otherposition;
+                    }	
                     html += `<tr >                                        
-                        <td> ${employ.name} ${employ.lastname} </td>                                            
-                        <td> ${employ.employposition['name']} </td> 
+                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                        <td> ${position} </td> 
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
@@ -3130,7 +3156,6 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
 });
 
 $(document).on("click",".deletecompanyemploy_research",function(e){
-    // //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -3146,10 +3171,18 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
             Employ.deleteEmployInfo($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (employ,index) {
-                    if(employ.employ_position_id == 6){
+                    if(employ.employ_position_id >= 6){
+                        var prefix = employ.prefix['name'];
+                        var position = employ.employposition['name'];
+                        if(prefix == 'อื่นๆ'){
+                            prefix = employ.otherprefix;
+                        }
+                        if(position == 'อื่นๆ'){
+                            position = employ.otherposition;
+                        }	
                         html += `<tr >                                        
-                            <td> ${employ.name} ${employ.lastname} </td>                                            
-                            <td> ${employ.employposition['name']} </td> 
+                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td> ${position} </td> 
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
@@ -3196,13 +3229,20 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
         return;
     }
     Employ.saveEmploy($('#employprefix_projectmember').val(),$('#otherprefix_projectmember').val(),$('#employname_projectmember').val(),$('#employlastname_projectmember').val(),$('#employposition_projectmember').val(),'',$('#employphone_projectmember').val(),$('#employworkphone_projectmember').val(),$('#employemail_projectmember').val()).then(data => {
-        //console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
                 if(employ.employ_position_id > 6){
+                    var prefix = employ.prefix['name'];
+                    var position = employ.employposition['name'];
+                    if(prefix == 'อื่นๆ'){
+                        prefix = employ.otherprefix;
+                    }
+                    if(position == 'อื่นๆ'){
+                        position = employ.otherposition;
+                    }	
                     html += `<tr >                                        
-                        <td> ${employ.name}${employ.lastname} </td>                                            
-                        <td> ${employ.employposition['name']} </td> 
+                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                        <td> ${position} </td> 
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
@@ -3218,7 +3258,6 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
 });
 
 $(document).on("click",".deletecompanyemploy_projectmember",function(e){
-    //console.log($(this).data('id'));
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
@@ -3234,10 +3273,18 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
             Employ.deleteEmployInfo($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (employ,index) {
+                    var prefix = employ.prefix['name'];
+                    var position = employ.employposition['name'];
                     if(employ.employ_position_id > 6){
+                        if(prefix == 'อื่นๆ'){
+                            prefix = employ.otherprefix;
+                        }
+                        if(position == 'อื่นๆ'){
+                            position = employ.otherposition;
+                        }	
                         html += `<tr >                                        
-                            <td> ${employ.name}${employ.lastname} </td>                                            
-                            <td> ${employ.employposition['name']} </td> 
+                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td> ${position} </td> 
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
@@ -3255,7 +3302,6 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
 
 $(document).on('keyup', '#employsearch', function(e) {
     Employ.searchEmploy($(this).val(),$('#companyid').val()).then(data => {
-        //console.log(data);
         var html = ``;
         data.forEach(function (employ,index) {
             html += `<a href="#" class="dropdown-item selectemploy" data-id="${employ.id}">${employ.prefix['name']}${employ.name} ${employ.lastname}</a>`
@@ -3416,7 +3462,6 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
         }
     });
 
-    // $("#employprefix_edit").on('change', function() {
     $(document).on('change', '#employprefix_edit', function(e) {
         if($("#employprefix_edit option:selected").text() == 'อื่นๆ'){
             $("#get_otherprefix_wrapper").attr("hidden",false);

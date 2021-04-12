@@ -502,8 +502,8 @@
 																	</td>                                
 																	
 																	<td> 
-																		@if ($authorizeddirector->prefix->name == 'อื่นๆ')
-																				{{$authorizeddirector->otherprefix}}
+																		@if ($authorizeddirector->employposition->name == 'อื่นๆ')
+																				{{$authorizeddirector->otherposition}}
 																			@else
 																				{{$authorizeddirector->employposition->name}}
 																		@endif

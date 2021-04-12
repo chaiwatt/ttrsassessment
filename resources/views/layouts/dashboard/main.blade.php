@@ -119,12 +119,12 @@
 				<!-- Main navigation -->
 				<div class="card card-sidebar-mobile">
 					<ul class="nav nav-sidebar" data-nav-type="accordion">
-						<li class="nav-item">
+						{{-- <li class="nav-item">
 								<a href="{{route('landing2.index')}}" class="nav-link">
 							<i class="icon-home4"></i>
 							<span>เว็บไซต์</span>
 							</a>
-						</li>
+						</li> --}}
 						@include('layouts.dashboard.sidemenu')
 					</ul>
 				</div>

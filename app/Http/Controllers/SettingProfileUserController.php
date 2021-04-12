@@ -162,6 +162,7 @@ class SettingProfileUserController extends Controller
             'fax' => $request->fax,
             'email' => $request->email,
             'logo' => $filelocation,
+            'saveprofile' => 1
         ]);
 
         CompanyAddress::where('company_id',$company->id)->first()->update([

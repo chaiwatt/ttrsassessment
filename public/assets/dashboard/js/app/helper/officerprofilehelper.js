@@ -190,6 +190,7 @@ $("#expertdoc").on('change', function() {
                     });
                  $("#fulltbp_expertdoc_wrapper_tr").html(html);
                  $('#modal_add_expertdoc').modal('hide');
+                 $('#expertdocname').val('')
         }
     });
 });

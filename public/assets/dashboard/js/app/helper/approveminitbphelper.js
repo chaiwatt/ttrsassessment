@@ -2,7 +2,10 @@ import * as MiniTbp from './minitbp.js'
 
 
 $(document).on('click', '#editapprove', function(e) {
+    console.log($(this).data('project'));
     $('#minitbpid').val($(this).data('id'));
+    $('#minitbptitle').html($(this).data('project'));
+    
     $('#modal_edit_minitbp').modal('show');
 });
 
@@ -61,6 +64,7 @@ $(document).on('click', '.showlog', function(e) {
             </tr>`
             });
         $("#reviselog_wrapper_tr").html(html);
+        $("#showlogminitbp").html(': ' +$(this).data('project'));
         $('#modal_show_reviselog').modal('show');
     }).catch(error => {})
     

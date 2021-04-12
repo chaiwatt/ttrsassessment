@@ -19,7 +19,7 @@
             </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            @if ($businessplans->count() == 0)
+            @if (Auth::user()->company->saveprofile == 0)
                 <div class="header-elements d-none">
                     <a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">ตั้งค่าโปรไฟล์ ก่อนขอรับการประเมิน</span></a>
                 </div>

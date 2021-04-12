@@ -39,7 +39,7 @@ class FullTbpCompanyEmployController extends Controller
         $companyemploy->workphone = $request->workphone;
         $companyemploy->email = $request->email;
         $companyemploy->save();
-        $companyemploys = CompanyEmploy::where('company_id',$company->id)->orderBy('employ_position_id','asc')->get();
+        $companyemploys = CompanyEmploy::where('company_id',$company->id)->orderBy('id','asc')->get();
         return response()->json($companyemploys); 
     }
 
@@ -73,7 +73,7 @@ class FullTbpCompanyEmployController extends Controller
             'otherprefix' => $request->otherprefix,
             'name' => $request->name,
             'lastname' => $request->lastname,
-            'employ_position_id' => $request->position,
+            // 'employ_position_id' => $request->position,
             'phone' => $request->phone,
             'workphone' => $request->workphone,
             'email' => $request->email

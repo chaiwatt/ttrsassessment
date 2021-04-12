@@ -21,7 +21,8 @@ class CreateEmployEducationTable extends Migration
             $table->string('otheremployeducationlevel',120)->nullable();
             $table->string('employeducationinstitute',120)->nullable();
             $table->string('employeducationmajor',120)->nullable();
-            $table->string('employeducationyear',120)->nullable();
+            $table->string('employeducationyearstart',120)->nullable();
+            $table->string('employeducationyearend',120)->nullable();
             $table->timestamps();
         });
     }

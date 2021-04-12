@@ -230,51 +230,99 @@ class MiniTbpController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 111, 197.5, 150, 90, 'auto');
         if($minitbpsignatures->count() == 1){
             $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
+            $directorposition = $director->employposition->name;
+            if($director->employposition->name == 'อื่นๆ'){
+                $directorposition = $director->otherposition;
+            }
+            $directorprefix = $director->prefix->name;
+            if($directorprefix == 'อื่นๆ'){
+                $directorprefix = $director->otherprefix;
+            }
             if ($minitbp->signature_status_id == 2) {
                 $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 116, 232, 150, 90, 'auto');
             } 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$director->prefix->name.$director->name. ' ' . $director->lastname. '</div>', 118,244.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$director->employposition->name. '</div>', 120,253.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 118,244.5, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$directorposition. '</div>', 120,253.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 142,261.7, 150, 90, 'auto');
         }else if($minitbpsignatures->count() == 2){
             $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
+            $directorposition = $director->employposition->name;
+            if($directorposition == 'อื่นๆ'){
+                $directorposition = $director->otherposition;
+            }
+            $directorprefix = $director->prefix->name;
+            if($directorprefix == 'อื่นๆ'){
+                $directorprefix = $director->otherprefix;
+            }
             if ($minitbp->signature_status_id == 2) {
                 $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 129, 232, 150, 90, 'auto');
             } 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:190px;heigh:100px;text-align:center">'.$director->prefix->name.$director->name. ' ' . $director->lastname. '</div>', 130,244.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:170px;heigh:100px;text-align:center">'.$director->employposition->name. '</div>', 135,253.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:190px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 130,244.5, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:170px;heigh:100px;text-align:center">'.$directorposition. '</div>', 135,253.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 152,261.7, 150, 90, 'auto');
 
             $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
+            $directorposition = $director->employposition->name;
+            if($directorposition == 'อื่นๆ'){
+                $directorposition = $director->otherposition;
+            }
+            $directorprefix = $director->prefix->name;
+            if($directorprefix == 'อื่นๆ'){
+                $directorprefix = $director->otherprefix;
+            }
             if ($minitbp->signature_status_id == 2) {
                 $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 32, 232, 150, 90, 'auto');
             } 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:190px;heigh:100px;text-align:center">'.$director->prefix->name.$director->name. ' ' . $director->lastname. '</div>', 35,244.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:170px;heigh:100px;text-align:center">'.$director->employposition->name. '</div>', 39,253.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:190px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 35,244.5, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:170px;heigh:100px;text-align:center">'.$directorposition. '</div>', 39,253.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 52,261.7, 150, 90, 'auto');
         }else if($minitbpsignatures->count() == 3){
             $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
+            $directorposition = $director->employposition->name;
+            if($directorposition == 'อื่นๆ'){
+                $directorposition = $director->otherposition;
+            }
+            $directorprefix = $director->prefix->name;
+            if($directorprefix == 'อื่นๆ'){
+                $directorprefix = $director->otherprefix;
+            }
             if ($minitbp->signature_status_id == 2) {
                 $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 86, 232, 150, 90, 'auto');
             } 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$director->prefix->name.$director->name. ' ' . $director->lastname. '</div>', 150,244.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$director->employposition->name. '</div>', 154,253.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 150,244.5, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 154,253.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 166,261.7, 150, 90, 'auto');
 
             $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
+            $directorposition = $director->employposition->name;
+            if($directorposition == 'อื่นๆ'){
+                $directorposition = $director->otherposition;
+            }
+            $directorprefix = $director->prefix->name;
+            if($directorprefix == 'อื่นๆ'){
+                $directorprefix = $director->otherprefix;
+            }
             if ($minitbp->signature_status_id == 2) {
                 $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25, 232, 150, 90, 'auto');
             } 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$director->prefix->name.$director->name. ' ' . $director->lastname. '</div>', 87,244.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$director->employposition->name. '</div>', 91,253.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 87,244.5, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 91,253.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 104,261.7, 150, 90, 'auto');
 
             $director = CompanyEmploy::find($minitbpsignatures[2]->company_employee_id);
+            $directorposition = $director->employposition->name;
+            if($directorposition == 'อื่นๆ'){
+                $directorposition = $director->otherposition;
+            }
+            $directorprefix = $director->prefix->name;
+            if($directorprefix == 'อื่นๆ'){
+                $directorprefix = $director->otherprefix;
+            }
             if ($minitbp->signature_status_id == 2) {
                 $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 150, 232, 150, 90, 'auto');
             } 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$director->prefix->name.$director->name. ' ' . $director->lastname. '</div>', 26,244.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$director->employposition->name. '</div>', 30,253.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 26,244.5, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 30,253.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 42,261.7, 150, 90, 'auto');
         }
         
@@ -400,7 +448,7 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $leader->leader_id;
                 $notificationbubble->save();
 
-                $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว',$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignments->first()->leader_id);
+                $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไข',$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignments->first()->leader_id);
 
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
@@ -412,7 +460,7 @@ class MiniTbpController extends Controller
                 MessageBox::find($messagebox->id)->update([
                     'alertmessage_id' => $alertmessage->id
                 ]);
-                EmailBox::send(User::find($leader->leader_id)->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. ' '. $fullcompanyname . ' ที่มีการแก้ไขแล้ว','เรียน Leader<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
+                EmailBox::send(User::find($leader->leader_id)->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. ' '. $fullcompanyname . ' ที่มีการแก้ไข','เรียน Leader<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
                
             }else{
                 $admin = User::where('user_type_id',5)->first();
@@ -424,7 +472,7 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $admin->id;
                 $notificationbubble->save();
 
-                $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว',$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$admin->id);
+                $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไข',$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$admin->id);
 
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
@@ -436,7 +484,7 @@ class MiniTbpController extends Controller
                 MessageBox::find($messagebox->id)->update([
                     'alertmessage_id' => $alertmessage->id
                 ]);
-                EmailBox::send($admin->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. ' '. $fullcompanyname . ' ที่มีการแก้ไขแล้ว','เรียน Admin<br><br> '. $fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
+                EmailBox::send($admin->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. ' '. $fullcompanyname . ' ที่มีการแก้ไข','เรียน Admin<br><br> '. $fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
             }
             CreateUserLog::createLog('ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project .  ' ที่มีการแก้ไข' );
         }
@@ -548,7 +596,7 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $projectassignments->first()->leader_id;
                 $notificationbubble->save();
 
-                $messagebox =  Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว', $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignments->first()->leader_id);
+                $messagebox =  Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ที่มีการแก้ไข', $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignments->first()->leader_id);
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->messagebox_id = $messagebox->id;
@@ -556,7 +604,7 @@ class MiniTbpController extends Controller
                 $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' .$minitbp->project. ' ส่งคืนแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>';
                 $alertmessage->save();
                 CreateUserLog::createLog('ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project .  ' ที่มีการแก้ไข' );
-                EmailBox::send(User::find($projectassignments->first()->leader_id)->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project .' ' . $fullcompanyname .' ที่มีการแก้ไขแล้ว','เรียน Leader<br><br>' . $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. 'ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send(User::find($projectassignments->first()->leader_id)->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project .' ' . $fullcompanyname .' ที่มีการแก้ไข','เรียน Leader<br><br>' . $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. 'ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                 
             }else{
                 $admin = User::where('user_type_id',5)->first();
@@ -568,16 +616,16 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $admin->id;
                 $notificationbubble->save();
 
-                $messagebox =  Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว', $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$admin->id);
+                $messagebox =  Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ที่มีการแก้ไข', $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$admin->id);
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->messagebox_id = $messagebox->id;
-                $alertmessage->target_user_id = $admin;
+                $alertmessage->target_user_id = $admin->id;
                 $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โครงการ' .$minitbp->project. ' ส่งคืนแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>';
                 $alertmessage->save();
                 CreateUserLog::createLog('ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project .  ' ที่มีการแก้ไข' );
 
-                EmailBox::send($admin->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' '. $fullcompanyname .' ที่มีการแก้ไขแล้ว','เรียน Admin <br><br>'. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. 'ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send($admin->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' '. $fullcompanyname .' ที่มีการแก้ไข','เรียน Admin <br><br>'. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. 'ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             }
         }
     }

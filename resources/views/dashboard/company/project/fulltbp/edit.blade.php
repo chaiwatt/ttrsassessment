@@ -242,17 +242,18 @@
 				<div class="row">
 						<div class="card-body">
 							<ul class="nav nav-tabs nav-tabs-highlight">
-								<li class="nav-item bg-info-300"><a href="#left-icon-employinfo" class="nav-link active" data-toggle="tab">ข้อมูลส่วนตัว</a></li>
-								<li class="nav-item bg-info-300"><a href="#left-icon-employeducation" class="nav-link" data-toggle="tab">ประวัติการศึกษา</a></li>
-								<li class="nav-item bg-info-300"><a href="#left-icon-employexpereince" class="nav-link" data-toggle="tab">ประวัติการทำงาน</a></li>
-								<li class="nav-item bg-info-300" ><a href="#left-icon-employtraining" class="nav-link" data-toggle="tab">ประวัติการฝึกอบรม</a></li>								
-								<li class="nav-item bg-info-300"><a href="#left-icon-attachment" class="nav-link" data-toggle="tab">เอกสารแนบ</a></li>	
+								<li class="nav-item bg-info-300"><a href="#left-icon-employinfo" id="employinfo_tab" class="nav-link active" data-toggle="tab">ข้อมูลส่วนตัว</a></li>
+								<li class="nav-item bg-info-300"><a href="#left-icon-employeducation" id="employeducation_tab" class="nav-link" data-toggle="tab">ประวัติการศึกษา</a></li>
+								<li class="nav-item bg-info-300"><a href="#left-icon-employexpereince" id="employexpereince_tab" class="nav-link" data-toggle="tab">ประวัติการทำงาน</a></li>
+								<li class="nav-item bg-info-300" ><a href="#left-icon-employtraining" id="employtraining_tab" class="nav-link" data-toggle="tab">ประวัติการฝึกอบรม</a></li>								
+								<li class="nav-item bg-info-300"><a href="#left-icon-attachment" id="attachment_tab" class="nav-link" data-toggle="tab">เอกสารแนบ</a></li>	
 							</ul>
 
 							<div class="tab-content">
 								<div class="tab-pane fade show active" id="left-icon-employinfo">
 									<input type="text" id="employid" value="" hidden>
 									<div class="row">
+										<input type="text" id="employtype" hidden>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
@@ -277,12 +278,7 @@
 											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" >
 										</div>
 										</div>
-										{{-- <div class="col-md-4">
-										<div class="form-group">
-											<label>ตำแหน่ง</label>
-											<div id="employposition_wrapper"></div>
-										</div>
-										</div> --}}
+
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>โทรศัพท์</label><span class="text-danger">*</span>
@@ -291,7 +287,7 @@
 										</div>
 										<div class="col-md-4">
 										<div class="form-group">
-											<label>โทรศัพท์มือถือ</label>
+											<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 											<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone">
 										</div>
 										</div>
@@ -318,7 +314,7 @@
 								<div class="tab-pane fade" id="left-icon-employeducation">
 									
 									<div class="form-group">	
-										<a href="" class="btn btn-warning btn-icon btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add mr-2"></i>เพิ่ม</a>
+										<a href="" class="btn btn-warning btn-icon btn-sm hiddenelement" data-toggle="modal" id="btnaddemployee"><i class="icon-add mr-2"></i>เพิ่ม</a>
 										
 									</div>
 									<div class="table-responsive">
@@ -425,11 +421,7 @@
 			<div class="modal-body">
 				<div class="row">
 					<label for="" class="text-danger">*กรุณาบันทึกวุฒิการศึกษาสูงสุดก่อน แล้วเรียงลำดับลงมา</label>
-					<div class="col-md-12">
-						{{-- <div class="form-group">
-							<label>ระดับ</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationlevel" placeholder="ระดับ" class="form-control form-control-lg stringformat20">
-						</div> --}}
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ระดับการศึกษา</label>
 							<select id="educationlevel" data-placeholder="ระดับการศึกษา" class="form-control form-control-lg form-control-select2">
@@ -439,28 +431,34 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-12" id="othereducationlevel_wrapper" hidden>
+					<div class="col-md-6" id="othereducationlevel_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุระดับการศึกษา</label><span class="text-danger">*</span>
 							<input type="text" id="othereducationlevel" placeholder="ระบุระดับการศึกษา" class="form-control form-control-lg stringformat30">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อสถานศึกษา</label><span class="text-danger">*</span>
 							<input type="text" id="employeducationinstitute" placeholder="ชื่อสถานศึกษา" class="form-control form-control-lg stringformat30">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>สาขาวิชาเอก</label><span class="text-danger">*</span>
 							<input type="text" id="employeducationmajor" placeholder="สาขาวิชาเอก" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
-							<label>ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationyear" placeholder="ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)" class="form-control form-control-lg stringformat20">
+							<label>ปีที่เริ่มต้นศึกษา</label><span class="text-danger">*</span>
+							<input type="text" id="employeducationyearstart" placeholder="ปีที่เริ่มต้นศึกษา" class="form-control form-control-lg numeralformatyear">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>ปีที่สิ้นสุดศึกษา</label><span class="text-danger">*</span>
+							<input type="text" id="employeducationyearend" placeholder="ปีที่สิ้นสุดศึกษา" class="form-control form-control-lg numeralformatyear">
 						</div>
 					</div>
 				</div>
@@ -484,28 +482,37 @@
 			<div class="modal-body">
 				<div class="row">
 					<label for="" class="text-danger">*กรุณาบันทึกประสบการณ์ทำงานจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</label>
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ปีทำงานเริ่มต้น</label><span class="text-danger">*</span>
 							<input type="text" id="employexperiencestartdate" placeholder="ปีทำงานเริ่มต้น" class="form-control form-control-lg numeralformatyear">
 						</div>
-
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ปีการทำงานสิ้นสุด</label><span class="text-danger">*</span>
 							<input type="text" id="employexperienceenddate" placeholder="ปีการทำงานสิ้นสุด" class="form-control form-control-lg numeralformatyear">
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>บริษัท</label><span class="text-danger">*</span>
 							<input type="text" id="employexperiencecompany" placeholder="บริษัท" class="form-control form-control-lg stringformat30">
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ประเภทธุรกิจ</label><span class="text-danger">*</span>
 							<input type="text" id="employexperiencebusinesstype" placeholder="ประเภทธุรกิจ" class="form-control form-control-lg stringformat30">
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่งแรกเข้า</label><span class="text-danger">*</span>
 							<input type="text" id="employexperiencestartposition" placeholder="ตำแหน่งแรกเข้า" class="form-control form-control-lg stringformat30">
 						</div>
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่งล่าสุด</label><span class="text-danger">*</span>
 							<input type="text" id="employexperienceendposition" placeholder="ตำแหน่งล่าสุด" class="form-control form-control-lg stringformat30">
@@ -1713,12 +1720,12 @@
 																<table class="table table-striped table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th style="width:25%">ชื่อ-นามสกุล</th>  
-																			<th style="width:19%">ตำแหน่ง</th>                                                                                    
-																			<th style="width:5%">โทรศัพท์</th>       
-																			<th style="width:5%">โทรศัพท์มือถือ</th>  
-																			<th style="width:8%">อีเมล</th>
-																			<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>    
+																			<th style="width:250px">ชื่อ-นามสกุล</th>  
+																			<th style="width:300px">ตำแหน่ง</th>                                                                                    
+																			<th style="width:150px">โทรศัพท์</th>       
+																			<th style="width:150px">โทรศัพท์มือถือ</th>  
+																			<th style="width:150px">อีเมล</th>
+																			<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_companyemploy_wrapper_tr">    
@@ -1732,10 +1739,10 @@
 																					@endif
 																					</td> 
 																				<td> 
-																					@if ($companyemploy->employposition->name == 'อื่นๆ')
-																					{{$companyemploy->otherposition}} 
+																					@if (@$companyemploy->employposition->name == 'อื่นๆ')
+																					{{@$companyemploy->otherposition}} 
 																						@else
-																						{{$companyemploy->employposition->name}} 
+																						{{@$companyemploy->employposition->name}} 
 																					@endif
 																					
 																				</td> 
@@ -1743,7 +1750,7 @@
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
 																				<td class="hiddenelement"> 
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
+																					<a type="button" data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy">ลบ</a> 
 																				</td> 
 																			</tr>
@@ -1763,7 +1770,7 @@
 																			<tr class="bg-info">
 																				<th>ชื่อ-นามสกุล</th>  
 																				<th>ความสัมพันธ์กับ CEO</th>
-																				<th class="hiddenelement" style="width:200px">เพิ่มเติม</th>    
+																				<th class="hiddenelement" style="width:210px">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_companystockholder_wrapper_tr">    
@@ -1788,16 +1795,16 @@
 																	<table class="table table-striped table-bordered">
 																		<thead>
 																			<tr class="bg-info">
-																				<th style="width:25%">ชื่อ-นามสกุล</th>  
-																				<th style="width:19%">ตำแหน่ง</th>                                                                                    
-																				<th style="width:5%">โทรศัพท์</th>       
-																				<th style="width:5%">โทรศัพท์มือถือ</th>  
-																				<th style="width:8%">อีเมล</th>
-																				<th class="hiddenelement" style="width:30%">เพิ่มเติม</th>     
+																				<th style="width:250px">ชื่อ-นามสกุล</th>  
+																				<th style="width:300px">ตำแหน่ง</th>                                                                                    
+																				<th style="width:150px">โทรศัพท์</th>       
+																				<th style="width:150px">โทรศัพท์มือถือ</th>  
+																				<th style="width:150px">อีเมล</th>
+																				<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>     
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_researcher_wrapper_tr">    
-																			@foreach ($companyemploys->where('employ_position_id',6)->reverse() as $companyemploy)
+																			@foreach ($companyemploys->where('employ_position_id','>=',6)->reverse() as $companyemploy)
 																				<tr >                                        
 																					<td> {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
 																					<td> {{$companyemploy->employposition->name}} </td> 
@@ -1805,7 +1812,7 @@
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
 																					<td class="hiddenelement">  
-																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
+																						<a type="button" data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
 																					</td> 
 																				</tr>
@@ -3077,7 +3084,6 @@
                 for (var i=0; i<rows.length; i++) {
 					newrow.push(rows[i].id);
                 }
-				console.log(newrow);
 				var fulltbpid = "{{$fulltbp->id}}";
 				updateGanttOrder(newrow,fulltbpid).then(data => {
 					console.log(data);
@@ -3092,7 +3098,6 @@
                 for (var i=0; i<rows.length; i++) {
 					orgrow.push(rows[i].id);
                 }
-				console.log(orgrow);
             }
         });
 

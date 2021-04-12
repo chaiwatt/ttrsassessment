@@ -17,7 +17,8 @@ class FullTbpCompanyEmployEducationController extends Controller
         $employeducation->otheremployeducationlevel = $request->othereducationlevel ;
         $employeducation->employeducationinstitute = $request->employeducationinstitute;
         $employeducation->employeducationmajor = $request->employeducationmajor;
-        $employeducation->employeducationyear = $request->employeducationyear;
+        $employeducation->employeducationyearstart = $request->employeducationyearstart;
+        $employeducation->employeducationyearend = $request->employeducationyearend;
         $employeducation->save();
         $employeducations = EmployEducation::where('company_employ_id',$request->id)->get();
         return response()->json($employeducations); 

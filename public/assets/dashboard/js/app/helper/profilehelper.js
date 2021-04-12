@@ -702,10 +702,7 @@ $("#hid").on('change', function() {
       })
 }
 
-
-// $("#companydoc").on('change', function() {
 $(document).on("change","#companydoc",function(e){
-
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
     console.log(file);
@@ -738,7 +735,7 @@ $(document).on("change","#companydoc",function(e){
                     });
                  $("#fulltbp_companydoc_wrapper_tr").html(html);
                  $('#modal_add_companydoc').modal('hide');
-               
+                 $('#companydocname').val('')
         }
     });
 });
@@ -1050,6 +1047,8 @@ $(document).on('click', '#btn_add_authorized_director', function(e) {
     $('#signature_type').val('1');
     $('#signatureid').val('');
     $("#sigdiv").html('');
+    $("#otherprefix_wrapper").attr("hidden",true);
+    $("#otherposition_wrapper").attr("hidden",true);
     $('#modal_add_authorized_director').modal('show');
 });
 
@@ -1220,6 +1219,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
             $("#otherposition_edit_wrapper").attr("hidden",false);
         }else{
             $("#otherposition_edit_wrapper").attr("hidden",true);
+            $('#otherposition').val('');
         }
     });
   

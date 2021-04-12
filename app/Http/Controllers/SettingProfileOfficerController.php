@@ -8,6 +8,7 @@ use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Prefix;
 use App\Model\Tambol;
+use App\Model\Company;
 use App\Model\Province;
 use App\Model\ExpertDoc;
 use App\Model\ExpertField;
@@ -129,6 +130,9 @@ class SettingProfileOfficerController extends Controller
             'officer_branch_id' => $request->expertbranch,
             'expereinceyear' => $request->expereinceyear,
             'expereincemonth' => $request->expereincemonth
+        ]);
+        Company::where('user_id',$auth->id)->first()->update([
+            'saveprofile' => 1
         ]);
         CreateUserLog::createLog('แก้ไขข้อมูลโปรไฟล์');
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 

@@ -162,7 +162,7 @@
                                                     <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
                                                     <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                     <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                    <td style="font-size:13px">{{$employeducation->employeducationyear}}</td>
+                                                    <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                 </tr>   
                                             @endforeach   
                                         @endif
@@ -258,7 +258,7 @@
                                                             <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                            <td style="font-size:13px">{{$employeducation->employeducationyear}}</td>
+                                                            <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                         </tr>   
                                                     @endforeach
                                                 @endif
@@ -374,7 +374,7 @@
                                                             <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                            <td style="font-size:13px">{{$employeducation->employeducationyear}}</td>
+                                                            <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                         </tr>   
                                                     @endforeach
                                                 @endif

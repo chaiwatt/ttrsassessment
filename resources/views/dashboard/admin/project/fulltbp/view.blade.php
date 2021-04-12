@@ -1522,7 +1522,7 @@
 																									<td> {{$education->employeducationlevel}} </td>                                            
 																									<td> {{$education->employeducationinstitute}} </td> 
 																									<td> {{$education->employeducationmajor}} </td>                                            
-																									<td> {{$education->employeducationyear}} </td> 
+																									<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
 																								</tr>
 																							@endforeach  
 																						</tbody>
@@ -1670,7 +1670,7 @@
 																									<td> {{$education->employeducationlevel}} </td>                                            
 																									<td> {{$education->employeducationinstitute}} </td> 
 																									<td> {{$education->employeducationmajor}} </td>                                            
-																									<td> {{$education->employeducationyear}} </td> 
+																									<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
 																								</tr>
 																							@endforeach  
 																						</tbody>
@@ -1798,7 +1798,7 @@
 																									<td> {{$education->employeducationlevel}} </td>                                            
 																									<td> {{$education->employeducationinstitute}} </td> 
 																									<td> {{$education->employeducationmajor}} </td>                                            
-																									<td> {{$education->employeducationyear}} </td> 
+																									<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
 																								</tr>
 																							@endforeach  
 																						</tbody>

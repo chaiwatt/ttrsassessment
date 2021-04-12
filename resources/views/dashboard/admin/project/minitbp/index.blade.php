@@ -7,7 +7,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การอนุมัติแบบคำขอรับการประเมิน (Mini TBP)</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;<span id="minitbptitle"></span></h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -101,7 +101,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายการแก้ไข</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายการแก้ไข <span id="showlogminitbp"></span></h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -236,23 +236,23 @@
                                         @if (Auth::user()->user_type_id >= 4)
                                             <td> 
                                                 @if ($minitbp->businessplan->business_plan_status_id > 3)
-                                                        <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                        <a href="#"  data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                         @if ($minitbp->reviselog->count() > 0)
-                                                            <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
+                                                            <a href="#" data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
                                                         @endif
                                                     @else
                                                         @if ($minitbp->refixstatus == 0)
-                                                                <a href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
+                                                                <a href="#" data-id="{{$minitbp->id}}" id="editapprove" data-project="{{$minitbp->project}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                             @elseif($minitbp->refixstatus == 1)
                                                                 {{-- <a  href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ส่งคืนแก้ไข</a> --}}
                                                                     <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a>
                                                                 @if ($minitbp->reviselog->count() > 0)
-                                                                    <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
+                                                                    <a href="#" data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
                                                                 @endif
                                                             @elseif($minitbp->refixstatus == 2)
-                                                                <a  href="#" data-id="{{$minitbp->id}}" id="editapprove" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                                <a  href="#" data-id="{{$minitbp->id}}" id="editapprove" data-project="{{$minitbp->project}}" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                                 @if ($minitbp->reviselog->count() > 0)
-                                                                    <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
+                                                                    <a href="#" data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
                                                                 @endif
                                                         @endif
                                                 @endif

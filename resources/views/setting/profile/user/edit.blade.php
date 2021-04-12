@@ -182,7 +182,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    {{-- <button id="btn_modal_add_companydoc" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button> --}}
+                    
                 </div>
             </div>
         </div>
@@ -242,8 +242,8 @@
 								</div>
 							</div>
 						
-							<div class="col-md-6">
-								<div class="form-group" id="otherposition_wrapper" hidden>
+							<div class="col-md-6" id="otherposition_wrapper" hidden>
+								<div class="form-group" >
 									<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
 									<input type="text" id="otherposition" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
 								</div>
@@ -636,7 +636,11 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>เลขบัตรประจำตัวประชาชน</label><span class="text-danger">*</span></span>
-											<input type="text" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control form-control-lg numeralformath13" readonly>
+											<input type="text" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control form-control-lg numeralformath13" 
+											@if (!Empty($user->hid))
+												readonly
+											@endif
+											>
 											<small id="hidinvalid" class="form-text text-danger" hidden></small>
 										</div>
 									</div>
