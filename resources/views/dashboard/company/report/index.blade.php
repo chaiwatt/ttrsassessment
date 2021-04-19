@@ -21,7 +21,7 @@
             </div>
             @if (Auth::user()->company->saveprofile == 0)
                 <div class="header-elements d-none">
-                    <a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">ตั้งค่าโปรไฟล์ ก่อนขอรับการประเมิน</span></a>
+                    <a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">ตั้งค่าโพรไฟล์ ก่อนขอรับการประเมิน</span></a>
                 </div>
             @endif
         </div>

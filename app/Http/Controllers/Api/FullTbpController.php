@@ -39,7 +39,6 @@ use App\Model\FullTbpCompanyProfileAttachment;
 
 class FullTbpController extends Controller
 {
-
     public function GeneratePdf(Request $request){
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $segment = new \Segment();
@@ -56,7 +55,7 @@ class FullTbpController extends Controller
         $company = Company::find($businessplan->company_id);
         $ceo = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id',1)->first();
         $companyboards = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->where('id','!=',@$ceo->id)->get();
-        // dd($companyboards);
+
         $companyemploys = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','>',5)->where('id','!=',@$ceo->id)->get();
         $companyhistory = $segment->get_segment_array($company->companyhistory);
         $companystockholders = StockHolderEmploy::where('company_id',$company->id)->get();
@@ -139,9 +138,19 @@ class FullTbpController extends Controller
             ]);
         }
 
+        $shortpdf = PDF::loadView('dashboard.company.project.fulltbp.shortpdf',$data,[],[
+            'watermark' => 'เอกสารสำคัญปกปิด (Private & Confidential)',
+            'show_watermark' => false
+        ]);
+
+      
         $path = public_path("storage/uploads/");
         $randname = str_random(10);
+        $shortpdf->save($path.$randname.'_shortdetail.pdf');
         $pdf->save($path.$randname.'.pdf');
+        FullTbp::find($request->id)->update([
+            'shortpdf' => 'storage/uploads/' . $randname.'_shortdetail.pdf'
+        ]);
         return 'storage/uploads/'.$randname.'.pdf' ;
     }
     
@@ -225,7 +234,7 @@ class FullTbpController extends Controller
     public function SubmitWithNoAttachement(Request $request){
         $auth = Auth::user();
         $fulltbp = FullTbp::find($request->id);
-        $filelocation = $request->pdfname;// "storage/uploads/".$fulltbp->fulltbp_code.'.pdf';
+        $filelocation = $request->pdfname;
 
         $fulltbp->update([
             'attachment' => $filelocation

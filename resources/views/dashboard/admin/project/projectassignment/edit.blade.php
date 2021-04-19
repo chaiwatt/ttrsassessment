@@ -129,8 +129,16 @@
                                                             $userprefix = $user->alter_prefix;
                                                         }
                                                     @endphp 
-                                                    <td><input type="radio" name="leader" value="{{$user->id}}" class="form-check-input-styled leader" data-fouc @if($projectassignment->leader_id == $user->id) checked @endif  ></td>  
-                                                    <td><input type="radio" name="coleader" value="{{$user->id}}" class="form-check-input-styled coleader" data-fouc   @if($projectassignment->coleader_id == $user->id) checked @endif  ></td>      
+                                                    <td><input type="radio" name="leader" value="{{$user->id}}" class="form-check-input-styled leader" data-fouc @if($projectassignment->leader_id == $user->id) checked @endif  
+                                                        @if (Auth::user()->user_type_id !==6)
+                                                            disabled
+                                                        @endif
+                                                        ></td>  
+                                                    <td><input type="radio" name="coleader" value="{{$user->id}}" class="form-check-input-styled coleader" data-fouc   @if($projectassignment->coleader_id == $user->id) checked @endif 
+                                                        @if (Auth::user()->user_type_id !==6)
+                                                            disabled
+                                                        @endif
+                                                        ></td>      
                                                     <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}</td>
                                                     <td>{{$user->projecthandle->count()}}</td>      
                                                     <td>{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
@@ -141,11 +149,13 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="text-right">
-                                        <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                @if (Auth::user()->user_type_id>=6)
+                                    <div class="form-group">
+                                        <div class="text-right">
+                                            <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </form>
 					</div>

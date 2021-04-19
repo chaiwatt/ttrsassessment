@@ -482,7 +482,6 @@
 																						@endif
 																						>
 																				@endif
-																				{{-- {{$authorizeddirector->prefix->name}} --}}
 																				
 																				@if ($authorizeddirector->prefix->name == 'อื่นๆ')
 																						{{$authorizeddirector->otherprefix}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}

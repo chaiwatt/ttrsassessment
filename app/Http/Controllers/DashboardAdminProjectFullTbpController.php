@@ -12,6 +12,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Model\ReviseLog;
 use App\Model\MessageBox;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
@@ -31,6 +32,7 @@ use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
+use App\Model\DocumentEditor;
 use App\Model\EmployPosition;
 use App\Model\EmployTraining;
 use App\Helper\DateConversion;
@@ -67,6 +69,7 @@ use App\Model\FullTbpMainProductDetail;
 use App\Model\FullTbpMarketCompetitive;
 use App\Model\ProjectStatusTransaction;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Activitylog\Models\Activity;
 use App\Model\FullTbpReturnOfInvestment;
 use App\Model\FullTbpProjectTechDevLevel;
 use App\Http\Requests\AssignExpertRequest;
@@ -193,6 +196,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             $allyears = array(count($year1), count($year2), count($year3));
         }
 
+        // $fulltbp_employ_activitylogs = Activity::causedBy($user)->where('log_name','Full TBP Employ')->orderBy('id','desc')->get();
 
         $fulltbpgantt = FullTbpGantt::where('full_tbp_id',$fulltbp->id)->first();
         return view('dashboard.admin.project.fulltbp.view')->withFulltbp($fulltbp)
@@ -538,6 +542,13 @@ class DashboardAdminProjectFullTbpController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
+
+            $reviselog = new ReviseLog();
+            $reviselog->mini_tbp_id = $minitbp->id;
+            $reviselog->user_id = $auth->id;
+            $reviselog->message = $request->note;
+            $reviselog->doctype = 2;
+            $reviselog->save();
 
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $minitbp->business_plan_id;

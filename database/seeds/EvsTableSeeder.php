@@ -14,7 +14,8 @@ class EvsTableSeeder extends Seeder
         DB::table('evs')->insert([
             [
                 'name' => 'scoringict',
-                'version' => '01'
+                'version' => '01',
+                'status' => '5'
             ]
         ]);
     }

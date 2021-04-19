@@ -105,11 +105,7 @@
             <div class="col-md-12">
 				<!-- Colors -->
             	<div class="card">
-
                 	<div class="card-body">
-
-
-						
 						<form id="frmminitbp" method="POST" class="wizard-form step-minitbp" action="" data-fouc>
 							@csrf
 							<h6>ผู้ยื่นแบบคำขอ</h6>
@@ -372,37 +368,47 @@
 									</div>
 								</div>
 							</fieldset>
-							<h6>การแก้ไขล่าสุด</h6>
-							<fieldset>
-								<div class="col-md-12 mb-2">
-									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
-											<thead>
-												<tr class="bg-info">
-													<th>วันที่</th>
-													<th>รายการ</th>                                                                                  
-													<th>เดิม</th>
-													<th>ใหม่</th>
-												</tr>
-											</thead>
-											<tbody >  
-												@foreach ($logcollections as $key => $activity)
-													<tr>
-														@if ($key == 0)
-															<td rowspan="{{$logcollections->count()+1}}" >{{$activity['edit']}}</td>
-														@endif
-														<td>{{$activity['key']}}</td>
-														<td>{{$activity['old']}}</td>
-														<td>{{$activity['new']}}</td>
+							{{-- @if (($minitbp->businessplan->business_plan_status_id == 3) && ($minitbp->refixstatus != 0))
+								<h6>การแก้ไขล่าสุด</h6>
+								<fieldset>
+									<div class="col-md-12 mb-2">
+										<div class="table-responsive">
+											<table class="table table-striped table-bordered">
+												<thead>
+													<tr class="bg-info">
+														<th>วันที่</th>
+														<th>รายการ</th>                                                                                  
+														<th>เดิม</th>
+														<th>ใหม่</th>
 													</tr>
-												@endforeach  
-											</tbody>
-										</table>
+												</thead>
+												<tbody >  
+													@foreach ($logcollections as $key => $activity)
+														<tr>
+															@if ($key == 0)
+																<td rowspan="{{$logcollections->count()+1}}" >{{$activity['edit']}}</td>
+															@endif
+															<td>{{$activity['key']}}</td>
+															<td>{{$activity['old']}}</td>
+															<td>{{$activity['new']}}</td>
+														</tr>
+													@endforeach  
+												</tbody>
+											</table>
+										</div>
 									</div>
-								</div>
-							</fieldset>
+								</fieldset>
+							@endif --}}
+
 							<h6>เสร็จสิ้น</h6>
 							<fieldset>
+								{{-- {{$projectassignment}} --}}
+								@if (!Empty($projectassignment->leader_id))
+										<input type="text" id="leaderid" value="{{$projectassignment->leader_id}}" hidden>
+									@else
+									<input type="text" id="leaderid" value="" hidden>
+								@endif
+								
 								<div class="col-md-12">
 									<div class="form-group">
 										<div style="width:100%;height:600px;" class="col-md-12 center"  >
@@ -434,16 +440,25 @@
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
-{{-- <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script> --}}
+
 <script>
 	var route = {
 		url: "{{ url('/') }}",
 		token: $('meta[name="csrf-token"]').attr('content'),
-		branchid: "{{Auth::user()->branch_id}}"
+		// branchid: "{{Auth::user()->branch_id}}"
 	};
 	var submitstatus = "{{$minitbp->businessplan->business_plan_status_id}}";
 	var refixstatus = "{{$minitbp->refixstatus}}";
+
 	// Basic wizard setup
+	var mytype = "{{Auth::user()->user_type_id}}";
+	var myid = "{{Auth::user()->id}}";
+	var btnstatus = true;
+    if (mytype == 4) {
+		if (myid != $("#leaderid").val()) {
+			btnstatus = false;
+		}
+	}
 	var form = $('.step-minitbp').show();
 	$('.step-minitbp').steps({
 		headerTag: 'h6',
@@ -455,11 +470,9 @@
 			next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
 			finish: 'ดำเนินการ <i class="icon-arrow-right14 ml-2" />'
 		},
-		enableFinishButton: true,
+		enableFinishButton: btnstatus,
 		onFinished: function (event, currentIndex) {
-			//  alert('Form submitted.');
 			 window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
-			// $("#frmminitbp").submit();
 		},
 		transitionEffect: 'fade',
 		autoFocus: true,

@@ -44,6 +44,13 @@
                 {{ $errors->first() }}
             </div>
         @endif
+        @php
+            $hidden = "";
+            $check = Auth::user()->experttype;
+            if($check == "(ภายนอก)"){
+                $hidden = "hidden";
+            }
+        @endphp
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -76,44 +83,71 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                @if ($company->businessplan->business_plan_status_id >=3)
+            @if ($company->businessplan->business_plan_status_id >=3)
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">รายการเอกสาร</h6>
+                            <h6 class="card-title">เอกสารของโครงการ</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr class="bg-info">
                                             <th style="width:600px">Mini TBP/Full TBP</th> 
-                                            <th style="width:200px">PDF</th>
-                                            <th>เอกสารแนบ</th> 
+                                            <th >PDF</th>
+                                            <th style="width:200px">เอกสารแนบ</th> 
                                         </tr>
                                     </thead>
                                     <tbody >
                                         <tr>
                                             <td>
-                                                <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                @if (Auth::user()->user_type_id == 3)
+                                                       @if (Auth::user()->experttype == "(ภายนอก)")
+                                                                Mini TBP
+                                                           @else
+                                                                <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                       @endif
+                                                    @else
+                                                        <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                @endif
+                                                
                                             </td>  
                                             <td> 
-                                                <a href="{{asset($company->businessplan->minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank">ดาวน์โหลด PDF</a>
+                                                <a href="{{asset($company->businessplan->minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
                                             </td>  
                                             <td>
-                                                -
+                                                
                                             </td>                                       
                                         </tr> 
                                         @if ($company->businessplan->business_plan_status_id >=5)
                                             <tr>
                                                 <td>
-                                                    <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
+                                                    @if (Auth::user()->user_type_id == 3)
+                                                        @if (Auth::user()->experttype == "(ภายนอก)")
+                                                            Full TBP
+                                                        @else
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
+                                                        @endif
+                                                    @else
+                                                        <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
+                                                    @endif
+                                                    
                                                 </td>  
                                                 <td> 
-                                                    <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                    @if (Auth::user()->user_type_id == 3)
+                                                        @if (Auth::user()->experttype == "(ภายนอก)")
+                                                            <a href="{{asset($company->businessplan->minitbp->fulltbp->shortpdf)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                        @else
+                                                            <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                        @endif
+                                                    @else
+                                                        <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                    @endif
+                                                    
                                                 </td>  
                                                 <td>
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-teal downloadlink">ดาวน์โหลดเอกสารแนบ</a>
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
                                                 </td>                                       
                                             </tr> 
                                         @endif 
@@ -122,10 +156,55 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                @if (!Empty($projectassignment))
+                    <div class="col-md-12" {{$hidden}}>
+                        <div class="card">
+                            <div class="card-header header-elements-sm-inline">
+                                <h6 class="card-title">Leader และ Co-Leader ของโครงการ</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th style="width:600px">ตำแหน่งรับผิดชอบ</th> 
+                                                <th>ชื่อ-นามสกุล</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr>
+                                                <td>Leader</td>  
+                                                <td>
+                                                    @if (!Empty($projectassignment->leader_id))
+                                                    {{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
+                                                    @else
+                                                    ยังไม่ได้มอบหมาย
+                                                    @endif
+                                                   
+                                                </td>                                     
+                                            </tr>  
+                                            <tr>
+                                                <td>Co-Leader</td>  
+                                                <td>
+                                                    @if (!Empty($projectassignment->coleader_id))
+                                                        {{$projectassignment->coleader->name}} {{$projectassignment->coleader->lastname}}
+                                                        @else
+                                                        ยังไม่ได้มอบหมาย
+                                                    @endif                                                   
+                                                </td>                                   
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endif
-            </div>
+  
+            @endif
             @if ($company->businessplan->business_plan_status_id >=8)
-                <div class="col-md-12">
+                <div class="col-md-12" {{$hidden}}>
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
                             <h6 class="card-title">รายการผู้เชี่ยวชาญ</h6>
@@ -134,7 +213,7 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr >
                                             <th style="width:600px">ชื่อ-นามสกุล</th> 
                                             <th>ความแม่นยำ</th> 
                                             <th>การลงคะแนน</th> 
@@ -158,7 +237,7 @@
                 </div>
             @endif
             @if ($company->businessplan->business_plan_status_id >=9)
-                <div class="col-md-12">
+                <div class="col-md-12" {{$hidden}}>
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
                             <h6 class="card-title">คะแนน/เกรด</h6>
@@ -210,8 +289,7 @@
     <script>
         var route = {
             url: "{{ url('/') }}",
-            token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            token: $('meta[name="csrf-token"]').attr('content')
         };
 
     </script>

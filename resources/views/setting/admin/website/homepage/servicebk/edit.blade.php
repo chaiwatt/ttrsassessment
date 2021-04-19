@@ -71,8 +71,8 @@
                                             <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="Description (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>ลิงค์</label>
-                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ลิงค์" class="form-control form-control-lg">
+                                            <label>ลิงก์</label>
+                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ลิงก์" class="form-control form-control-lg">
                                         </div>
                                 </div>
                                 <div class="col-md-12">

@@ -9,8 +9,11 @@ use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
+use App\Helper\OnlyBelongPerson;
+use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ProjectStatusTransaction;
+use Illuminate\Support\Facades\Session;
 
 class DashboardAdminReportDetailController extends Controller
 {
@@ -27,13 +30,22 @@ class DashboardAdminReportDetailController extends Controller
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
         $projectmembers = ProjectMember::where('full_tbp_id',$fulltbp->id)->get();
-
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $projectstatuses = ProjectStatus::where('mini_tbp_id',$minitbp->id)->get();
         $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->get();
 
-        return view('dashboard.admin.report.detail.view')->withCompany($company)
-                                                        ->withProjectmembers($projectmembers)
-                                                        ->withProjectstatustransactions($projectstatustransactions)
-                                                        ->withProjectstatuses($projectstatuses);
+        if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
+            return view('dashboard.admin.report.detail.view')->withCompany($company)
+                ->withProjectmembers($projectmembers)
+                ->withProjectstatustransactions($projectstatustransactions)
+                ->withProjectstatuses($projectstatuses)
+                ->withProjectassignment($projectassignment);
+        }else{
+            Auth::logout();
+            Session::flush();
+            return redirect()->route('login');
+        }
+
     }
+
 }

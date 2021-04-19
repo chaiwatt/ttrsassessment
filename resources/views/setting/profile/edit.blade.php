@@ -794,7 +794,7 @@
 											</tr>
 										</thead>
 										<tbody>
-
+{{-- 
 											@foreach ($activitylogs as $activitylog)
 											<tr>    
 												<td> {{$activitylog->log_name}} </td>
@@ -805,7 +805,7 @@
 													@endforeach
 												<td> {{$activitylog->created_at}} </td>
 											</tr>
-											@endforeach
+											@endforeach --}}
 										</tbody>
 									</table>      
 								</div>

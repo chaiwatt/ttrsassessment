@@ -4,7 +4,7 @@ import * as MiniTbp from './minitbp.js'
 $(document).on('click', '#editapprove', function(e) {
     console.log($(this).data('project'));
     $('#minitbpid').val($(this).data('id'));
-    $('#minitbptitle').html($(this).data('project'));
+    $('#minitbptitle').html('โครงการ : '+ $(this).data('project'));
     
     $('#modal_edit_minitbp').modal('show');
 });
@@ -44,17 +44,33 @@ $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
           }
       });
       }else if(check == 2){
-        $('#modal_edit_minitbp').modal('hide');
-        $("#spinicon"+$('#minitbpid').val()).attr("hidden",false);
-        MiniTbp.editApprove($('#minitbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {     
-                window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
-        }).catch(error => {})
+        Swal.fire({
+            title: 'ยืนยัน!',
+            text: `ต้องการส่งคืน Mini TBP หรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                $('#modal_edit_minitbp').modal('hide');
+                $("#spinicon"+$('#minitbpid').val()).attr("hidden",false);
+                MiniTbp.editApprove($('#minitbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {     
+                        window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
+                }).catch(error => {})
+            }
+        });
       }
 });
 
 $(document).on('click', '.showlog', function(e) {
     var html ='';
-    getReviseLog($(this).data('id')).then(data => {   
+    $("#spinicon_showlog"+$(this).data('id')).attr("hidden",false);
+    // console.log('ok');
+    getReviseLog($(this).data('id'),$(this).data('doctype')).then(data => {   
         data.forEach(function (log,index) {
             html += `<tr >                                        
                 <td> ${log.message} </td>    
@@ -65,19 +81,21 @@ $(document).on('click', '.showlog', function(e) {
             });
         $("#reviselog_wrapper_tr").html(html);
         $("#showlogminitbp").html(': ' +$(this).data('project'));
+        $("#spinicon_showlog"+$(this).data('id')).attr("hidden",true);
         $('#modal_show_reviselog').modal('show');
     }).catch(error => {})
     
 });
 
-function getReviseLog(minitbpid){
+function getReviseLog(minitbpid,doctype){
     return new Promise((resolve, reject) => {
         $.ajax({
         url: `${route.url}/api/minitbp/getreviselog`,
         type: 'POST',
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
-            minitbpid : minitbpid
+            minitbpid : minitbpid,
+            doctype : doctype
         },
         success: function(data) {
             resolve(data)

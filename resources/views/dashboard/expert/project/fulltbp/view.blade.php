@@ -2483,35 +2483,32 @@
 															<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u></label>
 															<p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p>
 														</div>
-														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
-																<thead>
-																	<tr class="bg-info">
-																		<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
-																		<th>ยอดขายปีปัจจุบัน</th> 
-																		<th>{{$fulltbp->past1}}</th>                                                                                    
-																		<th>{{$fulltbp->past2}}</th>       
-																		<th>{{$fulltbp->past3}}</th>  
-																		{{-- <th>เพิ่มเติม</th>     --}}
-																	</tr>
-																</thead>
-																<tbody id="fulltbp_sell_wrapper_tr">    
-																	@foreach ($fulltbpsells as $fulltbpsell)
-																		<tr>                                        
-																			<td> {{$fulltbpsell->name}}</td> 
-																			<td> {{$fulltbpsell->present}} </td> 
-																			<td> {{$fulltbpsell->past1}} </td> 
-																			<td> {{$fulltbpsell->past2}} </td>                                            															
-																			<td> {{$fulltbpsell->past3}} </td> 
-																			{{-- <td> 
-																				<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
-																				<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning deletesell">ลบ</a> 
-																			</td>  --}}
+														@if ($fulltbpsells->count() > 0)
+															<div class="table-responsive">
+																<table class="table table-striped table-bordered">
+																	<thead>
+																		<tr class="bg-info">
+																			<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
+																			<th>ยอดขายปีปัจจุบัน</th> 
+																			<th>{{$fulltbp->past1}}</th>                                                                                    
+																			<th>{{$fulltbp->past2}}</th>       
+																			<th>{{$fulltbp->past3}}</th>  
 																		</tr>
-																	@endforeach                            
-																</tbody>
-															</table>
-														</div>
+																	</thead>
+																	<tbody id="fulltbp_sell_wrapper_tr">    
+																		@foreach ($fulltbpsells as $fulltbpsell)
+																			<tr>                                        
+																				<td> {{$fulltbpsell->name}}</td> 
+																				<td> {{$fulltbpsell->present}} </td> 
+																				<td> {{$fulltbpsell->past1}} </td> 
+																				<td> {{$fulltbpsell->past2}} </td>                                            															
+																				<td> {{$fulltbpsell->past3}} </td> 
+																			</tr>
+																		@endforeach                            
+																	</tbody>
+																</table>
+															</div>
+														@endif
 													</div>
 													
 													<div class="col-md-12 mt-4">

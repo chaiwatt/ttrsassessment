@@ -16,14 +16,17 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ความเห็น</label>
-                                <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control form-control-lg"></textarea>
+                                <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control form-control-lg" @if (Auth::user()->user_type_id != 6) readonly @endif></textarea>
                             </div>
                         </div>
                     </div>
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    @if (Auth::user()->user_type_id == 6)
                     <button id="btn_modal_add_jdmessage" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="userspinicon" hidden></i><span id="btnname">เพิ่ม</span> </button>
+                    @endif
+                    
                 </div>
             </div>
         </div>
@@ -105,13 +108,13 @@
                                         <th>Leader</th>
                                         {{-- <th>Co-Leader</th> --}}
                                         <th>สถานะ</th>
-                                        @if (Auth::user()->user_type_id>=6)
+                                        @if (Auth::user()->user_type_id>=5)
                                             <th>เพิ่มเติม</th> 
                                         @endif                             
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($projectassignments as $key => $projectassignment)
+                                    @foreach ($projectassignments->reverse() as $key => $projectassignment)
                                     <tr>    
                                         <td> 
                                             <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
@@ -139,7 +142,10 @@
                                         </td> 
                                         <td> 
                                             @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
+                                                    @if (Auth::user()->user_type_id == 6)
                                                     <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                    @endif
+                                                    
                                                 @else
                                                     <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
@@ -157,7 +163,7 @@
                                                 <span class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</span>
                                             @endif
                                         </td>
-                                        @if (Auth::user()->user_type_id>=6)
+                                        @if (Auth::user()->user_type_id>=5)
                                             <td> 
                                                 @if (@$projectassignment->businessplan->minitbp->fulltbp->projectstatustransaction(8)->status != 2)
                                                     @if ($projectassignment->leader_id == null)

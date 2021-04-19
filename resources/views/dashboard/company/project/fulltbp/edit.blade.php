@@ -298,9 +298,7 @@
 										</div>
 										</div>
 										<div class="col-md-12">
-											{{-- <div class="form-group"> --}}
 												<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-pencil font-size-base mr-1"></i> แก้ไข</button>
-											{{-- </div> --}}
 											</div>
 									</div>
 							
@@ -335,7 +333,6 @@
 
 								</div>
 								<div class="tab-pane fade" id="left-icon-employexpereince">
-									{{-- <span class="text-danger">*กรุณาบันทึกประสบการณ์ทำงานจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span> --}}
 									<div class="form-group">	
 										<a href="" class="btn btn-warning btn-icon btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_employexperience"><i class="icon-add mr-2"></i>เพิ่ม</a>
 										
@@ -378,9 +375,9 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
-									{{-- <span class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</span> --}}
+									
 									<div class="form-group">	
-										{{-- <a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right hiddenelement" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add"></i></a> --}}
+										
 										<a href="" class="btn btn-warning btn-icon btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_employtraining"><i class="icon-add mr-2"></i>เพิ่ม</a>
 									</div>
 
@@ -1535,21 +1532,19 @@
 	
 
 				<div class="card">
-					{{-- <div class="card-header bg-white header-elements-inline">
-						<h6 class="card-title">Basic example</h6>
-						<div class="header-elements">
-							<div class="list-icons">
-		                		<a class="list-icons-item" data-action="collapse"></a>
-		                		<a class="list-icons-item" data-action="reload"></a>
-		                		<a class="list-icons-item" data-action="remove"></a>
-		                	</div>
-	                	</div>
-					</div> --}}
+
 					<div class="card-body">
 					<input type="text" id="companyid" value="{{$company->id}}" hidden>
 					<input type="text" id="fulltbpid" value="{{$fulltbp->id}}" hidden>
 						<form class="wizard-form steps-basic" action="#" data-fouc>
 							<h6>1.ข้อมูลทั่วไป</h6>
+							<input type="text" id="pdfname" hidden >
+							@if ($fulltbp->refixstatus !=4 && ($fulltbp->refixstatus == 0 || $fulltbp->refixstatus == 2 ))
+									<input type="text" id="fulltbpstatus" value="1" hidden>
+								@else
+									
+									<input type="text" id="fulltbpstatus" value="2" hidden>
+							@endif
 							<fieldset>
 								<div id="accordion-group">
 
@@ -1725,7 +1720,7 @@
 																			<th style="width:150px">โทรศัพท์</th>       
 																			<th style="width:150px">โทรศัพท์มือถือ</th>  
 																			<th style="width:150px">อีเมล</th>
-																			<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>    
+																			<th style="width:250px">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_companyemploy_wrapper_tr">    
@@ -1749,9 +1744,9 @@
 																				<td> {{$companyemploy->phone}} </td>                                            
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
-																				<td class="hiddenelement"> 
+																				<td > 
 																					<a type="button" data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy">ลบ</a> 
+																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy hiddenelement">ลบ</a> 
 																				</td> 
 																			</tr>
 																		@endforeach                            
@@ -1791,7 +1786,7 @@
 															<div class="col-md-12 mt-3">	
 																<label for=""><strong>1.13) ข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																<span id="fulltbp_researcher_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</span>
-																<div class="table-responsive" id="fulltbp_researcher_wrapper" @if ($companyemploys->where('employ_position_id',6)->count() == 0) hidden @endif>
+																<div class="table-responsive" id="fulltbp_researcher_wrapper" @if ($companyemploys->where('employ_position_id','>=',6)->count() == 0) hidden @endif>
 																	<table class="table table-striped table-bordered">
 																		<thead>
 																			<tr class="bg-info">
@@ -1800,10 +1795,11 @@
 																				<th style="width:150px">โทรศัพท์</th>       
 																				<th style="width:150px">โทรศัพท์มือถือ</th>  
 																				<th style="width:150px">อีเมล</th>
-																				<th class="hiddenelement" style="width:250px">เพิ่มเติม</th>     
+																				<th style="width:250px">เพิ่มเติม</th>     
 																			</tr>
 																		</thead>
-																		<tbody id="fulltbp_researcher_wrapper_tr">    
+																		<tbody id="fulltbp_researcher_wrapper_tr">   
+																			
 																			@foreach ($companyemploys->where('employ_position_id','>=',6)->reverse() as $companyemploy)
 																				<tr >                                        
 																					<td> {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
@@ -1811,7 +1807,7 @@
 																					<td> {{$companyemploy->phone}} </td>                                            
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
-																					<td class="hiddenelement">  
+																					<td >  
 																						<a type="button" data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
 																					</td> 
@@ -2383,7 +2379,7 @@
 																						<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
 																						@foreach ($allyears as $key => $item)
 																							@if ($item != 0)
-																								<th colspan="{{$item}}" class="text-center">ปี {{$fulltbpgantt->startyear + $key}} </th> 
+																								<th colspan="{{$item}}" class="text-center">พ.ศ.{{$fulltbpgantt->startyear + $key}} </th> 
 																							@endif
 																						@endforeach
 																						<th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th> 
@@ -2580,10 +2576,10 @@
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th>  
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th> 
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th> 
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past3}}</th>  
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past2}}</th> 
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past1}}</th> 
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past1+1}}</th> 
 																				                                                                                   
 																				      
 																				
@@ -2620,10 +2616,10 @@
 																		<thead>
 																			<tr  class="bg-info">
 																				<th>ประเภทยอดขาย</th>  
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past3}}</th> 
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past2}}</th>  
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1}}</th>    
-																				<th class="text-center" style="width: 13%">ปี {{$fulltbp->past1+1}}</th> 
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past3}}</th> 
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past2}}</th>  
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past1}}</th>    
+																				<th class="text-center" style="width: 13%">พ.ศ.{{$fulltbp->past1+1}}</th> 
 
 																				<th class="hiddenelement" style="width: 10%">เพิ่มเติม</th>    
 																			</tr>
@@ -2894,19 +2890,27 @@
 														<td>
 															<div class="form-check">
 																<label class="form-check-label">
+
 																	@if (Empty($authorizeddirector->signature_id))
 																			<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
-																			@if ($authorizeddirector->usefulltbpsignature == 2)
+																			@if ($authorizeddirector->usesignature == 2)
 																				checked
 																			@endif
 																			>
 																		@else
 																			<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
-																			@if ($authorizeddirector->usefulltbpsignature == 2)
+																			@if ($authorizeddirector->usesignature == 2)
 																				checked
 																			@endif
 																			>
 																	@endif
+																	
+																	@if ($authorizeddirector->prefix->name == 'อื่นๆ')
+																			{{$authorizeddirector->otherprefix}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
+																		@else
+																			{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
+																	@endif
+
 																	{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
 																</label>
 															</div>
@@ -2918,8 +2922,14 @@
 																<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
 														@endif
 														</td>                                
-														
-														<td> {{$authorizeddirector->employposition->name}}</td>      
+													
+														<td> 	
+															@if ($authorizeddirector->employposition->name == 'อื่นๆ')
+																	{{$authorizeddirector->otherposition}}
+																@else
+																	{{$authorizeddirector->employposition->name}}
+															@endif
+														</td>      
 													</tr>
 													@endforeach
 												</tbody>

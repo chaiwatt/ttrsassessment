@@ -87,7 +87,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return "";
         }
 
-        return UserType::find($this->user_type_id);
+        // return UserType::find($this->user_type_id);
     }
 
     public function getUserStatusAttribute()
@@ -223,6 +223,12 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function Tambol($id)
     {
+        return Tambol::find($id)->name;
+    }
+    public function IsExternalExpert($id)
+    {
+        $expertdetail = ExpertDetail::where('user_id',Auth::user()->id)->first();
+
         return Tambol::find($id)->name;
     }
 }

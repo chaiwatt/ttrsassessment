@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Youtube</label>
-                                            <input type="text"  name="youtube" value="{{$headertext->youtube}}"  placeholder="ลิงค์ Youtube" class="form-control form-control-lg">
+                                            <input type="text"  name="youtube" value="{{$headertext->youtube}}"  placeholder="ลิงก์ Youtube" class="form-control form-control-lg">
                                         </div>
 										<div class="form-group">
 											<label>รูป Banner<span class="text-danger">*</span></label>

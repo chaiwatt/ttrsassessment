@@ -66,7 +66,7 @@
             </div>
             @if (Auth::user()->company->saveprofile == 0)
                 <div class="header-elements d-none">
-                    <a href="{{route('setting.profile.expert.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">โปรดตั้งค่าโปรไฟล์</span></a>
+                    <a href="{{route('setting.profile.expert.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">โปรดตั้งค่าโพรไฟล์</span></a>
                 </div>
             @endif
         </div>

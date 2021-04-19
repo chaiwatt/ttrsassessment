@@ -58,7 +58,10 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
     }
 
     public function getReviselogAttribute(){
-        // return ReviseLog::where('mini_tbp_id',$this->id)->where('user_id',Auth::user()->id)->where('doctype',1)->get();
         return ReviseLog::where('mini_tbp_id',$this->id)->where('doctype',1)->get();
+    }
+
+    public function Reviselog($id){
+        return ReviseLog::where('mini_tbp_id',$this->id)->where('doctype',$id)->get();
     }
 }

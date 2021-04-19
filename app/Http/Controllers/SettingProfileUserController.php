@@ -87,7 +87,7 @@ class SettingProfileUserController extends Controller
                                             ->withBusinesstypes($businesstypes);
     }
     public function EditSave(EditProfileRequest $request, $id){
-        CreateUserLog::createLog('แก้ไขข้อมูลโปรไฟล์');
+        CreateUserLog::createLog('แก้ไขข้อมูลโพรไฟล์');
         $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
@@ -95,25 +95,10 @@ class SettingProfileUserController extends Controller
             ]);
         }
         $company = Company::where('user_id',$auth->id)->first();
+        
         $file = $request->picture; 
         $filelocation = $company->logo;
-        // if(!Empty($file)){   
-        //     $extension_picture = array('jpg' , 'JPG' , 'jpeg' , 'JPEG' , 'GIF' , 'gif' , 'PNG' , 'png');     
-        //     if( in_array($file->getClientOriginalExtension(), $extension_picture) ){
-        //         if(!Empty($company->logo)){
-        //             @unlink($company->logo);
-        //         }
-        //         $name = $file->getClientOriginalName();
-        //         $file = $request->picture;
-        //         $img = Image::make($file);  
-        //         $fname=str_random(10).".".$file->getClientOriginalExtension();
-        //         $filelocation = "storage/uploads/company/".$fname;
-        //         Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
-        //     }else{
-        //         return redirect()->back()->withError('รูปแบบไฟล์ภาพไม่ถูกต้อง'); 
-        //     }
-        // }
-        
+         
         $paidupcapitaldate=null;
         if(!Empty($request->paidupcapitaldate)){
             $paidupcapitaldate=DateConversion::thaiToEngDate($request->paidupcapitaldate);
@@ -310,7 +295,8 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
-            return redirect()->back()->withSuccess('แก้ไขข้อมูลโปรไฟล์สำเร็จ'); 
+
+            return redirect()->back()->withSuccess('แก้ไขข้อมูลโพรไฟล์สำเร็จ'); 
         }
     }
 }

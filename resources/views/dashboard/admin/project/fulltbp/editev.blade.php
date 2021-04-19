@@ -509,7 +509,7 @@
                                         <label>EV ในระบบ</label>
                                         <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
                                             <option value="0">==เลือกจาก EV ในระบบ==</option>
-                                            @foreach ($evs as $_ev)
+                                            @foreach ($evs->where('status','>=',5) as $_ev)
                                                 <option value="{{$_ev->id}}" >
                                                     {{$_ev->name}}
                                                     @if (Empty($_ev->fulltbp))
@@ -524,8 +524,8 @@
                                 @endif
 
                                 <ul class="nav nav-tabs nav-tabs-highlight ">
-                                    <li class="nav-item"><a href="#indextab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i>Index Criteria</a></li>
-                                    <li class="nav-item"><a href="#extratab" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i>Extra Criteria</a></li>
+                                    <li class="nav-item"><a href="#indextab" class="nav-link active" data-toggle="tab">Index Criteria</a></li>
+                                    <li class="nav-item"><a href="#extratab" class="nav-link" data-toggle="tab">Extra Criteria</a></li>
                                     @if ($evedithistories->count() > 0 || Auth::user()->user_type_id == 6)
                                     <li class="nav-item"><a href="#commenttab" class="nav-link" data-toggle="tab"><i class="icon-bubble-dots4 mr-2"></i>ส่งคืนแก้ไข @if ($evcommenttabs->count() > 0) <span class="badge badge-warning badge-pill mr-2">ใหม่</span> @endif </a></li>
                                     @endif

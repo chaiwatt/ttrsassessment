@@ -39,14 +39,29 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
                 window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
           }).catch(error => {})
         }
-    });
+      });
     }else if(check == 2){
-      $('#modal_edit_fulltbp').modal('hide');
-      $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
-      FullTbp.editApprove($('#fulltbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
-          var html = ``;
-          window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
-    }).catch(error => {})
+      Swal.fire({
+        title: 'ยืนยัน!',
+        text: `ต้องการส่งคืน Full TBP ให้แก้ไขหรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+          $('#modal_edit_fulltbp').modal('hide');
+          $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
+          FullTbp.editApprove($('#fulltbpid').val(),$("input[name='result']:checked").val(),$('#note').val()).then(data => {
+              var html = ``;
+              window.location.replace(`${route.url}/dashboard/admin/project/fulltbp`);
+        }).catch(error => {})
+        }
+      });
+
     }
 });
 
@@ -267,3 +282,44 @@ $(document).on('click', '.finishonsite', function(e) {
 });
 
 
+$(document).on('click', '.showlog', function(e) {
+  console.log('ok');
+  var html ='';
+  $("#spinicon_showlog"+$(this).data('id')).attr("hidden",false);
+  // console.log('ok');
+  getReviseLog($(this).data('id'),$(this).data('doctype')).then(data => {   
+      data.forEach(function (log,index) {
+          html += `<tr >                                        
+              <td> ${log.message} </td>    
+              <td> ${log.user} </td>                                         
+              <td> ${log.createdatth} </td>                                          
+              
+          </tr>`
+          });
+      $("#reviselog_wrapper_tr").html(html);
+      $("#showlogminitbp").html(': ' +$(this).data('project'));
+      $("#spinicon_showlog"+$(this).data('id')).attr("hidden",true);
+      $('#modal_show_reviselog').modal('show');
+  }).catch(error => {})
+  
+});
+
+function getReviseLog(minitbpid,doctype){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/minitbp/getreviselog`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+          minitbpid : minitbpid,
+          doctype : doctype
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}

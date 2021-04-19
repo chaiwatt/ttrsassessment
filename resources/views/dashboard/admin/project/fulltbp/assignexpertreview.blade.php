@@ -220,17 +220,22 @@
                                                 $isjd = 'expert';
                                                 if(Auth::user()->user_type_id !=6 )$isjd = '';
                                             @endphp
-                                        {{-- @if ($fulltbp->assignexpert == 2)
-                                            
-                                        @endif --}}
                                         <tr >  
                                             @if ($fulltbp->assignexpert != 2)
                                                 <td>
                                                     <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
                                                     <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
                                                     @if (!Empty($check))
-                                                        @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1)
-                                                            hidden
+                                                        {{-- @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1) --}}
+                                                       
+                                                        @if (Auth::user()->user_type_id <=4)
+                                                            @if ($check->expert_assignment_status_id == 2)
+                                                                hidden
+                                                            @endif
+                                                            @else
+                                                                @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1)
+                                                                    hidden
+                                                                @endif
                                                         @endif
 
                                                         checked 
@@ -284,7 +289,7 @@
                                 </table>
                             </div>
                         </div>
-                        @if (Auth::user()->user_type_id == 4)
+                        @if (Auth::user()->user_type_id == 4 && $fulltbp->assignexpert != 2)
                             <div class="form-group">
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

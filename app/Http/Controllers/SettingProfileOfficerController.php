@@ -134,7 +134,7 @@ class SettingProfileOfficerController extends Controller
         Company::where('user_id',$auth->id)->first()->update([
             'saveprofile' => 1
         ]);
-        CreateUserLog::createLog('แก้ไขข้อมูลโปรไฟล์');
+        CreateUserLog::createLog('แก้ไขข้อมูลโพรไฟล์');
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 
     }
 }

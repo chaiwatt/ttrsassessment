@@ -22,13 +22,16 @@ use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
+use App\Model\DocumentEditor;
 use App\Helper\DateConversion;
 use App\Model\SignatureStatus;
 use App\Model\TimeLineHistory;
+use App\Helper\OnlyBelongPerson;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ProjectStatusTransaction;
+use Illuminate\Support\Facades\Session;
 use Spatie\Activitylog\Models\Activity;
 
 class DashboardAdminProjectMiniTbpController extends Controller
@@ -64,60 +67,68 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $amphurs = Amphur::where('province_id',$user->province_id)->get();
         $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
-        $activitylogs = Activity::causedBy($user)->where('log_name','Mini TBP')->orderBy('id','desc')->get();
-// return  $activitylogs;
-        $check =false;
-        $totalchange = 0;
-        $oddarray = array();
-        $evenarray = array();
-        $logarray = array();
-        $updatedate = '';
-        foreach ($activitylogs as $key => $activity) {
+        // $activitylogs = Activity::causedBy($user)->where('log_name','Mini TBP')->orderBy('id','desc')->get();
 
-            $i = 0;
-            foreach ($activity->properties as $properties) {
-                foreach ($properties as $_key => $property) { 
-                    $updatedate = DateConversion::thaiDateTime($activity->created_at,'full');
-                    if( $i < count($properties)){
-                        // echo (count($properties)) . '<br>';
-                        $temp = array("key" => $_key,"property" => $property);
-                        array_push($evenarray,$temp);
-                    }else{
-                        // echo ($_key .' ' .$property). '<br>';;
-                        $_temp = array("key" => $_key,"property" => $property);
-                        array_push($oddarray,$_temp);
-                    }
-                    $i++;
-                    $check = true;
-                }
-            }
-            if($check == true){
-                break;
-            }
-        }
+        // $check =false;
+        // $totalchange = 0;
+        // $oddarray = array();
+        // $evenarray = array();
+        // $logarray = array();
+        // $updatedate = '';
+        // foreach ($activitylogs as $key => $activity) {
 
-        $i =0;
+        //     $i = 0;
+        //     foreach ($activity->properties as $properties) {
+        //         foreach ($properties as $_key => $property) { 
+        //             $updatedate = DateConversion::thaiDateTime($activity->created_at,'full');
+        //             if( $i < count($properties)){
+
+        //                 $temp = array("key" => $_key,"property" => $property);
+        //                 array_push($evenarray,$temp);
+        //             }else{
+        //                 $_temp = array("key" => $_key,"property" => $property);
+        //                 array_push($oddarray,$_temp);
+        //             }
+        //             $i++;
+        //             $check = true;
+        //         }
+        //     }
+        //     if($check == true){
+        //         break;
+        //     }
+        // }
+
+        // $i =0;
       
-        foreach ($oddarray as $key => $e) {
-           $temp = array("key" => $this->changekeyname($e['key']),"new" => $this->checkval($evenarray[$i]['property']),"old" =>  $this->checkval($e['property']),"edit" =>  $updatedate);
-           array_push($logarray,$temp);
-           $i ++;
+        // foreach ($oddarray as $key => $e) {
+        //    $temp = array("key" => $this->changekeyname($e['key']),"new" => $this->checkval($evenarray[$i]['property']),"old" =>  $this->checkval($e['property']),"edit" =>  $updatedate);
+        //    array_push($logarray,$temp);
+        //    $i ++;
+        // }
+        // $logcollections = collect($logarray);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+
+        if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
+            return view('dashboard.admin.project.minitbp.view')->withMinitbp($minitbp)
+                    ->withBanks($banks)
+                    ->withContactprefixes($contactprefixes)
+                    ->withContactpositions($contactpositions)
+                    ->withSignaturestatuses($signaturestatuses)
+                    ->withTimelinehistories($timelinehistories)
+                    ->withUser($user)
+                    ->withUser($user)
+                    ->withProvinces($provinces)
+                    ->withAmphurs($amphurs)
+                    ->withTambols($tambols)
+                    ->withAuthorizeddirectors($authorizeddirectors)
+                    // ->withActivitylogs($activitylogs)
+                    // ->withLogcollections($logcollections)
+                    ->withProjectassignment($projectassignment);
+        }else{
+            Auth::logout();
+            Session::flush();
+            return redirect()->route('login');
         }
-        $logcollections = collect($logarray);
-        return view('dashboard.admin.project.minitbp.view')->withMinitbp($minitbp)
-                                                ->withBanks($banks)
-                                                ->withContactprefixes($contactprefixes)
-                                                ->withContactpositions($contactpositions)
-                                                ->withSignaturestatuses($signaturestatuses)
-                                                ->withTimelinehistories($timelinehistories)
-                                                ->withUser($user)
-                                                ->withUser($user)
-                                                ->withProvinces($provinces)
-                                                ->withAmphurs($amphurs)
-                                                ->withTambols($tambols)
-                                                ->withAuthorizeddirectors($authorizeddirectors)
-                                                ->withActivitylogs($activitylogs)
-                                                ->withLogcollections($logcollections);
     }
 
     public function changekeyname($name){
@@ -194,6 +205,21 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $_businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $_company = Company::find($_businessplan->company_id);
         $_user = User::find($_company->user_id);
+
+        $company_name = (!Empty($_businessplan->company->name))?$_businessplan->company->name:'';
+        $bussinesstype = $_businessplan->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+
         if($request->val == 1){
             BusinessPlan::find($minitbp->business_plan_id)->update([
                 'business_plan_status_id' => 4
@@ -223,20 +249,20 @@ class DashboardAdminProjectMiniTbpController extends Controller
             EmailBox::send($_user->email,'TTRS:กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','เรียนผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ของท่านได้รับอนุมัติแล้ว กรุณากรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ในขั้นตอนต่อไป <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
             $jduser = User::where('user_type_id',6)->first();
-            $messagebox = Message::sendMessage('อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project,Auth::user()->id,$jduser->id);
+            $messagebox = Message::sendMessage('อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project. ' ของ' . $fullcompanyname,Auth::user()->id,$jduser->id) ;
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $jduser->id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname;
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send($jduser->email,'TTRS:อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'เรียน JD<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($jduser->email,'TTRS:อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'เรียน JD<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
@@ -292,6 +318,12 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ให้แก้ไขแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br><a href="'.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>' ; 
             $alertmessage->save();
+
+            $documenteditor = new DocumentEditor();
+            $documenteditor->mini_tbp_id = $minitbp->id;
+            $documenteditor->user_id = $auth->id;
+            $documenteditor->doctype = 1;
+            $documenteditor->save();
 
             $reviselog = new ReviseLog();
             $reviselog->mini_tbp_id = $minitbp->id;
