@@ -2184,14 +2184,14 @@
 						
 																		<div class="form-check">
 																			<label class="form-check-label">
-																				<input type="checkbox" id="cer8" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer8)) checked @endif data-fouc >
+																				<input type="checkbox" id="cer9" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer9)) checked @endif data-fouc >
 																				เครื่องหมายการค้า
 																			</label>
-																			<span id="cer8qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
-																			<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
+																			<span id="cer9qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
+																			<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer8_qty ?? 0}}">
+																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer9_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2201,14 +2201,14 @@
 																	<div class="col-md-4">
 																		<div class="form-check">
 																			<label class="form-check-label">
-																				<input type="checkbox" id="cer9" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer9)) checked @endif data-fouc >
+																				<input type="checkbox" id="cer8" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer8)) checked @endif data-fouc >
 																				ความลับทางการค้า
 																			</label>
-																			<span id="cer9qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
-																			<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
+																			<span id="cer8qty_error" class="form-text text-danger" hidden >*กรุณากรอกรายละเอียด</span>
+																			<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer9_qty ?? 0}}">
+																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer8_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
