@@ -20,7 +20,7 @@ class FullTbpCostController extends Controller
             'existing' => str_replace(',', '', $request->existing),
             'need' => str_replace(',', '', $request->need),
             'approved' => str_replace(',', '', $request->approved),
-            'plan' => $request->plan,
+            'plan' => str_replace(',', '', $request->plan) ,
         ]);
         $fulltbpcosts = FullTbpCost::where('full_tbp_id',$fulltbpid)->get();
         return response()->json($fulltbpcosts); 

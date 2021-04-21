@@ -2594,7 +2594,7 @@
 																				                                                                                   
 																				      
 																				
-																				<th class="text-center hiddenelement" style="width: 10%">เพิ่มเติม</th>    
+																				<th class="text-center hiddenelement" style="width: 150px">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_sell_wrapper_tr">    
@@ -2793,11 +2793,11 @@
 															</table>
 														</div>
 													</div>
-													<div class="col-md-12 mt-2" >
-														<div class="form-group">
+													<div class="col-md-12 mt-3" >
+														{{-- <div class="form-group"> --}}
 															<label for=""><u>เงินลงทุนสำหรับดำเนินการของโครงการ</u></label>
 															{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนสำหรับดำเนินการของโครงการ</i> </small></p> --}}
-														</div>
+														{{-- </div> --}}
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
 																<thead>
@@ -2811,7 +2811,7 @@
 																	@foreach ($fulltbpinvestments as $fulltbpinvestment)
 																		<tr >
 																			<td> {{$fulltbpinvestment->investment}}</td> 
-																			<td> {{number_format($fulltbpinvestment->cost, 2)}}</td> 
+																			<td class="text-right"> {{number_format($fulltbpinvestment->cost, 2)}}</td> 
 																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpinvestment->id}}" class="btn btn-sm bg-info editinvestment">แก้ไข</a>
 																			</td> 
@@ -2822,10 +2822,7 @@
 														</div>
 													</div>
 													<div class="col-md-12 mt-4">
-														<div class="form-group">
-															<label for=""><u>แหล่งเงินทุนของโครงการ</u></label>
-															<p><small><i>ตารางแสดงรายละเอียดแหล่งเงินทุนของโครงการ</i> </small></p>
-														</div>
+														<label for=""><u>แหล่งเงินทุนของโครงการ</u></label>
 														<div class="table-responsive">
 															<table class="table table-striped table-bordered">
 																<thead class="bg-info">

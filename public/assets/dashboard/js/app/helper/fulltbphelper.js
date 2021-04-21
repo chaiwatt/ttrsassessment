@@ -1932,9 +1932,9 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
             }
             html += `<tr >                                        
                 <td> ${asset.asset} </td>                            
-                <td> ${parseFloat(asset.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
-                <td> ${asset.quantity} </td>                         
-                <td> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
+                <td class="text-right"> ${parseFloat(asset.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
+                <td class="text-right"> ${asset.quantity} </td>                         
+                <td class="text-right"> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
                 <td> ${checkspec} </td> 
                 <td> 
                     <a type="button" data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
@@ -1970,7 +1970,7 @@ $(document).on('click', '#btn_modal_edit_investment', function(e) {
         data.forEach(function (invesment,index) {
             html += `<tr >                                        
                 <td> ${invesment.investment} </td>                            
-                <td> ${parseFloat(invesment.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
+                <td class="text-right"> ${parseFloat(invesment.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td> 
                     <a type="button" data-id="${invesment.id}" class="btn btn-sm bg-info editinvestment">แก้ไข</a> 
                 </td> 
@@ -2008,16 +2008,16 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
     Sell.editCost($('#costid').val(),$('#costexistingedit').val(),$('#costneededit').val(),$('#costapprovededit').val(),$('#costplanedit').val()).then(data => {
         var html = ``;
         data.forEach(function (cost,index) {
-            var checkcostplan = cost.plan;
-            if(checkcostplan == null){
-                var checkcostplan = '';
-            }
+            // var checkcostplan = cost.plan;
+            // if(checkcostplan == null){
+            //     var checkcostplan = '';
+            // }
             html += `<tr >                                        
                 <td> ${cost.costname} </td>                            
-                <td> ${parseFloat(cost.existing).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
-                <td> ${parseFloat(cost.need).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
-                <td> ${parseFloat(cost.approved).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
-                <td> ${checkcostplan} </td>
+                <td class="text-right"> ${parseFloat(cost.existing).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
+                <td class="text-right"> ${parseFloat(cost.need).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
+                <td class="text-right"> ${parseFloat(cost.approved).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
+                <td class="text-right"> ${parseFloat(cost.plan).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                 <td> 
                     <a type="button" data-id="${cost.id}" class="btn btn-sm bg-info editcost">แก้ไข</a> 
                 </td> 
