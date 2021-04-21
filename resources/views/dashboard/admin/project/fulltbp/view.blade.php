@@ -1439,7 +1439,7 @@
 											{{-- <div class="card mb-0 mt-2">										
 												<div class="card-body"> --}}
 													{{-- <div class="row"> --}}
-														<div class="col-md-12">	
+														<div class="col-md-12 mt-2">	
 															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label>
 														</div>
 														
@@ -1774,10 +1774,10 @@
 										</div>
 										
 										<div class="col-md-12">
-											<div class="form-group">	
+											{{-- <div class="form-group">	 --}}
 												<label for=""><strong>รายละเอียดเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong></label>
 												
-											</div>
+											{{-- </div> --}}
 											@if ($fulltbpprojecttechdevlevels->count() > 0)
 											<div class="table-responsive">
 												<table class="table table-striped table-bordered">
@@ -1801,7 +1801,7 @@
 											</div>
 											@endif
 										</div>
-										<div class="col-md-12">
+										<div class="col-md-12 mt-3">
 											<label><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</strong></label>
 											
 											<div class="form-group">
@@ -1820,29 +1820,29 @@
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer1" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer1)) checked @endif data-fouc disabled >
-																ได้รับการจดสิทธิบัตรการประดิษฐ์
+																ได้รับการจดสิทธิบัตรการประดิษฐ์ @if (!Empty($fulltbpprojectcertify->cer1)) (จำนวน {{$fulltbpprojectcertify->cer1_qty}}) @endif
 															</label>
-															<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer1_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 		
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer2" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer2)) checked @endif data-fouc disabled>
-																ยื่นจดสิทธิบัตรการประดิษฐ์
+																ยื่นจดสิทธิบัตรการประดิษฐ์ @if (!Empty($fulltbpprojectcertify->cer2)) (จำนวน {{$fulltbpprojectcertify->cer2_qty}}) @endif 
 															</label>
-															<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer2_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 													</div>
 		
@@ -1850,29 +1850,29 @@
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer3" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer3)) checked @endif data-fouc disabled>
-																ได้รับการจดสิทธิบัตรการออกแบบ
+																ได้รับการจดสิทธิบัตรการออกแบบ @if (!Empty($fulltbpprojectcertify->cer3)) (จำนวน {{$fulltbpprojectcertify->cer3_qty}}) @endif
 															</label>
-															<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer3_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 		
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer4" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer4)) checked @endif data-fouc disabled>
-																ยื่นจดสิทธิบัตรการออกแบบ
+																ยื่นจดสิทธิบัตรการออกแบบ @if (!Empty($fulltbpprojectcertify->cer4)) (จำนวน {{$fulltbpprojectcertify->cer4_qty}}) @endif
 															</label>
-															<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer4_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 													</div>
 	
@@ -1880,29 +1880,29 @@
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer5" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer5)) checked @endif data-fouc disabled>
-																ได้รับการจดอนุสิทธิบัตร
+																ได้รับการจดอนุสิทธิบัตร @if (!Empty($fulltbpprojectcertify->cer5)) (จำนวน {{$fulltbpprojectcertify->cer5_qty}}) @endif
 															</label>
-															<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer5_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 		
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer6" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer6)) checked @endif data-fouc disabled>
-																ยื่นจดอนุสิทธิบัตร
+																ยื่นจดอนุสิทธิบัตร @if (!Empty($fulltbpprojectcertify->cer6)) (จำนวน {{$fulltbpprojectcertify->cer6_qty}}) @endif
 															</label>
-															<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer6_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 													</div>
 												</div>
@@ -1918,47 +1918,50 @@
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer7" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer7)) checked @endif data-fouc disabled>
-																ลิขสิทธิ์
+																ลิขสิทธิ์ @if (!Empty($fulltbpprojectcertify->cer7)) (จำนวน {{$fulltbpprojectcertify->cer7_qty}}) @endif
 															</label>
-															<div class="row" id="cer7qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer7) || Empty(@$fulltbpprojectcertify->cer7_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer7qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer7) || Empty(@$fulltbpprojectcertify->cer7_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer7_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 		
-														<div class="form-check">
-															<label class="form-check-label">
-																<input type="checkbox" id="cer8" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer8)) checked @endif data-fouc disabled>
-																เครื่องหมายการค้า
-															</label>
-															<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
-																<div class="col-md-9">
-																	<div class="form-group">
-																		<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer8_qty}}" readonly>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-		
-													<div class="col-md-4">
+													
+
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer9" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer9)) checked @endif data-fouc disabled>
-																ความลับทางการค้า
+																 เครื่องหมายการค้า @if (!Empty($fulltbpprojectcertify->cer9)) (จำนวน {{$fulltbpprojectcertify->cer9_qty}}) @endif
 															</label>
-															<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer9_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
+													</div>
 		
+													<div class="col-md-4">
+														
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" id="cer8" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer8)) checked @endif data-fouc disabled>
+																ความลับทางการค้า @if (!Empty($fulltbpprojectcertify->cer8)) (จำนวน {{$fulltbpprojectcertify->cer8_qty}}) @endif
+															</label>
+															{{-- <div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
+																<div class="col-md-9">
+																	<div class="form-group">
+																		<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer8_qty}}" readonly>
+																	</div>
+																</div>
+															</div> --}}
+														</div>
+
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer10" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer10)) checked @endif data-fouc disabled>
@@ -1971,15 +1974,15 @@
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer11" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer11)) checked @endif data-fouc disabled>
-																อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม
+																อื่นๆ เช่น สิ่งบ่งชี้ทางภูมิศาสตร์ (GI) ความหลากหลายทางพันธุ์พืช แบบผังภูมิของวงจรรวม @if (!Empty($fulltbpprojectcertify->cer11)) <br> (จำนวน {{$fulltbpprojectcertify->cer11_qty}}) @endif
 															</label>
-															<div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
+															{{-- <div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
 																<div class="col-md-9">
 																	<div class="form-group">
 																		<input type="text" name="cer11qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer11_qty}}" readonly>
 																	</div>
 																</div>
-															</div>
+															</div> --}}
 														</div>
 													</div>
 												</div>
@@ -2093,7 +2096,7 @@
 
 									</div>
 									
-									<div  class="col-md-12">
+									<div  class="col-md-12 mt-3">
 										<label><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart)</strong></label>
 										{{-- <div class="row table-responsive"> --}}
 											
@@ -2269,10 +2272,10 @@
 														@foreach ($fulltbpsells as $fulltbpsell)
 															<tr>                                        
 																<td> {{$fulltbpsell->name}}</td> 
-																<td> {{number_format($fulltbpsell->past3, 2)}}</td> 
-																<td> {{number_format($fulltbpsell->past2, 2)}} </td> 
-																<td> {{number_format($fulltbpsell->past1, 2)}}</td> 
-																<td> {{number_format($fulltbpsell->present, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpsell->past3, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpsell->past2, 2)}} </td> 
+																<td class="text-right"> {{number_format($fulltbpsell->past1, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpsell->present, 2)}}</td> 
 															</tr>
 														@endforeach                            
 													</tbody>
@@ -2300,10 +2303,10 @@
 														@foreach ($fulltbpsellstatuses as $fulltbpsellstatus)
 															<tr >                                        
 																<td> {{$fulltbpsellstatus->name}}</td>                                    															
-																<td> {{number_format($fulltbpsellstatus->past3, 2)}}</td> 
-																<td> {{number_format($fulltbpsellstatus->past2, 2)}} </td>  
-																<td> {{number_format($fulltbpsellstatus->past1, 2)}}</td> 
-																<td> {{number_format($fulltbpsellstatus->present, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpsellstatus->past3, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpsellstatus->past2, 2)}} </td>  
+																<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpsellstatus->present, 2)}}</td> 
 															</tr>
 														@endforeach                            
 													</tbody>
@@ -2334,8 +2337,8 @@
 																<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
 																<td> {{$fulltbpdebtpartner->numproject}} </td> 
 																<td> {{$fulltbpdebtpartner->partnertaxid}} </td> 
-																<td> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}}</td>                                            															
-																<td> {{number_format($fulltbpdebtpartner->percenttosale, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}}</td>                                            															
+																<td class="text-right"> {{number_format($fulltbpdebtpartner->percenttosale, 2)}}</td> 
 																<td> {{$fulltbpdebtpartner->businessyear}} </td> 
 															</tr>
 														@endforeach              
@@ -2369,8 +2372,8 @@
 															<tr >
 																<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
 																<td> {{$fulltbpcreditpartner->partnertaxid}} </td> 
-																<td> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
-																<td> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}}</td> 
+																<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
+																<td class="text-right"> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}}</td> 
 																<td> {{$fulltbpcreditpartner->businessyear}} </td> 
 																{{-- <td> 
 																	<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
