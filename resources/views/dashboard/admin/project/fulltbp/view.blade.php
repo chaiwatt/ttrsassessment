@@ -1711,11 +1711,9 @@
 														<td>ตำแหน่ง</td>
 														<td>{{@$fulltbp->fulltbpresponsibleperson->position}}</td>
 													</tr>      
-												
-										    
 													<tr >                                        
 														<td>โทรศัพท์</td>
-														<td>{{@$fulltbp->fulltbpresponsibleperson->phone1y}}</td>
+														<td>{{@$fulltbp->fulltbpresponsibleperson->phone1}}</td>
 													</tr>  
 													<tr >                                        
 														<td>โทรศัพท์มือถือ</td>
@@ -2053,7 +2051,7 @@
 												@endif
 											     
 										
-											<div class="col-md-12">
+											<div class="col-md-12 mt-3">
 												<label for=""><strong>2.6.4 ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</strong> </label>
 											</div>
 
@@ -2366,13 +2364,14 @@
 														</tr>
 													</thead>
 													<tbody id="fulltbp_creditpartner_wrapper_tr">    
+														
 														@foreach ($fulltbpcreditpartners as $fulltbpcreditpartner)
 															<tr >
-																<td> {{$fulltbpdebtpartner->creditpartner}}</td> 
-																<td> {{$fulltbpdebtpartner->partnertaxid}} </td> 
-																<td> {{number_format($fulltbpdebtpartner->totalyearpurchase, 2)}}</td>                                            															
-																<td> {{number_format($fulltbpdebtpartner->percenttopurchase, 2)}}</td> 
-																<td> {{$fulltbpdebtpartner->businessyear}} </td> 
+																<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
+																<td> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+																<td> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
+																<td> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}}</td> 
+																<td> {{$fulltbpcreditpartner->businessyear}} </td> 
 																{{-- <td> 
 																	<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
 																	<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 

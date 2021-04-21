@@ -181,15 +181,15 @@
                                             
                                         </td>
                                         <td colspan="2"  style="font-size:13px;padding-top:10px;border-left: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer9)) checked="checked" @endif> ความลับทางการค้า</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer9)) checked="checked" @endif> ความลับทางการค้า @if($fulltbp->fulltbpprojectcertify->cer8_qty > 0)  (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer8_qty}} ) @endif</div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:13px;border-right: none !important;border-top: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer8)) checked="checked" @endif> เครื่องหมายการค้า @if($fulltbp->fulltbpprojectcertify->cer8_qty > 0)  (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer8_qty}} ) @endif</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer8)) checked="checked" @endif> เครื่องหมายการค้า @if($fulltbp->fulltbpprojectcertify->cer9_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer9_qty}} )</div>
                                         </td>
                                         <td colspan="2"  style="font-size:13px;border-left: none !important;border-top: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer10)) checked="checked" @endif> ซื้อหรือต่อยอดทรัพย์สินทางปัญญา @if($fulltbp->fulltbpprojectcertify->cer9_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer9_qty}} )@endif</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer10)) checked="checked" @endif> ซื้อหรือต่อยอดทรัพย์สินทางปัญญา @endif</div>
                                         </td>
                                     </tr >
                                     <tr>

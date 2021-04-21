@@ -1885,7 +1885,7 @@
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>ชื่อ</label><span class="text-danger">*</span>
-																	<input type="text" name="responsiblename" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name ?? Auth::user()->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat20"  required>
+																	<input type="text" name="responsiblename" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat20"  required>
 																</div>
 																{{-- <div class="form-group">
 																	<label>ฝ่ายผลิต/วิศวกรรม</label><span class="text-danger">*</span>
@@ -1896,7 +1896,7 @@
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>นามสกุล</label><span class="text-danger">*</span>
-																	<input type="text" name="responsiblelastname" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname ?? Auth::user()->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" required>
+																	<input type="text" name="responsiblelastname" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" required>
 																</div>
 															</div>
 															<div class="col-md-6">
