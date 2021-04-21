@@ -1416,7 +1416,7 @@
 														<tr >                                        
 															<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
 															<td> 
-																<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 															</td>
 														</tr>
 													@endforeach                            
@@ -1534,7 +1534,7 @@
 																			<tr>
 																				<td> {{$boardattachment->name}}</td>                                                                                      
 																				<td> 
-																				  <a href="{{asset($boardattachment->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+																				  <a href="{{asset($boardattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																				</td> 
 																			</tr>
 																		@endforeach  
@@ -1678,7 +1678,7 @@
 																			<tr>
 																				<td> {{$boardattachment->name}}</td>                                                                                      
 																				<td> 
-																				  <a href="{{asset($boardattachment->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
+																				  <a href="{{asset($boardattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																				</td> 
 																			</tr>
 																		@endforeach  
@@ -2004,7 +2004,7 @@
 																	<tr >                                        
 																		<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
 																		<td> 
-																			<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																			<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																			
 																		</td>
 																	</tr>
@@ -2042,7 +2042,7 @@
 																	<tr>                                        
 																		<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
 																		<td> 
-																			<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																			<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																		</td>
 																	</tr>
 																@endforeach                            
@@ -2080,7 +2080,7 @@
 																	<tr >                                        
 																		<td> {{$fulltbpprojectstandard->name}} </td>                                            
 																		<td> 
-																			<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																			<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																		</td>
 																	</tr>
 																@endforeach                            
@@ -2233,7 +2233,7 @@
 														<tr >                                        
 															<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
 															<td> 
-																<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+																<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 															</td>
 														</tr>
 													@endforeach                            
