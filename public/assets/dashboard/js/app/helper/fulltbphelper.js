@@ -244,7 +244,7 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
                 educationlevel = education.otheremployeducationlevel;
             }
             var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             html += `<tr >                                        
@@ -290,7 +290,7 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
         var html = '';
         data.forEach(function (experience,index) {
             var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             html += `<tr >                                        
@@ -326,7 +326,7 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
         var html = '';
         data.forEach(function (training,index) {
             var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             html += `<tr >                                        
@@ -378,7 +378,7 @@ $(document).on("click",".deleteemployeducation",function(e){
                     educationlevel = education.otheremployeducationlevel;
                 }
                 var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
-                if( $("#fulltbpstatus").val() == '1'){
+                if( $("#fulltbpstatus").val() > 1){
                     deletecode = ``;
                 }
             html += `<tr >                                        
@@ -414,7 +414,7 @@ $(document).on("click",".deleteemployexperience",function(e){
                 var html = ``;
                 data.forEach(function (experience,index) {
                     var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
-                    if( $("#fulltbpstatus").val() == '1'){
+                    if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
                     html += `<tr >                                        
@@ -451,7 +451,7 @@ $(document).on("click",".deleteemploytraining",function(e){
                 var html = ``;
                 data.forEach(function (training,index) {
                     var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
-                    if( $("#fulltbpstatus").val() == '1'){
+                    if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
                     html += `<tr >                                        
@@ -2631,7 +2631,7 @@ $(document).on('change', '#boardattachment', function(e) {
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     var deletecode = `<a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
-                    if( $("#fulltbpstatus").val() == '1'){
+                    if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
                     html += `<tr >                                        
@@ -2665,7 +2665,7 @@ $(document).on("click",".deleteboardattachment",function(e){
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     var deletecode = `<a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
-                    if( $("#fulltbpstatus").val() == '1'){
+                    if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
                     html += `<tr >                                        
@@ -2898,7 +2898,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
                 educationlevel = education.otheremployeducationlevel;
             }
             var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             employeducationtable += `<tr >                                        
@@ -2917,7 +2917,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
         
         data.employexperiences.forEach(function (experience,index) {
             var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             experiencetable += `<tr >                                        
@@ -2934,7 +2934,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
          var trainingtable = '';
          data.employtrainings.forEach(function (training,index) {
             var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             trainingtable += `<tr >                                        
@@ -2948,7 +2948,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
         var attachment  = '';
           data.fullTbpboardattachments.forEach(function (boardattachment,index) {
             var deletecode = `<a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             attachment += `<tr >                                        
@@ -3036,7 +3036,7 @@ function modaltrigger(id) {
                 educationlevel = education.otheremployeducationlevel;
             }
             var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             employeducationtable += `<tr >                                        
@@ -3052,7 +3052,7 @@ function modaltrigger(id) {
         var experiencetable = '';
         data.employexperiences.forEach(function (experience,index) {
             var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             experiencetable += `<tr >                                        
@@ -3069,7 +3069,7 @@ function modaltrigger(id) {
          var trainingtable = '';
          data.employtrainings.forEach(function (training,index) {
             var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
-            if( $("#fulltbpstatus").val() == '1'){
+            if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
             trainingtable += `<tr >                                        

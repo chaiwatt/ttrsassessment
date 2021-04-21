@@ -992,7 +992,7 @@
 
 	{{-- modal_add_debtpartner --}}
 	<div id="modal_add_debtpartner" class="modal fade" style="overflow:hidden;">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ลูกหนี้การค้า</h5>
@@ -1000,32 +1000,43 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
 								<input type="text" id="debtpartner" placeholder="ลูกหนี้การค้า" class="form-control form-control-lg stringformat30" >
 							</div>
+						</div>
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
 								<input type="text" id="numproject" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control form-control-lg numeralformat4">
 							</div>
+						</div>
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
 								<input type="text" id="debtpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg numeralformath13">
 							</div>
+						</div>
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
 								<input type="text" id="debttotalyearsell" placeholder="ยอดขายต่อปี (บาท)" class="form-control form-control-lg numeralformat10">
 							</div>
+						</div>
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
 								<input type="text" id="debtpercenttosale" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control form-control-lg numeralformat2">
 							</div>
+						</div>
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
 								<input type="text" id="debtpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
+			
 					</div>
 				</div>           
 				<div class="modal-footer">
@@ -2831,10 +2842,10 @@
 																	@foreach ($fulltbpcosts as $fulltbpcost)
 																		<tr >
 																			<td> {{$fulltbpcost->costname}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpcost->existing, 2)}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpcost->need, 2)}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpcost->approved, 2)}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpcost->plan, 2)}}</td> 
+																			<td class="text-right"> {{number_format(intval($fulltbpcost->existing), 2)}}</td> 
+																			<td class="text-right"> {{number_format(intval($fulltbpcost->need), 2)}}</td> 
+																			<td class="text-right"> {{number_format(intval($fulltbpcost->approved), 2)}}</td> 
+																			<td class="text-right"> {{number_format(intval($fulltbpcost->plan), 2)}}</td> 
 																			<td class="hiddenelement"> 
 																				<a type="button" data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">แก้ไข</a>
 																			</td> 
