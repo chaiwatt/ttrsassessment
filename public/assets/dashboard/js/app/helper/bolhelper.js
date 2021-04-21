@@ -1,6 +1,7 @@
 import * as Bol from './bol.js';
 
 $(document).on('change', '#boldoc', function(e) {
+    console.log($('#docname').val());
         var file = this.files[0];
         if (this.files[0].size/1024/1024*1000 > 5120 ){
             alert('ไฟล์ขนาดมากกว่า 5 MB');
@@ -30,6 +31,7 @@ $(document).on('change', '#boldoc', function(e) {
                         </tr>`
                         });
                      $("#fulltbp_bol_wrapper_tr").html(html);
+                     $('#docname').val("");
                      $('#modal_add_bol').modal('hide');
             }
         });

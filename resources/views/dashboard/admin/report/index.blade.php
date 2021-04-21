@@ -9,7 +9,7 @@
 @section('content')
 {{-- modal_get_calendar --}}
     <div id="modal_get_calendar" class="modal fade" style="overflow:hidden;">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฏิทิน</h5>
@@ -17,8 +17,8 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs nav-tabs-highlight">
-                        <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li>
-                        <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab"><i class="icon-mention mr-2"></i> ผู้เข้าร่วม</a></li>
+                        <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab">รายละเอียด</a></li>
+                        <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab">ผู้เข้าร่วม</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="left-icon-tab1">
@@ -768,6 +768,8 @@
             })
         })
     }
+
+
 </script>
 
 @stop

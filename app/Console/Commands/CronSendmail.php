@@ -76,17 +76,17 @@ class CronSendmail extends Command
             $usermail = User::find($company->user_id)->email;
             $date = Carbon::parse($eventcalendar->eventdate)->subDays(7);
             if($date->isToday() == 1){
-                EmailBox::send($mails,'TTRS:แจ้งเตือนการนัดหมายครั้งที่ 1','เรียนท่านกรรมการ <br><br> ท่านมีรายการนัดหมายของโครงการ'.$minitbp->project.' วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' สถานที่: '.$eventcalendar->place.' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send($mails,'TTRS:แจ้งเตือนการนัดหมายครั้งที่ 1','เรียน คณะกรรมการ <br><br> ท่านมีรายการนัดหมายของโครงการ'.$minitbp->project.' วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' สถานที่: '.$eventcalendar->place.' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                 if($eventcalendar->calendar_type_id == 2){
-                    EmailBox::send($usermail,'TTRS:แจ้งเตือนเข้าประเมิน','เรียนผู้ขอรับการประเมิน <br><br> โครงการ'.$minitbp->project.' มีนัดประเมิน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                    EmailBox::send($usermail,'TTRS:แจ้งเตือนเข้าประเมิน','เรียน ผู้ขอรับการประเมิน <br><br> โครงการ'.$minitbp->project.' มีนัดประเมิน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                 }
             }
 
             $date = Carbon::parse($eventcalendar->eventdate)->subDays(2);
             if($date->isToday() == 1){
-                EmailBox::send($mails,'TTRS:แจ้งเตือนการนัดหมายครั้งที่ 2','เรียนท่านกรรมการ <br><br> ท่านมีรายการนัดหมายของโครงการ'.$minitbp->project.' วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' สถานที่: '.$eventcalendar->place.' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send($mails,'TTRS:แจ้งเตือนการนัดหมายครั้งที่ 2','เรียน คณะกรรมการ <br><br> ท่านมีรายการนัดหมายของโครงการ'.$minitbp->project.' วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' สถานที่: '.$eventcalendar->place.' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                 if($eventcalendar->calendar_type_id == 2){
-                    EmailBox::send($usermail,'TTRS:แจ้งเตือนเข้าประเมิน','เรียนผู้ขอรับการประเมิน <br><br> โครงการ'.$minitbp->project.' มีนัดประเมิน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                    EmailBox::send($usermail,'TTRS:แจ้งเตือนเข้าประเมิน','เรียน ผู้ขอรับการประเมิน <br><br> โครงการ'.$minitbp->project.' มีนัดประเมิน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                 }
             }
 
@@ -102,7 +102,7 @@ class CronSendmail extends Command
                             $_user = User::find($user);
                             $membermails[] = $_user->email;
                         }
-                        EmailBox::send($membermails,'TTRS:แจ้งเตือนลงคะแนนการประเมิน','เรียนท่านกรรมการ <br><br> ท่านยังไม่ได้ลงคะแนนการประเมิน ของโครงการ'.$minitbp->project.' กรุณาลงคะแนนก่อน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                        EmailBox::send($membermails,'TTRS:แจ้งเตือนลงคะแนนการประเมิน','เรียน คณะกรรมการ <br><br> ท่านยังไม่ได้ลงคะแนนการประเมิน ของโครงการ'.$minitbp->project.' กรุณาลงคะแนนก่อน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                     }
                 }
             }

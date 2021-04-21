@@ -109,6 +109,26 @@
                                             <input type="text" name="contactemail" id="contactemail" value="{{$evaluationresult->contactemail ?? $user->email}}"  placeholder="อีเมล" class="form-control form-control-lg required">
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>วันที่ในจดหมาย<span class="text-danger">*</span></label>
+                                            <select name="evaluationday" id="evaluationday" data-placeholder="วันที่ในจดหมาย" class="form-control form-control-lg form-control-select2">
+                                                @foreach ($evaluationdays as $evaluationday)                                                                
+                                                    <option value="{{$evaluationday->id}}" @if ($evaluationday->id == $evaluationresult->evaluation_day_id) selected @endif> {{$evaluationday->name}} </option>
+                                                @endforeach   
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>เดือนในจดหมาย<span class="text-danger">*</span></label>
+                                            <select name="evaluationmonth" id="evaluationmonth" data-placeholder="เดือนในจดหมาย" class="form-control form-control-lg form-control-select2">
+                                                @foreach ($evaluationmonths as $evaluationmonth)                                                                
+                                                    <option value="{{$evaluationmonth->id}}" @if ($evaluationmonth->id == $evaluationresult->evaluation_month_id) selected @endif> {{$evaluationmonth->name}} </option>
+                                                @endforeach   
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-management">

@@ -170,7 +170,14 @@
                                                             <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
                                                         @else
                                                           @if ($projectassignment->businessplan->business_plan_status_id < 9)
-                                                            <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">แก้ไข</a>
+                                                            <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-warning">
+                                                                @if (Auth::user()->user_type_id <= 5)
+                                                                รายละเอียด
+                                                                    @else
+                                                                    แก้ไข
+                                                                @endif
+                                                                
+                                                            </a>
                                                           @endif 
                                                     @endif
                                                 @endif 

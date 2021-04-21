@@ -68,8 +68,8 @@
                                     <tr>
                                         <th>ชื่อรายการ</th> 
                                         <th>เวอร์ชั่น</th>  
-                                        <th>Criteria</th>                              
-                                        <th style="width:200px">เพิ่มเติม</th>
+                                        <th style="width:200px">เพิ่มเติม</th>                              
+                                        {{-- <th style="width:200px">เพิ่มเติม</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,10 +80,10 @@
                                         <td> 
                                             <a href="{{route('setting.admin.assessment.ev.editev',['id' => $ev->id])}}" class="btn btn-sm bg-info">แก้ไข Criteria</a>
                                         </td>                                    
-                                        <td>   
+                                        {{-- <td>   
                                             <a href="{{route('setting.admin.assessment.ev.edit',['id' => $ev->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.assessment.ev.delete',['id' => $ev->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

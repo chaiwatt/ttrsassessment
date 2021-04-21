@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">สถานะการวางแผนธุรกิจ</h6>
+                        <h6 class="card-title">รายการใบแจ้งหนี้</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -88,7 +88,7 @@
                                                             @elseif($invoicetransaction->status == 1)
                                                             <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่จ่ายเงิน</span>
                                                             @else                                     
-                                                            <a href="#" id="notifyuser" type="button" data-id="{{$invoicetransaction->id}}" class=" btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งผู้ประเมิน</a>
+                                                            <a href="#" id="notifyuser" type="button" data-id="{{$invoicetransaction->id}}" class=" btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งผู้รับบริการ</a>
                                                         @endif
                                                     @endif
                                                 </td>                                   
@@ -105,7 +105,7 @@
                                                             </a>
                                                         @endif
                                                  
-                                                    <a href="{{route('dashboard.admin.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
+                                                    <a href="{{route('dashboard.admin.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                                                     @if ($invoicetransaction->status == 1)
                                                     <a href="{{route('dashboard.admin.project.invoice.delete',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">ลบ</a>
                                                     @endif

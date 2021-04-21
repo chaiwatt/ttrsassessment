@@ -40,7 +40,7 @@ function getEv(evid){
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {
                 var comment = '';
-                var criterianame = `<label>กรอกเกรด (A - E) <a href="#" data-toggle="modal" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
+                var criterianame = `<label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
                                 <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring gradescore">
                                     `;
         
@@ -51,7 +51,7 @@ function getEv(evid){
                                     </label>`;
                 }
         
-                criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
+                criterianame += `<div class="toggle"><div class="form-group">
                                     <label><i>ความเห็น</i></label>
                                     <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg">
                                     </div>
@@ -216,15 +216,25 @@ function addScore(transactionid,score,subpillarindex,scoretype){
   $(document).on('click', '.conflictscore', function(e) {
     showConflictScore($(this).data('id')).then(data => {
         var html =``;
+      
         data.projectmembers.forEach(function (conflict,index) {
+           
             var icon = '<i class="icon-cross"></i>';
             var check = data.scores.find(x => x.user_id === conflict.user['id']);
+            var _comment ='';
             if ( typeof(check) !== "undefined" && check !== null ) {
                 icon = '<i class="icon-check"></i>';
+                _comment = check.comment;
+                if(_comment === null){
+                    _comment = "";
+                }
+                console.log(_comment);
             }
+            // console.log(check);
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
-            <td> ${icon} </td>                                            
+            <td> ${icon} </td>  
+            <td> ${_comment} </td>                                            
             </tr>`
             });
         $("#show_conflict_modal_wrapper_tr").html(html);
@@ -252,13 +262,15 @@ function showConflictScore(id){
   }
 
   $(document).on('click', '.conflictgrade', function(e) {
-    // console.log($(this).data('id'));
+    
     showConflictGrade($(this).data('id')).then(data => {
+        console.log(data);
         var html =``;
         data.forEach(function (conflict,index) {
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
-            <td> ${conflict.score} </td>                                            
+            <td> ${conflict.score} </td>   
+            <td> ${conflict.comment} </td>                                           
             </tr>`
         });
 

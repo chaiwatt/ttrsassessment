@@ -102,7 +102,7 @@
                                 <div class="text-right">
                                     <a type="button" href="{{asset($invoicetransaction->attachment)}}" class="btn bg-primary" target="blank" >ดาวน์โหลดเอกสารแนบ<i class="icon-download ml-2"></i></a>
                                     @if ($invoicetransaction->status == 2)
-                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">ยืนยันการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">ตรวจสอบเอกสารการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
                                     @endif
                                 </div>
                             </div>
@@ -136,11 +136,11 @@
         var frm = e.target.form;
         Swal.fire({
                 title: 'ยืนยัน',
-                text: `ต้องการยืนยันการชำระเงินหรือไม่? `,
+                text: `ยืนยันได้ตรวจสอบเอกสารการจ่ายเงิน แล้วหรือไม่?`,
                 type: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
-                confirmButtonText: 'ตกลง',
+                confirmButtonText: 'ยืนยัน',
                 cancelButtonText: 'ยกเลิก',
                 closeOnConfirm: false,
                 closeOnCancel: false

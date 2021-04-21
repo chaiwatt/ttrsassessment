@@ -24,27 +24,33 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
+use App\Model\EvaluationDay;
 use Illuminate\Http\Request;
+
 use App\Helper\CreateUserLog;
 
 use App\Model\CompanyAddress;
-
 use App\Helper\DateConversion;
+use App\Model\EvaluationMonth;
 use App\Model\SignatureStatus;
 use App\Model\EvaluationResult;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
 use setasign\Fpdi\PdfParser\StreamReader;
+use App\Http\Requests\EvaluationResultEdit;
 
 
 class DashboardAdminEvaluationResultController extends Controller
 {
     public function Index(){
         $fulltbps = FullTbp::get();
-        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps);
+        $generalinfo = GeneralInfo::first();
+        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps)->withGeneralinfo($generalinfo);
     }
     public function Edit($id){
+        $evaluationmonths = EvaluationMonth::get();
+        $evaluationdays = EvaluationDay::get();
         $evaluationresult = EvaluationResult::find($id);
         $fulltbp = FullTbp::find($evaluationresult->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
@@ -54,10 +60,12 @@ class DashboardAdminEvaluationResultController extends Controller
         $generalinfo = GeneralInfo::first();
         return view('dashboard.admin.evaluationresult.edit')->withEvaluationresult($evaluationresult)
                                                         ->withUser($user)
-                                                        ->withGeneralinfo($generalinfo);
+                                                        ->withGeneralinfo($generalinfo)
+                                                        ->withEvaluationmonths($evaluationmonths)
+                                                        ->withEvaluationdays($evaluationdays);
     }
 
-    public function EditSave(Request $request,$id){
+    public function EditSave(EvaluationResultEdit $request,$id){
         EvaluationResult::find($id)->update([
             'headercode' => $request->headercode,
             'contactname' => $request->contactname,
@@ -70,7 +78,9 @@ class DashboardAdminEvaluationResultController extends Controller
             'management' => $request->management,
             'technoandinnovation' => $request->technoandinnovation,
             'marketability' => $request->marketability,
-            'businessprospect' => $request->businessprospect
+            'businessprospect' => $request->businessprospect,
+            'evaluation_day_id' => $request->evaluationday,
+            'evaluation_month_id' => $request->evaluationmonth
         ]);
         $fulltbp = FullTbp::find(EvaluationResult::find($id)->full_tbp_id);
         CreateUserLog::createLog('เพิ่ม/แก้ไขบทวิเคราะห์ โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project);

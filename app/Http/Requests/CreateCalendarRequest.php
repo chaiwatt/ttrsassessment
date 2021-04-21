@@ -24,7 +24,7 @@ class CreateCalendarRequest extends FormRequest
             'eventtimestart' => 'required',
             'eventtimeend' => 'required',
             'place' => 'required',
-            'room' => 'required',
+            // 'room' => 'required',
             'summary' => 'required',
             'users' => 'required',
         ];
@@ -37,7 +37,7 @@ class CreateCalendarRequest extends FormRequest
             'eventtimestart.required' => 'ยังไม่ได้กรอกเวลาเริ่ม',
             'eventtimeend.required' => 'ยังไม่ได้กรอกเวลาสิ้นสุด',
             'place.required' => 'ยังไม่ได้กรอกสถานที่',
-            'room.required' => 'ยังไม่ได้กรอกห้อง',
+            // 'room.required' => 'ยังไม่ได้กรอกห้อง',
             'summary.required' => 'ยังไม่ได้กรอกรายละเอียด',
             'users.required' => 'ยังไม่ได้เลือกผู้เข้าร่วม',
       ]; 

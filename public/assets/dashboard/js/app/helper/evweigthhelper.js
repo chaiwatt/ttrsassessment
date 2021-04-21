@@ -159,7 +159,9 @@ function RenderWeightTable(data,evtypeid){
    if($('#evstatus').val() >= 4 || route.usertypeid != 6){
         commentreadonly =`readonly`;
     }
- 
+    if($('#evstatus').val() == 2 || route.refixstatus == 1){
+        commentreadonly =``;
+    }
     data.forEach(function (pillaindex,index) {
         var comment = '';
         if(pillaindex.comment){
@@ -174,9 +176,9 @@ function RenderWeightTable(data,evtypeid){
                         <label>${pillaindex.subpillarindex['name']}</label>
                         <input type="text" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}" class="form-control form-control-lg inputweigth weigthvalue${evtypeid} decimalformat">
                     </div>
-                    <div class="toggle" style="display:none;">
+                    <div class="toggle" >
                         <div class="form-group" style="margin-top:5px">
-                            <label><i>ความเห็น</i></label>
+                            <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
                             <input type="text" data-id="${pillaindex.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadonly} >
                         </div>
                     </div>
@@ -203,6 +205,9 @@ function RenderExtraTable(data){
     if($('#evstatus').val() >= 4 || route.usertypeid != 6){
         commentreadonly =`readonly`;
     }
+    if($('#evstatus').val() == 2 || route.refixstatus == 1){
+        commentreadonly =``;
+    }
     data.forEach(function (criteria,index) {
         var comment = '';
         if(criteria.weightcomment){
@@ -215,9 +220,9 @@ function RenderExtraTable(data){
             <div class="form-group">
                 <label>${criteria.extracriteria['name']}</label>
                 <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${readonly} >
-                <div class="toggle" style="display:none;">
+                <div class="toggle">
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i></label>
+                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadonly} >
                     </div>
                 </div>

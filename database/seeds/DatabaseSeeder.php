@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EventCalendarAttendeeStatusesTableSeeder::class);
         $this->call(AnnounceCategoryTableSeeder::class);
         $this->call(CompanyServiceTypesTableSeeder::class);
+        $this->call(EvaluationDaysTableSeeder::class);
+        $this->call(EvaluationMonthsTableSeeder::class);
         $this->call(CompanysizesTableSeeder::class);
         $this->call(VerifyExpertStatusTableSeeder::class);
         $this->call(GradesTableSeeder::class);

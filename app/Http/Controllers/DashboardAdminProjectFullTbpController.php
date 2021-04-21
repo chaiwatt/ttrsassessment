@@ -42,6 +42,7 @@ use App\Model\SignatureStatus;
 use App\Model\TimeLineHistory;
 use App\Model\EmployExperience;
 use App\Model\ExpertAssignment;
+use App\Helper\OnlyBelongPerson;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketNeed;
@@ -68,6 +69,7 @@ use App\Model\FullTbpMarketAttachment;
 use App\Model\FullTbpMainProductDetail;
 use App\Model\FullTbpMarketCompetitive;
 use App\Model\ProjectStatusTransaction;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Models\Activity;
 use App\Model\FullTbpReturnOfInvestment;
@@ -629,15 +631,37 @@ class DashboardAdminProjectFullTbpController extends Controller
         $evs = Ev::where('full_tbp_id','!=',$ev->full_tbp_id)->orWhereNull('full_tbp_id')->get();
         $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',1)->get();
         $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('stage',1)->get();
-        // return $evcommenttabs;
-        return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
-                                                            ->withEv($ev)
-                                                            ->withEvedithistories($evedithistories)
-                                                            ->withEvcommenttabs($evcommenttabs);
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
+            if(Auth::user()->user_type_id == 3){
+                if($ev->status < 4){
+                    Auth::logout();
+                    Session::flush();
+                    return redirect()->route('login');
+                }else{
+                    return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
+                    ->withEv($ev)
+                    ->withEvedithistories($evedithistories)
+                    ->withEvcommenttabs($evcommenttabs);
+                }
+            }else{
+                return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
+                ->withEv($ev)
+                ->withEvedithistories($evedithistories)
+                ->withEvcommenttabs($evcommenttabs);
+            }
+           
+        }else{
+            Auth::logout();
+            Session::flush();
+            return redirect()->route('login');
+        }    
+
     }
 
     public function GetUsers(Request $request){
-        $users = User::where('user_type_id','>=',3)->get();
+        $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
         $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
         return response()->json(array(
             "users" => $users,
@@ -814,7 +838,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'เรียนท่านคณะกรรมการ <br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project. ' บริษัท' . $company->name .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
+            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'เรียน ท่านคณะกรรมการ <br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project. ' บริษัท' . $company->name .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
         }
 
         // $company = Company::find($businessplan->company_id);

@@ -59,11 +59,9 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> EV Template</a>
-                    <a href="{{route('setting.admin.assessment.ev')}}" class="breadcrumb-item"> รายการ EV Template</a>
-                    <span class="breadcrumb-item active">{{$ev->name}}</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <a href="#" class="breadcrumb-item"> แบบฟอร์มแผนธุรกิจเทคโนโลยี</a>
+                    <span class="breadcrumb-item active">กำหนด Weight</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -93,6 +91,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    {{-- {{$ev->refixstatus}} --}}
                     <input type="text" id="evid" value="{{$ev->id}}" hidden>
                     <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                     <div class="card-body">

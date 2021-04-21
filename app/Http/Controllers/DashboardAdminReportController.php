@@ -24,6 +24,7 @@ class DashboardAdminReportController extends Controller
         // $this->middleware('role:4,5,6'); 
     }
     public function Index(){
+  
         $auth = Auth::user();
         $businessplanarr = BusinessPlan::where('business_plan_status_id','>',2)->pluck('id')->toArray();
         $minitbparr = MiniTBP::whereIn('business_plan_id',$businessplanarr)->pluck('id')->toArray();
@@ -40,10 +41,11 @@ class DashboardAdminReportController extends Controller
             $uniquefulltbparr = array_unique(array_merge($expertarr,$fulltbparr));
             $fulltbps = FullTbp::whereIn('id',$uniquefulltbparr)->get();
 
-        }else if($auth->user_type_id == 5){
-            $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
-            $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         }
+        // else if($auth->user_type_id == 5){
+        //     $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+        //     $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
+        // }
         
         $businessplans = BusinessPlan::get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();

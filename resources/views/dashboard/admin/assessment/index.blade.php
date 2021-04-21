@@ -91,8 +91,10 @@
                                 <thead>
                                     <tr>
                                         <th>เลขที่โครงการ</th> 
-                                        <th>ชื่อโครงการ</th> 
+                                        <th>ชื่อโครงการ</th>
+                                        
                                         <th>บริษัท</th>
+                                        
                                         <th>สถานะ</th>                   
                                     </tr>
                                 </thead>
@@ -104,7 +106,8 @@
                                                 <tr>    
                                                     <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                                     <td> {{$fulltbp->minitbp->project}} </td>  
-                                                    <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                                    <td> {{$fulltbp->minitbp->businessplan->company->name}} </td>
+                                                    
                                                     <td>
                                                             @if ($fulltbp->allscoring == 0)
                                                                 @if ($fulltbp->done_assessment != 0)

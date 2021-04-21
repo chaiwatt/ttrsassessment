@@ -207,7 +207,7 @@ $(document).on('click', '#togglecomment', function(e) {
                                 </label>`;
             }
 
-            criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
+            criterianame += `<div class="toggle"><div class="form-group">
                                 <label><i>ความเห็น</i></label>
                                 <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control inpscore">
                                 </div>

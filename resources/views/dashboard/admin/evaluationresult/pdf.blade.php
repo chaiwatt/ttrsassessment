@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=1252">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Report</title>
+        <title>จดหมายแจ้งผลการประเมิน</title>
         <link href="{{asset('assets/dashboard/css/pdf.css')}}" rel="stylesheet" type="text/css">
         <style>
             @page {
@@ -26,13 +26,13 @@
 
                 <div class="box bw600 mt20 ml30">
                     <div>{{$thainumeric::toThaiNumeric($evaluationresult->headercode)}}</div>
-                    <div class="bw450 text-right">{{$dateconversion::thaiMonthNow()}} {{$thainumeric::toThaiNumeric($dateconversion::thaiYearNow())}}</div>
+                    <div class="bw400 text-right">{{$evaluationresult->evaluation_day_id}} {{$evaluationresult->month->name}} {{$thainumeric::toThaiNumeric($dateconversion::thaiYearNow())}}</div>
                 </div>
                 <div class="box mt20 ml30">
                     <div>เรื่อง  แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model</div>
                     <div>เรียน  คุณ{{$fulltbp->fulltbpresponsibleperson->name}}  {{$fulltbp->fulltbpresponsibleperson->lastname}}</div>
                     <div class="ml35">กรรมการผู้จัดการ บริษัท {{$fulltbp->minitbp->businessplan->company->name}}</div>
-                    <div class="ml70 mt15">ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model</div>
+                    <div class="ml70 ">ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model</div>
                     <div class="bw600"><strong>โครงการเลขที่ {{$thainumeric::toThaiNumeric($fulltbp->minitbp->businessplan->code)}} เรื่อง "{{$fulltbp->minitbp->project}}"</strong> ของ <strong>บริษัท {{$fulltbp->minitbp->businessplan->company->name}}</strong></div>
                     <div>ความละเอียดทราบแล้วนั้น</div>
                     <div class="box ml50 text-justify" style="width:550px;word-wrap:break-word" ><span>บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการ</span></div>

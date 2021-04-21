@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PDF;
+use Segment;
 use App\User;
 use App\Model\Ev;
 use App\Model\EvType;
@@ -17,6 +18,7 @@ use App\Model\BusinessPlan;
 use App\Model\ExtraScoring;
 use App\Model\GradeSummary;
 use App\Model\ProjectGrade;
+use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
@@ -95,7 +97,7 @@ class DashboardAdminProjectAssessmentController extends Controller
             $pending .= 'คุณ' . $_user->name . '  ' .  $_user->lastname . ',';
         }
         
-        EmailBox::send($mails,'TTRS:มีการลงคะแนนโครงการ','เรียนท่านคณะกรรมการ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
+        EmailBox::send($mails,'TTRS:มีการลงคะแนนโครงการ','เรียน ท่านคณะกรรมการ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
         '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
         '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
         '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
@@ -458,6 +460,29 @@ class DashboardAdminProjectAssessmentController extends Controller
         $fulltbp = FullTbp::find($ev->full_tbp_id);                         
         CreateUserLog::createLog('นำส่งคะแนน โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project);                                           
         return response()->json($scoringstatus); 
+    }
+
+    public function ExpertCommentPDF($id){
+        require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
+        $segment = new \Segment();
+        $expertcomments = ExpertComment::where('full_tbp_id',$id)->get();
+        
+        $fulltbp = FullTbp::find($id);
+        $data = [
+            'fulltbp' => $fulltbp,
+            'expertcomments' => $expertcomments,
+        ];
+        $pdf = PDF::loadView('dashboard.admin.project.assessment.pdf', $data);
+        // $pdf = PDF::loadView('dashboard.admin.project.assessment.pdf',$data,[],[
+        //     'watermark' => $generalinfo->watermarktext,
+        //     'show_watermark' => false
+        // ]);
+
+        // $path = public_path("storage/uploads/");
+        // $randname = str_random(10);
+        // $shortpdf->save($path.$randname.'_shortdetail.pdf');
+        // $pdf->save($path.$randname.'.pdf');
+        return $pdf->stream('expertcomment.pdf',array('Attachment'=>0));
     }
     
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Model\Ev;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
@@ -20,7 +21,29 @@ use App\Model\EventCalendarAttendeeStatus;
 class CalendarController extends Controller
 {
     public function GetParticipate(Request $request){
+        $id1 = 0;
+        $id2 = 0;
+
+        $check =  ProjectMember::where('full_tbp_id',$request->id)->where('user_id',User::where('user_type_id',5)->first()->id)->first();
+        if(Empty($check)){
+            $projectmember = new ProjectMember();
+            $projectmember->full_tbp_id = $request->id;
+            $projectmember->user_id = User::where('user_type_id',5)->first()->id;
+            $projectmember->save();
+            $id1 = $projectmember->id;
+        }
+
+        $check =  ProjectMember::where('full_tbp_id',$request->id)->where('user_id',User::where('user_type_id',6)->first()->id)->first();
+        if(Empty($check)){
+            $projectmember = new ProjectMember();
+            $projectmember->full_tbp_id = $request->id;
+            $projectmember->user_id = User::where('user_type_id',6)->first()->id;
+            $projectmember->save();
+            $id2 = $projectmember->id;
+        }
+
         $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
+       
         $fulltbp = FullTbp::find($request->id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
@@ -39,6 +62,12 @@ class CalendarController extends Controller
             $calendartypes = CalendarType::where('id','<=',2)->get();
         }else if($projectstatustransactions == 2){
             $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();
+        }
+        if($id1 != 0){
+            ProjectMember::find($id1)->delete();
+        }
+        if($id2 != 0){
+            ProjectMember::find($id2)->delete();
         }
 
         return response()->json(array(

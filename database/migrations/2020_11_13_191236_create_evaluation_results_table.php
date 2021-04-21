@@ -29,6 +29,8 @@ class CreateEvaluationResultsTable extends Migration
             $table->longText('technoandinnovation')->nullable();
             $table->longText('marketability')->nullable();
             $table->longText('businessprospect')->nullable();
+            $table->unsignedBigInteger('evaluation_day_id')->nullable();
+            $table->unsignedBigInteger('evaluation_month_id')->nullable();
             $table->timestamps();
         });
     }

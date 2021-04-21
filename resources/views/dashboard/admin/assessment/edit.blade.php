@@ -9,7 +9,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;EV ในระบบ</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การลงคะแนน</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -19,6 +19,7 @@
                                 <tr>
                                     <th>ชื่อ-นามสกุล</th>                                                                                   
                                     <th>Score</th>  
+                                    <th>ความเห็น</th>  
                                 </tr>
                             </thead>
                             <tbody id="show_conflict_modal_wrapper_tr"> 
@@ -29,7 +30,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_show_conflict" class="btn bg-primary" data-dismiss="modal"><i class="icon-copy3 font-size-base mr-1"></i> ตกลง</button>
+                    {{-- <button id="btn_modal_show_conflict" class="btn bg-primary" data-dismiss="modal"><i class="icon-copy3 font-size-base mr-1"></i> ตกลง</button> --}}
                 </div>
             </div>
         </div>
@@ -93,7 +94,7 @@
                             <form id="frmminitbp" method="POST" class="wizard-form step-evweight" action="" data-fouc>
                                 @csrf
                                 <h6>Index Criteria</h6>
-                                <fieldset>
+                                <fieldset class="mb-2">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="criteriatable">
                                             <thead>
@@ -117,7 +118,7 @@
                                 </fieldset>
                                 @if ($ev->percentextra > 0)
                                 <h6>Extra Criteria</h6>
-                                <fieldset>
+                                <fieldset class="mb-2">
                                     {{-- <input type="text" id="tmpstepindex" value="0" hidden> --}}
                                     <ul class="nav nav-tabs nav-tabs-highlight">
                                         {{-- <li class="nav-item"><a href="#extradetailtab" class="nav-link active" data-toggle="tab"><i class="icon-menu7 mr-2"></i> รายละเอียด</a></li> --}}

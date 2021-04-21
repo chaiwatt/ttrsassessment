@@ -152,7 +152,7 @@
                                 @if (Auth::user()->user_type_id>=6)
                                     <div class="form-group">
                                         <div class="text-right">
-                                            <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                            <button type="submit" class="btn bg-teal">บันทึก<i class="icon-paperplane ml-2"></i></button>
                                         </div>
                                     </div>
                                 @endif

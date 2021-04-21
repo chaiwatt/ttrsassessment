@@ -6,6 +6,115 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
 @stop
 @section('content')
+<div id="modal_get_calendar" class="modal fade" style="overflow:hidden;">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฏิทิน</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs nav-tabs-highlight">
+                    <li class="nav-item"><a href="#left-icon-tab1" class="nav-link active" data-toggle="tab">รายละเอียด</a></li>
+                    <li class="nav-item"><a href="#left-icon-tab2" class="nav-link" data-toggle="tab">ผู้เข้าร่วม</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="left-icon-tab1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>หัวข้อ</label>
+                                        <input type="text"  id="title" value=""  placeholder="หัวข้อ" class="form-control form-control-lg" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>สถานที่/ห้อง</label>
+                                    <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control form-control-lg" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>ประเภท</label>
+                                        <input type="text" id="eventtype" value=""  placeholder="ประเภท" class="form-control form-control-lg" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>วันที่</label>
+                                        <input type="text" id="eventdate" value=""  placeholder="วันที่" class="form-control form-control-lg" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>เวลาเริ่ม</label>
+                                        <input type="text" id="starttime" value=""  placeholder="เวลาเริ่ม" class="form-control form-control-lg" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>ถึงเวลา</label>
+                                        <input type="text" id="endtime" value=""  placeholder="ถึงเวลา" class="form-control form-control-lg" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>รายละเอียด</label>
+                                        <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control form-control-lg" readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>การเข้าร่วม<span class="text-danger">*</span></label>
+                                    <select id="attendevent" class="form-control form-control-lg form-control-select2">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="left-icon-tab2">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="attendee_modal">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อ-นามสกุล</th>    
+                                        <th>สถานะ</th>                                                                               
+                                    </tr>
+                                </thead>
+                                <tbody id="attendee_modal_wrapper_tr"> 
+        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="modal-footer">
+                <button class="btn btn-link "  data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                <button id="btn_modal_get_calendar"  class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i>บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="modal_expertreject_reason" class="modal fade" style="overflow:hidden;">
     <div class="modal-dialog">
@@ -288,5 +397,6 @@
             })
         })
     }
+ 
 </script>
 @stop

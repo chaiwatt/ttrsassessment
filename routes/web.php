@@ -666,7 +666,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editscore','DashboardAdminProjectAssessmentController@EditScore')->name('dashboard.admin.project.assessment.editscore');
                     Route::post('editcomment','DashboardAdminProjectAssessmentController@EditComment')->name('dashboard.admin.project.assessment.editcomment');
                     Route::post('updatescoringstatus','DashboardAdminProjectAssessmentController@UpdateScoringStatus')->name('dashboard.admin.project.assessment.updatescoringstatus');
-                    
+                    Route::get('expertcommentpdf/{id}','DashboardAdminProjectAssessmentController@ExpertCommentPDF')->name('dashboard.admin.project.assessment.expertcommentpdf');
                 }); 
             });  
             Route::group(['prefix' => 'calendar'], function(){

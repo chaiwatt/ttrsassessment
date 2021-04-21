@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\FullTbp;
+use App\Model\EvaluationMonth;
 use Illuminate\Database\Eloquent\Model;
 
 class EvaluationResult extends Model
@@ -12,5 +13,8 @@ class EvaluationResult extends Model
 
     public function getFulltbpAttribute(){
         return FullTbp::find($this->full_tbp_id);
+    } 
+    public function getMonthAttribute(){
+        return EvaluationMonth::find($this->evaluation_month_id);
     } 
 }

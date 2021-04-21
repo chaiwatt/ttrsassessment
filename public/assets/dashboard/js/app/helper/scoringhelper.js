@@ -77,7 +77,7 @@ function RenderTable(data,evtype){
                             checkvalue = "checked";
                         }
                     }
-                    var criterianame = `<div class="form-group"><label>กรอกเกรด (A - E)</label>
+                    var criterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label>
                     <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control form-control-lg inpscore gradescore" ${readonly}></div>`;
 
                     if(criteria.criteria != null){
@@ -87,7 +87,7 @@ function RenderTable(data,evtype){
                                     </label>`;
                     }
         
-                    criterianame += `<div class="toggle" style="display:none;"><div class="form-group">
+                    criterianame += `<div class="toggle"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
                                         <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg inpscore comment" ${readonly}>
                                         </div>
@@ -99,7 +99,7 @@ function RenderTable(data,evtype){
                     var finalcheckscore = criteria.scoring.filter(x => x.user_id == null); 
                     if(typeof(finalcheckscore[0]) != "undefined"){
                         var _finalscoring = finalcheckscore[0];
-                        if(_finalscoring['comment']){finaltextvalue = _scoring['comment'];}
+                        if(_finalscoring['comment']){finalcomment = _finalscoring['comment'];}
                         if(_finalscoring['scoretype'] == 1){
                             finaltextvalue = _finalscoring['score'];
                         }else if(_finalscoring['scoretype'] == 2){
@@ -116,18 +116,18 @@ function RenderTable(data,evtype){
                         warninglabel ='text-danger';
                     }
 
-                    var finalcriterianame = `<div class="form-group"><label>กรอกเกรด (A-E)</label><input type="text" placeholder="" value="${finaltextvalue}" class="form-control form-control-lg ${warningtext}" disabled ></div>`;
+                    var finalcriterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label><input type="text" placeholder="" value="${finaltextvalue}" class="form-control form-control-lg " disabled ></div>`;
 
                     if(criteria.criteria != null){
                         finalcriterianame = `<label class="form-check-label">
                                         <input type="checkbox" class="form-check-input-styled-info" ${finalcheckvalue} disabled>
-                                        <span class="${warninglabel}">${criteria.criteria['name']}<span>
+                                        <span class="">${criteria.criteria['name']}<span>
                                     </label>`;
                     }
         
-                    finalcriterianame += `<div class="toggle" style="display:none;"><div class="form-group">
+                    finalcriterianame += `<div class="toggle"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
-                                        <input type="text" value="${comment}" class="form-control form-control-lg" disabled>
+                                        <input type="text" value="${finalcomment}" class="form-control form-control-lg" disabled>
                                         </div>
                                     </div>
                                     `; 
@@ -172,7 +172,7 @@ function RenderExtraTable(data,scoring){
                         <label>กรอกคะแนน (0-5)</label>
                         <input type="text" value="${score}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
                     </div>
-                    <div class="toggle" style="display:none;"><div class="form-group">
+                    <div class="toggle"><div class="form-group">
                         <label><i>ความเห็น</i></label>
                         <input type="text" value="${comment}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inpscore inputextracomment" >
                     </div>

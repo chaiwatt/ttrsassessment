@@ -73,15 +73,22 @@
                             list:     'รายการ'
                         },
                         events: events,
-                        editable: true,
+                        editable: false,
                         eventLimit: true,
+                        droppable: false,
+                        disableDragging: false,
+                        eventRender: function(info) {
+                            if(!info.event.startEditable) {
+                                $(info.el).css('cursor','pointer');
+                                return;
+                            }
+                        },
                         eventClick: function(e) {
                             getEvent(e.event.id).then(data => {
                                 $('#title').val('นัดหมายการประชุม โครงการ' + data.eventcalendar.fulltbp.minitbp['project']);
                                 $('#eventdate').val(data.eventcalendar.eventdateth);
                                 $('#starttime').val(data.eventcalendar.starttime);
                                 $('#endtime').val(data.eventcalendar.endtime);
-                                $('#placeroom').val(data.eventcalendar.place + ' ห้อง' + data.eventcalendar.room);
                                 $('#eventtype').val(data.eventcalendar.calendartype['name']);
                                 $('#detail').val(data.eventcalendar.summary);
                                 $('#attendeventid').val(data.attendeecalendar.id);

@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=1252">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Report</title>
+        <title>แผนธุรกิจเทคโนโลยี</title>
         <link href="{{asset('assets/dashboard/css/pdf.css')}}" rel="stylesheet" type="text/css">
         <style>
             @page {

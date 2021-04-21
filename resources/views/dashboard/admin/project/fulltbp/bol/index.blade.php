@@ -73,7 +73,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เอกสาร BOL <button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_bol"><i class="icon-add mr-2"></i>อัปโหลด</button></h6>
+                        {{-- @if (Auth::user()->user_type_id == 4) --}}
+                        <h6 class="card-title">เอกสาร BOL </h6> @if (Auth::user()->user_type_id == 4)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_bol"><i class="icon-add mr-2"></i>อัปโหลด</button> @endif
+                        {{-- @endif --}}
+                        
                     
                     </div>
                     <div class="card-body">
@@ -90,8 +93,11 @@
                                         <tr>    
                                             <td> {{$bol->name}} </td> 
                                             <td> 
-                                                <a href="{{asset($bol->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-                                                <a type="button" data-id="{{$bol->id}}" class="btn btn-sm bg-danger deletebol">ลบ</a>                                       
+                                                <a href="{{asset($bol->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                                                @if (Auth::user()->user_type_id == 4)
+                                                <a type="button" data-id="{{$bol->id}}" class="btn btn-sm bg-danger deletebol">ลบ</a>  
+                                                @endif
+                                                                                     
                                             </td>                                
                                         </tr>
                                     @endforeach

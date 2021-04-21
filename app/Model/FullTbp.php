@@ -286,6 +286,10 @@ class FullTbp extends Model
         }
 
     }
+
+    public function HaveExpertComment($fulltbpid){
+        return ExpertComment::where('full_tbp_id',$fulltbpid)->count();
+    }
 }
 
 

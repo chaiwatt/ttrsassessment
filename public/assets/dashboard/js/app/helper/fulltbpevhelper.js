@@ -217,7 +217,7 @@ $('.steps-basic').steps({
             }else{
                 $("#criteria_wrapper").attr("hidden",true);
                 if($('#indextype').val() == 2){
-                    console.log('index2');
+                    
                     $("#criteria_wrapper").attr("hidden",false);
                     if($('#gradea').val() == '' || $('#gradeb').val() == '' ||$('#gradec').val() == '' ||$('#graded').val() == '' || $('#gradee').val() == ''
                      || ($('#gradea').val() == 0 && $('#gradeb').val() == 0 && $('#gradec').val() == 0 && $('#graded').val() == 0 && $('#gradee').val() == 0 )){
@@ -397,6 +397,7 @@ $(document).on('click', '#addcriteria', function(e) {
 
 function AddCheckList(criterias){
     $("#spiniconcriteria").attr("hidden",false);
+    $('#show').hide();
     Ev.addEvCheckList($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val(),criterias,$('#gradea').val(),$('#gradeb').val(),$('#gradec').val(),$('#graded').val(),$('#gradee').val()).then(data => {
          RenderTable(data.criteriatransactions,data.pillaindexweigths);
          RowSpan("criteriatable");
@@ -428,6 +429,7 @@ function AddCheckList(criterias){
 
 function AddGrading(){
     $("#spiniconcriteria").attr("hidden",false);
+    $('#show').hide();
     Ev.addEvGrading($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
          RenderTable(data.criteriatransactions,data.pillaindexweigths);
          RowSpan("criteriatable");
@@ -500,16 +502,26 @@ function RenderTable(criterias,pillaindexweigths){
         if(route.usertypeid != 6 ){
             commentreadlonly = "readonly";
         }
-        if ($('#evstatus').val() >= 4) {
-            if(find[0].weigth){
-                weightval = `(weight = ` + find[0].weigth + `)`;
-            } 
+        if ($('#evstatus').val() >= 4 ) {
+            if (route.usertypeid >= 5) {
+                if(find[0].weigth){
+                    weightval = `(weight = ` + find[0].weigth + `)`;
+                } 
+            }
+
             readonly = "readonly";
         }
         if ($('#evstatus').val() >= 2) {
             commentreadlonly = "readonly";
+        }else if($('#evstatus').val() == 0){
+            commentreadlonly = "";
         }
-
+        if (route.refixstatus == 1) {
+            commentreadlonly = "";
+        }
+        // if (route.refixstatus == 1) {
+        //     commentreadlonly = "";
+        // }
         var comment = '';
         if(criteria.comment){
             comment = criteria.comment;
@@ -521,9 +533,9 @@ function RenderTable(criterias,pillaindexweigths){
             <td> ${subpillarindex} ${weightval}<a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
             <td> 
                 ${criterianame} 
-                <div class="toggle" style="display:none;">
+                <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i></label>
+                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadlonly} >
                     </div>
                 </div>
@@ -536,9 +548,9 @@ function RenderTable(criterias,pillaindexweigths){
             <td> ${subpillarindex} ${weightval}<a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 "></a></td>   
             <td> 
                 ${criterianame} 
-                <div class="toggle" style="display:none;">
+                <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i></label>
+                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadlonly} >
                     </div>
                 </div>
@@ -559,15 +571,22 @@ function RenderExtraTable(data){
         }
 
         if ($('#evstatus').val() >= 4) {
-            if(criteria.weight){
-                weightval = `(weight = ` + criteria.weight + `)`;
-            } 
+            if (route.usertypeid >= 5) {
+                if(criteria.weight){
+                    weightval = `(weight = ` + criteria.weight + `)`;
+                } 
+            }
+
             commentreadlonly = "readonly";
         }
         if ($('#evstatus').val() >= 2) {
             commentreadlonly = "readonly";
+        }else if($('#evstatus').val() == 0){
+            commentreadlonly = "";
         }
-
+        if (route.refixstatus == 1) {
+            commentreadlonly = "";
+        }
         var comment = '';
         if(criteria.extracomment){
             comment = criteria.extracomment;
@@ -576,9 +595,9 @@ function RenderExtraTable(data){
             html += `<tr > 
             <td> ${criteria.extracategory['name']} ${weightval}<a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300 deletecategorytransaction"><i class="icon-trash"></i></a></td>                
             <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 deletetriteriatransaction"><i class="icon-trash"></i></a>
-                <div class="toggle" style="display:none;">
+                <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i></label>
+                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small> </label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadlonly} >
                     </div>
                 </div>
@@ -589,9 +608,9 @@ function RenderExtraTable(data){
             html += `<tr > 
             <td> ${criteria.extracategory['name']} ${weightval}<a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
             <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300"></a>
-                <div class="toggle" style="display:none;">
+                <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i></label>
+                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadlonly} >
                     </div>
                 </div>

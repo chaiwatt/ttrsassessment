@@ -2,6 +2,50 @@
 @section('pageCss')
 @stop
 @section('content')
+    <div id="modal_edit_projectmember" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ทีมลงคะแนน</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="selectothermember">
+                        <div class="col-md-12" >
+                            <label>เลือกผู้ใช้</label>
+                            <div class="form-group header-elements-md-inline">
+                                <select name="usermember" id="usermember" data-placeholder="เลือกผู้ใช้" class="form-control form-control-select2">
+                                </select> 
+                                &nbsp;<button id="btn_modal_edit_projectmember" class="btn bg-teal" > เพิ่ม</button>
+                            </div>
+                        </div>
+                    </div>
+             
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ชื่อ</th> 
+                                            <th>นามสกุล</th> 
+                                            <th id="thother">เพิ่มเติม</th>                                                                                   
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usermember_wrapper_tr"> 
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
@@ -59,10 +103,15 @@
                                         <th>เลขที่โครงการ</th> 
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
+                                        <th>ความเห็นผู้เชี่ยวชาญ</th> 
+                                        <th>ทีมลงคะแนน</th> 
+
                                         <th>เพิ่มเติม</th>                       
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <input type="text" id="fulltbpid" hidden>
+                                   
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->finished_onsite != 1)
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
@@ -70,6 +119,16 @@
                                                     <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                                     <td> {{$fulltbp->minitbp->project}} </td>  
                                                     <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                                    <td>
+                                                        @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
+                                                        <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
+                                                        @endif
+                                                       
+                                                    </td>
+                                                    <td> 
+                                                        <button type="button" id="projectmember{{$fulltbp->id}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
+                                                    </td>  
+                                                    
                                                     <td> 
                                                         @if (!Empty($fulltbp->finalassessmentdate))
                                                                 @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
@@ -97,7 +156,8 @@
 
                                                             @endif        
                                                         @endif
-                                                    </td>                                
+                                                    </td>     
+                                                                             
                                                 </tr>
                                             @endif
                                         @endif
@@ -115,11 +175,12 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            branchid: "{{Auth::user()->branch_id}}",
         };
     </script>
 @stop

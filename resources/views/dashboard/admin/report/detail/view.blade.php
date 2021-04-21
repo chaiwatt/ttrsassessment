@@ -201,6 +201,46 @@
                         </div>
                     </div>
                 @endif
+                @if (!Empty($projectassignment))
+                    <div class="col-md-12" {{$hidden}}>
+                        <div class="card">
+                            <div class="card-header header-elements-sm-inline">
+                                <h6 class="card-title">รายการ EV</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th style="width:600px">ชื่อ EV</th> 
+                                                <th>เวอร์ชั่น</th> 
+                                                <th>เพิ่มเติม</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr>
+                                                <td>{{@$company->businessplan->minitbp->fulltbp->ev->name}}</td>  
+                                                <td>
+                                                  
+                                                    {{@$company->businessplan->minitbp->fulltbp->ev->version}}
+                                                </td>    
+                                                <td>
+                                                    @if (@$company->businessplan->minitbp->fulltbp->ev->status >= 4)
+                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$company->businessplan->minitbp->fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
+                                                    @else
+                                                    กำลังดำเนินการ
+                                                    @endif
+                                                    
+                                                   
+                                                </td>                                   
+                                            </tr>  
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
   
             @endif
             @if ($company->businessplan->business_plan_status_id >=8)

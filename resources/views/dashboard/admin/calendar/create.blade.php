@@ -121,18 +121,18 @@
                                                 <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" >
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>สถานที่นัดหมาย</label>
                                                 <input type="text"  name="place" value=""  placeholder="สถานที่นัดหมาย" class="form-control form-control-lg" >
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>ห้อง</label>
                                                 <input type="text"  name="room" value="{{old('room')}}" placeholder="ห้อง" class="form-control form-control-lg" >
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>รายละเอียด</label>
@@ -149,7 +149,8 @@
                                     </div>
                                     @if ($fulltbps->count() != 0)
                                         <div class="text-right">
-                                            <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                            <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">บันทึก<i class="icon-paperplane ml-2"></i></button>
+                                            {{-- <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button> --}}
                                         </div>
                                     @endif
                                 </div>
@@ -172,6 +173,7 @@
 
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 
     <script>
         var route = {
@@ -211,6 +213,24 @@
             $("#toast").attr("hidden",true);
         });
 
-
+        function confirmsubmit(e) {
+        e.preventDefault();
+        var frm = e.target.form;
+        Swal.fire({
+                title: 'ยืนยัน',
+                text: `ต้องการยืนยันสร้างปฎิทินหรือไม่? `,
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก',
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                frm.submit();
+            }
+        });
+    }
     </script>
 @stop

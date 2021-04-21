@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="col-md-12" style="margin-top:-20px">
                                         <div class="form-group">
-                                            <label for="" ><small class="text-danger">ให้กรอกเกรด A -> E</small></label>
+                                            <label for="" ><small class="text-danger">ให้กรอกเกรด A -> F</small></label>
                                         </div>
                                         <table class="table" id="show" style="display: none;margin-top:-10px">
                                             <thead>
@@ -398,10 +398,10 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">EV Template: {{$ev->name}}
-                @if ($ev->status != 0)
+                <h4> <span class="font-weight-semibold">EV : {{$ev->name}}
+                {{-- @if ($ev->status != 0)
                   <span class="text-success">(นำส่งแล้ว)</span> 
-                @endif
+                @endif --}}
                 
                 </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -425,11 +425,11 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> EV Template</a>
-                    <a href="{{route('setting.admin.assessment.ev')}}" class="breadcrumb-item"> รายการ EV Template</a>
-                    <span class="breadcrumb-item active">{{$ev->name}}</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
+                    <a href="#" class="breadcrumb-item"> แบบฟอร์มแผนธุรกิจเทคโนโลยี</a>
+                    {{-- <a href="#" class="breadcrumb-item"> EV Template</a> --}}
+                    {{-- <a href="{{route('setting.admin.assessment.ev')}}" class="breadcrumb-item"> รายการ EV Template</a> --}}
+                    <span class="breadcrumb-item active">EV</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -460,6 +460,7 @@
             <div class="col-md-12">
                 <div class="card">
 					<div class="card-body">
+                        {{-- {{$ev->refixstatus}} --}}
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden >
                         {{-- {{$ev->refixstatus}} --}}
                         {{-- <div class="text-right">
@@ -469,25 +470,33 @@
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>ชื่อ EV</label>
-                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" @if ($ev->status > 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text"  id="evname" value="{{$ev->name}}"  placeholder="ชื่อ EV เช่น ttrs.01" @if ($ev->status > 0 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เวอร์ชั่น</label>
-                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" @if ($ev->status > 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text" id="version" value="{{$ev->version}}"  placeholder="เวอร์ชั่น" @if ($ev->status > 0 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Index</label>
-                                    <input type="text" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" @if ($ev->status > 1 || $ev->refixstatus != 0) readonly @endif class="form-control form-control-lg">
+                                    <input type="text" id="percentindex" value="{{$ev->percentindex}}"  placeholder="เปอร์เซนต์ Index" 
+                                    @if ($ev->status > 0 || $ev->refixstatus != 0) 
+                                      @if ($ev->status <= 1 && Auth::user()->user_type_id == 6)
+                                        @else  
+                                        readonly 
+                                      @endif
+                                      
+                                    @endif 
+                                    class="form-control form-control-lg">
                                 </div>
                             </div>
                             <div class="col-md-6">	
                                 <div class="form-group">
                                     <label>เปอร์เซนต์ Extra</label>
-                                    <input type="text" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status > 1 || $ev->refixstatus != 0) @endif class="form-control form-control-lg" readonly>
+                                    <input type="text" id="percentextra" value="{{$ev->percentextra}}"  placeholder="เปอร์เซนต์ Extra" @if ($ev->status > 0 || $ev->refixstatus != 0) @endif class="form-control form-control-lg" readonly>
                                 </div>
                             </div>
                         </div>
@@ -605,9 +614,9 @@
                                                     <tr class="bg-info">
                                                         <th>วันที่</th>  
                                                         <th>รายละเอียด</th>   
-                                                        @if (Auth::user()->user_type_id == 6)
+                                                        {{-- @if (Auth::user()->user_type_id == 6)
                                                             <th>เพิ่มเติม</th>
-                                                        @endif
+                                                        @endif --}}
                                                     </tr>
                                                 </thead>
                                                 <tbody id="ev_edit_history_wrapper_tr"> 
@@ -616,11 +625,11 @@
                                                         <td>{{$evedithistory->thaidate}}</td>
                                                         <td>{{$evedithistory->detail}}</td>
                                                         @if (Auth::user()->user_type_id == 6 )
-                                                        @if ($ev->status < 4)
+                                                        {{-- @if ($ev->status < 4)
                                                                 <td><a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a></td>
                                                             @else
                                                                 <td></td>
-                                                        @endif
+                                                        @endif --}}
                                                         
                                                         @endif
                                                     </tr>
@@ -651,6 +660,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+
     <script>
         var route = {
             url: "{{ url('/') }}",

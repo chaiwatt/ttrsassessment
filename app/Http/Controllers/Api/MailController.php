@@ -31,8 +31,8 @@ class MailController extends Controller
         $alertmessage->detail = 'ข้อความระบบ: ' . $request->topic . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
         $alertmessage->save();
 
-        EmailBox::send($user->email,'TTRS:'.$request->topic,'เรียนผู้ขอรับการประเมิน<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียนผู้ขอรับการประเมิน<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ',$auth->id,$user->id);
+        EmailBox::send($user->email,'TTRS:'.$request->topic,'เรียน ผู้ขอรับการประเมิน<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        Message::sendMessage('ข้อความระบบ: ' . $request->topic,'เรียน ผู้ขอรับการประเมิน<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ',$auth->id,$user->id);
         return response()->json($fulltbp); 
     }
     public function SendMember(Request $request){

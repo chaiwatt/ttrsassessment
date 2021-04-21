@@ -10,11 +10,13 @@ use App\Model\EvEditHistory;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Model\PillaIndexWeigth;
+use App\Helper\OnlyBelongPerson;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ExtraCriteriaTransaction;
+use Illuminate\Support\Facades\Session;
 
 class DashboardAdminProjectEvWeightController extends Controller
 {
@@ -37,6 +39,7 @@ class DashboardAdminProjectEvWeightController extends Controller
     }
 
     public function Edit($id){
+
         $auth = Auth::user();
         NotificationBubble::where('target_user_id',$auth->id)
                         ->where('notification_category_id',1)
@@ -45,9 +48,18 @@ class DashboardAdminProjectEvWeightController extends Controller
         $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',2)->get();
         $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('stage',2)->get();
         $ev = Ev::find($id);
-        return view('dashboard.admin.project.evweight.edit')->withEv($ev)
-                                                            ->withEvedithistories($evedithistories)
-                                                            ->withEvcommenttabs($evcommenttabs);
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        if(OnlyBelongPerson::Admin($minitbp->id) == false){
+            return view('dashboard.admin.project.evweight.edit')->withEv($ev)
+                    ->withEvedithistories($evedithistories)
+                    ->withEvcommenttabs($evcommenttabs);
+        }else{
+            Auth::logout();
+            Session::flush();
+            return redirect()->route('login');
+        }
+
     }
 
     public function GetEv(Request $request){
