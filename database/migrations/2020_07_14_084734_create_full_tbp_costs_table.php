@@ -21,7 +21,7 @@ class CreateFullTbpCostsTable extends Migration
             $table->double('existing',15,2)->default(0);
             $table->double('need',15,2)->default(0);
             $table->double('approved',15,2)->default(0);
-            $table->string('plan',250)->nullable();
+            $table->double('plan',15,2)->default(0);
             $table->timestamps();
         });
     }

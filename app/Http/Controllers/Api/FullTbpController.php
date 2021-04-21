@@ -40,6 +40,7 @@ use App\Model\FullTbpCompanyProfileAttachment;
 class FullTbpController extends Controller
 {
     public function GeneratePdf(Request $request){
+        
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $segment = new \Segment();
         $fulltbp = FullTbp::find($request->id);
