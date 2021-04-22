@@ -260,7 +260,7 @@
                                         @endif
                                         <td> 
                                             <a  href="{{asset($minitbp->attachment)}}" class="btn btn-sm bg-teal" target="_blank">ดาวน์โหลด</a>
-                                            <a  href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                            <a  href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn btn-sm bg-primary" target="_blank">รายละเอียด</a>
                                         </td>                                
                                     </tr>
                                     @endforeach

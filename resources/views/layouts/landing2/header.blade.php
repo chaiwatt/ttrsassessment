@@ -10,38 +10,33 @@
                           <ul>
                               <li>
                                   <i class="flaticon-email"></i>
-                                  <a href="mailto:{{$generalinfo->email}}">{{$generalinfo->email}}</a>
+                                  <a href="mailto:{{$generalinfo->email}}" style="font-size: 16px"> {{$generalinfo->email}}</a>
                               </li>
                               <li>
                                   <i class="flaticon-call"></i>
-                                  <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}}</a>
+                                  <a href="tel:{{$generalinfo->phone1}}" style="font-size: 16px">{{$generalinfo->phone1}}</a>
                               </li>
-                              {{-- <li>
-                                  <i class="flaticon-location"></i>
-                                  05 kandi BR. New York
-                              </li> --}}
                           </ul>
                        </div>
                    </div>
                    <div class="col-lg-4 text-right">
                        <div class="toolbar-sl-share ">
                            <ul>
-                                {{-- <li class="opening"> <em><i class="flaticon-clock"></i> 08:00am-6:00pm</em> </li> --}}
                                 <li>
                                     @if (!Auth::check())
-                                        <a href="{{route('login')}}" ><i class="fa fa-sign-in" aria-hidden="true"></i> 
+                                        <a href="{{route('login')}}" style="font-size: 16px"><i class="fa fa-sign-in" aria-hidden="true"></i> 
                                         {{trans('lang.login')}}
                                     @else
                                         @if (Auth::user()->user_type_id >= 4)
-                                            <a href="{{route('dashboard.admin.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                            <a href="{{route('dashboard.admin.report')}}" class="linkedin sarabun" style="text-decoration: none" ><i class="fa fa-user"></i> <span style="font-size: 16px"> {{trans('lang.dashboard')}}</span> </a>
                                         @elseif(Auth::user()->user_type_id == 3)
-                                            <a href="{{route('dashboard.expert.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                            <a href="{{route('dashboard.expert.report')}}" class="linkedin sarabun" style="text-decoration: none" style="font-size: 16px"><i class="fa fa-user"></i> <span style="font-size: 16px"> {{trans('lang.dashboard')}}</span> </a>
                                         @else
-                                            <a href="{{route('dashboard.company.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                            <a href="{{route('dashboard.company.report')}}" class="linkedin sarabun" style="text-decoration: none" style="font-size: 16px"><i class="fa fa-user"></i> <span style="font-size: 16px"> {{trans('lang.dashboard')}}</span> </a>
                                         @endif
 
                                         &nbsp
-                                        <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> 
+                                        <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-size: 16px"><i class="fa fa-sign-out" aria-hidden="true"></i> 
                                                 {{trans('lang.signout')}}
                                             
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -52,9 +47,9 @@
                             </li>
                                 <li>
                                     @if (Config::get('app.locale') == 'th')
-                                        <li><a href="{{route('change',['locale' => 'en'])}}" class="thai-font"><img class="flag" src="{{asset('assets/landing2/images/flag/thflag.png')}}" alt=""> ไทย</a></li>
+                                        <li><a href="{{route('change',['locale' => 'en'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/thflag.png')}}" alt=""> ไทย</a></li>
                                     @else
-                                        <li><a href="{{route('change',['locale' => 'th'])}}" class="thai-font"><img class="flag" src="{{asset('assets/landing2/images/flag/usflag.png')}}" alt=""> English</a></li>
+                                        <li><a href="{{route('change',['locale' => 'th'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/usflag.png')}}" alt=""> English</a></li>
                                     @endif
                                 </li>
                         

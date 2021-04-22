@@ -179,7 +179,8 @@
                                                     @if (!Empty($projectassignment->leader_id))
                                                     {{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
                                                     @else
-                                                    ยังไม่ได้มอบหมาย
+                                                    
+                                                    <span class="badge badge-flat border-grey text-grey-600">ยังไม่ได้มอบหมาย</span>
                                                     @endif
                                                    
                                                 </td>                                     
@@ -190,7 +191,8 @@
                                                     @if (!Empty($projectassignment->coleader_id))
                                                         {{$projectassignment->coleader->name}} {{$projectassignment->coleader->lastname}}
                                                         @else
-                                                        ยังไม่ได้มอบหมาย
+                                                        
+                                                        <span class="badge badge-flat border-grey text-grey-600">ยังไม่ได้มอบหมาย</span>
                                                     @endif                                                   
                                                 </td>                                   
                                             </tr> 
@@ -228,7 +230,8 @@
                                                     @if (@$company->businessplan->minitbp->fulltbp->ev->status >= 4)
                                                     <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$company->businessplan->minitbp->fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
                                                     @else
-                                                    กำลังดำเนินการ
+                                                    
+                                                    <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
                                                     @endif
                                                     
                                                    
