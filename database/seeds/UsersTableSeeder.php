@@ -16,8 +16,8 @@ class UsersTableSeeder extends Seeder
                 'user_type_id' => 6,
                 'name' => 'สมพร',
                 'lastname' => 'สกุลเจดี',
-                //'email' => 'ttrsjd2020@gmail.com',     
-                'email' => 'ttrsjd@npcsolution.com',     
+                'email' => 'ttrsjd2020@gmail.com',     
+                //'email' => 'ttrsjd@npcsolution.com',     
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
@@ -27,8 +27,8 @@ class UsersTableSeeder extends Seeder
                 'user_type_id' => 5,
                 'name' => 'สมนึก',
                 'lastname' => 'สกุลแอดมิน',
-                //'email' => 'ttrsmanager2020@gmail.com', 
-                'email' => 'ttrsadmin@npcsolution.com',          
+                'email' => 'ttrsmanager2020@gmail.com', 
+                //'email' => 'ttrsadmin@npcsolution.com',          
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
