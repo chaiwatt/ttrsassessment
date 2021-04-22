@@ -15,6 +15,7 @@ use App\Model\MeetingDate;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\CalendarType;
+use App\Model\ExpertDetail;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
 use Google_Service_Calendar;
@@ -23,6 +24,7 @@ use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Helper\GoogleCalendar;
 use App\Model\TimeLineHistory;
+use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Google_Service_Calendar_Event;
@@ -184,9 +186,24 @@ class DashboardAdminCalendarController extends Controller
   public function Edit($id){
     $calendartypes = CalendarType::get();
     $eventcalendar = EventCalendar::find($id);
+    // return $eventcalendar;
     $eventcalendarattendees = EventCalendarAttendee::where('event_calendar_id',$eventcalendar->id)->get();
-    $users = User::where('user_type_id','>=',3)->get();
+    // $users = User::where('user_type_id','>=',3)->get();
     $isnotifies = Isnotify::get();
+    $tmpmember=array();
+    $tmpmember = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+    array_push($tmpmember,User::where('user_type_id',5)->first()->id);
+    array_push($tmpmember,User::where('user_type_id',6)->first()->id);
+
+    $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+    $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
+    
+  foreach ($expertdetailarr as $key => $value) {
+    array_push($tmpmember,$value);
+  }
+   
+  $users = User::whereIn('id',$tmpmember)->get();
+    // return $tmpmember;
     return view('dashboard.admin.calendar.edit')->withUsers($users)
                                                 ->withEventcalendar($eventcalendar)
                                                 ->withEventcalendarattendees($eventcalendarattendees)
@@ -241,6 +258,8 @@ class DashboardAdminCalendarController extends Controller
 
     $fulltbp = FullTbp::find(EventCalendar::find($id)->full_tbp_id);
     $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+    $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+    $company = Company::find($businessplan->company_id);
     $mails = array();
     $joinusers = array();
     foreach($updateguest_array as $user){

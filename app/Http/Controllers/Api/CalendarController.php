@@ -8,10 +8,12 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use App\Model\CalendarType;
+use App\Model\ExpertDetail;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
+use App\Model\ExpertAssignment;
 use App\Http\Controllers\Controller;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +44,21 @@ class CalendarController extends Controller
             $id2 = $projectmember->id;
         }
 
-        $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
+        $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$request->id)->pluck('user_id')->toArray();
+        $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
+        
+        $users = User::whereIn('id',$expertdetailarr)->get();
        
+        $tmpmember=array();
+        foreach ($users as $key => $user) {
+            $projectmember = new ProjectMember();
+            $projectmember->full_tbp_id = $request->id;
+            $projectmember->user_id = $user->id;
+            $projectmember->save();
+            array_push($tmpmember,$projectmember->id);
+        }
+
+        $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
         $fulltbp = FullTbp::find($request->id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
@@ -69,6 +84,7 @@ class CalendarController extends Controller
         if($id2 != 0){
             ProjectMember::find($id2)->delete();
         }
+        ProjectMember::where('full_tbp_id',$request->id)->whereIn('id',$tmpmember)->delete();
 
         return response()->json(array(
             "projectmembers" => $projectmembers,

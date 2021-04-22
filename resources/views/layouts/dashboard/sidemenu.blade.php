@@ -103,7 +103,7 @@
     
     @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0 )
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
-            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ปฏิทิน</span>
+            <a href="#" class="nav-link"><i class="icon-calendar3"></i> <span>ปฏิทิน</span>
                 @if ($sharenotificationbubbles->where('notification_category_id','2')->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif

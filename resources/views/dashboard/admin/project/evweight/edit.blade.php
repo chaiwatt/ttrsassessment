@@ -140,9 +140,9 @@
                                                     <tr class="bg-info">
                                                         <th>วันที่</th>  
                                                         <th>รายละเอียด</th>   
-                                                        @if (Auth::user()->user_type_id == 6)
+                                                        {{-- @if (Auth::user()->user_type_id == 6)
                                                             <th>เพิ่มเติม</th>
-                                                        @endif
+                                                        @endif --}}
                                                     </tr>
                                                 </thead>
                                                 <tbody id="ev_edit_history_wrapper_tr"> 
@@ -150,13 +150,13 @@
                                                     <tr>
                                                         <td>{{$evedithistory->thaidate}}</td>
                                                         <td>{{$evedithistory->detail}}</td>
-                                                        @if (Auth::user()->user_type_id == 6)
+                                                        {{-- @if (Auth::user()->user_type_id == 6)
                                                         <td>
                                                             @if ($ev->status < 4)
                                                                 <a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a>
                                                             @endif
                                                         </td>
-                                                        @endif
+                                                        @endif --}}
                                                     </tr>
                                                     @endforeach
                                                 </tbody>

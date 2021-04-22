@@ -45,6 +45,8 @@ $("#btn_modal_add_expertfield").on('click', function() {
           }else{
              $("#inpexpertfield").val('');
           }
+          $("#expertfieldnum").val("");
+          $("#expertfielddetail").val("");
           $('#modal_add_expertfield').modal('hide');
          }).catch(error => {})
     }

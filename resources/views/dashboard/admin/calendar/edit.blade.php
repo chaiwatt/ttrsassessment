@@ -104,12 +104,7 @@
                                         <input type="text"  name="place"  value="{{$eventcalendar->place}}"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control form-control-lg" >
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>ห้อง</label>
-                                        <input type="text"  name="room" value="{{$eventcalendar->room}}" placeholder="ห้อง" class="form-control form-control-lg" >
-                                    </div>
-                                </div> --}}
+
                             </div>
                             <div class="row">
                                 <div class="col-md-12">

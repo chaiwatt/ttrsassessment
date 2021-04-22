@@ -67,7 +67,7 @@
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
-                                        <th>Event</th>  
+                                        <th>ประเภทกิจกรรม</th>  
                                         <th>วัน-เวลา</th>
                                         <th>สถานะ</th> 
                                                                   
@@ -77,7 +77,7 @@
                                     @foreach ($eventcalendars->reverse() as $key => $eventcalendar)
                                     <tr>    
                                         <td> {{$eventcalendar->fulltbp->minitbp->project}} </td> 
-                                        <td> {{$eventcalendar->summary}} </td> 
+                                        <td> {{$eventcalendar->calendartype->name}}</td> 
                                         <td> {{$eventcalendar->eventdateth}} {{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} </td> 
                                         <td>
                                             <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>

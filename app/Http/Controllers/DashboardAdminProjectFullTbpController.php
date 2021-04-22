@@ -823,13 +823,19 @@ class DashboardAdminProjectFullTbpController extends Controller
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
-        $projectsmembers = ProjectMember::where('full_tbp_id',$id)->get();
+        $projectsmemberarray = ProjectMember::where('full_tbp_id',$id)->pluck('user_id')->toarray();
+        $jdid = User::where('user_type_id',6)->first()->id;
+        $adminid = User::where('user_type_id',5)->first()->id;
+        array_push($projectsmemberarray,$jdid);
+        array_push($projectsmemberarray,$adminid);
+        $uniquearr = array_unique($projectsmemberarray);
+        $users = User::whereIn('id',$uniquearr)->get();
         $company = Company::find($businessplan->company_id);
-        foreach ($projectsmembers as $key => $projectsmember) {
-            $messagebox = Message::sendMessage('แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project . ' บริษัท' . $company->name,$auth->id,$projectsmember->user_id);
+        foreach ($users as $key => $user) {
+            $messagebox = Message::sendMessage('แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project . ' บริษัท' . $company->name,$auth->id,$user->id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
-            $alertmessage->target_user_id =$projectsmember->user_id;
+            $alertmessage->target_user_id =$user->id;
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' แจ้งสิ้นสุดโครงการ ' . $minitbp->project ;
             $alertmessage->save();
@@ -838,7 +844,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($projectsmember->user_id)->email,'TTRS:แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'เรียน ท่านคณะกรรมการ <br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project. ' บริษัท' . $company->name .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
+            EmailBox::send($user->email,'TTRS:แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'เรียน ท่านคณะกรรมการ <br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project. ' บริษัท' . $company->name .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
         }
 
         // $company = Company::find($businessplan->company_id);
