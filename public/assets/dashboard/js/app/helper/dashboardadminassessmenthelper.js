@@ -175,7 +175,7 @@ $(document).on('change', '#comment', function(e) {
     }).catch(error => {})
 });
 
-function updateScore(arraylist,extraarraylist,evid){
+function updateScore(arraylist,extraarraylist,extracommnetarraylist,evid){
     return new Promise((resolve, reject) => {
         $.ajax({
         url: `${route.url}/dashboard/admin/assessment/updatescore`,
@@ -184,6 +184,7 @@ function updateScore(arraylist,extraarraylist,evid){
         data: {
             arraylist : arraylist,
             extraarraylist : extraarraylist,
+            extracommnetarraylist : extracommnetarraylist,
             evid : evid
         },
         success: function(data) {
@@ -270,10 +271,17 @@ function showConflictScore(id){
     showConflictGrade($(this).data('id')).then(data => {
         var html =``;
         data.forEach(function (conflict,index) {
+
+               var _comment = conflict.comment;
+                if(_comment === null){
+                    _comment = "";
+                }
+
+
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
             <td> ${conflict.score} </td>   
-            <td> ${conflict.comment} </td>                                           
+            <td> ${_comment} </td>                                           
             </tr>`
         });
 
@@ -305,9 +313,15 @@ function showConflictGrade(id){
     Extra.showConflictScore($(this).data('id'),$('#evid').val()).then(data => {
         var html =``;
         data.forEach(function (conflict,index) {
+            var _comment = conflict.comment;
+            if(_comment === null){
+                _comment = "";
+            }
+
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
-           <td> ${conflict.scoring} </td>                                             
+           <td> ${conflict.scoring} </td>   
+           <td> ${_comment} </td>                                             
             </tr>`
             });
         $("#show_conflict_modal_wrapper_tr").html(html);
@@ -406,9 +420,20 @@ $('.step-evweight').steps({
                         value: val
                       } 
                 }).get();
-        
+
+                var conflictextracommentarray = $(".extracomment").map(function () {
+                    var val = $(this).val();
+                    return {
+                        evid: $('#evid').val(),
+                        extracriteriatransactionid: $(this).data('id'),
+                        value: val
+                      } 
+                }).get();
+
+                // console.log(conflictextracommentarray);
+                
                 $("#spinicon").attr("hidden",false);
-                updateScore(conflictarray,conflictextraarray,$('#evid').val()).then(data => {
+                updateScore(conflictarray,conflictextraarray,conflictextracommentarray,$('#evid').val()).then(data => {
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
                         title: 'สำเร็จ...',

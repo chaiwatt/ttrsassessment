@@ -320,7 +320,8 @@ class DashboardAdminAssessmentController extends Controller
         return response()->json($users); 
     }
 
-    public function UpdateScore(Request $request){   
+    public function UpdateScore(Request $request){  
+        
         $auth = Auth::user(); 
         // if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
@@ -368,11 +369,13 @@ class DashboardAdminAssessmentController extends Controller
          $existingarray = array(); 
          if($request->extraarraylist != null){
             foreach ($request->extraarraylist as $key => $extracriteria) {
+                $comment = $request->extracommnetarraylist[$key]['value'];
                 array_push($existingarray, $extracriteria['extracriteriatransactionid']);
                 $extrascore = new ExtraScoring();
                 $extrascore->ev_id = $extracriteria['evid'];
                 $extrascore->extra_critreria_transaction_id = $extracriteria['extracriteriatransactionid'];
                 $extrascore->scoring  = $extracriteria['value'];
+                $extrascore->comment  = $comment;
                 $extrascore->save();
             }
           }
