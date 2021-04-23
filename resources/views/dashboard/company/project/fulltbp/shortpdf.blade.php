@@ -353,58 +353,63 @@
                             @endif
                         </tbody>
                     </table>
-                    <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : ลูกหนี้การค้า (หน่วย : บาท)</div>
-                    <table class="mt5  border tbwrap" >
-                        <thead>
-                            <tr>
-                                <th style="width:30%;font-size:12px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
-                                <th style="width:15%;font-size:12px">จำนวนผลิตภัณฑ์<pre style="font-family: THSarabunNew">หรือโครงการ</pre></th> 
-                                <th style="width:15%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
-                                <th style="width:10%;font-size:12px">ยอดขายต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
-                                <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดขาย (%)</pre></th>  
-                                <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
-                            <tr>
-                        </thead>
-                        <tbody>
-                            @if ($fulltbp->fulltbpdebtpartner->count() > 0)
-                                @foreach ($fulltbp->fulltbpdebtpartner as $fulltbpdebtpartner)
-                                    <tr>
-                                        <td style="font-size:13px"> {{$fulltbpdebtpartner->debtpartner}}</td> 
-                                        <td style="font-size:13px"> {{$fulltbpdebtpartner->numproject}} </td> 
-                                        <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->totalyearsell,2)}}</td>                                            															
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->percenttosale,2)}}</td> 
-                                        <td style="font-size:13px;text-align: center">{{$fulltbpdebtpartner->businessyear}}</td> 
-                                    </tr>   
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                    <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : เจ้าหนี้การค้า (หน่วย : บาท)</div>
-                    <table class="mt5  border tbwrap" >
-                        <thead>
-                            <tr>
-                                <th style="width:30%;font-size:12px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
-                                <th style="width:20%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
-                                <th style="width:20%;font-size:12px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
-                                <th style="width:15%;font-size:12px">เปรียบเทียบกับยอดซื้อ<pre style="font-family: THSarabunNew">(%)</pre></th>  
-                                <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
-                            <tr>
-                        </thead>
-                        <tbody>
-                            @if ($fulltbp->fulltbpcreditpartner->count() > 0)
-                                @foreach ($fulltbp->fulltbpcreditpartner as $fulltbpcreditpartner)
-                                    <tr>
-                                        <td style="font-size:13px"> {{$fulltbpcreditpartner->creditpartner}}</td> 
-                                        <td style="font-size:13px;text-align: right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->totalyearpurchase,2)}}</td>                                            															
-                                        <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->percenttopurchase,2)}}</td> 
-                                        <td style="font-size:13px;text-align: center">{{$fulltbpcreditpartner->businessyear}}</td> 
-                                    </tr>   
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                    <div style="page-break-inside: avoid;">
+                        <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : ลูกหนี้การค้า (หน่วย : บาท)</div>
+                        <table class="mt5  border tbwrap" >
+                            <thead>
+                                <tr>
+                                    <th style="width:30%;font-size:12px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
+                                    <th style="width:15%;font-size:12px">จำนวนผลิตภัณฑ์<pre style="font-family: THSarabunNew">หรือโครงการ</pre></th> 
+                                    <th style="width:15%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
+                                    <th style="width:10%;font-size:12px">ยอดขายต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
+                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดขาย (%)</pre></th>  
+                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
+                                <tr>
+                            </thead>
+                            <tbody>
+                                @if ($fulltbp->fulltbpdebtpartner->count() > 0)
+                                    @foreach ($fulltbp->fulltbpdebtpartner as $fulltbpdebtpartner)
+                                        <tr>
+                                            <td style="font-size:13px"> {{$fulltbpdebtpartner->debtpartner}}</td> 
+                                            <td style="font-size:13px"> {{$fulltbpdebtpartner->numproject}} </td> 
+                                            <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->totalyearsell,2)}}</td>                                            															
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->percenttosale,2)}}</td> 
+                                            <td style="font-size:13px;text-align: center">{{$fulltbpdebtpartner->businessyear}}</td> 
+                                        </tr>   
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="page-break-inside: avoid;">
+                        <div class="mt20" style="font-size:13px">คู่ค้าหลักทางธุรกิจของโครงการ : เจ้าหนี้การค้า (หน่วย : บาท)</div>
+                        <table class="mt5  border tbwrap" >
+                            <thead>
+                                <tr>
+                                    <th style="width:30%;font-size:12px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
+                                    <th style="width:20%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
+                                    <th style="width:20%;font-size:12px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
+                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับยอดซื้อ<pre style="font-family: THSarabunNew">(%)</pre></th>  
+                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
+                                <tr>
+                            </thead>
+                            <tbody>
+                                @if ($fulltbp->fulltbpcreditpartner->count() > 0)
+                                    @foreach ($fulltbp->fulltbpcreditpartner as $fulltbpcreditpartner)
+                                        <tr>
+                                            <td style="font-size:13px"> {{$fulltbpcreditpartner->creditpartner}}</td> 
+                                            <td style="font-size:13px;text-align: right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->totalyearpurchase,2)}}</td>                                            															
+                                            <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->percenttopurchase,2)}}</td> 
+                                            <td style="font-size:13px;text-align: center">{{$fulltbpcreditpartner->businessyear}}</td> 
+                                        </tr>   
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                   
                 </div>
         </div>
         <div class="box ml50 bw650  mt20 " style="page-break-inside: avoid;">
