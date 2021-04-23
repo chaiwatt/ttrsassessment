@@ -1322,13 +1322,30 @@
 							<fieldset class="mb-2">
 								<div class="row">
 									<div class="col-md-12">	
-										<label for=""><strong>1.1 ชื่อนิติบุคคล : </strong> {{@$fulltbp->minitbp->businessplan->company->name}}</label>
+										@php
+											$company = @$fulltbp->minitbp->businessplan->company;
+											$company_name = (!Empty($company->name))?$company->name:'';
+											$bussinesstype = $company->business_type_id;
+											$fullcompanyname = $company_name;
+											if($bussinesstype == 1){
+												$fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+											}else if($bussinesstype == 2){
+												$fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+											}else if($bussinesstype == 3){
+												$fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+											}else if($bussinesstype == 4){
+												$fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+											}else{
+												$fullcompanyname = $company->name; 
+											}
+										@endphp
+										<label for=""><strong>1.1 ชื่อนิติบุคคล : </strong> {{$fullcompanyname}}</label>
 									</div>
 									<div class="col-md-12">	
 										<label for=""><strong>1.2 ทะเบียนนิติบุคคลเลขที่ : </strong> {{@$fulltbp->minitbp->businessplan->company->vatno}}</label>
 									</div>
 									<div class="col-md-12">	
-										<label for=""><strong>1.3 ปีที่จดทะเบียน : </strong> {{@$fulltbp->minitbp->businessplan->company->registeredyear}}</label>
+										<label for=""><strong>1.3 ปีที่จดทะเบียน : </strong> พ.ศ.{{@$fulltbp->minitbp->businessplan->company->registeredyear}}</label>
 									</div>
 									<div class="col-md-12">	
 										<label for=""><strong>1.4 ทุนที่จดทะเบียน : </strong> {{number_format(@$fulltbp->minitbp->businessplan->company->registeredcapital, 2)}} บาท</label>
@@ -2337,11 +2354,11 @@
 														@foreach ($fulltbpdebtpartners as $fulltbpdebtpartner)
 															<tr>
 																<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
-																<td> {{$fulltbpdebtpartner->numproject}} </td> 
-																<td> {{$fulltbpdebtpartner->partnertaxid}} </td> 
+																<td class="text-center"> {{$fulltbpdebtpartner->numproject}} </td> 
+																<td class="text-center"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
 																<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}}</td>                                            															
 																<td class="text-right"> {{number_format($fulltbpdebtpartner->percenttosale, 2)}}</td> 
-																<td> {{$fulltbpdebtpartner->businessyear}} </td> 
+																<td class="text-center"> {{$fulltbpdebtpartner->businessyear}} </td> 
 															</tr>
 														@endforeach              
 													</tbody>
@@ -2373,10 +2390,10 @@
 														@foreach ($fulltbpcreditpartners as $fulltbpcreditpartner)
 															<tr >
 																<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
-																<td> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+																<td class="text-center"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
 																<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
 																<td class="text-right"> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}}</td> 
-																<td> {{$fulltbpcreditpartner->businessyear}} </td> 
+																<td class="text-center"> {{$fulltbpcreditpartner->businessyear}} </td> 
 																{{-- <td> 
 																	<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
 																	<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 
