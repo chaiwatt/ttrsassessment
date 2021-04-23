@@ -434,8 +434,8 @@
                                                 @if ($companyemploy->employexperience->count() > 0)
                                                     @foreach ($companyemploy->employexperience as $employexperience)
                                                         <tr>
-                                                            <td style="font-size:13px">{{$employexperience->startdate}}</td>
-                                                            <td style="font-size:13px">{{$employexperience->enddate}}</td>
+                                                            <td style="font-size:13px">พ.ศ.{{$employexperience->startdate}}</td>
+                                                            <td style="font-size:13px">พ.ศ.{{$employexperience->enddate}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employexperience->company)!!}</td>
                                                             <td style="font-size:13px">{{$employexperience->businesstype}}</td>
                                                             <td style="font-size:13px">{{$employexperience->startposition}}</td>

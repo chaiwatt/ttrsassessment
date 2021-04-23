@@ -1453,7 +1453,7 @@
 																				<th>ระดับ</th>  
 																				<th style="width:25%">ชื่อสถานศึกษา</th>                                                                                    
 																				<th style="width:20%">สาขาวิชาเอก</th>       
-																				<th style="width:15%">ปีที่ศึกษา</th>  
+																				<th style="width:20%">ปีที่ศึกษา</th>  
 																			</tr>
 																		</thead>
 																		<tbody>  
@@ -1462,7 +1462,7 @@
 																					<td> {{$education->employeducationlevel}} </td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
-																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
+																					<td> พ.ศ.{{$education->employeducationyearstart}} - พ.ศ.{{$education->employeducationyearend}} </td> 
 																				</tr>
 																			@endforeach  
 																		</tbody>
@@ -1485,7 +1485,7 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employexperience as $experience)
 																				<tr>
-																					<td> {{$experience->startdateth}} - {{$experience->enddateth}}</td>                                            
+																					<td> พ.ศ.{{$experience->startdate}} - พ.ศ.{{$experience->enddate}}</td>                                            
 																					<td> {{$experience->company}} </td> 
 																					<td> {{$experience->businesstype}} </td>                                            
 																					<td> {{$experience->startposition}} </td> 
@@ -1583,7 +1583,9 @@
 									
 												<div class="card-body">
 													<div class="row"> --}}
-														<div class="col-md-12">	
+														
+														
+														<div class="col-md-12 @if ($key > 0) mt-3 @endif">	
 															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label>
 														</div>
 														
@@ -1597,7 +1599,7 @@
 																				<th>ระดับ</th>  
 																				<th style="width:25%">ชื่อสถานศึกษา</th>                                                                                    
 																				<th style="width:20%">สาขาวิชาเอก</th>       
-																				<th style="width:15%">ปีที่ศึกษา</th>  
+																				<th style="width:20%">ปีที่ศึกษา</th>  
 																			</tr>
 																		</thead>
 																		<tbody>  
@@ -1606,7 +1608,7 @@
 																					<td> {{$education->employeducationlevel}} </td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
-																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
+																					<td> พ.ศ.{{$education->employeducationyearstart}} - พ.ศ.{{$education->employeducationyearend}} </td> 
 																				</tr>
 																			@endforeach  
 																		</tbody>
@@ -1629,7 +1631,7 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employexperience as $experience)
 																				<tr>
-																					<td> {{$experience->startdateth}} - {{$experience->enddateth}}</td>                                            
+																					<td> พ.ศ.{{$experience->startdate}} - พ.ศ.{{$experience->enddate}}</td>                                            
 																					<td> {{$experience->company}} </td> 
 																					<td> {{$experience->businesstype}} </td>                                            
 																					<td> {{$experience->startposition}} </td> 
