@@ -664,7 +664,6 @@
 					$(".chkauthorizeddirector:checked").each(function(){
 						selected_director.push($(this).val());
 				});
-				// if((submitstatus == 2 || refixstatus != 2) && refixstatus != 0){
 				if((submitstatus == 2 && refixstatus == 0) || (submitstatus == 3 && refixstatus == 1) ){
 					var formData = new FormData();
 					formData.append('id',$('#minitbpid').val());

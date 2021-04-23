@@ -2192,7 +2192,7 @@ $('.steps-basic').steps({
             
             if(route.submitstatus !=4 && (route.refixstatus == 0 || route.refixstatus == 2 )){
                 var pdfpath = route.url + '/'+ $('#pdfname').val();
-
+                $('#downloadpdf').attr('href', pdfpath);
                 PDFObject.embed(pdfpath, "#example1");
             }else{
                 var selected_director = [];
@@ -2204,6 +2204,7 @@ $('.steps-basic').steps({
                     $('#profit').val(data.profit);
                     $('#reduce').val(data.reduce);
                     FullTbp.generatePdf($('#fulltbpid').val()).then(data => {
+                        
                         var pdfpath = route.url + '/'+ data;
                         var url = pdfpath;
                         $('#pdfname').val(data);
