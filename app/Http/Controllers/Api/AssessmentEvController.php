@@ -361,16 +361,21 @@ class AssessmentEvController extends Controller
     }
 
     public function UpdateEvStatus(Request $request){
+       
+
         $auth = Auth::user();
         Ev::find($request->id)->update([
             'status' => 1
         ]);
         $ev = Ev::find($request->id);
+
         if($ev->refixstatus == 1){
             $ev->update([
                 'refixstatus' => 2  
             ]);
         }
+
+        
 
         $ev = Ev::find($request->id);
         // $admins = User::where('user_type_id',5)->pluck('id')->toArray();
@@ -378,6 +383,26 @@ class AssessmentEvController extends Controller
         $fulltbp = FullTbp::find($ev->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+
+        $message = ' ตรวจสอบ EV โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname;
+        if($ev->refixstatus == 2){
+            $message = ' ตรวจสอบ EV ที่มีการแก้ไข โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname;
+        }
 
         $jd = User::where('user_type_id',6)->first();
         $notificationbubble = new NotificationBubble();
@@ -391,11 +416,11 @@ class AssessmentEvController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id =$jd->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ตรวจสอบ EV ของโครงการ ' . $minitbp->project .' <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a> ';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $message.' <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a> ';
         $alertmessage->save();
 
-        EmailBox::send(User::find($jd->id)->email,'TTRS:ตรวจสอบ EV','เรียน JD<br><br> Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        Message::sendMessage('ตรวจสอบ EV','Leader ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$jd->id);
+        EmailBox::send(User::find($jd->id)->email,'TTRS:' . $message,'เรียน JD<br><br> ' . $message.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        Message::sendMessage($message,$message.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$jd->id);
 
         CreateUserLog::createLog('สร้าง/แก้ไข EV โครงการ' . $minitbp->project);
 
@@ -416,8 +441,23 @@ class AssessmentEvController extends Controller
         $fulltbp = FullTbp::find($ev->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
 
         foreach ($admins as $key => $admin) {
+            $company_name = (!Empty($company->name))?$company->name:'';
+            $bussinesstype = $company->business_type_id;
+            $fullcompanyname = $company_name;
+    
+            if($bussinesstype == 1){
+                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            }else if($bussinesstype == 2){
+                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 3){
+                $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 4){
+                $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            }
+
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $businessplan->id;
             $notificationbubble->notification_category_id = 1;
@@ -429,13 +469,13 @@ class AssessmentEvController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =$admin->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ตรวจสอบ EV ของโครงการ ' . $minitbp->project .' <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a> ';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' กำหนด Weight EV โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname .' <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a> ';
             $alertmessage->save();
 
             CreateUserLog::createLog('อนุมัติรายการ EV โครงการ' . $minitbp->project);
 
-            EmailBox::send(User::find($admin->id)->email,'TTRS:กำหนด Weight EV','เรียน Admin<br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            Message::sendMessage('กำหนด Weight EV','JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบและกำหนด Weight <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$admin->id);
+            EmailBox::send(User::find($admin->id)->email,'TTRS:กำหนด Weight EV โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname,'เรียน Admin<br> JD ได้อนุมัติ EV โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname .' โปรดตรวจสอบและกำหนด Weight <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            Message::sendMessage(' กำหนด Weight EV โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname,'JD ได้อนุมัติ EV โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname.' โปรดตรวจสอบและกำหนด Weight <a href="'.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$admin->id);
         }
 
         $ev = Ev::find($request->id);
@@ -455,15 +495,15 @@ class AssessmentEvController extends Controller
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
-
+        $jd = User::where('user_type_id',6)->first();
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
-        $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
+        $alertmessage->target_user_id = $jd->id;
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ตรวจสอบค่า Weight Ev ของโครงการ ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a> ';
         $alertmessage->save();
 
-        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br><br> Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        Message::sendMessage('ตรวจสอบ EV','Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+        EmailBox::send($jd->email,'TTRS:ตรวจสอบ EV','เรียน JD<br><br> Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        Message::sendMessage('ตรวจสอบ EV','Admin ได้สร้าง EV สำหรับโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a>',Auth::user()->id,$jd->id);
 
         return response()->json($ev);  
     }
@@ -483,17 +523,31 @@ class AssessmentEvController extends Controller
             $fulltbp = FullTbp::find($ev->full_tbp_id);
             $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
             $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+            $company = Company::find($businessplan->company_id);
+
+            $company_name = (!Empty($company->name))?$company->name:'';
+            $bussinesstype = $company->business_type_id;
+            $fullcompanyname = $company_name;
+    
+            if($bussinesstype == 1){
+                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            }else if($bussinesstype == 2){
+                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 3){
+                $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 4){
+                $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            }
 
             foreach ($admins as $key => $admin) {
-
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id =$admin->id;
-                $alertmessage->detail = 'EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+                $alertmessage->detail = 'EV โครงการ' . $minitbp->project .'ของ' .$fullcompanyname. ' ผ่านการอนุมัติแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
                 $alertmessage->save();
 
-                EmailBox::send($admin->email,'TTRS:EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','เรียน Admin<br><br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-                Message::sendMessage('EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a>',Auth::user()->id,$admin->id);
+                EmailBox::send($admin->email,'TTRS:EV ของโครงการ' . $minitbp->project .'ของ' .$fullcompanyname. ' ผ่านการอนุมัติ','เรียน Admin<br><br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ของ' .$fullcompanyname. ' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                Message::sendMessage('EV โครงการ' . $minitbp->project .'ของ' .$fullcompanyname. ' ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.'ของ' .$fullcompanyname. ' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a>',Auth::user()->id,$admin->id);
             }
 
             $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
@@ -501,11 +555,11 @@ class AssessmentEvController extends Controller
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =$projectassignment->leader_id;
-            $alertmessage->detail = 'EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+            $alertmessage->detail = 'EV โครงการ' . $minitbp->project .'ของ' .$fullcompanyname. ' ผ่านการอนุมัติแล้ว ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
             $alertmessage->save();
             
-            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','เรียน Leader<br><br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            Message::sendMessage('EV ของโครงการ' . $minitbp->project .' ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:EV โครงการ' . $minitbp->project .'ของ' .$fullcompanyname. ' ผ่านการอนุมัติ','เรียน Leader<br><br> JD ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ของ' .$fullcompanyname. ' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            Message::sendMessage('EV โครงการ' . $minitbp->project .' ผ่านการอนุมัติ','JD ได้อนุมัติ EV สำหรับโครงการ  '.$minitbp->project.' ตรวจสอบได้ที่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
 
         }else{
             Ev::find($request->id)->update(
@@ -521,6 +575,21 @@ class AssessmentEvController extends Controller
             $fulltbp = FullTbp::find($ev->full_tbp_id);
             $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
             $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+            $company = Company::find($businessplan->company_id);
+
+            $company_name = (!Empty($company->name))?$company->name:'';
+            $bussinesstype = $company->business_type_id;
+            $fullcompanyname = $company_name;
+    
+            if($bussinesstype == 1){
+                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            }else if($bussinesstype == 2){
+                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 3){
+                $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 4){
+                $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            }
 
             foreach ($admins as $key => $admin) {
                 $notificationbubble = new NotificationBubble();
@@ -534,11 +603,11 @@ class AssessmentEvController extends Controller
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id =$admin->id;
-                $alertmessage->detail = 'ให้แก้ไข EV ของโครงการ' . $minitbp->project . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
+                $alertmessage->detail = 'ให้แก้ไข EV โครงการ' . $minitbp->project . 'ของ' .$fullcompanyname . ' ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
                 $alertmessage->save();
 
-                EmailBox::send($admin->email,'TTRS:แก้ไข EV','เรียน Admin<br> JD ได้ตรวจ EV สำหรับโครงการ '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-                Message::sendMessage('แก้ไข EV','JD ได้ตรวจ EV สำหรับโครงการ  '.$minitbp->project.' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a>',Auth::user()->id,$admin->id);
+                EmailBox::send($admin->email,'TTRS:แก้ไข EV โครงการ' . $minitbp->project . 'ของ' .$fullcompanyname,'เรียน Admin<br> JD ได้ตรวจ EV สำหรับโครงการ '.$minitbp->project.'โครงการ' . $minitbp->project . ' ของ' .$fullcompanyname . ' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                Message::sendMessage('แก้ไข EV โครงการ' . $minitbp->project . 'ของ' .$fullcompanyname,'JD ได้ตรวจ EV สำหรับโครงการ  '.$minitbp->project. ' ของ' .$fullcompanyname . ' มีข้อแก้ไขดังนี้ '.$request->note.' ให้แก้ไขใหม่ ได้ที่ <a href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a>',Auth::user()->id,$admin->id);
             }
 
         }
@@ -563,6 +632,26 @@ class AssessmentEvController extends Controller
         $fulltbp = FullTbp::find($ev->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+
+        $message = ' Admin ได้กำหนด weight ของโครงการ' . $minitbp->project . ' ของ' . $fullcompanyname;
+        if($ev->refixstatus == 2){
+            $message = ' ตรวจสอบ EV ที่มีการแก้ไขค่า weight โครงการ' . $minitbp->project . ' ของ' . $fullcompanyname;
+        }
 
         // $notificationbubble = new NotificationBubble();
         // $notificationbubble->business_plan_id = $businessplan->id;
@@ -571,15 +660,15 @@ class AssessmentEvController extends Controller
         // $notificationbubble->user_id = $auth->id;
         // $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
         // $notificationbubble->save();
-
+        $jd = User::where('user_type_id',6)->first();
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
-        $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' Admin ได้กำหนด weight ของโครงการ ' . $minitbp->project . ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a> ';
+        $alertmessage->target_user_id = $jd->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $message. ' <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a> ';
         $alertmessage->save();
 
-        EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ตรวจสอบ EV','เรียน JD<br><br> Admin ได้กำหนด weight ของโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        Message::sendMessage('ตรวจสอบ EV','Admin ได้กำหนด weight ของโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+        EmailBox::send($jd->email,'TTRS:'. $message,'เรียน JD<br><br> ' .$message.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        Message::sendMessage($message,'Admin ได้กำหนด weight ของโครงการ '.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>ดำเนินการ</a>',Auth::user()->id,$jd->id);
         CreateUserLog::createLog('กำหนดค่า EV Weight โครงการ' . $minitbp->project);
         return response()->json($ev);  
     }
