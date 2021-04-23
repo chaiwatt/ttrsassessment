@@ -4,7 +4,6 @@ $(document).on('click', '.togglebar', function(e) {
     if ($("body").hasClass("sidebar-xs")) {
         status = 1
     }else{
-        console.log('open');
         status = 0;
     }
 

@@ -1,11 +1,9 @@
 $(document).on('change', '#expert', function(e) {
-  console.log($(this).val());
     if($(this).val() == ''){
         $('#assignedproject').html('');
         return;
     }
     getExpert($(this).val()).then(data => {
-      console.log(data);
        var html = 'ยังไม่มีโครงการที่ได้รับมอบหมาย';
        
         if(data.length > 0){
@@ -44,7 +42,6 @@ $(document).on('change', '#expert', function(e) {
                 </tr>`
             });
             html +=`</tbody></table></div>`;
-            console.log(html);
         }
         $('#assignedproject').html(html);
     }).catch(error => {})
@@ -114,7 +111,6 @@ function getExpert(id){
         $("#expert_wrapper").html(html);
         if(data.length == $('.assignexpert').filter(':checked').length){
             doneAssignement(route.fulltbpid).then(data => {
-              console.log(data);
             }).catch(error => {})
         }
      }).catch(error => {})
@@ -238,7 +234,6 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
     assignExpertSave($('#expert').val(),route.fulltbpid).then(data => {
       $("#spiniconcheck"+$(this).data('id')).attr("hidden",true);
         var html = ``;
-        console.log(data);
         data.forEach(function (expert,index) {
             var onlymaster = ``;
             var checkstatus = ``;
@@ -249,7 +244,6 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
             if(expert.expertcomment != null){
               comment = `<button type="button" data-id="${expert.id}" class="btn btn-sm bg-info expertcomment">ความเห็น</button>`;
             }
-            // console.log('--> ' + expert.expertcomment);
             var acceptstatus = '';
             if(expert.accepted == 0){
               acceptstatus = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ตอบรับ</span>`;
@@ -359,7 +353,6 @@ $(document).on('click', '#sendtojd', function(e) {
     });
     $("#spinicon").attr("hidden",false);
     notifyJD(arr,route.fulltbpid).then(data => {
-      console.log(data);
       $("#spinicon").attr("hidden",true);
         var html = ``;
           Swal.fire({
@@ -392,10 +385,8 @@ function notifyJD(users,fulltbpid){
   }
 
   $(document).on('click', '.expertcomment', function(e) {
-    console.log($(this).data('id'));
       expertComment($(this).data('id')).then(data => {
           var html = ``;
-          console.log(data);
           $('#overview').val(data.overview);
           $('#management').val(data.management);
           $('#technology').val(data.technology);
@@ -427,7 +418,6 @@ function notifyJD(users,fulltbpid){
   
   $(document).on('click', '.expertworkload', function(e) {
     getExpert($(this).data('id')).then(data => {
-      console.log(data);
        var html = 'ยังไม่มีโครงการที่ได้รับมอบหมาย';
        
         if(data.length > 0){
@@ -466,7 +456,6 @@ function notifyJD(users,fulltbpid){
                 </tr>`
             });
             html +=`</tbody></table></div>`;
-            console.log(html);
         }
         $('#expert_workload_wrapper').html(html);
         $('#modal_expert_workload').modal('show');

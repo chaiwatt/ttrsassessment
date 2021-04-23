@@ -78,9 +78,7 @@ savePNGButton.addEventListener("click", function (event) {
   } else {
     var dataURL = signaturePad.toDataURL();
     uploadSignature(dataURL).then(data => {
-    console.log(data);
     var html = `<img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
-    // console.log(html);
     $("#signatureid").val(data.id);
     $('#modal_signature').modal('hide');
     if(wrapper_edit.value == 1){
@@ -91,11 +89,9 @@ savePNGButton.addEventListener("click", function (event) {
 
   })
   .catch(error => {
-      console.log(error)
+
   })
 
-    console.log(dataURL);
-    // download(dataURL, "signature.png");
   }
 });
 
@@ -137,9 +133,7 @@ $("#signature").on('change', function() {
           data: formData,
           contentType: false,
           processData: false,
-          success: function(data){
-              console.log(data)
-              
+          success: function(data){            
               $("#signatureid").val(data.id);
               var html = `<br><img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
               $('#modal_signature').modal('hide');

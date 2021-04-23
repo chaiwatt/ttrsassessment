@@ -550,7 +550,6 @@
 	}
 
 	$(document).on('click', '#submitminitbp', function(e) {
-		console.log($('#appceptagreement').is(':checked'));
 		if($('#appceptagreement').is(':checked') === false){
 			Swal.fire({
 				title: 'ผิดพลาด!',

@@ -1,7 +1,6 @@
 $(document).on('change', '#announcecategory', function(e) {
     var html ='';
     showAnnounce($(this).val()).then(data => {
-        console.log(data);
         data.forEach(function (announce,index) {
             html += `<p class="announce-p"><i class="icofont-ui-folder"></i> ${announce.day} ${announce.month} ${announce.year} (${announce.announcecategory['name']}) <a class="ml-3" href="${route.url}/announcenews/${announce.slug}" > ${announce.title}</a></p>
             <hr class="announce-hr">`
@@ -32,7 +31,6 @@ function showAnnounce(categoryid){
   $(document).on('keyup', '#search', function(e) {
     var html ='';
     searchAnnounce($(this).val()).then(data => {
-        console.log(data);
         data.forEach(function (announce,index) {
             html += `<p class="announce-p"><i class="icofont-ui-folder"></i> ${announce.day} ${announce.month} ${announce.year} (${announce.announcecategory['name']}) <a class="ml-3" href="${route.url}/announcenews/${announce.slug}" > ${announce.title}</a></p>
             <hr class="announce-hr">`

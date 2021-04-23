@@ -184,7 +184,6 @@
     });
     $("#announce").on('change', function() {
     var file = this.files[0];
-    console.log(file);
     if (this.files[0].size/1024/1024*1000 > 1000 ){
         alert('ไฟล์ขนาดมากกว่า 1 MB');
         return ;

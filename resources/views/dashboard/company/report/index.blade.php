@@ -358,10 +358,8 @@
     }
 
     $( document ).ready(function() {
-        // console.log('events');
             var events = [];
             getEvent().then(data => {
-                console.log(data);
                 data.forEach(function (event,index) {
                     events.push({
                         title: event["summary"],

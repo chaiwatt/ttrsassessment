@@ -12,7 +12,7 @@ $(document).on("click","#btn_modal_create_category",function(e){
         $("#pagecategory").html(html);
     })
     .catch(error => {
-        //console.log(error)
+     
     })
 });
 
@@ -32,7 +32,7 @@ $(document).on("click","#btn_modal_edit_category",function(e){
         $("#pagecategory").html(html);
     })
     .catch(error => {
-        //console.log(error)
+        
     })
 });
 
@@ -60,7 +60,7 @@ $(document).on("click","#deletecategory",function(e){
                 $("#pagecategory").html(html);
             })
         .catch(error => {
-            //console.log(error)
+            
         })
         }
     });
@@ -77,7 +77,7 @@ $(document).on("click","#btn_modal_create_tag",function(e){
         $("#pagetag").html(html);
     })
     .catch(error => {
-        //console.log(error)
+        
     })
 });
 
@@ -106,7 +106,7 @@ $(document).on("click","#btn_modal_edit_tag",function(e){
         $("#pagetag").html(html);
     })
     .catch(error => {
-        //console.log(error)
+        
     })
 });
 
@@ -141,7 +141,7 @@ $(document).on("click","#deletetag",function(e){
                 $("#pagetag").html(html);
             })
         .catch(error => {
-            //console.log(error)
+            
         })
         }
     });
@@ -172,7 +172,6 @@ $("#singlefile").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data.gallergy)
                 var inp = `<input name="gal[]" value="${data.image.id}" data-id="${data.image.id}" class="gal" hidden>`;
                 $('#gallery_wrapper').append(inp);
                 var html = `<div class="form-group">
@@ -218,7 +217,6 @@ $(document).on('click', '#deletegallery', function (e) {
         contentType: false,
         processData: false,
         success: function(data){
-            console.log(data.id);
             $("input[name='gal[]'][data-id='" + data.id + "']").remove();
             var html = `<div class="form-group">
                         <div class="row">`;
@@ -269,8 +267,6 @@ $("#file").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
-
                 var inp = `<input name="featureinp" value="${data.feature.id}" data-id="${data.feature.id}" class="featureinp" hidden>`;
                 $('#feature_input_wrapper').append(inp);
                 var inp2 = `<input name="blogsidebarimage" value="${data.blogsidebarimage.id}" data-id="${data.blogsidebarimage.id}" class="blogsidebarimage" hidden>
@@ -311,7 +307,6 @@ $(document).on('click', '#deletefeature', function (e) {
         contentType: false,
         processData: false,
         success: function(data){
-            console.log(data);
             $("input[name='featureinp'][data-id='" + data.feature + "']").remove();
             $("input[name='featurethumbnailinp'][data-id='" + data.thumbnail + "']").remove();
             $("div[id='featurediv']").remove();

@@ -1,7 +1,5 @@
 $(document).on('click', '.pendinguser', function(e) {
-    console.log($(this).data('id'));
     showPendingUser($(this).data('id')).then(data => {
-        console.log(data);
         var html =``;
         data.forEach(function (user,index) {
             html += `<tr > 

@@ -333,13 +333,11 @@
         
     $(document).on('click', '.showreject', function(e) {
         showReject($(this).data('id'),$(this).data('fulltbpid')).then(data => {
-            // console.log(data);
             $('#rejectreason_wrapper').html(data);
             $('#modal_show_reason').modal('show');
         })
         
-    });
-    // 
+    }); 
 
     function showReject(id,fulltbpid){
         return new Promise((resolve, reject) => {

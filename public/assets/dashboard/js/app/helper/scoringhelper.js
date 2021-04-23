@@ -14,12 +14,10 @@ $(function() {
         // RowSpan("extra_criteriatable");
         // $('#sumofweight').html(data.sumweigth);
         // RowSpanExtra("extra_subpillarindex");
-        // console.log('dfsdf');
         if(jQuery.isEmptyObject(data.scoringstatus) ){
-            // console.log('aa');
+
             $('.inpscore').prop("disabled", false);
         }else{
-            // console.log('bb');
             $('.inpscore').prop("disabled", true);
             readonly = "readonly";
             disabled = "disabled";
@@ -106,7 +104,6 @@ function RenderTable(data,evtype){
                             finalcheckvalue = "checked";
                         }
                     }
-                    // console.log(comment);
                     var warningtext ='';
                     var warninglabel ='';
                     if(finaltextvalue != textvalue){

@@ -7,7 +7,6 @@ $(document).on('change', '#searchgroup', function(e) {
     
     // if($(this).val() < 12){
         var selectedtedtext = $(this).find("option:selected").text();
-        // console.log(selectedtedtext);
         if(selectedtedtext == 'สาขาความเชี่ยวชาญ'){
             $("#searchname_wrapper").attr("hidden",true);
             $("#searchexpertbranch_wrapper").attr("hidden",false);
@@ -63,13 +62,6 @@ $(document).on('change', '#searchprojectstatus', function(e) {
     })
     .catch(error => {})
 });
-
-// $(document).on('click', '#btnsearch', function(e) {
-//     console.log($('#searchgroup').val());
-//     // search($('#searchgroup').val(),$(this).val()).then(data => {
-//     //     createTable(data);
-//     // }).catch(error => {});
-// });
 
 
 function createTable(data){

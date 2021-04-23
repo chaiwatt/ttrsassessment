@@ -630,7 +630,6 @@
 						$(".chkauthorizeddirector:checked").each(function(){
 							if($(this).data('id') == 1){
 								iserror = true;
-								console.log('found');
 							}
 						});
 						if(iserror == true ){
@@ -727,7 +726,6 @@
 						}
 					});
 				}else{	
-					console.log('hi...');
 					var pdfpath = "{{url('/')}}" + '/'+ "{{$minitbp->attachment}}";
 					$('#pdfname').val("{{$minitbp->attachment}}");
 					PDFObject.embed(pdfpath, "#example1");
@@ -735,7 +733,7 @@
 					// createPdf($('#minitbpid').val()).then(data => {
 					// 	var pdfpath = route.url + '/'+ data;
 					// 	var url = pdfpath;
-					// 	$('#downloadpdf').attr('href', url);
+						$('#downloadpdf').attr('href', pdfpath);
 					// 	PDFObject.embed(pdfpath, "#example1");
 					// }).catch(error => {})
 				}
@@ -897,7 +895,6 @@
 	}
 
 	$(document).on('click', '#submitminitbp', function(e) {
-		// console.log($('#appceptagreement').is(':checked'));
 		if($('#appceptagreement').is(':checked') === false){
 			Swal.fire({
 				title: 'ผิดพลาด!',
@@ -925,7 +922,6 @@
 				if($('#usersignature').val() == 1){
 					$("#minitbppdf").trigger('click');
 				}else{
-					console.log(downloadpdf);
 					$("#spinicon").attr("hidden",false);
 					submitNoAttachement($('#minitbpid').val(),$('#pdfname').val()).then(data => {
 						$("#submitminitbp").attr("hidden",true);

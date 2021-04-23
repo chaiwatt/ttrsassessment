@@ -1,12 +1,10 @@
 $(function() {
     getSummaryEv($('#evid').val()).then(data => {
-        // console.log(data);
         $('#showpercent').html(parseFloat(data.projectgrade.percent).toFixed(2));
         $('#showgrade').html(data.projectgrade.grade);
         sumGrade(data);
         RenderTable(data,1);
         if(data.ev.percentextra > 0){ 
-            //console.log(data.extrascorings);
             RenderExtraTable(data.extracriteriatransactions,data.extrascorings);
         }
          $(".loadprogress").attr("hidden",true);
@@ -152,7 +150,6 @@ function getSummaryEv(evid){
         if (cell4 === null || forthCell.innerText !== cell4.innerText) {
             cell4 = forthCell;
         } else {
-            // console.log(forthCell.innerText)
             if (forthCell.innerText.includes("placeholder") == true){
                 cell4.rowSpan++;
                 forthCell.remove();
@@ -168,7 +165,6 @@ $(document).on('click', '#togglecomment', function(e) {
 
 
  function RenderTable(data,evtype){
-    // console.log(data.criteriatransactions);
     var html =``;
 
     data.criteriatransactions.forEach((criteria,index) => {
@@ -236,7 +232,10 @@ function RenderExtraTable(data,extrascorings){
             return result.ev_id === criteriatransaction.ev_id && result.extra_critreria_transaction_id === criteriatransaction.id;
           });
           
-        //  console.log(find[0].scoring);
+         var comment = '';
+         if(find[0].comment != null){
+            comment = find[0].comment;
+         }
             html += `<tr > 
             <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
             <td> ${criteriatransaction.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
@@ -244,6 +243,12 @@ function RenderExtraTable(data,extrascorings){
             <div class="form-group">
                 <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-id="${criteriatransaction.id}"><i class="icon-folder-open3"></i></a></label>
                 <input type="text" value="${find[0].scoring}" data-id="${criteriatransaction.id} "class="form-control inputextrascore weigthvalue decimalformat" readonly >
+
+                <div class="toggle"><div class="form-group">
+                    <label><i>ความเห็น</i></label>
+                    <input type="text" value="${comment}" class="form-control form-control-lg inpscore inputextracomment" >
+                </div>
+
             </div>
        
         </td> 

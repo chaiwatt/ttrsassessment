@@ -105,7 +105,6 @@ $(document).on("click",".deleteexperteducationclass",function(e){
 }); 
 
 $(document).on("click",".messagelink",function(e){
-    // console.log('new year');
     $(this).removeClass("unread")
     Message.getMessage($(this).data('id')).then(data => {
         let html= '';
@@ -150,7 +149,6 @@ $(document).on("click",".messagelink",function(e){
                 </li>`
             )
 
-        console.log(data.unreadmessages);
         
         $("#tablemessage").html(html);
         $("#unreadmessages").html(html2);
@@ -160,7 +158,6 @@ $(document).on("click",".messagelink",function(e){
         $('#modal_message').modal('show');
     })
     .catch(error => {
-        //console.log(error)
     })
     // 
 });
@@ -180,7 +177,6 @@ $(document).on("click","#deleteexpertexpienceclass_editview",function(e){
         if (result.value) {
             Expert.deleteExpereince($(this).data('id')).then(data => {
                 var html='';
-                console.log(data);
                 data.forEach(function (expereince,index) {
                     html += `<tr>
                                 <td>${expereince.company} </td>
@@ -195,7 +191,6 @@ $(document).on("click","#deleteexpertexpienceclass_editview",function(e){
                  $("#expertexpience_wrapper_tr").html(html);
            })
            .catch(error => {
-               // console.log(error)
            })
         }
     });
@@ -229,7 +224,7 @@ $(document).on("click","#deleteexperteducationclass_editview",function(e){
                  $("#experteducation_wrapper_tr").html(html);
            })
            .catch(error => {
-               // console.log(error)
+            
            })
         }
     });
@@ -260,7 +255,7 @@ $(document).on("click","#btn_modal_user",function(e){
          $("#requestfriend_wrapper_tr").html(html);
    })
    .catch(error => {
-       // console.log(error)
+       
    })
     return ;
 });
@@ -294,7 +289,7 @@ $(document).on("click","#deleterequestfriendclass_editview",function(e){
                  $("#requestfriend_wrapper_tr").html(html);
            })
            .catch(error => {
-               // console.log(error)
+               
            })
         }
     });
@@ -334,7 +329,7 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
                 $("#friend_wrapper_tr").html(html);
     })
     .catch(error => {
-        // console.log(error)
+        
     })
 });
 
@@ -366,7 +361,7 @@ $(document).on("click","#deletefriendclass_editview",function(e){
                     $("#friend_wrapper_tr").html(html);
             })
             .catch(error => {
-                // console.log(error)
+               
             })
         }
     });
@@ -397,7 +392,6 @@ $("#attachment").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
                 var inp = `<input name="input_attachment[]" value="${data.file.id}" data-id="${data.file.id}" class="input_attachment" hidden>`;
                 $('#input_attachment_wrapper').append(inp);
                 var html = `<ul class="media-list">`;
@@ -438,7 +432,6 @@ $(document).on('click', '#deleteattachment', function (e) {
         contentType: false,
         processData: false,
         success: function(data){
-            console.log(data.id);
             $("input[name='input_attachment[]'][data-id='" + data.id + "']").remove();
             var html = `<ul class="media-list">`;
             data.messageboxattachments.forEach(function (messageboxattachment,index) {
@@ -547,7 +540,7 @@ $("#vatno").on('change', function() {
         }
     })
     .catch(error => {
-        console.log(error)
+     
     })
 });
 
@@ -571,7 +564,6 @@ function checkTinPin(vatid){
 }
 
 $(document).on("click","#getotp",function(e){
-    // console.log($('#phone').val());
     if($('#phone').val() == ''){
         return ;
     }
@@ -601,11 +593,10 @@ $(document).on("click","#getotp",function(e){
                 showLoaderOnConfirm: true,
                 preConfirm: (login) => {
                     SMS.sendSMS($('#phone').val()).then(data => {
-                        console.log(data);
                         tmpotp = data;
                     })
                     .catch(error => {
-                        // console.log(error)
+
                     })
                 },
                 allowOutsideClick: false
@@ -624,11 +615,10 @@ $(document).on("click","#getotp",function(e){
                         showLoaderOnConfirm: true,
                         preConfirm: (inp) => {
                           SMS.saveOTP(tmpotp,inp).then(data => {
-                                console.log('my otp: ' + data);
                                 location.reload();
                             })
                             .catch(error => {
-                                // console.log(error)
+                               
                             })
                         },
                         allowOutsideClick: false
@@ -661,7 +651,7 @@ $("#hid").on('change', function() {
          }
      })
      .catch(error => {
-         console.log(error)
+         
      })
  });
 
@@ -705,7 +695,7 @@ $("#hid").on('change', function() {
 $(document).on("change","#companydoc",function(e){
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
-    console.log(file);
+
     if (this.files[0].size/1024/1024*1000 > 2000 ){
         alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
@@ -722,7 +712,6 @@ $(document).on("change","#companydoc",function(e){
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -861,7 +850,6 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,sign
         if (result.value) {
             deleteAuthorizedDirector($(this).data('id')).then(data => {
                 var html = ``;
-                console.log(data.length);
                 data.forEach(function (director,index) {
                     var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
                     if(director.signature_id != null){
@@ -945,7 +933,6 @@ $(document).on('click', '#btn_modal_add_address', function(e) {
                 <td><a type="button" data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
             </tr>`
             });
-            console.log(data.length);
             if (data.length >= 1) {
                 $("#other_address_wrapper").attr("hidden",false);
             }else{
@@ -1060,7 +1047,6 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
         data.employpositions.forEach(function (position,index) {
                 var selectposition = '';
                 if(position.id == data.companyemploy['employ_position_id']){
-                    console.log('ok');
                     selectposition = 'selected';
                 }
                 html += `<option value="${position['id']}" ${selectposition} >${position['name']}</option>`
@@ -1172,7 +1158,6 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
 
         editAuthorizedDirector($('#authorized_director_id').val(),$('#directorprefix_edit').val(),$('#otherprefix_edit').val(),$('#directorname_edit').val(),$('#directorlastname_edit').val(),$('#directorposition_edit').val(),$('#signatureid').val(),$('#otherposition_edit').val()).then(data => {
             var html = ``;
-            console.log(data);
             data.forEach(function (director,index) {
                 var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
                 if(director.signature_id){

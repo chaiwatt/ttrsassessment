@@ -10,7 +10,6 @@ import * as ClusterTransaction from './clustertransaction.js';
 $(document).on('click', '#btnaddclustergroup', function(e) {
     Cluster.getCluster().then(data => {
         var html = ``;
-        console.log(data);
         data.forEach(function (cluster,index) {
                 html += `<option value="${cluster['id']}" >${cluster['name']}</option>`
             });
@@ -24,7 +23,6 @@ $("#cluster").on('change', function() {
     SubCluster.getSubCluster($(this).val()).then(data => {
         $("#subcluster_wrapper").attr("hidden",false);
         var html = ``;
-        console.log(data);
         if(data.length > 0){
             $("#subcluster_wrapper").attr("hidden",false);
         }else{
@@ -41,11 +39,9 @@ $("#cluster").on('change', function() {
 });
 
 $("#subcluster").on('change', function() {
-    console.log($(this).val());
     Extrafactor.getExtraFactor($(this).val()).then(data => {
         $("#extrafactor_wrapper").attr("hidden",false);
         var html = ``;
-        console.log(data);
         if(data.length > 0){
             $("#extrafactor_wrapper").attr("hidden",false);
         }else{
@@ -70,7 +66,6 @@ $("#extrafactor").on('change', function() {
                       </div></div>`;
        
         SubExtrafactor.getSubExtraFactor($(this).val()[k]).then(data => {
-            console.log('data');
             $("#subextrafactor_wrapper").attr("hidden",false);
             if(data.subextrafactors.length > 0){
                 
@@ -87,18 +82,14 @@ $("#extrafactor").on('change', function() {
     
     output += "</div>";
     output = output.replace(`<div class='row'></div>`, ``);
-    console.log(html);
     $("#extrafactor2_wrapper").html(output);
 });
 
 
-$(document).on('change', '#subextrafactor', function(e) {
-    console.log('extrafactor: ' + $(this).val().length);
-    
+$(document).on('change', '#subextrafactor', function(e) { 
     var output = "<div class='row'>";
     for(var k = 0;k<$(this).val().length;k++){
         var array = $(this).val()[k].split('-');
-        // console.log($(this).val()[k]);
         output += `<div class="col-md-4">
                         <div class="form-group">
                             <input type="text" name="subextrafactorscore[]" id="subextrafactor_score" data-extrafactor="${array[1]}" data-id="${array[0]}" class="form-control form-control-lg" placeholder="${$("#subextrafactor option[value='"+$(this).val()[k]+"']").text()} score">
@@ -113,7 +104,6 @@ $(document).on('change', '#subextrafactor', function(e) {
 $(document).on('click', '#btn_modal_add_clustergroup', function(e) {
     var subextrafactorscore = [];
     $('input[name^="subextrafactorscore"]').each(function() {
-        console.log($(this).data('extrafactor') + ' ' + $(this).data('id'));
         subextrafactorscore.push({
             subcluster: $('#subcluster').val(),
             extrafactor: $(this).data('extrafactor'),
@@ -129,12 +119,9 @@ $(document).on('click', '#btn_modal_add_clustergroup', function(e) {
             score: $(this).val(),
         });
     });
-    // return ;
 
-    // console.log($('#assessmentgroupid').val() + ' ' + $('#cluster').val() + ' ' + $('#subcluster').val() + ' ' + $('#subclusterweight').val() + ' ' + $('#extrafactor').val() + ' ' + $('#extrafactorscore').val() + ' ' + $('#subextrafactor').val() + ' ' + $('#subextrafactorscore').val());
     ClusterTransaction.addClusterTransaction($('#assessmentgroupid').val(),$('#cluster').val(),$('#subcluster').val(),$('#subclusterweight').val(),$('#extrafactor').val(),$('#extrafactorscore').val(),$('#subextrafactor').val(),$('#subextrafactorscore').val(),subextrafactorscore,extrafactorscore).then(data => {
         var html = ``;
-        console.log(data);
         data.forEach(function (transaction,index) {
             html += `<tr >                                        
             <td> ${transaction.cluster_id} </td>                                            

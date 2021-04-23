@@ -339,7 +339,7 @@ function info(msg) {
 }
 function warn(msg) {
   if (verbosity >= VERBOSITY_LEVELS.warnings) {
-    // console.log('Warning: ' + msg);
+
   }
 }
 function deprecated(details) {

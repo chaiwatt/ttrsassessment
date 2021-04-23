@@ -1106,7 +1106,6 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
   
          var min = Math.min.apply(Math, unique.map(i=>Number(i)));
          var max = Math.max.apply(Math, unique.map(i=>Number(i)));
-         console.log(max + ' ' + min);
 
          if((max-min+1) <= parseInt($("#ganttnummonth").val())){
             Project.editPlan($('#projectplan').val(),$('#plandetail_edit').val(),data).then(data => {

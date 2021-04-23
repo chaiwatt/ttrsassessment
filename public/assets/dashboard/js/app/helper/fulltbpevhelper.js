@@ -195,7 +195,7 @@ $('.steps-basic').steps({
                     }
                 });
                 $('.context-menu-one').on('click', function(e){
-                    // console.log('clicked', this);
+
                 })    
             });
         }
@@ -284,7 +284,7 @@ $('.steps-basic-extra').steps({
                     selector: '.context-menu-one', 
                     callback: function(key, options) {
                         if(key == 'add'){
-                            console.log("add");
+
                             $("#parent").html($( "#pillar option:selected" ).text());
                             $('#modal_addextraitem').modal('show');
                         }
@@ -316,7 +316,6 @@ $('.steps-basic-extra').steps({
                     }
                 });
                 $('.context-menu-one').on('click', function(e){
-                    // console.log('clicked', this);
             
                 })    
             });
@@ -619,7 +618,7 @@ function RenderExtraTable(data){
         }
 
     });
-    // console.log(html)
+ 
         $("#extra_criteria_transaction_wrapper_tr").html(html);
 }
 
@@ -1055,7 +1054,6 @@ $(document).on('click', '#approveevstageone', function(e) {
 });
 
 $(document).on('click', '#btnaddextracriteria', function(e) {
-    // console.log('extra');
     if($('#percentextra').val() == 0){
         Swal.fire({
             title: 'ผิดพลาด...',

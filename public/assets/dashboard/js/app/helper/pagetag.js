@@ -18,7 +18,6 @@ function addTag(tag){
 }
 
 function editTag(id,tag){
-    console.log(id + '  ' + tag);
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/pagetag/edit`,

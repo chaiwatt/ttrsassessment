@@ -23,7 +23,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="left-icon-tab1">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-9">
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label>หัวข้อ</label>
@@ -31,14 +31,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>การเข้าร่วม<span class="text-danger">*</span></label>
+                                        <select id="attendevent" class="form-control form-control-lg form-control-select2">
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label>สถานที่/ห้อง</label>
                                         <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control form-control-lg" readonly>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-group">
@@ -47,8 +54,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-group">
@@ -57,7 +62,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label>เวลาเริ่ม</label>
@@ -65,7 +73,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label>ถึงเวลา</label>
@@ -83,13 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>การเข้าร่วม<span class="text-danger">*</span></label>
-                                        <select id="attendevent" class="form-control form-control-lg form-control-select2">
-                                        </select>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
 

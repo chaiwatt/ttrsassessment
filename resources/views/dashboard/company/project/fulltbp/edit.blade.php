@@ -3104,7 +3104,7 @@
                 }
 				var fulltbpid = "{{$fulltbp->id}}";
 				updateGanttOrder(newrow,fulltbpid).then(data => {
-					console.log(data);
+
 				})
 				.catch(error => {})
 

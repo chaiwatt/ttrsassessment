@@ -6,7 +6,6 @@ $(function() {
 });
 
 $(document).on('change', '#fulltbp', function(e) {
-    // console.log($(this).val());
     if($(this).val() == 0){
         $("#project_wrapper").attr("hidden",true);
         return;

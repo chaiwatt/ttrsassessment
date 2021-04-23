@@ -78,7 +78,7 @@
             // 
          };
          reader.onerror = function (error) {
-           console.log('Error: ', error);
+
          };
     }
 

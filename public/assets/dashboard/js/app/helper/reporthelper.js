@@ -308,19 +308,16 @@ $('#chkjoinmetting').on('change.bootstrapSwitch', function(e) {
     if(e.target.checked==true){
         status =1;
     }        
-   console.log($(this).data('id'));
    globalid = $(this).data('id');
    $("#spinicon").attr("hidden",false);
    Attendee.updateJoinEvent($(this).data('id'),status).then(data => {
        $("#spinicon").attr("hidden",true);
-       console.log(data);
       
    }).catch(error => {})
 });
 
 
 $(document).on('change', '#attendevent', function(e) {
-    console.log($(this).val());
     var status = 1
     if($(this).val()==2){
         status =0;
@@ -328,7 +325,6 @@ $(document).on('change', '#attendevent', function(e) {
    $("#spinicon").attr("hidden",false);
    Attendee.updateJoinEvent($('#attendeventid').val(),status).then(data => {
        $("#spinicon").attr("hidden",true);
-       console.log(data);
       
    }).catch(error => {})
 });

@@ -95,7 +95,6 @@
                 var tmp = this.$element.val();
                 var res = tmp.split("/");
                 var elementval= res[0] + "/" + res[1] + "/" +  (parseInt(res[2])- yearconst);
-                console.log(tmp);
                 if (typeof (this.params.format) !== 'undefined' && this.params.format !== null) {
                     this.currentDate = moment(elementval, this.params.format).locale(this.params.lang);
                     // this.currentDate = moment(this.$element.val(), this.params.format).locale(this.params.lang);
@@ -187,10 +186,9 @@
             var yearPicker = "";
             // var y = this.currentDate.year();
             var y =parseInt(this.currentDate.year())+ yearconst;
-            console.log(y);
             for (var i = y - 3; i < y + 4; i++) {
                 yearPicker += '<div class="year-picker-item" data-year="' + i + '">' + i + '</div>';
-                // console.log(i);
+
             }
             this.midYear = y;
 
@@ -966,7 +964,6 @@
             var str = moment(this.currentDate).locale(this.params.lang).format(this.params.format);
             var res = str.split("/"); 
             var newdate = res[0] + "/" + res[1] + "/" + (parseInt(res[2])+ yearconst); 
-            console.log(str);
             if(this.params.time === true){
                 if(res[0].length <=2){
                     var _str = str.split(" ");

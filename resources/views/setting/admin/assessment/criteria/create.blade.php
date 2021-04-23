@@ -107,7 +107,6 @@
             branchid: "{{Auth::user()->branch_id}}"
         };
         $(document).on('change', '#pillar', function(e) {
-            //console.log($(this).val());
             var html ='';
             getSubpillar($(this).val()).then(data => {
                 html += `<option value="0" >===เลือกรายการ===</option>`

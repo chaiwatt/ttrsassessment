@@ -7,7 +7,6 @@ import * as Project from './project.js';
      if(e.target.checked==true){
          status =1;
      }        
-    console.log($(this).data('id'));
     $("#spinicon").attr("hidden",false);
         Assessment.addAssessment($(this).data('id'),status).then(data => {
         $("#spinicon").attr("hidden",true);
@@ -33,7 +32,6 @@ $(document).on('change', '#isic', function(e) {
 $("#companydoc").on('change', function() {
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
-    // console.log(file);
     if (this.files[0].size/1024/1024*1000 > 2000 ){
         alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
@@ -50,7 +48,6 @@ $("#companydoc").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
                 var html = ``;
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
@@ -101,7 +98,6 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
 $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
     addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#directorname').val(),$('#directorlastname').val()).then(data => {
         var html = ``;
-        console.log(data);
         data.forEach(function (authorizeddirector,index) {
             html += `<tr >                                        
                 <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            

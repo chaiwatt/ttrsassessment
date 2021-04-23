@@ -18,7 +18,6 @@ function addCategory(category){
 }
 
 function editCategory(id,category){
-    console.log(id + '  ' + category);
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/pagecategory/edit`,

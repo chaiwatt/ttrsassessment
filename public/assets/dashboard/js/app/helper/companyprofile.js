@@ -1,5 +1,4 @@
 function addCompanyProfile(lines,id){
-    console.log(route.url);
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/fulltbp/companyprofile/add`,

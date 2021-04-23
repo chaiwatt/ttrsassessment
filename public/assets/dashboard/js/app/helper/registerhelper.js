@@ -59,7 +59,7 @@ $("#vatno").on( 'change', function(){
         }
     })
     .catch(error => {
-        console.log(error)
+        
     })
  });
 

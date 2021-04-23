@@ -1,6 +1,5 @@
 $(document).on('click', '.downloadlink', function(e) {
     download($(this).data('docname')).then(data => {
-        // console.log(data);
     })
     .catch(error => {})
 });

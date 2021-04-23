@@ -32,6 +32,7 @@ use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
 use App\Model\CriteriaGroupTransaction;
 use App\Model\ExtraCriteriaTransaction;
+use Illuminate\Support\Facades\Session;
 
 class DashboardAdminProjectAssessmentController extends Controller
 {
@@ -46,17 +47,31 @@ class DashboardAdminProjectAssessmentController extends Controller
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
     }
     public function Edit($id,$userid){
+  
+       
+        
         $fulltbp = FullTbp::find($id);
+        
+        
         $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
         $scoringstatus = ScoringStatus::where('ev_id',$ev->id)
                                     ->where('user_id',$userid)
                                     ->first(); 
         $user = User::find($userid);   
-        $projectgrade = ProjectGrade::where('full_tbp_id',$fulltbp->id)->where('percent','!=',0)->get();                         
-        return view('dashboard.admin.project.assessment.edit')->withEv($ev)
-                                                            ->withScoringstatus($scoringstatus)
-                                                            ->withUser($user)
-                                                            ->withProjectgrade($projectgrade);
+        $projectgrade = ProjectGrade::where('full_tbp_id',$fulltbp->id)->where('percent','!=',0)->get();  
+        $check = ProjectMember::where('full_tbp_id',$fulltbp->id)->where('user_id',Auth::user()->id)->first();  
+        
+        if(!Empty($check)){
+            return view('dashboard.admin.project.assessment.edit')->withEv($ev)
+            ->withScoringstatus($scoringstatus)
+            ->withUser($user)
+            ->withProjectgrade($projectgrade);
+        }else{
+            Auth::logout();
+            Session::flush();
+            return redirect()->route('login');
+        }                  
+
     }
 
     public function EditSave(Request $request, $id){

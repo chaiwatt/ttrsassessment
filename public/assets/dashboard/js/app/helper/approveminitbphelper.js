@@ -2,7 +2,6 @@ import * as MiniTbp from './minitbp.js'
 
 
 $(document).on('click', '#editapprove', function(e) {
-    console.log($(this).data('project'));
     $('#minitbpid').val($(this).data('id'));
     $('#minitbptitle').html('โครงการ : '+ $(this).data('project'));
     
@@ -69,7 +68,6 @@ $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
 $(document).on('click', '.showlog', function(e) {
     var html ='';
     $("#spinicon_showlog"+$(this).data('id')).attr("hidden",false);
-    // console.log('ok');
     getReviseLog($(this).data('id'),$(this).data('doctype')).then(data => {   
         data.forEach(function (log,index) {
             html += `<tr >                                        

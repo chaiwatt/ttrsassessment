@@ -23,8 +23,12 @@ use App\Model\EventCalendarAttendeeStatus;
 class CalendarController extends Controller
 {
     public function GetParticipate(Request $request){
+        $tmpmember=array();
         $id1 = 0;
         $id2 = 0;
+        $fulltbp = FullTbp::find($request->id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
 
         $check =  ProjectMember::where('full_tbp_id',$request->id)->where('user_id',User::where('user_type_id',5)->first()->id)->first();
         if(Empty($check)){
@@ -44,24 +48,26 @@ class CalendarController extends Controller
             $id2 = $projectmember->id;
         }
 
-        $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$request->id)->pluck('user_id')->toArray();
-        $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
-        
-        $users = User::whereIn('id',$expertdetailarr)->get();
-       
-        $tmpmember=array();
-        foreach ($users as $key => $user) {
-            $projectmember = new ProjectMember();
-            $projectmember->full_tbp_id = $request->id;
-            $projectmember->user_id = $user->id;
-            $projectmember->save();
-            array_push($tmpmember,$projectmember->id);
+        $calendartypes = CalendarType::where('id',3)->get();
+        $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id','>=',4)->count();
+        if($projectstatustransactions == 1){
+            $calendartypes = CalendarType::where('id','<=',2)->get();
+            $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$request->id)->pluck('user_id')->toArray();
+            $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
+            $users = User::whereIn('id',$expertdetailarr)->get();
+            
+            foreach ($users as $key => $user) {
+                $projectmember = new ProjectMember();
+                $projectmember->full_tbp_id = $request->id;
+                $projectmember->user_id = $user->id;
+                $projectmember->save();
+                array_push($tmpmember,$projectmember->id);
+            }
+        }else if($projectstatustransactions == 2){
+            $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();
         }
 
         $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
-        $fulltbp = FullTbp::find($request->id);
-        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
-        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
 
         $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',4)->first();
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id','>=',4)->count();
@@ -71,13 +77,7 @@ class CalendarController extends Controller
         if($businessplan->business_plan_status_id >= 6 && $fulltbp->assignexpert == 2 && $ev->status == 4){
             $flownothree = 2;
         }
-        $calendartypes = CalendarType::where('id',3)->get();
-        $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id','>=',4)->count();
-        if($projectstatustransactions == 1){
-            $calendartypes = CalendarType::where('id','<=',2)->get();
-        }else if($projectstatustransactions == 2){
-            $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();
-        }
+
         if($id1 != 0){
             ProjectMember::find($id1)->delete();
         }

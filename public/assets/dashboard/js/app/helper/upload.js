@@ -1,10 +1,7 @@
 
 function upload(file){
-    // console.log(file);
     var formData = new FormData();
-    
     formData.append('file',file);
-    // console.log(formData );
     // return ;
     return new Promise((resolve, reject) => {
         $.ajax({

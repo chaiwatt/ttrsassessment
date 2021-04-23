@@ -16,7 +16,6 @@ $( document ).ready(function() {
 $(document).on('click', '#btnaddclustergroup', function(e) {
     Pillar.getPillar().then(data => {
         var html ='<option value="0" >==เลือกรายการ==</option>';
-        console.log(data);
         data.forEach(function (pilla,index) {
                 html += `<option value="${pilla['id']}" >${pilla['name']}</option>`
             });
@@ -57,7 +56,6 @@ $(document).on('change', '#subpillar', function(e) {
 $(document).on('change', '#subpillarindex', function(e) {
     $("#criteria_wrapper").attr("hidden",true);
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
-        console.log(data);
         var html ='';
         data.forEach(function (subpillar,index) {
                 html += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
@@ -147,7 +145,6 @@ function AddCheckList(){
 }
 
 function AddGrading(){
-    console.log('add grading');
     Ev.addEvGrading($('#evid').val(),$('#indextype').val(),$('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
         RenderTable(data);
         RowSpan();
@@ -184,8 +181,6 @@ function RowSpan(){
         const firstCell = row.cells[0];
         const secondCell = row.cells[1];
         const thirdCell = row.cells[2];
-        console.log(firstCell);
-        console.log(secondCell);
         if (cell1 === null || firstCell.innerText !== cell1.innerText) {
             cell1 = firstCell;
         } else {

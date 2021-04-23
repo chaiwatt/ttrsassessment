@@ -7,7 +7,6 @@ $(document).on('change', '#searchgroup', function(e) {
     
     // if($(this).val() < 12){
         var selectedtedtext = $(this).find("option:selected").text();
-        console.log(selectedtedtext);
         if(selectedtedtext == 'ชื่อโครงการ'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -139,19 +138,11 @@ $(document).on('change', '#searchgrade', function(e) {
     .catch(error => {})
 });
 $(document).on('change', '#searchregisteredcapital', function(e) {
-    // console.log($(this).val());
     SearchProject.searchRegisteredCapital($(this).val()).then(data => {
         createTable(data);
     })
     .catch(error => {})
 });
-
-// $(document).on('click', '#btnsearch', function(e) {
-//     console.log($('#searchgroup').val());
-//     // search($('#searchgroup').val(),$(this).val()).then(data => {
-//     //     createTable(data);
-//     // }).catch(error => {});
-// });
 
 function search(searchid,value){
     return new Promise((resolve, reject) => {

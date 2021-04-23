@@ -123,7 +123,6 @@
             $(".loadprogress").attr("hidden",false);
             getEvByFulltbp("{{$fulltbp->id}}").then(data => {
                 $(".loadprogress").attr("hidden",true);
-                console.log(data);
                 RenderTable(data);
                 
                 RowSpan();
@@ -176,8 +175,6 @@
                 const firstCell = row.cells[0];
                 const secondCell = row.cells[1];
                 const thirdCell = row.cells[2];
-                console.log(firstCell);
-                console.log(secondCell);
                 if (cell1 === null || firstCell.innerText !== cell1.innerText) {
                     cell1 = firstCell;
                 } else {

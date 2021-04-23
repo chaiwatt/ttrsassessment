@@ -163,7 +163,6 @@
         $(document).on('click', '#btn_modal_expert_accept', function(e) {
             $("#spinicon"+$('#fulltbpid').val()).attr("hidden",false);
             editAccept($('#fulltbpid').val(),$("input[name='result']:checked").val()).then(data => {
-                console.log(data);
                 var html = ``;        
                 window.location.replace(`${route.url}/dashboard/expert/project/fulltbp`);
 

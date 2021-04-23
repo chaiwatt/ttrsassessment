@@ -230,7 +230,6 @@ function RenderExtraTable(data){
         </td> 
     </tr>`
     });
-    console.log(html)
     $("#extra_criteria_transaction_wrapper_tr").html(html);
 }
 
@@ -406,7 +405,6 @@ function updateEvAdminStatus(id,value){
     })
 
     $(document).on("click",".deletecomment",function(e){
-        // console.log($(this).data('id'));
         Swal.fire({
             title: 'คำเตือน!',
             text: `ต้องการลบรายการ หรือไม่`,
@@ -420,7 +418,6 @@ function updateEvAdminStatus(id,value){
             }).then((result) => {
             if (result.value) {
                 Ev.deleteComment($(this).data('id')).then(data => {
-                    // console.log(data);
                     var html =``;
                     data.forEach(function (comment,index) {
                             html += `<tr > 
@@ -545,7 +542,6 @@ function updateEvAdminStatus(id,value){
 		transitionEffect: 'fade',
 		autoFocus: true,
 		onStepChanged:function (event, currentIndex, newIndex) {
-			// console.log('current step ' + currentIndex);
 
 		return true;
 		},

@@ -1111,7 +1111,6 @@
 		if(isiccate == ''){
 			var isicval = "{{old('isic')}}";
 			var subisicval = "{{old('subisic')}}";
-			console.log(isicval + " " + subisicval + ' ' + route.url);
 			getSubIsic(parseInt(isicval)).then(data => {
 				var html = ``;
 				data.subisics.forEach(function (subisic,index) {

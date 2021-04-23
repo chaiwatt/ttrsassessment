@@ -585,7 +585,6 @@
         });
 
 		$(document).on('keyup', '#expereincemonth', function(e) {
-			console.log($(this).val());
 			if($(this).val() > 11 ){
 				$(this).val(11);
 			}

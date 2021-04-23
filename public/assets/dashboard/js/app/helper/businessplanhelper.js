@@ -19,7 +19,7 @@ $(document).on("click","#btn_add_performance",function(e){
          $("#performance_wrapper_tr").html(html); 
     })
     .catch(error => {
-        console.log(error)
+
     })
 });
 
@@ -37,7 +37,6 @@ $(document).on("click","#deleteperformance",function(e){
         }).then((result) => {
         if (result.value) {
             Businessplan.deletePerformance($(this).data('id')).then(data => {
-                console.log(data)
                 var html='';
                 data.forEach(function (performance,index) {
                     html += `<tr>
@@ -54,7 +53,7 @@ $(document).on("click","#deleteperformance",function(e){
                  $("#performance_wrapper_tr").html(html); 
            })
            .catch(error => {
-               // console.log(error)
+
            })
         }
     });

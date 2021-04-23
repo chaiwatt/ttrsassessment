@@ -121,7 +121,6 @@
 	<script>
         $(document).on('change', '#usertype', function(e) {
             if($(this).val() == 3){
-                console.log('expert');
                 $("#experttype_wrapper").attr("hidden",false);
             }else{
                 $("#experttype_wrapper").attr("hidden",true);

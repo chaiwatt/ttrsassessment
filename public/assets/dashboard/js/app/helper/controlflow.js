@@ -13,7 +13,7 @@ $(document).on('click', '.controlflowicon', function(e) {
             var updatedat = new Date();
             var icon = ``;
             var arraystartdate = projectstatus.startdate.split('-');
-            // console.log(arraystartdate);
+
             //var startdate = new Date(projectstatus.startdate);
            var month_start = parseInt(arraystartdate[1])+1; //'' + (startdate.getMonth() + 1);
            var day_start = parseInt(arraystartdate[2]);//'' + startdate.getDate();

@@ -334,16 +334,14 @@ function getVerbosityLevel() {
 }
 function info(msg) {
   if (verbosity >= VERBOSITY_LEVELS.infos) {
-    console.log('Info: ' + msg);
   }
 }
 function warn(msg) {
   if (verbosity >= VERBOSITY_LEVELS.warnings) {
-    // console.log('Warning: ' + msg);
   }
 }
 function deprecated(details) {
-  console.log('Deprecated API usage: ' + details);
+
 }
 function unreachable(msg) {
   throw new Error(msg);

@@ -69,8 +69,10 @@ function getEv(evid){
 }
 
 function RenderExtraTable(data){
+    
     var html =``;
     data.forEach(function (criteriatransaction,index) {
+
             html += `<tr > 
             <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
             <td> ${criteriatransaction.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
@@ -78,6 +80,13 @@ function RenderExtraTable(data){
             <div class="form-group">
                 <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-id="${criteriatransaction.id}"><i class="icon-folder-open3"></i></a></label>
                 <input type="text" value="" data-id="${criteriatransaction.id} "class="form-control inputextrascore weigthvalue decimalformat" >
+
+                <div class="toggle"><div class="form-group">
+                    <label><i>ความเห็น</i></label>
+                    <input type="text" data-id="${criteriatransaction.id}" class="form-control form-control-lg extracomment">
+                    </div>
+                </div>
+                
             </div>
        
         </td> 
@@ -121,7 +130,6 @@ function RowSpan(tableid){
         if (cell4 === null || forthCell.innerText !== cell4.innerText) {
             cell4 = forthCell;
         } else {
-            console.log(forthCell.innerText)
             if (forthCell.innerText.includes("placeholder") == true){
                 cell4.rowSpan++;
                 forthCell.remove();
@@ -163,9 +171,7 @@ function RowSpanWeight(tableid){
 
 
 $(document).on('change', '#comment', function(e) {
-    console.log($(this).data('id'));
     editComment($(this).data('id'),$(this).val()).then(data => {
-        console.log(data);
     }).catch(error => {})
 });
 
@@ -228,9 +234,7 @@ function addScore(transactionid,score,subpillarindex,scoretype){
                 if(_comment === null){
                     _comment = "";
                 }
-                console.log(_comment);
             }
-            // console.log(check);
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
             <td> ${icon} </td>  
@@ -264,7 +268,6 @@ function showConflictScore(id){
   $(document).on('click', '.conflictgrade', function(e) {
     
     showConflictGrade($(this).data('id')).then(data => {
-        console.log(data);
         var html =``;
         data.forEach(function (conflict,index) {
             html += `<tr > 
@@ -299,7 +302,6 @@ function showConflictGrade(id){
   }
 
   $(document).on('click', '.conflictextrascore', function(e) {
-    //   console.log($(this).data('id'));
     Extra.showConflictScore($(this).data('id'),$('#evid').val()).then(data => {
         var html =``;
         data.forEach(function (conflict,index) {
@@ -314,7 +316,6 @@ function showConflictGrade(id){
 });
 
   $(document).on('change', '.gradescore', function(e) {
-    console.log($(this).val() + ' index:' + stepindex);
     if(stepindex == 0){
         if($(this).val() !== 'A' && $(this).val() !== 'B' && $(this).val() !== 'C' && $(this).val() !== 'D' && $(this).val() !== 'E' && $(this).val() !== 'F'){
             

@@ -47,7 +47,6 @@ $(".coleader").on('click', function() {
         $("#main_wrapper").attr("hidden",false);
         var html = '';
         WorkLoad.getWorkLoadCoLeader($(this).val()).then(data => {
-            console.log(data.allprojects);
             data.allprojects.forEach(function (fulltbp,index) {
                 var status = fulltbp.minitbp.businessplan.businessplanstatus['name'];
                 if(fulltbp.minitbp.businessplan.finished == '1'){

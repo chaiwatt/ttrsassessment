@@ -288,7 +288,6 @@
         });
 
     $(document).on('change', '#status', function(e) {
-        console.log($(this).val());
         if($(this).val() == 1){
             // $("#publicdate").("hidden",false);
             $( "#publicdate" ).prop( "disabled", false );

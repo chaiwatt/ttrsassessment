@@ -87,7 +87,6 @@ $(document).on('click', '.projectmember', function(e) {
  var isleader =$(this).data('isprojectleader');
     $('#fulltbpid').val($(this).data('id'));
       getUsers($(this).data('id')).then(data => {
-          console.log(data);
           var html =``;
           var html1 =``;
           var hiddenbtn = `-`;
@@ -312,10 +311,8 @@ $(document).on('click', '.finishonsite', function(e) {
 
 
 $(document).on('click', '.showlog', function(e) {
-  console.log('ok');
   var html ='';
   $("#spinicon_showlog"+$(this).data('id')).attr("hidden",false);
-  // console.log('ok');
   getReviseLog($(this).data('id'),$(this).data('doctype')).then(data => {   
       data.forEach(function (log,index) {
           html += `<tr >                                        

@@ -1,7 +1,6 @@
 import * as Bol from './bol.js';
 
 $(document).on('change', '#boldoc', function(e) {
-    console.log($('#docname').val());
         var file = this.files[0];
         if (this.files[0].size/1024/1024*1000 > 5120 ){
             alert('ไฟล์ขนาดมากกว่า 5 MB');
@@ -19,7 +18,6 @@ $(document).on('change', '#boldoc', function(e) {
                 contentType: false,
                 processData: false,
                 success: function(data){
-                    console.log(data)
                     var html = ``;
                     data.forEach(function (bol,index) {
                         html += `<tr >                                        

@@ -2,7 +2,6 @@ import * as Geo from './location.js'
 
 // $("#province").change(function(){
 $(document).on('change', '#province', function(e) {
-    console.log('hello');
     Geo.amphur($(this).val()).then(data => {
         let  html = "";
         data.forEach((amphur,index) => 
@@ -12,7 +11,7 @@ $(document).on('change', '#province', function(e) {
         $("#amphur option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+
     })
 });
 $(document).on('change', '#amphur', function(e) {
@@ -25,7 +24,7 @@ $(document).on('change', '#amphur', function(e) {
         $("#tambol option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+ 
     })
 });
 
@@ -39,7 +38,7 @@ $(document).on('change', '#factoryprovince', function(e) {
         $("#factoryamphur option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+
     })
 });
 
@@ -53,7 +52,7 @@ $(document).on('change', '#factoryamphur', function(e) {
         $("#factorytambol option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+
     })
 });
 
@@ -67,7 +66,7 @@ $(document).on('change', '#province1', function(e) {
         $("#amphur1 option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+     
     })
 });
 
@@ -81,7 +80,7 @@ $(document).on('change', '#amphur1', function(e) {
         $("#tambol1 option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+        
     })
 });
 
@@ -95,7 +94,7 @@ $(document).on('change', '#provincemodal', function(e) {
         $("#amphurmodal option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+        
     })
 });
 
@@ -109,7 +108,7 @@ $(document).on('change', '#amphurmodal', function(e) {
         $("#tambolmodal option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+        
     })
 });
 

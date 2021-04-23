@@ -62,7 +62,6 @@ $("#btn_modal_edit_expertfield").on('click', function() {
         });
         return;
     }
-// console.log(globaldata)
     if(globaldata.indexOf(parseInt($('#expertfieldnum_edit').val())) != -1 && (parseInt($('#expertfieldnum_edit').val()) != parseInt($('#currentid').val()))){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -109,7 +108,6 @@ $(document).on("click",".deleteexpertfield",function(e){
         }).then((result) => {
         if (result.value) {
             Expert.deleteExpertfield($(this).data('id')).then(data => {
-                console.log(data);
                 var html = ``;
                 data.forEach(function (expertdoc,index) {
                     html += `<tr >                                        
@@ -144,7 +142,7 @@ $(document).on("click",".editexpertfield",function(e){
                 globaldata.push(parseInt($(this).text()));
         });
     });
-    // console.log(data);
+
     $("#expertfieldid").val($(this).data('id')); 
         Expert.getExpertfield($(this).data('id')).then(data => {
             $("#expertfieldnum_edit").val(data.order);     
@@ -161,7 +159,6 @@ $(document).on("click",".editexpertfield",function(e){
 $("#expertdoc").on('change', function() {
     if($('#expertdocname').val() == '')return ;
     var file = this.files[0];
-    console.log(file);
     if (this.files[0].size/1024/1024*1000 > 2000 ){
         alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
@@ -170,7 +167,7 @@ $("#expertdoc").on('change', function() {
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
     formData.append('expertdocname',$('#expertdocname').val());
-    console.log(formData);
+
         $.ajax({
             url: `${route.url}/api/expert/addexpertdoc`,  //Server script to process data
             type: 'POST',
@@ -179,7 +176,7 @@ $("#expertdoc").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                console.log(data)
+             
                 var html = ``;
                 data.forEach(function (expertdoc,index) {
                     html += `<tr >                                        
@@ -289,7 +286,7 @@ $("#sameaddress").on('change', function() {
             $("#province1 option:contains("+$('#province').find("option:selected").text()+")").attr('selected', true).trigger('change');
         })
         .catch(error => {
-            console.log(error)
+           
         })
     }else{
         // $("#contact_address_wrapper").attr("hidden",false);
@@ -306,7 +303,7 @@ $(document).on('change', '#province1', function(e) {
         $("#amphur1 option:contains("+$('#amphur').find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+        
     })
 });
 
@@ -320,6 +317,6 @@ $(document).on('change', '#amphur1', function(e) {
         $("#tambol1 option:contains("+$('#tambol').find("option:selected").text()+")").attr('selected', true).trigger('change');
     })
     .catch(error => {
-        console.log(error)
+        
     })
 });
