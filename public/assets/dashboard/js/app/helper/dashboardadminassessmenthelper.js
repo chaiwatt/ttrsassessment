@@ -3,11 +3,11 @@ import * as Extra from './extra.js';
 var stepindex =0;
 $(function() {
     getEv($('#evid').val()).then(data => {
+
         RenderTable(data);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         RenderExtraTable(data.extracriteriatransactions);
-        // RowSpan("extra_criteriatable");
         $('#sumofweight').html(data.sumweigth);
 
     }).catch(error => {})
@@ -37,8 +37,12 @@ function getEv(evid){
    });
    
    function RenderTable(data){
+       //console.log(data.scoring);
+       console.log(data.criteriatransactions);
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {
+
+           // var commentid = data.scoring.filter(x => x.critreria_transaction_id == criteria.id); 
                 var comment = '';
                 var criterianame = `<label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
                                 <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring gradescore">
@@ -46,14 +50,14 @@ function getEv(evid){
         
                 if(criteria.criteria != null){
                     criterianame = `<label class="form-check-label">
-                                        <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info scoring">
+                    <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info scoring">
                                         ${criteria.criteria['name']} <a href="#" data-toggle="modal" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
                                     </label>`;
                 }
         
                 criterianame += `<div class="toggle"><div class="form-group">
                                     <label><i>ความเห็น</i></label>
-                                    <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg">
+                                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg comment">
                                     </div>
                                 </div>`;
         
@@ -168,14 +172,33 @@ function RowSpanWeight(tableid){
     }
 }
 
-
-
-$(document).on('change', '#comment', function(e) {
-    editComment($(this).data('id'),$(this).val()).then(data => {
-    }).catch(error => {})
+$(document).on('change', '.comment', function(e) {
+    console.log($(this).data('id'));
+    // editComment($(this).data('id'),$(this).val()).then(data => {
+    // }).catch(error => {})
 });
 
-function updateScore(arraylist,extraarraylist,extracommnetarraylist,evid){
+// function editComment(transactionid,comment){
+//     return new Promise((resolve, reject) => {
+//         $.ajax({
+//         url: `${route.url}/dashboard/admin/project/assessment/editcomment`,
+//         type: 'POST',
+//         headers: {"X-CSRF-TOKEN":route.token},
+//         data: {
+//             transactionid : transactionid,
+//             comment : comment
+//         },
+//         success: function(data) {
+//             resolve(data)
+//         },
+//         error: function(error) {
+//             reject(error)
+//         },
+//         })
+//     })
+//   }
+
+function updateScore(arraylist,commentarraylist,extraarraylist,extracommnetarraylist,evid){
     return new Promise((resolve, reject) => {
         $.ajax({
         url: `${route.url}/dashboard/admin/assessment/updatescore`,
@@ -183,6 +206,7 @@ function updateScore(arraylist,extraarraylist,extracommnetarraylist,evid){
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
             arraylist : arraylist,
+            commentarraylist : commentarraylist,
             extraarraylist : extraarraylist,
             extracommnetarraylist : extracommnetarraylist,
             evid : evid
@@ -411,6 +435,16 @@ $('.step-evweight').steps({
                         value: val
                       } 
                 }).get();
+
+                var conflictcommentarray = $(".comment").map(function () {
+                    var val = $(this).val();
+                    return {
+                        evid: $('#evid').val(),
+                        criteriatransactionid: $(this).data('id'),
+                        subpillarindex: $(this).data('subpillarindex'),
+                        value: val
+                      } 
+                }).get();
         
                 var conflictextraarray = $(".inputextrascore").map(function () {
                     var val = $(this).val();
@@ -429,11 +463,11 @@ $('.step-evweight').steps({
                         value: val
                       } 
                 }).get();
-
-                // console.log(conflictextracommentarray);
                 
+
+    
                 $("#spinicon").attr("hidden",false);
-                updateScore(conflictarray,conflictextraarray,conflictextracommentarray,$('#evid').val()).then(data => {
+                updateScore(conflictarray,conflictcommentarray,conflictextraarray,conflictextracommentarray,$('#evid').val()).then(data => {
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
                         title: 'สำเร็จ...',

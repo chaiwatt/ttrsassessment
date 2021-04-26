@@ -321,7 +321,6 @@ class DashboardAdminAssessmentController extends Controller
     }
 
     public function UpdateScore(Request $request){  
-        
         $auth = Auth::user(); 
         // if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
@@ -332,7 +331,8 @@ class DashboardAdminAssessmentController extends Controller
                                     ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
                                     ->where('sub_pillar_index_id',$criteria['subpillarindex'])
                                     ->first()->update([
-                                        'score' => $criteria['value']
+                                        'score' => $criteria['value'],
+                                        'comment' => $request->commentarraylist[$key]['value']
                                     ]); 
 
     
@@ -351,6 +351,7 @@ class DashboardAdminAssessmentController extends Controller
                             $score->sub_pillar_index_id = $criteria['subpillarindex'];
                             $score->scoretype = 2;
                             $score->score = 1;
+                            $score->comment = $request->commentarraylist[$key]['value'];
                             $score->save();
                         }
                     }else{
@@ -366,6 +367,18 @@ class DashboardAdminAssessmentController extends Controller
                 }
             }
         // }
+
+        // foreach ($request->commentarraylist as $key => $comment) {
+        //     $scores = Scoring::where('ev_id',$comment['evid'])
+        //     ->whereNull('user_id')
+        //     ->where('criteria_transaction_id',$comment['criteriatransactionid'])
+        //     ->where('sub_pillar_index_id',$comment['subpillarindex'])
+        //     ->first()->update([
+        //         'score' => $criteria['value'],
+        //         // 'comment' => $request->commentarraylist[$key]['value']
+        //     ]); 
+        // }
+
          $existingarray = array(); 
          if($request->extraarraylist != null){
             foreach ($request->extraarraylist as $key => $extracriteria) {
