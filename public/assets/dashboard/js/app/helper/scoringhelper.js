@@ -72,7 +72,9 @@ function RenderTable(data,evtype){
                         if(_scoring['scoretype'] == 1){
                             textvalue = _scoring['score'];
                         }else if(_scoring['scoretype'] == 2){
-                            checkvalue = "checked";
+                            if(_scoring['score'] == 1){
+                                checkvalue = "checked";
+                            }
                         }
                     }
                     var criterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label>
@@ -253,30 +255,30 @@ function RowSpanWeight(tableid){
     }
 }
 
-$(document).on('change', '.gradescore', function(e) {
-    if(stepindex == 0){
-        if($(this).val() !== 'A' && $(this).val() !== 'B' && $(this).val() !== 'C' && $(this).val() !== 'D' && $(this).val() !== 'E' && $(this).val() !== 'F'){
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรอกเกรด A-F เท่านั้น!',
-            })
-            $(this).val('');
-            return;
-        }
-    }else if(stepindex == 1){
-        if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรอกคะแนน 0-5 เท่านั้น!',
-            })
-            $(this).val('');
-            return;
-        }  
-    }
-    addScore($(this).data('id'),$(this).val(),$(this).data('subpillarindex'),1).then(data => {
-        $('#weightsum'+$(this).data('subpillarindex')).val(data);
-    }).catch(error => {})
-});
+// $(document).on('change', '.gradescore', function(e) {
+//     if(stepindex == 0){
+//         if($(this).val() !== 'A' && $(this).val() !== 'B' && $(this).val() !== 'C' && $(this).val() !== 'D' && $(this).val() !== 'E' && $(this).val() !== 'F'){
+//             Swal.fire({
+//                 title: 'ผิดพลาด...',
+//                 text: 'กรอกเกรด A-F เท่านั้น!',
+//             })
+//             $(this).val('');
+//             return;
+//         }
+//     }else if(stepindex == 1){
+//         if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
+//             Swal.fire({
+//                 title: 'ผิดพลาด...',
+//                 text: 'กรอกคะแนน 0-5 เท่านั้น!',
+//             })
+//             $(this).val('');
+//             return;
+//         }  
+//     }
+//     addScore($(this).data('id'),$(this).val(),$(this).data('subpillarindex'),1).then(data => {
+//         $('#weightsum'+$(this).data('subpillarindex')).val(data);
+//     }).catch(error => {})
+// });
 
 $(document).on('change', '.inputextrascore', function(e) {
     if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
@@ -299,23 +301,23 @@ $(document).on('change', '.inputextracomment', function(e) {
 });
 
 
-$(document).on('change', '.checkscore', function(e) {
-    var state = 0;
-    if($(this).is(':checked') == true){
-        state=1;
-        if($(this).data("name").includes("x2")){
-            state=2;
-        }
-    }
-    addScore($(this).data('id'),state,$(this).data('subpillarindex'),2).then(data => {
-        $('#weightsum'+$(this).data('subpillarindex')).val(data);
-    }).catch(error => {})
-});
+// $(document).on('change', '.checkscore', function(e) {
+//     var state = 0;
+//     if($(this).is(':checked') == true){
+//         state=1;
+//         if($(this).data("name").includes("x2")){
+//             state=2;
+//         }
+//     }
+//     addScore($(this).data('id'),state,$(this).data('subpillarindex'),2).then(data => {
+//         $('#weightsum'+$(this).data('subpillarindex')).val(data);
+//     }).catch(error => {})
+// });
 
-$(document).on('change', '.comment', function(e) {
-    editComment($(this).data('id'),$(this).val()).then(data => {
-    }).catch(error => {})
-});
+// $(document).on('change', '.comment', function(e) {
+//     editComment($(this).data('id'),$(this).val()).then(data => {
+//     }).catch(error => {})
+// });
 
 function addScore(transactionid,score,subpillarindex,scoretype){
     return new Promise((resolve, reject) => {
@@ -359,7 +361,7 @@ function addScore(transactionid,score,subpillarindex,scoretype){
     })
   }
 
-function updateScoringStatus(evid,status){
+function updateScoringStatus(evid,gradescorelist,checkscorelist,commentlist,status){
     return new Promise((resolve, reject) => {
         $.ajax({
         url: `${route.url}/dashboard/admin/project/assessment/updatescoringstatus`,
@@ -367,6 +369,9 @@ function updateScoringStatus(evid,status){
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
             evid : evid,
+            gradescorelist : gradescorelist,
+            checkscorelist : checkscorelist,
+            commentlist : commentlist,
             status : status
         },
         success: function(data) {
@@ -425,6 +430,39 @@ $('.step-evweight').steps({
             closeOnCancel: false
             }).then((result) => {
             if (result.value) {
+
+                var checkscorelist = $(".checkscore").map(function () {
+                    var val = 0;
+                    if($(this).is(':checked') == true){
+                        val = 1;
+                    }
+                    return {
+                        evid: $('#evid').val(),
+                        criteriatransactionid: $(this).data('id'),
+                        subpillarindex: $(this).data('subpillarindex'),
+                        value: val
+                      } 
+                }).get();
+                
+                var gradescorelist = $(".gradescore").map(function () {
+                    return {
+                        evid: $('#evid').val(),
+                        criteriatransactionid: $(this).data('id'),
+                        subpillarindex: $(this).data('subpillarindex'),
+                        value: $(this).val()
+                      } 
+                }).get();
+                
+                var commentlist = $(".comment").map(function () {
+                    return {
+                        evid: $('#evid').val(),
+                        criteriatransactionid: $(this).data('id'),
+                        subpillarindex: $(this).data('subpillarindex'),
+                        value: $(this).val()
+                      } 
+                }).get();
+
+
                 var noblank = true;
                 $('.gradescore').each(function() {
                     if($(this).val() == ''){
@@ -460,7 +498,7 @@ $('.step-evweight').steps({
                 }
 
                 $("#spinicon").attr("hidden",false);
-                updateScoringStatus($('#evid').val(),1).then(data => {
+                updateScoringStatus($('#evid').val(),gradescorelist,checkscorelist,commentlist,1).then(data => {
                     if(jQuery.isEmptyObject(data) ){
                         $('.inpscore').prop("disabled", false);
                     }else{
@@ -471,7 +509,7 @@ $('.step-evweight').steps({
                         title: 'สำเร็จ...',
                         text: 'นำส่งคะแนนสำเร็จ!',
                     }).then((result) => {
-                        window.location.reload();
+                        //window.location.reload();
                     });
                 }).catch(error => {})
             }

@@ -52,7 +52,7 @@ class DashboardAdminAssessmentController extends Controller
                                     ->whereNotNull('user_id')
                                     ->pluck('sub_pillar_index_id')
                                     ->toArray();
-        
+
         $basearray = array();  
         $projectmembers = ProjectMember::where('full_tbp_id',Ev::find($request->evid)->full_tbp_id)->get();                              
         foreach ($subpillarindexarray as $key => $subpillarindex) {
@@ -60,17 +60,33 @@ class DashboardAdminAssessmentController extends Controller
             $scores = Scoring::where('ev_id',$request->evid)
                         ->where('sub_pillar_index_id',$subpillarindex)
                         ->whereNotNull('user_id')
+                        ->distinct('criteria_transaction_id')
                         ->pluck('criteria_transaction_id')
                         ->toArray();    
-            $val_count = array_count_values($scores);
-            $repeat = $projectmembers->count();
             $arrayrepeat = array();
             foreach($scores as $v) {
-                if ($val_count[$v] < $repeat) $arrayrepeat[] = $v;
+                $count = Scoring::where('ev_id',$request->evid)
+                                ->where('sub_pillar_index_id',$subpillarindex)
+                                ->whereNotNull('user_id')
+                                ->where('criteria_transaction_id',$v)
+                                ->where('scoretype',2)
+                                ->count();
+                
+                $checksum = Scoring::where('ev_id',$request->evid)
+                                ->where('sub_pillar_index_id',$subpillarindex)
+                                ->whereNotNull('user_id')
+                                ->where('criteria_transaction_id',$v)
+                                ->where('scoretype',2)
+                                ->sum('score');
+                            
+                if($checksum !=0 && $checksum !=$count){
+                    $arrayrepeat[] = $v;
+                }
+
             }
             $basearray = array_merge($arrayrepeat,$basearray); 
         }
-        
+
         $subpillarindexarray = Scoring::where('ev_id',$request->evid)
                         ->whereNotNull('user_id')
                         ->distinct('sub_pillar_index_id')
@@ -154,7 +170,9 @@ class DashboardAdminAssessmentController extends Controller
             $scoring->save();
         }else{
             if($request->scoretype == 2 && $request->score == 0){
-                $scoring->delete();
+                $scoring->update([
+                    'score' => 0
+                ]);
             }else{
                 $scoring->update([
                     'score' => $request->score
@@ -335,37 +353,51 @@ class DashboardAdminAssessmentController extends Controller
                                         'score' => $criteria['value']
                                     ]); 
 
-    
                 }elseif($criteria['scoretype'] == 2){
-                    $scores = Scoring::where('ev_id',$criteria['evid'])
+                    $score = Scoring::where('ev_id',$criteria['evid'])
                                     ->whereNull('user_id')
                                     ->where('scoretype',2)
                                     ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
                                     ->where('sub_pillar_index_id',$criteria['subpillarindex'])
                                     ->first();  
-                    if(Empty($scores)){
-                        if($criteria['value'] == 'true'){
-                            $score = new Scoring();
-                            $score->ev_id = $criteria['evid'];
-                            $score->criteria_transaction_id  = $criteria['criteriatransactionid'];
-                            $score->sub_pillar_index_id = $criteria['subpillarindex'];
-                            $score->scoretype = 2;
-                            $score->score = 1;
-                            $score->save();
+                    // if(Empty($score)){
+                    //     if($criteria['value'] == 'true'){
+                    //         $score = new Scoring();
+                    //         $score->ev_id = $criteria['evid'];
+                    //         $score->criteria_transaction_id  = $criteria['criteriatransactionid'];
+                    //         $score->sub_pillar_index_id = $criteria['subpillarindex'];
+                    //         $score->scoretype = 2;
+                    //         $score->score = 1;
+                    //         $score->save();
+                    //     }
+                    // }else{
+                        if($criteria['value'] == 0){
+                            // Scoring::where('ev_id',$criteria['evid'])
+                            //         ->whereNull('user_id')
+                            //         ->where('scoretype',2)
+                            //         ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
+                            //         ->where('sub_pillar_index_id',$criteria['subpillarindex'])
+                            //         ->first()->delete(); 
+                            $score->update([
+                                'score' => 0
+                            ]);
+                        } else if($criteria['value'] == 1){
+                            $score->update([
+                                'score' => 1
+                            ]);
                         }
-                    }else{
-                        if($criteria['value'] == 'false'){
-                            Scoring::where('ev_id',$criteria['evid'])
-                                    ->whereNull('user_id')
-                                    ->where('scoretype',2)
-                                    ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
-                                    ->where('sub_pillar_index_id',$criteria['subpillarindex'])
-                                    ->first()->delete(); 
-                        } 
-                    }                
+                    //}                
                 }
             }
-        // }
+        foreach ($request->conflictcommentarray as $key => $comment) {
+            Scoring::where('ev_id',$comment['evid'])
+                        ->whereNull('user_id')
+                        ->where('criteria_transaction_id',$comment['criteriatransactionid'])
+                        ->where('sub_pillar_index_id',$comment['subpillarindex'])
+                        ->first()->update([
+                            'comment' => $comment['value']
+                        ]); 
+        }
          $existingarray = array(); 
          if($request->extraarraylist != null){
             foreach ($request->extraarraylist as $key => $extracriteria) {

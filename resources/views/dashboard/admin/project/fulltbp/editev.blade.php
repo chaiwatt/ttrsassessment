@@ -518,13 +518,11 @@
                                         <label>EV ในระบบ</label>
                                         <select name="existingev" id="existingev" placeholder="EV ในระบบ" class="form-control form-control-lg form-control-select2">
                                             <option value="0">==เลือกจาก EV ในระบบ==</option>
-                                            @foreach ($evs->where('status','>=',5) as $_ev)
+                                            @foreach ($evs->where('status','>=',4) as $_ev)
                                                 <option value="{{$_ev->id}}" >
                                                     {{$_ev->name}}
                                                     @if (Empty($_ev->fulltbp))
                                                         (Template)
-                                                        @else
-                                                        ({{$_ev->fulltbp->minitbp->project}})
                                                     @endif
                                                 </option>
                                             @endforeach

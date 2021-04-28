@@ -226,7 +226,11 @@ class DashboardAdminProjectAssessmentController extends Controller
                                         ->where('sub_pillar_id',$demo->sub_pillar_id)
                                         ->where('sub_pillar_index_id',$demo->sub_pillar_index_id)->pluck('id');
                 if(count($count)>0){
-                    $inscore = Scoring::where('ev_id',$request->evid)->whereIn('criteria_transaction_id',$count)->whereNull('user_id')->pluck('criteria_transaction_id');
+                    $inscore = Scoring::where('ev_id',$request->evid)
+                                        ->whereIn('criteria_transaction_id',$count)
+                                        ->whereNull('user_id')
+                                        ->where('score',1)
+                                        ->pluck('criteria_transaction_id');
                     $_transactions = CriteriaTransaction::whereIn('id',$inscore)->get();
                     $_sumscore = 0;
                     foreach ($_transactions as $key => $_transaction) {
@@ -380,7 +384,10 @@ class DashboardAdminProjectAssessmentController extends Controller
             $scoring->save();
         }else{
             if($request->scoretype == 2 && $request->score == 0){
-                $scoring->delete();
+                // $scoring->delete();
+                $scoring->update([
+                    'score' => 0
+                ]);
             }else{
                 $scoring->update([
                     'score' => $request->score
@@ -457,6 +464,61 @@ class DashboardAdminProjectAssessmentController extends Controller
     }
 
     public function UpdateScoringStatus(Request $request){
+
+        foreach ($request->gradescorelist as $key => $gradescore) {
+
+            $commentid=array_search($gradescore['criteriatransactionid'], array_column(json_decode(json_encode($request->commentlist),TRUE), 'criteriatransactionid'));
+            $check = Scoring::where('ev_id',$gradescore['evid'])
+                            ->where('criteria_transaction_id',$gradescore['criteriatransactionid'])
+                            ->where('sub_pillar_index_id',$gradescore['subpillarindex'])
+                            ->where('scoretype',1)
+                            ->where('user_id',Auth::user()->id)->first();
+            if(Empty($check)){
+                $scoring = new Scoring();
+                $scoring->ev_id = $gradescore['evid'];
+                $scoring->criteria_transaction_id = $gradescore['criteriatransactionid'];
+                $scoring->sub_pillar_index_id =  $gradescore['subpillarindex'];
+                $scoring->scoretype = 1;
+                $scoring->score = $gradescore['value'];
+                $scoring->comment = $request->commentlist[$commentid]['value'];
+                $scoring->user_id = Auth::user()->id;
+                $scoring->save();
+            }else{
+                $check->update([
+                    'score' => $gradescore['value'],
+                    'comment' => $request->commentlist[$commentid]['value'],
+                ]);
+            }
+
+        }
+
+        foreach ($request->checkscorelist as $key => $checkscore) {
+
+            $commentid=array_search($checkscore['criteriatransactionid'], array_column(json_decode(json_encode($request->commentlist),TRUE), 'criteriatransactionid'));
+            $check = Scoring::where('ev_id',$checkscore['evid'])
+                        ->where('criteria_transaction_id',$checkscore['criteriatransactionid'])
+                        ->where('sub_pillar_index_id',$checkscore['subpillarindex'])
+                        ->where('scoretype',2)
+                        ->where('user_id',Auth::user()->id)->first();
+            if(Empty($check)){
+                $scoring = new Scoring();
+                $scoring->ev_id = $checkscore['evid'];
+                $scoring->criteria_transaction_id = $checkscore['criteriatransactionid'];
+                $scoring->sub_pillar_index_id = $checkscore['subpillarindex'];
+                $scoring->scoretype = 2;
+                $scoring->score = $checkscore['value'];
+                $scoring->comment = $request->commentlist[$commentid]['value'];
+                $scoring->user_id = Auth::user()->id;
+                $scoring->save();
+            }else{
+                $check->update([
+                    'score' => $checkscore['value'],
+                    'comment' => $request->commentlist[$commentid]['value'],
+                ]);
+            }
+
+        }
+        
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
                                     ->where('user_id',Auth::user()->id)
                                     ->first(); 

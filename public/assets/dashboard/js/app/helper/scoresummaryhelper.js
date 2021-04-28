@@ -189,7 +189,11 @@ $(document).on('click', '#togglecomment', function(e) {
                         raw = 1;
                     }
                 }else if(criteria.sumscoring['scoretype'] == 2){
-                    checkvalue = "checked";
+                    console.log(criteria.sumscoring['score']);
+                    //checkvalue = "checked";
+                    if(criteria.sumscoring['score'] == '1'){
+                        checkvalue = "checked";
+                    }
                 }
             }
 

@@ -2,6 +2,7 @@ import * as Extra from './extra.js';
 
 var stepindex =0;
 $(function() {
+
     getEv($('#evid').val()).then(data => {
         RenderTable(data);
         $(".loadprogress").attr("hidden",true);
@@ -37,6 +38,7 @@ function getEv(evid){
    });
    
    function RenderTable(data){
+    //    console.log(data.criteriatransactions);
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {
                 var comment = '';
@@ -53,7 +55,7 @@ function getEv(evid){
         
                 criterianame += `<div class="toggle"><div class="form-group">
                                     <label><i>ความเห็น</i></label>
-                                    <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg">
+                                    <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg comment">
                                     </div>
                                 </div>`;
         
@@ -168,10 +170,10 @@ function RowSpanWeight(tableid){
     }
 }
 
-$(document).on('change', '#comment', function(e) {
-    editComment($(this).data('id'),$(this).val()).then(data => {
-    }).catch(error => {})
-});
+// $(document).on('change', '#comment', function(e) {
+//     editComment($(this).data('id'),$(this).val()).then(data => {
+//     }).catch(error => {})
+// });
 
 // function editComment(transactionid,comment){
 //     return new Promise((resolve, reject) => {
@@ -193,7 +195,7 @@ $(document).on('change', '#comment', function(e) {
 //     })
 //   }
 
-function updateScore(arraylist,extraarraylist,extracommnetarraylist,evid){
+function updateScore(arraylist,conflictcommentarray,extraarraylist,extracommnetarraylist,evid){
     return new Promise((resolve, reject) => {
         $.ajax({
         url: `${route.url}/dashboard/admin/assessment/updatescore`,
@@ -201,6 +203,7 @@ function updateScore(arraylist,extraarraylist,extracommnetarraylist,evid){
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
             arraylist : arraylist,
+            conflictcommentarray : conflictcommentarray,
             extraarraylist : extraarraylist,
             extracommnetarraylist : extracommnetarraylist,
             evid : evid
@@ -248,7 +251,11 @@ function addScore(transactionid,score,subpillarindex,scoretype){
             var check = data.scores.find(x => x.user_id === conflict.user['id']);
             var _comment ='';
             if ( typeof(check) !== "undefined" && check !== null ) {
-                icon = '<i class="icon-check"></i>';
+                console.log(check['score']);
+               
+                if(check['score'] == 1){
+                    icon = '<i class="icon-check"></i>';
+                }
                 _comment = check.comment;
                 if(_comment === null){
                     _comment = "";
@@ -419,7 +426,14 @@ $('.step-evweight').steps({
                 var conflictarray = $(".scoring").map(function () {
                     var val = $(this).val();
                     if($(this).data('scoretype') == 2){
+                       
                         val = $(this).is(':checked');
+                        
+                        if(val == true){
+                            val = 1;
+                        }else{
+                            val = 0;
+                        }
                     }
                     return {
                         evid: $('#evid').val(),
@@ -429,7 +443,21 @@ $('.step-evweight').steps({
                         value: val
                       } 
                 }).get();
-        
+
+                // console.log(conflictarray);
+                // return;
+     
+                var conflictcommentarray = $(".comment").map(function () {
+                    var val = $(this).val();
+                    return {
+                        evid: $('#evid').val(),
+                        criteriatransactionid: $(this).data('id'),
+                        subpillarindex: $(this).data('subpillarindex'),
+                        value: val
+                      } 
+                }).get();
+                // console.log(conflictcommentarray);
+                // return;
                 var conflictextraarray = $(".inputextrascore").map(function () {
                     var val = $(this).val();
                     return {
@@ -447,11 +475,9 @@ $('.step-evweight').steps({
                         value: val
                       } 
                 }).get();
-
-                // console.log(conflictextracommentarray);
                 
                 $("#spinicon").attr("hidden",false);
-                updateScore(conflictarray,conflictextraarray,conflictextracommentarray,$('#evid').val()).then(data => {
+                updateScore(conflictarray,conflictcommentarray,conflictextraarray,conflictextracommentarray,$('#evid').val()).then(data => {
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
                         title: 'สำเร็จ...',
