@@ -425,7 +425,6 @@ class DashboardAdminAssessmentController extends Controller
                 $extrascore->scoring  = $check->scoring;
                 $extrascore->save();
             }
-        // }
 
         Ev::find($request->evid)->update([
             'status' => 5
@@ -435,6 +434,9 @@ class DashboardAdminAssessmentController extends Controller
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         BusinessPlan::find($minitbp->business_plan_id)->update([
             'business_plan_status_id' => 8
+        ]);
+        FullTbp::find($ev->full_tbp_id)->update([
+            'finishdate' => Carbon::now()->toDateString()
         ]);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();

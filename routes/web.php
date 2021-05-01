@@ -527,6 +527,75 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('getprojectbyregcapital','DashboardAdminRealtimeReportProjectController@GetProjectByRegCapital')->name('dashboard.admin.realtimereport.project.getprojectbyregcapital');
                     Route::get('docdownload','DashboardAdminRealtimeReportProjectController@DocDownload')->name('dashboard.admin.realtimereport.project.docdownload');
                     Route::get('getdocdownload','DashboardAdminRealtimeReportProjectController@GetDocDownload')->name('dashboard.admin.realtimereport.project.getdocdownload');
+                    Route::get('minitbpbymonth','DashboardAdminRealtimeReportProjectController@minitbpbymonth')->name('dashboard.admin.realtimereport.project.minitbpbymonth');
+                    Route::get('getminitbpbymonth','DashboardAdminRealtimeReportProjectController@getminitbpbymonth')->name('dashboard.admin.realtimereport.project.getminitbpbymonth');
+                    Route::get('fulltbpbymonth','DashboardAdminRealtimeReportProjectController@fulltbpbymonth')->name('dashboard.admin.realtimereport.project.fulltbpbymonth');
+                    Route::get('getfulltbpbymonth','DashboardAdminRealtimeReportProjectController@getfulltbpbymonth')->name('dashboard.admin.realtimereport.project.getfulltbpbymonth');
+                    Route::get('finishedbymonth','DashboardAdminRealtimeReportProjectController@finishedbymonth')->name('dashboard.admin.realtimereport.project.finishedbymonth');
+                    Route::get('getfinishedbymonth','DashboardAdminRealtimeReportProjectController@getfinishedbymonth')->name('dashboard.admin.realtimereport.project.getfinishedbymonth');
+                    Route::get('canceledbymonth','DashboardAdminRealtimeReportProjectController@canceledbymonth')->name('dashboard.admin.realtimereport.project.canceledbymonth');
+                    Route::get('getcanceledbymonth','DashboardAdminRealtimeReportProjectController@getcanceledbymonth')->name('dashboard.admin.realtimereport.project.getcanceledbymonth');
+                    Route::get('minitbpbyyear','DashboardAdminRealtimeReportProjectController@minitbpbyyear')->name('dashboard.admin.realtimereport.project.minitbpbyyear');
+                    Route::get('getminitbpbyyear','DashboardAdminRealtimeReportProjectController@getminitbpbyyear')->name('dashboard.admin.realtimereport.project.getminitbpbyyear');
+                    Route::get('fulltbpbyyear','DashboardAdminRealtimeReportProjectController@fulltbpbyyear')->name('dashboard.admin.realtimereport.project.fulltbpbyyear');
+                    Route::get('getfulltbpbyyear','DashboardAdminRealtimeReportProjectController@getfulltbpbyyear')->name('dashboard.admin.realtimereport.project.getfulltbpbyyear');
+                    Route::get('finishedbyyear','DashboardAdminRealtimeReportProjectController@finishedbyyear')->name('dashboard.admin.realtimereport.project.finishedbyyear');
+                    Route::get('getfinishedbyyear','DashboardAdminRealtimeReportProjectController@getfinishedbyyear')->name('dashboard.admin.realtimereport.project.getfinishedbyyear');
+                    Route::get('canceledbyyear','DashboardAdminRealtimeReportProjectController@canceledbyyear')->name('dashboard.admin.realtimereport.project.canceledbyyear');
+                    Route::get('getcanceledbyyear','DashboardAdminRealtimeReportProjectController@getcanceledbyyear')->name('dashboard.admin.realtimereport.project.getcanceledbyyear');
+                    Route::get('minitbpbyyearbudget','DashboardAdminRealtimeReportProjectController@minitbpbyyearbudget')->name('dashboard.admin.realtimereport.project.minitbpbyyearbudget');
+                    Route::get('getminitbpbyyearbudget','DashboardAdminRealtimeReportProjectController@getminitbpbyyearbudget')->name('dashboard.admin.realtimereport.project.getminitbpbyyearbudget');
+                    Route::get('fulltbpbyyearbudget','DashboardAdminRealtimeReportProjectController@fulltbpbyyearbudget')->name('dashboard.admin.realtimereport.project.fulltbpbyyearbudget');
+                    Route::get('getfulltbpbyyearbudget','DashboardAdminRealtimeReportProjectController@getfulltbpbyyearbudget')->name('dashboard.admin.realtimereport.project.getfulltbpbyyearbudget');
+                    Route::get('finishedbyyearbudget','DashboardAdminRealtimeReportProjectController@finishedbyyearbudget')->name('dashboard.admin.realtimereport.project.finishedbyyearbudget');
+                    Route::get('getfinishedbyyearbudget','DashboardAdminRealtimeReportProjectController@getfinishedbyyearbudget')->name('dashboard.admin.realtimereport.project.getfinishedbyyearbudget');
+                    Route::get('canceledbyyearbudget','DashboardAdminRealtimeReportProjectController@canceledbyyearbudget')->name('dashboard.admin.realtimereport.project.canceledbyyearbudget');
+                    Route::get('getcanceledbyyearbudget','DashboardAdminRealtimeReportProjectController@getcanceledbyyearbudget')->name('dashboard.admin.realtimereport.project.getcanceledbyyearbudget');
+                    Route::get('allbyyear','DashboardAdminRealtimeReportProjectController@allbyyear')->name('dashboard.admin.realtimereport.project.allbyyear');
+                    Route::get('getallbyyear','DashboardAdminRealtimeReportProjectController@getallbyyear')->name('dashboard.admin.realtimereport.project.getallbyyear');
+                    Route::get('allbyyearbudget','DashboardAdminRealtimeReportProjectController@allbyyearbudget')->name('dashboard.admin.realtimereport.project.allbyyearbudget');
+                    Route::get('getallbyyearbudget','DashboardAdminRealtimeReportProjectController@getallbyyearbudget')->name('dashboard.admin.realtimereport.project.getallbyyearbudget');
+                    Route::get('projectbycapital','DashboardAdminRealtimeReportProjectController@projectbycapital')->name('dashboard.admin.realtimereport.project.projectbycapital');
+                    Route::get('getprojectbycapital','DashboardAdminRealtimeReportProjectController@getprojectbycapital')->name('dashboard.admin.realtimereport.project.getprojectbycapital');
+
+                    Route::get('projectbybusinesstype','DashboardAdminRealtimeReportProjectController@projectbybusinesstype')->name('dashboard.admin.realtimereport.project.projectbybusinesstype');
+                    Route::get('projectbybusinesssize','DashboardAdminRealtimeReportProjectController@projectbybusinesssize')->name('dashboard.admin.realtimereport.project.projectbybusinesssize');
+                    Route::get('projectbyisiccode','DashboardAdminRealtimeReportProjectController@projectbyisiccode')->name('dashboard.admin.realtimereport.project.projectbyisiccode');
+                    Route::get('projectbyindustrygroup','DashboardAdminRealtimeReportProjectController@projectbyindustrygroup')->name('dashboard.admin.realtimereport.project.projectbyindustrygroup');
+                    Route::get('projectbytechgroup','DashboardAdminRealtimeReportProjectController@projectbytechgroup')->name('dashboard.admin.realtimereport.project.projectbytechgroup');
+                    Route::get('projectbyprovince','DashboardAdminRealtimeReportProjectController@projectbyprovince')->name('dashboard.admin.realtimereport.project.projectbyprovince');
+                    Route::get('projectbysector','DashboardAdminRealtimeReportProjectController@projectbysector')->name('dashboard.admin.realtimereport.project.projectbysector');
+                    Route::get('projectbystatus','DashboardAdminRealtimeReportProjectController@projectbystatus')->name('dashboard.admin.realtimereport.project.projectbystatus');
+                    Route::get('projectbyscore','DashboardAdminRealtimeReportProjectController@projectbyscore')->name('dashboard.admin.realtimereport.project.projectbyscore');
+                    Route::get('projectbygrade','DashboardAdminRealtimeReportProjectController@projectbygrade')->name('dashboard.admin.realtimereport.project.projectbygrade');
+                    Route::get('projectbycertificate','DashboardAdminRealtimeReportProjectController@projectbycertificate')->name('dashboard.admin.realtimereport.project.projectbycertificate');
+                    Route::get('projectbyobjective','DashboardAdminRealtimeReportProjectController@projectbyobjective')->name('dashboard.admin.realtimereport.project.projectbyobjective');
+                    Route::get('projectbyfinanceresult','DashboardAdminRealtimeReportProjectController@projectbyfinanceresult')->name('dashboard.admin.realtimereport.project.projectbyfinanceresult');
+                    Route::get('projectbynonefinanceresult','DashboardAdminRealtimeReportProjectController@projectbynonefinanceresult')->name('dashboard.admin.realtimereport.project.projectbynonefinanceresult');
+                    Route::get('projectbyleader','DashboardAdminRealtimeReportProjectController@projectbyleader')->name('dashboard.admin.realtimereport.project.projectbyleader');
+                    Route::get('projectleadbystatus','DashboardAdminRealtimeReportProjectController@projectleadbystatus')->name('dashboard.admin.realtimereport.project.projectleadbystatus');
+                    Route::get('projectleadbyindustrygroup','DashboardAdminRealtimeReportProjectController@projectleadbyindustrygroup')->name('dashboard.admin.realtimereport.project.projectleadbyindustrygroup');
+                    Route::get('projectleadbytechgroup','DashboardAdminRealtimeReportProjectController@projectleadbytechgroup')->name('dashboard.admin.realtimereport.project.projectleadbytechgroup');
+                    Route::get('projectbyexpert','DashboardAdminRealtimeReportProjectController@projectbyexpert')->name('dashboard.admin.realtimereport.project.projectbyexpert');
+                    Route::get('projectexpertbystatus','DashboardAdminRealtimeReportProjectController@projectexpertbystatus')->name('dashboard.admin.realtimereport.project.projectexpertbystatus');
+                    Route::get('projectexpertbyindustrygroup','DashboardAdminRealtimeReportProjectController@projectexpertbyindustrygroup')->name('dashboard.admin.realtimereport.project.projectexpertbyindustrygroup');
+                    Route::get('projectexpertbytechgroup','DashboardAdminRealtimeReportProjectController@projectexpertbytechgroup')->name('dashboard.admin.realtimereport.project.projectexpertbytechgroup');
+                    Route::get('projectgradebybusinesssize','DashboardAdminRealtimeReportProjectController@projectgradebybusinesssize')->name('dashboard.admin.realtimereport.project.projectgradebybusinesssize');
+                    Route::get('projectgradebyindustrygroup','DashboardAdminRealtimeReportProjectController@projectgradebyindustrygroup')->name('dashboard.admin.realtimereport.project.projectgradebyindustrygroup');
+                    Route::get('projectbusinesssizebyindustrygroup','DashboardAdminRealtimeReportProjectController@projectbusinesssizebyindustrygroup')->name('dashboard.admin.realtimereport.project.projectbusinesssizebyindustrygroup');
+                    Route::get('projectbusinesssizebytechgroup','DashboardAdminRealtimeReportProjectController@projectbusinesssizebytechgroup')->name('dashboard.admin.realtimereport.project.projectbusinesssizebytechgroup');
+                    Route::get('projectbusinesssizebysector','DashboardAdminRealtimeReportProjectController@projectbusinesssizebysector')->name('dashboard.admin.realtimereport.project.projectbusinesssizebysector');
+                    Route::get('projectindustrygroupbysector','DashboardAdminRealtimeReportProjectController@projectindustrygroupbysector')->name('dashboard.admin.realtimereport.project.projectindustrygroupbysector');
+                    Route::get('projectall','DashboardAdminRealtimeReportProjectController@projectall')->name('dashboard.admin.realtimereport.project.projectall');
+                    Route::get('projectstatusbyleader','DashboardAdminRealtimeReportProjectController@projectstatusbyleader')->name('dashboard.admin.realtimereport.project.projectstatusbyleader');
+                    Route::get('leadprojectstatusbyindustrygroup','DashboardAdminRealtimeReportProjectController@leadprojectstatusbyindustrygroup')->name('dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup');
+                    Route::get('leadprojectstatusbytechgroup','DashboardAdminRealtimeReportProjectController@leadprojectstatusbytechgroup')->name('dashboard.admin.realtimereport.project.leadprojectstatusbytechgroup');
+                    Route::get('leadprojectstatusbysector','DashboardAdminRealtimeReportProjectController@leadprojectstatusbysector')->name('dashboard.admin.realtimereport.project.leadprojectstatusbysector');
+                    Route::get('leadprojectstatusbybusinesssize','DashboardAdminRealtimeReportProjectController@leadprojectstatusbybusinesssize')->name('dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize');
+                    Route::get('projectbyleadcoleadexpert','DashboardAdminRealtimeReportProjectController@projectbyleadcoleadexpert')->name('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert');
+                 
+
+
                 });
                 Route::group(['prefix' => 'ttrsofficer'], function(){
                     Route::get('','DashboardAdminRealtimeReportTTRSofficerController@Index')->name('dashboard.admin.realtimereport.officer');
@@ -667,6 +736,11 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editcomment','DashboardAdminProjectAssessmentController@EditComment')->name('dashboard.admin.project.assessment.editcomment');
                     Route::post('updatescoringstatus','DashboardAdminProjectAssessmentController@UpdateScoringStatus')->name('dashboard.admin.project.assessment.updatescoringstatus');
                     Route::get('expertcommentpdf/{id}','DashboardAdminProjectAssessmentController@ExpertCommentPDF')->name('dashboard.admin.project.assessment.expertcommentpdf');
+
+                }); 
+                Route::group(['prefix' => 'projectcancel'], function(){
+                    Route::get('','DashboardAdminProjectCancelController@Index')->name('dashboard.admin.project.projectcancel');           
+                    Route::get('savecancel/{id}','DashboardAdminProjectCancelController@savecancel')->name('dashboard.admin.project.savecancel');
                 }); 
             });  
             Route::group(['prefix' => 'calendar'], function(){

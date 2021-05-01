@@ -52,6 +52,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SocialLoginStatusesTableSeeder::class);
         $this->call(ExpertBranchesTableSeeder::class);
         $this->call(EvStatusTablesSeeder::class);
+        $this->call(ProjectBudgetsTableSeeder::class);
         $this->call(EvTypesTableSeeder::class);
         $this->call(PillarsTableSeeder::class);
         $this->call(SubPillarsTableSeeder::class);
@@ -109,8 +110,8 @@ class DatabaseSeeder extends Seeder
         $this->call(HomepageIndustryGroupTextsSeeder::class);
         $this->call(DirectMenu2sTableSeeder::class);
         $this->call(PagesTableSeeder::class);
+        $this->call(ProjectBudgetsTableSeeder::class);
         
-
     }
 }
 

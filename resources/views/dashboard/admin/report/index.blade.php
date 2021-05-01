@@ -243,6 +243,13 @@
         </div>
         @if (Auth::user()->user_type_id > 5)
         <div class="row">
+            <div class="col-lg-12">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-3">
                 <div class="card bg-teal-400">
                     <div class="card-body">

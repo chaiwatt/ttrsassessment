@@ -379,7 +379,7 @@ function showConflictGrade(id){
 
 
 var submitbutton = true;
-if($('#evid').val() >= 5 ){
+if($('#evstatus').val() >= 5 ){
     submitbutton = false;
 }
 var form = $('.step-evweight').show();
@@ -443,9 +443,6 @@ $('.step-evweight').steps({
                         value: val
                       } 
                 }).get();
-
-                // console.log(conflictarray);
-                // return;
      
                 var conflictcommentarray = $(".comment").map(function () {
                     var val = $(this).val();
@@ -456,8 +453,7 @@ $('.step-evweight').steps({
                         value: val
                       } 
                 }).get();
-                // console.log(conflictcommentarray);
-                // return;
+
                 var conflictextraarray = $(".inputextrascore").map(function () {
                     var val = $(this).val();
                     return {

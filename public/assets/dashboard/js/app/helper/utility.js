@@ -18,6 +18,26 @@ function confirmation(e) {
     });
 }
 
+function cancelproject(e) {
+    e.preventDefault();
+    var urlToRedirect = e.currentTarget.getAttribute('href');
+    Swal.fire({
+            title: 'คำเตือน!',
+            text: `ต้องการยกเลิกโครงการหรือไม่? `,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            window.location.href = urlToRedirect;
+        }
+    });
+}
+
 function confirmsubmit(e,data) {
     e.preventDefault();
     var frm = e.target.form;

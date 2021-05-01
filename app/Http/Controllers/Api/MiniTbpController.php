@@ -348,7 +348,8 @@ class MiniTbpController extends Controller
         $file->move("storage/uploads/company/attachment" , $new_name);
         $filelocation = "storage/uploads/company/attachment/".$new_name;
         $minitbp->update([
-            'attachment' => $filelocation
+            'attachment' => $filelocation,
+            'submitdate' => Carbon::now()->toDateString()  
         ]);
         $minitbp = MiniTBP::find($id);
         if($minitbp->refixstatus == 1){
@@ -516,7 +517,8 @@ class MiniTbpController extends Controller
         $filelocation = $request->pdfname;
 
         $minitbp->update([
-            'attachment' => $filelocation
+            'attachment' => $filelocation,
+            'submitdate' => Carbon::now()->toDateString() 
         ]);
         $minitbp = MiniTBP::find($id);
         if($minitbp->refixstatus == 1){

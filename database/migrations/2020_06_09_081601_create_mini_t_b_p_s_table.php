@@ -17,6 +17,7 @@ class CreateMiniTBPSTable extends Migration
             $table->id();
             $table->unsignedBigInteger('business_plan_id');
             $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
+            $table->date('submitdate')->nullable();
             $table->char('ref_doc',15)->nullable();
             $table->string('minitbp_code',20)->nullable();
             $table->string('project',150)->nullable();
@@ -56,6 +57,7 @@ class CreateMiniTBPSTable extends Migration
             $table->text('jdmessage')->nullable();
             $table->string('otherbank')->nullable();
             $table->char('refixstatus',1)->default('0');
+            $table->char('cancel',1)->default('0');
             $table->timestamps();
         });
     }

@@ -430,7 +430,6 @@ $('.step-evweight').steps({
             closeOnCancel: false
             }).then((result) => {
             if (result.value) {
-
                 var checkscorelist = $(".checkscore").map(function () {
                     var val = 0;
                     if($(this).is(':checked') == true){
@@ -509,7 +508,7 @@ $('.step-evweight').steps({
                         title: 'สำเร็จ...',
                         text: 'นำส่งคะแนนสำเร็จ!',
                     }).then((result) => {
-                        //window.location.reload();
+                        window.location.reload();
                     });
                 }).catch(error => {})
             }

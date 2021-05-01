@@ -290,6 +290,14 @@ class FullTbp extends Model
     public function HaveExpertComment($fulltbpid){
         return ExpertComment::where('full_tbp_id',$fulltbpid)->count();
     }
+
+    public function getSubmitdateThAttribute(){
+        if(!Empty($this->submitdate)){
+            return DateConversion::engToThaiDate($this->submitdate);
+        }else{
+           return "" ;
+        }
+    } 
 }
 
 

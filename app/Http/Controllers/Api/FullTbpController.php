@@ -172,7 +172,8 @@ class FullTbpController extends Controller
         $filelocation = "storage/uploads/company/attachment/".$new_name;
         $fulltbp->update([
             'attachment' => $filelocation,
-            'status' => 2
+            'status' => 2,
+            'submitdate' => Carbon::now()->toDateString() 
         ]);
         
         $fulltbp = FullTbp::find($request->id);
@@ -238,9 +239,9 @@ class FullTbpController extends Controller
         $filelocation = $request->pdfname;
 
         $fulltbp->update([
-            'attachment' => $filelocation
+            'attachment' => $filelocation,
+            'submitdate' => Carbon::now()->toDateString()
         ]);
-        
         
         $fulltbp = FullTbp::find($request->id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);

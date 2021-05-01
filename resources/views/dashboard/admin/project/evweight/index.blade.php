@@ -117,6 +117,34 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
+                                    @if (!Empty($fulltbp->ev))
+                                    @php
+                                        $evstatus = 'ผ่านการอนุมัติ';
+                                        $style = 'badge badge-flat border-success text-success-600';
+                                        if($fulltbp->ev->status == 0){
+                                            $evstatus = 'อยู่ระหว่างการสร้าง EV';
+                                            $style = 'btn-sm bg-warning';
+                                        }elseif($fulltbp->ev->status == 1){
+                                            if($fulltbp->ev->refixstatus == 0){
+                                                $evstatus = 'อยู่ระหว่าง JD ตรวจสอบ';
+                                                $style = 'btn-sm bg-warning';
+                                            }else if($fulltbp->ev->refixstatus == 1){
+                                                $evstatus = 'ส่งคืนแก้ไข';
+                                                $style = 'btn-sm bg-pink';
+                                            }else if($fulltbp->ev->refixstatus == 2){
+                                                $evstatus = 'มีการแก้ไขแล้ว';
+                                                $style = 'btn-sm bg-indigo';
+                                            }
+                                        }elseif($fulltbp->ev->status == 2){
+                                            $evstatus = 'อยู่ระหว่าง Admin กำหนด Weight';
+                                            $style = 'btn-sm bg-pink';
+                                        }
+                                        elseif($fulltbp->ev->status == 3){
+                                            $evstatus = 'อยู่ระหว่าง JD พิจารณา';
+                                            $style = 'btn-sm bg-pink';
+                                        }
+                                    @endphp
+                                    @endif
                                     <tr>    
                                         {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
@@ -126,26 +154,31 @@
                                             @if (Auth::user()->user_type_id >= 6)
                                                     @if ($fulltbp->ev->refixstatus == 0)
                                                         @if ($fulltbp->ev->status >= 4)
-                                                                <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+                                                                <span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span>
                                                             @else
-                                                                <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>อยู่ระหว่าง JD พิจารณา</button> 
+                                                                {{-- <button type="button"  data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>{{$evstatus}}</button>  --}}
+                                                                <span class="badge badge-flat border-warning text-warning-600">{{$evstatus}}</span>
                                                         @endif
                                                     @elseif($fulltbp->ev->refixstatus == 1)
-                                                        <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>ส่งคืนให้ Admin แก้ไข</button> 
+                                                        <span class="badge badge-flat border-pink text-pink-600">{{$evstatus}}</span>
+                                                        {{-- <button type="button"  data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-pink"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>{{$evstatus}}</button>  --}}
                                                     @elseif($fulltbp->ev->refixstatus == 2)
-                                                        <button type="button" id="editapprove" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>มีการแก้ไขแล้ว</button> 
+                                                        <span class="badge badge-flat border-indigo text-indigo-600">{{$evstatus}}</span>
+                                                        {{-- <button type="button" data-id="{{$fulltbp->ev->id}}" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->ev->id}}" hidden></i>{{$evstatus}}</button>  --}}
                                                     @endif
                                                 @else
                                                     @if ($fulltbp->ev->refixstatus == 0)
                                                         @if ($fulltbp->ev->status >= 4)
-                                                                <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+
+                                                                <span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span>
                                                             @else
                                                                 <span class="badge badge-flat border-warning text-warning-600">{{$fulltbp->ev->evstatus->name}}</span> 
                                                         @endif    
                                                     @elseif($fulltbp->ev->refixstatus == 1)
-                                                        <span class="badge badge-flat border-pink text-pink-600">ให้แก้ไข EV</span>
+
+                                                        <span class="badge badge-flat border-pink text-pink-600">{{$evstatus}}</span>
                                                     @elseif($fulltbp->ev->refixstatus == 2)
-                                                        <span class="badge badge-flat border-indigo text-indigo-600">ส่งการแก้ไขแล้ว</span>                                                       
+                                                        <span class="badge badge-flat border-indigo text-indigo-600">{{$evstatus}}</span>                                                       
                                                     @endif
                                             @endif
                                         </td>

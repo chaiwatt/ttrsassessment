@@ -293,7 +293,7 @@ function RowSpanWeight(tableid){
 
 
 var submitbutton = true;
-if($('#evid').val() >= 5 ){
+if($('#evstatus').val() >= 5 ){
     submitbutton = false;
 }
 var form = $('.step-evweight').show();

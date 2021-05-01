@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use App\Model\Prefix;
 use App\Model\FullTbp;
 use App\Model\ThaiBank;
@@ -63,5 +64,48 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
 
     public function Reviselog($id){
         return ReviseLog::where('mini_tbp_id',$this->id)->where('doctype',$id)->get();
+    }
+
+    public function getSubmitdateThAttribute(){
+        if(!Empty($this->submitdate)){
+            return DateConversion::engToThaiDate($this->submitdate);
+        }else{
+           return "" ;
+        }
+    } 
+
+    public function getSubmitdateyearthAttribute(){
+        if(!Empty($this->submitdate)){
+            $check = DateConversion::engToThaiDate($this->submitdate);
+            preg_match("/[^\/]+$/", $check, $matches);
+            return $matches[0]; 
+        }else{
+           return "" ;
+        }
+    } 
+    public function getSubmitdateyearbudgetthAttribute(){
+        if(!Empty($this->submitdate)){
+            return  $this->fiscalYear($this->submitdate);
+        }else{
+           return "" ;
+        }
+    }
+
+    public function fiscalYear($date) {
+        // วันที่ที่ต้องการตรวจสอบ
+        list($year, $month, $day) = explode("-", $date);
+        // วันที่ที่ส่งมา (mktime)
+        $cday = mktime(0, 0, 0, $month, $day, $year);
+        // ปีงบประมาณตามค่าที่ส่งมา (mktime)
+        $d1 = mktime(0, 0, 0, 10, 1, $year );
+        // ปีใหม่
+        $d2 = mktime(0, 0, 0, 9, 30, $year + 1);
+        if ($cday >= $d1 && $cday < $d2) {
+            // 1 ตค. -  ธค.
+        
+        $year++;
+        
+        }
+        return $year+543;
     }
 }

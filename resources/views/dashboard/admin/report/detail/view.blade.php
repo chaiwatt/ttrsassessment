@@ -94,7 +94,8 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr class="bg-info">
-                                            <th style="width:600px">Mini TBP/Full TBP</th> 
+                                            <th style="width:300px">Mini TBP/Full TBP</th> 
+                                            <th >วันที่ส่งเอกสาร</th>
                                             <th >PDF</th>
                                             <th style="width:200px">เอกสารแนบ</th> 
                                         </tr>
@@ -112,7 +113,8 @@
                                                         <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
                                                 @endif
                                                 
-                                            </td>  
+                                            </td> 
+                                            <td>{{$company->businessplan->minitbp->submitdateth}}</td> 
                                             <td> 
                                                 <a href="{{asset($company->businessplan->minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
                                             </td>  
@@ -134,6 +136,7 @@
                                                     @endif
                                                     
                                                 </td>  
+                                                <td>{{$company->businessplan->minitbp->fulltbp->submitdateth}}</td> 
                                                 <td> 
                                                     @if (Auth::user()->user_type_id == 3)
                                                         @if (Auth::user()->experttype == "(ภายนอก)")

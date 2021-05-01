@@ -25,10 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Daily at 1 am
-        // 0 1 * * * php /var/www/html/ttrsassessment/artisan schedule:run >> /dev/null 2>&1
+        // Daily at 4 am add to crontab
+        // 0 4 * * * php /var/www/html/ttrsassessment/artisan schedule:run >> /dev/null 2>&1
         $schedule->command('cron:sendemail')->everyMinute();
-        $schedule->command('database:backup')->everyMinute();
+        //$schedule->command('database:backup')->everyMinute();
     }
 
     /**

@@ -17,6 +17,7 @@ class CreateFullTbpsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('mini_tbp_id');
             $table->foreign('mini_tbp_id')->references('id')->on('mini_t_b_p_s')->onDelete('cascade');
+            $table->date('submitdate')->nullable();
             $table->string('fulltbp_code',20)->nullable();
             $table->unsignedBigInteger('signature_status_id')->default(1);
             // $table->string('file',250)->nullable();
@@ -36,6 +37,8 @@ class CreateFullTbpsTable extends Migration
             $table->string('shortpdf',250)->nullable();
             $table->char('done_assessment',1)->default(0);
             $table->char('finished_onsite',1)->default(1);
+            $table->date('canceldate')->nullable();
+            $table->date('finishdate')->nullable();
             $table->timestamps();
         });
     }
