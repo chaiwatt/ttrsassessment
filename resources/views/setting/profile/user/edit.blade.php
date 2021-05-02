@@ -421,7 +421,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ประเภทที่อยู่</label><small> เช่น ที่อยู่สาขา, ที่อยู่โรงงาน</small><span class="text-danger">*</span>
-								<input type="text"  id="addressname" placeholder="ชื่อประเภท เช่น ชื่อบริษัท, ชื่อสาขา, ชื่อโรงงาน" class="form-control form-control-lg stringformat60" >
+								<input type="text"  id="addressname" placeholder="ชื่อประเภท เช่น ชื่อสาขา, ชื่อโรงงาน" class="form-control form-control-lg stringformat60" >
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -484,7 +484,7 @@
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_add_address" data-id="{{$user->company->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
+					<button id="btn_modal_add_address" data-id="{{$user->company->id}}" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่มรายการ</button>
 				</div>
 			</div>
 		</div>

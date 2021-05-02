@@ -10,22 +10,24 @@ use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\ProjectGrade;
+use App\Model\CompanyAddress;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ReportProjectExportByBusinessType implements FromView,ShouldAutoSize,WithTitle
+class ReportProjectExportByProvince implements FromView,ShouldAutoSize,WithTitle
 {
-    protected $businesstype;
+    protected $province;
     protected $projectname;
-    function __construct($businesstype) {
-        $this->projectname = 'โครงการแยกตามประเภทธุรกิจ';
-           $this->businesstype = $businesstype;
+    function __construct($province) {
+        $this->projectname = 'โครงการแยกตามจังหวัด';
+           $this->province = $province;
     }
     public function view(): View
     {
-        $companies = Company::where('business_type_id',$this->businesstype)->pluck('id')->toArray();
+        $addressarray = array_unique(CompanyAddress::where('province_id',$this->province)->pluck('company_id')->toArray());
+        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
         $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();

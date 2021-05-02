@@ -15,17 +15,17 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ReportProjectExportByBusinessType implements FromView,ShouldAutoSize,WithTitle
+class ReportProjectExportByIsic implements FromView,ShouldAutoSize,WithTitle
 {
-    protected $businesstype;
+    protected $isic;
     protected $projectname;
-    function __construct($businesstype) {
-        $this->projectname = 'โครงการแยกตามประเภทธุรกิจ';
-           $this->businesstype = $businesstype;
+    function __construct($isic) {
+        $this->projectname = 'โครงการแยกตาม ISIC Code';
+           $this->isic = $isic;
     }
     public function view(): View
     {
-        $companies = Company::where('business_type_id',$this->businesstype)->pluck('id')->toArray();
+        $companies = Company::where('isic_id',$this->isic)->pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
         $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();

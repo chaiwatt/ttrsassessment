@@ -298,6 +298,19 @@ class FullTbp extends Model
            return "" ;
         }
     } 
+
+    public function getProjectBudgetAttribute(){
+        $check = FullTbpInvestment::where('full_tbp_id',$this->id)->sum('cost');
+        $projectbudget = ProjectBudget::where('minbudget','<',$check)->where('maxbudget','>=',$check)->first();
+        if($projectbudget->id == 1){
+           return "น้อยกว่า " . number_format($projectbudget->maxbudget) ." บาท";
+        }elseif($projectbudget->id == 4){
+            return "มากกว่า " . number_format($projectbudget->minbudget) ." บาท";
+        }else{
+            return "ตั้งแต่ " . number_format($projectbudget->minbudget) . ' - ' . number_format($projectbudget->maxbudget) ." บาท";
+        }
+    } 
+
 }
 
 

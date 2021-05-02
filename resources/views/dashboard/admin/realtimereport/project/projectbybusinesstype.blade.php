@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">จำนวนโครงการที่ยื่น Full TBP รายปีงบประมาณ</span></h4>
+                <h4> <span class="font-weight-semibold">จำนวนโครงการแยกตามประเภทธุรกิจ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
                     <span class="breadcrumb-item active">โครงการ</span>
-                    <span class="breadcrumb-item active">จำนวนโครงการที่ยื่น Full TBP รายปีงบประมาณ</span>
+                    <span class="breadcrumb-item active">จำนวนโครงการแยกตามประเภทธุรกิจ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -38,29 +38,22 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จำนวนโครงการที่ยื่น Full TBP รายปีงบประมาณ</h6>
+                        <h6 class="card-title">จำนวนโครงการแยกตามประเภทธุรกิจ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('dashboard.admin.realtimereport.project.getprojectbycapital')}}" method="get">
+                        <form action="{{route('dashboard.admin.realtimereport.project.getprojectbybusinesstype')}}" method="get">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
 									<div class="form-group">
-										<label>เลือกงบประมาณของโครงการ</label>
-										<select name="projectbudget" data-placeholder="ปี" value="{{old('projectbudget')}}"  class="form-control form-control-lg form-control-select2">
-											@foreach ($projectbudgets as $key => $projectbudget)
-                                                @if ($key == 0)
-                                                        <option value="{{$projectbudget->id}}" @if ($projectbudget->id == Request::get('projectbudget')) selected @endif > น้อยกว่า {{number_format(@$projectbudget->maxbudget)}} บาท</option> 
-                                                   @elseif($key == ($projectbudgets->count()-1))
-                                                        <option value="{{$projectbudget->id}}" @if ($projectbudget->id == Request::get('projectbudget')) selected @endif > มากกว่า {{number_format(@$projectbudget->minbudget)}} บาท</option> 
-                                                   @else    
-                                                        <option value="{{$projectbudget->id}}" @if ($projectbudget->id == Request::get('projectbudget')) selected @endif > ตัั้งแต่ {{number_format(@$projectbudget->minbudget)}} - {{number_format(@$projectbudget->maxbudget)}} บาท</option> 
-                                                @endif
-                                                
+										<label>เลือกประเภทธุรกิจ</label>
+										<select name="businesstype" data-placeholder="เลือกประเภทธุรกิจ" value="{{old('businesstype')}}"  class="form-control form-control-lg form-control-select2">
+											@foreach ($businesstypes as $businesstype)
+                                                <option value="{{$businesstype->id}}" @if ($businesstype->id == Request::get('businesstype')) selected @endif >{{$businesstype->name}}</option> 
 											@endforeach
 										</select>
 									</div>

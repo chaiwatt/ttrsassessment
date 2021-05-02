@@ -920,6 +920,14 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,sign
 });
 
 $(document).on('click', '#btn_modal_add_address', function(e) {
+    if($('#addressname').val() == '' || $('#address').val() == '' ||$('#provincemodal').val() == '' ||$('#amphurmodal').val() == '' ||$('#tambolmodal').val() == '' ||$('#postalcode').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        })
+        return;
+    }
+
     addAddress($(this).data('id'),$('#addressname').val(),$('#address').val(),$('#provincemodal').val(),$('#amphurmodal').val(),$('#tambolmodal').val(),$('#postalcode').val(),$('#lat').val(),$('#lng').val()).then(data => {
         var html = ``;
         data.forEach(function (address,index) {
@@ -938,6 +946,7 @@ $(document).on('click', '#btn_modal_add_address', function(e) {
             }else{
                 $("#other_address_wrapper").attr("hidden",true);
             }
+            $('#modal_add_address').modal('hide');
          $("#authorized_address_wrapper_tr").html(html);
     }).catch(error => {})
 });

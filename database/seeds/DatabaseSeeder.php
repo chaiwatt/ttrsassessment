@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PillarsTableSeeder::class);
         $this->call(SubPillarsTableSeeder::class);
         $this->call(SubPillarIndicesTableSeeder::class); 
+        $this->call(SectorsTableSeeder::class); 
         $this->call(IndexTypesTableSeeder::class);
         $this->call(SignatureStatusesTableSeeder::class);
         $this->call(PaymentStatusesSeeder::class);

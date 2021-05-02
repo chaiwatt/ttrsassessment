@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>เลขที่โครงการ</th>
-        <th>ปีงบประมาณ</th>
+        <th>งบประมาณของโครงการ</th>
         <th>เลขที่คำขอ Mini TBP</th>
         <th>เลขที่คำขอ Full TBP</th>
         <th>ชื่อโครงการ</th>
@@ -90,7 +90,7 @@
         @if ($businessplan->business_plan_status_id > 2)
             <tr>
                 <td>{{ $businessplan->code }}</td>
-                <td>{{ $minitbp->submitdateyearbudgetth }}</td>
+                <td>{{ $fulltbp->projectbudget }}</td>
                 <td>{{ $minitbp->minitbp_code }}</td>
                 <td>{{ $fulltbp->fulltbp_code }}</td>
                 <td>{{ $minitbp->project }}</td>

@@ -6,12 +6,13 @@
         <th>เลขที่คำขอ Full TBP</th>
         <th>ชื่อโครงการ</th>
         <th>ชื่อบริษัท</th>
+        <th>ประเภทธุรกิจ</th>
         <th>ผลิต/บริการ</th>
         <th>M-S-M-L</th>
         <th>ISIC Code</th>
         <th>ประเภทธุรกิจตามรหัส ISIC</th>
         <th>ประเภทอุตสาหกรรม</th>
-        <th>ประเภทธุรกิจ</th>
+        <th>ลักษณะธุรกิจ</th>
         <th>ชื่อผู้ติดต่อ</th>
         <th>ตำแหน่ง</th>
         <th>E-mail</th>
@@ -92,6 +93,7 @@
                 <td>{{ $fulltbp->fulltbp_code }}</td>
                 <td>{{ $minitbp->project }}</td>
                 <td>{{ $company->name }}</td>
+                <td>{{ $company->businesstype->name }}</td>
                 <td>{{ $company->companyservicetype }}</td>
                 <td>{{ $company->companysize }}</td>
                 <td>{{ $company->isicsub->code }}</td>
