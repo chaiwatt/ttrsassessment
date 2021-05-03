@@ -16,20 +16,23 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ReportProjectExportByGrade implements FromView,ShouldAutoSize,WithTitle
+class ReportProjectExportByCertificate implements FromView,ShouldAutoSize,WithTitle
 {
-    protected $grade;
+    protected $status;
     protected $projectname;
-    function __construct($grade) {
+    function __construct($status) {
         $this->projectname = 'โครงการแยกตามเกรด';
-           $this->grade = $grade;
+           $this->status = $status;
     }
     public function view(): View
     {
-        $grade = Grade::find($this->grade);
-        $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
-        $fulltbps = FullTbp::whereIn('id', $projectgradearray)->get();
-        return view('dashboard.admin.realtimereport.project.download', [
+        $businessplanarray = BusinessPlan::where('business_plan_status_id',10)->pluck('id')->toArray();
+        if($this->status != 1){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id','!=',10)->pluck('id')->toArray();
+        }
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        return view('dashboard.admin.realtimereport.project.downloadcertificate', [
             'fulltbps' => $fulltbps
         ]);
     }

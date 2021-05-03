@@ -24,18 +24,22 @@ use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
 use App\Model\EvaluationMonth;
 use App\Model\FullTbpInvestment;
+use App\Model\BusinessPlanStatus;
 use App\Model\RegisteredCapitalType;
 use App\ExcelFromView\Report\Project\ReportProjectExport;
 use App\ExcelFromView\Report\Project\ReportProjectExportByIsic;
 use App\ExcelFromView\Report\Project\ReportProjectExportByYear;
 use App\ExcelFromView\Report\Project\ReportProjectExportByGrade;
+use App\ExcelFromView\Report\Project\ReportProjectExportByScore;
 use App\ExcelFromView\Report\Project\ReportProjectExportByBudget;
 use App\ExcelFromView\Report\Project\ReportProjectExportBySector;
 use App\ExcelFromView\Report\Project\ReportProjectExportByProvince;
+use App\ExcelFromView\Report\Project\ReportProjectExportByObjective;
 use App\ExcelFromView\Report\Project\ReportProjectExportDocDownload;
 use App\ExcelFromView\Report\Project\ReportProjectExportByRegCapital;
 use App\ExcelFromView\Report\Project\ReportProjectExportByYearBudget;
 use App\ExcelFromView\Report\Project\ReportProjectExportCancelByYear;
+use App\ExcelFromView\Report\Project\ReportProjectExportByCertificate;
 use App\ExcelFromView\Report\Project\ReportProjectExportCancelByMonth;
 use App\ExcelFromView\Report\Project\ReportProjectExportFullTbpByYear;
 use App\ExcelFromView\Report\Project\ReportProjectExportMiniTbpByYear;
@@ -49,6 +53,7 @@ use App\ExcelFromView\Report\Project\ReportProjectExportFinishedByMonth;
 use App\ExcelFromView\Report\Project\ReportProjectExportCancelByYearBudget;
 use App\ExcelFromView\Report\Project\ReportProjectExportFullTbpByYearBudget;
 use App\ExcelFromView\Report\Project\ReportProjectExportMiniTbpByYearBudget;
+use App\ExcelFromView\Report\Project\ReportProjectExportByBusinessPlanStatus;
 use App\ExcelFromView\Report\Project\ReportProjectExportFinishedByYearBudget;
 
 class DashboardAdminRealtimeReportProjectController extends Controller
@@ -72,19 +77,19 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $fulltbps = FullTbp::get();
         return view('dashboard.admin.realtimereport.project.bygrade')->withFulltbps($fulltbps)->withGrades($grades); 
     }
-    public function GetProjectByGrade(Request $request){
-        $grades = Grade::get();
-        $grade = Grade::find($request->grade)->name;
-        $startdate = DateConversion::thaiToEngDate($request->fromdate);
-        $enddate = DateConversion::thaiToEngDate($request->todate);
-        if($request->btnsubmit == 'excel'){
-            return Excel::download(new ReportProjectExportByGrade($startdate,$enddate,$grade), 'project.xlsx');
-        }else if($request->btnsubmit == 'search'){
-            $projectgrades = ProjectGrade::where('grade',$grade)->pluck('full_tbp_id')->toArray();
-            $fulltbps = FullTbp::whereIn('id', $projectgrades)->whereBetween('created_at', [$startdate, $enddate])->get();
-            return view('dashboard.admin.realtimereport.project.bygrade')->withFulltbps($fulltbps)->withGrades($grades); 
-        }
-    }
+    // public function GetProjectByGrade(Request $request){
+    //     $grades = Grade::get();
+    //     $grade = Grade::find($request->grade)->name;
+    //     $startdate = DateConversion::thaiToEngDate($request->fromdate);
+    //     $enddate = DateConversion::thaiToEngDate($request->todate);
+    //     if($request->btnsubmit == 'excel'){
+    //         return Excel::download(new ReportProjectExportByGrade($startdate,$enddate,$grade), 'project.xlsx');
+    //     }else if($request->btnsubmit == 'search'){
+    //         $projectgrades = ProjectGrade::where('grade',$grade)->pluck('full_tbp_id')->toArray();
+    //         $fulltbps = FullTbp::whereIn('id', $projectgrades)->whereBetween('created_at', [$startdate, $enddate])->get();
+    //         return view('dashboard.admin.realtimereport.project.bygrade')->withFulltbps($fulltbps)->withGrades($grades); 
+    //     }
+    // }
     public function ByIndustryGroup(){
         $industrygroups = IndustryGroup::get();
         $fulltbps = FullTbp::get();
@@ -587,8 +592,6 @@ class DashboardAdminRealtimeReportProjectController extends Controller
     }
 
     public function projectbysector(Request $request){
-        //$fulltbpinvestmentarr = FullTbpInvestment::distinct('full_tbp_id')->pluck('full_tbp_id')->toArray();
-
         $sectors = Sector::get();
         $provincearray = Province::where('map_code',1)->pluck('id')->toArray();
 
@@ -601,9 +604,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
     }
     public function getprojectbysector(Request $request){
         $sectors = Sector::get();
-
         $provincearray = Province::where('map_code',$request->sector)->pluck('id')->toArray();
-// return $request->sector;
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportBySector($request->sector), 'projectbysector.xlsx');
         }else if($request->btnsubmit == 'search'){
@@ -612,11 +613,125 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
             
             $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            // return  $addressarray;
             $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             return view('dashboard.admin.realtimereport.project.projectbysector')->withSectors($sectors)->withFulltbps($fulltbps); 
         }
     }
 
+    public function projectbystatus(Request $request){
+        $businessplanstatuses = BusinessPlanStatus::get();
+        $businessplanarray = BusinessPlan::where('business_plan_status_id',3)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        return view('dashboard.admin.realtimereport.project.projectbystatus')->withBusinessplanstatuses($businessplanstatuses)->withFulltbps($fulltbps);
+    }
+    public function getprojectbystatus(Request $request){
+        $businessplanstatuses = BusinessPlanStatus::get();
+        $businessplanstatus = BusinessPlanStatus::find($request->businessplanstatus);
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportByBusinessPlanStatus($businessplanstatus->id), 'projectbystatus.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id',$businessplanstatus->id)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            return view('dashboard.admin.realtimereport.project.projectbystatus')->withBusinessplanstatuses($businessplanstatuses)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectbyscore(Request $request){
+        $scores = Grade::get();
+        $score = Grade::first();
+        $projectgradearray = ProjectGrade::whereBetween('percent', [intVal($score->min), intVal($score->max)])->pluck('full_tbp_id')->toArray();                
+        $fulltbps = FullTbp::whereIn('id', $projectgradearray)->get();
+        return view('dashboard.admin.realtimereport.project.projectbyscore')->withScores($scores)->withFulltbps($fulltbps);
+    }
+    public function getprojectbyscore(Request $request){
+        $scores = Grade::get();
+        $score = Grade::find($request->score);
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportByScore($score->id), 'projectbyscore.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $projectgradearray = ProjectGrade::whereBetween('percent', [intVal($score->min), intVal($score->max)])->pluck('full_tbp_id')->toArray();
+            $fulltbps = FullTbp::whereIn('id', $projectgradearray)->get();
+            return view('dashboard.admin.realtimereport.project.projectbyscore')->withScores($scores)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectbygrade(Request $request){
+        $grades = Grade::get();
+        $grade = Grade::first();
+        $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
+        $fulltbps = FullTbp::whereIn('id', $projectgradearray)->get();
+        return view('dashboard.admin.realtimereport.project.projectbygrade')->withGrades($grades)->withFulltbps($fulltbps);
+    }
+    public function getprojectbygrade(Request $request){
+        $grades = Grade::get();
+        $grade = Grade::find($request->grade);
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportByGrade($request->grade), 'projectbygrade.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
+            $fulltbps = FullTbp::whereIn('id', $projectgradearray)->get();
+            return view('dashboard.admin.realtimereport.project.projectbygrade')->withGrades($grades)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectbycertificate(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        return view('dashboard.admin.realtimereport.project.projectbycertificate')->withFulltbps($fulltbps);
+    }
+    public function getprojectbycertificate(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id',10)->pluck('id')->toArray();
+        if($request->status != 1){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id','!=',10)->pluck('id')->toArray();
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportByCertificate($request->status), 'projectbycertificate.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            return view('dashboard.admin.realtimereport.project.projectbycertificate')->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectbyobjective(Request $request){
+        $minitbparray = MiniTBP::whereNotNull('finance1')
+                                ->orWhereNotNull('finance2')
+                                ->orWhereNotNull('finance3')
+                                ->orWhereNotNull('finance4')
+                                ->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        return view('dashboard.admin.realtimereport.project.projectbyobjective')->withFulltbps($fulltbps);
+    }
+    public function getprojectbyobjective(Request $request){
+            $minitbparray = MiniTBP::whereNotNull('finance1')
+                                ->orWhereNotNull('finance2')
+                                ->orWhereNotNull('finance3')
+                                ->orWhereNotNull('finance4')
+                                ->pluck('id')->toArray();
+
+        if($request->objecttivetype != 1){
+            $minitbparray = MiniTBP::whereNotNull('nonefinance1')
+                                    ->orWhereNotNull('nonefinance2')
+                                    ->orWhereNotNull('nonefinance3')
+                                    ->orWhereNotNull('nonefinance4')
+                                    ->orWhereNotNull('nonefinance5')
+                                    ->orWhereNotNull('nonefinance6')
+                                    ->pluck('id')->toArray();
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportByObjective($request->objecttivetype), 'projectbyobjective.xlsx');
+        }else if($request->btnsubmit == 'search'){
+
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            return view('dashboard.admin.realtimereport.project.projectbyobjective')->withFulltbps($fulltbps); 
+        }
+    }
+
 }
+

@@ -39,6 +39,7 @@ class CreateFullTbpsTable extends Migration
             $table->char('finished_onsite',1)->default(1);
             $table->date('canceldate')->nullable();
             $table->date('finishdate')->nullable();
+            $table->char('success_objective',1)->default(0);
             $table->timestamps();
         });
     }

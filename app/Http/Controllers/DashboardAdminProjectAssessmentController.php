@@ -347,7 +347,7 @@ class DashboardAdminProjectAssessmentController extends Controller
         $projectgrade->indexweight = $ev->percentindex;
         $projectgrade->extrapercent = $extrapercent;
         $projectgrade->extraweight = $ev->percentextra;
-        $projectgrade->percent = $percent;
+        $projectgrade->percent = intVal($percent);
         $projectgrade->grade = $grade;
         $projectgrade->save();
         $projectgrade = ProjectGrade::where('ev_id',$ev->id)->first(['percent', 'grade']); 

@@ -16,18 +16,19 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ReportProjectExportByGrade implements FromView,ShouldAutoSize,WithTitle
+class ReportProjectExportByScore implements FromView,ShouldAutoSize,WithTitle
 {
-    protected $grade;
+    protected $score;
     protected $projectname;
-    function __construct($grade) {
-        $this->projectname = 'โครงการแยกตามเกรด';
-           $this->grade = $grade;
+    function __construct($score) {
+        $this->projectname = 'โครงการแยกตามคะแนน';
+           $this->score = $score;
     }
     public function view(): View
     {
-        $grade = Grade::find($this->grade);
-        $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
+        $score = Grade::find($this->score);
+        // $projectgradearray = ProjectGrade::where('percent','>=',$score->min)->where('percent','<',$score->max)->pluck('full_tbp_id')->toArray();
+        $projectgradearray = ProjectGrade::whereBetween('percent', [intVal($score->min), intVal($score->max)])->pluck('full_tbp_id')->toArray();
         $fulltbps = FullTbp::whereIn('id', $projectgradearray)->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
