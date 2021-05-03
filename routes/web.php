@@ -581,16 +581,22 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('getprojectbycertificate','DashboardAdminRealtimeReportProjectController@getprojectbycertificate')->name('dashboard.admin.realtimereport.project.getprojectbycertificate');
                     Route::get('projectbyobjective','DashboardAdminRealtimeReportProjectController@projectbyobjective')->name('dashboard.admin.realtimereport.project.projectbyobjective');
                     Route::get('getprojectbyobjective','DashboardAdminRealtimeReportProjectController@getprojectbyobjective')->name('dashboard.admin.realtimereport.project.getprojectbyobjective');
-
-                    Route::get('projectbyfinanceresult','DashboardAdminRealtimeReportProjectController@projectbyfinanceresult')->name('dashboard.admin.realtimereport.project.projectbyfinanceresult');
-                    Route::get('projectbynonefinanceresult','DashboardAdminRealtimeReportProjectController@projectbynonefinanceresult')->name('dashboard.admin.realtimereport.project.projectbynonefinanceresult');
+                    Route::get('projectbyobjectiveapprove','DashboardAdminRealtimeReportProjectController@projectbyobjectiveapprove')->name('dashboard.admin.realtimereport.project.projectbyobjectiveapprove');
+                    Route::get('getprojectbyobjectiveapprove','DashboardAdminRealtimeReportProjectController@getprojectbyobjectiveapprove')->name('dashboard.admin.realtimereport.project.getprojectbyobjectiveapprove');
                     Route::get('projectbyleader','DashboardAdminRealtimeReportProjectController@projectbyleader')->name('dashboard.admin.realtimereport.project.projectbyleader');
+                    Route::get('getprojectbyleader','DashboardAdminRealtimeReportProjectController@getprojectbyleader')->name('dashboard.admin.realtimereport.project.getprojectbyleader');
                     Route::get('projectleadbystatus','DashboardAdminRealtimeReportProjectController@projectleadbystatus')->name('dashboard.admin.realtimereport.project.projectleadbystatus');
+                    Route::get('getprojectleadbystatus','DashboardAdminRealtimeReportProjectController@getprojectleadbystatus')->name('dashboard.admin.realtimereport.project.getprojectleadbystatus');
                     Route::get('projectleadbyindustrygroup','DashboardAdminRealtimeReportProjectController@projectleadbyindustrygroup')->name('dashboard.admin.realtimereport.project.projectleadbyindustrygroup');
+                    Route::get('getprojectleadbyindustrygroup','DashboardAdminRealtimeReportProjectController@getprojectleadbyindustrygroup')->name('dashboard.admin.realtimereport.project.getprojectleadbyindustrygroup');
                     Route::get('projectleadbytechgroup','DashboardAdminRealtimeReportProjectController@projectleadbytechgroup')->name('dashboard.admin.realtimereport.project.projectleadbytechgroup');
                     Route::get('projectbyexpert','DashboardAdminRealtimeReportProjectController@projectbyexpert')->name('dashboard.admin.realtimereport.project.projectbyexpert');
+                    Route::get('getprojectbyexpert','DashboardAdminRealtimeReportProjectController@getprojectbyexpert')->name('dashboard.admin.realtimereport.project.getprojectbyexpert');
                     Route::get('projectexpertbystatus','DashboardAdminRealtimeReportProjectController@projectexpertbystatus')->name('dashboard.admin.realtimereport.project.projectexpertbystatus');
+                    Route::get('getprojectexpertbystatus','DashboardAdminRealtimeReportProjectController@getprojectexpertbystatus')->name('dashboard.admin.realtimereport.project.getprojectexpertbystatus');
                     Route::get('projectexpertbyindustrygroup','DashboardAdminRealtimeReportProjectController@projectexpertbyindustrygroup')->name('dashboard.admin.realtimereport.project.projectexpertbyindustrygroup');
+                    Route::get('getprojectexpertbyindustrygroup','DashboardAdminRealtimeReportProjectController@getprojectexpertbyindustrygroup')->name('dashboard.admin.realtimereport.project.getprojectexpertbyindustrygroup');
+
                     Route::get('projectexpertbytechgroup','DashboardAdminRealtimeReportProjectController@projectexpertbytechgroup')->name('dashboard.admin.realtimereport.project.projectexpertbytechgroup');
                     Route::get('projectgradebybusinesssize','DashboardAdminRealtimeReportProjectController@projectgradebybusinesssize')->name('dashboard.admin.realtimereport.project.projectgradebybusinesssize');
                     Route::get('projectgradebyindustrygroup','DashboardAdminRealtimeReportProjectController@projectgradebyindustrygroup')->name('dashboard.admin.realtimereport.project.projectgradebyindustrygroup');
