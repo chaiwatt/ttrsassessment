@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\User;
 use App\Model\FullTbp;
+use App\Model\ExpertDetail;
 use App\Model\ExpertComment;
 use App\Model\ExpertAssignment;
 use Illuminate\Support\Facades\Auth;
@@ -30,5 +31,20 @@ class ExpertAssignment extends Model
 
     public function getFullTbpAttribute(){
         return FullTbp::find($this->full_tbp_id);
+    }
+
+    public function isExternal($id)
+    {
+        $user = User::find($id);
+        if ($user->user_type_id == 3){
+            $check = ExpertDetail::where('user_id',$id)->first();
+            if($check->expert_type_id == 1){
+                return "";
+            }else if($check->expert_type_id == 2){
+                return "(ภายนอก)";
+            }
+        }else{
+            return "";
+        }
     }
 }

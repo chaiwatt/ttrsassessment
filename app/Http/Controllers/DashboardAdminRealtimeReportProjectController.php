@@ -19,6 +19,8 @@ use App\Model\DownloadStat;
 use App\Model\ProjectGrade;
 use App\Model\IndustryGroup;
 use App\Model\ProjectBudget;
+use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
@@ -28,6 +30,7 @@ use App\Model\FullTbpInvestment;
 use App\Model\ProjectAssignment;
 use App\Model\BusinessPlanStatus;
 use App\Model\RegisteredCapitalType;
+use App\Model\ProjectStatusTransaction;
 use App\ExcelFromView\Report\Project\ReportProjectExport;
 use App\ExcelFromView\Report\Project\ReportProjectExportByIsic;
 use App\ExcelFromView\Report\Project\ReportProjectExportByYear;
@@ -40,6 +43,7 @@ use App\ExcelFromView\Report\Project\ReportProjectExportBySector;
 use App\ExcelFromView\Report\Project\ReportProjectExportByProvince;
 use App\ExcelFromView\Report\Project\ReportProjectExportByObjective;
 use App\ExcelFromView\Report\Project\ReportProjectExportDocDownload;
+use App\ExcelFromView\Report\Project\ReportProjectExportByProjectAll;
 use App\ExcelFromView\Report\Project\ReportProjectExportByRegCapital;
 use App\ExcelFromView\Report\Project\ReportProjectExportByYearBudget;
 use App\ExcelFromView\Report\Project\ReportProjectExportCancelByYear;
@@ -52,18 +56,28 @@ use App\ExcelFromView\Report\Project\ReportProjectExportByBusinessType;
 use App\ExcelFromView\Report\Project\ReportProjectExportFinishedByYear;
 use App\ExcelFromView\Report\Project\ReportProjectExportFullTbpByMonth;
 use App\ExcelFromView\Report\Project\ReportProjectExportMiniTbpByMonth;
+use App\ExcelFromView\Report\Project\ReportProjectExportRatingByLeader;
 use App\ExcelFromView\Report\Project\ReportProjectExportByIndustryGroup;
 use App\ExcelFromView\Report\Project\ReportProjectExportFinishedByMonth;
+use App\ExcelFromView\Report\Project\ReportProjectExportByLeadColeadExpert;
 use App\ExcelFromView\Report\Project\ReportProjectExportByObjectiveApprove;
 use App\ExcelFromView\Report\Project\ReportProjectExportCancelByYearBudget;
 use App\ExcelFromView\Report\Project\ReportProjectExportFullTbpByYearBudget;
+use App\ExcelFromView\Report\Project\ReportProjectExportGradeByBusinessSize;
 use App\ExcelFromView\Report\Project\ReportProjectExportMiniTbpByYearBudget;
+use App\ExcelFromView\Report\Project\ReportProjectExportBusinessSizeBySector;
 use App\ExcelFromView\Report\Project\ReportProjectExportByBusinessPlanStatus;
 use App\ExcelFromView\Report\Project\ReportProjectExportFinishedByYearBudget;
+use App\ExcelFromView\Report\Project\ReportProjectExportGradeByIndustryGroup;
+use App\ExcelFromView\Report\Project\ReportProjectExportRatingLeaderBySector;
 use App\ExcelFromView\Report\Project\ReportProjectExportExpertByIndustryGroup;
+use App\ExcelFromView\Report\Project\ReportProjectExportIndustryGroupBySector;
 use App\ExcelFromView\Report\Project\ReportProjectExportLeaderByIndustryGroup;
+use App\ExcelFromView\Report\Project\ReportProjectExportRatingLeaderByCompanySize;
 use App\ExcelFromView\Report\Project\ReportProjectExportExpertByBusinessPlanStatus;
 use App\ExcelFromView\Report\Project\ReportProjectExportLeaderByBusinessPlanStatus;
+use App\ExcelFromView\Report\Project\ReportProjectExportBusinessSizeByIndustryGroup;
+use App\ExcelFromView\Report\Project\ReportProjectExportRatingLeaderByIndustryGroup;
 
 class DashboardAdminRealtimeReportProjectController extends Controller
 {
@@ -1029,6 +1043,586 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             return view('dashboard.admin.realtimereport.project.projectexpertbyindustrygroup')->withExperts($experts)
                                                                                 ->withIndustrygroups($industrygroups)
                                                                                 ->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectgradebybusinesssize(Request $request){
+        $grades = Grade::get();
+        $grade = Grade::first();
+        $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('id', $projectgradearray)->pluck('id')->toArray();
+
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.projectgradebybusinesssize')->withGrades($grades)->withCompanysizes($companysizes)->withFulltbps($fulltbps);
+    }
+    public function getprojectgradebybusinesssize(Request $request){
+        $grades = Grade::get();
+        $grade = Grade::find($request->grade);
+        $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('id', $projectgradearray)->pluck('id')->toArray();
+
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',$request->companysize)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportGradeByBusinessSize($request->grade,$request->companysize), 'projectgradebybusinesssize.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.projectgradebybusinesssize')->withGrades($grades)->withCompanysizes($companysizes)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectgradebyindustrygroup(Request $request){
+        $grades = Grade::get();
+        $grade = Grade::first();
+        $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('id', $projectgradearray)->pluck('id')->toArray();
+
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.projectgradebyindustrygroup')->withGrades($grades)->withIndustrygroups($industrygroups)->withFulltbps($fulltbps);
+    }
+    public function getprojectgradebyindustrygroup(Request $request){
+        $grades = Grade::get();
+        $grade = Grade::find($request->grade);
+        $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('id', $projectgradearray)->pluck('id')->toArray();
+
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportGradeByIndustryGroup($request->grade,$request->industrygroup), 'projectgradebyindustrygroup.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.projectgradebyindustrygroup')->withGrades($grades)->withIndustrygroups($industrygroups)->withFulltbps($fulltbps); 
+        }
+    }
+
+    
+    public function projectbusinesssizebyindustrygroup(Request $request){
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.projectbusinesssizebyindustrygroup')->withCompanysizes($companysizes)->withIndustrygroups($industrygroups)->withFulltbps($fulltbps);
+    }
+    public function getprojectbusinesssizebyindustrygroup(Request $request){
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',$request->companysize)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportBusinessSizeByIndustryGroup($request->companysize,$request->industrygroup), 'projectbusinesssizebyindustrygroup.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.projectbusinesssizebyindustrygroup')->withCompanysizes($companysizes)->withIndustrygroups($industrygroups)->withFulltbps($fulltbps); 
+        }
+    }
+    
+    public function projectbusinesssizebysector(Request $request){
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $sectors = Sector::get();
+        $provincearray = Province::where('map_code',1)->pluck('id')->toArray();
+
+        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
+        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.projectbusinesssizebysector')->withCompanysizes($companysizes)->withSectors($sectors)->withFulltbps($fulltbps);
+    }
+    public function getprojectbusinesssizebysector(Request $request){
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',$request->companysize)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $sectors = Sector::get();
+        $provincearray = Province::where('map_code',$request->sector)->pluck('id')->toArray();
+        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
+        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportBusinessSizeBySector($request->companysize,$request->sector), 'projectbusinesssizebysector.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.projectbusinesssizebysector')->withCompanysizes($companysizes)->withSectors($sectors)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectindustrygroupbysector(Request $request){
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $sectors = Sector::get();
+        $provincearray = Province::where('map_code',1)->pluck('id')->toArray();
+        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
+        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.projectindustrygroupbysector')->withIndustrygroups($industrygroups)->withSectors($sectors)->withFulltbps($fulltbps);
+    }
+    public function getprojectindustrygroupbysector(Request $request){
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $sectors = Sector::get();
+        $provincearray = Province::where('map_code',$request->sector)->pluck('id')->toArray();
+        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
+        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportIndustryGroupBySector($request->industrygroup,$request->sector), 'projectindustrygroupbysector.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.projectindustrygroupbysector')->withIndustrygroups($industrygroups)->withSectors($sectors)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectall(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        return view('dashboard.admin.realtimereport.project.projectall')->withFulltbps($fulltbps);
+    }
+    public function getprojectall(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportByProjectAll(), 'projectall.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            return view('dashboard.admin.realtimereport.project.projectall')->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function projectstatusbyleader(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $first= ProjectAssignment::whereNotNull('leader_id')->first();
+        $firstleader= $first->leader_id;
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$first->leader_id)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.projectstatusbyleader')->withFirstleader($firstleader)->withLeaders($leaders)->withFulltbps($fulltbps);
+    }
+    public function getprojectstatusbyleader(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+        $intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($intersec,$f1);
+            } 
+        }
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportRatingByLeader($request->leader), 'projectstatusbyleader.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.projectstatusbyleader')->withLeaders($leaders)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function leadprojectstatusbyindustrygroup(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+      
+        $first= ProjectAssignment::whereNotNull('leader_id')->first();
+        $firstleader= $first->leader_id;
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$first->leader_id)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $_intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($_intersec,$f1);
+            } 
+        }
+
+        $intersec = array();
+        foreach($_intersec as $f1) {
+            if (in_array($f1,$fulltbps3)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')->withFirstleader($firstleader)->withIndustrygroups($industrygroups)->withLeaders($leaders)->withFulltbps($fulltbps);
+    }
+    public function getleadprojectstatusbyindustrygroup(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+        
+        $industrygroups = IndustryGroup::get();
+        $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $_intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($_intersec,$f1);
+            } 
+        }
+
+        $intersec = array();
+        foreach($_intersec as $f1) {
+            if (in_array($f1,$fulltbps3)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportRatingLeaderByIndustryGroup($request->leader,$request->industrygroup), 'leadprojectstatusbyindustrygroup.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')->withLeaders($leaders)->withIndustrygroups($industrygroups)->withFulltbps($fulltbps); 
+        }
+    }
+
+    public function leadprojectstatusbysector(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+        $first= ProjectAssignment::whereNotNull('leader_id')->first();
+        $firstleader= $first->leader_id;
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$first->leader_id)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+
+        $sectors = Sector::get();
+        $provincearray = Province::where('map_code',1)->pluck('id')->toArray();
+        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
+        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $_intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($_intersec,$f1);
+            } 
+        }
+
+        $intersec = array();
+        foreach($_intersec as $f1) {
+            if (in_array($f1,$fulltbps3)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.leadprojectstatusbysector')->withFirstleader($firstleader)->withSectors($sectors)->withLeaders($leaders)->withFulltbps($fulltbps);
+    }
+    public function getleadprojectstatusbysector(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+        
+        $sectors = Sector::get();
+        $provincearray = Province::where('map_code',$request->sector)->pluck('id')->toArray();
+        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
+        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $_intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($_intersec,$f1);
+            } 
+        }
+
+        $intersec = array();
+        foreach($_intersec as $f1) {
+            if (in_array($f1,$fulltbps3)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportRatingLeaderBySector($request->leader,$request->sector), 'leadprojectstatusbysector.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.leadprojectstatusbysector')->withLeaders($leaders)->withSectors($sectors)->withFulltbps($fulltbps); 
+        }
+    }
+
+    //==
+    
+    public function leadprojectstatusbybusinesssize(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+        $first= ProjectAssignment::whereNotNull('leader_id')->first();
+        $firstleader= $first->leader_id;
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$first->leader_id)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $_intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($_intersec,$f1);
+            } 
+        }
+
+        $intersec = array();
+        foreach($_intersec as $f1) {
+            if (in_array($f1,$fulltbps3)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        return view('dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')->withFirstleader($firstleader)->withCompanysizes($companysizes)->withLeaders($leaders)->withFulltbps($fulltbps);
+    }
+    public function getleadprojectstatusbybusinesssize(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        $leaders = User::whereIn('id',$leaderarray)->get();
+        $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+        
+        $companysizes = Companysize::get();
+        $companies = Company::where('company_size_id',$request->companysize)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $_intersec = array();
+        foreach($fulltbps1 as $f1) {
+            if (in_array($f1,$fulltbps2)) {
+                array_push($_intersec,$f1);
+            } 
+        }
+
+        $intersec = array();
+        foreach($_intersec as $f1) {
+            if (in_array($f1,$fulltbps3)) {
+                array_push($intersec,$f1);
+            } 
+        }
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportRatingLeaderByCompanySize($request->leader,$request->companysize), 'leadprojectstatusbybusinesssize.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            return view('dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')->withLeaders($leaders)->withCompanysizes($companysizes)->withFulltbps($fulltbps); 
+        }
+    } 
+
+    public function projectbyleadcoleadexpert(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','>',3)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        $fulltbp = FullTbp::first();
+        $minitbp = MiniTbp::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        $expertassignments = ExpertAssignment::where('full_tbp_id',$fulltbp->id)->get();
+        return view('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')->withFulltbps($fulltbps)
+                                                                                ->withExpertassignments($expertassignments)
+                                                                                ->withProjectassignment($projectassignment);
+    }
+    public function getprojectbyleadcoleadexpert(Request $request){
+        $businessplanarray = BusinessPlan::where('business_plan_status_id','>',3)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        $fulltbp = FullTbp::find($request->fulltbp);
+        $minitbp = MiniTbp::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        $expertassignments = ExpertAssignment::where('full_tbp_id',$fulltbp->id)->get();
+
+        if($request->btnsubmit == 'excel'){
+            return Excel::download(new ReportProjectExportByLeadColeadExpert($request->fulltbp), 'projectbyleadcoleadexpert.xlsx');
+        }else if($request->btnsubmit == 'search'){
+            return view('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')->withFulltbps($fulltbps)
+                                                                                    ->withExpertassignments($expertassignments)
+                                                                                    ->withProjectassignment($projectassignment);
         }
     }
 }
