@@ -72,7 +72,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8)
+                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8 && $fulltbp->canceldate == null)
                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                 <tr>    
                                                     <td> {{$fulltbp->minitbp->project}} </td> 

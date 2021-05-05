@@ -26,7 +26,8 @@ class ReportProjectExportCancelByMonth implements FromView,ShouldAutoSize,WithTi
     }
     public function view(): View
     {
-        $fulltbps = FullTbp::whereMonth('submitdate',$this->month)->whereYear('submitdate',$this->year)->whereNotNull('canceldate')->get();
+        $fulltbps = FullTbp::whereNotNull('canceldate')->whereMonth('canceldate',$this->month)->whereYear('canceldate',$this->year)->get();
+        //$fulltbps = FullTbp::whereMonth('submitdate',$this->month)->whereYear('submitdate',$this->year)->whereNotNull('canceldate')->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

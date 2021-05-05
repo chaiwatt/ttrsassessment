@@ -1,10 +1,12 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
-
+<link href="{{asset('assets/dashboard/js/plugins/aos/aos.css')}}" rel="stylesheet">
+<link href="{{asset('assets/dashboard/js/plugins/chart/chart.css')}}">
 @stop
 @section('content')
 {{-- modal_get_calendar --}}
@@ -40,12 +42,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>สถานที่/ห้อง</label>
-                                        <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div> --}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-group">
@@ -244,8 +240,178 @@
         @if (Auth::user()->user_type_id > 5)
         <div class="row">
             <div class="col-lg-12">
-                <div class="card-body">
-                </div>
+                <div class="card">
+                    <div class="card-body">
+            chart place here.
+                              <div class="row">
+                                  <div class="col-md-2">
+                                      <canvas id="myChart" width=100  height=100 ></canvas>
+                                  </div>
+                                  <div class="col-md-9 l-40 none">
+                                    <div style="margin-top: 300px;"></div>
+                                    <ul class="chart-skills">
+                                      <li>
+                                        <span>62.94%</span>
+                                      </li>
+                                    </ul>
+                                    <ul class="chart-skills2" style="margin-top:-230px"> 
+                                      <li>
+                                        <span>73.16%</span>
+                                      </li>
+                                    </ul>
+                                    <ul class="chart-skills3" style="margin-top:-286px"> 
+                                      <li>
+                                        <span>84.76%</span>
+                                      </li>
+                                    </ul>
+                                    <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                      <li>
+                                        <span>94.31%</span>
+                                      </li>
+                                    </ul>
+                                    <div class="text-min"> 
+                                      min
+                                    </div>
+                                    <div class="text-max">
+                                      max
+                                    </div>
+                                  </div>
+                                  <div class="col-md-1">
+                                        <table class="table table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
+                                      <thead>
+                                        <tr>
+                                         
+                                          <td class="bg-02 white" colspan="2">Level Classification</td>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr class="bg-01">
+                                          <td>87-100</td>
+                                          <td>AAA</td>
+                                        </tr>
+                                        <tr class="bg-04">
+                                          <td>80-86</td>
+                                          <td>AA</td>
+                                        </tr>
+                                        <tr class="bg-02">
+                                          <td>74-79</td>
+                                          <td>A</td>
+                                        </tr>
+                                        <tr class="bg-03">
+                                          <td>70-73</td>
+                                          <td>BBB</td>
+                                        </tr>
+                                        <tr class="bg-02">
+                                          <td>64-69</td>
+                                          <td>BB</td>
+                                        </tr>
+                                        <tr class="bg-03">
+                                          <td>56-63</td>
+                                          <td>B</td>
+                                        </tr>
+                                        <tr class="bg-02">
+                                          <td>54-55</td>
+                                          <td>CCC</td>
+                                        </tr>
+                                        <tr class="bg-03">
+                                          <td>51-52</td>
+                                          <td>CC</td>
+                                        </tr>
+                                        <tr class="bg-02">
+                                          <td>48-50</td>
+                                          <td>C</td>
+                                        </tr>
+                                        <tr class="bg-03">
+                                          <td>25-47</td>
+                                          <td>D</td>
+                                        </tr>
+                                        <tr class="bg-02">
+                                          <td>0-24</td>
+                                          <td>E</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                              </div>
+
+
+                    </div>
+                    <div class="card-footer">
+                      <div class="row">
+                          <div class="col-md-3" data-aos="fade-up">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="row">
+                                          <div class="col-sm-6"></div>
+                                          <div class="col-sm-6"> 
+                                              <h2>01</h2>
+                                              <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <h6 class="color-01">Management</h6>
+                                      <h5>94.31</h5>
+                                      <h4 class="color-01">AAA</h4>
+                                     
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="row">
+                                          <div class="col-sm-6"></div>
+                                          <div class="col-sm-6"> 
+                                              <h2>02</h2>
+                                              <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <h6 class="color-02">Technology</h6>
+                                      <h5>84.76</h5>
+                                      <h4 class="color-02">AA</h4>
+                                     
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-3" data-aos="fade-up" data-aos-delay="400"> 
+                              <div class="row">
+                              <div class="col-sm-6">
+                                  <div class="row">
+                                      <div class="col-sm-6"></div>
+                                      <div class="col-sm-6"> 
+                                          <h2>03</h2>
+                                          <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                  <h6 class="color-03">Marketability</h6>
+                                  <h5>73.16</h5>
+                                  <h4 class="color-03">BBB</h4>
+                                 
+                              </div>
+                          </div>
+                      </div>
+                          <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">  <div class="row">
+                              <div class="col-sm-6">
+                                  <div class="row">
+                                      <div class="col-sm-6"></div>
+                                      <div class="col-sm-6"> 
+                                          <h2>04</h2>
+                                          <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                  <h6 class="color-04">Business Prospet</h6>
+                                  <h5>62.94</h5>
+                                  <h4 class="color-04">B</h4>
+                                 
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
             </div>
         </div>
 
@@ -332,7 +498,7 @@
                                 <tbody>
                                     
                                     @foreach ($fulltbps as $fulltbp)
-                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 2)
+                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 2 & ($fulltbp->canceldate == null))
                                             @php
                                                 $check = Auth::user()->IsExpert($fulltbp->id);
                                             @endphp
@@ -687,13 +853,17 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/interaction/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/aos/aos.js')}}"></script>
 
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/chart/chart.2.6.0.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+      AOS.init();
     var route = {
         url: "{{ url('/') }}",
         token: $('meta[name="csrf-token"]').attr('content'),
@@ -777,8 +947,6 @@
             })
         })
     }
-
-
 </script>
 
 @stop

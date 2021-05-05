@@ -113,7 +113,7 @@
                                     <input type="text" id="fulltbpid" hidden>
                                    
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                        @if ($fulltbp->finished_onsite != 1)
+                                        @if ($fulltbp->finished_onsite != 1 && $fulltbp->canceldate == null)
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                 <tr>    
                                                     <td> {{$fulltbp->minitbp->businessplan->code}} </td> 

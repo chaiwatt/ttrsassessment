@@ -1,0 +1,560 @@
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 1.25rem;
+    
+}
+.card-footer:last-child {
+    border-radius: 0 0 calc(1.25rem - 1px) calc(1.25rem - 1px);
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 2.25rem;
+}
+.card-footer {
+    padding: 2.75rem 1.25rem;
+    background-color: rgba(0,0,0,.03);
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+h2{
+    margin: 0;
+}
+h6{
+    margin: 0;
+    padding-bottom: 10px;
+    text-align: center;
+    
+
+}
+h5{
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+    color: #000000;
+}
+h4{
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.color-01{
+    color: #43b19d;
+}
+.color-02{
+    color: #2b68b8;
+    ;
+}
+.color-03{
+    color: #eb9f2d;
+}
+.color-04{
+    color: #a0cc3a;
+}
+.table {
+    width: 50%;
+    margin-bottom: 1rem;
+    color: #111111;
+    margin-left: 70px;
+    margin-bottom: -60px;
+    text-align: center;
+    font-weight: 500;
+}
+.table td, .table th {
+    padding: 7px;
+    vertical-align: top;
+    border-top: 0.25px solid #dee2e6;
+}
+.bg-01{
+    background-color:#8199c5;
+}
+.bg-02{
+    background-color:#4688ce;
+}
+.bg-03{
+    background-color:#b1cfe4;
+}
+.bg-04{
+    background-color:#e69628;
+}
+.table-dark td, .table-dark th, .table-dark thead th {
+    border-color: #ffffff;
+}
+.white{
+    color: #ffffff;
+}
+
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills *,
+  .chart-skills::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills {
+    position: relative;
+    width: 350px;
+    height: 175px;
+    overflow: hidden;
+  }
+  
+  .chart-skills::before,
+  .chart-skills::after {
+    position: absolute;
+  }
+  
+  .chart-skills::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  
+  
+  .chart-skills li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(52, 212, 119);
+    animation-name: rotate-one;
+  }
+  
+  
+  .chart-skills span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills li:nth-child(1) span {
+    top: -35px;
+    left: -42px;
+    transform: rotate(-113.2deg);
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-one {
+    100% {
+      transform: rotate(113.2deg);
+      /**
+       * 62.94%	62.94/100 * 180 = 113.2
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+
+
+
+/* ****************************************************************************************************************************************************** */
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  ul .chart-skills2 {
+    margin-top: -230px;
+  }
+
+  .chart-skills2 {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills2 *,
+  .chart-skills2::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills2 {
+    position: relative;
+    width: 460px;
+    height: 230px;
+    overflow: hidden;
+  }
+  
+  .chart-skills2::before,
+  .chart-skills2::after {
+    position: absolute;
+  }
+  
+  .chart-skills2::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 230px;
+    border-top-right-radius: 230px;
+  }
+  
+  
+  .chart-skills2 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 230px;
+    border-bottom-right-radius: 230px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills2 li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(204, 99, 1);
+    animation-name: rotate-two;
+  }
+  
+  
+  .chart-skills2 span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills2 li:nth-child(1) span {
+    top: -40px;
+    left: -42px;
+    transform: rotate(-131.6deg);
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-two {
+    100% {
+      transform: rotate(131.6deg);
+      /**
+       * 62.94%	62.94/100 * 180 = 131.6
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+/* ****************************************************************************************************************************************************** */
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  ul .chart-skills3 {
+    margin-top: -286px;
+  }
+
+  .chart-skills3 {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills2 *,
+  .chart-skills2::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills3 {
+    position: relative;
+    width: 572px;
+    height: 286px;
+    overflow: hidden;
+  }
+  
+  .chart-skills3::before,
+  .chart-skills3::after {
+    position: absolute;
+  }
+  
+  .chart-skills3::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 286px;
+    border-top-right-radius: 286px;
+  }
+  
+  
+  .chart-skills3 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 286px;
+    border-bottom-right-radius: 286px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills3 li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(0, 41, 128);
+    animation-name: rotate-three;
+  }
+  
+  
+  .chart-skills3 span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills3 li:nth-child(1) span {
+    top: -40px;
+    left: -42px;
+    transform: rotate(-152.5deg);
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-three {
+    100% {
+      transform: rotate(152.5deg);
+      /**
+       * 84.76%	84.76/100 * 180 = 152.5
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+/* ****************************************************************************************************************************************************** */
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  ul .chart-skills4 {
+    margin-top: -286px;
+  }
+
+  .chart-skills4 {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills4 *,
+  .chart-skills4::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills4 {
+    position: relative;
+    width: 688px;
+    height: 344px;
+    overflow: hidden;
+  }
+  
+  .chart-skills4::before,
+  .chart-skills4::after {
+    position: absolute;
+  }
+  
+  .chart-skills4::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 344px;
+    border-top-right-radius: 344px;
+  }
+  
+  
+  .chart-skills4 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 344px;
+    border-bottom-right-radius: 344px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills4 li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(0, 128, 79);
+    animation-name: rotate-four;
+  }
+  
+  
+  .chart-skills4 span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills4 li:nth-child(1) span {
+    top: -40px;
+    left: -42px;
+    transform: rotate(-169.7deg);
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-four {
+    100% {
+      transform: rotate(169.7deg);
+      /**
+       * 94.31%	94.31/100 * 180 = 169.7
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .l-40{
+    margin-left: -100px;
+  }
+  @media(max-width:1210px) {
+      .none{
+          display: none;
+      }
+  }
+  @media(max-width:1220px) and (max-width:1310px) {
+    .chart-skills4 {
+      position: relative;
+      width: 688px;
+      height: 344px;
+      overflow: hidden;
+  }
+  .l-30{
+    margin-left: -33px;
+  }
+  .l-100{
+    margin-left: -100px;
+  }
+  .text-max {
+    margin: -18px 666px;
+}
+.text-min {
+  margin: -16px -59px;
+}
+
+  }

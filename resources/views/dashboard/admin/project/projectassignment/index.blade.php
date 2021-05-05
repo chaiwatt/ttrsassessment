@@ -115,6 +115,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($projectassignments->reverse() as $key => $projectassignment)
+                                    @if ($projectassignment->businessplan->minitbp->fulltbp->canceldate == null)
                                     <tr>    
                                         <td> 
                                             <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
@@ -185,6 +186,8 @@
                                         @endif
                                
                                     </tr>
+                                    @endif
+                             
                                     @endforeach
                                 </tbody>
                             </table>      

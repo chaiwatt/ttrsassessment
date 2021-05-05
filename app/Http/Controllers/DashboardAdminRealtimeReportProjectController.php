@@ -249,7 +249,8 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         }
     }
     public function canceledbymonth(Request $request){
-        $fulltbps = FullTbp::whereMonth('submitdate','01')->whereYear('created_at',Carbon::now()->year)->whereNotNull('canceldate')->get();
+        // $fulltbps = FullTbp::whereMonth('submitdate','05')->whereYear('created_at',Carbon::now()->year)->whereNotNull('canceldate')->get();
+        $fulltbps = FullTbp::whereNotNull('canceldate')->whereMonth('canceldate','01')->whereYear('created_at',Carbon::now()->year)->get();
         $years = array_reverse(BusinessPlan::latest()->get()->map(function($user){ return $user['created_at']->year; })->unique()->sort()->toArray());
         $months = EvaluationMonth::get();
         return view('dashboard.admin.realtimereport.project.canceledbymonth')->withMonths($months)->withYears($years)->withFulltbps($fulltbps);
@@ -262,7 +263,8 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportCancelByMonth($year,$month), 'canceledbymonth.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $fulltbps = FullTbp::whereMonth('submitdate',$month)->whereYear('submitdate',$year)->whereNotNull('canceldate')->get();
+            $fulltbps = FullTbp::whereNotNull('canceldate')->whereMonth('canceldate',$month)->whereYear('canceldate',$year)->get();
+            // $fulltbps = FullTbp::whereMonth('submitdate',$month)->whereYear('submitdate',$year)->whereNotNull('canceldate')->get();
             return view('dashboard.admin.realtimereport.project.canceledbymonth')->withMonths($months)->withYears($years)->withFulltbps($fulltbps); 
         }
     }
@@ -333,7 +335,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportCancelByYear($year), 'cancelbyyear.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $fulltbps = FullTbp::whereYear('submitdate',$year)->whereNotNull('canceldate')->get();
+            $fulltbps = FullTbp::whereYear('canceldate',$year)->whereNotNull('canceldate')->get();
             return view('dashboard.admin.realtimereport.project.canceledbyyear')->withMonths($months)->withYears($years)->withFulltbps($fulltbps); 
         }
     }
@@ -424,7 +426,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $_enddate = (Carbon::now()->year) . '-9-30';
         $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->subDay(1);
         $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->addDays(1);
-        $fulltbps = FullTbp::whereBetween('submitdate',[$startdate, $enddate])->whereNotNull('canceldate')->get();
+        $fulltbps = FullTbp::whereBetween('canceldate',[$startdate, $enddate])->whereNotNull('canceldate')->get();
         $years = array_reverse(BusinessPlan::latest()->get()->map(function($user){ return $user['created_at']->year; })->unique()->sort()->toArray());
         return view('dashboard.admin.realtimereport.project.canceledbyyearbudget')->withYears($years)->withFulltbps($fulltbps);
     }
@@ -441,7 +443,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             return Excel::download(new ReportProjectExportCancelByYearBudget($startdate,$enddate,$year), 'canceledbyyearbudget.xlsx');
         }else if($request->btnsubmit == 'search'){
            
-            $fulltbps = FullTbp::whereBetween('submitdate',[$startdate, $enddate])->whereNotNull('canceldate')->get();
+            $fulltbps = FullTbp::whereBetween('canceldate',[$startdate, $enddate])->whereNotNull('canceldate')->get();
             return view('dashboard.admin.realtimereport.project.canceledbyyearbudget')->withYears($years)->withFulltbps($fulltbps); 
         }
     }

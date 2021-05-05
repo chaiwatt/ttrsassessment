@@ -74,45 +74,49 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($invoicetransactions as $key => $invoicetransaction)
+                                        @if ($invoicetransaction->company->businessplan->minitbp->fulltbp->canceldate == null)
                                         @if (Auth::user()->isProjectLeader($invoicetransaction->company->businessplan->minitbp->fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
-                                            <tr>    
-                                                <td> {{$invoicetransaction->issuedateth}} </td>  
-                                                <td> {{$invoicetransaction->company->name}} </td> 
-                                                <td> {{$invoicetransaction->docno}} </td> 
-                                                <td> 
-                                                    @if ($invoicetransaction->price != 0)
-                                                        @if ($invoicetransaction->status == 3)
-                                                            <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</a>
-                                                            @elseif($invoicetransaction->status == 2)
-                                                            <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">แจ้งการชำระแล้ว</a>
-                                                            @elseif($invoicetransaction->status == 1)
-                                                            <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่จ่ายเงิน</span>
-                                                            @else                                     
-                                                            <a href="#" id="notifyuser" type="button" data-id="{{$invoicetransaction->id}}" class=" btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งผู้รับบริการ</a>
-                                                        @endif
+                                        <tr>    
+                                            <td> {{$invoicetransaction->issuedateth}} </td>  
+                                            <td> {{$invoicetransaction->company->name}} </td> 
+                                            <td> {{$invoicetransaction->docno}} </td> 
+                                            <td> 
+                                                @if ($invoicetransaction->price != 0)
+                                                    @if ($invoicetransaction->status == 3)
+                                                        <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</a>
+                                                        @elseif($invoicetransaction->status == 2)
+                                                        <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">แจ้งการชำระแล้ว</a>
+                                                        @elseif($invoicetransaction->status == 1)
+                                                        <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่จ่ายเงิน</span>
+                                                        @else                                     
+                                                        <a href="#" id="notifyuser" type="button" data-id="{{$invoicetransaction->id}}" class=" btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งผู้รับบริการ</a>
                                                     @endif
-                                                </td>                                   
-                                                <td>
-                                                    @if ($invoicetransaction->price != 0)
-                                                            
-                                                            <a href="{{route('dashboard.admin.project.invoice.edit',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">
-                                                                รายละเอียดใบแจ้งหนี้
-                                                            </a>
-                                                            @else
-                                                            
-                                                            <a href="{{route('dashboard.admin.project.invoice.edit',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">
-                                                                แก้ไขใบแจ้งหนี้
-                                                            </a>
-                                                        @endif
-                                                 
-                                                    <a href="{{route('dashboard.admin.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                                                    @if ($invoicetransaction->status == 1)
-                                                    <a href="{{route('dashboard.admin.project.invoice.delete',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">ลบ</a>
+                                                @endif
+                                            </td>                                   
+                                            <td>
+                                                @if ($invoicetransaction->price != 0)
+                                                        
+                                                        <a href="{{route('dashboard.admin.project.invoice.edit',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">
+                                                            รายละเอียดใบแจ้งหนี้
+                                                        </a>
+                                                        @else
+                                                        
+                                                        <a href="{{route('dashboard.admin.project.invoice.edit',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">
+                                                            แก้ไขใบแจ้งหนี้
+                                                        </a>
                                                     @endif
-                                                    
-                                                </td>    
-                                            </tr>
+                                             
+                                                <a href="{{route('dashboard.admin.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                                                @if ($invoicetransaction->status == 1)
+                                                <a href="{{route('dashboard.admin.project.invoice.delete',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">ลบ</a>
+                                                @endif
+                                                
+                                            </td>    
+                                        </tr>
+                                    @endif
                                         @endif
+
+
 
                                     @endforeach
                                 </tbody>

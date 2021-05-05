@@ -4,6 +4,7 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
+
 @stop
 @section('content')
     <!-- Page header -->
@@ -113,7 +114,11 @@
                                             @if ($businessplan->business_plan_status_id < 4)
                                                     <a class="text-info" href="{{route('dashboard.company.project.minitbp.edit',['id' => $businessplan->minitbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
                                                 @elseif($businessplan->business_plan_status_id >= 4)
-                                                <a class="text-info" href="{{route('dashboard.company.project.fulltbp.edit',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
+                                                    @if ($businessplan->minitbp->fulltbp->canceldate != null)
+                                                            {{$businessplan->minitbp->project}} <span class="badge badge-flat border-danger text-danger-400 rounded-0">โครงการถูกยกเลิก</span>
+                                                        @else
+                                                            <a class="text-info" href="{{route('dashboard.company.project.fulltbp.edit',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
+                                                    @endif       
                                                 @else
                                                     {{$businessplan->minitbp->project}} 
                                             @endif
@@ -210,6 +215,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
+
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script>
     var route = {

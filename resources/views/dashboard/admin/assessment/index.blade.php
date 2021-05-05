@@ -100,7 +100,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                        @if (!Empty($fulltbp->finalassessmentdate))
+                                        @if (!Empty($fulltbp->finalassessmentdate) && $fulltbp->canceldate == null)
                                         {{-- {{Auth::user()->isProjectLeader($fulltbp->id)}} --}}
                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                 <tr>    

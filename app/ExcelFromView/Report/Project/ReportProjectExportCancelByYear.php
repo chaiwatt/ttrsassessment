@@ -23,7 +23,7 @@ class ReportProjectExportCancelByYear implements FromView,ShouldAutoSize,WithTit
     }
     public function view(): View
     {
-        $fulltbps = FullTbp::whereYear('submitdate',$this->year)->whereNotNull('canceldate')->get();
+        $fulltbps = FullTbp::whereYear('canceldate',$this->year)->whereNotNull('canceldate')->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

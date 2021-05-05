@@ -175,6 +175,8 @@ class HomeController extends Controller
         $this->createUserTypeCompany(1,'อนุรักษ์','พันธ์งามตา','ttrsuser3@npcsolution.com','9955634503731','0882514838','ผัดไทยประตูป่า');
         $this->createUserTypePersonal(1,'พงศกร','สุขปาน','ttrsuser4@npcsolution.com','9908968928636','0882514838','ลาบดีขมลำพูน');
         $this->createUserTypeCompany(2,'พนิตา','สุภาพ','ttrsuser5@npcsolution.com','4789285689287','0882514838','ฟ้าใสหมูกระทะ');
+        $this->createUserTypeCompany(2,'มินตรา','รักการดี','ttrsuser6@npcsolution.com','1650719040046','0882514838','ก๋วยเตี๋ยวกะลามัง');
+        $this->createUserTypeCompany(2,'สายธาร','สวนจันทร์','ttrsuser7@npcsolution.com','6769198425725','8332571396890','ก๋วยเตี๋ยวไก่ลำพูน');
 
         $this->createOfficer(2,'จิตราพร','ทองคง','ttrsofficer1@npcsolution.com','4461544270681','0882514838');
         $this->createOfficer(1,'เฉลิมเดช','ประพิณไพโรจน์','ttrsofficer2@npcsolution.com','1535149478362','0882514838');
