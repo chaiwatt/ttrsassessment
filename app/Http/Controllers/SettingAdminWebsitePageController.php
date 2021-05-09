@@ -78,9 +78,11 @@ class SettingAdminWebsitePageController extends Controller
         $page->header = $request->description;
         $page->content = $detail;
         $page->feature_image_id = $request->featureinp;
-        $page->feature_image_thumbnail_id =  $request->featurethumbnailinp;
+        $page->feature_image_thumbnail_id =  $request->featurethumbnail;
         $page->blogsidebarimage_id =  $request->blogsidebarimage;
         $page->bloghomepageimage_id =  $request->bloghomepageimage;
+
+
         $page->user_id = Auth::user()->id;
         $page->save();
 
@@ -108,6 +110,14 @@ class SettingAdminWebsitePageController extends Controller
                 'page_id' => $page->id
             ]);
         }
+
+        // $pages = Page::get();
+        // $sitemap = Sitemap::create();
+        // foreach ($pages as $key => $page) {
+        //     $sitemap->add(route('landing.page',['slug' => $page->slug]));
+        // }
+        // $sitemap->writeToFile(public_path('sitemap.xml'));
+        //{{route('landing.page',['slug' => $page->slug])}}
 
         return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มหน้าเพจสำเร็จ');
     }
@@ -173,15 +183,20 @@ class SettingAdminWebsitePageController extends Controller
 
         $file = $request->feature; 
         $page = Page::find($id);
+
+        
         $detail = $dom->savehtml();
 
-        $exist_feature_image_id = $page->feature_image_id;
-        $exist_feature_image_thumbnail_id = $page->feature_image_thumbnail_id;
+        // $exist_feature_image_id = $page->feature_image_id;
+        // $exist_feature_image_thumbnail_id = $page->feature_image_thumbnail_id;
 
-        if(!Empty($page->feature_image_id)){
-            $exist_feature_image_id = $request->featureinp;
-            $exist_feature_image_thumbnail_id =  $request->featurethumbnailinp;
-        }
+        // if(!Empty($page->feature_image_id)){
+        //     $exist_feature_image_id = $request->featureinp;
+        //     $exist_feature_image_thumbnail_id =  $request->featurethumbnailinp;
+        // }
+
+         
+
         $publicdate =  $page->publicdate;
         if(!Empty($request->publicdate)){
             $publicdate = DateConversion::thaiToEngDate($request->publicdate) ;
@@ -194,8 +209,8 @@ class SettingAdminWebsitePageController extends Controller
             'header' => $request->description, 
             'publicdate' => $publicdate, 
             'content' => $detail, 
-            'feature_image_id' => $exist_feature_image_id, 
-            'feature_image_thumbnail_id' => $exist_feature_image_thumbnail_id
+            'feature_image_id' => $request->featureinp, 
+            'feature_image_thumbnail_id' => $request->featurethumbnail
         ]);
 
         $comming_array  = Array();
@@ -221,6 +236,16 @@ class SettingAdminWebsitePageController extends Controller
         //         'page_id' => $page->id
         //     ]);
         // }
+
+
+        // $pages = Page::get();
+
+        // $sitemap = App::make("sitemap");
+
+        // foreach ($pages as $key => $page) {
+        //     $sitemap->add(route('landing.page',['slug' => $page->slug]), $page->updated_at, '1.0', 'daily');
+        // }
+        // $sitemap->store('xml', 'sitemap');
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
     }
  

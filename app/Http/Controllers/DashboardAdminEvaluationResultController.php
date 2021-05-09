@@ -138,12 +138,12 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $objPHPPowerPoint = new PhpPresentation();
         $objPHPPowerPoint->getDocumentProperties()->setCreator('PHPOffice')
-            ->setLastModifiedBy('PHPPresentation Team')
-            ->setTitle('Sample 02 Title')
-            ->setSubject('Sample 02 Subject')
-            ->setDescription('Sample 02 Description')
-            ->setKeywords('office 2007 openxml libreoffice odt php')
-            ->setCategory('Sample Category');
+            ->setLastModifiedBy('TTRS')
+            ->setTitle('Certificate')
+            ->setSubject('Certificate')
+            ->setDescription('Certificate')
+            ->setKeywords('office 2007 TTRS Certificate')
+            ->setCategory('TTRS');
         $objPHPPowerPoint->removeSlideByIndex(0);
         $slide = $objPHPPowerPoint->createSlide();
                    
@@ -187,7 +187,6 @@ class DashboardAdminEvaluationResultController extends Controller
         $headertextRun->getFont()->setBold(true)
                 ->setName('PSL-Kittithada')
                 ->setSize(18);
-
         
         $shapethree = $slide->createRichTextShape()
                 ->setHeight(40)
@@ -199,8 +198,6 @@ class DashboardAdminEvaluationResultController extends Controller
                 ->setName('PSL-Kittithada')
                 ->setSize(18);
 
-
-        
         $shapefour = $slide->createRichTextShape()
                 ->setHeight(40)
                 ->setWidth(800)
@@ -211,7 +208,6 @@ class DashboardAdminEvaluationResultController extends Controller
                 ->setName('PSL-Kittithada')
                 ->setSize(18);
 
-
         $shapefive = $slide->createRichTextShape()
                 ->setHeight(40)
                 ->setWidth(800)
@@ -221,7 +217,6 @@ class DashboardAdminEvaluationResultController extends Controller
         $headertextRun->getFont()->setBold(true)
                 ->setName('PSL-Kittithada')
                 ->setSize(18);
-                //
           
         $shapesix = $slide->createRichTextShape()
                 ->setHeight(40)

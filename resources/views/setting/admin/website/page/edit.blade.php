@@ -192,14 +192,10 @@
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature" accept="image/*"/>
                                             <br>
-                                            @if (!Empty($page->feature_image_id))
+                                            {{-- @if (!Empty($page->feature_image_id)) --}}
                                                 <div class="col-md-12" id="feature_input_wrapper">
-                                                    <input name="featureinp" value="{{$page->feature_image_id}}" data-id="{{$page->feature_image_id}}" class="featureinp" hidden> 
-                                                </div>
-                                                <div class="col-md-12" id="featurethumbnail_input_wrapper" >
-                                                    {{-- <input name="featurethumbnailinp" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden>  --}}
-                                                    <input name="blogsidebarimage" value="{{$page->blogsidebarimage_id}}" data-id="{{$page->blogsidebarimage_id}}" class="blogsidebarimage" hidden> 
-                                                    <input name="bloghomepageimage" value="{{$page->bloghomepageimage_id}}" data-id="{{$page->bloghomepageimage_id}}" class="bloghomepageimage" hidden> 
+                                                    <input name="featureinp" id="featureinp" value="{{$page->feature_image_id}}" data-id="{{$page->feature_image_id}}" class="featureinp" hidden> 
+                                                    <input name="featurethumbnail" id="featurethumbnail" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden> 
                                                 </div>
                                                 <div id="featurethumbnail_wrapper">
                                                     <div class="form-group" id="featurediv" >
@@ -207,7 +203,12 @@
                                                             <div class="col-sm-6 col-xl-6">
                                                                 <div class="card">
                                                                     <div class="card-img-actions mx-1 mt-1">
-                                                                        <img class="card-img img-fluid" src="{{asset($page->featureimage->name)}}" alt="">
+                                                                        @if (Empty($page->feature_image_id))
+                                                                            <img id="featureimage" class="card-img img-fluid" src="{{asset('storage/uploads//page/feature/default.png')}}" alt="">
+                                                                            @else
+                                                                            <img id="featureimage" class="card-img img-fluid" src="{{asset($page->featureimage->name)}}" alt="">
+                                                                        @endif
+                                                                        
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="d-flex align-items-start flex-nowrap">
@@ -221,7 +222,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endif
+                                            {{-- @endif --}}
                                         <div class="card-img-actions-overlay card-img">
                                             <a href="{{asset($page->featureimg)}}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
                                                 <i class="icon-plus3"></i>

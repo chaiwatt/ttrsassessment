@@ -131,20 +131,46 @@
                                         <nav class="rs-menu pr-70 md-pr-0">
                                             <ul id="onepage-menu" class="nav-menu">
                                                 @foreach($directmenus2 as $key => $menu)
-                                                    @if (Config::get('app.locale') == 'th')
-                                                        @if ($key == 0)
-                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                            @else
-                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                        @endif
-                                                    @else
-                                                        @if ($key == 0)
-                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
-                                                            @else
-                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
-                                                        @endif
+                                                @if (Config::get('app.locale') == 'th')
+                                                    @if ($key == 0)
+                                                            <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                        @else
+                                                            @if ($menu->name != 'เข้าสู่ระบบ')
+                                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                @else
+                                                                    @if ($shareagent->isPhone() == 1)
+                                                                        <li>
+                                                                            @if (!Auth::check())
+                                                                                <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
+                                                                            @else
+                                                                                @if (Auth::user()->user_type_id >= 4)
+                                                                                    <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                @elseif(Auth::user()->user_type_id == 3)
+                                                                                    <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                @else
+                                                                                    <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                @endif
+                                                                            @endif
+                                                                        </li>
+                                                                    @endif
+                                                            @endif
+                                                           
                                                     @endif
-                                                @endforeach
+                                                @else
+                                                    @if ($key == 0)
+                                                            <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                        @else
+                                                        @if ($menu->name != 'เข้าสู่ระบบ')
+                                                            <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                        @else
+                                                            @if ($shareagent->isPhone() == 1)
+                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
+                                                            @endif
+                                                        @endif
+                                                            
+                                                    @endif
+                                                @endif
+                                            @endforeach
         
                                             </ul> 
                                         </nav>                                     
@@ -254,10 +280,10 @@
                                 @foreach ($pages as $page)
                                     <div class="recent-post-widget">
                                         <div class="post-img">
-                                            <a href="blog-details.html"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
+                                            <a href="{{route('landing.page',['slug' => $page->slug])}}"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
                                         </div>
                                         <div class="post-desc">
-                                            <a href="blog-details.html">{{$page->name}}</a>
+                                            <a href="{{route('landing.page',['slug' => $page->slug])}}">{{$page->name}}</a>
                                             <div class="blog-desc">   
                                                 {{$page->header}}
                                             </div>

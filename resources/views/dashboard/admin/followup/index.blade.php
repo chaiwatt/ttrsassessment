@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">ยกเลิกโครงการ</span></h4>
+                <h4> <span class="font-weight-semibold">การติดตาม</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             {{-- <div class="header-elements d-none">
@@ -18,8 +18,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <span class="breadcrumb-item active">ยกเลิกโครงการ</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> การติดตาม</a>
+                    <span class="breadcrumb-item active">การติดตาม</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-striped" id="followuptable">
                                 <thead>
                                     <tr>
                                         <th>เลขที่โครงการ</th>
@@ -72,35 +72,32 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                    <tr>    
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                        <td> {{$fulltbp->minitbp->project}} </td> 
-                                        <td>
-                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)
-                                                    <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
-                                                @else
-                                                    @if ($fulltbp->refixstatus == 0)
-                                                        @if($fulltbp->minitbp->businessplan->business_plan_status_id == 5)
-                                                                <span class="badge badge-flat border-warning text-warning-600">อยู่ระหว่างพิจารณา Full TBP</span>
-                                                            @elseif($fulltbp->minitbp->businessplan->business_plan_status_id > 5)
-                                                                <span class="badge badge-flat border-success text-success-600">ผ่านอนุมัติแล้ว</span>
-                                                        @endif 
-                                                        @elseif($fulltbp->refixstatus == 1)
-                                                            <span class="badge badge-flat border-warning text-warning-600">ให้มีการแก้ไข</span>
-                                                        @elseif($fulltbp->refixstatus == 2)
-                                                            <span class="badge badge-flat border-warning text-warning-600">ส่งรายการแก้ไขแล้ว</span>
+                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 10)
+                                            <tr>    
+                                                <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                <td> {{$fulltbp->minitbp->project}} </td> 
+                                                <td>
+                                                    @if ($fulltbp->success_objective == 0)
+                                                            <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ติดตาม</span>
+                                                        @else
+                                                        @if ($fulltbp->success_objective == 1)
+                                                                <span class="badge badge-flat border-success text-success-600">บรรลุตามจุดประสงค์</span>
+                                                            @elseif($fulltbp->success_objective == 2)
+                                                                <span class="badge badge-flat border-danger text-danger-600">ไม่บรรลุตามจุดประสงค์</span>
+                                                        @endif
+                                                            
                                                     @endif
-                                            @endif
-                                        </td>                                        
-                                        <td style="text-align: right"> 
-                                            @if (!Empty($fulltbp->canceldate))
-                                                    <span class="badge badge-flat border-danger text-danger-600">ยกเลิกโครงการแล้ว</span>
-                                                @else
-                                                   <a href="{{route('dashboard.admin.project.savecancel',['id' => $fulltbp->id])}}" onclick="cancelproject(event)" class=" btn btn-sm bg-warning">ยกเลิกโครงการ</a>
-                                            @endif
-                                            
-                                        </td>
-                                    </tr>
+                                                </td>                                        
+                                                <td style="text-align: right"> 
+                                                    @if ($fulltbp->success_objective == 0)
+                                                        <a href="{{route('dashboard.admin.edit',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-warning">เพิ่มผลการติดตาม</a>
+                                                        @else
+                                                        <a href="{{route('dashboard.admin.view',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-info">รายละเอียด</a>
+                                                    @endif
+                                                    
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>      

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/vendor/sitemap/styles/xml.xsl" type="text/xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+	<url>
+	<loc>http://localhost/ttrsassessment/public/page/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%97%E0%B8%B5%E0%B9%88-1</loc>
+		<priority>1.0</priority>
+		<lastmod>2021-05-09T16:43:07+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://localhost/ttrsassessment/public/page/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%97%E0%B8%B5%E0%B9%88-2</loc>
+		<priority>1.0</priority>
+		<lastmod>2021-05-09T16:35:12+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://localhost/ttrsassessment/public/page/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%97%E0%B8%B5%E0%B9%88-3</loc>
+		<priority>1.0</priority>
+		<lastmod>2021-05-09T16:34:35+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://localhost/ttrsassessment/public/page/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B9%80%E0%B8%A7%E0%B8%97%E0%B8%A2%E0%B9%8C%E0%B8%9C%E0%B8%99%E0%B8%B6%E0%B8%81%E0%B8%A1%E0%B8%B2%E0%B8%A3-Jujutsu-Kaisen</loc>
+		<priority>1.0</priority>
+		<lastmod>2021-05-09T16:43:01+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+</urlset>
+

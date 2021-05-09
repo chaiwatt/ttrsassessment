@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes(['verify' => true]);
-
+Route::get('ttrssitemap.xml','SitemapController@Index')->name('sitemap');     
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
@@ -796,6 +796,12 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('ppt/{id}','DashboardAdminEvaluationResultController@Ppt')->name('dashboard.admin.evaluationresult.ppt'); 
                 Route::get('certificate/{id}/{type}','DashboardAdminEvaluationResultController@Certificate')->name('dashboard.admin.evaluationresult.certificate'); 
                 Route::post('editsave/{id}','DashboardAdminEvaluationResultController@EditSave')->name('dashboard.admin.evaluationresult.editsave');  
+            }); 
+            Route::group(['prefix' => 'followup'], function(){
+                Route::get('','DashboardAdminFollowUpController@Index')->name('dashboard.admin.followup');    
+                Route::get('edit/{id}','DashboardAdminFollowUpController@Edit')->name('dashboard.admin.edit');    
+                Route::get('view/{id}','DashboardAdminFollowUpController@View')->name('dashboard.admin.view');    
+                Route::post('editsave/{id}','DashboardAdminFollowUpController@EditSave')->name('dashboard.admin.editsave');         
             }); 
         }); 
         Route::group(['prefix' => 'expert'], function(){

@@ -22,9 +22,9 @@
                            <li class="date"><i class="fa fa-calendar-check-o"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}</li>
                            <li class="admin"><i class="fa fa-eye"></i>  เข้าดู: {{$page->pageview->count()}}</li>
                        </ul>
-                       <h3 class="blog-title"><a href="{{route('landing.page',['slug' => $page->slug])}}">{{@$page->name}}</a></h3>
+                       <h3 class="blog-title"><a href="{{route('landing.page',['slug' => @$page->slug])}}">{{@$page->name}}</a></h3>
                        <p class="desc">{{@$page->header}}...</p>
-                       <div class="blog-button"><a href="{{route('landing.page',['slug' => $page->slug])}}">เพิ่มเติม</a></div>
+                       <div class="blog-button"><a href="{{route('landing.page',['slug' => @$page->slug])}}">เพิ่มเติม</a></div>
                     </div>
                 </div>
             @endforeach

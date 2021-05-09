@@ -138,6 +138,12 @@
                     <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน</a></li>
                 </ul>
             </li>
+            <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.followup')?'nav-item-expanded nav-item-open':''}}">
+                <a href="#" class="nav-link"><i class="icon-flag7"></i> <span>การติดตาม</span></a>
+                <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
+                    <li class="nav-item"><a href="{{route('dashboard.admin.followup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.followup')?'active':''}}">การติดตาม</a></li>
+                </ul>
+            </li>
             @elseif(Auth::user()->user_type_id == 4)
                 @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0 )
                     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
@@ -346,7 +352,7 @@
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.announce')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.announce')?'active':''}}">ประกาศ</a></li>	 --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu.create')?'active':''}}">เมนู</a></li>	
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	 --}}
-                <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้าแรกพิเศษ</a></li>	
+                <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้า Billboard</a></li>	
                 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage')?'nav-item-expanded':''}}">
                     <a href="#" class="nav-link"><span>หน้าแรก (Homepage)</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
@@ -356,6 +362,7 @@
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.pillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.pillar')?'active':''}}">Pillar</a></li>	
                     </ul>
                 </li>
+                <li class="nav-item"><a href="{{route('sitemap')}}" class="nav-link {{starts_with(Route::currentRouteName(),'sitemap')?'active':''}}" target="_blank" >Sitemap</a></li>	
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.user')?'nav-item-expanded':''}}">

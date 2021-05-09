@@ -194,9 +194,31 @@
                                             </div>
                                             <input type="file" style="display:none;" id="file" name="feature" accept="image/*"/>
                                             <br>
-                                            <div class="col-md-12" id="feature_input_wrapper" >	</div>
-                                            <div class="col-md-12" id="featurethumbnail_input_wrapper" ></div>
-                                            <div id="featurethumbnail_wrapper"></div>
+                                            <div class="col-md-12" id="feature_input_wrapper">
+                                                <input name="featureinp" id="featureinp" value="" data-id="" class="featureinp" hidden > 
+                                                <input name="featurethumbnail" id="featurethumbnail" value="" data-id="" class="featurethumbnailinp"  hidden> 
+                                            </div>
+
+                                            <div class="form-group" id="featurediv" >
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xl-6">
+                                                        <div class="card">
+                                                            <div class="card-img-actions mx-1 mt-1">
+                                                                <img id="featureimage" class="card-img img-fluid" src="{{asset('storage/uploads//page/feature/default.png')}}" alt="">
+                                                                
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="d-flex align-items-start flex-nowrap">
+                                                                    <div class="list-icons list-icons-extended ml-auto">
+                                                                        {{-- <a href="#" id="deletefeature" data-id="{{$page->feature_image_id}}" data-thumbnail="{{$page->feature_image_thumbnail_id}}"  class="list-icons-item"><i class="icon-bin top-0"></i></a> --}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- <div id="featurethumbnail_wrapper"></div> --}}
                                                 
                                         </div>
                                         <div class="form-group">

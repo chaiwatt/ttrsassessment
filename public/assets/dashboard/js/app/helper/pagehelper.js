@@ -247,6 +247,7 @@ $(document).on('click', '#deletegallery', function (e) {
 
 $("#file").on('change', function() {
     var file = this.files[0];
+
     if (this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/) == null ){
         return ;
     }
@@ -254,9 +255,10 @@ $("#file").on('change', function() {
         alert('ไฟล์ขนาดมากกว่า 250 KB');
         return ;
     }
-    if($('.featureinp').length>0){
-        return ;
-    }
+    // if($('.featureinp').length>0){
+    //     return ;
+    // }
+    console.log(file);
     var formData = new FormData();
     formData.append('file',file);
         $.ajax({
@@ -267,29 +269,36 @@ $("#file").on('change', function() {
             contentType: false,
             processData: false,
             success: function(data){
-                var inp = `<input name="featureinp" value="${data.feature.id}" data-id="${data.feature.id}" class="featureinp" hidden>`;
-                $('#feature_input_wrapper').append(inp);
-                var inp2 = `<input name="blogsidebarimage" value="${data.blogsidebarimage.id}" data-id="${data.blogsidebarimage.id}" class="blogsidebarimage" hidden>
-                            <input name="bloghomepageimage" value="${data.bloghomepageimage.id}" data-id="${data.bloghomepageimage.id}" class="bloghomepageimage" hidden>`;
-                $('#featurethumbnail_input_wrapper').append(inp2);
-                var html = `<div class="form-group" id="featurediv" >
-                            <div class="row"><div class="col-sm-6 col-xl-6">
-                            <div class="card">
-                                <div class="card-img-actions mx-1 mt-1">
-                                    <img class="card-img img-fluid" src="${route.url}/${data.feature.name}" alt="">
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start flex-nowrap">
-                                        <div class="list-icons list-icons-extended ml-auto">
-                                            <a href="#" id="deletefeature" data-id="${data.feature.id}" data-thumbnail="${data.bloghomepageimage.id}"  class="list-icons-item"><i class="icon-bin top-0"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
+                console.log(data);
+                    $('#featureinp').val(data.feature.id);
+                    $('#featurethumbnail').val(data.bloghomepageimage.id);
+                    $('#featureimage').attr('src',route.url+'/'+data.feature.name);
+                    
+                // <input name="featurethumbnailinp" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden>
+                // var inp = `<input name="featureinp" id="featureinp" value="${data.feature.id}" data-id="${data.feature.id}" class="featureinp" >
+                // <input name="featurethumbnail" id="featurethumbnail" value="${data.bloghomepageimage.id}" data-id="${data.bloghomepageimage.id}" class="featurethumbnailinp" `;
+                // $('#feature_input_wrapper').append(inp);
+                // // var inp2 = `<input name="blogsidebarimage" value="${data.blogsidebarimage.id}" data-id="${data.blogsidebarimage.id}" class="blogsidebarimage" hidden>
+                //             // <input name="bloghomepageimage" value="${data.bloghomepageimage.id}" data-id="${data.bloghomepageimage.id}" class="bloghomepageimage" hidden>`;
+                // // $('#featurethumbnail_input_wrapper').append(inp2);
+                // var html = `<div class="form-group" id="featurediv" >
+                //             <div class="row"><div class="col-sm-6 col-xl-6">
+                //             <div class="card">
+                //                 <div class="card-img-actions mx-1 mt-1">
+                //                     <img class="card-img img-fluid" src="${route.url}/${data.feature.name}" alt="">
+                //                 </div>
+                //                 <div class="card-body">
+                //                     <div class="d-flex align-items-start flex-nowrap">
+                //                         <div class="list-icons list-icons-extended ml-auto">
+                //                             <a href="#" id="deletefeature" data-id="${data.feature.id}" data-thumbnail="${data.bloghomepageimage.id}"  class="list-icons-item"><i class="icon-bin top-0"></i></a>
+                //                         </div>
+                //                     </div>
+                //                 </div>
+                //             </div>
+                //         </div>`;
 
-                    html +=`</div></div>`;
-                 $("#featurethumbnail_wrapper").html(html);
+                //     html +=`</div></div>`;
+                //  $("#featurethumbnail_wrapper").html(html);
         }
     });
 });
@@ -297,8 +306,8 @@ $("#file").on('change', function() {
 $(document).on('click', '#deletefeature', function (e) {
     e.preventDefault();
     var formData = new FormData();
-    formData.append('featureid',$(this).data('id'));
-    formData.append('thumbnailid',$(this).data('thumbnail'));
+    formData.append('featureid',$('#featureinp').val());
+    formData.append('thumbnailid',$('#featurethumbnail').val());
     $.ajax({
         url: `${route.url}/api/feature/delete`,  //Server script to process data
         type: 'POST',
@@ -307,9 +316,11 @@ $(document).on('click', '#deletefeature', function (e) {
         contentType: false,
         processData: false,
         success: function(data){
-            $("input[name='featureinp'][data-id='" + data.feature + "']").remove();
-            $("input[name='featurethumbnailinp'][data-id='" + data.thumbnail + "']").remove();
-            $("div[id='featurediv']").remove();
+            $('#featureinp').val('');
+            $('#featurethumbnail').val('');
+            $('#featureimage').attr('src',route.url+'/storage/uploads//page/feature/default.png');
+            //$("div[id='featurediv']").remove();
+            // $('#featurethumbnail').html('');
         }
     });
 

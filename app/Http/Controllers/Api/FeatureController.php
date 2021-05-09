@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Image;
+use App\Model\Page;
 use App\Helper\Crop;
 use App\Model\FeatureImage;
 use Illuminate\Http\Request;
@@ -21,37 +22,48 @@ class FeatureController extends Controller
         $featureimage->name = $feature;
         $featureimage->save();
 
-        $fname=str_random(10).".".$file->getClientOriginalExtension();
-        $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),500,330,2);
-        $featureimagethumbnail_1 = new FeatureImageThumbnail();
-        $featureimagethumbnail_1->name = $feature;
-        $featureimagethumbnail_1->save();
+        // $fname=str_random(10).".".$file->getClientOriginalExtension();
+        // $feature = "storage/uploads/page/feature/".$fname;
+        // Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),500,330,2);
+        // $featureimagethumbnail_1 = new FeatureImageThumbnail();
+        // $featureimagethumbnail_1->name = $feature;
+        // $featureimagethumbnail_1->save();
 
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),400,300,2);
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),700,700,2);
         $featureimagethumbnail_2 = new FeatureImageThumbnail();
         $featureimagethumbnail_2->name = $feature;
         $featureimagethumbnail_2->save();
 
+        // featurethumbnail 
+
         return response()->json(
             array(
                 "feature" => $featureimage,
-                "blogsidebarimage" => $featureimagethumbnail_1,
+                // "blogsidebarimage" => $featureimagethumbnail_1,
                 "bloghomepageimage" => $featureimagethumbnail_2
                 ));  
     }
 
 
     public function Delete(Request $request){
+        
         $featureimage = FeatureImage::find($request->featureid);
+        
         @unlink($featureimage->name); 
         $featureimage->delete();
 
         $featureimagethumbnail = FeatureImageThumbnail::find($request->thumbnailid);
         @unlink($featureimagethumbnail->name); 
         $featureimagethumbnail->delete();
+
+        Page::where('feature_image_id',$request->featureid)->update([
+            'feature_image_id' => null
+        ]);
+        Page::where('feature_image_thumbnail_id',$request->thumbnailid)->update([
+            'feature_image_thumbnail_id' => null
+        ]);
         return response()->json(array("feature" => $request->featureid,"thumbnail" => $request->thumbnailid));  
     }
 
