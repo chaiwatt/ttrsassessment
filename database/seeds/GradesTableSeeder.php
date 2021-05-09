@@ -59,8 +59,13 @@ class GradesTableSeeder extends Seeder
             ],
             [
                 'name' => 'D',
-                'min' => 0,
+                'min' => 25,
                 'max' => 48,
+            ],
+            [
+                'name' => 'E',
+                'min' => 0,
+                'max' => 25,
             ]
         ]);
     }

@@ -68,6 +68,7 @@ Route::group(['prefix' => 'api'], function(){
         Route::group(['prefix' => 'chart'], function(){
             Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');    
             Route::post('chartdata','Api\ReportChartController@ChartData')->name('api.report.chart.chartdata');         
+            Route::post('getchartdata','Api\ReportChartController@getchartdata')->name('api.report.chart.getchartdata'); 
         }); 
     }); 
     Route::group(['prefix' => 'adminreport'], function(){
@@ -792,6 +793,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('','DashboardAdminEvaluationResultController@Index')->name('dashboard.admin.evaluationresult');           
                 Route::get('edit/{id}','DashboardAdminEvaluationResultController@Edit')->name('dashboard.admin.evaluationresult.edit');  
                 Route::get('pdf/{id}','DashboardAdminEvaluationResultController@Pdf')->name('dashboard.admin.evaluationresult.pdf'); 
+                Route::get('ppt/{id}','DashboardAdminEvaluationResultController@Ppt')->name('dashboard.admin.evaluationresult.ppt'); 
                 Route::get('certificate/{id}/{type}','DashboardAdminEvaluationResultController@Certificate')->name('dashboard.admin.evaluationresult.certificate'); 
                 Route::post('editsave/{id}','DashboardAdminEvaluationResultController@EditSave')->name('dashboard.admin.evaluationresult.editsave');  
             }); 

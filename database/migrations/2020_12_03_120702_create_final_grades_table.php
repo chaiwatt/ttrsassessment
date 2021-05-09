@@ -20,6 +20,7 @@ class CreateFinalGradesTable extends Migration
             $table->unsignedBigInteger('ev_id');
             $table->unsignedBigInteger('pillar_id');
             $table->char('percent',10)->default(0);
+            $table->char('grade',3)->nullable();
             $table->timestamps();
         });
     }

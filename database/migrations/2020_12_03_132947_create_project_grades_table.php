@@ -24,6 +24,12 @@ class CreateProjectGradesTable extends Migration
             $table->char('extraweight',10)->default(0);
             $table->char('percent',10)->default(0);
             $table->char('grade',10)->default(0);
+            $table->char('businesssize',10)->nullable();
+            $table->char('businesstype',10)->nullable();
+            $table->char('isiccode',10)->nullable();
+            $table->char('industrygroup',10)->nullable();
+            $table->char('province',10)->nullable();
+            $table->char('sector',10)->nullable();
             $table->timestamps();
         });
     }

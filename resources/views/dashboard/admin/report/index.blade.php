@@ -239,183 +239,6 @@
         </div>
         @if (Auth::user()->user_type_id > 5)
         <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-            chart place here.
-                              <div class="row">
-                                  <div class="col-md-2">
-                                      <canvas id="myChart" width=100  height=100 ></canvas>
-                                  </div>
-                                  <div class="col-md-9 l-40 none">
-                                    <div style="margin-top: 300px;"></div>
-                                    <ul class="chart-skills">
-                                      <li>
-                                        <span>62.94%</span>
-                                      </li>
-                                    </ul>
-                                    <ul class="chart-skills2" style="margin-top:-230px"> 
-                                      <li>
-                                        <span>73.16%</span>
-                                      </li>
-                                    </ul>
-                                    <ul class="chart-skills3" style="margin-top:-286px"> 
-                                      <li>
-                                        <span>84.76%</span>
-                                      </li>
-                                    </ul>
-                                    <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
-                                      <li>
-                                        <span>94.31%</span>
-                                      </li>
-                                    </ul>
-                                    <div class="text-min"> 
-                                      min
-                                    </div>
-                                    <div class="text-max">
-                                      max
-                                    </div>
-                                  </div>
-                                  <div class="col-md-1">
-                                        <table class="table table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
-                                      <thead>
-                                        <tr>
-                                         
-                                          <td class="bg-02 white" colspan="2">Level Classification</td>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr class="bg-01">
-                                          <td>87-100</td>
-                                          <td>AAA</td>
-                                        </tr>
-                                        <tr class="bg-04">
-                                          <td>80-86</td>
-                                          <td>AA</td>
-                                        </tr>
-                                        <tr class="bg-02">
-                                          <td>74-79</td>
-                                          <td>A</td>
-                                        </tr>
-                                        <tr class="bg-03">
-                                          <td>70-73</td>
-                                          <td>BBB</td>
-                                        </tr>
-                                        <tr class="bg-02">
-                                          <td>64-69</td>
-                                          <td>BB</td>
-                                        </tr>
-                                        <tr class="bg-03">
-                                          <td>56-63</td>
-                                          <td>B</td>
-                                        </tr>
-                                        <tr class="bg-02">
-                                          <td>54-55</td>
-                                          <td>CCC</td>
-                                        </tr>
-                                        <tr class="bg-03">
-                                          <td>51-52</td>
-                                          <td>CC</td>
-                                        </tr>
-                                        <tr class="bg-02">
-                                          <td>48-50</td>
-                                          <td>C</td>
-                                        </tr>
-                                        <tr class="bg-03">
-                                          <td>25-47</td>
-                                          <td>D</td>
-                                        </tr>
-                                        <tr class="bg-02">
-                                          <td>0-24</td>
-                                          <td>E</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                              </div>
-
-
-                    </div>
-                    <div class="card-footer">
-                      <div class="row">
-                          <div class="col-md-3" data-aos="fade-up">
-                              <div class="row">
-                                  <div class="col-sm-6">
-                                      <div class="row">
-                                          <div class="col-sm-6"></div>
-                                          <div class="col-sm-6"> 
-                                              <h2>01</h2>
-                                              <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <h6 class="color-01">Management</h6>
-                                      <h5>94.31</h5>
-                                      <h4 class="color-01">AAA</h4>
-                                     
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-                              <div class="row">
-                                  <div class="col-sm-6">
-                                      <div class="row">
-                                          <div class="col-sm-6"></div>
-                                          <div class="col-sm-6"> 
-                                              <h2>02</h2>
-                                              <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <h6 class="color-02">Technology</h6>
-                                      <h5>84.76</h5>
-                                      <h4 class="color-02">AA</h4>
-                                     
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-3" data-aos="fade-up" data-aos-delay="400"> 
-                              <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="row">
-                                      <div class="col-sm-6"></div>
-                                      <div class="col-sm-6"> 
-                                          <h2>03</h2>
-                                          <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <h6 class="color-03">Marketability</h6>
-                                  <h5>73.16</h5>
-                                  <h4 class="color-03">BBB</h4>
-                                 
-                              </div>
-                          </div>
-                      </div>
-                          <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">  <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="row">
-                                      <div class="col-sm-6"></div>
-                                      <div class="col-sm-6"> 
-                                          <h2>04</h2>
-                                          <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <h6 class="color-04">Business Prospet</h6>
-                                  <h5>62.94</h5>
-                                  <h4 class="color-04">B</h4>
-                                 
-                              </div>
-                          </div>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-        </div>
-
-        <div class="row">
             <div class="col-lg-3">
                 <div class="card bg-teal-400">
                     <div class="card-body">
@@ -471,6 +294,83 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">เกรดแยกตาม Pillar</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebypillar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">เกรดแยกตามขนาดธุรกิจ</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebybusinesssize"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">เกรดแยกตามภูมิภาค</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebysector"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">เกรดแยกตามประเภทธุรกิจ</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebybusinesstype"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">เกรดแยกตามกลุ่มอุตสาหกรรม</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebyindustry"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">เกรดแยกตาม Isic</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebyisic"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @endif
        
         <div class="row">
@@ -547,66 +447,66 @@
                 </div>
             </div>
         </div>
-        @if (Auth::user()->user_type_id >= 5)
+        {{-- @if (Auth::user()->user_type_id >= 5)
         <div class="row">
-        @if ($numprojectcollections->count() > 0)
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จำนวนโครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
-                        <div class="header-elements">
-                            <div class="list-icons ml-3">
-                                <div class="list-icons-item dropdown">
-                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="#" data-toggle="modal" id="numproject_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
-                                        <a href="#" data-toggle="modal" id="numproject_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
-                                        <a href="#" data-toggle="modal" id="numproject_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="{{route('api.adminreport.download.numproject')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
+            @if ($numprojectcollections->count() > 0)
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header header-elements-sm-inline">
+                            <h6 class="card-title">จำนวนโครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
+                            <div class="header-elements">
+                                <div class="list-icons ml-3">
+                                    <div class="list-icons-item dropdown">
+                                        <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                        <div class="dropdown-menu">
+                                            <a href="#" data-toggle="modal" id="numproject_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                            <a href="#" data-toggle="modal" id="numproject_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
+                                            <a href="#" data-toggle="modal" id="numproject_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="{{route('api.adminreport.download.numproject')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="chart-container">
+                                        <div class="chart has-fixed-height" id="participate_chart"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" id="testtopictable">
+                                            <thead>
+                                                <tr class="bg-info">
+                                                    <th style="width: 25%">ปีโครงการ</th> 
+                                                    <th style="width: 25%">จำนวน Mini TBP</th>
+                                                    <th style="width: 25%">จำนวน Full TBP</th>
+                                                    <th style="width: 25%">ประเมินสำเร็จ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($numprojectcollections->reverse() as $key => $numprojectcollection)
+                                                @if ($key <=5)
+                                                    <tr> 
+                                                        <td> {{$numprojectcollection['year']}} </td>  
+                                                        <td> {{$numprojectcollection['minitpbs']}} </td>  
+                                                        <td> {{$numprojectcollection['fulltbps']}} </td>  
+                                                        <td> {{$numprojectcollection['finished']}} </td>  
+                                                    </tr>
+                                                @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>      
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="chart-container">
-                                    <div class="chart has-fixed-height" id="participate_chart"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="table-responsive">
-                                    <table class="table table-striped" id="testtopictable">
-                                        <thead>
-                                            <tr class="bg-info">
-                                                <th style="width: 25%">ปีโครงการ</th> 
-                                                <th style="width: 25%">จำนวน Mini TBP</th>
-                                                <th style="width: 25%">จำนวน Full TBP</th>
-                                                <th style="width: 25%">ประเมินสำเร็จ</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($numprojectcollections->reverse() as $key => $numprojectcollection)
-                                            @if ($key <=5)
-                                                <tr> 
-                                                    <td> {{$numprojectcollection['year']}} </td>  
-                                                    <td> {{$numprojectcollection['minitpbs']}} </td>  
-                                                    <td> {{$numprojectcollection['fulltbps']}} </td>  
-                                                    <td> {{$numprojectcollection['finished']}} </td>  
-                                                </tr>
-                                            @endif
-                                            @endforeach
-                                        </tbody>
-                                    </table>      
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
             @if ($projectgradecollections->count() > 0)
             <div class="col-md-12">
                 <div class="card">
@@ -818,7 +718,7 @@
                 </div>
             @endif
         </div>
-        @endif
+        @endif --}}
 
         @if ($fulltbps->count() > 0)
             <div class="row">

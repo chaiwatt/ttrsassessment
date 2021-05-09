@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Model\Grade;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\FinalGrade;
 use App\Model\BusinessPlan;
 use App\Model\ProjectGrade;
 use Illuminate\Http\Request;
@@ -21,6 +23,19 @@ class ReportChartController extends Controller
             "minitbps" => $minitbps,
             "fulltbps" => $fulltbps,
             "completes" => $completes
+        ));
+    }
+
+    public function getChartData(Request $request){
+        $finalgrades = FinalGrade::get(['full_tbp_id','pillar_id','grade']);
+        $grades = Grade::get(['name']);
+        $projectgrades = ProjectGrade::get(['businesssize','isiccode','industrygroup','sector','grade','businesstype']);
+
+
+        return response()->json(array(
+            "finalgrades" => $finalgrades,
+            "grades" => $grades,
+            "projectgrades" => $projectgrades
         ));
     }
 

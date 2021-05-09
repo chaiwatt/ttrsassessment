@@ -12,6 +12,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
 use App\Model\Criteria;
+use App\Model\Province;
 use App\Helper\EmailBox;
 use App\Model\FinalGrade;
 use App\Model\BusinessPlan;
@@ -23,6 +24,7 @@ use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
+use App\Model\CompanyAddress;
 use App\Model\ProjectScoring;
 use App\Model\CheckListGrading;
 use App\Model\PillaIndexWeigth;
@@ -293,11 +295,13 @@ class DashboardAdminProjectAssessmentController extends Controller
                 if($totalweight != 0){
                     $_percent = $totalweightsum/$totalweight*100;
                 }
+                $pillargrade = $this->checkPillarGrade(intVal($_percent));
                 $finalgrade =  new FinalGrade();
                 $finalgrade->full_tbp_id = $ev->full_tbp_id;
                 $finalgrade->ev_id = $ev->id;
                 $finalgrade->pillar_id = $pillar->id;
-                $finalgrade->percent = $_percent;
+                $finalgrade->grade = $pillargrade;
+                $finalgrade->percent = intVal($_percent);
                 $finalgrade->save();
             }
         }
@@ -335,10 +339,18 @@ class DashboardAdminProjectAssessmentController extends Controller
             $grade = 'CC';
         }elseif($percent >= 48 && $percent < 51){
             $grade = 'C';
-        }else{
+        }elseif($percent >= 25 && $percent < 48){
             $grade = 'D';
+        }elseif($percent >= 0 && $percent < 25){
+            $grade = 'E';
         }
-
+        $fulltbp = FullTbp::find($ev->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $companyaddress = CompanyAddress::where('company_id',$company->id)->whereNull('addresstype')->first();
+        $province = Province::find($companyaddress->province_id);
+        
         ProjectGrade::where('ev_id',$request->evid)->delete(); 
         $projectgrade =  new ProjectGrade();
         $projectgrade->full_tbp_id = $ev->full_tbp_id;
@@ -349,6 +361,12 @@ class DashboardAdminProjectAssessmentController extends Controller
         $projectgrade->extraweight = $ev->percentextra;
         $projectgrade->percent = intVal($percent);
         $projectgrade->grade = $grade;
+        $projectgrade->businesssize = $company->company_size_id;
+        $projectgrade->businesstype = $company->business_type_id;
+        $projectgrade->isiccode = $company->isic_id;
+        $projectgrade->industrygroup = $company->industry_group_id;
+        $projectgrade->province = $province->id;
+        $projectgrade->sector = $province->map_code;
         $projectgrade->save();
         $projectgrade = ProjectGrade::where('ev_id',$ev->id)->first(['percent', 'grade']); 
         
@@ -358,7 +376,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                                                             ->get()
                                                             ->append('extracategory')
                                                             ->append('extracriteria');  
-        $extrascorings = ExtraScoring::where('ev_id',$request->evid)->whereNull('user_id')->get();                                                    
+        $extrascorings = ExtraScoring::where('ev_id',$request->evid)->whereNull('user_id')->get();                                                 
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "finalgrade" => $finalgrade,
@@ -368,6 +386,32 @@ class DashboardAdminProjectAssessmentController extends Controller
             "extracriteriatransactions" => $extracriteriatransactions,
             "extrascorings" => $extrascorings
         ));
+    }
+
+    public function checkPillarGrade($percent){
+        if($percent >= 87){
+            return 'AAA';
+        }elseif($percent >= 80 && $percent < 87){
+            return 'AA';
+        }elseif($percent >= 74 && $percent < 80){
+            return 'A';
+        }elseif($percent >= 70 && $percent < 74){
+            return 'BBB';
+        }elseif($percent >= 64 && $percent < 70){
+            return 'BB';
+        }elseif($percent >= 56 && $percent < 64){
+            return 'B';
+        }elseif($percent >= 54 && $percent < 56){
+            return 'CCC';
+        }elseif($percent >= 51 && $percent < 54){
+            return 'CC';
+        }elseif($percent >= 48 && $percent < 51){
+            return 'C';
+        }elseif($percent >= 25 && $percent < 48){
+            return 'D';
+        }elseif($percent >= 0 && $percent < 25){
+            return 'E';
+        }
     }
 
     public function EditScore(Request $request){

@@ -40,6 +40,10 @@ use Illuminate\Support\Facades\Auth;
 use setasign\Fpdi\PdfParser\StreamReader;
 use App\Http\Requests\EvaluationResultEdit;
 
+use PhpOffice\PhpPresentation\PhpPresentation;
+use PhpOffice\PhpPresentation\IOFactory;
+use PhpOffice\PhpPresentation\Style\Color;
+use PhpOffice\PhpPresentation\Style\Alignment;
 
 class DashboardAdminEvaluationResultController extends Controller
 {
@@ -108,6 +112,134 @@ class DashboardAdminEvaluationResultController extends Controller
         return $pdf->stream('document.pdf');
     }
     
+
+    public function Ppt($id){
+        $fulltbp = FullTbp::find($id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $evaluationresult= EvaluationResult::where('full_tbp_id',$id)->first();
+        $generalinfo = GeneralInfo::first();
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+        $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+        $strMonthThai=$strMonthCut[intval(Carbon::today()->format('m'))];
+
+        $objPHPPowerPoint = new PhpPresentation();
+        $objPHPPowerPoint->getDocumentProperties()->setCreator('PHPOffice')
+            ->setLastModifiedBy('PHPPresentation Team')
+            ->setTitle('Sample 02 Title')
+            ->setSubject('Sample 02 Subject')
+            ->setDescription('Sample 02 Description')
+            ->setKeywords('office 2007 openxml libreoffice odt php')
+            ->setCategory('Sample Category');
+        $objPHPPowerPoint->removeSlideByIndex(0);
+        $slide = $objPHPPowerPoint->createSlide();
+                   
+        $shapeheader = $slide->createRichTextShape()
+                ->setHeight(60)
+                ->setWidth(800)
+                ->setOffsetX(190)
+                ->setOffsetY(150);
+        $headertextRun = $shapeheader->createTextRun($minitbp->project. ' ' . $minitbp->projecteng);
+        $headertextRun->getFont()->setBold(true)
+                ->setName('PSL-Kittithada')
+                ->setSize(38);
+
+        $shapeheader = $slide->createRichTextShape()
+                ->setHeight(40)
+                ->setWidth(800)
+                ->setOffsetX(50)
+                ->setOffsetY(210);
+        $headertextRun = $shapeheader->createTextRun('เลขที่                '.$fulltbp->fulltbp_code);
+        $headertextRun->getFont()->setBold(true)
+                ->setName('PSL-Kittithada')
+                ->setSize(18);
+
+        $shapeone = $slide->createRichTextShape()
+                ->setHeight(40)
+                ->setWidth(800)
+                ->setOffsetX(50)
+                ->setOffsetY(245);
+        $headertextRun = $shapeone->createTextRun('โดย                 '. $fullcompanyname);
+        $headertextRun->getFont()->setBold(true)
+                ->setName('PSL-Kittithada')
+                ->setSize(18);
+
+
+        $shapetwo = $slide->createRichTextShape()
+                ->setHeight(40)
+                ->setWidth(800)
+                ->setOffsetX(50)
+                ->setOffsetY(280);
+        $headertextRun = $shapetwo->createTextRun('สาขาเทคโนโลยี        '. $company->industrygroup->name);
+        $headertextRun->getFont()->setBold(true)
+                ->setName('PSL-Kittithada')
+                ->setSize(18);
+
+        
+        $shapethree = $slide->createRichTextShape()
+                ->setHeight(40)
+                ->setWidth(800)
+                ->setOffsetX(50)
+                ->setOffsetY(315);
+        $headertextRun = $shapethree->createTextRun('ระดับ                '.$fulltbp->projectgrade->grade);
+        $headertextRun->getFont()->setBold(true)
+                ->setName('PSL-Kittithada')
+                ->setSize(18);
+
+
+        
+        $shapefour = $slide->createRichTextShape()
+                ->setHeight(40)
+                ->setWidth(800)
+                ->setOffsetX(50)
+                ->setOffsetY(350);
+        $headertextRun = $shapefour->createTextRun('ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)');
+        $headertextRun->getFont()->setBold(true)
+                ->setName('PSL-Kittithada')
+                ->setSize(18);
+
+
+        $shapefive = $slide->createRichTextShape()
+                ->setHeight(40)
+                ->setWidth(800)
+                ->setOffsetX(50)
+                ->setOffsetY(430);
+        $headertextRun = $shapefive->createTextRun('ให้ไว้ ณ วันที่ ' .ltrim(Carbon::today()->format('d'), '0'). ' '. $strMonthCut[intval(Carbon::today()->format('m'))].' พ.ศ. '.(Carbon::today()->format('Y')+543));
+        $headertextRun->getFont()->setBold(true)
+                ->setName('PSL-Kittithada')
+                ->setSize(18);
+                //
+          
+        $shapesix = $slide->createRichTextShape()
+                ->setHeight(40)
+                ->setWidth(800)
+                ->setOffsetX(150)
+                ->setOffsetY(490);
+        $headertextRun = $shapesix->createTextRun('(' .$generalinfo->director. ')');
+        $headertextRun->getFont()->setBold(false)
+                ->setName('PSL-Kittithada')
+                ->setSize(26);
+
+        header("Content-Type: application/vnd.openxmlformats-officedocument.presentationml.presentation");
+        header("Content-Disposition: attachment; filename=certificate.pptx");
+        $oWriterPPTX = IOFactory::createWriter($objPHPPowerPoint, 'PowerPoint2007');
+        $oWriterPPTX->save('php://output');
+        //$oWriterPPTX->save("sample.pptx");
+    }
+
     public function Certificate($id,$type){
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
@@ -144,6 +276,20 @@ class DashboardAdminEvaluationResultController extends Controller
             $fileContent = file_get_contents(asset("assets/dashboard/template/blankcertificate.pdf"),'rb');
         }
         
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
         $tplId = $mpdf->ImportPage($pagecount); 
 
@@ -154,11 +300,11 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->UseTemplate($tplId);
         $mpdf->WriteFixedPosHTML('<span style="font-size: 37pt;">'. $minitbp->project. ' ' . $minitbp->projecteng.'</span>', 45, 69.5, 200, 150, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>เลขที่</strong></span>', 13, 84, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.Carbon::today()->format('Y').sprintf("%03d",  $fulltbp->id).'</strong></span>', 50, 84, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fulltbp->fulltbp_code.'</strong></span>', 50, 84, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>โดย</strong></span>', 13, 92.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>บริษัท '.$minitbp->businessplan->company->name.'</strong></span>', 50, 92.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fullcompanyname.'</strong></span>', 50, 92.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>สาขาเทคโนโลยี</strong></span>', 13, 101.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$minitbp->businessplan->company->industrygroup->name.'</strong></span>', 50, 101.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$company->industrygroup->name.'</strong></span>', 50, 101.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ระดับ</strong></span>', 13, 109.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'. $fulltbp->projectgrade->grade.'</strong></span>', 50, 109.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)</strong></span>', 13, 118, 250, 90, 'auto');

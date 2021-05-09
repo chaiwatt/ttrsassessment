@@ -57,6 +57,7 @@ function getSummaryEv(evid){
             html1 += `<tr>
             <td>${basepillar}</td>
             <td>${parseFloat(grade.percent).toFixed(2)}</td>
+            <td>${grade.grade}</td>
             <tr>`
         }else{
             var basepillar = ``;
@@ -75,6 +76,7 @@ function getSummaryEv(evid){
             html2 += `<tr>
             <td>${basepillar}</td>
             <td>${parseFloat(grade.percent).toFixed(2)}</td>
+            <td>${grade.grade}</td>
             <tr>`
         }
 ;

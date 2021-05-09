@@ -104,7 +104,8 @@
                             <thead>
                                 <tr class="bg-info">
                                     <th>Pillar (Index)</th>  
-                                    <th style="width:30%">เปอร์เซนต์</th>                                                                                 
+                                    <th style="width:30%">เปอร์เซนต์</th>          
+                                    <th style="width:30%">เกรด</th>                                                                             
                                 </tr>
                             </thead>
                             <tbody id="gradesummary_wrapper_tr"> 
