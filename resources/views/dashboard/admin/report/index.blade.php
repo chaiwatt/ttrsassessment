@@ -6,7 +6,7 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/aos/aos.css')}}" rel="stylesheet">
-<link href="{{asset('assets/dashboard/js/plugins/chart/chart.css')}}">
+{{-- <link href="{{asset('assets/dashboard/js/plugins/chart/chart.css')}}"> --}}
 @stop
 @section('content')
 {{-- modal_get_calendar --}}
@@ -291,6 +291,183 @@
                         </div>
                     </div>
                     <div id="today-revenue"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">เกรดแยกตาม Pillar</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <canvas id="myChart" width=200  height=200 ></canvas>
+                            </div>
+                            <div class="col-md-9 l-40 none">
+                              <div style="margin-top: 300px;"></div>
+                              <ul class="chart-skills">
+                                <li>
+                                  <span id="chartpillar4"></span>
+                                </li>
+                              </ul>
+                              <ul class="chart-skills2" style="margin-top:-230px"> 
+                                <li>
+                                    <span id="chartpillar3"></span>
+                                </li>
+                              </ul>
+                              <ul class="chart-skills3" style="margin-top:-286px"> 
+                                <li>
+                                    <span id="chartpillar2"></span>
+                                </li>
+                              </ul>
+                              <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                <li>
+                                    <span id="chartpillar1"></span>
+                                </li>
+                              </ul>
+                              <div class="text-min"> 
+                                min
+                              </div>
+                              <div class="text-max">
+                                max
+                              </div>
+                            </div>
+                            <div class="col-md-1">
+                                  <table class="table-score table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
+                                <thead>
+                                  <tr>
+                                   
+                                    <td class="bg-01 white" colspan="2">Level Classification</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="bg-02">
+                                    <td style="width:70px"> 87-100</td>
+                                    <td>AAA</td>
+                                  </tr>
+                                  <tr class="bg-03">
+                                    <td>80-86</td>
+                                    <td>AA</td>
+                                  </tr>
+                                  <tr class="bg-02">
+                                    <td>74-79</td>
+                                    <td>A</td>
+                                  </tr>
+                                  <tr class="bg-03">
+                                    <td>70-73</td>
+                                    <td>BBB</td>
+                                  </tr>
+                                  <tr class="bg-02">
+                                    <td>64-69</td>
+                                    <td>BB</td>
+                                  </tr>
+                                  <tr class="bg-03">
+                                    <td>56-63</td>
+                                    <td>B</td>
+                                  </tr>
+                                  <tr class="bg-02">
+                                    <td>54-55</td>
+                                    <td>CCC</td>
+                                  </tr>
+                                  <tr class="bg-03">
+                                    <td>51-52</td>
+                                    <td>CC</td>
+                                  </tr>
+                                  <tr class="bg-02">
+                                    <td>48-50</td>
+                                    <td>C</td>
+                                  </tr>
+                                  <tr class="bg-03">
+                                    <td>25-47</td>
+                                    <td>D</td>
+                                  </tr>
+                                  <tr class="bg-02">
+                                    <td>0-24</td>
+                                    <td>E</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-3" data-aos="fade-up">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-6"> 
+                                                <h2><span style="font-weight: bold"> 01</span></h2>
+                                                <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h6 class="color-01" style="font-weight: bold">Management</h6>
+                                        <h5><span id="pillar1"></span></h5>
+                                        <h4 class="color-01"><span id="gradepillar1"></span></h4>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-6"> 
+                                                <h2><span style="font-weight: bold"> 02</span></h2>
+                                                <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h6 class="color-02" style="font-weight: bold">Technology</h6>
+                                        <h5><span id="pillar2"></span></h5>
+                                        <h4 class="color-02"><span id="gradepillar2"></span></h4>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="400"> 
+                                <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6"></div>
+                                        <div class="col-sm-6"> 
+                                            <h2><span style="font-weight: bold"> 03</span></h2>
+                                            <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6 class="color-03" style="font-weight: bold">Marketability</h6>
+                                    <h5><span id="pillar3"></span></h5>
+                                    <h4 class="color-03"><span id="gradepillar3"></span></h4>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">  <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6"></div>
+                                        <div class="col-sm-6"> 
+                                            <h2><span style="font-weight: bold"> 04</span></h2>
+                                            <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                    <h5><span id="pillar4"></span></h5>
+                                    <h4 class="color-04"><span id="gradepillar4"></span></h4>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
@@ -758,9 +935,10 @@
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/chart/chart.2.6.0.js')}}"></script>
+{{-- <script src="{{asset('assets/dashboard/js/plugins/chart/chart.2.6.0.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/dashboard/js/plugins/chart/chart.js')}}"></script> --}}
 <script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 
 <script>
       AOS.init();

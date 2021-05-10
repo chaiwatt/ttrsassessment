@@ -69,6 +69,7 @@ Route::group(['prefix' => 'api'], function(){
             Route::post('getproject','Api\ReportChartController@GetProject')->name('api.report.chart.getproject');    
             Route::post('chartdata','Api\ReportChartController@ChartData')->name('api.report.chart.chartdata');         
             Route::post('getchartdata','Api\ReportChartController@getchartdata')->name('api.report.chart.getchartdata'); 
+            Route::post('gettopleftchartdata','Api\ReportChartController@getTopLeftChartData')->name('api.report.chart.gettopleftchartdata'); 
         }); 
     }); 
     Route::group(['prefix' => 'adminreport'], function(){

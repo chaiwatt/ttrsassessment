@@ -125,14 +125,14 @@ import * as Attendee from './eventcalendarattendee.js';
             }).catch(error => {})
 
             getRadarChartData().then(data => {
-
-
+                callUpdateChart(data);
                 callGenRadarGradeByPillar(data);
                 callGenRadarByBusinessSize(data);
                 callGenRadarBySector(data);
                 callGenRadarByBusinessType(data);
                 callGenRadarByIndustryGroup(data);
                 callGenRadarByIsic(data);
+                // topLeftChart(data,"myChart");
             }).catch(error => {})
 
             // getChartData().then(data => {
@@ -216,6 +216,63 @@ import * as Attendee from './eventcalendarattendee.js';
                 },
             })
         })
+    }
+
+    function callUpdateChart(data) {
+        var pillar1 = data.finalgrades.filter(x => x.pillar_id == 1).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+        var pillar2 = data.finalgrades.filter(x => x.pillar_id == 2).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+        var pillar3 = data.finalgrades.filter(x => x.pillar_id == 3).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+        var pillar4 = data.finalgrades.filter(x => x.pillar_id == 4).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+
+        var avgpillar = (pillar1 + pillar2 + pillar3 + pillar4)/4;
+        var avrgrade = checkPillarGrade(avgpillar)
+        topLeftChart(avgpillar,avrgrade);
+
+        $('#pillar1').html(pillar1 + '%');
+        $('#gradepillar1').html(checkPillarGrade(pillar1));
+        $('#chartpillar1').html(pillar1 + '%');
+
+        $('#pillar2').html(pillar2 + '%');
+        $('#gradepillar2').html(checkPillarGrade(pillar2));
+        $('#chartpillar2').html(pillar2 + '%');
+        
+        $('#pillar3').html(pillar1 + '%');
+        $('#gradepillar3').html(checkPillarGrade(pillar3));
+        $('#chartpillar3').html(pillar3 + '%');
+
+        $('#pillar4').html(pillar4 + '%');
+        $('#gradepillar4').html(checkPillarGrade(pillar4));
+        $('#chartpillar4').html(pillar4 + '%');
+
+
+    }
+
+ 
+    function checkPillarGrade(_percent){
+        var percent = parseInt(_percent);
+        if(percent >= 87){
+            return 'AAA';
+        }else if(percent >= 80 && percent < 87){
+            return 'AA';
+        }else if(percent >= 74 && percent < 80){
+            return 'A';
+        }else if(percent >= 70 && percent < 74){
+            return 'BBB';
+        }else if(percent >= 64 && percent < 70){
+            return 'BB';
+        }else if(percent >= 56 && percent < 64){
+            return 'B';
+        }else if(percent >= 54 && percent < 56){
+            return 'CCC';
+        }else if(percent >= 51 && percent < 54){
+            return 'CC';
+        }else if(percent >= 48 && percent < 51){
+            return 'C';
+        }else if(percent >= 25 && percent < 48){
+            return 'D';
+        }else if(percent >= 0 && percent < 25){
+            return 'E';
+        }
     }
 
     function getRadarChartData() {
@@ -697,6 +754,55 @@ function callGenRadarByIsic(data){
 //  genRadar('radar','gradebysector');
 //  genRadar('radar','gradebybusinesstype');
 
+function topLeftChart(_percent,grade){
+    // 
+    var percent = parseInt(_percent);
+    console.log(percent);
+    var dom = document.getElementById('myChart');
+    var echart = echarts.init(dom);
+    echart.clear();
+    var option = null;
+    option = {
+        series: [
+            {
+                name: 'เกรด',
+                type: 'pie',
+                hoverAnimation: false,
+                animation: true,
+                radius: ['80%', '100%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: true,
+                    position: 'center',
+                    fontSize : 26,
+                    color: '#000000'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        // fontSize: '16',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: 100-percent, name: '',},
+                    {value: percent, name:   _percent + ' ' + grade},
+    
+                ],
+                 color: ['#bbbbbb', '#4688ce'],
+                 silent: true,
+            }
+        ]
+    };
+
+    if (option && typeof option === "object") {
+        echart.setOption(option, true);
+    }
+}
+
 function genRadar(charttype,indicator,color,legend,data,eleid){
     var dom = document.getElementById(eleid);
     var echart = echarts.init(dom);
@@ -1007,3 +1113,6 @@ $(document).on('click', '#project_objective_bar', function(e) {
     genNumProject('bar',data,objectivelegend,'วัตถุประสงค์ของการขอรับการประเมิน ' + $('#currentyear').html(),'วัตถุประสงค์ของการขอรับการประเมิน ' + $('#currentyear').html(),'financial_chart','center');
 }); 
 
+
+
+  

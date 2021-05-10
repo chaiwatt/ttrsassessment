@@ -27,7 +27,7 @@ class ReportChartController extends Controller
     }
 
     public function getChartData(Request $request){
-        $finalgrades = FinalGrade::get(['full_tbp_id','pillar_id','grade']);
+        $finalgrades = FinalGrade::get(['full_tbp_id','pillar_id','grade','percent']);
         $grades = Grade::get(['name']);
         $projectgrades = ProjectGrade::get(['businesssize','isiccode','industrygroup','sector','grade','businesstype']);
 
@@ -38,6 +38,15 @@ class ReportChartController extends Controller
             "projectgrades" => $projectgrades
         ));
     }
+
+    public function getTopLeftChartData(Request $request){
+        $finalgrades = FinalGrade::get(['pillar_id','percent']);
+     
+
+
+        return response()->json($finalgrades);
+    }
+
 
     public function ChartData(Request $request){
         $thisyear = Carbon::now()->year;

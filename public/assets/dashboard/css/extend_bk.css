@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../fonts/thsarabunnew-webfont.eot');
+    src: url('../fonts/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/thsarabunnew-webfont.woff') format('woff'),
+         url('../fonts/thsarabunnew-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    
+}
+
+@font-face {
+    font-family: 'Kanit';
+    src: url('../fonts/Kanit-Light.eot');
+    src: url('../fonts/Kanit-Light.woff') format('woff'),
+         url('../fonts/Kanit-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body{
+    font-family: "Kanit"; 
+    font-size:16px;
+}
+
+.ml-menu li{
+    font-family: "Kanit";
+}
+
+.ml-menu li a{
+    font-family: "Kanit";
+}
+
+.list li{
+    font-family: "Kanit";
+}
+
+select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
+    font-family: "Kanit";
+}
+
+.btn{
+    font-size:14px; 
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+    color: #f5f8fa;
+    font-size: 15px;
+    font-weight: 100
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  .blink-one {
+    animation: blinker-one 1s linear infinite;
+  }
+  @keyframes blinker-one {
+    0% {
+      opacity: 0;
+    }
+  }
+  .blink-two {
+    animation: blinker-two 1.4s linear infinite;
+  }
+  @keyframes blinker-two {
+    100% {
+      opacity: 0;
+    }
+  }
+

@@ -8,7 +8,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">แจ้งผลการประเมิน </span></h4>
+                <h4> <span class="font-weight-semibold">บทวิเคราะห์ </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ผลการประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> รายงานผลการประเมิน</a>
-                    <span class="breadcrumb-item active">แจ้งผลการประเมิน</span>
+                    <a href="{{route('dashboard.admin.evaluationresult')}}" class="breadcrumb-item">รายงานผลการประเมิน</a>
+                    <span class="breadcrumb-item active">บทวิเคราะห์</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

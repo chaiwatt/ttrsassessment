@@ -135,10 +135,9 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="#" class="breadcrumb-item"> Full-TBP</a>
-                    <a href="{{route('dashboard.admin.project.fulltbp')}}" class="breadcrumb-item"> รายการ Full-TBP</a>
-                    <span class="breadcrumb-item active">{{$fulltbp->minitbp->project}}</span>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>โครงการ</a>
+                    <a href="{{route('dashboard.admin.project.fulltbp')}}" class="breadcrumb-item">แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</a>
+                    <span class="breadcrumb-item active">มอบหมายผู้เชี่ยวชาญ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
