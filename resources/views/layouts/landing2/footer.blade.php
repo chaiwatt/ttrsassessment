@@ -67,11 +67,11 @@
                     {{-- <div class="row y-middle">  --}}
                         {{-- <div class="col-lg-12 text-left"> --}}
                             <ul class="copy-right-menu" >
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
+                                <li><a href="{{route('sitemap')}}" target="_blank">Site map xml</a></li>
+                                {{-- <li><a href="about.html">About</a></li>
                                 <li><a href="blog.html">Blog</a></li>
                                 <li><a href="shop.html">Shop</a></li>
-                                <li><a href="faq.html">FAQs</a></li>
+                                <li><a href="faq.html">FAQs</a></li> --}}
                             </ul>
                         {{-- </div> --}}
                     {{-- </div> --}}
