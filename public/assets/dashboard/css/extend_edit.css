@@ -211,9 +211,9 @@ h4{
   
   .chart-skills li:nth-child(1) {
     z-index: 4;
-    border-color: rgb(52, 212, 119);
-    /* animation-name: rotate-one; */
-    transform: rotate(113.2deg);
+    /* border-color: rgb(52, 212, 119);
+    animation-name: rotate-one; */
+    transform: rotate(90deg);
   }
   
   
@@ -326,7 +326,7 @@ h4{
     z-index: 4;
     border-color: rgb(204, 99, 1);
     /* animation-name: rotate-two; */
-    transform: rotate(131.6deg);
+    transform: rotate(169.7deg);
   }
   
   
@@ -340,7 +340,7 @@ h4{
   .chart-skills2 li:nth-child(1) span {
     top: -40px;
     left: -42px;
-    transform: rotate(-131.6deg);
+    transform: rotate(-90deg);
   }
   
   
@@ -436,7 +436,7 @@ h4{
     z-index: 4;
     border-color: rgb(0, 41, 128);
     /* animation-name: rotate-three; */
-     transform: rotate(152.5deg);
+    transform: rotate(120deg);
   }
   
   
@@ -450,7 +450,7 @@ h4{
   .chart-skills3 li:nth-child(1) span {
     top: -40px;
     left: -42px;
-    transform: rotate(-152.5deg);
+    transform: rotate(-90deg);
   }
   
   
@@ -546,7 +546,7 @@ h4{
     z-index: 4;
     border-color: rgb(0, 128, 79);
     /* animation-name: rotate-four; */
-    transform: rotate(169.7deg);
+    transform: rotate(120deg);
   }
   
   
@@ -560,7 +560,7 @@ h4{
   .chart-skills4 li:nth-child(1) span {
     top: -40px;
     left: -42px;
-    transform: rotate(-169.7deg);
+    transform: rotate(-90deg);
   }
   
   

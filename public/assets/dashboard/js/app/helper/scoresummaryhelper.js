@@ -39,7 +39,25 @@ function getSummaryEv(evid){
   function sumGrade(data){
     var html1 =``;
     var html2 =``;
+    var pillarpercent4 = 0;
+    var pillarpercent3 = 0;
+    var pillarpercent2 = 0;
+    var pillarpercent1 = 0;
     data.finalgrade.forEach((grade,index) => {
+        $('#chartpillar' + (index+1)).html(grade.percent + ' %');
+        $('#pillar' + (index+1)).html(grade.percent + ' %');
+        $('#gradepillar' + (index+1)).html(grade.grade);
+         //console.log(index);
+ 
+        if(index == 0){
+            pillarpercent4 = grade.percent;
+        }else if(index == 1){
+            pillarpercent3 = grade.percent;
+        }else if(index == 2){
+            pillarpercent2 = grade.percent;
+        }else if(index == 3){
+            pillarpercent1 = grade.percent;
+        }
         if(index < 4){
             var basepillar = ``;
             if(grade.pillar_id == 1){
@@ -79,8 +97,26 @@ function getSummaryEv(evid){
             <td>${grade.grade}</td>
             <tr>`
         }
-;
-    });   
+
+    });  
+    // var angle = grade.percent*1.8;
+    $('.chart-skills4').find('span:nth-child(1)').text(`${pillarpercent4}%`);
+    $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
+    $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent4}deg)`);
+
+    $('.chart-skills3').find('span:nth-child(1)').text(`${pillarpercent3}%`);
+    $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent3*1.8}deg)`);
+    $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent3}deg)`);
+
+    $('.chart-skills2').find('span:nth-child(1)').text(`${pillarpercent2}%`);
+    $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent2*1.8}deg)`);
+    $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent2}deg)`);
+
+    $('.chart-skills').find('span:nth-child(1)').text(`${pillarpercent1}%`);
+    $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent1*1.8}deg)`);
+    $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent1}deg)`);
+
+    $("#chartarea").attr("hidden",false);
     $("#gradesummary_wrapper_tr").html(html1); 
     $("#extra_gradesummary_wrapper_tr").html(html2); 
   }
