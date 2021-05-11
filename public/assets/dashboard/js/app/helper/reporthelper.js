@@ -232,10 +232,6 @@ import * as Attendee from './eventcalendarattendee.js';
         var avrgrade = checkPillarGrade(avgpillar)
         topLeftChart(avgpillar,avrgrade);
 
-        // $('#pillar1').html(pillar1 + '%');
-        $('#gradepillar1').html(checkPillarGrade(pillar1));
-        // $('#chartpillar1').html(pillar1 + '%');
-        // console.log(pillar1);
         if(isNaN(pillar1)) {
             pillar1 = 0;
         }
@@ -249,35 +245,42 @@ import * as Attendee from './eventcalendarattendee.js';
             pillar4 = 0;
         }
 
-        $('.chart-skills').find('span:nth-child(1)').text(`${pillar1}%`);
+        $('#gradepillar1').html(checkPillarGrade(pillar1));
+        if(pillar1 == 0){
+            $('.chart-skills').find('span:nth-child(1)').text(``);
+        }else{
+            $('.chart-skills').find('span:nth-child(1)').text(`${pillar1}%`);
+        }
         $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillar1*1.8}deg)`);
         $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar1}deg)`);
 
 
-        // $('#pillar2').html(pillar2 + '%');
         $('#gradepillar2').html(checkPillarGrade(pillar2));
-        // $('#chartpillar2').html(pillar2 + '%');
-
-
-        $('.chart-skills2').find('span:nth-child(1)').text(`${pillar2}%`);
+        if(pillar2 == 0){
+            $('.chart-skills2').find('span:nth-child(1)').text(``);
+        }else{
+            $('.chart-skills2').find('span:nth-child(1)').text(`${pillar2}%`);
+        }
         $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillar2*1.8}deg)`);
         $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar2}deg)`);    
             
-        // $('#pillar3').html(pillar1 + '%');
-        $('#gradepillar3').html(checkPillarGrade(pillar3));
-        // $('#chartpillar3').html(pillar3 + '%');
 
-        
-        $('.chart-skills3').find('span:nth-child(1)').text(`${pillar3}%`);
+        $('#gradepillar3').html(checkPillarGrade(pillar3));
+        if(pillar3 == 0){
+            $('.chart-skills3').find('span:nth-child(1)').text(``);
+        }else{
+            $('.chart-skills3').find('span:nth-child(1)').text(`${pillar3}%`);
+        }
         $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillar3*1.8}deg)`);
         $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar3}deg)`);
 
 
         $('#gradepillar4').html(checkPillarGrade(pillar4));
-        // $('#chartpillar4').html(pillar4 + '%');
-        // $('#pillar4').html(pillar4 + '%');
-
-        $('.chart-skills4').find('span:nth-child(1)').text(`${pillar4}%`);
+        if(pillar4 == 0){
+            $('.chart-skills4').find('span:nth-child(1)').text(``);
+        }else{
+            $('.chart-skills4').find('span:nth-child(1)').text(`${pillar4}%`);
+        }
         $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillar4*1.8}deg)`);
         $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar4}deg)`);
 
@@ -308,8 +311,10 @@ import * as Attendee from './eventcalendarattendee.js';
             return 'C';
         }else if(percent >= 25 && percent < 48){
             return 'D';
-        }else if(percent >= 0 && percent < 25){
+        }else if(percent > 0 && percent < 25){
             return 'E';
+        }else{
+            return '';
         }
     }
 
