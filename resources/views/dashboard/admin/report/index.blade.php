@@ -299,7 +299,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เกรดแยกตาม Pillar</h6>
+                        <h6 class="card-title" style="font-size:16px">ร้อยละเกรดแยกตาม Pillar</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -478,7 +478,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เกรดแยกตาม Pillar</h6>
+                        <h6 class="card-title" style="font-size:16px">เกรดแยกตาม Pillar</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -501,7 +501,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เกรดแยกตามขนาดธุรกิจ</h6>
+                        <h6 class="card-title" style="font-size:16px">เกรดแยกตามขนาดธุรกิจ</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -526,7 +526,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เกรดแยกตามภูมิภาค</h6>
+                        <h6 class="card-title" style="font-size:16px">เกรดแยกตามภูมิภาค</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -549,7 +549,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เกรดแยกตามประเภทธุรกิจ</h6>
+                        <h6 class="card-title" style="font-size:16px">เกรดแยกตามประเภทธุรกิจ</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -572,7 +572,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เกรดแยกตามกลุ่มอุตสาหกรรม</h6>
+                        <h6 class="card-title" style="font-size:16px">เกรดแยกตามกลุ่มอุตสาหกรรม</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -595,7 +595,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">เกรดแยกตาม Isic</h6>
+                        <h6 class="card-title" style="font-size:16px">เกรดแยกตาม Isic</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -624,7 +624,7 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายการโครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px">รายการโครงการ</h6>
                         <div class="header-elements">
                         </div>
                     </div>
@@ -699,7 +699,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">จำนวนโครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
+                            <h6 class="card-title" style="font-size:16px">จำนวนโครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
                             <div class="header-elements">
                                 <div class="list-icons ml-3">
                                     <div class="list-icons-item dropdown">
@@ -757,7 +757,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">จำนวนโครงการตามเกรดการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
+                        <h6 class="card-title" style="font-size:16px">จำนวนโครงการตามเกรดการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -830,7 +830,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">โครงการตามกลุ่มอุตสาหกรรม ปี {{intVal(date("Y"))+543}}</h6>
+                        <h6 class="card-title" style="font-size:16px">โครงการตามกลุ่มอุตสาหกรรม ปี {{intVal(date("Y"))+543}}</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">
@@ -909,7 +909,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">วัตถุประสงค์ของการขอรับการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
+                            <h6 class="card-title" style="font-size:16px">วัตถุประสงค์ของการขอรับการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
                             <div class="header-elements">
                                 <div class="list-icons ml-3">
                                     <div class="list-icons-item dropdown">
@@ -971,7 +971,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">ปฏิทิน</h6>
+                            <h6 class="card-title" style="font-size:16px">ปฏิทิน</h6>
                             <div class="header-elements">
                                 <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                     <span></span>

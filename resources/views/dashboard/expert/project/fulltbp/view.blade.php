@@ -1326,7 +1326,7 @@
 
 				<div class="card">
 					{{-- <div class="card-header bg-white header-elements-inline">
-						<h6 class="card-title">Basic example</h6>
+						<h6 class="card-title" style="font-size:16px">Basic example</h6>
 						<div class="header-elements">
 							<div class="list-icons">
 		                		<a class="list-icons-item" data-action="collapse"></a>
@@ -1344,14 +1344,14 @@
 								<div id="accordion-group">
 									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
 										<div class="card-header">
-											<h6 class="card-title">
+											<h6 class="card-title" style="font-size:16px">
 												<a data-toggle="collapse" class="text-default list-icons-item" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.1 ข้อมูลกิจการ</a>
 											</h6>
 										</div>
 		
 
 										{{-- <div class="card-header text-white header-elements-inline">
-											<h6 class="card-title"><a data-toggle="collapse" class="text-default" href="#accordion-item-group1">1.1 ข้อมูลกิจการ</a></h6>
+											<h6 class="card-title" style="font-size:16px"><a data-toggle="collapse" class="text-default" href="#accordion-item-group1">1.1 ข้อมูลกิจการ</a></h6>
 											<div class="header-elements">
 												<div class="list-icons">
 													<a class="list-icons-item text-teal" data-action="collapse"></a>
@@ -1545,7 +1545,7 @@
 		
 									<div class="card mb-0 border-top-success rounded-top-0 rounded-0 border-y-0">
 										<div class="card-header">
-											<h6 class="card-title">
+											<h6 class="card-title" style="font-size:16px">
 												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>1.2 ข้อมูลบุคลากร</a>
 											</h6>
 										</div>
@@ -1793,7 +1793,7 @@
 									<div id="accordion-group">
 										<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
 											<div class="card-header">
-												<h6 class="card-title">
+												<h6 class="card-title" style="font-size:16px">
 													<a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.1 ข้อมูลทั่วไป</a>
 												</h6>
 											</div>
@@ -1890,7 +1890,7 @@
 
 										<div class="card mb-0 rounded-0 border-y-0">
 											<div class="card-header">
-												<h6 class="card-title">
+												<h6 class="card-title" style="font-size:16px">
 													<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.2 ข้อมูลเทคโนโลยี</a>
 												</h6>
 											</div>
@@ -2282,7 +2282,7 @@
 
 										<div class="card rounded-top-0">
 											<div class="card-header">
-												<h6 class="card-title">
+												<h6 class="card-title" style="font-size:16px">
 													<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>2.3 แผนการดำเนินงาน (Gantt Chart)</a>
 												</h6>
 											</div>
@@ -2360,7 +2360,7 @@
 								<div id="accordion-group">
 									<div class="card border-top-info rounded-top-1 mb-0 rounded-bottom-0">
 										<div class="card-header">
-											<h6 class="card-title">
+											<h6 class="card-title" style="font-size:16px">
 												<a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.1 ข้อมูลด้านการตลาด</a>
 											</h6>
 										</div>
@@ -2470,7 +2470,7 @@
 
 									<div class="card mb-0 rounded-0 border-y-0">
 										<div class="card-header">
-											<h6 class="card-title">
+											<h6 class="card-title" style="font-size:16px">
 												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.2 ข้อมูลยอดขายของบริษัท</a>
 											</h6>
 										</div>
@@ -2553,7 +2553,7 @@
 
 									<div class="card rounded-top-0">
 										<div class="card-header">
-											<h6 class="card-title">
+											<h6 class="card-title" style="font-size:16px">
 												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group3"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>3.3 ข้อมูลคู่ค้าหลักทางธุรกิจ</a>
 											</h6>
 										</div>
@@ -2646,7 +2646,7 @@
 								<div id="accordion-group">
 									<div class="card border-top-info rounded-top-1 mb-0">
 										<div class="card-header">
-											<h6 class="card-title">
+											<h6 class="card-title" style="font-size:16px">
 												<a data-toggle="collapse" class="text-default" href="#accordion-item-group1"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</a>
 											</h6>
 										</div>
@@ -2757,7 +2757,7 @@
 
 									<div class="card mb-0 rounded-0 border-y-0">
 										<div class="card-header">
-											<h6 class="card-title">
+											<h6 class="card-title" style="font-size:16px">
 												<a class="collapsed text-default" data-toggle="collapse" href="#accordion-item-group2"><div class="list-icons"><a class="list-icons-item mr-2 mb-2" data-action="collapse"></a></div>4.2 ประมาณการผลตอบแทนจากการลงทุน</a>
 											</h6>
 										</div>

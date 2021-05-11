@@ -49,7 +49,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายงานสถานะ</h6>
+                        <h6 class="card-title" style="font-size:16px">รายงานสถานะ</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -81,7 +81,7 @@
             <div class="col-md-12">
 				<div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">Dashboard - Work load</h6>
+                        <h6 class="card-title" style="font-size:16px">Dashboard - Work load</h6>
                         <div class="header-elements">
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">รายการโครงการ</h6>
+                            <h6 class="card-title" style="font-size:16px">รายการโครงการ</h6>
                             <div class="header-elements">
                             </div>
                         </div>

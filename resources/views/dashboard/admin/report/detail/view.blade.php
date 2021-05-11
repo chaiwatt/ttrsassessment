@@ -55,7 +55,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title">รายงานสถานะ</h6>
+                        <h6 class="card-title" style="font-size:16px">รายงานสถานะ</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -87,7 +87,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">เอกสารของโครงการ</h6>
+                            <h6 class="card-title" style="font-size:16px">เอกสารของโครงการ</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -164,7 +164,7 @@
                     <div class="col-md-12" {{$hidden}}>
                         <div class="card">
                             <div class="card-header header-elements-sm-inline">
-                                <h6 class="card-title">Leader และ Co-Leader ของโครงการ</h6>
+                                <h6 class="card-title" style="font-size:16px">Leader และ Co-Leader ของโครงการ</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -210,7 +210,7 @@
                     <div class="col-md-12" {{$hidden}}>
                         <div class="card">
                             <div class="card-header header-elements-sm-inline">
-                                <h6 class="card-title">รายการ EV</h6>
+                                <h6 class="card-title" style="font-size:16px">รายการ EV</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -253,7 +253,7 @@
                 <div class="col-md-12" {{$hidden}}>
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">รายการผู้เชี่ยวชาญ</h6>
+                            <h6 class="card-title" style="font-size:16px">รายการผู้เชี่ยวชาญ</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -286,7 +286,7 @@
                 <div class="col-md-12" {{$hidden}}>
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title">คะแนน/เกรด</h6>
+                            <h6 class="card-title" style="font-size:16px">คะแนน/เกรด</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

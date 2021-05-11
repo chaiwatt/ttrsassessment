@@ -517,7 +517,7 @@
 					<div class="tab-pane fade active show" id="messagebox">
 						<div class="card">
 							<div class="card-header bg-transparent header-elements-inline">
-								<h6 class="card-title">กล่องข้อความ</h6>
+								<h6 class="card-title" style="font-size:16px">กล่องข้อความ</h6>
 								<div class="header-elements">
 									@if ($messagereceives->count()>0)
 									<span class="badge bg-teal" id="newmessagecount2">{{$unreadmessages->count()}} ข้อความใหม่</span>
