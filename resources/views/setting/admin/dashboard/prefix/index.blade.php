@@ -77,7 +77,10 @@
                                         <td> {{$prefix->name}} </td>                                         
                                         <td> 
                                             <a href="{{route('setting.admin.dashboard.prefix.edit',['id' => $prefix->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            @if ($key > 4)
                                             <a href="{{route('setting.admin.dashboard.prefix.delete',['id' => $prefix->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

@@ -98,7 +98,7 @@
                                     <div class="col-md-12">
                                         <button type="submit" name="action" value="create" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                         <button type="submit" name="action" value="edit" class="btn bg-info">แก้ไข <i class="icon-pencil ml-2"></i></button>
-                                        <button type="submit" name="action" value="delete" class="btn bg-danger">ลบ <i class="icon-trash-alt ml-2"></i></button>
+                                        {{-- <button type="submit" name="action" value="delete" class="btn bg-danger">ลบ <i class="icon-trash-alt ml-2"></i></button> --}}
                                     </div>
                                  </div>
                               </form>

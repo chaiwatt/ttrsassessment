@@ -77,7 +77,10 @@
                                         <td> {{$educationlevel->name}} </td>                                         
                                         <td> 
                                             <a href="{{route('setting.admin.dashboard.educationlevel.edit',['id' => $educationlevel->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            @if ($key > 3)
                                             <a href="{{route('setting.admin.dashboard.educationlevel.delete',['id' => $educationlevel->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                     @endforeach
