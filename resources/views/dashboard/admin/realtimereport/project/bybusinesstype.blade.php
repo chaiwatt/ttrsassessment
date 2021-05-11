@@ -266,6 +266,7 @@
             "info":     false,
             "pageLength" : 50,
             "language": {
+                "zeroRecords": " ",
                 "search": "ค้นหา: ",  
                 "sLengthMenu": "จำนวน _MENU_ รายการ",
                 'paginate': {
