@@ -76,7 +76,7 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         {{-- @if (Auth::user()->user_type_id == 4) --}}
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสาร BOL </h6> @if (Auth::user()->user_type_id == 4)<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_bol"><i class="icon-add mr-2"></i>อัปโหลด</button> @endif
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสาร BOL </h6> @if (Auth::user()->user_type_id == 4)<button type="button" class="btn btn-info btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_bol"><i class="icon-add mr-2"></i>อัปโหลด</button> @endif
                         {{-- @endif --}}
                         
                     

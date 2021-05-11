@@ -17,7 +17,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
-                    <span class="breadcrumb-item active">ค้นหา</span>
+                    <span class="breadcrumb-item active">{{$company->businessplan->minitbp->project}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

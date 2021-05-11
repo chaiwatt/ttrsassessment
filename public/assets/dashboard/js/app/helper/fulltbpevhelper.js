@@ -140,7 +140,7 @@ $('.steps-basic').steps({
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
-        if(newIndex == 3){
+        if(newIndex == 3 && $('#subpillarindex').val() != 0){      
             if($('#indextype').val() == 2){
                 if($('#gradea').val() == 0 && $('#gradeb').val() == 0 && $('#gradec').val() == 0 && $('#graded').val() == 0 && $('#gradee').val() == 0 ){
                     return false;
