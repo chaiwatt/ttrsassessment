@@ -8,6 +8,7 @@ var globalNewIndex = 0;
 var readonly = "";
 $(function() {
     Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
+        // console.log(data.criteriatransactions);
         RenderTable(data.criteriatransactions,data.pillaindexweigths);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
@@ -507,7 +508,6 @@ function RenderTable(criterias,pillaindexweigths){
                     weightval = `(weight = ` + find[0].weigth + `)`;
                 } 
             }
-
             readonly = "readonly";
         }
         if ($('#evstatus').val() >= 2) {
@@ -518,9 +518,7 @@ function RenderTable(criterias,pillaindexweigths){
         if (route.refixstatus == 1) {
             commentreadlonly = "";
         }
-        // if (route.refixstatus == 1) {
-        //     commentreadlonly = "";
-        // }
+
         var comment = '';
         if(criteria.comment){
             comment = criteria.comment;

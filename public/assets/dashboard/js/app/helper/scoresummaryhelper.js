@@ -103,18 +103,30 @@ function getSummaryEv(evid){
     $('.chart-skills4').find('span:nth-child(1)').text(`${pillarpercent4}%`);
     $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
     $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent4}deg)`);
+    if(pillarpercent4 == 100){
+        $('.chart-skills4').find('span:nth-child(1)').css('top', `20px`);
+    }
 
     $('.chart-skills3').find('span:nth-child(1)').text(`${pillarpercent3}%`);
     $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent3*1.8}deg)`);
     $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent3}deg)`);
+    if(pillarpercent3 == 100){
+        $('.chart-skills3').find('span:nth-child(1)').css('top', `20px`);
+    }
 
     $('.chart-skills2').find('span:nth-child(1)').text(`${pillarpercent2}%`);
     $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent2*1.8}deg)`);
     $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent2}deg)`);
+    if(pillarpercent2 == 100){
+        $('.chart-skills2').find('span:nth-child(1)').css('top', `20px`);
+    }
 
     $('.chart-skills').find('span:nth-child(1)').text(`${pillarpercent1}%`);
     $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent1*1.8}deg)`);
     $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent1}deg)`);
+    if(pillarpercent1 == 100){
+        $('.chart-skills1').find('span:nth-child(1)').css('top', `20px`);
+    }
 
     $("#chartarea").attr("hidden",false);
     $("#gradesummary_wrapper_tr").html(html1); 

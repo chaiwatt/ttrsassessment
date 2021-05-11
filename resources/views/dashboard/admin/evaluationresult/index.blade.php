@@ -102,7 +102,7 @@
                                                                     @elseif($fulltbp->projectstatustransaction(7)->status == 1)
                                                                     
                                                                         @if (Auth::user()->user_type_id == 4)
-                                                                                <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมายaa</button>
+                                                                                <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button>
                                                                         @else 
                                                                                 {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
                                                                                 <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>

@@ -226,7 +226,6 @@ class AssessmentEvController extends Controller
         )); 
     }
     public function AddExtraEvGrading(Request $request){
-        
         $criteriatransaction = new CriteriaTransaction();
         $criteriatransaction->ev_id = $request->evid;
         $criteriatransaction->ev_type_id = 2;

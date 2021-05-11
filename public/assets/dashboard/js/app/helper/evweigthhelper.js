@@ -4,6 +4,7 @@ var commentreadonly =``;
 
 $(function() {
     getEv($('#evid').val()).then(data => {
+        // console.log(data.pillaindexweigths);
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
         $('#extraweight').html('(' + data.sumextraweigth.toFixed(3) + ')');
         RenderWeightTable(data.pillaindexweigths,1);
