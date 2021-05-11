@@ -69,7 +69,7 @@
                                         <td>Sub Pillar </td>   
                                         <td>Sub Pillar Index </td>   
                                         <th>Criteria</th>                             
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        <th style="width:200px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,7 +80,7 @@
                                         <td> {{$criteria->subpillarindex->name}} </td>   
                                         <td> {{$criteria->name}} </td>                                         
                                         <td> 
-                                            {{-- <a href="{{route('setting.admin.assessment.criteria.edit',['id' => $criteria->id])}}" class="btn btn-sm bg-primary">แก้ไข</a> --}}
+                                            <a href="{{route('setting.admin.assessment.criteria.edit',['id' => $criteria->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.assessment.criteria.delete',['id' => $criteria->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
@@ -105,5 +105,20 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+
+        $('#testtopictable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 20,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
     </script>
 @stop

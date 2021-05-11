@@ -96,12 +96,20 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-    <script>
-        var route = {
-            url: "{{ url('/') }}",
-            token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
-        };
-    </script>
+<script>
+        $('#testtopictable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 20,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
+</script>
 @stop

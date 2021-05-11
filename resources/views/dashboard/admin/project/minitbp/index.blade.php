@@ -108,7 +108,7 @@
                     <div class="row">
                         <div class="col-md-12" >
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped" >
                                     <thead>
                                         <tr>
                                             <th>รายละเอียด</th> 
@@ -183,7 +183,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-striped" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
@@ -348,5 +348,20 @@
                 })
             })
         }
+
+    $('#maintable').DataTable( {
+        "paging":   true,
+        "ordering": true,
+        "info":     false,
+        "pageLength" : 20,
+        "language": {
+            "search": "ค้นหา: ",  
+            "sLengthMenu": "จำนวน _MENU_ รายการ",
+            'paginate': {
+                'previous': 'ก่อนหน้า',
+                'next': 'ถัดไป'
+            }
+        }
+    });
     </script>
 @stop

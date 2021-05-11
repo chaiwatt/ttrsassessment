@@ -102,5 +102,20 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+
+        $('#testtopictable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
     </script>
 @stop

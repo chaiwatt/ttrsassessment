@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Pillar;
 use App\Model\Criteria;
 use Illuminate\Http\Request;
+use App\Model\CriteriaTransaction;
 
 class SettingAdminAssessmentCriteriaController extends Controller
 {
@@ -29,13 +30,21 @@ class SettingAdminAssessmentCriteriaController extends Controller
         return view('setting.admin.assessment.criteria.edit')->withCriteria($criteria) ;
     }
     public function EditSave(Request $request,$id){
+        $check = CriteriaTransaction::where('criteria_id',$id)->first();
+        if(!empty($check)){
+            return redirect()->route('setting.admin.assessment.criteria')->withError('ผิดพลาดมีการใช้ Criteria นี้แล้ว');
+        }
         $criteria = Criteria::find($id)->update([
             'name' => $request->criteria,
         ]);
         return redirect()->route('setting.admin.assessment.criteria')->withSuccess('แก้ไขรายการสำเร็จ');
     }
     public function Delete($id){
+        $check = CriteriaTransaction::where('criteria_id',$id)->first();
+        if(!empty($check)){
+            return redirect()->route('setting.admin.assessment.criteria')->withError('ผิดพลาดมีการใช้ Criteria นี้แล้ว');
+        }
         Criteria::find($id)->delete();
-        return redirect()->route('setting.admin.assessment.criteria')->withSuccess('แก้ไขรายการสำเร็จ');
+        return redirect()->route('setting.admin.assessment.criteria')->withSuccess('ลบรายการสำเร็จ');
     }
 }

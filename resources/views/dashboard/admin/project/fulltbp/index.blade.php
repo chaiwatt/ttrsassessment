@@ -264,7 +264,7 @@
                     <div class="card-body">
                         <input type="text" id="fulltbpid"  hidden>
                         <div class="table-responsive" style="min-height: 230px">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-striped" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
@@ -472,5 +472,20 @@
 			toolbar: false,
             height: 200,
 		});
+
+    $('#maintable').DataTable( {
+        "paging":   true,
+        "ordering": true,
+        "info":     false,
+        "pageLength" : 20,
+        "language": {
+            "search": "ค้นหา: ",  
+            "sLengthMenu": "จำนวน _MENU_ รายการ",
+            'paginate': {
+                'previous': 'ก่อนหน้า',
+                'next': 'ถัดไป'
+            }
+        }
+    });
     </script>
 @stop

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Model\SubPillarIndex;
 use App\Model\Pillar;
 use App\Model\SubPillar;
 use Illuminate\Http\Request;
+use App\Model\SubPillarIndex;
+use App\Model\CriteriaTransaction;
 
 class SettingAdminAssessmentSubPillarIndexController extends Controller
 {
@@ -33,6 +34,11 @@ class SettingAdminAssessmentSubPillarIndexController extends Controller
                                                                 ->withSubpillarindex($subpillarindex);
     }
     public function EditSave(Request $request,$id){
+        $check = CriteriaTransaction::where('sub_pillar_id',$id)->first();
+        if(!empty($check)){
+            return redirect()->route('setting.admin.assessment.subpillarindex')->withError('ผิดพลาดมีการใช้ Sub Pillar นี้แล้ว');
+        }
+
         SubPillarIndex::find($id)->update([
             'sub_pillar_id' => $request->subpillar,
             'name' => $request->subpillarindex
@@ -40,6 +46,10 @@ class SettingAdminAssessmentSubPillarIndexController extends Controller
         return redirect()->route('setting.admin.assessment.subpillarindex')->withSuccess('แก้ไขรายการสำเร็จ');
     }
     public function Delete($id){
+        $check = CriteriaTransaction::where('sub_pillar_id',$id)->first();
+        if(!empty($check)){
+            return redirect()->route('setting.admin.assessment.subpillarindex')->withError('ผิดพลาดมีการใช้ Sub Pillar นี้แล้ว');
+        }
         SubPillarIndex::find($id)->delete();
         return redirect()->route('setting.admin.assessment.subpillarindex')->withSuccess('ลบรายการสำเร็จ');
     }

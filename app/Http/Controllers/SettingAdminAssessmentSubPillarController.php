@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Pillar;
 use App\Model\SubPillar;
 use Illuminate\Http\Request;
+use App\Model\CriteriaTransaction;
 
 class SettingAdminAssessmentSubPillarController extends Controller
 {
@@ -30,6 +31,10 @@ class SettingAdminAssessmentSubPillarController extends Controller
                                                               ->withPillars($pillars);
     }
     public function EditSave(Request $request,$id){
+        $check = CriteriaTransaction::where('pillar_id',$id)->first();
+        if(!empty($check)){
+            return redirect()->route('setting.admin.assessment.subpillar')->withError('ผิดพลาดมีการใช้ Pillar นี้แล้ว');
+        }
         $pillars = Pillar::get();
         $subpillar = SubPillar::find($id)->update([
             'pillar_id' =>$request->pillarid,
@@ -40,6 +45,10 @@ class SettingAdminAssessmentSubPillarController extends Controller
                                                                       ->withSuccess('แก้ไข Sub Pillar สำเร็จ');
     }
     public function Delete($id){
+        $check = CriteriaTransaction::where('pillar_id',$id)->first();
+        if(!empty($check)){
+            return redirect()->route('setting.admin.assessment.subpillar')->withError('ผิดพลาดมีการใช้ Pillar นี้แล้ว');
+        }
         $subpillar = SubPillar::find($id)->delete();
         return redirect()->route('setting.admin.assessment.subpillar')->withSubpillar($subpillar)
                                                                       ->withSuccess('ลบ Sub Pillar สำเร็จ');

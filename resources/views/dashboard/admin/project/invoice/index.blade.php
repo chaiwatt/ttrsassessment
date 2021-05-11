@@ -62,7 +62,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-striped" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>วันที่</th>
@@ -140,5 +140,20 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+
+    $('#maintable').DataTable( {
+        "paging":   true,
+        "ordering": true,
+        "info":     false,
+        "pageLength" : 20,
+        "language": {
+            "search": "ค้นหา: ",  
+            "sLengthMenu": "จำนวน _MENU_ รายการ",
+            'paginate': {
+                'previous': 'ก่อนหน้า',
+                'next': 'ถัดไป'
+            }
+        }
+    });
     </script>
 @stop

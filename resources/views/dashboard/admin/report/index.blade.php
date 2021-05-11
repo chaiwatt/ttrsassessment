@@ -630,7 +630,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" >
+                            <table class="table table-striped" id="maintable" >
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
@@ -1021,7 +1021,7 @@
         "paging":   true,
         "ordering": true,
         "info":     false,
-        "pageLength" : 50,
+        "pageLength" : 20,
         "language": {
             "search": "ค้นหา: ",  
             "sLengthMenu": "จำนวน _MENU_ รายการ",
@@ -1031,6 +1031,21 @@
             }
         }
     });
+
+    // $('#testtopictable').DataTable( {
+    //         "paging":   true,
+    //         "ordering": true,
+    //         "info":     false,
+    //         "pageLength" : 20,
+    //         "language": {
+    //             "search": "ค้นหา: ",  
+    //             "sLengthMenu": "จำนวน _MENU_ รายการ",
+    //             'paginate': {
+    //                 'previous': 'ก่อนหน้า',
+    //                 'next': 'ถัดไป'
+    //             }
+    //         }
+    //     });
 
     $(document).on('click', '.reject', function(e) {
         $('#btn_modal_expertreject_reason').data('id',$(this).data('id')); //setter
