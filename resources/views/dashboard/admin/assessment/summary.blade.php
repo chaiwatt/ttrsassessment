@@ -108,7 +108,7 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     {{-- <div class="card-header header-elements-sm-inline">
-                                        <h6 class="card-title" style="font-size:16px">เกรดแยกตาม Pillar</h6>
+                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
                                     </div> --}}
                                     <div class="card-body">
                                         <div class="row">

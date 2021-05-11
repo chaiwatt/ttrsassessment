@@ -77,7 +77,7 @@
 
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">สรุปคะแนนการประเมิน</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">สรุปคะแนนการประเมิน</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>

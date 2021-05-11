@@ -86,7 +86,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">โครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการ</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
@@ -147,7 +147,7 @@
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">ความก้าวหน้าโครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ความก้าวหน้าโครงการ</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -164,7 +164,7 @@
             <div class="col-md-7">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">TimeLine</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">TimeLine</h6>
                         <div class="header-elements">
 
                         </div>

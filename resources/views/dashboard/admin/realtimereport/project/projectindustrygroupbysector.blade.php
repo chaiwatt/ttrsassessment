@@ -38,7 +38,7 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">จำนวนโครงการตามประเภทอุตสาหกรรมในแต่ละภูมิภาค</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการตามประเภทอุตสาหกรรมในแต่ละภูมิภาค</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                             </a>
@@ -120,7 +120,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">จำนวนโครงการต่อการยื่น ปี2563</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการต่อการยื่น ปี2563</h6>
                         <div class="header-elements">
                             <a class="text-default font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
@@ -140,7 +140,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">ข้อมูลย้อนหลัง ปี2561-2563</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ข้อมูลย้อนหลัง ปี2561-2563</h6>
                         <div class="header-elements">
                             <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>

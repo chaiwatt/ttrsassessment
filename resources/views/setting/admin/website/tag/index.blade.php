@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px">ป้ายชื่อกำกับเพจ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ป้ายชื่อกำกับเพจ</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 

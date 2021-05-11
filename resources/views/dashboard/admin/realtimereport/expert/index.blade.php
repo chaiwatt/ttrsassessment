@@ -37,7 +37,7 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        {{-- <h6 class="card-title" style="font-size:16px">ช่วงเวลาโครงการ</h6> --}}
+                        {{-- <h6 class="card-title" style="font-size:16px;font-weight: bold">ช่วงเวลาโครงการ</h6> --}}
                         <div class="header-elements">
                             {{-- <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                             </a> --}}
