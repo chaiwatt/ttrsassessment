@@ -72,6 +72,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
+                                    @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 3)
                                     <tr>    
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td> 
@@ -101,6 +102,8 @@
                                             
                                         </td>
                                     </tr>
+                                    @endif
+                           
                                     @endforeach
                                 </tbody>
                             </table>      
