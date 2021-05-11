@@ -1017,23 +1017,24 @@
         branchid: "{{Auth::user()->branch_id}}"
     };
 
-    $('#maintable').DataTable( {
-        "paging":   true,
-        "ordering": true,
-        "info":     false,
-        "pageLength" : 20,
-        "language": {
-            "zeroRecords": " ",
-            "search": "ค้นหา: ",  
-            "sLengthMenu": "จำนวน _MENU_ รายการ",
-            'paginate': {
-                'previous': 'ก่อนหน้า',
-                'next': 'ถัดไป'
-            }
+    var countitemtable =  "{{$fulltbps->count()}}";
+        if (countitemtable >= 20) {
+            $('#maintable').DataTable( {
+                "paging":   true,
+                "ordering": true,
+                "info":     false,
+                "pageLength" : 20,
+                "language": {
+                    "zeroRecords": " ",
+                    "search": "ค้นหา: ",  
+                    "sLengthMenu": "จำนวน _MENU_ รายการ",
+                    'paginate': {
+                        'previous': 'ก่อนหน้า',
+                        'next': 'ถัดไป'
+                    }
+                }
+            });
         }
-    });
-
-
 
     $(document).on('click', '.reject', function(e) {
         $('#btn_modal_expertreject_reason').data('id',$(this).data('id')); //setter

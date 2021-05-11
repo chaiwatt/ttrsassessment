@@ -277,20 +277,25 @@
             })
         }
 
-    $('#maintable').DataTable( {
-        "paging":   true,
-        "ordering": true,
-        "info":     false,
-        "pageLength" : 20,
-        "language": {
-            "zeroRecords": " ",
-            "search": "ค้นหา: ",  
-            "sLengthMenu": "จำนวน _MENU_ รายการ",
-            'paginate': {
-                'previous': 'ก่อนหน้า',
-                'next': 'ถัดไป'
-            }
+        var countitemtable =  "{{$projectassignments->count()}}";
+        // console.log(countitemtable);
+        if (countitemtable >= 20) {
+            $('#maintable').DataTable( {
+                "paging":   true,
+                "ordering": true,
+                "info":     false,
+                "pageLength" : 20,
+                "language": {
+                    "zeroRecords": " ",
+                    "search": "ค้นหา: ",  
+                    "sLengthMenu": "จำนวน _MENU_ รายการ",
+                    'paginate': {
+                        'previous': 'ก่อนหน้า',
+                        'next': 'ถัดไป'
+                    }
+                }
+            }); 
         }
-    });
+
     </script>
 @stop
