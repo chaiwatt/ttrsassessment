@@ -213,7 +213,7 @@ h4{
     z-index: 4;
     border-color: rgb(52, 212, 119);
     /* animation-name: rotate-one; */
-    transform: rotate(113.2deg);
+    transform: rotate(0deg);
   }
   
   
@@ -227,7 +227,7 @@ h4{
   .chart-skills li:nth-child(1) span {
     top: -35px;
     left: -42px;
-    transform: rotate(-113.2deg);
+    transform: rotate(0deg);
   }
   
   
@@ -236,7 +236,7 @@ h4{
   
   @keyframes rotate-one {
     100% {
-      transform: rotate(113.2deg);
+      transform: rotate(0deg);
       /**
        * 62.94%	62.94/100 * 180 = 113.2
        */
@@ -326,7 +326,7 @@ h4{
     z-index: 4;
     border-color: rgb(204, 99, 1);
     /* animation-name: rotate-two; */
-    transform: rotate(131.6deg);
+    transform: rotate(0deg);
   }
   
   
@@ -340,7 +340,7 @@ h4{
   .chart-skills2 li:nth-child(1) span {
     top: -40px;
     left: -42px;
-    transform: rotate(-131.6deg);
+    transform: rotate(0deg);
   }
   
   
@@ -349,7 +349,7 @@ h4{
   
   @keyframes rotate-two {
     100% {
-      transform: rotate(131.6deg);
+      transform: rotate(0deg);
       /**
        * 62.94%	62.94/100 * 180 = 131.6
        */
@@ -436,7 +436,7 @@ h4{
     z-index: 4;
     border-color: rgb(0, 41, 128);
     /* animation-name: rotate-three; */
-     transform: rotate(152.5deg);
+     transform: rotate(0deg);
   }
   
   
@@ -450,7 +450,7 @@ h4{
   .chart-skills3 li:nth-child(1) span {
     top: -40px;
     left: -42px;
-    transform: rotate(-152.5deg);
+    transform: rotate(0deg);
   }
   
   
@@ -459,7 +459,7 @@ h4{
   
   @keyframes rotate-three {
     100% {
-      transform: rotate(152.5deg);
+      transform: rotate(0deg);
       /**
        * 84.76%	84.76/100 * 180 = 152.5
        */
@@ -546,7 +546,7 @@ h4{
     z-index: 4;
     border-color: rgb(0, 128, 79);
     /* animation-name: rotate-four; */
-    transform: rotate(169.7deg);
+    transform: rotate(0deg);
   }
   
   
@@ -560,7 +560,7 @@ h4{
   .chart-skills4 li:nth-child(1) span {
     top: -40px;
     left: -42px;
-    transform: rotate(-169.7deg);
+    transform: rotate(0deg);
   }
   
   
@@ -569,7 +569,7 @@ h4{
   
   @keyframes rotate-four {
     100% {
-      transform: rotate(169.7deg);
+      transform: rotate(0deg);
       /**
        * 94.31%	94.31/100 * 180 = 169.7
        */

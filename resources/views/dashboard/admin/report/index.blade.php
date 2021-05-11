@@ -308,32 +308,35 @@
                             </div>
                             <div class="col-md-9 l-40 none">
                               <div style="margin-top: 300px;"></div>
-                              <ul class="chart-skills">
-                                <li>
-                                  <span id="chartpillar4"></span>
-                                </li>
-                              </ul>
-                              <ul class="chart-skills2" style="margin-top:-230px"> 
-                                <li>
-                                    <span id="chartpillar3"></span>
-                                </li>
-                              </ul>
-                              <ul class="chart-skills3" style="margin-top:-286px"> 
-                                <li>
-                                    <span id="chartpillar2"></span>
-                                </li>
-                              </ul>
-                              <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
-                                <li>
-                                    <span id="chartpillar1"></span>
-                                </li>
-                              </ul>
-                              <div class="text-min"> 
+                              <div id="mainchart" hidden>
+                                <ul class="chart-skills">
+                                    <li>
+                                      <span id="chartpillar4"></span>
+                                    </li>
+                                  </ul>
+                                  <ul class="chart-skills2" style="margin-top:-230px"> 
+                                    <li>
+                                        <span id="chartpillar3"></span>
+                                    </li>
+                                  </ul>
+                                  <ul class="chart-skills3" style="margin-top:-286px"> 
+                                    <li>
+                                        <span id="chartpillar2"></span>
+                                    </li>
+                                  </ul>
+                                  <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                    <li>
+                                        <span id="chartpillar1"></span>
+                                    </li>
+                                  </ul>
+                              </div>
+
+                              {{-- <div class="text-min"> 
                                 min
                               </div>
                               <div class="text-max">
-                                max
-                              </div>
+                                max --}}
+                              {{-- </div> --}}
                             </div>
                             <div class="col-md-1">
                                   <table class="table-score table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
@@ -476,6 +479,17 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">เกรดแยกตาม Pillar</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_gradebypillar_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebypillar_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -488,6 +502,17 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">เกรดแยกตามขนาดธุรกิจ</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesssize_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesssize_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -502,6 +527,17 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">เกรดแยกตามภูมิภาค</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_gradebysector_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebysector_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -514,6 +550,17 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">เกรดแยกตามประเภทธุรกิจ</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesstype_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesstype_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -526,6 +573,17 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">เกรดแยกตามกลุ่มอุตสาหกรรม</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_gradebyindustry_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebyindustry_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -538,6 +596,17 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title">เกรดแยกตาม Isic</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_gradebyisic_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebyisic_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">

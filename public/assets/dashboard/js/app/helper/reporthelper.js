@@ -5,6 +5,8 @@ import * as Attendee from './eventcalendarattendee.js';
        var  gradedata = null;
        var  industrygroupdata = null;
        var  objectivedata = null;
+       var globaldata = null;
+       
        var  participatelegend = [
             'Mimi TBP',
             'Full TBP',
@@ -125,13 +127,15 @@ import * as Attendee from './eventcalendarattendee.js';
             }).catch(error => {})
 
             getRadarChartData().then(data => {
-                callUpdateChart(data);
-                callGenRadarGradeByPillar(data);
-                callGenRadarByBusinessSize(data);
-                callGenRadarBySector(data);
-                callGenRadarByBusinessType(data);
-                callGenRadarByIndustryGroup(data);
-                callGenRadarByIsic(data);
+                globaldata = data;
+                callUpdateChart(globaldata);
+                callGenRadarGradeByPillar(globaldata);
+                callGenRadarByBusinessSize(globaldata);
+                callGenRadarBySector(globaldata);
+                callGenRadarByBusinessType(globaldata);
+                callGenRadarByIndustryGroup(globaldata);
+                callGenRadarByIsic(globaldata);
+               
                 // topLeftChart(data,"myChart");
             }).catch(error => {})
 
@@ -228,23 +232,57 @@ import * as Attendee from './eventcalendarattendee.js';
         var avrgrade = checkPillarGrade(avgpillar)
         topLeftChart(avgpillar,avrgrade);
 
-        $('#pillar1').html(pillar1 + '%');
+        // $('#pillar1').html(pillar1 + '%');
         $('#gradepillar1').html(checkPillarGrade(pillar1));
-        $('#chartpillar1').html(pillar1 + '%');
+        // $('#chartpillar1').html(pillar1 + '%');
+        // console.log(pillar1);
+        if(isNaN(pillar1)) {
+            pillar1 = 0;
+        }
+        if(isNaN(pillar2)) {
+            pillar2 = 0;
+        }
+        if(isNaN(pillar3)) {
+            pillar3 = 0;
+        }
+        if(isNaN(pillar4)) {
+            pillar4 = 0;
+        }
 
-        $('#pillar2').html(pillar2 + '%');
+        $('.chart-skills').find('span:nth-child(1)').text(`${pillar1}%`);
+        $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillar1*1.8}deg)`);
+        $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar1}deg)`);
+
+
+        // $('#pillar2').html(pillar2 + '%');
         $('#gradepillar2').html(checkPillarGrade(pillar2));
-        $('#chartpillar2').html(pillar2 + '%');
-        
-        $('#pillar3').html(pillar1 + '%');
+        // $('#chartpillar2').html(pillar2 + '%');
+
+
+        $('.chart-skills2').find('span:nth-child(1)').text(`${pillar2}%`);
+        $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillar2*1.8}deg)`);
+        $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar2}deg)`);    
+            
+        // $('#pillar3').html(pillar1 + '%');
         $('#gradepillar3').html(checkPillarGrade(pillar3));
-        $('#chartpillar3').html(pillar3 + '%');
+        // $('#chartpillar3').html(pillar3 + '%');
 
-        $('#pillar4').html(pillar4 + '%');
+        
+        $('.chart-skills3').find('span:nth-child(1)').text(`${pillar3}%`);
+        $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillar3*1.8}deg)`);
+        $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar3}deg)`);
+
+
         $('#gradepillar4').html(checkPillarGrade(pillar4));
-        $('#chartpillar4').html(pillar4 + '%');
+        // $('#chartpillar4').html(pillar4 + '%');
+        // $('#pillar4').html(pillar4 + '%');
 
+        $('.chart-skills4').find('span:nth-child(1)').text(`${pillar4}%`);
+        $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillar4*1.8}deg)`);
+        $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar4}deg)`);
 
+        
+        $("#mainchart").attr("hidden",false);
     }
 
  
@@ -497,15 +535,6 @@ $(document).on('click', '#project_grade_pie', function(e) {
 });
 
 
-
-
-// callGenRadarBySector();
-// callGenRadarByIndustryGroup();
-// callGenRadarByBusinessSize();
-// callGenRadarByBusinessType();
-// callGenRadarByIsic();
-
-
 function callGenRadarGradeByPillar(data){
     var numgrade = [];
     var gradedata = []
@@ -534,8 +563,27 @@ function callGenRadarGradeByPillar(data){
     genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebypillar');
 }
 
+function callBarGradeByPillar(data){
+
+    var gradedata = []
+    data.grades.forEach(function (grade,index) {
+        var pillararr = [];
+        var pillar1 = data.finalgrades.filter(x => x.pillar_id == 1 && x.grade == grade.name); 
+        var pillar2 = data.finalgrades.filter(x => x.pillar_id == 2 && x.grade == grade.name); 
+        var pillar3 = data.finalgrades.filter(x => x.pillar_id == 3 && x.grade == grade.name); 
+        var pillar4 = data.finalgrades.filter(x => x.pillar_id == 4 && x.grade == grade.name); 
+        pillararr = [pillar1.length,pillar2.length,pillar3.length,pillar4.length];
+        var tmp = {name: grade.name, type: 'bar', stack: 'single', data: pillararr};
+        gradedata.push(tmp);
+     });
+
+    var xaxis = ['Management', 'Technology', 'Marketability', 'Business Prospect']
+
+    genBar(xaxis ,gradedata , 'gradebypillar');
+}
+
+
 function callGenRadarByBusinessSize(data){
-console.log(data.projectgrades);
     var numgrade = [];
     var gradedata = []
     var rgbcolor = [ 'rgba(194, 53, 49, 0.2)', 'rgba(47, 69, 84, 0.2)', 'rgba(97, 160, 168, 0.2)', 'rgba(212, 130, 101, 0.2)', 'rgba(145, 199, 174, 0.2)', 'rgba(116, 159, 131, 0.2)', 'rgba(202, 134, 34, 0.2)','rgba(189, 162, 154, 0.2)', 'rgba(110, 112, 116, 0.2)', 'rgba(84, 101, 112, 0.2)','rgba(196, 204, 211, 0.2)'];
@@ -564,6 +612,24 @@ console.log(data.projectgrades);
     genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebybusinesssize');
 }
 
+function callGenBarByBusinessSize(data){
+    var gradedata = []
+    data.grades.forEach(function (grade,index) {
+        var businesssizearr = [];
+        var micro = data.projectgrades.filter(x => x.businesssize == 1 && x.grade == grade.name); 
+        var S = data.projectgrades.filter(x => x.businesssize == 2 && x.grade == grade.name); 
+        var M = data.projectgrades.filter(x => x.businesssize == 3 && x.grade == grade.name); 
+        var L = data.projectgrades.filter(x => x.businesssize == 4 && x.grade == grade.name); 
+        businesssizearr = [micro.length,S.length,M.length,L.length];
+
+        var tmp = {name: grade.name, type: 'bar', stack: 'single', data: businesssizearr};
+        gradedata.push(tmp);
+    });
+
+    var xaxis = ['micro', 'S', 'M', 'L']
+
+    genBar(xaxis ,gradedata , 'gradebybusinesssize');
+}
 
 function callGenRadarBySector(data){
     var numgrade = [];
@@ -596,6 +662,28 @@ function callGenRadarBySector(data){
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
     genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebysector');
+}
+
+function callGenBarBySector(data){
+    var gradedata = []
+    data.grades.forEach(function (grade,index) {
+        var sectorarr = [];
+        var sector1 = data.projectgrades.filter(x => x.sector == 1 && x.grade == grade.name); 
+        var sector2 = data.projectgrades.filter(x => x.sector == 2 && x.grade == grade.name); 
+        var sector3 = data.projectgrades.filter(x => x.sector == 3 && x.grade == grade.name); 
+        var sector4 = data.projectgrades.filter(x => x.sector == 4 && x.grade == grade.name); 
+        var sector5 = data.projectgrades.filter(x => x.sector == 5 && x.grade == grade.name); 
+        var sector6 = data.projectgrades.filter(x => x.sector == 6 && x.grade == grade.name); 
+        sectorarr = [sector1.length,sector2.length,sector3.length,sector4.length,sector5.length,sector6.length];
+
+        var tmp = {name: grade.name, type: 'bar', stack: 'single', data: sectorarr};
+        gradedata.push(tmp);
+  
+    });
+
+    var xaxis = ['เหนือ', 'กลาง', 'ตะวันออก', 'ตะวันตก', 'ตะวันออกเฉียงเหนือ', 'ใต้']
+
+    genBar(xaxis ,gradedata , 'gradebysector');
 }
 
 function callGenRadarByBusinessType(data){
@@ -631,6 +719,26 @@ function callGenRadarByBusinessType(data){
     genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebybusinesstype');
 }
 
+function callGenBarByBusinessType(data){
+    var gradedata = []
+    data.grades.forEach(function (grade,index) {
+        var businesstypearr = [];
+        var businesstype1 = data.projectgrades.filter(x => x.businesstype == 1 && x.grade == grade.name); 
+        var businesstype2 = data.projectgrades.filter(x => x.businesstype == 2 && x.grade == grade.name); 
+        var businesstype3 = data.projectgrades.filter(x => x.businesstype == 3 && x.grade == grade.name); 
+        var businesstype4 = data.projectgrades.filter(x => x.businesstype == 4 && x.grade == grade.name); 
+        var businesstype5 = data.projectgrades.filter(x => x.businesstype == 5 && x.grade == grade.name); 
+        var businesstype6 = data.projectgrades.filter(x => x.businesstype == 6 && x.grade == grade.name); 
+        businesstypearr = [businesstype1.length,businesstype2.length,businesstype3.length,businesstype4.length,businesstype5.length,businesstype6.length];
+        var tmp = {name: grade.name, type: 'bar', stack: 'single', data: businesstypearr};
+        gradedata.push(tmp);
+  
+    });
+
+    var xaxis = ['บริษัทมหาชน', 'บริษัทจำกัด', 'ห้างหุ้นส่วนจำกัด', 'ห้างหุ้นส่วนสามัญ', 'กิจการเจ้าของคนเดียว', 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ']
+
+    genBar(xaxis ,gradedata , 'gradebybusinesstype');
+}
 
 function callGenRadarByIndustryGroup(data){
     var numgrade = [];
@@ -680,6 +788,37 @@ function callGenRadarByIndustryGroup(data){
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
 
     genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebyindustry');
+}
+
+function callGenBarByIndustryGroup(data){
+    var gradedata = []
+    data.grades.forEach(function (grade,index) {
+        var industrygrouparr = [];
+        var industrygroup1 = data.projectgrades.filter(x => x.industrygroup == 1 && x.grade == grade.name); 
+        var industrygroup2 = data.projectgrades.filter(x => x.industrygroup == 2 && x.grade == grade.name); 
+        var industrygroup3 = data.projectgrades.filter(x => x.industrygroup == 3 && x.grade == grade.name); 
+        var industrygroup4 = data.projectgrades.filter(x => x.industrygroup == 4 && x.grade == grade.name); 
+        var industrygroup5 = data.projectgrades.filter(x => x.industrygroup == 5 && x.grade == grade.name); 
+        var industrygroup6 = data.projectgrades.filter(x => x.industrygroup == 6 && x.grade == grade.name); 
+        var industrygroup7 = data.projectgrades.filter(x => x.industrygroup == 7 && x.grade == grade.name); 
+        var industrygroup8 = data.projectgrades.filter(x => x.industrygroup == 8 && x.grade == grade.name); 
+        var industrygroup9 = data.projectgrades.filter(x => x.industrygroup == 9 && x.grade == grade.name); 
+        var industrygroup10 = data.projectgrades.filter(x => x.industrygroup == 10 && x.grade == grade.name); 
+        var industrygroup11 = data.projectgrades.filter(x => x.industrygroup == 11 && x.grade == grade.name); 
+        var industrygroup12 = data.projectgrades.filter(x => x.industrygroup == 12 && x.grade == grade.name); 
+        var industrygroup13 = data.projectgrades.filter(x => x.industrygroup == 13 && x.grade == grade.name); 
+        industrygrouparr = [industrygroup1.length,industrygroup2.length,industrygroup3.length,industrygroup4.length,industrygroup5.length,industrygroup6.length
+        ,industrygroup7.length,industrygroup8.length,industrygroup9.length,industrygroup10.length,industrygroup11.length,industrygroup12.length,industrygroup13.length];
+
+        var tmp = {name: grade.name, type: 'bar', stack: 'single', data: industrygrouparr};
+        gradedata.push(tmp);
+  
+    });
+
+    var xaxis = ['Next-generation Automotive', 'Smart Electronics', 'Affluent, Medical and Wellness Tourism', 'Agriculture and Biotechnology', 'Food for the Future', 'Robotics',
+'Aviation and Logistics','Biofuels and Biochemicals','Digital','Medical Hub','Defense','Education and Skill Development','Other']
+
+    genBar(xaxis ,gradedata , 'gradebyindustry');
 }
 
 function callGenRadarByIsic(data){
@@ -748,14 +887,55 @@ function callGenRadarByIsic(data){
     genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebyisic');
 }
 
-//  genRadar('radar','scorebypillar');
-//  genRadar('radar','gradebyindustry');
-//  genRadar('radar','gradebybusinesssize');
-//  genRadar('radar','gradebysector');
-//  genRadar('radar','gradebybusinesstype');
+function callGenBarByIsic(data){
+    var gradedata = []
+    data.grades.forEach(function (grade,index) {
+        var isicarray = [];
+        var isic1 = data.projectgrades.filter(x => x.isiccode == 1 && x.grade == grade.name); 
+        var isic2 = data.projectgrades.filter(x => x.isiccode == 2 && x.grade == grade.name); 
+        var isic3 = data.projectgrades.filter(x => x.isiccode == 3 && x.grade == grade.name); 
+        var isic4 = data.projectgrades.filter(x => x.isiccode == 4 && x.grade == grade.name); 
+        var isic5 = data.projectgrades.filter(x => x.isiccode == 5 && x.grade == grade.name); 
+        var isic6 = data.projectgrades.filter(x => x.isiccode == 6 && x.grade == grade.name); 
+        var isic7 = data.projectgrades.filter(x => x.isiccode == 7 && x.grade == grade.name); 
+        var isic8 = data.projectgrades.filter(x => x.isiccode == 8 && x.grade == grade.name); 
+        var isic9 = data.projectgrades.filter(x => x.isiccode == 9 && x.grade == grade.name); 
+        var isic10 = data.projectgrades.filter(x => x.isiccode == 10 && x.grade == grade.name); 
+        var isic11 = data.projectgrades.filter(x => x.isiccode == 11 && x.grade == grade.name); 
+        var isic12 = data.projectgrades.filter(x => x.isiccode == 12 && x.grade == grade.name); 
+        var isic13 = data.projectgrades.filter(x => x.isiccode == 13 && x.grade == grade.name); 
+        var isic14 = data.projectgrades.filter(x => x.isiccode == 14 && x.grade == grade.name);
+        var isic15 = data.projectgrades.filter(x => x.isiccode == 15 && x.grade == grade.name);
+        var isic16 = data.projectgrades.filter(x => x.isiccode == 16 && x.grade == grade.name);
+        var isic17 = data.projectgrades.filter(x => x.isiccode == 17 && x.grade == grade.name);
+        var isic18 = data.projectgrades.filter(x => x.isiccode == 18 && x.grade == grade.name);
+        var isic19 = data.projectgrades.filter(x => x.isiccode == 19 && x.grade == grade.name);
+        var isic20 = data.projectgrades.filter(x => x.isiccode == 20 && x.grade == grade.name);
+
+        isicarray = [isic1.length,isic2.length,isic3.length,isic4.length,isic5.length,isic6.length
+        ,isic7.length,isic8.length,isic9.length,isic10.length,isic11.length,isic12.length,isic13.length
+        ,isic14.length,isic15.length,isic16.length,isic17.length,isic18.length,isic19.length,isic20.length];
+
+        var tmp = {name: grade.name, type: 'bar', stack: 'single', data: isicarray};
+        gradedata.push(tmp);
+  
+    });
+
+    var xaxis = ['เกษตรกรรม การป่าไม้ และการประมง','การทำเหมืองแร่และเหมืองหิน','การผลิต','ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ','การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล',
+'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์','การขนส่งและสถานที่เก็บสินค้า','ที่พักแรมและบริการด้านอาหาร','ข้อมูลข่าวสารและการสื่อสาร','กิจกรรมทางการเงินและการประกันภัย','กิจกรรมอสังหาริมทรัพย์',
+'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค','กิจกรรมการบริหารและการบริการสนับสนุน','การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ','การศึกษา','กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์',
+'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเองเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
+
+    genBar(xaxis ,gradedata , 'gradebyisic');
+}
 
 function topLeftChart(_percent,grade){
-    // 
+    if(isNaN(_percent)) {
+        _percent = 0;
+    }
+    if( typeof grade === 'undefined' ) {
+        grade = "";
+    }
     var percent = parseInt(_percent);
     console.log(percent);
     var dom = document.getElementById('myChart');
@@ -815,9 +995,10 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
         },
         tooltip: {},
         legend: {
-           bottom: 0,
+           top: -5,
            type: 'scroll',
            orient: 'horizontal',
+           fontSize: 8,
            legend
         },
         radar: {
@@ -827,7 +1008,6 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
                     color: '#fff',
                     backgroundColor: '#999',
                     borderRadius: 3,
-                    // padding: [3, 5]
                 },
                 textStyle: {
                     fontSize: 16,
@@ -837,11 +1017,56 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
             indicator: indicator
         },
         series: [{
-            // name: '预算 vs 开销（Budget vs spending）',
             type: charttype,
             areaStyle: {normal: {}},
             data: data
         }]
+    };
+
+    if (option && typeof option === "object") {
+        echart.setOption(option, true);
+    }
+
+}
+
+
+ function genBar(xaxis,data,eleid){
+    var dom = document.getElementById(eleid);
+    var echart = echarts.init(dom);
+    echart.clear();
+    var option = null;
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 
+                type: 'shadow'        // 'line' | 'shadow'
+            }
+        },
+        legend: {
+            top: -5,
+            type: 'scroll',
+            data: ['AAA', 'AA', 'A', 'BBB', 'BB', 'B', 'CCC', 'CC', 'C', 'D', 'E'],
+            selected:{'AAA':true, 'AA':true,'A':true, 'BBB':true,'BB':true,'B':true, 'CCC':true,'CC':true, 'C':true,'D':true, 'E':true},
+            
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: xaxis,
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: data
     };
 
     if (option && typeof option === "object") {
@@ -1026,6 +1251,54 @@ function downloadNumProject() {
         })
     })
 }
+
+$(document).on('click', '#select_gradebypillar_pie', function(e) {
+    callGenRadarGradeByPillar(globaldata);
+});
+
+$(document).on('click', '#select_gradebypillar_bar', function(e) {
+    callBarGradeByPillar(globaldata);
+});
+
+$(document).on('click', '#select_gradebybusinesssize_pie', function(e) {
+    callGenRadarByBusinessSize(globaldata);
+});
+
+$(document).on('click', '#select_gradebybusinesssize_bar', function(e) {
+    callGenBarByBusinessSize(globaldata);
+});
+
+$(document).on('click', '#select_gradebysector_pie', function(e) {
+    callGenRadarBySector(globaldata);
+});
+
+$(document).on('click', '#select_gradebysector_bar', function(e) {
+    callGenBarBySector(globaldata);
+});
+
+$(document).on('click', '#select_gradebybusinesstype_pie', function(e) {
+    callGenRadarByBusinessType(globaldata);
+});
+
+$(document).on('click', '#select_gradebybusinesstype_bar', function(e) {
+    callGenBarByBusinessType(globaldata);
+});
+
+$(document).on('click', '#select_gradebyindustry_pie', function(e) {
+    callGenRadarByIndustryGroup(globaldata);
+});
+
+$(document).on('click', '#select_gradebyindustry_bar', function(e) {
+    callGenBarByIndustryGroup(globaldata);
+});
+
+$(document).on('click', '#select_gradebyisic_pie', function(e) {
+    callGenRadarByIsic(globaldata);
+});
+
+$(document).on('click', '#select_gradebyisic_bar', function(e) {
+    callGenBarByIsic(globaldata);
+});
 
 $(document).on('click', '#project_industry_pie', function(e) {
     genNumProject('pie',industrygroupdata,industrygrouplegend,'กลุ่มอุตสาหกรรม ' + $('#currentyear').html(),'จำนวนโครงการตามกลุ่มอุตสาหกรรม ' + $('#currentyear').html(),'industrygroup_chart','center');
