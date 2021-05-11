@@ -162,7 +162,7 @@ $('.steps-basic').steps({
                 $.contextMenu({
                     selector: '.context-menu-one', 
                     callback: function(key, options) {
-                        var m = "clicked: " + key;
+                        //var m = "clicked: " + key;
                         if(key == 'add'){
                             $("#parent").html($( "#pillar option:selected" ).text());
                             $('#modal_additem').modal('show');
