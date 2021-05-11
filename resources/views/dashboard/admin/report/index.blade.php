@@ -237,7 +237,7 @@
                 </div>
             @endforeach
         </div>
-        @if (Auth::user()->user_type_id > 5)
+        @if (Auth::user()->user_type_id >= 5)
         <div class="row">
             <div class="col-lg-3">
                 <div class="card bg-teal-400">
