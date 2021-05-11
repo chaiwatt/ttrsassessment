@@ -634,11 +634,11 @@
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
-                                        <th>สถานะ</th>
                                         <th>วันนัดประชุมก่อนลงพื้นที่</th>
                                         <th>วันที่ประเมิน</th>
                                         <th>วันที่สรุปผลประเมิน</th>
-                                        <th>เพิ่มเติม</th>
+                                        <th>เข้าร่วม(เฉพาะผู้เชี่ยวชาญ)</th>
+                                        <th>สถานะ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -661,14 +661,7 @@
                                                                 {{$fulltbp->minitbp->project}}
                                                             @endif
                                                     @endif          
-                                                </td>  
-                                                <td> 
-                                                    @if ($fulltbp->status == 3)
-                                                            <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                                        @else
-                                                        <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                                    @endif
-                                                </td>  
+                                                </td>   
                                                 <td> {{$fulltbp->briefingdate}} </td>  
                                                 <td> {{$fulltbp->assessmentdate}} </td>  
                                                 <td> {{$fulltbp->finalassessmentdate}} </td>  
@@ -680,6 +673,13 @@
                                                             @elseif($fulltbp->expertassignment->accepted == 2)
                                                                 <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
                                                         @endif
+                                                    @endif
+                                                </td> 
+                                                <td> 
+                                                    @if ($fulltbp->status == 3)
+                                                            <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                                        @else
+                                                        <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                     @endif
                                                 </td> 
                                             </tr>
