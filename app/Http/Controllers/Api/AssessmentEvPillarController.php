@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Model\Ev;
 use App\Model\Pillar;
 use Illuminate\Http\Request;
+use App\Model\PillaIndexWeigth;
 use App\Model\CriteriaTransaction;
 use App\Http\Controllers\Controller;
 
@@ -23,6 +24,11 @@ class AssessmentEvPillarController extends Controller
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
                                                 ->get();
+
+        PillaIndexWeigth::where('ev_id',$request->evid)
+                                                ->where('pillar_id',$request->pillarid)
+                                                ->delete();                                                  
+
         return response()->json($criteriatransactions); 
     }
 

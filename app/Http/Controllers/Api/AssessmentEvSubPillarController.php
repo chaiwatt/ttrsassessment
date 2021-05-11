@@ -53,6 +53,12 @@ class AssessmentEvSubPillarController extends Controller
                                                 ->orderBy('sub_pillar_id', 'asc')
                                                 ->orderBy('sub_pillar_index_id', 'asc')
                                                 ->get();
+
+        PillaIndexWeigth::where('ev_id',$request->evid)
+                    ->where('pillar_id',$request->pillarid)
+                    ->where('sub_pillar_id',$request->subpillarid)
+                    ->delete();  
+
         return response()->json($criteriatransactions); 
     }
     public function DeleteSubPillarIndex(Request $request){

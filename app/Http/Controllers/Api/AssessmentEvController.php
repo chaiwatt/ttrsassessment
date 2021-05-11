@@ -154,6 +154,7 @@ class AssessmentEvController extends Controller
                                         ->orderBy('sub_pillar_id', 'asc')
                                         ->orderBy('sub_pillar_index_id', 'asc')
                                         ->get()->makeHidden('pillar')->makeHidden('subpillar')->makeHidden('subpillarindex');
+        
         $check_list = CriteriaTransaction::where('ev_id',$request->evid)
             ->where('index_type_id',2)
             ->where('pillar_id',$pillar->id)
@@ -179,6 +180,8 @@ class AssessmentEvController extends Controller
                                     ->where('sub_pillar_id',$subpillar->id)
                                     ->where('sub_pillar_index_id',$request->subpillarindex)
                                     ->first();
+
+
         if(Empty($check)){
             $check_list = CriteriaTransaction::where('ev_id',$request->evid)
                                     ->where('index_type_id',2)
@@ -204,6 +207,7 @@ class AssessmentEvController extends Controller
         }
 
         $pillaindexweigth = PillaIndexWeigth::where('ev_id',$request->evid)->where('sub_pillar_index_id',$request->subpillarindex)->first();
+
         if(Empty($pillaindexweigth)){
             $pillaindexweigth = new PillaIndexWeigth();
             $pillaindexweigth->ev_id = $request->evid;
