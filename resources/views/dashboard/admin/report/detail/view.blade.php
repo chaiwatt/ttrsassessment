@@ -150,7 +150,7 @@
                                                     
                                                 </td>  
                                                 <td>
-                                                    <a type="button" href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
+                                                    <a  href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
                                                 </td>                                       
                                             </tr> 
                                         @endif 
@@ -232,7 +232,7 @@
                                                     </td>    
                                                     <td>
                                                         @if (@$company->businessplan->minitbp->fulltbp->ev->status >= 4)
-                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$company->businessplan->minitbp->fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
+                                                        <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$company->businessplan->minitbp->fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
                                                         @else
                                                         
                                                         <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
