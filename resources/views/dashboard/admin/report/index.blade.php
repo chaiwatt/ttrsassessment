@@ -486,6 +486,7 @@
                                     <div class="dropdown-menu">
                                         <a href="#" data-toggle="modal" id="select_gradebypillar_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebypillar_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebypillar_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
                                     </div>
                                 </div>
                             </div>
@@ -509,6 +510,7 @@
                                     <div class="dropdown-menu">
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesssize_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesssize_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesssize_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
                                     </div>
                                 </div>
                             </div>
@@ -534,6 +536,7 @@
                                     <div class="dropdown-menu">
                                         <a href="#" data-toggle="modal" id="select_gradebysector_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebysector_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebysector_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
                                     </div>
                                 </div>
                             </div>
@@ -557,6 +560,7 @@
                                     <div class="dropdown-menu">
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesstype_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesstype_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesstype_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
                                     </div>
                                 </div>
                             </div>
@@ -580,6 +584,7 @@
                                     <div class="dropdown-menu">
                                         <a href="#" data-toggle="modal" id="select_gradebyindustry_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebyindustry_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebyindustry_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
                                     </div>
                                 </div>
                             </div>
@@ -603,6 +608,7 @@
                                     <div class="dropdown-menu">
                                         <a href="#" data-toggle="modal" id="select_gradebyisic_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebyisic_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebyisic_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
                                     </div>
                                 </div>
                             </div>

@@ -376,7 +376,6 @@
                                                                 @else
                                                                     <span class="badge badge-flat border-info text-info-600">ยังไม่ได้เพิ่ม</span>
                                                             @endif
-                                                            
                                                     @endif
                                                 </td>  
                                                 <td>
@@ -388,7 +387,6 @@
                                                                         <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ยืนยันการลงพื้นที่</span>
                                                                     @endif
                                                                 @else
-                                                                {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id}} --}}
 
                                                                 @if (Auth::user()->user_type_id == 4)
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
