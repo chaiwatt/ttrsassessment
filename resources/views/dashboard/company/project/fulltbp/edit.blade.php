@@ -1706,7 +1706,7 @@
 																						<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
 																						<td> 
 																							<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-																							<a type="button" data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+																							<a  data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcompanyprofileattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
 																				@endforeach                            
@@ -1756,8 +1756,8 @@
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
 																				<td > 
-																					<a type="button" data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																					<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy hiddenelement">ลบ</a> 
+																					<a  data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
+																					<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy hiddenelement">ลบ</a> 
 																				</td> 
 																			</tr>
 																		@endforeach                            
@@ -1784,7 +1784,7 @@
 																				<tr >                                        
 																					<td> {{$companystockholder->name}}</td> 
 																					<td> {{$companystockholder->ceorelation}} </td> 
-																					<td class="hiddenelement"> <a type="button" data-id="{{$companystockholder->id}}" class="btn btn-sm bg-danger hiddenelement deletestockholder">ลบ</a> </td> 
+																					<td class="hiddenelement"> <a  data-id="{{$companystockholder->id}}" class="btn btn-sm bg-danger hiddenelement deletestockholder">ลบ</a> </td> 
 																				</tr>
 																			@endforeach                            
 																		</tbody>
@@ -1819,8 +1819,8 @@
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
 																					<td >  
-																						<a type="button" data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
+																						<a  data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
+																						<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
 																					</td> 
 																				</tr>
 																			@endforeach                            
@@ -1852,8 +1852,8 @@
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
 																					<td class="hiddenelement"> 
-																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																						<a type="button" data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_projectmember">ลบ</a> 
+																						<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
+																						<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_projectmember">ลบ</a> 
 																					</td> 
 																				</tr>
 																			@endforeach                            
@@ -2045,7 +2045,7 @@
 																					<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
-																					<td> <a type="button" data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-danger hiddenelement deleteprojectechdevlevel">ลบ</a> </td> 
+																					<td> <a  data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-danger hiddenelement deleteprojectechdevlevel">ลบ</a> </td> 
 																				</tr>
 																			@endforeach                            
 																		</tbody>
@@ -2262,7 +2262,7 @@
 																							<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
 																							<td> 
 																								<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-																								<a type="button" data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcertifyattachment">ลบ</a>                                       
+																								<a  data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcertifyattachment">ลบ</a>                                       
 																							</td>
 																						</tr>
 																					@endforeach                            
@@ -2298,7 +2298,7 @@
 																						<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
 																						<td> 
 																							<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-																							<a type="button" data-id="{{$fulltbpprojectawardattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpawardattachment">ลบ</a>                                       
+																							<a  data-id="{{$fulltbpprojectawardattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpawardattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
 																				@endforeach                            
@@ -2338,7 +2338,7 @@
 																						<td> {{$fulltbpprojectstandard->name}} </td>                                            
 																						<td> 
 																							<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-																							<a type="button" data-id="{{$fulltbpprojectstandard->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpstandardattachment">ลบ</a>                                       
+																							<a  data-id="{{$fulltbpprojectstandard->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpstandardattachment">ลบ</a>                                       
 																						</td>
 																					</tr>
 																				@endforeach                            
@@ -2440,8 +2440,8 @@
 																							@endphp
 																						@endfor															
 																						<td class="hiddenelement" style="width:180px"> 
-																							<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-																							<a type="button" data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a> 
+																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a> 
 																						</td> 
 																					</tr>
 																				@endforeach                            
@@ -2522,7 +2522,7 @@
 																				<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
 																				<td> 
 																					<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-																					<a type="button" data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+																					<a  data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpmodelcanvasattachment">ลบ</a>                                       
 																				</td>
 																			</tr>
 																		@endforeach                            
@@ -2564,7 +2564,7 @@
 																					<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
 																					<td> 
 																						<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-																						<a type="button" data-id="{{$fullTbpmarketattachmentswot->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpswotattachment">ลบ</a>                                       
+																						<a  data-id="{{$fullTbpmarketattachmentswot->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpswotattachment">ลบ</a>                                       
 																					</td>
 																				</tr>
 																			@endforeach                            
@@ -2609,8 +2609,8 @@
 																					                                          															
 																				
 																					<td class="hiddenelement"> 
-																						<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
-																						<a type="button" data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning hiddenelement deletesell">ลบ</a> 
+																						<a  data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
+																						<a  data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning hiddenelement deletesell">ลบ</a> 
 																					</td> 
 																				</tr>
 																			@endforeach                            
@@ -2644,7 +2644,7 @@
 																					<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}} </td> 
 																					<td class="text-right"> {{number_format($fulltbpsellstatus->present, 2)}} </td> 
 																					<td class="hiddenelement"> 
-																						<a type="button" data-id="{{$fulltbpsellstatus->id}}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
+																						<a  data-id="{{$fulltbpsellstatus->id}}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
 																					</td> 
 																				</tr>
 																			@endforeach                            
@@ -2685,8 +2685,8 @@
 																					<td class="text-right"> {{$fulltbpdebtpartner->percenttosale}} </td> 
 																					<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
 																					<td class="hiddenelement"> 
-																						<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
-																						<a type="button" data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletedebtpartner">ลบ</a> 
+																						<a  data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
+																						<a  data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletedebtpartner">ลบ</a> 
 																					</td> 
 																				</tr>
 																			@endforeach              
@@ -2720,8 +2720,8 @@
 																					<td class="text-right"> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
 																					<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
 																					<td class="hiddenelement"> 
-																						<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
-																						<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletecreditpartner">ลบ</a> 
+																						<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
+																						<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning hiddenelement deletecreditpartner">ลบ</a> 
 																					</td> 
 																				</tr>
 																			@endforeach              
@@ -2785,7 +2785,7 @@
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
 																			<td> {{$fulltbpasset->specification}} </td> 
 																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
+																				<a  data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
 																			</td> 
 																		</tr>
 																	@endforeach              
@@ -2813,7 +2813,7 @@
 																			<td> {{$fulltbpinvestment->investment}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpinvestment->cost, 2)}}</td> 
 																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpinvestment->id}}" class="btn btn-sm bg-info editinvestment">แก้ไข</a>
+																				<a  data-id="{{$fulltbpinvestment->id}}" class="btn btn-sm bg-info editinvestment">แก้ไข</a>
 																			</td> 
 																		</tr>
 																	@endforeach              
@@ -2844,7 +2844,7 @@
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->approved), 2)}}</td> 
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->plan), 2)}}</td> 
 																			<td class="hiddenelement"> 
-																				<a type="button" data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">แก้ไข</a>
+																				<a  data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">แก้ไข</a>
 																			</td> 
 																		</tr>
 																	@endforeach              

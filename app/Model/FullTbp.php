@@ -311,6 +311,16 @@ class FullTbp extends Model
         }
     } 
 
+    public function getIsEvaluationResultReadyAttribute(){
+        $evaluationresult = EvaluationResult::where('full_tbp_id',$fulltbpid)->first();
+        if(!empty($evaluationresult->management) && !empty($evaluationresult->technoandinnovation) && !empty($evaluationresult->marketability) && !empty($evaluationresult->businessprospect)){
+            return 1;
+        }else{
+            return 0;
+        }   
+        return ExpertComment::where('full_tbp_id',$fulltbpid)->count();
+    }
+
 }
 
 

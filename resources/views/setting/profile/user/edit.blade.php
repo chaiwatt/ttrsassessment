@@ -991,7 +991,7 @@
 																	<td> {{$companyaddress->province->name}}</td>   
 																	<td> {{$companyaddress->postalcode}}</td>   
 																	<td> 
-																		<a type="button" data-id="{{$companyaddress->id}}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>
+																		<a  data-id="{{$companyaddress->id}}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>
 																	</td>   
 																</tr>	
 															@endif
@@ -1006,7 +1006,7 @@
 									<div class="form-group">
 										<input type="text" name="authorizeddirector" id="authorizeddirector" value="{{$authorizeddirectors->count()}}" hidden >
 										<label for="">รายชื่อกรรมการ/ผู้มีอำนาจลงนาม<span class="text-danger">*</span></label>
-										<a href="#" type="button" id="btn_add_authorized_director" data-toggle="modal" class="text-primary" >คลิกเพิ่ม</a>
+										<a href="#" id="btn_add_authorized_director" data-toggle="modal" class="text-primary" >คลิกเพิ่ม</a>
 										<div class="table-responsive">
 											<table class="table table-bordered table-striped">
 												<thead>
@@ -1044,8 +1044,8 @@
 															@endif  
 														</td>   
 														<td> 
-															<a type="button" data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>                                       
-															<a type="button" data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
+															<a  data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>                                       
+															<a  data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
 														</td>
 													</tr>
 													@endforeach
@@ -1075,7 +1075,7 @@
 															<td> {{$fulltbpcompanydoc->name}}</td>                                            
 															<td> 
 																<a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
-																<a type="button" data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+																<a  data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
 															</td>
 														</tr>
 														@endforeach

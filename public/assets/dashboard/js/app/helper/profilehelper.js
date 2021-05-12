@@ -47,7 +47,7 @@ $(document).on("click","#btn_modal_expertexpience",function(e){
     <td> ${$('#expertexpienceposition').val()}</td>  
     <td> ${$('#fromyear').val()}</td>  
     <td> ${$('#toyear').val()}</td>    
-    <td> <a type="button" data-id="expertexpienceclass${a}"  class="btn btn-danger-400 btn-sm deleteexpertexpienceclass" ><i class="icon-trash danger"></i></a></td>
+    <td> <a  data-id="expertexpienceclass${a}"  class="btn btn-danger-400 btn-sm deleteexpertexpienceclass" ><i class="icon-trash danger"></i></a></td>
     </tr>`;
     $('#expertexpience_wrapper_tr').append(tr);
 });
@@ -95,7 +95,7 @@ $(document).on("click","#btn_modal_experteducation",function(e){
     <td> ${$('#educationlevel').find(':selected').data('name')}</td>                                     
     <td> ${$('#educationbranch').find(':selected').data('name')}</td>  
     <td> ${$('#institute').val()}</td>  
-    <td> <a type="button" data-id="experteducationclass${b}"  class="btn btn-danger-400 btn-sm deleteexperteducationclass" ><i class="icon-trash danger"></i></a></td>
+    <td> <a  data-id="experteducationclass${b}"  class="btn btn-danger-400 btn-sm deleteexperteducationclass" ><i class="icon-trash danger"></i></a></td>
     </tr>`;
     $('#experteducation_wrapper_tr').append(tr);
 });
@@ -184,7 +184,7 @@ $(document).on("click","#deleteexpertexpienceclass_editview",function(e){
                                 <td>${expereince.fromyear}</td>                   
                                 <td>${expereince.toyear}</td> 
                                 <td>                                                                                                      
-                                <a type="button" data-id="${expereince['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexpertexpienceclass_editview" ><i class="icon-trash danger"></i></a>
+                                <a  data-id="${expereince['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexpertexpienceclass_editview" ><i class="icon-trash danger"></i></a>
                                 </td>
                             <tr>`
                     });
@@ -217,7 +217,7 @@ $(document).on("click","#deleteexperteducationclass_editview",function(e){
                                 <td>${education.educationbranch['name']}</td>
                                 <td>${education.institute}</td>          
                                 <td>                                                                                                      
-                                <a type="button" data-id="${education['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexperteducationclass_editview" ><i class="icon-trash danger"></i></a>
+                                <a  data-id="${education['id']}"  class="btn btn-danger-400 btn-sm" id="deleteexperteducationclass_editview" ><i class="icon-trash danger"></i></a>
                                 </td>
                             <tr>`
                     });
@@ -248,7 +248,7 @@ $(document).on("click","#btn_modal_user",function(e){
                         <td>${friendrequest.request.usertype['name']}</td>   
                         <td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td>                 
                         <td>                                                                                                      
-                        <a type="button" data-id="${friendrequest['id']}"  class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview" ><i class="icon-trash danger"></i></a>
+                        <a  data-id="${friendrequest['id']}"  class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview" ><i class="icon-trash danger"></i></a>
                         </td>
                     <tr>`
             });
@@ -282,7 +282,7 @@ $(document).on("click","#deleterequestfriendclass_editview",function(e){
                                 <td>${friendrequest.request.usertype['name']}</td>   
                                 <td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td>                 
                                 <td>                                                                                                      
-                                <a type="button" data-id="${friendrequest['id']}"  class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview" ><i class="icon-trash danger"></i></a>
+                                <a  data-id="${friendrequest['id']}"  class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview" ><i class="icon-trash danger"></i></a>
                                 </td>
                             <tr>`
                     });
@@ -305,8 +305,8 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
                         <td>${friendrequest.requestcoming.usertype['name']}</td>   
                         <td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td>                 
                         <td>                                                                                                      
-                            <a type="button" data-id="${friendrequest['id']}" class="btn btn-sm bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                                                        
-                            <a type="button" data-id="${friendrequest['id']}" class="btn btn-sm bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a> 
+                            <a  data-id="${friendrequest['id']}" class="btn btn-sm bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                                                        
+                            <a  data-id="${friendrequest['id']}" class="btn btn-sm bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a> 
                         </td>
                     <tr>`
             });
@@ -318,7 +318,7 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
                             <td>${friend.user['name']}  ${(friend.user['lastname'] == null) ? "" : friend.user['lastname']}</td>
                             <td>${friend.user.usertype['name']}</td>                 
                             <td>                                                                                                      
-                                <a type="button" data-id="${friend['id']}" class="btn btn-sm bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a>                                           
+                                <a  data-id="${friend['id']}" class="btn btn-sm bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a>                                           
                             </td>
                         <tr>`
                 });
@@ -354,7 +354,7 @@ $(document).on("click","#deletefriendclass_editview",function(e){
                                 <td>${friend.user['name']}  ${(friend.user['lastname'] == null) ? "" : friend.user['lastname']}</td>
                                 <td>${friend.user.usertype['name']}</td>                 
                                 <td>                                                                                                                                                                             
-                                    <a type="button" data-id="${friend['id']}" class="btn btn-sm bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
+                                    <a  data-id="${friend['id']}" class="btn btn-sm bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
                                 </td>
                             <tr>`
                     });
@@ -718,7 +718,7 @@ $(document).on("change","#companydoc",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -749,7 +749,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -797,8 +797,8 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
                     ${check}
                 </td>   
                 <td>
-                    <a type="button" data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
-                    <a type="button" data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
+                    <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
+                    <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                 </td> 
             </tr>`
             });
@@ -870,8 +870,8 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,sign
                             ${check}
                         </td>   
                         <td>
-                            <a type="button" data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
-                            <a type="button" data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
+                            <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
+                            <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                         </td> 
                     </tr>`
                     });
@@ -938,7 +938,7 @@ $(document).on('click', '#btn_modal_add_address', function(e) {
                 <td> ${address.amphur['name']} </td> 
                 <td> ${address.province['name']} </td> 
                 <td> ${address.postalcode} </td> 
-                <td><a type="button" data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
+                <td><a  data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
             </tr>`
             });
             if (data.length >= 1) {
@@ -974,7 +974,7 @@ $(document).on('click', '.deleteaddress', function(e) {
                         <td> ${address.amphur['name']} </td> 
                         <td> ${address.province['name']} </td> 
                         <td> ${address.postalcode} </td> 
-                        <td><a type="button" data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
+                        <td><a  data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
                     </tr>`
                     });
                     if (data.length >= 1) {
@@ -1187,8 +1187,8 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                         ${check}
                     </td>   
                     <td>
-                        <a type="button" data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
-                        <a type="button" data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
+                        <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
+                        <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                     </td> 
                 </tr>`
                 });

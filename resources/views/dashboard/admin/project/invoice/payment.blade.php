@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="text-right">
-                                    <a type="button" href="{{asset($invoicetransaction->attachment)}}" class="btn bg-primary" target="blank" >ดาวน์โหลดเอกสารแนบ<i class="icon-download ml-2"></i></a>
+                                    <a  href="{{asset($invoicetransaction->attachment)}}" class="btn bg-primary" target="blank" >ดาวน์โหลดเอกสารแนบ<i class="icon-download ml-2"></i></a>
                                     @if ($invoicetransaction->status == 2)
                                     <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">ตรวจสอบเอกสารการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
                                     @endif

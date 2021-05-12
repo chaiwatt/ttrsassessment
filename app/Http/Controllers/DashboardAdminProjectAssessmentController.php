@@ -48,13 +48,10 @@ class DashboardAdminProjectAssessmentController extends Controller
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
     }
-    public function Edit($id,$userid){
-  
-       
-        
+    public function Edit($id,$userid){  
         $fulltbp = FullTbp::find($id);
-        
-        
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businesspaln = BusinessPlan::find($minitbp->business_plan_id);
         $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
         $scoringstatus = ScoringStatus::where('ev_id',$ev->id)
                                     ->where('user_id',$userid)
@@ -69,9 +66,17 @@ class DashboardAdminProjectAssessmentController extends Controller
             ->withUser($user)
             ->withProjectgrade($projectgrade);
         }else{
-            Auth::logout();
-            Session::flush();
-            return redirect()->route('login');
+            if($businesspaln->business_plan_status_id >= 8 && Auth::user()->user_type_id > 5 ){
+                return view('dashboard.admin.project.assessment.edit')->withEv($ev)
+                ->withScoringstatus($scoringstatus)
+                ->withUser($user)
+                ->withProjectgrade($projectgrade);
+            }else{
+                Auth::logout();
+                Session::flush();
+                return redirect()->route('login');
+            }
+
         }                  
 
     }

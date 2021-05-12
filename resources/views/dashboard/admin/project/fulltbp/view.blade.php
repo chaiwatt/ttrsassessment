@@ -2224,7 +2224,7 @@
 																<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
 																<td> 
 																	<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-																	{{-- <a type="button" data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                        --}}
+																	{{-- <a  data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                        --}}
 																</td>
 															</tr>
 														@endforeach                            
@@ -2395,8 +2395,8 @@
 																<td class="text-right"> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}}</td> 
 																<td class="text-center"> {{$fulltbpcreditpartner->businessyear}} </td> 
 																{{-- <td> 
-																	<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
-																	<a type="button" data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 
+																	<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
+																	<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 
 																</td>  --}}
 															</tr>
 														@endforeach              

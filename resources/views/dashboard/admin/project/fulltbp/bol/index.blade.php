@@ -97,7 +97,7 @@
                                             <td> 
                                                 <a href="{{asset($bol->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                                                 @if (Auth::user()->user_type_id == 4)
-                                                <a type="button" data-id="{{$bol->id}}" class="btn btn-sm bg-danger deletebol">ลบ</a>  
+                                                <a  data-id="{{$bol->id}}" class="btn btn-sm bg-danger deletebol">ลบ</a>  
                                                 @endif
                                                                                      
                                             </td>                                

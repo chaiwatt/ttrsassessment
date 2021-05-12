@@ -164,8 +164,8 @@ function RenderExtraTable(data,scoring){
                 if(checkscore.comment){comment = checkscore.comment;}
             }
             html += `<tr > 
-            <td> ${criteriatransaction.extracategory['name']} <a href="#" type="button" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
-            <td> ${criteriatransaction.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
+            <td> ${criteriatransaction.extracategory['name']} <a href="#" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteriatransaction.extracriteria['name']} <a href="#" data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
                 <div class="form-group">
                         <label>กรอกคะแนน (0-5)</label>

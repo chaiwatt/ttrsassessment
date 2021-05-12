@@ -193,7 +193,7 @@
                                     @foreach ($expertassignments as $key => $expertassignment)
                                     <tr>    
                                         <td class='userid' data-id='{{$expertassignment->user->id}}'> 
-                                            <a type="button" class="text-info expertworkload" data-id="{{$expertassignment->user_id}}">{{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</a>
+                                            <a  class="text-info expertworkload" data-id="{{$expertassignment->user_id}}">{{$expertassignment->user->name}} {{$expertassignment->user->lastname}}</a>
                                         </td> 
                                         @if (Auth::user()->user_type_id == 6 )
                                             <td> <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$expertassignment->id}}" hidden></i><input type="checkbox" data-id="{{$expertassignment->id}}" class="form-check assignexpert" @if ($expertassignment->expert_assignment_status_id == 2) checked @endif></td> 

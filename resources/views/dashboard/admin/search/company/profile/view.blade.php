@@ -318,7 +318,7 @@
 																		<td> {{$companyaddress->province->name}}</td>   
 																		<td> {{$companyaddress->postalcode}}</td>   
 																		<td> 
-																			<a type="button" data-id="{{$companyaddress->id}}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>
+																			<a  data-id="{{$companyaddress->id}}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>
 																		</td>   
 																	</tr>	
 																@endif
@@ -348,7 +348,7 @@
 															<tr >                                        
 																<td> {{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}</td>                                            
 																{{-- <td> 
-																	<a type="button" data-id="{{$authorizeddirector->id}}" data-name="" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
+																	<a  data-id="{{$authorizeddirector->id}}" data-name="" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
 																</td> --}}
 															</tr>
 															@endforeach
@@ -380,7 +380,7 @@
 																<td> {{$fulltbpcompanydoc->name}}</td>                                            
 																<td> 
 																	<a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-																	{{-- <a type="button" data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                        --}}
+																	{{-- <a  data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                        --}}
 																</td>
 															</tr>
 															@endforeach
@@ -456,7 +456,7 @@
 															<td> {{$friend->user->name}}  {{$friend->user->lastname}} </td>    
 															<td> {{$friend->user->usertype->name}} </td> 
 															<td> 
-																<a type="button" data-id="{{$friend->id}}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
+																<a  data-id="{{$friend->id}}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
 															</td>
 														</tr>
 													@endforeach
@@ -488,7 +488,7 @@
 																	<td> {{$friendrequest->request->usertype->name}} </td> 
 																	<td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td> 
 																	<td> 
-																		<a type="button" data-id="{{$friendrequest->id}}" class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview"><i class="icon-trash danger"></i></a>
+																		<a  data-id="{{$friendrequest->id}}" class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview"><i class="icon-trash danger"></i></a>
 																	</td>
 																</tr>
 															@endforeach
@@ -522,8 +522,8 @@
 																	<td> {{$friendrequestcoming->requestcoming->usertype->name}} </td> 
 																	<td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td> 
 																	<td> 
-																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                       
-																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a>                                       
+																		<a  data-id="{{$friendrequestcoming->id}}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                       
+																		<a  data-id="{{$friendrequestcoming->id}}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a>                                       
 																	</td>
 																</tr>
 															@endforeach

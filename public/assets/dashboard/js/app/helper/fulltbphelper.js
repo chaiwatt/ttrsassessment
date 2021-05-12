@@ -50,7 +50,7 @@ $("#companygeneraldoc").on('change', function() {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+                            <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -87,7 +87,7 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
+                            <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -132,8 +132,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                        <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                     </tr>`
                  }
              }else if($('#employtype').val() == 'board'){
@@ -144,8 +144,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                        <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                     </tr>`
                  }
              }
@@ -203,8 +203,8 @@ $(document).on("click",".deletecompanyemploy",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                            <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                         </tr>`
                         }
                     });
@@ -243,7 +243,7 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
             if(educationlevel == 'อื่นๆ'){
                 educationlevel = education.otheremployeducationlevel;
             }
-            var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+            var deletecode = `<a data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -289,7 +289,7 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
     Employ.addEmployExperience($('#employid').val(),$('#employexperiencestartdate').val(),$('#employexperienceenddate').val(),$('#employexperiencecompany').val(),$('#employexperiencebusinesstype').val(),$('#employexperiencestartposition').val(),$('#employexperienceendposition').val()).then(data => {
         var html = '';
         data.forEach(function (experience,index) {
-            var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+            var deletecode = `<a data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -325,7 +325,7 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
     Employ.addEmployTraining($('#employid').val(),$('#employtrainingdate').val(),$('#employtrainingcourse').val(),$('#employtrainingowner').val()).then(data => {
         var html = '';
         data.forEach(function (training,index) {
-            var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+            var deletecode = `<a data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -377,7 +377,7 @@ $(document).on("click",".deleteemployeducation",function(e){
                 if(educationlevel == 'อื่นๆ'){
                     educationlevel = education.otheremployeducationlevel;
                 }
-                var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+                var deletecode = `<a data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
                 if( $("#fulltbpstatus").val() > 1){
                     deletecode = ``;
                 }
@@ -413,7 +413,7 @@ $(document).on("click",".deleteemployexperience",function(e){
             Employ.deleteEmployExperience($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (experience,index) {
-                    var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+                    var deletecode = `<a data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -450,7 +450,7 @@ $(document).on("click",".deleteemploytraining",function(e){
             Employ.deleteEmployTraining($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (training,index) {
-                    var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+                    var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -489,7 +489,7 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
             html += `<tr >                                        
                 <td> ${stockholder.name}</td>                                            
                 <td> ${stockholder.ceorelation} </td>                                           
-                <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
+                <td> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
             </tr>`
             });
         $("#fulltbp_companystockholder_wrapper_tr").html(html);
@@ -529,7 +529,7 @@ $(document).on("click",".deletestockholder",function(e){
                     html += `<tr >                                        
                         <td> ${stockholder.name}</td>                                            
                         <td> ${stockholder.ceorelation} </td>                                           
-                        <td> <a type="button" data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
+                        <td> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
                     </tr>`
                     });
                 $("#fulltbp_companystockholder_wrapper_tr").html(html);
@@ -624,7 +624,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td> 
-                <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
+                <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
             });
          $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
@@ -654,7 +654,7 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
                         <td> ${techdevlevel.presenttechnology} </td> 
                         <td> ${techdevlevel.projecttechnology} </td>                                            
                         <td> 
-                        <a type="button" data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
+                        <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
                     </tr>`
                     });
                  $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
@@ -797,7 +797,7 @@ $(document).on('change', '#certify', function(e) {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -828,7 +828,7 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -862,7 +862,7 @@ $(document).on('change', '#award', function(e) {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -894,7 +894,7 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -928,7 +928,7 @@ $(document).on('change', '#standard', function(e) {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -959,7 +959,7 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1043,8 +1043,8 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                         <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
                         <td style="width:180px"> 
-                        <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
+                        <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                            <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1160,8 +1160,8 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                         <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
                         <td style="width:180px"> 
-                            <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
+                            <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                            <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1248,8 +1248,8 @@ $(document).on("click",".deleteprojectplan",function(e){
                         <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
                         <td style="width:180px"> 
-                        <a type="button" data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                            <a type="button" data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
+                        <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
+                            <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1360,7 +1360,7 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1392,7 +1392,7 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1432,7 +1432,7 @@ $(document).on('change', '#swotfile', function(e) {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1463,7 +1463,7 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1499,7 +1499,7 @@ $(document).on('change', '#financialplan', function(e) {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1529,7 +1529,7 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -1558,8 +1558,8 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                     
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1593,8 +1593,8 @@ $(document).on("click",".deletesell",function(e){
                         <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
                         <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
                         <td> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
+                            <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
+                            <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1636,8 +1636,8 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                     
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1671,7 +1671,7 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                   
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -1699,8 +1699,8 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
                 <td class="text-right"> ${sell.percenttosale} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1743,8 +1743,8 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
                 <td class="text-right"> ${sell.percenttosale} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1778,8 +1778,8 @@ $(document).on("click",".deletedebtpartner",function(e){
                         <td class="text-right"> ${sell.percenttosale} </td> 
                         <td class="text-right"> ${sell.businessyear} </td> 
                         <td> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
+                            <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
+                            <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1808,8 +1808,8 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
                 <td class="text-right"> ${sell.percenttopurchase} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1850,8 +1850,8 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
                 <td class="text-right"> ${sell.percenttopurchase} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
                 <td> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
-                    <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
+                    <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
             </tr>`
             });
@@ -1884,8 +1884,8 @@ $(document).on("click",".deletecreditpartner",function(e){
                         <td class="text-right"> ${sell.percenttopurchase} </td> 
                         <td class="text-right"> ${sell.businessyear} </td> 
                         <td> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
-                            <a type="button" data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
+                            <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
+                            <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                         </td> 
                     </tr>`
                     });
@@ -1936,7 +1936,7 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
                 <td class="text-right"> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
                 <td> ${checkspec} </td> 
                 <td> 
-                    <a type="button" data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
+                    <a  data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -1971,7 +1971,7 @@ $(document).on('click', '#btn_modal_edit_investment', function(e) {
                 <td> ${invesment.investment} </td>                            
                 <td class="text-right"> ${parseFloat(invesment.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td> 
-                    <a type="button" data-id="${invesment.id}" class="btn btn-sm bg-info editinvestment">แก้ไข</a> 
+                    <a  data-id="${invesment.id}" class="btn btn-sm bg-info editinvestment">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -2018,7 +2018,7 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
                 <td class="text-right"> ${parseFloat(cost.approved).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td class="text-right"> ${parseFloat(cost.plan).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                 <td> 
-                    <a type="button" data-id="${cost.id}" class="btn btn-sm bg-info editcost">แก้ไข</a> 
+                    <a  data-id="${cost.id}" class="btn btn-sm bg-info editcost">แก้ไข</a> 
                 </td> 
             </tr>`
             });
@@ -2065,7 +2065,7 @@ $(document).on('change', '#companydoc', function(e) {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -2096,7 +2096,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -2505,7 +2505,7 @@ $(document).on('click', '#btn_modal_add_researcher', function(e) {
                 <td> ${researcher.experience} </td>     
                 <td> ${researcher.training} </td>  
                 <td> 
-                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
+                    <a  data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
                 </td>
             </tr>`
             });
@@ -2530,7 +2530,7 @@ $(document).on('click', '#btn_modal_add_projectmember', function(e) {
                 <td> ${researcher.experience} </td>     
                 <td> ${researcher.training} </td>  
                 <td> 
-                    <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteprojectmember">ลบ</a>                                       
+                    <a  data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteprojectmember">ลบ</a>                                       
                 </td>
             </tr>`
             });
@@ -2561,7 +2561,7 @@ $(document).on("click",".deleteresearcher",function(e){
                         <td> ${researcher.experience} </td>     
                         <td> ${researcher.training} </td>  
                         <td> 
-                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
+                            <a  data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -2600,7 +2600,7 @@ $(document).on("click",".deleteprojectmember",function(e){
                         <td> ${researcher.experience} </td>     
                         <td> ${researcher.training} </td>  
                         <td> 
-                            <a type="button" data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
+                            <a  data-id="${researcher.id}" data-name="" class="btn btn-sm bg-danger deleteresearcher">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -2630,7 +2630,7 @@ $(document).on('change', '#boardattachment', function(e) {
             success: function(data){
                 var html = ``;
                 data.forEach(function (attachment,index) {
-                    var deletecode = `<a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
+                    var deletecode = `<a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -2664,7 +2664,7 @@ $(document).on("click",".deleteboardattachment",function(e){
                 var html = ``;
                 var html = ``;
                 data.forEach(function (attachment,index) {
-                    var deletecode = `<a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
+                    var deletecode = `<a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -2897,7 +2897,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
             if(educationlevel == 'อื่นๆ'){
                 educationlevel = education.otheremployeducationlevel;
             }
-            var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+            var deletecode = `<a  data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -2916,7 +2916,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
         var experiencetable = '';
         
         data.employexperiences.forEach(function (experience,index) {
-            var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+            var deletecode = `<a  data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -2933,7 +2933,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
 
          var trainingtable = '';
          data.employtrainings.forEach(function (training,index) {
-            var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+            var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -2947,7 +2947,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
           $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
         var attachment  = '';
           data.fullTbpboardattachments.forEach(function (boardattachment,index) {
-            var deletecode = `<a type="button" data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
+            var deletecode = `<a  data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3035,7 +3035,7 @@ function modaltrigger(id) {
             if(educationlevel == 'อื่นๆ'){
                 educationlevel = education.otheremployeducationlevel;
             }
-            var deletecode = `<a type="button" data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+            var deletecode = `<a  data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3051,7 +3051,7 @@ function modaltrigger(id) {
 
         var experiencetable = '';
         data.employexperiences.forEach(function (experience,index) {
-            var deletecode = `<a type="button" data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+            var deletecode = `<a  data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3068,7 +3068,7 @@ function modaltrigger(id) {
 
          var trainingtable = '';
          data.employtrainings.forEach(function (training,index) {
-            var deletecode = `<a type="button" data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+            var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3160,8 +3160,8 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                    <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
+                    <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
                 </tr>`
             }
       
@@ -3201,8 +3201,8 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
+                        <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                     </tr>`
                 }
             });
@@ -3249,8 +3249,8 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
+                            <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                         </tr>`
                     }
                 });
@@ -3309,8 +3309,8 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
+                        <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                     </tr>`
                 }
             });
@@ -3351,8 +3351,8 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a type="button" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                            <a type="button" data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
+                            <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                         </tr>`
                     }
                 });

@@ -128,7 +128,7 @@ $(document).on('click', '#btn_modal_add_clustergroup', function(e) {
             <td> ${transaction.sub_cluster_id} (${transaction.sub_cluster_weight})</td> 
             <td> ${transaction.extrafactor_id} (${transaction.extrafactor_score})</td>                                            
             <td> ${transaction.sub_extrafactor_id} (${transaction.sub_extrafactor_score})</td> 
-            <td> <a type="button" data-id="${transaction.id}" class="btn badge bg-danger edittransaction">ลบ</a> </td> 
+            <td> <a data-id="${transaction.id}" class="btn badge bg-danger edittransaction">ลบ</a> </td> 
         </tr>`
             });
          $("#cluster_transaction_wrapper_tr").html(html);

@@ -658,7 +658,7 @@
 				}
 				$(document).find(".actions ul").append(`
 					<li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-					<li class='libtn' ${hidden}><a type="button" id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
+					<li class='libtn' ${hidden}><a  id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
 				`);
 				var selected_director = [];
 					$(".chkauthorizeddirector:checked").each(function(){

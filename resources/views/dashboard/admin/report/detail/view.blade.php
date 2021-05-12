@@ -291,7 +291,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" >
+                                <table class="table table-striped" style="height: 150px"  >
                                     <thead>
                                         <tr>
                                             <th style="width:200px">คะแนน</th> 
@@ -306,18 +306,29 @@
                                             <td>{{number_format(@$company->businessplan->minitbp->fulltbp->projectgrade->percent, 2, '.', '')}}</td>  
                                             <td>{{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}</td>
                                             
-                                            <td> <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a></td>
+                                            <td> 
+                                                @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1)
+                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a>
+                                                    @else
+                                                        <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                    {{-- <div class="dropdown-menu dropdown-menu-right">
                                                         <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
                                                         <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item"><i class="icon-download"></i> ดาวน์โหลด</a>
+                                                    </div> --}}
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <a type="button" href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
+                                                <a  href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
                                             </td>                                     
                                         </tr>  
                                     </tbody>

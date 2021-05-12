@@ -215,8 +215,8 @@ function RenderExtraTable(data){
             comment = criteria.weightcomment;
         }
             html += `<tr > 
-            <td> ${criteria.extracategory['name']} <a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
-            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
+            <td> ${criteria.extracategory['name']} <a href="#" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteria.extracriteria['name']} <a href="#" data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
             <div class="form-group">
                 <label>${criteria.extracriteria['name']}</label>
@@ -424,7 +424,7 @@ function updateEvAdminStatus(id,value){
                             html += `<tr > 
                             <td> ${comment.created_at} </td>                                            
                             <td> ${comment.detail} </td>    
-                            <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
+                            <td> <a data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
                             </tr>`
                         });
                     $("#ev_edit_history_wrapper_tr").html(html);

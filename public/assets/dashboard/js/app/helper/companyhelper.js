@@ -54,7 +54,7 @@ $("#companydoc").on('change', function() {
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -84,7 +84,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                         <td> ${attachment.name} </td>                                            
                         <td> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-                            <a type="button" data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                            <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
@@ -101,7 +101,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
         data.forEach(function (authorizeddirector,index) {
             html += `<tr >                                        
                 <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            
-                <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
+                <td><a data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
             </tr>`
             });
          $('#authorizeddirector').val(data.length);
@@ -151,7 +151,7 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
                 data.forEach(function (authorizeddirector,index) {
                     html += `<tr >                                        
                         <td> ${authorizeddirector.prefix['name']}${authorizeddirector.name}  ${authorizeddirector.lastname} </td>                                            
-                        <td><a type="button" data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
+                        <td><a data-id="${authorizeddirector.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  </td> 
                     </tr>`
                     });
                  $('#authorizeddirector').val(data.length);

@@ -532,7 +532,7 @@
 																<td> {{$officerdoc->name}}</td>                                            
 																<td> 
 																	<a href="{{asset($officerdoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
-																	<a type="button" data-id="{{$officerdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
+																	<a  data-id="{{$officerdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
 																</td>
 															</tr>
 														@endforeach

@@ -214,7 +214,7 @@
                     <td> ${announceattachment.name} </td>                                            
                     <td> 
                         <a href="${route.url}/${announceattachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-                        <a type="button" data-id="${announceattachment.id}" data-name="" class="btn btn-sm bg-danger deleteannounceattachment">ลบ</a>                                       
+                        <a  data-id="${announceattachment.id}" data-name="" class="btn btn-sm bg-danger deleteannounceattachment">ลบ</a>                                       
                     </td>
                 </tr>`
                 });
@@ -248,7 +248,7 @@ $(document).on("click",".deleteannounceattachment",function(e){
                     <td> ${announceattachment.name} </td>                                            
                     <td> 
                         <a href="${route.url}/${announceattachment.path}" class=" btn btn-sm bg-primary">ดาวน์โหลด</a>
-                        <a type="button" data-id="${announceattachment.id}" data-name="" class="btn btn-sm bg-danger deleteannounceattachment">ลบ</a>                                       
+                        <a  data-id="${announceattachment.id}" data-name="" class="btn btn-sm bg-danger deleteannounceattachment">ลบ</a>                                       
                     </td>
                 </tr>`
                 });

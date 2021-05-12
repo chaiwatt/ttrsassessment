@@ -256,7 +256,7 @@
                                                 @if (!Empty($check))
                                                     @if ($check->expert_assignment_status_id == 1)
                                                         @if (Auth::user()->user_type_id == 6)
-                                                           <a href="#" type="button" data-id="{{$user->id}}" class="btn btn-sm bg-warning assingexpert"><i class="icon-spinner spinner mr-2" id="btnassign{{$user->id}}" hidden></i>มอบหมาย</a>
+                                                           <a  data-id="{{$user->id}}" class="btn btn-sm bg-warning assingexpert"><i class="icon-spinner spinner mr-2" id="btnassign{{$user->id}}" hidden></i>มอบหมาย</a>
                                                         @else
                                                             <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่ได้มอบหมาย</span>
                                                         @endif
@@ -274,7 +274,7 @@
                                                         @elseif($check->accepted == 1) 
                                                             <span class="badge badge-flat border-success text-success-600 rounded-0">ตอบรับแล้ว</span>
                                                         @elseif($check->accepted == 2)
-                                                            <a href="#" type="button"  data-id="{{$user->id}}" data-fulltbpid="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-info showreject">ปฏิเสธเข้าร่วม</a>
+                                                            <a  data-id="{{$user->id}}" data-fulltbpid="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-info showreject">ปฏิเสธเข้าร่วม</a>
                                                         @endif
                                                     @endif
                                                 @endif

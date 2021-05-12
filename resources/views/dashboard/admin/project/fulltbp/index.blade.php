@@ -285,17 +285,17 @@
                                                 </td>  
                                                 <td>    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
-                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                            <a href="#"  data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                         @else
                                                             @if ($fulltbp->refixstatus == 0)
-                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
+                                                                    <a href="#" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                                 @elseif($fulltbp->refixstatus == 1)
                                                                     <span class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</span>
                                                                     @if ($fulltbp->minitbp->reviselog(2)->count() > 0)
                                                                         <a href="#" data-id="{{$fulltbp->minitbp->id}}" data-project="{{$fulltbp->minitbp->project}}" data-doctype="2" class="btn btn-sm bg-pink showlog" ><i class="icon-spinner spinner mr-2" id="spinicon_showlog{{$fulltbp->minitbp->id}}" hidden></i>รายการแก้ไข</a>
                                                                     @endif
                                                                 @elseif($fulltbp->refixstatus == 2)
-                                                                    <a href="#" type="button" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
+                                                                    <a href="#" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-indigo"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>มีการแก้ไขแล้ว</a>
                                                                     @if ($fulltbp->minitbp->reviselog(2)->count() > 0)
                                                                         <a href="#" data-id="{{$fulltbp->minitbp->id}}" data-project="{{$fulltbp->minitbp->project}}" data-doctype="2" class="btn btn-sm bg-pink showlog" ><i class="icon-spinner spinner mr-2" id="spinicon_showlog{{$fulltbp->minitbp->id}}" hidden></i>รายการแก้ไข</a>
                                                                     @endif
@@ -347,20 +347,20 @@
                                                         @endphp
             
                                                         @if (Auth::user()->user_type_id == 4)
-                                                                <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                             @elseif(Auth::user()->user_type_id == 5)
                                                                 @if ($fulltbp->ev->status < 2)
                                                                         <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
                                                                     @else
-                                                                        <a type="button" href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                        <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                                 @endif
                                                             @elseif(Auth::user()->user_type_id == 6)
                                                                 @if ($fulltbp->ev->status == 0)
                                                                         <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
                                                                     @elseif($fulltbp->ev->status == 3)
-                                                                        <a type="button" href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                        <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                                     @else   
-                                                                        <a type="button" href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                        <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                                 @endif
                                                         @endif
                                                     @else
@@ -369,9 +369,14 @@
                                                 </td> 
                                                 <td> 
                                                     @if ( $fulltbp->bol->count() != 0)
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
                                                         @else
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" type="button" class="btn btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  
+                                                            @if (Auth::user()->user_type_id == 4)
+                                                                    <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มเอกสาร BOL</a> 
+                                                                @else
+                                                                    <span class="badge badge-flat border-info text-info-600">ยังไม่ได้เพิ่ม</span>
+                                                            @endif
+                                                            
                                                     @endif
                                                 </td>  
                                                 <td>
@@ -404,9 +409,9 @@
                                                             @if (Auth::user()->user_type_id == 4)
                                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
+                                                                            <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
                                                                         @else
-                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                                            <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
                                                                         @endif
                                                                             
                                                                         @else
@@ -414,7 +419,7 @@
                                                                     @endif
                                                                 @else
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                            <a href="#" type="button" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
+                                                                            <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
                                                                         @else
                                                                             <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
                                                                         @endif

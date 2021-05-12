@@ -108,6 +108,7 @@ class DashboardAdminEvaluationResultController extends Controller
             'generalinfo' => $generalinfo
         ];
         $pdf = PDF::loadView('dashboard.admin.evaluationresult.pdf', $data);
+         return $evaluationresult;
         $path = public_path("storage/uploads/fulltbp/");
         return $pdf->stream('document.pdf');
     }

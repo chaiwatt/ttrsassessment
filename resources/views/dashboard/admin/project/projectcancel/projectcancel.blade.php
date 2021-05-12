@@ -66,7 +66,7 @@
                                     <tr>
                                         <th>เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>    
-                                        <th>สถานะ</th>                             
+                                        {{-- <th>สถานะ</th>                              --}}
                                         <th style="text-align: right">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -76,7 +76,7 @@
                                     <tr>    
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td> 
-                                        <td>
+                                        {{-- <td>
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)
                                                     <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
                                                 @else
@@ -92,7 +92,7 @@
                                                             <span class="badge badge-flat border-warning text-warning-600">ส่งรายการแก้ไขแล้ว</span>
                                                     @endif
                                             @endif
-                                        </td>                                        
+                                        </td>                                         --}}
                                         <td style="text-align: right"> 
                                             @if (!Empty($fulltbp->canceldate))
                                                     <span class="badge badge-flat border-danger text-danger-600">ยกเลิกโครงการแล้ว</span>

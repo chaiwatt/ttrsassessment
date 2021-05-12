@@ -24,7 +24,7 @@ $(document).on('change', '#boldoc', function(e) {
                             <td> ${bol.name} </td>                                            
                             <td> 
                                 <a href="${route.url}/${bol.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                                <a type="button" data-id="${bol.id}" data-name="" class="btn btn-sm bg-danger deletebol">ลบ</a>                                       
+                                <a data-id="${bol.id}" data-name="" class="btn btn-sm bg-danger deletebol">ลบ</a>                                       
                             </td>
                         </tr>`
                         });
@@ -55,7 +55,7 @@ $(document).on('change', '#boldoc', function(e) {
                             <td> ${bol.name} </td>                                            
                             <td> 
                                 <a href="${route.url}/${bol.path}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-                                <a type="button" data-id="${bol.id}" data-name="" class="btn btn-sm bg-danger deletebol">ลบ</a>                                       
+                                <a data-id="${bol.id}" data-name="" class="btn btn-sm bg-danger deletebol">ลบ</a>                                       
                             </td>
                         </tr>`
                         });

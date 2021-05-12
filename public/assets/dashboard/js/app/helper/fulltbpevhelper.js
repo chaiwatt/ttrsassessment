@@ -525,9 +525,9 @@ function RenderTable(criterias,pillaindexweigths){
         }
         if(route.status == 0 || route.refixstatus == 1){
             html += `<tr > 
-            <td> ${criteria.pillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" class="text-grey-300 pillarname deletepillar"><i class="icon-trash"></i></a></td>                                            
-            <td> ${criteria.subpillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
-            <td> ${subpillarindex} ${weightval}<a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
+            <td> ${criteria.pillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" class="text-grey-300 pillarname deletepillar"><i class="icon-trash"></i></a></td>                                            
+            <td> ${criteria.subpillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 deletesubpillar"><i class="icon-trash"></i></a></td>    
+            <td> ${subpillarindex} ${weightval}<a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 deletesubpillarindex"><i class="icon-trash"></i></a></td>   
             <td> 
                 ${criterianame} 
                 <div class="toggle" >
@@ -540,9 +540,9 @@ function RenderTable(criterias,pillaindexweigths){
             </tr>`
         }else{
             html += `<tr > 
-            <td> ${criteria.pillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" class="text-grey-300 pillarname"></a></td>                                            
-            <td> ${criteria.subpillar['name']} <a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 "></a></td>    
-            <td> ${subpillarindex} ${weightval}<a href="#" type="button" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 "></a></td>   
+            <td> ${criteria.pillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" class="text-grey-300 pillarname"></a></td>                                            
+            <td> ${criteria.subpillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" class="text-grey-300 "></a></td>    
+            <td> ${subpillarindex} ${weightval}<a href="#" data-pillar="${criteria.pillar['id']}" data-subpillar="${criteria.subpillar['id']}" data-subpillarindex="${criteria.subpillarindex['id']}" class="text-grey-300 "></a></td>   
             <td> 
                 ${criterianame} 
                 <div class="toggle" >
@@ -590,8 +590,8 @@ function RenderExtraTable(data){
         }
         if(route.status == 0 || route.refixstatus == 1){
             html += `<tr > 
-            <td> ${criteria.extracategory['name']} ${weightval}<a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300 deletecategorytransaction"><i class="icon-trash"></i></a></td>                
-            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 deletetriteriatransaction"><i class="icon-trash"></i></a>
+            <td> ${criteria.extracategory['name']} ${weightval}<a href="#" data-categoryid="${criteria.extra_category_id}" class="text-grey-300 deletecategorytransaction"><i class="icon-trash"></i></a></td>                
+            <td> ${criteria.extracriteria['name']} <a href="#"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 deletetriteriatransaction"><i class="icon-trash"></i></a>
                 <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
                         <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small> </label>
@@ -603,8 +603,8 @@ function RenderExtraTable(data){
             </tr>`
         }else{
             html += `<tr > 
-            <td> ${criteria.extracategory['name']} ${weightval}<a href="#" type="button" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
-            <td> ${criteria.extracriteria['name']} <a href="#" type="button"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300"></a>
+            <td> ${criteria.extracategory['name']} ${weightval}<a href="#" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
+            <td> ${criteria.extracriteria['name']} <a href="#"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300"></a>
                 <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
                         <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
@@ -1147,7 +1147,7 @@ $(document).on("click",".deletecomment",function(e){
                         html += `<tr > 
                         <td> ${comment.created_at} </td>                                            
                         <td> ${comment.detail} </td>    
-                        <td> <a type="button" data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
+                        <td> <a data-id="${comment.id}" class="btn btn-sm bg-danger deletecomment">ลบ</a> </td>                                          
                         </tr>`
                     });
                 $("#ev_edit_history_wrapper_tr").html(html);

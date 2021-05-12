@@ -12,7 +12,7 @@ $(document).on("click","#btn_add_performance",function(e){
                         <td>${performance.totalasset}</td> 
                         <td>${performance.totalasset}</td>
                         <td>                                                                                                      
-                        <a type="button" data-id="${performance['id']}"  class="btn btn-danger-400 btn-sm" id="deleteperformance" ><i class="icon-trash danger"></i></a>
+                        <a data-id="${performance['id']}"  class="btn btn-danger-400 btn-sm" id="deleteperformance" ><i class="icon-trash danger"></i></a>
                         </td>
                     <tr>`
             });
@@ -46,7 +46,7 @@ $(document).on("click","#deleteperformance",function(e){
                                 <td>${performance.totalasset}</td> 
                                 <td>${performance.totalasset}</td>
                                 <td>                                                                                                      
-                                <a type="button" data-id="${performance['id']}"  class="btn btn-danger-400 btn-sm" id="deleteperformance" ><i class="icon-trash danger"></i></a>
+                                <a data-id="${performance['id']}"  class="btn btn-danger-400 btn-sm" id="deleteperformance" ><i class="icon-trash danger"></i></a>
                                 </td>
                             <tr>`
                     });

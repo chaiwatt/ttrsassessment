@@ -366,7 +366,7 @@
                                                     <tr >                                        
                                                         <td> {{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}</td>                                            
                                                         <td> 
-                                                            <a type="button" data-id="{{$authorizeddirector->id}}" data-name="" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
+                                                            <a  data-id="{{$authorizeddirector->id}}" data-name="" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -398,7 +398,7 @@
                                                         <td> {{$fulltbpcompanydoc->name}}</td>                                            
                                                         <td> 
                                                             <a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-                                                            <a type="button" data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
+                                                            <a  data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                                                         </td>
                                                     </tr>
                                                     @endforeach

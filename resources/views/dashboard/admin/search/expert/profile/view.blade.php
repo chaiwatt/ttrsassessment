@@ -306,7 +306,7 @@
 																			<td> {{$expertfield->order}}</td>                                            
 																			<td> {{$expertfield->detail}}</td>    
 																			{{-- <td> 
-																				<a type="button" data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield">ลบ</a>                                       
+																				<a  data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield">ลบ</a>                                       
 																			</td> --}}
 																		</tr>
 																	@endforeach
@@ -337,7 +337,7 @@
 																			<td> {{$expertdoc->name}}</td>                                            
 																			<td> 
 																				<a href="{{asset($expertdoc->path)}}" class="btn btn-sm bg-primary">ดาวน์โหลด</a>
-																				{{-- <a type="button" data-id="{{$expertdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                        --}}
+																				{{-- <a  data-id="{{$expertdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                        --}}
 																			</td>
 																		</tr>
 																	@endforeach
@@ -385,7 +385,7 @@
 															<td> {{$friend->user->name}}  {{$friend->user->lastname}} </td>    
 															<td> {{$friend->user->usertype->name}} </td> 
 															<td> 
-																<a type="button" data-id="{{$friend->id}}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
+																<a  data-id="{{$friend->id}}" class="badge bg-danger deletefriendclass" id="deletefriendclass_editview">ลบ</a> 
 															</td>
 														</tr>
 													@endforeach
@@ -417,7 +417,7 @@
 																	<td> {{$friendrequest->request->usertype->name}} </td> 
 																	<td> <span class="badge badge-flat border-warning text-warning">รอการตอบรับ</span></td> 
 																	<td> 
-																		<a type="button" data-id="{{$friendrequest->id}}" class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview"><i class="icon-trash danger"></i></a>
+																		<a  data-id="{{$friendrequest->id}}" class="btn btn-danger-400 btn-sm deleterequestfriendclass" id="deleterequestfriendclass_editview"><i class="icon-trash danger"></i></a>
 																	</td>
 																</tr>
 															@endforeach
@@ -451,8 +451,8 @@
 																	<td> {{$friendrequestcoming->requestcoming->usertype->name}} </td> 
 																	<td> <span class="badge badge-flat border-info text-info">ยังไม่ได้ตอบรับ</span> </td> 
 																	<td> 
-																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                       
-																		<a type="button" data-id="{{$friendrequestcoming->id}}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a>                                       
+																		<a  data-id="{{$friendrequestcoming->id}}" class="badge bg-teal acceptfriendclass" id="acceptfriendclass_editview">ยืนยันตอบรับ</a>                                       
+																		<a  data-id="{{$friendrequestcoming->id}}" class="badge bg-danger rejectfriendclass" id="rejectfriendclass_editview">ไม่รับ</a>                                       
 																	</td>
 																</tr>
 															@endforeach
