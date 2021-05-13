@@ -55,24 +55,24 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ข้อความที่ 1 (ภาษาไทย)</label>
-                                            <input type="text"  name="titleth" value="{{$headertext->titleth}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <label>ข้อความที่ 1 (ภาษาไทย)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="titleth" value="{{$headertext->titleth}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control form-control-lg" >
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่ 1 (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="titleeng" value="{{$headertext->titleeng}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <label>ข้อความที่ 1 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="titleeng" value="{{$headertext->titleeng}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control form-control-lg" >
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่ 2 (ภาษาไทย)</label>
-                                            <input type="text"  name="detailth" value="{{$headertext->detailth}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <label>ข้อความที่ 2 (ภาษาไทย)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="detailth" value="{{$headertext->detailth}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control form-control-lg" >
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่2 (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="detaileng" value="{{$headertext->detaileng}}"  placeholder="ข้อความที่ 2 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <label>ข้อความที่2 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="detaileng" value="{{$headertext->detaileng}}"  placeholder="ข้อความที่ 2 (ภาษาอังกฤษ)" class="form-control form-control-lg" >
                                         </div>
                                         <div class="form-group">
                                             <label>Youtube</label>
-                                            <input type="text"  name="youtube" value="{{$headertext->youtube}}"  placeholder="ลิงก์ Youtube" class="form-control form-control-lg">
+                                            <input type="text"  name="youtube" value="{{$headertext->youtube}}"  placeholder="ลิงก์ Youtube" class="form-control form-control-lg" >
                                         </div>
 										<div class="form-group">
 											<label>รูป Banner<span class="text-danger">*</span></label>

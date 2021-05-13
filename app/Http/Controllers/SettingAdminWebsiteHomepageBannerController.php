@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\HeaderText;
 use Illuminate\Http\Request;
+use App\Http\Requests\HomePageBannerRequest;
 
 class SettingAdminWebsiteHomepageBannerController extends Controller
 {
@@ -15,7 +16,7 @@ class SettingAdminWebsiteHomepageBannerController extends Controller
         // ->withWebsitelayouts($websitelayouts)
         // ->withGeneralinfo($generalinfo);
     }
-    public function EditSave(Request $request){
+    public function EditSave(HomePageBannerRequest $request){
         $filelocation = HeaderText::first()->imgbanner;
         $file = $request->file('picture');
         if(!Empty($file)){
@@ -34,7 +35,5 @@ class SettingAdminWebsiteHomepageBannerController extends Controller
         ]);
 
         return redirect()->route('setting.admin.website.homepage.banner')->withSuccess('แก้ไขสำเร็จ');
-        // $headertext = HeaderText::first();
-        // return view('setting.admin.website.banner.edit')->withHeadertext($headertext);
     }
 }

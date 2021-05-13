@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\HomepagePillar;
 use App\Model\HomepagePillarSection;
+use App\Http\Requests\HomePagePillarRequest;
 use App\Http\Requests\EditHomePagePillarRequest;
 
 class SettingAdminWebsiteHomepagePillarController extends Controller
@@ -14,7 +15,7 @@ class SettingAdminWebsiteHomepagePillarController extends Controller
         return view('setting.admin.website.homepage.pillar.edit')->withHomepagepillar($homepagepillar);
     }
 
-    public function EditSave(Request $request){
+    public function EditSave(HomePagePillarRequest $request){
         
         HomepagePillarSection::first()->update([
             'textth1' =>  $request->textth1,
@@ -39,7 +40,6 @@ class SettingAdminWebsiteHomepagePillarController extends Controller
             'pillardesceng4' =>  $request->pillardesceng4
         ]);
         return redirect()->route('setting.admin.website.homepage.pillar')->withSuccess('แก้ไขสำเร็จ');
-        // return view('setting.admin.website.homepage.pillar.edit')->withHomepagepillar($homepagepillar);
     }
 
     // public function EditSave(EditHomePagePillarRequest $request){

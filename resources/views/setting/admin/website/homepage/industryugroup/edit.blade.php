@@ -55,19 +55,19 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>ข้อความที่ 1 (ภาษาไทย)</label>
+                                            <label>ข้อความที่ 1 (ภาษาไทย)<span class="text-danger">*</span></label>
                                             <input type="text"  name="titleth" value="{{$homepageindustrygroup->titleth}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่ 1 (ภาษาอังกฤษ)</label>
+                                            <label>ข้อความที่ 1 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
                                             <input type="text"  name="titleeng" value="{{$homepageindustrygroup->titleeng}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่ 2 (ภาษาไทย)</label>
+                                            <label>ข้อความที่ 2 (ภาษาไทย)<span class="text-danger">*</span></label>
                                             <input type="text"  name="subtitleth" value="{{$homepageindustrygroup->subtitleth}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>ข้อความที่2 (ภาษาอังกฤษ)</label>
+                                            <label>ข้อความที่2 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
                                             <input type="text"  name="subtitleeng" value="{{$homepageindustrygroup->subtitleeng}}"  placeholder="ข้อความที่ 2 (ภาษาอังกฤษ)" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
