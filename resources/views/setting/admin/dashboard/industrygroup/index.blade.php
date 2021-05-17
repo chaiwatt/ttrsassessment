@@ -1,5 +1,9 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+{{-- 
+<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"> --}}
+
 @stop
 @section('content')
     <!-- Page header -->
@@ -10,9 +14,9 @@
                 <h4> <span class="font-weight-semibold">กลุ่มอุตสาหกรรม</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            {{-- <div class="header-elements d-none">
+            <div class="header-elements d-none">
                 <a href="{{route('setting.admin.dashboard.industrygroup.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มกลุ่มอุตสาหกรรม <b><i class="icon-plus3"></i></b></a>
-            </div> --}}
+            </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -61,13 +65,18 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="float-right">
+                            <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel</button>
+                            <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก Pdf</button>
+                        </div>
+
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-striped" id="industrygrouptable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>กลุ่มอุตสาหกรรม</th>                               
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        <th style="width:200px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,7 +86,10 @@
                                         <td> {{$industrygroup->name}} </td>                                         
                                         <td> 
                                             <a href="{{route('setting.admin.dashboard.industrygroup.edit',['id' => $industrygroup->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            {{-- <a href="{{route('setting.admin.dashboard.industrygroup.delete',['id' => $industrygroup->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}
+                                            @if ($key > 12)
+                                            <a href="{{route('setting.admin.dashboard.industrygroup.delete',['id' => $industrygroup->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                     @endforeach
@@ -94,6 +106,16 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+{{-- <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> --}}
+<script src="{{asset('assets/dashboard/js/vfs_fonts.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -101,5 +123,86 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+
+        $("#btnOnExcel").on('click', function() {
+            $('#industrygrouptable').DataTable().buttons(0,0).trigger();
+        });
+        $("#btnOnPdf").on('click', function() {
+            $('#industrygrouptable').DataTable().buttons(0,1).trigger();
+        });
+
+        $(document).ready(function() {
+            pdfMake.fonts = {
+                    THSarabun: {
+                        normal: 'THSarabun.ttf',
+                        bold: 'THSarabun-Bold.ttf',
+                        italics: 'THSarabun-Italic.ttf',
+                        bolditalics: 'THSarabun-BoldItalic.ttf'
+                    }
+                }
+          
+            $('#industrygrouptable').DataTable( {
+                dom: 'Bfrtip',
+                paging:   true,
+                ordering: true,
+                info:     false,
+                pageLength : 10,
+                language: {
+                    zeroRecords: " ",
+                    search: "ค้นหา: ",  
+                    sLengthMenu: "จำนวน _MENU_ รายการ",
+                    info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+                    paginate: {
+                        previous: 'ก่อนหน้า',
+                        next: 'ถัดไป'
+                    }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "กลุ่มอุตสาหกรรม"      
+                        }, 
+                        exportOptions: {
+                            columns: [ 0, 1 ]
+                        },
+                    },
+                    { 
+                        extend: 'pdfHtml5',
+                        customize: function(doc) {
+                            doc.defaultStyle = {
+                                font:'THSarabun',
+                                fontSize:14                                 
+                            };
+                            doc.content[1].table.widths = [50,450];
+                            var rowCount = doc.content[1].table.body.length; 
+                            for (i = 1; i < rowCount; i++) { 
+                                doc.content[1].table.body[i][0].alignment = 'center'; 
+                                doc.content[1].table.body[i][1].alignment = 'left';
+                            }; 
+                        },
+                        exportOptions: {
+                            columns: [ 0, 1 ]
+                        },
+                        title: function () { 
+                            return "รายการกลุ่มอุตสาหกรรม"; 
+                        },
+                        filename: function() {
+                            return "กลุ่มอุตสาหกรรม"      
+                        }, 
+                    },    
+                ],
+                drawCallback: function() {
+                    $('.buttons-excel')[0].style.visibility = 'hidden'
+                    $('.buttons-pdf')[0].style.visibility = 'hidden'
+                }
+            } );
+            
+        } );
     </script>
 @stop

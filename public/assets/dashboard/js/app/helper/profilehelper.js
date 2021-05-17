@@ -149,7 +149,6 @@ $(document).on("click",".messagelink",function(e){
                 </li>`
             )
 
-        
         $("#tablemessage").html(html);
         $("#unreadmessages").html(html2);
         // $("#messagetitle").html(data.message.title);
@@ -370,9 +369,22 @@ $(document).on("click","#deletefriendclass_editview",function(e){
 
 $("#attachment").on('change', function() {
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        //alert('ไฟล์ขนาดมากกว่า 1 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB!',
+            });
         return ;
     }
     
@@ -454,9 +466,21 @@ $(document).on('click', '#deleteattachment', function (e) {
 
 $("#coverimg").on('change', function() {
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
         return ;
     }
     var formData = new FormData();
@@ -478,9 +502,21 @@ $("#coverimg").on('change', function() {
 
 $("#avatarimg").on('change', function() {
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
         return ;
     }
     var formData = new FormData();
@@ -693,17 +729,29 @@ $("#hid").on('change', function() {
 }
 
 $(document).on("change","#companydoc",function(e){
-    if($('#companydocname').val() == '')return ;
+    // if($('#companydocname').val() == '')return ;
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 2000 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
-    formData.append('companydocname',$('#companydocname').val());
+    // formData.append('companydocname',$('#companydocname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/companydoc/add`,  //Server script to process data
             type: 'POST',
@@ -716,8 +764,8 @@ $(document).on("change","#companydoc",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
+                        <td class="text-center"> 
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -747,8 +795,8 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
+                        <td class="text-center"> 
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -796,7 +844,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
                 <td>
                     ${check}
                 </td>   
-                <td>
+                <td class="text-center">
                     <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
                     <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                 </td> 
@@ -869,7 +917,7 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,sign
                         <td>
                             ${check}
                         </td>   
-                        <td>
+                        <td class="text-center">
                             <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
                             <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                         </td> 
@@ -1186,7 +1234,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                     <td>
                         ${check}
                     </td>   
-                    <td>
+                    <td class="text-center">
                         <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
                         <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                     </td> 

@@ -21,7 +21,7 @@ class FullTbpCompanyDocController extends Controller
         // $buninessplan = BusinessPlan::find($minitbp->business_plan_id);
         $fulltbpcompanydoc = new FullTbpCompanyDoc();
         $fulltbpcompanydoc->company_id = $request->id;
-        $fulltbpcompanydoc->name = $request->companydocname;
+        $fulltbpcompanydoc->name = $file->getClientOriginalName();
         $fulltbpcompanydoc->path = $filelocation;
         $fulltbpcompanydoc->save();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$request->id)->get();

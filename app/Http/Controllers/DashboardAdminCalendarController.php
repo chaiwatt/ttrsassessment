@@ -11,6 +11,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Model\Isnotify;
 use App\Helper\EmailBox;
+use App\Model\MessageBox;
 use App\Model\MeetingDate;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
@@ -118,10 +119,9 @@ class DashboardAdminCalendarController extends Controller
 
       foreach($request->users as $user){
           $_user = User::find($user);
-          Message::sendMessage($messageheader,'เรียน ท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. ' มีรายละเอียดดังนี้' .
+          $messagebox = Message::sendMessage($messageheader,'เรียน ท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. ' มีรายละเอียดดังนี้' .
           '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
           '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-          // '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
           '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
           '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
           '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
@@ -130,8 +130,13 @@ class DashboardAdminCalendarController extends Controller
           $alertmessage = new AlertMessage();
           $alertmessage->user_id = $auth->id;
           $alertmessage->target_user_id = $_user->id;
+          $alertmessage->messagebox_id = $messagebox->id;
           $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '. $messageheader. ' โครงการ'.$minitbp->project;
           $alertmessage->save();
+
+          MessageBox::find($messagebox->id)->update([
+              'alertmessage_id' => $alertmessage->id
+          ]);
     
           $notificationbubble = new NotificationBubble();
           $notificationbubble->business_plan_id = $minitbp->business_plan_id;
@@ -285,10 +290,9 @@ class DashboardAdminCalendarController extends Controller
     foreach($updateguest_array as $user){
         $_user = User::find($user);
 
-        Message::sendMessage($calendartype->name.' (แก้ไข) โครงการ'. $minitbp->project,'TTRS:'.$calendartype->name.'(แก้ไข) เรียน ท่านคณะกรรมการ <br><br>โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. ' มีรายละเอียดดังนี้' .
+        $messagebox = Message::sendMessage($calendartype->name.' (แก้ไข) โครงการ'. $minitbp->project,'TTRS:'.$calendartype->name.'(แก้ไข) เรียน ท่านคณะกรรมการ <br><br>โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. ' มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-        // '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
@@ -297,8 +301,13 @@ class DashboardAdminCalendarController extends Controller
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $_user->id;
+        $alertmessage->messagebox_id = $messagebox->id;
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $calendartype->name. ' (แก้ไข)สำหรับโครงการ'.$minitbp->project.' ' ;
         $alertmessage->save();
+
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
   
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $minitbp->business_plan_id;

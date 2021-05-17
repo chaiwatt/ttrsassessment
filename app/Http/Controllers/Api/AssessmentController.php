@@ -80,7 +80,7 @@ class AssessmentController extends Controller
                 $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
                 $notificationbubble->save();
                 
-                $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
+                $sellstatus = array("1. ยอดขายในประเทศ", "2. ยอดขายส่งออก", "  -  ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","  -  วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
 
                 foreach ($sellstatus as $status) {
                     FullTbpSellStatus::create([
@@ -123,15 +123,22 @@ class AssessmentController extends Controller
                 // $messagebox->receiver_id = User::where('user_type_id',6)->first()->id;
                 // $messagebox->message_read_status_id = 1;
                 // $messagebox->save();
+                $messagebox =  Message::sendMessage('ขอรับการประเมินใหม่','บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+
                 $company = Company::where('user_id',Auth::user()->id);
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
+                $alertmessage->messagebox_id = $messagebox->id;
                 $alertmessage->detail = Company::where('user_id',$auth->id)->first()->name . 'ขอรับการประเมินใหม่ ส่งเมื่อ ' . DateConversion::engToThaiDate(Carbon::now()->toDateString());
                 $alertmessage->save();
+
+                MessageBox::find($messagebox->id)->update([
+                    'alertmessage_id' => $alertmessage->id
+                ]);
                 
                 EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ขอรับการประเมินใหม่','เรียน JD<br><br> บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-                Message::sendMessage('ขอรับการประเมินใหม่','บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+               
             }
         }else{
             if($request->status == 1){

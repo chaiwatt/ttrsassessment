@@ -87,6 +87,12 @@ class SettingProfileUserController extends Controller
                                             ->withBusinesstypes($businesstypes);
     }
     public function EditSave(EditProfileRequest $request, $id){
+        if($request->registeredcapital == 0 && Auth::user()->user_group_id == 1){
+            return redirect()->back()->withError('ทุนจดทะเบียนไม่ถูกต้อง');  
+        }
+        if($request->paidupcapital == 0 && Auth::user()->user_group_id == 1){
+            return redirect()->back()->withError('ทุนจดทะเบียนที่เรียกชำระแล้วไม่ถูกต้อง');  
+        }
         CreateUserLog::createLog('แก้ไขข้อมูลโพรไฟล์');
         $auth = Auth::user();
         if(!Empty($request->password)){
@@ -252,7 +258,7 @@ class SettingProfileUserController extends Controller
                 //     $projectmember->save();
                 // }
                 
-                $sellstatus = array("ยอดขายในประเทศ", "ยอดขายส่งออก", "ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
+                $sellstatus = array("1. ยอดขายในประเทศ", "2. ยอดขายส่งออก", "  -  ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","  -  วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
                 foreach ($sellstatus as $status) {
                     FullTbpSellStatus::create([
                         'full_tbp_id' => $fulltbp->id,

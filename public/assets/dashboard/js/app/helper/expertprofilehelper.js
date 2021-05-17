@@ -153,16 +153,31 @@ $("#btn_modal_edit_expertfield").on('click', function() {
 
 });
 $("#expertdoc").on('change', function() {
-    if($('#expertdocname').val() == '')return ;
+    // if($('#expertdocname').val() == '')return ;
     var file = this.files[0];
+
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
+
     if (this.files[0].size/1024/1024*1000 > 2000 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB!',
+            });
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
-    formData.append('expertdocname',$('#expertdocname').val());
+    // formData.append('expertdocname',$('#expertdocname').val());
         $.ajax({
             url: `${route.url}/api/expert/addexpertdoc`,  //Server script to process data
             type: 'POST',
@@ -176,7 +191,7 @@ $("#expertdoc").on('change', function() {
                     html += `<tr >                                        
                         <td> ${expertdoc.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -207,7 +222,7 @@ $(document).on("click",".deleteexpertdoc",function(e){
                     html += `<tr >                                        
                         <td> ${expertdoc.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary" data-toggle="modal" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary" data-toggle="modal" target="_blank">ดูเอกสาร</a>
                             <a data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc" data-toggle="modal">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -220,9 +235,21 @@ $(document).on("click",".deleteexpertdoc",function(e){
 }); 
 $("#coverimg").on('change', function() {
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB!',
+            });
         return ;
     }
     var formData = new FormData();
@@ -244,9 +271,21 @@ $("#coverimg").on('change', function() {
 
 $("#avatarimg").on('change', function() {
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB!',
+            });
         return ;
     }
     var formData = new FormData();

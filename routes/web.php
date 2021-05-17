@@ -132,7 +132,8 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('uploadorganizeimg','Api\CompanyController@UploadOrganizeImg')->name('api.company.uploadorganizeimg');  
     }); 
     Route::group(['prefix' => 'alert'], function(){
-        Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');            
+        Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');     
+        Route::post('deletealert','Api\AlertController@DeleteAlert')->name('api.alert.deletealert');        
     });  
     Route::group(['prefix' => 'mail'], function(){
         Route::post('senduser','Api\MailController@SendUser')->name('api.mail.senduser');            

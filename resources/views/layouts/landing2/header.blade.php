@@ -5,7 +5,7 @@
         <div class="topbar-area style2 modify1">
            <div class="container">
                <div class="row y-middle">
-                   <div class="col-lg-8">
+                   <div class="col-lg-7">
                        <div class="topbar-contact">
                           <ul>
                               <li>
@@ -19,12 +19,14 @@
                           </ul>
                        </div>
                    </div>
-                   <div class="col-lg-4 text-right">
+                   <div class="col-lg-5 text-right">
                        <div class="toolbar-sl-share ">
                            <ul>
                                 <li>
                                     @if (!Auth::check())
-                                        <a href="{{route('login')}}" style="font-size: 16px"><i class="fa fa-sign-in" aria-hidden="true"></i> 
+                                    <a href="{{route('register')}}" style="font-size: 16px"><i class="fa fa-user" aria-hidden="true"></i> 
+                                        {{trans('lang.register')}} &nbsp;&nbsp;
+                                    <a href="{{route('login')}}" style="font-size: 16px"><i class="fa fa-sign-in" aria-hidden="true"></i> 
                                         {{trans('lang.login')}}
                                     @else
                                         @if (Auth::user()->user_type_id >= 4)
@@ -46,11 +48,11 @@
                                         </a>
                             </li>
                                 <li>
-                                    @if (Config::get('app.locale') == 'th')
-                                        <li><a href="{{route('change',['locale' => 'en'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/thflag.png')}}" alt=""> ไทย</a></li>
-                                    @else
-                                        <li><a href="{{route('change',['locale' => 'th'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/usflag.png')}}" alt=""> English</a></li>
-                                    @endif
+                                    {{-- @if (Config::get('app.locale') == 'th') --}}
+                                        <li><a href="{{route('change',['locale' => 'th'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/thflag.png')}}" alt=""> ไทย</a></li>
+                                    {{-- @else --}}
+                                        <li><a href="{{route('change',['locale' => 'en'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/usflag.png')}}" alt=""> English</a></li>
+                                    {{-- @endif --}}
                                 </li>
                         
                            </ul>

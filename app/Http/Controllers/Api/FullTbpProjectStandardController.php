@@ -15,7 +15,7 @@ class FullTbpProjectStandardController extends Controller
         $filelocation = "storage/uploads/fulltbp/project/standard/attachment/".$new_name;
         $fulltbpprojectstandard = new FullTbpProjectStandard();
         $fulltbpprojectstandard->full_tbp_id = $request->id;
-        $fulltbpprojectstandard->name = $request->standardname;
+        $fulltbpprojectstandard->name = $file->getClientOriginalName();
         $fulltbpprojectstandard->path = $filelocation;
         $fulltbpprojectstandard->save();
         $fulltbpprojectstandards = FullTbpProjectStandard::where('full_tbp_id',$request->id)->get();

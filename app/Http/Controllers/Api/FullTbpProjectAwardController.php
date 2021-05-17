@@ -15,7 +15,7 @@ class FullTbpProjectAwardController extends Controller
         $filelocation = "storage/uploads/fulltbp/project/award/attachment/".$new_name;
         $fulltbpprojectawardattachment = new FullTbpProjectAwardAttachment();
         $fulltbpprojectawardattachment->full_tbp_id = $request->id;
-        $fulltbpprojectawardattachment->name = $request->awardname;
+        $fulltbpprojectawardattachment->name = $file->getClientOriginalName();
         $fulltbpprojectawardattachment->path = $filelocation;
         $fulltbpprojectawardattachment->save();
         $fulltbpprojectawardattachments = FullTbpProjectAwardAttachment::where('full_tbp_id',$request->id)->get();

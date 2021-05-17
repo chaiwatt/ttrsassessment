@@ -15,7 +15,7 @@ class FullTbpCompanyProfileAttachmentController extends Controller
         $filelocation = "storage/uploads/fulltbp/companyprofile/attachment/".$new_name;
         $fulltbpcompanyprofileattachment = new FullTbpCompanyProfileAttachment();
         $fulltbpcompanyprofileattachment->full_tbp_id = $request->id;
-        $fulltbpcompanyprofileattachment->name = $request->companydocname;
+        $fulltbpcompanyprofileattachment->name =  $file->getClientOriginalName();
         $fulltbpcompanyprofileattachment->path = $filelocation;
         $fulltbpcompanyprofileattachment->save();
         $fulltbpcompanyprofileattachments = FullTbpCompanyProfileAttachment::where('full_tbp_id',$request->id)->orderBy('id','desc')->get();

@@ -233,7 +233,7 @@
         <div id="alertmessage_wrapper">
             @foreach ($alertmessages->reverse() as $alertmessage)
                 <div class="alert alert-info alert-styled-left alert-dismissible">
-                    <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{!!$alertmessage->detail!!}
+                   <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{!!$alertmessage->detail!!}
                 </div>
             @endforeach
         </div>

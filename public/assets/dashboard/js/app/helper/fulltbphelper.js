@@ -25,17 +25,32 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
     .catch(error => {})
 });
 
-$("#companygeneraldoc").on('change', function() {
-    if($('#companydocname').val() == '')return ;
+// $("#companygeneraldoc").on('change', function() {
+    $(document).on('change', '#companygeneraldoc', function(e) {
+    //console.log('ok');
+    // if($('#companydocname').val() == '')return ;
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 2000 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+            Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            }); 
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
-    formData.append('companydocname',$('#companydocname').val());
+    // formData.append('companydocname',$('#companydocname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/companyprofile/attachement/add`,  //Server script to process data
             type: 'POST',
@@ -49,7 +64,7 @@ $("#companygeneraldoc").on('change', function() {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -62,7 +77,7 @@ $("#companygeneraldoc").on('change', function() {
                  }
                  $('#modal_add_companydoc').modal('hide');
                  $('#companydocname').val('')
-                 this.files[0].val('');
+                //  this.files[0].val('');
         }
     });
 });
@@ -86,7 +101,7 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -137,24 +152,40 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     </tr>`
                  }
              }else if($('#employtype').val() == 'board'){
-                 if(employ.employ_position_id <= 5){
+                if(employ.employ_position_id > 1){
                     html += `<tr >                                        
-                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                        <td> ${position} </td> 
-                        <td> ${employ.phone} </td>                                            
-                        <td> ${employ.workphone} </td> 
-                        <td> ${employ.email} </td> 
-                        <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
-                    </tr>`
-                 }
-             }
+                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td> ${position} </td> 
+                    <td> ${employ.phone} </td>                                            
+                    <td> ${employ.workphone} </td> 
+                    <td> ${employ.email} </td> 
+                    <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                </tr>`
+                }
+             }else if($('#employtype').val() == 'ceo'){
+                if(employ.employ_position_id == 1){
+                    html += `<tr >                                        
+                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td> ${position} </td> 
+                    <td> ${employ.phone} </td>                                            
+                    <td> ${employ.workphone} </td> 
+                    <td> ${employ.email} </td> 
+                    <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
+                </tr>`
+                }
 
+             }
+             
             });
+
          if($('#employtype').val() == 'employee'){
             $("#fulltbp_researcher_wrapper_tr").html(html);
          }else if($('#employtype').val() == 'board'){
             $("#fulltbp_companyemploy_wrapper_tr").html(html);
+         }else if($('#employtype').val() == 'ceo'){
+            $("#fulltbp_companyemploy_ceo_wrapper_tr").html(html);
          }
         
          if(data.length > 0){
@@ -188,7 +219,7 @@ $(document).on("click",".deletecompanyemploy",function(e){
             Employ.deleteEmployInfo($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (employ,index) {
-                    if(employ.employ_position_id < 6 ){
+                    if(employ.employ_position_id < 6  && employ.employ_position_id != 1 ){
                         var prefix = employ.prefix['name'];
                         var position = employ.employposition['name'];
                         if(prefix == 'อื่นๆ'){
@@ -220,6 +251,57 @@ $(document).on("click",".deletecompanyemploy",function(e){
         }
     });
 }); 
+
+
+
+$(document).on("click",".deletecompanyceo",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรายการ หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Employ.deleteEmployInfo($(this).data('id')).then(data => {
+                var html = ``;
+                data.forEach(function (employ,index) {
+                    if(employ.employ_position_id < 6 ){
+                        var prefix = employ.prefix['name'];
+                        var position = employ.employposition['name'];
+                        if(prefix == 'อื่นๆ'){
+                            prefix = employ.otherprefix;
+                        }	
+                        if(position == 'อื่นๆ'){
+                            position = employ.otherposition;
+                        }	
+                        html += `<tr >                                        
+                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td> ${position} </td> 
+                            <td> ${employ.phone} </td>                                            
+                            <td> ${employ.workphone} </td> 
+                            <td> ${employ.email} </td> 
+                            <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
+                        </tr>`
+                        }
+                    });
+                 $("#fulltbp_companyemploy_ceo_wrapper_tr").html(html);
+                 if(data.length > 0){
+                    $("#fulltbp_companyemploy_ceo_wrapper").attr("hidden",false);
+                    $("#fulltbp_companyemploy_wrapper_ceo_error").attr("hidden",true);
+                 }else{
+                    $("#fulltbp_companyemploy_ceo_wrapper").attr("hidden",true);
+                 }
+            })
+           .catch(error => {})
+        }
+    });
+});
 
 $(document).on('click', '#btn_modal_add_employeducation', function(e) {
     if($('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyearstart').val() == '' || $('#employeducationyearend').val() == ''){
@@ -345,17 +427,17 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
     .catch(error => {})
 });
 
-$(function () {
-    $('#employtrainingdate').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        clearButton: true,
-        weekStart: 1,
-        cancelText: "ยกเลิก",
-        okText: "ตกลง",
-        clearText: "เคลียร์",
-        time: false
-    });
-});
+// $(function () {
+//     $('#employtrainingdate').bootstrapMaterialDatePicker({
+//         format: 'DD/MM/YYYY',
+//         clearButton: true,
+//         weekStart: 1,
+//         cancelText: "ยกเลิก",
+//         okText: "ตกลง",
+//         clearText: "เคลียร์",
+//         time: false
+//     });
+// });
 
 $(document).on("click",".deleteemployeducation",function(e){
     Swal.fire({
@@ -627,6 +709,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
                 <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
             });
+         $("#fulltbp_projectechdevlevel_wrapper").attr("hidden",false);
          $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
          $('#modal_add_tectdevlevel').modal('hide');
     })
@@ -680,6 +763,30 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     })
     .catch(error => {})
 });
+
+$(document).on('change', '#employexperienceenddate', function(e) {
+   if($('#employexperiencestartdate').val() != ''){
+    if(parseInt($('#employexperiencestartdate').val()) > parseInt($('#employexperienceenddate').val())){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ปีที่สิ้นสุดงานน้อยกว่าปีเริ่มทำงาน!',
+            });
+        $('#employexperienceenddate').val('') ;
+    }
+   }
+});
+
+$(document).on('change', '#employeducationyearend', function(e) {
+    if($('#employeducationyearstart').val() != ''){
+     if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
+         Swal.fire({
+             title: 'ผิดพลาด...',
+             text: 'ปีที่สิ้นสุดศึกษาน้อยกว่าปีเริ่มต้นศึกษา!',
+             });
+         $('#employeducationyearend').val('') ;
+     }
+    }
+ });
 
 $(document).on('change', '#cer1', function(e) {
     if($(this).is(":checked")){
@@ -775,14 +882,27 @@ $(document).on('click', '#btnaddprojectcertify', function(e) {
 });
 $(document).on('change', '#certify', function(e) {
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+            Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
-    formData.append('certifyname',$('#certifyname').val());
+    // formData.append('certifyname',$('#certifyname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/project/projectcertify/upload/add`,  //Server script to process data
             type: 'POST',
@@ -796,12 +916,14 @@ $(document).on('change', '#certify', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
+
                  $("#fulltbp_certify_wrapper_tr").html(html);
+                 $("#fulltbp_certify_wrapper").attr("hidden",false);
                  $('#modal_add_certify').modal('hide');
                  $('#certifyname').val('')
         }
@@ -827,7 +949,7 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -840,14 +962,27 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
 }); 
 $(document).on('change', '#award', function(e) {
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+            Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
-    formData.append('awardname',$('#awardname').val());
+    // formData.append('awardname',$('#awardname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/project/projectaward/add`,  //Server script to process data
             type: 'POST',
@@ -861,12 +996,13 @@ $(document).on('change', '#award', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_award_wrapper_tr").html(html);
+                 $("#fulltbp_award_wrapper").attr("hidden",false);
                  $('#modal_add_award').modal('hide');
                  
                  $('#awardname').val('')
@@ -893,7 +1029,7 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -906,14 +1042,27 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
 }); 
 $(document).on('change', '#standard', function(e) {
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+            Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
-    formData.append('standardname',$('#standardname').val());
+    // formData.append('standardname',$('#standardname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/project/standard/add`,  //Server script to process data
             type: 'POST',
@@ -927,12 +1076,13 @@ $(document).on('change', '#standard', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_standard_wrapper_tr").html(html);
+                 $("#fulltbp_standard_wrapper").attr("hidden",false);
                  $('#modal_add_standard').modal('hide');
                  $('#standardname').val('')
         }
@@ -958,7 +1108,7 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1331,13 +1481,24 @@ $(document).on('click', '#btnaddmarketcompetitive', function(e) {
 });
 
 $(document).on('change', '#businessmodelcanvas', function(e) {
-    if($('#bmcname').val() == ''){
-        return;
+    var file = this.files[0];
+    
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
     }
 
-    var file = this.files[0];
     if (this.files[0].size/1024/1024*1000 > 2048 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB!',
+            });
         return ;
     }
 
@@ -1345,7 +1506,7 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
     formData.append('attachmenttype','1');
-    formData.append('docname',$('#bmcname').val());
+    // formData.append('docname',$('#bmcname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/market/attachment/add`,  //Server script to process data
             type: 'POST',
@@ -1359,12 +1520,13 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_businessmodelcanvas_wrapper_tr").html(html);
+                 $("#fulltbp_businessmodelcanvas_wrapper").attr("hidden",false);
                  $('#modal_add_bmc').modal('hide');
         }
     });
@@ -1391,7 +1553,7 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1403,21 +1565,29 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
     });
 }); 
 $(document).on('change', '#swotfile', function(e) {
-    if($('#swotname').val() == ''){
-        return;
-    }
-
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+            Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
         return ;
     }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
     formData.append('attachmenttype','2');
-    formData.append('docname',$('#swotname').val());
+    // formData.append('docname',$('#swotname').val());
         $.ajax({
             url: `${route.url}/api/fulltbp/market/attachment/add`,  //Server script to process data
             type: 'POST',
@@ -1431,12 +1601,13 @@ $(document).on('change', '#swotfile', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
                     });
                  $("#fulltbp_swot_wrapper_tr").html(html);
+                 $("#fulltbp_swot_wrapper").attr("hidden",false);
                  $('#modal_add_swot').modal('hide');
         }
     });
@@ -1462,7 +1633,7 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1476,9 +1647,22 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
 
 $(document).on('change', '#financialplan', function(e) {
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
 
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+            Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
         return ;
     }
     var formData = new FormData();
@@ -1498,7 +1682,7 @@ $(document).on('change', '#financialplan', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1528,7 +1712,7 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -1564,6 +1748,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
             </tr>`
             });
          $("#fulltbp_sell_wrapper_tr").html(html);
+         $("#fulltbp_sell_wrapper").attr("hidden",false);
          $('#modal_add_sell').modal('hide');
     })
     .catch(error => {})
@@ -1705,6 +1890,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
             </tr>`
             });
          $("#fulltbp_debtpartner_wrapper_tr").html(html);
+         $("#fulltbp_debtpartner_wrapper").attr("hidden",false);
          $('#modal_add_debtpartner').modal('hide');
     })
     .catch(error => {})
@@ -1749,6 +1935,7 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
             </tr>`
             });
          $("#fulltbp_debtpartner_wrapper_tr").html(html);
+
          $('#modal_edit_debtpartner').modal('hide');
     })
     .catch(error => {})
@@ -1814,6 +2001,7 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
             </tr>`
             });
          $("#fulltbp_creditpartner_wrapper_tr").html(html);
+         $("#fulltbp_creditpartner_wrapper").attr("hidden",false);
          $('#modal_add_creditpartner').modal('hide');
     })
     .catch(error => {})
@@ -1926,15 +2114,15 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
         var html = ``;
         data.forEach(function (asset,index) {
             var checkspec = asset.specification;
-            if(checkspec == null){
-                var checkspec = '';
-            }
+            // if(checkspec == null){
+            //     var checkspec = '';
+            // }
             html += `<tr >                                        
                 <td> ${asset.asset} </td>                            
                 <td class="text-right"> ${parseFloat(asset.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td class="text-right"> ${asset.quantity} </td>                         
                 <td class="text-right"> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
-                <td> ${checkspec} </td> 
+                <td class="text-right"> ${parseFloat(asset.specification).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td> 
                     <a  data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
                 </td> 
@@ -2043,8 +2231,21 @@ $(document).on('click', '#btnaddreturnofinvestment', function(e) {
 $(document).on('change', '#companydoc', function(e) {
     if($('#companydocname').val() == '')return ;
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+            Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
         return ;
     }
     var formData = new FormData();
@@ -2064,7 +2265,7 @@ $(document).on('change', '#companydoc', function(e) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -2095,7 +2296,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
                     </tr>`
@@ -2124,8 +2325,21 @@ $(document).on('click', '#btneditquantityemploy', function(e) {
 
 $(document).on('change', '#organizeimg', function(e) {
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1024 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
         return ;
     }
     var formData = new FormData();
@@ -2216,74 +2430,54 @@ $('.steps-basic').steps({
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
-        if(currentIndex == 3 && newIndex == 4){
-            if($('.chkauthorizeddirector').filter(':checked').length == 0){
-                Swal.fire({
-                    title: 'ผิดพลาด!',
-                    text: 'ยังไม่ได้เลือกผู้ลงนามในแบบฟอร์มแผนธุรกิจเทคโนโลยี',
-                });
-                return false; 
+
+        if (currentIndex > newIndex) {
+            return true;
+        }
+
+        console.log(currentIndex + " " +  newIndex);
+
+       if(newIndex == 1){
+            if ($('#organizeimgholder').prop('src').includes("orgimg.png") == true)
+            {
+                $("#organizationcharterror").attr("hidden",false);
+                return;
             }else{
-                if($('#usersignature').val() == 2){
-                    var iserror = false;
-                    $(".chkauthorizeddirector:checked").each(function(){
-                        if($(this).data('id') == 1){
-                            iserror = true;
-                        }
-                    });
-                    if(iserror == true ){
-                        Swal.fire({
-                                title: 'ผิดพลาด!',
-                                text: 'มีผู้ลงนามที่ยังไม่ได้เพิ่มลายมือชื่อ',
-                            })
-                            return false;
-                    }
-                }
+                $("#organizationcharterror").attr("hidden",true);
+            }
+    
+            if ($('#companyhistory').summernote('isEmpty'))
+            {
+                $("#companyhistoryerror").attr("hidden",false);
+                return;
+            }else{
+                $("#companyhistoryerror").attr("hidden",true);
             }
 
-        }
-
-       if ($('#organizeimgholder').prop('src').includes("orgimg.png") == true)
-       {
-           $("#organizationcharterror").attr("hidden",false);
-           return;
-       }else{
-           $("#organizationcharterror").attr("hidden",true);
-       }
-
-        if ($('#companyhistory').summernote('isEmpty'))
-        {
-            $("#companyhistoryerror").attr("hidden",false);
-            return;
-        }else{
-            $("#companyhistoryerror").attr("hidden",true);
-        }
-
-        var fulltbp_companyemploy_wrapper_tr = $('#fulltbp_companyemploy_wrapper_tr tr').length;
-        if(fulltbp_companyemploy_wrapper_tr == 0){
-            $("#fulltbp_companyemploy_wrapper_error").attr("hidden",false);
-            return false;
-        }else{
-            $("#fulltbp_companyemploy_wrapper_error").attr("hidden",true);
-        }
-
-        var fulltbp_companystockholder_wrapper_tr = $('#fulltbp_companystockholder_wrapper_tr tr').length;
-        if(fulltbp_companystockholder_wrapper_tr == 0){
-            $("#fulltbp_companystockholder_wrapper_error").attr("hidden",false);
-            return false;
-        }else{
-            $("#fulltbp_companystockholder_wrapper_error").attr("hidden",true);
-        }
-       
-        var fulltbp_researcher_wrapper_tr = $('#fulltbp_researcher_wrapper_tr tr').length;
-        if(fulltbp_researcher_wrapper_tr == 0){
-            $("#fulltbp_researcher_wrapper_error").attr("hidden",false);
-            return false;
-        }else{
-            $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
-        }
-
-        if(currentIndex == 1){
+            var fulltbp_companyemploy_wrapper_tr = $('#fulltbp_companyemploy_wrapper_tr tr').length;
+            if(fulltbp_companyemploy_wrapper_tr == 0){
+                $("#fulltbp_companyemploy_wrapper_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#fulltbp_companyemploy_wrapper_error").attr("hidden",true);
+            }
+    
+            var fulltbp_companystockholder_wrapper_tr = $('#fulltbp_companystockholder_wrapper_tr tr').length;
+            if(fulltbp_companystockholder_wrapper_tr == 0){
+                $("#fulltbp_companystockholder_wrapper_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#fulltbp_companystockholder_wrapper_error").attr("hidden",true);
+            }
+           
+            var fulltbp_researcher_wrapper_tr = $('#fulltbp_researcher_wrapper_tr tr').length;
+            if(fulltbp_researcher_wrapper_tr == 0){
+                $("#fulltbp_researcher_wrapper_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
+            }
+       }else if(newIndex == 2){
             if ($('#projectabtract_input').summernote('isEmpty'))
             {
                 $("#projectabtract_input_error").attr("hidden",false);
@@ -2324,17 +2518,17 @@ $('.steps-basic').steps({
                 $("#projectechdevproblem_input_error").attr("hidden",true);
             }
 
-           if($("#cer1").is(":checked") == true){
+        if($("#cer1").is(":checked") == true){
                 if(parseInt($("#cer1qty").val()) < 1){
                     $("#cer1qtydiv").attr("hidden",false);
                     $("#cer1qty_error").attr("hidden",false);
                     return;
                 }
-           }else{
+        }else{
                 $("#cer1qty_error").attr("hidden",true);
-           }
+        }
 
-           if($("#cer2").is(":checked") == true){
+        if($("#cer2").is(":checked") == true){
                 if(parseInt($("#cer2qty").val()) < 1){
                     $("#cer2qtydiv").attr("hidden",false);
                     $("#cer2qty_error").attr("hidden",false);
@@ -2418,8 +2612,6 @@ $('.steps-basic').steps({
                     $("#cer11qty_error").attr("hidden",true);
             }
 
-
-
             if ($('#projectinnovation_input').summernote('isEmpty'))
             {
                 $("#projectinnovation_input_error").attr("hidden",false);
@@ -2451,8 +2643,7 @@ $('.steps-basic').steps({
             }else{
                 $("#notmatch_wrapper_error").attr("hidden",true);
             }
-
-        }else if(currentIndex == 2){
+       }else if(newIndex == 3){
             if ($('#analysis').summernote('isEmpty'))
             {
                 $("#analysis_error").attr("hidden",false);
@@ -2474,8 +2665,38 @@ $('.steps-basic').steps({
             }else{
                 $("#swot_error").attr("hidden",true);
             }
-        }
-
+       }else if(newIndex == 4){
+            if($('.chkauthorizeddirector').filter(':checked').length == 0){
+                Swal.fire({
+                    title: 'ผิดพลาด!',
+                    text: 'ยังไม่ได้เลือกผู้ลงนามในแบบฟอร์มแผนธุรกิจเทคโนโลยี',
+                });
+                return false; 
+            }else{
+                if($('#usersignature').val() == 2){
+                    var iserror = false;
+                    $(".chkauthorizeddirector:checked").each(function(){
+                        if($(this).data('id') == 1){
+                            iserror = true;
+                        }
+                    });
+                    if(iserror == true ){
+                        Swal.fire({
+                                title: 'ผิดพลาด!',
+                                text: 'มีผู้ลงนามที่ยังไม่ได้เพิ่มลายมือชื่อ',
+                            })
+                            return false;
+                    }
+                }
+            }
+            if($('#usersignature').val() == 0){
+                Swal.fire({
+                    title: 'ผิดพลาด!',
+                    text: 'กรุณาเลือกการใช้ลายมือชื่ออิเล็กทรอนิกส์',
+                });
+                return false;
+            }
+       }
 
         form.validate().settings.ignore = ':disabled,:hidden';
         return form.valid();
@@ -2613,8 +2834,21 @@ $(document).on("click",".deleteprojectmember",function(e){
 
 $(document).on('change', '#boardattachment', function(e) {
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
         return ;
     }
     var formData = new FormData();
@@ -2671,7 +2905,7 @@ $(document).on("click",".deleteboardattachment",function(e){
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
                         <td> 
-                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                            <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             ${deletecode}                                       
                         </td>
                     </tr>`
@@ -2744,11 +2978,24 @@ $(document).on('click', '#submitfulltbp', function(e) {
 
 $(document).on('change', '#fulltbppdf', function(e) {
     var file = this.files[0];
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (file === undefined) {
         return ;
     }
     if (this.files[0].size/1024/1024*1000 > 2000 ){
-        alert('ไฟล์ขนาดมากกว่า 2 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
         return ;
     }
     var formData = new FormData();
@@ -2816,7 +3063,8 @@ $(document).on('click', '#btnaddboard', function(e) {
     Employ.getEmployPosition().then(data => {
         var selectemployposition = `<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">`;
         data.forEach(function (position,index) {
-                if(index <= 4){
+            
+                if(index <= 4 && index != 0){
                     selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
                 }
             });
@@ -2828,6 +3076,34 @@ $(document).on('click', '#btnaddboard', function(e) {
     .catch(error => {})
  
     $('#modal_add_employ').modal('show');
+});
+
+$(document).on('click', '#btnaddboardceo', function(e) {
+    $('#employname_ceo').val('') ;
+    $('#employlastname_ceo').val('');
+    // $('#otherboardposition').val('');
+    $('#employphone_ceo').val('');
+    $('#otherprefix_ceo').val('');
+    $('#employworkphone_ceo').val('');
+    $('#employemail_ceo').val('');
+    $("#otherprefix_ceo_wrapper").attr("hidden",true);
+    // $("#employ_otherposition_wrapper").attr("hidden",true);
+
+    Employ.getEmployPosition().then(data => {
+        // var selectemployposition = `<select id="employposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">`;
+        // data.forEach(function (position,index) {
+        //         if(index <= 4){
+        //             selectemployposition += `<option value="${position['id']}" >${position['name']}</option>`
+        //         }
+        //     });
+        // selectemployposition += `</select>`;
+        
+        // $("#employ_position_wrapper").html(selectemployposition);
+        $(".form-control-select2").select2();
+    })
+    .catch(error => {})
+ 
+    $('#modal_add_ceo').modal('show');
 });
 
 
@@ -2954,7 +3230,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
                   <td> 
-                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                     ${deletecode} 
                   </td> 
               </tr>`
@@ -3086,7 +3362,7 @@ function modaltrigger(id) {
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
                   <td> 
-                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                    <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                      
                   </td> 
               </tr>`
@@ -3144,7 +3420,7 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
        var dataid = 0;
         var html = ``;
         data.forEach(function (employ,index) {
-            if(employ.employ_position_id < 6 ){
+            if(employ.employ_position_id < 6 && employ.employ_position_id != 1 ){
                 var prefix = employ.prefix['name'];
                 var position = employ.employposition['name'];
                 if(prefix == 'อื่นๆ'){
@@ -3175,6 +3451,55 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
             $("#fulltbp_companyemploy_wrapper").attr("hidden",true);
          }
          $('#modal_add_employ').modal('hide');
+         modaltrigger(dataid);
+    })
+    .catch(error => {})
+});
+
+
+$(document).on('click', '#btn_modal_add_ceo', function(e) {
+    if($('#employname_ceo').val() == '' || $('#employlastname_ceo').val() == '' || $('#employphone_ceo').val() == '' || $('#employworkphone_ceo').val() == '' || $('#employemail_ceo').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
+        return;
+    }
+    Employ.saveEmploy($('#employprefix_ceo').val(),$('#otherprefix_ceo').val(),$('#employname_ceo').val(),$('#employlastname_ceo').val(),1,null,$('#employphone_ceo').val(),$('#employworkphone_ceo').val(),$('#employemail_ceo').val()).then(data => {
+       var dataid = 0;
+        var html = ``;
+        data.forEach(function (employ,index) {
+            if(employ.employ_position_id == 1 ){
+                var prefix = employ.prefix['name'];
+                var position = employ.employposition['name'];
+                if(prefix == 'อื่นๆ'){
+                    prefix = employ.otherprefix;
+                }
+                if(position == 'อื่นๆ'){
+                    position = employ.otherposition;
+                }	
+                dataid = employ.id;
+                html += `<tr >                                        
+                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td> ${position} </td> 
+                    <td> ${employ.phone} </td>                                            
+                    <td> ${employ.workphone} </td> 
+                    <td> ${employ.email} </td> 
+                    <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
+                </tr>`
+            }
+      
+            });
+
+         $("#fulltbp_companyemploy_ceo_wrapper_tr").html(html);
+         if(data.length > 0){
+            $("#fulltbp_companyemploy_ceo_wrapper").attr("hidden",false);
+            $("#fulltbp_companyemploy_wrapper_ceo_error").attr("hidden",true);
+         }else{
+            $("#fulltbp_companyemploy_ceo_wrapper").attr("hidden",true);
+         }
+         $('#modal_add_ceo').modal('hide');
          modaltrigger(dataid);
     })
     .catch(error => {})

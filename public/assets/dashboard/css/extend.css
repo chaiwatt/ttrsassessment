@@ -45,7 +45,7 @@ select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
 }
 
 .blink {
-    animation: blinker 1s linear infinite;
+    animation: blinker 2s linear infinite;
     color: #f5f8fa;
     font-size: 15px;
     font-weight: 100
@@ -56,7 +56,7 @@ select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
     }
   }
   .blink-one {
-    animation: blinker-one 1s linear infinite;
+    animation: blinker-one 2s linear infinite;
   }
   @keyframes blinker-one {
     0% {
@@ -64,7 +64,7 @@ select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
     }
   }
   .blink-two {
-    animation: blinker-two 1.4s linear infinite;
+    animation: blinker-two 2.4s linear infinite;
   }
   @keyframes blinker-two {
     100% {
@@ -72,8 +72,19 @@ select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
     }
   }
 
+	input {
+		font-size:16px !important;
+    height: 41px !important;
+	}
 
+  a {
+		font-size:16px !important;
+	}
  
+  button {
+		font-size:16px !important;
+    /* height: 41px !important; */
+	}
 
 .card-footer {
     padding: 2.75rem 1.25rem;
@@ -100,6 +111,10 @@ h4{
     text-align: center;
     margin: 0;
     padding-bottom: 10px;
+}
+
+th {
+  text-align: center !important;
 }
 
 .color-01{

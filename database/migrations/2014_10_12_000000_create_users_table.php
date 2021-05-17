@@ -34,14 +34,14 @@ class CreateUsersTable extends Migration
             $table->string('signature')->nullable();
             $table->string('cover')->nullable();
             $table->string('address',150)->nullable();
-            $table->unsignedBigInteger('province_id')->default(4);  //ปทุมธานี
-            $table->unsignedBigInteger('amphur_id')->default(67);   //คลองหลวง
-            $table->unsignedBigInteger('tambol_id')->default(367);  //คลองหนึ่ง
+            $table->unsignedBigInteger('province_id')->nullable();  //ปทุมธานี
+            $table->unsignedBigInteger('amphur_id')->nullable();   //คลองหลวง
+            $table->unsignedBigInteger('tambol_id')->nullable();  //คลองหนึ่ง
             $table->char('postal',5)->nullable();
             $table->string('address1',150)->nullable();
-            $table->unsignedBigInteger('province1_id')->default(4);  //ปทุมธานี
-            $table->unsignedBigInteger('amphur1_id')->default(67);   //คลองหลวง
-            $table->unsignedBigInteger('tambol1_id')->default(367);  //คลองหนึ่ง
+            $table->unsignedBigInteger('province1_id')->nullable();  //ปทุมธานี
+            $table->unsignedBigInteger('amphur1_id')->nullable();   //คลองหลวง
+            $table->unsignedBigInteger('tambol1_id')->nullable();  //คลองหนึ่ง
             $table->char('postal1',5)->nullable();
             $table->unsignedBigInteger('verify_type')->default(1);
             $table->unsignedBigInteger('allow_assessment')->default(1);

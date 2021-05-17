@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Company;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Http\Requests\CrIndustryGroupRequest;
@@ -32,12 +33,20 @@ class SettingAdminDashboardIndustryGroupController extends Controller
         return view('setting.admin.dashboard.industrygroup.edit')->withIndustrygroup($industrygroup);
     }
     public function EditSave(CrIndustryGroupRequest $request,$id){
+        $check = Company::where('industry_group_id',$id)->first();
+        if(!Empty($check)){
+            return redirect()->route('setting.admin.dashboard.industrygroup')->withError('มีการใช้กลุ่มอุตสาหกรรมนี้แล้ว');
+        }
         $industrygroup = IndustryGroup::find($id)->update([
             'name' => $request->industrygroup
         ]);
         return redirect()->route('setting.admin.dashboard.industrygroup')->withSuccess('แก้ไขกลุ่มอุตสาหกรรมสำเร็จ');
     }
     public function Delete($id){
+        $check = Company::where('industry_group_id',$id)->first();
+        if(!Empty($check)){
+            return redirect()->route('setting.admin.dashboard.industrygroup')->withError('มีการใช้กลุ่มอุตสาหกรรมนี้แล้ว');
+        }
         IndustryGroup::find($id)->delete();
         return redirect()->route('setting.admin.dashboard.industrygroup')->withSuccess('ลบกลุ่มอุตสาหกรรมสำเร็จ');
     }

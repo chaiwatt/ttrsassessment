@@ -29,9 +29,9 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                 <ul class="nav nav-tabs nav-justified alpha-grey mb-0" id="usertype">
-                    <li class="nav-item bg-info-300" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">ผู้ขอรับการประเมิน</span></h6></a></li>
-                    <li class="nav-item bg-teal-300" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">เจ้าหน้าที่ TTRS</h6></a></li>
-                    <li class="nav-item bg-warning-300" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">ผู้เชี่ยวชาญ</h6></a></li>
+                    <li class="nav-item bg-info-300" style="margin-right:5px" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">ผู้ขอรับการประเมิน</span></h6></a></li>
+                    <li class="nav-item bg-teal-300" style="margin-right:5px" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">เจ้าหน้าที่ TTRS</h6></a></li>
+                    <li class="nav-item bg-warning-300" style="margin-right:5px" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">ผู้เชี่ยวชาญ</h6></a></li>
                 </ul>
                 
                 <div class="tab-content card-body">
@@ -179,7 +179,7 @@
         <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/pwstrength/pwstrength.js')}}"></script>
-        {{-- <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script> --}}
+        <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
         {{-- <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script> --}}
         {{-- <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script> --}}
         <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
@@ -227,7 +227,17 @@
                 }
             });
 
-            $(document).on('keyup', '#password', function(e) {
+            $(document).on('change', '#password', function(e) {
+                var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
+                if(re.test($(this).val()) == false){
+                  $(this).val('')
+                    Swal.fire({
+                        title: 'ผิดพลาด...',
+                        text: 'ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร',
+                    }).then((result) => {});
+                    return false;
+                }
+
                 if($(this).val() == ''){
                     $(".pwstrength_viewport_progress").attr("hidden",true);
                 }else{
@@ -300,17 +310,17 @@
                 return "";
             }
 
-        $(document).on('keyup', '.engonly', function(e) {
-                var pattern_eng = /^[0-9a-zA-Z]+$/;
-                if(!$(this).val().match(pattern_eng) && $(this).val() != ''){
-                    $(this).val('')
-                    Swal.fire({
-                        title: 'ผิดพลาด...',
-                        text: 'ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร',
-                    }).then((result) => {});
-                    return false;
-                }
-        });
+        // $(document).on('keyup', '.engonly', function(e) {
+        //         var pattern_eng = /^[0-9a-zA-Z]+$/;
+        //         if(!$(this).val().match(pattern_eng) && $(this).val() != ''){
+        //             $(this).val('')
+        //             Swal.fire({
+        //                 title: 'ผิดพลาด...',
+        //                 text: 'ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร',
+        //             }).then((result) => {});
+        //             return false;
+        //         }
+        // });
 
         $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
            $(this).val($(this).val().replace(/[^\d].+/, ""));
@@ -321,6 +331,7 @@
         
         $(document).on('click', '#genpassword', function(e) {
             var genpass = password_generator(10);
+            $('#password').attr("type", "text");
             $('#password').val(genpass);
             $('#password-confirm').val(genpass);
             $('#password').keyup();

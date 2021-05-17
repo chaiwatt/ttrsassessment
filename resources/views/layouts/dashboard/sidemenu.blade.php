@@ -6,8 +6,8 @@
 {{-- @if ($test == 1) --}}
     @if (Auth::user()->user_type_id == 3)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}">
-    <a href="#" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
-    <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
+    <a href="{{route('dashboard.expert.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
+    {{-- <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">รายงาน</a></li>
         @if (Auth::user()->expertdetail->expert_type_id == 1)
             <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
@@ -16,16 +16,16 @@
                 @endif
             </a></li>								
         @endif
-    </ul>
+    </ul> --}}
     </li>
     @endif
 
     @if (Auth::user()->user_type_id >=4 )
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'nav-item-expanded nav-item-open':''}}">
-    <a href="#" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
-    <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
+    <a href="{{route('dashboard.admin.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
+    {{-- <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.admin.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'active':''}}">หน้าแรก</a></li>     
-    </ul>
+    </ul> --}}
     </li>
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
     <a href="#" class="nav-link"><i class="icon-archive"></i> <span>โครงการ</span>
@@ -165,10 +165,10 @@
 
     @if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'nav-item-expanded nav-item-open':''}}">
-        <a href="#" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
-        <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
+        <a href="{{route('dashboard.company.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
+        {{-- <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
             <li class="nav-item"><a href="{{route('dashboard.company.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'active':''}}">หน้าแรก</a></li>     
-        </ul>
+        </ul> --}}
     </li>
     @if (!Empty(Auth::user()->company->businessplan))
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.project')?'nav-item-expanded nav-item-open':''}}">

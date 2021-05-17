@@ -172,12 +172,14 @@
 	<script src="{{asset('assets/dashboard/js/handsontable.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/forms/styling/uniform.min.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script>
-
+	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> --}}
+	
 	<script src="{{asset('assets/dashboard/js/plugins/datatables/datatables.min.js')}}"></script>
 
 	<script src="{{asset('assets/dashboard/js/app.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/demo_pages/form_layouts.js')}}"></script>
-
+	<script src="{{asset('assets/dashboard/js/removenextaction.js')}}"></script>
+	
 	<script>
 		var route = {
 			 url: "{{ url('/') }}",

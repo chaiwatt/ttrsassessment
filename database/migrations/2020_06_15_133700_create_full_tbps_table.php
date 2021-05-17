@@ -19,7 +19,7 @@ class CreateFullTbpsTable extends Migration
             $table->foreign('mini_tbp_id')->references('id')->on('mini_t_b_p_s')->onDelete('cascade');
             $table->date('submitdate')->nullable();
             $table->string('fulltbp_code',20)->nullable();
-            $table->unsignedBigInteger('signature_status_id')->default(1);
+            $table->unsignedBigInteger('signature_status_id')->default(0);
             // $table->string('file',250)->nullable();
             $table->char('status',1)->default(1);
             $table->char('asic',1)->nullable();

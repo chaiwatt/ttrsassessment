@@ -83,12 +83,13 @@
 
     <!-- Content area -->
     <div class="content">
-        @if (Session::has('success'))
+        {{-- @if (Session::has('success'))
             <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                 {{ Session::get('success') }}
             </div>
-        @elseif( Session::has('error') )
+        @elseif --}}
+		@if( Session::has('error') )
             <div class="alert alert-warning alert-styled-left alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                 {{ Session::get('error') }}
@@ -281,6 +282,7 @@
 								<div class="row">
 									<legend>
 										<label style="font-size: 16px"><strong>วัตถุประสงค์ของการยื่นขอรับบริการประเมิน TTRS (สามารถเลือกได้มากกว่า 1 ข้อ)</strong></label>
+										<span id="noneselect" class="form-text text-danger" style="font-size: 16px" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ</span>
 									</legend>
 									<div class="col-md-12">
 										<div class="form-group mb-3 mb-md-2">
@@ -312,7 +314,7 @@
 																</div>
 																<div class="col-md-6">
 																	<div class="form-group">
-																		<label for="">วงเงินสินเชื่อที่ต้องการ</label>
+																		<label for="">มูลค่าเงินลงทุนที่ต้องการ</label>
 																		<input type="text" name="finance1loan" id="finance1loan" value="{{old('finance1loan') ?? $minitbp->finance1_loan}}" class="form-control form-control-lg numeralformat10" >
 																	</div>
 																</div>
@@ -344,19 +346,19 @@
 															<div class="row" id="financediv2" style="margin-top: 5px" @if (Empty($minitbp->finance4_joint_min) || Empty($minitbp->finance4)) hidden @endif >
 																<div class="col-md-4">
 																	<div class="form-group">
-																		<label for="">วงเงินสินเชื่อที่ต้องการ</label>
+																		<label for="">มูลค่าเงินลงทุนที่ต้องการ</label>
 																		<input type="text" name ="finance4joint" id="finance4joint" class="form-control form-control-lg numeralformat10" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}">
 																	</div>
 																</div>
 																<div class="col-md-4">
 																	<div class="form-group">
-																		<label for="">สัดส่วนลงทุนของบริษัทและผู้ถือหุ้นอื่น %</label>
+																		<label for="">สัดส่วนการลงทุนของบริษัทและผู้ถือหุ้นอื่น %</label>
 																		<input type="text" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}">
 																	</div>
 																</div>
 																<div class="col-md-4">
 																	<div class="form-group">
-																		<label for="">สัดส่วนการลงทุนของสวทช. %</label>
+																		<label for="">สัดส่วนการลงทุนของ สวทช. %</label>
 																		<input type="text" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg numeralformat2" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}} readonly">
 																	</div>
 																</div>
@@ -520,6 +522,7 @@
 										<div class="form-group">
 											<label for="">ลายมือชื่ออิเล็กทรอนิกส์<span class="text-danger">*</span></label>
 											<select name="signature" id="usersignature" value="{{$minitbp->signature_status_id}}" id="" class="form-control form-control-lg form-control-select2">
+												<option value="0">โปรดเลือก</option>
 												@foreach ($signaturestatuses as $signaturestatus)
 													<option value="{{$signaturestatus->id}}" @if($minitbp->signature_status_id == $signaturestatus->id) selected @endif >{{$signaturestatus->name}}</option>
 												@endforeach
@@ -535,7 +538,7 @@
 											<div style="width:100%;height:600px;" class="col-md-12 center"  >
 												<div id="example1"></div>
 											</div>
-											<input type="file" style="display:none;" id="minitbppdf" accept="application/pdf"/>
+											<input type="file" style="display:none;" id="minitbppdf" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 										</div>
 									</div>
 									<div class="col-md-12 " id="appceptagreement_wrapper">
@@ -616,8 +619,28 @@
 				form.find('.body:eq(' + newIndex + ') label.error').remove();
 				form.find('.body:eq(' + newIndex + ') .error').removeClass('error');
 			}
-			if(currentIndex == 2){
+			// console.log(newIndex);
+			if(newIndex == 3){
+				if($('#usersignature').val() == 0){
+					Swal.fire({
+						title: 'ผิดพลาด!',
+						text: 'กรุณาเลือกการใช้ลายมือชื่ออิเล็กทรอนิกส์',
+					});
+					return false;
+				}
+			}
+			if(newIndex == 2){
+				if($("#finance1").is(":checked") == false && $("#finance2").is(":checked") == false && $("#finance3").is(":checked") == false && $("#finance4").is(":checked") == false
+				&& $("#nonefinance1").is(":checked") == false && $("#nonefinance2").is(":checked") == false && $("#nonefinance3").is(":checked") == false && $("#nonefinance4").is(":checked") == false
+				&& $("#nonefinance5").is(":checked") == false && $("#nonefinance6").is(":checked") == false){
+					$("#noneselect").attr("hidden",false);
+					return false;
+				}else{
+					$("#noneselect").attr("hidden",true);
+				}
+			}
 
+			if(currentIndex == 2){
 				if($('.chkauthorizeddirector').filter(':checked').length == 0){
 					Swal.fire({
 						title: 'ผิดพลาด!',
@@ -657,8 +680,8 @@
 					$("#appceptagreement_wrapper").attr("hidden",true);
 				}
 				$(document).find(".actions ul").append(`
-					<li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-					<li class='libtn' ${hidden}><a  id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
+					<li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-download4 ml-2' /></a></li>
+					<li class='libtn' ${hidden}><a  id='submitminitbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งแบบคำขอฯ<i class='icon-paperplane ml-2' /></a></li>
 				`);
 				var selected_director = [];
 					$(".chkauthorizeddirector:checked").each(function(){
@@ -728,13 +751,7 @@
 					var pdfpath = "{{url('/')}}" + '/'+ "{{$minitbp->attachment}}";
 					$('#pdfname').val("{{$minitbp->attachment}}");
 					PDFObject.embed(pdfpath, "#example1");
-
-					// createPdf($('#minitbpid').val()).then(data => {
-					// 	var pdfpath = route.url + '/'+ data;
-					// 	var url = pdfpath;
-						$('#downloadpdf').attr('href', pdfpath);
-					// 	PDFObject.embed(pdfpath, "#example1");
-					// }).catch(error => {})
+					$('#downloadpdf').attr('href', pdfpath);
 				}
 			
 			}else{
@@ -819,10 +836,10 @@
 				required: 'กรุณากรอกชื่อโครงการ'
 			},			
 			finance1loan: {
-				required: 'กรุณากรอกวงเงินสินเชื่อที่ต้องการ'
+				required: 'กรุณากรอกมูลค่าเงินลงทุนที่ต้องการ'
 			},			
 			finance4joint: {
-				required: 'กรุณากรอกวงเงินสินเชื่อที่ต้องการ'
+				required: 'กรุณากรอกมูลค่าเงินลงทุนที่ต้องการ'
 			},			
 			finance4jointmin: {
 				required: 'กรุณากรอกสัดส่วนลงทุน บริษัท %'
@@ -860,15 +877,15 @@
 		}
 	});
 
-	$(".chkauthorizeddirector").on('change', function() {
-		if($('.chkauthorizeddirector').filter(':checked').length > 3){
-			$(this).prop('checked', false);
-			Swal.fire({
-				title: 'ผิดพลาด!',
-				text: 'เลือกผู้ลงนามได้ไม่เกิน 3 คน',
-			});
-		}
-	});
+	// $(".chkauthorizeddirector").on('change', function() {
+	// 	if($('.chkauthorizeddirector').filter(':checked').length > 3){
+	// 		$(this).prop('checked', false);
+	// 		Swal.fire({
+	// 			title: 'ผิดพลาด!',
+	// 			text: 'เลือกผู้ลงนามได้ไม่เกิน 3 คน',
+	// 		});
+	// 	}
+	// });
 
 	$("#finance4jointmin").on('keyup', function() {
 		$("#finance4jointmax").val(100-$("#finance4jointmin").val());
@@ -896,13 +913,13 @@
 	$(document).on('click', '#submitminitbp', function(e) {
 		if($('#appceptagreement').is(':checked') === false){
 			Swal.fire({
-				title: 'ผิดพลาด!',
+				title: 'ผิดพลาด',
 				type: 'warning',
-				text: 'กรุณารับรองว่าข้อมูลทั้งหมดเป็นความจริง',
+				html: 'โปรดทำเครื่องหมาย <i class="icon-checkbox-checked"></i> เพื่อรับรองข้อมูลก่อนดำเนินการ',
 			});
 			return;
 		}
-		var text = 'ส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
+		var text = 'ยืนยันการส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
 		if($('#usersignature').val() == 1){
 			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF ที่ลงลายมือชื่อเรียบร้อยแล้ว'
 		}
@@ -928,8 +945,8 @@
 						$("#appceptagreement_wrapper").attr("hidden",true);
 							var html = ``;
 							Swal.fire({
-								title: 'สำเร็จ...',
-								text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+								title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
+								text: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทางอีเมลที่ท่านแจ้งไว้',
 							}).then((result) => {
 								window.location.replace(`${route.url}/dashboard/company/report`);
 							});
@@ -942,11 +959,24 @@
 
 	$(document).on('change', '#minitbppdf', function(e) {
 		var file = this.files[0];
+		var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+		var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+		if(!validExtensions.includes(fextension)){
+			Swal.fire({
+				title: 'ผิดพลาด...',
+				text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+				});
+			this.value = "";
+			return false;
+		}
 		if (file === undefined) {
 			return ;
 		}
 		if (this.files[0].size/1024/1024*1000 > 2000 ){
-			alert('ไฟล์ขนาดมากกว่า 2 MB');
+			Swal.fire({
+				title: 'ผิดพลาด...',
+				text: 'ไฟล์ขนาดมากกว่า 2 MB',
+				});
 			return ;
 		}
 		var formData = new FormData();

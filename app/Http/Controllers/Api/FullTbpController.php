@@ -111,7 +111,8 @@ class FullTbpController extends Controller
         }
         $companystockholders = StockHolderEmploy::where('company_id',$company->id)->get();
         $fulltbpprojectplans =  FullTbpProjectPlan::where('full_tbp_id',$request->id)->get();
-        $fulltbpsignatures = FullTbpSignature::where('full_tbp_id',$request->id)->get();
+        $fulltbpgant =  FullTbpGantt::where('full_tbp_id',$request->id)->first();
+        $fulltbpsignatures = FullTbpSignature::where('full_tbp_id',$request->id)->orderBy('employ_position_id','asc')->get();
         $data = [
             'fulltbp' => $fulltbp,
             'companyboards' => $companyboards,
@@ -123,7 +124,8 @@ class FullTbpController extends Controller
             'allyears' => $allyears,
             'fulltbpgantt' => $fulltbpgantt,
             'fulltbpprojectplans' => $fulltbpprojectplans,
-            'fulltbpsignatures' => $fulltbpsignatures
+            'fulltbpsignatures' => $fulltbpsignatures,
+            'fulltbpgant' => $fulltbpgant
         ];
 
         $generalinfo = GeneralInfo::first();
@@ -216,7 +218,7 @@ class FullTbpController extends Controller
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name .' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a> ';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name .' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a> ';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
@@ -283,7 +285,7 @@ class FullTbpController extends Controller
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>  ';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>  ';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
@@ -322,6 +324,11 @@ class FullTbpController extends Controller
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Leader ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว สำหรับโครงการ' . $minitbp->project . ' บริษัท' . $company->name ;
             $alertmessage->save();
+
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+
             $membermails[] = $user->email;
         }
 
@@ -334,6 +341,10 @@ class FullTbpController extends Controller
         $alertmessage->messagebox_id = $messagebox->id;
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' สร้างปฏิทินนัดหมายการสรุปคะแนน โครงการ' . $minitbp->project . ' บริษัท' . $company->name ;
         $alertmessage->save();
+
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
 
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมายการสรุปคะแนน โครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน Leader<br><br> ท่านได้ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว กรุณาสร้างปฏิทินนัดหมายการสรุปคะแนน โครงการ' . $minitbp->project . ' บริษัท' . $company->name . 'โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 

@@ -52,7 +52,7 @@ class CreateMiniTBPSTable extends Migration
             $table->unsignedBigInteger('managerposition_id')->nullable();
             $table->string('website',250)->nullable();
             $table->string('attachment',250)->nullable();
-            $table->unsignedBigInteger('signature_status_id')->default(1);
+            $table->unsignedBigInteger('signature_status_id')->default(0);
             $table->char('submit',1)->default('1');
             $table->text('jdmessage')->nullable();
             $table->string('otherbank')->nullable();

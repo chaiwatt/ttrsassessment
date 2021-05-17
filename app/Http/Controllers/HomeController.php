@@ -226,10 +226,10 @@ class HomeController extends Controller
 
         $companyaddress = new CompanyAddress();
         $companyaddress->company_id = $company->id;
-        $companyaddress->province_id = 4;
-        $companyaddress->amphur_id = 67;
-        $companyaddress->tambol_id = 367;
-        $companyaddress->postalcode = '12120';
+        // $companyaddress->province_id = 4;
+        // $companyaddress->amphur_id = 67;
+        // $companyaddress->tambol_id = 367;
+        // $companyaddress->postalcode = '12120';
         $companyaddress->save(); 
     }
 
@@ -257,10 +257,10 @@ class HomeController extends Controller
 
         $companyaddress = new CompanyAddress();
         $companyaddress->company_id = $company->id;
-        $companyaddress->province_id = 4;
-        $companyaddress->amphur_id = 67;
-        $companyaddress->tambol_id = 367;
-        $companyaddress->postalcode = '12120';
+        // $companyaddress->province_id = 4;
+        // $companyaddress->amphur_id = 67;
+        // $companyaddress->tambol_id = 367;
+        // $companyaddress->postalcode = '12120';
         $companyaddress->save(); 
     }
 
@@ -287,10 +287,10 @@ class HomeController extends Controller
 
         $companyaddress = new CompanyAddress();
         $companyaddress->company_id = $company->id;
-        $companyaddress->province_id = 4;
-        $companyaddress->amphur_id = 67;
-        $companyaddress->tambol_id = 367;
-        $companyaddress->postalcode = '12120';
+        // $companyaddress->province_id = 4;
+        // $companyaddress->amphur_id = 67;
+        // $companyaddress->tambol_id = 367;
+        // $companyaddress->postalcode = '12120';
         $companyaddress->save(); 
 
         $officerdetail = new OfficerDetail();
@@ -320,10 +320,10 @@ class HomeController extends Controller
 
         $companyaddress = new CompanyAddress();
         $companyaddress->company_id = $company->id;
-        $companyaddress->province_id = 4;
-        $companyaddress->amphur_id = 67;
-        $companyaddress->tambol_id = 367;
-        $companyaddress->postalcode = '12120';
+        // $companyaddress->province_id = 4;
+        // $companyaddress->amphur_id = 67;
+        // $companyaddress->tambol_id = 367;
+        // $companyaddress->postalcode = '12120';
         $companyaddress->save(); 
 
         $expertdetail = new ExpertDetail();

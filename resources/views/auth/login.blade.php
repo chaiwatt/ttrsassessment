@@ -40,7 +40,7 @@
                 <div class="form-group form-group-feedback form-group-feedback-left">
                     <input id="password" type="password" class="form-control form-control-lg" name="password" required>
                     <div class="form-control-feedback">
-                        <i class="icon-lock2 text-muted"></i>
+                        <i class="icon-eye-blocked text-muted toggle_password"></i>
                     </div>
                 </div>
                 <div class="form-group d-flex align-items-center">
@@ -72,8 +72,27 @@
         </div>
     </div>
 </div>
+@section('pageScript')
+<script>
+    $(".toggle_password").click(function() {
+             var check = $('#password').attr("type");
+             if (check == "password") {
+                 $('.toggle_password').removeClass("icon-eye-blocked");
+                 $('.toggle_password').addClass("icon-eye");
+                 $('#password').attr("type", "text");
+             } else {
+                 $('.toggle_password').addClass("icon-eye-blocked");
+                 $('.toggle_password').removeClass("icon-eye");
+                 $('#password').attr("type", "password");
+             }
+         });
+</script>
+@stop
+{{--  --}}
 
 @endsection
+
+
 
 
 

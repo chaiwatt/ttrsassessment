@@ -19,4 +19,14 @@ class AlertController extends Controller
         $alertmessages = AlertMessage::where('target_user_id',Auth::user()->id)->get();
         return response()->json($alertmessages);
     }
+
+    public function DeleteAlert(Request $request){
+        $check = Messagebox::find($request->id);
+        $alertid =  $check->alertmessage_id;
+
+        AlertMessage::find($alertid)->delete();
+        Messagebox::find($request->id)->update([
+            'message_read_status_id' => 2
+        ]);
+    }
 }

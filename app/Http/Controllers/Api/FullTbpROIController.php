@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
 use App\Model\FullTbpSignature;
 use App\Http\Controllers\Controller;
@@ -22,8 +23,10 @@ class FullTbpROIController extends Controller
         if(count(json_decode($request->directors)) > 0){
             FullTbpSignature::where('full_tbp_id',$fulltbpid)->delete();
             foreach (json_decode($request->directors) as $value) {
+                $check = CompanyEmploy::find($value);
                 $fulltbpsignature = new FullTbpSignature();
                 $fulltbpsignature->full_tbp_id = $fulltbpid;
+                $fulltbpsignature->employ_position_id = $check->employ_position_id;
                 $fulltbpsignature->company_employee_id = $value;
                 $fulltbpsignature->save();
             }

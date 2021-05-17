@@ -244,7 +244,7 @@
 																</div>
 																<div class="col-md-6">
 																	<div class="form-group">
-																		<label for="">วงเงินสินเชื่อที่ต้องการ</label>
+																		<label for="">มูลค่าเงินลงทุนที่ต้องการ</label>
 																		<input type="text" name="finance1loan" id="finance1loan" value="{{old('finance1loan') ?? $minitbp->finance1_loan}}" class="form-control form-control-lg numeralformat10" readonly>
 																	</div>
 																</div>
@@ -273,19 +273,19 @@
 														<div class="row" id="financediv2" style="margin-top: 5px" @if (Empty($minitbp->finance4_joint_min) || Empty($minitbp->finance4)) hidden @endif >
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">วงเงินสินเชื่อที่ต้องการ</label>
+																	<label for="">มูลค่าเงินลงทุนที่ต้องการ</label>
 																	<input type="text" name ="finance4joint" id="finance4joint" class="form-control form-control-lg numeralformat10" value="{{old('finance4joint') ?? $minitbp->finance4_joint}}" readonly>
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">สัดส่วนลงทุนของบริษัทและผู้ถือหุ้นอื่น %</label>
+																	<label for="">สัดส่วนการลงทุนของบริษัทและผู้ถือหุ้นอื่น %</label>
 																	<input type="number" name="finance4jointmin" id="finance4jointmin" class="form-control form-control-lg" value="{{old('finance4jointmin') ?? $minitbp->finance4_joint_min}}" readonly>
 																</div>
 															</div>
 															<div class="col-md-4">
 																<div class="form-group">
-																	<label for="">สัดส่วนการลงทุนของสวทช. %</label>
+																	<label for="">สัดส่วนการลงทุนของ สวทช. %</label>
 																	<input type="number" name="finance4jointmax" id="finance4jointmax" class="form-control form-control-lg" value="{{old('finance4jointmax') ?? $minitbp->finance4_joint_max}}" readonly>
 																</div>
 															</div>
@@ -414,7 +414,7 @@
 										<div style="width:100%;height:600px;" class="col-md-12 center"  >
 											<div id="example1"></div>
 										</div>
-										<input type="file" style="display:none;" id="minitbppdf" accept="application/pdf"/>
+										<input type="file" style="display:none;" id="minitbppdf" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 									</div>
 								</div>
 							</fieldset>
@@ -599,8 +599,21 @@
 		if (file === undefined) {
 			return ;
 		}
+		var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+		var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+		if(!validExtensions.includes(fextension)){
+			Swal.fire({
+				title: 'ผิดพลาด...',
+				text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+				});
+			this.value = "";
+			return false;
+		}
 		if (this.files[0].size/1024/1024*1000 > 2000 ){
-			alert('ไฟล์ขนาดมากกว่า 2 MB');
+			Swal.fire({
+				title: 'ผิดพลาด...',
+				text: 'ไฟล์ขนาดมากกว่า 2 MB',
+				});
 			return ;
 		}
 		var formData = new FormData();

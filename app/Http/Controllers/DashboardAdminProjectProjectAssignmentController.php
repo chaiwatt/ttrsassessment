@@ -40,6 +40,8 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         return view('dashboard.admin.project.projectassignment.index')->withProjectassignments($projectassignments);
     }
     public function Edit($id){
+
+
         $projectassignment = ProjectAssignment::find($id);
         $minitbp = MiniTBP::where('business_plan_id',BusinessPlan::find($projectassignment->business_plan_id)->id)->first();
         $users = User::where('user_type_id',4)->get();
@@ -98,7 +100,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         $alertmessage->user_id = $auth->id;
         $alertmessage->messagebox_id = $messagebox->id;
         $alertmessage->target_user_id = User::find($request->leader)->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project . ' ของ'.$fullcompanyname.' โปรดตรวจสอบแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ในขั้นตอนต่อไป <a href="'.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project . ' ของ'.$fullcompanyname.' โปรดตรวจสอบแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ในขั้นตอนต่อไป <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([

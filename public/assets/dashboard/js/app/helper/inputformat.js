@@ -1,3 +1,5 @@
+
+
 $(function() {
     $('.timeformat').toArray().forEach(function(field){
         new Cleave(field, {
@@ -5,6 +7,15 @@ $(function() {
             timePattern: ['h', 'm']
         })
     });	
+
+    $('.dmyformat').toArray().forEach(function(field){
+        new Cleave(field, {
+            date: true,
+            delimiter: '/',
+            datePattern: ['d', 'm', 'Y']
+        })
+    });	
+
     $('.numeralformat2').toArray().forEach(function(field){
         new Cleave(field, {
             numeral: true,

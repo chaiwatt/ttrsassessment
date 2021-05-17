@@ -1,6 +1,11 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<style>
+	.myFont{
+		font-size:4px;
+	}
 
+</style>
 @stop
 
 @section('content')
@@ -165,15 +170,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>ชื่อเอกสาร <small>เช่น หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ</small><span class="text-danger">*</span></label>
-                                <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
+                                <label>เลือกเอกสาร เช่น หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ<span class="text-danger">*</span></label>
+                                {{-- <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60"> --}}
                             </div>
                         </div>
                         <div class="col-md-12">	
                             <div class="input-group">													
 								<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 float-left" type="button" onclick="document.getElementById('companydoc').click();" ><i class="icon-upload4 mr-2"></i>อัปโหลด</button>													
 							</div>
-							<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc" accept="application/pdf"/>
+							<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 							<div class="input-group">	
 								<label class="text-danger"><small>ไฟล์ PDF ขนาดไม่เกิน 2 MB</small></label>
 							</div> 
@@ -264,7 +269,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_authorized_director" class="btn bg-primary" data-id="{{$user->company->id}}" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+                    <button id="btn_modal_add_authorized_director" class="btn bg-primary" data-id="{{$user->company->id}}" ><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
                 </div>
             </div>
         </div>
@@ -291,8 +296,6 @@
 								</div>
 							</div>
 
-
-
 							<div class="col-md-6" id="otherprefix_edit_wrapper" hidden>
 								<div class="form-group" >
 									<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
@@ -300,8 +303,6 @@
 								</div>
 							</div>
 							
-
-
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>ชื่อ</label><span class="text-danger">*</span>
@@ -358,7 +359,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_edit_authorized_director" class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไข</button>
+                    <button id="btn_modal_edit_authorized_director" class="btn bg-primary" data-dismiss="modal"><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
                 </div>
             </div>
         </div>
@@ -584,11 +585,13 @@
 			</div>
 			@endif
 			@if ($errors->count() > 0)
-			<div class="alert alert-warning alert-styled-left alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-				{{ $errors->first() }}
-			</div>
-		@endif
+				@foreach ($errors->all() as $error)
+					<div class="alert alert-warning alert-styled-left alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+						{{ $error}}
+					</div>
+				@endforeach
+			@endif
 
 		<form method="POST" action="{{route('setting.profile.user.editsave',['userid' => $user->id ])}}" enctype="multipart/form-data">
 			@csrf
@@ -605,8 +608,17 @@
 										<div class="form-group">
 											<label>คำนำหน้า<span class="text-danger">*</span></label>
 											<select name="prefix"  id="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
-												@foreach ($prefixes as $prefix)
+												{{-- @foreach ($prefixes as $prefix)
 													<option value="{{$prefix->id}}" @if ($user->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
+												@endforeach --}}
+												@foreach ($prefixes as $prefix)
+													<option value="{{$prefix->id}}" 
+														@if (empty(old('prefix')))
+															@if ($user->prefix_id == $prefix->id) selected @endif 
+															@else
+															@if (old('prefix') == $prefix->id) selected @endif 
+														@endif
+												>{{$prefix->name}}</option> 
 												@endforeach
 											</select>
 										</div>
@@ -624,7 +636,7 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg stringformat60">
+											<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class=" form-control form-control-lg stringformat60 ">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -710,7 +722,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>ปีที่จดทะเบียน@if ($user->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
-										<input type="text" name="registeredyear" value="{{old('registeredyear') ?? $user->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg numeralformatyear">
+										<input type="text" name="registeredyear" value="{{old('registeredyear') ?? $user->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg numeralformatyear inputfield40">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -727,14 +739,14 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>วันที่ชำระทุนจดทะเบียน</label>
-										<input type="text"  name="paidupcapitaldate" id="paidupcapitaldate" value="{{old('paidupcapitaldate') ?? $user->company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control form-control-lg" >
+										<label>วันที่ชำระทุนจดทะเบียน (วดป. ตัวอย่าง 22/12/2530)</label>
+										<input type="text"  name="paidupcapitaldate"  value="{{old('paidupcapitaldate') ?? $user->company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control form-control-lg dmyformat" >
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>หมวดหมู่หลัก ISIC </label>
-										<select name="isic" id="isic" data-placeholder="หมวดหมู่หลัก ISIC" class="form-control form-control-lg form-control-select2">
+										<label>หมวดหมู่หลัก ISIC</label>
+										<select name="isic" id="isic" data-placeholder="หมวดหมู่หลัก ISIC" class="form-control form-control-select2">
 											@foreach ($isics as $isic)
 												<option value="{{$isic->id}}" 
 													@if ($user->company->isic_id == $isic->id) 
@@ -750,7 +762,7 @@
 								<div class="col-md-6">                                          
 									<div class="form-group">
 										<label>หมวดหมู่ย่อย ISIC {{old('subisic')}} </label>
-										<select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-lg form-control-select2">
+										<select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-select2">
 											@foreach ($isicsubs as $isicsub)
 												<option value="{{$isicsub->id}}" 
 													@if($user->company->isic_sub_id == $isicsub->id) 
@@ -872,7 +884,7 @@
 											<div class="col-md-9">
 												<div class="form-group">
 													<label>ชื่อผู้ประสานงาน<span class="text-danger">*</span></label>
-													<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg stringformat60">
+													<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg stringformat60 inputfield40">
 												</div>
 											</div>
 										</div>
@@ -1011,10 +1023,10 @@
 											<table class="table table-bordered table-striped">
 												<thead>
 													<tr class="bg-info">
-														<th style="width:45%">ชื่อ  นามสกุล</th> 
+														<th style="width:35%">ชื่อ  นามสกุล</th> 
 														<th style="width:25%">ตำแหน่ง</th>   
 														<th style="width:15%">ลายมือชื่อ</th>
-														<th style="width:15%">เพิ่มเติม</th>                                                                                   
+														<th style="width:25%" class="text-center">เพิ่มเติม</th>                                                                                   
 													</tr>
 												</thead>
 												<tbody id="authorized_director_wrapper_tr"> 
@@ -1043,7 +1055,7 @@
 																	<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
 															@endif  
 														</td>   
-														<td> 
+														<td class="text-center"> 
 															<a  data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>                                       
 															<a  data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
 														</td>
@@ -1058,23 +1070,24 @@
 								<div class="col-md-12">
 									<div class="form-group">
 											<label for="">แนบเอกสาร </label>
-										<a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">อัปโหลดเอกสารแนบ</a> 
-										<p><small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small></p>
+										<a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" onclick="document.getElementById('companydoc').click();">อัปโหลดเอกสารแนบ</a> 
+										<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
+										<p>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</p>
 										
 											<div class="table-responsive">
 												<table class="table table-bordered table-striped">
 													<thead>
 														<tr class="bg-info">
-															<th style="width:80%">ไฟล์</th> 
-															<th style="width:20%">เพิ่มเติม</th>                                                                                   
+															<th style="width:75%">ไฟล์</th> 
+															<th style="width:25%" class="text-center">เพิ่มเติม</th>                                                                                   
 														</tr>
 													</thead>
 													<tbody id="fulltbp_companydoc_wrapper_tr"> 
 														@foreach ($fulltbpcompanydocs as $fulltbpcompanydoc)
 														<tr >                                        
 															<td> {{$fulltbpcompanydoc->name}}</td>                                            
-															<td> 
-																<a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
+															<td class="text-center"> 
+																<a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
 																<a  data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
 															</td>
 														</tr>
@@ -1085,7 +1098,7 @@
 										</div>
 									</div>
 								<div class="col-md-12 text-right">
-									<button type="submit" name="action" id="submitform" value="personal" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+									<button type="submit" name="action" id="submitform" value="personal" onclick="confirmsubmit(event);" class="btn bg-teal">บันทึก <i class="icon-floppy-disk mr-2"></i></button>
 								</div>
 						</div>
 					</div>
@@ -1102,10 +1115,92 @@
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/specialinputformat.js')}}"></script>
     <script>
+
+$(".form-control-select2").select2();
+		$("#isic").select2({ dropdownCssClass: "myFont" });
+
     	var route = {
 			url: "{{ url('/') }}",
 			token: $('meta[name="csrf-token"]').attr('content'),
         };
+
+		var oldprovince =  "{{old('province')}}";
+		var oldamphur=  "{{old('amphur')}}";
+		var oldtambol =  "{{old('tambol')}}";
+
+		if(oldprovince != '' && oldamphur != ''){
+			amphur(oldprovince).then(data => {
+				let  html = "";
+				var select ='';
+				data.forEach(function (amphur,index) {
+					var select ='';
+					if(oldamphur == amphur['id']){
+						select = 'selected'
+					}
+					html += `<option value='${amphur.id}' ${select}>${amphur.name}</option>`
+					});
+
+				
+				$("#amphur").html(html);
+			})
+			.catch(error => {})
+		}
+
+		if(oldamphur != '' && oldtambol != ''){
+			tambol(oldamphur).then(data => {
+				let  html = "";
+				var select ='';
+				data.forEach(function (tambol,index) {
+					var select ='';
+					if(oldtambol == tambol['id']){
+						select = 'selected'
+					}
+					html += `<option value='${tambol.id}' ${select}>${tambol.name}</option>`
+					});
+
+				
+				$("#tambol").html(html);
+			})
+			.catch(error => {})
+		}
+
+		function amphur(provinceid){
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/api/location/amphur`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					proviceid : provinceid
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
+		function tambol(amphurid){
+
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/api/location/tambol`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					amphurid : amphurid
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
 
 		var isiccate = "{{$user->company->isic_id}}";
 		if(isiccate == ''){
@@ -1163,6 +1258,27 @@
             clearText: "เคลียร์",
             time: false
 		});
+
+		function confirmsubmit(e) {
+			e.preventDefault();
+			var frm = e.target.form;
+			Swal.fire({
+					title: 'ยืนยันการบันทึก',
+					text: `ยืนยันการบันทึกหรือไม่? `,
+					type: 'info',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: 'ตกลง',
+					cancelButtonText: 'ยกเลิก',
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}).then((result) => {
+				if (result.value) {
+					frm.submit();
+				}
+			});
+		}
+	
     </script>	
 @stop
 

@@ -186,12 +186,12 @@
 									<input type="text" id="expertdocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg">
 								</div>
 							</div>
-							<div class="col-md-12">	
+							{{-- <div class="col-md-12">	
 								<div class="input-group">													
 									<button id="btnuploadexpertdoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('expertdoc').click();" >อัปโหลด</button>													
 								</div>
-								<input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc" accept="application/pdf"/>
-							</div>
+								<input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
+							</div> --}}
 						</div>
 					</div>           
 					<div class="modal-footer">
@@ -221,11 +221,13 @@
 			</div>
 			@endif
 			@if ($errors->count() > 0)
-			<div class="alert alert-warning alert-styled-left alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-				{{ $errors->first() }}
-			</div>
-		@endif
+				@foreach ($errors->all() as $error)
+					<div class="alert alert-warning alert-styled-left alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+						{{ $error}}
+					</div>
+				@endforeach
+			@endif
 		<!-- Inner container -->
 		<form method="POST" action="{{route('setting.profile.officer.editsave',['userid' => $user->id ])}}" enctype="multipart/form-data">
 			@csrf
@@ -241,7 +243,13 @@
 											<label>คำนำหน้า<span class="text-danger">*</span></label>
 											<select name="prefix" id="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
 												@foreach ($prefixes as $prefix)
-													<option value="{{$prefix->id}}" @if ($user->prefix_id == $prefix->id) selected @endif >{{$prefix->name}}</option> 
+													<option value="{{$prefix->id}}" 
+														@if (empty(old('prefix')))
+															@if ($user->prefix_id == $prefix->id) selected @endif 
+															@else
+															@if (old('prefix') == $prefix->id) selected @endif 
+														@endif
+												>{{$prefix->name}}</option> 
 												@endforeach
 											</select>
 										</div>
@@ -293,10 +301,16 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>จังหวัด<span class="text-danger">*</span></label>
+										{{-- {{old('province')}} --}}
 										<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
 											<option value=""></option>
 											@foreach ($provinces as $province)
-												<option value="{{$province->id}}" @if($user->province_id == $province->id) selected @endif>{{$province->name}}</option> 
+												<option value="{{$province->id}}" 
+													@if($user->province_id == $province->id) 
+															selected 
+														@else	
+															@if (old('province') == $province->id) selected @endif
+													@endif>{{$province->name}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -305,9 +319,17 @@
 									<div class="form-group">
 										<label>อำเภอ<span class="text-danger">*</span></label>
 										<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
-											@foreach ($amphurs as $amphur)                                                                
+											{{-- @foreach ($amphurs as $amphur)                                                                
 												<option value="{{$amphur->id}}" @if ($amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
-											@endforeach   
+											@endforeach    --}}
+											@foreach ($amphurs as $amphur)                                                                
+												<option value="{{$amphur->id}}" 
+													@if ($user->amphur_id == $amphur->id) 
+															selected 
+														@else
+															@if (old('amphur') == $amphur->id) selected @endif
+													@endif> {{$amphur->name}} </option>
+											@endforeach 
 										</select>
 									</div>
 								</div>
@@ -316,7 +338,14 @@
 										<label>ตำบล<span class="text-danger">*</span></label>
 										<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
 											@foreach ($tambols as $tambol)                                                                
-												<option value="{{$tambol->id}}" @if ($tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
+												{{-- <option value="{{$tambol->id}}" @if ($tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option> --}}
+												<option value="{{$tambol->id}}" 
+												@if ($user->tambol_id == $tambol->id) 
+													selected
+													@else	
+														@if (old('tambol') == $amphur->id) selected @endif
+												@endif> {{$tambol->name}} </option>
+
 											@endforeach    
 										</select>
 									</div>
@@ -351,9 +380,19 @@
 										<label>จังหวัด<span class="text-danger">*</span></label>
 										<select name="province1" id="province1" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
 											<option value=""></option>
-											@foreach ($provinces as $province)
-												<option value="{{$province->id}}" @if($user->province1_id == $province->id) selected @endif>{{$province->name}}</option> 
-											@endforeach
+											{{-- @foreach ($provinces as $province) --}}
+												{{-- <option value="{{$province->id}}" @if($user->province1_id == $province->id) selected @endif>{{$province->name}}</option>  --}}
+
+												@foreach ($provinces as $province)
+													<option value="{{$province->id}}" 
+														@if($user->province1_id == $province->id) 
+																selected 
+															@else	
+																@if (old('province1') == $province->id) selected @endif
+														@endif>{{$province->name}}</option> 
+												@endforeach
+
+											{{-- @endforeach --}}
 										</select>
 									</div>
 								</div>
@@ -361,9 +400,17 @@
 									<div class="form-group">
 										<label>อำเภอ<span class="text-danger">*</span></label>
 										<select name="amphur1" id="amphur1" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
-											@foreach ($amphurs1 as $amphur1)                                                                
+											{{-- @foreach ($amphurs1 as $amphur1)                                                                
 												<option value="{{$amphur1->id}}" @if ($amphur1->id == $user->amphur1_id) selected @endif> {{$amphur1->name}} </option>
-											@endforeach   
+											@endforeach    --}}
+											@foreach ($amphurs1 as $amphur1)                                                                
+												<option value="{{$amphur1->id}}" 
+													@if ($user->amphur1_id == $amphur1->id) 
+															selected 
+														@else
+															@if (old('amphur1') == $amphur1->id) selected @endif
+													@endif> {{$amphur1->name}} </option>
+											@endforeach 
 										</select>
 									</div>
 								</div>
@@ -371,8 +418,17 @@
 									<div class="form-group">
 										<label>ตำบล<span class="text-danger">*</span></label>
 										<select name="tambol1" id="tambol1" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
-											@foreach ($tambols1 as $tambol1)                                                                
+											{{-- @foreach ($tambols1 as $tambol1)                                                                
 												<option value="{{$tambol1->id}}" @if ($tambol1->id == $user->tambol1_id) selected @endif> {{$tambol1->name}} </option>
+											@endforeach  --}}
+											
+											@foreach ($tambols1 as $tambol1)                                                                
+												<option value="{{$tambol1->id}}" 
+												@if ($user->tambol1_id == $tambol1->id) 
+													selected
+													@else	
+														@if (old('tambol1') == $tambol1->id) selected @endif
+												@endif> {{$tambol1->name}} </option>
 											@endforeach    
 										</select>
 									</div>
@@ -516,8 +572,9 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="">แนบเอกสาร  </label>
-										<a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertdoc">คลิกเพิ่ม</a> 
-										<p><small>(ประวัติย่อ, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่นๆ)</small></p> 
+										<a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" onclick="document.getElementById('expertdoc').click();">คลิกเพิ่ม</a> 
+										<input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
+										<p><i> (ประวัติย่อ, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่นๆ)</i></p> 
 											<div class="table-responsive">
 												<table class="table table-bordered table-striped">
 													<thead>
@@ -531,7 +588,7 @@
 															<tr >                                        
 																<td> {{$officerdoc->name}}</td>                                            
 																<td> 
-																	<a href="{{asset($officerdoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดาวน์โหลด</a>
+																	<a href="{{asset($officerdoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
 																	<a  data-id="{{$officerdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
 																</td>
 															</tr>
@@ -542,7 +599,7 @@
 										</div>
 								</div>
 							<div class="col-md-12 text-right">
-								<button type="submit" name="action" value="personal" class="btn bg-teal">บันทึก<i class="icon-paperplane ml-2"></i></button>
+								<button type="submit" name="action" value="personal" onclick="confirmsubmit(event);" class="btn bg-teal">บันทึก<i class="icon-paperplane ml-2"></i></button>
 							</div>
 						</div>
 					</div>
@@ -564,6 +621,134 @@
 			url: "{{ url('/') }}",
 			token: $('meta[name="csrf-token"]').attr('content'),
         };
+
+
+
+	// var cleave = new Cleave('.numeralformatpostal', {
+	// 	numericOnly: true,
+    //         blocks: [5]
+	// });
+
+		var oldprovince =  "{{old('province')}}";
+		var oldamphur=  "{{old('amphur')}}";
+		var oldtambol =  "{{old('tambol')}}";
+
+		var oldprovince1 =  "{{old('province1')}}";
+		var oldamphur1 =  "{{old('amphur1')}}";
+		var oldtambol1 =  "{{old('tambol1')}}";
+
+		if(oldprovince != '' && oldamphur != ''){
+			amphur(oldprovince).then(data => {
+				let  html = "";
+				var select ='';
+				data.forEach(function (amphur,index) {
+					var select ='';
+					if(oldamphur == amphur['id']){
+						select = 'selected'
+					}
+					html += `<option value='${amphur.id}' ${select}>${amphur.name}</option>`
+					});
+
+				
+				$("#amphur").html(html);
+			})
+			.catch(error => {})
+		}
+
+		if(oldamphur != '' && oldtambol != ''){
+			tambol(oldamphur).then(data => {
+				let  html = "";
+				var select ='';
+				data.forEach(function (tambol,index) {
+					var select ='';
+					if(oldtambol == tambol['id']){
+						select = 'selected'
+					}
+					html += `<option value='${tambol.id}' ${select}>${tambol.name}</option>`
+					});
+
+				
+				$("#tambol").html(html);
+			})
+			.catch(error => {})
+		}
+
+		if(oldprovince1 != '' && oldamphur1 != ''){
+			amphur(oldprovince1).then(data => {
+				let  html = "";
+				var select ='';
+				data.forEach(function (amphur,index) {
+					var select ='';
+					if(oldamphur1 == amphur['id']){
+						select = 'selected'
+					}
+					html += `<option value='${amphur.id}' ${select}>${amphur.name}</option>`
+					});
+
+				
+				$("#amphur1").html(html);
+			})
+			.catch(error => {})
+		}
+
+		if(oldamphur1 != '' && oldtambol1 != ''){
+			tambol(oldamphur1).then(data => {
+				let  html = "";
+				var select ='';
+				data.forEach(function (tambol,index) {
+					var select ='';
+					if(oldtambol1 == tambol['id']){
+						select = 'selected'
+					}
+					html += `<option value='${tambol.id}' ${select}>${tambol.name}</option>`
+					});
+
+				
+				$("#tambol1").html(html);
+			})
+			.catch(error => {})
+		}
+
+
+		function amphur(provinceid){
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/api/location/amphur`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					proviceid : provinceid
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
+		function tambol(amphurid){
+
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/api/location/tambol`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					amphurid : amphurid
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
+
+
         $("#file").on('change', function() {
             $("#filename").val(this.value);
         });
@@ -589,6 +774,26 @@
 				$(this).val(11);
 			}
 		});
+
+		function confirmsubmit(e) {
+			e.preventDefault();
+			var frm = e.target.form;
+			Swal.fire({
+					title: 'ยืนยันการบันทึก',
+					text: `ยืนยันการบันทึกหรือไม่? `,
+					type: 'info',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: 'ตกลง',
+					cancelButtonText: 'ยกเลิก',
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}).then((result) => {
+				if (result.value) {
+					frm.submit();
+				}
+			});
+		}
     </script>	
 @stop
 

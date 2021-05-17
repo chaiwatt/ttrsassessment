@@ -172,7 +172,7 @@
                                                     <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
                                                     <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                     <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                    <td style="font-size:13px;text-align:center">พ.ศ.{{$employeducation->employeducationyearstart}} - พ.ศ.{{$employeducation->employeducationyearend}}</td>
+                                                    <td style="font-size:13px;text-align:center">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                 </tr>   
                                             @endforeach   
                                         @endif
@@ -201,8 +201,8 @@
                                         @if ($fulltbp->employexperience->count() > 0)
                                             @foreach ($fulltbp->employexperience as $employexperience)
                                                 <tr>
-                                                    <td style="font-size:13px">พ.ศ.{{$employexperience->startdate}}</td>
-                                                    <td style="font-size:13px">พ.ศ.{{$employexperience->enddate}}</td>
+                                                    <td style="font-size:13px">{{$employexperience->startdate}}</td>
+                                                    <td style="font-size:13px">{{$employexperience->enddate}}</td>
                                                     <td style="font-size:13px">{{$employexperience->company}}</td>
                                                     <td style="font-size:13px">{{$employexperience->businesstype}}</td>
                                                     <td style="font-size:13px">{{$employexperience->startposition}}</td>
@@ -282,7 +282,7 @@
                                                             <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                            <td style="font-size:13px">พ.ศ.{{$employeducation->employeducationyearstart}} - พ.ศ.{{$employeducation->employeducationyearend}}</td>
+                                                            <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                         </tr>   
                                                     @endforeach
                                                 @endif
@@ -311,8 +311,8 @@
                                                 @if ($companyemboard->employexperience->count() > 0)
                                                     @foreach ($companyemboard->employexperience as $employexperience)
                                                         <tr>
-                                                            <td style="font-size:13px">พ.ศ.{{$employexperience->startdate}}</td>
-                                                            <td style="font-size:13px">พ.ศ.{{$employexperience->enddate}}</td>
+                                                            <td style="font-size:13px">{{$employexperience->startdate}}</td>
+                                                            <td style="font-size:13px">{{$employexperience->enddate}}</td>
                                                             <td style="font-size:13px">{{$employexperience->company}}</td>
                                                             <td style="font-size:13px">{{$employexperience->businesstype}}</td>
                                                             <td style="font-size:13px">{{$employexperience->startposition}}</td>
@@ -404,7 +404,7 @@
                                                             <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                            <td style="font-size:13px">พ.ศ.{{$employeducation->employeducationyearstart}} - พ.ศ.{{$employeducation->employeducationyearend}}</td>
+                                                            <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                         </tr>   
                                                     @endforeach
                                                 @endif
@@ -434,8 +434,8 @@
                                                 @if ($companyemploy->employexperience->count() > 0)
                                                     @foreach ($companyemploy->employexperience as $employexperience)
                                                         <tr>
-                                                            <td style="font-size:13px">พ.ศ.{{$employexperience->startdate}}</td>
-                                                            <td style="font-size:13px">พ.ศ.{{$employexperience->enddate}}</td>
+                                                            <td style="font-size:13px">{{$employexperience->startdate}}</td>
+                                                            <td style="font-size:13px">{{$employexperience->enddate}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employexperience->company)!!}</td>
                                                             <td style="font-size:13px">{{$employexperience->businesstype}}</td>
                                                             <td style="font-size:13px">{{$employexperience->startposition}}</td>
@@ -600,105 +600,92 @@
                     </div>
 
                 </div>
-                <div class="landscape" style="width:980px">
-                        <div class="ml20 mt20 " style="font-size:13px"><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart) </strong></div>
-                        <table class="mt5  border">
-                            {{-- <thead>
-                                <tr>
+
+                {{-- <div class="landscape" style="width:980px;background-color: yellow">
+                    sdfsdf
+                </div> --}}
+               
+                    <div class="landscape" style="width:980px !important;">
+                        <div class="ml20 mt20 " style="font-size:13px"><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart) จำนวน {{$fulltbpgant->numofmonth}}  เดือน</strong></div>
+                            <table class="mt5  border" style="width:100%">
+                                <thead>
                                     <tr>
-                                        <th rowspan="2" style="width: 450px">รายละเอียดการดำเนินงาน</th> 
-                                        @foreach ($allyears as $key => $item)
-                                            @if ($item != 0)
-                                                <th colspan="{{$item}}" class="text-center">ปี {{$fulltbpgantt->startyear + $key}} </th> 
-                                            @endif
-                                        @endforeach
-                                    </tr>
-                                    @if ($minmonth != 0 && $maxmonth !=0)
-                                        <tr >
-                                            @for ($i = $minmonth; $i <= $maxmonth; $i++)
-                                                <th style="width:5px;font-size:12px">{{$i}}</th>
-                                            @endfor
-                                        </tr>
-                                    @endif
-                                </tr>
-                            </thead> --}}
-                            <thead>
-                                <tr>
-                                    <tr>
-                                        <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
-                                        @foreach ($allyears as $key => $item)
-                                            @if ($item != 0)
-                                                <th colspan="{{$item}}" class="text-center">พ.ศ.{{$fulltbpgantt->startyear + $key}} </th> 
-                                            @endif
-                                        @endforeach
-                                        {{-- <th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th>  --}}
-                                    </tr>
-                                    @if ($minmonth != 0 && $maxmonth !=0)
-                                        <tr >
-                                            @for ($i = $minmonth; $i <= $maxmonth; $i++)
-                                                <th class="text-center" style="width: 40px;font-size:10px;padding:5px">
-                                                    @php
-                                                        $full = 12;
-                                                        if($i%12 == 0){
-                                                            echo (12);
-                                                        }else{
-                                                            echo($i%12);
-                                                        }
-                                                    @endphp
-                                                </th>
-                                            @endfor
-                                        </tr>
-                                    @endif
-                                </tr>
-                            </thead>
-                            
-                            {{-- <tbody >    
-                                @foreach ($fulltbpprojectplans as $fulltbpprojectplan)
-                                    <tr >                                        
-                                        <td> {{$fulltbpprojectplan->name}} </td> 
-                                        @for ($i = $minmonth; $i <= $maxmonth; $i++)
-                                            @php
-                                                $color = 'white';
-                                                $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
-                                                if (!Empty($check)) {
-                                                    $color = 'grey';
-                                                }
-                                            @endphp
-                                            <td style="background-color:{{$color}};width:5px;font-size:12px"> </td> 
-                                        @endfor															
-                                    </tr>
-                                @endforeach                            
-                            </tbody> --}}
-                            <tbody id="ganttchart_wrapper_tr">  
-                                @foreach ($fulltbpprojectplans as $fulltbpprojectplan)
-                                
-                                    <tr id= "{{$fulltbpprojectplan->id}}" >                                        
-                                        <td> {{$fulltbpprojectplan->name}}</td> 
-                                        @php
-                                            $_count = 1;
-                                        @endphp
-                                        @for ($i = $minmonth; $i <= $maxmonth; $i++)
-                                            @php
-                                                $color = 'white';
-                                                $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
-                                                if (!Empty($check)) {
-                                                    $color = 'grey';
-                                                }
-                                            @endphp
-                                            <td style="background-color:{{$color}};width: 40px;font-size:9px;padding:5px;text-align:center">
-                                                @if ($color == 'grey')
-                                                 {{$_count}}
+                                        <tr>
+                                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                            @foreach ($allyears as $key => $item)
+                                                @if ($item != 0)
+                                                    <th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
                                                 @endif
-                                            </td> 
-                                            @php
-                                                $_count++;
-                                            @endphp
-                                        @endfor															
+                                            @endforeach
+                                            {{-- <th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th>  --}}
+                                        </tr>
+                                        @if ($minmonth != 0 && $maxmonth !=0)
+                                            <tr >
+                                                @for ($i = $minmonth; $i <= $maxmonth; $i++)
+                                                    <th class="text-center" style="width: 40px;font-size:10px;padding:5px">
+                                                        @php
+                                                            $full = 12;
+                                                            if($i%12 == 0){
+                                                                echo (12);
+                                                            }else{
+                                                                echo($i%12);
+                                                            }
+                                                        @endphp
+                                                    </th>
+                                                @endfor
+                                            </tr>
+                                        @endif
                                     </tr>
-                                @endforeach                            
-                            </tbody>
-                        </table>
-                </div>
+                                </thead>
+                                
+                                {{-- <tbody >    
+                                    @foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+                                        <tr >                                        
+                                            <td> {{$fulltbpprojectplan->name}} </td> 
+                                            @for ($i = $minmonth; $i <= $maxmonth; $i++)
+                                                @php
+                                                    $color = 'white';
+                                                    $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+                                                    if (!Empty($check)) {
+                                                        $color = 'grey';
+                                                    }
+                                                @endphp
+                                                <td style="background-color:{{$color}};width:5px;font-size:12px"> </td> 
+                                            @endfor															
+                                        </tr>
+                                    @endforeach                            
+                                </tbody> --}}
+                                <tbody id="ganttchart_wrapper_tr">  
+                                    @foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+                                    
+                                        <tr id= "{{$fulltbpprojectplan->id}}" >                                        
+                                            <td> {{$fulltbpprojectplan->name}}</td> 
+                                            @php
+                                                $_count = 1;
+                                            @endphp
+                                            @for ($i = $minmonth; $i <= $maxmonth; $i++)
+                                                @php
+                                                    $color = 'white';
+                                                    $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+                                                    if (!Empty($check)) {
+                                                        $color = 'grey';
+                                                    }
+                                                @endphp
+                                                <td style="background-color:{{$color}};width: 40px;font-size:9px;padding:5px;text-align:center">
+                                                    @if ($color == 'grey')
+                                                        {{$_count}}
+                                                    @endif
+                                                </td> 
+                                                @php
+                                                    $_count++;
+                                                @endphp
+                                            @endfor															
+                                        </tr>
+                                    @endforeach                            
+                                </tbody>
+                            </table>
+                    </div>
+             
                 <div class="portrait"></div>
                 <div class="box bw650  mt20 " style="background-color: #bdd6ee;">
                     <div style="font-size:13px"><strong>3. ความเป็นไปได้ด้านการตลาดและแผนสู่เชิงพาณิชย์</strong></div>
@@ -717,10 +704,10 @@
                         <thead>
                             <tr>
                                 <th style="width:40%;font-size:13px">ยอดขายแยกตามประเภทผลิตภัณฑ์/บริการ</th>
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past3}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past2}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1}}</th>  
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1 +1 }}</th>
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th>  
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1 +1 }}</th>
                             <tr>
                         </thead>
                         <tbody>
@@ -749,10 +736,10 @@
                         <thead>
                             <tr>
                                 <th style="width:40%;font-size:13px">ระยะเวลา</th>
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past3}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past2}}</th>   
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1+1}}</th>   
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th>   
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1+1}}</th>   
                             <tr>
                         </thead>
                         <tbody>
@@ -941,14 +928,14 @@
 
                 </div>
         </div>
-        <div class="box ml50 bw650  mt20 " style="page-break-inside: avoid;">
+        <div class="box bw650  mt20 " style="page-break-inside: avoid;">
             <div class="mt50" style="font-size:13px"><strong><u>หมายเหตุ</u> โปรดแนบเอกสารที่เกี่ยวข้องดังต่อไปนี้</strong></div>
             <div class="ml30" style="font-size:13px">1. สำเนาหนังสือรับรองจากการจดทะเบียนนิติบุคคล</div>
             <div class="ml30" style="font-size:13px">2. สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ. 5)</div>
             <div class="ml30" style="font-size:13px">3. เอกสารอื่นๆ ที่เกี่ยวข้องกับโครงการ</div>
         </div>
         <div style="page-break-inside: avoid;">
-            <div class="box ml50 bw650  mt30 ">
+            <div class="box bw650  mt30 ">
                 <div class="mt30" style="font-size:13px"><strong><u>ข้อตกลง :</u></strong>
                     {!!$provider::FixBreak("การลงลายมือชื่อข้างท้ายนี้ ผู้ขอรับการประเมินขอรับรองและยืนยันความถูกต้องของข้อมูลและรายละเอียดตามที่ระบุไว้ในแผนธุรกิจเทคโนโลยีฉบับนี้ หากภายหลังปรากฏเหตุอันเกิดข้อพิพาทที่เกี่ยวกับโครงการนี้ว่ามีการละเมิดทรัพย์สิน ทางปัญญาของผู้อื่นและหรือปลอมแปลงเอกสารของผู้อื่นหรือไม่ว่าประการใดก็ตามผู้ขอรับการประเมินจะเป็นผู้รับผิดชอบทั้งทางแพ่งและอาญาแต่เพียงผู้เดียว")!!}
                 </div>
@@ -959,7 +946,12 @@
                     <td class="" style="text-align: right;width: 90px;border: none;"></td>
                     <td class="" style="text-align: right;width: 300px;border: none;">
                         @foreach ($fulltbpsignatures as $fulltbpsignature)
-                          
+                          @php
+                               $directorposition = $fulltbpsignature->companyemploy->employposition->name;
+                               if($directorposition == 'อื่นๆ'){
+                                    $directorposition = $fulltbpsignature->companyemploy->otherposition;
+                                }
+                          @endphp
                           <table class="mt20">
                             <tr>
                                 <td class="" style="width:1px; text-align: right;border: none;font-size:13px">ลงชื่อ</td>
@@ -985,7 +977,7 @@
                             </tr>
                             <tr>
                                 <td class="" style="width: 1px; text-align: right;border: none;"></td>
-                                <td class=" center" style="width: 200px;text-align: center;border: none;font-size:13px">เจ้าของหรือผู้บริหารระดับสูง</td>
+                                <td class=" center" style="width: 200px;text-align: center;border: none;font-size:13px">{{$directorposition}}</td>
                                 <td class="" style="width: 1px;border: none;"></td>
                             </tr>
                         </table>
@@ -999,5 +991,4 @@
     </body>
 
 </html>   
-
 

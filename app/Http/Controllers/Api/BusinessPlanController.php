@@ -9,6 +9,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Model\MessageBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
@@ -47,14 +48,20 @@ class BusinessPlanController extends Controller
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
+            $messagebox =  Message::sendMessage('กรอกข้อมูล Mini TBP','คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a>',User::where('user_type_id',6)->first()->id,$_user->id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
-            $alertmessage->target_user_id = $_user->id;
+            $alertmessage->target_user_id = $_user->id;           
+            $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detailDateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คำขอประเมินธุรกิจได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้  ' ;
             $alertmessage->save();
 
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+            
             EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Mini TBP โครงการ' . $minitbp->project,'เรียน ผู้ขอรับการประเมิน<br><br> คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            Message::sendMessage('กรอกข้อมูล Mini TBP','คำขอประเมินธุรกิจของท่านได้รับอนุมัติให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a>',User::where('user_type_id',6)->first()->id,$_user->id);
+            
 
         }
         BusinessPlan::find($request->id)->update([

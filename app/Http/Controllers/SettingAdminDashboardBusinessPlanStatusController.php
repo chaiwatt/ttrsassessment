@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
 use App\Model\BusinessPlanStatus;
 use App\Http\Requests\CreateBusinessPlanStatuRequest;
@@ -32,6 +33,11 @@ class SettingAdminDashboardBusinessPlanStatusController extends Controller
         return view('setting.admin.dashboard.businessplanstatus.edit')->withBusinessplanstatus($businessplanstatus);
     }
     public function EditSave(CreateBusinessPlanStatuRequest $request,$id){
+        $check = BusinessPlan::where('business_plan_status_id',$id)->first();
+        if(!Empty($check)){
+            return redirect()->route('setting.admin.dashboard.businessplanstatus')->withError('มีการใช้สถานะความก้าวหน้าโครงการนี้แล้ว');
+        }
+
         $businessplanstatus = BusinessPlanStatus::find($id)->update([
             'name' => $request->businessplanstatus
         ]);

@@ -305,7 +305,7 @@
 									<div class="input-group">													
 										<label for="">เอกสารแนบ</label>
 									</div>
-									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="application/pdf"/>
+									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
@@ -559,7 +559,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="application/pdf"/>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -591,7 +591,7 @@
 						<div class="input-group">													
 							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="application/pdf"/>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -1133,7 +1133,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc" accept="application/pdf"/>
+						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -2195,7 +2195,7 @@
 							<fieldset class="mb-2">
 									<div class="row">
 										<div class="col-md-12">	
-											<label for=""><strong>3.1) ข้อมูลด้านการตลาด</strong></label>
+											<label for=""><strong>3.1 ข้อมูลด้านการตลาด</strong></label>
 										</div>
 										<div class="col-md-12">
 											<label> <strong><u>Market Analysis</u></strong> </label>

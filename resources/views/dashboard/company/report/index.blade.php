@@ -15,7 +15,23 @@
                 @if (Empty(Auth::user()->company->name))
                         รายงาน : ยังไม่ได้ตั้งค่า
                     @else
-                        {{Auth::user()->company->name}}
+                    @php
+                        $company = Auth::user()->company;
+                        $company_name = (!Empty($company->name))?$company->name:'';
+                        $bussinesstype = $company->business_type_id;
+                        $fullcompanyname = $company_name;
+
+                        if($bussinesstype == 1){
+                            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+                        }else if($bussinesstype == 2){
+                            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+                        }else if($bussinesstype == 3){
+                            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+                        }else if($bussinesstype == 4){
+                            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+                        }
+                    @endphp
+                        {{$fullcompanyname}}
                 @endif
             </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -127,7 +143,8 @@
                                         <td>
                                             <div class="progress" style="height: 1.375rem;">
                                                 <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
-                                                    <span class="sr-only"></span>
+                                                    {{-- <span class="sr-only"></span> --}}
+                                                    <span style="font-size: 14px">{{$businessplan->businessplanstatus->progress}}%</span>
                                                 </div>
                                             </div>
                                         </td> 

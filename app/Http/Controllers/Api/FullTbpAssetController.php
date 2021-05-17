@@ -20,7 +20,7 @@ class FullTbpAssetController extends Controller
             'cost' => str_replace(',', '', $request->assetcostedit),
             'quantity' => $request->assetquantityedit,
             'price' => str_replace(',', '', $request->assetpriceedit),
-            'specification' => $request->assetspecificationedit,
+            'specification' => str_replace(',', '', $request->assetspecificationedit),
         ]);
         $fulltbpassets = FullTbpAsset::where('full_tbp_id',$fulltbpid)->get();
         return response()->json($fulltbpassets); 

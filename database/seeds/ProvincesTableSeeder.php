@@ -199,11 +199,6 @@ class ProvincesTableSeeder extends Seeder
                    'map_code' => '3'
                 ],
                 [
-                   'code' => '97',
-                   'name' => 'บึงกาฬ',
-                   'map_code' => '3'
-                ],  
-                [
                    'code' => '50',
                    'name' => 'เชียงใหม่',
                    'map_code' => '1'
@@ -397,7 +392,11 @@ class ProvincesTableSeeder extends Seeder
                    'code' => '96',
                    'name' => 'นราธิวาส',
                    'map_code' => '6'
-                ]          
+                ],                  [
+                  'code' => '97',
+                  'name' => 'บึงกาฬ',
+                  'map_code' => '3'
+               ]       
         ]);
     }
 }

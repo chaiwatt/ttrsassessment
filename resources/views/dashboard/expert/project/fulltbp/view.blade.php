@@ -309,7 +309,7 @@
 									<div class="input-group">													
 										<label for="">เอกสารแนบ</label>
 									</div>
-									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="application/pdf"/>
+									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered">
@@ -567,7 +567,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcertify" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('award').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="application/pdf" />
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="image/jpeg,image/gif,image/png,application/pdf" />
 					</div>
 				</div>
 			</div>           
@@ -599,7 +599,7 @@
 						<div class="input-group">													
 							<button id="btnuploadstandard" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('standard').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="application/pdf"/>
+						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -1141,7 +1141,7 @@
 						<div class="input-group">													
 							<button id="btnuploadcompanydoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('companydoc').click();" >อัปโหลด</button>													
 						</div>
-						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc" accept="application/pdf"/>
+						<input type="file" style="display:none;" data-id="{{$company->id}}" id="companydoc" name="companydoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 					</div>
 				</div>
 			</div>           
@@ -1497,7 +1497,7 @@
 																	{{-- <button id="btnuploadattachment" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('attachment').click();"><i class="icon-add"></i></button>													 --}}
 																	<label for="">เอกสารแนบข้อมูลทั่วไป</label>
 																</div>
-																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment" accept="application/pdf"/>
+																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachment" name="attachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 															</div>
 														</div>			
 														<div class="row">	
@@ -2149,7 +2149,7 @@
 																	<div class="form-group">												
 																		<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</label>
 																	</div>
-																	<input type="file" style="display:none;" data-id="{{$fulltbpprojectcertify->id}}" id="certify" name="certify" accept="application/pdf"/>
+																	<input type="file" style="display:none;" data-id="{{$fulltbpprojectcertify->id}}" id="certify" name="certify" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 																</div>
 															{{-- </div>																								 --}}
 															{{-- <div class="row">	 --}}
@@ -2194,7 +2194,7 @@
 																	<div class="form-group">												
 																		<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label>
 																	</div>
-																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="application/pdf"/>
+																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 																</div>
 																<div class="col-md-12" id="fulltbp_award_wrapper" >	
 																</div>
@@ -2238,7 +2238,7 @@
 																		<label for="">เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI</label>
 																		{{-- <p><small><i>เพิ่มรายการใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</i> </small></p> --}}
 																	</div>
-																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="application/pdf"/>
+																	<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="standard" name="standard" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 																</div>
 															</div>																								
 															<div class="row">	
@@ -2393,7 +2393,7 @@
 															<div class="input-group">													
 																<label for="">เอกสารแนบ Business Model Canvas</label>
 															</div>
-															<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="businessmodelcanvas" name="businessmodelcanvas" accept="application/pdf"/>
+															<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="businessmodelcanvas" name="businessmodelcanvas" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 														</div>
 														<div class="col-md-12" id="fulltbp_businessmodelcanvas_wrapper" >	
 														</div>
@@ -2432,7 +2432,7 @@
 																	{{-- <button id="btnuploadswot" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('swot').click();"><i class="icon-add"></i></button>													 --}}
 																	<label for="">SWOT Analysis, Five Forces Analysis</label>
 																</div>
-																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="swotfile" name="swot" accept="application/pdf"/>
+																<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="swotfile" name="swot" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 															</div>
 				
 															<div class="col-md-12" id="fulltbp_swot_wrapper" >	
@@ -2831,7 +2831,7 @@
 											{{-- <canvas id="the-canvas"></canvas> --}}
 											<div style="width:100%;height:600px;" id="example1"></div>
 										</div>
-										<input type="file" style="display:none;" id="fulltbppdf" accept="application/pdf"/>
+										<input type="file" style="display:none;" id="fulltbppdf" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 									</div>
 								</div>
 								<div class="col-md-12 " id="appceptagreement_wrapper">

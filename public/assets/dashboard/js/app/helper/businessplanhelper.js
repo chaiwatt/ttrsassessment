@@ -61,9 +61,21 @@ $(document).on("click","#deleteperformance",function(e){
 
 $("#attachment").on('change', function() {
     var file = this.files[0];
-
+    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    if(!validExtensions.includes(fextension)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            });
+        this.value = "";
+        return false;
+    }
     if (this.files[0].size/1024/1024*1000 > 1000 ){
-        alert('ไฟล์ขนาดมากกว่า 1 MB');
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ไฟล์ขนาดมากกว่า 1 MB!',
+            });
         return ;
     }
     return ;
