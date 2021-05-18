@@ -554,7 +554,7 @@
 			Swal.fire({
 				title: 'ผิดพลาด!',
 				type: 'warning',
-				text: 'กรุณารับรองว่าข้อมูลทั้งหมดเป็นความจริง',
+				html: 'โปรดทำเครื่องหมาย <i class="icon-checkbox-checked"></i> เพื่อรับรองข้อมูลก่อนดำเนินการ',
 			});
 			return;
 		}

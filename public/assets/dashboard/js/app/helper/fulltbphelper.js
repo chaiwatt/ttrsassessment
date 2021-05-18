@@ -2086,6 +2086,7 @@ $(document).on("click",".deletecreditpartner",function(e){
 
 $(document).on('click', '.editasset', function(e) {
     Sell.getAsset($(this).data('id')).then(data => {
+        
         $('#assetid').val(data.id);
         $('#asset').val(data.asset);
         $('#assetcostedit').val(data.cost);
@@ -2114,15 +2115,15 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
         var html = ``;
         data.forEach(function (asset,index) {
             var checkspec = asset.specification;
-            // if(checkspec == null){
-            //     var checkspec = '';
-            // }
+            if(checkspec == null){
+                var checkspec = '';
+            }
             html += `<tr >                                        
                 <td> ${asset.asset} </td>                            
                 <td class="text-right"> ${parseFloat(asset.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td class="text-right"> ${asset.quantity} </td>                         
                 <td class="text-right"> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
-                <td class="text-right"> ${parseFloat(asset.specification).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
+                <td> ${checkspec} </td> 
                 <td> 
                     <a  data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
                 </td> 
@@ -2933,28 +2934,41 @@ $(document).on('click', '#submitfulltbp', function(e) {
         Swal.fire({
             title: 'ผิดพลาด!',
             type: 'warning',
-            text: 'กรุณารับรองว่าข้อมูลทั้งหมดเป็นความจริง',
+            html: 'โปรดทำเครื่องหมาย <i class="icon-checkbox-checked"></i> เพื่อรับรองข้อมูลก่อนดำเนินการ',
         });
         return;
     }
     var text = 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) หรือไม่'
     if($('#usersignature').val() == 1){
-        text = 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) และเลือกไฟล์ PDF ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+        text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP)'
     }
     Swal.fire({
         title: 'โปรดยืนยัน',
         text: text,
-        type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'ตกลง',
         cancelButtonText: 'ยกเลิก',
-        closeOnConfirm: false,
-        closeOnCancel: false
+
         }).then((result) => {
         if (result.value) {
+
+
             if($('#usersignature').val() == 1){
-                $("#fulltbppdf").trigger('click');
+
+                Swal.fire({
+                    title: 'อัปโหลดไฟล์',
+                    html: "โปรดแนบไฟล์แบบฟอร์ม Full TBP ที่ลงลายมือชื่อ <br> และประทับตราแล้ว",
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง',
+                    cancelButtonText: 'ยกเลิก',
+                  }).then((result) => {
+                    if (result.value) {
+                        $("#fulltbppdf").trigger('click');
+                    }
+                  })
+
             }else{
                 $("#spinicon").attr("hidden",false);
                 submitNoAttachement($('#fulltbpid').val(),$('#pdfname').val()).then(data => {
@@ -2962,7 +2976,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                     $("#spinicon").attr("hidden",true);
                     $("#appceptagreement_wrapper").attr("hidden",true);
                         Swal.fire({
-                            title: 'สำเร็จ...',
+                            title: 'สำเร็จ',
                             text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
                         }).then(() => {
                             window.location.replace(`${route.url}/dashboard/company/report`);
@@ -2970,6 +2984,8 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         
                     })
                 .catch(error => {})
+
+
             }
         }
     });
@@ -2979,7 +2995,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
 $(document).on('change', '#fulltbppdf', function(e) {
     var file = this.files[0];
     var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
-    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
+    var validExtensions = ["pdf"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -2998,31 +3014,45 @@ $(document).on('change', '#fulltbppdf', function(e) {
             });
         return ;
     }
-    var formData = new FormData();
-    formData.append('attachment',file);
-    formData.append('id',$('#fulltbpid').val());
-    $.ajax({
-        url: `${route.url}/api/fulltbp/submitwithattachement`,  //Server script to process data
-        type: 'POST',
-        headers: {"X-CSRF-TOKEN":route.token},
-        data: formData,
-        contentType: false,
-        processData: false,
-        beforeSend: function ( xhr ) {
-            $("#spinicon").attr("hidden",false);
-        },
-        success: function(data){
-            $("#submitfulltbp").attr("hidden",true);
-            $("#spinicon").attr("hidden",true);
-            $("#appceptagreement_wrapper").attr("hidden",true);
-            Swal.fire({
-                title: 'สำเร็จ...',
-                text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
-            }).then(() => {
-                window.location.replace(`${route.url}/dashboard/company/report`);
+
+    Swal.fire({
+        title: 'ยืนยัน',
+        text: "ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+      }).then((result) => {
+        if (result.value) {
+            var formData = new FormData();
+            formData.append('attachment',file);
+            formData.append('id',$('#fulltbpid').val());
+            $.ajax({
+                url: `${route.url}/api/fulltbp/submitwithattachement`,  //Server script to process data
+                type: 'POST',
+                headers: {"X-CSRF-TOKEN":route.token},
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function ( xhr ) {
+                    $("#spinicon").attr("hidden",false);
+                },
+                success: function(data){
+                    $("#submitfulltbp").attr("hidden",true);
+                    $("#spinicon").attr("hidden",true);
+                    $("#appceptagreement_wrapper").attr("hidden",true);
+                    Swal.fire({
+                        title: 'เสร็จสิ้น',
+                        html: 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) เรียบร้อยแล้ว <br> เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งการดำเนินการในลำดับถัดไปให้ท่านทราบทางอีเมล',
+                    }).then(() => {
+                        window.location.replace(`${route.url}/dashboard/company/report`);
+                    });
+                }
             });
         }
-    });
+      })
+
+
 });
 
 function submitNoAttachement(id,pdfname){

@@ -4,7 +4,9 @@
 <link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
 {{-- <link href="{{asset('assets/dashboard/js/plugins/jqueryui/jquery-ui.css')}}" rel="stylesheet"> --}}
 <style>
-
+th {
+  text-align: center !important;
+}
 </style>
 @stop
 @section('content')
@@ -1319,7 +1321,7 @@
 							</div>
 							<div class="form-group">
 								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
-								<input type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -2995,7 +2997,7 @@
 																			<td class="text-right"> {{number_format($fulltbpasset->cost, 2)}} </td> 
 																			<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
-																			<td class="text-right"> {{number_format($fulltbpasset->specification, 2)}}</td> 
+																			<td> {{$fulltbpasset->specification}} </td> 
 																			<td class="hiddenelement"> 
 																				<a  data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
 																			</td> 

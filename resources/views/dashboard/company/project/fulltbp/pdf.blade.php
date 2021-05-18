@@ -497,9 +497,11 @@
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.3 บทคัดย่อโครงการ :</strong> <span >{!!$provider::FixBreak($fulltbp->abtract)!!}</span></div>
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
-                    <div style="page-break-inside: avoid;">
-                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.6 ข้อมูลเทคโนโลยี
+                    {{-- <div style="page-break-inside: avoid;"> --}}
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.6 ข้อมูลเทคโนโลยี </strong>
                         <div class="ml30 mt0" style="font-size:13px"> <strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {!!$provider::FixBreak($fulltbp->techdev)!!}</div>
+                    </div>
+                    <div class="ml30 mt0" style="font-size:13px">    
                         <div class="mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
                             <table class="mt5  border tbwrap" >
                                 <thead>
@@ -928,65 +930,70 @@
 
                 </div>
         </div>
-        <div class="box bw650  mt20 " style="page-break-inside: avoid;">
+        <div class="box ml30 mt20 " style="page-break-inside: avoid;width:680px">
             <div class="mt50" style="font-size:13px"><strong><u>หมายเหตุ</u> โปรดแนบเอกสารที่เกี่ยวข้องดังต่อไปนี้</strong></div>
             <div class="ml30" style="font-size:13px">1. สำเนาหนังสือรับรองจากการจดทะเบียนนิติบุคคล</div>
             <div class="ml30" style="font-size:13px">2. สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ. 5)</div>
             <div class="ml30" style="font-size:13px">3. เอกสารอื่นๆ ที่เกี่ยวข้องกับโครงการ</div>
-        </div>
-        <div style="page-break-inside: avoid;">
-            <div class="box bw650  mt30 ">
-                <div class="mt30" style="font-size:13px"><strong><u>ข้อตกลง :</u></strong>
-                    {!!$provider::FixBreak("การลงลายมือชื่อข้างท้ายนี้ ผู้ขอรับการประเมินขอรับรองและยืนยันความถูกต้องของข้อมูลและรายละเอียดตามที่ระบุไว้ในแผนธุรกิจเทคโนโลยีฉบับนี้ หากภายหลังปรากฏเหตุอันเกิดข้อพิพาทที่เกี่ยวกับโครงการนี้ว่ามีการละเมิดทรัพย์สิน ทางปัญญาของผู้อื่นและหรือปลอมแปลงเอกสารของผู้อื่นหรือไม่ว่าประการใดก็ตามผู้ขอรับการประเมินจะเป็นผู้รับผิดชอบทั้งทางแพ่งและอาญาแต่เพียงผู้เดียว")!!}
-                </div>
-            </div>
-            <table class="bw500 ml50 mt50 center border">
-                <tr>
-                    <td class="" style="text-align: center;width: 200px;color:grey;border: none;font-size:13px">(ประทับตราบริษัท – ถ้ามี)</td>
-                    <td class="" style="text-align: right;width: 90px;border: none;"></td>
-                    <td class="" style="text-align: right;width: 300px;border: none;">
-                        @foreach ($fulltbpsignatures as $fulltbpsignature)
-                          @php
-                               $directorposition = $fulltbpsignature->companyemploy->employposition->name;
-                               if($directorposition == 'อื่นๆ'){
-                                    $directorposition = $fulltbpsignature->companyemploy->otherposition;
-                                }
-                          @endphp
-                          <table class="mt20">
-                            <tr>
-                                <td class="" style="width:1px; text-align: right;border: none;font-size:13px">ลงชื่อ</td>
-                                <td class="" style="width: 200px;text-align: center;border: none;font-size:13px">
-                                    @if ($fulltbp->signature_status_id == 2)
-                                        <img src="{{asset($fulltbpsignature->companyemploy->signature->path)}}" alt="Girl in a jacket" width="100" height="40">
-                                    @endif
-                                </td>
-                                <td class="" style="width: 1px;border: none;font-size:13px">ผู้ขอรับการประเมิน</td>
-                            </tr>
-                            <tr>
-                                <td class="" style="width: 1px; text-align: right;padding-top:15px;border: none;">(</td>
-                                <td class="" style="width: 200px;text-align: center;padding-top:15px;border: none;">
-                                   @php
-                                        $directorprefix = @$fulltbpsignature->companyemploy->prefix->name;
-                                        if($directorprefix == 'อื่นๆ'){
-                                            $directorprefix = @$fulltbpsignature->companyemploy->otherprefix;
-                                        }
-                                   @endphp
-                                    {{$directorprefix}}{{$fulltbpsignature->companyemploy->name}} {{$fulltbpsignature->companyemploy->lastname}}
-                                </td>
-                                <td class="" style="width: 1px;text-align: left;padding-top:15px;border: none;">)</td>
-                            </tr>
-                            <tr>
-                                <td class="" style="width: 1px; text-align: right;border: none;"></td>
-                                <td class=" center" style="width: 200px;text-align: center;border: none;font-size:13px">{{$directorposition}}</td>
-                                <td class="" style="width: 1px;border: none;"></td>
-                            </tr>
-                        </table>
-                        @endforeach
-                    </td>
-                </tr>
-            </table>
 
+            <div style="page-break-inside: avoid;">
+                <div class="box  mt30 " style="width:680px">
+                    <div class="mt30" style="font-size:13px">
+                        <p style="white-space: nowrap"><strong><u>ข้อตกลง:</u></strong> การลงลายมือชื่อข้างท้ายนี้ ผู้ขอรับการประเมินขอรับรองและยืนยันความถูกต้องของข้อมูลและรายละเอียดตามที่ระบุไว้
+                        <br>ในแผนธุรกิจเทคโนโลยีฉบับนี้ หากภายหลังปรากฏเหตุอันเกิดข้อพิพาทที่เกี่ยวกับโครงการนี้ว่ามีการละเมิดทรัพย์สินทางปัญญาของ
+                        <br>ผู้อื่นและหรือปลอมแปลงเอกสารของผู้อื่น หรือไม่ว่าประการใดก็ตาม ผู้ขอรับการประเมินจะเป็นผู้รับผิดชอบทั้งทางแพ่งและอาญา<br>แต่เพียงผู้เดียว</p>
+
+                    </div>
+                </div>
+                <table class="bw500 ml50 mt50 center border">
+                    <tr>
+                        <td class="" style="text-align: center;width: 200px;color:grey;border: none;font-size:13px">(ประทับตราบริษัท – ถ้ามี)</td>
+                        <td class="" style="text-align: right;width: 90px;border: none;"></td>
+                        <td class="" style="text-align: right;width: 300px;border: none;">
+                            @foreach ($fulltbpsignatures as $fulltbpsignature)
+                              @php
+                                   $directorposition = $fulltbpsignature->companyemploy->employposition->name;
+                                   if($directorposition == 'อื่นๆ'){
+                                        $directorposition = $fulltbpsignature->companyemploy->otherposition;
+                                    }
+                              @endphp
+                              <table class="mt20">
+                                <tr>
+                                    <td class="" style="width:1px; text-align: right;border: none;font-size:13px">ลงชื่อ</td>
+                                    <td class="" style="width: 200px;text-align: center;border: none;font-size:13px">
+                                        @if ($fulltbp->signature_status_id == 2)
+                                            <img src="{{asset($fulltbpsignature->companyemploy->signature->path)}}" alt="Girl in a jacket" width="100" height="40">
+                                        @endif
+                                    </td>
+                                    <td class="" style="width: 1px;border: none;font-size:13px">ผู้ขอรับการประเมิน</td>
+                                </tr>
+                                <tr>
+                                    <td class="" style="width: 1px; text-align: right;padding-top:15px;border: none;">(</td>
+                                    <td class="" style="width: 200px;text-align: center;padding-top:15px;border: none;">
+                                       @php
+                                            $directorprefix = @$fulltbpsignature->companyemploy->prefix->name;
+                                            if($directorprefix == 'อื่นๆ'){
+                                                $directorprefix = @$fulltbpsignature->companyemploy->otherprefix;
+                                            }
+                                       @endphp
+                                        {{$directorprefix}}{{$fulltbpsignature->companyemploy->name}} {{$fulltbpsignature->companyemploy->lastname}}
+                                    </td>
+                                    <td class="" style="width: 1px;text-align: left;padding-top:15px;border: none;">)</td>
+                                </tr>
+                                <tr>
+                                    <td class="" style="width: 1px; text-align: right;border: none;"></td>
+                                    <td class=" center" style="width: 200px;text-align: center;border: none;font-size:13px">{{$directorposition}}</td>
+                                    <td class="" style="width: 1px;border: none;"></td>
+                                </tr>
+                            </table>
+                            @endforeach
+                        </td>
+                    </tr>
+                </table>
+    
+            </div>
         </div>
+      
 
     </body>
 

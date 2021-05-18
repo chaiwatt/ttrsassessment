@@ -1,6 +1,12 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 <link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
+<style>
+    td{
+        padding-left:5px !important;
+        padding-right:5px !important;
+    }
+</style>
 @stop
 @section('content')
     {{-- modal_edit_fulltbp --}}
@@ -264,26 +270,26 @@
                     <div class="card-body">
                         <input type="text" id="fulltbpid"  hidden>
                         <div class="table-responsive" style="min-height: 230px">
-                            <table class="table table-striped" id="maintable">
+                            <table class="table table-striped " id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
-                                        <th>การอนุมัติ</th> 
-                                        <th>ผู้เชี่ยวชาญ</th> 
-                                        <th>EV</th> 
-                                        <th>BOL</th> 
-                                        <th>สถานะ</th>                               
+                                        <th style="width:130px;text-center">การอนุมัติ</th> 
+                                        <th style="width:155px;text-center">ผู้เชี่ยวชาญ</th> 
+                                        <th style="width:190px;text-center">EV</th> 
+                                        <th style="width:155px;text-center">BOL</th> 
+                                        <th style="width:160px;text-center">สถานะ</th>                               
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>    
-                                                <td> 
+                                                <td > 
                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                     <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                 </td>  
-                                                <td>    
+                                                <td >    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
                                                             <a href="#"  data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                         @else

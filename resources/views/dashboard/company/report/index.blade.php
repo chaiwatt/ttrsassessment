@@ -71,7 +71,7 @@
                         <div class="card bg-teal-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0">{{@$businessplans->first()->minitbp->fulltbp->projectgrade->percent}}</h1>
+                                    <h1 class="font-weight-semibold mb-0">{{ number_format(@$businessplans->first()->minitbp->fulltbp->projectgrade->percent, 2)}} %</h1>
                                 </div>
                                 <div>
                                     ผลคะแนนการประเมิน
@@ -117,9 +117,9 @@
                             <table class="table table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>เลขที่โครงการ</th> 
-                                        <th >ความก้าวหน้าการประเมิน</th>    
+                                        <th class="text-left">ชื่อโครงการ</th> 
+                                        <th class="text-left">เลขที่โครงการ</th> 
+                                        <th class="text-left">ความก้าวหน้าการประเมิน</th>    
                                         <th class="text-right">สถานะ</th>                                                                  
                                     </tr>
                                 </thead>
@@ -148,7 +148,11 @@
                                                 </div>
                                             </div>
                                         </td> 
-                                        <td class="text-right"> <span class="badge badge-flat border-success text-success-400 rounded-0">{{$businessplan->businessplanstatus->name}}</span></td>                                       
+                                        <td class="text-right"> 
+                                            @if ($businessplan->business_plan_status_id > 3)
+                                                <span class="badge badge-flat border-success text-success-400 rounded-0">อยู่ระหว่างการประเมิน</span>
+                                            @endif
+                                        </td>                                       
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -241,6 +245,12 @@
         branchid: "{{Auth::user()->branch_id}}"
     };
     
+    var bpstatus = "{{@$businessplans[0]->business_plan_status_id}}";
+    var _bpstatus = "";
+    if(bpstatus >= 3){
+        _bpstatus = 'อยู่ระหว่างการประเมิน';
+    }
+
     var dom = document.getElementById("progress_chart");
     var myChart = echarts.init(dom);
     var app = {};
@@ -369,7 +379,7 @@
                 data: [
                     {
                         value: datavalue, 
-                        name: "{{@$businessplans[0]->businessplanstatus->name}}"
+                        name: _bpstatus
                     }
                 ]
              }

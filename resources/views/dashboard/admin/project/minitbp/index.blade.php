@@ -188,12 +188,12 @@
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
-                                        <th>ความเห็น JD</th>
+                                        <th style="width: 150px">ความเห็น JD</th>
                                         @if (Auth::user()->user_type_id >= 4)
-                                            <th>การอนุมัติ</th> 
+                                            <th style="width: 250px">การอนุมัติ</th> 
                                         @endif
                                         
-                                        <th >เพิ่มเติม</th>                                  
+                                        <th style="width: 250px" >เพิ่มเติม</th>                                  
                                     </tr>
                                 </thead>
                                 <tbody>
