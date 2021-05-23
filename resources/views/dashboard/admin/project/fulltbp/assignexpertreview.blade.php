@@ -225,8 +225,6 @@
                                                     <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
                                                     <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
                                                     @if (!Empty($check))
-                                                        {{-- @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1) --}}
-                                                       
                                                         @if (Auth::user()->user_type_id <=4)
                                                             @if ($check->expert_assignment_status_id == 2)
                                                                 hidden

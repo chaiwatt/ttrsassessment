@@ -6,18 +6,208 @@ import * as Extra from './extra.js';
 var countchecklist = 0;
 var globalNewIndex = 0;
 var readonly = "";
+var evdata = [];
+var evextradata = [];
+
 $(function() {
+    pdfMake.fonts = {
+        THSarabun: {
+            normal: 'THSarabun.ttf',
+            bold: 'THSarabun-Bold.ttf',
+            italics: 'THSarabun-Italic.ttf',
+            bolditalics: 'THSarabun-BoldItalic.ttf'
+        }
+    }
+
     Ev.getEvByFullTbp($('#fulltbpid').val()).then(data => {
-        // console.log(data.criteriatransactions);
         RenderTable(data.criteriatransactions,data.pillaindexweigths);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         RenderExtraTable(data.extracriteriatransactions);
         $(".loadprogress").attr("hidden",true);
         RowSpanExtra("extracriteriatable");
+
+        callDataTable();
+        callDataTableExtra();
     }).catch(error => {})
+
+
 });
 
+
+
+
+function callDataTable(){
+   
+        $('#evexporttable').DataTable( {
+            dom: 'Bfrtip',
+            data: evdata,
+            columns : [
+                { "data" : "pillar" },
+                { "data" : "subpillar" },
+                { "data" : "subpillarindex" },
+                { "data" : "criteria" }
+            ],
+            
+            searching: false,
+            paging:   false,
+            ordering: false,
+            info:     false,
+            pageLength : 10,
+            language: {
+                zeroRecords: " ",
+                search: "ค้นหา: ",  
+                sLengthMenu: "จำนวน _MENU_ รายการ",
+                info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+                paginate: {
+                    previous: 'ก่อนหน้า',
+                    next: 'ถัดไป'
+                }
+            },
+            buttons: [
+                { 
+                    extend: 'excelHtml5',
+                    className: 'btn-primary',
+                    text: 'Excel',
+                    title: function () { 
+                        return null; 
+                    },
+                    filename: function() {
+                        return "รายการ EV (Index Criteria)"      
+                    }, 
+                    exportOptions: {
+                        columns: [ 0, 1,2,3 ]
+                    },
+                },
+                { 
+                    extend: 'pdfHtml5',
+                    pageSize: 'A4',
+                    // orentation: 'landscape',
+                    customize: function(doc) {
+                        doc.defaultStyle = {
+                            font:'THSarabun',
+                            fontSize:14                                 
+                        };
+                        doc.styles.title.alignment = 'left';
+                        doc.pageMargins = [30, 30, 30, 30];
+                        doc.content[1].table.widths = ['*','*', '*', '*']
+                        var rowCount = doc.content[1].table.body.length;
+                        for (var i = 1; i < rowCount; i++) {
+                        doc.content[1].table.body[i][0].alignment = 'left';
+                        }
+                    },
+                    exportOptions: {
+                        columns: [ 0, 1,2,3 ]
+                    },
+                    title: function () { 
+                        return "รายการ EV (Index Criteria)"; 
+                    },
+                    filename: function() {
+                        return "รายการ EV (Index Criteria)"      
+                    }, 
+                }
+                
+            ],
+            drawCallback: function() {
+                $('.buttons-excel')[0].style.visibility = 'hidden'
+                $('.buttons-pdf')[0].style.visibility = 'hidden'
+            }
+        } );
+}
+
+function callDataTableExtra(){
+   
+    $('#evextraexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evextradata,
+        columns : [
+            { "data" : "category" },
+            { "data" : "criteria" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV (Extra)"      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                    doc.content[1].table.body[i][0].alignment = 'left';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1]
+                },
+                title: function () { 
+                    return "รายการ EV (Extra)"; 
+                },
+                filename: function() {
+                    return "รายการ EV (Extra)"      
+                }, 
+            }
+            
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[1].style.visibility = 'hidden'
+            $('.buttons-pdf')[1].style.visibility = 'hidden'
+        }
+    } );
+}
+
+$("#btnOnExcel").on('click', function() {
+    $('#evexporttable').DataTable().buttons(0,0).trigger();
+
+});
+
+$("#btnOnPdf").on('click', function() {
+    $('#evexporttable').DataTable().buttons(0,1).trigger();
+});
+
+$("#btnOnExcelExtra").on('click', function() {
+    $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+
+});
+
+$("#btnOnPdfExtra").on('click', function() {
+    $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+});
 
 $(document).on('click', '#btnaddclustergroup', function(e) {
     Pillar.getPillar(1).then(data => {
@@ -90,7 +280,7 @@ $(document).on('change', '#subpillarindex', function(e) {
             
             $("#chklist").append(`<div class="col-md-6">
                                     <div class="form-check">
-                                        <input type="checkbox" id="${subpillarindex['id']}" value="${subpillarindex['id']}" ${check} > ${subpillarindex['name']}
+                                        <input style="vertical-align:middle !important;" type="checkbox" id="${subpillarindex['id']}" value="${subpillarindex['id']}" ${check} > ${subpillarindex['name']}
                                     </div>
                                 </div>`);
             });
@@ -141,6 +331,9 @@ $('.steps-basic').steps({
         }
     },
     onStepChanging: function (event, currentIndex, newIndex) {
+        if (currentIndex > newIndex) {
+            return true;
+        }
         if(newIndex == 3 && $('#subpillarindex').val() != 0){      
             if($('#indextype').val() == 2){
                 if($('#gradea').val() == 0 && $('#gradeb').val() == 0 && $('#gradec').val() == 0 && $('#graded').val() == 0 && $('#gradee').val() == 0 ){
@@ -157,49 +350,49 @@ $('.steps-basic').steps({
 
         $('#tmpstepindex').val(newIndex);
         $('#criteriamodal').removeClass('context-menu-one'); 
-        if(newIndex > 0){
-            $('#criteriamodal').addClass('context-menu-one'); 
-            $(function() {
-                $.contextMenu({
-                    selector: '.context-menu-one', 
-                    callback: function(key, options) {
-                        //var m = "clicked: " + key;
-                        if(key == 'add'){
-                            $("#parent").html($( "#pillar option:selected" ).text());
-                            $('#modal_additem').modal('show');
-                        }
-                        if(key == 'edit'){
-                            $("#multipleselect").attr("hidden",true);
-                            $("#parent").html($( "#pillar option:selected" ).text());
-                            var isempty = false;
-                            if($('#tmpstepindex').val() == 1){
-                                if($('#subpillar option:selected').val() == 0)isempty=true;
-                                $('#nameedit').val($('#subpillar option:selected').text())
-                            }else if($('#tmpstepindex').val() == 2){
-                                if($('#subpillarindex option:selected').val() == 0)isempty=true;
-                                $('#nameedit').val($('#subpillarindex option:selected').text())
-                            }else if($('#tmpstepindex').val() == 3){
-                                $("#multipleselect").attr("hidden",false);
-                                $('#tmpcriteria').html($('#criteria').html())
-                                $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
-                            }
-                            if(isempty==false)$('#modal_edititem').modal('show');
-                        }
-                    },
-                    items: {
-                        "add": {name: "เพิ่ม" , icon: "add"},
-                        // "edit": {name: "แก้ไข", icon: "edit"},
-                        "sep1": "---------",
-                        "edit": {name: "แก้ไข", icon: function(){
-                            return 'context-menu-icon context-menu-icon-edit';
-                        }}
-                    }
-                });
-                $('.context-menu-one').on('click', function(e){
+        // if(newIndex > 0){
+        //     $('#criteriamodal').addClass('context-menu-one'); 
+        //     $(function() {
+        //         $.contextMenu({
+        //             selector: '.context-menu-one', 
+        //             callback: function(key, options) {
+        //                 //var m = "clicked: " + key;
+        //                 if(key == 'add'){
+        //                     $("#parent").html($( "#pillar option:selected" ).text());
+        //                     $('#modal_additem').modal('show');
+        //                 }
+        //                 if(key == 'edit'){
+        //                     $("#multipleselect").attr("hidden",true);
+        //                     $("#parent").html($( "#pillar option:selected" ).text());
+        //                     var isempty = false;
+        //                     if($('#tmpstepindex').val() == 1){
+        //                         if($('#subpillar option:selected').val() == 0)isempty=true;
+        //                         $('#nameedit').val($('#subpillar option:selected').text())
+        //                     }else if($('#tmpstepindex').val() == 2){
+        //                         if($('#subpillarindex option:selected').val() == 0)isempty=true;
+        //                         $('#nameedit').val($('#subpillarindex option:selected').text())
+        //                     }else if($('#tmpstepindex').val() == 3){
+        //                         $("#multipleselect").attr("hidden",false);
+        //                         $('#tmpcriteria').html($('#criteria').html())
+        //                         $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
+        //                     }
+        //                     if(isempty==false)$('#modal_edititem').modal('show');
+        //                 }
+        //             },
+        //             items: {
+        //                 "add": {name: "เพิ่ม" , icon: "add"},
+        //                 // "edit": {name: "แก้ไข", icon: "edit"},
+        //                 "sep1": "---------",
+        //                 "edit": {name: "แก้ไข", icon: function(){
+        //                     return 'context-menu-icon context-menu-icon-edit';
+        //                 }}
+        //             }
+        //         });
+        //         $('.context-menu-one').on('click', function(e){
 
-                })    
-            });
-        }
+        //         })    
+        //     });
+        // }
         if(newIndex == 1){
             if($('#pillar').val() == 0){
                 return false;
@@ -277,50 +470,50 @@ $('.steps-basic-extra').steps({
     autoFocus: true,
     onStepChanging: function (event, currentIndex, newIndex) {
         $('#tmpstepindex').val(newIndex);
-        $('#extracriteriamodal').removeClass('context-menu-one'); 
-        if(newIndex > 0){
-            $('#extracriteriamodal').addClass('context-menu-one'); 
-            $(function() {
-                $.contextMenu({
-                    selector: '.context-menu-one', 
-                    callback: function(key, options) {
-                        if(key == 'add'){
+        // $('#extracriteriamodal').removeClass('context-menu-one'); 
+        // if(newIndex > 0){
+        //     $('#extracriteriamodal').addClass('context-menu-one'); 
+        //     $(function() {
+        //         $.contextMenu({
+        //             selector: '.context-menu-one', 
+        //             callback: function(key, options) {
+        //                 if(key == 'add'){
 
-                            $("#parent").html($( "#pillar option:selected" ).text());
-                            $('#modal_addextraitem').modal('show');
-                        }
-                        if(key == 'edit'){
-                            $("#multipleselect").attr("hidden",true);
-                            $("#parent").html($( "#pillar option:selected" ).text());
-                            var isempty = false;
-                            if($('#tmpstepindex').val() == 1){
-                                if($('#subpillar option:selected').val() == 0)isempty=true;
-                                $('#nameedit').val($('#subpillar option:selected').text())
-                            }else if($('#tmpstepindex').val() == 2){
-                                if($('#subpillarindex option:selected').val() == 0)isempty=true;
-                                $('#nameedit').val($('#subpillarindex option:selected').text())
-                            }else if($('#tmpstepindex').val() == 3){
-                                $("#multipleselect").attr("hidden",false);
-                                $('#tmpcriteria').html($('#criteria').html())
-                                $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
-                            }
-                            if(isempty==false)$('#modal_editextraitem').modal('show');
-                        }
-                    },
-                    items: {
-                        "add": {name: "เพิ่ม" , icon: "add"},
-                        // "edit": {name: "แก้ไข", icon: "edit"},
-                        "sep1": "---------",
-                        "edit": {name: "แก้ไข", icon: function(){
-                            return 'context-menu-icon context-menu-icon-edit';
-                        }}
-                    }
-                });
-                $('.context-menu-one').on('click', function(e){
+        //                     $("#parent").html($( "#pillar option:selected" ).text());
+        //                     $('#modal_addextraitem').modal('show');
+        //                 }
+        //                 if(key == 'edit'){
+        //                     $("#multipleselect").attr("hidden",true);
+        //                     $("#parent").html($( "#pillar option:selected" ).text());
+        //                     var isempty = false;
+        //                     if($('#tmpstepindex').val() == 1){
+        //                         if($('#subpillar option:selected').val() == 0)isempty=true;
+        //                         $('#nameedit').val($('#subpillar option:selected').text())
+        //                     }else if($('#tmpstepindex').val() == 2){
+        //                         if($('#subpillarindex option:selected').val() == 0)isempty=true;
+        //                         $('#nameedit').val($('#subpillarindex option:selected').text())
+        //                     }else if($('#tmpstepindex').val() == 3){
+        //                         $("#multipleselect").attr("hidden",false);
+        //                         $('#tmpcriteria').html($('#criteria').html())
+        //                         $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
+        //                     }
+        //                     if(isempty==false)$('#modal_editextraitem').modal('show');
+        //                 }
+        //             },
+        //             items: {
+        //                 "add": {name: "เพิ่ม" , icon: "add"},
+        //                 // "edit": {name: "แก้ไข", icon: "edit"},
+        //                 "sep1": "---------",
+        //                 "edit": {name: "แก้ไข", icon: function(){
+        //                     return 'context-menu-icon context-menu-icon-edit';
+        //                 }}
+        //             }
+        //         });
+        //         $('.context-menu-one').on('click', function(e){
             
-                })    
-            });
-        }
+        //         })    
+        //     });
+        // }
         if(newIndex == 1){
             if($('#extracategory').val() == 0){
                 return false;
@@ -368,7 +561,6 @@ $.contextMenu({
     },
     items: {
         "add": {name: "เพิ่ม" , icon: "add"},
-        // "edit": {name: "แก้ไข", icon: "edit"},
         "sep1": "---------",
         "edit": {name: "แก้ไข", icon: function(){
             return 'context-menu-icon context-menu-icon-edit';
@@ -485,6 +677,7 @@ function RenderModalTable(data){
 }
 function RenderTable(criterias,pillaindexweigths){
     var html =``;
+    evdata = [];
     criterias.forEach(function (criteria,index) {
         var criterianame = criteria.subpillarindex['name'] + ' <small>(เกรด)</small>';
         if(criteria.criteria != null){
@@ -523,6 +716,11 @@ function RenderTable(criterias,pillaindexweigths){
         if(criteria.comment){
             comment = criteria.comment;
         }
+        
+
+        evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": subpillarindex, "criteria": criterianame});
+
+
         if(route.status == 0 || route.refixstatus == 1){
             html += `<tr > 
             <td> ${criteria.pillar['name']} <a href="#" data-pillar="${criteria.pillar['id']}" class="text-grey-300 pillarname deletepillar"><i class="icon-trash"></i></a></td>                                            
@@ -555,11 +753,13 @@ function RenderTable(criterias,pillaindexweigths){
             </tr>`
         }
     });
+    JSON.stringify({array: evdata});
         $("#criteria_transaction_wrapper_tr").html(html);
 }
 
 function RenderExtraTable(data){
     var html =``;
+    evextradata = [];
     data.forEach(function (criteria,index) {
         var weightval = '';
         var commentreadlonly = '';
@@ -588,6 +788,10 @@ function RenderExtraTable(data){
         if(criteria.extracomment){
             comment = criteria.extracomment;
         }
+
+        evextradata.push({"category":  criteria.extracategory['name'] , "criteria": criteria.extracriteria['name']});
+
+
         if(route.status == 0 || route.refixstatus == 1){
             html += `<tr > 
             <td> ${criteria.extracategory['name']} ${weightval}<a href="#" data-categoryid="${criteria.extra_category_id}" class="text-grey-300 deletecategorytransaction"><i class="icon-trash"></i></a></td>                
@@ -1242,6 +1446,11 @@ $("#gradee").on('change', function() {
     }
 });
 $(document).on("click","#toggletable",function(e){
+    if($("#gradea").val() == '' || $("#gradeb").val() == '' || $("#gradec").val() == '' || $("#graded").val() =='' || $("#gradee").val() == ''){
+        return ;
+    }
+
+
     $("#tda").html("ตั้งแต่ " + $("#gradea").val());
 
     if ((parseInt($("#gradea").val())-parseInt($("#gradeb").val())) > 1) {
@@ -1267,6 +1476,7 @@ $(document).on("click","#toggletable",function(e){
     }else{
         $("#tde").html($("#gradee").val());
     }
+    $("#tdf").html('น้อยกว่า ' + $("#gradee").val());
 
     // $("#te").html("<= " + parseInt($("#graded").val()-1));
     $("#show").toggle();

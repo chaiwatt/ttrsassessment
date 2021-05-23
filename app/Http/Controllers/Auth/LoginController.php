@@ -47,7 +47,7 @@ class LoginController extends Controller
                 if(($user->user_type_id == 3 || $user->user_type_id == 4) && $user->verify_expert == 1){
                     Auth::logout();
                     Session::flush();
-                    return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ JD');
+                    return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ Admin');
                 }
             }
             if($user->user_type_id >= 4){

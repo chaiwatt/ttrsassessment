@@ -222,7 +222,7 @@
                                         <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
                                         @foreach ($allyears as $key => $item)
                                             @if ($item != 0)
-                                                <th colspan="{{$item}}" class="text-center">พ.ศ.{{$fulltbpgantt->startyear + $key}} </th> 
+                                                <th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
                                             @endif
                                         @endforeach
                                         {{-- <th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th>  --}}
@@ -290,18 +290,19 @@
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
                     <div class="ml30" style="font-size:13px" ><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></div>
                     <div style="font-size:13px">ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
+                    @if ($fulltbp->fulltbpsell->count() > 0)
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
                                 <th style="width:40%;font-size:13px">ยอดขายแยกตามประเภทผลิตภัณฑ์/บริการ</th>
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past3}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past2}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1}}</th>  
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1 +1 }}</th>
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th>  
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1 +1 }}</th>
                             <tr>
                         </thead>
                         <tbody>
-                            @if ($fulltbp->fulltbpsell->count() > 0)
+                            
                                 @foreach ($fulltbp->fulltbpsell as $fulltbpsell)
                                     <tr>
                                         <td style="font-size:13px"> {{$fulltbpsell->name}}</td> 
@@ -318,18 +319,19 @@
                                     <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('past1'),2)}} </td>   
                                     <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('present'),2)}} </td>    
                                 </tr>
-                            @endif
+                            
                         </tbody>
                     </table>
+                    @endif
                     <div class="mt20" style="font-size:13px">(สถานะยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
                                 <th style="width:40%;font-size:13px">ระยะเวลา</th>
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past3}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past2}}</th>   
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1}}</th> 
-                                <th style="width:15%;font-size:13px">พ.ศ.{{$fulltbp->past1+1}}</th>   
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th>   
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th> 
+                                <th style="width:15%;font-size:13px">{{$fulltbp->past1+1}}</th>   
                             <tr>
                         </thead>
                         <tbody>

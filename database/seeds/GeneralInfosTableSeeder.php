@@ -25,7 +25,7 @@ class GeneralInfosTableSeeder extends Seeder
                 'instagram' => 'https://www.instagram.com',
                 'skype' => 'https://www.skype.com',
                 'linkedin' => 'https://th.linkedin.com',
-                'workdaytime' => '08.00-16.00 น.',
+                'workdaytime' => '08.00-16.00',
                 'saturdaytime' => 'ปิดทำการ',
                 'sundaytime' => 'ปิดทำการ',
                 'address' => '111 อุทยานวิทยาศาสตร์ประเทศไทย ถ.พหลโยธิน',

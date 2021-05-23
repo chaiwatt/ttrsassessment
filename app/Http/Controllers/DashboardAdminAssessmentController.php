@@ -11,6 +11,11 @@ use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
+use App\Helper\Message;
+use App\Helper\EmailBox;
+use App\Model\MessageBox;
+use App\Model\GeneralInfo;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ExtraScoring;
 use App\Helper\GetEvPercent;
@@ -440,42 +445,80 @@ class DashboardAdminAssessmentController extends Controller
         ]);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
-        $notificationbubble = new NotificationBubble();
-        $notificationbubble->business_plan_id = $businessplan->id;
-        $notificationbubble->notification_category_id = 1;
-        $notificationbubble->notification_sub_category_id = 3;
-        $notificationbubble->user_id = $auth->id;
-        $notificationbubble->target_user_id = $projectassignment->leader_id;
-        $notificationbubble->save();
+
 
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
+        $generalinfo = GeneralInfo::first();
+        if($generalinfo->use_invoice_status_id == 2){
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $businessplan->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 9;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $projectassignment->leader_id;
+            $notificationbubble->save();
+            
+            BusinessPlan::find($minitbp->business_plan_id)->update([
+                'business_plan_status_id' => 9
+            ]);
+        }else{
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $businessplan->id;
+            $notificationbubble->notification_category_id = 1;
+            $notificationbubble->notification_sub_category_id = 3;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $projectassignment->leader_id;
+            $notificationbubble->save();
 
-        $invoicetransaction = new InvoiceTransaction();
-        $invoicetransaction->company_id = $company->id;
-        $invoicetransaction->customer = $company->name;
-        // $invoicetransaction->docno = $request->docno;
-        $invoicetransaction->issuedate = Carbon::now()->toDateString();
-        // $invoicetransaction->quotationno = $request->quotationno;
-        // $invoicetransaction->purchaseorderno = $request->purchaseorderno;
-        // $invoicetransaction->saleorderno = $request->saleorderno;
-        $invoicetransaction->saleorderdate = Carbon::now()->toDateString();
-        // $invoicetransaction->refno = $request->refno;
-        $invoicetransaction->description = 'ค่าธรรมเนียมการประเมินเทคโนโลยี';
-        $invoicetransaction->price = 0;
-        // $invoicetransaction->billerid = $request->billerid;
-        // $invoicetransaction->branchid = $request->branchid;
-        // $invoicetransaction->servicecode = $request->servicecode;
-        // $invoicetransaction->compcode = $request->compcode;
-        $invoicetransaction->save();
+            $invoicetransaction = new InvoiceTransaction();
+            $invoicetransaction->company_id = $company->id;
+            $invoicetransaction->customer = $company->name;
+            $invoicetransaction->issuedate = Carbon::now()->toDateString();
+            $invoicetransaction->saleorderdate = Carbon::now()->toDateString();
+            $invoicetransaction->description = 'ค่าธรรมเนียมการประเมินเทคโนโลยี';
+            $invoicetransaction->price = 0;
+            $invoicetransaction->save();
+        }
+
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
 
         $projectmembers = ProjectMember::where('full_tbp_id',$ev->full_tbp_id)->get();
         foreach ($projectmembers as $key => $projectmember) {
+            $_user = User::find($projectmember->user_id);
             $summaryexpertpercent = new SummaryExpertPercent();
             $summaryexpertpercent->ev_id = $ev->id;
             $summaryexpertpercent->user_id = $projectmember->user_id;
             $summaryexpertpercent->percent = GetEvPercent::getEvPercent($projectmember->user_id,$ev->full_tbp_id); 
             $summaryexpertpercent->save();
+
+            $messagebox = Message::sendMessage('สรุปผลการประเมิน โครงการ'.$minitbp->project .' ของ' . $fullcompanyname,'ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult').'>ดำเนินการ</a>',Auth::user()->id,$projectmember->user_id);
+
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $projectmember->user_id;
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project .' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.evaluationresult').'>ดำเนินการ</a>';
+            $alertmessage->save();
+    
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+    
+            EmailBox::send($_user->email,'TTRS:สรุปผลการประเมิน โครงการ'.$minitbp->project  .' ของ' . $fullcompanyname,'เรียน ทีมประเมิน <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    
         }
 
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();

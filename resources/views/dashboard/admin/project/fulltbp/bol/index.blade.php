@@ -18,12 +18,12 @@
 							<input type="text" id="docname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg">
 						</div>
 					</div>
-					<div class="col-md-12">	
+					{{-- <div class="col-md-12">	
 						<div class="input-group">													
 							<button id="btnaddboldoc" class="btn btn-info  btn-icon ml-2 btn-sm float-left" type="button" onclick="document.getElementById('boldoc').click();" >อัปโหลด</button>													
 						</div>
 						<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="boldoc" name="boldoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
-					</div>
+					</div> --}}
 				</div>
 			</div>           
 			<div class="modal-footer">
@@ -76,25 +76,25 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         {{-- @if (Auth::user()->user_type_id == 4) --}}
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสาร BOL </h6> @if (Auth::user()->user_type_id == 4)<button type="button" class="btn btn-info btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" data-target="#modal_add_bol"><i class="icon-add mr-2"></i>อัปโหลด</button> @endif
-                        {{-- @endif --}}
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสาร BOL </h6> @if (Auth::user()->user_type_id == 4)<button type="button" class="btn btn-info btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" onclick="document.getElementById('boldoc').click();"><i class="icon-add mr-2"></i>อัปโหลด</button> @endif
+                        <input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="boldoc" name="boldoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
                         
                     
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อไฟล์</th> 
-                                        <th style="width:20%">เพิ่มเติม</th>                                  
+                                        <th style="width:1%">เพิ่มเติม</th>                                  
                                     </tr>
                                 </thead>
                                 <tbody id="fulltbp_bol_wrapper_tr">
                                     @foreach ($bols as $key => $bol)
                                         <tr>    
                                             <td> {{$bol->name}} </td> 
-                                            <td> 
+                                            <td style="white-space: nowrap"> 
                                                 <a href="{{asset($bol->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                                                 @if (Auth::user()->user_type_id == 4)
                                                 <a  data-id="{{$bol->id}}" class="btn btn-sm bg-danger deletebol">ลบ</a>  

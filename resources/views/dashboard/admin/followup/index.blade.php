@@ -61,13 +61,13 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="maintable">
+                            <table class="table table-bordered" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>    
                                         <th>สถานะ</th>                             
-                                        <th style="text-align: right">เพิ่มเติม</th>
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -88,7 +88,7 @@
                                                             
                                                     @endif
                                                 </td>                                        
-                                                <td style="text-align: right"> 
+                                                <td style="white-space: nowrap"> 
                                                     @if ($fulltbp->success_objective == 0)
                                                         <a href="{{route('dashboard.admin.edit',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-warning">เพิ่มผลการติดตาม</a>
                                                         @else

@@ -1,6 +1,7 @@
 
     $(".linknextaction").on('click', function() {
-        deleteAlert($(this).data('id')).then(data => {
+        console.log($(this).data('id'));
+        deleteAlertQ($(this).data('id')).then(data => {
 
         }).catch(error => {})
 
@@ -9,21 +10,30 @@
     $(".dmyformat").on('change', function() {
        var str = $(this).val();
        var lastSlash = str.lastIndexOf("/");
-       if(str.substring(lastSlash+1).length != 4){
+       var year = str.substring(lastSlash+1);
+       if(year.length != 4){
         Swal.fire({
             title: 'ผิดพลาด',
             text: 'รูปแบบวันที่ไม่ถูกต้อง!',
             });
             $(this).val('');
+       }else{
+           if(parseInt(year) < 2500 || parseInt(year) > 3000){
+            Swal.fire({
+                title: 'ผิดพลาด',
+                text: 'กรุณากรอกปี พ.ศ. ระหว่าง 2500 - 3000',
+                });
+                $(this).val('');
+           }
        }
     });
 
     
 
-    function deleteAlert(id) {
+    function deleteAlertQ(id) {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: `${route.url}/api/alert/deletealert`,
+                url: `${route.url}/api/alert/deletealertq`,
                 type: 'POST',
                 headers: {"X-CSRF-TOKEN":route.token},
                 data: {

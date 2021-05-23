@@ -104,7 +104,7 @@
                     <div class="card-body">
                         <input id="evid" type="text" hidden>
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
                                         {{-- <th>วันที่ขอส่ง</th>  --}}

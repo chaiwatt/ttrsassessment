@@ -1,6 +1,11 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 <link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
+<style>
+	th {
+	  text-align: center !important;
+	}
+	</style>
 @stop
 @section('content')
 {{-- modal_add_employ --}}
@@ -267,7 +272,7 @@
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
 									</div> --}}
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>ระดับ</th>  
@@ -285,7 +290,7 @@
 								</div>
 								<div class="tab-pane fade" id="left-icon-employexpereince">
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>เริ่มต้น-สิ้นสุด</th>  
@@ -308,7 +313,7 @@
 									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
@@ -322,7 +327,7 @@
 								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>วัน เดือน ปี</th>  
@@ -1374,7 +1379,7 @@
 									<div class="col-md-12">	
 										<label><strong><u>1.7 รายการบุคลากร</u></strong></label>
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th>รายการบุคลากร</th>                                                                                  
@@ -1421,18 +1426,18 @@
 										</div>
 										@if ($fulltbpcompanyprofileattachments->count() > 0)
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th>เอกสารแนบ</th>                                                                                  
-														<th style="width:200px">ดาวน์โหลด</th>
+														<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 													</tr>
 												</thead>
 												<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
 													@foreach ($fulltbpcompanyprofileattachments as $fulltbpcompanyprofileattachment)
 														<tr >                                        
 															<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
-															<td> 
+															<td style="white-space: nowrap"> 
 																<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 															</td>
 														</tr>
@@ -1444,19 +1449,29 @@
 
 									</div>
 
+
+
+
 									<div class="col-md-12 mt-3">	
-										<label><strong>1.10 - 1.11 ข้อมูลผู้บริหารระดับสูง (CEO, CTO, CMO, CFO หรืออื่น ๆ)</strong></label>
+										<label><strong>1.10 ข้อมูลผู้บริหารระดับสูง CEO</strong></label>
 										@php
 											$count = 0;
 										@endphp
-										@foreach ($companyemploys->where('employ_position_id','<=',5) as $key => $companyemploy)
+										@foreach ($companyemploys->where('employ_position_id',1) as $key => $companyemploy)
 											@php
 												$count++
 											@endphp
 											{{-- <div class="card mb-0 mt-2">										
 												<div class="card-body"> --}}
 													{{-- <div class="row"> --}}
-														<div class="col-md-12 mt-2">	
+
+														<div 
+														@if ($key == 0)
+															class="col-md-12 mt-2"
+															@else
+															class="col-md-12 mt-3"
+														@endif
+														>	
 															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label>
 														</div>
 														
@@ -1464,7 +1479,7 @@
 															@if ($companyemploy->employeducation->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการศึกษา</u></label>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ระดับ</th>  
@@ -1479,7 +1494,7 @@
 																					<td> {{$education->employeducationlevel}} </td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
-																					<td> พ.ศ.{{$education->employeducationyearstart}} - พ.ศ.{{$education->employeducationyearend}} </td> 
+																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
 																				</tr>
 																			@endforeach  
 																		</tbody>
@@ -1489,7 +1504,7 @@
 															@if ($companyemploy->employexperience->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการทำงาน</u></label>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>เริ่มต้น-สิ้นสุด</th>  
@@ -1502,7 +1517,7 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employexperience as $experience)
 																				<tr>
-																					<td> พ.ศ.{{$experience->startdate}} - พ.ศ.{{$experience->enddate}}</td>                                            
+																					<td> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
 																					<td> {{$experience->company}} </td> 
 																					<td> {{$experience->businesstype}} </td>                                            
 																					<td> {{$experience->startposition}} </td> 
@@ -1516,7 +1531,7 @@
 															@if ($companyemploy->employtraining->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการฝึกอบรม</u></label>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>วัน เดือน ปี</th>  
@@ -1539,7 +1554,138 @@
 															@if ($companyemploy->fulltbpboardattachment->count() > 0)
 															<div class="table-responsive mt-1">
 																<label for=""><u>เอกสารแนบ</u></label>
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
+																	<thead>
+																		<tr class="bg-info">
+																			<th>เอกสาร</th>  
+																			<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>                                                                                     
+																		</tr>
+																	</thead>
+																	<tbody>  
+																		@foreach ($companyemploy->fulltbpboardattachment as $boardattachment)
+																			<tr>
+																				<td> {{$boardattachment->name}}</td>                                                                                      
+																				<td style="white-space: nowrap"> 
+																				  <a href="{{asset($boardattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+																				</td> 
+																			</tr>
+																		@endforeach  
+																	</tbody>
+																</table>
+															</div>
+														@endif
+														</div>
+													{{-- </div> --}}
+												{{-- </div>
+											</div> --}}
+										@endforeach
+									</div>
+
+
+
+			<div class="col-md-12 mt-3">	
+										<label><strong>1.11 ข้อมูลผู้บริหารระดับสูง (CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</strong></label>
+										@php
+											$count = 0;
+										@endphp
+										@foreach ($companyemploys->where('employ_position_id','>',1)->where('employ_position_id','<=',5) as $key => $companyemploy)
+											@php
+												$count++
+											@endphp
+											{{-- <div class="card mb-0 mt-2">										
+												<div class="card-body"> --}}
+													{{-- <div class="row"> --}}
+														<div 
+														@if ($key == 0)
+															class="col-md-12 mt-2"
+															@else
+															class="col-md-12 mt-3"
+														@endif
+														
+														>	
+															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label>
+														</div>
+														
+														<div class="col-md-12">	
+															@if ($companyemploy->employeducation->count() > 0)
+																<div class="table-responsive mt-1">
+																	<label for=""><u>ประวัติการศึกษา</u></label>
+																	<table class="table table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>ระดับ</th>  
+																				<th style="width:25%">ชื่อสถานศึกษา</th>                                                                                    
+																				<th style="width:20%">สาขาวิชาเอก</th>       
+																				<th style="width:20%">ปีที่ศึกษา</th>  
+																			</tr>
+																		</thead>
+																		<tbody>  
+																			@foreach ($companyemploy->employeducation as $education)
+																				<tr>
+																					<td> {{$education->employeducationlevel}} </td>                                            
+																					<td> {{$education->employeducationinstitute}} </td> 
+																					<td> {{$education->employeducationmajor}} </td>                                            
+																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
+																				</tr>
+																			@endforeach  
+																		</tbody>
+																	</table>
+																</div>
+															@endif
+															@if ($companyemploy->employexperience->count() > 0)
+																<div class="table-responsive mt-1">
+																	<label for=""><u>ประวัติการทำงาน</u></label>
+																	<table class="table table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>เริ่มต้น-สิ้นสุด</th>  
+																				<th style="width:20%">บริษัท</th>                                                                                    
+																				<th style="width:25%">ประเภทธุรกิจ</th>       
+																				<th style="width:20%">ตำแหน่งแรกเข้า</th>  
+																				<th style="width:15%">ตำแหน่งล่าสุด</th> 
+																			</tr>
+																		</thead>
+																		<tbody>  
+																			@foreach ($companyemploy->employexperience as $experience)
+																				<tr>
+																					<td> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
+																					<td> {{$experience->company}} </td> 
+																					<td> {{$experience->businesstype}} </td>                                            
+																					<td> {{$experience->startposition}} </td> 
+																					<td> {{$experience->endposition}} </td> 
+																				</tr>
+																			@endforeach  
+																		</tbody>
+																	</table>
+																</div>
+															@endif
+															@if ($companyemploy->employtraining->count() > 0)
+																<div class="table-responsive mt-1">
+																	<label for=""><u>ประวัติการฝึกอบรม</u></label>
+																	<table class="table table-bordered">
+																		<thead>
+																			<tr class="bg-info">
+																				<th>วัน เดือน ปี</th>  
+																				<th style="width:40%">หลักสูตร</th>                                                                                    
+																				<th style="width:40%">หน่วยงานผู้จัด</th>   
+																			</tr>
+																		</thead>
+																		<tbody>  
+																			@foreach ($companyemploy->employtraining->reverse() as $training)
+																				<tr>
+																					<td> {{$training->trainingdateth}}</td>                                            
+																					<td> {{$training->course}} </td> 
+																					<td> {{$training->owner}} </td>  
+																				</tr>
+																			@endforeach  
+																		</tbody>
+																	</table>
+																</div>
+															@endif
+															@if ($companyemploy->fulltbpboardattachment->count() > 0)
+															<div class="table-responsive mt-1">
+																<label for=""><u>เอกสารแนบ</u></label>
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร</th>  
@@ -1565,10 +1711,14 @@
 											</div> --}}
 										@endforeach
 									</div>
+
+
+
+
 									<div class="col-md-12 mt-3">	
 										<label><strong>1.12 บัญชีรายชื่อผู้ถือหุ้น</strong></label>
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th>ชื่อ-นามสกุล</th>  
@@ -1610,7 +1760,7 @@
 															@if ($companyemploy->employeducation->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการศึกษา</u></label>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ระดับ</th>  
@@ -1625,7 +1775,7 @@
 																					<td> {{$education->employeducationlevel}} </td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
-																					<td> พ.ศ.{{$education->employeducationyearstart}} - พ.ศ.{{$education->employeducationyearend}} </td> 
+																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
 																				</tr>
 																			@endforeach  
 																		</tbody>
@@ -1635,7 +1785,7 @@
 															@if ($companyemploy->employexperience->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการทำงาน</u></label>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>เริ่มต้น-สิ้นสุด</th>  
@@ -1648,7 +1798,7 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employexperience as $experience)
 																				<tr>
-																					<td> พ.ศ.{{$experience->startdate}} - พ.ศ.{{$experience->enddate}}</td>                                            
+																					<td> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
 																					<td> {{$experience->company}} </td> 
 																					<td> {{$experience->businesstype}} </td>                                            
 																					<td> {{$experience->startposition}} </td> 
@@ -1662,7 +1812,7 @@
 															@if ($companyemploy->employtraining->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการฝึกอบรม</u></label>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>วัน เดือน ปี</th>  
@@ -1685,7 +1835,7 @@
 															@if ($companyemploy->fulltbpboardattachment->count() > 0)
 															<div class="table-responsive mt-1">
 																<label for=""><u>เอกสารแนบ</u></label>
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร</th>  
@@ -1714,7 +1864,7 @@
 									<div class="col-md-12 mt-3">	
 										<label><strong>1.14 ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong></label>
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th style="width:200px">รายการ</th>                                                                                  
@@ -1799,7 +1949,7 @@
 											{{-- </div> --}}
 											@if ($fulltbpprojecttechdevlevels->count() > 0)
 											<div class="table-responsive">
-												<table class="table table-striped table-bordered">
+												<table class="table table-bordered">
 													<thead>
 														<tr class="bg-info">
 															<th>รายการ</th>  
@@ -2012,18 +2162,18 @@
 										
 												<div class="col-md-12">	
 													<div class="table-responsive">
-														<table class="table table-striped table-bordered">
+														<table class="table table-bordered">
 															<thead>
 																<tr class="bg-info">
 																	<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
-																	<th style="width:200px">ดาวน์โหลด</th>
+																	<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 																</tr>
 															</thead>
 															<tbody id="fulltbp_certify_wrapper_tr">    
 																@foreach ($fulltbpprojectcertifyattachments as $fulltbpprojectcertifyattachment)
 																	<tr >                                        
 																		<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
-																		<td> 
+																		<td style="white-space: nowrap"> 
 																			<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																			
 																		</td>
@@ -2050,18 +2200,18 @@
 												@if ($fulltbpprojectawardattachments->count() > 0)
 												<div class="col-md-12">	
 													<div class="table-responsive">
-														<table class="table table-striped table-bordered">
+														<table class="table table-bordered">
 															<thead>
 																<tr class="bg-info">
 																	<th>เอกสารรางวัลด้านเทคโนโลยี/นวัตกรรม</th>                                                                                  
-																	<th style="width:200px">ดาวน์โหลด</th>
+																	<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 																</tr>
 															</thead>
 															<tbody id="fulltbp_award_wrapper_tr">    
 																@foreach ($fulltbpprojectawardattachments as $fulltbpprojectawardattachment)
 																	<tr>                                        
 																		<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
-																		<td> 
+																		<td style="white-space: nowrap"> 
 																			<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																		</td>
 																	</tr>
@@ -2088,18 +2238,18 @@
 											<div class="row">
 												<div class="col-md-12">	
 													<div class="table-responsive">
-														<table class="table table-striped table-bordered">
+														<table class="table table-bordered">
 															<thead>
 																<tr class="bg-info">
 																	<th>เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ</th>                                                                                  
-																	<th style="width:200px">ดาวน์โหลด</th>
+																	<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 																</tr>
 															</thead>
 															<tbody id="fulltbp_standard_wrapper_tr">    
 																@foreach ($fulltbpprojectstandards as $fulltbpprojectstandard)
 																	<tr >                                        
 																		<td> {{$fulltbpprojectstandard->name}} </td>                                            
-																		<td> 
+																		<td style="white-space: nowrap"> 
 																			<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																		</td>
 																	</tr>
@@ -2130,7 +2280,7 @@
 														<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
 														@foreach ($allyears as $key => $item)
 															@if ($item != 0)
-																<th colspan="{{$item}}" class="text-center">พ.ศ.{{$fulltbpgantt->startyear + $key}} </th> 
+																<th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
 															@endif
 														@endforeach
 														
@@ -2211,18 +2361,18 @@
 											</div>
 											@if ($fullTbpmarketattachmentmodelcanvases->count() > 0)
 											<div class="table-responsive">
-												<table class="table table-striped table-bordered">
+												<table class="table table-bordered">
 													<thead>
 														<tr class="bg-info">
 															<th>เอกสาร Business Model Canvas</th>                                                                                  
-															<th style="width:200px">ดาวน์โหลด</th>
+															<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 														</tr>
 													</thead>
 													<tbody id="fulltbp_businessmodelcanvas_wrapper_tr">    
 														@foreach ($fullTbpmarketattachmentmodelcanvases as $fullTbpmarketattachmentmodelcanvas)
 															<tr >                                        
 																<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
-																<td> 
+																<td style="white-space: nowrap"> 
 																	<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 																	{{-- <a  data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                        --}}
 																</td>
@@ -2241,18 +2391,18 @@
 												<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->fulltbpmarketswot->detail!!}</div>
 											</div>
 											@if ($fullTbpmarketattachmentswots->count() > 0)
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th>เอกสาร SWOT Analysis, Five Forces Analysis</th>                                                                                  
-														<th style="width:200px">ดาวน์โหลด</th>
+														<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 													</tr>
 												</thead>
 												<tbody id="fulltbp_swot_wrapper_tr">    
 													@foreach ($fullTbpmarketattachmentswots as $fullTbpmarketattachmentswot)
 														<tr >                                        
 															<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
-															<td> 
+															<td style="white-space: nowrap"> 
 																<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
 															</td>
 														</tr>
@@ -2273,14 +2423,14 @@
 												{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
 											{{-- </div> --}}
 											<div class="table-responsive">
-												<table class="table table-striped table-bordered">
+												<table class="table table-bordered">
 													<thead>
 														<tr class="bg-info">
 															<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
-															<th>พ.ศ.{{$fulltbp->past3}}</th> 
-															<th>พ.ศ.{{$fulltbp->past2}}</th> 
-															<th>พ.ศ.{{$fulltbp->past1}}</th> 
-															<th>พ.ศ.{{$fulltbp->past1+1}}</th> 
+															<th>{{$fulltbp->past3}}</th> 
+															<th>{{$fulltbp->past2}}</th> 
+															<th>{{$fulltbp->past1}}</th> 
+															<th>{{$fulltbp->past1+1}}</th> 
 															                                                                                   
 														     
 															 
@@ -2308,14 +2458,14 @@
 												{{-- <small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small> --}}
 											{{-- </div> --}}
 											<div class="table-responsive">
-												<table class="table table-striped table-bordered">
+												<table class="table table-bordered">
 													<thead>
 														<tr  class="bg-info">
 															<th>ระยะเวลา</th>  
-															<th>พ.ศ.{{$fulltbp->past3}}</th>  
-															<th>พ.ศ.{{$fulltbp->past2}}</th> 
-															<th>พ.ศ.{{$fulltbp->past1}}</th>  
-															<th>พ.ศ.{{$fulltbp->past1 + 1}}</th>  
+															<th>{{$fulltbp->past3}}</th>  
+															<th>{{$fulltbp->past2}}</th> 
+															<th>{{$fulltbp->past1}}</th>  
+															<th>{{$fulltbp->past1 + 1}}</th>  
 														</tr>
 													</thead>
 													<tbody id="fulltbp_sellstatus_wrapper_tr">    
@@ -2339,7 +2489,7 @@
 											{{-- </div> --}}
 											@if ($fulltbpdebtpartners->count() > 0)
 											<div class="table-responsive">
-												<table class="table table-striped table-bordered">
+												<table class="table table-bordered">
 													<thead>
 														<tr class="bg-info">
 															<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
@@ -2374,7 +2524,7 @@
 											{{-- </div> --}}
 											@if ($fulltbpcreditpartners->count() > 0)
 											<div class="table-responsive">
-												<table class="table table-striped table-bordered">
+												<table class="table table-bordered">
 													<thead>
 														<tr class="bg-info">
 															<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
@@ -2421,7 +2571,7 @@
 											{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p> --}}
 										{{-- </div> --}}
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th colspan="5" style="text-align: center">เงินลงทุนในสินทรัพย์ถาวรของโครงการ</th>   
@@ -2451,7 +2601,7 @@
 									<div class="col-md-12 mt-3">
 										
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th colspan="2" style="text-align: center">เงินลงทุนสำหรับดำเนินการของโครงการ</th>   
@@ -2478,7 +2628,7 @@
 											<p><small><i>ตารางแสดงรายละเอียดแหล่งเงินทุนของโครงการ</i> </small></p>
 										</div> --}}
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead class="bg-info">
 													<tr class="bg-info">
 														<th colspan="5" style="text-align: center">แหล่งเงินทุนของโครงการ</th>   
@@ -2508,7 +2658,7 @@
 									<div class="col-md-12 mt-3">
 										<label><strong>4.2 ประมาณการผลตอบแทนจากการลงทุน</strong></label>
 										<fieldset>	
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead class="bg-info">
 													<tr>
 														<th>รายการ</th>  

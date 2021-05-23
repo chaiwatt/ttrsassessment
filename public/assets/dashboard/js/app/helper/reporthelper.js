@@ -48,6 +48,7 @@ import * as Attendee from './eventcalendarattendee.js';
         ]
         var datagradebysector = ['เกรด AAA', 'เกรด AA','เกรด A', 'เกรด BBB','เกรด BB', 'เกรด B','เกรด CCC', 'เกรด CC','เกรด C', 'เกรด D']
        $(function() {
+
             var events = [];
             getEvents().then(data => {
                 data.forEach(function (event,index) {
@@ -89,12 +90,13 @@ import * as Attendee from './eventcalendarattendee.js';
                         eventClick: function(e) {
                             getEvent(e.event.id).then(data => {
                                 $('#title').val('นัดหมายการประชุม โครงการ' + data.eventcalendar.fulltbp.minitbp['project']);
-                                $('#eventdate').val(data.eventcalendar.eventdateth);
-                                $('#starttime').val(data.eventcalendar.starttime);
-                                $('#endtime').val(data.eventcalendar.endtime);
-                                $('#eventtype').val(data.eventcalendar.calendartype['name']);
-                                $('#detail').val(data.eventcalendar.summary);
+                                $('#eventdate').html(data.eventcalendar.eventdateth + ' เวลา ' + data.eventcalendar.starttime + ' น. - ' + data.eventcalendar.endtime + ' น.');
+                                $('#place').html(data.eventcalendar.place);
+                                $('#eventtype').html(data.eventcalendar.calendartype['name']);
+                                $('#subject').html(data.eventcalendar.subject);
+                                $('#detail').html(data.eventcalendar.summary);
                                 $('#attendeventid').val(data.attendeecalendar.id);
+
                                 var html =``;
                                
                                 data.eventcalendarattendeestatuses.forEach(function (status,index) {
@@ -109,17 +111,26 @@ import * as Attendee from './eventcalendarattendee.js';
 
                                 var html =``;
                                 data.eventcalendarattendees.forEach(function (attendee,index) {
-                                    var attendeestatus = `<span class="badge badge-flat border-success text-success-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
+                                    var attendeestatus = `<span class="badge badge-flat border-info text-info-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
                                     if(attendee.joinevent == 2){
-                                        attendeestatus = `<span class="badge badge-flat border-warning text-warning-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
+                                        attendeestatus = `<span class="badge badge-flat border-success text-success-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
+                                    }else if(attendee.joinevent == 3){
+                                        attendeestatus = `<span class="badge badge-flat border-danger text-danger-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
                                     }
                                     html += `<tr > 
                                     <td> ${attendee.user['name']} ${attendee.user['lastname']}</td>                                            
                                     <td> ${attendeestatus} </td> 
                                     </tr>`
-                                    });
-                                $("#attendee_modal_wrapper_tr").html(html);
+                                });
 
+                                $("#attendee_modal_wrapper_tr").html(html);
+                                var html =`<ul>`;
+                                data.calendarattachments.forEach(function (attachment,index) {
+                                    html += `<li><a href="${route.url}/${attachment.path}" target="_blank">${attachment.name}</a></li>`
+                                });
+                                html +=`</ul>`;
+                                
+                                $("#attachment_wrapper").html(html);
                             }).catch(error => {})
                         },
                     }).render();
@@ -463,20 +474,22 @@ $('#chkjoinmetting').on('change.bootstrapSwitch', function(e) {
 });
 
 
-$(document).on('change', '#attendevent', function(e) {
-    var status = 1
-    if($(this).val()==2){
-        status =0;
-    }        
-   $("#spinicon").attr("hidden",false);
-   Attendee.updateJoinEvent($('#attendeventid').val(),status).then(data => {
-       $("#spinicon").attr("hidden",true);
-      
-   }).catch(error => {})
+$(document).on('change', '#attendevent', function(e) {    
+//    $("#spinicon").attr("hidden",false);
+//    Attendee.updateJoinEvent($('#attendeventid').val(),$(this).val()).then(data => {
+//        $("#spinicon").attr("hidden",true);
+//        document.location.reload();
+//    }).catch(error => {})
 });
 
+
 $(document).on('click', '#btn_modal_get_calendar', function(e) {
-    window.location.replace(`${route.url}/dashboard/admin/report`);
+    //window.location.replace(`${route.url}/dashboard/admin/report`);
+    $("#spinicon").attr("hidden",false);
+   Attendee.updateJoinEvent($('#attendeventid').val(),$('#attendevent').val()).then(data => {
+       $("#spinicon").attr("hidden",true);
+       document.location.reload();
+   }).catch(error => {})
 });
 
 $(document).on('click', '#numproject_donut', function(e) {

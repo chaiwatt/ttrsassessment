@@ -270,15 +270,15 @@
                     <div class="card-body">
                         <input type="text" id="fulltbpid"  hidden>
                         <div class="table-responsive" style="min-height: 230px">
-                            <table class="table table-striped " id="maintable">
+                            <table class="table table-bordered" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
-                                        <th style="width:130px;text-center">การอนุมัติ</th> 
-                                        <th style="width:155px;text-center">ผู้เชี่ยวชาญ</th> 
-                                        <th style="width:190px;text-center">EV</th> 
-                                        <th style="width:155px;text-center">BOL</th> 
-                                        <th style="width:160px;text-center">สถานะ</th>                               
+                                        <th style="width:1%;white-space: nowrap">Full TBP</th> 
+                                        <th style="width:1%;white-space: nowrap">ผู้เชี่ยวชาญ</th> 
+                                        <th style="width:1%;white-space: nowrap">EV</th> 
+                                        <th style="width:1%;white-space: nowrap">BOL</th> 
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                               
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -289,9 +289,9 @@
                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                     <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                 </td>  
-                                                <td >    
+                                                <td style="white-space: nowrap">    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
-                                                            <a href="#"  data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                            <a href="#"  data-id="{{$fulltbp->id}}" ><span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span></a>
                                                         @else
                                                             @if ($fulltbp->refixstatus == 0)
                                                                     <a href="#" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
@@ -308,22 +308,24 @@
                                                             @endif       
                                                     @endif
                                                 </td>
-                                                <td> 
+                                                <td style="white-space: nowrap"> 
                                                     @if ($fulltbp->expertassignments->count() > 0)
                                                             @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
-                                                                    <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">มีรายการรอ JD พิจารณา</a>
+                                                                    <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">อยู่ระหว่าง JD พิจารณา</a>
                                                                 @elseif($fulltbp->expertassignments->where('expert_assignment_status_id',2)->count() > 0)
                                                                     @if ($fulltbp->assignexpert !=2)
                                                                             <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
                                                                         @else
-                                                                            <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</a>
+                                                                            <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" >
+                                                                                <span class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</span>
+                                                                            </a>
                                                                     @endif
                                                             @endif  
                                                         @else
                                                             <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
                                                     @endif
                                                 </td>  
-                                                <td> 
+                                                <td style="white-space: nowrap"> 
                                                     @if (!Empty($fulltbp->ev))
                                                         @php
                                                             $evstatus = 'ผ่านการอนุมัติ';
@@ -351,14 +353,25 @@
                                                                 $style = 'btn-sm bg-pink';
                                                             }
                                                         @endphp
-            
+  
                                                         @if (Auth::user()->user_type_id == 4)
+                                                        @if ($fulltbp->ev->status >= 4)
+                                                                <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" ><span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span></a>
+                                                            @else
                                                                 <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                        @endif
+                                                                
+                                                                
                                                             @elseif(Auth::user()->user_type_id == 5)
                                                                 @if ($fulltbp->ev->status < 2)
                                                                         <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
                                                                     @else
+                                                                        @if ($fulltbp->ev->status >= 4)
+                                                                        <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" ><span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span></a>
+                                                                        @else
                                                                         <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                        @endif
+                                                                       
                                                                 @endif
                                                             @elseif(Auth::user()->user_type_id == 6)
                                                                 @if ($fulltbp->ev->status == 0)
@@ -366,16 +379,23 @@
                                                                     @elseif($fulltbp->ev->status == 3)
                                                                         <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                                     @else   
-                                                                        <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                    @if ($fulltbp->ev->status >= 4)
+                                                                    <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" ><span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span></a>
+                                                                    @else
+                                                                    <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                    @endif
+                                                                       
                                                                 @endif
                                                         @endif
                                                     @else
                                                             <a href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
-                                                <td> 
+                                                <td style="white-space: nowrap"> 
                                                     @if ( $fulltbp->bol->count() != 0)
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">เอกสาร BOL</a> 
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" >
+                                                                <span class="badge badge-flat border-success text-success-600">เอกสาร BOL</span>
+                                                            </a> 
                                                         @else
                                                             @if (Auth::user()->user_type_id == 4)
                                                                     <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มเอกสาร BOL</a> 
@@ -384,7 +404,7 @@
                                                             @endif
                                                     @endif
                                                 </td>  
-                                                <td>
+                                                <td style="white-space: nowrap">
                                                     @if (!Empty($fulltbp->assessmentdate))
                                                             @if ($fulltbp->finished_onsite == 1)
                                                                     @if (Auth::user()->user_type_id == 4)
@@ -412,12 +432,11 @@
                                                        @else
                                                             @if (Auth::user()->user_type_id == 4)
                                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
-                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                            <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
-                                                                        @else
-                                                                            <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
-                                                                        @endif
-                                                                            
+                                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
+                                                                                <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
+                                                                            @else
+                                                                                <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                                            @endif  
                                                                         @else
                                                                             <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
                                                                     @endif
@@ -481,7 +500,6 @@
 			toolbar: false,
             height: 200,
 		});
-
 
         var countitemtable =  "{{$fulltbps->count()}}";
         if (countitemtable >= 20) {

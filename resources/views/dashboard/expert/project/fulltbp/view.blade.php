@@ -267,7 +267,7 @@
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
 									</div> --}}
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>ระดับ</th>  
@@ -289,7 +289,7 @@
 									</div> --}}
 
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>เริ่มต้น-สิ้นสุด</th>  
@@ -312,7 +312,7 @@
 									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
@@ -330,7 +330,7 @@
 									</div> --}}
 
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>วัน เดือน ปี</th>  
@@ -1507,7 +1507,7 @@
 														<div class="row">
 															<div class="col-md-12">	
 																<div class="table-responsive">
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>เอกสารแนบ</th>                                                                                  
@@ -1556,7 +1556,7 @@
 													<div class="col-md-12">	
 														<label for="">ข้อมูลผู้บริหารระดับสูง</label>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>ชื่อ-นามสกุล</th>  
@@ -1590,7 +1590,7 @@
 														<div class="col-md-12 mt-3">	
 															<label for="">ข้อมูลผู้ถือหุ้น</label>
 															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-นามสกุล</th>  
@@ -1616,7 +1616,7 @@
 														<div class="col-md-12 mt-3">	
 															<label for="">ข้อมูลทีมวิจัย</label>
 															<div class="table-responsive">
-																{{-- <table class="table table-striped table-bordered">
+																{{-- <table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-นามสกุล</th>  
@@ -1638,7 +1638,7 @@
 																		@endforeach    			   
 																	</tbody>
 																</table> --}}
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-นามสกุล</th>  
@@ -1671,7 +1671,7 @@
 														<div class="col-md-12 mt-3">	
 															<label for="">ข้อมูลทีมงานในโครงการ</label>
 															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ชื่อ-นามสกุล</th>  
@@ -1926,7 +1926,7 @@
 																<p><small><i>ตารางเปรียบเทียบเทคโนโลยีที่มีอยู่ในปัจจุบัน (เทคโนโลยีที่ใช้ทั่วไปในตลาด) /เทคโนโลยีที่ใช้ในโครงการ</i> </small></p>
 															</div>
 															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>รายการ</th>  
@@ -2159,7 +2159,7 @@
 															{{-- <div class="row"> --}}
 																<div class="col-md-12">	
 																	<div class="table-responsive">
-																		<table class="table table-striped table-bordered">
+																		<table class="table table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
@@ -2200,7 +2200,7 @@
 																</div>
 																<div class="col-md-12">	
 																	<div class="table-responsive">
-																		<table class="table table-striped table-bordered">
+																		<table class="table table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารรางวัลด้านเทคโนโลยี/นวัตกรรม</th>                                                                                  
@@ -2248,7 +2248,7 @@
 															<div class="row">
 																<div class="col-md-12">	
 																	<div class="table-responsive">
-																		<table class="table table-striped table-bordered">
+																		<table class="table table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ</th>                                                                                  
@@ -2399,7 +2399,7 @@
 														</div>
 														<div class="col-md-12">	
 															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร Business Model Canvas</th>                                                                                  
@@ -2440,7 +2440,7 @@
 		
 															<div class="col-md-12">	
 																<div class="table-responsive">
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>เอกสาร SWOT Analysis, Five Forces Analysis</th>                                                                                  
@@ -2485,7 +2485,7 @@
 														</div>
 														@if ($fulltbpsells->count() > 0)
 															<div class="table-responsive">
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
@@ -2517,7 +2517,7 @@
 															<small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
 														{{-- </div> --}}
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr  class="bg-info">
 																		<th>ระยะเวลา</th>  
@@ -2567,7 +2567,7 @@
 															<p><small><i>ลูกหนี้การค้า</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
@@ -2604,7 +2604,7 @@
 															<p><small><i>เจ้าหนี้การค้า</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
@@ -2659,7 +2659,7 @@
 															<p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
@@ -2693,7 +2693,7 @@
 															<p><small><i>ตารางแสดงรายละเอียดเงินลงทุนสำหรับดำเนินการของโครงการ</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
@@ -2721,7 +2721,7 @@
 															<p><small><i>ตารางแสดงรายละเอียดแหล่งเงินทุนของโครงการ</i> </small></p>
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead class="bg-info">
 																	<tr>
 																		<th>รายการ</th>  

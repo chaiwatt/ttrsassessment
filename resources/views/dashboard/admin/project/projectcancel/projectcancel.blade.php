@@ -61,13 +61,13 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="maintable">
+                            <table class="table table-bordered" id="maintable">
                                 <thead>
                                     <tr>
-                                        <th>เลขที่โครงการ</th>
+                                        <th  style="width:20%;">เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>    
                                         {{-- <th>สถานะ</th>                              --}}
-                                        <th style="text-align: right">เพิ่มเติม</th>
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -93,7 +93,7 @@
                                                     @endif
                                             @endif
                                         </td>                                         --}}
-                                        <td style="text-align: right"> 
+                                        <td style="white-space: nowrap"> 
                                             @if (!Empty($fulltbp->canceldate))
                                                     <span class="badge badge-flat border-danger text-danger-600">ยกเลิกโครงการแล้ว</span>
                                                 @else

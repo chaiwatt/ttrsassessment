@@ -113,7 +113,8 @@
                     </div>
     
                     <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="phone" type="text" maxlength="10" class="form-control form-control-lg allownumericwithoutdecimal @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  placeholder="เบอร์โทรศัพท์มือถือ">
+                        <input id="phone" type="text" maxlength="10" name="phone" class="form-control form-control-lg allownumericwithoutdecimal @error('phone') is-invalid @enderror"  value="{{ old('phone') }}"  placeholder="เบอร์โทรศัพท์มือถือ">
+                        <span id="phone_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> เบอร์โทรศัพท์ไม่ถูกต้อง</span>
                         <div class="form-control-feedback">
                             <i class="icon-phone2 text-muted"></i>
                         </div>
@@ -126,6 +127,7 @@
                         
                         <div class="input-group form-group form-group-feedback form-group-feedback-left" >
                             <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
+                            
                             <div class="form-control-feedback">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
@@ -137,6 +139,7 @@
                             <span class="input-group-append">
                                 <button class="btn btn-light" type="button" id="genpassword" >สุ่มรหัสผ่าน</button>
                             </span>
+                            <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span>
                         </div>
         
                         <div class="form-group form-group-feedback form-group-feedback-left">
@@ -230,12 +233,11 @@
             $(document).on('change', '#password', function(e) {
                 var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
                 if(re.test($(this).val()) == false){
-                  $(this).val('')
-                    Swal.fire({
-                        title: 'ผิดพลาด...',
-                        text: 'ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร',
-                    }).then((result) => {});
-                    return false;
+                    $(this).val('')
+                    $("#password_input_error").attr("hidden",false);
+                }else{
+                    
+                    $("#password_input_error").attr("hidden",true);
                 }
 
                 if($(this).val() == ''){
@@ -310,17 +312,15 @@
                 return "";
             }
 
-        // $(document).on('keyup', '.engonly', function(e) {
-        //         var pattern_eng = /^[0-9a-zA-Z]+$/;
-        //         if(!$(this).val().match(pattern_eng) && $(this).val() != ''){
-        //             $(this).val('')
-        //             Swal.fire({
-        //                 title: 'ผิดพลาด...',
-        //                 text: 'ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร',
-        //             }).then((result) => {});
-        //             return false;
-        //         }
-        // });
+        $(document).on('change', '#phone', function(e) {
+            if($(this).val().length < 9 || $(this).val().length > 10 ){
+                $(this).val('')
+                $("#phone_input_error").attr("hidden",false);
+            }else{
+                
+                $("#phone_input_error").attr("hidden",true);
+            }
+        });
 
         $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
            $(this).val($(this).val().replace(/[^\d].+/, ""));

@@ -63,11 +63,11 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อรายการ</th>  
-                                        <th>ร้อยละ</th>                              
+                                        {{-- <th>ร้อยละ</th>                               --}}
                                         <th style="width:200px">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -75,7 +75,7 @@
                                     @foreach ($pillars as $key => $pillar)
                                     <tr>    
                                         <td> {{$pillar->name}} </td>  
-                                        <td> {{$pillar->percent}} </td>                                    
+                                        {{-- <td> {{$pillar->percent}} </td>                                     --}}
                                         <td>   
                                             <a href="{{route('setting.admin.assessment.pillar.edit',['id' => $pillar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             {{-- <a href="{{route('setting.admin.assessment.pillar.delete',['id' => $pillar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}

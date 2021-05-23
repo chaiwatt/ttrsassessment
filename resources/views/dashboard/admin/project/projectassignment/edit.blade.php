@@ -53,7 +53,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th >รายการ</th> 
@@ -81,7 +81,7 @@
             <div class="col-md-12">
 				<div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">Dashboard - Work load</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">Dashboard - Workload</h6>
                         <div class="header-elements">
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>เลขที่โครงการ</th> 

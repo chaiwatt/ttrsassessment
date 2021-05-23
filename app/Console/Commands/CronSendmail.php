@@ -107,7 +107,12 @@ class CronSendmail extends Command
                 }
             }
         } 
-        $eventcalendars = EventCalendar::get();
+        $eventcalendars = EventCalendar::whereNotNull('eventdate')
+                        ->whereNotNull('starttime')
+                        ->whereNotNull('endtime')
+                        ->whereNotNull('place')
+                        ->whereNotNull('summary')
+                        ->get();
         foreach ($eventcalendars as $key => $eventcalendar) {
             if($eventcalendar->calendar_type_id == 3){
                 $ev = Ev::where('full_tbp_id',$eventcalendar->full_tbp_id)->first();

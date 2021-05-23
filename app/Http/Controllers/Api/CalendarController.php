@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\User;
 use App\Model\Ev;
+use Carbon\Carbon;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
@@ -14,6 +15,7 @@ use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Model\ExpertAssignment;
+use App\Model\CalendarAttachement;
 use App\Http\Controllers\Controller;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
@@ -86,11 +88,28 @@ class CalendarController extends Controller
         }
         ProjectMember::where('full_tbp_id',$request->id)->whereIn('id',$tmpmember)->delete();
 
+        $eventcalendar = EventCalendar::where('full_tbp_id',$fulltbp->id)
+                                    ->whereNull('starttime')
+                                    ->whereNull('endtime')
+                                    ->whereNull('place')
+                                    ->whereNull('summary')
+                                    ->orderBy('id', 'desc')->first();
+        if(Empty($eventcalendar)){
+            $eventcalendar = new EventCalendar();
+            $eventcalendar->full_tbp_id = $fulltbp->id;
+            $eventcalendar->eventdate = Carbon::now()->toDateString();
+            $eventcalendar->save();
+        }
+
+        $calendarattachments = CalendarAttachement::where('event_calendar_id',$eventcalendar->id)->get();
+
         return response()->json(array(
             "projectmembers" => $projectmembers,
             "flownothree" => $flownothree,
             "calendartypes" => $calendartypes,
-            "projectstatus" => $projectstatus
+            "projectstatus" => $projectstatus,
+            "eventcalendarid" => $eventcalendar->id,
+            "calendarattachments" => $calendarattachments
         ));
     }
 
@@ -99,12 +118,13 @@ class CalendarController extends Controller
         $eventcalendarattendees = EventCalendarAttendee::where('event_calendar_id',$request->id)->get();
         $eventcalendarattendeestatuses = EventCalendarAttendeeStatus::get();
         $attendeecalendar = EventCalendarAttendee::where('event_calendar_id',$request->id)->where('user_id',Auth::user()->id)->first();
-
+        $calendarattachments = CalendarAttachement::where('event_calendar_id',$request->id)->get();
         return response()->json(array(
             "eventcalendar" => $eventcalendar,
             "eventcalendarattendees" => $eventcalendarattendees,
             "eventcalendarattendeestatuses" => $eventcalendarattendeestatuses,
-            "attendeecalendar" => $attendeecalendar
+            "attendeecalendar" => $attendeecalendar,
+            "calendarattachments" => $calendarattachments
         ));
     }
 
@@ -114,12 +134,17 @@ class CalendarController extends Controller
             if($request->state == '1'){
                 EventCalendarAttendee::find($request->id)->update([
                     'joinevent' => '1',
-                    'color' => '#27AE60'
+                    'color' => '#DF01A5'
                 ]);
-            }elseif($request->state == '0'){
+            }elseif($request->state == '2'){
                 EventCalendarAttendee::find($request->id)->update([
                     'joinevent' => '2',
-                    'color' => '#C0392B'
+                    'color' => '#088A08'
+                ]);
+            }elseif($request->state == '3'){
+                EventCalendarAttendee::find($request->id)->update([
+                    'joinevent' => '3',
+                    'color' => '#B43104'
                 ]);
             }
             $eventcalendarattendee = EventCalendarAttendee::find($request->id);
@@ -128,6 +153,30 @@ class CalendarController extends Controller
         }else{
             return null;
         } 
+    }
+
+    public function AddAttachment(Request $request){
+        $file = $request->file;
+        $new_name = str_random(10).".".$file->getClientOriginalExtension();
+        $file->move("storage/uploads/fulltbp/project/calendar/attachment" , $new_name);
+        $filelocation = "storage/uploads/fulltbp/project/calendar/attachment/".$new_name;
+        $calendarattachment = new CalendarAttachement();
+        $calendarattachment->event_calendar_id = $request->eventcalendarid;
+        $calendarattachment->name = $file->getClientOriginalName();
+        $calendarattachment->path = $filelocation;
+        $calendarattachment->save();
+        $calendarattachments = CalendarAttachement::where('event_calendar_id',$request->eventcalendarid)->get();
+        return response()->json($calendarattachments); 
+        // return response()->json($calendarattachment); 
+    }
+
+    public function DeleteAttachment(Request $request){
+        $calendarattachment = CalendarAttachement::find($request->id);
+        $calendarattachmentid = $calendarattachment->event_calendar_id;
+        @unlink($calendarattachment->path);  
+        $calendarattachment->delete();
+        $calendarattachments = CalendarAttachement::where('event_calendar_id',$calendarattachmentid)->get();
+        return response()->json($calendarattachments); 
     }
 }
 

@@ -58,13 +58,13 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
                                         <th>คำถาม</th>                               
                                         <th>คำตอบ</th>
-                                        <th>สถานะ</th>
-                                        <th style="width:250px">เพิ่มเติม</th>
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
+                                        <th  style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,8 +72,8 @@
                                         <tr>    
                                             <td> {{$faq->title}} </td>                                         
                                             <td> {{$faq->body}}</td>      
-                                            <td> {{$faq->showstatus->name}}</td>                                                                                                               
-                                            <td> 
+                                            <td style="white-space: nowrap"> {{$faq->showstatus->name}}</td>                                                                                                               
+                                            <td  style="white-space: nowrap"> 
                                                 <a href="{{route('setting.admin.website.faq.edit',['id' => $faq->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                                 <a href="{{route('setting.admin.website.faq.delete',['id' => $faq->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                             </td>

@@ -30,7 +30,15 @@ class DashboardCompanyReportController extends Controller
 
     public function GetEvent(Request $request){
         $eventcalendarattendees = EventCalendarAttendee::where('user_id',Auth::user()->id)->pluck('event_calendar_id')->toArray();
-        $eventcalendars = EventCalendar::whereIn('id',$eventcalendarattendees)->get();
+        // $eventcalendars = EventCalendar::whereIn('id',$eventcalendarattendees)->get();
+
+        $eventcalendars = EventCalendar::whereNotNull('subject')
+                                    ->whereNotNull('eventdate')
+                                    ->whereNotNull('starttime')
+                                    ->whereNotNull('endtime')
+                                    ->whereNotNull('place')
+                                    ->whereNotNull('summary')
+                                    ->whereIn('id',$eventcalendarattendees)->get();
     
         $_events = array();
         foreach ($eventcalendars as $event) {

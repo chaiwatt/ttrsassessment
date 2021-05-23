@@ -52,6 +52,8 @@ class CreateGeneralInfosTable extends Migration
             $table->char('invoiceoption',1)->default(1);
             $table->string('watermarktext',250)->default('เอกสารสำคัญปกปิด (Private & Confidential)');
             // $table->char('pageview',10)->default(0);
+            //$table->char('useinvoice',1)->default(1);
+            $table->unsignedBigInteger('use_invoice_status_id')->default(1);  
             $table->timestamps();
         });
     }

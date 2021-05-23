@@ -134,26 +134,44 @@ function getUsers(id){
 }
 
 $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
-    addProjectMember($('#fulltbpid').val(),$('#usermember').val()).then(data => {
-        var html =``;
-        var html1 =``;
-        data.users.forEach(function (user,index) {
-            html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
-        });
-        data.projectmembers.forEach(function (projectmember,index) {
-            html1 += `<tr >                                        
-                        <td> ${projectmember.user['name']}</td>                            
-                        <td> ${projectmember.user['lastname']} </td>     
-                        <td>   
-                            <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>
-                        </td>
-                    </tr>`
-            });
-        $("#projectmember"+$('#fulltbpid').val()).html(data.projectmembers.length + ' คน');
-        $("#usermember_wrapper_tr").html(html1);
-        $("#usermember").html(html);
-        $('#modal_edit_projectmember').modal('show');
-   }).catch(error => {})
+
+  Swal.fire({
+    title: 'ยืนยัน!',
+    text: `ต้องการบันทึก คุณ${$("#usermember option:selected" ).text()} ลงในทีมลงคะแนนหรือไม่`,
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'ตกลง',
+    cancelButtonText: 'ยกเลิก',
+    closeOnConfirm: false,
+    closeOnCancel: false
+    }).then((result) => {
+    if (result.value) {
+      addProjectMember($('#fulltbpid').val(),$('#usermember').val()).then(data => {
+          var html =``;
+          var html1 =``;
+          data.users.forEach(function (user,index) {
+              html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
+          });
+          data.projectmembers.forEach(function (projectmember,index) {
+              html1 += `<tr >                                        
+                          <td> ${projectmember.user['name']}</td>                            
+                          <td> ${projectmember.user['lastname']} </td>     
+                          <td>   
+                              <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>
+                          </td>
+                      </tr>`
+              });
+          $("#projectmember"+$('#fulltbpid').val()).html(data.projectmembers.length + ' คน');
+          $("#usermember_wrapper_tr").html(html1);
+          $("#usermember").html(html);
+          $('#modal_edit_projectmember').modal('show');
+    }).catch(error => {})
+
+    }
+  });
+
+
 });
 
 function addProjectMember(fulltbpid,userid){

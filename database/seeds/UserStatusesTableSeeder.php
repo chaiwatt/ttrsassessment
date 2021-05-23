@@ -13,10 +13,10 @@ class UserStatusesTableSeeder extends Seeder
     {
         DB::table('user_statuses')->insert([
             [
-                'name' => 'เปิดใช้งาน'
+                'name' => 'บัญชีปกติ'
             ],
             [
-                'name' => 'ระงับการใช้งาน'
+                'name' => 'ระงับการใช้งานบัญชี'
             ]
         ]);
     }

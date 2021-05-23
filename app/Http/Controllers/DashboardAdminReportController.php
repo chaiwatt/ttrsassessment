@@ -147,9 +147,14 @@ class DashboardAdminReportController extends Controller
     }
     public function GetEvent(Request $request){
         $auth = Auth::user();
-        $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->pluck('event_calendar_id')->toArray();
-        $eventcalendars = EventCalendar::whereIn('id',$eventcalendarattendees)->get();
-        
+        $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->where('joinevent','!=',3)->pluck('event_calendar_id')->toArray();
+        $eventcalendars = EventCalendar::whereNotNull('subject')
+                                    ->whereNotNull('eventdate')
+                                    ->whereNotNull('starttime')
+                                    ->whereNotNull('endtime')
+                                    ->whereNotNull('place')
+                                    ->whereNotNull('summary')
+                                    ->whereIn('id',$eventcalendarattendees)->get();                         
         $_events = array();
         foreach ($eventcalendars as $event) {
             $eventcalendarattendee = EventCalendarAttendee::where('user_id',$auth->id)->where('event_calendar_id',$event->id)->first();

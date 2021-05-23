@@ -4,6 +4,11 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -51,6 +56,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    <input type="text" name="eventcalendarid" id="eventcalendarid" value="{{$eventcalendar->id}}" hidden>
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">ปฏิทินกิจกรรม</h6>
                         <div class="header-elements">
@@ -63,16 +69,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>วันที่</label>
-                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg" >
+                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg dmyformat" >
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label>ประเภทปฏิทิน</label>
                                         <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฏิทิน" class="form-control form-control-lg" disabled>
                                     </div>
-                                </div>
-                                <div class="col-md-2">
+                                </div> --}}
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
                                         <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-lg form-control-select2">
@@ -87,13 +93,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลาเริ่ม</label>
-                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{$eventcalendar->starttime}}"  placeholder="เวลา" class="form-control form-control-lg" >
+                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{$eventcalendar->starttime}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" required >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลาสิ้นสุด</label>
-                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{$eventcalendar->endtime}}"  placeholder="เวลา" class="form-control form-control-lg" >
+                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{$eventcalendar->endtime}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" required>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +107,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>สถานที่</label>
-                                        <input type="text"  name="place"  value="{{$eventcalendar->place}}"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control form-control-lg" >
+                                        <input type="text"  name="place"  value="{{$eventcalendar->place}}"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control form-control-lg" required>
                                     </div>
                                 </div>
 
@@ -109,10 +115,47 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>รายละเอียด</label>
-                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg">{{$eventcalendar->summary}}</textarea>
+                                        <label>หัวข้อ</label>
+                                        <input type="text"  name="subject" value="{{$eventcalendar->subject}}"  placeholder="หัวข้อ" class="form-control form-control-lg" >
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>รายละเอียด</label>
+                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg" required>{{$eventcalendar->summary}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">													
+                                        <label for="">เอกสารแนบ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnuploadcalendarattachment" onclick="document.getElementById('calendarattachment').click();"><i class="icon-add mr-2"></i>อัปโหลดไฟล์</button></label>
+                                    </div>
+                                    <input type="file" style="display:none;" data-id="" id="calendarattachment" name="calendarattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>    
+                                </div> 
+                                @if ($calendarattachments->count() > 0)
+                                <div class="col-md-12" id="attachmenttable_wrapper">
+                                    <div class="form-group">
+                                    <table class="table table-bordered" id="attachmenttable">
+                                        <thead>
+                                            <tr>
+                                                <th>เอกสารแนบ</th> 
+                                                <th style="width:1%">เพิ่มเติม</th>                           
+                                            </tr>
+                                        </thead>
+                                        <tbody id="attachmenttable_wrapper_tr">
+                                            @foreach ($calendarattachments as $calendarattachment)
+                                            <tr>    
+                                                <td> {{$calendarattachment->name}} </td> 
+                                                <td style="white-space: nowrap">
+                                                    <a href="{{asset($calendarattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                                                    {{-- <a href="#" data-id="{{$calendarattachment->id}}" class="btn btn-sm bg-danger deleteattachment" data-toggle="modal" >ลบ</a> --}}
+                                                </td> 
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table> 
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
@@ -127,9 +170,13 @@
                                         </select>
                                     </div>
                                 </div>
+
+
                             </div>
                             <div class="text-right">
+                                <div class="form-group">
                                 <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -146,6 +193,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/interaction/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js')}}"></script>
 
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
@@ -155,32 +203,32 @@
             branchid: "{{Auth::user()->branch_id}}"
         };
 
-        $('#eventdate').bootstrapMaterialDatePicker({
-            format: 'DD/MM/YYYY HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            time: false
-        });
+        // $('#eventdate').bootstrapMaterialDatePicker({
+        //     format: 'DD/MM/YYYY HH:mm',
+        //     clearButton: true,
+        //     cancelText: "ยกเลิก",
+        //     okText: "ตกลง",
+        //     clearText: "เคลียร์",
+        //     time: false
+        // });
 
-        $('#eventtimestart').bootstrapMaterialDatePicker({
-            format: 'HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            date: false,
-        });
+        // $('#eventtimestart').bootstrapMaterialDatePicker({
+        //     format: 'HH:mm',
+        //     clearButton: true,
+        //     cancelText: "ยกเลิก",
+        //     okText: "ตกลง",
+        //     clearText: "เคลียร์",
+        //     date: false,
+        // });
         
-        $('#eventtimeend').bootstrapMaterialDatePicker({
-            format: 'HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            date: false,
-        });
+        // $('#eventtimeend').bootstrapMaterialDatePicker({
+        //     format: 'HH:mm',
+        //     clearButton: true,
+        //     cancelText: "ยกเลิก",
+        //     okText: "ตกลง",
+        //     clearText: "เคลียร์",
+        //     date: false,
+        // });
 
     </script>
 @stop

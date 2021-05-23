@@ -115,7 +115,7 @@
 									<div class="col-md-12">	
 										<label><strong><u>ข้อมูลบริษัท</u></strong></label>
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th style="width:200px">รายการ</th>                                                                                  
@@ -159,7 +159,7 @@
 									<div class="col-md-12 mt-3">	
 										<label><strong ><u>ข้อมูลผู้ยื่นแบบคำขอ</u></strong></label>
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th style="width:200px">รายการ</th>                                                                                  
@@ -373,7 +373,7 @@
 								<fieldset>
 									<div class="col-md-12 mb-2">
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered">
+											<table class="table table-bordered">
 												<thead>
 													<tr class="bg-info">
 														<th>วันที่</th>

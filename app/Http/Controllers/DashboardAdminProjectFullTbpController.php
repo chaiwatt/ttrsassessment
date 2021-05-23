@@ -505,19 +505,19 @@ class DashboardAdminProjectFullTbpController extends Controller
                    $projectstatustransaction->project_flow_id = 4;
                    $projectstatustransaction->save();
 
-                   $messagebox =  Message::sendMessage('สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name ,'Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+                   $messagebox =  Message::sendMessage('สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name ,'EV และ Weighting โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
                    $alertmessage = new AlertMessage();
                    $alertmessage->user_id = $auth->id;
                    $alertmessage->target_user_id =  $projectassignment->leader_id;
                    $alertmessage->messagebox_id = $messagebox->id;
-                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป' ;
+                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' EV และ Weighting โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป' ;
                    $alertmessage->save();
 
                    MessageBox::find($messagebox->id)->update([
                         'alertmessage_id' => $alertmessage->id
                     ]);
 
-                   EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name,'เรียน Leader<br><br> Full TBP, การมอบหมายผู้เชี่ยวชาญ และ EV โครงการ' . $minitbp->project .  ' บริษัท' . $_company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                   EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name,'เรียน Leader<br><br> EV และ Weighting โครงการ' . $minitbp->project .  ' บริษัท' . $_company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                    DateConversion::addExtraDay($minitbp->id,3);
                 }
             }
@@ -849,7 +849,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send($user->email,'TTRS:แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'เรียน ท่านคณะกรรมการ <br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project. ' บริษัท' . $company->name .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
+            EmailBox::send($user->email,'TTRS:แจ้งสิ้นสุดโครงการ'.$minitbp->project. ' บริษัท' . $company->name,'เรียน ผู้เชี่ยวชาญ <br><br>แจ้งสิ้นสุดโครงการโครงการ '.$minitbp->project. ' บริษัท' . $company->name .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());  
         }
 
         // $company = Company::find($businessplan->company_id);

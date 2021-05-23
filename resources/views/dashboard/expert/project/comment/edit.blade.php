@@ -15,7 +15,7 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="{{route('dashboard.expert.report')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
+                    <a href="{{route('dashboard.expert.report')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
                     {{-- <a href="#" class="breadcrumb-item"> Full TBP</a> --}}
                     <span class="breadcrumb-item active">ความเห็นผู้เชี่ยวชาญ</span>
                 </div>
@@ -38,11 +38,23 @@
                 {{ Session::get('error') }}
             </div>
             @endif
-            @if ($errors->count() > 0)
-            <div class="alert alert-warning alert-styled-left alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                {{ $errors->first() }}
-            </div>
+            {{-- @if ($errors->count() > 0)
+                <div class="alert alert-warning alert-styled-left alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    {{ $errors->first() }}
+                </div>
+
+
+            @endif --}}
+
+        
+			@if ($errors->count() > 0)
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-warning alert-styled-left alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    {{ $error}}
+                </div>
+            @endforeach
         @endif
         <div class="row">
             <div class="col-md-12">

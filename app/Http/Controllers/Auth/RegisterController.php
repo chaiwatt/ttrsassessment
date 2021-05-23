@@ -33,7 +33,7 @@ class RegisterController extends Controller
                     if(Auth::user()->verify_expert == 1){
                         Auth::logout();
                         Session::flush();
-                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ JD');
+                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ Admin');
                     }else{
                         return 'dashboard/expert/report';
                     }
@@ -45,7 +45,7 @@ class RegisterController extends Controller
                     if(Auth::user()->verify_expert == 1){
                         Auth::logout();
                         Session::flush();
-                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ JD');
+                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ Admin');
                     }else{
                         return 'dashboard/admin/report';
                     }

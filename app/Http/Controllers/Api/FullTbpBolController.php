@@ -18,7 +18,7 @@ class FullTbpBolController extends Controller
         $filelocation = "storage/uploads/fulltbp/bol/attachment/".$new_name;
         $bol = new Bol();
         $bol->full_tbp_id = $request->id;
-        $bol->name = $request->docname;
+        $bol->name = $file->getClientOriginalName();
         $bol->path = $filelocation;
         $bol->save();
         $bols = Bol::where('full_tbp_id',$request->id)->get();

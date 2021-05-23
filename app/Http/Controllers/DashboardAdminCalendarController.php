@@ -28,6 +28,7 @@ use App\Model\TimeLineHistory;
 use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
+use App\Model\CalendarAttachement;
 use Google_Service_Calendar_Event;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,15 @@ class DashboardAdminCalendarController extends Controller
 
       $minitbps = MiniTBP::whereIn('business_plan_id',$projectassignments)->pluck('id')->toArray();
       $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->pluck('id')->toArray();
-      $eventcalendars = EventCalendar::whereIn('full_tbp_id',$fulltbps)->where('status',1)->get();
+      $eventcalendars = EventCalendar::whereNotNull('subject')
+                                    ->whereNotNull('eventdate')
+                                    ->whereNotNull('starttime')
+                                    ->whereNotNull('endtime')
+                                    ->whereNotNull('place')
+                                    ->whereNotNull('summary')
+                                    ->where('status',1)
+                                    ->whereIn('full_tbp_id',$fulltbps)
+                                    ->get();
       return view('dashboard.admin.calendar.index')->withEventcalendars($eventcalendars); 
     }
 
@@ -59,25 +68,38 @@ class DashboardAdminCalendarController extends Controller
         
         $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->get();
         $isnotifies = Isnotify::get();
+        //$CalendarType = CalendarType::get();
         return view('dashboard.admin.calendar.create')->withUsers($users)
                                                     ->withFulltbps($fulltbps)
                                                     ->withCalendartypes($calendartypes)
                                                     ->withIsnotifies($isnotifies);
     }
     public function CreateSave(CreateCalendarRequest $request){
+
       $auth = Auth::user();
       // $check = EventCalendar()->where('full_tbp_id',$request->fulltbp)
-      $eventcalendar = new EventCalendar();
-      $eventcalendar->full_tbp_id = $request->fulltbp;
-      $eventcalendar->calendar_type_id = $request->calendartype;
-      $eventcalendar->eventdate = DateConversion::thaiToEngDate($request->eventdate);
-      $eventcalendar->starttime = $request->eventtimestart;
-      $eventcalendar->endtime = $request->eventtimeend;
-      $eventcalendar->place = $request->place;
-      // $eventcalendar->room = $request->room;
-      $eventcalendar->summary = $request->summary;
-      $eventcalendar->isnotify_id = $request->isnotify;
-      $eventcalendar->save();
+
+      EventCalendar::find($request->eventcalendarid)->update([
+          'calendar_type_id' => $request->calendartype,
+          'eventdate' => DateConversion::thaiToEngDate($request->eventdate),
+          'starttime' => $request->eventtimestart,
+          'endtime' => $request->eventtimeend,
+          'subject' => $request->subject,
+          'place' => $request->place,
+          'summary' => $request->summary,
+          'isnotify_id' => $request->isnotify
+      ]);
+      $eventcalendar = EventCalendar::find($request->eventcalendarid);
+      // $eventcalendar->full_tbp_id = $request->fulltbp;
+      // $eventcalendar->calendar_type_id = $request->calendartype;
+      // $eventcalendar->eventdate = DateConversion::thaiToEngDate($request->eventdate);
+      // $eventcalendar->starttime = $request->eventtimestart;
+      // $eventcalendar->endtime = $request->eventtimeend;
+      // $eventcalendar->place = $request->place;
+      // // $eventcalendar->room = $request->room;
+      // $eventcalendar->summary = $request->summary;
+      // $eventcalendar->isnotify_id = $request->isnotify;
+      // $eventcalendar->save();
 
       if($request->isnotify == 2){
         $meetingdate = new MeetingDate();
@@ -89,11 +111,12 @@ class DashboardAdminCalendarController extends Controller
       $joinusers = array();
       foreach($request->users as $user){
           $_user = User::find($user);
-          $joinusers[] = $_user->name . ' ' . $_user->lastname;
+          $joinusers[] = 'คุณ' . $_user->name . ' ' . $_user->lastname;
           $mails[] = $_user->email;
           $eventcalendarattendee = new EventCalendarAttendee();
           $eventcalendarattendee->event_calendar_id = $eventcalendar->id;
           $eventcalendarattendee->user_id = $_user->id;
+          $eventcalendarattendee->color = '#cc6699';
           $eventcalendarattendee->save();
       }
       $fulltbp = FullTbp::find($request->fulltbp);
@@ -101,37 +124,48 @@ class DashboardAdminCalendarController extends Controller
       $businessplan = BusinessPlan::find($minitbp->business_plan_id);
       $company = Company::find($businessplan->company_id);
 
-      $messageheader = "นัดหมายการประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
-      if ($request->calendartype == 1) {
-        $messageheader = "นัดหมายการประชุมและ briefing ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
-      }else if ($request->calendartype == 1){
-        $messageheader = "นัดหมายการประชุมและรายละเอียดการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      $calendarattachements = CalendarAttachement::where('event_calendar_id',$eventcalendar->id)->get();
+      $attachmentfiles = '';
+      if($calendarattachements->count() > 0){
+        $html = '<ul>';
+        foreach ($calendarattachements as $key => $calendarattachement) {
+          $html .= '<li><a href="'.url('').'/'.$calendarattachement->path.'" target="_blank" >'.$calendarattachement->name.'</a></li>';
+        }
+        $attachmentfiles = '<br><br><strong>เอกสารแนบ:</strong><br>' . $html . '</ul>';
       }
-      EmailBox::send($mails,'TTRS:'.$messageheader,'เรียน ท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. 'มีรายละเอียดดังนี้' .
+
+      $messageheader = "ประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      if ($request->calendartype == 1) {
+        $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      }
+      else if ($request->calendartype == 2){
+         $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+       }
+      EmailBox::send($mails,'TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. 'มีรายละเอียดดังนี้' .
       '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
       '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-      // '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
       '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
       '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
       '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
+      $attachmentfiles.
       '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
 
       foreach($request->users as $user){
           $_user = User::find($user);
-          $messagebox = Message::sendMessage($messageheader,'เรียน ท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. ' มีรายละเอียดดังนี้' .
+          $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
           '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
           '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
           '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
           '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
           '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-          '<br><br>ด้วยความนับถือ<br>TTRS' ,Auth::user()->id,$_user->id);
+          $attachmentfiles,Auth::user()->id,$_user->id);
 
           $alertmessage = new AlertMessage();
           $alertmessage->user_id = $auth->id;
           $alertmessage->target_user_id = $_user->id;
           $alertmessage->messagebox_id = $messagebox->id;
-          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '. $messageheader. ' โครงการ'.$minitbp->project;
+          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '. $messageheader;
           $alertmessage->save();
 
           MessageBox::find($messagebox->id)->update([
@@ -167,6 +201,7 @@ class DashboardAdminCalendarController extends Controller
         $timeLinehistory->owner_id = $company->user_id;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
+
       }else if($request->calendartype == 3) {
         BusinessPlan::find($minitbp->business_plan_id)->update([
           'business_plan_status_id' => 7
@@ -191,7 +226,7 @@ class DashboardAdminCalendarController extends Controller
   public function Edit($id){
     $calendartypes = CalendarType::get();
     $eventcalendar = EventCalendar::find($id);
-
+    $calendarattachments = CalendarAttachement::where('event_calendar_id',$eventcalendar->id)->get();
     $eventcalendarattendees = EventCalendarAttendee::where('event_calendar_id',$eventcalendar->id)->get();
     $isnotifies = Isnotify::get();
     $tmpmember=array();
@@ -208,15 +243,14 @@ class DashboardAdminCalendarController extends Controller
       }
     }
 
-
-   
-  $users = User::whereIn('id',$tmpmember)->get();
+   $users = User::whereIn('id',$tmpmember)->get();
 
     return view('dashboard.admin.calendar.edit')->withUsers($users)
                                                 ->withEventcalendar($eventcalendar)
                                                 ->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withCalendartypes($calendartypes)
-                                                ->withIsnotifies($isnotifies);
+                                                ->withIsnotifies($isnotifies)
+                                                ->withCalendarattachments($calendarattachments);
   }
   public function EditSave(Request $request,$id){
     $auth = Auth::user();
@@ -238,6 +272,7 @@ class DashboardAdminCalendarController extends Controller
         $newguest_array[] = $_user->id;
         $eventcalendar = new EventCalendarAttendee();
         $eventcalendar->event_calendar_id = $request->id;
+        $eventcalendar->color = '#cc6699';
         $eventcalendar->user_id =  $_user->id;
         $eventcalendar->save();
     }
@@ -249,7 +284,7 @@ class DashboardAdminCalendarController extends Controller
       'starttime' => $request->eventtimestart,
       'endtime' => $request->eventtimeend,
       'place' => $request->place,
-      // 'room' => $request->room,
+       'subject' => $request->subject,
       'summary' => $request->summary,
     ]);
     
@@ -272,37 +307,55 @@ class DashboardAdminCalendarController extends Controller
     $joinusers = array();
     foreach($updateguest_array as $user){
         $_user = User::find($user);
-        $joinusers[] = $_user->name . ' ' . $_user->lastname;
+        $joinusers[] = 'คุณ'.$_user->name . ' ' . $_user->lastname;
         $mails[] = $_user->email;
     }
     $eventcalendar = EventCalendar::find($id);
     $calendartype = CalendarType::find($eventcalendar->calendar_type_id);
- 
-    EmailBox::send($mails,'TTRS:'.$calendartype->name.' (แก้ไข) โครงการ'. $minitbp->project,'เรียน ท่านคณะกรรมการ <br><br> โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. ' มีรายละเอียดดังนี้' .
+    $calendarattachements = CalendarAttachement::where('event_calendar_id',$request->id)->get();
+    $attachmentfiles = '';
+    if($calendarattachements->count() > 0){
+      $html = '<ul>';
+      foreach ($calendarattachements as $key => $calendarattachement) {
+        $html .= '<li><a href="'.url('').'/'.$calendarattachement->path.'">'.$calendarattachement->name.'</a></li>';
+      }
+      $attachmentfiles = '<br><strong>รายการเอกสารแนบ:</strong>' . $html . '</ul>';
+    }
+
+    $messageheader = "ประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+    if ($request->calendartype == 1) {
+      $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+    }
+    else if ($request->calendartype == 2){
+       $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+     }
+
+
+    EmailBox::send($mails,'TTRS: (แก้ไข) นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> (แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
     '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-    // '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
     '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
     '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-    '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
+    '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
+    .$attachmentfiles.
     '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
     foreach($updateguest_array as $user){
         $_user = User::find($user);
 
-        $messagebox = Message::sendMessage($calendartype->name.' (แก้ไข) โครงการ'. $minitbp->project,'TTRS:'.$calendartype->name.'(แก้ไข) เรียน ท่านคณะกรรมการ <br><br>โปรดเข้าร่วมประชุมนัดหมาย โครงการ'. $minitbp->project . " บริษัท" . $company->name. ' มีรายละเอียดดังนี้' .
+        $messagebox = Message::sendMessage('(แก้ไข) นัด'.$messageheader,'(แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-        '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-        '<br><br>ด้วยความนับถือ<br>TTRS' ,Auth::user()->id,$_user->id);
+        '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
+        .$attachmentfiles,Auth::user()->id,$_user->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $_user->id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $calendartype->name. ' (แก้ไข)สำหรับโครงการ'.$minitbp->project.' ' ;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $calendartype->name. ' (แก้ไข) สำหรับโครงการ'.$minitbp->project.' ' ;
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
@@ -325,20 +378,18 @@ class DashboardAdminCalendarController extends Controller
     }
 
     if ($mails > 0){
-        EmailBox::send($mails,'TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ท่านคณะกรรมการ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+        EmailBox::send($mails,'TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-        // '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
         '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     
         foreach($removeguest_array as $user){
             $_user = User::find($user);
-            Message::sendMessage('ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ท่านคณะกรรมการ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+            Message::sendMessage('ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-            // '<br><strong>&nbsp;ห้อง:</strong> '.$request->room.
             '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
             '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
@@ -363,7 +414,7 @@ class DashboardAdminCalendarController extends Controller
     }
 
     $calendartype = CalendarType::find($eventcalendar->calendar_type_id);
-    EmailBox::send($mails,'TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ท่านคณะกรรมการทุกท่าน <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+    EmailBox::send($mails,'TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
     '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
     // '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
@@ -373,7 +424,7 @@ class DashboardAdminCalendarController extends Controller
     $eventcalendar->delete();
     foreach($eventcalendars as $user){
         $_user = User::find($user);
-        Message::sendMessage('ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ท่านคณะกรรมการทุกท่าน <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+        Message::sendMessage('ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
         '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
         // '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.

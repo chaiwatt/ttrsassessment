@@ -62,14 +62,14 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="maintable">
+                            <table class="table table-bordered" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>วันที่</th>
                                         <th>บริษัท</th>
                                         <th>เลขที่เอกสาร</th>    
                                         <th>สถานะ</th> 
-                                        <th>เพิ่มเติม</th>                       
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -93,7 +93,7 @@
                                                     @endif
                                                 @endif
                                             </td>                                   
-                                            <td>
+                                            <td style="width:1%;white-space: nowrap">
                                                 @if ($invoicetransaction->price != 0)
                                                         
                                                         <a href="{{route('dashboard.admin.project.invoice.edit',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">

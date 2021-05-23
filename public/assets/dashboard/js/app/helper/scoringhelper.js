@@ -3,9 +3,20 @@ import * as Extra from './extra.js';
 var stepindex =0;
 var readonly = "";
 var disabled = "";
+var evdata = [];
+var evextradata = [];
 $(function() {
+
+    pdfMake.fonts = {
+        THSarabun: {
+            normal: 'THSarabun.ttf',
+            bold: 'THSarabun-Bold.ttf',
+            italics: 'THSarabun-Italic.ttf',
+            bolditalics: 'THSarabun-BoldItalic.ttf'
+        }
+    }
+
     getEv($('#evid').val(),route.userid).then(data => {
-        
         RenderTable(data,1);
         //RenderTable(data,2);
         RenderExtraTable(data.extracriteriatransactions,data.extrascoring);
@@ -22,9 +33,205 @@ $(function() {
             readonly = "readonly";
             disabled = "disabled";
         }
-        
+    //    callDataTable();
     }).catch(error => {})
 });
+
+function callDataTable(){
+    $('#evexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evdata,
+        columns : [
+            { "data" : "pillar" },
+            { "data" : "subpillar" },
+            { "data" : "subpillarindex" },
+            { "data" : "criteria" },
+            { "data" : "score" },
+            { "data" : "comment" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV (Index Criteria)"      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4,5 ]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*', '*', '*', '*', '*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                    //doc.content[1].table.body[i][0].alignment = 'left';
+                        doc.content[1].table.body[i][4].alignment = 'center';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4,5 ]
+                },
+                title: function () { 
+                    return "รายการ EV (Index Criteria)"; 
+                },
+                filename: function() {
+                    return "รายการ EV (Index Criteria)"      
+                }, 
+            }
+            
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden'
+            $('.buttons-pdf')[0].style.visibility = 'hidden'
+        },
+        bDestroy: true
+    } );
+
+    
+}
+
+function callDataTableExtra(){
+
+    $('#evextraexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evextradata,
+        columns : [
+            { "data" : "category" },
+            { "data" : "criteria" },
+            { "data" : "score" },
+            { "data" : "comment" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV (Extra)"      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*','*','*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                    doc.content[1].table.body[i][2].alignment = 'center';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1,2,3]
+                },
+                title: function () { 
+                    return "รายการ EV (Extra)"; 
+                },
+                filename: function() {
+                    return "รายการ EV (Extra)"      
+                }, 
+            }     
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden'
+            $('.buttons-pdf')[0].style.visibility = 'hidden'
+        },
+        bDestroy: true
+    } );
+}
+$(document).on('click', '#btnOnExcel', function(e) {
+    getEv($('#evid').val(),route.userid).then(data => {
+         RenderTable2(data,1);
+        callDataTable();
+       $('#evexporttable').DataTable().buttons(0,0).trigger();
+    }).catch(error => {})
+});
+$(document).on('click', '#btnOnPdf', function(e) {
+    console.log('here');
+    getEv($('#evid').val(),route.userid).then(data => {
+        RenderTable2(data,1);
+        callDataTable();
+       $('#evexporttable').DataTable().buttons(0,1).trigger();
+   }).catch(error => {})
+});
+
+$(document).on('click', '#btnOnExcelExtra', function(e) {
+    getEv($('#evid').val(),route.userid).then(data => {
+        console.log(data);
+        RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
+        callDataTableExtra();
+       $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+    }).catch(error => {})
+});
+
+
+$(document).on('click', '#btnOnPdfExtra', function(e) {
+    getEv($('#evid').val(),route.userid).then(data => {
+        console.log(data);
+        RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
+        callDataTableExtra();
+       $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+    }).catch(error => {})
+});
+
 
 function getEv(evid,userid){
     return new Promise((resolve, reject) => {
@@ -51,6 +258,7 @@ function getEv(evid,userid){
    });
 function RenderTable(data,evtype){
     var html =``;
+    evdata = [];
     var userid = route.userid;
     data.pillars.some((pillar,index) => {
         if(pillar.ev_type_id == evtype){
@@ -77,19 +285,24 @@ function RenderTable(data,evtype){
                             }
                         }
                     }
+                     var showscore = textvalue;
+                     var showcriteria = criteria.subpillarindex['name'];
+
                     var criterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label>
-                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control form-control-lg inpscore gradescore" ${readonly}></div>`;
+                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" data-type="score" class="form-control form-control-lg inpscore gradescore" ${readonly}></div>`;
 
                     if(criteria.criteria != null){
+                     showscore = checkvalue;
+                     showcriteria = criteria.criteria['name'];
                     criterianame = `<label class="form-check-label">
-                                        <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info inpscore checkscore" ${checkvalue} ${disabled}>
+                                        <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="score" style="vertical-align: middle" class="form-check-input-styled-info inpscore checkscore" ${checkvalue} ${disabled}>
                                         ${criteria.criteria['name']}
                                     </label>`;
                     }
         
                     criterianame += `<div class="toggle"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
-                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg inpscore comment" ${readonly}>
+                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" data-type="comment" class="form-control form-control-lg inpscore comment" ${readonly}>
                                         </div>
                                     </div>`;
 
@@ -115,11 +328,13 @@ function RenderTable(data,evtype){
                         warninglabel ='text-danger';
                     }
 
+                     evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : showscore , "comment" : comment });
+
                     var finalcriterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label><input type="text" placeholder="" value="${finaltextvalue}" class="form-control form-control-lg " disabled ></div>`;
 
                     if(criteria.criteria != null){
                         finalcriterianame = `<label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input-styled-info" ${finalcheckvalue} disabled>
+                                        <input type="checkbox" class="form-check-input-styled-info" style="vertical-align: middle" ${finalcheckvalue} disabled>
                                         <span class="">${criteria.criteria['name']}<span>
                                     </label>`;
                     }
@@ -146,10 +361,56 @@ function RenderTable(data,evtype){
         $("#criteria_transaction_wrapper_tr").html(html);
     }else if(evtype == 2){
         $("#extra_criteria_transaction_wrapper_tr").html(html);
-    }
-    
+    }  
 }
 
+function RenderTable2(data,evtype){
+
+    evdata = [];
+    var userid = route.userid;
+    data.pillars.some((pillar,index) => {
+        if(pillar.ev_type_id == evtype){
+            data.criteriatransactions.some((criteria,item) => {
+                if(criteria.ev_type_id == evtype && criteria.pillar_id == pillar.id){
+                    var textvalue = '';
+                    var checkvalue = '';
+                    var comment = '';
+
+                    
+                    var checkscore = criteria.scoring.filter(x => x.user_id == userid); 
+                    if(typeof(checkscore[0]) != "undefined"){
+                        var _scoring = checkscore[0];
+                        if(_scoring['comment']){comment = _scoring['comment'];}
+                        if(_scoring['scoretype'] == 1){
+                            textvalue = _scoring['score'];
+                        }else if(_scoring['scoretype'] == 2){
+                            if(_scoring['score'] == 1){
+                                checkvalue = "checked";
+                            }
+                        }
+                    }
+                     var showcriteria = criteria.subpillarindex['name'];
+                     var score = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`).val();
+                     var comment = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="comment"]`).val();
+                     
+                    if(criteria.criteria != null){
+
+                     showcriteria = criteria.criteria['name'];
+
+                     if($($(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`)).is(":checked")){
+                            score = 'x';
+                     }else{
+                        score = '';
+                     }
+                    }
+        
+                     evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : score , "comment" : comment });
+                }
+            });
+
+        }
+    }); 
+}
 
 function RenderExtraTable(data,scoring){
     var html =``;
@@ -169,11 +430,11 @@ function RenderExtraTable(data,scoring){
             <td> 
                 <div class="form-group">
                         <label>กรอกคะแนน (0-5)</label>
-                        <input type="text" value="${score}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
+                        <input type="text" value="${score}" data-id="${criteriatransaction.id}" data-type="score" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
                     </div>
                     <div class="toggle"><div class="form-group">
                         <label><i>ความเห็น</i></label>
-                        <input type="text" value="${comment}" data-id="${criteriatransaction.id}" class="form-control form-control-lg inpscore inputextracomment" >
+                        <input type="text" value="${comment}" data-id="${criteriatransaction.id}" data-type="comment" class="form-control form-control-lg inpscore inputextracomment" >
                     </div>
                 </div>
             </td> 
@@ -181,6 +442,19 @@ function RenderExtraTable(data,scoring){
     });
 
     $("#extra_criteria_transaction_wrapper_tr").html(html);
+}
+
+function RenderExtraTable2(data,scoring){
+
+    evextradata =[];
+    data.forEach(function (criteriatransaction,index) {
+        var score = $(`input[data-id="${criteriatransaction.id}"][data-type="score"]`).val();
+        var comment = $(`input[data-id="${criteriatransaction.id}"][data-type="comment"]`).val();
+
+        evextradata.push({"category":  criteriatransaction.extracategory['name'] , "criteria": criteriatransaction.extracriteria['name'], "score": score , "comment" : comment });
+
+    });
+
 }
 
 function RowSpan(tableid){
@@ -279,6 +553,35 @@ function RowSpanWeight(tableid){
 //         $('#weightsum'+$(this).data('subpillarindex')).val(data);
 //     }).catch(error => {})
 // });
+
+$(document).on('change', '.gradescore', function(e) {
+    if(stepindex == 0){
+       if($(this).val() == 'a'){$(this).val('A')}
+       if($(this).val() == 'b'){$(this).val('B')}
+       if($(this).val() == 'c'){$(this).val('C')}
+       if($(this).val() == 'd'){$(this).val('D')}
+       if($(this).val() == 'e'){$(this).val('E')}
+       if($(this).val() == 'f'){$(this).val('F')}
+        
+        if(($(this).val() !== 'A') && ($(this).val() !== 'B') && ($(this).val() !== 'C') && ($(this).val() !== 'D') && ($(this).val() !== 'E') && ($(this).val() !== 'F' )){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรอกเกรด A-F เท่านั้น!',
+            })
+            $(this).val('');
+            return;
+        }
+    }else if(stepindex == 1){
+        if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรอกคะแนน 0-5 เท่านั้น!',
+            })
+            $(this).val('');
+            return;
+        }  
+    }
+});
 
 $(document).on('change', '.inputextrascore', function(e) {
     if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){

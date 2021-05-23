@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HomepageServicesTableSeeder::class);   
         $this->call(SounddexApiTableSeeder::class);
         $this->call(ExtraCategoriesTableSeeder::class);
+        $this->call(UseInvoiceStatuswsTableSeeder::class);
         $this->call(ExtraCriteriasTableSeeder::class);
         $this->call(IsicTablesSeeder::class);
         $this->call(IsicSubsTablesSeeder::class);
@@ -111,7 +112,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HomepageIndustryGroupTextsSeeder::class);
         $this->call(DirectMenu2sTableSeeder::class);
         $this->call(PagesTableSeeder::class);
-        $this->call(ProjectBudgetsTableSeeder::class);
+        // $this->call(ProjectBudgetsTableSeeder::class);
         
     }
 }

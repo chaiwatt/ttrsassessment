@@ -7,8 +7,8 @@
     @if (Auth::user()->user_type_id == 3)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}">
     <a href="{{route('dashboard.expert.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
-    {{-- <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
-        <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">รายงาน</a></li>
+    <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
+        <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">แดชบอร์ด</a></li>
         @if (Auth::user()->expertdetail->expert_type_id == 1)
             <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
@@ -16,7 +16,7 @@
                 @endif
             </a></li>								
         @endif
-    </ul> --}}
+    </ul>
     </li>
     @endif
 
@@ -62,13 +62,13 @@
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
             </a></li>
-            @if (Auth::user()->user_type_id == 5)
+            {{-- @if (Auth::user()->user_type_id == 5)
                 <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight
                     @if ($sharenotificationbubbles->where('notification_sub_category_id',6)->count() > 0)
                         <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                     @endif
                 </a></li>	
-            @endif
+            @endif --}}
             <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
@@ -154,8 +154,13 @@
                     </li>
                     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
                         <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
-                        <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
-                            <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน</a></li>
+                        <ul class="nav nav-group-sub" data-submenu-title="รายงานผลการประเมิน">
+                            <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน
+                                @if ($sharenotificationbubbles->where('notification_sub_category_id',9)->count() > 0)
+                                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                            @endif
+                            
+                            </a></li>
                         </ul>
                     </li>
                 @endif
@@ -269,12 +274,12 @@
 
 
 
-                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'active':''}}">ทั้งหมด</a></li>
+                {{-- <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'active':''}}">ทั้งหมด</a></li>
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.bygrade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.bygrade')?'active':''}}">ตามเกรด</a></li>
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.byindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.byindustrygroup')?'active':''}}">ตามกลุ่มอุตสาหกรรม</a></li>
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.bybusinesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.bybusinesstype')?'active':''}}">ตามประเภทธุรกิจ</a></li>
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.regcapital')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.regcapital')?'active':''}}">ตามทุนจดทะเบียน</a></li>
-                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.docdownload')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.docdownload')?'active':''}}">ดาวน์โหลดเอกสาร</a></li>
+                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.docdownload')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.docdownload')?'active':''}}">ดาวน์โหลดเอกสาร</a></li> --}}
                 
              
             </ul>
@@ -295,7 +300,7 @@
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.website.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website.visit')?'active':''}}">การเข้าชมเว็บไซต์</a></li>
-                <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.website.contact')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website.contact')?'active':''}}">ข้อมูลการติดต่อ</a></li>
+                {{-- <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.website.contact')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website.contact')?'active':''}}">ข้อมูลการติดต่อ</a></li> --}}
             </ul>
         </li>
      
@@ -341,16 +346,16 @@
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.website')?'nav-item-expanded':''}}">
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
-                <li class="nav-item"><a href="{{route('setting.admin.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagestatus')?'active':''}}">สถานะเพจ</a></li>	
-                <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagecategory')?'active':''}}">หมวดหมู่เพจ</a></li>
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagestatus')?'active':''}}">สถานะเพจ</a></li>	 --}}
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagecategory')?'active':''}}">หมวดหมู่เพจ</a></li> --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faqcategory')?'active':''}}">หมวดหมู่คำถามที่พบบ่อย</a></li> --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faq')?'active':''}}">คำถามที่พบบ่อย</a></li>
-                <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.tag')?'active':''}}">ป้ายกำกับ</a></li>		             
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.tag')?'active':''}}">ป้ายกำกับ</a></li>		              --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.slide')?'active':''}}">ภาพสไลด์</a></li>		              --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.introsection')?'active':''}}">Intro section</a></li>		              --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าเพจ</a></li>		             
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.announce')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.announce')?'active':''}}">ประกาศ</a></li>	 --}}
-                <li class="nav-item"><a href="{{route('setting.admin.website.menu.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu.create')?'active':''}}">เมนู</a></li>	
+                <li class="nav-item"><a href="{{route('setting.admin.website.menu')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu')?'active':''}}">เมนู</a></li>	
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	 --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.frontpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.frontpage')?'active':''}}">หน้า Billboard</a></li>	
                 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage')?'nav-item-expanded':''}}">

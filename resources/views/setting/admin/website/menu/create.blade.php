@@ -46,15 +46,15 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                            <div class="col-md-12">
-                              <form action="{{route('setting.admin.website.menu.crud')}}" method="post">
+                              <form action="{{route('setting.admin.website.menu.createsave')}}" method="post">
                                  @csrf
                                  <input type="text" id="menuid" name="menuid" hidden>
-                                 <div class="row">
+                                 {{-- <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
                                           <label>เมนูหลัก</label>
@@ -66,7 +66,7 @@
                                         </select>
                                        </div>
                                     </div>
-                                 </div>
+                                 </div> --}}
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
@@ -80,15 +80,20 @@
                                            <input type="text" name="menuenglish" id="menuenglish" class="form-control form-control-lg">   
                                         </div>
                                      </div>
+                                     <div class="col-md-12">
+                                        <div class="form-group">
+                                           <label>ลิงก์<span class="text-danger">*</span></label>
+                                           <input type="text" name="url" id="url" class="form-control form-control-lg">   
+                                        </div>
+                                     </div>
                                  </div>
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                          <label>ลิงก์เพจ</label>
-                                          <select name="page" id="page" placeholder="ลิงก์เพจ" class="form-control form-control-select2">
-                                            <option value="">เลือกลิงก์เพจ</option>
-                                            @foreach($pages as $key => $page)
-                                                <option value="{{$page->id}}" >{{$page->name}}</option>
+                                          <label>แสดงผลเมนู</label>
+                                          <select name="showstatus" placeholder="แสดงผลเมนู" class="form-control form-control-select2">
+                                            @foreach($showstatuses as $key => $showstatus)
+                                                <option value="{{$showstatus->id}}" >{{$showstatus->name}}</option>
                                             @endforeach
                                         </select>
                                        </div>
@@ -96,8 +101,8 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-md-12">
-                                        <button type="submit" name="action" value="create" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                                        <button type="submit" name="action" value="edit" class="btn bg-info">แก้ไข <i class="icon-pencil ml-2"></i></button>
+                                        <button type="submit" name="action" value="create" class="btn bg-teal float-right">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                        {{-- <button type="submit" name="action" value="edit" class="btn bg-info">แก้ไข <i class="icon-pencil ml-2"></i></button> --}}
                                         {{-- <button type="submit" name="action" value="delete" class="btn bg-danger">ลบ <i class="icon-trash-alt ml-2"></i></button> --}}
                                     </div>
                                  </div>
@@ -107,7 +112,7 @@
                     </div>   
                 </div>
             </div>
-            <div class="col-md-5">
+            {{-- <div class="col-md-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -126,7 +131,7 @@
                         </div>
                     </div>   
                 </div>
-            </div>
+            </div> --}}
     </div>
     </div>
     <!-- /content area -->

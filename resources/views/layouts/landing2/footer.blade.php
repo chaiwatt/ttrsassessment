@@ -6,7 +6,13 @@
                     <div class="footer-logo mb-30">
                         <a href="index.html"><img src="{{asset($generalinfo->logo)}}" alt=""></a>
                     </div>
-                      <div class="textwidget pb-30"><p>111 อุทยานวิทยาศาสตร์ประเทศไทย <br>ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120 </p>
+                      <div class="textwidget pb-30">
+                          
+                          @if (Config::get('app.locale') == 'th')
+                          <p>111 อุทยานวิทยาศาสตร์ประเทศไทย <br>ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120 </p>
+                          @else
+                          <p>111 Thailand Science Park <br>Phahonyothin Rd, Khlong Luang District, Pathum Thani 12120 </p>
+                          @endif
                       </div>
                       {{-- <ul class="footer-social md-mb-30">  
                           <li> 
@@ -26,11 +32,30 @@
                       </ul> --}}
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12">
-                    <h3 class="widget-title">เวลาทำการ</h3>
-                    <p class="widget-desc">จันทร์-ศุกร์: {{$generalinfo->workdaytime}}</p>
+                    <h3 class="widget-title">
+                        @if (Config::get('app.locale') == 'th')
+                        เวลาทำการ
+                        @else
+                        Office Hours
+                        @endif
+                        
+                    </h3>
+                    <p class="widget-desc">
+                        @if (Config::get('app.locale') == 'th')
+                        จันทร์-ศุกร์:
+                        @else
+                        Mon-Fri:
+                        @endif
+                        {{$generalinfo->workdaytime}}</p>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 md-mb-30">
-                    <h3 class="widget-title">ติดต่อ</h3>
+                    <h3 class="widget-title">
+                        @if (Config::get('app.locale') == 'th')
+                        ติดต่อ
+                        @else
+                        Contact
+                        @endif
+                    </h3>
                     <ul class="address-widget">
                         {{-- <li>
                             <i class="flaticon-location"></i>
@@ -69,7 +94,17 @@
         <div class="container" style="text-align:center">                    
             <div class="col-lg-12">
                 <div class="copyright">
-                    <p>&copy; สงวนลิขสิทธิ์ {{date('Y')}} <span>{{$generalinfo->company}}</span> </p>
+                    <p>&copy;
+                        @if (Config::get('app.locale') == 'th')
+                        สงวนลิขสิทธิ์
+                        @else
+                        Copyright
+                        @endif
+                          {{date('Y')}} <span> @if (Config::get('app.locale') == 'th')
+                            {{$generalinfo->company}}
+                            @else
+                            National Science and Technology Development Agency : NSTDA.  
+                            @endif</span> </p>
                 </div>
             </div>
         </div>

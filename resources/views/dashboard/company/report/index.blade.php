@@ -4,7 +4,11 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
-
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -114,13 +118,13 @@
 
         
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th class="text-left">ชื่อโครงการ</th> 
-                                        <th class="text-left">เลขที่โครงการ</th> 
-                                        <th class="text-left">ความก้าวหน้าการประเมิน</th>    
-                                        <th class="text-right">สถานะ</th>                                                                  
+                                        <th >ชื่อโครงการ</th> 
+                                        <th >เลขที่โครงการ</th> 
+                                        <th >ความก้าวหน้าการประเมิน</th>    
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                                                                  
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -148,7 +152,7 @@
                                                 </div>
                                             </div>
                                         </td> 
-                                        <td class="text-right"> 
+                                        <td style="white-space: nowrap"> 
                                             @if ($businessplan->business_plan_status_id > 3)
                                                 <span class="badge badge-flat border-success text-success-400 rounded-0">อยู่ระหว่างการประเมิน</span>
                                             @endif
@@ -192,7 +196,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>วันที่</th> 

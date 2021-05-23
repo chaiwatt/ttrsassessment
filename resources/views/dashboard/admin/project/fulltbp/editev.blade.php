@@ -1,6 +1,8 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+
+
 @stop
 @section('content')
     {{-- modal_add_clustergroup --}}
@@ -116,7 +118,7 @@
                                     </div>
                                     <div class="col-md-12" style="margin-top:-20px">
                                         <div class="form-group">
-                                            <label for="" ><small class="text-danger">ให้กรอกเกรด A -> F</small></label>
+                                            <label for="" ><small class="text-danger">ให้กรอกคะแนนสำหรับเกรด A -> E</small></label>
                                         </div>
                                         <table class="table" id="show" style="display: none;margin-top:-10px">
                                             <thead>
@@ -146,6 +148,10 @@
                                                 <tr>
                                                     <td>E</td>
                                                     <td id="tde"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>F</td>
+                                                    <td id="tdf"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -505,6 +511,7 @@
                 <!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
+
                         <input type="text" id="tmpstepindex" value="0" hidden>
                         <div class="text-right">
                         </div>
@@ -539,6 +546,10 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="indextab">
                                         <div class="form-group">	
+                                            <div class="float-left">
+                                                <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel</button>
+                                                <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก Pdf</button>
+                                            </div>
                                             @if (Auth::user()->user_type_id == 6)
                                                     @if ($ev->status < 2)
                                                         <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddclustergroup" >เพิ่ม Index Criteria</button>
@@ -569,10 +580,24 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <table id="evexporttable" width="100%" hidden>
+                                            <thead>
+                                                <tr >
+                                                    <th style="text-align: left">Pillar</th>  
+                                                    <th style="text-align: left">Sub Pillar</th>   
+                                                    <th style="text-align: left">Sub Pillar Index</th>                                                                                
+                                                    <th style="text-align: left">Criteria</th>  
+                                                </tr>
+                                            </thead>
+                                        </table> 
                                     </div>
         
                                     <div class="tab-pane fade" id="extratab">
                                         <div class="form-group">	
+                                            <div class="float-left">
+                                                <button id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก Excel</button>
+                                                <button id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก Pdf</button>
+                                            </div>
                                             @if ($ev->status == 0 || $ev->refixstatus == 1)
                                             <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" >เพิ่ม Extra Criteria</button>
                                             @endif
@@ -594,6 +619,14 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <table id="evextraexporttable" width="100%" hidden>
+                                            <thead>
+                                                <tr >
+                                                    <th style="text-align: left">Category</th>  
+                                                    <th style="text-align: left">Extra Criteria</th>   
+                                                </tr>
+                                            </thead>
+                                        </table>  
                                     </div>
                                     <div class="tab-pane fade" id="commenttab">
                                         @if (Auth::user()->user_type_id == 6 && $ev->status < 2)
@@ -636,9 +669,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>          
+                        </div> 
+
+        
                     </div>
-                    
+
 				</div>
 				<!-- /multiple selection -->
             <!-- /striped rows -->
@@ -649,10 +684,23 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+{{-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> --}}
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> --}}
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+{{-- <script src="{{asset('assets/dashboard/js/plugins/datatables/dataTables.rowsGroup.js')}}"></script> --}}
+
+<script src="{{asset('assets/dashboard/js/vfs_fonts.js')}}"></script>
+
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script> --}}
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
@@ -665,6 +713,104 @@
             status: "{{$ev->status}}",
             refixstatus: "{{$ev->refixstatus}}"
         };
+    // var evdata = [];
+
+    // function callDataTable(){
+    //     for(var x = 0; x < 10; x++){
+    //         evdata.push({"pillar":  x , "subpillar": x, "subpillarindex": x, "criteria": x});
+    //     }
+    //     JSON.stringify({array: evdata});
+        
+    //         $('#evexporttable').DataTable( {
+    //             dom: 'Bfrtip',
+    //             data: evdata,
+    //             columns : [
+    //                 { "data" : "pillar" },
+    //                 { "data" : "subpillar" },
+    //                 { "data" : "subpillarindex" },
+    //                 { "data" : "criteria" }
+    //             ],
+                
+    //             searching: false,
+    //             paging:   true,
+    //             ordering: false,
+    //             info:     false,
+    //             pageLength : 10,
+    //             language: {
+    //                 zeroRecords: " ",
+    //                 search: "ค้นหา: ",  
+    //                 sLengthMenu: "จำนวน _MENU_ รายการ",
+    //                 info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+    //                 paginate: {
+    //                     previous: 'ก่อนหน้า',
+    //                     next: 'ถัดไป'
+    //                 }
+    //             },
+    //             buttons: [
+    //                 { 
+    //                     extend: 'excelHtml5',
+    //                     className: 'btn-primary',
+    //                     text: 'Excel',
+    //                     title: function () { 
+    //                         return null; 
+    //                     },
+    //                     filename: function() {
+    //                         return "รายการ EV"      
+    //                     }, 
+    //                     exportOptions: {
+    //                         columns: [ 0, 1,2,3 ]
+    //                     },
+    //                 },
+    //                 { 
+    //                     extend: 'pdfHtml5',
+    //                     pageSize: 'A4',
+    //                     // orentation: 'landscape',
+    //                     customize: function(doc) {
+    //                         doc.defaultStyle = {
+    //                             font:'THSarabun',
+    //                             fontSize:14                                 
+    //                         };
+    //                         doc.pageMargins = [30, 30, 30, 30];
+    //                         doc.content[1].table.widths = ['*','*', '*', '*']
+    //                         var rowCount = doc.content[1].table.body.length;
+    //                         for (var i = 1; i < rowCount; i++) {
+    //                         doc.content[1].table.body[i][0].alignment = 'left';
+    //                         }
+    //                     },
+    //                     exportOptions: {
+    //                         columns: [ 0, 1,2,3 ]
+    //                     },
+    //                     title: function () { 
+    //                         return "รายการ EV"; 
+    //                     },
+    //                     filename: function() {
+    //                         return "รายการ EV"      
+    //                     }, 
+    //                 }, 
+    //                 {
+    //                     extend: 'print',
+    //                 }
+                    
+    //             ],
+    //             drawCallback: function() {
+    //                 $('.buttons-excel')[0].style.visibility = 'hidden'
+    //                 $('.buttons-pdf')[0].style.visibility = 'hidden'
+    //             }
+    //         } );
+    // }
+    
+
+        // $("#btnOnExcel").on('click', function() {
+        //         $('#evexporttable').DataTable().buttons(0,0).trigger();
+
+        // });
+
+        // $("#btnOnPdf").on('click', function() {
+        //     $('#evexporttable').DataTable().buttons(0,1).trigger();
+        // });
+
+
+ 
 
     </script>
 @stop

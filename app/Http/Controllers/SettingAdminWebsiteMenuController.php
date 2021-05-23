@@ -12,6 +12,7 @@ use App\Http\Requests\CreateMenuRequest;
 class SettingAdminWebsiteMenuController extends Controller
 {
     public function Create(){
+        
         $menus = Menu::where('parent_id',0)->get();
         // $allmenus = Menu::pluck('name','id')->all();
         $allmenus = DirectMenu::pluck('name','id')->all();

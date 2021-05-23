@@ -21,76 +21,46 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="left-icon-tab1">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        <label>หัวข้อ</label>
-                                        <input type="text"  id="title" value=""  placeholder="หัวข้อ" class="form-control form-control-lg" readonly>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="attendee_modal">
+                                                <tr>
+                                                    <td><strong>ประเภท</strong> </td>  
+                                                    <td id="eventtype"></td>
+                                                </tr> 
+                                                <tr> 
+                                                    <td><strong>หัวข้อ</strong></td>
+                                                    <td id="subject"></td>
+                                                </tr>  
+                                                <tr> 
+                                                    <td><strong>วันที่ เวลา</strong></td> 
+                                                    <td id="eventdate"></td>
+                                                </tr>  
+                                                <tr> 
+                                                    <td><strong>สถานที่</strong></td> 
+                                                    <td id="place"></td>
+                                                </tr> 
+                                                <tr style="width:200px">
+                                                    <td  style="width:120px"><strong>รายละเอียด</strong></td>   
+                                                    <td id="detail"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>เอกสารแนบ</strong></td>    
+                                                    <td style="vertical-align: middle;" id="attachment_wrapper"></td>                                                                       
+                                                </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>การเข้าร่วม<span class="text-danger">*</span></label>
                                     <select id="attendevent" class="form-control form-control-lg form-control-select2">
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            {{-- <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>สถานที่/ห้อง</label>
-                                    <input type="text" id="placeroom" value=""  placeholder="สถานที่/ห้อง" class="form-control form-control-lg" readonly>
-                                </div>
-                            </div> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>ประเภท</label>
-                                        <input type="text" id="eventtype" value=""  placeholder="ประเภท" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>วันที่</label>
-                                        <input type="text" id="eventdate" value=""  placeholder="วันที่" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>เวลาเริ่ม</label>
-                                        <input type="text" id="starttime" value=""  placeholder="เวลาเริ่ม" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>ถึงเวลา</label>
-                                        <input type="text" id="endtime" value=""  placeholder="ถึงเวลา" class="form-control form-control-lg" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>รายละเอียด</label>
-                                        <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control form-control-lg" readonly></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                           
-                        </div>
+                        </div> 
                     </div>
 
                     <div class="tab-pane fade" id="left-icon-tab2">
@@ -186,7 +156,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="{{route('dashboard.expert.report')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
-                    <span class="breadcrumb-item active">รายงาน</span>
+                    {{-- <span class="breadcrumb-item active">รายงาน</span> --}}
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -228,19 +198,20 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <input id="attendeventid" type="text" hidden >
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
                                         {{-- <th>เลขที่โครงการ</th>  --}}
                                         {{-- <th>ชื่อโครงการ</th>  --}}
                                         <th>โครงการ</th>
-                                        <th>สถานะ</th>
-                                        <th>แสดงความเห็น</th>
-                                        <th>วันนัดประชุมก่อนลงพื้นที่</th>
-                                        <th>วันที่ประเมิน</th>
-                                        <th>วันที่สรุปผลประเมิน</th>
-                                        <th class="text-right">เพิ่มเติม</th> 
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
+                                        <th style="width:1%;white-space: nowrap">แสดงความเห็น</th>
+                                        <th style="width:1%;white-space: nowrap">วันนัดประชุมก่อนลงพื้นที่</th>
+                                        <th style="width:1%;white-space: nowrap">วันที่ประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap">วันที่สรุปผลประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -256,24 +227,24 @@
                                                     @endif
                                                     
                                                 </td>  
-                                                <td>  
+                                                <td style="white-space: nowrap">  
                                                     <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
                                                 </td>  
-                                                <td> 
+                                                <td style="white-space: nowrap"> 
                                                     @if($fulltbp->expertassignment->accepted == 1)
                                                             @if (Empty($fulltbp->expertcomment))
                                                                     <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">แสดงความเห็น</a> 
                                                                 @else
-                                                                    <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="badge badge-flat border-success text-success-600">แสดงความเห็นแล้ว</a> 
+                                                                    <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" ><span class="badge badge-flat border-success text-success-600">แสดงความเห็นแล้ว</span></a> 
                                                             @endif
                                                         @else
                                                         -
                                                     @endif
                                                 </td> 
-                                                <td> {{$fulltbp->briefingdate}} </td>  
-                                                <td> {{$fulltbp->assessmentdate}} </td>  
-                                                <td> {{$fulltbp->finalassessmentdate}} </td> 
-                                                <td class="text-right"> 
+                                                <td style="white-space: nowrap"> {{$fulltbp->briefingdate}} </td>  
+                                                <td style="white-space: nowrap"> {{$fulltbp->assessmentdate}} </td>  
+                                                <td style="white-space: nowrap"> {{$fulltbp->finalassessmentdate}} </td> 
+                                                <td style="white-space: nowrap"> 
                                                     @if ($fulltbp->expertassignment->accepted == 0)
                                                             <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
                                                             <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>

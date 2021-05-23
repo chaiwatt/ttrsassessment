@@ -88,7 +88,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="testtopictable">
+                                    <table class="table table-bordered" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th>ชื่อ-นามสกุล</th> 

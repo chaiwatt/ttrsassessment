@@ -160,6 +160,14 @@ h4{
     color: #ffffff;
 }
 
+.table-bordered td{
+   padding-left: 5px !important;
+   padding-right: 5px !important;
+}
+
+table {
+  border-top: 1px solid #ddd !important;
+}
 
   /* RESET STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */

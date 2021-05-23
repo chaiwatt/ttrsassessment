@@ -175,8 +175,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Front page</label>
-                                        <select name="frontpage" data-placeholder="Front page" class="form-control form-control-lg form-control-select2">
+                                        <label>Front page (Bill board)</label>
+                                        <select name="frontpage" data-placeholder="Front page (Bill board)" class="form-control form-control-lg form-control-select2">
                                             @foreach ($frontpagestatuses as $frontpagestatus)                                                                
                                                 <option value="{{$frontpagestatus->id}}" @if ($generalinfo->front_page_status_id == $frontpagestatus->id) selected @endif> {{$frontpagestatus->name}} </option>
                                             @endforeach   
@@ -195,6 +195,16 @@
                                         <select name="verifyexpert" data-placeholder="ยืนยันผู้เจ้าหน้าที่ TTRS /เชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
                                             @foreach ($verifyexpertstatuses as $verifyexpertstatus)                                                                
                                                 <option value="{{$verifyexpertstatus->id}}" @if ($generalinfo->verify_expert_status_id == $verifyexpertstatus->id) selected @endif> {{$verifyexpertstatus->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>การใช้ Invoice</label>
+                                        <select name="useinvoicestatus" data-placeholder="การใช้ Invoice" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($useinvoicestatuses as $useinvoicestatus)                                                                
+                                                <option value="{{$useinvoicestatus->id}}" @if ($generalinfo->use_invoice_status_id == $useinvoicestatus->id) selected @endif> {{$useinvoicestatus->name}} </option>
                                             @endforeach   
                                         </select>
                                     </div>

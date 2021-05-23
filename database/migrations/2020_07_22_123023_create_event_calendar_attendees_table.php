@@ -19,7 +19,7 @@ class CreateEventCalendarAttendeesTable extends Migration
             $table->foreign('event_calendar_id')->references('id')->on('event_calendars')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->char('joinevent',1)->default('1');
-            $table->char('color',10)->default('#27AE60');
+            $table->char('color',10)->default('#FF33E6');
             $table->timestamps();
         });
     }

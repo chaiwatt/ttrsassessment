@@ -90,12 +90,12 @@
                             <table class="table text-nowrap" id="maintable">
                                 <thead>
                                     <tr>
-                                        <th>เลขที่โครงการ</th> 
+                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th>
                                         
                                         <th>บริษัท</th>
                                         
-                                        <th>สถานะ</th>                   
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                   
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,11 +104,11 @@
                                         {{-- {{Auth::user()->isProjectLeader($fulltbp->id)}} --}}
                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                 <tr>    
-                                                    <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                    {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                                     <td> {{$fulltbp->minitbp->project}} </td>  
                                                     <td> {{$fulltbp->minitbp->businessplan->company->name}} </td>
                                                     
-                                                    <td>
+                                                    <td style="white-space: nowrap">
                                                             @if ($fulltbp->allscoring == 0)
                                                                 @if ($fulltbp->done_assessment != 0)
                                                                         @if ($fulltbp->ev->status == 5)
@@ -121,7 +121,7 @@
                                                                         
                                                                 @endif     
                                                             @else   
-                                                                    <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ค้างอยู่ {{$fulltbp->allscoring}} คน</button>
+                                                                    <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ยังไม่ได้ประเมิน {{$fulltbp->allscoring}} คน</button>
                                                             @endif 
                                                     </td>                                
                                                 </tr>

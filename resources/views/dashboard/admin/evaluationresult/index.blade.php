@@ -65,9 +65,9 @@
                                         <th>ชื่อโครงการ</th> 
                                         <th>คะแนน</th>
                                         <th>เกรด</th>     
-                                        <th>รายงานผล</th>    
-                                        <th>แจ้งผลทางจดหมาย</th>  
-                                        <th>สิ้นสุดโครงการ</th>              
+                                        <th style="width:1%;white-space: nowrap">รายงานผล</th>    
+                                        <th style="width:1%;white-space: nowrap">แจ้งผลทางจดหมาย</th>  
+                                        <th style="width:1%;white-space: nowrap">สิ้นสุดโครงการ</th>              
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,7 +78,7 @@
                                                     <td> {{$fulltbp->minitbp->project}} </td> 
                                                     <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                     <td> {{@$fulltbp->projectgrade->grade}} </td> 
-                                                    <td> 
+                                                    <td style="white-space: nowrap"> 
                                                         @if(@$fulltbp->projectstatustransaction(8)->status != 2)
                                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">เขียนบทวิเคราะห์</a>
                                                         @endif  
@@ -95,7 +95,7 @@
                                                             </div>
                                                         </div>
                                                     </td> 
-                                                    <td>
+                                                    <td style="white-space: nowrap">
                                                         @if (!Empty($fulltbp->projectstatustransaction(7)))
                                                                 @if ($fulltbp->projectstatustransaction(7)->status == 2)  
                                                                         <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
@@ -118,7 +118,7 @@
                                                                 <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
                                                         @endif
                                                     </td>
-                                                    <td> 
+                                                    <td style="white-space: nowrap"> 
                                                         @if (!Empty($fulltbp->projectstatustransaction(8)))
                                                                 @if ($fulltbp->projectstatustransaction(8)->status == 2)
                                                                         <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>

@@ -58,7 +58,7 @@
                                                    @elseif($key == ($projectbudgets->count()-1))
                                                         <option value="{{$projectbudget->id}}" @if ($projectbudget->id == Request::get('projectbudget')) selected @endif > มากกว่า {{number_format(@$projectbudget->minbudget)}} บาท</option> 
                                                    @else    
-                                                        <option value="{{$projectbudget->id}}" @if ($projectbudget->id == Request::get('projectbudget')) selected @endif > ตัั้งแต่ {{number_format(@$projectbudget->minbudget)}} - {{number_format(@$projectbudget->maxbudget)}} บาท</option> 
+                                                        <option value="{{$projectbudget->id}}" @if ($projectbudget->id == Request::get('projectbudget')) selected @endif > ตั้งแต่ {{number_format(@$projectbudget->minbudget)}} - {{number_format(@$projectbudget->maxbudget)}} บาท</option> 
                                                 @endif
                                                 
 											@endforeach
@@ -75,7 +75,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="searchtable">
+                                    <table class="table table-bordered" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th>เลขที่โครงการ</th> 

@@ -1,5 +1,11 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<style>
+    td{
+        padding-left:5px !important;
+        padding-right:5px !important;
+    }
+</style>
 @stop
 @section('content')
     {{-- modal_add_jdmessage --}}
@@ -99,17 +105,16 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="maintable">
+                            <table class="table table-bordered" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th>ความเห็น JD</th>
-                                        <th>Leader</th>
-                                        {{-- <th>Co-Leader</th> --}}
-                                        <th>สถานะ</th>
+                                        <th style="width:1%;white-space: nowrap">บริษัท</th>
+                                        <th style="width:1%;white-space: nowrap">ความเห็น JD</th>
+                                        <th style="width:1%;white-space: nowrap">Leader</th>
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
                                         @if (Auth::user()->user_type_id>=5)
-                                            <th>เพิ่มเติม</th> 
+                                            <th style="width:1%;white-space: nowrap">เพิ่มเติม</th> 
                                         @endif                             
                                     </tr>
                                 </thead>
@@ -121,7 +126,7 @@
                                             <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="text-info" target="_blank">{{$projectassignment->businessplan->minitbp->project}} </a>
                                         </td> 
-                                        <td> 
+                                        <td style="white-space: nowrap"> 
                                             @php
                                                 $company = $projectassignment->businessplan->company;
                                                 $company_name = (!Empty($company->name))?$company->name:'';
@@ -141,7 +146,7 @@
                                             @endphp
                                             {{$fullcompanyname}}
                                         </td> 
-                                        <td> 
+                                        <td style="white-space: nowrap"> 
                                             @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
                                                     @if (Auth::user()->user_type_id == 6)
                                                     <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
@@ -151,13 +156,13 @@
                                                     <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                         </td>  
-                                        <td> 
+                                        <td style="white-space: nowrap"> 
                                             @if (!Empty($projectassignment->leader))
                                                 {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
                                             @endif
                                         </td>  
 
-                                        <td>
+                                        <td style="white-space: nowrap">
                                             @if ($projectassignment->leader_id == null)
                                                 <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้มอบหมาย</span>
                                                 @else
@@ -165,7 +170,7 @@
                                             @endif
                                         </td>
                                         @if (Auth::user()->user_type_id>=5)
-                                            <td> 
+                                            <td style="white-space: nowrap"> 
                                                 @if (@$projectassignment->businessplan->minitbp->fulltbp->projectstatustransaction(8)->status != 2)
                                                     @if ($projectassignment->leader_id == null)
                                                             <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
@@ -278,7 +283,6 @@
         }
 
         var countitemtable =  "{{$projectassignments->count()}}";
-        // console.log(countitemtable);
         if (countitemtable >= 20) {
             $('#maintable').DataTable( {
                 "paging":   true,

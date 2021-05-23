@@ -7,6 +7,12 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/aos/aos.css')}}" rel="stylesheet">
 {{-- <link href="{{asset('assets/dashboard/js/plugins/chart/chart.css')}}"> --}}
+
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
 {{-- modal_get_calendar --}}
@@ -25,70 +31,46 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="left-icon-tab1">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <div class="form-group">
-                                            <label>หัวข้อ</label>
-                                            <input type="text"  id="title" value=""  placeholder="หัวข้อ" class="form-control form-control-lg" readonly>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="attendee_modal">
+                                                    <tr>
+                                                        <td><strong>ประเภท</strong> </td>  
+                                                        <td id="eventtype"></td>
+                                                    </tr> 
+                                                    <tr> 
+                                                        <td><strong>หัวข้อ</strong></td>
+                                                        <td id="subject"></td>
+                                                    </tr>  
+                                                    <tr> 
+                                                        <td><strong>วันที่ เวลา</strong></td> 
+                                                        <td id="eventdate"></td>
+                                                    </tr>  
+                                                    <tr> 
+                                                        <td><strong>สถานที่</strong></td> 
+                                                        <td id="place"></td>
+                                                    </tr> 
+                                                    <tr style="width:200px">
+                                                        <td  style="width:120px"><strong>รายละเอียด</strong></td>   
+                                                        <td id="detail"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>เอกสารแนบ</strong></td>    
+                                                        <td style="vertical-align: middle;" id="attachment_wrapper"></td>                                                                       
+                                                    </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>การเข้าร่วม<span class="text-danger">*</span></label>
                                         <select id="attendevent" class="form-control form-control-lg form-control-select2">
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>ประเภท</label>
-                                            <input type="text" id="eventtype" value=""  placeholder="ประเภท" class="form-control form-control-lg" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>วันที่</label>
-                                            <input type="text" id="eventdate" value=""  placeholder="วันที่" class="form-control form-control-lg" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>เวลาเริ่ม</label>
-                                            <input type="text" id="starttime" value=""  placeholder="เวลาเริ่ม" class="form-control form-control-lg" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>ถึงเวลา</label>
-                                            <input type="text" id="endtime" value=""  placeholder="ถึงเวลา" class="form-control form-control-lg" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>รายละเอียด</label>
-                                            <textarea type="text" id="detail" rows="3" cols="5"  placeholder="รายละเอียด" class="form-control form-control-lg" readonly></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                               
-                            </div>
+                            </div> 
                         </div>
 
                         <div class="tab-pane fade" id="left-icon-tab2">
@@ -636,15 +618,15 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="maintable" >
+                            <table class="table table-bordered" id="maintable" >
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
-                                        <th>วันนัดประชุมก่อนลงพื้นที่</th>
-                                        <th>วันที่ประเมิน</th>
-                                        <th>วันที่สรุปผลประเมิน</th>
-                                        <th>เข้าร่วม(เฉพาะผู้เชี่ยวชาญ)</th>
-                                        <th>สถานะ</th>
+                                        <th style="width:1%;white-space: nowrap">วันนัดประชุมก่อนลงพื้นที่</th>
+                                        <th style="width:1%;white-space: nowrap">วันที่ประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap">วันที่สรุปผลประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap">เข้าร่วม(เฉพาะผู้เชี่ยวชาญ)</th>
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -668,10 +650,10 @@
                                                             @endif
                                                     @endif          
                                                 </td>   
-                                                <td> {{$fulltbp->briefingdate}} </td>  
-                                                <td> {{$fulltbp->assessmentdate}} </td>  
-                                                <td> {{$fulltbp->finalassessmentdate}} </td>  
-                                                <td> 
+                                                <td style="white-space: nowrap"> {{$fulltbp->briefingdate}} </td>  
+                                                <td style="white-space: nowrap"> {{$fulltbp->assessmentdate}} </td>  
+                                                <td style="white-space: nowrap"> {{$fulltbp->finalassessmentdate}} </td>  
+                                                <td style="white-space: nowrap"> 
                                                     @if (!Empty($check))
                                                         @if ($fulltbp->expertassignment->accepted == 0)
                                                                 <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
@@ -681,7 +663,7 @@
                                                         @endif
                                                     @endif
                                                 </td> 
-                                                <td> 
+                                                <td style="white-space: nowrap"> 
                                                     @if ($fulltbp->status == 3)
                                                             <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                         @else
@@ -730,7 +712,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="table-responsive">
-                                        <table class="table table-striped" id="testtopictable">
+                                        <table class="table table-bordered" id="testtopictable">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width: 25%">ปีโครงการ</th> 
@@ -788,7 +770,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="testtopictable">
+                                    <table class="table table-bordered" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width: 10%">ปี</th> 
@@ -861,7 +843,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="testtopictable">
+                                    <table class="table table-bordered" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width: 10%">ปี</th> 
@@ -940,7 +922,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="table-responsive">
-                                        <table class="table table-striped" id="testtopictable">
+                                        <table class="table table-bordered" id="testtopictable">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width: 10%">ปี</th> 

@@ -15,7 +15,7 @@ $(document).on('click', '.controlflowicon', function(e) {
             var arraystartdate = projectstatus.startdate.split('-');
 
             //var startdate = new Date(projectstatus.startdate);
-           var month_start = parseInt(arraystartdate[1])+1; //'' + (startdate.getMonth() + 1);
+           var month_start = parseInt(arraystartdate[1]); //'' + (startdate.getMonth() + 1);
            var day_start = parseInt(arraystartdate[2]);//'' + startdate.getDate();
            var year_start = parseInt(arraystartdate[0]);//startdate.getFullYear();
            

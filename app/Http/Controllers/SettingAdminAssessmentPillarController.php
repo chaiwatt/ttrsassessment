@@ -29,7 +29,7 @@ class SettingAdminAssessmentPillarController extends Controller
     public function EditSave(Request $request,$id){
         $pillar = Pillar::find($id)->update([
             'name' => $request->name,
-            'percent' => $request->percent
+            // 'percent' => $request->percent
         ]);
         return redirect()->route('setting.admin.assessment.pillar')->withSuccess('แก้ไขรายการ Pillar สำเร็จ');
     }

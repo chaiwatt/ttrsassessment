@@ -33,7 +33,7 @@ class ProjectFlowsTableSeeder extends Seeder
                 'duration' => 5
             ],
             [
-                'name' => 'ส่งผลการประเมินทางEmail /ระบบ',
+                'name' => 'ส่งผลการประเมินทาง Email /ระบบ',
                 'duration' => 2
             ],
             [

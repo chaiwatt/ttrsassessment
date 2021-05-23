@@ -289,8 +289,8 @@
                             <thead>
                                 <tr class="bg-info">
                                     <th>Pillar (Index)</th>  
-                                    <th style="width:30%">เปอร์เซนต์</th>          
-                                    <th style="width:30%">เกรด</th>                                                                             
+                                    <th style="width:30%;text-align: center">เปอร์เซนต์</th>          
+                                    <th style="width:30%;text-align: center">เกรด</th>                                                                             
                                 </tr>
                             </thead>
                             <tbody id="gradesummary_wrapper_tr"> 
@@ -304,6 +304,10 @@
                                 @csrf
                                 <h6>Index Criteria</h6>
                                 <fieldset>
+                                    <div class="float-left mb-2">
+                                        <button type="button" id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel (Index)</button>
+                                        <button type="button"  id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก Pdf (Index)</button>
+                                    </div>
                                     <div class="table-responsive mb-3">
                                         <table class="table table-bordered table-striped" id="criteriatable">
                                             <thead>
@@ -324,10 +328,26 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <table id="evexporttable" width="100%" hidden>
+                                        <thead>
+                                            <tr >
+                                                <th style="text-align: left">Pillar</th>  
+                                                <th style="text-align: left">Sub Pillar</th>   
+                                                <th style="text-align: left">Sub Pillar Index</th>                                                                                
+                                                <th style="text-align: left">Criteria</th>  
+                                                <th style="text-align: left">Score</th>  
+                                                <th style="text-align: left">Comment</th> 
+                                            </tr>
+                                        </thead>
+                                    </table> 
                                 </fieldset>
                                 @if ($ev->percentextra > 0)
                                 <h6>Extra Criteria</h6>
                                 <fieldset>
+                                    <div class="float-left mb-2">
+                                        <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก Excel (Extra)</button>
+                                        <button type="button"  id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก Pdf (Extra)</button>
+                                    </div>
                                     <div class="table-responsive mb-3">
                                         <table class="table table-bordered table-striped" id="extra_subpillarindex">
                                             <thead>
@@ -346,6 +366,16 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <table id="evextraexporttable" width="100%" hidden>
+                                        <thead>
+                                            <tr >
+                                                <th style="text-align: left">Category</th>  
+                                                <th style="text-align: left">Extra Criteria</th>   
+                                                <th style="text-align: left">Score</th>  
+                                                <th style="text-align: left">Comment</th> 
+                                            </tr>
+                                        </thead>
+                                    </table>  
                                 </fieldset>
                                 @endif
 
@@ -361,6 +391,14 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+<script src="{{asset('assets/dashboard/js/vfs_fonts.js')}}"></script>
+
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>

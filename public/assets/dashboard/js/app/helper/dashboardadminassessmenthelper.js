@@ -1,7 +1,18 @@
 import * as Extra from './extra.js';
 
 var stepindex =0;
+var evdata = [];
+var evextradata = [];
+
 $(function() {
+    pdfMake.fonts = {
+        THSarabun: {
+            normal: 'THSarabun.ttf',
+            bold: 'THSarabun-Bold.ttf',
+            italics: 'THSarabun-Italic.ttf',
+            bolditalics: 'THSarabun-BoldItalic.ttf'
+        }
+    }
 
     getEv($('#evid').val()).then(data => {
         RenderTable(data);
@@ -11,6 +22,198 @@ $(function() {
         // RowSpan("extra_criteriatable");
         $('#sumofweight').html(data.sumweigth);
 
+    }).catch(error => {})
+});
+
+function callDataTable(){
+    $('#evexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evdata,
+        columns : [
+            { "data" : "pillar" },
+            { "data" : "subpillar" },
+            { "data" : "subpillarindex" },
+            { "data" : "criteria" },
+            { "data" : "score" },
+            { "data" : "comment" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV (Index Criteria)"      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4,5 ]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*', '*', '*', '*', '*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                        doc.content[1].table.body[i][4].alignment = 'center';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4,5]
+                },
+                title: function () { 
+                    return "รายการ EV (Index Criteria)"; 
+                },
+                filename: function() {
+                    return "รายการ EV (Index Criteria)"      
+                }, 
+            }
+            
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden'
+            $('.buttons-pdf')[0].style.visibility = 'hidden'
+        },
+        bDestroy: true
+    } );
+
+    
+}
+
+function callDataTableExtra(){
+    $('#evextraexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evextradata,
+        columns : [
+            { "data" : "category" },
+            { "data" : "criteria" },
+            { "data" : "score" },
+            { "data" : "comment" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV (Extra)"      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*','*','*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                    doc.content[1].table.body[i][0].alignment = 'left';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1,2,3]
+                },
+                title: function () { 
+                    return "รายการ EV (Extra)"; 
+                },
+                filename: function() {
+                    return "รายการ EV (Extra)"      
+                }, 
+            }     
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden'
+            $('.buttons-pdf')[0].style.visibility = 'hidden'
+        },
+        bDestroy: true
+    } );
+}
+
+$(document).on('click', '#btnOnExcel', function(e) {
+    getEv($('#evid').val(),route.userid).then(data => {
+         RenderTable2(data,1);
+         callDataTable();
+       $('#evexporttable').DataTable().buttons(0,0).trigger();
+    }).catch(error => {})
+});
+$(document).on('click', '#btnOnPdf', function(e) {
+    getEv($('#evid').val(),route.userid).then(data => {
+        RenderTable2(data,1);
+        callDataTable();
+       $('#evexporttable').DataTable().buttons(0,1).trigger();
+   }).catch(error => {})
+});
+
+$(document).on('click', '#btnOnExcelExtra', function(e) {
+    getEv($('#evid').val(),route.userid).then(data => {
+        console.log(data);
+        RenderExtraTable2(data.extracriteriatransactions);
+        callDataTableExtra();
+       $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+    }).catch(error => {})
+});
+
+$(document).on('click', '#btnOnPdfExtra', function(e) {
+    getEv($('#evid').val(),route.userid).then(data => {
+        console.log(data);
+        RenderExtraTable2(data.extracriteriatransactions);
+        callDataTableExtra();
+       $('#evextraexporttable').DataTable().buttons(0,1).trigger();
     }).catch(error => {})
 });
 
@@ -38,24 +241,23 @@ function getEv(evid){
    });
    
    function RenderTable(data){
-    //    console.log(data.criteriatransactions);
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {
                 var comment = '';
                 var criterianame = `<label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
-                                <input type="text" id="gradescore" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" class="form-control scoring gradescore">
+                                <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" data-type="score" class="form-control scoring gradescore">
                                     `;
         
                 if(criteria.criteria != null){
                     criterianame = `<label class="form-check-label">
-                                        <input type="checkbox" id="checkscore" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info scoring">
+                                        <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="score" style="vertical-align: middle" class="form-check-input-styled-info scoring">
                                         ${criteria.criteria['name']} <a href="#" data-toggle="modal" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
                                     </label>`;
                 }
         
                 criterianame += `<div class="toggle"><div class="form-group">
                                     <label><i>ความเห็น</i></label>
-                                    <input type="text" id="comment" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control form-control-lg comment">
+                                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" data-type="comment" class="form-control form-control-lg comment">
                                     </div>
                                 </div>`;
         
@@ -70,6 +272,27 @@ function getEv(evid){
 
 }
 
+function RenderTable2(data){
+    evdata = [];
+    data.criteriatransactions.forEach((criteria,index) => {
+            var comment = '';
+            var score = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`).val();
+            var comment = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="comment"]`).val();
+            var showcriteria = criteria.subpillarindex['name'];
+            if(criteria.criteria != null){
+                showcriteria = criteria.criteria['name'];
+                if($($(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`)).is(":checked")){
+                        score = 'x';
+                    }else{
+                    score = '';
+                }
+            }
+
+        evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : score , "comment" : comment });                            
+    });
+
+}
+
 function RenderExtraTable(data){
     
     var html =``;
@@ -80,12 +303,12 @@ function RenderExtraTable(data){
             <td> ${criteriatransaction.extracriteria['name']} <a href="#" data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
             <div class="form-group">
-                <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-id="${criteriatransaction.id}"><i class="icon-folder-open3"></i></a></label>
-                <input type="text" value="" data-id="${criteriatransaction.id} "class="form-control inputextrascore weigthvalue decimalformat" >
+                <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-id="${criteriatransaction.id}"  ><i class="icon-folder-open3"></i></a></label>
+                <input type="text" value="" data-id="${criteriatransaction.id}" data-type="score" class="form-control inputextrascore weigthvalue decimalformat" >
 
                 <div class="toggle"><div class="form-group">
                     <label><i>ความเห็น</i></label>
-                    <input type="text" data-id="${criteriatransaction.id}" class="form-control form-control-lg extracomment">
+                    <input type="text" data-id="${criteriatransaction.id}" class="form-control form-control-lg extracomment" data-type="comment">
                     </div>
                 </div>
                 
@@ -97,6 +320,15 @@ function RenderExtraTable(data){
     $("#extra_criteria_transaction_wrapper_tr").html(html);
 }
 
+function RenderExtraTable2(data){
+    evextradata =[];
+    data.forEach(function (criteriatransaction,index) {
+        var score = $(`input[data-id="${criteriatransaction.id}"][data-type="score"]`).val();
+        var comment = $(`input[data-id="${criteriatransaction.id}"][data-type="comment"]`).val();
+        evextradata.push({"category":  criteriatransaction.extracategory['name'] , "criteria": criteriatransaction.extracriteria['name'], "score": score , "comment" : comment });
+
+    });
+}
 
 function RowSpan(tableid){
     const table = document.getElementById(tableid);// document.querySelector('table');
@@ -356,6 +588,13 @@ function showConflictGrade(id){
 
   $(document).on('change', '.gradescore', function(e) {
     if(stepindex == 0){
+        if($(this).val() == 'a'){$(this).val('A')}
+        if($(this).val() == 'b'){$(this).val('B')}
+        if($(this).val() == 'c'){$(this).val('C')}
+        if($(this).val() == 'd'){$(this).val('D')}
+        if($(this).val() == 'e'){$(this).val('E')}
+        if($(this).val() == 'f'){$(this).val('F')}
+
         if($(this).val() !== 'A' && $(this).val() !== 'B' && $(this).val() !== 'C' && $(this).val() !== 'D' && $(this).val() !== 'E' && $(this).val() !== 'F'){
             
             Swal.fire({

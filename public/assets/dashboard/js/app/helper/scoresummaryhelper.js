@@ -1,4 +1,16 @@
+var evdata = [];
+var evextradata = [];
+
 $(function() {
+    pdfMake.fonts = {
+        THSarabun: {
+            normal: 'THSarabun.ttf',
+            bold: 'THSarabun-Bold.ttf',
+            italics: 'THSarabun-Italic.ttf',
+            bolditalics: 'THSarabun-BoldItalic.ttf'
+        }
+    }
+
     getSummaryEv($('#evid').val()).then(data => {
         $('#showpercent').html(parseFloat(data.projectgrade.percent).toFixed(2));
         $('#showgrade').html(data.projectgrade.grade);
@@ -15,6 +27,206 @@ $(function() {
 
     }).catch(error => {})
 });
+
+
+function callDataTable(){
+    $('#evexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evdata,
+        columns : [
+            { "data" : "pillar" },
+            { "data" : "subpillar" },
+            { "data" : "subpillarindex" },
+            { "data" : "criteria" },
+            { "data" : "score" },
+            { "data" : "comment" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV (Index Criteria)"      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4,5 ]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*', '*', '*', '*', '*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                    //doc.content[1].table.body[i][0].alignment = 'left';
+                        doc.content[1].table.body[i][4].alignment = 'center';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4,5 ]
+                },
+                title: function () { 
+                    return "สรุปคะแนน (Index Criteria)"; 
+                },
+                filename: function() {
+                    return "สรุปคะแนน (Index Criteria)"      
+                }, 
+            }
+            
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden'
+            $('.buttons-pdf')[0].style.visibility = 'hidden'
+        },
+         bDestroy: true
+    } );
+
+    
+}
+
+function callDataTableExtra(){
+
+    $('#evextraexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evextradata,
+        columns : [
+            { "data" : "category" },
+            { "data" : "criteria" },
+            { "data" : "score" },
+            { "data" : "comment" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV (Extra)"      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*','*','*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                    doc.content[1].table.body[i][2].alignment = 'center';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1,2,3]
+                },
+                title: function () { 
+                    return "สรุปคะแนน (Extra)"; 
+                },
+                filename: function() {
+                    return "สรุปคะแนน (Extra)"      
+                }, 
+            }     
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden'
+            $('.buttons-pdf')[0].style.visibility = 'hidden'
+        },
+        bDestroy: true
+    } );
+}
+$(document).on('click', '#btnOnExcel', function(e) {
+    getSummaryEv($('#evid').val(),route.userid).then(data => {
+         RenderTable2(data,1);
+         console.log(evdata);
+         callDataTable();
+         //console.log('evdata');
+       $('#evexporttable').DataTable().buttons(0,0).trigger();
+    }).catch(error => {})
+});
+$(document).on('click', '#btnOnPdf', function(e) {
+    // console.log('here');
+
+    getSummaryEv($('#evid').val(),route.userid).then(data => {
+        RenderTable2(data,1);
+        callDataTable();
+       $('#evexporttable').DataTable().buttons(0,1).trigger();
+   }).catch(error => {})
+});
+
+$(document).on('click', '#btnOnExcelExtra', function(e) {
+        // RenderExtraTable(data.extracriteriatransactions,data.extrascorings);
+    getSummaryEv($('#evid').val(),route.userid).then(data => {
+       // console.log(data);
+        RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
+        callDataTableExtra();
+       $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+    }).catch(error => {})
+});
+
+
+$(document).on('click', '#btnOnPdfExtra', function(e) {
+    getSummaryEv($('#evid').val(),route.userid).then(data => {
+        RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
+        callDataTableExtra();
+       $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+    }).catch(error => {})
+});
+
 
 function getSummaryEv(evid){
     return new Promise((resolve, reject) => {
@@ -64,18 +276,18 @@ function getSummaryEv(evid){
                 basepillar = `Management`;
             }
             if(grade.pillar_id == 2){
-                basepillar = `เทคโนโลยี`;
+                basepillar = `Technology`;
             }
             if(grade.pillar_id == 3){
-                basepillar = `การตลาด`;
+                basepillar = `Marketability`;
             }
             if(grade.pillar_id == 4){
-                basepillar = `ธุรกิจ`;
+                basepillar = `Business Prospet`;
             }
             html1 += `<tr>
             <td>${basepillar}</td>
-            <td>${parseFloat(grade.percent).toFixed(2)}</td>
-            <td>${grade.grade}</td>
+            <td style="text-align: center;">${parseFloat(grade.percent).toFixed(2)}</td>
+            <td style="text-align: center;">${grade.grade}</td>
             <tr>`
         }else{
             var basepillar = ``;
@@ -93,8 +305,8 @@ function getSummaryEv(evid){
             }
             html2 += `<tr>
             <td>${basepillar}</td>
-            <td>${parseFloat(grade.percent).toFixed(2)}</td>
-            <td>${grade.grade}</td>
+            <td style="text-align: center;">${parseFloat(grade.percent).toFixed(2)}</td>
+            <td style="text-align: center;" >${grade.grade}</td>
             <tr>`
         }
 
@@ -223,6 +435,10 @@ $(document).on('click', '#togglecomment', function(e) {
             var checkvalue = '';
             var comment = '';
             var raw = 0;
+
+            var showscore = '';
+            var showcriteria = criteria.subpillarindex['name'];
+
             if(criteria.sumscoring != null){
                 if(criteria.sumscoring['comment'] != null){comment = criteria.sumscoring['comment'];}
                 if(criteria.sumscoring['scoretype'] == 1){
@@ -238,31 +454,35 @@ $(document).on('click', '#togglecomment', function(e) {
                     }else if(textvalue == 'E'){
                         raw = 1;
                     }
+                    showscore = textvalue;
                 }else if(criteria.sumscoring['scoretype'] == 2){
-                    console.log(criteria.sumscoring['score']);
-                    //checkvalue = "checked";
                     if(criteria.sumscoring['score'] == '1'){
                         checkvalue = "checked";
+                        showscore = 'x';
                     }
+
+
                 }
             }
 
             var criterianame = `<label>กรอกเกรด/คะแนน</label>
-                                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" class="form-control inpscore">`;
+                                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="score" placeholder="" value="${textvalue}" class="form-control inpscore">`;
 
             if(criteria.criteria != null){
                 criterianame = `<label class="form-check-label">
-                                    <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" class="form-check-input-styled-info inpscore" ${checkvalue}>
+                                    <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-type="score" data-subpillarindex="${criteria.subpillarindex['id']}" style="vertical-align: middle" class="form-check-input-styled-info inpscore" ${checkvalue}>
                                     ${criteria.criteria['name']}
                                 </label>`;
             }
 
             criterianame += `<div class="toggle"><div class="form-group">
                                 <label><i>ความเห็น</i></label>
-                                <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" class="form-control inpscore">
+                                <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" data-type="comment" class="form-control inpscore" disabled>
                                 </div>
                             </div>`;
-            
+
+           // evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : showscore , "comment" : comment });
+
             html += `<tr > 
             <td> ${criteria.pillar['name']}</td>                                            
             <td> ${criteria.subpillar['name']}</td>    
@@ -278,6 +498,58 @@ $(document).on('click', '#togglecomment', function(e) {
         }
     
 }
+
+
+function RenderTable2(data,evtype){
+
+    evdata = [];
+    var userid = route.userid;
+    data.pillars.some((pillar,index) => {
+        if(pillar.ev_type_id == evtype){
+            data.criteriatransactions.some((criteria,item) => {
+                if(criteria.ev_type_id == evtype && criteria.pillar_id == pillar.id){
+                    var textvalue = '';
+                    var checkvalue = '';
+                    var comment = '';
+
+                    
+                    var checkscore = criteria.scoring.filter(x => x.user_id == userid); 
+                    if(typeof(checkscore[0]) != "undefined"){
+                        var _scoring = checkscore[0];
+                        if(_scoring['comment']){comment = _scoring['comment'];}
+                        if(_scoring['scoretype'] == 1){
+                            textvalue = _scoring['score'];
+                        }else if(_scoring['scoretype'] == 2){
+                            if(_scoring['score'] == 1){
+                                checkvalue = "checked";
+                            }
+                        }
+                    }
+                     var showscore = textvalue;
+                     var showcriteria = criteria.subpillarindex['name'];
+                     var score = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`).val();
+                     var comment = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="comment"]`).val();
+                     
+                    if(criteria.criteria != null){
+                     showscore = checkvalue;
+                     showcriteria = criteria.criteria['name'];
+
+                     if($($(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`)).is(":checked")){
+                            score = 'x';
+                     }else{
+                        score = '';
+                     }
+                    }
+        
+                     evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : score , "comment" : comment });
+                }
+            });
+
+        }
+    }); 
+    // console.log(evdata);
+}
+
 
 function RenderExtraTable(data,extrascorings){
     var html =``;
@@ -296,11 +568,11 @@ function RenderExtraTable(data,extrascorings){
             <td> 
             <div class="form-group">
                 <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-id="${criteriatransaction.id}"><i class="icon-folder-open3"></i></a></label>
-                <input type="text" value="${find[0].scoring}" data-id="${criteriatransaction.id} "class="form-control inputextrascore weigthvalue decimalformat" readonly >
+                <input type="text" value="${find[0].scoring}" data-id="${criteriatransaction.id}"  data-type="score" class="form-control inputextrascore weigthvalue decimalformat" readonly >
 
                 <div class="toggle"><div class="form-group">
                     <label><i>ความเห็น</i></label>
-                    <input type="text" value="${comment}" class="form-control form-control-lg inpscore inputextracomment" >
+                    <input type="text" data-id="${criteriatransaction.id}" value="${comment}" class="form-control form-control-lg" data-type="comment" inpscore inputextracomment" disabled>
                 </div>
 
             </div>
@@ -309,6 +581,18 @@ function RenderExtraTable(data,extrascorings){
     </tr>`
     });
     $("#extra_criteria_transaction_wrapper_tr").html(html);
+}
+
+function RenderExtraTable2(data,scoring){
+    evextradata =[];
+    data.forEach(function (criteriatransaction,index) {
+        var score = $(`input[data-id="${criteriatransaction.id}"][data-type="score"]`).val();
+        var comment = $(`input[data-id="${criteriatransaction.id}"][data-type="comment"]`).val();
+
+        evextradata.push({"category":  criteriatransaction.extracategory['name'] , "criteria": criteriatransaction.extracriteria['name'], "score": score , "comment" : comment });
+
+    });
+console.log(evextradata);
 }
 
 function RowSpanWeight(tableid){

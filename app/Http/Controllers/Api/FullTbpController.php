@@ -332,7 +332,7 @@ class FullTbpController extends Controller
             $membermails[] = $user->email;
         }
 
-        EmailBox::send($membermails,'TTRS:ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว สำหรับโครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน ท่านคณะกรรมการ<br><br> Leader ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว สำหรับโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' กรุณาเตรียมพร้อมในการลงคะแนน ในขั้นตอนต่อไป <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send($membermails,'TTRS:ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว สำหรับโครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน ผู้เชี่ยวชาญ<br><br> Leader ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว สำหรับโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' กรุณาเตรียมพร้อมในการลงคะแนน ในขั้นตอนต่อไป <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
        
         $messagebox =  Message::sendMessage('สร้างปฏิทินนัดหมายการสรุปคะแนน โครงการ' . $minitbp->project . ' บริษัท' . $company->name , 'กรุณาสร้างปฏิทินนัดหมายการสรุปคะแนน โครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
         $alertmessage = new AlertMessage();

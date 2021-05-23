@@ -1,6 +1,11 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 <link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
+<style>
+    textarea {
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -49,7 +54,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.homepage.banner.editsave',['id' => $faq->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.faq.editsave',['id' => $faq->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
@@ -59,7 +64,7 @@
                                             <input type="text"  name="title" value="{{$faq->title}}"  placeholder="คำถาม" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>คำถาม(English)<span class="text-danger">*</span></label>
+                                            <label>คำถาม (English)<span class="text-danger">*</span></label>
                                             <input type="text"  name="titleeng" value="{{$faq->titleeng}}"  placeholder="คำถาม" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
@@ -67,7 +72,7 @@
 											<textarea name="body" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->body}}</textarea>
                                         </div>    
                                         <div class="form-group">
-                                            <label>คำตอบ(English)<span class="text-danger">*</span></label>
+                                            <label>คำตอบ (English)<span class="text-danger">*</span></label>
 											<textarea name="bodyeng" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->bodyeng}}</textarea>
                                         </div>                            
                                         <div class="form-group">

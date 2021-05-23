@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table table-striped" id="industrygrouptable">
+                            <table class="table table-bordered"  id="industrygrouptable">
                                 <thead>
                                     <tr>
                                         <th>#</th>

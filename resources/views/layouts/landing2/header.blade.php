@@ -83,7 +83,7 @@
                     <div class="col-lg-9 text-right"> 
                         <div class="rs-menu-area">
                             <div class="main-menu">
-                                <nav class="rs-menu pr-70 md-pr-0">
+                                <nav class="rs-menu pr-0 md-pr-0">
                                     <ul id="onepage-menu" class="nav-menu">
                                         @foreach($directmenus2 as $key => $menu)
                                             @if (Config::get('app.locale') == 'th')

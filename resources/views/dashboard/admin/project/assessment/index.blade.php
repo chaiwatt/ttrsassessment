@@ -40,9 +40,9 @@
                         </div>
                     </div>
                 </div>           
-                <div class="modal-footer">
+                {{-- <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -93,22 +93,22 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ลงคะแนนโครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการโครงการ</h6>
                         <div class="header-elements">
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="maintable">
+                            <table class="table table-bordered" id="maintable">
                                 <thead>
                                     <tr>
-                                        <th>เลขที่โครงการ</th> 
+                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>ชื่อโครงการ</th> 
                                         <th>บริษัท</th>
-                                        <th>ความเห็นผู้เชี่ยวชาญ</th> 
-                                        <th>ทีมลงคะแนน</th> 
+                                        <th style="width:1%;white-space: nowrap">ความเห็นผู้เชี่ยวชาญ</th> 
+                                        <th style="width:1%;white-space: nowrap">ทีมลงคะแนน</th> 
 
-                                        <th>เพิ่มเติม</th>                       
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -118,20 +118,20 @@
                                         @if ($fulltbp->finished_onsite != 1 && $fulltbp->canceldate == null)
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                 <tr>    
-                                                    <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                    {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
                                                     <td> {{$fulltbp->minitbp->project}} </td>  
                                                     <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                                    <td>
+                                                    <td style="white-space: nowrap">
                                                         @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
                                                         <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
                                                         @endif
                                                        
                                                     </td>
-                                                    <td> 
+                                                    <td style="white-space: nowrap"> 
                                                         <button type="button" id="projectmember{{$fulltbp->id}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                                     </td>  
                                                     
-                                                    <td> 
+                                                    <td style="white-space: nowrap"> 
                                                         @if (!Empty($fulltbp->finalassessmentdate))
                                                                 @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
                                                                         <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>

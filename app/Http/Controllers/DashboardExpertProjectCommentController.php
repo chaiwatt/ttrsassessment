@@ -19,6 +19,7 @@ use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ExpertCommentRequest;
 
 class DashboardExpertProjectCommentController extends Controller
 {
@@ -38,7 +39,7 @@ class DashboardExpertProjectCommentController extends Controller
                                                         ->withFulltbp($fulltbp)
                                                         ->withUsers($users);
     }
-    public function EditSave(Request $request,$id){
+    public function EditSave(ExpertCommentRequest $request,$id){
         $auth = Auth::user(); 
         $expertcomment = ExpertComment::where('full_tbp_id',$id)->where('user_id',$auth->id)->first();
         if(Empty($expertcomment)){
@@ -73,20 +74,20 @@ class DashboardExpertProjectCommentController extends Controller
         $notificationbubble->target_user_id = $projectassignment->leader_id;
         $notificationbubble->save();
 
-        $messagebox = Message::sendMessage('ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
+        $messagebox = Message::sendMessage('ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.assessment',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.project.assessment',['id' => $fulltbp->id]).'>ดำเนินการ</a>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
         
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว','เรียน Leader<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็นสำหรับโครงการ' . $minitbp->project . ' เสร็จแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.assessment',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         CreateUserLog::createLog('เพิ่มความเห็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project );
         return redirect()->route('dashboard.expert.report')->withSuccess('เพิ่มรายการสำเร็จ');

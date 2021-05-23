@@ -133,7 +133,8 @@ Route::group(['prefix' => 'api'], function(){
     }); 
     Route::group(['prefix' => 'alert'], function(){
         Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');     
-        Route::post('deletealert','Api\AlertController@DeleteAlert')->name('api.alert.deletealert');        
+        Route::post('deletealert','Api\AlertController@DeleteAlert')->name('api.alert.deletealert');      
+        Route::post('deletealertq','Api\AlertController@DeleteAlertQ')->name('api.alert.deletealertq');     
     });  
     Route::group(['prefix' => 'mail'], function(){
         Route::post('senduser','Api\MailController@SendUser')->name('api.mail.senduser');            
@@ -170,11 +171,13 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'calendar'], function(){
             Route::post('getparticipate','Api\CalendarController@GetParticipate')->name('api.calendar.getparticipate');   
             Route::post('getevent','Api\CalendarController@GetEvent')->name('api.calendar.getevent');  
-            Route::post('updatejoinevent','Api\CalendarController@UpdateJoinEvent')->name('api.calendar.updatejoinevent');        
+            Route::post('updatejoinevent','Api\CalendarController@UpdateJoinEvent')->name('api.calendar.updatejoinevent');     
+            Route::post('addattachment','Api\CalendarController@AddAttachment')->name('api.calendar.addattachment');    
+            Route::post('deleteattachment','Api\CalendarController@DeleteAttachment')->name('api.calendar.deleteattachment');
         });
         Route::group(['prefix' => 'menu'], function(){
-            Route::post('getmenu','Api\MenuController@GetMenu')->name('api.menu.getmenu');           
-            Route::post('getdirectmenu','Api\MenuController@GetDirectMenu')->name('api.menu.getdirectmenu'); 
+            // Route::post('getmenu','Api\MenuController@GetMenu')->name('api.menu.getmenu');           
+            // Route::post('getdirectmenu','Api\MenuController@GetDirectMenu')->name('api.menu.getdirectmenu'); 
         });
         Route::group(['prefix' => 'category'], function(){
             Route::post('getcategory','Api\CategoryController@GetCategory')->name('api.category.getcategory');           
@@ -1017,6 +1020,14 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('create','SettingAdminWebsitePageCategoryController@Create')->name('setting.admin.website.pagecategory.create'); 
                     Route::post('crud','SettingAdminWebsitePageCategoryController@Crud')->name('setting.admin.website.pagecategory.crud');
                 });
+                Route::group(['prefix' => 'menu'], function(){
+                    Route::get('','MenuController@Index')->name('setting.admin.website.menu'); 
+                    Route::get('create','MenuController@Create')->name('setting.admin.website.menu.create');
+                    Route::post('createsave','MenuController@CreateSave')->name('setting.admin.website.menu.createsave');
+                    Route::get('edit/{id}','MenuController@Edit')->name('setting.admin.website.menu.edit');
+                    Route::post('editsave/{id}','MenuController@EditSave')->name('setting.admin.website.menu.editsave');
+                    Route::get('delete/{id}','MenuController@Delete')->name('setting.admin.website.menu.delete');
+                });
                 Route::group(['prefix' => 'announce'], function(){
                     Route::get('','SettingAdminWebsiteAnnounceController@Index')->name('setting.admin.website.announce');           
                     Route::get('create','SettingAdminWebsiteAnnounceController@Create')->name('setting.admin.website.announce.create'); 
@@ -1077,7 +1088,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('delete/{id}','SettingAdminWebsitePageController@Delete')->name('setting.admin.website.page.delete'); 
                 });
                 Route::group(['prefix' => 'menu'], function(){     
-                    Route::get('create','SettingAdminWebsiteMenuController@Create')->name('setting.admin.website.menu.create'); 
+                    // Route::get('create','SettingAdminWebsiteMenuController@Create')->name('setting.admin.website.menu.create'); 
                     Route::post('crud','SettingAdminWebsiteMenuController@Crud')->name('setting.admin.website.menu.crud');
                 });
                 Route::group(['prefix' => 'directmenu'], function(){

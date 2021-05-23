@@ -13,6 +13,9 @@ class EventCalendarAttendeeStatusesTableSeeder extends Seeder
     {
         DB::table('event_calendar_attendee_statuses')->insert([
             [
+                'name' => 'รอยืนยัน'
+            ],
+            [
                 'name' => 'เข้าร่วม'
             ],
             [

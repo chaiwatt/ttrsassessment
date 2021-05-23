@@ -59,7 +59,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th >รายการ</th> 
@@ -91,13 +91,13 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="width:300px">Mini TBP/Full TBP</th> 
                                             <th >วันที่ส่งเอกสาร</th>
-                                            <th >PDF</th>
-                                            <th style="width:200px">เอกสารแนบ</th> 
+                                            <th style="width:1%">PDF</th>
+                                            <th style="width:1%">เอกสารแนบ</th> 
                                         </tr>
                                     </thead>
                                     <tbody >
@@ -137,7 +137,7 @@
                                                     
                                                 </td>  
                                                 <td>{{$company->businessplan->minitbp->fulltbp->submitdateth}}</td> 
-                                                <td> 
+                                                <td style="white-space: nowrap"> 
                                                     @if (Auth::user()->user_type_id == 3)
                                                         @if (Auth::user()->experttype == "(ภายนอก)")
                                                             <a href="{{asset($company->businessplan->minitbp->fulltbp->shortpdf)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
@@ -149,7 +149,7 @@
                                                     @endif
                                                     
                                                 </td>  
-                                                <td>
+                                                <td style="white-space: nowrap">
                                                     <a  href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
                                                 </td>                                       
                                             </tr> 
@@ -168,7 +168,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width:600px">ตำแหน่งรับผิดชอบ</th> 
@@ -208,19 +208,19 @@
                 @endif
                 @if (!Empty($projectassignment))
                     @if (@$company->businessplan->business_plan_status_id >= 5)
-                        <div class="col-md-12" {{$hidden}}>
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header header-elements-sm-inline">
                                     <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการ EV</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped">
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width:600px">ชื่อ EV</th> 
                                                     <th>เวอร์ชั่น</th> 
-                                                    <th>เพิ่มเติม</th> 
+                                                    <th style="width:1%">เพิ่มเติม</th> 
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -230,7 +230,7 @@
                                                     
                                                         {{@$company->businessplan->minitbp->fulltbp->ev->version}}
                                                     </td>    
-                                                    <td>
+                                                    <td style="white-space: nowrap">
                                                         @if (@$company->businessplan->minitbp->fulltbp->ev->status >= 4)
                                                         <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$company->businessplan->minitbp->fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
                                                         @else
@@ -241,6 +241,37 @@
                                                     
                                                     </td>                                   
                                                 </tr>  
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" {{$hidden}}>
+                            <div class="card">
+                                <div class="card-header header-elements-sm-inline">
+                                    <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการเอกสาร BOL</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr class="bg-info">
+                                                    <th >ชื่อเอกสาร</th> 
+                                                    <th style="width:1%">เพิ่มเติม</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                                @foreach ($bols as $bol)
+                                                <tr>
+                                                    <td>{{@$bol->name}}</td>     
+                                                    <td style="white-space: nowrap">
+                                                        <a href="{{asset($bol->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                                                    </td>                                   
+                                                </tr>    
+                                                @endforeach
+ 
                                             </tbody>
                                         </table>
                                     </div>
@@ -258,12 +289,12 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr >
                                             <th style="width:600px">ชื่อ-นามสกุล</th> 
                                             <th>ความแม่นยำ</th> 
-                                            <th>การลงคะแนน</th> 
+                                            <th style="width:1%;white-space: nowrap">การลงคะแนน</th> 
                                         </tr>
                                     </thead>
                                     <tbody >
@@ -271,7 +302,7 @@
                                         <tr>
                                             <td>{{$projectmember->user->name}} {{$projectmember->user->lastname}}</td>  
                                             <td>{{number_format($getpercent::getEvPercent($projectmember->user_id,$projectmember->fulltbp->id), 2, '.', '')}} %</td>
-                                            <td>
+                                            <td  style="white-space: nowrap">
                                                 <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $projectmember->fulltbp->id, 'userid' => $projectmember->user->id])}}" class="btn btn-sm bg-info" target="_blank">การลงคะแนน</a>
                                             </td>                                       
                                         </tr>  
@@ -283,7 +314,7 @@
                     </div>
                 </div>
             @endif
-            @if ($company->businessplan->business_plan_status_id >=9)
+            {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
                 <div class="col-md-12" {{$hidden}}>
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
@@ -291,14 +322,14 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" style="height: 150px"  >
+                                <table class="table table-bordered"  >
                                     <thead>
                                         <tr>
-                                            <th style="width:200px">คะแนน</th> 
-                                            <th style="width:200px">เกรด</th>
+                                            <th >คะแนน</th> 
+                                            <th >เกรด</th>
                                             <th >จดหมายแจ้งผล</th>
                                             <th >Certificate</th>
-                                            <th>รายงานผล</th> 
+                                            <th style="width:1%;white-space: nowrap">รายงานผล</th> 
                                         </tr>
                                     </thead>
                                     <tbody >
@@ -314,20 +345,21 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
-                                                    {{-- <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
-                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item"><i class="icon-download"></i> ดาวน์โหลด</a>
-                                                    </div> --}}
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
-                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a>
-                                                        <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
+                                                @if ($company->businessplan->business_plan_status_id >=9)
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
+                                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a>
+                                                            <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @else
+                                                    <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
+                                                @endif
+
                                             </td>
-                                            <td>
+                                            <td  style="white-space: nowrap">
                                                 <a  href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
                                             </td>                                     
                                         </tr>  
@@ -337,7 +369,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            {{-- @endif --}}
         </div>
     </div>
 @endsection

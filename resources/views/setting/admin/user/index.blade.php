@@ -55,16 +55,16 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
                                         {{-- <th>#</th> --}}
                                         <th>ชื่อ-นามสกุล</th> 
                                         <th>กลุ่ม</th>    
-                                        <th>ออนไลน์</th>  
-                                        <th>Verify</th>    
-                                        <th>สถานะ</th>                          
-                                        <th style="width:170px">เพิ่มเติม</th>
+                                        {{-- <th style="width:1%;white-space: nowrap">ออนไลน์</th>   --}}
+                                        <th style="width:1%;white-space: nowrap">Verify</th>    
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                          
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,12 +79,12 @@
                                         @endphp
                                         <td> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
                                         <td> {{$user->usertype->name}} </td> 
-                                        @if ($user->isonline() == 1)
+                                        {{-- @if ($user->isonline() == 1)
                                             <td> <span class="badge badge-mark border-success mr-1"></span> <span class="badge badge-flat border-success text-success-600">ออนไลน์</span> </td>  
                                             @else
                                             <td> <span class="badge badge-mark border-danger mr-1"></span> {{$user->isonline()}} </td>  
-                                        @endif  
-                                        <td>
+                                        @endif   --}}
+                                        <td style="white-space: nowrap">
                                             @if ($user->user_type_id == 3 || $user->user_type_id == 4)
                                                 @if ($user->verify_expert == 2)
                                                         <button type="button" data-id="{{$user->id}}" data-status="{{$user->verify_expert}}" class="btn btn-sm bg-success user">ยืนยันแล้ว</button>
@@ -95,12 +95,12 @@
                                             @endif 
                                         </td>
                                         @if ($user->user_status_id == 1)
-                                                <td><span class="badge badge-flat border-info text-info-600 rounded-0">{{$user->userstatus->name}}</span></td> 
+                                                <td style="white-space: nowrap"><span class="badge badge-flat border-info text-info-600 rounded-0">{{$user->userstatus->name}}</span></td> 
                                            @else 
-                                                <td><span class="badge badge-flat border-danger text-danger-600 rounded-0">{{$user->userstatus->name}}</span></td> 
+                                                <td style="white-space: nowrap"><span class="badge badge-flat border-danger text-danger-600 rounded-0">{{$user->userstatus->name}}</span></td> 
                                         @endif                                     
                                         
-                                        <td> 
+                                        <td style="white-space: nowrap"> 
                                             <a href="{{route('setting.admin.user.edit',['id' => $user->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             {{-- <a href="{{route('setting.admin.user.delete',['id' => $user->id])}}" data-name="" onclick="confirmation(event)" class=" btn btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>

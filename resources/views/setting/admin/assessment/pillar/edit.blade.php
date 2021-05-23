@@ -58,10 +58,10 @@
                                     <label>ชื่อ</label>
                                     <input type="text"  name="name" value="{{$pillar->name}}"  placeholder="ชื่อ Pillar" class="form-control form-control-lg">
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>ร้อยละ</label>
-                                    <input type="text" name="percent" value="{{$pillar->percent}}"  placeholder="ร้อยละ" class="form-control form-control-lg">
-                                </div>
+                                    <input type="text" name="percent" value="{{$pillar->percent}}"  placeholder="ร้อยละ" class="form-control form-control-lg numeralformat2">
+                                </div> --}}
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                 </div>
@@ -78,4 +78,5 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 @stop

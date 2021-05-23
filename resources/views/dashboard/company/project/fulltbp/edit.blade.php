@@ -401,7 +401,7 @@ th {
 										
 									</div>
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead class="bg-info">
 												<tr>
 													<th >ระดับ</th>  
@@ -424,7 +424,7 @@ th {
 									</div>
 
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead class="bg-info">
 												<tr>
 													<th>เริ่มต้น-สิ้นสุด</th>  
@@ -447,7 +447,7 @@ th {
 									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead class="bg-info">
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
@@ -467,7 +467,7 @@ th {
 									</div>
 
 									<div class="table-responsive">
-										<table class="table table-striped table-bordered">
+										<table class="table table-bordered">
 											<thead>
 												<tr class="bg-info">
 													<th>วัน เดือน ปี</th>  
@@ -623,7 +623,7 @@ th {
 					<label for="" class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>วัน เดือน ปี (วดป. ตัวอย่าง 22/12/2530)</label><span class="text-danger">*</span>
+							<label>วัน เดือน ปี (ตัวอย่าง 22/12/2564)</label><span class="text-danger">*</span>
 							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control form-control-lg dmyformat">
 						</div>
 
@@ -1809,18 +1809,18 @@ th {
 															<div class="row" id="fulltbp_companyprofile_attachment_wrapper" @if ($fulltbpcompanyprofileattachments->count() == 0) hidden @endif>
 																<div class="col-md-12" >	
 																	<div class="table-responsive">
-																		<table class="table table-striped table-bordered">
+																		<table class="table table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารแนบ</th>                                                                                  
-																					<th style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>
+																					<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 																				</tr>
 																			</thead>
 																			<tbody id="fulltbp_companyprofile_attachment_wrapper_tr">    
 																				@foreach ($fulltbpcompanyprofileattachments->reverse() as $fulltbpcompanyprofileattachment)
 																					<tr >                                        
 																						<td> {{$fulltbpcompanyprofileattachment->name}} </td>                                            
-																						<td> 
+																						<td style="white-space: nowrap"> 
 																							<a href="{{asset($fulltbpcompanyprofileattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
 																							<a  data-id="{{$fulltbpcompanyprofileattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcompanyprofileattachment">ลบ</a>                                       
 																						</td>
@@ -1839,7 +1839,7 @@ th {
 															<label for=""><strong>1.10) ข้อมูลผู้บริหารระดับสูง CEO</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnaddboardceo"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<span id="fulltbp_companyemploy_wrapper_ceo_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลผู้บริหารระดับสูง (CEO, CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</span>
 															<div class="table-responsive" id="fulltbp_companyemploy_ceo_wrapper" @if ($companyemploys->where('employ_position_id','<=',5)->count() == 0) hidden @endif>
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th style="width:250px;display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
@@ -1847,7 +1847,7 @@ th {
 																			<th style="width:150px">โทรศัพท์</th>       
 																			<th style="width:150px">โทรศัพท์มือถือ</th>  
 																			<th style="width:150px">อีเมล</th>
-																			<th style="width:250px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																			<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_companyemploy_ceo_wrapper_tr">    
@@ -1871,7 +1871,7 @@ th {
 																				<td> {{$companyemploy->phone}} </td>                                            
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
-																				<td > 
+																				<td style="white-space: nowrap"> 
 																					<a  data-id="{{$companyemploy->id}}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																					<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyceo hiddenelement">ลบ</a> 
 																				</td> 
@@ -1887,7 +1887,7 @@ th {
 															<label for=""><strong>1.11) ข้อมูลผู้บริหารระดับสูง (CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnaddboard"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 															<span id="fulltbp_companyemploy_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลผู้บริหารระดับสูง (CEO, CTO, CMO, CFO หรืออื่น ๆ โปรดระบุ)</span>
 															<div class="table-responsive" id="fulltbp_companyemploy_wrapper" @if ($companyemploys->where('employ_position_id','<=',5)->count() == 0) hidden @endif>
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th style="width:250px;display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
@@ -1895,7 +1895,7 @@ th {
 																			<th style="width:150px">โทรศัพท์</th>       
 																			<th style="width:150px">โทรศัพท์มือถือ</th>  
 																			<th style="width:150px">อีเมล</th>
-																			<th style="width:250px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																			<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_companyemploy_wrapper_tr">    
@@ -1919,7 +1919,7 @@ th {
 																				<td> {{$companyemploy->phone}} </td>                                            
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
-																				<td > 
+																				<td style="white-space: nowrap"> 
 																					<a  data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																					<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy hiddenelement">ลบ</a> 
 																				</td> 
@@ -1935,7 +1935,7 @@ th {
 																<label for=""><strong>1.12) บัญชีรายชื่อผู้ถือหุ้น</strong><span class="text-danger">*</span><button type="button" data-toggle="modal" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnstckholder" data-id="{{$company->id}}"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																<span id="fulltbp_companystockholder_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มบัญชีรายชื่อผู้ถือหุ้น</span>
 																<div class="table-responsive" id="fulltbp_companystockholder_wrapper" @if ($companystockholders->count() == 0) hidden @endif>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th style="display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
@@ -1962,7 +1962,7 @@ th {
 																<label for=""><strong>1.13) ข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																<span id="fulltbp_researcher_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</span>
 																<div class="table-responsive" id="fulltbp_researcher_wrapper" @if ($companyemploys->where('employ_position_id','>=',6)->count() == 0) hidden @endif>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th style="width:250px;display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
@@ -1970,7 +1970,7 @@ th {
 																				<th style="width:150px">โทรศัพท์</th>       
 																				<th style="width:150px">โทรศัพท์มือถือ</th>  
 																				<th style="width:150px">อีเมล</th>
-																				<th style="width:250px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>     
+																				<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>     
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_researcher_wrapper_tr">   
@@ -1982,7 +1982,7 @@ th {
 																					<td> {{$companyemploy->phone}} </td>                                            
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
-																					<td >  
+																					<td style="white-space: nowrap">  
 																						<a  data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																						<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
 																					</td> 
@@ -1996,7 +1996,7 @@ th {
 															{{-- <div class="col-md-12 mt-3">	
 																<label for="">ข้อมูลทีมงานในโครงการ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement" id="btnaddprojectmember"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																<div class="table-responsive">
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th style="width:25%">ชื่อ-นามสกุล</th>  
@@ -2199,13 +2199,13 @@ th {
 																
 																<div class="table-responsive" id="fulltbp_projectechdevlevel_wrapper" @if ($fulltbpprojecttechdevlevels->count() == 0) hidden @endif >
 																	
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>รายการ</th>  
 																				<th>เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
 																				<th>เทคโนโลยีในโครงการ</th>
-																				<th style="display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																				<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
@@ -2214,7 +2214,7 @@ th {
 																					<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
-																					<td> <a  data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-danger hiddenelement deleteprojectechdevlevel">ลบ</a> </td> 
+																					<td style="white-space: nowrap"> <a  data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-danger hiddenelement deleteprojectechdevlevel">ลบ</a> </td> 
 																				</tr>
 																			@endforeach                            
 																		</tbody>
@@ -2424,18 +2424,18 @@ th {
 																				hidden
 																			@endif
 																		>
-																			<table class="table table-striped table-bordered">
+																			<table class="table table-bordered">
 																				<thead>
 																					<tr class="bg-info">
 																						<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
-																						<th style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>
+																						<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 																					</tr>
 																				</thead>
 																				<tbody id="fulltbp_certify_wrapper_tr">    
 																					@foreach ($fulltbpprojectcertifyattachments->reverse() as $fulltbpprojectcertifyattachment)
 																						<tr >                                        
 																							<td> {{$fulltbpprojectcertifyattachment->name}} </td>                                            
-																							<td> 
+																							<td style="white-space: nowrap"> 
 																								<a href="{{asset($fulltbpprojectcertifyattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
 																								<a  data-id="{{$fulltbpprojectcertifyattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpcertifyattachment">ลบ</a>                                       
 																							</td>
@@ -2466,18 +2466,18 @@ th {
 																		hidden
 																	@endif
 																	>
-																		<table class="table table-striped table-bordered">
+																		<table class="table table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารรางวัลด้านเทคโนโลยี/นวัตกรรม</th>                                                                                  
-																					<th style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>
+																					<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 																				</tr>
 																			</thead>
 																			<tbody id="fulltbp_award_wrapper_tr">    
 																				@foreach ($fulltbpprojectawardattachments->reverse() as $fulltbpprojectawardattachment)
 																					<tr>                                        
 																						<td> {{$fulltbpprojectawardattachment->name}} </td>                                            
-																						<td> 
+																						<td style="white-space: nowrap"> 
 																							<a href="{{asset($fulltbpprojectawardattachment->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
 																							<a  data-id="{{$fulltbpprojectawardattachment->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpawardattachment">ลบ</a>                                       
 																						</td>
@@ -2510,18 +2510,18 @@ th {
 																		hidden
 																	@endif
 																	>
-																		<table class="table table-striped table-bordered">
+																		<table class="table table-bordered">
 																			<thead>
 																				<tr class="bg-info">
 																					<th>เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ</th>                                                                                  
-																					<th style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>
+																					<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 																				</tr>
 																			</thead>
 																			<tbody id="fulltbp_standard_wrapper_tr">    
 																				@foreach ($fulltbpprojectstandards->reverse() as $fulltbpprojectstandard)
 																					<tr >                                        
 																						<td> {{$fulltbpprojectstandard->name}} </td>                                            
-																						<td> 
+																						<td style="white-space: nowrap"> 
 																							<a href="{{asset($fulltbpprojectstandard->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
 																							<a  data-id="{{$fulltbpprojectstandard->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpstandardattachment">ลบ</a>                                       
 																						</td>
@@ -2710,18 +2710,18 @@ th {
 																hidden
 															@endif
 															>
-																<table class="table table-striped table-bordered">
+																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร Business Model Canvas</th>                                                                                  
-																			<th style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>
+																			<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 																		</tr>
 																	</thead>
 																	<tbody id="fulltbp_businessmodelcanvas_wrapper_tr">    
 																		@foreach ($fullTbpmarketattachmentmodelcanvases->reverse() as $fullTbpmarketattachmentmodelcanvas)
 																			<tr >                                        
 																				<td> {{$fullTbpmarketattachmentmodelcanvas->name}} </td>                                            
-																				<td> 
+																				<td style="white-space: nowrap"> 
 																					<a href="{{asset($fullTbpmarketattachmentmodelcanvas->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
 																					<a  data-id="{{$fullTbpmarketattachmentmodelcanvas->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpmodelcanvasattachment">ลบ</a>                                       
 																				</td>
@@ -2756,18 +2756,18 @@ th {
 																	hidden
 																@endif
 																>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>เอกสาร SWOT Analysis, Five Forces Analysis</th>                                                                                  
-																				<th style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>
+																				<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_swot_wrapper_tr">    
 																			@foreach ($fullTbpmarketattachmentswots->reverse() as $fullTbpmarketattachmentswot)
 																				<tr >                                        
 																					<td> {{$fullTbpmarketattachmentswot->name}} </td>                                            
-																					<td> 
+																					<td style="white-space: nowrap"> 
 																						<a href="{{asset($fullTbpmarketattachmentswot->path)}}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
 																						<a  data-id="{{$fullTbpmarketattachmentswot->id}}" data-name=""  class="btn btn-sm bg-danger hiddenelement deletefulltbpswotattachment">ลบ</a>                                       
 																					</td>
@@ -2792,7 +2792,7 @@ th {
 																	hidden
 																@endif
 																>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
@@ -2829,7 +2829,7 @@ th {
 																<label for=""><u>(สถานะยอดขาย 3 ปีย้อนหลัง)</u> </label>
 																<small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
 																<div class="table-responsive">
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr  class="bg-info">
 																				<th>ยอดขายแยกตามสถานะ</th>  
@@ -2873,7 +2873,7 @@ th {
 																	hidden
 																@endif
 																>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>คู่ค้าหลักของธุรกิจ</th>  
@@ -2914,7 +2914,7 @@ th {
 																	hidden
 																@endif
 																>
-																	<table class="table table-striped table-bordered">
+																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>คู่ค้าหลักของธุรกิจ</th>  
@@ -2979,7 +2979,7 @@ th {
 															{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p> --}}
 														</div>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
@@ -3013,7 +3013,7 @@ th {
 															{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนสำหรับดำเนินการของโครงการ</i> </small></p> --}}
 														{{-- </div> --}}
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
@@ -3038,7 +3038,7 @@ th {
 													<div class="col-md-12 mt-4">
 														<label for=""><u>แหล่งเงินทุนของโครงการ</u></label>
 														<div class="table-responsive">
-															<table class="table table-striped table-bordered">
+															<table class="table table-bordered">
 																<thead class="bg-info">
 																	<tr>
 																		<th>รายการ</th>  

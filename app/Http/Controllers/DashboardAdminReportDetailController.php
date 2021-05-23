@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Bol;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
@@ -33,13 +34,14 @@ class DashboardAdminReportDetailController extends Controller
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $projectstatuses = ProjectStatus::where('mini_tbp_id',$minitbp->id)->get();
         $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->get();
-
+        $bols = Bol::where('full_tbp_id',$fulltbp->id)->get();
         if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
             return view('dashboard.admin.report.detail.view')->withCompany($company)
                 ->withProjectmembers($projectmembers)
                 ->withProjectstatustransactions($projectstatustransactions)
                 ->withProjectstatuses($projectstatuses)
-                ->withProjectassignment($projectassignment);
+                ->withProjectassignment($projectassignment)
+                ->withBols($bols);
         }else{
             Auth::logout();
             Session::flush();

@@ -5,6 +5,11 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
 
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -58,7 +63,7 @@
                         <form method="POST" action="{{route('dashboard.admin.calendar.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div  class="col-md-12" id="toast" hidden>
+                                {{-- <div  class="col-md-12" id="toast" hidden>
                                     <div class="mb-4">
                                         <div class="toast bg-slate border-transparent" style="opacity: 1; max-width: none;">
                                             <div class="toast-header bg-slate-600 border-bottom-slate-400">
@@ -72,7 +77,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>โครงการ</label><span class="text-danger">*</span>
@@ -85,8 +90,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12" id="project_wrapper" hidden>
+                                    <input type="text" name="eventcalendarid" id="eventcalendarid" hidden>
                                     <div class="row" >
                                         <div class="col-md-6">
+                                            <input type="text" id="oldcalendartype" value="{{old('calendartype')}}" hidden>
                                             <div class="form-group">
                                                 <label>ประเภทปฏิทิน</label><span class="text-danger">*</span>
                                                 <select name="calendartype" id="calendartype" data-placeholder="ประเภทปฏิทิน" class="form-control form-control-lg form-control-select2">
@@ -105,26 +112,33 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>วันที่</label>
-                                                <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control form-control-lg" >
+                                                <label>วันที่ (ตัวอย่าง 22/12/2564)</label><span class="text-danger">*</span>
+                                                <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control form-control-lg dmyformat" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>เวลาเริ่ม</label>
+                                                <label>เวลาเริ่ม</label><span class="text-danger">*</span>
                                                 <input type="text"  name="eventtimestart" id="eventtimestart" value="{{old('eventtimestart')}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>เวลาสิ้นสุด</label>
+                                                <label>เวลาสิ้นสุด</label><span class="text-danger">*</span>
                                                 <input type="text"  name="eventtimeend" id="eventtimeend" value="{{old('eventtimeend')}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" >
+                                            </div>
+                                        </div>
+                                        {{-- {{old('paidupcapital') ?? $user->company->paidupcapital}} --}}
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>สถานที่นัดหมาย</label><span class="text-danger">*</span>
+                                                <input type="text"  name="place" value="{{old('place')}}"  placeholder="สถานที่นัดหมาย" class="form-control form-control-lg" >
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>สถานที่นัดหมาย</label>
-                                                <input type="text"  name="place" value=""  placeholder="สถานที่นัดหมาย" class="form-control form-control-lg" >
+                                                <label>หัวข้อ</label><span class="text-danger">*</span>
+                                                <input type="text"  name="subject" value="{{old('subject')}}"  placeholder="หัวข้อ" class="form-control form-control-lg" >
                                             </div>
                                         </div>
                                         {{-- <div class="col-md-6">
@@ -135,8 +149,28 @@
                                         </div> --}}
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>รายละเอียด</label>
-                                                <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg"></textarea>
+                                                <label>รายละเอียด</label><span class="text-danger">*</span>
+                                                <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg">{{old('summary')}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input-group">													
+                                                <label for="">เอกสารแนบ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnuploadcalendarattachment" onclick="document.getElementById('calendarattachment').click();"><i class="icon-add mr-2"></i>อัปโหลดไฟล์</button></label>
+                                            </div>
+                                            <input type="file" style="display:none;" data-id="" id="calendarattachment" name="calendarattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>    
+                                        </div> 
+                                        <div class="col-md-12" id="attachmenttable_wrapper" hidden>
+                                            <div class="form-group">
+                                            <table class="table table-bordered" id="attachmenttable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>เอกสารแนบ</th> 
+                                                        <th style="width:1%">เพิ่มเติม</th>                           
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="attachmenttable_wrapper_tr">
+                                                </tbody>
+                                            </table> 
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -182,14 +216,14 @@
             branchid: "{{Auth::user()->branch_id}}"
         };
 
-        $('#eventdate').bootstrapMaterialDatePicker({
-            format: 'DD/MM/YYYY HH:mm',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            time: false
-        });
+        // $('#eventdate').bootstrapMaterialDatePicker({
+        //     format: 'DD/MM/YYYY HH:mm',
+        //     clearButton: true,
+        //     cancelText: "ยกเลิก",
+        //     okText: "ตกลง",
+        //     clearText: "เคลียร์",
+        //     time: false
+        // });
 
         // $('#eventtimestart').bootstrapMaterialDatePicker({
         //     format: 'HH:mm',

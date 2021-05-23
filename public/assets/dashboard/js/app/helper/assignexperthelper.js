@@ -11,7 +11,7 @@ $(document).on('change', '#expert', function(e) {
             html = `
             <div class="table-responsive">
             <strong>Work Load</strong>
-            <table class="table table-striped">
+            <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>โครงการ</th>
@@ -137,14 +137,34 @@ function doneAssignement(fulltbpid){
 
 
 $(document).on('change', '.expert', function(e) {
+  var message = "ต้องการลบการเลือกผู้เชี่ยวชาญหรือไม่";
   var status = 1;
   if($(this).is(":checked")){
       status = 2;
+      message = "ต้องการเพิ่มผู้เชี่ยวชาญหรือไม่";
   }
-  $("#spiniconcheck"+$(this).data('id')).attr("hidden",false);
-  assignExpert($(this).data('id'),status,route.fulltbpid).then(data => {
-    window.location.reload();
-   }).catch(error => {})
+
+  Swal.fire({
+    title: 'การมอบหมาย',
+    html: message,
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'ตกลง',
+    cancelButtonText: 'ยกเลิก',
+  }).then((result) => {
+    if (result.value) {
+      $("#spiniconcheck"+$(this).data('id')).attr("hidden",false);
+      assignExpert($(this).data('id'),status,route.fulltbpid).then(data => {
+        window.location.reload();
+       }).catch(error => {})
+    }else{
+      
+      location.reload()
+    }
+  });
+
+
+
 });
 
 function assignExpert(id,status,fulltbpid){
@@ -425,7 +445,7 @@ function notifyJD(users,fulltbpid){
             html = `
             <div class="table-responsive">
             <strong>Work Load</strong>
-            <table class="table table-striped">
+            <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>โครงการ</th>

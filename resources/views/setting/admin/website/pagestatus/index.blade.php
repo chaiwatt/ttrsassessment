@@ -62,12 +62,12 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="testtopictable">
+                            <table class="table table-bordered" id="testtopictable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>สถานะเพจ</th>                               
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                        {{-- <th style="width:150px">เพิ่มเติม</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,10 +75,10 @@
                                     <tr>    
                                         <td> {{$key+1}} </td>
                                         <td> {{$pagestatus->name}} </td>                                         
-                                        <td> 
+                                        {{-- <td> 
                                             <a href="{{route('setting.admin.website.pagestatus.edit',['id' => $pagestatus->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            {{-- <a href="{{route('setting.admin.website.pagestatus.delete',['id' => $pagestatus->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}
-                                        </td>
+                                            <a href="{{route('setting.admin.website.pagestatus.delete',['id' => $pagestatus->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

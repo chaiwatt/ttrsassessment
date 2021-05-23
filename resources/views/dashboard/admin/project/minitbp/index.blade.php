@@ -1,6 +1,12 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 <link href="{{asset('assets/dashboard/plugins/summernote/summernote.min.css')}}" rel="stylesheet">
+<style>
+    td{
+        padding-left:5px !important;
+        padding-right:5px !important;
+    }
+</style>
 @stop
 @section('content')
     <div id="modal_edit_minitbp" class="modal fade" style="overflow:hidden;">
@@ -183,17 +189,17 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="maintable">
+                            <table class="table table-bordered" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th style="width: 150px">ความเห็น JD</th>
+                                        <th style="width:1%;white-space: nowrap">บริษัท</th>
+                                        <th style="width:1%;white-space: nowrap">ความเห็น JD</th>
                                         @if (Auth::user()->user_type_id >= 4)
-                                            <th style="width: 250px">การอนุมัติ</th> 
+                                            <th style="width:1%;white-space: nowrap">การอนุมัติ</th> 
                                         @endif
                                         
-                                        <th style="width: 250px" >เพิ่มเติม</th>                                  
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                  
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,10 +207,9 @@
                                     <tr>    
                                         <td> 
                                             <a href="#" data-toggle="modal" data-id="{{$minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                            {{-- {{$minitbp->project}}  --}}
                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">{{$minitbp->project}}</a>
                                         </td>  
-                                        <td> 
+                                        <td style="white-space: nowrap"> 
                                             @php
                                                 $company = $minitbp->businessplan->company;
                                                 $company_name = (!Empty($company->name))?$company->name:'';
@@ -224,7 +229,7 @@
                                             @endphp
                                             {{$fullcompanyname}} 
                                         </td> 
-                                        <td> 
+                                        <td style="white-space: nowrap"> 
                                             @if (Empty($minitbp->jdmessage))
                                                     @if (Auth::user()->user_type_id == 6)
                                                         <a href="#" data-id="{{$minitbp->businessplan->projectassignment->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
@@ -234,7 +239,7 @@
                                             @endif
                                         </td>  
                                         @if (Auth::user()->user_type_id >= 4)
-                                            <td> 
+                                            <td style="white-space: nowrap"> 
                                                 @if ($minitbp->businessplan->business_plan_status_id > 3)
                                                         <a href="#"  data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
                                                         @if ($minitbp->reviselog(1)->count() > 0)
@@ -258,7 +263,7 @@
                                                 @endif
                                             </td> 
                                         @endif
-                                        <td> 
+                                        <td style="white-space: nowrap"> 
                                             <a  href="{{asset($minitbp->attachment)}}" class="btn btn-sm bg-teal" target="_blank">ดาวน์โหลด</a>
                                             <a  href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn btn-sm bg-primary" target="_blank">รายละเอียด</a>
                                         </td>                                
