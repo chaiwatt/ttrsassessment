@@ -87,7 +87,7 @@
                                 <thead>
                                     <tr>
                                         <th>ชื่อไฟล์</th> 
-                                        <th style="width:1%">เพิ่มเติม</th>                                  
+                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                  
                                     </tr>
                                 </thead>
                                 <tbody id="fulltbp_bol_wrapper_tr">

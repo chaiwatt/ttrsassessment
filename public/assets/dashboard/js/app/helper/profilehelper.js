@@ -7,6 +7,7 @@ import * as Project from './project.js';
 import * as Company from './company.js'
 
 var a=0;
+
 $('#companydocname').val(null);
 $(document).on("click","#btn_modal_expertexpience",function(e){
     if($("#expertexpienceposition").val() == '' || $("#expertexpiencecompany").val() == '' || $("#expertexpiencedetail").val() == '' || $("#fromyear").val() == '' || $("#toyear").val() == ''){
@@ -822,10 +823,12 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
             return ;
         }
     } 
-    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#otherprefix').val(),$('#directorname').val(),$('#directorlastname').val(),$('#directorposition').val(),$('#signatureid').val(),$('#otherposition').val()).then(data => {
+    $("#spinicon_director_add").attr("hidden",false);
+    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#otherprefix').val(),$('#directorname').val(),$('#directorlastname').val(),$('#directorposition').val(),$('#otherposition').val(),$('#dataurl').val()).then(data => {
         var html = ``;
         //
         data.forEach(function (director,index) {
+            console.log(director);
             var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
             if(director.signature_id != null){
                 check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
@@ -839,7 +842,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
                 prefix = director.otherprefix;
             }
             html += `<tr >                                        
-               <td> ${prefix}${director.name}  ${director.lastname} </td>                                          
+               <td> ${prefix}${director.name}  ${director.lastname}</td>                                          
                 <td> ${otherposition} </td>  
                 <td>
                     ${check}
@@ -850,6 +853,8 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
                 </td> 
             </tr>`
             });
+            $('#dataurl').val('');
+            $("#spinicon_director_add").attr("hidden",true);
          $('#authorizeddirector').val(data.length);
          $("#authorized_director_wrapper_tr").html(html);
          $('#modal_add_authorized_director').modal('hide');
@@ -857,7 +862,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
     .catch(error => {})
 });
 
-function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,signature,otherposition) {
+function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,otherposition,dataURL) {
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/company/addauthorizeddirector`,
@@ -871,8 +876,9 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,sign
             name : name,
             lastname : lastname,
             position : position,
-            signature : signature,
+            // signature : signature,
             otherposition : otherposition,
+            signaturebase64 : dataURL
           },
           success: function(data) {
             resolve(data)
@@ -1096,6 +1102,16 @@ $(document).on('click', '#btn_add_authorized_director', function(e) {
     $('#modal_add_authorized_director').modal('show');
 });
 
+$(document).on('click', '#btnaddsig', function(e) {
+    $("#clearpad").trigger("click");
+    $('#modal_signature').modal('show');
+});
+
+$(document).on('click', '#call_model_edit', function(e) {
+    $("#clearpad").trigger("click");
+    $('#modal_signature').modal('show');
+});
+
 $(document).on('click', '.editauthorizeddirector', function(e) {
     $('#signature_type').val('2');
     getAuthorizedDirector($(this).data('id')).then(data => {
@@ -1119,9 +1135,10 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
 
 
         });
-        
+        //console.log(data.companyemploy.signature_id);
+         $('#signatureid').val(data.companyemploy.signature_id)
         if(data.$signature != ''){            
-            $("#sigdiv_edit").html(`<img src="${route.url}/${data.$signature}" style="width: 180px;height:45px" alt=""></img>`);
+            $("#sigdiv_edit").html(`<img id="imgdivedit" src="${route.url}/${data.$signature}" style="width: 180px;height:45px" alt=""></img>`);
         }else{
             $("#sigdiv_edit").html(`ไม่พบลายมือชื่อ`);
         }
@@ -1171,7 +1188,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
       }
 
 
-      function editAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,signature,otherposition) {
+      function editAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,otherposition,dataUrl) {
         return new Promise((resolve, reject) => {
             $.ajax({
               url: `${route.url}/api/company/editauthorizeddirector`,
@@ -1184,9 +1201,9 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                 name : name,
                 lastname : lastname,
                 position : position,
-                signature : signature,
                 otherposition : otherposition,
-                otherprefix : otherprefix
+                otherprefix : otherprefix,
+                signaturebase64 : dataUrl,
               },
               success: function(data) {
                 resolve(data)
@@ -1201,7 +1218,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
     //   directorposition_edit
 
       $(document).on('click', '#btn_modal_edit_authorized_director', function(e) {
-
+        $("#clearpad").trigger("click");
         if($('#directorposition_edit').val() == 5){
             if($('#otherposition_edit').val() == ''){
                 return ;
@@ -1212,8 +1229,8 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                 return ;
             }
         }
-
-        editAuthorizedDirector($('#authorized_director_id').val(),$('#directorprefix_edit').val(),$('#otherprefix_edit').val(),$('#directorname_edit').val(),$('#directorlastname_edit').val(),$('#directorposition_edit').val(),$('#signatureid').val(),$('#otherposition_edit').val()).then(data => {
+        $("#spinicon_director_edit").attr("hidden",false);
+        editAuthorizedDirector($('#authorized_director_id').val(),$('#directorprefix_edit').val(),$('#otherprefix_edit').val(),$('#directorname_edit').val(),$('#directorlastname_edit').val(),$('#directorposition_edit').val(),$('#otherposition_edit').val(),$('#dataurl').val()).then(data => {
             var html = ``;
             data.forEach(function (director,index) {
                 var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
@@ -1240,6 +1257,8 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                     </td> 
                 </tr>`
                 });
+                $('#dataurl').val('');
+                $("#spinicon_director_edit").attr("hidden",true);
              $('#authorizeddirector').val(data.length);
              $("#authorized_director_wrapper_tr").html(html);
         })

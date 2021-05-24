@@ -77,20 +77,25 @@ savePNGButton.addEventListener("click", function (event) {
     alert("ยังไม่ได้เซนต์ลายมือชื่อ");
   } else {
     var dataURL = signaturePad.toDataURL();
-    uploadSignature(dataURL).then(data => {
-    var html = `<img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
-    $("#signatureid").val(data.id);
+    $("#dataurl").val(dataURL);
+    $("#imgdivedit").attr("src", dataURL);
+    // $('#btnaddsig').html('<i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ(+)</a>');
+
+
     $('#modal_signature').modal('hide');
-    if(wrapper_edit.value == 1){
-      $("#sigdiv").html(html);
-    }else{
-      $("#sigdiv_edit").html(html);
-    }
+    
+  //   uploadSignature(dataURL).then(data => {
+  //   var html = `<img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
+  //   $("#signatureid").val(data.id);
+  //   $('#modal_signature').modal('hide');
+  //   if(wrapper_edit.value == 1){
+  //     $("#sigdiv").html(html);
+  //   }else{
+  //     $("#sigdiv_edit").html(html);
+  //   }
 
-  })
-  .catch(error => {
-
-  })
+  // })
+  // .catch(error => {})
 
   }
 });
@@ -116,44 +121,73 @@ function uploadSignature(dataURL){
 }
 
 $("#signature").on('change', function() {
-  var file = this.files[0];
-  var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
-  var validExtensions = ["jpg","jpeg","gif","png","bmp"];
-  if(!validExtensions.includes(fextension)){
-      Swal.fire({
-          title: 'ผิดพลาด...',
-          text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
-          });
-      this.value = "";
-      return false;
-  }
-  if (this.files[0].size/1024/1024*1000 > 1000 ){
-      Swal.fire({
-        title: 'ผิดพลาด...',
-        text: 'ไฟล์ขนาดมากกว่า 1 MB!',
-        });
-      return ;
-  }
+  // var reader = new FileReader();
+// console.log(reader.readAsDataURL(this.files[0]));
+var file = this.files[0];
+if(file){
+    var reader = new FileReader();
+    reader.onload = function(){
+        $("#imgdivedit").attr("src", reader.result);
+        //console.log(reader.result);
+        $("#dataurl").val(reader.result);
+    }
 
-  var formData = new FormData();
-  formData.append('signature',file);
-  var url = `${route.url}/api/profile/uploadsignature`;
-      $.ajax({
-          url: url,  //Server script to process data
-          type: 'POST',
-          headers: {"X-CSRF-TOKEN":route.token},
-          data: formData,
-          contentType: false,
-          processData: false,
-          success: function(data){            
-              $("#signatureid").val(data.id);
-              var html = `<br><img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
-              $('#modal_signature').modal('hide');
-              if(wrapper_edit.value == 1){
-                $("#sigdiv").html(html);
-              }else{
-                $("#sigdiv_edit").html(html);
-              }
-      }
-  });
+    reader.readAsDataURL(file);
+    $('#modal_signature').modal('hide');
+}
+
+  // var file = this.files[0];
+  // var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+  // var validExtensions = ["jpg","jpeg","gif","png","bmp"];
+  // if(!validExtensions.includes(fextension)){
+  //     Swal.fire({
+  //         title: 'ผิดพลาด...',
+  //         text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+  //         });
+  //     this.value = "";
+  //     return false;
+  // }
+  // if (this.files[0].size/1024/1024*1000 > 1000 ){
+  //     Swal.fire({
+  //       title: 'ผิดพลาด...',
+  //       text: 'ไฟล์ขนาดมากกว่า 1 MB!',
+  //       });
+  //     return ;
+  // }
+
+  // var formData = new FormData();
+  // formData.append('signature',file);
+  // var url = `${route.url}/api/profile/uploadsignature`;
+  //     $.ajax({
+  //         url: url,  //Server script to process data
+  //         type: 'POST',
+  //         headers: {"X-CSRF-TOKEN":route.token},
+  //         data: formData,
+  //         contentType: false,
+  //         processData: false,
+  //         success: function(data){            
+  //             $("#signatureid").val(data.id);
+  //             var html = `<br><img id="signatureimg" src="${route.url}/${data.path}" style="width: 150px;height:75px" alt="">`;
+  //             $('#modal_signature').modal('hide');
+  //             if(wrapper_edit.value == 1){
+  //               $("#sigdiv").html(html);
+  //             }else{
+  //               $("#sigdiv_edit").html(html);
+  //             }
+  //     }
+  // });
 });
+
+
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          $(input).next('img').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+  }
+}

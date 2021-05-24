@@ -164,7 +164,7 @@ th {
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_employ" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+				<button id="btn_modal_add_employ" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_add_employ" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 			</div>
 		</div>
 	</div>
@@ -238,7 +238,7 @@ th {
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_employ_research" class="btn bg-primary" data-dismiss="modal"><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+				<button id="btn_modal_add_employ_research" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_add_employ_research" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 			</div>
 		</div>
 	</div>
@@ -383,7 +383,7 @@ th {
 										</div>
 										</div>
 										<div class="col-md-12">
-												<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+												<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_employ" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 											</div>
 									</div>
 							
@@ -674,7 +674,7 @@ th {
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_stockholder" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+				<button id="btn_modal_add_stockholder" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_add_stockholder" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 			</div>
 		</div>
 	</div>
@@ -708,7 +708,7 @@ th {
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_tectdevlevel" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+				<button id="btn_modal_add_tectdevlevel" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_add_tectdevlevel" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 			</div>
 		</div>
 	</div>
@@ -904,7 +904,7 @@ th {
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_projectplan" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+				<button id="btn_modal_add_projectplan" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_add_projectplan" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 			</div>
 		</div>
 	</div>
@@ -941,7 +941,7 @@ th {
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_edit_projectplan" class="btn bg-primary" data-id="{{$fulltbp->id}}" data-dismiss="modal"><i class="icon-pencil font-size-base mr-1"></i> แก้ไข</button>
+				<button id="btn_modal_edit_projectplan" class="btn bg-primary" data-id="{{$fulltbp->id}}" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_edit_projectplan" hidden></i><i class="icon-pencil font-size-base mr-1"></i> แก้ไข</button>
 			</div>
 		</div>
 	</div>
@@ -983,7 +983,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_add_sell" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+					<button id="btn_modal_add_sell" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_add_sell" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1026,7 +1026,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_edit_sell" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+					<button id="btn_modal_edit_sell" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_sell" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1069,7 +1069,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_edit_sellstatus" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+					<button id="btn_modal_edit_sellstatus" data-id="{{$fulltbp->id}}" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_edit_sellstatus" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1126,7 +1126,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_add_debtpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary"><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+					<button id="btn_modal_add_debtpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon_add_debtpartner" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1183,7 +1183,7 @@ th {
 					</div>           
 					<div class="modal-footer">
 						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-						<button id="btn_modal_edit_debtpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+						<button id="btn_modal_edit_debtpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_debtpartner" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 					</div>
 				</div>
 			</div>
@@ -1233,7 +1233,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_add_creditpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+					<button id="btn_modal_add_creditpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_add_creditpartner" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1284,7 +1284,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_edit_creditpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary"><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+					<button id="btn_modal_edit_creditpartner" data-id="{{$fulltbp->id}}" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon_edit_creditpartner" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1328,7 +1328,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_edit_asset" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+					<button id="btn_modal_edit_asset" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_asset" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1359,7 +1359,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_edit_investment" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไข</button>
+					<button id="btn_modal_edit_investment" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_investment" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>
@@ -1402,7 +1402,7 @@ th {
 				</div>           
 				<div class="modal-footer">
 					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-					<button id="btn_modal_edit_cost" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> แก้ไข</button>
+					<button id="btn_modal_edit_cost" data-id="{{$fulltbp->id}}" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_cost" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 				</div>
 			</div>
 		</div>

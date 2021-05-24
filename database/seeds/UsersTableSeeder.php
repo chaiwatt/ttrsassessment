@@ -32,17 +32,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
-            ],
-            [
-                'prefix_id' => 1,
-                'user_type_id' => 6,
-                'name' => 'superadmin',
-                'lastname' => 'superadmin',
-                'email' => 'admin@npcsolution.com',           
-                'password' => Hash::make('TtR$@Min2020'), 
-                'email_verified_at' => Carbon::now()->toDateString(),
-                'verify_type' => 1
-            ],
+            ]
         ]);
         DB::table('officer_details')->insert([
             [

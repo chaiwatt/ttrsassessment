@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use Image;
 use App\Model\Prefix;
 use App\Model\Company;
 use App\Model\IsicSub;
@@ -41,16 +41,40 @@ class CompanyController extends Controller
         $companyemploy->lastname = $request->lastname;
         $companyemploy->employ_position_id = $request->position;
         $companyemploy->otherposition = $otherposition;
-        $companyemploy->signature_id = $request->signature;
+        // $companyemploy->signature_id = $request->signature;
         $companyemploy->save();
+        
+
+        if(!Empty($request->signaturebase64)){
+            $base64 = $request->signaturebase64;   
+            $new_name = time().'.'.explode('/',explode(':',substr($base64,0,strpos($base64,';')))[1])[1];
+            $imgpath = public_path("storage/uploads/profile/signature/");
+            if (!file_exists($imgpath)) {
+                mkdir($imgpath, 0777, true);
+            }
+            Image::make($base64)->save($imgpath.$new_name);
+            $signature = new Signature();
+            $signature->path = 'storage/uploads/profile/signature/' .$new_name;
+            $signature->save();
+
+            $companyemploy->update([
+                'signature_id' => $signature->id
+            ]);
+        }
+
         $companyemploys = CompanyEmploy::where('company_id',$request->id)->where('employ_position_id', '<=',5)->orderBy('id','desc')->get();
         return response()->json($companyemploys);
     }
     public function DeleteAuthorizedDirector(Request $request){
         $signature = CompanyEmploy::find($request->id)->signature_id;
+      
             if(!Empty($signature)){
-                unlink(Signature::find($signature)->path);
-                Signature::find($signature)->delete();
+                @unlink(Signature::find($signature)->path);
+                $check = Signature::find($signature);
+                if(!Empty($check)){
+                    @Signature::find($signature)->delete();
+                }
+                
             }
         $companyid = CompanyEmploy::find($request->id)->company_id;
         CompanyEmploy::find($request->id)->delete();
@@ -96,14 +120,40 @@ class CompanyController extends Controller
         if(!Empty($request->otherprefix)){
             $otherprefix = $request->otherprefix;
         }
-        $signature = CompanyEmploy::find($request->id)->signature_id;
-        if(!Empty($request->signature)){
-            if(!Empty($signature)){
-                unlink(Signature::find($signature)->path);
-                Signature::find($signature)->delete();
+        $employ = CompanyEmploy::find($request->id);//->signature_id;
+        // if(!Empty($request->signature)){
+        //     if(!Empty($signature)){
+        //         unlink(Signature::find($signature)->path);
+        //         Signature::find($signature)->delete();
+        //     }
+        //     $signature = $request->signature;
+        // }
+
+        if(!Empty($request->signaturebase64)){
+            if(!Empty($employ->signature_id)){
+                unlink(Signature::find($employ->signature_id)->path);
+                Signature::find($employ->signature_id)->delete();
             }
-            $signature = $request->signature;
+            // $signature = $request->signature;
+            $base64 = $request->signaturebase64;   
+            $new_name = time().'.'.explode('/',explode(':',substr($base64,0,strpos($base64,';')))[1])[1];
+            $imgpath = public_path("storage/uploads/profile/signature/");
+            if (!file_exists($imgpath)) {
+                mkdir($imgpath, 0777, true);
+            }
+            Image::make($base64)->save($imgpath.$new_name);
+            $signature = new Signature();
+            $signature->path = 'storage/uploads/profile/signature/' .$new_name;
+            $signature->save();
+
+            // $companyemploy->update([
+                // 'signature_id' => $signature->id
+            // ]);
+            CompanyEmploy::find($request->id)->update([
+                'signature_id' => $signature->id
+            ]);
         }
+
         CompanyEmploy::find($request->id)->update([
             'prefix_id' => $request->prefix,
             'otherprefix' => $otherprefix,
@@ -111,7 +161,7 @@ class CompanyController extends Controller
             'lastname' => $request->lastname,
             'employ_position_id' => $request->position,
             'otherposition' => $otherposition,
-            'signature_id' => $signature
+            // 'signature_id' => $signature
         ]);
         $companyid = CompanyEmploy::find($request->id)->company_id;
         $companyemploys = CompanyEmploy::where('company_id',$companyid)->where('employ_position_id', '<=',5)->orderBy('id','desc')->get();

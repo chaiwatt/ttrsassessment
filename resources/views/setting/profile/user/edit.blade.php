@@ -255,8 +255,9 @@
 							</div>
 						
 							<div class="col-md-12">
+								
 								<div class="form-group">
-									<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ</a>
+									<a href="" class="btn btn-sm bg-teal" id="btnaddsig" data-toggle="modal" ><i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ</a>
 									<div class="col-md-12">
 										<div id='sigdiv'>
 										</div>
@@ -269,7 +270,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_add_authorized_director" class="btn bg-primary" data-id="{{$user->company->id}}" ><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
+                    <button id="btn_modal_add_authorized_director" class="btn bg-primary" data-id="{{$user->company->id}}" ><i class="icon-spinner spinner mr-2" id="spinicon_director_add" hidden></i><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
                 </div>
             </div>
         </div>
@@ -342,7 +343,7 @@
 
 							<div class="col-md-12">
 								<div class="form-group">
-									<a href="" class="btn btn-sm bg-teal" data-toggle="modal" data-target="#modal_signature"><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
+									<a href="" class="btn btn-sm bg-teal" data-toggle="modal" id="call_model_edit" ><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
 									<div class="col-md-12 mt-2">
 										<div id='sigdiv_edit'>
 											
@@ -359,7 +360,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_edit_authorized_director" class="btn bg-primary" data-dismiss="modal"><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
+                    <button id="btn_modal_edit_authorized_director" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_director_edit" hidden></i><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
                 </div>
             </div>
         </div>
@@ -383,7 +384,7 @@
 										<p>ลงลายมือชื่อ ที่นี่</p>
 										  <div class="signature-pad--actions">
 											<div>
-											  <button type="button" class="btn bg-teal save" data-action="save-png"><i class="icon-floppy-disk mr-2"></i>บันทึก</button>
+											  <button type="button" class="btn bg-teal save" data-action="save-png"><i class="icon-floppy-disk mr-2"></i>เพิ่ม</button>
 											  <button type="button" class="btn bg-primary" data-action="undo" hidden>ยกเลิก</button>
 											  <button type="button" class="btn bg-primary clear" data-action="clear" id="clearpad"><i class="icon-trash-alt mr-2"></i>ล้างข้อมูล</button>
 											  
@@ -595,7 +596,7 @@
 
 		<form method="POST" action="{{route('setting.profile.user.editsave',['userid' => $user->id ])}}" enctype="multipart/form-data">
 			@csrf
-			<input name="signatureid" id="signatureid" type="text" hidden>
+		
 			<input id="signature_type" value="1" type="text" hidden>
 			<input name="usergroup" value="{{$user->user_group_id}}" type="text" hidden>
 			<div class="d-flex align-items-start flex-column flex-md-row">
@@ -1016,6 +1017,8 @@
 								<hr>
 								<div class="col-md-12">
 									<div class="form-group">
+										<input name="dataurl" id="dataurl" type="text" hidden >
+										<input name="signatureid" id="signatureid" type="text" hidden >
 										<input type="text" name="authorizeddirector" id="authorizeddirector" value="{{$authorizeddirectors->count()}}" hidden >
 										<label for="">รายชื่อกรรมการ/ผู้มีอำนาจลงนาม<span class="text-danger">*</span></label>
 										<a href="#" id="btn_add_authorized_director" data-toggle="modal" class="text-primary" >คลิกเพิ่ม</a>

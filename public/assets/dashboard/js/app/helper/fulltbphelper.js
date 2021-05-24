@@ -63,7 +63,7 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
@@ -100,7 +100,7 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanyprofileattachment">ลบ</a>                                       
                         </td>
@@ -126,7 +126,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
         });
         return;
     }
-
+    $("#spinicon_edit_employ").attr("hidden",false);
     Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {   
         var html = ``;
         data.forEach(function (employ,index) {
@@ -171,7 +171,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <td style="white-space: nowrap"> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
                 </tr>`
                 }
@@ -179,7 +179,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
              }
              
             });
-
+        $("#spinicon_edit_employ").attr("hidden",true);
          if($('#employtype').val() == 'employee'){
             $("#fulltbp_researcher_wrapper_tr").html(html);
          }else if($('#employtype').val() == 'board'){
@@ -565,13 +565,14 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
         });
         return;
     }
+    $("#spinicon_add_stockholder").attr("hidden",false);
     StockHolder.addStockHolder($('#companyid').val(),$('#employsearch').val(),$('#relationwithceo').val()).then(data => {
         var html = ``;
         data.forEach(function (stockholder,index) {
             html += `<tr >                                        
                 <td> ${stockholder.name}</td>                                            
                 <td> ${stockholder.ceorelation} </td>                                           
-                <td> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
+                <td style="white-space: nowrap"> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
             </tr>`
             });
         $("#fulltbp_companystockholder_wrapper_tr").html(html);
@@ -581,6 +582,7 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
          }else{
             $("#fulltbp_companystockholder_wrapper").attr("hidden",true);
          }
+         $("#spinicon_add_stockholder").attr("hidden",true);
         $('#modal_add_stockholder').modal('hide');
     })
     .catch(error => {})
@@ -691,6 +693,7 @@ $(document).on('click', '#btnaddprojectechdev', function(e) {
 });
 
 $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
+
     if($('#tectdevleveltechnology').val() == '' || $('#tectdevleveltechnologypresent').val() == '' ||$('#tectdevleveltechnologyproject').val() == '' ){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -698,6 +701,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
         });
         return;
     }
+    $("#spinicon_add_tectdevlevel").attr("hidden",false);
     Project.addTechDevLevel($(this).data('id'),$('#tectdevleveltechnology').val(),$('#tectdevleveltechnologypresent').val(),$('#tectdevleveltechnologyproject').val()).then(data => {
         var html = ``;
         data.forEach(function (techdevlevel,index) {
@@ -705,10 +709,11 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
                 <td> ${techdevlevel.technology} </td>                                            
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
-                <td> 
+                <td style="white-space: nowrap"> 
                 <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
             });
+            $("#spinicon_add_tectdevlevel").attr("hidden",true);
          $("#fulltbp_projectechdevlevel_wrapper").attr("hidden",false);
          $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
          $('#modal_add_tectdevlevel').modal('hide');
@@ -915,7 +920,7 @@ $(document).on('change', '#certify', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
@@ -948,7 +953,7 @@ $(document).on("click",".deletefulltbpcertifyattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcertifyattachment">ลบ</a>                                       
                         </td>
@@ -995,7 +1000,7 @@ $(document).on('change', '#award', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
@@ -1028,7 +1033,7 @@ $(document).on("click",".deletefulltbpawardattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpawardattachment">ลบ</a>                                       
                         </td>
@@ -1075,7 +1080,7 @@ $(document).on('change', '#standard', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
@@ -1107,7 +1112,7 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpstandardattachment">ลบ</a>                                       
                         </td>
@@ -1135,6 +1140,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
     }
 
     var unique =[];
+    $("#spinicon_add_projectplan").attr("hidden",false);
     Project.getMonth($(this).data('id')).then(_data => {
         var _all = _data.concat(data); 
          unique = _all.filter((v, i, a) => a.indexOf(v) === i);
@@ -1198,6 +1204,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                         </td>
                     </tr>`
                     });
+                    $("#spinicon_add_projectplan").attr("hidden",true);
                     $("#maxrow").val(maxrow);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
@@ -1249,7 +1256,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
         data.push($(this).val());
       })
 
-
+      $("#spinicon_edit_projectplan").attr("hidden",false);
       Project.getMonth($(this).data('id')).then(_data => {
         var _all = _data.concat(data); 
         var unique = _all.filter((v, i, a) => a.indexOf(v) === i);
@@ -1315,6 +1322,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                         </td>
                     </tr>`
                     });
+                    $("#spinicon_edit_projectplan").attr("hidden",true);
                  $("#maxrow").val(maxrow);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
@@ -1519,7 +1527,7 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
@@ -1552,7 +1560,7 @@ $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpmodelcanvasattachment">ลบ</a>                                       
                         </td>
@@ -1600,7 +1608,7 @@ $(document).on('change', '#swotfile', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
@@ -1632,7 +1640,7 @@ $(document).on("click",".deletefulltbpswotattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpswotattachment">ลบ</a>                                       
                         </td>
@@ -1681,7 +1689,7 @@ $(document).on('change', '#financialplan', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
@@ -1711,7 +1719,7 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpfinancialplanattachment">ลบ</a>                                       
                         </td>
@@ -1732,6 +1740,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
         });
         return;
     }
+    $("#spinicon_add_sell").attr("hidden",false);
     Sell.addSell($(this).data('id'),$('#productname').val(),$('#sellpresent').val(),$('#sellpast1').val(),$('#sellpast2').val(),$('#sellpast3').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
@@ -1747,6 +1756,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_add_sell").attr("hidden",true);
          $("#fulltbp_sell_wrapper_tr").html(html);
          $("#fulltbp_sell_wrapper").attr("hidden",false);
          $('#modal_add_sell').modal('hide');
@@ -1811,6 +1821,7 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
         });
         return;
     }
+    $("#spinicon_edit_sell").attr("hidden",false);
     Sell.editSell($('#sellid').val(),$('#productnameedit').val(),$('#sellpresentedit').val(),$('#sellpastedit1').val(),$('#sellpastedit2').val(),$('#sellpastedit3').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
@@ -1826,6 +1837,7 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_edit_sell").attr("hidden",true);
          $("#fulltbp_sell_wrapper_tr").html(html);
          $('#modal_edit_sell').modal('hide');
     })
@@ -1846,6 +1858,7 @@ $(document).on('click', '.editsellstatus', function(e) {
 });
 
 $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
+    $("#spinicon_edit_sellstatus").attr("hidden",false);
     Sell.editSellStatus($('#sellstatusid').val(),$('#sellstatuspresentedit').val(),$('#sellstatuspastedit1').val(),$('#sellstatuspastedit2').val(),$('#sellstatuspastedit3').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
@@ -1860,6 +1873,7 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_edit_sellstatus").attr("hidden",true);
          $("#fulltbp_sellstatus_wrapper_tr").html(html);
     })
     .catch(error => {})
@@ -1873,6 +1887,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
         });
         return;
     }
+    $("#spinicon_add_debtpartner").attr("hidden",false);
     Sell.addDebtPartner($(this).data('id'),$('#debtpartner').val(),$('#numproject').val(),$('#debtpartnertaxid').val(),$('#debttotalyearsell').val(),$('#debtpercenttosale').val(),$('#debtpartneryear').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
@@ -1889,6 +1904,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_add_debtpartner").attr("hidden",true);
          $("#fulltbp_debtpartner_wrapper_tr").html(html);
          $("#fulltbp_debtpartner_wrapper").attr("hidden",false);
          $('#modal_add_debtpartner').modal('hide');
@@ -1918,6 +1934,7 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
         });
         return;
     }
+    $("#spinicon_edit_debtpartner").attr("hidden",false);
     Sell.editDebtPartner($('#debtpartnerid').val(),$('#debtpartneredit').val(),$('#numprojectedit').val(),$('#debtpartnertaxidedit').val(),$('#debttotalyearselledit').val(),$('#debtpercenttosaleedit').val(),$('#debtpartneryearedit').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
@@ -1934,6 +1951,7 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_edit_debtpartner").attr("hidden",true);
          $("#fulltbp_debtpartner_wrapper_tr").html(html);
 
          $('#modal_edit_debtpartner').modal('hide');
@@ -1985,6 +2003,7 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
         });
         return;
     }
+    $("#spinicon_add_creditpartner").attr("hidden",false);
     Sell.addCreditPartner($(this).data('id'),$('#creditpartner').val(),$('#creditpartnertaxid').val(),$('#credittotalyearsell').val(),$('#creditpercenttosale').val(),$('#creditpartneryear').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
@@ -2000,6 +2019,7 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_add_creditpartner").attr("hidden",true);
          $("#fulltbp_creditpartner_wrapper_tr").html(html);
          $("#fulltbp_creditpartner_wrapper").attr("hidden",false);
          $('#modal_add_creditpartner').modal('hide');
@@ -2028,6 +2048,7 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
         });
         return;
     }
+    $("#spinicon_edit_creditpartner").attr("hidden",false);
     Sell.editCreditPartner($('#creditpartnerid').val(),$('#creditpartneredit').val(),$('#creditpartnertaxidedit').val(),$('#credittotalyearselledit').val(),$('#creditpercenttosaleedit').val(),$('#creditpartneryearedit').val()).then(data => {
         var html = ``;
         data.forEach(function (sell,index) {
@@ -2043,6 +2064,7 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_edit_creditpartner").attr("hidden",true);
          $("#fulltbp_creditpartner_wrapper_tr").html(html);
          $('#modal_edit_creditpartner').modal('hide');
     })
@@ -2111,6 +2133,7 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
         });
         return;
     }
+    $("#spinicon_edit_asset").attr("hidden",false);
     Sell.editAsset($('#assetid').val(),$('#assetcostedit').val(),$('#assetquantityedit').val(),$('#assetpriceedit').val(),$('#assetspecificationedit').val()).then(data => {
         var html = ``;
         data.forEach(function (asset,index) {
@@ -2129,6 +2152,7 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_edit_asset").attr("hidden",true);
          $("#fulltbp_asset_wrapper_tr").html(html);
          $('#modal_edit_asset').modal('hide');
     })
@@ -2153,6 +2177,7 @@ $(document).on('click', '#btn_modal_edit_investment', function(e) {
         });
         return;
     }
+    $("#spinicon_edit_investment").attr("hidden",false);
     Sell.editInvestment($('#investmentid').val(),$('#investmentcostedit').val()).then(data => {
         var html = ``;
         data.forEach(function (invesment,index) {
@@ -2164,6 +2189,7 @@ $(document).on('click', '#btn_modal_edit_investment', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_edit_investment").attr("hidden",true);
          $("#fulltbp_investment_wrapper_tr").html(html);
          $('#modal_edit_investment').modal('hide');
     })
@@ -2193,6 +2219,7 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
         });
         return;
     }
+    $("#spinicon_edit_cost").attr("hidden",false);
     Sell.editCost($('#costid').val(),$('#costexistingedit').val(),$('#costneededit').val(),$('#costapprovededit').val(),$('#costplanedit').val()).then(data => {
         var html = ``;
         data.forEach(function (cost,index) {
@@ -2211,6 +2238,7 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
                 </td> 
             </tr>`
             });
+            $("#spinicon_edit_cost").attr("hidden",true);
          $("#fulltbp_cost_wrapper_tr").html(html);
          $('#modal_edit_cost').modal('hide');
     })
@@ -2265,7 +2293,7 @@ $(document).on('change', '#companydoc', function(e) {
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
@@ -2296,7 +2324,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
@@ -2905,7 +2933,7 @@ $(document).on("click",".deleteboardattachment",function(e){
                     }
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             ${deletecode}                                       
                         </td>
@@ -3259,7 +3287,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
             }
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
-                  <td> 
+                  <td style="white-space: nowrap"> 
                     <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                     ${deletecode} 
                   </td> 
@@ -3391,7 +3419,7 @@ function modaltrigger(id) {
        
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
-                  <td> 
+                  <td style="white-space: nowrap"> 
                     <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                      
                   </td> 
@@ -3446,6 +3474,7 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
         });
         return;
     }
+    $("#spinicon_add_employ").attr("hidden",false);
     Employ.saveEmploy($('#employprefix').val(),$('#otherprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#otherboardposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
        var dataid = 0;
         var html = ``;
@@ -3466,13 +3495,13 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
                 </tr>`
             }
       
             });
-
+            $("#spinicon_add_employ").attr("hidden",true);
          $("#fulltbp_companyemploy_wrapper_tr").html(html);
          if(data.length > 0){
             $("#fulltbp_companyemploy_wrapper").attr("hidden",false);
@@ -3536,6 +3565,7 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
 });
 
 $(document).on('click', '#btn_modal_add_employ_research', function(e) {
+    $("#spinicon_add_employ_research").attr("hidden",false);
     Employ.saveEmploy($('#employprefix_research').val(),$('#otherprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),"",$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
         var dataid = 0;
         var html = ``;
@@ -3556,11 +3586,12 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                         <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                     </tr>`
                 }
             });
+            $("#spinicon_add_employ_research").attr("hidden",true);
          $("#fulltbp_researcher_wrapper_tr").html(html);
          if(data.length > 0){
             $("#fulltbp_researcher_wrapper").attr("hidden",false);

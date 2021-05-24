@@ -241,7 +241,9 @@
                                         @if (Auth::user()->user_type_id >= 4)
                                             <td style="white-space: nowrap"> 
                                                 @if ($minitbp->businessplan->business_plan_status_id > 3)
-                                                        <a href="#"  data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</a>
+                                                        <a href="#"  data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" ><span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span></a>
+
+                                                        
                                                         @if ($minitbp->reviselog(1)->count() > 0)
                                                             <a href="#" data-id="{{$minitbp->id}}" data-doctype="1" data-project="{{$minitbp->project}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
                                                         @endif
