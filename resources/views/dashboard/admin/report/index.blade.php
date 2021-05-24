@@ -306,7 +306,12 @@
                                         <span id="chartpillar2"></span>
                                     </li>
                                   </ul>
-                                  <ul class="chart-skills4 l-30" style="margin-top:-344px" onload="play('rotate-four')"> 
+                                  <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                    <li>
+                                        <span id="chartpillar1"></span>
+                                    </li>
+                                  </ul>
+                                  {{-- <ul class="chart-skills4 l-30" style="margin-top:-344px" onload="play('rotate-four')"> 
                                     <li>
                                         <span id="chartpillar1"></span>
                                         <script>
@@ -316,9 +321,7 @@
                                             $('.chart-skills4').find('span:nth-child(1)').text(`${(angle/1.8).toFixed(2)}%`);
                                             $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
                                             $(document).ready(function() {
-                                            // Setup the initial transform style.
                                             $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
-                                            // Adding a new animation sequences (keyframe)
                                             $.keyframe.define([{
                                             name: 'rotate-four',
                                             '100%': {
@@ -336,7 +339,7 @@
                                             
                                         </script>
                                     </li>
-                                  </ul>
+                                  </ul> --}}
                               </div>
 
                               {{-- <div class="text-min"> 
