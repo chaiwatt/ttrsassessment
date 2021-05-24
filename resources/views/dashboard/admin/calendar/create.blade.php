@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>วันที่ (ตัวอย่าง 22/12/2564)</label><span class="text-danger">*</span>
+                                                <label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label><span class="text-danger">*</span>
                                                 <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control form-control-lg dmyformat" >
                                             </div>
                                         </div>

@@ -623,7 +623,7 @@ th {
 					<label for="" class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>วัน เดือน ปี (ตัวอย่าง 22/12/2564)</label><span class="text-danger">*</span>
+							<label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label><span class="text-danger">*</span>
 							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control form-control-lg dmyformat">
 						</div>
 

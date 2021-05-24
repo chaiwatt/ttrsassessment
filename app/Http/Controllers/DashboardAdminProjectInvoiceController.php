@@ -121,10 +121,10 @@ class DashboardAdminProjectInvoiceController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 8.5pt;">'.$generalinfo->company.'</span>', 46, 88.3, 200, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">1</span>', 19, 109, 200, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$invoicetransaction->description.'</span>', 30, 109, 200, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:center;">'.number_format($invoicetransaction->price, 2).'</div>', 172,109, 91, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:center;">'.number_format($invoicetransaction->price*0.93, 2).'</div>', 172,165, 91, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:center;">'.number_format($invoicetransaction->price*0.07, 2).'</div>', 172,172.5, 91, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:center;">'.number_format($invoicetransaction->price, 2).'</div>', 172,179.5, 91, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:right;">'.number_format($invoicetransaction->price, 2).'</div>', 172,109, 91, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:right;">'.number_format($invoicetransaction->price*0.93, 2).'</div>', 172,165, 91, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:right;">'.number_format($invoicetransaction->price*0.07, 2).'</div>', 172,172.5, 91, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:91px;heigh:95px;text-align:right;">'.number_format($invoicetransaction->price, 2).'</div>', 172,179.5, 91, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 8pt;width:80px;heigh:95px;text-align:center;">'.$generalinfo->fax.'</div>', 147,199.8, 80, 90, 'auto');
         
         $mpdf->WriteFixedPosHTML('<span style="font-size: 8.5pt;">บริษัท '.$company->name.'</span>', 15.5, 230, 200, 90, 'auto');

@@ -31,9 +31,9 @@
                 <div class="box mt20 ml30">
                     <div>เรื่อง  แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model</div>
                     <div>เรียน  คุณ{{$fulltbp->fulltbpresponsibleperson->name}}  {{$fulltbp->fulltbpresponsibleperson->lastname}}</div>
-                    <div class="ml35">กรรมการผู้จัดการ บริษัท {{$fulltbp->minitbp->businessplan->company->name}}</div>
+                    <div class="ml35">กรรมการผู้จัดการ {{$fulltbp->minitbp->businessplan->company->fullname}}</div>
                     <div class="ml70 ">ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model</div>
-                    <div class="bw600"><strong>โครงการเลขที่ {{$thainumeric::toThaiNumeric($fulltbp->minitbp->businessplan->code)}} เรื่อง "{{$fulltbp->minitbp->project}}"</strong> ของ <strong>บริษัท {{$fulltbp->minitbp->businessplan->company->name}}</strong></div>
+                    <div class="bw600"><strong>โครงการเลขที่ {{$thainumeric::toThaiNumeric($fulltbp->minitbp->businessplan->code)}} เรื่อง "{{$fulltbp->minitbp->project}}"</strong> ของ <strong>{{$fulltbp->minitbp->businessplan->company->fullname}}</strong></div>
                     <div>ความละเอียดทราบแล้วนั้น</div>
                     <div class="box ml50 text-justify" style="width:550px;word-wrap:break-word" ><span>บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการ</span></div>
                     <div class="box bw600 text-justify" style="word-wrap:break-word" >ประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการ</div>

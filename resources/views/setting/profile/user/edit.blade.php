@@ -739,7 +739,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>วันที่ชำระทุนจดทะเบียน (วดป. ตัวอย่าง 22/12/2564)</label>
+										<label>วันที่ชำระทุนจดทะเบียน (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label>
 										<input type="text"  name="paidupcapitaldate"  value="{{old('paidupcapitaldate') ?? $user->company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control form-control-lg dmyformat" >
 									</div>
 								</div>

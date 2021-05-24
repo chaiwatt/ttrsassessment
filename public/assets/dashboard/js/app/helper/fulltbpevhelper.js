@@ -534,39 +534,39 @@ $('.steps-basic-extra').steps({
     }
 });
 
-$.contextMenu({
-    selector: '.context-menu-two', 
-    callback: function(key, options) {
-        if(key == 'add'){
-            $("#parent").html($( "#pillar option:selected" ).text());
-            $('#modal_addextraitem').modal('show');
-        }
-        if(key == 'edit'){
-            $("#multipleselect").attr("hidden",true);
-            $("#parent").html($( "#pillar option:selected" ).text());
-            var isempty = false;
-            if($('#tmpstepindex').val() == 1){
-                if($('#subpillar option:selected').val() == 0)isempty=true;
-                $('#nameedit').val($('#subpillar option:selected').text())
-            }else if($('#tmpstepindex').val() == 2){
-                if($('#subpillarindex option:selected').val() == 0)isempty=true;
-                $('#nameedit').val($('#subpillarindex option:selected').text())
-            }else if($('#tmpstepindex').val() == 3){
-                $("#multipleselect").attr("hidden",false);
-                $('#tmpcriteria').html($('#criteria').html())
-                $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
-            }
-            if(isempty==false)$('#modal_editextraitem').modal('show');
-        }
-    },
-    items: {
-        "add": {name: "เพิ่ม" , icon: "add"},
-        "sep1": "---------",
-        "edit": {name: "แก้ไข", icon: function(){
-            return 'context-menu-icon context-menu-icon-edit';
-        }}
-    }
-});
+// $.contextMenu({
+//     selector: '.context-menu-two', 
+//     callback: function(key, options) {
+//         if(key == 'add'){
+//             $("#parent").html($( "#pillar option:selected" ).text());
+//             $('#modal_addextraitem').modal('show');
+//         }
+//         if(key == 'edit'){
+//             $("#multipleselect").attr("hidden",true);
+//             $("#parent").html($( "#pillar option:selected" ).text());
+//             var isempty = false;
+//             if($('#tmpstepindex').val() == 1){
+//                 if($('#subpillar option:selected').val() == 0)isempty=true;
+//                 $('#nameedit').val($('#subpillar option:selected').text())
+//             }else if($('#tmpstepindex').val() == 2){
+//                 if($('#subpillarindex option:selected').val() == 0)isempty=true;
+//                 $('#nameedit').val($('#subpillarindex option:selected').text())
+//             }else if($('#tmpstepindex').val() == 3){
+//                 $("#multipleselect").attr("hidden",false);
+//                 $('#tmpcriteria').html($('#criteria').html())
+//                 $('#nameedit').val( $("#criteria option:eq(0)").prop("selected", true).text()) 
+//             }
+//             if(isempty==false)$('#modal_editextraitem').modal('show');
+//         }
+//     },
+//     items: {
+//         "add": {name: "เพิ่ม" , icon: "add"},
+//         "sep1": "---------",
+//         "edit": {name: "แก้ไข", icon: function(){
+//             return 'context-menu-icon context-menu-icon-edit';
+//         }}
+//     }
+// });
 
 $(document).on('click', '#addcriteria', function(e) {
     if($('#indextype').val() == 1){

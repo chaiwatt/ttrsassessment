@@ -70,11 +70,11 @@
                                         <th style="width:1%;white-space: nowrap">สิ้นสุดโครงการ</th>              
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="min-height:300px">
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8 && $fulltbp->canceldate == null)
                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
-                                                <tr>    
+                                                <tr style="height:100px">    
                                                     <td> {{$fulltbp->minitbp->project}} </td> 
                                                     <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                     <td> {{@$fulltbp->projectgrade->grade}} </td> 
@@ -83,11 +83,18 @@
                                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">เขียนบทวิเคราะห์</a>
                                                         @endif  
                                                         @if (!Empty(@$fulltbp->evaluationresult->management) && !Empty(@$fulltbp->evaluationresult->technoandinnovation) && !Empty(@$fulltbp->evaluationresult->marketability) && !Empty(@$fulltbp->evaluationresult->businessprospect))
-                                                            <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary" target="_blank">จดหมายแจ้งผล</a>
+                                                            {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary" target="_blank">จดหมายแจ้งผล</a> --}}
+                                                            <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Pdf</a>
+                                                                <a href="{{route('dashboard.admin.evaluationresult.word',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
+                                                                {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a> --}}
+                                                              
+                                                            </div>
                                                         @endif
                                                         
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
+                                                            <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">Certificate</button>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
                                                                 <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a>

@@ -306,9 +306,35 @@
                                         <span id="chartpillar2"></span>
                                     </li>
                                   </ul>
-                                  <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                  <ul class="chart-skills4 l-30" style="margin-top:-344px" onload="play('rotate-four')"> 
                                     <li>
                                         <span id="chartpillar1"></span>
+                                        <script>
+                                            var angle = 120;
+                                            var supportedFlag = $.keyframe.isSupported();
+                                            $('.chart-skills4').find('li:nth-child(1) span').css({'transform':`rotate(-${angle}deg)`});
+                                            $('.chart-skills4').find('span:nth-child(1)').text(`${(angle/1.8).toFixed(2)}%`);
+                                            $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
+                                            $(document).ready(function() {
+                                            // Setup the initial transform style.
+                                            $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
+                                            // Adding a new animation sequences (keyframe)
+                                            $.keyframe.define([{
+                                            name: 'rotate-four',
+                                            '100%': {
+                                                'transform': `rotate(${angle}deg)`,
+                                            }
+                                            }]);
+                                            });
+                                            $('.chart-skills4').find('li:nth-child(1)').playKeyframe({
+                                                        name: 'rotate-four',
+                                                        duration: "4s",
+                                                        timingFunction: 'linear',
+                                                        fillMode: 'forwards',
+                                                    
+                                                    });
+                                            
+                                        </script>
                                     </li>
                                   </ul>
                               </div>

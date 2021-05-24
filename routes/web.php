@@ -796,7 +796,8 @@ Route::group(['middleware' => 'auth'], function(){
             }); 
             Route::group(['prefix' => 'evaluationresult'], function(){
                 Route::get('','DashboardAdminEvaluationResultController@Index')->name('dashboard.admin.evaluationresult');           
-                Route::get('edit/{id}','DashboardAdminEvaluationResultController@Edit')->name('dashboard.admin.evaluationresult.edit');  
+                Route::get('edit/{id}','DashboardAdminEvaluationResultController@Edit')->name('dashboard.admin.evaluationresult.edit'); 
+                Route::get('word/{id}','DashboardAdminEvaluationResultController@Word')->name('dashboard.admin.evaluationresult.word');  
                 Route::get('pdf/{id}','DashboardAdminEvaluationResultController@Pdf')->name('dashboard.admin.evaluationresult.pdf'); 
                 Route::get('ppt/{id}','DashboardAdminEvaluationResultController@Ppt')->name('dashboard.admin.evaluationresult.ppt'); 
                 Route::get('certificate/{id}/{type}','DashboardAdminEvaluationResultController@Certificate')->name('dashboard.admin.evaluationresult.certificate'); 

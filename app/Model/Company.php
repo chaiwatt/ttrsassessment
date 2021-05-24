@@ -100,4 +100,24 @@ class Company extends Model
     {
         return IsicSub::find($this->isic_sub_id);
     }
+
+    public function getFullnameAttribute()
+    {
+        $company = Company::find($this->id);
+        
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+        return $fullcompanyname;
+    }
 }

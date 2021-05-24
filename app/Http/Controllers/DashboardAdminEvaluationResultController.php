@@ -36,13 +36,15 @@ use App\Model\SignatureStatus;
 use App\Model\EvaluationResult;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
+use App\Helper\ThaiNumericConverter;
 use Illuminate\Support\Facades\Auth;
-use setasign\Fpdi\PdfParser\StreamReader;
-use App\Http\Requests\EvaluationResultEdit;
-
-use PhpOffice\PhpPresentation\PhpPresentation;
 use PhpOffice\PhpPresentation\IOFactory;
+
+use PhpOffice\PhpWord\TemplateProcessor;
+use setasign\Fpdi\PdfParser\StreamReader;
 use PhpOffice\PhpPresentation\Style\Color;
+use App\Http\Requests\EvaluationResultEdit;
+use PhpOffice\PhpPresentation\PhpPresentation;
 use PhpOffice\PhpPresentation\Style\Alignment;
 
 class DashboardAdminEvaluationResultController extends Controller
@@ -108,11 +110,39 @@ class DashboardAdminEvaluationResultController extends Controller
             'generalinfo' => $generalinfo
         ];
         $pdf = PDF::loadView('dashboard.admin.evaluationresult.pdf', $data);
-         return $evaluationresult;
         $path = public_path("storage/uploads/fulltbp/");
         return $pdf->stream('document.pdf');
     }
-    
+    public function Word($id){
+        $evaluationresult = EvaluationResult::find($id);
+        $fulltbp = FullTbp::find($evaluationresult->full_tbp_id);
+        $generalinfo = GeneralInfo::first();
+        $wordtemplate = new TemplateProcessor(asset("assets/dashboard/template/letter.docx"));
+        $wordtemplate->setValue('headercode',ThaiNumericConverter::toThaiNumeric($evaluationresult->headercode));
+        $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
+        $wordtemplate->setValue('_month',$evaluationresult->month->name);
+        $wordtemplate->setValue('_year',ThaiNumericConverter::toThaiNumeric(DateConversion::thaiYearNow()));
+        $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
+        $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
+        $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);
+        $wordtemplate->setValue('projectno',ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code));
+        $wordtemplate->setValue('projectname',$fulltbp->minitbp->project);
+        $wordtemplate->setValue('score',ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')));
+        $wordtemplate->setValue('grade',$fulltbp->projectgrade->grade);
+        $wordtemplate->setValue('management',strip_tags($evaluationresult->management));
+        $wordtemplate->setValue('technology',strip_tags($evaluationresult->technoandinnovation));
+        $wordtemplate->setValue('marketability',strip_tags($evaluationresult->marketability));
+        $wordtemplate->setValue('prospect',strip_tags($evaluationresult->businessprospect));
+        $wordtemplate->setValue('leadername',$evaluationresult->contactname);
+        $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
+        $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);
+        $wordtemplate->setValue('phone',ThaiNumericConverter::toThaiNumeric($generalinfo->phone1));
+        $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($generalinfo->contactphoneext));
+        $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
+        $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
+        $wordtemplate->saveAs('myletter.docx');
+        return response()->download('myletter.docx')->deleteFileAfterSend(true);
+    }
 
     public function Ppt($id){
         $fulltbp = FullTbp::find($id);
@@ -300,12 +330,13 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>โดย</strong></span>', 13, 92.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fullcompanyname.'</strong></span>', 50, 92.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>สาขาเทคโนโลยี</strong></span>', 13, 101.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$company->industrygroup->name.'</strong></span>', 50, 101.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$company->industrygroup->name.'</strong></span>', 50, 101.5, 250, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ระดับ</strong></span>', 13, 109.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'. $fulltbp->projectgrade->grade.'</strong></span>', 50, 109.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)</strong></span>', 13, 118, 250, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ให้ไว้ ณ วันที่ '.ltrim(Carbon::today()->format('d'), '0').' '.$strMonthCut[intval(Carbon::today()->format('m'))].' พ.ศ. '.(Carbon::today()->format('Y')+543).'</strong></span>', 13, 132.5, 200, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">('.$generalinfo->director.')</div>', 14,160, 200, 90, 'auto');
+        // $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fulltbp->fulltbp_code.'</strong></span>', 50, 190, 150, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output();
     }

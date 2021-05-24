@@ -293,19 +293,33 @@
                                     <thead>
                                         <tr >
                                             <th style="width:600px">ชื่อ-นามสกุล</th> 
-                                            <th>ความแม่นยำ</th> 
+                                            <th style="text-align: center">ความแม่นยำ</th> 
                                             <th style="width:1%;white-space: nowrap">การลงคะแนน</th> 
                                         </tr>
                                     </thead>
                                     <tbody >
                                         @foreach ($projectmembers as $projectmember)
+                                        @if (Auth::user()->user_type_id >= 5)
                                         <tr>
                                             <td>{{$projectmember->user->name}} {{$projectmember->user->lastname}}</td>  
-                                            <td>{{number_format($getpercent::getEvPercent($projectmember->user_id,$projectmember->fulltbp->id), 2, '.', '')}} %</td>
+                                            <td style="text-align:center">{{number_format($getpercent::getEvPercent($projectmember->user_id,$projectmember->fulltbp->id), 2, '.', '')}} %</td>
                                             <td  style="white-space: nowrap">
                                                 <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $projectmember->fulltbp->id, 'userid' => $projectmember->user->id])}}" class="btn btn-sm bg-info" target="_blank">การลงคะแนน</a>
                                             </td>                                       
-                                        </tr>  
+                                        </tr> 
+                                        @else
+                                        @if (Auth::user()->id == $projectmember->user->id)
+                                        <tr>
+                                            <td>{{$projectmember->user->name}} {{$projectmember->user->lastname}}</td>  
+                                            <td style="text-align:center">{{number_format($getpercent::getEvPercent($projectmember->user_id,$projectmember->fulltbp->id), 2, '.', '')}} %</td>
+                                            <td  style="white-space: nowrap">
+                                                <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $projectmember->fulltbp->id, 'userid' => $projectmember->user->id])}}" class="btn btn-sm bg-info" target="_blank">การลงคะแนน</a>
+                                            </td>                                       
+                                        </tr>
+                                        @endif
+ 
+                                        @endif
+ 
                                         @endforeach
                                     </tbody>
                                 </table>      

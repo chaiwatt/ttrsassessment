@@ -208,7 +208,7 @@ table {
     border-top-left-radius: 175px;
     border-top-right-radius: 175px;
   }
-  
+    
   
   .chart-skills li {
     position: absolute;
@@ -231,8 +231,8 @@ table {
   .chart-skills li:nth-child(1) {
     z-index: 4;
     border-color: rgb(52, 212, 119);
-    /* animation-name: rotate-one; */
-    transform: rotate(0deg);
+    animation-name: rotate-one;
+    /* transform: rotate(0deg); */
   }
   
   
@@ -255,7 +255,8 @@ table {
   
   @keyframes rotate-one {
     100% {
-      transform: rotate(0deg);
+      /* transform: rotate(0deg); */
+      transform: rotate(113.2deg);
       /**
        * 62.94%	62.94/100 * 180 = 113.2
        */
@@ -344,8 +345,8 @@ table {
   .chart-skills2 li:nth-child(1) {
     z-index: 4;
     border-color: rgb(204, 99, 1);
-    /* animation-name: rotate-two; */
-    transform: rotate(0deg);
+    animation-name: rotate-two;
+    /* transform: rotate(0deg); */
   }
   
   
@@ -368,7 +369,8 @@ table {
   
   @keyframes rotate-two {
     100% {
-      transform: rotate(0deg);
+      /* transform: rotate(0deg); */
+      transform: rotate(131.6deg);
       /**
        * 62.94%	62.94/100 * 180 = 131.6
        */
@@ -454,8 +456,8 @@ table {
   .chart-skills3 li:nth-child(1) {
     z-index: 4;
     border-color: rgb(0, 41, 128);
-    /* animation-name: rotate-three; */
-     transform: rotate(0deg);
+    animation-name: rotate-three;
+     /* transform: rotate(0deg); */
   }
   
   
@@ -478,7 +480,8 @@ table {
   
   @keyframes rotate-three {
     100% {
-      transform: rotate(0deg);
+      transform: rotate(152.5deg);
+      /* transform: rotate(0deg); */
       /**
        * 84.76%	84.76/100 * 180 = 152.5
        */
@@ -564,8 +567,8 @@ table {
   .chart-skills4 li:nth-child(1) {
     z-index: 4;
     border-color: rgb(0, 128, 79);
-    /* animation-name: rotate-four; */
-    transform: rotate(0deg);
+    animation-name: rotate-four;
+    /* transform: rotate(0deg); */
   }
   
   
@@ -583,12 +586,13 @@ table {
   }
   
   
+  
   /* ANIMATIONS
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   
   @keyframes rotate-four {
     100% {
-      transform: rotate(0deg);
+      /* transform: rotate(169.7deg); */
       /**
        * 94.31%	94.31/100 * 180 = 169.7
        */
@@ -609,37 +613,462 @@ table {
   .l-40{
     margin-left: -100px;
   }
-  .text-max {
-    margin: -25px 800px;
+  .text-min {
+    margin: -14px 107px;
+    }
+    .text-max {
     width: 100%;
-}
-.text-min {
-  margin: -18px 70px;
+    margin: -20px 826px;
+    }
+
+.gauge1{
+  margin-top: -339px;
+  margin-left: 145px;
+  position: absolute;
+  z-index: 10;
 }
 
-  @media(max-width:1210px) {
-      .none{
-          display: none;
-      }
-  }
-  @media(max-width:1220px) and (max-width:1310px) {
-    .chart-skills4 {
-      position: relative;
-      width: 688px;
-      height: 344px;
-      overflow: hidden;
-  }
-  .l-30{
-    margin-left: -33px;
-  }
-  .l-100{
-    margin-left: -100px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+@media(max-width:768px){
+  .l-40 {
+    margin-left: -16px !important;
+}
+
+.chart-skills {
+position:relative;
+width: 123px !important;
+height: 61px !important;
+margin-left: 28.1% !important;
+margin-top: -61px;
+overflow: hidden;
+}
+.chart-skills2 {
+position: relative;
+width: 223px !important;
+height: 111px !important;
+margin-top: -111px !important;
+margin-left: 11% !important;
+overflow: hidden;
+}
+.chart-skills3 {
+position: relative;
+width: 326px !important;
+height: 164px !important;
+margin-top: -164px !important;
+margin-left: -21px !important;
+overflow: hidden;
+}
+.chart-skills4 {
+position: relative;
+width: 434px !important;
+height: 217px !important;
+margin-top: -217px !important;
+margin-left: -73px !important;
+overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+padding-top: 20px;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+  display: block !important;
+  height: 120px !important;
+  width: 120px !important;
+}
+
+.table-7{
+  margin-bottom: -904px !important;
+  margin-top: 476px !important;
+  margin-left: -362px !important;
+
+}
+.l-50{
+padding-left: 50px;
+}
+.gauge1{
+width: 304px !important;
+height: 227px !important;
+margin-top: -224px !important;
+margin-left: -4px !important;
+position: absolute !important;
+z-index: 10 !important;
+}
+
+}
+
+
+
+
+
+
+
+/* ***************************************************** */
+@media(max-width:970px){
+.l-40 {
+  margin-left: -16px !important;
+}
+
+.chart-skills {
+position:relative;
+width: 123px !important;
+height: 61px !important;
+margin-left: 81px !important;
+margin-top: -61px;
+overflow: hidden;
+}
+.chart-skills2 {
+position: relative;
+width: 223px !important;
+height: 111px !important;
+margin-top: -111px !important;
+margin-left: 31px !important;
+overflow: hidden;
+}
+.chart-skills3 {
+position: relative;
+width: 326px !important;
+height: 164px !important;
+margin-top: -164px !important;
+margin-left: -21px !important;
+overflow: hidden;
+}
+.chart-skills4 {
+position: relative;
+width: 434px !important;
+height: 217px !important;
+margin-top: -217px !important;
+margin-left: -73px !important;
+overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+padding-top: 20px;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+display: block !important;
+height: 120px !important;
+width: 120px !important;
+}
+
+.table-7{
+margin-bottom: -904px !important;
+margin-top: 476px !important;
+margin-left: -362px !important;
+
+}
+.l-50{
+padding-left: 50px;
+}
+.gauge1{
+width: 304px !important;
+height: 227px !important;
+margin-top: -224px !important;
+margin-left: -4px !important;
+position: absolute !important;
+z-index: 10 !important;
+}
+
+
+}
+
+
+
+
+/* ***************************************************** */
+@media(max-width:767px){
+.l-40 {
+  margin-left: 48px !important;
+  margin-top: -100px;
+}
+
+.chart-skills {
+position:relative;
+width: 123px !important;
+height: 61px !important;
+margin-left: 81px !important;
+margin-top: -61px;
+overflow: hidden;
+}
+.chart-skills2 {
+position: relative;
+width: 223px !important;
+height: 111px !important;
+margin-top: -111px !important;
+margin-left: 31px !important;
+overflow: hidden;
+}
+.chart-skills3 {
+position: relative;
+width: 326px !important;
+height: 164px !important;
+margin-top: -164px !important;
+margin-left: -21px !important;
+overflow: hidden;
+}
+.chart-skills4 {
+position: relative;
+width: 434px !important;
+height: 217px !important;
+margin-top: -217px !important;
+margin-left: -73px !important;
+overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+padding-top: 20px;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+display: block !important;
+height: 120px !important;
+width: 120px !important;
+}
+
+.table-7{
+margin-bottom: -910px !important;
+margin-top: 211px !important;
+margin-left: 5px !important;
+width: 16% !important;
+}
+
+
+
+.l-50{
+padding-left: 50px;
+}
+}
+
+
+
+
+/* ***************************************************** */
+@media(max-width:500px){
+.l-40 {
+  margin-left: 77px !important;
+  margin-top: -100px;
+}
+
+.chart-skills {
+position: relative;
+width: 95px !important;
+height: 47px !important;
+margin-left: 57px !important;
+margin-top: -47px;
+overflow: hidden;
+}
+.chart-skills2 {
+position: relative;
+width: 191px !important;
+height: 95px !important;
+margin-top: -95px !important;
+margin-left: 10px !important;
+overflow: hidden;
+}
+.chart-skills3 {
+position: relative;
+width: 282px !important;
+height: 143px !important;
+margin-top: -143px !important;
+margin-left: -35px !important;
+overflow: hidden;
+}
+.chart-skills4 {
+position: relative;
+width: 376px !important;
+height: 190px !important;
+margin-top: -190px !important;
+margin-left: -81px !important;
+overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+margin-left: -29px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+display: block !important;
+height: 120px !important;
+width: 120px !important;
+}
+
+.table-7 {
+margin-bottom: -910px !important;
+margin-top: 70px !important;
+margin-left: -24px !important;
+width: 115% !important;
+font-size: 20px;
+}
+.l-50{
+padding-left: 50px;
+padding-top: 550px;
+}
+.gauge1 {
+width: 225px !important;
+height: 197px !important;
+margin-top: -196px !important;
+margin-left: -7px !important;
+position: absolute !important;
+z-index: 10 !important;
+}
+}
+
+/* ***************************************************** */
+@media(max-width:425px){
+.l-40 {
+  margin-left: 48px !important;
+  margin-top: -100px;
+}
+}
+/* ***************************************************** */
+@media(max-width:1440px){
+.gauge1{
+  margin-top: -339px;
+  margin-left: 59px;
+  position: absolute;
+  z-index: 10;
+}
+.text-min {
+  margin: -14px 25px;
   }
   .text-max {
-    margin: -18px 666px;
-}
-.text-min {
-  margin: -16px -59px;
-}
-
+  width: 100%;
+  margin: -20px 740px;
   }
+  .gauge12{
+    display: none;
+   }
+
+
+}
