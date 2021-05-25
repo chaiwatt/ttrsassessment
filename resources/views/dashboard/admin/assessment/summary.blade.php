@@ -143,7 +143,7 @@
                                               </div> --}}
                                             </div>
                                             <div class="col-md-1">
-                                                  <table class="table-score table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
+                                                  <table class="table-score table-bordered table-dark">
                                                 <thead>
                                                   <tr>
                                                    
@@ -202,7 +202,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="row">
-                                            <div class="col-md-3" data-aos="fade-up">
+                                            <div class="col-md-3">
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="row">
@@ -220,7 +220,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                                            <div class="col-md-3">
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="row">
@@ -238,7 +238,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="400"> 
+                                            <div class="col-md-3"> 
                                                 <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="row">
@@ -256,7 +256,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">  <div class="row">
+                                            <div class="col-md-3">  <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="row">
                                                         <div class="col-sm-6"></div>
