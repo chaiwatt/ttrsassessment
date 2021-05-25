@@ -1210,6 +1210,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                  $("#table_gantt_wrapper").tableDnD();
            })
          }else{
+            $("#spinicon_add_projectplan").attr("hidden",true);
                 Swal.fire({
                 title: 'ผิดพลาด...',
                 text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
@@ -1329,6 +1330,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
             })
             .catch(error => {})
          }else{
+            $("#spinicon_edit_projectplan").attr("hidden",true);
             Swal.fire({
                 title: 'ผิดพลาด...',
                 text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
