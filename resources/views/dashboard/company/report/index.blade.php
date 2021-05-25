@@ -377,7 +377,10 @@
         </div>
         @endif
         <div class="row" 
-        @if ($businessplan->business_plan_status_id >= 9)
+       @if ()
+           
+       @endif
+        @if (@$businessplans->first()->business_plan_status_id >= 9)
             hidden
         @endif
         >
