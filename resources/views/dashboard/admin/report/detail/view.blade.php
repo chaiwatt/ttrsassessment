@@ -329,68 +329,71 @@
                 </div>
             @endif
             {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
-                <div class="col-md-12" {{$hidden}}>
-                    <div class="card">
-                        <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนน/เกรด</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered"  >
-                                    <thead>
-                                        <tr>
-                                            <th >คะแนน</th> 
-                                            <th >เกรด</th>
-                                            <th >จดหมายแจ้งผล</th>
-                                            <th >Certificate</th>
-                                            <th style="width:1%;white-space: nowrap">รายงานผล</th> 
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                        <tr>
-                                            <td>{{number_format(@$company->businessplan->minitbp->fulltbp->projectgrade->percent, 2, '.', '')}}</td>  
-                                            <td>{{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}</td>
-                                            
-                                            <td> 
-                                                @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1)
-                                                {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
-                                                        {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a> --}}
-                                                        <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Pdf</a>
-                                                            <a href="{{route('dashboard.admin.evaluationresult.word',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
-                                                            {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a> --}}
-                                                          
-                                                        </div>
-                                                    @else
-                                                        <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($company->businessplan->business_plan_status_id >=9)
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
-                                                            <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a>
-                                                            <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
-                                                        </div>
+            @if (Auth::user()->user_type_id >= 5 || Auth::user()->isLeader() != 0)
+            <div class="col-md-12" {{$hidden}}>
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนน/เกรด</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered"  >
+                                <thead>
+                                    <tr>
+                                        <th >คะแนน</th> 
+                                        <th >เกรด</th>
+                                        <th >จดหมายแจ้งผล</th>
+                                        <th >Certificate</th>
+                                        <th style="width:1%;white-space: nowrap">รายงานผล</th> 
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <td>{{number_format(@$company->businessplan->minitbp->fulltbp->projectgrade->percent, 2, '.', '')}}</td>  
+                                        <td>{{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}</td>
+                                        
+                                        <td> 
+                                            @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1)
+                                            {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
+                                                    {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a> --}}
+                                                    <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Pdf</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.word',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
+                                                        {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a> --}}
+                                                      
                                                     </div>
                                                 @else
                                                     <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
-                                                @endif
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($company->businessplan->business_plan_status_id >=9)
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
+                                            @endif
 
-                                            </td>
-                                            <td  style="white-space: nowrap">
-                                                <a  href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
-                                            </td>                                     
-                                        </tr>  
-                                    </tbody>
-                                </table>      
-                            </div>
+                                        </td>
+                                        <td  style="white-space: nowrap">
+                                            <a  href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
+                                        </td>                                     
+                                    </tr>  
+                                </tbody>
+                            </table>      
                         </div>
                     </div>
                 </div>
+            </div>
+            @endif
+              
             {{-- @endif --}}
         </div>
     </div>
