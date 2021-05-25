@@ -1141,10 +1141,13 @@ $(document).on('change', '#version', function(e) {
     }).catch(error => {})
 });
 $(document).on('change', '#percentindex', function(e) {
-
+    var message = "ต้องการเพิ่ม เปอร์เซนต์ Extra หรือไม่";
+    if($('#percentindex').val() == 100){
+        message = "ต้องการยกเลิก เปอร์เซนต์ Extra หรือไม่";
+    }
     Swal.fire({
         title: 'ยืนยัน!',
-        text: `ต้องการเพิ่ม เปอร์เซนต์ Extra หรือไม่`,
+        text: message,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
