@@ -93,8 +93,8 @@
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
-                                        <label>วันที่ใบสั่งขาย/Sale Order Date</label>
-                                        <input type="text"  name="saleorderdate" id="saleorderdate" value="{{$invoicetransaction->saleorderdateth}}"  placeholder="วันที่ใบสั่งขาย/Sale Order Date" class="form-control form-control-lg">
+                                        <label>วันที่ใบสั่งขาย/Sale Order Date (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label>
+                                        <input type="text"  name="saleorderdate" id="saleorderdate" value="{{$invoicetransaction->saleorderdateth}}"  placeholder="วันที่ใบสั่งขาย/Sale Order Date" class="form-control form-control-lg dmyformat">
                                     </div>
                                 </div>
                                 <div class="col-md-6">  
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
-                                        <label>จำนวนเงิน/Amount (THB)</label>
+                                        <label>จำนวนเงิน/Amount (THB) (บาท)</label>
                                         <input type="text"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน/Amount (THB)" class="form-control form-control-lg numeralformat10">
                                     </div>
                                 </div>
@@ -158,13 +158,13 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 	<script>
-        $('#saleorderdate').bootstrapMaterialDatePicker({
-            format: 'DD/MM/YYYY',
-            clearButton: true,
-            cancelText: "ยกเลิก",
-            okText: "ตกลง",
-            clearText: "เคลียร์",
-            time: false
-        });
+        // $('#saleorderdate').bootstrapMaterialDatePicker({
+        //     format: 'DD/MM/YYYY',
+        //     clearButton: true,
+        //     cancelText: "ยกเลิก",
+        //     okText: "ตกลง",
+        //     clearText: "เคลียร์",
+        //     time: false
+        // });
     </script>
 @stop

@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>จำนวนเงิน<span class="text-danger">*</span></label>
+                                        <label>จำนวนเงิน (บาท)<span class="text-danger">*</span></label>
                                         <input type="text"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control form-control-lg numeralformat10">
                                     </div>
                                 </div>

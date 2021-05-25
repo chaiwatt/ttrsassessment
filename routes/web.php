@@ -848,6 +848,8 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('getevent','DashboardCompanyReportController@GetEvent')->name('dashboard.company.report.getevent');         
                 Route::post('gettimeline','DashboardCompanyReportController@GetTimeLine')->name('dashboard.company.report.gettimeline'); 
                 Route::post('edittimelinestatus','DashboardCompanyReportController@EditTimeLineStatus')->name('dashboard.company.report.edittimelinestatus'); 
+                Route::post('getfinalgrade','DashboardCompanyReportController@GetFinalGrade')->name('dashboard.company.report.getfinalgrade'); 
+                
                 
             });      
             Route::group(['prefix' => 'project'], function(){

@@ -75,7 +75,7 @@
                         <div class="card bg-teal-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0">{{ number_format(@$businessplans->first()->minitbp->fulltbp->projectgrade->percent, 2)}} %</h1>
+                                    <h1 class="font-weight-semibold mb-0"><span id="showscore">{{ number_format(@$businessplans->first()->minitbp->fulltbp->projectgrade->percent, 2)}}</span> %</h1>
                                 </div>
                                 <div>
                                     ผลคะแนนการประเมิน
@@ -90,13 +90,221 @@
                         <div class="card bg-blue-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0">{{@$businessplans->first()->minitbp->fulltbp->projectgrade->grade}}</h1>
+                                    <h1 class="font-weight-semibold mb-0"><span id="showgrade">{{@$businessplans->first()->minitbp->fulltbp->projectgrade->grade}}</span></h1>
                                 </div>
                                 <div>
                                     ระดับเกรดการประเมิน
                                 </div>
                             </div>
                             <div id="today-revenue"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header header-elements-sm-inline">
+                                <h6 class="card-title" style="font-size:16px;font-weight: bold">ร้อยละเกรดแยกตาม Pillar</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <canvas id="myChart" width=200  height=200 ></canvas>
+                                    </div>
+                                    <div class="col-md-9 l-40 none">
+                                      <div style="margin-top: 300px;"></div>
+                                      <div id="mainchart">
+                                        <ul class="chart-skills">
+                                            <li>
+                                              <span id="chartpillar4"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills2" style="margin-top:-230px"> 
+                                            <li>
+                                                <span id="chartpillar3"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills3" style="margin-top:-286px"> 
+                                            <li>
+                                                <span id="chartpillar2"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                            <li>
+                                                <span id="chartpillar1"></span>
+                                            </li>
+                                          </ul>
+                                          {{-- <ul class="chart-skills4 l-30" style="margin-top:-344px" onload="play('rotate-four')"> 
+                                            <li>
+                                                <span id="chartpillar1"></span>
+                                                <script>
+                                                    var angle = 120;
+                                                    var supportedFlag = $.keyframe.isSupported();
+                                                    $('.chart-skills4').find('li:nth-child(1) span').css({'transform':`rotate(-${angle}deg)`});
+                                                    $('.chart-skills4').find('span:nth-child(1)').text(`${(angle/1.8).toFixed(2)}%`);
+                                                    $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
+                                                    $(document).ready(function() {
+                                                    $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
+                                                    $.keyframe.define([{
+                                                    name: 'rotate-four',
+                                                    '100%': {
+                                                        'transform': `rotate(${angle}deg)`,
+                                                    }
+                                                    }]);
+                                                    });
+                                                    $('.chart-skills4').find('li:nth-child(1)').playKeyframe({
+                                                                name: 'rotate-four',
+                                                                duration: "4s",
+                                                                timingFunction: 'linear',
+                                                                fillMode: 'forwards',
+                                                            
+                                                            });
+                                                    
+                                                </script>
+                                            </li>
+                                          </ul> --}}
+                                      </div>
+        
+                                      {{-- <div class="text-min"> 
+                                        min
+                                      </div>
+                                      <div class="text-max">
+                                        max --}}
+                                      {{-- </div> --}}
+                                    </div>
+                                    <div class="col-md-1">
+                                          <table class="table-score table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
+                                        <thead>
+                                          <tr>
+                                           
+                                            <td class="bg-01 white" colspan="2">Level Classification</td>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr class="bg-02">
+                                            <td style="width:70px"> 87-100</td>
+                                            <td>AAA</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>80-86</td>
+                                            <td>AA</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>74-79</td>
+                                            <td>A</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>70-73</td>
+                                            <td>BBB</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>64-69</td>
+                                            <td>BB</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>56-63</td>
+                                            <td>B</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>54-55</td>
+                                            <td>CCC</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>51-52</td>
+                                            <td>CC</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>48-50</td>
+                                            <td>C</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>25-47</td>
+                                            <td>D</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>0-24</td>
+                                            <td>E</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-3" data-aos="fade-up">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6"></div>
+                                                    <div class="col-sm-6"> 
+                                                        <h2><span style="font-weight: bold"> 01</span></h2>
+                                                        <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h6 class="color-01" style="font-weight: bold">Management</h6>
+                                                <h5><span id="pillar1"></span></h5>
+                                                <h4 class="color-01"><span id="gradepillar1"></span></h4>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6"></div>
+                                                    <div class="col-sm-6"> 
+                                                        <h2><span style="font-weight: bold"> 02</span></h2>
+                                                        <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h6 class="color-02" style="font-weight: bold">Technology</h6>
+                                                <h5><span id="pillar2"></span></h5>
+                                                <h4 class="color-02"><span id="gradepillar2"></span></h4>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="400"> 
+                                        <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6"> 
+                                                    <h2><span style="font-weight: bold"> 03</span></h2>
+                                                    <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6 class="color-03" style="font-weight: bold">Marketability</h6>
+                                            <h5><span id="pillar3"></span></h5>
+                                            <h4 class="color-03"><span id="gradepillar3"></span></h4>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">  <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6"> 
+                                                    <h2><span style="font-weight: bold"> 04</span></h2>
+                                                    <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                            <h5><span id="pillar4"></span></h5>
+                                            <h4 class="color-04"><span id="gradepillar4"></span></h4>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -114,9 +322,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                    
-
-        
+            
                         <div class="table-responsive">
                             <table class="table table-bordered" id="testtopictable">
                                 <thead>
@@ -153,8 +359,10 @@
                                             </div>
                                         </td> 
                                         <td style="white-space: nowrap"> 
-                                            @if ($businessplan->business_plan_status_id > 3)
-                                                <span class="badge badge-flat border-success text-success-400 rounded-0">อยู่ระหว่างการประเมิน</span>
+                                            @if ($businessplan->business_plan_status_id > 3 && $businessplan->business_plan_status_id < 10)
+                                                <span class="badge badge-flat border-warning text-warning-400 rounded-0">อยู่ระหว่างการประเมิน</span>
+                                                @elseif($businessplan->business_plan_status_id >= 9)
+                                                <span class="badge badge-flat border-success text-success-400 rounded-0">ประเมินเสร็จสิ้น</span>
                                             @endif
                                         </td>                                       
                                     </tr>
@@ -168,7 +376,11 @@
             </div>
         </div>
         @endif
-        <div class="row">
+        <div class="row" 
+        @if ($businessplan->business_plan_status_id >= 9)
+            hidden
+        @endif
+        >
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
@@ -395,6 +607,7 @@
     }
 
     $( document ).ready(function() {
+        if(bpstatus < 9){
             var events = [];
             getEvent().then(data => {
                 data.forEach(function (event,index) {
@@ -427,6 +640,108 @@
                     }).render();
                 }
             }).catch(error => {})
+        }else{
+            getFinalGrage().then(data => {
+                topLeftChart($('#showscore').html(),$('#showgrade').html());
+                var html1 =``;
+                var html2 =``;
+                var pillarpercent4 = 0;
+                var pillarpercent3 = 0;
+                var pillarpercent2 = 0;
+                var pillarpercent1 = 0;
+                data.forEach((grade,index) => {
+                    $('#chartpillar' + (index+1)).html(grade.percent + ' %');
+                    $('#pillar' + (index+1)).html(grade.percent + ' %');
+                    $('#gradepillar' + (index+1)).html(grade.grade);
+                    //console.log(index);
+            
+                    if(index == 0){
+                        pillarpercent4 = grade.percent;
+                    }else if(index == 1){
+                        pillarpercent3 = grade.percent;
+                    }else if(index == 2){
+                        pillarpercent2 = grade.percent;
+                    }else if(index == 3){
+                        pillarpercent1 = grade.percent;
+                    }
+                    if(index < 4){
+                        var basepillar = ``;
+                        if(grade.pillar_id == 1){
+                            basepillar = `Management`;
+                        }
+                        if(grade.pillar_id == 2){
+                            basepillar = `Technology`;
+                        }
+                        if(grade.pillar_id == 3){
+                            basepillar = `Marketability`;
+                        }
+                        if(grade.pillar_id == 4){
+                            basepillar = `Business Prospet`;
+                        }
+                        html1 += `<tr>
+                        <td>${basepillar}</td>
+                        <td style="text-align: center;">${parseFloat(grade.percent).toFixed(2)}</td>
+                        <td style="text-align: center;">${grade.grade}</td>
+                        <tr>`
+                    }else{
+                        var basepillar = ``;
+                        if(grade.pillar_id == 5){
+                            basepillar = `Management`;
+                        }
+                        if(grade.pillar_id == 6){
+                            basepillar = `เทคโนโลยี`;
+                        }
+                        if(grade.pillar_id == 7){
+                            basepillar = `การตลาด`;
+                        }
+                        if(grade.pillar_id == 8){
+                            basepillar = `ธุรกิจ`;
+                        }
+                        html2 += `<tr>
+                        <td>${basepillar}</td>
+                        <td style="text-align: center;">${parseFloat(grade.percent).toFixed(2)}</td>
+                        <td style="text-align: center;" >${grade.grade}</td>
+                        <tr>`
+                    }
+
+                });  
+                // var angle = grade.percent*1.8;
+                $('.chart-skills4').find('span:nth-child(1)').text(`${pillarpercent4}%`);
+                $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
+                $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent4}deg)`);
+                if(pillarpercent4 == 100){
+                    $('.chart-skills4').find('span:nth-child(1)').css('top', `20px`);
+                }
+
+                $('.chart-skills3').find('span:nth-child(1)').text(`${pillarpercent3}%`);
+                $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent3*1.8}deg)`);
+                $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent3}deg)`);
+                if(pillarpercent3 == 100){
+                    $('.chart-skills3').find('span:nth-child(1)').css('top', `20px`);
+                }
+
+                $('.chart-skills2').find('span:nth-child(1)').text(`${pillarpercent2}%`);
+                $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent2*1.8}deg)`);
+                $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent2}deg)`);
+                if(pillarpercent2 == 100){
+                    $('.chart-skills2').find('span:nth-child(1)').css('top', `20px`);
+                }
+
+                $('.chart-skills').find('span:nth-child(1)').text(`${pillarpercent1}%`);
+                $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent1*1.8}deg)`);
+                $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent1}deg)`);
+                if(pillarpercent1 == 100){
+                    $('.chart-skills1').find('span:nth-child(1)').css('top', `20px`);
+                }
+
+                $("#chartarea").attr("hidden",false);
+                $("#gradesummary_wrapper_tr").html(html1); 
+                $("#extra_gradesummary_wrapper_tr").html(html2); 
+
+            }).catch(error => {})
+        }    
+
+        
         });
 
     $(document).on('click', '#alertmessage', function(e) {
@@ -453,6 +768,22 @@
         return new Promise((resolve, reject) => {
             $.ajax({
                     url: `${route.url}/dashboard/company/report/getevent`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    success: function(data) {
+                    resolve(data)
+                },
+                    error: function(error) {
+                    reject(error)
+                },
+            })
+        })
+    }
+
+    function getFinalGrage() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                    url: `${route.url}/dashboard/company/report/getfinalgrade`,
                     type: 'POST',
                     headers: {"X-CSRF-TOKEN":route.token},
                     success: function(data) {
@@ -503,6 +834,61 @@
             })
         })
     }
+
+    function topLeftChart(_percent,grade){
+        if(isNaN(_percent)) {
+            _percent = 0;
+        }
+        if( typeof grade === 'undefined' ) {
+            grade = "";
+        }
+        var percent = parseInt(_percent);
+        console.log(percent);
+        var dom = document.getElementById('myChart');
+        var echart = echarts.init(dom);
+        echart.clear();
+        var option = null;
+        option = {
+            series: [
+                {
+                    name: 'เกรด',
+                    type: 'pie',
+                    hoverAnimation: false,
+                    animation: true,
+                    radius: ['80%', '100%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: true,
+                        position: 'center',
+                        fontSize : 26,
+                        color: '#000000'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            // fontSize: '16',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [
+                        {value: 100-percent, name: '',},
+                        {value: percent, name:   _percent + ' / ' + grade},
+        
+                    ],
+                    color: ['#bbbbbb', '#4688ce'],
+                    silent: true,
+                }
+            ]
+        };
+
+        if (option && typeof option === "object") {
+            echart.setOption(option, true);
+        }
+}
+
 
 </script>
 @stop

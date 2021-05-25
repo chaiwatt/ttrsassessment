@@ -9,7 +9,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การลงคะแนน</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การลงคะแนน <span id="title"></span> </h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -85,6 +85,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <input type="text" id="projectname" value="{{$ev->fulltbp->minitbp->project}}" hidden>
                         <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden>
                         <input type="text" id="evid" value="{{$ev->id}}" hidden>
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden>

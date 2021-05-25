@@ -27,7 +27,7 @@ class EditPaymentNotification extends FormRequest
     public function messages()
     {
       return  [
-        'price.required' => 'ยังไม่ได้กรอกจำนวนเงิน',
+        'price.required' => 'ยังไม่ได้กรอกจำนวนเงิน (บาท)',
         'paymentdate.required' => 'ยังไม่ได้เลือกวันที่ชำระเงิน',
         'paymenttime.required' => 'ยังไม่ได้กรอกเวลาชำระเงิน',
         'file.required' => 'ยังไม่ได้แนบไฟล์',

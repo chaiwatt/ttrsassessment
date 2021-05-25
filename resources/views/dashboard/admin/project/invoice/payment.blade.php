@@ -1,5 +1,10 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -61,8 +66,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>จำนวนเงิน<span class="text-danger">*</span></label>
-                                            <input type="number"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control form-control-lg" readonly >
+                                            <label>จำนวนเงิน (บาท)<span class="text-danger">*</span></label>
+                                            <input type="text"  name="price" value="{{$invoicetransaction->price}}"  placeholder="จำนวนเงิน" class="form-control form-control-lg numeralformat10" readonly  >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -119,15 +124,16 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 <script>
-    $('#paymentdate').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        clearButton: true,
-        cancelText: "ยกเลิก",
-        okText: "ตกลง",
-        clearText: "เคลียร์",
-        time: false
-    });
+    // $('#paymentdate').bootstrapMaterialDatePicker({
+    //     format: 'DD/MM/YYYY',
+    //     clearButton: true,
+    //     cancelText: "ยกเลิก",
+    //     okText: "ตกลง",
+    //     clearText: "เคลียร์",
+    //     time: false
+    // });
     $("#file").on('change', function() {
         $("#filename").val(this.value);
     });
@@ -136,7 +142,7 @@
         var frm = e.target.form;
         Swal.fire({
                 title: 'ยืนยัน',
-                text: `ยืนยันได้ตรวจสอบเอกสารการจ่ายเงิน แล้วหรือไม่?`,
+                text: `ได้ตรวจสอบเอกสารการจ่ายเงิน แล้วหรือไม่?`,
                 type: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

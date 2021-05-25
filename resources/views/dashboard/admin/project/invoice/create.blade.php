@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
-                                        <label>จำนวนเงิน/Amount (THB)</label>
+                                        <label>จำนวนเงิน/Amount (THB) (บาท)</label>
                                         <input type="number"  name="price" value="{{old('price')}}"  placeholder="จำนวนเงิน/Amount (THB)" class="form-control form-control-lg">
                                     </div>
                                 </div>

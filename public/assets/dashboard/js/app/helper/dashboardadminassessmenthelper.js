@@ -244,14 +244,14 @@ function getEv(evid){
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {
                 var comment = '';
-                var criterianame = `<label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
+                var criterianame = `<label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" data-criterianame="${criteria.subpillarindex['name']}" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
                                 <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" data-type="score" class="form-control scoring gradescore">
                                     `;
         
                 if(criteria.criteria != null){
                     criterianame = `<label class="form-check-label">
                                         <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-scoretype="2" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="score" style="vertical-align: middle" class="form-check-input-styled-info scoring">
-                                        ${criteria.criteria['name']} <a href="#" data-toggle="modal" class="text-grey conflictscore" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
+                                        ${criteria.criteria['name']} <a href="#" data-toggle="modal" class="text-grey conflictscore" data-criterianame="${criteria.criteria['name']}" data-id="${criteria.id}"><i class="icon-folder-open3"></i></a>
                                     </label>`;
                 }
         
@@ -303,8 +303,8 @@ function RenderExtraTable(data){
             <td> ${criteriatransaction.extracriteria['name']} <a href="#" data-categoryid="${criteriatransaction.extra_category_id}" data-criteriaid="${criteriatransaction.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
             <td> 
             <div class="form-group">
-                <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-id="${criteriatransaction.id}"  ><i class="icon-folder-open3"></i></a></label>
-                <input type="text" value="" data-id="${criteriatransaction.id}" data-type="score" class="form-control inputextrascore weigthvalue decimalformat" >
+                <label>กรอกคะแนน (0 - 5) <a href="#" data-toggle="modal" class="text-grey conflictextrascore" data-criterianame="${criteriatransaction.extracriteria['name']}" data-id="${criteriatransaction.id}"  ><i class="icon-folder-open3"></i></a></label>
+                <input type="text" value="" data-id="${criteriatransaction.id}"  data-type="score" class="form-control inputextrascore weigthvalue decimalformat" >
 
                 <div class="toggle"><div class="form-group">
                     <label><i>ความเห็น</i></label>
@@ -476,15 +476,13 @@ function addScore(transactionid,score,subpillarindex,scoretype){
   $(document).on('click', '.conflictscore', function(e) {
     showConflictScore($(this).data('id')).then(data => {
         var html =``;
-      
+        console.log(data);  
         data.projectmembers.forEach(function (conflict,index) {
-           
+             
             var icon = '<i class="icon-cross"></i>';
             var check = data.scores.find(x => x.user_id === conflict.user['id']);
             var _comment ='';
             if ( typeof(check) !== "undefined" && check !== null ) {
-                console.log(check['score']);
-               
                 if(check['score'] == 1){
                     icon = '<i class="icon-check"></i>';
                 }
@@ -500,6 +498,7 @@ function addScore(transactionid,score,subpillarindex,scoretype){
             </tr>`
             });
         $("#show_conflict_modal_wrapper_tr").html(html);
+        $('#title').html('โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
         $('#modal_show_conflict').modal('show');
     }).catch(error => {})
 });
@@ -543,6 +542,7 @@ function showConflictScore(id){
         });
 
         $("#show_conflict_modal_wrapper_tr").html(html);
+        $('#title').html('โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
         $('#modal_show_conflict').modal('show');
     }).catch(error => {})
 });
@@ -582,6 +582,7 @@ function showConflictGrade(id){
             </tr>`
             });
         $("#show_conflict_modal_wrapper_tr").html(html);
+        $('#title').html('โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
         $('#modal_show_conflict').modal('show');
     }).catch(error => {})
 });

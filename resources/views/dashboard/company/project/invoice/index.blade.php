@@ -90,7 +90,7 @@
                                         </td> 
                                         <td style="text-align: right">
                                             @if($invoicetransaction->status == 1)
-                                            <a href="{{route('dashboard.company.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">ดาวน์โหลดใบแจ้งหนี้</a>
+                                            <a href="{{route('dashboard.company.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info" target="_blank" >ดาวน์โหลดใบแจ้งหนี้</a>
                                             @endif
                                             
                                         </td>

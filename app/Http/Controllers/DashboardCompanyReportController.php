@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Ev;
 use App\Model\Company;
+use App\Model\FullTbp;
+use App\Model\MiniTBP;
+use App\Model\FinalGrade;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\EventCalendar;
@@ -46,6 +50,18 @@ class DashboardCompanyReportController extends Controller
         }
         return collect($_events);
     }
+
+    public function GetFinalGrade(Request $request){
+        $auth = Auth::user();
+        $company = Company::where('user_id',$auth->id)->first();
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+        $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
+        $finalgrade = FinalGrade::where('ev_id',$ev->id)->get();
+        return response()->json($finalgrade); 
+    }
+    
 
     public function GetTimeLine(Request $request){
         $timelinehistories = TimeLineHistory::where('owner_id',$request->userid)->orderBy('id','desc')->get();
