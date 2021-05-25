@@ -140,8 +140,8 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($generalinfo->contactphoneext));
         $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
         $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
-        $wordtemplate->saveAs('myletter.docx');
-        return response()->download('myletter.docx')->deleteFileAfterSend(true);
+        $wordtemplate->saveAs('letter.docx');
+        return response()->download('letter.docx')->deleteFileAfterSend(true);
     }
 
     public function Ppt($id){

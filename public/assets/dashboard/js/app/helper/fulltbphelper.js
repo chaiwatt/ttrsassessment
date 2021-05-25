@@ -3200,12 +3200,16 @@ $(document).on('click', '.editEmployinfo', function(e) {
 
     Employ.getEmploy($(this).data('id')).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        var disablestatus = "";
+        if(route.submitstatus >= 9){
+            disablestatus = "disabled";
+        }
         data.prefixes.forEach(function (prefix,index) {
             var selected = '';
             if(data.employ['prefix_id'] == prefix['id']){
                 selected = 'selected';
             }
-            selectprefix += `<option value="${prefix['id']}" ${selected} >${prefix['name']}</option>`
+            selectprefix += `<option value="${prefix['id']}" ${selected} ${disablestatus}>${prefix['name']}</option>`
             if(data.employ['prefix_id'] == '5'){
                 $("#get_otherprefix_wrapper").attr("hidden",false);
                 $("#getotherprefix").val(data.employ['otherprefix']);
@@ -3345,12 +3349,16 @@ function modaltrigger(id) {
 
     Employ.getEmploy(id).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
+        var disablestatus = "";
+        if(route.submitstatus >= 9){
+            disablestatus = "disabled";
+        }
         data.prefixes.forEach(function (prefix,index) {
             var selected = '';
             if(data.employ['prefix_id'] == prefix['id']){
                 selected = 'selected';
             }
-            selectprefix += `<option value="${prefix['id']}" ${selected} >${prefix['name']}</option>`
+            selectprefix += `<option value="${prefix['id']}" ${selected} ${disablestatus} >${prefix['name']}</option>`
             });
             selectprefix += `</select>`;
         $("#employprefix_wrapper").html(selectprefix);

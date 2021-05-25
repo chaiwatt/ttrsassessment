@@ -1799,9 +1799,12 @@ th {
 																<div class="col-md-12">	
 																	<div class="input-group">													
 																		{{-- <label for="">แนบเอกสารข้อมูลทั่วไปของบริษัท <i>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ ไฟล์ pdf ขนาดไม่เกิน 2 MB)</i><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm " data-toggle="modal" data-target="#modal_add_companydoc"><i class="icon-add mr-2"></i>อัปโหลด</button></label> --}}
+																		@if ($fulltbp->minitbp->businessplan->business_plan_status_id < 9)
 																		<label for="">แนบเอกสารข้อมูลทั่วไปของบริษัท <i>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ ไฟล์ pdf ขนาดไม่เกิน 2 MB)</i>
 																			<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm " onclick="document.getElementById('companygeneraldoc').click();"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																		<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="companygeneraldoc" name="companygeneraldoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
+																		@endif
+																	
 																	</div>
 																</div>
 															</div>			

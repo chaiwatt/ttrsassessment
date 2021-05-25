@@ -1163,7 +1163,7 @@ function topLeftChart(_percent,grade){
                 },
                 data: [
                     {value: 100-percent, name: '',},
-                    {value: percent, name:   _percent + ' ' + grade},
+                    {value: percent, name:   _percent + ' / ' + grade},
     
                 ],
                  color: ['#bbbbbb', '#4688ce'],

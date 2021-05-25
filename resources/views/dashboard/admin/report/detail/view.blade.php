@@ -353,7 +353,15 @@
                                             
                                             <td> 
                                                 @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1)
-                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a>
+                                                {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
+                                                        {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a> --}}
+                                                        <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Pdf</a>
+                                                            <a href="{{route('dashboard.admin.evaluationresult.word',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
+                                                            {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a> --}}
+                                                          
+                                                        </div>
                                                     @else
                                                         <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
                                                 @endif
