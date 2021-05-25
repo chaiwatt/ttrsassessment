@@ -1141,9 +1141,30 @@ $(document).on('change', '#version', function(e) {
     }).catch(error => {})
 });
 $(document).on('change', '#percentindex', function(e) {
-    Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
 
-    }).catch(error => {})
+    Swal.fire({
+        title: 'ยืนยัน!',
+        text: `ต้องการเพิ่ม เปอร์เซนต์ Extra หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
+
+            }).catch(error => {})
+        }else{
+            
+            $('#percentindex').val(100);
+            $('#percentextra').val(0);
+        }
+    });
+
+
 });
 
 $(document).on('keyup', '#percentindex', function(e) {
