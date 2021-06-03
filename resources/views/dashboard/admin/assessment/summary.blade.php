@@ -107,43 +107,80 @@
                         <div class="row" id="chartarea" hidden>
                             <div class="col-lg-12">
                                 <div class="card">
-                                    {{-- <div class="card-header header-elements-sm-inline">
+                                    <div class="card-header header-elements-sm-inline">
                                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
-                                    </div> --}}
+                                    </div>
                                     <div class="card-body">
                                         <div class="row">
-
-                                            <div class="col-md-11 l-40 none">
+                                            <div class="col-md-2 c-20">
+                                                <canvas id="myChart" width=200  height=200 ></canvas>
+                                            </div>
+                                            <div class="col-md-9 l-40 none">
                                               <div style="margin-top: 300px;"></div>
-                                              <ul class="chart-skills">
-                                                <li>
-                                                  <span id="chartpillar4"></span>
-                                                </li>
-                                              </ul>
-                                              <ul class="chart-skills2" style="margin-top:-230px"> 
-                                                <li>
-                                                    <span id="chartpillar3"></span>
-                                                </li>
-                                              </ul>
-                                              <ul class="chart-skills3" style="margin-top:-286px"> 
-                                                <li>
-                                                    <span id="chartpillar2"></span>
-                                                </li>
-                                              </ul>
-                                              <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
-                                                <li>
-                                                    <span id="chartpillar1"></span>
-                                                </li>
-                                              </ul>
+                                              <div id="mainchart" >
+                                                <ul class="chart-skills">
+                                                    <li>
+                                                      <span id="chartpillar4"></span>
+                                                    </li>
+                                                  </ul>
+                                                  <ul class="chart-skills2"> 
+                                                    <li>
+                                                        <span id="chartpillar3"></span>
+                                                    </li>
+                                                  </ul>
+                                                  <ul class="chart-skills3"> 
+                                                    <li>
+                                                        <span id="chartpillar2"></span>
+                                                    </li>
+                                                  </ul>
+                                                  <ul class="chart-skills4 l-30"> 
+                                                    <li>
+                                                        <span id="chartpillar1"></span>
+                                                    </li>
+                                                  </ul>
+                                                  {{-- <ul class="chart-skills4 l-30" style="margin-top:-344px" onload="play('rotate-four')"> 
+                                                    <li>
+                                                        <span id="chartpillar1"></span>
+                                                        <script>
+                                                            var angle = 120;
+                                                            var supportedFlag = $.keyframe.isSupported();
+                                                            $('.chart-skills4').find('li:nth-child(1) span').css({'transform':`rotate(-${angle}deg)`});
+                                                            $('.chart-skills4').find('span:nth-child(1)').text(`${(angle/1.8).toFixed(2)}%`);
+                                                            $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
+                                                            $(document).ready(function() {
+                                                            $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
+                                                            $.keyframe.define([{
+                                                            name: 'rotate-four',
+                                                            '100%': {
+                                                                'transform': `rotate(${angle}deg)`,
+                                                            }
+                                                            }]);
+                                                            });
+                                                            $('.chart-skills4').find('li:nth-child(1)').playKeyframe({
+                                                                        name: 'rotate-four',
+                                                                        duration: "4s",
+                                                                        timingFunction: 'linear',
+                                                                        fillMode: 'forwards',
+                                                                    
+                                                                    });
+                                                            
+                                                        </script>
+                                                    </li>
+                                                  </ul> --}}
+                                              </div>
+                                              <div>
+                                                <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" alt="" srcset="">
+                                            </div>
+                
                                               {{-- <div class="text-min"> 
                                                 min
                                               </div>
                                               <div class="text-max">
-                                                max
-                                              </div> --}}
+                                                max --}}
+                                              {{-- </div> --}}
                                             </div>
-                                            <div class="col-md-1">
-                                                  <table class="table-score table-bordered table-dark">
+                                            <div class="col-md-1 c-100">
+                                                  <table class="table-score table-7 table-bordered table-dark">
                                                 <thead>
                                                   <tr>
                                                    
@@ -201,7 +238,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <div class="row">
+                                        <div class="row l-50">
                                             <div class="col-md-3">
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -274,7 +311,7 @@
                                             </div>
                                         </div>
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

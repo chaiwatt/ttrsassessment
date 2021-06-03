@@ -208,7 +208,7 @@ table {
     border-top-left-radius: 175px;
     border-top-right-radius: 175px;
   }
-  
+    
   
   .chart-skills li {
     position: absolute;
@@ -256,6 +256,7 @@ table {
   @keyframes rotate-one {
     100% {
       transform: rotate(0deg);
+      /* transform: rotate(113.2deg); */
       /**
        * 62.94%	62.94/100 * 180 = 113.2
        */
@@ -281,14 +282,13 @@ table {
 
   /* RESET STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  ul .chart-skills2 {
-    margin-top: -230px;
-  }
-
+ 
+ 
   .chart-skills2 {
     margin: 0 auto;
     padding: 0;
     list-style-type: none;
+    margin-top: -230px;
   }
   
   .chart-skills2 *,
@@ -369,6 +369,7 @@ table {
   @keyframes rotate-two {
     100% {
       transform: rotate(0deg);
+      /* transform: rotate(131.6deg); */
       /**
        * 62.94%	62.94/100 * 180 = 131.6
        */
@@ -414,6 +415,7 @@ table {
     position: relative;
     width: 572px;
     height: 286px;
+    margin-top: -286px;
     overflow: hidden;
   }
   
@@ -478,6 +480,7 @@ table {
   
   @keyframes rotate-three {
     100% {
+      /* transform: rotate(152.5deg); */
       transform: rotate(0deg);
       /**
        * 84.76%	84.76/100 * 180 = 152.5
@@ -501,13 +504,11 @@ table {
 
   /* RESET STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  ul .chart-skills4 {
-    margin-top: -286px;
-  }
 
   .chart-skills4 {
     margin: 0 auto;
     padding: 0;
+    margin-top: -344px;
     list-style-type: none;
   }
   
@@ -583,12 +584,14 @@ table {
   }
   
   
+  
   /* ANIMATIONS
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   
   @keyframes rotate-four {
     100% {
-      transform: rotate(0deg);
+       transform: rotate(0deg);
+      /* transform: rotate(169.7deg); */
       /**
        * 94.31%	94.31/100 * 180 = 169.7
        */
@@ -609,37 +612,848 @@ table {
   .l-40{
     margin-left: -100px;
   }
-  .text-max {
-    margin: -25px 800px;
+  .text-min {
+    margin: -14px 107px;
+    }
+    .text-max {
     width: 100%;
-}
-.text-min {
-  margin: -18px 70px;
+    margin: -20px 826px;
+    }
+
+.gauge1{
+  margin-top: -339px;
+  margin-left: 145px;
+  position: absolute;
+  z-index: 10;
 }
 
-  @media(max-width:1210px) {
-      .none{
-          display: none;
-      }
-  }
-  @media(max-width:1220px) and (max-width:1310px) {
-    .chart-skills4 {
-      position: relative;
-      width: 688px;
-      height: 344px;
-      overflow: hidden;
-  }
-  .l-30{
-    margin-left: -33px;
-  }
-  .l-100{
-    margin-left: -100px;
-  }
-  .text-max {
-    margin: -18px 666px;
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+@media(max-width:1024px),(max-width:1300px) {
+ .l-40{
+   margin-left: -100px !important;
+ }
+ .c-table {
+  margin-left: -15px !important;
+}
+  .chart-skills {
+    position: relative !important;
+    width: 202px !important;
+    height: 101px !important;
+    margin-left: 152px !important; 
+    overflow: hidden !important;
+}
+.chart-skills2 {
+    position: relative !important;
+    width: 306px !important;
+    height: 154px !important;
+    margin-top: -154px !important;
+    margin-left: 100px !important;
+    overflow: hidden !important;
+}
+.chart-skills3 {
+    position: relative !important;
+    width: 420px !important;
+    height: 210px !important;
+    margin-top: -210px !important;
+    margin-left: 44px !important;
+    overflow: hidden;
+}
+.chart-skills4 {
+    position: relative !important;
+    width: 527px !important;
+    height: 264px !important;
+    margin-top: -264px !important;
+    margin-left: -8px !important;
+    overflow: hidden !important;
+}
+.table-7{
+margin-left: 7px !important;
 }
 .text-min {
-  margin: -16px -59px;
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-sm-6 {
+flex: 0 0 100%;
+max-width: 100%;
+padding-left: 30px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+.gauge1{
+  width: 512px !important;
+  height: 256px !important;
+    margin-top: -254px !important;
+    margin-left: 5px !important;
+    position: absolute !important;
+    z-index: 10 !important;
+}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/* ***************************************************** */
+@media(max-width:768px){
+  .l-40 {
+    margin-left: -16px !important;
+}
+.c-table{
+  margin-left: -600px !important;
+}
+
+.chart-skills {
+position:relative;
+width: 123px !important;
+height: 61px !important;
+margin-left: 28.1% !important;
+margin-top: -61px;
+overflow: hidden;
+}
+.chart-skills2 {
+position: relative;
+width: 223px !important;
+height: 111px !important;
+margin-top: -111px !important;
+margin-left: 11% !important;
+overflow: hidden;
+}
+.chart-skills3 {
+position: relative;
+width: 326px !important;
+height: 164px !important;
+margin-top: -164px !important;
+margin-left: -21px !important;
+overflow: hidden;
+}
+.chart-skills4 {
+position: relative;
+width: 434px !important;
+height: 217px !important;
+margin-top: -217px !important;
+margin-left: -73px !important;
+overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+padding-top: 20px;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+  display: block !important;
+  height: 120px !important;
+  width: 120px !important;
+}
+
+.table-7{
+  margin-bottom: -904px !important;
+  margin-top: 476px !important;
+  margin-left: -362px !important;
+
+}
+.l-50{
+padding-left: 50px;
+}
+.gauge1{
+width: 304px !important;
+height: 227px !important;
+margin-top: -224px !important;
+margin-left: -4px !important;
+position: absolute !important;
+z-index: 10 !important;
+}
+
+}
+
+
+
+
+
+
+
+/* ***************************************************** */
+@media(max-width:970px){
+.l-40 {
+  margin-left: -16px !important;
+}
+.c-table{
+  margin-left: -362px !important;
+}
+
+.chart-skills {
+position:relative;
+width: 123px !important;
+height: 61px !important;
+margin-left: 81px !important;
+margin-top: -61px;
+overflow: hidden;
+}
+.chart-skills2 {
+position: relative;
+width: 223px !important;
+height: 111px !important;
+margin-top: -111px !important;
+margin-left: 31px !important;
+overflow: hidden;
+}
+.chart-skills3 {
+position: relative;
+width: 326px !important;
+height: 164px !important;
+margin-top: -164px !important;
+margin-left: -21px !important;
+overflow: hidden;
+}
+.chart-skills4 {
+position: relative;
+width: 434px !important;
+height: 217px !important;
+margin-top: -217px !important;
+margin-left: -73px !important;
+overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+padding-top: 20px;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+display: block !important;
+height: 120px !important;
+width: 120px !important;
+}
+
+.table-7{
+margin-bottom: -904px !important;
+margin-top: 476px !important;
+margin-left: -362px !important;
+
+}
+.l-50{
+padding-left: 50px;
+}
+.gauge1{
+width: 304px !important;
+height: 227px !important;
+margin-top: -224px !important;
+margin-left: -4px !important;
+position: absolute !important;
+z-index: 10 !important;
+}
+
+
+}
+
+
+
+
+/* ***************************************************** */
+@media(max-width:767px){
+.l-40 {
+  margin-left: 48px !important;
+  margin-top: -100px;
+}
+
+.chart-skills {
+position:relative;
+width: 123px !important;
+height: 61px !important;
+margin-left: 81px !important;
+margin-top: -61px;
+overflow: hidden;
+}
+.chart-skills2 {
+position: relative;
+width: 223px !important;
+height: 111px !important;
+margin-top: -111px !important;
+margin-left: 31px !important;
+overflow: hidden;
+}
+.chart-skills3 {
+position: relative;
+width: 326px !important;
+height: 164px !important;
+margin-top: -164px !important;
+margin-left: -21px !important;
+overflow: hidden;
+}
+.chart-skills4 {
+position: relative;
+width: 434px !important;
+height: 217px !important;
+margin-top: -217px !important;
+margin-left: -73px !important;
+overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+padding-top: 20px;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+display: block !important;
+height: 120px !important;
+width: 120px !important;
+}
+
+.table-7{
+margin-bottom: -910px !important;
+margin-top: 211px !important;
+margin-left: 5px !important;
+width: 16% !important;
+}
+
+
+
+.l-50{
+padding-left: 50px;
+}
+}
+
+
+
+
+/* ***************************************************** */
+@media(max-width:500px){
+  .l-40 {
+    margin-left: 85px !important;
+    margin-top: -100px;
+}
+.c-table {
+  margin-left: -50px !important;
+}
+
+.chart-skills {
+  position: relative;
+  width: 79px !important;
+  height: 39px !important;
+  margin-left: 57px !important;
+  margin-top: -39px;
+  overflow: hidden;
+}
+.chart-skills2 {
+  position: relative;
+  width: 154px !important;
+  height: 77px !important;
+  margin-top: -77px !important;
+  margin-left: 20px !important;
+  overflow: hidden;
+}
+.chart-skills3 {
+  position: relative;
+  width: 231px !important;
+  height: 115px !important;
+  margin-top: -115px !important;
+  margin-left: -18px !important;
+  overflow: hidden;
+}
+.chart-skills4 {
+  position: relative;
+  width: 305px !important;
+  height: 153px !important;
+  margin-top: -153px !important;
+  margin-left: -54px !important;
+  overflow: hidden;
+}
+.text-min {
+margin: -16px 105px;
+display: none;
+}
+.text-max {
+width: 100%;
+margin: -20px 826px;
+display: none;
+}
+.col-md-3 {
+flex: 0 0 100%;
+max-width: 100%;
+}
+.col-sm-6 {
+flex: 0 0 -1%;
+max-width: 50%;
+padding-left: 30px;
+margin-left: -29px;
+}
+h2{
+font-weight: bold;
+}
+h4{
+font-weight: bold;
+}
+h5 {
+font-size: 1.3rem;
+font-weight: bold;
+}
+h6{
+font-weight: bold;
+padding-top: 20px;
+}
+#myChart{
+  display: block !important;
+  height: 120px !important;
+  width: 120px !important;
+}
+
+.table-7 {
+  margin-bottom: -910px !important;
+  margin-top: 70px !important;
+  margin-left: -24px !important;
+  width: 115% !important;
+  font-size: 20px;
+}
+.l-50{
+padding-left: 5px;
+padding-top: 580px;
+}
+.gauge1 {
+  width: 225px !important;
+  height: 160px !important;
+  margin-top: -159px !important;
+  margin-left: -11px !important;
+  position: absolute !important;
+  z-index: 10 !important;
+}
+}
+
+@media(max-width:375px){
+  .c-table{
+    margin-left: -350px !important;
+    margin-top: 200px;
   }
+}
+/* ***************************************************** */
+@media(max-width:425px){
+  .l-40 {
+    margin-left: 40px !important;
+    margin-top: -100px;
+}
+.chart-skills::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 45px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+
+.chart-skills::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 35px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+
+.chart-skills li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 35px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+
+.chart-skills2::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 35px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+.chart-skills2 li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 35px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+.chart-skills3::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 35px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+.chart-skills3 li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 35px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+.chart-skills4::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 35px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+.chart-skills4 li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 35px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+
+}
+/* ***************************************************** */
+
+@media(max-width:375px){
+  .c-table{
+    margin-left: -350px !important;
+    margin-top: 200px;
+  }
+}
+ 
+  .c-20{
+    margin-left: 30px;
+  }
+      
+  .chart-skills {
+    position: relative;
+    width: 276px;
+    height: 138px;
+    margin-left: 160px;
+    overflow: hidden;
+}
+.chart-skills2 {
+  position: relative;
+  width: 395px;
+  height: 197px;
+  margin-top: -197px;
+  margin-left: 102px;
+  overflow: hidden;
+}
+.chart-skills3 {
+  position: relative;
+  width: 510px;
+  height: 252px;
+  margin-top: -254px;
+  margin-left: 46px;
+  overflow: hidden;
+}
+.chart-skills4 {
+  position: relative;
+  width: 624px;
+  height: 311px;
+  margin-top: -311px;
+  margin-left: -8px;
+  overflow: hidden;
+}
+.l-40{
+  margin-left:-30px;
+}
+.table-7{
+margin-left: -150px;
+}
+
+.gauge1 {
+  width: 682px;
+  height: 316px;
+  margin-top: -312px;
+  margin-left: -25px;
+  position: absolute;
+  z-index: 10;
+}
+
+.text-min {
+  margin: -14px -38px;
+}
+    .text-max {
+      width: 100%;
+      margin: -20px 623px;
+  }
+
+
+/* ***************************************************** */
+
+@media(max-width:1440px),(max-width:1868px){
+  .c-table {
+    margin-left: -70px;
+  }
+      
+  .chart-skills {
+    position: relative;
+    width: 276px;
+    height: 138px;
+    margin-left: 160px;
+    overflow: hidden;
+}
+.chart-skills2 {
+  position: relative;
+  width: 395px;
+  height: 197px;
+  margin-top: -197px;
+  margin-left: 102px;
+  overflow: hidden;
+}
+.chart-skills3 {
+  position: relative;
+  width: 510px;
+  height: 252px;
+  margin-top: -254px;
+  margin-left: 46px;
+  overflow: hidden;
+}
+.chart-skills4 {
+  position: relative;
+  width: 624px;
+  height: 311px;
+  margin-top: -311px;
+  margin-left: -8px;
+  overflow: hidden;
+}
+.table-7{
+margin-left: 20px !important;
+}
+.gauge1 {
+  width: 682px;
+  height: 316px;
+  margin-top: -312px;
+  margin-left: -25px;
+  position: absolute;
+  z-index: 10;
+}
+
+.text-min {
+  margin: -14px -38px;
+}
+    .text-max {
+      width: 100%;
+      margin: -20px 623px;
+  }
+
+}
+
+
+@media(min-width:1920px),(max-width:1920px){
+ 
+  .c-20{
+    margin-left: 30px;
+  }
+      
+  .chart-skills {
+    position: relative;
+    width: 344px;
+    height: 170px;
+    margin-left: 162px;
+    overflow: hidden;
+}
+.chart-skills2 {
+  position: relative;
+  width: 455px;
+  height: 227px;
+  margin-top: -228px;
+  margin-left: 108px;
+  overflow: hidden;
+}
+.chart-skills3 {
+  position: relative;
+  width: 566px;
+  height: 281px;
+  margin-top: -281px;
+  margin-left: 52px;
+  overflow: hidden;
+}
+.chart-skills4 {
+  position: relative;
+  width: 687px;
+  height: 343px;
+  margin-top: -343px;
+  margin-left: -8px;
+  overflow: hidden;
+}
+.l-40{
+  margin-left:-30px;
+}
+.table-7{
+margin-left: -450px;
+width: 99px;
+margin-top: 10px;
+}
+
+.gauge1 {
+  width: 682px;
+  height: 316px;
+  margin-top: -312px;
+  margin-left: -5px;
+  position: absolute;
+  z-index: 10;
+}
+
+.text-min {
+  margin: -14px -38px;
+}
+    .text-max {
+      width: 100%;
+      margin: -20px 623px;
+  }
+}

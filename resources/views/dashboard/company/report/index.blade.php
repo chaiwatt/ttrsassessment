@@ -69,7 +69,7 @@
             @endforeach
         </div>
         @if (@$businessplans->first()->business_plan_status_id > 2)
-            @if (@$businessplans->first()->business_plan_status_id >=  9)
+            @if (@$businessplans->first()->business_plan_status_id >= 9)
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card bg-teal-400">
@@ -104,32 +104,32 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header header-elements-sm-inline">
-                                <h6 class="card-title" style="font-size:16px;font-weight: bold">ร้อยละเกรดแยกตาม Pillar</h6>
+                                <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 c-20">
                                         <canvas id="myChart" width=200  height=200 ></canvas>
                                     </div>
                                     <div class="col-md-9 l-40 none">
                                       <div style="margin-top: 300px;"></div>
-                                      <div id="mainchart">
+                                      <div id="mainchart" >
                                         <ul class="chart-skills">
                                             <li>
                                               <span id="chartpillar4"></span>
                                             </li>
                                           </ul>
-                                          <ul class="chart-skills2" style="margin-top:-230px"> 
+                                          <ul class="chart-skills2"> 
                                             <li>
                                                 <span id="chartpillar3"></span>
                                             </li>
                                           </ul>
-                                          <ul class="chart-skills3" style="margin-top:-286px"> 
+                                          <ul class="chart-skills3"> 
                                             <li>
                                                 <span id="chartpillar2"></span>
                                             </li>
                                           </ul>
-                                          <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                          <ul class="chart-skills4 l-30"> 
                                             <li>
                                                 <span id="chartpillar1"></span>
                                             </li>
@@ -164,6 +164,9 @@
                                             </li>
                                           </ul> --}}
                                       </div>
+                                      <div>
+                                        <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" alt="" srcset="">
+                                    </div>
         
                                       {{-- <div class="text-min"> 
                                         min
@@ -171,6 +174,176 @@
                                       <div class="text-max">
                                         max --}}
                                       {{-- </div> --}}
+                                    </div>
+                                    <div class="col-md-1 c-100">
+                                          <table class="table-score table-7 table-bordered table-dark">
+                                        <thead>
+                                          <tr>
+                                           
+                                            <td class="bg-01 white" colspan="2">Level Classification</td>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr class="bg-02">
+                                            <td style="width:70px"> 87-100</td>
+                                            <td>AAA</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>80-86</td>
+                                            <td>AA</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>74-79</td>
+                                            <td>A</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>70-73</td>
+                                            <td>BBB</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>64-69</td>
+                                            <td>BB</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>56-63</td>
+                                            <td>B</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>54-55</td>
+                                            <td>CCC</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>51-52</td>
+                                            <td>CC</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>48-50</td>
+                                            <td>C</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>25-47</td>
+                                            <td>D</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>0-24</td>
+                                            <td>E</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row l-50">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6"></div>
+                                                    <div class="col-sm-6"> 
+                                                        <h2><span style="font-weight: bold"> 01</span></h2>
+                                                        <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h6 class="color-01" style="font-weight: bold">Management</h6>
+                                                <h5><span id="pillar1"></span></h5>
+                                                <h4 class="color-01"><span id="gradepillar1"></span></h4>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6"></div>
+                                                    <div class="col-sm-6"> 
+                                                        <h2><span style="font-weight: bold"> 02</span></h2>
+                                                        <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h6 class="color-02" style="font-weight: bold">Technology</h6>
+                                                <h5><span id="pillar2"></span></h5>
+                                                <h4 class="color-02"><span id="gradepillar2"></span></h4>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"> 
+                                        <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6"> 
+                                                    <h2><span style="font-weight: bold"> 03</span></h2>
+                                                    <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6 class="color-03" style="font-weight: bold">Marketability</h6>
+                                            <h5><span id="pillar3"></span></h5>
+                                            <h4 class="color-03"><span id="gradepillar3"></span></h4>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-md-3">  <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6"> 
+                                                    <h2><span style="font-weight: bold"> 04</span></h2>
+                                                    <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                            <h5><span id="pillar4"></span></h5>
+                                            <h4 class="color-04"><span id="gradepillar4"></span></h4>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="card">
+                            <div class="card-header header-elements-sm-inline">
+                                <h6 class="card-title" style="font-size:16px;font-weight: bold">ร้อยละเกรดแยกตาม Pillar</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <canvas id="myChart" width=200  height=200 ></canvas>
+                                    </div>
+                                    <div class="col-md-9 l-40 none">
+                                      <div style="margin-top: 300px;"></div>
+                                      <div id="mainchart">
+                                        <ul class="chart-skills">
+                                            <li>
+                                              <span id="chartpillar4"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills2" style="margin-top:-230px"> 
+                                            <li>
+                                                <span id="chartpillar3"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills3" style="margin-top:-286px"> 
+                                            <li>
+                                                <span id="chartpillar2"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                            <li>
+                                                <span id="chartpillar1"></span>
+                                            </li>
+                                          </ul>
+
+                                      </div>
+        
                                     </div>
                                     <div class="col-md-1">
                                           <table class="table-score table-bordered table-dark">
@@ -305,7 +478,7 @@
                                 </div>
                                 </div>
                               </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             @endif

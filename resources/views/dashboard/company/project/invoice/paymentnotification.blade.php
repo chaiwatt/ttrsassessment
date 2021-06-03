@@ -80,13 +80,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})<span class="text-danger">*</span></label>
-                                        <input type="text"  name="paymentdate" id="paymentdate" value=""  placeholder="วันที่" class="form-control form-control-lg dmyformat">
+                                        <input type="text"  name="paymentdate" id="paymentdate" value="{{old('paymentdate')}}"  placeholder="วันที่" class="form-control form-control-lg dmyformat">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
-                                        <input type="text"  name="paymenttime" value="" placeholder="เวลา" class="form-control form-control-lg timeformat">
+                                        <input type="text"  name="paymenttime" value="{{old('paymenttime')}}" placeholder="เวลา" class="form-control form-control-lg timeformat">
                                     </div>
                                 </div>
                                 <div class="col-md-6">

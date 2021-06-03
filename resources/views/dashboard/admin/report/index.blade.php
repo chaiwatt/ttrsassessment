@@ -285,8 +285,8 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
-                                <canvas id="myChart" width=200  height=200 ></canvas>
+                            <div class="col-md-2 c-20">
+                                <canvas id="myChart" width=180  height=180 ></canvas>
                             </div>
                             <div class="col-md-9 l-40 none">
                               <div style="margin-top: 300px;"></div>
@@ -296,17 +296,17 @@
                                       <span id="chartpillar4"></span>
                                     </li>
                                   </ul>
-                                  <ul class="chart-skills2" style="margin-top:-230px"> 
+                                  <ul class="chart-skills2"> 
                                     <li>
                                         <span id="chartpillar3"></span>
                                     </li>
                                   </ul>
-                                  <ul class="chart-skills3" style="margin-top:-286px"> 
+                                  <ul class="chart-skills3"> 
                                     <li>
                                         <span id="chartpillar2"></span>
                                     </li>
                                   </ul>
-                                  <ul class="chart-skills4 l-30" style="margin-top:-344px"> 
+                                  <ul class="chart-skills4 l-30"> 
                                     <li>
                                         <span id="chartpillar1"></span>
                                     </li>
@@ -341,6 +341,9 @@
                                     </li>
                                   </ul> --}}
                               </div>
+                              <div>
+                                <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" data-aos-delay="1600" alt="" srcset="">
+                            </div>
 
                               {{-- <div class="text-min"> 
                                 min
@@ -349,8 +352,8 @@
                                 max --}}
                               {{-- </div> --}}
                             </div>
-                            <div class="col-md-1">
-                                  <table class="table-score table-bordered table-dark">
+                            <div class="col-md-1 c-table">
+                                  <table class="table-score table-7 table-bordered table-dark">
                                 <thead>
                                   <tr>
                                    
@@ -408,7 +411,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="row">
+                        <div class="row l-50">
                             <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -481,7 +484,7 @@
                             </div>
                         </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
