@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-2 c-20">
+                                            <div class="col-md-1 c-20">
                                                 <canvas id="myChart" width=200  height=200 ></canvas>
                                             </div>
                                             <div class="col-md-9 l-40 none">
