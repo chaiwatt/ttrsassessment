@@ -288,7 +288,7 @@
                             <div class="col-md-2 c-20">
                                 <canvas id="myChart" width=180  height=180 ></canvas>
                             </div>
-                            <div class="col-md-8 l-40 none">
+                            <div class="col-md-9 l-40 none">
                               <div style="margin-top: 300px;"></div>
                               <div id="mainchart" hidden>
                                 <ul class="chart-skills">
@@ -357,7 +357,7 @@
                                 <thead>
                                   <tr>
                                    
-                                    <td class="bg-01 white" colspan="2"  style="width:1%;white-space: nowrap">Level Classification</td>
+                                    <td class="bg-01 white" colspan="2" >Level Classification</td>
                                   </tr>
                                 </thead>
                                 <tbody>
