@@ -341,7 +341,7 @@
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนน/เกรด</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="min-height: 250px">
                             <table class="table table-bordered"  >
                                 <thead>
                                     <tr>
