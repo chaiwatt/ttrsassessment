@@ -6,6 +6,10 @@
         padding-left:5px !important;
         padding-right:5px !important;
     }
+
+    textarea{
+        font-size: 16px !important;
+    }
 </style>
 @stop
 @section('content')
