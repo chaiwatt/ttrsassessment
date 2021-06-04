@@ -2,8 +2,11 @@
 @section('pageCss')
 <style>
     td{
-        padding-left:5px !important;
-        padding-right:5px !important;
+        padding-left:10px !important;
+        padding-right:10px !important;
+    }
+    textarea{
+        font-size: 16px !important;
     }
 </style>
 @stop

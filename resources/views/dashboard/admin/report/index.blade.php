@@ -342,7 +342,7 @@
                                   </ul> --}}
                               </div>
                               <div>
-                                <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" data-aos-delay="1600" alt="" srcset="">
+                                {{-- <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" data-aos-delay="1600" alt="" srcset=""> --}}
                             </div>
 
                               {{-- <div class="text-min"> 
@@ -353,16 +353,16 @@
                               {{-- </div> --}}
                             </div>
                             <div class="col-md-1 c-table">
-                                  <table class="table-score table-7 table-bordered table-dark">
+                                  <table class="table-score table-7 table-bordered table-dark" >
                                 <thead>
                                   <tr>
                                    
-                                    <td class="bg-01 white" colspan="2">Level Classification</td>
+                                    <td class="bg-01 white" colspan="2"  style="width:1%;white-space: nowrap">Level Classification</td>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr class="bg-02">
-                                    <td style="width:70px"> 87-100</td>
+                                    <td style="width:100px"> 87-100</td>
                                     <td>AAA</td>
                                   </tr>
                                   <tr class="bg-03">

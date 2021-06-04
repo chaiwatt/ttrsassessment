@@ -1,6 +1,6 @@
 $(document).on("click","#notifyuser",function(e){
     Swal.fire({
-        title: 'ยืนยัน!',
+        title: 'ยืนยัน',
         text: `ต้องการแจ้งใบแจ้งหนี้ หรือไม่`,
         // type: 'warning',
         showCancelButton: true,

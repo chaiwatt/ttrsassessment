@@ -277,9 +277,9 @@
                                                     @endif
                                                 @endif
                                             </td> 
-                                            <td>{{$user->projecthandle->count()}}</td>      
-                                            <td>{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
-                                            <td>{{$user->projecthandle->where('ststus',3)->count()}}</td> 
+                                            <td class="text-center">{{$user->projecthandle->count()}}</td>      
+                                            <td class="text-center">{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
+                                            <td class="text-center">{{$user->projecthandle->where('ststus',3)->count()}}</td> 
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -289,14 +289,14 @@
                         @if (Auth::user()->user_type_id == 4 && $fulltbp->assignexpert != 2)
                             <div class="form-group">
                                 <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">บันทึก <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </div>
                         @endif
                         @if (Auth::user()->user_type_id == 6 && $fulltbp->assignexpert !=2)
                         <div class="form-group">
                             <div class="text-right">
-                                <button type="button" id="jdconfirmteam" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ยืนยันทีมผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
+                                <button type="button" id="jdconfirmteam" class="btn bg-teal" ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ยืนยันทีมผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
                             </div>
                         </div>
                     @endif
@@ -384,14 +384,7 @@
                     })
                .catch(error => {})
             }
-        });
-
-
-
-
-
-
-        
+        });     
     });
     // 
 
@@ -413,5 +406,26 @@
             })
         })
     }
+
+    
+    function confirmsubmit(e) {
+            e.preventDefault();
+            var frm = e.target.form;
+            Swal.fire({
+                    title: 'ยืนยัน',
+                    text: `ต้องการส่งรายการมอบหมายหรือไม่? `,
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง',
+                    cancelButtonText: 'ยกเลิก',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                if (result.value) {
+                    frm.submit();
+                }
+            });
+        }
     </script>
 @stop

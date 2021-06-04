@@ -163,7 +163,7 @@
             e.preventDefault();
             var urlToRedirect = e.currentTarget.getAttribute('href');
             Swal.fire({
-                    title: 'ยืนยัน!',
+                    title: 'ยืนยัน',
                     text: `ต้องการสิ้นสุดโครงการหรือไม่? `,
                     type: 'warning',
                     showCancelButton: true,
@@ -180,7 +180,7 @@
         }
         $(document).on("click",".confirmsendletter",function(e){
             Swal.fire({
-                title: 'ยืนยัน!',
+                title: 'ยืนยัน',
                 text: `ยืนยันการส่งจดหมายแล้ว หรือไม่`,
                 type: 'warning',
                 showCancelButton: true,

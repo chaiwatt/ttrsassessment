@@ -303,7 +303,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $existing_array = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
         $unique_array = array_diff($request->expert,$existing_array);
         if(count($unique_array) == 0){
-            return redirect()->back()->withSuccess('แก้ไขรายการสำเร็จ'); 
+            return redirect()->back(); 
         }
         $experts = '';
         foreach ($unique_array as $key => $expert) {

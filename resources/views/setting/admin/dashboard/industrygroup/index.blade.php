@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="float-right">
+                        <div class="float-right mb-2">
                             <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel</button>
                             <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก Pdf</button>
                         </div>

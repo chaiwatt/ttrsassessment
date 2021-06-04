@@ -129,6 +129,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
     $("#spinicon_edit_employ").attr("hidden",false);
     Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {   
         var html = ``;
+        console.log(data);
         data.forEach(function (employ,index) {
             var prefix = employ.prefix['name'];
             var position = employ.employposition['name'];
@@ -140,27 +141,28 @@ $(document).on('click', '#btn_edit_employ', function(e) {
             }	
 
             if($('#employtype').val() == 'employee'){
+                
                 if(employ.employ_position_id > 5){
                     html += `<tr >                                        
-                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                        <td> ${prefix}${employ.name} ${employ.lastname}</td>                                            
                         <td> ${position} </td> 
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                        <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="employee"  class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a data-id="${employ.id}" data-type="employee"  class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                     </tr>`
                  }
              }else if($('#employtype').val() == 'board'){
-                if(employ.employ_position_id > 1){
+                if(employ.employ_position_id > 1 & employ.employ_position_id <= 5){
                     html += `<tr >                                        
                     <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td> ${position} </td> 
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                    <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                    <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                 </tr>`
                 }
              }else if($('#employtype').val() == 'ceo'){
@@ -171,8 +173,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td style="white-space: nowrap"> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                    <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
+                    <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
                 </tr>`
                 }
 
@@ -234,7 +236,7 @@ $(document).on("click",".deletecompanyemploy",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <td style="white-space: nowrap"> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                         </tr>`
                         }
@@ -270,7 +272,7 @@ $(document).on("click",".deletecompanyceo",function(e){
             Employ.deleteEmployInfo($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (employ,index) {
-                    if(employ.employ_position_id < 6 ){
+                    if(employ.employ_position_id == 1 ){
                         var prefix = employ.prefix['name'];
                         var position = employ.employposition['name'];
                         if(prefix == 'อื่นๆ'){
@@ -285,8 +287,8 @@ $(document).on("click",".deletecompanyceo",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                            <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
+                            <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
                         </tr>`
                         }
                     });
@@ -572,7 +574,7 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
             html += `<tr >                                        
                 <td> ${stockholder.name}</td>                                            
                 <td> ${stockholder.ceorelation} </td>                                           
-                <td style="white-space: nowrap"> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
+                <td style="width:180px;white-space: nowrap"> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
             </tr>`
             });
         $("#fulltbp_companystockholder_wrapper_tr").html(html);
@@ -3197,7 +3199,10 @@ $(document).on('click', '.editEmployinfo', function(e) {
     $('#left-icon-employexpereince').removeClass("show active");
     $('#left-icon-employtraining').removeClass("show active");
     $('#left-icon-attachment').removeClass("show active");
+    // $('#btn_edit_employ').data('type',$(this).data('type'))
 
+    $('#employtype').val($(this).data('type'))
+    console.log($(this).data('type'));
     Employ.getEmploy($(this).data('id')).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         var disablestatus = "";
@@ -3505,8 +3510,8 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                    <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
+                    <td style="white-space: nowrap"> <a data-type="board" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a  data-id="${employ.id}" data-type="board"  class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
                 </tr>`
             }
       
@@ -3554,8 +3559,8 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
                     <td> ${employ.phone} </td>                                            
                     <td> ${employ.workphone} </td> 
                     <td> ${employ.email} </td> 
-                    <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                    <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
+                    <td style="white-space: nowrap"> <a data-type="ceo" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                    <a  data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td> 
                 </tr>`
             }
       
@@ -3596,8 +3601,8 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
+                        <td style="white-space: nowrap"> <a data-type="employee" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <a  data-id="${employ.id}" data-type="employee" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                     </tr>`
                 }
             });
@@ -3645,7 +3650,7 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                         </tr>`
                     }
@@ -3705,7 +3710,7 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
                         <td> ${employ.phone} </td>                                            
                         <td> ${employ.workphone} </td> 
                         <td> ${employ.email} </td> 
-                        <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                        <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                         <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                     </tr>`
                 }
@@ -3747,7 +3752,7 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
                             <td> ${employ.phone} </td>                                            
                             <td> ${employ.workphone} </td> 
                             <td> ${employ.email} </td> 
-                            <td> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                         </tr>`
                     }

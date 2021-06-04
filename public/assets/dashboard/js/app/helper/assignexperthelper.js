@@ -190,7 +190,7 @@ function assignExpert(id,status,fulltbpid){
 
 $(document).on('click', '.assingexpert', function(e) {
   Swal.fire({
-    title: 'ยืนยัน!',
+    title: 'ยืนยัน',
     text: `ต้องการมอบหมายผู้เชี่ยวชาญ หรือไม่`,
     type: 'warning',
     showCancelButton: true,

@@ -235,7 +235,7 @@
                                                         <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$company->businessplan->minitbp->fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
                                                         @else
                                                         
-                                                        <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
+                                                        <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                                         @endif
                                                         
                                                     
@@ -251,7 +251,12 @@
                         <div class="col-md-12" {{$hidden}}>
                             <div class="card">
                                 <div class="card-header header-elements-sm-inline">
-                                    <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการเอกสาร BOL</h6>
+                                    <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการเอกสาร BOL
+                                    
+                                    @if ($bols->count() == 0)
+                                    <span class="text-pink-600"> (ยังไม่ได้อัปโหลด)</span>
+                                    @endif
+                                    </h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -259,7 +264,7 @@
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th >ชื่อเอกสาร</th> 
-                                                    <th style="width:1%">เพิ่มเติม</th> 
+                                                    <th style="width:1%;white-space: nowrap">เพิ่มเติม</th> 
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -349,8 +354,20 @@
                                 </thead>
                                 <tbody >
                                     <tr>
-                                        <td>{{number_format(@$company->businessplan->minitbp->fulltbp->projectgrade->percent, 2, '.', '')}}</td>  
-                                        <td>{{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}</td>
+                                        <td>
+                                            @if ($company->businessplan->business_plan_status_id >= 8)
+                                            {{number_format(@$company->businessplan->minitbp->fulltbp->projectgrade->percent, 2, '.', '')}}
+                                            @else
+                                            <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
+                                            @endif
+                                        </td>  
+                                        <td>
+                                            @if ($company->businessplan->business_plan_status_id >= 8)
+                                            {{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}
+                                            @else
+                                            <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
+                                            @endif
+                                        </td>
                                         
                                         <td> 
                                             @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1)
@@ -364,7 +381,7 @@
                                                       
                                                     </div>
                                                 @else
-                                                    <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
+                                                    <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                             @endif
                                         </td>
                                         <td>
@@ -378,12 +395,17 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <span class="badge badge-flat border-pink text-pink-600">กำลังดำเนินการ</span>
+                                                <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                             @endif
 
                                         </td>
                                         <td  style="white-space: nowrap">
+                                            @if ($company->businessplan->business_plan_status_id >= 8)
                                             <a  href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
+                                            @else
+                                            <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
+                                            @endif
+                                            
                                         </td>                                     
                                     </tr>  
                                 </tbody>

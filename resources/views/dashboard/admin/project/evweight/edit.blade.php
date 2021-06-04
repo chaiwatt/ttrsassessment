@@ -60,7 +60,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
-                    <a href="#" class="breadcrumb-item"> แบบฟอร์มแผนธุรกิจเทคโนโลยี</a>
+                    {{-- <a href="#" class="breadcrumb-item"> แบบฟอร์มแผนธุรกิจเทคโนโลยี</a> --}}
+                    <a href="{{route('dashboard.admin.project.fulltbp')}}" class="breadcrumb-item">แบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</a>
                     <span class="breadcrumb-item active">กำหนด Weight</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

@@ -383,7 +383,7 @@ th {
 										</div>
 										</div>
 										<div class="col-md-12">
-												<button id="btn_edit_employ" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_employ" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+												<button id="btn_edit_employ" data-type="" data-id="" class="btn bg-primary float-right hiddenelement" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_employ" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 											</div>
 									</div>
 							
@@ -1088,37 +1088,37 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="debtpartner" placeholder="ลูกหนี้การค้า" class="form-control form-control-lg stringformat30" >
+								<input type="text" id="debtpartner" placeholder="" class="form-control form-control-lg stringformat30" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-								<input type="text" id="numproject" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control form-control-lg numeralformat4">
+								<input type="text" id="numproject" placeholder="" class="form-control form-control-lg numeralformat4">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-								<input type="text" id="debtpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg numeralformath13">
+								<input type="text" id="debtpartnertaxid" placeholder="" class="form-control form-control-lg numeralformath13">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="debttotalyearsell" placeholder="ยอดขายต่อปี (บาท)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="debttotalyearsell" placeholder="" class="form-control form-control-lg numeralformat10">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
-								<input type="text" id="debtpercenttosale" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control form-control-lg numeralformat2">
+								<input type="text" id="debtpercenttosale" placeholder="" class="form-control form-control-lg numeralformat2">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-								<input type="text" id="debtpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg numeralformat3">
+								<input type="text" id="debtpartneryear" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
 			
@@ -1146,37 +1146,37 @@ th {
 								<input type="text" id="debtpartnerid" value="" hidden >
 								<div class="form-group">
 									<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
-									<input type="text" id="debtpartneredit" placeholder="ลูกหนี้การค้า" class="form-control form-control-lg stringformat30" >
+									<input type="text" id="debtpartneredit" placeholder="" class="form-control form-control-lg stringformat30" >
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-									<input type="text" id="numprojectedit" placeholder="จำนวนผลิตภัณฑ์หรือโครงการ" class="form-control form-control-lg numeralformat4">
+									<input type="text" id="numprojectedit" placeholder="" class="form-control form-control-lg numeralformat4">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-									<input type="text" id="debtpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg numeralformath13">
+									<input type="text" id="debtpartnertaxidedit" placeholder="" class="form-control form-control-lg numeralformath13">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
-									<input type="text" id="debttotalyearselledit" placeholder="ยอดขายต่อปี (บาท)" class="form-control form-control-lg numeralformat10">
+									<input type="text" id="debttotalyearselledit" placeholder="" class="form-control form-control-lg numeralformat10">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
-									<input type="text" id="debtpercenttosaleedit" placeholder="เปรียบเทียบกับยอดขาย (%)" class="form-control form-control-lg numeralformat2">
+									<input type="text" id="debtpercenttosaleedit" placeholder="" class="form-control form-control-lg numeralformat2">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-									<input type="text" id="debtpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg numeralformat3">
+									<input type="text" id="debtpartneryearedit" placeholder="" class="form-control form-control-lg numeralformat3">
 								</div>
 							</div>
 						</div>
@@ -1202,31 +1202,31 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartner" placeholder="เจ้าหนี้การค้า" class="form-control form-control-lg stringformat30" >
+								<input type="text" id="creditpartner" placeholder="" class="form-control form-control-lg stringformat30" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartnertaxid" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg numeralformath13">
+								<input type="text" id="creditpartnertaxid" placeholder="" class="form-control form-control-lg numeralformath13">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="credittotalyearsell" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="credittotalyearsell" placeholder="" class="form-control form-control-lg numeralformat10">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpercenttosale" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control form-control-lg numeralformat2">
+								<input type="text" id="creditpercenttosale" placeholder="" class="form-control form-control-lg numeralformat2">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartneryear" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg numeralformat3">
+								<input type="text" id="creditpartneryear" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
 					</div>
@@ -1253,31 +1253,31 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartneredit" placeholder="เจ้าหนี้การค้า" class="form-control form-control-lg stringformat30" >
+								<input type="text" id="creditpartneredit" placeholder="" class="form-control form-control-lg stringformat30" >
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartnertaxidedit" placeholder="เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)" class="form-control form-control-lg numeralformath13">
+								<input type="text" id="creditpartnertaxidedit" placeholder="" class="form-control form-control-lg numeralformath13">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="credittotalyearselledit" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="credittotalyearselledit" placeholder="" class="form-control form-control-lg numeralformat10">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpercenttosaleedit" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control form-control-lg numeralformat2">
+								<input type="text" id="creditpercenttosaleedit" placeholder="" class="form-control form-control-lg numeralformat2">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartneryearedit" placeholder="จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)" class="form-control form-control-lg numeralformat3">
+								<input type="text" id="creditpartneryearedit" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
 					</div>
@@ -1876,7 +1876,7 @@ th {
 																				<td> {{$companyemploy->email}} </td> 
 																				<td style="white-space: nowrap"> 
 																					<a  data-id="{{$companyemploy->id}}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																					<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyceo hiddenelement">ลบ</a> 
+																					<a  data-id="{{$companyemploy->id}}" data-type="ceo" class="btn btn-sm bg-danger hiddenelement deletecompanyceo hiddenelement">ลบ</a> 
 																				</td> 
 																			</tr>
 																		@endforeach                            
@@ -1924,7 +1924,7 @@ th {
 																				<td> {{$companyemploy->email}} </td> 
 																				<td style="white-space: nowrap"> 
 																					<a  data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																					<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy hiddenelement">ลบ</a> 
+																					<a  data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy hiddenelement">ลบ</a> 
 																				</td> 
 																			</tr>
 																		@endforeach                            
@@ -1943,7 +1943,7 @@ th {
 																			<tr class="bg-info">
 																				<th style="display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
 																				<th>ความสัมพันธ์กับ CEO</th>
-																				<th class="hiddenelement" style="width:210px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																				<th class="hiddenelement" style="width:180px;white-space: nowrap;">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_companystockholder_wrapper_tr">    
@@ -1978,7 +1978,7 @@ th {
 																		</thead>
 																		<tbody id="fulltbp_researcher_wrapper_tr">   
 																			
-																			@foreach ($companyemploys->where('employ_position_id','>=',6)->reverse() as $companyemploy)
+																			@foreach ($companyemploys->where('employ_position_id','>=',6) as $companyemploy)
 																				<tr >                                        
 																					<td> {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
 																					<td> {{$companyemploy->employposition->name}} </td> 
@@ -1987,7 +1987,7 @@ th {
 																					<td> {{$companyemploy->email}} </td> 
 																					<td style="white-space: nowrap">  
 																						<a  data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
-																						<a  data-id="{{$companyemploy->id}}" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
+																						<a  data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy_research">ลบ</a> 
 																					</td> 
 																				</tr>
 																			@endforeach                            

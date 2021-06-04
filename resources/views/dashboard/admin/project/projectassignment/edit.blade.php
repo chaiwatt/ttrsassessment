@@ -2,7 +2,9 @@
 @section('pageCss')
 @stop
 <style>
-
+    textarea{
+        font-size: 16px !important;
+    }
 </style>
 @section('content')
     <div class="page-header page-header-light">
@@ -112,12 +114,12 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-info">
-                                                    <th style="width:15px">Leader</th>
-                                                    <th style="width:15px">Co Leader</th>
-                                                    <th >ชื่อ สกุล</th>
-                                                    <th >โครงการรับผิดชอบ</th> 
-                                                    <th >กำลังดำเนินการ</th>    
-                                                    <th >เสร็จสิ้น</th>
+                                                    <th style="width:120px" class="text-center">Leader</th>
+                                                    <th style="width:120px" class="text-center">Co Leader</th>
+                                                    <th class="text-center">ชื่อ สกุล</th>
+                                                    <th class="text-center">โครงการรับผิดชอบ</th> 
+                                                    <th class="text-center">กำลังดำเนินการ</th>    
+                                                    <th class="text-center">เสร็จสิ้น</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="authorized_director_wrapper_tr"> 
@@ -129,20 +131,20 @@
                                                             $userprefix = $user->alter_prefix;
                                                         }
                                                     @endphp 
-                                                    <td><input type="radio" name="leader" value="{{$user->id}}" class="form-check-input-styled leader" data-fouc @if($projectassignment->leader_id == $user->id) checked @endif  
+                                                    <td style="text-align: center" ><input type="radio" name="leader" value="{{$user->id}}" class="form-check-input-styled leader" style="text-align: center" data-fouc @if($projectassignment->leader_id == $user->id) checked @endif  
                                                         @if (Auth::user()->user_type_id !==6)
                                                             disabled
                                                         @endif
                                                         ></td>  
-                                                    <td><input type="radio" name="coleader" value="{{$user->id}}" class="form-check-input-styled coleader" data-fouc   @if($projectassignment->coleader_id == $user->id) checked @endif 
+                                                    <td style="text-align: center" ><input type="radio" name="coleader" value="{{$user->id}}" class="form-check-input-styled coleader" style="text-align: center" data-fouc   @if($projectassignment->coleader_id == $user->id) checked @endif 
                                                         @if (Auth::user()->user_type_id !==6)
                                                             disabled
                                                         @endif
                                                         ></td>      
                                                     <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}</td>
-                                                    <td>{{$user->projecthandle->count()}}</td>      
-                                                    <td>{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
-                                                    <td>{{$user->projecthandle->where('ststus',3)->count()}}</td> 
+                                                    <td class="text-center">{{$user->projecthandle->count()}}</td>      
+                                                    <td class="text-center">{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
+                                                    <td class="text-center">{{$user->projecthandle->where('ststus',3)->count()}}</td> 
                                                 </tr>
                                                 @endforeach
                                             </tbody>

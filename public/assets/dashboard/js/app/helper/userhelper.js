@@ -7,7 +7,7 @@ $(document).on('click', '.user', function(e) {
     }
 
     Swal.fire({
-        title: 'ยืนยัน!',
+        title: 'ยืนยัน',
         text: `ต้องการทำรายการ หรือไม่`,
         type: 'warning',
         showCancelButton: true,

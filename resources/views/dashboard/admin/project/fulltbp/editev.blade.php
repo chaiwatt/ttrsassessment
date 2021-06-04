@@ -1,7 +1,11 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css"> --}}
-
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 
 @stop
 @section('content')
@@ -244,8 +248,8 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body context-menu-two_notuse" id="extracriteriamodal">
-                    <h6>Category</h6>
-                        <div class="row">
+                    Category
+                        <div class="row mt-1">
                             <div class="col-md-12">
                                 <div class="form-group" id="extra_criteria_wrapper">
                                     <select name="extracategory" id="extracategory" data-placeholder="Category" class="form-control form-control-lg form-control-select2" >
@@ -254,8 +258,8 @@
                             </div>
                         </div>
 
-                    <h6>Extra Criteria</h6>
-                        <div class="row">
+                    Extra Criteria
+                        <div class="row mt-1">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <select name="extracriteria" id="extracriteria" data-placeholder="Extra Criteria" class="form-control form-control-lg form-control-select2" >
@@ -546,7 +550,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="indextab">
                                         <div class="form-group">	
-                                            <div class="float-left">
+                                            <div class="float-left mb-2">
                                                 <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel</button>
                                                 <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก Pdf</button>
                                             </div>
@@ -594,7 +598,7 @@
         
                                     <div class="tab-pane fade" id="extratab">
                                         <div class="form-group">	
-                                            <div class="float-left">
+                                            <div class="float-left mb-2">
                                                 <button id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก Excel</button>
                                                 <button id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก Pdf</button>
                                             </div>

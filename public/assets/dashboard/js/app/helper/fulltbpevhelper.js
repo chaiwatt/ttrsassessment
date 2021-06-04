@@ -301,13 +301,16 @@ $(document).on('change', '#indextype', function(e) {
   }else if($(this).val() == 2){
     $("#grade_wrapper").attr("hidden",false);
     Ev.getEvCheckList($('#pillar').val(),$('#subpillar').val(),$('#subpillarindex').val()).then(data => {
+        console.log(data);
         var html =``;
         if(!jQuery.isEmptyObject(data)){
-            $('#gradea').val(data.gradea);
-            $('#gradeb').val(data.gradeb);
-            $('#gradec').val(data.gradec);
-            $('#graded').val(data.graded);
-            $('#gradee').val(data.gradee);
+            if(data.gradea != 0 && data.gradeb != 0 && data.gradec != 0 && data.graded != 0 && data.gradee != 0){
+                $('#gradea').val(data.gradea);
+                $('#gradeb').val(data.gradeb);
+                $('#gradec').val(data.gradec);
+                $('#graded').val(data.graded);
+                $('#gradee').val(data.gradee);
+            }
         }
     }).catch(error => {})
   }
@@ -1146,7 +1149,7 @@ $(document).on('change', '#percentindex', function(e) {
         message = "ต้องการยกเลิก เปอร์เซนต์ Extra หรือไม่";
     }
     Swal.fire({
-        title: 'ยืนยัน!',
+        title: 'ยืนยัน',
         text: message,
         type: 'warning',
         showCancelButton: true,
@@ -1254,7 +1257,7 @@ function onlyUnique(value, index, self) {
 $(document).on('click', '#approveevstageone', function(e) {
 
     Swal.fire({
-        title: 'ยืนยัน!',
+        title: 'ยืนยัน',
         text: `ต้องการอนุมัติ EV หรือไม่`,
         type: 'warning',
         showCancelButton: true,
@@ -1326,7 +1329,7 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
         return;
     }
     Swal.fire({
-        title: 'ยืนยัน!',
+        title: 'ยืนยัน',
         text: `ต้องการส่งคืนให้ Leader แก้ไขหรือไม่`,
         type: 'warning',
         showCancelButton: true,

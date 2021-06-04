@@ -16,7 +16,7 @@ class DashboardAdminProjectFullTbpBolController extends Controller
         $fulltbp = FullTbp::find($id);
         $bols = Bol::where('full_tbp_id',$id)->get();
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
-        if(OnlyBelongPerson::Leader($minitbp->id) == false){
+        if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
             return view('dashboard.admin.project.fulltbp.bol.index')->withBols($bols)->withFulltbp($fulltbp);
         }else{
             Auth::logout();

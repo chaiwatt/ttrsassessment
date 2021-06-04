@@ -248,23 +248,23 @@
         });
 
         function confirmsubmit(e) {
-        e.preventDefault();
-        var frm = e.target.form;
-        Swal.fire({
-                title: 'ยืนยัน',
-                text: `ต้องการยืนยันสร้างปฎิทินหรือไม่? `,
-                type: 'info',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'ตกลง',
-                cancelButtonText: 'ยกเลิก',
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }).then((result) => {
-            if (result.value) {
-                frm.submit();
-            }
-        });
-    }
+            e.preventDefault();
+            var frm = e.target.form;
+            Swal.fire({
+                    title: 'ยืนยัน',
+                    text: `ต้องการยืนยันสร้างปฎิทินหรือไม่? `,
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ตกลง',
+                    cancelButtonText: 'ยกเลิก',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                if (result.value) {
+                    frm.submit();
+                }
+            });
+        }
     </script>
 @stop

@@ -165,7 +165,7 @@
                                           </ul> --}}
                                       </div>
                                       <div>
-                                        <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" alt="" srcset="">
+                                        {{-- <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" alt="" srcset=""> --}}
                                     </div>
         
                                       {{-- <div class="text-min"> 
@@ -185,7 +185,7 @@
                                         </thead>
                                         <tbody>
                                           <tr class="bg-02">
-                                            <td style="width:70px"> 87-100</td>
+                                            <td style="width:100px"> 87-100</td>
                                             <td>AAA</td>
                                           </tr>
                                           <tr class="bg-03">
