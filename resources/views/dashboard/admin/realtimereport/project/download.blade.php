@@ -52,6 +52,7 @@
             $projectgrade = $fulltbp->projectgrade;
             $resultissuedate = $fulltbp->resultissuedate(8);
             $projectassignment = $businessplan->projectassignment;
+            // dd($projectassignment->leader->lastname);
             $projectmembers = $fulltbp->projectmember;
             $financemessagearr = array();
             if(!Empty($minitbp->finance1)){
@@ -141,8 +142,8 @@
                     @endif
                 </td>
                 <td>
-                    @if (!Empty($projectassignment))
-                    {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}}  {{$projectassignment->leader->lastname}}
+                    @if ($projectassignment->leader_id != null)
+                        {{$projectassignment->leader->prefix->name}} {{$projectassignment->leader->name}}  {{$projectassignment->leader->lastname}}
                     @endif
                 </td>
                 <td>
