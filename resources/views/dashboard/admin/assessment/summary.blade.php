@@ -184,12 +184,12 @@
                                                 <thead>
                                                   <tr>
                                                    
-                                                    <td class="bg-01 white" colspan="2">Level Classification</td>
+                                                    <td class="bg-01 white" colspan="2" style="padding-left: 5px !important; padding-right:5px !important">Level Classification</td>
                                                   </tr>
                                                 </thead>
                                                 <tbody>
                                                   <tr class="bg-02">
-                                                    <td style="width:100px"> 87-100</td>
+                                                    <td> 87-100</td>
                                                     <td>AAA</td>
                                                   </tr>
                                                   <tr class="bg-03">

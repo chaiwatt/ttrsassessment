@@ -362,7 +362,7 @@
                                 </thead>
                                 <tbody>
                                   <tr class="bg-02">
-                                    <td > 87-100</td>
+                                    <td >87-100</td>
                                     <td>AAA</td>
                                   </tr>
                                   <tr class="bg-03">
