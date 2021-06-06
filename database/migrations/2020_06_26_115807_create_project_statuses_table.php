@@ -19,8 +19,11 @@ class CreateProjectStatusesTable extends Migration
             $table->foreign('mini_tbp_id')->references('id')->on('mini_t_b_p_s')->onDelete('cascade');
             $table->unsignedBigInteger('project_flow_id');
             $table->char('duration',2)->default(0);
+            $table->char('actual_duration',2)->default(0);
             $table->date('startdate')->nullable();
+            $table->date('actual_startdate')->nullable();
             $table->date('enddate')->nullable();
+            $table->date('actual_enddate')->nullable();
             $table->char('status',1)->default(1);
             $table->timestamps();
         });

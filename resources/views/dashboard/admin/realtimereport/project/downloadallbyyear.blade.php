@@ -143,7 +143,8 @@
                     @endif
                 </td>
                 <td>
-                    @if (!Empty($projectassignment))
+                    {{-- @if (!Empty($projectassignment)) --}}
+                    @if ($projectassignment->leader_id != null)
                     {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}}  {{$projectassignment->leader->lastname}}
                     @endif
                 </td>

@@ -284,7 +284,7 @@
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">ร้อยละเกรดแยกตาม Pillar</h6>
                     </div>
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row l-400">
                             <div class="col-md-2 c-20">
                                 <canvas id="myChart" width=180  height=180 ></canvas>
                             </div>
