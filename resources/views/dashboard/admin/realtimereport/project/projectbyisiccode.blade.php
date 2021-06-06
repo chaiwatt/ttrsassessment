@@ -21,7 +21,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
-                    <span class="breadcrumb-item active">โครงการ</span>
+                    <span class="breadcrumb-item">โครงการ</span>
                     <span class="breadcrumb-item active">จำนวนโครงการแยกตาม ISIC Code</span>
                 </div>
 
