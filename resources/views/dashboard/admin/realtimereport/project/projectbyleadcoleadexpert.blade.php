@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">จำนวนของผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</span></h4>
+                <h4> <span class="font-weight-semibold">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
                     <span class="breadcrumb-item active">โครงการ</span>
-                    <span class="breadcrumb-item active">จำนวนของผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</span>
+                    <span class="breadcrumb-item active">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -38,7 +38,7 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนของผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                             </a>
