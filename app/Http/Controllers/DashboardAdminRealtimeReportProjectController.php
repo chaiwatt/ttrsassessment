@@ -1539,7 +1539,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
         $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+        $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
 
         $_intersec = array();
         foreach($fulltbps1 as $f1) {
