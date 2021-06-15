@@ -233,88 +233,88 @@ import * as Attendee from './eventcalendarattendee.js';
     }
 
     function callUpdateChart(data) {
-        var pillar1 = data.finalgrades.filter(x => x.pillar_id == 1).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
-        var pillar2 = data.finalgrades.filter(x => x.pillar_id == 2).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
-        var pillar3 = data.finalgrades.filter(x => x.pillar_id == 3).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
-        var pillar4 = data.finalgrades.filter(x => x.pillar_id == 4).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+        var pillar_management = data.finalgrades.filter(x => x.pillar_id == 1).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+        var pillar_tech = data.finalgrades.filter(x => x.pillar_id == 2).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+        var pillar_marketability = data.finalgrades.filter(x => x.pillar_id == 3).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
+        var pillar_bp = data.finalgrades.filter(x => x.pillar_id == 4).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
 
-        var avgpillar = (pillar1 + pillar2 + pillar3 + pillar4)/4;
+        var avgpillar = (pillar_management + pillar_tech + pillar_marketability + pillar_bp)/4;
+
         var avrgrade = checkPillarGrade(avgpillar)
         topLeftChart(avgpillar,avrgrade);
-
-        if(isNaN(pillar1)) {
-            pillar1 = 0;
+  
+        if(isNaN(pillar_management)) {
+            pillar_management = 0;
         }
-        if(isNaN(pillar2)) {
-            pillar2 = 0;
+        if(isNaN(pillar_tech)) {
+            pillar_tech = 0;
         }
-        if(isNaN(pillar3)) {
-            pillar3 = 0;
+        if(isNaN(pillar_marketability)) {
+            pillar_marketability = 0;
         }
-        if(isNaN(pillar4)) {
-            pillar4 = 0;
+        if(isNaN(pillar_bp)) {
+            pillar_bp = 0;
         }
-
     
-        $('#gradepillar1').html(checkPillarGrade(pillar4));
-        if(pillar4 == 0){
+        $('#gradepillar_bp').html(checkPillarGrade(pillar_bp));
+        if(pillar_bp == 0){
             $('.chart-skills').find('span:nth-child(1)').text(``);
-            $('#pillar4').html('');
+            $('#pillar_bp').html('');
 
         }else{
-            $('#pillar4').html(pillar4 + ' %');
-            $('.chart-skills').find('span:nth-child(1)').text(`${pillar4}%`);
+            $('#pillar_bp').html(pillar_bp + ' %');
+            $('.chart-skills').find('span:nth-child(1)').text(`${pillar_bp}%`);
         }
-        $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillar4*1.8}deg)`);
-        $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar4}deg)`);
-        if(pillar4 == 100){
+        $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillar_bp*1.8}deg)`);
+        $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_bp}deg)`);
+        if(pillar_bp == 100){
             $('.chart-skills').find('span:nth-child(1)').css('top', `20px`);
         }
 
-        $('#gradepillar2').html(checkPillarGrade(pillar3));
-        if(pillar3 == 0){
+        $('#gradepillar_marketability').html(checkPillarGrade(pillar_marketability));
+        if(pillar_marketability == 0){
             $('.chart-skills2').find('span:nth-child(1)').text(``);
-            $('#pillar3').html('');
+            $('#pillar_marketability').html('');
         }else{
-            $('#pillar3').html(pillar3 + ' %');
-            $('.chart-skills2').find('span:nth-child(1)').text(`${pillar3}%`);
+            $('#pillar_marketability').html(pillar_marketability + ' %');
+            $('.chart-skills2').find('span:nth-child(1)').text(`${pillar_marketability}%`);
         }
-        $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillar3*1.8}deg)`);
-        $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar3}deg)`);    
-        if(pillar3 == 100){
+        $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillar_marketability*1.8}deg)`);
+        $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_marketability}deg)`);    
+        if(pillar_marketability == 100){
             $('.chart-skills2').find('span:nth-child(1)').css('top', `20px`);
         }    
 
-        $('#gradepillar3').html(checkPillarGrade(pillar2));
-        if(pillar2 == 0){
+        $('#gradepillar_tech').html(checkPillarGrade(pillar_tech));
+        if(pillar_tech == 0){
             $('.chart-skills3').find('span:nth-child(1)').text(``);
-            $('#pillar2').html('');
+            $('#pillar_tech').html('');
         }else{
-            $('.chart-skills3').find('span:nth-child(1)').text(`${pillar2}%`);
-            $('#pillar2').html(pillar2 + ' %');
+            $('.chart-skills3').find('span:nth-child(1)').text(`${pillar_tech}%`);
+            $('#pillar_tech').html(pillar_tech + ' %');
         }
-        $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillar2*1.8}deg)`);
-        $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar2}deg)`);
-        if(pillar2 == 100){
+        $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillar_tech*1.8}deg)`);
+        $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_tech}deg)`);
+        if(pillar_tech == 100){
             $('.chart-skills3').find('span:nth-child(1)').css('top', `20px`);
         }
 
-        $('#gradepillar4').html(checkPillarGrade(pillar1));
-        if(pillar1 == 0){
+
+        $('#gradepillar_management').html(checkPillarGrade(pillar_management));
+        if(pillar_management == 0){
             $('.chart-skills4').find('span:nth-child(1)').text(``);
-            $('#pillar1').html('');
+            $('#pillar_management').html('');
         }else{
-            $('.chart-skills4').find('span:nth-child(1)').text(`${pillar1}%`);
-            $('#pillar1').html(pillar1 + ' %');
+            $('.chart-skills4').find('span:nth-child(1)').text(`${pillar_management}%`);
+            $('#pillar_management').html(pillar_management + ' %');
         }
-        $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillar1*1.8}deg)`);
-        $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar1}deg)`);
-        if(pillar1 == 100){
+        $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillar_management*1.8}deg)`);
+        $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_management}deg)`);
+        if(pillar_management == 100){
             $('.chart-skills4').find('span:nth-child(1)').css('top', `20px`);
         }
-        
-        
         $("#mainchart").attr("hidden",false);
+
     }
 
  

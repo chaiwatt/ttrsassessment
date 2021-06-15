@@ -1,0 +1,1209 @@
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+ }
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 2.25rem;
+}
+.card-footer {
+    padding: 2.75rem 1.25rem;
+    background-color: rgba(0,0,0,.03);
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+h2{
+    margin: 0;
+}
+h6{
+    margin: 0;
+    padding-bottom: 10px;
+    text-align: center;
+    
+
+}
+h5{
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+    color: #000000;
+}
+h4{
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.color-01{
+    color: #43b19d;
+}
+.color-02{
+    color: #2b68b8;
+    ;
+}
+.color-03{
+    color: #eb9f2d;
+}
+.color-04{
+    color: #a0cc3a;
+}
+/* .table {
+    
+    margin-bottom: 1rem;
+    color: #111111;
+   
+    text-align: center;
+    font-weight: 500;
+}
+.table td, .table th {
+    padding: 7px;
+    vertical-align: top;
+    border-top: 0.25px solid #dee2e6;
+}
+.bg-01{
+    background-color:#8199c5;
+}
+.bg-02{
+    background-color:#4688ce;
+}
+.bg-03{
+    background-color:#b1cfe4;
+}
+.bg-04{
+    background-color:#e69628;
+}
+.table-dark td, .table-dark th, .table-dark thead th {
+    border-color: #ffffff;
+} */
+.white{
+    color: #ffffff;
+}
+
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills *,
+  .chart-skills::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills {
+    position: relative;
+    width: 350px;
+    height: 175px;
+    overflow: hidden;
+  }
+  
+  .chart-skills::before,
+  .chart-skills::after {
+    position: absolute;
+  }
+  
+  .chart-skills::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  
+  
+  .chart-skills li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(52, 212, 119);
+    transform: rotate(0deg);
+  }
+  
+  
+  .chart-skills span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills li:nth-child(1) span {
+    top: -35px;
+    left: -42px;
+    transform: rotate(-113.2deg);
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-one {
+    100% {
+      transform: rotate(113.2deg);
+      /**
+       * 62.94%	62.94/100 * 180 = 113.2
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+
+
+
+/* ****************************************************************************************************************************************************** */
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  ul .chart-skills2 {
+    margin-top: -230px;
+  }
+
+  .chart-skills2 {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills2 *,
+  .chart-skills2::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills2 {
+    position: relative;
+    width: 460px;
+    height: 230px;
+    margin-top: -230px;
+    overflow: hidden;
+  }
+  
+  .chart-skills2::before,
+  .chart-skills2::after {
+    position: absolute;
+  }
+  
+  .chart-skills2::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 230px;
+    border-top-right-radius: 230px;
+  }
+  
+  
+  .chart-skills2 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 230px;
+    border-bottom-right-radius: 230px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills2 li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(204, 99, 1);
+    /* animation-name: rotate-two; */
+    transform: rotate(0deg);
+  }
+  
+  
+  .chart-skills2 span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills2 li:nth-child(1) span {
+    top: -40px;
+    left: -42px;
+    /* transform: rotate(-131.6deg); */
+    transform: rotate(0deg);
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-two {
+    100% {
+      transform: rotate(131.6deg);
+      /**
+       * 62.94%	62.94/100 * 180 = 131.6
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+/* ****************************************************************************************************************************************************** */
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  ul .chart-skills3 {
+    margin-top: -286px;
+  }
+
+  .chart-skills3 {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills2 *,
+  .chart-skills2::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills3 {
+    position: relative;
+    width: 572px;
+    height: 286px;
+    margin-top:-286px;
+    overflow: hidden;
+  }
+  
+  .chart-skills3::before,
+  .chart-skills3::after {
+    position: absolute;
+  }
+  
+  .chart-skills3::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 286px;
+    border-top-right-radius: 286px;
+  }
+  
+  
+  .chart-skills3 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 286px;
+    border-bottom-right-radius: 286px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills3 li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(0, 41, 128);
+    /* animation-name: rotate-three; */
+    transform: rotate(0deg);
+  }
+  
+  
+  .chart-skills3 span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills3 li:nth-child(1) span {
+    top: -40px;
+    left: -42px;
+    /* transform: rotate(-152.5deg); */
+    transform: rotate(0deg);
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-three {
+    100% {
+      transform: rotate(152.5deg);
+      /**
+       * 84.76%	84.76/100 * 180 = 152.5
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+/* ****************************************************************************************************************************************************** */
+
+  /* RESET STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  ul .chart-skills4 {
+    margin-top: -286px;
+  }
+
+  .chart-skills4 {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .chart-skills4 *,
+  .chart-skills4::before {
+    box-sizing: border-box;
+  }
+  
+  
+  /* CHART-SKILLS STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  .chart-skills4 {
+    position: relative;
+    width: 688px;
+    height: 344px;
+    margin-top:-344px;
+    overflow: hidden;
+  }
+  
+  .chart-skills4::before,
+  .chart-skills4::after {
+    position: absolute;
+  }
+  
+  .chart-skills4::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 45px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 344px;
+    border-top-right-radius: 344px;
+  }
+  
+  
+  .chart-skills4 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 45px solid;
+    border-top: none;
+    border-bottom-left-radius: 344px;
+    border-bottom-right-radius: 344px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills4 li:nth-child(1) {
+    z-index: 4;
+    border-color: rgb(0, 128, 79);
+    /* animation-name: rotate-four; */
+    transform: rotate(0deg);
+    
+  }
+    
+  .chart-skills4 span {
+    position: absolute;
+    font-size: .85rem;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+  }
+  
+  .chart-skills4 li:nth-child(1) span {
+    top: -40px;
+    left: -42px;
+    /* transform: rotate(-169.7deg); */
+    transform: rotate(0deg);
+
+  }
+  
+  
+  /* ANIMATIONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  
+  @keyframes rotate-four {
+    100% {
+      /* transform: rotate(169.7deg); */
+      transform: rotate(0deg);
+      /**
+       * 94.31%	94.31/100 * 180 = 169.7
+       */
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0%,
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .l-40{
+    margin-left: -100px;
+  }
+  .text-min {
+    margin: -14px 107px;
+    }
+    .text-max {
+    width: 100%;
+    margin: -20px 826px;
+    }
+
+.gauge1{
+  padding-top: -339px;
+  padding-left: 145px;
+  position: absolute;
+  z-index: 10;
+}
+h2{
+    font-weight: bold;
+    }
+h4{
+    font-weight: bold;
+  }
+h5 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    }
+h6{
+    font-weight: bold;
+    padding-top: 20px;
+    padding-left: 10px;
+  }
+
+  .table2-none{
+    display: none;
+}
+
+
+
+
+
+
+/* ***************************************************** */
+@media (min-width:1024px) and (max-width:1300px){
+    .table2-none{
+        display: none;
+    }
+    #myChart{
+        display: block;
+        height: 140px ;
+        width: 140px ;
+    }
+    .l-40 {
+        margin-top: 150px;
+        margin-left: -111px;
+    }
+    .l-50{
+        padding-left: 50px;
+        }
+    .l-75{
+        margin-left: -10px;
+    }
+    .chart-skills {
+        position: relative;
+        width: 238px;
+        height: 119px;
+        margin-top: -137px;
+        overflow: hidden;
+      }
+      .chart-skills2 {
+        position: relative;
+        width: 346px;
+        height: 173px;
+        margin-top: -173px;
+        overflow: hidden;
+      }
+      .chart-skills3 {
+        position: relative;
+        width: 450px;
+        height: 226px;
+        margin-top: -226px;
+        overflow: hidden;
+      }
+      .chart-skills4 {
+        position: relative;
+        width: 555px;
+        height: 277px;
+        margin-top: -277px;
+        overflow: hidden;
+    }
+        
+      .col-sm-6 {
+        -ms-flex: 0 0 -1%;
+        flex: 0 0 0%;
+        max-width: 100%;
+        padding-left: 30px;
+        margin-left: -28px;
+    }
+    .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 100%;
+    }
+    h2{
+        font-weight: bold;
+        }
+    h4{
+        font-weight: bold;
+      }
+    h5 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        }
+    h6{
+        font-weight: bold;
+        padding-top: 20px;
+        padding-left: 10px;
+      }
+}
+
+
+/* ***************************************************** */
+@media (min-width:768px) and (max-width:1023px){
+    #myChart{
+        display: block;
+        height: 120px !important ;
+        width: 120px !important;
+    }
+    .table-none{
+        display: none;
+    }
+    .table2-none{
+        display:inline-table;
+    }
+    
+    .l-40 {
+        margin-top: -36px;
+        margin-left: 50px;
+    }
+    .l-50{
+        padding-left: 50px;
+        }
+    .l-75{
+        margin-left: -10px;
+    }
+    .chart-skills {
+        position:relative;
+        width: 123px ;
+        height: 61px ;
+        margin-left: 80px ;
+        margin-top: -61px;
+        overflow: hidden;
+      }
+      .chart-skills2 {
+        position: relative;
+        width: 223px ;
+        height: 111px ;
+        margin-top: -111px ;
+        margin-left: 30px ;
+        overflow: hidden;
+      }
+      .chart-skills3 {
+        position: relative;
+        width: 326px ;
+        height: 164px ;
+        margin-top: -164px ;
+        margin-left: -21px ;
+        overflow: hidden;
+      }
+      .chart-skills4 {
+        position: relative;
+        width: 434px ;
+        height: 217px ;
+        margin-top: -217px ;
+        margin-left: -73px ;
+        overflow: hidden;
+      }
+        
+      .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-top: 20px;
+      }
+      .col-sm-6 {
+        flex: 0 0 -1%;
+        max-width: 50%;
+        padding-left: 30px;
+      }
+    .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 100%;
+    }
+    h2{
+        font-weight: bold;
+        }
+    h4{
+        font-weight: bold;
+      }
+    h5 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        }
+    h6{
+        font-weight: bold;
+        padding-top: 20px;
+        padding-left: 10px;
+      }
+      .f-table{
+        margin-bottom: -600px;
+        margin-top: 100px;
+        margin-left: -20px;
+    }
+      
+}
+
+
+
+
+/* ***************************************************** */
+@media (min-width:425px) and (max-width:764px){
+    #myChart{
+        display: block;
+        height: 120px !important ;
+        width: 120px !important;
+    }
+    .top-550{
+        margin-top: 550px;
+    }
+    .table-none{
+        display: none;
+    }
+    .table2-none{
+        display:inline-table;
+    }
+    .table-w{
+        width: 240%;
+    }
+    
+    .l-40 {
+        margin-top: -120px;
+        margin-left: 50px;
+    }
+    .l-50{
+        padding-left: 20px;
+        margin-top: -130px;
+        }
+    .l-75{
+        margin-left: -10px;
+    }
+    .chart-skills {
+        position: relative;
+        width: 117px;
+        height: 59px;
+        margin-left: 44px;
+        margin-top: -59px;
+        overflow: hidden;
+    }
+      
+      .chart-skills2 {
+        position: relative;
+        width: 199px;
+        height: 99px;
+        margin-top: -99px;
+        margin-left: 4px;
+        overflow: hidden;
+      }
+      .chart-skills3 {
+        position: relative;
+        width: 277px;
+        height: 138px;
+        margin-top: -138px;
+        margin-left: -35px;
+        overflow: hidden;
+    }
+    .chart-skills4 {
+        position: relative;
+        width: 352px;
+        height: 176px;
+        margin-top: -176px;
+        margin-left: -72px;
+        overflow: hidden;
+    }
+      
+      
+
+.chart-skills::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  
+  .chart-skills::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  
+  .chart-skills li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills2::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  .chart-skills2 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  .chart-skills3::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  .chart-skills3 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  .chart-skills4::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  .chart-skills4 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+
+        
+      .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-top: 20px;
+        margin-left: -60px;
+      }
+      .col-sm-6 {
+        flex: 0 0 -1%;
+        max-width: 50%;
+        padding-left: 30px;
+      }
+    .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 100%;
+    }
+    h2{
+        font-weight: bold;
+        }
+    h4{
+        font-weight: bold;
+      }
+    h5 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        }
+    h6{
+        font-weight: bold;
+        padding-top: 20px;
+        padding-left: 10px;
+      }
+      .f-table{
+        margin-bottom: -600px;
+        margin-top: 100px;
+        margin-left: -20px;
+    }
+      
+}
+
+
+
+
+
+
+/* ***************************************************** */
+@media (min-width:375px) and (max-width:424px){
+    #myChart{
+        display: block;
+        height: 120px !important ;
+        width: 120px !important;
+    }
+    .top-550{
+        margin-top: 550px;
+    }
+    .table-none{
+        display: none;
+    }
+    .table2-none{
+        display:inline-table;
+    }
+    .table-w{
+        width: 240%;
+    }
+    
+    .l-40 {
+        margin-top: -120px;
+        margin-left: 50px;
+    }
+    .l-50{
+        padding-left: 20px;
+        margin-top: -130px;
+        }
+    .l-75{
+        margin-left: -10px;
+    }
+    .chart-skills {
+      position: relative;
+      width: 79px;
+      height: 39px;
+      margin-left: 42px;
+      margin-top: -39px;
+      overflow: hidden;
+    }
+      .chart-skills2 {
+        position: relative;
+        width: 151px;
+        height: 76px;
+        margin-top: -76px;
+        margin-left: 6px;
+        overflow: hidden;
+      }
+      .chart-skills3 {
+        position: relative;
+        width: 227px;
+        height: 114px;
+        margin-top: -114px;
+        margin-left: -32px;
+        overflow: hidden;
+    }
+    .chart-skills4 {
+        position: relative;
+        width: 306px;
+        height: 152px;
+        margin-top: -152px;
+        margin-left: -72px;
+        overflow: hidden;
+    }
+      
+      
+
+.chart-skills::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  
+  .chart-skills::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  
+  .chart-skills li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  
+  .chart-skills2::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  .chart-skills2 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  .chart-skills3::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  .chart-skills3 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+  .chart-skills4::before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border: 35px solid rgba(211, 211, 211, .3);
+    border-bottom: none;
+    border-top-left-radius: 175px;
+    border-top-right-radius: 175px;
+  }
+  .chart-skills4 li {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border: 35px solid;
+    border-top: none;
+    border-bottom-left-radius: 175px;
+    border-bottom-right-radius: 175px;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .4s;
+    animation-timing-function: linear;
+  }
+
+        
+      .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-top: 20px;
+        margin-left: -60px;
+      }
+      .col-sm-6 {
+        flex: 0 0 -1%;
+        max-width: 50%;
+        padding-left: 20px;
+      }
+    .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 100%;
+    }
+    h2{
+        font-weight: bold;
+        }
+    h4{
+        font-weight: bold;
+      }
+    h5 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        }
+    h6{
+        font-weight: bold;
+        padding-top: 20px;
+        padding-left: 10px;
+      }
+      .f-table{
+        margin-bottom: -600px;
+        margin-top: 100px;
+        margin-left: -20px;
+    }
+      
+}
+
+
+
+
+
+
+
