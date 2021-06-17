@@ -23,7 +23,7 @@
 	<link href="{{asset('assets/dashboard/css/extend.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/customlogo.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/css-loader.css')}}" rel="stylesheet" type="text/css">
-	
+	{{-- <link href="{{asset('assets/dashboard/css/new.css')}}" rel="stylesheet" type="text/css"> --}}
 	{{-- <link href="{{asset('assets/dashboard/js/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>  
 	<link href="{{asset('assets/dashboard/js/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"/>   --}}
 	

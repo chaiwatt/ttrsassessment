@@ -312,49 +312,13 @@
                                         <span id="chartpillar1"></span>
                                     </li>
                                   </ul>
-                                  {{-- <ul class="chart-skills4 l-30" style="margin-top:-344px" onload="play('rotate-four')"> 
-                                    <li>
-                                        <span id="chartpillar1"></span>
-                                        <script>
-                                            var angle = 120;
-                                            var supportedFlag = $.keyframe.isSupported();
-                                            $('.chart-skills4').find('li:nth-child(1) span').css({'transform':`rotate(-${angle}deg)`});
-                                            $('.chart-skills4').find('span:nth-child(1)').text(`${(angle/1.8).toFixed(2)}%`);
-                                            $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
-                                            $(document).ready(function() {
-                                            $('.chart-skills4').find('li:nth-child(1)').css({'transform':`rotate(${angle}deg)`});
-                                            $.keyframe.define([{
-                                            name: 'rotate-four',
-                                            '100%': {
-                                                'transform': `rotate(${angle}deg)`,
-                                            }
-                                            }]);
-                                            });
-                                            $('.chart-skills4').find('li:nth-child(1)').playKeyframe({
-                                                        name: 'rotate-four',
-                                                        duration: "4s",
-                                                        timingFunction: 'linear',
-                                                        fillMode: 'forwards',
-                                                    
-                                                    });
-                                            
-                                        </script>
-                                    </li>
-                                  </ul> --}}
                               </div>
                               <div>
-                                {{-- <img class="gauge1" src="{{asset('assets/dashboard/images/chart/gauge1.png')}}" data-aos-delay="1600" alt="" srcset=""> --}}
+                                
                             </div>
-
-                              {{-- <div class="text-min"> 
-                                min
-                              </div>
-                              <div class="text-max">
-                                max --}}
-                              {{-- </div> --}}
                             </div>
                             <div class="col-md-1 c-table">
-                                  <table class="table-score table-7 table-bordered table-dark"  >
+                                  <table class="table-score table-7 table-bordered table-dark" >
                                 <thead>
                                   <tr>
                                    
