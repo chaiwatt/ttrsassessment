@@ -22,7 +22,7 @@ class SettingAdminAssessmentSubPillarController extends Controller
         $subpillar->pillar_id = $request->pillarid;
         $subpillar->name = $request->subpillar;
         $subpillar->save();
-        return redirect()->route('setting.admin.assessment.subpillar')->withSuccess('เพิ่มรายการ Pillar สำเร็จ');
+        return redirect()->route('setting.admin.assessment.subpillar')->withSuccess('เพิ่มรายการ Sub Pillar สำเร็จ');
     }
     public function Edit($id){
         $pillars = Pillar::get();
@@ -31,7 +31,7 @@ class SettingAdminAssessmentSubPillarController extends Controller
                                                               ->withPillars($pillars);
     }
     public function EditSave(Request $request,$id){
-        $check = CriteriaTransaction::where('pillar_id',$id)->first();
+        $check = CriteriaTransaction::where('sub_pillar_id',$id)->first();
         if(!empty($check)){
             return redirect()->route('setting.admin.assessment.subpillar')->withError('ผิดพลาดมีการใช้ Sub Pillar นี้แล้ว');
         }
@@ -45,7 +45,7 @@ class SettingAdminAssessmentSubPillarController extends Controller
                                                                       ->withSuccess('แก้ไข Sub Pillar สำเร็จ');
     }
     public function Delete($id){
-        $check = CriteriaTransaction::where('pillar_id',$id)->first();
+        $check = CriteriaTransaction::where('sub_pillar_id',$id)->first();
         if(!empty($check)){
             return redirect()->route('setting.admin.assessment.subpillar')->withError('ผิดพลาดมีการใช้ Sub Pillar นี้แล้ว');
         }
