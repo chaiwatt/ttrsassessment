@@ -3877,7 +3877,7 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
 				required: 'กรุณากรอกจำนวนบุคลากรทั้งหมด'
             },
             department1_qty: {
-				required: 'กรุณากรอกจำนวนผ่ายบริหาร'
+				required: 'กรุณากรอกจำนวนฝ่ายบริหาร'
             },
             department2_qty: {
 				required: 'กรุณากรอกจำนวนฝ่ายวิจัยและพัฒนา'
@@ -3886,7 +3886,7 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
 				required: 'กรุณากรอกจำนวนฝ่ายผลิต/วิศวกรรม'
             },
             department4_qty: {
-				required: 'ผ่ายการตลาด'
+				required: 'ฝ่ายการตลาด'
             },
             department5_qty: {
 				required: 'กรุณากรอกพนักงานทั่วไป'

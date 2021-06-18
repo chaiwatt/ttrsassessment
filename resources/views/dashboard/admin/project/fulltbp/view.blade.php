@@ -1392,7 +1392,7 @@
 														<td>{{@$fulltbpemployee->department_qty}}</td>
 													</tr>       
 													<tr >                                        
-														<td>ผ่ายบริหาร</td>
+														<td>ฝ่ายบริหาร</td>
 														<td>{{@$fulltbpemployee->department1_qty}}</td>
 													</tr>  
 													<tr >                                        
@@ -1404,7 +1404,7 @@
 														<td>{{@$fulltbpemployee->department3_qty}}</td>
 													</tr>  
 													<tr >                                        
-														<td>ผ่ายการตลาด</td>
+														<td>ฝ่ายการตลาด</td>
 														<td>{{@$fulltbpemployee->department4_qty}}</td>
 													</tr> 
 													<tr >                                        

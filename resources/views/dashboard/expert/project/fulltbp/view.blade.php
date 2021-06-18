@@ -1446,7 +1446,7 @@
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
-																	<label>ผ่ายบริหาร</label>
+																	<label>ฝ่ายบริหาร</label>
 																	<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
@@ -1464,7 +1464,7 @@
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
-																	<label>ผ่ายการตลาด</label>
+																	<label>ฝ่ายการตลาด</label>
 																	<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
