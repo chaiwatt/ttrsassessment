@@ -109,7 +109,7 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>อำเภอ<span class="text-danger">*</span></label>
+													<label>อำเภอ/เขต<span class="text-danger">*</span></label>
 													<select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
 														@foreach ($amphurs as $amphur)                                                                
 															<option value="{{$amphur->id}}" @if ($amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
@@ -119,7 +119,7 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>ตำบล<span class="text-danger">*</span></label>
+													<label>ตำบล/แขวง<span class="text-danger">*</span></label>
 													<select name="tambol" id="tambol" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
 														@foreach ($tambols as $tambol)                                                                
 															<option value="{{$tambol->id}}" @if ($tambol->id == $user->tambol_id) selected @endif> {{$tambol->name}} </option>
@@ -156,7 +156,7 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>อำเภอ<span class="text-danger">*</span></label>
+													<label>อำเภอ/เขต<span class="text-danger">*</span></label>
 													<select name="amphur1" id="amphur1" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
 														@foreach ($amphurs1 as $amphur1)                                                                
 															<option value="{{$amphur1->id}}" @if ($amphur1->id == $user->amphur1_id) selected @endif> {{$amphur1->name}} </option>
@@ -166,7 +166,7 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>ตำบล<span class="text-danger">*</span></label>
+													<label>ตำบล/แขวง<span class="text-danger">*</span></label>
 													<select name="tambol1" id="tambol1" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
 														@foreach ($tambols1 as $tambol1)                                                                
 															<option value="{{$tambol1->id}}" @if ($tambol1->id == $user->tambol1_id) selected @endif> {{$tambol1->name}} </option>

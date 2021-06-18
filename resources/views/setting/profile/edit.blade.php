@@ -625,7 +625,7 @@
 															</select>
 														</div>
 														<div class="col-md-6">
-															<label>อำเภอ<span class="text-danger">*</span></label>
+															<label>อำเภอ/เขต<span class="text-danger">*</span></label>
 															<select name="organizationamphur" id="organizationamphur" data-placeholder="อำเภอ" class="form-control form-control-select2">
 																@foreach ($amphurs as $amphur)                                                                
 																	<option value="{{$amphur->id}}" @if ($amphur->id == $generalinfo->amphur_id) selected @endif> {{$amphur->name}} </option>
@@ -637,7 +637,7 @@
 												<div class="form-group">
 													<div class="row">
 														<div class="col-md-6">
-															<label>ตำบล<span class="text-danger">*</span></label>
+															<label>ตำบล/แขวง<span class="text-danger">*</span></label>
 															<select name="organizationtambol" id="organizationtambol" data-placeholder="ตำบล" class="form-control form-control-select2">
 																@foreach ($tambols as $tambol)                                                                
 																	<option value="{{$tambol->id}}" @if ($tambol->id == $generalinfo->tambol_id) selected @endif> {{$tambol->name}} </option>
