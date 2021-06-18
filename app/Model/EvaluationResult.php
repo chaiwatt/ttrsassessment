@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use App\Model\FullTbp;
 use App\Model\EvaluationMonth;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,10 @@ class EvaluationResult extends Model
         return FullTbp::find($this->full_tbp_id);
     } 
     public function getMonthAttribute(){
-        return EvaluationMonth::find($this->evaluation_month_id);
+        if($this->evaluation_month_id != null){
+            return EvaluationMonth::find($this->evaluation_month_id);
+        }else{
+            return EvaluationMonth::find(Carbon::now()->month);
+        }
     } 
 }

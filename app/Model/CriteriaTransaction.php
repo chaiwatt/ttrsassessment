@@ -23,9 +23,9 @@ class CriteriaTransaction extends Model
         return SubPillarIndex::find($this->sub_pillar_index_id,['id', 'name']);
     } 
     public function getPillarAttribute(){
+       
         $subpillarindex = SubPillarIndex::find($this->sub_pillar_index_id);
         $subpillar = SubPillar::find($subpillarindex->sub_pillar_id);
-
         return Pillar::find($subpillar->pillar_id,['id', 'name']);
     } 
     public function getSubpillarAttribute(){

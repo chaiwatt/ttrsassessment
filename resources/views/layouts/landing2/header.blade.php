@@ -91,7 +91,11 @@
                                                         <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                     @else
                                                         @if ($menu->name != 'เข้าสู่ระบบ')
-                                                                    <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                @if (substr("$menu->url",0,1) == '#')
+                                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                    @else
+                                                                        <li> <a href="//{{$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                @endif    
                                                             @else
                                                                 @if ($shareagent->isPhone() == 1)
                                                                     <li>
@@ -108,8 +112,7 @@
                                                                         @endif
                                                                     </li>
                                                                 @endif
-                                                        @endif
-                                                       
+                                                        @endif                                                      
                                                 @endif
                                             @else
                                                 @if ($key == 0)
@@ -121,8 +124,7 @@
                                                         @if ($shareagent->isPhone() == 1)
                                                             <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
                                                         @endif
-                                                    @endif
-                                                        
+                                                    @endif                                                       
                                                 @endif
                                             @endif
                                         @endforeach

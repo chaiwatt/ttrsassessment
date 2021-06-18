@@ -370,7 +370,9 @@
                                         </td>
                                         
                                         <td> 
-                                            @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1)
+                                            {{-- @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1) --}}
+                                            @if (@$company->businessplan->minitbp->fulltbp->projectstatustransaction(7)->status == 2)
+                                            {{-- $fulltbp->projectstatustransaction(7)->status != 2 --}}
                                             {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
                                                     {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a> --}}
                                                     <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
