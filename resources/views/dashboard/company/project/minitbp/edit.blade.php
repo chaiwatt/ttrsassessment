@@ -1027,5 +1027,17 @@
 		})
 	}
 
+	$(document).on('change', '#projecteng', function(e) {
+		var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
+		if(re.test($(this).val()) == false){
+			$(this).val('')
+			Swal.fire({
+				title: 'ผิดพลาด...',
+				text: 'ไม่อนุญาตให้ใช้ภาษาไทย!',
+			});
+		}
+
+	});
+
 </script>
 @stop

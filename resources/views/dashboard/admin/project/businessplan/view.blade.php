@@ -120,8 +120,14 @@
                                     <div class="form-group">
                                         <label>อำเภอ<span class="text-danger">*</span></label>
                                         <select name="amphur" id="amphur" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2" disabled>
-                                            @foreach ($amphurs as $amphur)                                                                
-                                                <option value="{{$amphur->id}}" @if ($amphur->id == $company->amphur_id) selected @endif > {{$amphur->name}} </option>
+
+
+                                            
+                                            @foreach ($amphurs as $amphur)  
+                                                @if (strpos($amphur, "*") === false)
+                                                    <option value="{{$amphur->id}}" @if ($amphur->id == $company->amphur_id) selected @endif > {{$amphur->name}} </option>
+                                                @endif                                                              
+                                                
                                             @endforeach   
                                         </select>
                                     </div>

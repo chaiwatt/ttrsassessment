@@ -862,40 +862,57 @@
 										<label><strong style="font-size: 16px">ผู้ประสานงาน</strong></label>
 									{{-- </legend> --}}
 								</div>
-									<div class="col-md-6">
+
+								<div class="col-md-2">
+									<div class="form-group">
+										<label>คำนำหน้า<span class="text-danger">*</span></label>
+										<select name="prefix" id="prefix"  data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
+											@foreach ($prefixes as $key => $prefix)
+												@if ($key+1 != $prefixes->count())
+													<option value="{{$prefix->id}}" 
+														@if ($user->prefix_id == $prefix->id) 
+																selected 
+															@else	
+																@if (old('prefix') == $prefix->id) selected @endif	 
+														@endif >{{$prefix->name}}</option> 
+												@endif
+												
+											@endforeach
+										</select>
+									</div>
+								</div>
+								
+								<div class="col-md-4" id="alter_prefix_wrapper" 
+									@if (Empty($user->alter_prefix))
+										$col= 6;
+										hidden
+				
+										
+									@endif
+									>
+									<div class="form-group">
+										<label>คำนำหน้า อื่น</label>
+										<input type="text" name="alter_prefix" id="alter_prefix" value="{{$user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>ชื่อผู้ประสานงาน<span class="text-danger">*</span></label>
+										<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg stringformat60 inputfield40">
+									</div>
+								</div>
+									{{-- <div class="col-md-6">
 										<div class="row">
-											<div class="col-md-3">
-												<div class="form-group">
-													<label>คำนำหน้า<span class="text-danger">*</span></label>
-													<select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-lg form-control-select2">
-														@foreach ($prefixes as $key => $prefix)
-															@if ($key+1 != $prefixes->count())
-																<option value="{{$prefix->id}}" 
-																	@if ($user->prefix_id == $prefix->id) 
-																			selected 
-																		@else	
-																			@if (old('prefix') == $prefix->id) selected @endif	 
-																	@endif >{{$prefix->name}}</option> 
-															@endif
-															
-														@endforeach
-													</select>
-												</div>
-											</div>
-											<div class="col-md-9">
-												<div class="form-group">
-													<label>ชื่อผู้ประสานงาน<span class="text-danger">*</span></label>
-													<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg stringformat60 inputfield40">
-												</div>
-											</div>
+	
+
 										</div>
+									</div> --}}
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>นามสกุลผู้ประสานงาน<span class="text-danger">*</span></label>
+										<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
 									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>นามสกุลผู้ประสานงาน<span class="text-danger">*</span></label>
-											<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
-										</div>
-									</div>
+								</div>
 								@endif
 								<div class="col-md-12">  
 									<legend>
@@ -1245,7 +1262,9 @@ $(".form-control-select2").select2();
         $("#file").on('change', function() {
             $("#filename").val(this.value);
         });
+		// $(document).on('change', '#prefix', function(e) {
 		$("#prefix").on('change', function() {
+			console.log(this.value);
 			if(this.value == 5){
 				$("#alter_prefix_wrapper").attr("hidden",false);
 			}else{
@@ -1281,6 +1300,15 @@ $(".form-control-select2").select2();
 				}
 			});
 		}
+
+		// $("#prefix").on('change', function() {
+		// 	if(this.value == 5){
+		// 		$("#alter_prefix_wrapper").attr("hidden",false);
+		// 	}else{
+		// 		$("#alter_prefix_wrapper").attr("hidden",true);
+		// 		$("#alter_prefix").val('');
+		// 	}
+        // });
 	
     </script>	
 @stop

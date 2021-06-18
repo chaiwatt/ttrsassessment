@@ -255,10 +255,10 @@
 										</div>
 									</div>
 									<div class="col-md-6" id="alter_prefix_wrapper" 
-									@if (Empty($user->alter_prefix))
-										hidden
-									@endif
-									>
+										@if (Empty($user->alter_prefix))
+											hidden
+										@endif
+										>
 										<div class="form-group">
 											<label>คำนำหน้า อื่น</label>
 											<input type="text" name="alter_prefix" id="alter_prefix" value="{{$user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
@@ -322,13 +322,19 @@
 											{{-- @foreach ($amphurs as $amphur)                                                                
 												<option value="{{$amphur->id}}" @if ($amphur->id == $user->amphur_id) selected @endif> {{$amphur->name}} </option>
 											@endforeach    --}}
-											@foreach ($amphurs as $amphur)                                                                
-												<option value="{{$amphur->id}}" 
+											@foreach ($amphurs as $amphur)   
+												@php
+													$string = strpos($amphur,"*");
+												@endphp
+												@if ($string == null)
+												
+													<option value="{{$amphur->id}}" 
 													@if ($user->amphur_id == $amphur->id) 
 															selected 
 														@else
 															@if (old('amphur') == $amphur->id) selected @endif
-													@endif> {{$amphur->name}} </option>
+													@endif> {{$amphur->name}}</option>
+												@endif                                                            
 											@endforeach 
 										</select>
 									</div>
