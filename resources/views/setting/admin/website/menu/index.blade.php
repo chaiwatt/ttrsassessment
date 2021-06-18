@@ -84,7 +84,10 @@
                                         <td style="white-space: nowrap"> 
                                             {{-- <a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a> --}}
                                             <a href="{{route('setting.admin.website.menu.edit',['id' => $directmenu->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.website.menu.delete',['id' => $directmenu->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            @if ($key >= 7)
+                                                <a href="{{route('setting.admin.website.menu.delete',['id' => $directmenu->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

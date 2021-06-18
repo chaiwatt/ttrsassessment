@@ -80,12 +80,22 @@
                                            <input type="text" name="menuenglish" id="menuenglish" value="{{$menu->engname}}" class="form-control form-control-lg">   
                                         </div>
                                      </div>
-                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                           <label>ลิงก์<span class="text-danger">*</span></label>
-                                           <input type="text" name="url" id="url" value="{{$menu->url}}" class="form-control form-control-lg">   
-                                        </div>
-                                     </div>
+                                     @if ($menu->id <= 7 )
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                <label>ลิงก์ (ไม่อนุญาติให้แก้ไขลิงก์หลัก)<span class="text-danger">*</span></label>
+                                                <input type="text" name="url" id="url" value="{{$menu->url}}" class="form-control form-control-lg" readonly >   
+                                                </div>
+                                            </div>
+                                         @else
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                <label>ลิงก์<span class="text-danger">*</span></label>
+                                                <input type="text" name="url" id="url" value="{{$menu->url}}" class="form-control form-control-lg" >   
+                                                </div>
+                                            </div>
+                                     @endif
+
                                  </div>
                                  <div class="row">
                                     <div class="col-md-12">
