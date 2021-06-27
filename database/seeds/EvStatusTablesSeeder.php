@@ -19,7 +19,7 @@ class EvStatusTablesSeeder extends Seeder
                 'name' => 'Admin พิจารณา'
             ],
             [
-                'name' => 'JD พิจารณา'
+                'name' => 'Manager พิจารณา'
             ],
             [
                 'name' => 'ผ่านการอนุมัติ'

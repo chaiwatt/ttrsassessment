@@ -126,8 +126,8 @@
             </div>
             @if (Auth::user()->user_type_id != 6 )
                 <div class="header-elements d-none">
-                    {{-- <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD</a> --}}
-                    {{-- <button id="sendtojd" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button> --}}
+                    {{-- <a href="#" class="btn btn-labeled btn-labeled-right bg-info" id="sendtojd"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง Manager</a> --}}
+                    {{-- <button id="sendtojd" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง Manager<i class="icon-paperplane ml-2"></i></button> --}}
                 </div>
             @endif    
         </div>
@@ -200,19 +200,29 @@
                                     <thead>
                                         <tr class="bg-info">
                                             @if ($fulltbp->assignexpert != 2)
-                                            <th style="width:15px">เลือก</th>
+                                            @if (Auth::user()->user_type_id <=5 && $fulltbp->offer_expert == 1)
+                                                @else
+                                                <th style="width:15px">เลือก</th>
+                                            @endif
+                                            
                                             @endif
                                             
                                             <th >ชื่อ-นามสกุล</th>
                                             <th >ตำแหน่ง</th>
-                                            <th >JD มอบหมาย</th>
+                                            <th >Manager มอบหมาย</th>
                                             <th >การตอบรับ</th>
-                                            <th >โครงการรับผิดชอบ</th> 
-                                            <th >กำลังดำเนินการ</th>    
-                                            <th >เสร็จสิ้น</th>
+                                            @if (Auth::user()->user_type_id >= 5)
+                                                <th >โครงการรับผิดชอบ</th> 
+                                                <th >กำลังดำเนินการ</th>    
+                                                <th >เสร็จสิ้น</th>
+                                            @endif
+
                                         </tr>
                                     </thead>
                                     <tbody id="authorized_director_wrapper_tr"> 
+                                        @php
+                                            $checkaccorref = 0;
+                                        @endphp
                                         @foreach ($experts as $key => $user)
                                             @php
                                                 $check = $user->IsExpert($fulltbp->id);
@@ -220,26 +230,33 @@
                                                 if(Auth::user()->user_type_id !=6 )$isjd = '';
                                             @endphp
                                         <tr >  
-                                            @if ($fulltbp->assignexpert != 2)
-                                                <td>
-                                                    <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
-                                                    <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
-                                                    @if (!Empty($check))
-                                                        @if (Auth::user()->user_type_id <=4)
-                                                            @if ($check->expert_assignment_status_id == 2)
-                                                                hidden
-                                                            @endif
-                                                            @else
-                                                                @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1)
-                                                                    hidden
-                                                                @endif
-                                                        @endif
 
-                                                        checked 
-                                                    @endif
-                                                    >
-                                                </td>  
+                                            @if (Auth::user()->user_type_id <=5 && $fulltbp->offer_expert == 1)
+                                           
+                                            @else
+                                                @if ($fulltbp->assignexpert != 2)
+                                                    <td>
+                                                        <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
+                                                        <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
+                                                            @if (!Empty($check))
+                                                                @if (Auth::user()->user_type_id <=5)
+                                                                    @if ($check->expert_assignment_status_id == 2)
+                                                                        hidden
+                                                                    @endif
+                                                                @else
+                                                                    @if ($check->expert_assignment_status_id == 2 && $check->accepted == 1)
+                                                                        hidden
+                                                                    @endif
+                                                                @endif
+                                                                checked 
+                                                            @endif
+                                                        >
+                                                    </td>  
+                                                @endif
                                             @endif
+
+
+
                                             @php
                                             $userprefix = $user->prefix->name;
                                             if($userprefix == 'อื่นๆ'){
@@ -270,6 +287,9 @@
                                                         @if ($check->accepted == 0)
                                                             <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่ได้ตอบรับ</span>
                                                         @elseif($check->accepted == 1) 
+                                                            @php
+                                                                $checkaccorref++;
+                                                            @endphp
                                                             <span class="badge badge-flat border-success text-success-600 rounded-0">ตอบรับแล้ว</span>
                                                         @elseif($check->accepted == 2)
                                                             <a  data-id="{{$user->id}}" data-fulltbpid="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-info showreject">ปฏิเสธเข้าร่วม</a>
@@ -277,16 +297,19 @@
                                                     @endif
                                                 @endif
                                             </td> 
+                                            @if (Auth::user()->user_type_id >= 5)
                                             <td class="text-center">{{$user->projecthandle->count()}}</td>      
                                             <td class="text-center">{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
                                             <td class="text-center">{{$user->projecthandle->where('ststus',3)->count()}}</td> 
+                                            @endif
+
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        @if (Auth::user()->user_type_id == 4 && $fulltbp->assignexpert != 2)
+                        @if (Auth::user()->user_type_id == 4 && $fulltbp->offer_expert == 0)
                             <div class="form-group">
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -296,7 +319,9 @@
                         @if (Auth::user()->user_type_id == 6 && $fulltbp->assignexpert !=2)
                         <div class="form-group">
                             <div class="text-right">
-                                <button type="button" id="jdconfirmteam" class="btn bg-teal" ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ยืนยันทีมผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
+                                @if ($checkaccorref != 0)
+                                    <button type="button" id="jdconfirmteam" class="btn bg-teal" ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ยืนยันทีมผู้เชี่ยวชาญ <i class="icon-paperplane ml-2"></i></button>
+                                @endif
                             </div>
                         </div>
                     @endif

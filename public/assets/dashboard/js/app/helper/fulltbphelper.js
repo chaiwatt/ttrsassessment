@@ -8,6 +8,8 @@ import * as Market from './market.js';
 import * as Sell from './sell.js';
 import * as FullTbp from './fulltbp.js';
 
+var usermessage = '';
+
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
 });
@@ -2974,53 +2976,129 @@ $(document).on('click', '#submitfulltbp', function(e) {
     if($('#usersignature').val() == 1){
         text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP)'
     }
-    Swal.fire({
-        title: 'โปรดยืนยัน',
-        text: text,
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'ตกลง',
-        cancelButtonText: 'ยกเลิก',
-
-        }).then((result) => {
-        if (result.value) {
-
-
-            if($('#usersignature').val() == 1){
-
-                Swal.fire({
-                    title: 'อัปโหลดไฟล์',
-                    html: "โปรดแนบไฟล์แบบฟอร์ม Full TBP ที่ลงลายมือชื่อ <br> และประทับตราแล้ว",
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'ตกลง',
-                    cancelButtonText: 'ยกเลิก',
-                  }).then((result) => {
-                    if (result.value) {
-                        $("#fulltbppdf").trigger('click');
-                    }
-                  })
-
-            }else{
-                $("#spinicon").attr("hidden",false);
-                submitNoAttachement($('#fulltbpid').val(),$('#pdfname').val()).then(data => {
-                    $("#submitfulltbp").attr("hidden",true);
-                    $("#spinicon").attr("hidden",true);
-                    $("#appceptagreement_wrapper").attr("hidden",true);
-                        Swal.fire({
-                            title: 'สำเร็จ',
-                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
-                        }).then(() => {
-                            window.location.replace(`${route.url}/dashboard/company/report`);
-                        });
-                        
-                    })
-                .catch(error => {})
-
-
+    
+    if(route.refixstatus == 0){
+        Swal.fire({
+            title: 'โปรดยืนยัน',
+            text: text,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก',
+    
+            }).then((result) => {
+            if (result.value) {
+                if($('#usersignature').val() == 1){
+                    Swal.fire({
+                        title: 'อัปโหลดไฟล์',
+                        html: "โปรดแนบไฟล์แบบฟอร์ม Full TBP ที่ลงลายมือชื่อ <br> และประทับตราแล้ว",
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'ตกลง',
+                        cancelButtonText: 'ยกเลิก',
+                      }).then((result) => {
+                        if (result.value) {
+                            $("#fulltbppdf").trigger('click');
+                        }
+                      })
+    
+                }else{
+                    $("#spinicon").attr("hidden",false);
+                    submitNoAttachement($('#fulltbpid').val(),$('#pdfname').val(),usermessage).then(data => {
+                        $("#submitfulltbp").attr("hidden",true);
+                        $("#spinicon").attr("hidden",true);
+                        $("#appceptagreement_wrapper").attr("hidden",true);
+                            Swal.fire({
+                                title: 'สำเร็จ',
+                                text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
+                            }).then(() => {
+                                window.location.replace(`${route.url}/dashboard/company/report`);
+                            });
+                            
+                        })
+                    .catch(error => {})
+    
+    
+                }
             }
-        }
-    });
+        });
+    }else{
+        Swal.fire({
+            title: 'ข้อมูลแก้ไข',
+            text: 'กรุณากรอกรายละเอียดที่ท่านได้แก้เอกสาร Full Tbp',
+            input: 'textarea',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ต่อไป',
+            cancelButtonText: 'ยกเลิก',
+    
+            }).then((result) => {
+                if (result.value) {
+                    usermessage = result.value;
+                    Swal.fire({
+                        title: 'โปรดยืนยัน',
+                        text: text,
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'ตกลง',
+                        cancelButtonText: 'ยกเลิก',
+                
+                        }).then((result) => {
+                        if (result.value) {
+                            if($('#usersignature').val() == 1){
+                                Swal.fire({
+                                    title: 'อัปโหลดไฟล์',
+                                    html: "โปรดแนบไฟล์แบบฟอร์ม Full TBP ที่ลงลายมือชื่อ <br> และประทับตราแล้ว",
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'ตกลง',
+                                    cancelButtonText: 'ยกเลิก',
+                                }).then((result) => {
+                                    if (result.value) {
+                                        $("#fulltbppdf").trigger('click');
+                                    }
+                                })
+                
+                            }else{
+                                $("#spinicon").attr("hidden",false);
+                                submitNoAttachement($('#fulltbpid').val(),$('#pdfname').val(),usermessage).then(data => {
+                                    $("#submitfulltbp").attr("hidden",true);
+                                    $("#spinicon").attr("hidden",true);
+                                    $("#appceptagreement_wrapper").attr("hidden",true);
+                                        Swal.fire({
+                                            title: 'สำเร็จ',
+                                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
+                                        }).then(() => {
+                                            window.location.replace(`${route.url}/dashboard/company/report`);
+                                        });                                       
+                                    })
+                                .catch(error => {})
+                
+                
+                            }
+                        }
+                    });
+                }else{
+                    if(route.refixstatus != 0 & usermessage == ''){
+                        Swal.fire({
+                            title: 'ผิดพลาด...',
+                            text: 'กรุณาระบุข้อมูลที่แก้ไขใน Full TBP',
+                            });
+                    }
+                }
+        });
+    }
+
+
+
+    return;
+
+
+
+
 
 });
 
@@ -3059,6 +3137,8 @@ $(document).on('change', '#fulltbppdf', function(e) {
             var formData = new FormData();
             formData.append('attachment',file);
             formData.append('id',$('#fulltbpid').val());
+            formData.append('message',usermessage);
+            
             $.ajax({
                 url: `${route.url}/api/fulltbp/submitwithattachement`,  //Server script to process data
                 type: 'POST',
@@ -3087,7 +3167,7 @@ $(document).on('change', '#fulltbppdf', function(e) {
 
 });
 
-function submitNoAttachement(id,pdfname){
+function submitNoAttachement(id,pdfname,message){
     return new Promise((resolve, reject) => {
         $.ajax({
             url: `${route.url}/api/fulltbp/submitwithnoattachement`,
@@ -3095,7 +3175,8 @@ function submitNoAttachement(id,pdfname){
             headers: {"X-CSRF-TOKEN":route.token},
             data: {
             id : id,
-            pdfname : pdfname
+            pdfname : pdfname,
+            message : message
             },
             success: function(data) {
             resolve(data)

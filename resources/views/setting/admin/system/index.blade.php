@@ -54,7 +54,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>สำนักงาน</label>
+                                        <label>หน่วยงาน</label>
                                         <input type="text" name="organizationname" value="{{$generalinfo->company}}" data-placeholder="สำนักงาน"class="form-control form-control-lg">
                                     </div>
                                 </div>
@@ -109,8 +109,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>โทรศัพท์2</label>
-                                        <input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="โทรศัพท์2" class="form-control form-control-lg">
+                                        <label>Call Center</label>
+                                        <input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="Call Center" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -128,49 +128,19 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลาทำการ</label>
-                                        <input type="text" name="workdaytime" value="{{$generalinfo->workdaytime}}" data-placeholder="เวลาทำการ วันอาทิตย์" class="form-control form-control-lg">
+                                        <input type="text" name="workdaytime" value="{{$generalinfo->workdaytime}}" data-placeholder="เวลาทำการ" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>เวลาทำการ วันอาทิตย์</label>
-                                        <input type="text" name="sundaytime" value="{{$generalinfo->sundaytime}}" data-placeholder="เวลาทำการ วันอาทิตย์" class="form-control form-control-lg">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Youtube</label>
-                                        <input type="text" name="youtube" value="{{$generalinfo->youtube}}" data-placeholder="Youtube" class="form-control form-control-lg">
+                                        <label>เวลาทำการ</label>
+                                        <input type="text" name="sundaytime" value="{{$generalinfo->sundaytime}}" data-placeholder="เวลาทำการ" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Facebook</label>
                                         <input type="text" name="facebook" value="{{$generalinfo->facebook}}" data-placeholder="Facebook" class="form-control form-control-lg">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Twitter</label>
-                                        <input type="text" name="twitter" value="{{$generalinfo->twitter}}" data-placeholder="Twitter" class="form-control form-control-lg">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Instagram</label>
-                                        <input type="text" name="instagram" value="{{$generalinfo->instagram}}" data-placeholder="Instagram" class="form-control form-control-lg">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Skype</label>
-                                        <input type="text" name="skype" value="{{$generalinfo->skype}}" data-placeholder="Skype" class="form-control form-control-lg">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Linkedin</label>
-                                        <input type="text" name="linkedin" value="{{$generalinfo->linkedin}}" data-placeholder="Linkedin" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -185,7 +155,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>ผู้อำนวยการ/ผู้มีอำนาจลงนาม</label>
+                                        <label>ผู้อำนวยการ/ผู้มีอำนาจลงนาม</label><span class="text-danger">*</span></label>
                                         <input type="text" name="director" value="{{$generalinfo->director}}" data-placeholder="ผู้อำนวยการ/ผู้มีอำนาจลงนาม" class="form-control form-control-lg">
                                     </div>
                                 </div>
@@ -247,8 +217,12 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- <div class="text-right">
+                               
+                            </div> --}}
                             <div class="text-right">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                <button type="submit" name="submit" value="default" class="btn bg-info">ค่าเริ่มต้น <i class="icon-rotate-ccw3 ml-2"></i></button>
+                                <button type="submit" name="submit" value="save" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
                             </div>
 
                         </form>

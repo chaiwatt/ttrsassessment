@@ -419,7 +419,7 @@
             <div class="header-elements d-none">
                 <div class="d-flex justify-content-center">
                     @if (($ev->status == 0 || $ev->refixstatus == 1) && Auth::user()->user_type_id != 6)
-                        <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง JD<i class="icon-paperplane ml-2"></i></button>
+                        <button id="updateev" data-id="{{$ev->id}}" class="btn bg-teal"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>นำส่ง Manager<i class="icon-paperplane ml-2"></i></button>
                     @endif
                     @if (($ev->status == 1 || $ev->refixstatus == 1))
                         @if (Auth::user()->user_type_id == 6)
@@ -552,7 +552,7 @@
                                         <div class="form-group">	
                                             <div class="float-left mb-2">
                                                 <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel</button>
-                                                <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก Pdf</button>
+                                                <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF</button>
                                             </div>
                                             @if (Auth::user()->user_type_id == 6)
                                                     @if ($ev->status < 2)
@@ -600,11 +600,26 @@
                                         <div class="form-group">	
                                             <div class="float-left mb-2">
                                                 <button id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก Excel</button>
-                                                <button id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก Pdf</button>
+                                                <button id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF</button>
                                             </div>
-                                            @if ($ev->status == 0 || $ev->refixstatus == 1)
+                                            {{-- @if ($ev->status == 0 || $ev->refixstatus == 1)
                                             <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" >เพิ่ม Extra Criteria</button>
+                                            @endif --}}
+
+                                            @if (Auth::user()->user_type_id == 6)
+                                                @if ($ev->status < 2)
+                                                    <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" >เพิ่ม Extra Criteria</button>
+                                                @endif
+                                            
+                                                @else
+                                                    @if ($ev->status == 0 || $ev->refixstatus == 1)
+                                                        <button type="button" class="btn btn-warning ml-2 btn-sm float-right mb-2" data-id="" id="btnaddextracriteria" >เพิ่ม Extra Criteria</button>
+                                                    @endif
                                             @endif
+
+
+
+
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped" id="extracriteriatable">

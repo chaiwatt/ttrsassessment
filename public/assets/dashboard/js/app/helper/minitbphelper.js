@@ -36,6 +36,16 @@ $(document).on('change', '#nonefinance5', function(e) {
     }
 });
 
+ $(document).on('change', '#finance3_other', function(e) {
+    // $("#finance3_other").on('change', function() {
+    // console.log('hello');
+    if($(this).is(":checked")){
+        $("#finance3_other_div").attr("hidden",false);
+    }else{
+        $("#finance3_other_div").attr("hidden",true);
+    }
+});
+
 $(document).on('change', '#finance1', function(e) {
     if($(this).is(":checked")){
         $("#financediv1").attr("hidden",false);
@@ -59,10 +69,40 @@ $(document).on('change', '#finance1', function(e) {
 
 $(document).on('change', '#bank', function(e) {
     var selectedtedtext = $(this).find("option:selected").text();
+    if(selectedtedtext == '=== โปรดเลือกธนาคาร ==='){
+        $('#finance1loan').val(0);
+    }
     if(selectedtedtext == "อื่นๆ โปรดระบุ"){
         $("#otherbank").attr("hidden",false);
     }else{
         $("#otherbank").attr("hidden",true);
+    }
+    
+});
+
+$(document).on('change', '#bank1', function(e) {
+    var selectedtedtext = $(this).find("option:selected").text();
+    console.log(selectedtedtext)
+    if(selectedtedtext == '=== โปรดเลือกธนาคาร ==='){
+        $('#finance1_1_loan').val(0);
+    }
+    if(selectedtedtext == "อื่นๆ โปรดระบุ"){
+        $("#otherbank1").attr("hidden",false);
+    }else{
+        $("#otherbank1").attr("hidden",true);
+    }
+    
+});
+
+$(document).on('change', '#bank2', function(e) {
+    var selectedtedtext = $(this).find("option:selected").text();
+    if(selectedtedtext == '=== โปรดเลือกธนาคาร ==='){
+        $('#finance1_2_loan').val(0);
+    }
+    if(selectedtedtext == "อื่นๆ โปรดระบุ"){
+        $("#otherbank2").attr("hidden",false);
+    }else{
+        $("#otherbank2").attr("hidden",true);
     }
     
 });

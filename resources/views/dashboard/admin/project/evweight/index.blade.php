@@ -126,7 +126,7 @@
                                             $style = 'btn-sm bg-warning';
                                         }elseif($fulltbp->ev->status == 1){
                                             if($fulltbp->ev->refixstatus == 0){
-                                                $evstatus = 'อยู่ระหว่าง JD ตรวจสอบ';
+                                                $evstatus = 'อยู่ระหว่าง Manager ตรวจสอบ';
                                                 $style = 'btn-sm bg-warning';
                                             }else if($fulltbp->ev->refixstatus == 1){
                                                 $evstatus = 'ส่งคืนแก้ไข';
@@ -140,7 +140,7 @@
                                             $style = 'btn-sm bg-pink';
                                         }
                                         elseif($fulltbp->ev->status == 3){
-                                            $evstatus = 'อยู่ระหว่าง JD พิจารณา';
+                                            $evstatus = 'อยู่ระหว่าง Manager พิจารณา';
                                             $style = 'btn-sm bg-pink';
                                         }
                                     @endphp

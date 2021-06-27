@@ -536,7 +536,7 @@ class DashboardAdminAssessmentController extends Controller
         
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
-        $timeLinehistory->details = 'สรุปผลการประเมินสำเร็จ';
+        $timeLinehistory->details = 'TTRS: สรุปผลการประเมินสำเร็จ';
         $timeLinehistory->message_type = 3;
         $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;

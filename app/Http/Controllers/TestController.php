@@ -48,7 +48,7 @@ class TestController extends Controller
         $leader = User::find($projectassignment->leader_id);
         if($flow == 1){
             $jduser = User::where('user_type_id',6)->first();
-            EmailBox::send($jduser->email,'TTRS:แจ้งเตือนใกล้ถึงกำหนดการมอบหมาย Leader และ Co-Leader สำหรับโครงการ'. $minitbp->project . ' บริษัท ' . $company->name,'เรียน JD <br><br> แจ้งเตือนใกล้ถึงกำหนดการมอบหมาย Leader และ Co-Leader ของโครงการ'.$minitbp->project. ' บริษัท'.$company->name. ' ซึ่งจะครบกำหนดตาม Control Flow วันที่ '.$enddate.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($jduser->email,'TTRS:แจ้งเตือนใกล้ถึงกำหนดการมอบหมาย Leader และ Co-Leader สำหรับโครงการ'. $minitbp->project . ' บริษัท ' . $company->name,'เรียน Manager<br><br> แจ้งเตือนใกล้ถึงกำหนดการมอบหมาย Leader และ Co-Leader ของโครงการ'.$minitbp->project. ' บริษัท'.$company->name. ' ซึ่งจะครบกำหนดตาม Control Flow วันที่ '.$enddate.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }else if($flow == 2){
             EmailBox::send($leader->email,'TTRS:แจ้งเตือนใกล้ถึงกำหนดการอนุมัติ Mini TBP สำหรับโครงการ'. $minitbp->project . ' บริษัท ' . $company->name,'เรียน Leader <br><br> แจ้งเตือนใกล้ถึงกำหนดการอนุมัติ Mini TBP ของโครงการ'.$minitbp->project. ' บริษัท'.$company->name. ' ซึ่งจะครบกำหนดตาม Control Flow วันที่ '.$enddate.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }else if($flow == 3){

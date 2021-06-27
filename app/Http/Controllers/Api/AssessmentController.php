@@ -137,7 +137,7 @@ class AssessmentController extends Controller
                     'alertmessage_id' => $alertmessage->id
                 ]);
                 
-                EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ขอรับการประเมินใหม่','เรียน JD<br><br> บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS:ขอรับการประเมินใหม่','เรียน Manager<br><br> บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                
             }
         }else{
@@ -169,7 +169,7 @@ class AssessmentController extends Controller
             $auth = Auth::user();
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = MiniTBP::find($request->id)->business_plan_id;
-            $timeLinehistory->details = 'ยืนยันการส่งจดหมายแจ้งผล';
+            $timeLinehistory->details = 'TTRS: ยืนยันการส่งจดหมายแจ้งผล';
             $timeLinehistory->message_type = 3;
             $timeLinehistory->owner_id = $auth->id;
             $timeLinehistory->user_id = $auth->id;

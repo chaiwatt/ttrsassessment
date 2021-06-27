@@ -7,6 +7,7 @@ use App\Model\MiniTBP;
 use App\Model\EvStatus;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
+use App\Model\CriteriaTransaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,10 @@ class Ev extends Model
 
     public function getEvStatusAttribute(){
         return EvStatus::find($this->status);
+    } 
+
+
+    public function getIsevaddAttribute(){       
+        return CriteriaTransaction::where('ev_id',$this->id)->count();
     } 
 }

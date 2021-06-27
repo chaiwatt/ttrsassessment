@@ -64,7 +64,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเห็น JD</h5>
+                        <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเห็น Manager</h5>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -198,7 +198,7 @@
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap">บริษัท</th>
-                                        <th style="width:1%;white-space: nowrap">ความเห็น JD</th>
+                                        <th style="width:1%;white-space: nowrap">ความเห็น Manager</th>
                                         @if (Auth::user()->user_type_id >= 4)
                                             <th style="width:1%;white-space: nowrap">การอนุมัติ</th> 
                                         @endif

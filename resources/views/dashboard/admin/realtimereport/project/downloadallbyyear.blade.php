@@ -30,7 +30,7 @@
         <th>วันที่ออกใบรับรอง</th>
         <th>Leader</th>
         <th>ผู้เชี่ยวชาญ</th>
-        <th>JD</th>
+        <th>Manager</th>
         <th>ความต้องการด้านการเงิน (Finance)</th>
         <th>ความต้องการที่ไม่ใช่การเงิน (Non-Finance)</th>
         <th>ผลการดำเนินงาน</th>
@@ -56,7 +56,7 @@
             $projectmembers = $fulltbp->projectmember;
             $financemessagearr = array();
             if(!Empty($minitbp->finance1)){
-                array_push($financemessagearr,"ขอสินเชื่อธนาคาร" . $minitbp->bank->name . " จำนวน " . $minitbp->finance1_loan . " บาท");
+                array_push($financemessagearr,"ขอสินเชื่อธนาคาร" . $minitbp->bank . " จำนวน " . $minitbp->finance1_loan . " บาท");
             }
             if(!Empty($minitbp->finance2)){
                 array_push($financemessagearr,"ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)");

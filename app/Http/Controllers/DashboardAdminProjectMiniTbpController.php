@@ -262,11 +262,11 @@ class DashboardAdminProjectMiniTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send($jduser->email,'TTRS:อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'เรียน JD<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($jduser->email,'TTRS:อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
-            $timeLinehistory->details = 'แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ของท่านได้รับอนุมัติ';
+            $timeLinehistory->details = 'TTRS: แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ของท่านได้รับอนุมัติ';
             $timeLinehistory->message_type = 1;
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->user_id = $auth->id;
@@ -304,7 +304,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
 
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
-            $timeLinehistory->details = $request->note;
+            $timeLinehistory->details = 'TTRS: ' . $request->note;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->message_type = 1;
             $timeLinehistory->owner_id = $_company->user_id;

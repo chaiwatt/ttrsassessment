@@ -474,13 +474,13 @@ function updateEvAdminStatus(id,value){
 		labels: {
 			previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
 			next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
-			finish: '<i class="icon-spinner spinner mr-2" id="spiniconsendjd" hidden/>นำส่ง JD <i class="icon-arrow-right14 ml-2" />'
+			finish: '<i class="icon-spinner spinner mr-2" id="spiniconsendjd" hidden/>นำส่ง Manager <i class="icon-arrow-right14 ml-2" />'
 		},
 		enableFinishButton: submitbutton,
 		onFinished: function (event, currentIndex) {
             Swal.fire({
                 title: 'ยืนยัน',
-                text: `ต้องการนำส่ง JD หรือไม่`,
+                text: `ต้องการนำส่ง Manager หรือไม่`,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -529,7 +529,7 @@ function updateEvAdminStatus(id,value){
                                 $("#spiniconsendjd").attr("hidden",true);
                                 Swal.fire({
                                     title: 'สำเร็จ...',
-                                    text: 'นำส่ง JD สำเร็จ!',
+                                    text: 'นำส่ง Manager สำเร็จ!',
                                 }).then((result) => {
                                     window.location.reload();
                                 });

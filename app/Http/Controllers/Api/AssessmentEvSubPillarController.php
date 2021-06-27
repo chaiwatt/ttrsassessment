@@ -22,10 +22,12 @@ class AssessmentEvSubPillarController extends Controller
 
     public function GetSubPillarIndex(Request $request){
         $subpillarindexs = SubPillarIndex::where('sub_pillar_id', $request->value)->get();
+        $criteriatransactions = CriteriaTransaction::where('ev_id', $request->evid)->get();
         $indextypes = IndexType::get();
         return response()->json(array(
             "indextypes" => $indextypes,
-            "subpillarindexs" => $subpillarindexs
+            "subpillarindexs" => $subpillarindexs,
+            "criteriatransactions" => $criteriatransactions
         ));
     }
 

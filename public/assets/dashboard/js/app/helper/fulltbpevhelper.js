@@ -244,7 +244,12 @@ $(document).on('change', '#subpillar', function(e) {
         var html0 ='<option value="0" >==เลือกรายการ==</option>';
         var html1 ='';
         data.subpillarindexs.forEach(function (subpillar,index) {
-                html0 += `<option value="${subpillar['id']}" >${subpillar['name']}</option>`
+            var checkindex = data.criteriatransactions.filter(x => x.ev_id == $('#evid').val() && x.sub_pillar_index_id == subpillar['id']);
+            //console.log(subpillar['id'] + ' ' + checkindex.length);
+            if(checkindex.length == 0){
+                html0 += `<option value="${subpillar['id']}" >${subpillar['name']}  </option>`
+            }
+                
             });
         data.indextypes.forEach(function (indextype,index) {
                 html1 += `<option value="${indextype['id']}" >${indextype['name']}</option>`

@@ -20,6 +20,7 @@ use App\Model\CompanyEmploy;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
+use App\Model\FullTbpHistory;
 use App\Helper\DateConversion;
 use App\Model\FullTbpEmployee;
 use App\Model\TimeLineHistory;
@@ -179,6 +180,13 @@ class FullTbpController extends Controller
         ]);
         
         $fulltbp = FullTbp::find($request->id);
+
+        $fulltbphistory = new FullTbpHistory();
+        $fulltbphistory->full_tbp_id = $request->id;
+        $fulltbphistory->path = $filelocation;
+        $fulltbphistory->message = $request->message;
+        $fulltbphistory->save();
+
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ;
         if($fulltbp->refixstatus == 1){
@@ -207,7 +215,7 @@ class FullTbpController extends Controller
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $businessplan->id;
-        $timeLinehistory->details = 'ส่งแผนธุรกิจเทคโนโลยี (Full TBP)';
+        $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแผนธุรกิจเทคโนโลยี (Full TBP)';
         $timeLinehistory->message_type = 2;
         $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;
@@ -246,6 +254,13 @@ class FullTbpController extends Controller
         ]);
         
         $fulltbp = FullTbp::find($request->id);
+
+        $fulltbphistory = new FullTbpHistory();
+        $fulltbphistory->full_tbp_id = $request->id;
+        $fulltbphistory->path = $filelocation;
+        $fulltbphistory->message = $request->message;
+        $fulltbphistory->save();
+
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ;
         if($fulltbp->refixstatus == 1){
@@ -273,7 +288,7 @@ class FullTbpController extends Controller
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $businessplan->id;
-        $timeLinehistory->details = 'ส่งแผนธุรกิจเทคโนโลยี (Full TBP)';
+        $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแผนธุรกิจเทคโนโลยี (Full TBP)';
         $timeLinehistory->message_type = 2;
         $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;

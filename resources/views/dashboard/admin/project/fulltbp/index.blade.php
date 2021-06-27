@@ -312,9 +312,9 @@
                                                     @if ($fulltbp->expertassignments->count() > 0)
                                                             @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
                                                                 @if (Auth::user()->user_type_id >= 5)
-                                                                        <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">อยู่ระหว่าง JD พิจารณา</a>
+                                                                        <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">อยู่ระหว่าง Manager พิจารณา</a>
                                                                     @else
-                                                                        <span class="badge badge-flat border-danger text-danger-600">อยู่ระหว่าง JD พิจารณา</span>
+                                                                        <span class="badge badge-flat border-danger text-danger-600">อยู่ระหว่าง Manager พิจารณา</span>
                                                                 @endif
                                                                     
                                                                 @elseif($fulltbp->expertassignments->where('expert_assignment_status_id',2)->count() > 0)
@@ -341,11 +341,15 @@
                                                             $evstatus = 'ผ่านการอนุมัติ';
                                                             $style = 'badge badge-flat border-success text-success-600';
                                                             if($fulltbp->ev->status == 0){
-                                                                $evstatus = 'อยู่ระหว่างการสร้าง EV';
+                                                                $evstatus = 'ยังไม่ได้สร้าง EV';
+                                                                if($fulltbp->ev->isevadd > 0){
+                                                                    $evstatus = 'อยู่ระหว่างการสร้าง EV';
+                                                                }
+
                                                                 $style = 'btn-sm bg-warning';
                                                             }elseif($fulltbp->ev->status == 1){
                                                                 if($fulltbp->ev->refixstatus == 0){
-                                                                    $evstatus = 'อยู่ระหว่าง JD ตรวจสอบ';
+                                                                    $evstatus = 'อยู่ระหว่าง Manager ตรวจสอบ';
                                                                     $style = 'btn-sm bg-warning';
                                                                 }else if($fulltbp->ev->refixstatus == 1){
                                                                     $evstatus = 'ส่งคืนแก้ไข';
@@ -359,7 +363,7 @@
                                                                 $style = 'btn-sm bg-pink';
                                                             }
                                                             elseif($fulltbp->ev->status == 3){
-                                                                $evstatus = 'อยู่ระหว่าง JD พิจารณา';
+                                                                $evstatus = 'อยู่ระหว่าง Manager พิจารณา';
                                                                 $style = 'btn-sm bg-pink';
                                                             }
                                                         @endphp

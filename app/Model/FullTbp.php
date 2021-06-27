@@ -31,6 +31,7 @@ use App\Model\FullTbpMarketSwot;
 use App\Model\FullTbpSellStatus;
 use App\Model\FullTbpDebtPartner;
 use App\Model\FullTbpProjectPlan;
+use App\Model\CriteriaTransaction;
 use App\Model\FullTbpCreditPartner;
 use App\Model\FullTbpMarketAnalysis;
 use App\Model\FullTbpProjectCertify;
@@ -135,6 +136,7 @@ class FullTbp extends Model
     public function getEvAttribute(){
         return Ev::where('full_tbp_id',$this->id)->first();
     } 
+
     public function getExpertCommentAttribute(){
         return ExpertComment::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->first();
     } 

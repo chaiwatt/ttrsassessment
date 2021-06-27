@@ -604,7 +604,7 @@
 												<div class="form-group">
 													<div class="row">
 														<div class="col-md-6">
-															<label>สำนักงาน</label>
+															<label>หน่วยงาน</label>
 															<input type="text" name="organizationname" value="{{$generalinfo->company}}" data-placeholder="สำนักงาน"class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
@@ -657,8 +657,8 @@
 															<input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล" class="form-control form-control-lg">
 														</div>
 														<div class="col-md-6">
-															<label>โทรศัพท์2</label>
-															<input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="โทรศัพท์2" class="form-control form-control-lg">
+															<label>Call Center</label>
+															<input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="Call Center" class="form-control form-control-lg">
 														</div>
 													</div>
 												</div>

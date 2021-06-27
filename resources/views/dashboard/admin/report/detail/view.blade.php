@@ -90,69 +90,95 @@
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารของโครงการ</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th style="width:150px">Mini TBP</th> 
+                                        <th >วันที่ส่งเอกสาร</th>
+                                        {{-- <th style="width:1%">เอกสารแนบ</th>  --}}
+                                        <th style="width:1%;white-space: nowrap">PDF</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <td>
+                                            @if (Auth::user()->user_type_id == 3)
+                                                   @if (Auth::user()->experttype == "(ภายนอก)")
+                                                            Mini TBP
+                                                       @else
+                                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                   @endif
+                                                @else
+                                                    <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                            @endif
+                                            
+                                        </td> 
+                                        <td>{{$company->businessplan->minitbp->submitdateth}}</td> 
+                                       
+                                        <td style="white-space: nowrap"> 
+                                            <a href="{{asset($company->businessplan->minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
+                                        </td>  
+                                                                            
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="table-responsive mt-4">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr class="bg-info">
-                                            <th style="width:300px">Mini TBP/Full TBP</th> 
-                                            <th >วันที่ส่งเอกสาร</th>
-                                            <th style="width:1%">PDF</th>
-                                            <th style="width:1%">เอกสารแนบ</th> 
+                                            <th style="width:150px">Full TBP</th> 
+                                            <th style="width:1%; white-space: nowrap">วันที่ส่งเอกสาร</th>
+                                            <th >รายระเอียดการแก้ไข</th>
+                                            <th style="width:1%; white-space: nowrap">PDF</th>
+                                            <th style="width:1% ;white-space: nowrap">เอกสารแนบ</th> 
+                                          
+                                           
                                         </tr>
                                     </thead>
                                     <tbody >
-                                        <tr>
-                                            <td>
-                                                @if (Auth::user()->user_type_id == 3)
-                                                       @if (Auth::user()->experttype == "(ภายนอก)")
-                                                                Mini TBP
-                                                           @else
-                                                                <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
-                                                       @endif
-                                                    @else
-                                                        <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
-                                                @endif
-                                                
-                                            </td> 
-                                            <td>{{$company->businessplan->minitbp->submitdateth}}</td> 
-                                            <td> 
-                                                <a href="{{asset($company->businessplan->minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
-                                            </td>  
-                                            <td>
-                                                
-                                            </td>                                       
-                                        </tr> 
+                                     
                                         @if ($company->businessplan->business_plan_status_id >=5)
-                                            <tr>
-                                                <td>
-                                                    @if (Auth::user()->user_type_id == 3)
-                                                        @if (Auth::user()->experttype == "(ภายนอก)")
-                                                            Full TBP
+                                            @foreach ($fulltbphistories as $key => $fulltbphistory)
+                                                <tr>
+                                                    @if ($key == 0)
+                                                    <td rowspan="{{$fulltbphistories->count()}}">
+                                                        @if (Auth::user()->user_type_id == 3)
+                                                            @if (Auth::user()->experttype == "(ภายนอก)")
+                                                                Full TBP
+                                                            @else
+                                                                <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbphistory->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
+                                                            @endif
                                                         @else
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbphistory->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
                                                         @endif
-                                                    @else
-                                                        <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="text-info" target="_blank">Full TBP</a>
+                                                        
+                                                    </td> 
                                                     @endif
-                                                    
-                                                </td>  
-                                                <td>{{$company->businessplan->minitbp->fulltbp->submitdateth}}</td> 
-                                                <td style="white-space: nowrap"> 
-                                                    @if (Auth::user()->user_type_id == 3)
-                                                        @if (Auth::user()->experttype == "(ภายนอก)")
-                                                            <a href="{{asset($company->businessplan->minitbp->fulltbp->shortpdf)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
+ 
+                                                    <td>{{$fulltbphistory->submitdateth}}</td> 
+                                                    <td>{{$fulltbphistory->message}}</td> 
+
+                                                    <td style="white-space: nowrap"> 
+                                                        @if (Auth::user()->user_type_id == 3)
+                                                            @if (Auth::user()->experttype == "(ภายนอก)")
+                                                                <a href="{{asset($fulltbphistory->fulltbp->shortpdf)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$fulltbphistory->fulltbp->shortpdf}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                            @else
+                                                                <a href="{{asset($fulltbphistory->path)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$fulltbphistory->path}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                            @endif
                                                         @else
-                                                            <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                            <a href="{{asset($fulltbphistory->path)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$fulltbphistory->path}}" target="_blank ">ดาวน์โหลด PDF</a>
                                                         @endif
-                                                    @else
-                                                        <a href="{{asset($company->businessplan->minitbp->fulltbp->attachment)}}" class="btn btn-sm bg-info downloadlink" data-docname="PDF Full TBP-{{$company->businessplan->minitbp->project}}" target="_blank ">ดาวน์โหลด PDF</a>
+                                                        
+                                                    </td>  
+                                                    @if ($key == 0)
+                                                    <td rowspan="{{$fulltbphistories->count()}}" style="white-space: nowrap">
+                                                        <a  href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbphistory->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$fulltbphistory->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
+                                                    </td>  
                                                     @endif
-                                                    
-                                                </td>  
-                                                <td style="white-space: nowrap">
-                                                    <a  href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $company->businessplan->minitbp->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
-                                                </td>                                       
-                                            </tr> 
+                                                </tr> 
+                                            @endforeach
+
                                         @endif 
                                     </tbody>
                                 </table>      
@@ -377,9 +403,9 @@
                                                     {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a> --}}
                                                     <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Pdf</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ PDF</a>
                                                         <a href="{{route('dashboard.admin.evaluationresult.word',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
-                                                        {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a> --}}
+                                                        {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a> --}}
                                                       
                                                     </div>
                                                 @else
@@ -392,7 +418,7 @@
                                                     <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
-                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด Pdf</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a>
                                                         <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
                                                     </div>
                                                 </div>

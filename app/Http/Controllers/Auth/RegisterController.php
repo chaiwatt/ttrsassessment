@@ -145,7 +145,7 @@ class RegisterController extends Controller
         
         if($generalinfo->verify_expert_status_id == 2){
             if($user->user_type_id == 3 || $user->user_type_id == 4){
-                EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS: คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype,'เรียน JD<br><br> คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype.' กรุณาตรวจสอบ/Verify ได้ที่ <a href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send(User::where('user_type_id',6)->first()->email,'TTRS: คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype,'เรียน Manager<br><br> คุณ'. $user->name . ' ' .  $user->lastname .' ได้สมัครเป็น'.$officertype.' กรุณาตรวจสอบ/Verify ได้ที่ <a href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             }  
         }
         return $user ; 

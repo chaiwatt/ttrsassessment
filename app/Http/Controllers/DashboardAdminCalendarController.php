@@ -196,7 +196,7 @@ class DashboardAdminCalendarController extends Controller
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
-        $timeLinehistory->details = 'นัดหมายการประเมิน ณ สถานประกอบการ';
+        $timeLinehistory->details = 'TTRS: นัดหมายการประเมิน ณ สถานประกอบการ';
         $timeLinehistory->message_type = 2;
         $timeLinehistory->owner_id = $company->user_id;
         $timeLinehistory->user_id = $auth->id;

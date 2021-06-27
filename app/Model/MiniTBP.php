@@ -43,7 +43,22 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
         return Prefix::find($this->managerprefix_id);
     } 
     public function getBankAttribute(){
-        return ThaiBank::find($this->thai_bank_id);
+        if($this->thai_bank_id == 0){
+            return '';
+        }
+        return ThaiBank::find($this->thai_bank_id)->name;
+    } 
+    public function getBank1Attribute(){
+        if($this->thai_bank_1_id == 0){
+            return '';
+        }
+        return ThaiBank::find($this->thai_bank_1_id)->name;
+    } 
+    public function getBank2Attribute(){
+        if($this->thai_bank_2_id == 0){
+            return '';
+        }
+        return ThaiBank::find($this->thai_bank_2_id)->name;
     } 
 
     public function getUpdatedAtThAttribute(){

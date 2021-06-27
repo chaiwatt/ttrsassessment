@@ -15,45 +15,59 @@ class CreateGeneralInfosTable extends Migration
     {
         Schema::create('general_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('company',150)->comment('ชื่อหน่วยงาน เช่น สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ');
+            $table->string('company',150)->default('สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)')->comment('ชื่อหน่วยงาน เช่น สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ');
+            $table->string('company_default',150)->default('สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)')->comment('ชื่อหน่วยงาน เช่น สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ');
             $table->string('logo',250)->nullable();
             $table->string('logo2',250)->nullable();
-            $table->string('phone1',50)->nullable();
-            $table->string('phone2',50)->nullable();
-            $table->string('fax',50)->nullable();
-            $table->string('email',200)->nullable();
-            $table->string('address',150)->nullable();
+            $table->string('phone1',50)->default('0-2564-7000');
+            $table->string('phone1_default',50)->default('0-2564-7000');
+            $table->string('phone2',50)->default('0-2564-8000');
+            $table->string('phone2_default',50)->default('0-2564-8000');
+            $table->string('fax',50)->default('0-2564-7004');
+            $table->string('fax_default',50)->default('0-2564-7004');
+            $table->string('email',200)->default('ttrs@nstda.or.th');
+            $table->string('email_default',200)->default('ttrs@nstda.or.th');
+            $table->string('address',150)->default('111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน');
+            $table->string('address_default',150)->default('111 อุทยานวิทยาศาสตร์ประเทศไทย ถนนพหลโยธิน');
             $table->unsignedBigInteger('province_id')->default(4);  //ปทุมธานี
             $table->unsignedBigInteger('amphur_id')->default(67);   //คลองหลวง
             $table->unsignedBigInteger('tambol_id')->default(367);  //คลองหนึ่ง
+            $table->unsignedBigInteger('province_default_id')->default(4);  //ปทุมธานี
+            $table->unsignedBigInteger('amphur_default_id')->default(67);   //คลองหลวง
+            $table->unsignedBigInteger('tambol_default_id')->default(367);  //คลองหนึ่ง
+            $table->string('workdaytime',250)->default('8.00-16.00');
+            $table->string('workdaytime_default',250)->default('8.00-16.00');
+            $table->string('facebook',250)->default('https://www.facebook.com/NSTDATHAILAND');
+            $table->string('facebook_default',250)->default('https://www.facebook.com/NSTDATHAILAND');
+            $table->string('instagram',250)->nullable();
+            $table->string('instagram_default',250)->nullable();
+            $table->string('director',250)->nullable();
+            $table->string('director_default',250)->nullable();
             $table->char('postalcode',5)->default('12120');
+            $table->char('postalcode_default',5)->default('12120');
             $table->string('client_id',250);
             $table->string('client_secret',250);
-            $table->string('youtube',250)->nullable();
-            $table->string('facebook',250)->nullable();
-            $table->string('twitter',250)->nullable();
-            $table->string('instagram',250)->nullable();
-            $table->string('skype',250)->nullable();
-            $table->string('linkedin',250)->nullable();
             $table->unsignedBigInteger('layout_style_id')->default(1);  //คลองหนึ่ง
-            $table->string('workdaytime',250)->nullable();
             $table->string('saturdaytime',250)->nullable();
             $table->string('sundaytime',250)->nullable();
-            $table->string('director',250)->nullable();
             $table->string('thsmsuser',250)->nullable();
             $table->text('thsmspass')->nullable();
             $table->longText('consent')->nullable();
             $table->unsignedBigInteger('social_login_status')->default(1);  //ปิด
             $table->unsignedBigInteger('verify_type_id')->default(1);
             $table->unsignedBigInteger('front_page_status_id')->default(1);
-            $table->unsignedBigInteger('verify_expert_status_id')->default(2);
-            $table->char('watermark',1)->default(0);
+            $table->unsignedBigInteger('front_page_status_default_id')->default(1);
+            $table->unsignedBigInteger('verify_expert_status_id')->default(1);
+            $table->unsignedBigInteger('verify_expert_default_status_id')->default(1);
+            $table->char('watermark',1)->default(1);
+            $table->char('watermark_default',1)->default(1);
             $table->char('togglebar',1)->default(1);
-            $table->char('invoiceoption',1)->default(1);
+            $table->char('invoiceoption',1)->default(2);
+            $table->char('notifybolchange',1)->default(1);
+            $table->char('invoiceoption_default',1)->default(2);
             $table->string('watermarktext',250)->default('เอกสารสำคัญปกปิด (Private & Confidential)');
-            // $table->char('pageview',10)->default(0);
-            //$table->char('useinvoice',1)->default(1);
-            $table->unsignedBigInteger('use_invoice_status_id')->default(1);  
+            $table->unsignedBigInteger('use_invoice_status_id')->default(2);  
+            $table->unsignedBigInteger('use_invoice_status_default_id')->default(2); 
             $table->timestamps();
         });
     }

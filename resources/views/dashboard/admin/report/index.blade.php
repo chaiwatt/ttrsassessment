@@ -228,7 +228,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h1>
                         </div>
                         <div>
-                            จำนวนสมัครสมาชิก
+                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนผู้ขอรับการประเมิน</a>  
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -243,7 +243,8 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
                         </div>
                         <div>
-                            จำนวนยื่น Mini Tbp
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนยื่น Mini Tbp</a>  
+                            
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -255,8 +256,8 @@
                         <div class="d-flex">
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
                         </div>
-                        <div>
-                            จำนวนยื่น Full TBP
+                        <div>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนยื่น Full TBP</a>  
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -268,8 +269,8 @@
                         <div class="d-flex">
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',8)->count()}}</h1>
                         </div>
-                        <div>
-                            จำนวนที่ได้รับการประเมิน
+                        <div> 
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">จำนวนที่ได้รับการประเมิน</a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -285,11 +286,11 @@
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">ร้อยละเกรดแยกตาม Pillar</h6>
                     </div>
                     <div class="card-body">
-                        <div class="row l-400">
-                            <div class="col-md-2 c-20">
+                        <div class="row">
+                            <div class="col-md-2">
                                 <canvas id="myChart" width=180  height=180 ></canvas>
                             </div>
-                            <div class="col-md-9 l-40 none">
+                            <div class="col-md-9 l-40">
                               <div style="margin-top: 300px;"></div>
                               <div id="mainchart" hidden>
                                 <ul class="chart-skills">
@@ -317,8 +318,8 @@
                                 
                             </div>
                             </div>
-                            <div class="col-md-1 c-table">
-                                  <table class="table-score table-7 table-bordered table-dark" >
+                            <div class="col-md-1 l-75 table-none">
+                                  <table class="table table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200" >
                                 <thead>
                                   <tr>
                                    
@@ -377,7 +378,63 @@
                     </div>
                     <div class="card-footer">
                         <div class="row l-50">
-                            <div class="col-md-3">
+                            <div class="f-table table2-none table-w">
+                                <table class="table table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
+                                    <thead>
+                                      <tr>
+                                       
+                                        <td class="bg-02 white" colspan="2">Level Classification</td>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr class="bg-01">
+                                        <td>87-100</td>
+                                        <td>AAA</td>
+                                      </tr>
+                                      <tr class="bg-04">
+                                        <td>80-86</td>
+                                        <td>AA</td>
+                                      </tr>
+                                      <tr class="bg-02">
+                                        <td>74-79</td>
+                                        <td>A</td>
+                                      </tr>
+                                      <tr class="bg-03">
+                                        <td>70-73</td>
+                                        <td>BBB</td>
+                                      </tr>
+                                      <tr class="bg-02">
+                                        <td>64-69</td>
+                                        <td>BB</td>
+                                      </tr>
+                                      <tr class="bg-03">
+                                        <td>56-63</td>
+                                        <td>B</td>
+                                      </tr>
+                                      <tr class="bg-02">
+                                        <td>54-55</td>
+                                        <td>CCC</td>
+                                      </tr>
+                                      <tr class="bg-03">
+                                        <td>51-52</td>
+                                        <td>CC</td>
+                                      </tr>
+                                      <tr class="bg-02">
+                                        <td>48-50</td>
+                                        <td>C</td>
+                                      </tr>
+                                      <tr class="bg-03">
+                                        <td>25-47</td>
+                                        <td>D</td>
+                                      </tr>
+                                      <tr class="bg-02">
+                                        <td>0-24</td>
+                                        <td>E</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                            <div class="col-md-3 top-550">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="row">

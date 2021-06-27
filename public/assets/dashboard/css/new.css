@@ -578,81 +578,80 @@ h6{
 
 /* ***************************************************** */
 @media (min-width:1024px) and (max-width:1300px){
-    .table2-none{
-        display: none;
-    }
-    #myChart{
-        display: block;
-        height: 140px ;
-        width: 140px ;
-    }
-    .l-40 {
-        margin-top: 150px;
-        margin-left: -111px;
-    }
-    .l-50{
-        padding-left: 50px;
-        }
-    .l-75{
-        margin-left: -10px;
-    }
-    .chart-skills {
-        position: relative;
-        width: 238px;
-        height: 119px;
-        margin-top: -137px;
-        overflow: hidden;
+  .table2-none{
+      display: none;
+  }
+  #myChart{
+      display: block;
+      height: 140px ;
+      width: 140px ;
+  }
+  .l-40 {
+      margin-top: 150px;
+      margin-left: -111px;
+  }
+  .l-50{
+      padding-left: 50px;
       }
-      .chart-skills2 {
-        position: relative;
-        width: 346px;
-        height: 173px;
-        margin-top: -173px;
-        overflow: hidden;
-      }
-      .chart-skills3 {
-        position: relative;
-        width: 450px;
-        height: 226px;
-        margin-top: -226px;
-        overflow: hidden;
-      }
-      .chart-skills4 {
-        position: relative;
-        width: 555px;
-        height: 277px;
-        margin-top: -277px;
-        overflow: hidden;
+  .l-75{
+      margin-left: -10px;
+  }
+  .chart-skills {
+      position: relative;
+      width: 238px;
+      height: 119px;
+      margin-top: -137px;
+      overflow: hidden;
     }
-        
-      .col-sm-6 {
-        -ms-flex: 0 0 -1%;
-        flex: 0 0 0%;
-        max-width: 100%;
-        padding-left: 30px;
-        margin-left: -28px;
+    .chart-skills2 {
+      position: relative;
+      width: 346px;
+      height: 173px;
+      margin-top: -173px;
+      overflow: hidden;
     }
-    .col-md-9 {
-        flex: 0 0 75%;
-        max-width: 100%;
+    .chart-skills3 {
+      position: relative;
+      width: 450px;
+      height: 226px;
+      margin-top: -226px;
+      overflow: hidden;
     }
-    h2{
-        font-weight: bold;
-        }
-    h4{
-        font-weight: bold;
+    .chart-skills4 {
+      position: relative;
+      width: 555px;
+      height: 277px;
+      margin-top: -277px;
+      overflow: hidden;
+  }
+      
+    .col-sm-6 {
+      -ms-flex: 0 0 -1% !important;
+      flex: 0 0 0% !important;
+      max-width: 100% !important;
+      padding-left: 30px !important;
+      margin-left: -28px !important;
+  }
+  .col-md-9 {
+      flex: 0 0 75%;
+      max-width: 100% !important;
+  }
+  h2{
+      font-weight: bold;
       }
-    h5 {
-        font-size: 1.3rem;
-        font-weight: bold;
-        }
-    h6{
-        font-weight: bold;
-        padding-top: 20px;
-        padding-left: 10px;
+  h4{
+      font-weight: bold;
+    }
+  h5 {
+      font-size: 1.3rem;
+      font-weight: bold;
       }
+  h6{
+      font-weight: bold;
+      padding-top: 20px;
+      padding-left: 10px;
+    }
 }
-
 
 /* ***************************************************** */
 @media (min-width:768px) and (max-width:1023px){
@@ -669,8 +668,11 @@ h6{
     }
     
     .l-40 {
-        margin-top: -36px;
-        margin-left: 50px;
+       
+        margin-left: 54px;
+    }
+    #mainchart{
+      margin-left: 10px;
     }
     .l-50{
         padding-left: 50px;
@@ -712,18 +714,18 @@ h6{
       }
         
       .col-md-3 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        padding-top: 20px;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding-top: 20px !important;
       }
       .col-sm-6 {
         flex: 0 0 -1%;
         max-width: 50%;
-        padding-left: 30px;
+        padding-left: 40px !important;
       }
     .col-md-9 {
-        flex: 0 0 75%;
-        max-width: 100%;
+        flex: 0 0 75% !important;
+        max-width: 100% !important;
     }
     h2{
         font-weight: bold;
@@ -759,7 +761,7 @@ h6{
         width: 120px !important;
     }
     .top-550{
-        margin-top: 550px;
+        margin-top: 650px;
     }
     .table-none{
         display: none;
@@ -773,7 +775,7 @@ h6{
     
     .l-40 {
         margin-top: -120px;
-        margin-left: 50px;
+        margin-left: 65px;
     }
     .l-50{
         padding-left: 20px;
@@ -987,7 +989,7 @@ h6{
         width: 120px !important;
     }
     .top-550{
-        margin-top: 550px;
+        margin-top: 650px;
     }
     .table-none{
         display: none;
@@ -1001,7 +1003,7 @@ h6{
     
     .l-40 {
         margin-top: -120px;
-        margin-left: 50px;
+        margin-left: 65px;
     }
     .l-50{
         padding-left: 20px;
@@ -1199,6 +1201,288 @@ h6{
         margin-left: -20px;
     }
       
+}
+
+
+/* ***************************************************** */
+@media (min-width:320px) and (max-width:374px){
+  #myChart{
+      display: block;
+      height: 120px !important ;
+      width: 120px !important;
+  }
+  .top-550{
+      margin-top: 650px;
+  }
+  .table-none{
+      display: none;
+  }
+  .table2-none{
+      display:inline-table;
+  }
+  .table-w{
+      width: 240%;
+  }
+  
+  .l-40 {
+      margin-top: -170px;
+      margin-left: 65px;
+  }
+  .l-50{
+      padding-left: 20px;
+      margin-top: -130px;
+      }
+  .l-75{
+      margin-left: -10px;
+  }
+  .chart-skills {
+    position: relative;
+    width: 79px;
+    height: 39px;
+    margin-left: 12px;
+    margin-top: -39px;
+    overflow: hidden;
+  }
+    
+    .chart-skills2 {
+      position: relative;
+      width: 136px;
+      height: 68px;
+      margin-left: -16px;
+      margin-top: -68px;
+      overflow: hidden;
+    }
+    .chart-skills3 {
+      position: relative;
+    width: 196px;
+    height: 98px;
+    margin-top: -98px;
+    margin-left: -46px;
+    overflow: hidden;
+  }
+  .chart-skills4 {
+    position: relative;
+    width: 256px;
+    height: 128px;
+    margin-top: -128px;
+    margin-left: -76px;
+    overflow: hidden;
+  }
+    
+    
+
+.chart-skills::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 25px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+
+.chart-skills::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 25px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+
+.chart-skills li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 25px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+
+.chart-skills2::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 25px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+.chart-skills2 li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 25px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+.chart-skills3::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 25px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+.chart-skills3 li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 25px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+.chart-skills4::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 25px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 175px;
+  border-top-right-radius: 175px;
+}
+.chart-skills4 li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 25px solid;
+  border-top: none;
+  border-bottom-left-radius: 175px;
+  border-bottom-right-radius: 175px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+
+.chart-skills li:nth-child(1) span {
+  top: -19px;
+  left: -23px;
+  transform: rotate(
+-113.2deg
+);
+}
+.chart-skills span {
+  position: absolute;
+  font-size: 7px;
+  backface-visibility: hidden;
+  animation: fade-in .4s linear forwards;
+}
+
+.chart-skills2 li:nth-child(1) span {
+    top: -18px;
+    left: -24px;
+    transform: rotate(
+-131.6deg
+);
+}
+.chart-skills2 span {
+    position: absolute;
+    font-size: 7px;
+    backface-visibility: hidden;
+    animation: fade-in .4s linear forwards;
+}
+.chart-skills3 li:nth-child(1) span {
+  top: -16px;
+  left: -24px;
+  transform: rotate(
+-152.5deg
+);
+}
+
+.chart-skills3 span {
+  position: absolute;
+  font-size: 7px;
+  backface-visibility: hidden;
+  animation: fade-in .4s linear forwards;
+}
+
+.chart-skills4 li:nth-child(1) span {
+  top: -12px;
+  left: -23px;
+  transform: rotate(
+-169.7deg
+);
+}
+.chart-skills4 span {
+  position: absolute;
+  font-size: 7px;
+  backface-visibility: hidden;
+  animation: fade-in .4s linear forwards;
+}
+
+
+
+      
+    .col-md-3 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      padding-top: 20px;
+      margin-left: -38px;
+    }
+    .col-sm-6 {
+      flex: 0 0 -1%;
+      max-width: 50% !important;
+      padding-left: 0px !important;
+    }
+  .col-md-9 {
+      flex: 0 0 75%;
+      max-width: 100%;
+  }
+  h2{
+      font-weight: bold;
+      }
+  h4{
+      font-weight: bold;
+    }
+  h5 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      }
+  h6{
+      font-weight: bold;
+      padding-top: 20px;
+      padding-left: 10px;
+    }
+    .f-table{
+      margin-bottom: -600px;
+      margin-top: 100px;
+      margin-left: -20px;
+  }
+    
 }
 
 

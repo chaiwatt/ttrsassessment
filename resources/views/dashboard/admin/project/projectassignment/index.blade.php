@@ -16,7 +16,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเห็น JD</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเห็น Manager</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>ความเห็น</label>
-                                <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น JD" class="form-control form-control-lg" @if (Auth::user()->user_type_id != 6) readonly @endif></textarea>
+                                <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น Manager" class="form-control form-control-lg" @if (Auth::user()->user_type_id != 6) readonly @endif></textarea>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap">บริษัท</th>
-                                        <th style="width:1%;white-space: nowrap">ความเห็น JD</th>
+                                        <th style="width:1%;white-space: nowrap">ความเห็น Manager</th>
                                         <th style="width:1%;white-space: nowrap">Leader</th>
                                         <th style="width:1%;white-space: nowrap">สถานะ</th>
                                         @if (Auth::user()->user_type_id>=5)

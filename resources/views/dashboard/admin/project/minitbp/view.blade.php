@@ -236,10 +236,10 @@
 																			@endforeach
 																		</select>
 																	</div>
-																	@if (@$minitbp->bank->name == 'อื่นๆ โปรดระบุ')
-																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled>
+																	@if (@$minitbp->bank == 'อื่นๆ โปรดระบุ')
+																			<input type="text" name="otherbank" id="otherbank" value="{{$minitbp->otherbank}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled>
 																		@else
-																			<input type="text" name="otherbank" id="otherbank" value="" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled hidden >
+																			<input type="text" name="otherbank" id="otherbank" value="{{$minitbp->otherbank}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled hidden >
 																	@endif
 																</div>
 																<div class="col-md-6">
@@ -248,6 +248,57 @@
 																		<input type="text" name="finance1loan" id="finance1loan" value="{{old('finance1loan') ?? $minitbp->finance1_loan}}" class="form-control form-control-lg numeralformat10" readonly>
 																	</div>
 																</div>
+
+																<div class="col-md-6 mt-2">
+																	<div class="form-group">
+																		<label for="">เลือกธนาคาร</label>
+																		<select name="bank1" id="bank1" class="form-control form-control-lg form-control-select2" disabled>
+																			<option value="0">=== โปรดเลือกธนาคาร ===</option>
+																			@foreach ($banks as $bank)
+																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_1_id == $bank->id) selected @endif >{{$bank->name}}</option>
+																			@endforeach
+																		</select>
+																	</div>
+																	@if (@$minitbp->bank1 == 'อื่นๆ โปรดระบุ')
+																			<input type="text" name="otherbank1" id="otherbank1" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
+																		@else
+																			<input type="text" name="otherbank1" id="otherbank1" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled hidden >
+																	@endif
+																	
+																</div>
+																<div class="col-md-6 mt-2">
+																	<div class="form-group">
+																		<label for="">มูลค่าเงินลงทุนที่ต้องการ</label>
+																		<input type="text" name="finance1_1_loan" id="finance1_1_loan" value="{{old('finance1_1_loan') ?? $minitbp->finance1_1_loan}}" class="form-control form-control-lg numeralformat10" readonly>
+																	</div>
+																</div>
+
+
+
+																<div class="col-md-6 mt-2">
+																	<div class="form-group">
+																		<label for="">เลือกธนาคาร</label>
+																		<select name="bank2" id="bank2" class="form-control form-control-lg form-control-select2" disabled>
+																			<option value="0">=== โปรดเลือกธนาคาร ===</option>
+																			@foreach ($banks as $bank)
+																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_2_id == $bank->id) selected @endif >{{$bank->name}}</option>
+																			@endforeach
+																		</select>
+																	</div>
+																	@if (@$minitbp->bank2 == 'อื่นๆ โปรดระบุ')
+																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
+																		@else
+																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled hidden >
+																	@endif
+																	
+																</div>
+																<div class="col-md-6 mt-2">
+																	<div class="form-group">
+																		<label for="">มูลค่าเงินลงทุนที่ต้องการ</label>
+																		<input type="text" name="finance1_2_loan" id="finance1_2_loan" value="{{old('finance1_2_loan') ?? $minitbp->finance1_2_loan}}" class="form-control form-control-lg numeralformat10" readonly>
+																	</div>
+																</div>
+
 															</div>	
 														</div>
 													</div>
@@ -258,8 +309,26 @@
 															ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)
 														</label>														
 													</div>
+
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" id="finance3_other" name="finance3_other" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance3_other)) checked @endif data-fouc disabled>
+																อื่นๆ โปรดระบุ
+															</label>
+															<div class="row" id="finance3_other_div" style="margin-top: 5px"  @if (Empty($minitbp->finance3_other_detail) || Empty($minitbp->finance3_other) ) hidden @endif>
+																<div class="col-md-6">
+																	<div class="form-group">
+																		{{-- <label for="">โปรดระบุ</label> --}}
+																		<input type="text" name="finance3_other_detail" id="finance3_other_detail" class="form-control form-control-lg" value="{{old('finance3_other_detail') ?? $minitbp->finance3_other_detail}}">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
 	
-													<div class="form-check">
+													{{-- <div class="form-check">
 														<label class="form-check-label">
 															<input type="checkbox" name="finance3" id="finance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->finance3)) checked @endif data-fouc disabled>
 															โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)
@@ -290,7 +359,7 @@
 																</div>
 															</div>
 														</div>
-													</div>
+													</div> --}}
 												</div>
 	
 											</div>
@@ -304,7 +373,31 @@
 											<label class="font-weight-semibold">สิทธิประโยชน์ที่ไม่ใช่การเงิน (Non-Finance)</label>
 											<div class="row">
 												<div class="col-md-6">
-													<div class="form-check">
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance1" id="nonefinance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc disabled>
+																ที่ปรึกษาด้านเทคโนโลยี/เทคนิค
+															</label>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance2" id="nonefinance2" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance2)) checked @endif data-fouc disabled>
+																ที่ปรึกษาด้านการตลาด
+															</label>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="form-check">
+															<label class="form-check-label">
+																<input type="checkbox" name="nonefinance3" id="nonefinance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc disabled>
+																ที่ปรึกษาด้านการเงิน
+															</label>
+														</div>
+													</div>
+													{{-- <div class="form-check">
 														<label class="form-check-label">
 															<input type="checkbox" name="nonefinance1" id="nonefinance1" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance1)) checked @endif data-fouc disabled>
 															โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย
@@ -322,17 +415,17 @@
 															<input type="checkbox" name="nonefinance3" id="nonefinance3" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance3)) checked @endif data-fouc disabled>
 															โครงการ spin-off
 														</label>
-													</div>
+													</div> --}}
 												</div>
 	
 												<div class="col-md-6">
-													<div class="form-check">
+													{{-- <div class="form-check">
 														<label class="form-check-label">
 															<input type="checkbox" name="nonefinance4" id="nonefinance4" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance4)) checked @endif data-fouc disabled>
 															ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ
 														</label>
 													</div>
-	
+	 --}}
 													<div class="form-check">
 														<label class="form-check-label">
 															<input type="checkbox" name="nonefinance5" id="nonefinance5" class="form-check-input-styled-primary" @if (!Empty($minitbp->nonefinance5)) checked @endif data-fouc disabled>

@@ -40,6 +40,7 @@ class CreateFullTbpsTable extends Migration
             $table->date('canceldate')->nullable();
             $table->date('finishdate')->nullable();
             $table->char('success_objective',1)->default(0);
+            $table->char('offer_expert',1)->default(0);
             $table->longText('follow_reason')->nullable();
             $table->timestamps();
         });
