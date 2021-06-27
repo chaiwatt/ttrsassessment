@@ -22,7 +22,6 @@ $(document).on('change', '#boldoc', function(e) {
         var formData = new FormData();
         formData.append('file',file);
         formData.append('id',$(this).data('id'));
-        // formData.append('docname',$('#docname').val());
             $.ajax({
                 url: `${route.url}/api/fulltbp/bol/add`,  //Server script to process data
                 type: 'POST',
