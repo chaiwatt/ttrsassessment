@@ -21,7 +21,7 @@ class ReportProjectExportByLeader implements FromView,ShouldAutoSize,WithTitle
     protected $leader;
     protected $projectname;
     function __construct($leader) {
-        $this->projectname = 'โครงการแยกตาม Lead';
+        $this->projectname = ' โครงการแยกตาม Lead';
            $this->leader = $leader;
     }
     public function view(): View

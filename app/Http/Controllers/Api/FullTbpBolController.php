@@ -10,6 +10,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use Illuminate\Http\Request;
@@ -67,12 +68,20 @@ class FullTbpBolController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'เพิ่มเอกสาร BOL (รายละเอียด: ' .$bol->name.')';
+        $projectlog->save();
+
         CreateUserLog::createLog('เพิ่มเอกสาร BOL โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project);
         return response()->json($bols); 
     }
     public function Delete(Request $request){
+        
         $auth = Auth::user();
         $bol = Bol::find($request->id);
+        $fname = $bol->name;
         $fulltbpid = $bol->full_tbp_id;
         @unlink($bol->path);
         $bol->delete();
@@ -109,6 +118,12 @@ class FullTbpBolController extends Controller
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'ลบเอกสาร BOL (รายละเอียด: ' .$fname.')';
+        $projectlog->save();
 
         CreateUserLog::createLog('ลบเอกสาร BOL โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project);
         return response()->json($bols); 

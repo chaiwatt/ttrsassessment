@@ -20,7 +20,7 @@ class ReportProjectExportByBusinessPlanStatus implements FromView,ShouldAutoSize
     protected $businessplanstatus;
     protected $projectname;
     function __construct($businessplanstatus) {
-        $this->projectname = 'โครงการแยกตามสถานะของการประเมิน';
+        $this->projectname = ' โครงการแยกตามสถานะของการประเมิน';
            $this->businessplanstatus = $businessplanstatus;
     }
     public function view(): View

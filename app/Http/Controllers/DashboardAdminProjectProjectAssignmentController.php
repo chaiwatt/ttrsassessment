@@ -9,6 +9,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
@@ -40,8 +41,6 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         return view('dashboard.admin.project.projectassignment.index')->withProjectassignments($projectassignments);
     }
     public function Edit($id){
-
-
         $projectassignment = ProjectAssignment::find($id);
         $minitbp = MiniTBP::where('business_plan_id',BusinessPlan::find($projectassignment->business_plan_id)->id)->first();
         $users = User::where('user_type_id',4)->get();
@@ -66,12 +65,12 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
 
         $company_name = (!Empty($businessplan->company->name))?$businessplan->company->name:'';
         $bussinesstype = $businessplan->business_type_id;
-        // $companyname = $businessplan->company->name;
+
         $fullcompanyname = $company_name;
         if($bussinesstype == 1){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
             $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
@@ -139,6 +138,17 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
             DateConversion::addExtraDay($minitbp->id,1);
 
         }
+
+        $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',1)->first()->update([
+            'actual_startdate' =>  Carbon::now()->toDateString()
+        ]);
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'มอบหมาย Leader และ Co-Leader';
+        $projectlog->save();
+
         CreateUserLog::createLog('มอบหมาย Leader และ Co-Leader โครงการ' . $minitbp->project);
         return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('การมอบหมายสำเร็จ');
     }

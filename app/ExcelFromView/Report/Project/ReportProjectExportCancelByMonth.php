@@ -20,7 +20,7 @@ class ReportProjectExportCancelByMonth implements FromView,ShouldAutoSize,WithTi
     protected $projectname;
     function __construct($year,$month) {
      $_m = (string)((int)($month));
-        $this->projectname = 'โครงการยกเลิก-' . EvaluationMonth::find($_m)->name . ' พ.ศ.' . (intVal($year)+543) ;
+        $this->projectname = ' โครงการยกเลิก-' . EvaluationMonth::find($_m)->name . ' พ.ศ.' . (intVal($year)+543) ;
         $this->year = $year;
         $this->month = $month;
     }

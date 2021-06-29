@@ -3025,7 +3025,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
     }else{
         Swal.fire({
             title: 'ข้อมูลแก้ไข',
-            text: 'กรุณากรอกรายละเอียดที่ท่านได้แก้เอกสาร Full Tbp',
+            text: 'กรุณากรอกรายการ/รายละเอียดที่ท่านได้แก้เอกสาร Full TBP',
             input: 'textarea',
             inputAttributes: {
               autocapitalize: 'off'

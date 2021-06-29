@@ -66,6 +66,7 @@
                                         <th>คะแนน</th>
                                         <th>เกรด</th>     
                                         <th style="width:1%;white-space: nowrap">รายงานผล</th>    
+                                        <th style="width:1%;white-space: nowrap">แจ้งผล</th> 
                                         <th style="width:1%;white-space: nowrap">แจ้งผลทางจดหมาย</th>  
                                         <th style="width:1%;white-space: nowrap">สิ้นสุดโครงการ</th>              
                                     </tr>
@@ -102,6 +103,16 @@
                                                             </div>
                                                         </div>
                                                     </td> 
+                                                    <td style="white-space: nowrap"> 
+                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id >=9)
+                                                            <span class="badge badge-flat border-success text-success-600">แจ้งผลแล้ว</span>
+                                                        @else
+                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 8 && $generalinfo->use_invoice_status_id == 2)
+                                                                <button class="btn btn-sm bg-warning notifyresult" data-id="{{$fulltbp->minitbp->id}}">แจ้งผล</button>
+                                                            @endif
+                                                        @endif
+
+                                                    </td>
                                                     <td style="white-space: nowrap">
                                                         @if (!Empty($fulltbp->projectstatustransaction(7)))
                                                                 @if ($fulltbp->projectstatustransaction(7)->status == 2)  
@@ -198,6 +209,46 @@
                 }
             });
         }); 
+
+        $(document).on("click",".notifyresult",function(e){
+            Swal.fire({
+                title: 'ยืนยัน',
+                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมินหรือไม่?`,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก',
+                closeOnConfirm: false,
+                closeOnCancel: false
+                }).then((result) => {
+                if (result.value) {
+                    NotifyResult($(this).data('id')).then(data => {
+                        window.location.reload();
+                    })
+                .catch(error => {})
+                }
+            });
+        }); 
+
+        function NotifyResult(id){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `${route.url}/api/assessment/notifyresult`,
+                    type: 'POST',
+                    headers: {"X-CSRF-TOKEN":route.token},
+                    data: {
+                    id : id
+                    },
+                    success: function(data) {
+                    resolve(data)
+                    },
+                    error: function(error) {
+                    reject(error)
+                    },
+                })
+            })
+        }
 
         function LetterSent(id){
             return new Promise((resolve, reject) => {

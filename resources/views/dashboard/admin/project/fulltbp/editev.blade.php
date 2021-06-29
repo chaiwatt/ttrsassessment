@@ -551,7 +551,7 @@
                                     <div class="tab-pane fade show active" id="indextab">
                                         <div class="form-group">	
                                             <div class="float-left mb-2">
-                                                <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel</button>
+                                                <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
                                                 <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF</button>
                                             </div>
                                             @if (Auth::user()->user_type_id == 6)
@@ -599,7 +599,7 @@
                                     <div class="tab-pane fade" id="extratab">
                                         <div class="form-group">	
                                             <div class="float-left mb-2">
-                                                <button id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก Excel</button>
+                                                <button id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
                                                 <button id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF</button>
                                             </div>
                                             {{-- @if ($ev->status == 0 || $ev->refixstatus == 1)

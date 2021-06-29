@@ -14,6 +14,7 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\ReviseLog;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
 use App\Model\AlertMessage;
@@ -30,6 +31,7 @@ use App\Model\EvEditHistory;
 use App\Model\EventCalendar;
 use App\Model\ExpertComment;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Model\DocumentEditor;
@@ -103,6 +105,7 @@ class DashboardAdminProjectFullTbpController extends Controller
     }
 
     public function View($id){
+    
         $businesstypes = BusinessType::get();
         $fulltbp = FullTbp::find($id);
         $fulltbpcompanyprofile = FullTbpCompanyProfile::where('full_tbp_id',$fulltbp->id)->first();
@@ -282,7 +285,8 @@ class DashboardAdminProjectFullTbpController extends Controller
         $leader = ProjectAssignment::where('full_tbp_id',$id)->pluck('leader_id')->toArray();
         $coleader = ProjectAssignment::where('full_tbp_id',$id)->pluck('coleader_id')->toArray();
         $expertassignmentarray = array_unique(array_merge($leader,$coleader)); 
-        $unique_array = array_diff($_experts, $expertassignmentarray);
+        // $unique_array = array_diff($_experts, $expertassignmentarray);
+        $unique_array = array_diff($_experts, $leader);
 
         $fulltbp = FullTbp::find($id);
         $experts = User::whereIn('id',$unique_array)->get() ;
@@ -351,6 +355,14 @@ class DashboardAdminProjectFullTbpController extends Controller
         ]);
 
         EmailBox::send($jduser->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project  .' บริษัท' . $_company->name,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .' บริษัท' . $_company->name.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        $_experts = str_replace("<br>",", ",$experts);
+        
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'มอบหมายผู้เชี่ยวชาญ (รายละเอียด: ' . $_experts . ')';
+        $projectlog->save();
+
         CreateUserLog::createLog('มอบหมายผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
 
         FullTbp::find($id)->update([
@@ -522,8 +534,18 @@ class DashboardAdminProjectFullTbpController extends Controller
 
                    EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name,'เรียน Leader<br><br> EV และ Weighting โครงการ' . $minitbp->project .  ' บริษัท' . $_company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                    DateConversion::addExtraDay($minitbp->id,3);
+
+                   ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first()->update([
+                        'actual_startdate' =>  Carbon::now()->toDateString()
+                    ]);
+
                 }
             }
+            $projectlog = new ProjectLog();
+            $projectlog->mini_tbp_id = $minitbp->id;
+            $projectlog->user_id = $auth->id;
+            $projectlog->action = 'อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP)';
+            $projectlog->save();
             CreateUserLog::createLog('อนุมัติ Full TBP โครงการ' . $minitbp->project);
         }else{
             
@@ -569,6 +591,13 @@ class DashboardAdminProjectFullTbpController extends Controller
             $notificationbubble->save();
 
             EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูลแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+          
+            $projectlog = new ProjectLog();
+            $projectlog->mini_tbp_id = $minitbp->id;
+            $projectlog->user_id = $auth->id;
+            $projectlog->action = 'ส่งคืน Full TBP (รายละเอียด: ' . $request->note . ')';
+            $projectlog->save();
+
             CreateUserLog::createLog('ส่งคืน Full TBP โครงการ' . $minitbp->project);
         }
         return response()->json($fulltbp); 

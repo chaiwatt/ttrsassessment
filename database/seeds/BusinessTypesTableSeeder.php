@@ -13,11 +13,11 @@ class BusinessTypesTableSeeder extends Seeder
     {
         DB::table('business_types')->insert([
             [
-                'name' => 'บริษัทมหาชน',
+                'name' => ' บริษัทมหาชน',
                 'user_group_id' => 1
             ],
             [
-                'name' => 'บริษัทจำกัด',
+                'name' => ' บริษัทจำกัด',
                 'user_group_id' => 1
             ],
             [

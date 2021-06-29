@@ -18,7 +18,7 @@ class ReportProjectExportByYearBudget implements FromView,ShouldAutoSize,WithTit
     //protected $year;
     protected $projectname;
     function __construct() {
-        $this->projectname = 'โครงการทั้งหมดตามปีงบประมาณ' ;
+        $this->projectname = ' โครงการทั้งหมดตามปีงบประมาณ' ;
         //$this->year = $year;
     }
     public function view(): View

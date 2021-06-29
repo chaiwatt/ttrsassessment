@@ -6,11 +6,13 @@ use App\Model\Bol;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\ProjectLog;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Model\FullTbpHistory;
+use App\Model\TimeLineHistory;
 use App\Helper\OnlyBelongPerson;
 use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
@@ -25,8 +27,6 @@ class DashboardAdminReportDetailController extends Controller
         $this->middleware('role:3,4,5,6'); 
     }
     public function View($id){
- 
-
         $check = ProjectMember::where('user_id',Auth::user()->id)->first();
         $auth = Auth::user();
         $company = Company::find($id);
@@ -39,6 +39,8 @@ class DashboardAdminReportDetailController extends Controller
         $projectstatuses = ProjectStatus::where('mini_tbp_id',$minitbp->id)->get();
         $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->get();
         $bols = Bol::where('full_tbp_id',$fulltbp->id)->get();
+        $timelinehistories = TimeLineHistory::where('owner_id',$company->user_id)->orderBy('id','desc')->paginate(5);
+        $projectlogs = ProjectLog::where('mini_tbp_id',$minitbp->id)->orderBy('id','desc')->paginate(7);
         if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
             return view('dashboard.admin.report.detail.view')->withCompany($company)
                 ->withProjectmembers($projectmembers)
@@ -46,7 +48,9 @@ class DashboardAdminReportDetailController extends Controller
                 ->withProjectstatuses($projectstatuses)
                 ->withProjectassignment($projectassignment)
                 ->withBols($bols)
-                ->withFulltbphistories($fulltbphistories);
+                ->withFulltbphistories($fulltbphistories)
+                ->withTimelinehistories($timelinehistories)
+                ->withProjectlogs($projectlogs);
         }else{
             Auth::logout();
             Session::flush();

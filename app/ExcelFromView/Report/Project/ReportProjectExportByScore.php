@@ -21,7 +21,7 @@ class ReportProjectExportByScore implements FromView,ShouldAutoSize,WithTitle
     protected $score;
     protected $projectname;
     function __construct($score) {
-        $this->projectname = 'โครงการแยกตามคะแนน';
+        $this->projectname = ' โครงการแยกตามคะแนน';
            $this->score = $score;
     }
     public function view(): View

@@ -20,7 +20,7 @@ class ReportProjectExportByIsic implements FromView,ShouldAutoSize,WithTitle
     protected $isic;
     protected $projectname;
     function __construct($isic) {
-        $this->projectname = 'โครงการแยกตาม ISIC Code';
+        $this->projectname = ' โครงการแยกตาม ISIC Code';
            $this->isic = $isic;
     }
     public function view(): View

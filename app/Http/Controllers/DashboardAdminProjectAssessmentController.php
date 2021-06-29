@@ -15,6 +15,7 @@ use App\Model\Criteria;
 use App\Model\Province;
 use App\Helper\EmailBox;
 use App\Model\FinalGrade;
+use App\Model\ProjectLog;
 use App\Model\BusinessPlan;
 use App\Model\ExtraScoring;
 use App\Model\GradeSummary;
@@ -513,7 +514,7 @@ class DashboardAdminProjectAssessmentController extends Controller
     }
 
     public function UpdateScoringStatus(Request $request){
-
+        $auth = Auth::user();
         foreach ($request->gradescorelist as $key => $gradescore) {
 
             $commentid=array_search($gradescore['criteriatransactionid'], array_column(json_decode(json_encode($request->commentlist),TRUE), 'criteriatransactionid'));
@@ -521,7 +522,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                             ->where('criteria_transaction_id',$gradescore['criteriatransactionid'])
                             ->where('sub_pillar_index_id',$gradescore['subpillarindex'])
                             ->where('scoretype',1)
-                            ->where('user_id',Auth::user()->id)->first();
+                            ->where('user_id',$auth->id)->first();
             if(Empty($check)){
                 $scoring = new Scoring();
                 $scoring->ev_id = $gradescore['evid'];
@@ -530,7 +531,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                 $scoring->scoretype = 1;
                 $scoring->score = $gradescore['value'];
                 $scoring->comment = $request->commentlist[$commentid]['value'];
-                $scoring->user_id = Auth::user()->id;
+                $scoring->user_id = $auth->id;
                 $scoring->save();
             }else{
                 $check->update([
@@ -548,7 +549,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                         ->where('criteria_transaction_id',$checkscore['criteriatransactionid'])
                         ->where('sub_pillar_index_id',$checkscore['subpillarindex'])
                         ->where('scoretype',2)
-                        ->where('user_id',Auth::user()->id)->first();
+                        ->where('user_id',$auth->id)->first();
             if(Empty($check)){
                 $scoring = new Scoring();
                 $scoring->ev_id = $checkscore['evid'];
@@ -557,7 +558,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                 $scoring->scoretype = 2;
                 $scoring->score = $checkscore['value'];
                 $scoring->comment = $request->commentlist[$commentid]['value'];
-                $scoring->user_id = Auth::user()->id;
+                $scoring->user_id = $auth->id;
                 $scoring->save();
             }else{
                 $check->update([
@@ -569,22 +570,30 @@ class DashboardAdminProjectAssessmentController extends Controller
         }
         
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
-                                    ->where('user_id',Auth::user()->id)
+                                    ->where('user_id',$auth->id)
                                     ->first(); 
         if($request->status == 1){
             $scoringstatus = new ScoringStatus();
             $scoringstatus->ev_id = $request->evid;
-            $scoringstatus->user_id = Auth::user()->id;
+            $scoringstatus->user_id = $auth->id;
             $scoringstatus->save();
         }else{
             $scoringstatus->delete();
         }     
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
-                                    ->where('user_id',Auth::user()->id)
+                                    ->where('user_id',$auth->id)
                                     ->first();   
         $ev = Ev::find($request->evid)  ; 
-        $fulltbp = FullTbp::find($ev->full_tbp_id);                         
-        CreateUserLog::createLog('นำส่งคะแนน โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project);                                           
+        $fulltbp = FullTbp::find($ev->full_tbp_id);  
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'นำส่งคะแนน';
+        $projectlog->save();
+        
+        CreateUserLog::createLog('นำส่งคะแนน โครงการ' . $minitbp->project);                                           
         return response()->json($scoringstatus); 
     }
 

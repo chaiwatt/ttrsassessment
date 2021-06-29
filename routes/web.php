@@ -238,6 +238,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'assessment'], function(){
             Route::post('add','Api\AssessmentController@Add')->name('api.assessment.add');     
             Route::post('lettersent','Api\AssessmentController@LetterSent')->name('api.assessment.lettersent');  
+            Route::post('notifyresult','Api\AssessmentController@NotifyResult')->name('api.assessment.notifyresult'); 
             Route::group(['prefix' => 'cluster'], function(){
                 Route::post('get','Api\AssessmentClusterController@Get')->name('api.assessment.ev.get');          
             });  

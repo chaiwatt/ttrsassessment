@@ -571,13 +571,27 @@ h6{
     display: none;
 }
 
-
+.table-h{
+  line-height: 16px;
+  text-align: center;
+  margin-top: -38px;
+}
+#myChart{
+  display: block;
+  height: 200px ;
+  width: 200px ;
+}
 
 
 
 
 /* ***************************************************** */
 @media (min-width:1024px) and (max-width:1300px){
+  .table-h{
+    line-height: 16px;
+    text-align: center;
+    margin-top: -78px;
+  }
   .table2-none{
       display: none;
   }

@@ -20,7 +20,7 @@ class ReportProjectExportByIndustrygroup implements FromView,ShouldAutoSize,With
     protected $industrygroup;
     protected $projectname;
     function __construct($industrygroup) {
-        $this->projectname = 'โครงการแยกตามประเภทอุตสาหกรรม';
+        $this->projectname = ' โครงการแยกตามประเภทอุตสาหกรรม';
            $this->industrygroup = $industrygroup;
     }
     public function view(): View

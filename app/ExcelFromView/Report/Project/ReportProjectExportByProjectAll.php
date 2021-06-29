@@ -19,7 +19,7 @@ class ReportProjectExportByProjectAll implements FromView,ShouldAutoSize,WithTit
 {
     protected $projectname;
     function __construct() {
-        $this->projectname = 'โครงการระหว่างการประเมินทั้งหมด' ;
+        $this->projectname = ' โครงการระหว่างการประเมินทั้งหมด' ;
     }
     public function view(): View
     {

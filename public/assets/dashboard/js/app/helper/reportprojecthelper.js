@@ -31,7 +31,7 @@
                 {value: data.completes.length, name: 'เสร็จสิ้น'},
             ]
             
-            genDonutchart(data,legend,'โครงการต่อการยื่น','จำนวนโครงการต่อการยื่น','reportproject_chart','center');
+            genDonutchart(data,legend,' โครงการต่อการยื่น','จำนวนโครงการต่อการยื่น','reportproject_chart','center');
            
         }).catch(error => {})
     });

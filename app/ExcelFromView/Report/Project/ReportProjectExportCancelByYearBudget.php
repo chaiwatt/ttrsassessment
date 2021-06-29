@@ -20,7 +20,7 @@ class ReportProjectExportCancelByYearBudget implements FromView,ShouldAutoSize,W
     protected $year;
     protected $projectname;
     function __construct($startdate,$enddate,$year) {
-        $this->projectname = 'โครงการยกเลิก ปีงบประมาณ ' . (intVal($year)+543) ;
+        $this->projectname = ' โครงการยกเลิก ปีงบประมาณ ' . (intVal($year)+543) ;
         $this->year = $year;
         $this->startdate = $startdate;
         $this->enddate = $enddate;

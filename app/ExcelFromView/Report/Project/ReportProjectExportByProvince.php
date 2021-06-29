@@ -21,7 +21,7 @@ class ReportProjectExportByProvince implements FromView,ShouldAutoSize,WithTitle
     protected $province;
     protected $projectname;
     function __construct($province) {
-        $this->projectname = 'โครงการแยกตามจังหวัด';
+        $this->projectname = ' โครงการแยกตามจังหวัด';
            $this->province = $province;
     }
     public function view(): View

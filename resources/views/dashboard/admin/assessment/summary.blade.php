@@ -479,8 +479,8 @@
                                 <h6>Index Criteria</h6>
                                 <fieldset>
                                     <div class="float-left mb-2">
-                                        <button type="button" id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก Excel (Index)</button>
-                                        <button type="button"  id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก Pdf (Index)</button>
+                                        <button type="button" id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก EXCEL (Index)</button>
+                                        <button type="button"  id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF (Index)</button>
                                     </div>
                                     <div class="table-responsive mb-3">
                                         <table class="table table-bordered table-striped" id="criteriatable">
@@ -519,8 +519,8 @@
                                 <h6>Extra Criteria</h6>
                                 <fieldset>
                                     <div class="float-left mb-2">
-                                        <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก Excel (Extra)</button>
-                                        <button type="button"  id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก Pdf (Extra)</button>
+                                        <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก EXCEL (Extra)</button>
+                                        <button type="button"  id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF (Extra)</button>
                                     </div>
                                     <div class="table-responsive mb-3">
                                         <table class="table table-bordered table-striped" id="extra_subpillarindex">

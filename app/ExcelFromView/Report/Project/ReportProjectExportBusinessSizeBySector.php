@@ -28,7 +28,7 @@ class ReportProjectExportBusinessSizeBySector implements FromView,ShouldAutoSize
     protected $sector;
     protected $projectname;
     function __construct($companysize,$sector) {
-        $this->projectname = 'โครงการตามขนาดธุรกิจในแต่ละภูมิภาค';
+        $this->projectname = ' โครงการตามขนาดธุรกิจในแต่ละภูมิภาค';
            $this->companysize = $companysize;
            $this->sector = $sector;
     }

@@ -221,7 +221,7 @@ class FullTbpController extends Controller
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 
-        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,'บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,User::find($projectassignment->leader_id)->id);
+        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,User::find($projectassignment->leader_id)->id);
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
@@ -294,7 +294,7 @@ class FullTbpController extends Controller
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 
-        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,'บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',$auth->id,User::find($projectassignment->leader_id)->id);
+        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',$auth->id,User::find($projectassignment->leader_id)->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;

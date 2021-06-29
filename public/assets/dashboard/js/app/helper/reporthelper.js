@@ -804,8 +804,8 @@ function callGenRadarByBusinessType(data){
     });
     var maxval = Math.max.apply(null, numgrade);
     var indicator =  [
-        { name: 'บริษัทมหาชน', max: maxval},
-        { name: 'บริษัทจำกัด', max: maxval},
+        { name: ' บริษัทมหาชน', max: maxval},
+        { name: ' บริษัทจำกัด', max: maxval},
         { name: 'ห้างหุ้นส่วนจำกัด', max: maxval},
         { name: 'ห้างหุ้นส่วนสามัญ', max: maxval},
         { name: 'กิจการเจ้าของคนเดียว', max: maxval},
@@ -832,7 +832,7 @@ function callGenBarByBusinessType(data){
   
     });
 
-    var xaxis = ['บริษัทมหาชน', 'บริษัทจำกัด', 'ห้างหุ้นส่วนจำกัด', 'ห้างหุ้นส่วนสามัญ', 'กิจการเจ้าของคนเดียว', 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ']
+    var xaxis = [' บริษัทมหาชน', ' บริษัทจำกัด', 'ห้างหุ้นส่วนจำกัด', 'ห้างหุ้นส่วนสามัญ', 'กิจการเจ้าของคนเดียว', 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ']
 
     genBar(xaxis ,gradedata , 'gradebybusinesstype');
 }
@@ -853,7 +853,7 @@ function callGenPolarStackByBusinessType(data){
   
     });
 
-    var xaxis = ['บริษัทมหาชน', 'บริษัทจำกัด', 'ห้างหุ้นส่วนจำกัด', 'ห้างหุ้นส่วนสามัญ', 'กิจการเจ้าของคนเดียว', 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ']
+    var xaxis = [' บริษัทมหาชน', ' บริษัทจำกัด', 'ห้างหุ้นส่วนจำกัด', 'ห้างหุ้นส่วนสามัญ', 'กิจการเจ้าของคนเดียว', 'องค์กรธุรกิจจัดตั้ง หรือจดทะเบียนภายใต้กฎหมายเฉพาะ']
 
     // genBar(xaxis ,gradedata , 'gradebybusinesstype');
     genPolarStack(xaxis ,gradedata , 'gradebybusinesstype');

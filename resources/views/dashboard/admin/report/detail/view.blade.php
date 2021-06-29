@@ -50,9 +50,10 @@
             if($check == "(ภายนอก)"){
                 $hidden = "hidden";
             }
+           
         @endphp
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" {{$hidden}}>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายงานสถานะ</h6>
@@ -79,6 +80,40 @@
                                     @endforeach
                                 </tbody>
                             </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" {{$hidden}}>
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">TimeLine ของโครงการ</h6>
+                        <div class="header-elements">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>วันที่</th> 
+                                        <th>รายละเอียด</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="timeline_wrapper_tr">
+                                    @foreach ($timelinehistories as $timelinehistory)
+                                        <tr>
+                                            <td> {{$timelinehistory->createdatth}} </td>                            
+                                            <td> {{html_entity_decode(strip_tags($timelinehistory->details))}} </td>  
+                                        </tr>
+                                    @endforeach
+                                </tbody>  
+                            </table>   
+                        </div>
+                        <div class="float-right mt-2">
+                            {{$timelinehistories->links()}} 
                         </div>
                     </div>
                 </div>
@@ -322,7 +357,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
-                                        <tr >
+                                        <tr class="bg-info">
                                             <th style="width:600px">ชื่อ-นามสกุล</th> 
                                             <th style="text-align: center">ความแม่นยำ</th> 
                                             <th style="width:1%;white-space: nowrap">การลงคะแนน</th> 
@@ -370,7 +405,7 @@
                         <div class="table-responsive" style="min-height: 150px">
                             <table class="table table-bordered"  >
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         <th >คะแนน</th> 
                                         <th >เกรด</th>
                                         <th >จดหมายแจ้งผล</th>
@@ -444,6 +479,41 @@
             </div>
             @endif
               
+            <div class="col-md-12" {{$hidden}}>
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">Log ของโครงการ (เจ้าหน้าที่)</h6>
+                        <div class="header-elements">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead >
+                                    <tr class="bg-info">
+                                        <th>วันที่</th> 
+                                        <th style="width:70%">รายละเอียด</th>
+                                        <th>โดย</th> 
+                                    </tr>
+                                </thead>
+                                <tbody id="timeline_wrapper_tr">
+                                    @foreach ($projectlogs as $projectlog)
+                                        <tr>
+                                            <td> {{$projectlog->createdatth}} </td>                            
+                                            <td> {{html_entity_decode(strip_tags($projectlog->action))}} </td>  
+                                            <td> คุณ{{$projectlog->user->name}} คุณ{{$projectlog->user->lastname}}</td>  
+                                        </tr>
+                                    @endforeach
+                                </tbody>  
+                            </table>   
+                        </div>
+                        <div class="float-right mt-2">
+                            {{$projectlogs->links()}} 
+                        </div>
+                    </div>
+                </div>
+            </div>
             {{-- @endif --}}
         </div>
     </div>

@@ -13,7 +13,7 @@ class NotificationCategoriesSeederTable extends Seeder
     {
         DB::table('notification_categories')->insert([
             [
-                'name' => 'โครงการ'
+                'name' => ' โครงการ'
             ],
             [
                 'name' => 'ปฏิทิน'

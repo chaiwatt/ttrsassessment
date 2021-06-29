@@ -36,8 +36,8 @@ class CreateMiniTBPSTable extends Migration
             $table->double('finance1_2_loan',15,0)->default(0);
 
             $table->char('finance2',5)->nullable()->comment('ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)');
-            // $table->char('finance3',5)->nullable()->comment('โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)');
-            // $table->char('finance4',5)->nullable()->comment('บริษัทร่วมทุน (สวทช.)');
+            // $table->char('finance3',5)->nullable()->comment(' โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)');
+            // $table->char('finance4',5)->nullable()->comment(' บริษัทร่วมทุน (สวทช.)');
             $table->char('finance3_other',5)->nullable()->comment('อื่น ๆ');
             $table->string('finance3_other_detail',250)->nullable()->comment('อื่นๆ โปรดระบุ');
 
@@ -48,8 +48,8 @@ class CreateMiniTBPSTable extends Migration
             $table->char('nonefinance2',5)->nullable()->comment('ด้านการตลาด');
             $table->char('nonefinance3',5)->nullable()->comment('ด้านการเงิน');
             // $table->char('nonefinance4',5)->nullable()->comment('ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ');
-            $table->string('nonefinance5',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบุ');
-            $table->string('nonefinance5_detail',250)->nullable()->comment('โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบุ');
+            $table->string('nonefinance5',250)->nullable()->comment(' โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบุ');
+            $table->string('nonefinance5_detail',250)->nullable()->comment(' โครงการสนับสนุนผู้ประกอบการภาครัฐ โปรดระบุ');
             $table->string('nonefinance6',250)->nullable()->comment('อื่นๆ โปรดระบุ');
             $table->string('nonefinance6_detail',250)->nullable()->comment('อื่นๆ โปรดระบุ');
             $table->char('minitbp_objecttive',1)->default(1)->comment('1=finance 2=none-finance 3=both');

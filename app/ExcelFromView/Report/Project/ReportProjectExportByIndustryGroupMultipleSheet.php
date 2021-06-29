@@ -126,7 +126,7 @@ class ReportProjectExportByIndustryGroupMultipleSheet implements
     public function headings(): array
     {
         return [
-            'โครงการ',
+            ' โครงการ',
             'Next-generation Automotive',
             'Smart Electronics',
             'Affluent, Medical and Wellness Tourism',

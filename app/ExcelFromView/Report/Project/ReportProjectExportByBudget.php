@@ -20,7 +20,7 @@ class ReportProjectExportByBudget implements FromView,ShouldAutoSize,WithTitle
     protected $projectbudget;
     protected $projectname;
     function __construct($projectbudget) {
-        $this->projectname = 'โครงการตามงบประมาณ';
+        $this->projectname = ' โครงการตามงบประมาณ';
         $this->projectbudget = $projectbudget;
     }
     public function view(): View

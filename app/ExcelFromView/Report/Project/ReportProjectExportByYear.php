@@ -18,7 +18,7 @@ class ReportProjectExportByYear implements FromView,ShouldAutoSize,WithTitle
     //protected $year;
     protected $projectname;
     function __construct() {
-        $this->projectname = 'โครงการทั้งหมด' ;
+        $this->projectname = ' โครงการทั้งหมด' ;
         //$this->year = $year;
     }
     public function view(): View

@@ -498,7 +498,7 @@ function addScore(transactionid,score,subpillarindex,scoretype){
             </tr>`
             });
         $("#show_conflict_modal_wrapper_tr").html(html);
-        $('#title').html('โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
+        $('#title').html(' โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
         $('#modal_show_conflict').modal('show');
     }).catch(error => {})
 });
@@ -542,7 +542,7 @@ function showConflictScore(id){
         });
 
         $("#show_conflict_modal_wrapper_tr").html(html);
-        $('#title').html('โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
+        $('#title').html(' โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
         $('#modal_show_conflict').modal('show');
     }).catch(error => {})
 });
@@ -582,7 +582,7 @@ function showConflictGrade(id){
             </tr>`
             });
         $("#show_conflict_modal_wrapper_tr").html(html);
-        $('#title').html('โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
+        $('#title').html(' โครงการ'+$('#projectname').val() + ' | ' + $(this).data('criterianame'));
         $('#modal_show_conflict').modal('show');
     }).catch(error => {})
 });

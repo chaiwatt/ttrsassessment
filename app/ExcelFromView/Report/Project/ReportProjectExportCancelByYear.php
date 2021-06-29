@@ -18,7 +18,7 @@ class ReportProjectExportCancelByYear implements FromView,ShouldAutoSize,WithTit
     protected $year;
     protected $projectname;
     function __construct($year) {
-        $this->projectname = 'โครงการยกเลิก พ.ศ.' . (intVal($year)+543) ;
+        $this->projectname = ' โครงการยกเลิก พ.ศ.' . (intVal($year)+543) ;
         $this->year = $year;
     }
     public function view(): View

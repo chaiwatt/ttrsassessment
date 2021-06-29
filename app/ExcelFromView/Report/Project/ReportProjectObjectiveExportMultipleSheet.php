@@ -75,7 +75,7 @@ class ReportProjectObjectiveExportMultipleSheet implements
     public function headings(): array
     {
         return [
-            'โครงการ',
+            ' โครงการ',
             'ด้านการเงิน',
             'ไม่ใช่ด้านการเงิน',
             'ด้านการเงินและไม่ใช่ด้านการเงิน'

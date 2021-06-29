@@ -21,7 +21,7 @@ class ReportProjectExportByCertificate implements FromView,ShouldAutoSize,WithTi
     protected $status;
     protected $projectname;
     function __construct($status) {
-        $this->projectname = 'โครงการแยกตามเกรด';
+        $this->projectname = ' โครงการแยกตามเกรด';
            $this->status = $status;
     }
     public function view(): View

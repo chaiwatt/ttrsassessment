@@ -287,7 +287,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2 c-100">
                                 <canvas id="myChart" width=180  height=180 ></canvas>
                             </div>
                             <div class="col-md-9 l-40">
@@ -319,7 +319,7 @@
                             </div>
                             </div>
                             <div class="col-md-1 l-75 table-none">
-                                  <table class="table table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200" >
+                                  <table class="table table-bordered table-h table-dark" data-aos="fade-laft" data-aos-delay="200" >
                                 <thead>
                                   <tr>
                                    

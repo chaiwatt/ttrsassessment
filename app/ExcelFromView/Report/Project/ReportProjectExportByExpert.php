@@ -22,7 +22,7 @@ class ReportProjectExportByExpert implements FromView,ShouldAutoSize,WithTitle
     protected $expert;
     protected $projectname;
     function __construct($expert) {
-        $this->projectname = 'โครงการแยกตาม Expert';
+        $this->projectname = ' โครงการแยกตาม Expert';
            $this->expert = $expert;
     }
     public function view(): View

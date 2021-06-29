@@ -12,6 +12,7 @@ use App\Helper\Message;
 use App\Model\Isnotify;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\MeetingDate;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
@@ -19,6 +20,7 @@ use App\Model\CalendarType;
 use App\Model\ExpertDetail;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Google_Service_Calendar;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
@@ -75,7 +77,6 @@ class DashboardAdminCalendarController extends Controller
                                                     ->withIsnotifies($isnotifies);
     }
     public function CreateSave(CreateCalendarRequest $request){
-
       $auth = Auth::user();
       // $check = EventCalendar()->where('full_tbp_id',$request->fulltbp)
 
@@ -135,10 +136,12 @@ class DashboardAdminCalendarController extends Controller
       }
 
       $messageheader = "ประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      $logname = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน";
       if ($request->calendartype == 1) {
         $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
       }
       else if ($request->calendartype == 2){
+        $logname = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ";
          $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project . " บริษัท" . $company->name;
        }
       EmailBox::send($mails,'TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. 'มีรายละเอียดดังนี้' .
@@ -202,6 +205,10 @@ class DashboardAdminCalendarController extends Controller
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 
+        ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',4)->first()->update([
+          'actual_startdate' =>  Carbon::now()->toDateString()
+        ]);
+
       }else if($request->calendartype == 3) {
         BusinessPlan::find($minitbp->business_plan_id)->update([
           'business_plan_status_id' => 7
@@ -219,6 +226,16 @@ class DashboardAdminCalendarController extends Controller
             $notificationbubble->save();
         }
       }
+
+      ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first()->update([
+        'actual_startdate' =>  Carbon::now()->toDateString()
+      ]);
+
+      $projectlog = new ProjectLog();
+      $projectlog->mini_tbp_id = $minitbp->id;
+      $projectlog->user_id = $auth->id;
+      $projectlog->action = 'สร้างปฎิทินกิจกรรม (รายละเอียด: ' . $logname . ')';
+      $projectlog->save();
 
       CreateUserLog::createLog('สร้างปฎิทินกิจกรรม ' . $messageheader );
       return redirect()->route('dashboard.admin.calendar')->withSuccess('เพิ่มรายการสำเร็จ');
@@ -323,10 +340,12 @@ class DashboardAdminCalendarController extends Controller
     }
 
     $messageheader = "ประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+    $logname = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน";
     if ($request->calendartype == 1) {
       $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
     }
     else if ($request->calendartype == 2){
+      $logname = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ";
        $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project . " บริษัท" . $company->name;
      }
 
@@ -396,6 +415,13 @@ class DashboardAdminCalendarController extends Controller
         }
     
     }
+
+    $projectlog = new ProjectLog();
+    $projectlog->mini_tbp_id = $minitbp->id;
+    $projectlog->user_id = $auth->id;
+    $projectlog->action = 'แก้ไขปฎิทินกิจกรรม (รายละเอียด: ' . $logname . ')';
+    $projectlog->save();
+
     CreateUserLog::createLog('แก้ไขปฎิทินกิจกรรม โครงการ' . $minitbp->project );
     return redirect()->route('dashboard.admin.calendar')->withSuccess('แก้ไขรายการสำเร็จ');
   }

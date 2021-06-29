@@ -20,7 +20,7 @@ class ReportProjectExportByBusinessSize implements FromView,ShouldAutoSize,WithT
     protected $companysize;
     protected $projectname;
     function __construct($companysize) {
-        $this->projectname = 'โครงการแยกตามขนาดธุรกิจ';
+        $this->projectname = ' โครงการแยกตามขนาดธุรกิจ';
            $this->companysize = $companysize;
     }
     public function view(): View

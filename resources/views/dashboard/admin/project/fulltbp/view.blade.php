@@ -1333,9 +1333,9 @@
 											$bussinesstype = $company->business_type_id;
 											$fullcompanyname = $company_name;
 											if($bussinesstype == 1){
-												$fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+												$fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
 											}else if($bussinesstype == 2){
-												$fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+												$fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
 											}else if($bussinesstype == 3){
 												$fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
 											}else if($bussinesstype == 4){

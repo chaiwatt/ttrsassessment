@@ -11,6 +11,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\FullTbpCost;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
@@ -123,9 +124,10 @@ class AssessmentController extends Controller
                 // $messagebox->receiver_id = User::where('user_type_id',6)->first()->id;
                 // $messagebox->message_read_status_id = 1;
                 // $messagebox->save();
-                $messagebox =  Message::sendMessage('ขอรับการประเมินใหม่','บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+                $messagebox =  Message::sendMessage('ขอรับการประเมินใหม่',' บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
 
                 $company = Company::where('user_id',Auth::user()->id);
+                
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
@@ -176,6 +178,27 @@ class AssessmentController extends Controller
             $timeLinehistory->save();
         }
         $minitbp = MiniTBP::find($request->id);
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = Auth::user()->id;
+        $projectlog->action = 'ยืนยันส่งจดหมายแจ้งผล';
+        $projectlog->save();
+
         CreateUserLog::createLog('ยืนยันส่งจดหมายแจ้งผล โครงการ' . $minitbp->project);
+    }
+
+    public function NotifyResult(Request $request){
+        $minitbp = MIniTBP::find($request->id);
+        BusinessPlan::find($minitbp->business_plan_id)->update([
+                'business_plan_status_id' => 9
+            ]);
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = Auth::user()->id;
+        $projectlog->action = 'ยืนยันแจ้งผลการประเมิน';
+        $projectlog->save();
+
+        CreateUserLog::createLog('ยืนยันแจ้งผลการประเมิน โครงการ' . $minitbp->project);
     }
 }

@@ -64,9 +64,9 @@
                         $companyname = $fulltbp->minitbp->businessplan->company->name;
                         $fullname = $companyname;
                         if($bussinesstype == 1){
-                            $fullname = 'บริษัท ' . $companyname . ' จำกัด (มหาชน)';
+                            $fullname = ' บริษัท ' . $companyname . ' จำกัด (มหาชน)';
                         }else if($bussinesstype == 2){
-                            $fullname = 'บริษัท ' . $companyname . ' จำกัด'; 
+                            $fullname = ' บริษัท ' . $companyname . ' จำกัด'; 
                         }else if($bussinesstype == 3){
                             $fullname = 'ห้างหุ้นส่วน ' . $companyname . ' จำกัด'; 
                         }else if($bussinesstype == 4){

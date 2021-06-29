@@ -15,6 +15,7 @@ use App\Model\LogChange;
 use App\Model\ReviseLog;
 use App\Model\Signature;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\GeneralInfo;
 use App\Model\ProjectFlow;
 use App\Model\AlertMessage;
@@ -234,9 +235,9 @@ class MiniTbpController extends Controller
         $companyname = $minitbp->businessplan->company->name;
         $fullcompanyname = $company_name;
         if($bussinesstype == 1){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
             $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
@@ -689,9 +690,9 @@ class MiniTbpController extends Controller
         $company_name = (!Empty($company->name))?$company->name:'';
         $fullcompanyname = $company_name;
         if($bussinesstype == 1){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
             $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
@@ -792,6 +793,14 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $leader->leader_id;
                 $notificationbubble->save();
 
+                $timeLinehistory = new TimeLineHistory();
+                $timeLinehistory->business_plan_id = $businessplan->id;
+                $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) ฉบับแก้ไข';
+                $timeLinehistory->message_type = 1;
+                $timeLinehistory->owner_id = $auth->id;
+                $timeLinehistory->user_id = $auth->id;
+                $timeLinehistory->save();
+
                 $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไข',$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignments->first()->leader_id);
 
                 $alertmessage = new AlertMessage();
@@ -817,6 +826,14 @@ class MiniTbpController extends Controller
                 $notificationbubble->user_id = Auth::user()->id;
                 $notificationbubble->target_user_id = $documenteditor->user_id;
                 $notificationbubble->save();
+
+                $timeLinehistory = new TimeLineHistory();
+                $timeLinehistory->business_plan_id = $businessplan->id;
+                $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) ฉบับแก้ไข';
+                $timeLinehistory->message_type = 1;
+                $timeLinehistory->owner_id = $auth->id;
+                $timeLinehistory->user_id = $auth->id;
+                $timeLinehistory->save();
 
                 $messagebox = Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไข',$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$documenteditor->user_id);
 
@@ -863,9 +880,9 @@ class MiniTbpController extends Controller
         $bussinesstype = $company->business_type_id;
         $fullcompanyname = $company_name;
         if($bussinesstype == 1){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
             $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
@@ -970,6 +987,14 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $projectassignments->first()->leader_id;
                 $notificationbubble->save();
 
+                $timeLinehistory = new TimeLineHistory();
+                $timeLinehistory->business_plan_id = $businessplan->id;
+                $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) ฉบับแก้ไข';
+                $timeLinehistory->message_type = 1;
+                $timeLinehistory->owner_id = $auth->id;
+                $timeLinehistory->user_id = $auth->id;
+                $timeLinehistory->save();
+
                 $messagebox =  Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ที่มีการแก้ไข', $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$projectassignments->first()->leader_id);
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
@@ -994,6 +1019,14 @@ class MiniTbpController extends Controller
                 $notificationbubble->user_id = Auth::user()->id;
                 $notificationbubble->target_user_id = $documenteditor->user_id;
                 $notificationbubble->save();
+
+                $timeLinehistory = new TimeLineHistory();
+                $timeLinehistory->business_plan_id = $businessplan->id;
+                $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) ฉบับแก้ไข';
+                $timeLinehistory->message_type = 1;
+                $timeLinehistory->owner_id = $auth->id;
+                $timeLinehistory->user_id = $auth->id;
+                $timeLinehistory->save();
 
                 $messagebox =  Message::sendMessage('แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ที่มีการแก้ไข', $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) ที่มีการแก้ไขแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp').'>ดำเนินการ</a>',Auth::user()->id,$documenteditor->user_id);
                 $alertmessage = new AlertMessage();
@@ -1020,10 +1053,18 @@ class MiniTbpController extends Controller
         return response()->json($minitbp);
     }
     public function AddJdMessage(Request $request){
+        $auth = Auth::user();
         MiniTBP::find($request->id)->update([
             'jdmessage' => $request->message
         ]);
         $minitbp = MiniTBP::find($request->id);
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'เพิ่มความเห็น Mini TBP (รายละเอียด: ' . $request->message . ')' ;
+        $projectlog->save();
+
         CreateUserLog::createLog('เพิ่มความเห็น โครงการ' . $minitbp->project );
         return response()->json($minitbp);
     }

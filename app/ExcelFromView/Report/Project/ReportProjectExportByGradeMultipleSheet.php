@@ -111,7 +111,7 @@ class ReportProjectExportByGradeMultipleSheet implements
     public function headings(): array
     {
         return [
-            'โครงการ',
+            ' โครงการ',
             'เกรด AAA',
             'เกรด AA',
             'เกรด A',

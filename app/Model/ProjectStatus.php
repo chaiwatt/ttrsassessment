@@ -43,11 +43,12 @@ class ProjectStatus extends Model
         $fulltbp = FullTbp::where('mini_tbp_id',$this->mini_tbp_id)->first();
         $minitbp = MiniTBP::find($this->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
-        $ev= Ev::where('full_tbp_id')->first();
+        $ev= Ev::where('full_tbp_id',$fulltbp->id)->first();
 
         $fulltbpapprove = $businessplan->business_plan_status_id;
         $expertapprove = $fulltbp->assignexpert;
         $evapprove = $ev->status;
+        // dd($evapprove);
         $controlflowstage3 = array($fulltbpapprove, $expertapprove,$evapprove);
         return $controlflowstage3;
     } 

@@ -24,7 +24,8 @@ $(document).on('click', '.controlflowicon', function(e) {
             // day_end = '' + _enddate.getDate(),
             // year_end = _enddate.getFullYear();
             var arrayenddate = projectstatus.enddate.split('-');
-            var month_end = parseInt(arrayenddate[1])+1;
+            //var month_end = parseInt(arrayenddate[1])+1;
+            var month_end = parseInt(arrayenddate[1]);
             var day_end = parseInt(arrayenddate[2]);
             var year_end = parseInt(arrayenddate[0]);
 
@@ -39,7 +40,8 @@ $(document).on('click', '.controlflowicon', function(e) {
                 var tmp = month+'/'+day+'/'+year;
                 var updatedat = new Date(tmp);
 
-                var month_end = parseInt(arrayenddate[1])+1;
+                var month_end = parseInt(arrayenddate[1]);
+                // var month_end = parseInt(arrayenddate[1])+1;
                 var day_end = parseInt(arrayenddate[2]);
                 var year_end = parseInt(arrayenddate[0]);
 

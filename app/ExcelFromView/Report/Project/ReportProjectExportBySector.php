@@ -22,7 +22,7 @@ class ReportProjectExportBySector implements FromView,ShouldAutoSize,WithTitle
     protected $sector;
     protected $projectname;
     function __construct($sector) {
-        $this->projectname = 'โครงการแยกตามภูมิภาค';
+        $this->projectname = ' โครงการแยกตามภูมิภาค';
            $this->sector = $sector;
     }
     public function view(): View

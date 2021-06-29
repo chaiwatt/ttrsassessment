@@ -16,10 +16,12 @@ use App\Model\ThaiBank;
 use App\Helper\EmailBox;
 use App\Model\ReviseLog;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Model\DocumentEditor;
@@ -141,19 +143,19 @@ class DashboardAdminProjectMiniTbpController extends Controller
         }elseif($name == 'finance2'){
             return 'ขอรับการค้ำประกันสินเชื่อฯ บสย. (บรรษัทประกันสินเชื่ออุตสาหกรรมขนาดย่อม)';
         }elseif($name == 'finance3'){
-            return 'โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)';
+            return ' โครงการเงินกู้ดอกเบี้ยต่ำ (สวทช.)';
         }elseif($name == 'finance4'){
-            return 'บริษัทร่วมทุน (สวทช.)';
+            return ' บริษัทร่วมทุน (สวทช.)';
         }elseif($name == 'nonefinance1'){
-            return 'โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย';
+            return ' โครงการขึ้นทะเบียนบัญชีนวัตกรรมไทย';
         }elseif($name == 'nonefinance2'){
             return 'รับรองสิทธิประโยชน์ทางภาษี';
         }elseif($name == 'nonefinance3'){
-            return 'โครงการ spin-off';
+            return ' โครงการ spin-off';
         }elseif($name == 'nonefinance4'){
             return 'ที่ปรึกษาทางด้านเทคนิค/ด้านธุรกิจ';
         }elseif($name == 'nonefinance5'){
-            return 'โครงการสนับสนุนผู้ประกอบการภาครัฐ';
+            return ' โครงการสนับสนุนผู้ประกอบการภาครัฐ';
         }elseif($name == 'contactname'){
             return 'ชื่อผู้ยื่นแบบคำขอ';
         }elseif($name == 'contactlastname'){
@@ -211,9 +213,9 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $fullcompanyname = $company_name;
 
         if($bussinesstype == 1){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
             $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
@@ -293,6 +295,17 @@ class DashboardAdminProjectMiniTbpController extends Controller
                 DateConversion::addExtraDay($minitbp->id,2);
             }
 
+            $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',2)->first()->update([
+                'actual_startdate' =>  Carbon::now()->toDateString()
+            ]);
+
+            $projectlog = new ProjectLog();
+            $projectlog->mini_tbp_id = $minitbp->id;
+            $projectlog->user_id = $auth->id;
+            $projectlog->action = 'อนุมัติ Mini TBP';
+            $projectlog->save();
+            
+            
             CreateUserLog::createLog('อนุมัติ Mini TBP โครงการ'.$minitbp->project);
             
         }else{
@@ -343,6 +356,13 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $notificationbubble->user_id = $auth->id;
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
+
+            $projectlog = new ProjectLog();
+            $projectlog->mini_tbp_id = $minitbp->id;
+            $projectlog->user_id = $auth->id;
+            $projectlog->action = 'ส่งคืน Mini TBP (รายละเอียด: ' . $request->note . ')';
+            $projectlog->save();
+
             CreateUserLog::createLog('ส่งคืน Mini TBP โครงการ'.$minitbp->project);
             EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูลแบบคำขอรับบริการประเมิน TTRS (Mini TBP)','เรียน ผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br>โปรดตรวจสอบ <a href="'.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }

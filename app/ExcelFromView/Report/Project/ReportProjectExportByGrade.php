@@ -21,7 +21,7 @@ class ReportProjectExportByGrade implements FromView,ShouldAutoSize,WithTitle
     protected $grade;
     protected $projectname;
     function __construct($grade) {
-        $this->projectname = 'โครงการแยกตามเกรด';
+        $this->projectname = ' โครงการแยกตามเกรด';
            $this->grade = $grade;
     }
     public function view(): View

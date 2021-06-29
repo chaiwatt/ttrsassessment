@@ -1223,8 +1223,8 @@ $(".form-control-select2").select2();
 		}
 
 		var isiccate = "{{$user->company->isic_id}}";
-		if(isiccate == ''){
-			var isicval = "{{old('isic')}}";
+		if(isiccate == ""){
+			var isicval = $('#isic').val();// "{{old('isic')}}";
 			var subisicval = "{{old('subisic')}}";
 			getSubIsic(parseInt(isicval)).then(data => {
 				var html = ``;

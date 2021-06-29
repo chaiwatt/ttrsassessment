@@ -1,6 +1,11 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css"> --}}
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <div id="modal_add_comment" class="modal fade" style="overflow:hidden;">
@@ -13,7 +18,7 @@
                 <div class="modal-body">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Comment<span class="text-danger">*</span></label>
+                            <label>ความเห็น<span class="text-danger">*</span></label>
                             <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Admin" class="form-control form-control-lg" ></textarea>
                         </div>
                     </div>

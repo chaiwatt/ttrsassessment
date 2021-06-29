@@ -3,7 +3,7 @@ import * as MiniTbp from './minitbp.js'
 
 $(document).on('click', '#editapprove', function(e) {
     $('#minitbpid').val($(this).data('id'));
-    $('#minitbptitle').html('โครงการ : '+ $(this).data('project'));
+    $('#minitbptitle').html(' โครงการ : '+ $(this).data('project'));
     
     $('#modal_edit_minitbp').modal('show');
 });

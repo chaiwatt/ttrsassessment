@@ -74,7 +74,7 @@ class ReportNumprojectExportMultipleSheet implements
     public function headings(): array
     {
         return [
-            'โครงการ',
+            ' โครงการ',
             'Mini TBP',
             'Full TBP',
             'ประเมินสำเร็จ',

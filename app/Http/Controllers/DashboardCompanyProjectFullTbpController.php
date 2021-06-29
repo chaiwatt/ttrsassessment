@@ -382,7 +382,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $notificationbubble->target_user_id = $projectassignment->leader_id;
         $notificationbubble->save();
 
-        $messagebox = Message::sendMessage('ส่ง'.$message,'บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>ดำเนินการ</a>',Auth::user()->id,User::find($projectassignment->leader_id)->id);
+        $messagebox = Message::sendMessage('ส่ง'.$message,' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>ดำเนินการ</a>',Auth::user()->id,User::find($projectassignment->leader_id)->id);
        
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
@@ -395,7 +395,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        $messagebox = Message::sendMessage('ส่ง'.$message,'บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
+        $messagebox = Message::sendMessage('ส่ง'.$message,' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>ดำเนินการ</a>',Auth::user()->id,User::where('user_type_id',6)->first()->id);
        
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;

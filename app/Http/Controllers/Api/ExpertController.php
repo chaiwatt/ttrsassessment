@@ -12,11 +12,13 @@ use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\ExpertDoc;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\ExpertField;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ExpertDetail;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
@@ -127,9 +129,9 @@ class ExpertController extends Controller
 
             $fullcompanyname = $company_name;
             if($bussinesstype == 1){
-                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
             }else if($bussinesstype == 2){
-                $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
             }else if($bussinesstype == 3){
                 $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
             }else if($bussinesstype == 4){
@@ -150,6 +152,12 @@ class ExpertController extends Controller
             ]);
 
             CreateUserLog::createLog('มอบหมาย '.$expert->name . ' ' .$expert->lastname.' เป็นผู้เชี่ยวชาญในโครงการ' . $minitbp->project .' ของ'.$fullcompanyname);
+
+            $projectlog = new ProjectLog();
+            $projectlog->mini_tbp_id = $minitbp->id;
+            $projectlog->user_id = $auth->id;
+            $projectlog->action = 'Manager มอบหมายผูเชี่ยวชาญ (รายละเอียด: คุณ' . $expert->name . ' ' .$expert->lastname . ')';
+            $projectlog->save();
 
             EmailBox::send($expert->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' ของ'.$fullcompanyname,'เรียนคุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' ของ'.$fullcompanyname.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     }
@@ -204,6 +212,13 @@ class ExpertController extends Controller
         
         EmailBox::send($jduser->email,'TTRS:ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน Manager<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project . ' บริษัท' . $company->name . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         CreateUserLog::createLog('ปฎิเสธเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'ผู้เชี่ยวชาญปฎิเสธ (รายละเอียด: '.$request->note.')';
+        $projectlog->save();
+
         return redirect()->route('dashboard.expert.report')->withSuccess('คุณปฎิเสธเข้าร่วมโครงการแล้ว');
 
     }
@@ -286,9 +301,21 @@ class ExpertController extends Controller
 
                    EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $company->name,'เรียน Leader<br><br> EV และ Weighting โครงการ' . $minitbp->project .  ' บริษัท' . $company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                    DateConversion::addExtraDay($minitbp->id,3);
+
+                   ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first()->update([
+                        'actual_startdate' =>  Carbon::now()->toDateString()
+                    ]);
+
                 }
             }
             CreateUserLog::createLog('ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
+
+            $projectlog = new ProjectLog();
+            $projectlog->mini_tbp_id = $minitbp->id;
+            $projectlog->user_id = $auth->id;
+            $projectlog->action = 'ยืนยันทีมผู้เชี่ยวชาญ';
+            $projectlog->save();
+
             return response()->json($expertassignments);
        }
  

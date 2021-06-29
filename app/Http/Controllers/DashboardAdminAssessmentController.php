@@ -14,12 +14,14 @@ use App\Model\Scoring;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ExtraScoring;
 use App\Helper\GetEvPercent;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use App\Model\ScoringStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
@@ -344,7 +346,6 @@ class DashboardAdminAssessmentController extends Controller
     }
 
     public function UpdateScore(Request $request){  
-        
         $auth = Auth::user(); 
         // if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
@@ -459,9 +460,9 @@ class DashboardAdminAssessmentController extends Controller
             $notificationbubble->target_user_id = $projectassignment->leader_id;
             $notificationbubble->save();
             
-            BusinessPlan::find($minitbp->business_plan_id)->update([
-                'business_plan_status_id' => 9
-            ]);
+            // BusinessPlan::find($minitbp->business_plan_id)->update([
+            //     'business_plan_status_id' => 9
+            // ]);
         }else{
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $businessplan->id;
@@ -486,9 +487,9 @@ class DashboardAdminAssessmentController extends Controller
         $fullcompanyname = $company_name;
 
         if($bussinesstype == 1){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
-            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
             $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
@@ -533,6 +534,11 @@ class DashboardAdminAssessmentController extends Controller
 
             DateConversion::addExtraDay($minitbp->id,5);
         }
+
+        ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first()->update([
+            'actual_startdate' =>  Carbon::now()->toDateString()
+        ]);
+
         
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
@@ -541,6 +547,13 @@ class DashboardAdminAssessmentController extends Controller
         $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'สรุปคะแนนสำเร็จ';
+        $projectlog->save();
+
         CreateUserLog::createLog('สรุปคะแนน โครงการ' . $minitbp->project);
     }
 
