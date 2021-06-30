@@ -914,8 +914,20 @@ class DashboardAdminProjectFullTbpController extends Controller
             $projectstatustransaction->update([
                 'status' => 2
             ]);
+
+            ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',8)->first()->update([
+                'actual_startdate' =>  Carbon::now()->toDateString()
+            ]);
+
             DateConversion::addExtraDay($minitbp->id,8);
         }
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'ยืนยันสิ้นสุดโครงการ';
+        $projectlog->save();
+
         CreateUserLog::createLog('ยืนยันสิ้นสุดโครงการ โครงการ' . $minitbp->project);
         return redirect()->back()->withSuccess('สิ้นสุดโครงการ'.$minitbp->project.'สำเร็จ');
     }

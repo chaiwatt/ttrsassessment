@@ -18,6 +18,7 @@ use App\Model\BusinessPlan;
 use App\Model\FullTbpAsset;
 use App\Model\FullTbpGantt;
 use App\Model\ProjectMember;
+use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
@@ -27,6 +28,7 @@ use App\Model\FullTbpInvestment;
 use App\Model\FullTbpSellStatus;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
+use App\Helper\ThaiNumericConverter;
 use App\Http\Controllers\Controller;
 use App\Model\FullTbpCompanyProfile;
 use App\Model\FullTbpProjectCertify;
@@ -158,6 +160,7 @@ class AssessmentController extends Controller
     }
 
     public function LetterSent(Request $request){
+        $minitbp = MiniTBP::find($request->id);
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$request->id)->where('project_flow_id',7)->first();
         if($projectstatustransaction->status == 1){
             $projectstatustransaction->update([
@@ -169,16 +172,20 @@ class AssessmentController extends Controller
             $projectstatustransaction->save();
             DateConversion::addExtraDay($request->id,7);
 
+            ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',7)->first()->update([
+                'actual_startdate' =>  Carbon::now()->toDateString()
+            ]);
+
             $auth = Auth::user();
             $timeLinehistory = new TimeLineHistory();
-            $timeLinehistory->business_plan_id = MiniTBP::find($request->id)->business_plan_id;
+            $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
             $timeLinehistory->details = 'TTRS: ยืนยันการส่งจดหมายแจ้งผล';
             $timeLinehistory->message_type = 3;
             $timeLinehistory->owner_id = $auth->id;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
         }
-        $minitbp = MiniTBP::find($request->id);
+       
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
@@ -230,6 +237,26 @@ class AssessmentController extends Controller
             ]);
             EmailBox::send($_user->email,'TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  .' ของ' . $fullcompanyname,'เรียน ทีมประเมิน <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
+
+
+        $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',6)->first();
+        if($projectstatustransaction->status == 1){
+            $projectstatustransaction->update([
+                'status' => 2
+            ]);
+            $projectstatustransaction = new ProjectStatusTransaction();
+            $projectstatustransaction->mini_tbp_id = $minitbp->id;
+            $projectstatustransaction->project_flow_id = 7;
+            $projectstatustransaction->save();
+
+            ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',6)->first()->update([
+                'actual_startdate' =>  Carbon::now()->toDateString()
+            ]);
+
+            $mailbody  ="เรียน คุณ".$fulltbp->fulltbpresponsibleperson->name ." ".$fulltbp->fulltbpresponsibleperson->lastname . " กรรมการผู้จัดการ บริษัท ". $fulltbp->minitbp->businessplan->company->name ."<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการเลขที่ " . ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code) . " เรื่อง" .$fulltbp->minitbp->project ." ของ บริษัท" . $fulltbp->minitbp->businessplan->company->name . " ความละเอียดทราบแล้วนั้น บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่งได้คะแนน " .ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')) . " คะแนน จากคะแนนเต็ม " .ThaiNumericConverter::toThaiNumeric('100') ." คะแนนคิดเป็นเกรดระดับ " . $fulltbp->projectgrade->grade ." โดยสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ จะจัดส่งหนังสือแจ้งผลการประเมินอย่างเป็นทางการในลำดับถัดไป";
+            EmailBox::send(User::find($company->user_id)->email,'TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            DateConversion::addExtraDay($minitbp->id,6);
+        } 
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;

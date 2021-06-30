@@ -245,6 +245,7 @@ class DashboardAdminProjectInvoiceController extends Controller
           ]);
 
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',6)->first();
+        
         if($projectstatustransaction->status == 1){
             $projectstatustransaction->update([
                 'status' => 2
