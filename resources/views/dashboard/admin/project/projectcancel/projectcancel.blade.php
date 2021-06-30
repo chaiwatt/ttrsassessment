@@ -97,7 +97,7 @@
                                             @if (!Empty($fulltbp->canceldate))
                                                     <span class="badge badge-flat border-danger text-danger-600">ยกเลิกโครงการแล้ว</span>
                                                 @else
-                                                   <a href="{{route('dashboard.admin.project.savecancel',['id' => $fulltbp->id])}}" onclick="cancelproject(event)" class=" btn btn-sm bg-warning">ยกเลิกโครงการ</a>
+                                                   <a href="{{route('dashboard.admin.project.savecancel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning btncancel"><i class="icon-spinner spinner mr-2" id="spincancelproject" hidden></i>ยกเลิกโครงการ</a>
                                             @endif
                                             
                                         </td>
@@ -144,5 +144,26 @@
                 }
             });
         }
+
+        $(document).on("click",".btncancel",function(e){
+            var urlToRedirect = e.currentTarget.getAttribute('href');
+            //console.log(urlToRedirect)
+            Swal.fire({
+                    title: 'คำเตือน!',
+                    text: `ต้องการยกเลิกโครงการหรือไม่? `,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                $("#spincancelproject").attr("hidden",false);
+                if (result.value) {
+                    window.location.href = urlToRedirect;
+                }
+            });
+        }); 
     </script>
 @stop

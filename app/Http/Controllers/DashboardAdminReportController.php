@@ -24,7 +24,7 @@ class DashboardAdminReportController extends Controller
         // $this->middleware('role:4,5,6'); 
     }
     public function Index(){
-  
+
         $auth = Auth::user();
         $businessplanarr = BusinessPlan::where('business_plan_status_id','>',2)->pluck('id')->toArray();
         $minitbparr = MiniTBP::whereIn('business_plan_id',$businessplanarr)->pluck('id')->toArray();
@@ -135,6 +135,23 @@ class DashboardAdminReportController extends Controller
         $projectgradecollections = collect($projectgrades);
         $projectindustrycollections = collect($projectindustrys);
         $objecttivecollections = collect($objectives);
+
+
+
+        // $auth = Auth::user();
+        // NotificationBubble::where('target_user_id',Auth::user()->id)
+        //             ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
+        //             ->where('notification_sub_category_id',5) // notification_sub_category_id 5 = Full TBP
+        //             ->where('status',0)->delete();                  
+        // $fulltbps = FullTbp::get();
+        // if($auth->user_type_id < 5){
+        //     $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
+        //                                     // ->orWhere('coleader_id',$auth->id)
+        //                                     ->pluck('business_plan_id')->toArray();
+        //     $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
+        //     $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+        // }
+        // return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps) ;
      
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)

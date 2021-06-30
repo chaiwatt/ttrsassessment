@@ -108,7 +108,7 @@
                                                             <span class="badge badge-flat border-success text-success-600">แจ้งผลแล้ว</span>
                                                         @else
                                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 8 && $generalinfo->use_invoice_status_id == 2)
-                                                                <button class="btn btn-sm bg-warning notifyresult" data-id="{{$fulltbp->minitbp->id}}">แจ้งผล</button>
+                                                                <button class="btn btn-sm bg-warning notifyresult" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinresultnity" hidden></i>แจ้งผล</button>
                                                             @endif
                                                         @endif
 
@@ -125,7 +125,6 @@
                                                                                 {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
                                                                                 <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>
                                                                         @endif
-                                                                    
                                                                 @endif  
                                                             @else
                                                                 {{-- @if ($generalinfo->invoiceoption == 1)
@@ -223,6 +222,7 @@
                 closeOnCancel: false
                 }).then((result) => {
                 if (result.value) {
+                    $("#spinresultnity").attr("hidden",false);
                     NotifyResult($(this).data('id')).then(data => {
                         window.location.reload();
                     })
