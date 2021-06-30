@@ -12,6 +12,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\MessageBox;
+use App\Model\ProjectLog;
 use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
@@ -375,6 +376,21 @@ class FullTbpController extends Controller
 
             DateConversion::addExtraDay($minitbp->id,4);
         }
+
+        $timeLinehistory = new TimeLineHistory();
+        $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->details = 'TTRS: ยืนยันการลงพื้นที่';
+        $timeLinehistory->message_type = 2;
+        $timeLinehistory->owner_id = $auth->id;
+        $timeLinehistory->user_id = $auth->id;
+        $timeLinehistory->save();
+
+        $projectlog = new ProjectLog();
+        $projectlog->mini_tbp_id = $minitbp->id;
+        $projectlog->user_id = $auth->id;
+        $projectlog->action = 'ยืนยันการลงพื้นที่';
+        $projectlog->save();
+
         CreateUserLog::createLog('ยืนยันการลงพื้นที่ โครงการ' . $minitbp->project);
     }
 

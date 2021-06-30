@@ -185,7 +185,6 @@ class AssessmentController extends Controller
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
         }
-       
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
@@ -257,6 +256,14 @@ class AssessmentController extends Controller
             EmailBox::send(User::find($company->user_id)->email,'TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             DateConversion::addExtraDay($minitbp->id,6);
         } 
+
+        $timeLinehistory = new TimeLineHistory();
+        $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->details = 'TTRS: ยืนยันแจ้งผลการประเมิน';
+        $timeLinehistory->message_type = 2;
+        $timeLinehistory->owner_id = $auth->id;
+        $timeLinehistory->user_id = $auth->id;
+        $timeLinehistory->save();
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;

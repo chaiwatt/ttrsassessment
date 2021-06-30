@@ -65,6 +65,7 @@
                                     <tr>
                                         <th >รายการ</th> 
                                         <th >วันที่กำหนด</th>
+                                        <th >วันที่ Action</th>
                                         <th>สถานะ</th> 
                                     </tr>
                                 </thead>
@@ -73,6 +74,7 @@
                                         <tr>
                                             <td>{{$projectstatus->projectflow}}</td>
                                             <td>{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
+                                            <td>{{$projectstatus->actualdateth}}</td>
                                             <td>
                                                {!!$projectstatus->projectstatustransaction($projectstatus->project_flow_id,$company->businessplan->minitbp->id)!!}
                                             </td>

@@ -22,6 +22,13 @@ class ProjectStatus extends Model
     public function getEnddatethAttribute(){
         return DateConversion::engToThaiDate($this->enddate);
     } 
+    public function getActualdatethAttribute(){
+        if(Empty($this->actual_startdate)){
+            return '';
+        }else{
+            return DateConversion::engToThaiDate($this->actual_startdate);
+        }
+    } 
     public function getProjectflowAttribute(){
         return ProjectFlow::find($this->project_flow_id)->name;
     } 

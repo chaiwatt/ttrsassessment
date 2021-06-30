@@ -133,22 +133,22 @@
                             </div>
                             <div class="tab-pane fade" id="left-icon-management">
                                 <div class="form-group">
-                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->technoandinnovation}}</textarea>
+                                    <textarea name="management" id="management" cols="30" rows="15" class="form-control form-control-lg">{{old('management') ?? $evaluationresult->management}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-technology">
                                 <div class="form-group">
-                                    <textarea name="technoandinnovation" id="technoandinnovation" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->technoandinnovation}}</textarea>
+                                    <textarea name="technoandinnovation" id="technoandinnovation" cols="30" rows="15" class="form-control form-control-lg">{{old('technoandinnovation') ?? $evaluationresult->technoandinnovation}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-marketing">
                                 <div class="form-group">
-                                    <textarea name="marketability" id="marketability" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->marketability}}</textarea>
+                                    <textarea name="marketability" id="marketability" cols="30" rows="15" class="form-control form-control-lg">{{old('marketability') ?? $evaluationresult->marketability}}</textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-businessprospect">
                                 <div class="form-group">
-                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control form-control-lg">{{$evaluationresult->businessprospect}}</textarea>
+                                    <textarea name="businessprospect" id="businessprospect" cols="30" rows="15" class="form-control form-control-lg">{{old('businessprospect') ?? $evaluationresult->businessprospect}}</textarea>
                                 </div>
                             </div>
                         </div>
