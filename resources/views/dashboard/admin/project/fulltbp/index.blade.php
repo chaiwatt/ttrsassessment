@@ -456,7 +456,8 @@
                                                                     @endif
                                                                 @else
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                            <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
+                                                                            {{-- <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a> --}}
+                                                                            <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
                                                                         @else
                                                                             <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
                                                                         @endif

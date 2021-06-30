@@ -925,10 +925,10 @@ class DashboardAdminProjectFullTbpController extends Controller
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
-        $projectlog->action = 'ยืนยันสิ้นสุดโครงการ';
+        $projectlog->action = 'แจ้งสิ้นสุดโครงการ';
         $projectlog->save();
 
         CreateUserLog::createLog('ยืนยันสิ้นสุดโครงการ โครงการ' . $minitbp->project);
-        return redirect()->back()->withSuccess('สิ้นสุดโครงการ'.$minitbp->project.'สำเร็จ');
+        return redirect()->back();
     }
 }
