@@ -20,6 +20,7 @@ class CreateEventCalendarAttendeesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->char('joinevent',1)->default('1');
             $table->char('color',10)->default('#FF33E6');
+            $table->text('rejectreason')->nullable();
             $table->timestamps();
         });
     }

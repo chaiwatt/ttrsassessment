@@ -1313,7 +1313,7 @@ th {
 							</div>
 							<div class="form-group">
 								<label>จำนวน (<span id="unit">หน่วย</span>)</label><span class="text-danger">*</span>
-								<input type="text" id="assetquantityedit" placeholder="จำนวน (หน่วย)" class="form-control form-control-lg numeralformat4">
+								<input type="text" id="assetquantityedit" placeholder="จำนวน (หน่วย)" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
 								<label>ราคาต่อหน่วย (บาท)</label><span class="text-danger">*</span>

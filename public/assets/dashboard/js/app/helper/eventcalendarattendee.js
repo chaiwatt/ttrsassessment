@@ -1,4 +1,4 @@
-function updateJoinEvent(id,state) {
+function updateJoinEvent(id,state,rejreason) {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: `${route.url}/api/calendar/updatejoinevent`,
@@ -6,7 +6,8 @@ function updateJoinEvent(id,state) {
             headers: {"X-CSRF-TOKEN":route.token},
             data: {
                 id : id,
-                state : state
+                state : state,
+                rejreason : rejreason
             },
             success: function(data) {
             resolve(data)

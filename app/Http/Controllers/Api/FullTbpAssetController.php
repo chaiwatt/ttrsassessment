@@ -18,7 +18,7 @@ class FullTbpAssetController extends Controller
         $fulltbpid = $fulltbpasset->full_tbp_id;
         $fulltbpasset->update([
             'cost' => str_replace(',', '', $request->assetcostedit),
-            'quantity' => $request->assetquantityedit,
+            'quantity' => str_replace(',', '', $request->assetquantityedit),
             'price' => str_replace(',', '', $request->assetpriceedit),
             'specification' => $request->assetspecificationedit,
         ]);

@@ -144,8 +144,11 @@ class CalendarController extends Controller
             }elseif($request->state == '3'){
                 EventCalendarAttendee::find($request->id)->update([
                     'joinevent' => '3',
-                    'color' => '#B43104'
+                    'color' => '#B43104',
+                    'rejectreason' => $request->rejreason
                 ]);
+
+
             }
             $eventcalendarattendee = EventCalendarAttendee::find($request->id);
             

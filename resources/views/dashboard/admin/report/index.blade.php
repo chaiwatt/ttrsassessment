@@ -228,6 +228,12 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-12" id="rej_meeting_note_wrapper" hidden>
+                                    <div class="form-group">
+                                        <label>เหตุผลการไม่เข้าร่วม</label>
+                                        <textarea type="text" rows="5"  id="rej_meeting_note" placeholder="กรุณาระบุเหตุผลการไม่เข้าร่วมการประชุม" class="form-control form-control-lg" ></textarea>
+                                    </div>
+                                </div>
                             </div> 
                         </div>
 

@@ -109,17 +109,24 @@ import * as Attendee from './eventcalendarattendee.js';
                                 $("#attendevent").html(html);
                                 $('#modal_get_calendar').modal('show');
 
+
+
                                 var html =``;
                                 data.eventcalendarattendees.forEach(function (attendee,index) {
+                                    var rejreason = "";
+                                    if(attendee['rejectreason'] != null){
+                                        rejreason = ' ('+attendee['rejectreason']+')';
+                                    }
+
                                     var attendeestatus = `<span class="badge badge-flat border-info text-info-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
                                     if(attendee.joinevent == 2){
                                         attendeestatus = `<span class="badge badge-flat border-success text-success-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
                                     }else if(attendee.joinevent == 3){
-                                        attendeestatus = `<span class="badge badge-flat border-danger text-danger-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
+                                        attendeestatus = `<span class="badge badge-flat border-danger text-danger-600">${attendee.eventcalendarattendeestatus['name']}</span> ${rejreason}`;
                                     }
                                     html += `<tr > 
-                                    <td> ${attendee.user['name']} ${attendee.user['lastname']}</td>                                            
-                                    <td> ${attendeestatus} </td> 
+                                    <td > ${attendee.user['name']} ${attendee.user['lastname']}</td>                                            
+                                    <td style="width:1%;white-space: nowrap"> ${attendeestatus} </td> 
                                     </tr>`
                                 });
 
@@ -474,14 +481,20 @@ $('#chkjoinmetting').on('change.bootstrapSwitch', function(e) {
     }        
    globalid = $(this).data('id');
    $("#spinicon").attr("hidden",false);
-   Attendee.updateJoinEvent($(this).data('id'),status).then(data => {
+   Attendee.updateJoinEvent($(this).data('id'),status,"").then(data => {
        $("#spinicon").attr("hidden",true);
       
    }).catch(error => {})
 });
 
 
-$(document).on('change', '#attendevent', function(e) {    
+$(document).on('change', '#attendevent', function(e) { 
+    if($(this).val() == 3){
+        $("#rej_meeting_note_wrapper").attr("hidden",false);   
+    }else{
+        $("#rej_meeting_note_wrapper").attr("hidden",true); 
+    }
+    
 //    $("#spinicon").attr("hidden",false);
 //    Attendee.updateJoinEvent($('#attendeventid').val(),$(this).val()).then(data => {
 //        $("#spinicon").attr("hidden",true);
@@ -490,10 +503,11 @@ $(document).on('change', '#attendevent', function(e) {
 });
 
 
+
+
 $(document).on('click', '#btn_modal_get_calendar', function(e) {
-    //window.location.replace(`${route.url}/dashboard/admin/report`);
-    $("#spinicon").attr("hidden",false);
-   Attendee.updateJoinEvent($('#attendeventid').val(),$('#attendevent').val()).then(data => {
+   $("#spinicon").attr("hidden",false);
+   Attendee.updateJoinEvent($('#attendeventid').val(),$('#attendevent').val(),$('#rej_meeting_note').val()).then(data => {
        $("#spinicon").attr("hidden",true);
        document.location.reload();
    }).catch(error => {})
