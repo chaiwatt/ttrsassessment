@@ -47,6 +47,10 @@ class NotificationSubCategoriesSeederTable extends Seeder
             [
                 'notification_category_id' => 3,
                 'name' => 'สรุปการประเมิน'
+            ],
+            [
+                'notification_category_id' => 3,
+                'name' => 'รายงานผลการประเมิน'
             ]
         ]);
     }

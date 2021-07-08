@@ -66,7 +66,7 @@
                                     <tr>
                                         <th  style="width:20%;">เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>    
-                                        {{-- <th>สถานะ</th>                              --}}
+                                        <th>วันที่ยกเลิก</th>                             
                                         <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -75,7 +75,8 @@
                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 3)
                                     <tr>    
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
-                                        <td> {{$fulltbp->minitbp->project}} </td> 
+                                        <td> <a class="text-info" href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}">{{$fulltbp->minitbp->project}} </a> </td> 
+                                        <td> {{$fulltbp->canceldateth}} </td> 
                                         {{-- <td>
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)
                                                     <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
@@ -95,9 +96,15 @@
                                         </td>                                         --}}
                                         <td style="white-space: nowrap"> 
                                             @if (!Empty($fulltbp->canceldate))
-                                                    <span class="badge badge-flat border-danger text-danger-600">ยกเลิกโครงการแล้ว</span>
+                                                    
+                                                    <a href="{{route('dashboard.admin.project.cancel',['id' => $fulltbp->id])}}" class="badge badge-flat border-danger text-danger-600">ยกเลิกโครงการแล้ว</a>
                                                 @else
-                                                   <a href="{{route('dashboard.admin.project.savecancel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning btncancel"><i class="icon-spinner spinner mr-2" id="spincancelproject" hidden></i>ยกเลิกโครงการ</a>
+                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 10)
+                                                    <a href="{{route('dashboard.admin.project.cancel',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยกเลิกโครงการ</a>
+                                                @else
+                                                    <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
+                                                @endif
+                                                  
                                             @endif
                                             
                                         </td>
@@ -127,12 +134,13 @@
         };
 
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 10) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 2, "desc" ]],
                 "info":     false,
-                "pageLength" : 20,
+                "pageLength" : 10,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  

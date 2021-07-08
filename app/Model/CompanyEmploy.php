@@ -75,4 +75,15 @@ class CompanyEmploy extends Model
         return $signature;
     } 
  
+    public function IsSelectDirector($minitbpid)
+    {
+        $minitbpsignature = MinitbpSignature::where('company_employee_id',$this->id)->where('mini_tbp_id',$minitbpid)->first();
+        if(!Empty($minitbpsignature)){
+            return 1;
+        }else{
+            return 0;
+        }
+        // return MinitbpSignature::find($this->prefix_id);
+    }
+
 }

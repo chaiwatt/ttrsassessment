@@ -301,6 +301,14 @@ class FullTbp extends Model
         }
     } 
 
+    public function getCanceldatethAttribute(){
+        if(!Empty($this->canceldate)){
+            return DateConversion::engToThaiDate($this->canceldate);
+        }else{
+           return "" ;
+        }
+    } 
+
     public function getProjectBudgetAttribute(){
         $check = FullTbpInvestment::where('full_tbp_id',$this->id)->sum('cost');
         $projectbudget = ProjectBudget::where('minbudget','<',$check)->where('maxbudget','>=',$check)->first();

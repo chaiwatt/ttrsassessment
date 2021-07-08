@@ -192,20 +192,44 @@ function callDataTableExtra(){
 }
 
 $("#btnOnExcel").on('click', function() {
+    if (!$('#evextraexporttable').DataTable().data().any() ) {
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+        });
+    }
     $('#evexporttable').DataTable().buttons(0,0).trigger();
-
 });
 
 $("#btnOnPdf").on('click', function() {
+    if (!$('#evexporttable').DataTable().data().any() ) {
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+        });
+    }
     $('#evexporttable').DataTable().buttons(0,1).trigger();
 });
 
 $("#btnOnExcelExtra").on('click', function() {
+
+    if (!$('#evextraexporttable').DataTable().data().any() ) {
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+        });
+    }
     $('#evextraexporttable').DataTable().buttons(0,0).trigger();
 
 });
 
 $("#btnOnPdfExtra").on('click', function() {
+    if (!$('#evextraexporttable').DataTable().data().any() ) {
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+        });
+    }
     $('#evextraexporttable').DataTable().buttons(0,1).trigger();
 });
 

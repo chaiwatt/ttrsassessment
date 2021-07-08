@@ -617,6 +617,20 @@ function showConflictGrade(id){
     }
 });
 
+$(document).on('change', '.inputextrascore', function(e) {
+if(stepindex == 1){
+        if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรอกคะแนน 0-5 เท่านั้น!',
+            })
+            $(this).val('');
+            return;
+        }  
+    }
+});
+
+
 
 var submitbutton = true;
 if($('#evstatus').val() >= 5 ){

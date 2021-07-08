@@ -23,6 +23,7 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 Route::get('generate','PDFController@Generate')->name('generate');
 
 Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
+Route::get('demottrsuser', 'HomeController@DemoTTRSUser')->name('demottrsuser');
 
 // Route::get('test', 'HomeController@Test')->name('test');
 Route::get('landing', 'HomeController@Index')->name('landing.index');
@@ -223,6 +224,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'status'], function(){
                 Route::post('update','Api\BusinessPlanController@Update')->name('api.businessplan.update');          
             });
+            Route::post('createproject','Api\BusinessPlanController@CreateProject')->name('api.businessplan.createproject');   
         });
         Route::group(['prefix' => 'coverimage'], function(){
             Route::post('add','Api\CoverImageController@Add')->name('api.coverimage.add');    
@@ -772,14 +774,17 @@ Route::group(['middleware' => 'auth'], function(){
 
                 }); 
                 Route::group(['prefix' => 'projectcancel'], function(){
-                    Route::get('','DashboardAdminProjectCancelController@Index')->name('dashboard.admin.project.projectcancel');           
-                    Route::get('savecancel/{id}','DashboardAdminProjectCancelController@savecancel')->name('dashboard.admin.project.savecancel');
+                    Route::get('','DashboardAdminProjectCancelController@Index')->name('dashboard.admin.project.projectcancel');  
+                    Route::get('cancel/{id}','DashboardAdminProjectCancelController@cancel')->name('dashboard.admin.project.cancel');         
+                    Route::post('savecancel/{id}','DashboardAdminProjectCancelController@savecancel')->name('dashboard.admin.project.savecancel');
                 }); 
             });  
             Route::group(['prefix' => 'calendar'], function(){
                 Route::get('','DashboardAdminCalendarController@Index')->name('dashboard.admin.calendar');           
                 Route::get('create','DashboardAdminCalendarController@Create')->name('dashboard.admin.calendar.create'); 
                 Route::post('createsave','DashboardAdminCalendarController@CreateSave')->name('dashboard.admin.calendar.createsave');
+                Route::get('createcalendar/{id}','DashboardAdminCalendarController@CreateCalendar')->name('dashboard.admin.calendar.createcalendar');
+                Route::post('createcalendarsave/{id}','DashboardAdminCalendarController@CreateCalendarSave')->name('dashboard.admin.calendar.createcalendarsave');
                 Route::get('edit/{id}','DashboardAdminCalendarController@Edit')->name('dashboard.admin.calendar.edit'); 
                 Route::post('editsave/{id}','DashboardAdminCalendarController@EditSave')->name('dashboard.admin.calendar.editsave'); 
                 Route::get('delete/{id}','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
@@ -850,7 +855,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('gettimeline','DashboardCompanyReportController@GetTimeLine')->name('dashboard.company.report.gettimeline'); 
                 Route::post('edittimelinestatus','DashboardCompanyReportController@EditTimeLineStatus')->name('dashboard.company.report.edittimelinestatus'); 
                 Route::post('getfinalgrade','DashboardCompanyReportController@GetFinalGrade')->name('dashboard.company.report.getfinalgrade'); 
-                
+                Route::get('singlereport/{id}','DashboardCompanyReportController@SingleReport')->name('dashboard.company.report.singlereport'); 
                 
             });      
             Route::group(['prefix' => 'project'], function(){
@@ -884,7 +889,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','DashboardCompanyProjectFullTbpController@EditSave')->name('dashboard.company.project.fulltbp.editsave');   
                     Route::get('downloadpdf/{id}','DashboardCompanyProjectFullTbpController@DownloadPDF')->name('dashboard.company.project.fulltbp.downloadpdf'); 
                     Route::get('submit/{id}','DashboardCompanyProjectFullTbpController@Submit')->name('dashboard.company.project.fulltbp.submit'); 
-                    Route::post('submitsave/{id}','DashboardCompanyProjectFullTbpController@SubmitSave')->name('dashboard.company.project.fulltbp.submitsave');        
+                    Route::post('submitsave/{id}','DashboardCompanyProjectFullTbpController@SubmitSave')->name('dashboard.company.project.fulltbp.submitsave'); 
+                   
+                           
                 }); 
             });       
 

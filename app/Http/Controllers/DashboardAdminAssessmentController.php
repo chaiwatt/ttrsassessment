@@ -452,13 +452,13 @@ class DashboardAdminAssessmentController extends Controller
         $company = Company::find($businessplan->company_id);
         $generalinfo = GeneralInfo::first();
         if($generalinfo->use_invoice_status_id == 2){
-            $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = $businessplan->id;
-            $notificationbubble->notification_category_id = 1;
-            $notificationbubble->notification_sub_category_id = 9;
-            $notificationbubble->user_id = $auth->id;
-            $notificationbubble->target_user_id = $projectassignment->leader_id;
-            $notificationbubble->save();
+            // $notificationbubble = new NotificationBubble();
+            // $notificationbubble->business_plan_id = $businessplan->id;
+            // $notificationbubble->notification_category_id = 1;
+            // $notificationbubble->notification_sub_category_id = 3;
+            // $notificationbubble->user_id = $auth->id;
+            // $notificationbubble->target_user_id = $projectassignment->leader_id;
+            // $notificationbubble->save();
             
             // BusinessPlan::find($minitbp->business_plan_id)->update([
             //     'business_plan_status_id' => 9
@@ -505,6 +505,14 @@ class DashboardAdminAssessmentController extends Controller
             $summaryexpertpercent->percent = GetEvPercent::getEvPercent($projectmember->user_id,$ev->full_tbp_id); 
             $summaryexpertpercent->save();
 
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $businessplan->id;
+            $notificationbubble->notification_category_id = 3;
+            $notificationbubble->notification_sub_category_id = 10;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $projectmember->user_id;
+            $notificationbubble->save();
+
             $messagebox = Message::sendMessage('สรุปผลการประเมิน โครงการ'.$minitbp->project .' ของ' . $fullcompanyname,'ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult').'>ดำเนินการ</a>',Auth::user()->id,$projectmember->user_id);
 
             $alertmessage = new AlertMessage();
@@ -542,6 +550,7 @@ class DashboardAdminAssessmentController extends Controller
         
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->mini_tbp_id = $minitbp->id;
         $timeLinehistory->details = 'TTRS: สรุปผลการประเมินสำเร็จ';
         $timeLinehistory->message_type = 3;
         $timeLinehistory->owner_id = $auth->id;

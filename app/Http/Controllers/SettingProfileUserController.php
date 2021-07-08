@@ -87,6 +87,7 @@ class SettingProfileUserController extends Controller
                                             ->withBusinesstypes($businesstypes);
     }
     public function EditSave(EditProfileRequest $request, $id){
+        
         if($request->registeredcapital == 0 && Auth::user()->user_group_id == 1){
             return redirect()->back()->withError('ทุนจดทะเบียนไม่ถูกต้อง');  
         }
@@ -192,7 +193,7 @@ class SettingProfileUserController extends Controller
                 $minitbp = new MiniTBP();
                 $minitbp->business_plan_id = $businessplan->id;
                 $minitbp->contactname = $auth->name;
-                $minitbp->contactprefix = $user->prefix;
+                $minitbp->contactprefix = $user->prefix_id;
                 $minitbp->contactposition = $user->position;
                 $minitbp->contactlastname = $auth->lastname;
                 $minitbp->contactemail = $auth->email;
@@ -289,7 +290,7 @@ class SettingProfileUserController extends Controller
                 }
                 $fulltbpreturnofinvestment = new FullTbpReturnOfInvestment();
                 $fulltbpreturnofinvestment->full_tbp_id = $fulltbp->id;
-                $fulltbpreturnofinvestment->save();
+                $fulltbpreturnofinvestment->save();               
                 return redirect()->route('dashboard.company.project.minitbp.edit',['id'=>$minitbp->id])->withSuccess('บันทึกข้อมูลสำเร็จ กรุณากรอกแบบคำขอเพื่อขอรับการประเมินธุรกิจ'); 
         }else{
             if($request->status == 1){
@@ -301,7 +302,6 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
-
             return redirect()->back()->withSuccess('แก้ไขข้อมูลโพรไฟล์สำเร็จ'); 
         }
     }

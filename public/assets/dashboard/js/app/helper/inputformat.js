@@ -105,8 +105,10 @@ $(function() {
     });
     $('.numeralformat3').toArray().forEach(function(field){
         new Cleave(field, {
-            numericOnly: true,
-            blocks: [3]
+            numeral: true,
+            // numeralThousandsGroupStyle: 'thousand',
+            numeralPositiveOnly: true,
+            numeralIntegerScale: 3
         })
     });
     $('.numeralformat4').toArray().forEach(function(field){

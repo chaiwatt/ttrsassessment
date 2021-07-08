@@ -36,7 +36,7 @@ class ShareComposer
         $slides = Slide::get();
         $tags = Tag::get();
         $sharepagecategories = PageCategory::where('parent_id',0)->get();
-        $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->take(5)->get();
+        $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->get();
         $homepageservices = HomepageService::get();
         $homepagepillar = HomepagePillarSection::first();
         $sharepages = Page::orderBy('id','desc')->paginate(3);

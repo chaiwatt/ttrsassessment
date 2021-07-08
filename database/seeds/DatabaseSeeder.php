@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EventCalendarAttendeeStatusesTableSeeder::class);
         $this->call(AnnounceCategoryTableSeeder::class);
         $this->call(CompanyServiceTypesTableSeeder::class);
+        $this->call(ShowFinishedProjectsTableSeeder::class);
         $this->call(EvaluationDaysTableSeeder::class);
         $this->call(EvaluationMonthsTableSeeder::class);
         $this->call(CompanysizesTableSeeder::class);
@@ -63,6 +64,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SignatureStatusesTableSeeder::class);
         $this->call(PaymentStatusesSeeder::class);
         $this->call(ExpertAssignmentStatusesTableSeeder::class);
+        $this->call(ShowAlertsTableSeeder::class);
         $this->call(UserGroupsTableSeeder::class);
         $this->call(MessagePrioritiesTableSeeder::class);
         $this->call(FeeTypesTableSeeder::class);

@@ -287,7 +287,7 @@
                                             <tr>    
                                                 <td > 
                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                 </td>  
                                                 <td style="white-space: nowrap">    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
@@ -430,7 +430,7 @@
 
                                                                 @if (Auth::user()->user_type_id == 4)
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
-                                                                                <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                                                                <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
                                                                             @elseif($fulltbp->minitbp->businessplan->business_plan_status_id == 7) 
                                                                                 <span class="badge badge-flat border-info text-info-600">ลงคะแนนการประเมิน</span>
                                                                         @endif
@@ -452,14 +452,20 @@
                                                                                 <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
                                                                             @endif  
                                                                         @else
-                                                                            <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                        @if ($fulltbp->minitbp->flowstagefour == true)
+                                                                                <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                        @endif
+                                                                            
                                                                     @endif
                                                                 @else
                                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
                                                                             {{-- <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a> --}}
                                                                             <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
                                                                         @else
-                                                                            <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                            @if ($fulltbp->minitbp->flowstagefour == true)
+                                                                                <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                            @endif
+                                                                            
                                                                         @endif
                                                                         
                                                             @endif

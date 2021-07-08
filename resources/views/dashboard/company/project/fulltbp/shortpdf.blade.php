@@ -372,12 +372,12 @@
                                 @if ($fulltbp->fulltbpdebtpartner->count() > 0)
                                     @foreach ($fulltbp->fulltbpdebtpartner as $fulltbpdebtpartner)
                                         <tr>
-                                            <td style="font-size:13px"> {{$fulltbpdebtpartner->debtpartner}}</td> 
-                                            <td style="font-size:13px"> {{$fulltbpdebtpartner->numproject}} </td> 
+                                            <td style="font-size:13px;"> {{$fulltbpdebtpartner->debtpartner}}</td> 
+                                            <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->numproject}} </td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->totalyearsell,2)}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->percenttosale,2)}}</td> 
-                                            <td style="font-size:13px;text-align: center">{{$fulltbpdebtpartner->businessyear}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{$fulltbpdebtpartner->businessyear}}</td> 
                                         </tr>   
                                     @endforeach
                                 @endif
@@ -400,11 +400,11 @@
                                 @if ($fulltbp->fulltbpcreditpartner->count() > 0)
                                     @foreach ($fulltbp->fulltbpcreditpartner as $fulltbpcreditpartner)
                                         <tr>
-                                            <td style="font-size:13px"> {{$fulltbpcreditpartner->creditpartner}}</td> 
+                                            <td style="font-size:13px;"> {{$fulltbpcreditpartner->creditpartner}}</td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->totalyearpurchase,2)}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->percenttopurchase,2)}}</td> 
-                                            <td style="font-size:13px;text-align: center">{{$fulltbpcreditpartner->businessyear}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{$fulltbpcreditpartner->businessyear}}</td> 
                                         </tr>   
                                     @endforeach
                                 @endif

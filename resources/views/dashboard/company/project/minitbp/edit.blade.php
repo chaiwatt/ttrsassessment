@@ -540,7 +540,7 @@
 																	<td>
 																		<div class="form-check">
 																			<label class="form-check-label">
-																				@if (Empty($authorizeddirector->signature_id))
+																				{{-- @if (Empty($authorizeddirector->signature_id))
 																						<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
 																						@if ($authorizeddirector->usesignature == 2)
 																							checked
@@ -552,7 +552,27 @@
 																							checked
 																						@endif
 																						>
+																				@endif --}}
+
+																				@if (Empty($authorizeddirector->signature_id))
+																						@if ($authorizeddirector->IsSelectDirector($minitbp->id) == 1)
+																							<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc checked>
+																							@else
+																							<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc >
+																						@endif
+																					@else
+																						@if ($authorizeddirector->IsSelectDirector($minitbp->id) == 1)
+																							<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc checked>
+																							@else
+																							<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc >
+																						@endif
 																				@endif
+
+																				{{-- @if ($authorizeddirector->IsSelectDirector($minitbp->id) == 1)
+																						<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc checked>
+																					@else
+																						<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc >
+																				@endif --}}
 																				
 																				@if ($authorizeddirector->prefix->name == 'อื่นๆ')
 																						{{$authorizeddirector->otherprefix}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
@@ -770,6 +790,7 @@
 						selected_director.push($(this).val());
 				});
 				if((submitstatus == 2 && refixstatus == 0) || (submitstatus == 3 && refixstatus == 1) ){
+					$("#submitminitbp").attr("hidden",true);
 					var formData = new FormData();
 					formData.append('id',$('#minitbpid').val());
 					formData.append('project',$('#project').val());
@@ -835,6 +856,7 @@
 								$('#downloadpdf').attr('href', url);
 								$('#pdfname').val(data);
 								PDFObject.embed(pdfpath, "#example1");
+								$("#submitminitbp").attr("hidden",false);
 							}).catch(error => {})
 						}
 					});
@@ -843,6 +865,7 @@
 					$('#pdfname').val("{{$minitbp->attachment}}");
 					PDFObject.embed(pdfpath, "#example1");
 					$('#downloadpdf').attr('href', pdfpath);
+					$("#submitminitbp").attr("hidden",false);
 				}
 			
 			}else{

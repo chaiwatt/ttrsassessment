@@ -56,9 +56,16 @@
             @endif
 
             <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @if (Auth::user()->user_type_id == 5)
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',2)->count() || $sharenotificationbubbles->where('notification_sub_category_id',4)->count()> 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
+                    @else
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
                 @endif
+
             </a></li>	
             <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
@@ -137,15 +144,27 @@
 
         @if (Auth::user()->user_type_id >= 5)
             <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'nav-item-expanded nav-item-open':''}}">
-            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span></a>
+            <a href="#" class="nav-link"><i class="icon-clipboard2"></i> <span>ประเมิน</span>
+                @if ($sharenotificationbubbles->where('notification_category_id','3')->count() > 0)
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                @endif
+            </a>
                 <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
-                    <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">สรุปคะแนน</a></li>
+                    <li class="nav-item"><a href="{{route('dashboard.admin.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.assessment')?'active':''}}">สรุปคะแนน
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',9)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
+                    </a></li>
                 </ul>
             </li>
             <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
                 <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
                 <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
-                    <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน</a></li>
+                    <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',10)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
+                    </a></li>
                 </ul>
             </li>
             <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.followup')?'nav-item-expanded nav-item-open':''}}">
@@ -166,10 +185,9 @@
                         <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
                         <ul class="nav nav-group-sub" data-submenu-title="รายงานผลการประเมิน">
                             <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน
-                                @if ($sharenotificationbubbles->where('notification_sub_category_id',9)->count() > 0)
-                                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                            @endif
-                            
+                                @if ($sharenotificationbubbles->where('notification_sub_category_id',10)->count() > 0)
+                                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                                @endif
                             </a></li>
                         </ul>
                     </li>
@@ -179,46 +197,33 @@
     @endif
 
     @if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'nav-item-expanded nav-item-open':''}}">
-        <a href="{{route('dashboard.company.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
-        {{-- <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
-            <li class="nav-item"><a href="{{route('dashboard.company.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'active':''}}">หน้าแรก</a></li>     
-        </ul> --}}
-    </li>
-    @if (!Empty(Auth::user()->company->businessplan))
-        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.project')?'nav-item-expanded nav-item-open':''}}">
-            <a href="#" class="nav-link"><i class="icon-archive"></i> <span>โครงการ</span>
-                @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                @endif
-            </a>
-            <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
-                @if (Auth::user()->company->businessplan->business_plan_status_id > 1 )
-                    <li class="nav-item"><a href="{{route('dashboard.company.project.minitbp.edit',['id'=>Auth::user()->company->businessplan->minitbp->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
-                        @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
+        <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'nav-item-expanded nav-item-open':''}}">
+            <a href="{{route('dashboard.company.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
+            {{-- <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
+                <li class="nav-item"><a href="{{route('dashboard.company.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'active':''}}">หน้าแรก</a></li>     
+            </ul> --}}
+        </li>
+        @if ($generalinfo->use_invoice_status_id != 2)
+            @if (!Empty(Auth::user()->company->businessplan))
+                <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.project')?'nav-item-expanded nav-item-open':''}}">
+                    <a href="#" class="nav-link"><i class="icon-archive"></i> <span>รายการแจ้งหนี้</span>
+                        @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
                             <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                         @endif
-                    </a></li>  
-                    @if (Auth::user()->company->businessplan->business_plan_status_id > 3)
-                        <li class="nav-item"><a href="{{route('dashboard.company.project.fulltbp.edit',['id'=>Auth::user()->company->businessplan->minitbp->fulltbp->id])}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
-                            @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
-                                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                    </a>
+                    <ul class="nav nav-group-sub" data-submenu-title="โครงการ">    
+                            @if (Auth::user()->company->businessplan->business_plan_status_id >= 8)
+                                <li class="nav-item"><a href="{{route('dashboard.company.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">ใบแจ้งหนี้
+                                    @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
+                                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                                    @endif
+                                </a></li>
                             @endif
-                        </a></li>
-                    @endif
-                    @if ($generalinfo->use_invoice_status_id != 2)
-                        @if (Auth::user()->company->businessplan->business_plan_status_id >= 8)
-                            <li class="nav-item"><a href="{{route('dashboard.company.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.project.invoice')?'active':''}}">ใบแจ้งหนี้
-                                @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
-                                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                                @endif
-                            </a></li>
-                        @endif
-                    @endif
-                @endif
-            </ul>
-        </li>
-    @endif
+                        {{-- @endif --}}
+                    </ul>
+                </li>
+            @endif
+        @endif
     @endif
 
     @if (Auth::user()->user_type_id >=5)
@@ -227,59 +232,59 @@
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
 
-        <li style="margin-left: -30px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'nav-item-expanded':''}}">
+        <li style="margin-left: -17px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'nav-item-expanded':''}}">
             <a href="#" class="nav-link"><span>โครงการ</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.minitbpbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.minitbpbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น mini TBP รายเดือน</span></a></li>      
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.fulltbpbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.fulltbpbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น Full TBP รายเดือน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.finishedbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.finishedbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ประเมินแล้วเสร็จรายเดือน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.canceledbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.canceledbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ขอยกเลิกรายเดือน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.minitbpbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น mini TBP รายปี</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.fulltbpbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น Full TBP รายปี</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.finishedbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ประเมินแล้วเสร็จรายปี</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.canceledbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.canceledbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ขอยกเลิกรายปี</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.minitbpbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น mini TBP รายปีงบประมาณ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.fulltbpbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น Full TBP รายปีงบประมาณ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.finishedbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.finishedbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ประเมินแล้วเสร็จรายปีงบประมาณ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.canceledbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.canceledbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ขอยกเลิกรายปีงบประมาณ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.allbyyear')?'active':''}}"><span style="font-size: 15px">โครงการทั้งหมดแยกตามปี</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.allbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.allbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการทั้งหมดแยกตามปีงบประมาณ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbycapital')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbycapital')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามงบประมาณของโครงการ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbybusinesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbybusinesstype')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามประเภทธุรกิจ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbybusinesssize')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbybusinesssize')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามขนาดธุรกิจ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyisiccode')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyisiccode')?'active':''}}"><span style="font-size: 15px">โครงการแยกตาม ISIC Code</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามประเภทอุตสาหกรรม</span></a></li>
-                {{-- <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามสาขาเทคโนโลยี</span></a></li> --}}
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyprovince')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyprovince')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามจังหวัด</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbysector')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามภูมิภาค</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbystatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbystatus')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามสถานะของการประเมิน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyscore')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyscore')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามคะแนน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbygrade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbygrade')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามเกรด</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbycertificate')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbycertificate')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามที่ได้รับใบรับรอง</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyobjective')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyobjective')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามวัตถุประสงค์ของการประเมิน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyobjectiveapprove')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyobjectiveapprove')?'active':''}}"><span style="font-size: 15px">จำนวนโครงการแยกตามผลการอนุมัติ</span></a></li>
-                {{-- <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbynonefinanceresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbynonefinanceresult')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามผลการอนุมัติการสนับสนุน Non-Finance</span></a></li> --}}
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyleader')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyleader')?'active':''}}"><span style="font-size: 15px">โครงการแยกตาม Lead</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectleadbystatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectleadbystatus')?'active':''}}"><span style="font-size: 15px">โครงการของ Lead แยกตามสถานะของการประเมิน Lead</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectleadbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectleadbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Lead แยกตามประเภทอุตสาหกรรม</span></a></li>
-                {{-- <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectleadbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectleadbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Lead แยกตามสาขาเทคโนโลยี</span></a></li> --}}
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyexpert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyexpert')?'active':''}}"><span style="font-size: 15px">โครงการแยกตาม Expert</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectexpertbystatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectexpertbystatus')?'active':''}}"><span style="font-size: 15px">โครงการของ Expert แยกตามสถานะของการประเมิน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectexpertbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectexpertbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Expert แยกตามประเภทอุตสาหกรรม</span></a></li>
-                {{-- <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectexpertbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectexpertbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Expert แยกตามสาขาเทคโนโลยี</span></a></li> --}}
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectgradebybusinesssize')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectgradebybusinesssize')?'active':''}}"><span style="font-size: 15px">โครงการที่ได้เกรดแต่ละระดับแยกตามขนาดธุรกิจ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectgradebyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectgradebyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการที่ได้เกรดแต่ละระดับแยกตามประเภทอุตสาหกรรม</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbusinesssizebyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbusinesssizebyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการตามขนาดธุรกิจในแต่ละประเภทอุตสาหกรรม</span></a></li>
-                {{-- <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbusinesssizebytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbusinesssizebytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการตามสาขาเทคโนโลยีในแต่ละประเภทอุตสาหกรรม</span></a></li> --}}
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbusinesssizebysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbusinesssizebysector')?'active':''}}"><span style="font-size: 15px">โครงการตามขนาดธุรกิจในแต่ละภูมิภาค</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectindustrygroupbysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectindustrygroupbysector')?'active':''}}"><span style="font-size: 15px">โครงการตามประเภทอุตสาหกรรมในแต่ละภูมิภาค</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectall')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินทั้งหมด</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectstatusbyleader')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectstatusbyleader')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายคน</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายอุตสาหกรรม</span></a></li>
-                {{-- <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายสาขาเทคโนโลยี</span></a></li> --}}
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbysector')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead ในแต่ละภูมิภาค</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead ตามขนาดธุรกิจ</span></a></li>
-                <li style="margin-left: -30px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')?'active':''}}"><span style="font-size: 15px">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.minitbpbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.minitbpbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น mini TBP รายเดือน</span></a></li>      
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.fulltbpbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.fulltbpbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น Full TBP รายเดือน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.finishedbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.finishedbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ประเมินแล้วเสร็จรายเดือน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.canceledbymonth')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.canceledbymonth')?'active':''}}"><span style="font-size: 15px">โครงการที่ขอยกเลิกรายเดือน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.minitbpbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น mini TBP รายปี</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.fulltbpbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น Full TBP รายปี</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.finishedbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ประเมินแล้วเสร็จรายปี</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.canceledbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.canceledbyyear')?'active':''}}"><span style="font-size: 15px">โครงการที่ขอยกเลิกรายปี</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.minitbpbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น mini TBP รายปีงบประมาณ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.fulltbpbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ยื่น Full TBP รายปีงบประมาณ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.finishedbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.finishedbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ประเมินแล้วเสร็จรายปีงบประมาณ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.canceledbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.canceledbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการที่ขอยกเลิกรายปีงบประมาณ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.allbyyear')?'active':''}}"><span style="font-size: 15px">โครงการทั้งหมดแยกตามปี</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.allbyyearbudget')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.allbyyearbudget')?'active':''}}"><span style="font-size: 15px">โครงการทั้งหมดแยกตามปีงบประมาณ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbycapital')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbycapital')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามงบประมาณของโครงการ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbybusinesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbybusinesstype')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามประเภทธุรกิจ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbybusinesssize')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbybusinesssize')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามขนาดธุรกิจ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyisiccode')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyisiccode')?'active':''}}"><span style="font-size: 15px">โครงการแยกตาม ISIC Code</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามประเภทอุตสาหกรรม</span></a></li>
+                {{-- <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามสาขาเทคโนโลยี</span></a></li> --}}
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyprovince')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyprovince')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามจังหวัด</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbysector')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามภูมิภาค</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbystatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbystatus')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามสถานะของการประเมิน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyscore')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyscore')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามคะแนน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbygrade')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbygrade')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามเกรด</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbycertificate')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbycertificate')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามที่ได้รับใบรับรอง</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyobjective')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyobjective')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามวัตถุประสงค์ของการประเมิน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyobjectiveapprove')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyobjectiveapprove')?'active':''}}"><span style="font-size: 15px">จำนวนโครงการแยกตามผลการอนุมัติ</span></a></li>
+                {{-- <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbynonefinanceresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbynonefinanceresult')?'active':''}}"><span style="font-size: 15px">โครงการแยกตามผลการอนุมัติการสนับสนุน Non-Finance</span></a></li> --}}
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyleader')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyleader')?'active':''}}"><span style="font-size: 15px">โครงการแยกตาม Lead</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectleadbystatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectleadbystatus')?'active':''}}"><span style="font-size: 15px">โครงการของ Lead แยกตามสถานะของการประเมิน Lead</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectleadbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectleadbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Lead แยกตามประเภทอุตสาหกรรม</span></a></li>
+                {{-- <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectleadbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectleadbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Lead แยกตามสาขาเทคโนโลยี</span></a></li> --}}
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyexpert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyexpert')?'active':''}}"><span style="font-size: 15px">โครงการแยกตาม Expert</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectexpertbystatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectexpertbystatus')?'active':''}}"><span style="font-size: 15px">โครงการของ Expert แยกตามสถานะของการประเมิน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectexpertbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectexpertbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Expert แยกตามประเภทอุตสาหกรรม</span></a></li>
+                {{-- <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectexpertbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectexpertbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการของ Expert แยกตามสาขาเทคโนโลยี</span></a></li> --}}
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectgradebybusinesssize')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectgradebybusinesssize')?'active':''}}"><span style="font-size: 15px">โครงการที่ได้เกรดแต่ละระดับแยกตามขนาดธุรกิจ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectgradebyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectgradebyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการที่ได้เกรดแต่ละระดับแยกตามประเภทอุตสาหกรรม</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbusinesssizebyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbusinesssizebyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการตามขนาดธุรกิจในแต่ละประเภทอุตสาหกรรม</span></a></li>
+                {{-- <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbusinesssizebytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbusinesssizebytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการตามสาขาเทคโนโลยีในแต่ละประเภทอุตสาหกรรม</span></a></li> --}}
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbusinesssizebysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbusinesssizebysector')?'active':''}}"><span style="font-size: 15px">โครงการตามขนาดธุรกิจในแต่ละภูมิภาค</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectindustrygroupbysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectindustrygroupbysector')?'active':''}}"><span style="font-size: 15px">โครงการตามประเภทอุตสาหกรรมในแต่ละภูมิภาค</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectall')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินทั้งหมด</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectstatusbyleader')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectstatusbyleader')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายคน</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายอุตสาหกรรม</span></a></li>
+                {{-- <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbytechgroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbytechgroup')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายสาขาเทคโนโลยี</span></a></li> --}}
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbysector')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead ในแต่ละภูมิภาค</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead ตามขนาดธุรกิจ</span></a></li>
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')?'active':''}}"><span style="font-size: 15px">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</span></a></li>
         
 
 
@@ -296,19 +301,19 @@
              
             </ul>
         </li>
-        <li style="margin-left: -30px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.officer')?'nav-item-expanded':''}}">
+        <li style="margin-left: -17px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.officer')?'nav-item-expanded':''}}">
             <a href="#" class="nav-link"><span>เจ้าหน้าที่ TTRS</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เจ้าหน้าที่ TTRS">
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.officer')?'active':''}}">เจ้าหน้าที่ TTRS</a></li>	
             </ul>
         </li>
-        <li style="margin-left: -30px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.expert')?'nav-item-expanded':''}}">
+        <li style="margin-left: -17px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.expert')?'nav-item-expanded':''}}">
             <a href="#" class="nav-link"><span>ผู้เชี่ยวชาญ</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="ผู้เชี่ยวชาญ">
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.expert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.expert')?'active':''}}">ผู้เชี่ยวชาญ</a></li>
             </ul>
         </li>
-        <li style="margin-left: -30px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website')?'nav-item-expanded':''}}">
+        <li style="margin-left: -17px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website')?'nav-item-expanded':''}}">
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                 <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.website.visit')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.website.visit')?'active':''}}">การเข้าชมเว็บไซต์</a></li>

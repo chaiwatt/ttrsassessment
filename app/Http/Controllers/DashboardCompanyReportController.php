@@ -76,5 +76,17 @@ class DashboardCompanyReportController extends Controller
         $timelinehistories = TimeLineHistory::where('owner_id',$request->userid)->get();
         return response()->json($timelinehistories); 
     }
+
+    public function SingleReport($id){
+        $auth = Auth::user();
+        $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
+        $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$auth->id)->first()->id)->get();
+        $timelinehistories = TimeLineHistory::where('business_plan_id',$id)->orderBy('id','desc')->paginate(5);
+        $businessplan = BusinessPlan::find($id);
+        return view('dashboard.company.report.singlereport')->withBusinessplans($businessplans)
+                                                ->withAlertmessages($alertmessages)
+                                                ->withTimelinehistories($timelinehistories)
+                                                ->withBusinessplan($businessplan);
+    }
     
 }

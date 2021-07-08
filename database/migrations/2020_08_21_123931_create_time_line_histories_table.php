@@ -17,6 +17,7 @@ class CreateTimeLineHistoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('business_plan_id');
             $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
+            $table->unsignedBigInteger('mini_tbp_id');
             $table->text('details')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('user_id');

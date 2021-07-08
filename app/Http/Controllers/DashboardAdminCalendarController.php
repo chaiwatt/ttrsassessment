@@ -34,6 +34,7 @@ use App\Model\CalendarAttachement;
 use Google_Service_Calendar_Event;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 use App\Http\Requests\CreateCalendarRequest;
 
 
@@ -76,6 +77,90 @@ class DashboardAdminCalendarController extends Controller
                                                     ->withCalendartypes($calendartypes)
                                                     ->withIsnotifies($isnotifies);
     }
+    public function CreateCalendar($id){
+      $users = User::where('user_type_id','>=',3)->get();
+      $calendartypes = CalendarType::where('id',3)->get();
+      $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
+      
+      $minitbps = MiniTBP::whereIn('business_plan_id',$projectassignments)->pluck('id')->toArray();
+      
+      $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbps)->get();
+      $fulltbp = FullTbp::find($id);
+      $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+      $isnotifies = Isnotify::get();
+      //$CalendarType = CalendarType::get();
+
+      $tmpmember=array();
+      $id1 = 0;
+      $id2 = 0;
+
+      $check =  ProjectMember::where('full_tbp_id',$id)->where('user_id',User::where('user_type_id',5)->first()->id)->first();
+      if(Empty($check)){
+          $projectmember = new ProjectMember();
+          $projectmember->full_tbp_id = $id;
+          $projectmember->user_id = User::where('user_type_id',5)->first()->id;
+          $projectmember->save();
+          $id1 = $projectmember->id;
+      }
+
+      $check =  ProjectMember::where('full_tbp_id',$id)->where('user_id',User::where('user_type_id',6)->first()->id)->first();
+      if(Empty($check)){
+          $projectmember = new ProjectMember();
+          $projectmember->full_tbp_id = $id;
+          $projectmember->user_id = User::where('user_type_id',6)->first()->id;
+          $projectmember->save();
+          $id2 = $projectmember->id;
+      }
+
+      $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id','>=',4)->count();
+      if($projectstatustransactions == 1){
+        $calendartypes = CalendarType::where('id','<=',2)->get();
+          $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
+          $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
+          $users = User::whereIn('id',$expertdetailarr)->get();
+          
+          foreach ($users as $key => $user) {
+              $projectmember = new ProjectMember();
+              $projectmember->full_tbp_id = $id;
+              $projectmember->user_id = $user->id;
+              $projectmember->save();
+              array_push($tmpmember,$projectmember->id);
+          }
+      }else if($projectstatustransactions == 2){
+          $projectstatus = ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();
+      }
+
+      $projectmembers = ProjectMember::where('full_tbp_id',$id)->get();
+
+      if($id1 != 0){
+          ProjectMember::find($id1)->delete();
+      }
+      if($id2 != 0){
+          ProjectMember::find($id2)->delete();
+      }
+      ProjectMember::where('full_tbp_id',$id)->whereIn('id',$tmpmember)->delete();
+      $eventcalendar = EventCalendar::where('full_tbp_id',$fulltbp->id)
+        ->whereNull('starttime')
+        ->whereNull('endtime')
+        ->whereNull('place')
+        ->whereNull('summary')
+        ->orderBy('id', 'desc')->first();
+      if(Empty($eventcalendar)){
+        $eventcalendar = new EventCalendar();
+        $eventcalendar->full_tbp_id = $fulltbp->id;
+        $eventcalendar->eventdate = Carbon::now()->toDateString();
+        $eventcalendar->save();
+      }
+      // $calendar =  EventCalendar::where('full_tbp_id',$id)->first();
+// return $projectmembers;
+      return view('dashboard.admin.calendar.createcalendar')->withUsers($users)
+                                                  ->withFulltbp($fulltbp)
+                                                  ->withFulltbps($fulltbps)
+                                                  ->withCalendartypes($calendartypes)
+                                                  ->withIsnotifies($isnotifies)
+                                                  ->withProjectmembers($projectmembers)
+                                                  ->withEventcalendar($eventcalendar);
+  }
     public function CreateSave(CreateCalendarRequest $request){
       $auth = Auth::user();
       // $check = EventCalendar()->where('full_tbp_id',$request->fulltbp)
@@ -135,7 +220,7 @@ class DashboardAdminCalendarController extends Controller
         $attachmentfiles = '<br><br><strong>เอกสารแนบ:</strong><br>' . $html . '</ul>';
       }
 
-      $messageheader = "ประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      $messageheader = "ประชุมและสรุปผลการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
       $logname = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน";
       if ($request->calendartype == 1) {
         $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
@@ -168,7 +253,7 @@ class DashboardAdminCalendarController extends Controller
           $alertmessage->user_id = $auth->id;
           $alertmessage->target_user_id = $_user->id;
           $alertmessage->messagebox_id = $messagebox->id;
-          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '. $messageheader;
+          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' นัด'. $messageheader;
           $alertmessage->save();
 
           MessageBox::find($messagebox->id)->update([
@@ -199,6 +284,7 @@ class DashboardAdminCalendarController extends Controller
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->mini_tbp_id = $minitbp->id;
         $timeLinehistory->details = 'TTRS: นัดหมายการประเมิน ณ สถานประกอบการ';
         $timeLinehistory->message_type = 2;
         $timeLinehistory->owner_id = $company->user_id;
@@ -217,6 +303,7 @@ class DashboardAdminCalendarController extends Controller
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbp)->get();
         
         foreach ($projectmembers as $key => $projectmember) {
+
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $minitbp->business_plan_id;
             $notificationbubble->notification_category_id = 1;
@@ -224,6 +311,20 @@ class DashboardAdminCalendarController extends Controller
             $notificationbubble->user_id = $auth->id;
             $notificationbubble->target_user_id = $projectmember->user_id;
             $notificationbubble->save();
+
+             $messagebox =  Message::sendMessage('ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . ' บริษัท' . $company->name ,'ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . ' บริษัท' . $company->name . 'สามารถลงคะแนนได้ตั้งแต่วันนี้จนถึงวันก่อนการสรุปผล',$auth->id,$projectmember->user_id);
+          
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id =  $projectmember->user_id;
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Leader ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว สำหรับโครงการ' . $minitbp->project . ' บริษัท' . $company->name ;
+            $alertmessage->save();
+
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+
         }
       }
 
@@ -237,7 +338,7 @@ class DashboardAdminCalendarController extends Controller
       $projectlog->action = 'สร้างปฎิทินกิจกรรม (รายละเอียด: ' . $logname . ')';
       $projectlog->save();
 
-      CreateUserLog::createLog('สร้างปฎิทินกิจกรรม ' . $messageheader );
+      CreateUserLog::createLog('สร้างปฎิทินกิจกรรม นัด' . $messageheader );
       return redirect()->route('dashboard.admin.calendar')->withSuccess('เพิ่มรายการสำเร็จ');
   }
   public function Edit($id){

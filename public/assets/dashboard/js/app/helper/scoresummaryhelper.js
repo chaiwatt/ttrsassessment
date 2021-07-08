@@ -269,6 +269,12 @@ function getSummaryEv(evid){
         }else if(index == 3){
             pillarpercent1 = grade.percent;
         }
+
+        pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
+        pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
+        pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
+        pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
+
         if(index < 4){
             var basepillar = ``;
             if(grade.pillar_id == 1){
@@ -311,7 +317,11 @@ function getSummaryEv(evid){
 
     });  
     // var angle = grade.percent*1.8;
-    console.log(pillarpercent4);
+    //console.log(pillarpercent4);
+
+
+
+
     $('.chart-skills4').find('span:nth-child(1)').text(`${pillarpercent4}%`);
     $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
     $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent4}deg)`);

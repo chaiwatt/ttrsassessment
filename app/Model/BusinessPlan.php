@@ -4,7 +4,9 @@ namespace App\Model;
 
 use Carbon\Carbon;
 use App\Model\Company;
+use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\BusinessPlan;
 use App\Helper\DateConversion;
 use App\Model\TimeLineHistory;
 use App\Model\ProjectAssignment;
@@ -119,6 +121,13 @@ class BusinessPlan extends Model
         }else{
             return '';
         }
+    } 
+
+
+    public function getFullTbpAttribute(){
+        $minitbp = MiniTBP::where('business_plan_id',$this->id)->first();
+        $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+        return $fulltbp;
     } 
     
 }

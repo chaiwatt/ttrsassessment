@@ -65,9 +65,11 @@ class CreateGeneralInfosTable extends Migration
             $table->char('invoiceoption',1)->default(2);
             $table->char('notifybolchange',1)->default(1);
             $table->char('invoiceoption_default',1)->default(2);
+            $table->unsignedBigInteger('showalert_id')->default(1);
             $table->string('watermarktext',250)->default('เอกสารสำคัญปกปิด (Private & Confidential)');
             $table->unsignedBigInteger('use_invoice_status_id')->default(2);  
             $table->unsignedBigInteger('use_invoice_status_default_id')->default(2); 
+            $table->unsignedBigInteger('show_finished_project_id')->default(1);
             $table->timestamps();
         });
     }

@@ -129,7 +129,6 @@ class SettingUserCompanyController extends Controller
 
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         if(Empty($businessplan)){
-            // if($request->status == 1){
                 $count = BusinessPlan::get()->count() + 1;
                 $businessplan = new BusinessPlan();
                 $businessplan->code = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($count),3,0,STR_PAD_LEFT); 
@@ -162,14 +161,6 @@ class SettingUserCompanyController extends Controller
                 $fulltbpprojectcertify->full_tbp_id = $fulltbp->id;
                 $fulltbpprojectcertify->save();
 
-                // $notificationbubble = new NotificationBubble();
-                // $notificationbubble->business_plan_id = $businessplan->id;
-                // $notificationbubble->notification_category_id = 1;
-                // $notificationbubble->notification_sub_category_id = 2;
-                // $notificationbubble->user_id = $auth->id;
-                // $notificationbubble->target_user_id = User::where('user_type_id',6)->first()->id;
-                // $notificationbubble->save();
-                
                 $sellstatus = array("1. ยอดขายในประเทศ", "2. ยอดขายส่งออก", "  -  ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","  -  วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
 
                 foreach ($sellstatus as $status) {
@@ -204,9 +195,6 @@ class SettingUserCompanyController extends Controller
                 $fulltbpreturnofinvestment = new FullTbpReturnOfInvestment();
                 $fulltbpreturnofinvestment->full_tbp_id = $fulltbp->id;
                 $fulltbpreturnofinvestment->save();
-
-            
-            // }
         }else{
             if($request->status == 1){
                 $businessplan->where('company_id',$company->id)->first()->update([

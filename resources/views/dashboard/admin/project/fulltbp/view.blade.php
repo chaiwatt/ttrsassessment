@@ -317,7 +317,7 @@
 											<thead>
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
-													<th style="width:200px">ดาวน์โหลด</th>
+													<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 												</tr>
 											</thead>
 											<tbody id="fulltbp_board_attachment_wrapper_tr">                             
@@ -1472,7 +1472,14 @@
 															class="col-md-12 mt-3"
 														@endif
 														>	
-															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label>
+															<label><u>คนที่ {{$count}}</u> : 
+																
+																@if ($companyemploy->prefix->name == 'อื่นๆ')
+																		{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}
+																	@else
+																		{{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}
+																@endif		
+																</label>
 														</div>
 														
 														<div class="col-md-12">	
@@ -1603,7 +1610,15 @@
 														@endif
 														
 														>	
-															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label>
+															<label><u>คนที่ {{$count}}</u> : 
+																
+																{{-- {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label> --}}
+																@if ($companyemploy->prefix->name == 'อื่นๆ')
+																		{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}
+																	@else
+																		{{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}
+																@endif		
+																</label>
 														</div>
 														
 														<div class="col-md-12">	
@@ -1622,7 +1637,13 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employeducation as $education)
 																				<tr>
-																					<td> {{$education->employeducationlevel}} </td>                                            
+																					<td> 
+																					@if ($education->employeducationlevel == 'อื่นๆ')
+																							{{$education->otheremployeducationlevel}} 
+																						@else
+																							{{$education->employeducationlevel}} 
+																					@endif
+																					</td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
 																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
@@ -1689,7 +1710,7 @@
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร</th>  
-																			<th style="width:20%">ดาวน์โหลด</th>                                                                                     
+																			<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>                                                                                     
 																		</tr>
 																	</thead>
 																	<tbody>  
@@ -1772,7 +1793,15 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employeducation as $education)
 																				<tr>
-																					<td> {{$education->employeducationlevel}} </td>                                            
+																					<td>
+																					
+																						@if ($education->employeducationlevel == 'อื่นๆ')
+																								{{$education->otheremployeducationlevel}} 
+																							@else
+																								{{$education->employeducationlevel}} 
+																						@endif
+																					
+																					</td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
 																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
@@ -1839,7 +1868,7 @@
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร</th>  
-																			<th style="width:20%">ดาวน์โหลด</th>                                                                                     
+																			<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>                                                                                     
 																		</tr>
 																	</thead>
 																	<tbody>  
@@ -2504,11 +2533,11 @@
 														@foreach ($fulltbpdebtpartners as $fulltbpdebtpartner)
 															<tr>
 																<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
-																<td class="text-center"> {{$fulltbpdebtpartner->numproject}} </td> 
-																<td class="text-center"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
+																<td class="text-right"> {{$fulltbpdebtpartner->numproject}} </td> 
+																<td class="text-right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
 																<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}}</td>                                            															
 																<td class="text-right"> {{number_format($fulltbpdebtpartner->percenttosale, 2)}}</td> 
-																<td class="text-center"> {{$fulltbpdebtpartner->businessyear}} </td> 
+																<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
 															</tr>
 														@endforeach              
 													</tbody>
@@ -2540,10 +2569,10 @@
 														@foreach ($fulltbpcreditpartners as $fulltbpcreditpartner)
 															<tr >
 																<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
-																<td class="text-center"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
+																<td class="text-right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
 																<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
 																<td class="text-right"> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}}</td> 
-																<td class="text-center"> {{$fulltbpcreditpartner->businessyear}} </td> 
+																<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
 																{{-- <td> 
 																	<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
 																	<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 

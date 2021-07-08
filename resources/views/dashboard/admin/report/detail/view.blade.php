@@ -8,7 +8,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">โครงการ: {{$company->businessplan->minitbp->project}}</span></h4>
+                <h4> <span class="font-weight-semibold">โครงการ: {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
-                    <span class="breadcrumb-item active">{{$company->businessplan->minitbp->project}}</span>
+                    <span class="breadcrumb-item active">{{$minitbp->project}}</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -76,7 +76,7 @@
                                             <td>{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
                                             <td>{{$projectstatus->actualdateth}}</td>
                                             <td>
-                                               {!!$projectstatus->projectstatustransaction($projectstatus->project_flow_id,$company->businessplan->minitbp->id)!!}
+                                               {!!$projectstatus->projectstatustransaction($projectstatus->project_flow_id,$minitbp->id)!!}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            @if ($company->businessplan->business_plan_status_id >=3)
+            @if ($businessplan->business_plan_status_id >=3)
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
@@ -144,17 +144,17 @@
                                                    @if (Auth::user()->experttype == "(ภายนอก)")
                                                             Mini TBP
                                                        @else
-                                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
                                                    @endif
                                                 @else
-                                                    <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $company->businessplan->minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                    <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
                                             @endif
                                             
                                         </td> 
-                                        <td>{{$company->businessplan->minitbp->submitdateth}}</td> 
+                                        <td>{{$minitbp->submitdateth}}</td> 
                                        
                                         <td style="white-space: nowrap"> 
-                                            <a href="{{asset($company->businessplan->minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$company->businessplan->minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
+                                            <a href="{{asset($minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
                                         </td>  
                                                                             
                                     </tr>
@@ -166,7 +166,7 @@
                                         <tr class="bg-info">
                                             <th style="width:150px">Full TBP</th> 
                                             <th style="width:1%; white-space: nowrap">วันที่ส่งเอกสาร</th>
-                                            <th >รายระเอียดการแก้ไข</th>
+                                            <th >รายละเอียดการแก้ไข</th>
                                             <th style="width:1%; white-space: nowrap">PDF</th>
                                             <th style="width:1% ;white-space: nowrap">เอกสารแนบ</th> 
                                           
@@ -175,7 +175,7 @@
                                     </thead>
                                     <tbody >
                                      
-                                        @if ($company->businessplan->business_plan_status_id >=5)
+                                        @if ($businessplan->business_plan_status_id >=5)
                                             @foreach ($fulltbphistories as $key => $fulltbphistory)
                                                 <tr>
                                                     @if ($key == 0)
@@ -270,7 +270,7 @@
                     </div>
                 @endif
                 @if (!Empty($projectassignment))
-                    @if (@$company->businessplan->business_plan_status_id >= 5)
+                    @if (@$businessplan->business_plan_status_id >= 5)
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header header-elements-sm-inline">
@@ -288,14 +288,14 @@
                                             </thead>
                                             <tbody >
                                                 <tr>
-                                                    <td>{{@$company->businessplan->minitbp->fulltbp->ev->name}}</td>  
+                                                    <td>{{@$fulltbp->ev->name}}</td>  
                                                     <td>
                                                     
-                                                        {{@$company->businessplan->minitbp->fulltbp->ev->version}}
+                                                        {{@$fulltbp->ev->version}}
                                                     </td>    
                                                     <td style="white-space: nowrap">
-                                                        @if (@$company->businessplan->minitbp->fulltbp->ev->status >= 4)
-                                                        <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$company->businessplan->minitbp->fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
+                                                        @if (@$fulltbp->ev->status >= 4)
+                                                        <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
                                                         @else
                                                         
                                                         <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
@@ -349,7 +349,7 @@
                     @endif
                 @endif
             @endif
-            @if ($company->businessplan->business_plan_status_id >=8)
+            @if ($businessplan->business_plan_status_id >=8)
                 <div class="col-md-12" {{$hidden}}>
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
@@ -396,7 +396,7 @@
                     </div>
                 </div>
             @endif
-            {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
+            {{-- @if ($businessplan->business_plan_status_id >=9) --}}
             @if (Auth::user()->user_type_id >= 5 || Auth::user()->isLeader() != 0)
             <div class="col-md-12" {{$hidden}}>
                 <div class="card">
@@ -418,30 +418,30 @@
                                 <tbody >
                                     <tr>
                                         <td>
-                                            @if ($company->businessplan->business_plan_status_id >= 8)
-                                            {{number_format(@$company->businessplan->minitbp->fulltbp->projectgrade->percent, 2, '.', '')}}
+                                            @if ($businessplan->business_plan_status_id >= 8)
+                                            {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}}
                                             @else
                                             <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                             @endif
                                         </td>  
                                         <td>
-                                            @if ($company->businessplan->business_plan_status_id >= 8)
-                                            {{@$company->businessplan->minitbp->fulltbp->projectgrade->grade}}
+                                            @if ($businessplan->business_plan_status_id >= 8)
+                                            {{@$fulltbp->projectgrade->grade}}
                                             @else
                                             <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                             @endif
                                         </td>
                                         
                                         <td> 
-                                            {{-- @if (@$company->businessplan->minitbp->fulltbp->isevaluationresultready == 1) --}}
-                                            @if (@$company->businessplan->minitbp->fulltbp->projectstatustransaction(7)->status == 2)
+                                            {{-- @if (@$fulltbp->isevaluationresultready == 1) --}}
+                                            @if (@$fulltbp->projectstatustransaction(7)->status == 2)
                                             {{-- $fulltbp->projectstatustransaction(7)->status != 2 --}}
-                                            {{-- @if ($company->businessplan->business_plan_status_id >=9) --}}
-                                                    {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a> --}}
+                                            {{-- @if ($businessplan->business_plan_status_id >=9) --}}
+                                                    {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary">จดหมายแจ้งผล</a> --}}
                                                     <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ PDF</a>
-                                                        <a href="{{route('dashboard.admin.evaluationresult.word',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => @$fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ PDF</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.word',['id' => @$fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ WORD</a>
                                                         {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a> --}}
                                                       
                                                     </div>
@@ -450,13 +450,13 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($company->businessplan->business_plan_status_id >=9)
+                                            @if ($businessplan->business_plan_status_id >=9)
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
-                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a>
-                                                        <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$company->businessplan->minitbp->fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$fulltbp->evaluationresult->id, 'type' => '1'])}}" class="dropdown-item" target="_blank"><i class="icon-file-eye"></i> ตัวอย่างการแสดงผล</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => @$fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a>
+                                                        <a href="{{route('dashboard.admin.evaluationresult.ppt',['id' => @$fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PPT</a>
                                                     </div>
                                                 </div>
                                             @else
@@ -465,8 +465,8 @@
 
                                         </td>
                                         <td  style="white-space: nowrap">
-                                            @if ($company->businessplan->business_plan_status_id >= 8)
-                                            <a  href="{{route('dashboard.admin.assessment.summary',['id' => $company->businessplan->minitbp->fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
+                                            @if ($businessplan->business_plan_status_id >= 8)
+                                            <a  href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
                                             @else
                                             <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                             @endif

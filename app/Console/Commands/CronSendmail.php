@@ -11,8 +11,11 @@ use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\Scoring;
+use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Model\MessageBox;
 use App\Model\MeetingDate;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
@@ -21,7 +24,9 @@ use App\Model\ScoringStatus;
 use App\Helper\DateConversion;
 use Illuminate\Console\Command;
 use App\Model\ProjectAssignment;
+use App\Model\NotificationBubble;
 use App\Model\EventCalendarAttendee;
+use Illuminate\Support\Facades\Auth;
 use App\Model\ProjectStatusTransaction;
 
 class CronSendmail extends Command
@@ -102,7 +107,50 @@ class CronSendmail extends Command
                             $_user = User::find($user);
                             $membermails[] = $_user->email;
                         }
-                        EmailBox::send($membermails,'TTRS:แจ้งเตือนลงคะแนนการประเมิน','เรียน คณะกรรมการ <br><br> ท่านยังไม่ได้ลงคะแนนการประเมิน ของโครงการ'.$minitbp->project.' กรุณาลงคะแนนก่อน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                        EmailBox::send($membermails,'TTRS:แจ้งเตือนการสรุปคะแนน','เรียน คณะกรรมการ <br><br> ท่านยังไม่ได้ลงคะแนนการประเมิน ของโครงการ'.$minitbp->project.' กรุณาลงคะแนนก่อน วันที่ '.DateConversion::engToThaiDate($eventcalendar->eventdate).' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                    }
+                    $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+                    $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+                    $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+
+                    $company_name = (!Empty($businessplan->company->name))?$businessplan->company->name:'';
+                    $bussinesstype = $businessplan->business_type_id;
+            
+                    $fullcompanyname = $company_name;
+                    if($bussinesstype == 1){
+                        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+                    }else if($bussinesstype == 2){
+                        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+                    }else if($bussinesstype == 3){
+                        $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+                    }else if($bussinesstype == 4){
+                        $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+                    }
+                    
+                    $projectmembers = ProjectMember::whereNotIn('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+                    $auth = Auth::user();
+                    foreach ($projectmembers as $key => $user) {
+                        $_user = User::find($user);
+                        $notificationbubble = new NotificationBubble();
+                        $notificationbubble->business_plan_id = $businessplan->id;
+                        $notificationbubble->notification_category_id = 3;
+                        $notificationbubble->notification_sub_category_id = 9;
+                        $notificationbubble->user_id = $auth->id;
+                        $notificationbubble->target_user_id = $_user->id;
+                        $notificationbubble->save();
+                
+                        $messagebox = Message::sendMessage('แจ้งเตือนการสรุปคะแนน โครงการ' . $minitbp->project . $fullcompanyname ,'แจ้งเตือนการสรุปคะแนน โครงการ' . $minitbp->project . $fullcompanyname . ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.assessment').'>ดำเนินการ</a>',$auth->id,$_user->id);
+                        
+                        $alertmessage = new AlertMessage();
+                        $alertmessage->user_id = $auth->id;
+                        $alertmessage->target_user_id = $projectassignment->leader_id;
+                        $alertmessage->messagebox_id = $messagebox->id;
+                        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().  'แจ้งเตือนการสรุปคะแนน โครงการ' . $minitbp->project . $fullcompanyname . ' โปรดตรวจสอบ <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.assessment').'>ดำเนินการ</a>' ;
+                        $alertmessage->save();
+                
+                        MessageBox::find($messagebox->id)->update([
+                            'alertmessage_id' => $alertmessage->id
+                        ]);
                     }
                 }
             }

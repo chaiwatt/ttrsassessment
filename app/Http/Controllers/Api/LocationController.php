@@ -15,11 +15,12 @@ class LocationController extends Controller
         return response()->json($provicnes);  
     }
     public function Amphur(Request $request){
-        $amphurs = Amphur::where('province_id',$request->proviceid)->get();
+        $amphurs = Amphur::where('province_id',$request->proviceid)->where('name', 'not like', "%*%")->get();
         return response()->json($amphurs);  
     }
     public function Tambol(Request $request){
         $tambols = Tambol::where('amphur_id',$request->amphurid)
+                        ->where('name', 'not like', "%*%")
                         ->get();
         return response()->json($tambols);  
     }

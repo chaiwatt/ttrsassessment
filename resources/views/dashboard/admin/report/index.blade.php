@@ -15,6 +15,164 @@
 </style>
 @stop
 @section('content')
+
+    {{-- modal_edit_fulltbp --}}
+
+    <div id="modal_edit_fulltbp" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;การอนุมัติแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form id="my_radio_box">
+                            <div class="col-md-12">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-input-styled" name="result" value="1" checked data-fouc>
+                                        อนุมัติ
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-input-styled" name="result" value="2" data-fouc>
+                                        ให้แก้ไข
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label id="messageshow">ข้อความเพิ่มเติม</label>
+                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม แจ้งไปยังผู้ประกอบการ" class="form-control form-control-lg" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_edit_fulltbp" class="btn bg-primary"><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- modal_edit_projectmember --}}
+    <div id="modal_edit_projectmember" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ทีมผู้เชี่ยวชาญการประเมิน</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    ทีมผู้เชี่ยวชาญการประเมิน
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ชื่อ</th> 
+                                            <th>นามสกุล</th> 
+                                            {{-- <th>เพิ่มเติม</th>                                                                                    --}}
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usermember_wrapper_tr"> 
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- modal_mailto_user --}}
+    <div id="modal_mailto_user" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ส่งอีเมลผู้ประกอบการ</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>หัวข้อ</label>
+                                    <input type="text" id="topic" placeholder="หัวข้อ" class="form-control form-control-lg" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>ข้อความ<span class="text-danger">*</span></label>
+                                <textarea type="text" rows="5" id="messagebody" placeholder="ข้อความ" class="form-control form-control-lg"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_mailto_user" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="userspinicon" hidden></i> ส่งอีเมล</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        {{-- modal_mailto_member --}}
+        <div id="modal_mailto_member" class="modal fade" style="overflow:hidden;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ส่งอีเมลทีมในโครงการ</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>หัวข้อ</label>
+                                        <input type="text" id="topicmember" placeholder="หัวข้อ" class="form-control form-control-lg" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>ข้อความ<span class="text-danger">*</span></label>
+                                    <textarea type="text" rows="5" id="messagebodymember" placeholder="ข้อความ" class="form-control form-control-lg"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>ผู้รับ</label><span class="text-danger">*</span>
+                                    <select name="users[]" id="user" data-placeholder="ผู้รับ" class="form-control form-control-lg form-control-select2" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>           
+                    <div class="modal-footer">
+                        <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                        <button id="btn_modal_mailto_member" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="memberspinicon" hidden></i> ส่งอีเมล</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 {{-- modal_get_calendar --}}
     <div id="modal_get_calendar" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -98,6 +256,42 @@
         </div>
     </div>
 
+
+    <div id="modal_show_reviselog" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายการแก้ไข โครงการ<span id="showlogminitbp"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>รายละเอียด</th> 
+                                            <th>ให้แก้ไขโดย</th>
+                                            <th>วันที่</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reviselog_wrapper_tr"> 
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="modal_expertreject_reason" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -111,7 +305,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label id="messageshow">สาเหตุการไม่เข้าร่วมโครงการ</label>
-                                <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม สาเหตุการไม่เข้าร่วมโครงการ" class="form-control form-control-lg" ></textarea>
+                                <textarea type="text" rows="5"  id="rej_note" placeholder="ข้อความเพิ่มเติม สาเหตุการไม่เข้าร่วมโครงการ" class="form-control form-control-lg" ></textarea>
                             </div>
                         </div>
                     </div>
@@ -147,6 +341,8 @@
             </div>
         </div>
     </div>
+
+
 
     {{-- modal_show_controlflow --}}
     <div id="modal_show_controlflow" class="modal fade" style="overflow:hidden;">
@@ -195,30 +391,36 @@
     </div>
     <!-- /page header -->
     <div class="content">
-        @if (Session::has('success'))
+        @if ($generalinfo->showalert_id == 1)
+            @if (Session::has('success'))
             <div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                 {{ Session::get('success') }}
             </div>
-        @elseif( Session::has('error') )
+            @elseif( Session::has('error') )
             <div class="alert alert-warning alert-styled-left alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                 {{ Session::get('error') }}
             </div>
-        @endif
-        @if ($errors->count() > 0)
-            <div class="alert alert-warning alert-styled-left alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                {{ $errors->first() }}
-            </div>
-        @endif
-        <div id="alertmessage_wrapper">
-            @foreach ($alertmessages->reverse() as $alertmessage)
-                <div class="alert alert-info alert-styled-left alert-dismissible">
-                   <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{!!$alertmessage->detail!!}
+            @endif
+        
+
+            @if ($errors->count() > 0)
+                <div class="alert alert-warning alert-styled-left alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    {{ $errors->first() }}
                 </div>
-            @endforeach
-        </div>
+            @endif
+
+            <div id="alertmessage_wrapper">
+                @foreach ($alertmessages->reverse() as $alertmessage)
+                    <div class="alert alert-info alert-styled-left alert-dismissible">
+                    <button type="button" data-id ="{{$alertmessage->id}}" class="close alertmessage" data-dismiss="alert"><span>&times;</span></button>{!!$alertmessage->detail!!}
+                    </div>
+                @endforeach
+            </div>
+
+        @endif
         @if (Auth::user()->user_type_id >= 5)
         <div class="row">
             <div class="col-lg-3">
@@ -228,7 +430,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h1>
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนผู้ขอรับการประเมิน</a>  
+                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนโครงการขอรับการประเมิน</a>  
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -243,7 +445,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
                         </div>
                         <div>
-                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนยื่น Mini Tbp</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนโครงการที่ยื่น Mini Tbp</a>  
                             
                         </div>
                     </div>
@@ -257,7 +459,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
                         </div>
                         <div>  
-                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนยื่น Full TBP</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนโครงการที่ยื่น Full TBP</a>  
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -270,7 +472,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',8)->count()}}</h1>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">จำนวนที่ได้รับการประเมิน</a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">จำนวนโครงการเสร็จสิ้นการประเมิน</a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -672,7 +874,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="maintable" >
+                            <table class="table table-bordered mb-2" id="maintable" >
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
@@ -694,11 +896,11 @@
                                                 <td>
                                                     @if (Empty($fulltbp->expertassignment))
                                                             <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                         @else
                                                             @if ($fulltbp->expertassignment->accepted == 1)
                                                                 <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                             @else
                                                                 {{$fulltbp->minitbp->project}}
                                                             @endif
@@ -735,7 +937,11 @@
                 </div>
             </div>
         </div>
-        @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
+        {{-- {{$fulltbp->id}} --}}
+        {{-- @if (Auth::user()->isProjectLeader(@$fulltbp->id) == 1 || Auth::user()->user_type_id >= 5) --}}
+       {{-- {{ Auth::user()->isProjectsLeader(@$fulltbps)}} --}}
+       {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id}} --}}
+        @if (Auth::user()->isProjectsLeader(@$fulltbps) != 0 || Auth::user()->user_type_id >= 5)
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" >
@@ -747,7 +953,7 @@
                         <div class="card-body">
                             <input type="text" id="fulltbpid"  hidden>
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="maintable">
+                                <table class="table table-bordered mb-2" id="fulltbptable" >
                                     <thead>
                                         <tr>
                                             <th>ชื่อโครงการ</th> 
@@ -760,11 +966,11 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($fulltbps as $key => $fulltbp)
-                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
+                                            @if (($fulltbp->minitbp->businessplan->business_plan_status_id > 4 &&  Auth::user()->isProjectLeader(@$fulltbp->id) == 1) || ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 && Auth::user()->user_type_id >=5))
                                                 <tr>    
                                                     <td > 
                                                         <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                        <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                        <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                     </td>  
                                                     <td style="white-space: nowrap">    
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
@@ -844,7 +1050,7 @@
                                                                     $style = 'btn-sm bg-pink';
                                                                 }
                                                             @endphp
-    
+
                                                             @if (Auth::user()->user_type_id == 4)
                                                             @if ($fulltbp->ev->status >= 4)
                                                                     <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" ><span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span></a>
@@ -907,7 +1113,7 @@
 
                                                                     @if (Auth::user()->user_type_id == 4)
                                                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
-                                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                                                                    <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
                                                                                 @elseif($fulltbp->minitbp->businessplan->business_plan_status_id == 7) 
                                                                                     <span class="badge badge-flat border-info text-info-600">ลงคะแนนการประเมิน</span>
                                                                             @endif
@@ -930,14 +1136,20 @@
                                                                                     <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
                                                                                 @endif  
                                                                             @else
-                                                                                <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                            @if ($fulltbp->minitbp->flowstagefour == true)
+                                                                            <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                            @endif
+                                                                              
                                                                         @endif
                                                                     @else
                                                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
                                                                                 {{-- <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a> --}}
                                                                                 <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
                                                                             @else
+                                                                            @if ($fulltbp->minitbp->flowstagefour == true)
                                                                                 <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                            @endif
+                                                                               
                                                                             @endif
                                                                             
                                                                 @endif
@@ -974,7 +1186,7 @@
                 </div>
             </div>
 
-
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -989,7 +1201,7 @@
                         <div class="card-body">
                             
                             <div class="table-responsive">
-                                <table class="table text-nowrap" id="maintable">
+                                <table class="table text-nowrap" id="reporttable">
                                     <thead>
                                         <tr>
                                             <th>ชื่อโครงการ</th> 
@@ -1005,7 +1217,7 @@
                                         @foreach ($fulltbps as $key => $fulltbp)
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8 && $fulltbp->canceldate == null)
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
-                                                    <tr style="height:100px">    
+                                                    <tr>    
                                                         <td> {{$fulltbp->minitbp->project}} </td> 
                                                         <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                         <td> {{@$fulltbp->projectgrade->grade}} </td> 
@@ -1018,7 +1230,7 @@
                                                                 <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
                                                                 <div class="dropdown-menu dropdown-menu-right">
                                                                     <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ PDF</a>
-                                                                    <a href="{{route('dashboard.admin.evaluationresult.word',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
+                                                                    <a href="{{route('dashboard.admin.evaluationresult.word',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ WORD</a>
                                                                     {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a> --}}
                                                                 
                                                                 </div>
@@ -1050,7 +1262,7 @@
                                                                         @elseif($fulltbp->projectstatustransaction(7)->status == 1)
                                                                         
                                                                             @if (Auth::user()->user_type_id == 4)
-                                                                                    <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button>
+                                                                                    <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinlettersent" hidden></i>ยืนยันส่งจดหมาย</button>
                                                                             @else 
                                                                                     {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
                                                                                     <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>
@@ -1076,7 +1288,7 @@
                                                                     <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
                                                             @endif
                                                         </td> 
-                                                </tr>
+                                                    </tr>
                                                 @endif
                                             @endif
                                         @endforeach
@@ -1087,8 +1299,13 @@
                     </div>
                 </div>
             </div>
-
         @endif
+
+        
+
+
+
+        {{-- @endif --}}
 
 
 
@@ -1408,6 +1625,8 @@
 <script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script>
+
 <script>
       AOS.init();
     var route = {
@@ -1417,12 +1636,48 @@
     };
 
     var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 7) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
                 "info":     false,
-                "pageLength" : 20,
+                "pageLength" : 7,
+                "language": {
+                    "zeroRecords": " ",
+                    "search": "ค้นหา: ",  
+                    "sLengthMenu": "จำนวน _MENU_ รายการ",
+                    'paginate': {
+                        'previous': 'ก่อนหน้า',
+                        'next': 'ถัดไป'
+                    }
+                }
+            });
+        }
+
+        if (countitemtable >= 7) {
+            $('#fulltbptable').DataTable( {
+                "paging":   true,
+                "ordering": true,
+                "info":     false,
+                "pageLength" : 7,
+                "language": {
+                    "zeroRecords": " ",
+                    "search": "ค้นหา: ",  
+                    "sLengthMenu": "จำนวน _MENU_ รายการ",
+                    'paginate': {
+                        'previous': 'ก่อนหน้า',
+                        'next': 'ถัดไป'
+                    }
+                }
+            });
+        }
+
+        if (countitemtable >= 5) {
+            $('#reporttable').DataTable( {
+                "paging":   true,
+                "ordering": true,
+                "info":     false,
+                "pageLength" : 5,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  
@@ -1441,9 +1696,11 @@
     });
 
     $(document).on('click', '#btn_modal_expertreject_reason', function(e) {
-        if($('#note').val() == '')return;
+        // console.log($('#rej_note').val() );
+        if($('#rej_note').val() == '')return;
+        
         $("#spinicon").attr("hidden",false);
-        expertReject("{{Auth::user()->id}}",$(this).data('id'),$('#note').val()).then(data => {
+        expertReject("{{Auth::user()->id}}",$(this).data('id'),$('#rej_note').val()).then(data => {
             $("#spinicon").attr("hidden",true);
             window.location.reload();
         })
@@ -1472,7 +1729,9 @@
     }
 
     $(document).on('click', '.showreject', function(e) {
+        // console.log($(this).data('id'));
         showReject("{{Auth::user()->id}}",$(this).data('id')).then(data => {
+           
             $('#rejectreason_wrapper').html(data);
             $('#modal_show_reason').modal('show');
         })  
@@ -1530,6 +1789,7 @@
                 closeOnCancel: false
                 }).then((result) => {
                 if (result.value) {
+                    $("#spinlettersent").attr("hidden",false);
                     LetterSent($(this).data('id')).then(data => {
                         window.location.reload();
                     })

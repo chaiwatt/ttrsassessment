@@ -307,33 +307,43 @@ $("#avatarimg").on('change', function() {
 
 $("#sameaddress").on('change', function() {
     if(this.checked) {
+        $("#contact_address_wrapper").attr("hidden",true);
         $("#address1").val($('#address').val());
         $("#postalcode1").val($('#postalcode').val());
         
-        Geo.province().then(data => {
-            let  html = "";
-            data.forEach((amphur,index) => 
-                html += `<option value='${amphur.id}'>${amphur.name}</option>`
-            )           
-            $("#province1").html(html);
-            $("#province1 option:contains("+$('#province').find("option:selected").text()+")").attr('selected', true).trigger('change');
-        })
-        .catch(error => {
+        // Geo.province().then(data => {
+        //     let  html = "<option value='0'>===เลือกจังหวัด===</option>";
+        //     data.forEach((amphur,index) => 
+        //         html += `<option value='${amphur.id}'>${amphur.name}</option>`
+        //     )           
+        //     $("#province1").html(html);
+        //     if(($("#province1").val() !== '' || $("#province1").val() !== 0)  &&  $('#sameaddress').is(":checked") == true){
+        //         $("#province1 option:contains("+$('#province').find("option:selected").text()+")").attr('selected', true).trigger('change');
+        //     }
+        // })
+        // .catch(error => {
 
-        })
+        // })
     }else{
-       
+        $("#contact_address_wrapper").attr("hidden",false);
     }
 });
 
 $(document).on('change', '#province1', function(e) {
-    Geo.amphur($('#province').val()).then(data => {
-        let  html = "";
+    if($('#sameaddress').is(":checked") == false){
+        $('#postalcode1').val('');
+        $("#tambol1").html('');
+    }
+    Geo.amphur($('#province1').val()).then(data => {
+        let  html = "<option value='0'>===เลือกอำเภอ===</option>";
         data.forEach((amphur,index) => 
             html += `<option value='${amphur.id}'>${amphur.name}</option>`
         )
         $("#amphur1").html(html);
-        $("#amphur1 option:contains("+$('#amphur').find("option:selected").text()+")").attr('selected', true).trigger('change');
+        // if(($("#amphur").val() !== '' || $("#amphur").val() !== 0) &&  $('#sameaddress').is(":checked") == true){
+        //     console.log('ww');
+        //     $("#amphur1 option[value="+$("#amphur").val()+"]").attr('selected', true).trigger('change');
+        // }   
     })
     .catch(error => {
 
@@ -341,15 +351,28 @@ $(document).on('change', '#province1', function(e) {
 });
 
 $(document).on('change', '#amphur1', function(e) {
-    Geo.tambol($('#amphur').val()).then(data => {
-        let  html = "";
-        data.forEach((tambol,index) => 
-            html += `<option value='${tambol.id}'>${tambol.name}</option>`
-        )
+    Geo.tambol($('#amphur1').val()).then(data => {
+        let  html = "<option value='0'>===เลือกตำบล===</option>";
+        var i;
+        for (i = 0; i < data.length; i++) {
+            var n = data[i]['name'].includes("*");
+            if(n == false){
+                html += `<option data-id='${data[i]['postal']}' value='${data[i]['id']}'>${data[i]['name']}</option>`
+            }
+        }
+
         $("#tambol1").html(html);
-        $("#tambol1 option:contains("+$('#tambol').find("option:selected").text()+")").attr('selected', true).trigger('change');
+        // if(($("#tambol").val() !== '' || $("#tambol").val() !== 0) &&  $('#sameaddress').is(":checked") == true){
+        //     // $("#tambol1 option[value="+$("#tambol").val()+"]").attr('selected', true).trigger('change');
+        //     $("#tambol1 option:contains("+$('#tambol').find("option:selected").text()+")").attr('selected', true).trigger('change');
+        // }
+        // else{
+        //     console.log('d');
+        //     $("#tambol1 option:contains("+$('#tambol1').find("option:selected").text()+")").attr('selected', true).trigger('change');
+        // }    
+
     })
     .catch(error => {
-
+        
     })
 });

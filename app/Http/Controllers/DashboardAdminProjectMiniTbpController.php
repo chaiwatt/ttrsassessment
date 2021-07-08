@@ -43,6 +43,11 @@ class DashboardAdminProjectMiniTbpController extends Controller
                         ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
                         ->where('notification_sub_category_id',4) // notification_sub_category_id 4 = Mini TBP
                         ->where('status',0)->delete();
+        $admin  = User::where('user_type_id',5)->first();
+        NotificationBubble::where('target_user_id',$admin->id)
+                        ->where('notification_category_id',1)
+                        ->where('notification_sub_category_id',2) 
+                        ->where('status',0)->delete();
         $projectassignments = ProjectAssignment::where('leader_id',Auth::user()->id)->pluck('business_plan_id')->toArray();
         // $businessplans = BusinessPlan::where('business_plan_status_id',3)->whereIn('id',$projectassignments)->pluck('id')->toArray();
         $businessplans = BusinessPlan::whereIn('id',$projectassignments)->pluck('id')->toArray();
@@ -268,6 +273,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
 
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+            $timeLinehistory->mini_tbp_id = $minitbp->id;
             $timeLinehistory->details = 'TTRS: แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ของท่านได้รับอนุมัติ';
             $timeLinehistory->message_type = 1;
             $timeLinehistory->owner_id = $_company->user_id;
@@ -317,6 +323,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
 
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+            $timeLinehistory->mini_tbp_id = $minitbp->id;
             $timeLinehistory->details = 'TTRS: ' . $request->note;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->message_type = 1;

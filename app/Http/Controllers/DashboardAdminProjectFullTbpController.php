@@ -471,19 +471,20 @@ class DashboardAdminProjectFullTbpController extends Controller
            
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
-            $timeLinehistory->details = 'TTRS: แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติ';
+            $timeLinehistory->mini_tbp_id = $minitbp->id;
+            $timeLinehistory->details = 'TTRS: แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ของท่านได้รับอนุมัติ';
             $timeLinehistory->message_type = 2;
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
 
-            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ,'แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ',$auth->id,$_user->id);
+            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ,'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ',$auth->id,$_user->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $_company->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติ';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ของท่านได้รับอนุมัติ';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -520,19 +521,19 @@ class DashboardAdminProjectFullTbpController extends Controller
                    $projectstatustransaction->project_flow_id = 4;
                    $projectstatustransaction->save();
 
-                   $messagebox =  Message::sendMessage('สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name ,'EV และ Weighting โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a>',Auth::user()->id,$projectassignment->leader_id);
+                   $messagebox =  Message::sendMessage('สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name ,'EV และ Weighting โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
                    $alertmessage = new AlertMessage();
                    $alertmessage->user_id = $auth->id;
                    $alertmessage->target_user_id =  $projectassignment->leader_id;
                    $alertmessage->messagebox_id = $messagebox->id;
-                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' EV และ Weighting โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป' ;
+                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' EV และ Weighting โครงการ' . $minitbp->project . 'ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id]).'>ดำเนินการ</a>' ;
                    $alertmessage->save();
 
                    MessageBox::find($messagebox->id)->update([
                         'alertmessage_id' => $alertmessage->id
                     ]);
 
-                   EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name,'เรียน Leader<br><br> EV และ Weighting โครงการ' . $minitbp->project .  ' บริษัท' . $_company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a href='.route('dashboard.admin.calendar').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                   EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project . ' บริษัท' . $_company->name,'เรียน Leader<br><br> EV และ Weighting โครงการ' . $minitbp->project .  ' บริษัท' . $_company->name . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id]).'>ดำเนินการ</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                    DateConversion::addExtraDay($minitbp->id,3);
 
                    ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first()->update([
@@ -557,6 +558,7 @@ class DashboardAdminProjectFullTbpController extends Controller
 
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+            $timeLinehistory->mini_tbp_id = $minitbp->id;
             $timeLinehistory->details = 'TTRS: ' .$request->note;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->message_type = 2;
@@ -898,6 +900,7 @@ class DashboardAdminProjectFullTbpController extends Controller
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->mini_tbp_id = $minitbp->id;
         $timeLinehistory->details = 'TTRS: สิ้นสุดโครงการ';
         $timeLinehistory->message_type = 3;
         $timeLinehistory->owner_id = $auth->id;

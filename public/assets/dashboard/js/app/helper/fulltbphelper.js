@@ -9,6 +9,9 @@ import * as Sell from './sell.js';
 import * as FullTbp from './fulltbp.js';
 
 var usermessage = '';
+var d = new Date();
+var currentyear = d.getFullYear()+543;
+// console.log(currentyear);
 
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
@@ -29,7 +32,6 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
 
 // $("#companygeneraldoc").on('change', function() {
     $(document).on('change', '#companygeneraldoc', function(e) {
-    //console.log('ok');
     // if($('#companydocname').val() == '')return ;
     var file = this.files[0];
     var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
@@ -131,7 +133,6 @@ $(document).on('click', '#btn_edit_employ', function(e) {
     $("#spinicon_edit_employ").attr("hidden",false);
     Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {   
         var html = ``;
-        console.log(data);
         data.forEach(function (employ,index) {
             var prefix = employ.prefix['name'];
             var position = employ.employposition['name'];
@@ -142,17 +143,30 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                 position = employ.otherposition;
             }	
 
+            var phone = employ.phone;
+            var workphone = employ.workphone;
+            var email = employ.email;
+            if(phone == null){
+                phone = '';
+            }
+            if(workphone == null){
+                workphone = '';
+            }
+            if(email == null){
+                email = '';
+            }
+
             if($('#employtype').val() == 'employee'){
                 
                 if(employ.employ_position_id > 5){
                     html += `<tr >                                        
                         <td> ${prefix}${employ.name} ${employ.lastname}</td>                                            
                         <td> ${position} </td> 
-                        <td> ${employ.phone} </td>                                            
-                        <td> ${employ.workphone} </td> 
-                        <td> ${employ.email} </td> 
+                        <td> ${phone} </td>                                            
+                        <td> ${workphone} </td> 
+                        <td> ${email} </td> 
                         <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="employee"  class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                        <a data-id="${employ.id}" data-type="employee"  class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                        <a data-id="${employ.id}" data-type="employee"  class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td>  
                     </tr>`
                  }
              }else if($('#employtype').val() == 'board'){
@@ -160,9 +174,9 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     html += `<tr >                                        
                     <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td> ${position} </td> 
-                    <td> ${employ.phone} </td>                                            
-                    <td> ${employ.workphone} </td> 
-                    <td> ${employ.email} </td> 
+                    <td> ${phone} </td>                                            
+                    <td> ${workphone} </td> 
+                    <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                 </tr>`
@@ -172,9 +186,9 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     html += `<tr >                                        
                     <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td> ${position} </td> 
-                    <td> ${employ.phone} </td>                                            
-                    <td> ${employ.workphone} </td> 
-                    <td> ${employ.email} </td> 
+                    <td> ${phone} </td>                                            
+                    <td> ${workphone} </td> 
+                    <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
                 </tr>`
@@ -222,6 +236,7 @@ $(document).on("click",".deletecompanyemploy",function(e){
         if (result.value) {
             Employ.deleteEmployInfo($(this).data('id')).then(data => {
                 var html = ``;
+                // console.log(data);
                 data.forEach(function (employ,index) {
                     if(employ.employ_position_id < 6  && employ.employ_position_id != 1 ){
                         var prefix = employ.prefix['name'];
@@ -232,14 +247,26 @@ $(document).on("click",".deletecompanyemploy",function(e){
                         if(position == 'อื่นๆ'){
                             position = employ.otherposition;
                         }	
+                        var phone = employ.phone;
+                        var workphone = employ.workphone;
+                        var email = employ.email;
+                        if(phone == null){
+                            phone = '';
+                        }
+                        if(workphone == null){
+                            workphone = '';
+                        }
+                        if(email == null){
+                            email = '';
+                        }
                         html += `<tr >                                        
                             <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td> ${position} </td> 
-                            <td> ${employ.phone} </td>                                            
-                            <td> ${employ.workphone} </td> 
-                            <td> ${employ.email} </td> 
-                            <td style="white-space: nowrap"> <a data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                            <a data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
+                            <td> ${phone} </td>                                            
+                            <td> ${workphone} </td> 
+                            <td> ${email} </td> 
+                            <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
                         </tr>`
                         }
                     });
@@ -283,12 +310,24 @@ $(document).on("click",".deletecompanyceo",function(e){
                         if(position == 'อื่นๆ'){
                             position = employ.otherposition;
                         }	
+                        var phone = employ.phone;
+                        var workphone = employ.workphone;
+                        var email = employ.email;
+                        if(phone == null){
+                            phone = '';
+                        }
+                        if(workphone == null){
+                            workphone = '';
+                        }
+                        if(email == null){
+                            email = '';
+                        }
                         html += `<tr >                                        
                             <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td> ${position} </td> 
-                            <td> ${employ.phone} </td>                                            
-                            <td> ${employ.workphone} </td> 
-                            <td> ${employ.email} </td> 
+                            <td> ${phone} </td>                                            
+                            <td> ${workphone} </td> 
+                            <td> ${email} </td> 
                             <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
                         </tr>`
@@ -307,11 +346,56 @@ $(document).on("click",".deletecompanyceo",function(e){
     });
 });
 
+$(document).on('change', '#employeducationyearstart', function(e) {
+    if($('#employeducationyearstart').val() != ''){
+        if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200) || parseInt($('#employeducationyearstart').val()) > parseInt(currentyear)){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรอกปีเริ่มต้นไม่ถูกต้อง!',
+                });
+            $('#employeducationyearstart').val('') ;
+        }
+    }
+ });
+
+ $(document).on('change', '#employeducationyearend', function(e) {
+    if($('#employeducationyearend').val() != ''){
+        if(parseInt($('#employeducationyearend').val()) > parseInt(currentyear)){
+         Swal.fire({
+             title: 'ผิดพลาด...',
+             text: 'กรอกปีสิ้นสุดไม่ถูกต้อง!',
+             });
+         $('#employeducationyearend').val('') ;
+     }
+    }
+
+    if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
+        });
+        $('#employeducationyearend').val('') ;
+    }
+ });
+
+
 $(document).on('click', '#btn_modal_add_employeducation', function(e) {
     if($('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyearstart').val() == '' || $('#employeducationyearend').val() == ''){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
+        return;
+    }else if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีเริ่มต้นไม่ถูกต้อง',
+        });
+        return;
+    }else if(parseInt($('#employeducationyearend').val()) > parseInt(currentyear)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีสิ้นสุดไม่ถูกต้อง',
         });
         return;
     }else if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
@@ -363,6 +447,18 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
+        return;
+    }else if(parseInt($('#employexperiencestartdate').val()) < (parseInt(currentyear)-200)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีเริ่มต้นไม่ถูกต้อง',
+        });
+        return;
+    }else if(parseInt($('#employexperienceenddate').val()) > parseInt(currentyear)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีสิ้นสุดไม่ถูกต้อง',
         });
         return;
     }else if(parseInt($('#employexperiencestartdate').val()) > parseInt($('#employexperienceenddate').val())){
@@ -773,8 +869,32 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     .catch(error => {})
 });
 
+
+$(document).on('change', '#employexperiencestartdate', function(e) {
+    if($('#employexperiencestartdate').val() != ''){
+ 
+     if(parseInt($('#employexperiencestartdate').val()) < (parseInt(currentyear)-200) || parseInt($('#employexperiencestartdate').val()) > parseInt(currentyear)){
+         Swal.fire({
+             title: 'ผิดพลาด...',
+             text: 'กรอกปีเริ่มต้นไม่ถูกต้อง!',
+             });
+         $('#employexperiencestartdate').val('') ;
+     }
+
+    }
+ });
+
 $(document).on('change', '#employexperienceenddate', function(e) {
-   if($('#employexperiencestartdate').val() != ''){
+   if($('#employexperienceenddate').val() != ''){
+
+    if(parseInt($('#employexperienceenddate').val()) > parseInt(currentyear)){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรอกปีสิ้นสุดไม่ถูกต้อง!',
+            });
+        $('#employexperienceenddate').val('') ;
+    }
+
     if(parseInt($('#employexperiencestartdate').val()) > parseInt($('#employexperienceenddate').val())){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -796,6 +916,7 @@ $(document).on('change', '#employeducationyearend', function(e) {
      }
     }
  });
+
 
 $(document).on('change', '#cer1', function(e) {
     if($(this).is(":checked")){
@@ -1202,7 +1323,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                     html += `<tr >                                        
                         <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
-                        <td style="width:180px"> 
+                        <td style="width:1%;white-space: nowrap"> 
                         <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
                             <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
@@ -1321,7 +1442,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                     html += `<tr >                                        
                         <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
-                        <td style="width:180px"> 
+                        <td style="width:1%;white-space: nowrap"> 
                             <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
                             <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
@@ -1411,7 +1532,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                     html += `<tr >                                        
                         <td style="padding:5px"> ${plan.name} </td>                                            
                             ${tdbody}
-                        <td style="width:180px"> 
+                        <td style="width:1%;white-space: nowrap"> 
                         <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
                             <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
                         </td>
@@ -1756,7 +1877,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                     
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
@@ -1793,7 +1914,7 @@ $(document).on("click",".deletesell",function(e){
                         <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                         <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
                         <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                        <td> 
+                        <td style="width:1%;white-space: nowrap"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                         </td> 
@@ -1837,7 +1958,7 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                     
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
@@ -1874,7 +1995,7 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                   
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -1902,9 +2023,9 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
                 <td class="text-right"> ${sell.numproject} </td>  
                 <td class="text-right"> ${sell.partnertaxid} </td>                         
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${sell.percenttosale} </td> 
+                <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
@@ -1949,9 +2070,9 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
                 <td class="text-right"> ${sell.numproject} </td>  
                 <td class="text-right"> ${sell.partnertaxid} </td>                         
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                <td class="text-right"> ${sell.percenttosale} </td> 
+                <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
@@ -1986,9 +2107,9 @@ $(document).on("click",".deletedebtpartner",function(e){
                         <td class="text-right"> ${sell.numproject} </td>  
                         <td class="text-right"> ${sell.partnertaxid} </td>                         
                         <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
-                        <td class="text-right"> ${sell.percenttosale} </td> 
+                        <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
                         <td class="text-right"> ${sell.businessyear} </td> 
-                        <td> 
+                        <td style="width:1%;white-space: nowrap"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                         </td> 
@@ -2017,9 +2138,9 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
                 <td> ${sell.creditpartner} </td>                            
                 <td class="text-right"> ${sell.partnertaxid} </td>  
                 <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
-                <td class="text-right"> ${sell.percenttopurchase} </td> 
+                <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
@@ -2062,9 +2183,9 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
                 <td> ${sell.creditpartner} </td>                            
                 <td class="text-right"> ${sell.partnertaxid} </td>  
                 <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
-                <td class="text-right"> ${sell.percenttopurchase} </td> 
+                <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
                 <td class="text-right"> ${sell.businessyear} </td> 
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
@@ -2097,9 +2218,9 @@ $(document).on("click",".deletecreditpartner",function(e){
                         <td> ${sell.creditpartner} </td>                            
                         <td class="text-right"> ${sell.partnertaxid} </td>  
                         <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
-                        <td class="text-right"> ${sell.percenttopurchase} </td> 
+                        <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
                         <td class="text-right"> ${sell.businessyear} </td> 
-                        <td> 
+                        <td style="width:1%;white-space: nowrap"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                         </td> 
@@ -2153,7 +2274,7 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
                 <td class="text-right"> ${asset.quantity} </td>                         
                 <td class="text-right"> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
                 <td> ${checkspec} </td> 
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -2190,7 +2311,7 @@ $(document).on('click', '#btn_modal_edit_investment', function(e) {
             html += `<tr >                                        
                 <td> ${invesment.investment} </td>                            
                 <td class="text-right"> ${parseFloat(invesment.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${invesment.id}" class="btn btn-sm bg-info editinvestment">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -2239,7 +2360,7 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
                 <td class="text-right"> ${parseFloat(cost.need).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
                 <td class="text-right"> ${parseFloat(cost.approved).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td class="text-right"> ${parseFloat(cost.plan).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                <td> 
+                <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${cost.id}" class="btn btn-sm bg-info editcost">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -2410,6 +2531,7 @@ $('.steps-basic').steps({
     },
     onStepChanged:function (event, currentIndex, newIndex) {
         if(currentIndex == 1){
+            // console.log($('#responsibleprefix').val());
             $(".actions").find(".libtn").remove();
             FullTbp.editGeneral($('#fulltbpid').val(),$('#businesstype').val(),$('#department_qty').val(),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val(),
             $('#companyhistory').val(),$('#responsibleprefix').val(),$('#responsiblename').val(),$('#responsiblelastname').val(),$('#responsibleposition').val(),$('#responsibleemail').val(),$('#responsiblephone').val(),$('#responsibleworkphone').val(),$('#responsibleeducationhistory').val(),$('#responsibleexperiencehistory').val(),$('#responsibletraininghistory').val()).then(data => {
@@ -2436,13 +2558,15 @@ $('.steps-basic').steps({
             }
             $(document).find(".actions ul").append(`
                 <li class='libtn'><a href='#' id='downloadpdf' class='btn btn-primary' target="_blank"> ดาวน์โหลด <i class='icon-floppy-disk ml-2' /></a></li>
-                <li class='libtn' ${hidden}><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
+                <li class='libtn' ${hidden}><span id="spinicon_send_fulltbp"><i class="icon-spinner spinner mr-2" ></i>กำลังสร้าง PDF...</span><a href='#' id='submitfulltbp' class='btn bg-teal' ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>ส่งขอประเมิน<i class='icon-paperplane ml-2' /></a></li>
             `);
-            
+            $("#submitfulltbp").attr("hidden",true);
             if(route.submitstatus !=4 && (route.refixstatus == 0 || route.refixstatus == 2 )){
                 var pdfpath = route.url + '/'+ $('#pdfname').val();
                 $('#downloadpdf').attr('href', pdfpath);
                 PDFObject.embed(pdfpath, "#example1");
+                $("#spinicon_send_fulltbp").attr("hidden",true);
+                $("#submitfulltbp").attr("hidden",false);
             }else{
                 var selected_director = [];
                 $(".chkauthorizeddirector:checked").each(function(){
@@ -2459,6 +2583,8 @@ $('.steps-basic').steps({
                         $('#pdfname').val(data);
                         $('#downloadpdf').attr('href', url);
                         PDFObject.embed(pdfpath, "#example1");
+                        $("#spinicon_send_fulltbp").attr("hidden",true);
+                        $("#submitfulltbp").attr("hidden",false);
                     })
                 }).catch(error => {})
             }
@@ -2469,8 +2595,6 @@ $('.steps-basic').steps({
         if (currentIndex > newIndex) {
             return true;
         }
-
-        console.log(currentIndex + " " +  newIndex);
 
        if(newIndex == 1){
             if ($('#organizeimgholder').prop('src').includes("orgimg.png") == true)
@@ -2484,9 +2608,14 @@ $('.steps-basic').steps({
             if ($('#companyhistory').summernote('isEmpty'))
             {
                 $("#companyhistoryerror").attr("hidden",false);
+                // $('html, body').animate({
+                //     scrollTop: $("#companyhistoryerror").offset().top
+                // }, 2000);
                 return;
             }else{
+                
                 $("#companyhistoryerror").attr("hidden",true);
+  
             }
 
             var fulltbp_companyemploy_wrapper_tr = $('#fulltbp_companyemploy_wrapper_tr tr').length;
@@ -2750,6 +2879,78 @@ $(".chkauthorizeddirector").on('change', function() {
         });
     }
 });
+
+$(document).on("change","#department_qty",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+$(document).on("change","#department1_qty",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+$(document).on("change","#department2_qty",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+$(document).on("change","#department3_qty",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+$(document).on("change","#department4_qty",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+$(document).on("change","#department5_qty",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+
+// $("#debtpercenttosale").on('change', function() {
+$(document).on("change","#debtpercenttosale",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+// $("#creditpercenttosale").on('change', function() {
+$(document).on("change","#creditpercenttosale",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+// $("#numproject").on('change', function() {
+$(document).on("change","#numproject",function(e){
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+// $("#debtpartneryear").on('change', function() {
+$(document).on("change","#debtpartneryear",function(e){    
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+// $("#numprojectedit").on('change', function() {
+    $(document).on("change","#debtpartneryearedit",function(e){  
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+$(document).on("change","#numprojectedit",function(e){  
+// $("#numprojectedit").on('change', function() {
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+$(document).on("change","#credittotalyearsell",function(e){  
+// $("#credittotalyearsell").on('change', function() {
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+$(document).on("change","#creditpartneryear",function(e){  
+// $("#creditpartneryear").on('change', function() {
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+$(document).on("change","#credittotalyearselledit",function(e){ 
+// $("#credittotalyearselledit").on('change', function() {
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
+$(document).on("change","#creditpartneryearedit",function(e){ 
+// $("#creditpartneryearedit").on('change', function() {
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+});
+
 
 $(document).on('click', '#btn_modal_add_researcher', function(e) {
     FullTbp.addResearcher(1,$('#fulltbpid').val(),$('#researcherfix').val(),$('#researchername').val(),$('#researcherlastname').val(),$('#researchereducation').val(),$('#researcherexperience').val(),$('#researchertraining').val()).then(data => {
@@ -3222,6 +3423,8 @@ $(document).on('click', '#btnaddboard', function(e) {
 });
 
 $(document).on('click', '#btnaddboardceo', function(e) {
+
+    $('select#employprefix_ceo').val(1).select2();
     $('#employname_ceo').val('') ;
     $('#employlastname_ceo').val('');
     // $('#otherboardposition').val('');
@@ -3283,7 +3486,6 @@ $(document).on('click', '.editEmployinfo', function(e) {
     // $('#btn_edit_employ').data('type',$(this).data('type'))
 
     $('#employtype').val($(this).data('type'))
-    console.log($(this).data('type'));
     Employ.getEmploy($(this).data('id')).then(data => {
         var selectprefix = `<select id="employprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         var disablestatus = "";
@@ -3403,7 +3605,6 @@ $(document).on('click', '.editEmployinfo', function(e) {
 });
 
 function modaltrigger(id) {
-    
     $('select#employposition').val(1).select2();
     $('select#employprefix').val(1).select2();
     $('#employname').val('') ;
@@ -3448,6 +3649,15 @@ function modaltrigger(id) {
             });
             selectprefix += `</select>`;
         $("#employprefix_wrapper").html(selectprefix);
+
+
+        if(data.employ['prefix_id'] == '5'){
+            $("#get_otherprefix_wrapper").attr("hidden",false);
+            $("#getotherprefix").val(data.employ['otherprefix']);
+        }else{
+            $("#get_otherprefix_wrapper").attr("hidden",true);
+        }
+
         $(".form-control-select2").select2();
         var selectemployposition = `<select id="employposition_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-select2">`;
         data.employpositions.forEach(function (position,index) {
@@ -3585,12 +3795,24 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
                     position = employ.otherposition;
                 }	
                 dataid = employ.id;
+                var phone = employ.phone;
+                var workphone = employ.workphone;
+                var email = employ.email;
+                if(phone == null){
+                    phone = '';
+                }
+                if(workphone == null){
+                    workphone = '';
+                }
+                if(email == null){
+                    email = '';
+                }
                 html += `<tr >                                        
                     <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td> ${position} </td> 
-                    <td> ${employ.phone} </td>                                            
-                    <td> ${employ.workphone} </td> 
-                    <td> ${employ.email} </td> 
+                    <td> ${phone} </td>                                            
+                    <td> ${workphone} </td> 
+                    <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-type="board" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a  data-id="${employ.id}" data-type="board"  class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
                 </tr>`
@@ -3634,12 +3856,24 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
                     position = employ.otherposition;
                 }	
                 dataid = employ.id;
+                var phone = employ.phone;
+                var workphone = employ.workphone;
+                var email = employ.email;
+                if(phone == null){
+                    phone = '';
+                }
+                if(workphone == null){
+                    workphone = '';
+                }
+                if(email == null){
+                    email = '';
+                }
                 html += `<tr >                                        
                     <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td> ${position} </td> 
-                    <td> ${employ.phone} </td>                                            
-                    <td> ${employ.workphone} </td> 
-                    <td> ${employ.email} </td> 
+                    <td> ${phone} </td>                                            
+                    <td> ${workphone} </td> 
+                    <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-type="ceo" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a  data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td> 
                 </tr>`
@@ -3676,12 +3910,26 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                     if(position == 'อื่นๆ'){
                         position = employ.otherposition;
                     }	
+
+                    var phone = employ.phone;
+                    var workphone = employ.workphone;
+                    var email = employ.email;
+                    if(phone == null){
+                        phone = '';
+                    }
+                    if(workphone == null){
+                        workphone = '';
+                    }
+                    if(email == null){
+                        email = '';
+                    }
+
                     html += `<tr >                                        
                         <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                         <td> ${position} </td> 
-                        <td> ${employ.phone} </td>                                            
-                        <td> ${employ.workphone} </td> 
-                        <td> ${employ.email} </td> 
+                        <td> ${phone} </td>                                            
+                        <td> ${workphone} </td> 
+                        <td> ${email} </td> 
                         <td style="white-space: nowrap"> <a data-type="employee" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                         <a  data-id="${employ.id}" data-type="employee" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                     </tr>`
@@ -3725,14 +3973,28 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                         if(position == 'อื่นๆ'){
                             position = employ.otherposition;
                         }	
+
+                        var phone = employ.phone;
+                        var workphone = employ.workphone;
+                        var email = employ.email;
+                        if(phone == null){
+                            phone = '';
+                        }
+                        if(workphone == null){
+                            workphone = '';
+                        }
+                        if(email == null){
+                            email = '';
+                        }
+
                         html += `<tr >                                        
                             <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td> ${position} </td> 
-                            <td> ${employ.phone} </td>                                            
-                            <td> ${employ.workphone} </td> 
-                            <td> ${employ.email} </td> 
-                            <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
-                            <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
+                            <td> ${phone} </td>                                            
+                            <td> ${workphone} </td> 
+                            <td> ${email} </td> 
+                            <td style="white-space: nowrap"> <a  data-id="${employ.id}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
+                            <a  data-id="${employ.id}" data-type="employee" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
                         </tr>`
                     }
                 });
@@ -3785,12 +4047,27 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
                     if(position == 'อื่นๆ'){
                         position = employ.otherposition;
                     }	
+
+                    var phone = employ.phone;
+                    var workphone = employ.workphone;
+                    var email = employ.email;
+                    if(phone == null){
+                        phone = '';
+                    }
+                    if(workphone == null){
+                        workphone = '';
+                    }
+                    if(email == null){
+                        email = '';
+                    }
+
+
                     html += `<tr >                                        
                         <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                         <td> ${position} </td> 
-                        <td> ${employ.phone} </td>                                            
-                        <td> ${employ.workphone} </td> 
-                        <td> ${employ.email} </td> 
+                        <td> ${phone} </td>                                            
+                        <td> ${workphone} </td> 
+                        <td> ${email} </td> 
                         <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                         <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                     </tr>`
@@ -3827,12 +4104,26 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
                         if(position == 'อื่นๆ'){
                             position = employ.otherposition;
                         }	
+
+                        var phone = employ.phone;
+                        var workphone = employ.workphone;
+                        var email = employ.email;
+                        if(phone == null){
+                            phone = '';
+                        }
+                        if(workphone == null){
+                            workphone = '';
+                        }
+                        if(email == null){
+                            email = '';
+                        }
+
                         html += `<tr >                                        
                             <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td> ${position} </td> 
-                            <td> ${employ.phone} </td>                                            
-                            <td> ${employ.workphone} </td> 
-                            <td> ${employ.email} </td> 
+                            <td> ${phone} </td>                                            
+                            <td> ${workphone} </td> 
+                            <td> ${email} </td> 
                             <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
                         </tr>`
@@ -4004,6 +4295,15 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             $("#otherprefix_wrapper").attr("hidden",false);
         } else{
             $("#otherprefix_wrapper").attr("hidden",true);
+        }
+    });
+
+    $("#employprefix_ceo").on('change', function() {
+       
+        if($("#employprefix_ceo option:selected").text() == 'อื่นๆ'){
+            $("#otherprefix_ceo_wrapper").attr("hidden",false);
+        } else{
+            $("#otherprefix_ceo_wrapper").attr("hidden",true);
         }
     });
 

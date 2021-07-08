@@ -75,7 +75,7 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8 && $fulltbp->canceldate == null)
                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
-                                                <tr style="height:100px">    
+                                                <tr>    
                                                     <td> {{$fulltbp->minitbp->project}} </td> 
                                                     <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                     <td> {{@$fulltbp->projectgrade->grade}} </td> 
@@ -88,7 +88,7 @@
                                                             <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ PDF</a>
-                                                                <a href="{{route('dashboard.admin.evaluationresult.word',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ Word</a>
+                                                                <a href="{{route('dashboard.admin.evaluationresult.word',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ WORD</a>
                                                                 {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a> --}}
                                                               
                                                             </div>
@@ -120,7 +120,7 @@
                                                                     @elseif($fulltbp->projectstatustransaction(7)->status == 1)
                                                                     
                                                                         @if (Auth::user()->user_type_id == 4)
-                                                                                <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button>
+                                                                                <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinlettersent" hidden></i>ยืนยันส่งจดหมาย</button>
                                                                         @else 
                                                                                 {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
                                                                                 <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>
@@ -201,6 +201,7 @@
                 closeOnCancel: false
                 }).then((result) => {
                 if (result.value) {
+                    $("#spinlettersent").attr("hidden",false);
                     LetterSent($(this).data('id')).then(data => {
                         window.location.reload();
                     })
@@ -270,12 +271,12 @@
         }
 
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 7) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
                 "info":     false,
-                "pageLength" : 20,
+                "pageLength" : 7,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  

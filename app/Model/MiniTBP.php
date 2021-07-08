@@ -11,6 +11,7 @@ use App\Helper\LogAction;
 use App\Model\BusinessPlan;
 use App\Helper\DateConversion;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectStatusTransaction;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -122,5 +123,14 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
         
         }
         return $year+543;
+    }
+
+    public function getFlowstagefourAttribute(){
+       $check =  ProjectStatusTransaction::where('mini_tbp_id',$this->id)->where('project_flow_id','>=',4)->count();
+       if($check == 0){
+        return false;
+       }else{
+        return true;
+       }
     }
 }

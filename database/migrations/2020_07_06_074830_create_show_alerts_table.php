@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTambolsTable extends Migration
+class CreateShowAlertsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateTambolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tambols', function (Blueprint $table) {
+        Schema::create('show_alerts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('province_id')->index();
-            $table->unsignedBigInteger('amphur_id')->index();
-            $table->string('name',100);
-            $table->char('postal',10)->nullable();
+            $table->string('name',200)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateTambolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tambols');
+        Schema::dropIfExists('show_alerts');
     }
 }

@@ -6,7 +6,6 @@ $(function() {
 });
 
 $(document).on('change', '#fulltbp', function(e) {
-    
     if($(this).val() == 0){
         $("#project_wrapper").attr("hidden",true);
         return;
@@ -14,12 +13,12 @@ $(document).on('change', '#fulltbp', function(e) {
     Participate($(this).val());
 });
 
-
 function Participate(id){
     var html ='';
     var html0 ='';
     var html1 ='';
     Calendar.getParticipate(id).then(data => {
+        
         if(data.flownothree == 2){
             data.projectmembers.forEach(function (participate,index) {
                 html += `<option value="${participate.user['id']}" selected >${participate.user['name']} ${participate.user['lastname']}</option>`
@@ -56,7 +55,7 @@ function Participate(id){
 
             $("#calendartype").html(html0);
             $("#user").html(html);
-            console.log(data.calendarattachments.length);
+            // console.log(data.calendarattachments.length);
             if (data.calendarattachments.length == 0) {
                 $("#attachmenttable_wrapper").attr("hidden",true);
             }else{
@@ -64,16 +63,18 @@ function Participate(id){
                 $("#attachmenttable_wrapper").attr("hidden",false);
             }
             
+            $("#project_wrapper_not_finish").attr("hidden",true);
             $("#toast").attr("hidden",false);
-
             $("#project_wrapper").attr("hidden",false);
             
         }else if(data.flownothree == 1){
-            $("#project_wrapper").attr("hidden",false);
-            $("#project_wrapper").html(`<span class="text-danger">โครงการนี้ยังไม่สามารถสร้างปฏิทินกิจกรรมได้ โปรดตรวจสอบ Full TBP , การมอบหมายผู้เชี่ยวชาญ และ EV ได้รับการอนุมัติทั้งหมดแล้ว</span>`);
+            $("#project_wrapper").attr("hidden",true);
+            $("#project_wrapper_not_finish").attr("hidden",false);
+            $("#project_wrapper_not_finish").html(`<span class="text-danger">โครงการนี้ยังไม่สามารถสร้างปฏิทินกิจกรรมได้ โปรดตรวจสอบ Full TBP , การมอบหมายผู้เชี่ยวชาญ และ EV ได้รับการอนุมัติทั้งหมดแล้ว</span>`);
         }
         
         $("#eventcalendarid").val(data.eventcalendarid);
+        // console.log(data);
     }).catch(error => {})
 }
 
@@ -120,7 +121,7 @@ $(document).on('change', '#calendarattachment', function(e) {
                     </tr>`
                     });
 
-                    console.log(data.length);
+                    // console.log(data.length);
                     if(data.lenght == 0){
                         $("#attachmenttable_wrapper").attr("hidden",true);
                       }  else{

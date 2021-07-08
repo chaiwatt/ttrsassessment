@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ProjectGrade;
@@ -24,7 +25,7 @@ class DashboardAdminReportController extends Controller
         // $this->middleware('role:4,5,6'); 
     }
     public function Index(){
-
+        $check = GeneralInfo::first()->show_finished_project_id;
         $auth = Auth::user();
         $businessplanarr = BusinessPlan::where('business_plan_status_id','>',2)->pluck('id')->toArray();
         $minitbparr = MiniTBP::whereIn('business_plan_id',$businessplanarr)->pluck('id')->toArray();

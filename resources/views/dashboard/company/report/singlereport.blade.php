@@ -44,27 +44,7 @@
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
             <h4> <span class="font-weight-semibold">
-                @if (Empty(Auth::user()->company->name))
-                        รายงาน : ยังไม่ได้ตั้งค่า
-                    @else
-                    @php
-                        $company = Auth::user()->company;
-                        $company_name = (!Empty($company->name))?$company->name:'';
-                        $bussinesstype = $company->business_type_id;
-                        $fullcompanyname = $company_name;
-
-                        if($bussinesstype == 1){
-                            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
-                        }else if($bussinesstype == 2){
-                            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
-                        }else if($bussinesstype == 3){
-                            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
-                        }else if($bussinesstype == 4){
-                            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
-                        }
-                    @endphp
-                        {{$fullcompanyname}}
-                @endif
+                โครงการ: {{@$businessplan->minitbp->project}}
             </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -96,121 +76,271 @@
                 </div>
             @endforeach
         </div>
-      
-       
+        @if (@$businessplan->business_plan_status_id > 2)
+            @if (@$businessplan->business_plan_status_id >= 9)
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card bg-teal-400">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h1 class="font-weight-semibold mb-0"><span id="showscore">{{ number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent, 2)}}</span> %</h1>
+                                </div>
+                                <div>
+                                    ผลคะแนนการประเมิน
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div id="members-online"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card bg-blue-400">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h1 class="font-weight-semibold mb-0"><span id="showgrade">{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}</span></h1>
+                                </div>
+                                <div>
+                                    ระดับเกรดการประเมิน
+                                </div>
+                            </div>
+                            <div id="today-revenue"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="card">
+                            <div class="card-header header-elements-sm-inline">
+                                <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2 c-20">
+                                        <canvas id="myChart" width=200  height=200 ></canvas>
+                                    </div>
+                                    <div class="col-md-9 l-40 none">
+                                      <div style="margin-top: 300px;"></div>
+                                      <div id="mainchart" >
+                                        <ul class="chart-skills">
+                                            <li>
+                                              <span id="chartpillar4"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills2"> 
+                                            <li>
+                                                <span id="chartpillar3"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills3"> 
+                                            <li>
+                                                <span id="chartpillar2"></span>
+                                            </li>
+                                          </ul>
+                                          <ul class="chart-skills4 l-30"> 
+                                            <li>
+                                                <span id="chartpillar1"></span>
+                                            </li>
+                                          </ul>
+                                      </div>
+                                      <div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-1 c-100">
+                                          <table class="table-score table-7 table-bordered table-dark">
+                                        <thead>
+                                          <tr>
+                                           
+                                            <td class="bg-01 white" colspan="2">Level Classification</td>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr class="bg-02">
+                                            <td style="width:100px"> 87-100</td>
+                                            <td>AAA</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>80-86</td>
+                                            <td>AA</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>74-79</td>
+                                            <td>A</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>70-73</td>
+                                            <td>BBB</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>64-69</td>
+                                            <td>BB</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>56-63</td>
+                                            <td>B</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>54-55</td>
+                                            <td>CCC</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>51-52</td>
+                                            <td>CC</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>48-50</td>
+                                            <td>C</td>
+                                          </tr>
+                                          <tr class="bg-03">
+                                            <td>25-47</td>
+                                            <td>D</td>
+                                          </tr>
+                                          <tr class="bg-02">
+                                            <td>0-24</td>
+                                            <td>E</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row l-50">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6"></div>
+                                                    <div class="col-sm-6"> 
+                                                        <h2><span style="font-weight: bold"> 01</span></h2>
+                                                        <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h6 class="color-01" style="font-weight: bold">Management</h6>
+                                                <h5><span id="pillar1"></span></h5>
+                                                <h4 class="color-01"><span id="gradepillar1"></span></h4>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6"></div>
+                                                    <div class="col-sm-6"> 
+                                                        <h2><span style="font-weight: bold"> 02</span></h2>
+                                                        <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h6 class="color-02" style="font-weight: bold">Technology</h6>
+                                                <h5><span id="pillar2"></span></h5>
+                                                <h4 class="color-02"><span id="gradepillar2"></span></h4>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"> 
+                                        <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6"> 
+                                                    <h2><span style="font-weight: bold"> 03</span></h2>
+                                                    <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6 class="color-03" style="font-weight: bold">Marketability</h6>
+                                            <h5><span id="pillar3"></span></h5>
+                                            <h4 class="color-03"><span id="gradepillar3"></span></h4>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-md-3">  <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6"> 
+                                                    <h2><span style="font-weight: bold"> 04</span></h2>
+                                                    <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                            <h5><span id="pillar4"></span></h5>
+                                            <h4 class="color-04"><span id="gradepillar4"></span></h4>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+        @endif
+    
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนน/เกรดแยกตาม Pillar</h6>
                         <div class="header-elements">
-                            @if (@$businessplans->first()->business_plan_status_id > 2)
-                                <button class="btn bg-primary" data-toggle="modal" data-target="#modal_add_project">เพิ่มโครงการใหม่</button>
-                            @else
-                                @if (!Empty(@$businessplans->first()->minitbp))
-                                    <a class="btn bg-primary" href="{{route('dashboard.company.project.minitbp.edit',['id' => @$businessplans->first()->minitbp->id])}}" >เพิ่มโครงการใหม่</a>
-                                @endif
-                            @endif  
+                            {{-- <button class="btn bg-primary" data-toggle="modal" data-target="#modal_add_project">เพิ่มโครงการใหม่</button> --}}
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            @if (@$businessplans->first()->business_plan_status_id > 2)
                             <table class="table table-bordered" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th >ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap">เลขที่โครงการ</th> 
-                                        <th >ความก้าวหน้าการประเมิน</th>   
-                                        <th style="width:1%;white-space: nowrap">Mini TBP</th>  
-                                        <th style="width:1%;white-space: nowrap">Full TBP</th>  
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                                                                  
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">Pillar (Index)</th> 
+                                        <th style="text-align: center">เปอร์เซนต์</th> 
+                                        <th style="text-align: center">เกรด</th>   
+                                                               
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($businessplans->reverse() as $key => $businessplan)
-                                    <tr>    
-                                        <td> 
-                                            
-                                            @if ($businessplan->business_plan_status_id < 4)
-                                                    <a class="text-info" href="{{route('dashboard.company.project.minitbp.edit',['id' => $businessplan->minitbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
-                                                @elseif($businessplan->business_plan_status_id >= 4)
-                                                    @if ($businessplan->minitbp->fulltbp->canceldate != null)
-                                                            {{$businessplan->minitbp->project}} <span class="badge badge-flat border-danger text-danger-400 rounded-0">โครงการถูกยกเลิก</span>
-                                                        @else
-                                                            @if ($businessplan->business_plan_status_id >= 9)
-                                                                    <a class="text-info" href="{{route('dashboard.company.report.singlereport',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}}</a>
-                                                                @else
-                                                                    <a class="text-info" href="{{route('dashboard.company.project.fulltbp.edit',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}}</a>
-                                                            @endif
-                                                           
-                                                    @endif       
-                                                @else
-                                                    {{$businessplan->minitbp->project}} 
-                                            @endif
-                                        </td> 
-                                        <td> {{$businessplan->code}} </td> 
-                                        <td>
-                                            <div class="progress" style="height: 1.375rem;">
-                                                <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
-                                                    {{-- <span class="sr-only"></span> --}}
-                                                    <span style="font-size: 14px">{{$businessplan->businessplanstatus->progress}}%</span>
-                                                </div>
-                                            </div>
-                                        </td> 
-                                        <td>
-                                            @if (!Empty($businessplan->minitbp->attachment))
-                                                <a  href="{{asset(@$businessplan->minitbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">Mini TBP</a>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if (!Empty($businessplan->fulltbp->attachment))
-                                            <a  href="{{asset(@$businessplan->fulltbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">Full TBP</a>
-                                        @endif
-                                        </td>
-                                        <td style="white-space: nowrap"> 
-                                            @if ($businessplan->business_plan_status_id > 3 && $businessplan->business_plan_status_id < 10)
-                                                <span class="badge badge-flat border-warning text-warning-400 rounded-0">อยู่ระหว่างการประเมิน</span>
-                                                @elseif($businessplan->business_plan_status_id >= 9)
-                                                <span class="badge badge-flat border-success text-success-400 rounded-0">ประเมินเสร็จสิ้น</span>
-                                            @endif
-                                        </td>                                       
+                                <tbody id="gradesummary_wrapper_tr">
+                                    {{-- <tr>    
+                                        <td>Management</td>
+                                        <td style="text-align: center"><span id="manage_percent"></span></td>
+                                        <td style="text-align: center"><span id="manage_grade"></span></td>          
                                     </tr>
-                                    @endforeach
+                                    <tr>    
+                                        <td>Technology</td>
+                                        <td style="text-align: center"><span id="tech_percent"></span></td>
+                                        <td style="text-align: center"><span id="tech_grade"></span></td>          
+                                    </tr>
+                                    <tr>    
+                                        <td>Marketability</td>
+                                        <td style="text-align: center"><span id="market_percent"></span></td>
+                                        <td style="text-align: center"><span id="market_grade"></span></td>          
+                                    </tr>
+                                    <tr>    
+                                        <td>Business Prospet</td>
+                                        <td style="text-align: center"><span id="business_percent"></span></td>
+                                        <td style="text-align: center"><span id="business_grade"></span></td>          
+                                    </tr> --}}
                                 </tbody>
-                            </table>   
-                            @endif   
+                            </table>      
                         </div>
                     </div>
                 </div>
             <!-- /striped rows -->
             </div>
         </div>
-       
-        <div class="row" 
-        {{-- @if (@$businessplans->first()->business_plan_status_id >= 9)
-            hidden
-        @endif --}}
-        >
-            {{-- <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ความก้าวหน้าโครงการ</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 ">
-                                <div class="chart-container" >
-                                    <div class="chart has-fixed-height" style="margin-top:-40px; " id="progress_chart"></div>
-                                </div>
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            {{-- @if (@$businessplans->first()->business_plan_status_id > 2) --}}
+        
+        <div class="row" >
+        
+            @if (@$businessplan->business_plan_status_id > 2)
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
@@ -244,7 +374,7 @@
                         </div>
                     </div>
                 </div>
-            {{-- @endif --}}
+            @endif
 
         </div>
         <div class="row">
@@ -455,6 +585,7 @@
                 topLeftChart($('#showscore').html(),$('#showgrade').html());
                 var html1 =``;
                 var html2 =``;
+                var html3 =``;
                 var pillarpercent4 = 0;
                 var pillarpercent3 = 0;
                 var pillarpercent2 = 0;
@@ -479,7 +610,6 @@
                     pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
                     pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
                     pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
-
 
                     if(index < 4){
                         var basepillar = ``;
@@ -506,13 +636,13 @@
                             basepillar = `Management`;
                         }
                         if(grade.pillar_id == 6){
-                            basepillar = `เทคโนโลยี`;
+                            basepillar = `Technology`;
                         }
                         if(grade.pillar_id == 7){
-                            basepillar = `การตลาด`;
+                            basepillar = `Marketability`;
                         }
                         if(grade.pillar_id == 8){
-                            basepillar = `ธุรกิจ`;
+                            basepillar = `Business Prospet`;
                         }
                         html2 += `<tr>
                         <td>${basepillar}</td>
@@ -561,25 +691,7 @@
         
         });
 
-    $(document).on('click', '#alertmessage', function(e) {
-        editTimeLineStatus($(this).data('id')).then(data => {
-            data.forEach(function (timeline,index) {
-                var doctype = '';
-                if(timeline.message_type == 1){
-                    doctype ='เอกสาร Mini TBP';
-                }else if(timeline.message_type == 2){
-                    doctype ='เอกสาร Mini TBP';
-                }
-                html += `<tr >                                        
-                    <td> ${timeline.createdatth} </td>                            
-                    <td> ${timeline.details} </td> 
-                </tr>`
-                });
-            $("#timeline_wrapper_tr").html(html);
-            $("#infostatus").html(infostatus);
 
-        }).catch(error => {})
-    });
 
     function getEvent() {
         return new Promise((resolve, reject) => {
@@ -633,24 +745,6 @@
         })
     }
 
-    function editTimeLineStatus(id){
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `${route.url}/dashboard/company/report/edittimelinestatus`,
-            type: 'POST',
-            headers: {"X-CSRF-TOKEN":route.token},
-            data: {
-                'id': id
-            },
-            success: function(data) {
-                resolve(data)
-            },
-            error: function(error) {
-                reject(error)
-            },
-            })
-        })
-    }
 
     function topLeftChart(_percent,grade){
         if(isNaN(_percent)) {

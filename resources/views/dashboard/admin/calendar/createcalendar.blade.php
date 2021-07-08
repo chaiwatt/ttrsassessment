@@ -63,42 +63,18 @@
                         <form method="POST" action="{{route('dashboard.admin.calendar.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                {{-- <div  class="col-md-12" id="toast" hidden>
-                                    <div class="mb-4">
-                                        <div class="toast bg-slate border-transparent" style="opacity: 1; max-width: none;">
-                                            <div class="toast-header bg-slate-600 border-bottom-slate-400">
-                                                <span class="font-weight-semibold mr-auto blink" style="font-size: 16px">ข้อแนะนำ</span>
-                                                <button type="button" class="close" data-dismiss="toast" id="closetoast">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="toast-body" style="font-size: 16px">
-                                               <span id="toastmessage"></span>  
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>โครงการ</label><span class="text-danger">*</span>
-                                        <select name="fulltbp" id="fulltbp" data-placeholder="โครงการ" class="form-control form-control-lg form-control-select2">
-                                           <option value="0">==เลือกโครงการ==</option>
-                                            @foreach ($fulltbps as $fulltbp)
-                                                <option value="{{$fulltbp->id}}">{{$fulltbp->minitbp->project}}</option> 
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12" id="project_wrapper_not_finish" hidden></div>
-
-                                <div class="col-md-12" id="project_wrapper" hidden>
-                                    <input type="text" name="eventcalendarid" id="eventcalendarid" hidden>
+                                    <input type="text" name="eventcalendarid" id="eventcalendarid" value="{{$eventcalendar->id}}" hidden> 
+                                    <input type="text" name="fulltbp" value="{{$fulltbp->id}}" hidden>
                                     <div class="row" >
                                         <div class="col-md-6">
                                             <input type="text" id="oldcalendartype" value="{{old('calendartype')}}" hidden>
                                             <div class="form-group">
                                                 <label>ประเภทปฏิทิน</label><span class="text-danger">*</span>
                                                 <select name="calendartype" id="calendartype" data-placeholder="ประเภทปฏิทิน" class="form-control form-control-lg form-control-select2">
+                                               
+                                                    @foreach ($calendartypes as $calendartype)
+                                                        <option value="{{$calendartype->id}}">{{$calendartype->name}}</option> 
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -179,17 +155,24 @@
                                             <div class="form-group">
                                                 <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
                                                 <select name="users[]" id="user" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-lg form-control-select2" multiple="multiple">
+                                                    @foreach ($projectmembers as $key => $projectmember)
+                                                        <option value="{{$projectmember->user_id}}" selected >{{$projectmember->user->name}} {{$projectmember->user->lastname}}</option> 
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    @if ($fulltbps->count() != 0)
-                                        <div class="text-right">
-                                            <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">บันทึก<i class="icon-paperplane ml-2"></i></button>
-                                            {{-- <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button> --}}
+                                        @if ($fulltbps->count() != 0)
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="text-right">
+                                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">บันทึก<i class="icon-paperplane ml-2"></i></button>
+                                                    {{-- <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button> --}}
+                                                </div>
+                                            </div>
                                         </div>
-                                    @endif
-                                </div>
+                                        @endif
+                                    </div>
+ 
                             </div>
                         </form>
                     </div>

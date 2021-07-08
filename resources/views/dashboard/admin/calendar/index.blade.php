@@ -14,9 +14,9 @@
                 <h4> <span class="font-weight-semibold">ปฏิทินกิจกรรม</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            <div class="header-elements d-none">
+            {{-- <div class="header-elements d-none">
                 <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มปฏิทินกิจกรรม <b><i class="icon-plus3"></i></b></a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">

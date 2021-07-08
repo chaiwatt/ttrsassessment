@@ -7,12 +7,14 @@ use App\Model\Prefix;
 use App\Model\Tambol;
 use App\Model\Company;
 use App\Model\FullTbp;
+use App\Model\MiniTBP;
 use App\Model\Province;
 use App\Model\UserType;
-use App\Model\UserGroup;
 // use App\Model\UserPosition;
+use App\Model\UserGroup;
 use App\Helper\LogAction;
 use App\Model\UserStatus;
+use App\Model\BusinessPlan;
 use App\Model\ExpertBranch;
 use App\Model\ExpertDetail;
 use App\Model\OfficerDetail;
@@ -138,8 +140,24 @@ class User extends Authenticatable implements MustVerifyEmail
             return 1;
         }else{
             return 0;
+        } 
+    }
+
+    public function isProjectsLeader($fulltbps)
+    {
+        $count = 0;
+        foreach ($fulltbps as $key => $fulltbp) {
+            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+            $businessplan = BusinessPlan::where('id',$minitbp->business_plan_id)->where('business_plan_status_id','>=',5)->first();
+            if(!Empty($businessplan)){
+                $check = ProjectAssignment::where('leader_id',Auth::user()->id)->where('full_tbp_id',$fulltbp->id)->first();
+                if(!Empty($check)){
+                    $count++;
+                    return 1;
+                }
+            }
         }
-        
+        return 0;
     }
 
     public function isProjectmember()

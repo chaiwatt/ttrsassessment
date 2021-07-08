@@ -286,9 +286,9 @@
 																		</select>
 																	</div>
 																	@if (@$minitbp->bank2 == 'อื่นๆ โปรดระบุ')
-																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
+																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank2}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
 																		@else
-																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled hidden >
+																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank2}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled hidden >
 																	@endif
 																	
 																</div>
@@ -320,7 +320,7 @@
 																<div class="col-md-6">
 																	<div class="form-group">
 																		{{-- <label for="">โปรดระบุ</label> --}}
-																		<input type="text" name="finance3_other_detail" id="finance3_other_detail" class="form-control form-control-lg" value="{{old('finance3_other_detail') ?? $minitbp->finance3_other_detail}}">
+																		<input type="text" name="finance3_other_detail" id="finance3_other_detail" class="form-control form-control-lg" value="{{old('finance3_other_detail') ?? $minitbp->finance3_other_detail}}" readonly>
 																	</div>
 																</div>
 															</div>

@@ -17,19 +17,26 @@ use App\Model\ProjectMember;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
+use App\Model\TimeLineHistory;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminProjectCancelController extends Controller
 {
     public function Index(){
-        $fulltbps = FullTbp::get();
-        return view('dashboard.admin.project.projectcancel.projectcancel')->withFulltbps($fulltbps);
+        $fulltbps = FullTbp::orderBy('canceldate','asc')->get();
+        return view('dashboard.admin.project.projectcancel.index')->withFulltbps($fulltbps);
     }
 
-    public function savecancel($id){
+    public function cancel($id){
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.admin.project.projectcancel.edit')->withFulltbp($fulltbp);
+    }    
+
+    public function savecancel(Request $request,$id){
         $auth = Auth::user();
         FullTbp::find($id)->update([
-            'canceldate' => Carbon::now()->toDateString()
+            'canceldate' => Carbon::now()->toDateString(),
+            'cancel_reason' => $request->cancelreason
         ]);
 
         $fulltbp = FullTbp::find($id);
@@ -70,14 +77,23 @@ class DashboardAdminProjectCancelController extends Controller
             EmailBox::send($_user->email,'TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project  .' ของ' . $fullcompanyname,'เรียน ทีมประเมิน <br><br> คุณ'.$auth->name . ' '.$auth->lastname.' ได้ยกเลิกโครงการ โครงการ'.$minitbp->project.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
+        $timeLinehistory = new TimeLineHistory();
+        $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
+        $timeLinehistory->mini_tbp_id = $minitbp->id;
+        $timeLinehistory->details = 'TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project  .' ของ' . $fullcompanyname;
+        $timeLinehistory->message_type = 3;
+        $timeLinehistory->owner_id = $auth->id;
+        $timeLinehistory->user_id = $auth->id;
+        $timeLinehistory->save();
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
-        $projectlog->action = 'ยกเลิกโครงการ';
+        $projectlog->action = 'ยกเลิกโครงการ (รายละเอียด: ' .$request->cancelreason. ')';
         $projectlog->save();
 
         CreateUserLog::createLog('ยกเลิกโครงการ');
 
-        return redirect()->back()->withSuccess('ยกเลิกโครงการสำเร็จ');
+        return redirect()->route('dashboard.admin.project.projectcancel')->withSuccess('ยกเลิกโครงการสำเร็จ');
     }
 }

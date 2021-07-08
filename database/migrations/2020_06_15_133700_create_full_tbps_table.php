@@ -42,6 +42,7 @@ class CreateFullTbpsTable extends Migration
             $table->char('success_objective',1)->default(0);
             $table->char('offer_expert',1)->default(0);
             $table->longText('follow_reason')->nullable();
+            $table->longText('cancel_reason')->nullable();
             $table->timestamps();
         });
     }

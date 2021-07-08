@@ -26,7 +26,11 @@ class EvaluationResultEdit extends FormRequest
             'contactphone' => 'required',
             'contactphoneext' => 'required',
             'contactfax' => 'required',
-            'contactemail' => 'required'          
+            'contactemail' => 'required',        
+            'management' => 'required',
+            'technoandinnovation' => 'required',
+            'marketability' => 'required',
+            'businessprospect' => 'required'
         ];
     }
     public function messages()
@@ -39,7 +43,11 @@ class EvaluationResultEdit extends FormRequest
             'contactphone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
             'contactphoneext.required' => 'ยังไม่ได้กรอกเบอร์ต่อ',
             'contactfax.required' => 'ยังไม่ได้กรอกโทรสาร',
-            'contactemail.required' => 'ยังไม่ได้กรอกอีเมล'
+            'contactemail.required' => 'ยังไม่ได้กรอกอีเมล',
+            'management.required' => 'ยังไม่ได้กรอกบทวิเคราะห์ Management',
+            'technoandinnovation.required' => 'ยังไม่ได้กรอกบทวิเคราะห์ Technology',
+            'marketability.required' => 'ยังไม่ได้กรอกบทวิเคราะห์ Marketability',
+            'businessprospect.required' => 'ยังไม่ได้กรอกบทวิเคราะห์ Business Prospect',
       ]; 
     }
 }

@@ -256,6 +256,12 @@ import * as Attendee from './eventcalendarattendee.js';
             pillar_bp = 0;
         }
     
+
+        pillar_bp = Math.round(pillar_bp * 100) / 100
+        pillar_marketability = Math.round(pillar_marketability * 100) / 100
+        pillar_tech = Math.round(pillar_tech * 100) / 100
+        pillar_management = Math.round(pillar_management * 100) / 100
+
         $('#gradepillar_bp').html(checkPillarGrade(pillar_bp));
         if(pillar_bp == 0){
             $('.chart-skills').find('span:nth-child(1)').text(``);
@@ -265,6 +271,7 @@ import * as Attendee from './eventcalendarattendee.js';
             $('#pillar_bp').html(pillar_bp + ' %');
             $('.chart-skills').find('span:nth-child(1)').text(`${pillar_bp}%`);
         }
+
         $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillar_bp*1.8}deg)`);
         $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_bp}deg)`);
         if(pillar_bp == 100){
@@ -1119,7 +1126,6 @@ function callGenPolarStackByIsic(data){
 'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค','กิจกรรมการบริหารและการบริการสนับสนุน','การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ','การศึกษา','กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์',
 'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเองเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
 
-    // genBar(xaxis ,gradedata , 'gradebyisic');
     genPolarStack(xaxis ,gradedata , 'gradebyisic');
 }
 
@@ -1131,7 +1137,6 @@ function topLeftChart(_percent,grade){
         grade = "";
     }
     var percent = parseInt(_percent);
-    console.log(percent);
     var dom = document.getElementById('myChart');
     var echart = echarts.init(dom);
     echart.clear();
@@ -1220,7 +1225,6 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
     if (option && typeof option === "object") {
         echart.setOption(option, true);
     }
-
 }
 
 

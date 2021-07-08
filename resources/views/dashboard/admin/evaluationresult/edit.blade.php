@@ -39,12 +39,12 @@
                 {{ Session::get('error') }}
             </div>
             @endif
-            @if ($errors->count() > 0)
-            <div class="alert alert-warning alert-styled-left alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                {{ $errors->first() }}
-            </div>
-        @endif
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-warning alert-styled-left alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    {{ $error }}
+                </div>
+            @endforeach
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

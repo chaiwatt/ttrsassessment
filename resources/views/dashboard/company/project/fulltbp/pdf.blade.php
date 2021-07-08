@@ -169,7 +169,13 @@
                                         @if ($fulltbp->employeducation->count() > 0)
                                             @foreach ($fulltbp->employeducation as $employeducation)
                                                 <tr>
-                                                    <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
+                                                    <td style="font-size:13px">
+                                                    	@if ($employeducation->employeducationlevel == 'อื่นๆ')
+                                                                {{$employeducation->otheremployeducationlevel}} 
+                                                            @else
+                                                                {{$employeducation->employeducationlevel}} 
+                                                        @endif
+                                                    </td>
                                                     <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                     <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
                                                     <td style="font-size:13px;text-align:center">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
@@ -279,7 +285,15 @@
                                                 @if ($companyemboard->employeducation->count() > 0)
                                                     @foreach ($companyemboard->employeducation as $employeducation)
                                                         <tr>
-                                                            <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
+                                                            <td style="font-size:13px">
+                                                            
+                                                                @if ($employeducation->employeducationlevel == 'อื่นๆ')
+                                                                        {{$employeducation->otheremployeducationlevel}} 
+                                                                    @else
+                                                                        {{$employeducation->employeducationlevel}} 
+                                                                @endif
+                                                            
+                                                            </td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
@@ -351,8 +365,8 @@
                             @endforeach
                         @endif
                     </div>
-                    <div class="ml20 mt20" style="font-size:13px"><strong>1.12 บัญชีรายชื่อผู้ถือหุ้น</strong>
-                        <table class="ml30 mt5  tbwrap" >
+                    <div class="ml20 mt20 " style="font-size:13px;page-break-inside: avoid;"><strong>1.12 บัญชีรายชื่อผู้ถือหุ้น</strong>
+                        <table class="ml30 mt5 " >
                             <thead>
                                 <tr>
                                     <th style="width:35%">รายชื่อผู้ถือหุ้น</th>
@@ -401,7 +415,14 @@
                                                 @if ($companyemploy->employeducation->count() > 0)
                                                     @foreach ($companyemploy->employeducation as $employeducation)
                                                         <tr>
-                                                            <td style="font-size:13px">{{$employeducation->employeducationlevel}}</td>
+                                                            <td style="font-size:13px">
+                                                                @if ($employeducation->employeducationlevel == 'อื่นๆ')
+                                                                        {{$employeducation->otheremployeducationlevel}} 
+                                                                    @else
+                                                                        {{$employeducation->employeducationlevel}} 
+                                                                @endif
+                                                            
+                                                            </td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
@@ -783,11 +804,11 @@
                                     @foreach ($fulltbp->fulltbpdebtpartner as $fulltbpdebtpartner)
                                         <tr>
                                             <td style="font-size:13px"> {{$fulltbpdebtpartner->debtpartner}}</td> 
-                                            <td style="font-size:13px"> {{$fulltbpdebtpartner->numproject}} </td> 
+                                            <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->numproject}} </td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->totalyearsell,2)}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->percenttosale,2)}}</td> 
-                                            <td style="font-size:13px;text-align: center">{{$fulltbpdebtpartner->businessyear}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{$fulltbpdebtpartner->businessyear}}</td> 
                                         </tr>   
                                     @endforeach
                                 @endif
@@ -814,7 +835,7 @@
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->totalyearpurchase,2)}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->percenttopurchase,2)}}</td> 
-                                            <td style="font-size:13px;text-align: center">{{$fulltbpcreditpartner->businessyear}}</td> 
+                                            <td style="font-size:13px;text-align: right">{{$fulltbpcreditpartner->businessyear}}</td> 
                                         </tr>   
                                     @endforeach
                                 @endif

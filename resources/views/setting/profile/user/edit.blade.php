@@ -978,7 +978,7 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											<input type="text"  name="postalcode" value="{{$companyaddress->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+											<input type="text"  name="postalcode" id="postal" value="{{$companyaddress->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
 										</div>
 									</div>
 									<div class="col-md-6">  
@@ -1159,8 +1159,6 @@ $(".form-control-select2").select2();
 					}
 					html += `<option value='${amphur.id}' ${select}>${amphur.name}</option>`
 					});
-
-				
 				$("#amphur").html(html);
 			})
 			.catch(error => {})
@@ -1177,8 +1175,6 @@ $(".form-control-select2").select2();
 					}
 					html += `<option value='${tambol.id}' ${select}>${tambol.name}</option>`
 					});
-
-				
 				$("#tambol").html(html);
 			})
 			.catch(error => {})
@@ -1203,7 +1199,6 @@ $(".form-control-select2").select2();
 			})
 		}
 		function tambol(amphurid){
-
 			return new Promise((resolve, reject) => {
 				$.ajax({
 				url: `${route.url}/api/location/tambol`,
@@ -1309,6 +1304,12 @@ $(".form-control-select2").select2();
 		// 		$("#alter_prefix").val('');
 		// 	}
         // });
+
+		$(document).on('change', '#tambol', function(e) {
+			// console.log($(this).find(':selected').data('id'));
+			$('#postal').val($(this).find(':selected').data('id'));
+		});
+
 	
     </script>	
 @stop

@@ -408,7 +408,7 @@ th {
 													<th>ชื่อสถานศึกษา</th>                                                                                    
 													<th>สาขาวิชาเอก</th>       
 													<th>ปีที่ศึกษา</th>  
-													<th style="display: inline-block;white-space: nowrap;" >เพิ่มเติม</th>    
+													<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 												</tr>
 											</thead>
 											<tbody id="fulltbp_companyemployeducation_wrapper_tr">    
@@ -432,7 +432,7 @@ th {
 													<th>ประเภทธุรกิจ</th>       
 													<th>ตำแหน่งแรกเข้า</th>  
 													<th>ตำแหน่งล่าสุด</th> 
-													<th style="display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+													<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 												</tr>
 											</thead>
 											<tbody id="fulltbp_companyemployexperience_wrapper_tr">    
@@ -451,7 +451,7 @@ th {
 											<thead class="bg-info">
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
-													<th style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>
+													<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 												</tr>
 											</thead>
 											<tbody id="fulltbp_board_attachment_wrapper_tr">                             
@@ -473,7 +473,7 @@ th {
 													<th>วัน เดือน ปี</th>  
 													<th>หลักสูตร</th>                                                                                    
 													<th>หน่วยงานผู้จัด</th>       
-													<th style="display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+													<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 												</tr>
 											</thead>
 											<tbody id="fulltbp_companyemploytraining_wrapper_tr">    
@@ -1094,7 +1094,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-								<input type="text" id="numproject" placeholder="" class="form-control form-control-lg numeralformat4">
+								<input type="text" id="numproject" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1152,7 +1152,7 @@ th {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-									<input type="text" id="numprojectedit" placeholder="" class="form-control form-control-lg numeralformat4">
+									<input type="text" id="numprojectedit" placeholder="" class="form-control form-control-lg numeralformat3">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -1845,7 +1845,7 @@ th {
 																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th style="width:250px;display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
+																			<th style="width:1%;white-space: nowrap">ชื่อ-นามสกุล</th>  
 																			<th style="width:300px">ตำแหน่ง</th>                                                                                    
 																			<th style="width:150px">โทรศัพท์</th>       
 																			<th style="width:150px">โทรศัพท์มือถือ</th>  
@@ -1893,7 +1893,7 @@ th {
 																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th style="width:250px;display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
+																			<th style="width:1%;white-space: nowrap">ชื่อ-นามสกุล</th>  
 																			<th style="width:300px">ตำแหน่ง</th>                                                                                    
 																			<th style="width:150px">โทรศัพท์</th>       
 																			<th style="width:150px">โทรศัพท์มือถือ</th>  
@@ -1913,7 +1913,7 @@ th {
 																					</td> 
 																				<td> 
 																					@if (@$companyemploy->employposition->name == 'อื่นๆ')
-																					{{@$companyemploy->otherposition}} 
+																						{{@$companyemploy->otherposition}} 
 																						@else
 																						{{@$companyemploy->employposition->name}} 
 																					@endif
@@ -1968,7 +1968,7 @@ th {
 																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
-																				<th style="width:250px;display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
+																				<th style="width:1%;white-space: nowrap">ชื่อ-นามสกุล</th>  
 																				<th style="width:300px">ตำแหน่ง</th>                                                                                    
 																				<th style="width:150px">โทรศัพท์</th>       
 																				<th style="width:150px">โทรศัพท์มือถือ</th>  
@@ -2040,11 +2040,21 @@ th {
 															<div class="col-md-6">
 																
 																<div class="form-group">
+																	{{-- {{Auth::user()->prefix->name}} --}}
 																	<label>คำนำหน้าชื่อ</label><span class="text-danger">*</span>
 																	<select id="responsibleprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
 																		@foreach ($prefixes as $prefix)
 																			<option value="{{$prefix->id}}" 
-																				@if ($prefix->id == @$fulltbp->fulltbpresponsibleperson->prefix_id) selected @endif >{{$prefix->name}}</option> 
+																				@if (Empty(@$fulltbp->fulltbpresponsibleperson->prefix_id))
+																						@if ($prefix->id == Auth::user()->prefix_id) 
+																						selected 
+																						@endif 
+																					@else
+																						@if ($prefix->id == @$fulltbp->fulltbpresponsibleperson->prefix_id) 
+																						selected 
+																						@endif 
+																				@endif	
+																				>{{$prefix->name}}</option> 
 																		@endforeach
 																	</select>
 																</div>
@@ -2586,7 +2596,7 @@ th {
 																			<thead>
 																				<tr>
 																					<tr>
-																						<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+																						<th rowspan="2" style="width:1%;white-space: nowrap;padding:5px">รายละเอียดการดำเนินงาน</th> 
 																						@foreach ($allyears as $key => $item)
 																							@if ($item != 0)
 																								<th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
@@ -2617,7 +2627,7 @@ th {
 																				@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
 																				
 																					<tr id= "{{$fulltbpprojectplan->id}}" >                                        
-																						<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
+																						<td style="width:1%;white-space: nowrap;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
 																						@php
 																							$_count = 1;
 																						@endphp
@@ -2638,7 +2648,7 @@ th {
 																								$_count++;
 																							@endphp
 																						@endfor															
-																						<td class="hiddenelement" style="width:180px"> 
+																						<td class="hiddenelement" style="width:1%;white-space: nowrap"> 
 																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
 																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a> 
 																						</td> 
@@ -2679,14 +2689,14 @@ th {
 													<div class="col-md-12">	
 														<div class="form-group">
 															<label for=""><u>Market Analysis</u> </label><span class="text-danger">*</span>
-															<p><i>อธิบายความเป็นไปได้ทางการตลาดของผลิตภัณฑ์หรือบริการในโครงการ และ ระบุแผนงานในการนำผลลัพธ์ของโครงการออกสู่เชิงพาณิชย์  โดยให้ข้อมูลในประเด็นต่างๆ ดังนี้ 
+															<p>อธิบายความเป็นไปได้ทางการตลาดของผลิตภัณฑ์หรือบริการในโครงการ และ ระบุแผนงานในการนำผลลัพธ์ของโครงการออกสู่เชิงพาณิชย์  โดยให้ข้อมูลในประเด็นต่างๆ ดังนี้ 
 																<ul>
-																	<li>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs/Market requirements)</li>
-																	<li>ระบุและให้รายละเอียดเกี่ยวกับตลาดภายในและนอกประเทศ (Market size)</li>
-																	<li>ส่วนแบ่งของตลาดที่คาดว่าผลิตภัณฑ์จะครอบครอง (Market share)</li>
-																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</li>
+																	<li><i>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs/Market requirements)</i></li>
+																	<li><i>ระบุและให้รายละเอียดเกี่ยวกับตลาดภายในและนอกประเทศ (Market size)</i></li>
+																	<li><i>ส่วนแบ่งของตลาดที่คาดว่าผลิตภัณฑ์จะครอบครอง (Market share)</i></li>
+																	<li><i>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</i></li>
 																</ul>
-																</i></p>
+																</p>
 																<span id="analysis_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
 															<textarea name="" id="analysis" class="form-control form-control-lg summernoteelement" cols="3" rows="10">{!!@$fulltbp->fulltbpmarketanalysis->detail!!}</textarea>
 														</div>
@@ -2803,13 +2813,13 @@ th {
 																				<th class="text-center" style="width: 13%">{{$fulltbp->past2}}</th> 
 																				<th class="text-center" style="width: 13%">{{$fulltbp->past1}}</th> 
 																				<th class="text-center" style="width: 13%">{{$fulltbp->past1+1}}</th> 
-																				<th class="text-center hiddenelement" style="width: 150px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																				<th class="text-center hiddenelement" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_sell_wrapper_tr">    
 																			@foreach ($fulltbpsells->reverse() as $fulltbpsell)
 																				<tr>                                        
-																					<td> {{$fulltbpsell->name}}</td> 
+																					<td  > {{$fulltbpsell->name}}</td> 
 																					<td class="text-right"> {{number_format($fulltbpsell->past3, 2)}}</td> 
 																					<td class="text-right"> {{number_format($fulltbpsell->past2, 2)}}</td>  
 																					<td class="text-right"> {{number_format($fulltbpsell->past1, 2)}}</td> 
@@ -2817,7 +2827,7 @@ th {
 																				
 																					                                          															
 																				
-																					<td class="hiddenelement"> 
+																					<td style="width:1%;white-space: nowrap" class="hiddenelement"> 
 																						<a  data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-info editsell">แก้ไข</a>
 																						<a  data-id="{{$fulltbpsell->id}}" class="btn btn-sm bg-warning hiddenelement deletesell">ลบ</a> 
 																					</td> 
@@ -2841,7 +2851,7 @@ th {
 																				<th class="text-center" style="width: 13%">{{$fulltbp->past1}}</th>    
 																				<th class="text-center" style="width: 13%">{{$fulltbp->past1+1}}</th> 
 
-																				<th class="hiddenelement" style="width: 10%;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																				<th class="hiddenelement" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_sellstatus_wrapper_tr">    
@@ -2885,7 +2895,7 @@ th {
 																				<th>ยอดขายต่อปี (บาท)</th>       
 																				<th>เปรียบเทียบกับยอดขาย (%)</th>  
 																				<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
-																				<th class="hiddenelement" style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																				<th class="hiddenelement" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_debtpartner_wrapper_tr">    
@@ -2895,9 +2905,9 @@ th {
 																					<td class="text-right"> {{$fulltbpdebtpartner->numproject}} </td> 
 																					<td class="text-right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
 																					<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}} </td>                                            															
-																					<td class="text-right"> {{$fulltbpdebtpartner->percenttosale}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpdebtpartner->percenttosale,2)}} </td> 
 																					<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
-																					<td class="hiddenelement"> 
+																					<td style="width:1%;white-space: nowrap" class="hiddenelement"> 
 																						<a  data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
 																						<a  data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-danger hiddenelement deletedebtpartner">ลบ</a> 
 																					</td> 
@@ -2925,7 +2935,7 @@ th {
 																				<th>ยอดซื้อต่อปี (บาท)</th>       
 																				<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
 																				<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
-																				<th class="hiddenelement" style="width:200px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																				<th class="hiddenelement" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_creditpartner_wrapper_tr">    
@@ -2934,9 +2944,9 @@ th {
 																					<td> {{$fulltbpcreditpartner->creditpartner}}</td> 
 																					<td class="text-right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
 																					<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
-																					<td class="text-right"> {{$fulltbpcreditpartner->percenttopurchase}} </td> 
+																					<td class="text-right"> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}} </td> 
 																					<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
-																					<td class="hiddenelement"> 
+																					<td style="width:1%;white-space: nowrap" class="hiddenelement"> 
 																						<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
 																						<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-danger hiddenelement deletecreditpartner">ลบ</a> 
 																					</td> 
@@ -2990,7 +3000,7 @@ th {
 																		<th>จำนวน (หน่วย)</th>       
 																		<th>ราคาต่อหน่วย (บาท)</th>  
 																		<th>ข้อมูลจำเพาะทางเทคนิค</th> 
-																		<th class="hiddenelement" style="width:150px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_asset_wrapper_tr">    
@@ -3001,7 +3011,7 @@ th {
 																			<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
 																			<td> {{$fulltbpasset->specification}} </td> 
-																			<td class="hiddenelement"> 
+																			<td style="width:1%;white-space: nowrap" class="hiddenelement"> 
 																				<a  data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
 																			</td> 
 																		</tr>
@@ -3021,7 +3031,7 @@ th {
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
 																		<th class="text-right">จำนวนเงิน (บาท)</th>                                                                                    
-																		<th class="hiddenelement" style="width:150px;display: inline-block;white-space: nowrap;">เพิ่มเติม</th>    
+																		<th class="hiddenelement" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_investment_wrapper_tr">    
@@ -3029,7 +3039,7 @@ th {
 																		<tr >
 																			<td> {{$fulltbpinvestment->investment}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpinvestment->cost, 2)}}</td> 
-																			<td class="hiddenelement"> 
+																			<td style="width:1%;white-space: nowrap" class="hiddenelement"> 
 																				<a  data-id="{{$fulltbpinvestment->id}}" class="btn btn-sm bg-info editinvestment">แก้ไข</a>
 																			</td> 
 																		</tr>
@@ -3060,7 +3070,7 @@ th {
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->need), 2)}}</td> 
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->approved), 2)}}</td> 
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->plan), 2)}}</td> 
-																			<td class="hiddenelement"> 
+																			<td style="width:1%;white-space: nowrap" class="hiddenelement"> 
 																				<a  data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">เพิ่มข้อมูลแหล่งเงินทุน</a>
 																			</td> 
 																		</tr>
@@ -3255,58 +3265,156 @@ th {
 		$('#companyhistory').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#responsibleeducationhistory').summernote({
 			toolbar: false,
-			height: 150,
+			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#responsibleexperiencehistory').summernote({
 			toolbar: false,
-			height: 150,
+			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#responsibletraininghistory').summernote({
 			toolbar: false,
-			height: 150,
+			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectabtract_input').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#mainproduct_input').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#productdetails_input').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectechdev_input').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectechdevproblem_input').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectinnovation_input').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectstandard_input').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#analysis').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#swot').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#modelcanvas').summernote({
 			toolbar: false,
 			height: 200,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 
 

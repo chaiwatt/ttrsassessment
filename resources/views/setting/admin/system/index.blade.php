@@ -194,6 +194,26 @@
                                         <input type="text" name="watermarktext" value="{{$generalinfo->watermarktext}}" data-placeholder="ลายน้ำ PDF (Mini TBP & Full TBP)" class="form-control form-control-lg">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>แสดง Alert หน้า Dashboard</label>
+                                        <select name="showalert" data-placeholder="การใช้ Invoice" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showalerts as $showalert)                                                                
+                                                <option value="{{$showalert->id}}" @if ($generalinfo->showalert_id == $showalert->id) selected @endif> {{$showalert->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>แสดงรายการที่สิ้นสุดโครงการแล้ว</label>
+                                        <select name="showfinishedproject" data-placeholder="การใช้ Invoice" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showfinishedprojects as $showfinishedproject)                                                                
+                                                <option value="{{$showfinishedproject->id}}" @if ($showfinishedproject->id == $generalinfo->show_finished_project_id) selected @endif> {{$showfinishedproject->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Consent</label></span>

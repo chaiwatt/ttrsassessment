@@ -6,12 +6,14 @@ use App\Helper\Crop;
 use App\Model\Amphur;
 use App\Model\Tambol;
 use App\Model\Province;
+use App\Model\ShowAlert;
 use App\Model\GeneralInfo;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Model\FrontPageStatus;
 use App\Model\UseInvoiceStatus;
 use App\Model\VerifyExpertStatus;
+use App\Model\ShowFinishedProject;
 use Illuminate\Support\Facades\Auth;
 
 class SettingAdminSystemController extends Controller
@@ -25,16 +27,20 @@ class SettingAdminSystemController extends Controller
         $useinvoicestatuses = UseInvoiceStatus::get();
         $frontpagestatuses = FrontPageStatus::get();
         $verifyexpertstatuses = VerifyExpertStatus::get();
+        $showalerts = ShowAlert::get();
+        $showfinishedprojects = ShowFinishedProject::get();
         return view('setting.admin.system.index')->withProvinces($provinces)
                                                 ->withAmphurs($amphurs)
                                                 ->withTambols($tambols)
                                                 ->withGeneralinfo($generalinfo)
                                                 ->withFrontpagestatuses($frontpagestatuses)
                                                 ->withVerifyexpertstatuses($verifyexpertstatuses)
-                                                ->withUseinvoicestatuses($useinvoicestatuses);
+                                                ->withUseinvoicestatuses($useinvoicestatuses)
+                                                ->withShowalerts($showalerts)
+                                                ->withShowfinishedprojects($showfinishedprojects);
     }
     public function Save(Request $request){
-        $request->submit ;
+        //$request->submit ;
         // return $request->submit ;
         if($request->submit == 'save'){
             if(Empty($request->director)){
@@ -78,8 +84,10 @@ class SettingAdminSystemController extends Controller
                 'verify_expert_status_id' => $request->verifyexpert,
                 'consent' => $request->consent,
                 'director' => $request->director,
+                'showalert_id' => $request->showalert,
                 'watermark' => $request->watermark,
                 'use_invoice_status_id' => $request->useinvoicestatus,
+                // 'show_finished_project_id' => $request->showfinishedproject,
                 'watermarktext' => $request->watermarktext
             ]);
             CreateUserLog::createLog('แก้ไขการตั้งค่าระบบ');
@@ -100,9 +108,11 @@ class SettingAdminSystemController extends Controller
                 'facebook' => $generalinfo->facebook_default,
                 'workdaytime' => $generalinfo->workdaytime_default,
                 'director' => $generalinfo->director_default,
+                'showalert_id' => 1,
                 'front_page_status_id' => $generalinfo->front_page_status_default_id,
                 'verify_expert_status_id' => $generalinfo->verify_expert_default_status_id,
                 'watermark' => $generalinfo->watermark_default,
+                // 'show_finished_project_id' => 1,
                 'use_invoice_status_id' => $generalinfo->use_invoice_status_default_id,
             ]);
             CreateUserLog::createLog('แก้ไขการตั้งค่าระบบ (ค่า Default)');

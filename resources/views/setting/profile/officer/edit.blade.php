@@ -303,7 +303,7 @@
 										<label>จังหวัด<span class="text-danger">*</span></label>
 										{{-- {{old('province')}} --}}
 										<select name="province" id="province" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
-											<option value=""></option>
+											<option value="0">===เลือกจังหวัด===</option>
 											@foreach ($provinces as $province)
 												<option value="{{$province->id}}" 
 													@if($user->province_id == $province->id) 
@@ -375,79 +375,84 @@
 										</label>)
 									</div>
 								</legend>	
-								<div class="col-md-6">  
-									<div class="form-group">
-										<label>ที่อยู่อื่น</label><span class="text-danger">*</span>
-										<input type="text"  name="address1" id="address1" value="{{old('address1') ?? $user->address1}}"  placeholder="ที่อยู่อื่น" class="form-control form-control-lg stringformat60">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>จังหวัด<span class="text-danger">*</span></label>
-										<select name="province1" id="province1" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
-											<option value=""></option>
-											{{-- @foreach ($provinces as $province) --}}
-												{{-- <option value="{{$province->id}}" @if($user->province1_id == $province->id) selected @endif>{{$province->name}}</option>  --}}
-
-												@foreach ($provinces as $province)
-													<option value="{{$province->id}}" 
-														@if($user->province1_id == $province->id) 
-																selected 
+								<div class="col-md-12" id="contact_address_wrapper"> 
+									<div class="row">
+										<div class="col-md-6">  
+											<div class="form-group">
+												<label>ที่อยู่อื่น</label><span class="text-danger">*</span>
+												<input type="text"  name="address1" id="address1" value="{{old('address1') ?? $user->address1}}"  placeholder="ที่อยู่อื่น" class="form-control form-control-lg stringformat60">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>จังหวัด<span class="text-danger">*</span></label>
+												<select name="province1" id="province1" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
+													<option value="0">===เลือกจังหวัด===</option>
+													{{-- @foreach ($provinces as $province) --}}
+														{{-- <option value="{{$province->id}}" @if($user->province1_id == $province->id) selected @endif>{{$province->name}}</option>  --}}
+		
+														@foreach ($provinces as $province)
+															<option value="{{$province->id}}" 
+																@if($user->province1_id == $province->id) 
+																		selected 
+																	@else	
+																		@if (old('province1') == $province->id) selected @endif
+																@endif>{{$province->name}}</option> 
+														@endforeach
+		
+													{{-- @endforeach --}}
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>อำเภอ/เขต<span class="text-danger">*</span></label>
+												<select name="amphur1" id="amphur1" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
+													{{-- @foreach ($amphurs1 as $amphur1)                                                                
+														<option value="{{$amphur1->id}}" @if ($amphur1->id == $user->amphur1_id) selected @endif> {{$amphur1->name}} </option>
+													@endforeach    --}}
+													@foreach ($amphurs1 as $amphur1)                                                                
+														<option value="{{$amphur1->id}}" 
+															@if ($user->amphur1_id == $amphur1->id) 
+																	selected 
+																@else
+																	@if (old('amphur1') == $amphur1->id) selected @endif
+															@endif> {{$amphur1->name}} </option>
+													@endforeach 
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>ตำบล/แขวง<span class="text-danger">*</span></label>
+												<select name="tambol1" id="tambol1" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
+													{{-- @foreach ($tambols1 as $tambol1)                                                                
+														<option value="{{$tambol1->id}}" @if ($tambol1->id == $user->tambol1_id) selected @endif> {{$tambol1->name}} </option>
+													@endforeach  --}}
+													
+													@foreach ($tambols1 as $tambol1)                                                                
+														<option value="{{$tambol1->id}}" 
+														@if ($user->tambol1_id == $tambol1->id) 
+															selected
 															@else	
-																@if (old('province1') == $province->id) selected @endif
-														@endif>{{$province->name}}</option> 
-												@endforeach
+																@if (old('tambol1') == $tambol1->id) selected @endif
+														@endif> {{$tambol1->name}} </option>
+													@endforeach    
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">  
+											<div class="form-group">
+												<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
+												<input type="text"  name="postalcode1" id="postalcode1" value="{{old('postalcode1') ?? $user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+											</div>
+										</div>
+									</div>
+									<legend>
 
-											{{-- @endforeach --}}
-										</select>
-									</div>
+									</legend>	
 								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>อำเภอ/เขต<span class="text-danger">*</span></label>
-										<select name="amphur1" id="amphur1" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
-											{{-- @foreach ($amphurs1 as $amphur1)                                                                
-												<option value="{{$amphur1->id}}" @if ($amphur1->id == $user->amphur1_id) selected @endif> {{$amphur1->name}} </option>
-											@endforeach    --}}
-											@foreach ($amphurs1 as $amphur1)                                                                
-												<option value="{{$amphur1->id}}" 
-													@if ($user->amphur1_id == $amphur1->id) 
-															selected 
-														@else
-															@if (old('amphur1') == $amphur1->id) selected @endif
-													@endif> {{$amphur1->name}} </option>
-											@endforeach 
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>ตำบล/แขวง<span class="text-danger">*</span></label>
-										<select name="tambol1" id="tambol1" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
-											{{-- @foreach ($tambols1 as $tambol1)                                                                
-												<option value="{{$tambol1->id}}" @if ($tambol1->id == $user->tambol1_id) selected @endif> {{$tambol1->name}} </option>
-											@endforeach  --}}
-											
-											@foreach ($tambols1 as $tambol1)                                                                
-												<option value="{{$tambol1->id}}" 
-												@if ($user->tambol1_id == $tambol1->id) 
-													selected
-													@else	
-														@if (old('tambol1') == $tambol1->id) selected @endif
-												@endif> {{$tambol1->name}} </option>
-											@endforeach    
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6">  
-									<div class="form-group">
-										<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-										<input type="text"  name="postalcode1" id="postalcode1" value="{{old('postalcode1') ?? $user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
-									</div>
-								</div>
-								<legend>
-
-								</legend>	
+								
 								<div class="col-md-6"> 
 									<div class="form-group">
 										<label>โทรศัพท์<span class="text-danger">*</span></label>
@@ -800,6 +805,16 @@
 				}
 			});
 		}
+
+		$(document).on('change', '#tambol', function(e) {
+			// console.log($(this).find(':selected').data('id'));
+			$('#postalcode').val($(this).find(':selected').data('id'));
+		});
+
+		$(document).on('change', '#tambol1', function(e) {
+			// console.log($(this).find(':selected').data('id'));
+			$('#postalcode1').val($(this).find(':selected').data('id'));
+		});
     </script>	
 @stop
 
