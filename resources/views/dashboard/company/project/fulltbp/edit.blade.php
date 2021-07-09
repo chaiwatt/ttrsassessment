@@ -3101,10 +3101,6 @@ th {
 										<!-- /striped rows -->
 										</div>
 									</div>
-
-
-									
-
 								</div>
 								<br>
 							 <strong>ผู้มีอำนาจลงนามในแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</strong>	
