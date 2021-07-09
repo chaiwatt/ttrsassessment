@@ -355,9 +355,9 @@
 																		</select>
 																	</div>
 																	@if (@$minitbp->bank2 == 'อื่นๆ โปรดระบุ')
-																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" >
+																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank2}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" >
 																		@else
-																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" hidden >
+																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank2}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" hidden >
 																	@endif
 																	
 																</div>

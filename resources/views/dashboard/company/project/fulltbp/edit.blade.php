@@ -35,19 +35,19 @@ th {
 					<div class="col-md-6" id="otherprefix_ceo_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix_ceo" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="otherprefix_ceo" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_ceo" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employname_ceo" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_ceo" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employlastname_ceo" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					{{-- <div class="col-md-6">
@@ -77,7 +77,7 @@ th {
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
-							<input type="text" id="employemail_ceo" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employemail_ceo" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 				</div>
@@ -115,19 +115,19 @@ th {
 					<div class="col-md-6" id="otherprefix_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="otherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employname" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -157,7 +157,7 @@ th {
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
-							<input type="text" id="employemail" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employemail" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 				</div>
@@ -195,19 +195,19 @@ th {
 					<div class="col-md-6" id="otherprefix_research_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix_research" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="otherprefix_research" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -231,7 +231,7 @@ th {
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
-							<input type="text" id="employemail_research" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employemail_research" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 				</div>
@@ -266,19 +266,19 @@ th {
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6" id="otherprefix_projectmember_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix_projectmember" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
+							<input type="text" id="otherprefix_projectmember" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -302,7 +302,7 @@ th {
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
-							<input type="text" id="employemail_projectmember" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employemail_projectmember" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 				</div>
@@ -348,19 +348,19 @@ th {
 										<div class="col-md-4" id="get_otherprefix_wrapper" hidden>
 											<div class="form-group">
 												<label>ระบุคำนำหน้าชื่อ</label>
-												<input type="text" id="getotherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat20" >
+												<input type="text" id="getotherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat60" >
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label>ชื่อ</label><span class="text-danger">*</span>
-												<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat20" >
+												<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat60" >
 											</div>
 										</div>
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>นามสกุล</label><span class="text-danger">*</span>
-											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" >
+											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat60" >
 										</div>
 										</div>
 
@@ -379,7 +379,7 @@ th {
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>อีเมล</label><span class="text-danger">*</span>
-											<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control form-control-lg stringformat30">
+											<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
 										</div>
 										</div>
 										<div class="col-md-12">
@@ -516,19 +516,19 @@ th {
 					<div class="col-md-6" id="othereducationlevel_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุระดับการศึกษา</label><span class="text-danger">*</span>
-							<input type="text" id="othereducationlevel" placeholder="ระบุระดับการศึกษา" class="form-control form-control-lg stringformat30">
+							<input type="text" id="othereducationlevel" placeholder="ระบุระดับการศึกษา" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อสถานศึกษา</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationinstitute" placeholder="ชื่อสถานศึกษา" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employeducationinstitute" placeholder="ชื่อสถานศึกษา" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>สาขาวิชาเอก</label><span class="text-danger">*</span>
-							<input type="text" id="employeducationmajor" placeholder="สาขาวิชาเอก" class="form-control form-control-lg stringformat20">
+							<input type="text" id="employeducationmajor" placeholder="สาขาวิชาเอก" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -579,25 +579,25 @@ th {
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>บริษัท</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencecompany" placeholder="บริษัท" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employexperiencecompany" placeholder="บริษัท" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ประเภทธุรกิจ</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencebusinesstype" placeholder="ประเภทธุรกิจ" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employexperiencebusinesstype" placeholder="ประเภทธุรกิจ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่งแรกเข้า</label><span class="text-danger">*</span>
-							<input type="text" id="employexperiencestartposition" placeholder="ตำแหน่งแรกเข้า" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employexperiencestartposition" placeholder="ตำแหน่งแรกเข้า" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ตำแหน่งล่าสุด</label><span class="text-danger">*</span>
-							<input type="text" id="employexperienceendposition" placeholder="ตำแหน่งล่าสุด" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employexperienceendposition" placeholder="ตำแหน่งล่าสุด" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 				</div>
@@ -629,7 +629,7 @@ th {
 
 						<div class="form-group">
 							<label>หลักสูตร</label><span class="text-danger">*</span>
-							<input type="text" id="employtrainingcourse" placeholder="หลักสูตร" class="form-control form-control-lg stringformat30">
+							<input type="text" id="employtrainingcourse" placeholder="หลักสูตร" class="form-control form-control-lg stringformat60">
 						</div>
 						<div class="form-group">
 							<label>หน่วยงานผู้จัด</label><span class="text-danger">*</span>
@@ -727,7 +727,7 @@ th {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร <small>เช่น เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</small></label><span class="text-danger">*</span>
-							<input type="text" id="certifyname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat30">
+							<input type="text" id="certifyname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					<div class="col-md-12">	
@@ -759,7 +759,7 @@ th {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร <small>เช่น เอกสารแนบ Business Model Canvas</small></label><span class="text-danger">*</span>
-							<input type="text" id="bmcname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat30">
+							<input type="text" id="bmcname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					{{-- <div class="col-md-12">	
@@ -791,7 +791,7 @@ th {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร <small>เช่น เอกสารแนบ SWOT Analysis, Five Forces Analysis</small></label><span class="text-danger">*</span>
-							<input type="text" id="swotname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat30">
+							<input type="text" id="swotname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					{{-- <div class="col-md-12">	
@@ -823,7 +823,7 @@ th {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อรางวัล <small>เช่น ด้านเทคโนโลยี/นวัตกรรมที่ได้รับ </small></label><span class="text-danger">*</span>
-							<input type="text" id="awardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat30">
+							<input type="text" id="awardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					{{-- <div class="col-md-12">	
@@ -855,7 +855,7 @@ th {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>ชื่อเอกสาร <small>เช่น ใบรับรองมาตรฐาน เช่น ISO, อย., มอก., GMP, HACCP, CMMI</small></label><span class="text-danger">*</span>
-							<input type="text" id="standardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat30">
+							<input type="text" id="standardname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 					{{-- <div class="col-md-12">	
@@ -960,7 +960,7 @@ th {
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
-								<input type="text" id="productname" placeholder="ชื่อผลิตภัณฑ์" class="form-control form-control-lg stringformat30">
+								<input type="text" id="productname" placeholder="ชื่อผลิตภัณฑ์" class="form-control form-control-lg stringformat60">
 							</div>
 							<div class="form-group">
 								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
@@ -1003,7 +1003,7 @@ th {
 							<input type="text" id="sellid" value="" hidden >
 							<div class="form-group">
 								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
-								<input type="text" id="productnameedit" placeholder="ชื่อผลิตภัณฑ์" class="form-control form-control-lg stringformat30">
+								<input type="text" id="productnameedit" placeholder="ชื่อผลิตภัณฑ์" class="form-control form-control-lg stringformat60">
 							</div>
 							<div class="form-group">
 								<label>ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
@@ -1088,7 +1088,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="debtpartner" placeholder="" class="form-control form-control-lg stringformat30" >
+								<input type="text" id="debtpartner" placeholder="" class="form-control form-control-lg stringformat60" >
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1146,7 +1146,7 @@ th {
 								<input type="text" id="debtpartnerid" value="" hidden >
 								<div class="form-group">
 									<label>ลูกหนี้การค้า</label><span class="text-danger">*</span>
-									<input type="text" id="debtpartneredit" placeholder="" class="form-control form-control-lg stringformat30" >
+									<input type="text" id="debtpartneredit" placeholder="" class="form-control form-control-lg stringformat60" >
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -1202,7 +1202,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartner" placeholder="" class="form-control form-control-lg stringformat30" >
+								<input type="text" id="creditpartner" placeholder="" class="form-control form-control-lg stringformat60" >
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1253,7 +1253,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เจ้าหนี้การค้า</label><span class="text-danger">*</span>
-								<input type="text" id="creditpartneredit" placeholder="" class="form-control form-control-lg stringformat30" >
+								<input type="text" id="creditpartneredit" placeholder="" class="form-control form-control-lg stringformat60" >
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1421,7 +1421,7 @@ th {
 					<div class="col-md-12">
 						{{-- <div class="form-group"> --}}
 							<label>อัปโหลดไฟล์เอกสาร เช่น หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ</label>
-							{{-- <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat30"> --}}
+							{{-- <input type="text" id="companydocname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60"> --}}
 						{{-- </div> --}}
 					</div>
 					<div class="col-md-12">	
@@ -1845,8 +1845,8 @@ th {
 																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th style="width:1%;white-space: nowrap">ชื่อ-นามสกุล</th>  
-																			<th style="width:300px">ตำแหน่ง</th>                                                                                    
+																			<th style="width:350px">ชื่อ-นามสกุล</th>  
+																			<th style="width:1%;white-space: nowrap">ตำแหน่ง</th>                                                                                    
 																			<th style="width:150px">โทรศัพท์</th>       
 																			<th style="width:150px">โทรศัพท์มือถือ</th>  
 																			<th style="width:150px">อีเมล</th>
@@ -1856,14 +1856,14 @@ th {
 																	<tbody id="fulltbp_companyemploy_ceo_wrapper_tr">    
 																		@foreach ($companyemploys->where('employ_position_id',1) as $companyemploy)
 																			<tr >                                        
-																				<td style="width:1%;white-space: nowrap"> 
+																				<td > 
 																					@if ($companyemploy->prefix->name == 'อื่นๆ')
 																						{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}}
 																						@else
 																						{{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}
 																					@endif
 																					</td> 
-																				<td> 
+																				<td style="width:1%;white-space: nowrap"> 
 																					@if (@$companyemploy->employposition->name == 'อื่นๆ')
 																					{{@$companyemploy->otherposition}} 
 																						@else
@@ -1893,8 +1893,8 @@ th {
 																<table class="table table-bordered">
 																	<thead>
 																		<tr class="bg-info">
-																			<th style="width:1%;white-space: nowrap">ชื่อ-นามสกุล</th>  
-																			<th style="width:300px">ตำแหน่ง</th>                                                                                    
+																			<th style="width:350px">ชื่อ-นามสกุล</th>  
+																			<th style="width:1%;white-space: nowrap">ตำแหน่ง</th>                                                                                    
 																			<th style="width:150px">โทรศัพท์</th>       
 																			<th style="width:150px">โทรศัพท์มือถือ</th>  
 																			<th style="width:150px">อีเมล</th>
@@ -1904,14 +1904,14 @@ th {
 																	<tbody id="fulltbp_companyemploy_wrapper_tr">    
 																		@foreach ($companyemploys->where('employ_position_id','>',1)->where('employ_position_id','<=',5) as $companyemploy)
 																			<tr >                                        
-																				<td> 
+																				<td style="width:350px"> 
 																					@if ($companyemploy->prefix->name == 'อื่นๆ')
 																						{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}}
 																						@else
 																						{{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}
 																					@endif
-																					</td> 
-																				<td> 
+																				</td> 
+																				<td style="width:1%;white-space: nowrap"> 
 																					@if (@$companyemploy->employposition->name == 'อื่นๆ')
 																						{{@$companyemploy->otherposition}} 
 																						@else
@@ -1922,7 +1922,7 @@ th {
 																				<td> {{$companyemploy->phone}} </td>                                            
 																				<td> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
-																				<td style="white-space: nowrap"> 
+																				<td style="width:1%;white-space: nowrap"> 
 																					<a  data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
 																					<a  data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-danger hiddenelement deletecompanyemploy hiddenelement">ลบ</a> 
 																				</td> 
@@ -1941,16 +1941,16 @@ th {
 																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
-																				<th style="display: inline-block;white-space: nowrap;">ชื่อ-นามสกุล</th>  
-																				<th>ความสัมพันธ์กับ CEO</th>
+																				<th >ชื่อ-นามสกุล</th>  
+																				<th style="width:350px">ความสัมพันธ์กับ CEO</th>
 																				<th class="hiddenelement" style="width:180px;white-space: nowrap;">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_companystockholder_wrapper_tr">    
 																			@foreach ($companystockholders->reverse() as $companystockholder)
 																				<tr >                                        
-																					<td> {{$companystockholder->name}}</td> 
-																					<td> {{$companystockholder->ceorelation}} </td> 
+																					<td > {{$companystockholder->name}}</td> 
+																					<td style="width:350px"> {{$companystockholder->ceorelation}} </td> 
 																					<td class="hiddenelement"> <a  data-id="{{$companystockholder->id}}" class="btn btn-sm bg-danger hiddenelement deletestockholder">ลบ</a> </td> 
 																				</tr>
 																			@endforeach                            
@@ -1968,8 +1968,8 @@ th {
 																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
-																				<th style="width:1%;white-space: nowrap">ชื่อ-นามสกุล</th>  
-																				<th style="width:300px">ตำแหน่ง</th>                                                                                    
+																				<th style="width:350px">ชื่อ-นามสกุล</th>  
+																				<th style="width:1%;white-space: nowrap">ตำแหน่ง</th>                                                                                    
 																				<th style="width:150px">โทรศัพท์</th>       
 																				<th style="width:150px">โทรศัพท์มือถือ</th>  
 																				<th style="width:150px">อีเมล</th>
@@ -1980,8 +1980,8 @@ th {
 																			
 																			@foreach ($companyemploys->where('employ_position_id','>=',6) as $companyemploy)
 																				<tr >                                        
-																					<td> {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
-																					<td> {{$companyemploy->employposition->name}} </td> 
+																					<td style="width:350px"> {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
+																					<td style="width:1%;white-space: nowrap"> {{$companyemploy->employposition->name}} </td> 
 																					<td> {{$companyemploy->phone}} </td>                                            
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
@@ -2062,7 +2062,7 @@ th {
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>ชื่อ</label><span class="text-danger">*</span>
-																	<input type="text" name="responsiblename" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name ?? Auth::user()->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat20"  required>
+																	<input type="text" name="responsiblename" id="responsiblename" value="{{@$fulltbp->fulltbpresponsibleperson->name ?? Auth::user()->name}}" placeholder="ชื่อ" class="form-control form-control-lg stringformat60"  required>
 																</div>
 																{{-- <div class="form-group">
 																	<label>ฝ่ายผลิต/วิศวกรรม</label><span class="text-danger">*</span>
@@ -2073,19 +2073,19 @@ th {
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>นามสกุล</label><span class="text-danger">*</span>
-																	<input type="text" name="responsiblelastname" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname ?? Auth::user()->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" required>
+																	<input type="text" name="responsiblelastname" id="responsiblelastname" value="{{@$fulltbp->fulltbpresponsibleperson->lastname ?? Auth::user()->lastname}}" placeholder="นามสกุล" class="form-control form-control-lg stringformat60" required>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>อีเมล</label><span class="text-danger">*</span>
-																	<input type="text" name="responsibleemail" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat30" required>
+																	<input type="text" name="responsibleemail" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat60" required>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>ตำแหน่ง</label><span class="text-danger">*</span>
-																	<input type="text" name="responsibleposition" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->position}}" placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat20" required>
+																	<input type="text" name="responsibleposition" id="responsibleposition" value="{{@$fulltbp->fulltbpresponsibleperson->position ?? Auth::user()->position}}" placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat60" required>
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -3336,7 +3336,7 @@ th {
 			}
 		});
 		$('#projectechdev_input').summernote({
-			toolbar: false,
+			toolbar: true,
 			height: 200,
 			callbacks: {
 				onPaste: function (e) {

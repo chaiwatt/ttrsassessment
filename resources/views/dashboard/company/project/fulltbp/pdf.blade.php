@@ -519,10 +519,10 @@
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
                     {{-- <div style="page-break-inside: avoid;"> --}}
-                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.6 ข้อมูลเทคโนโลยี </strong>
+                    <div class="ml30 mt0" style="font-size:13px;margin-buttom:-20px"> <strong>2.6 ข้อมูลเทคโนโลยี</strong>
                         <div class="ml30 mt0" style="font-size:13px"> <strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {!!$provider::FixBreak($fulltbp->techdev)!!}</div>
                     </div>
-                    <div class="ml30 mt0" style="font-size:13px">    
+                    <div class="ml30" style="font-size:13px;margin-top:-50px">    
                         <div class="mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
                             <table class="mt5  border tbwrap" >
                                 <thead>

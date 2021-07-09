@@ -765,7 +765,7 @@ $(document).on("change","#companydoc",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td class="text-center"> 
+                        <td style="width:1%;white-space: nowrap" class="text-center"> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
@@ -796,7 +796,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
                 data.forEach(function (attachment,index) {
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td class="text-center"> 
+                        <td style="width:1%;white-space: nowrap" class="text-center"> 
                             <a href="${route.url}/${attachment.path}" class=" btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
                             <a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
                         </td>
@@ -847,7 +847,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
                 <td>
                     ${check}
                 </td>   
-                <td class="text-center">
+                <td style="width:1%;white-space: nowrap" class="text-center">
                     <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
                     <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                 </td> 
@@ -923,7 +923,7 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,othe
                         <td>
                             ${check}
                         </td>   
-                        <td class="text-center">
+                        <td style="width:1%;white-space: nowrap" class="text-center">
                             <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
                             <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                         </td> 
@@ -1251,7 +1251,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                     <td>
                         ${check}
                     </td>   
-                    <td class="text-center">
+                    <td style="width:1%;white-space: nowrap" class="text-center">
                         <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
                         <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
                     </td> 

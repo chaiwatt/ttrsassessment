@@ -506,13 +506,16 @@
 									<div class="form-group">
 										<label>วุฒิการศึกษาสูงสุด<span class="text-danger">*</span></label>
 										<select name="educationlevel" id="educationlevel" data-placeholder="วุฒิการศึกษาสูงสุด" class="form-control form-control-lg form-control-select2">
-											@foreach ($educationlevels as $educationlevel)                                                                
-												<option value="{{$educationlevel->id}}" 
+											@foreach ($educationlevels as $educationlevel)     
+												@if ($educationlevel->name !="อื่นๆ")
+													<option value="{{$educationlevel->id}}" 
 													@if ($educationlevel->id == $officer->education_level_id) 
 															selected 
 														@else
 															@if (old('educationlevel') == $educationlevel->id) selected @endif
 													@endif > {{$educationlevel->name}} </option>
+												@endif                                                           
+
 											@endforeach    
 										</select>
 									</div>
@@ -560,7 +563,7 @@
 														<tr class="bg-info">
 															<th style="width:10%">ลำดับ</th> 
 															<th style="width:70%">รายละเอียด</th> 
-															<th style="width:20%">เพิ่มเติม</th>                                                                                   
+															<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                                                                   
 														</tr>
 													</thead>
 													<tbody id="expertfield_wrapper_tr"> 
@@ -568,7 +571,7 @@
 															<tr >                                        
 																<td> {{$officerfield->order}}</td>                                            
 																<td> {{$officerfield->detail}}</td>    
-																<td> 
+																<td style="width:1%;white-space: nowrap"> 
 																	<a href="#" data-id="{{$officerfield->id}}" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>                                       
 																	<a href="#" data-id="{{$officerfield->id}}" data-toggle="modal" class="btn btn-sm bg-info editexpertfield">แก้ไข</a>                                       
 																</td>
@@ -591,14 +594,14 @@
 													<thead>
 														<tr class="bg-info">
 															<th style="width:80%">ไฟล์</th> 
-															<th style="width:20%">เพิ่มเติม</th>                                                                                   
+															<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                                                                   
 														</tr>
 													</thead>
 													<tbody id="fulltbp_expertdoc_wrapper_tr"> 
 														@foreach ($officerdocs as $officerdoc)
 															<tr >                                        
 																<td> {{$officerdoc->name}}</td>                                            
-																<td> 
+																<td style="width:1%;white-space: nowrap"> 
 																	<a href="{{asset($officerdoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
 																	<a  data-id="{{$officerdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
 																</td>

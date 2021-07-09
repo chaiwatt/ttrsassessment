@@ -1043,10 +1043,10 @@
 											<table class="table table-bordered table-striped">
 												<thead>
 													<tr class="bg-info">
-														<th style="width:35%">ชื่อ  นามสกุล</th> 
+														<th style="width:35%">ชื่อ นามสกุล</th> 
 														<th style="width:25%">ตำแหน่ง</th>   
 														<th style="width:15%">ลายมือชื่อ</th>
-														<th style="width:25%" class="text-center">เพิ่มเติม</th>                                                                                   
+														<th style="width:1%;white-space: nowrap" class="text-center">เพิ่มเติม</th>                                                                                   
 													</tr>
 												</thead>
 												<tbody id="authorized_director_wrapper_tr"> 
@@ -1054,12 +1054,12 @@
 													<tr >                                        
 														<td> 
 															@if ($authorizeddirector->prefix->name == 'อื่นๆ')
-																	{{$authorizeddirector->otherprefix}}
+																	{{$authorizeddirector->otherprefix}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
 																@else
-																	{{$authorizeddirector->prefix->name}}
+																	{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
 															@endif
 
-															{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}</td>                                            
+															</td>                                            
 														<td> 
 															@if ($authorizeddirector->employ_position_id == 5)
 																	{{$authorizeddirector->otherposition}}
@@ -1075,7 +1075,7 @@
 																	<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
 															@endif  
 														</td>   
-														<td class="text-center"> 
+														<td style="width:1%;white-space: nowrap" class="text-center"> 
 															<a  data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>                                       
 															<a  data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>                                       
 														</td>
@@ -1099,14 +1099,14 @@
 													<thead>
 														<tr class="bg-info">
 															<th style="width:75%">ไฟล์</th> 
-															<th style="width:25%" class="text-center">เพิ่มเติม</th>                                                                                   
+															<th style="width:1%;white-space: nowrap" class="text-center">เพิ่มเติม</th>                                                                                   
 														</tr>
 													</thead>
 													<tbody id="fulltbp_companydoc_wrapper_tr"> 
 														@foreach ($fulltbpcompanydocs as $fulltbpcompanydoc)
 														<tr >                                        
 															<td> {{$fulltbpcompanydoc->name}}</td>                                            
-															<td class="text-center"> 
+															<td style="width:1%;white-space: nowrap" class="text-center"> 
 																<a href="{{asset($fulltbpcompanydoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
 																<a  data-id="{{$fulltbpcompanydoc->id}}" data-name="" class="btn btn-sm bg-danger deletefulltbpcompanydocattachment">ลบ</a>                                       
 															</td>

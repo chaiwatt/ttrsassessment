@@ -160,8 +160,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                 
                 if(employ.employ_position_id > 5){
                     html += `<tr >                                        
-                        <td> ${prefix}${employ.name} ${employ.lastname}</td>                                            
-                        <td> ${position} </td> 
+                        <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname}</td>                                            
+                        <td style="width:1%;white-space: nowrap"> ${position} </td> 
                         <td> ${phone} </td>                                            
                         <td> ${workphone} </td> 
                         <td> ${email} </td> 
@@ -172,8 +172,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
              }else if($('#employtype').val() == 'board'){
                 if(employ.employ_position_id > 1 & employ.employ_position_id <= 5){
                     html += `<tr >                                        
-                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                    <td> ${position} </td> 
+                    <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td style="width:1%;white-space: nowrap"> ${position} </td> 
                     <td> ${phone} </td>                                            
                     <td> ${workphone} </td> 
                     <td> ${email} </td> 
@@ -184,8 +184,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
              }else if($('#employtype').val() == 'ceo'){
                 if(employ.employ_position_id == 1){
                     html += `<tr >                                        
-                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                    <td> ${position} </td> 
+                    <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td style="width:1%;white-space: nowrap"> ${position} </td> 
                     <td> ${phone} </td>                                            
                     <td> ${workphone} </td> 
                     <td> ${email} </td> 
@@ -260,8 +260,8 @@ $(document).on("click",".deletecompanyemploy",function(e){
                             email = '';
                         }
                         html += `<tr >                                        
-                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                            <td> ${position} </td> 
+                            <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td style="width:1%;white-space: nowrap"> ${position} </td> 
                             <td> ${phone} </td>                                            
                             <td> ${workphone} </td> 
                             <td> ${email} </td> 
@@ -323,8 +323,8 @@ $(document).on("click",".deletecompanyceo",function(e){
                             email = '';
                         }
                         html += `<tr >                                        
-                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                            <td> ${position} </td> 
+                            <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td style="width:1%;white-space: nowrap"> ${position} </td> 
                             <td> ${phone} </td>                                            
                             <td> ${workphone} </td> 
                             <td> ${email} </td> 
@@ -3808,8 +3808,8 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
                     email = '';
                 }
                 html += `<tr >                                        
-                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                    <td> ${position} </td> 
+                    <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td style="width:1%;white-space: nowrap"> ${position} </td> 
                     <td> ${phone} </td>                                            
                     <td> ${workphone} </td> 
                     <td> ${email} </td> 
@@ -3869,8 +3869,8 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
                     email = '';
                 }
                 html += `<tr >                                        
-                    <td style="width:1%;white-space: nowrap"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                    <td> ${position} </td> 
+                    <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td style="width:1%;white-space: nowrap"> ${position} </td> 
                     <td> ${phone} </td>                                            
                     <td> ${workphone} </td> 
                     <td> ${email} </td> 
@@ -3925,8 +3925,8 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                     }
 
                     html += `<tr >                                        
-                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                        <td> ${position} </td> 
+                        <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                        <td style="width:1%;white-space: nowrap"> ${position} </td> 
                         <td> ${phone} </td>                                            
                         <td> ${workphone} </td> 
                         <td> ${email} </td> 
@@ -3988,8 +3988,8 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                         }
 
                         html += `<tr >                                        
-                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                            <td> ${position} </td> 
+                            <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td style="width:1%;white-space: nowrap"> ${position} </td> 
                             <td> ${phone} </td>                                            
                             <td> ${workphone} </td> 
                             <td> ${email} </td> 
@@ -4063,8 +4063,8 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
 
 
                     html += `<tr >                                        
-                        <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                        <td> ${position} </td> 
+                        <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                        <td style="width:1%;white-space: nowrap"> ${position} </td> 
                         <td> ${phone} </td>                                            
                         <td> ${workphone} </td> 
                         <td> ${email} </td> 
@@ -4119,8 +4119,8 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
                         }
 
                         html += `<tr >                                        
-                            <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
-                            <td> ${position} </td> 
+                            <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                            <td style="width:1%;white-space: nowrap"> ${position} </td> 
                             <td> ${phone} </td>                                            
                             <td> ${workphone} </td> 
                             <td> ${email} </td> 
@@ -4139,8 +4139,13 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
 $(document).on('keyup', '#employsearch', function(e) {
     Employ.searchEmploy($(this).val(),$('#companyid').val()).then(data => {
         var html = ``;
+        
         data.forEach(function (employ,index) {
-            html += `<a href="#" class="dropdown-item selectemploy" data-id="${employ.id}">${employ.prefix['name']}${employ.name} ${employ.lastname}</a>`
+            var prefix = employ.prefix['name'];
+            if(prefix == 'อื่นๆ'){
+                prefix = employ.otherprefix;
+            }
+            html += `<a href="#" class="dropdown-item selectemploy" data-id="${employ.id}" data-toggle="modal">${prefix}${employ.name} ${employ.lastname}</a>`
         });
      if(data.length > 0){
         $("#employsearch_wrapper").html(html);
