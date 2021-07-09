@@ -1856,7 +1856,7 @@ th {
 																	<tbody id="fulltbp_companyemploy_ceo_wrapper_tr">    
 																		@foreach ($companyemploys->where('employ_position_id',1) as $companyemploy)
 																			<tr >                                        
-																				<td> 
+																				<td style="width:1%;white-space: nowrap"> 
 																					@if ($companyemploy->prefix->name == 'อื่นๆ')
 																						{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}}
 																						@else

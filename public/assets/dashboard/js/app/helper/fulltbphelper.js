@@ -3869,7 +3869,7 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
                     email = '';
                 }
                 html += `<tr >                                        
-                    <td> ${prefix}${employ.name} ${employ.lastname} </td>                                            
+                    <td style="width:1%;white-space: nowrap"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td> ${position} </td> 
                     <td> ${phone} </td>                                            
                     <td> ${workphone} </td> 
