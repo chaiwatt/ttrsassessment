@@ -309,15 +309,15 @@
                                         <table class="mt5  tbwrap" >
                                             <thead>
                                                 <tr>
-                                                    <th style="font-size:13px;width:100px" colspan="2">ช่วงเวลาการทำงาน</th>
-                                                    <th style="font-size:13px;" rowspan="2">บริษัท</th>
-                                                    <th style="font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
-                                                    <th style="width:20%;font-size:13px" rowspan="2">ตำแหน่งแรกเข้า</th>
-                                                    <th style="width:20%;font-size:13px" rowspan="2">ตำแหน่งล่าสุด</th>
+                                                    <th style="width:20%;font-size:13px;" colspan="2">ช่วงเวลาการทำงาน</th>
+                                                    <th style="width:15%;font-size:13px;" rowspan="2">บริษัท</th>
+                                                    <th style="width:15%;font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
+                                                    <th style="width:15%;font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
+                                                    <th style="width:15%;font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
                                                 </tr>
                                                 <tr>
-                                                    <th style="font-size:13px;width:50px" >เริ่มต้น</th>
-                                                    <th style="font-size:13px;width:50px">สิ้นสุด</th>
+                                                    <th style="font-size:13px;width:10%" >เริ่มต้น</th>
+                                                    <th style="font-size:13px;width:10%">สิ้นสุด</th>
                                                  
                                                 <tr>
                                             </thead>
