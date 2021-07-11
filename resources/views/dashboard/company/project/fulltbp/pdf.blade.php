@@ -327,8 +327,8 @@
                                                         <tr>
                                                             <td style="font-size:13px">{{$employexperience->startdate}}</td>
                                                             <td style="font-size:13px">{{$employexperience->enddate}}</td>
-                                                            <td style="font-size:13px">{{$employexperience->company}}</td>
-                                                            <td style="font-size:13px">{{$employexperience->businesstype}}</td>
+                                                            <td style="font-size:13px">{!!$provider::FixBreak($employexperience->company)!!}</td>
+                                                            <td style="font-size:13px">{!!$provider::FixBreak($employexperience->businesstype)!!}</td>
                                                             <td style="font-size:13px">{{$employexperience->startposition}}</td>
                                                             <td style="font-size:13px">{{$employexperience->endposition}}</td>
                                                         </tr>   
