@@ -271,7 +271,7 @@ class FullTbpController extends Controller
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
-            $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project. 'ที่มีการแก้ไข' ;
+            $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project. ' ที่มีการแก้ไข' ;
             $fulltbp_edit_note = ' โดยมีรายละเอียด ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>';
         }
         
