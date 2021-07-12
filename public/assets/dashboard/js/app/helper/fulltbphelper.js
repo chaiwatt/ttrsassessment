@@ -413,7 +413,7 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
             if(educationlevel == 'อื่นๆ'){
                 educationlevel = education.otheremployeducationlevel;
             }
-            var deletecode = `<a data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+            var deletecode = `<a data-id="${education.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployeducation">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -471,7 +471,7 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
     Employ.addEmployExperience($('#employid').val(),$('#employexperiencestartdate').val(),$('#employexperienceenddate').val(),$('#employexperiencecompany').val(),$('#employexperiencebusinesstype').val(),$('#employexperiencestartposition').val(),$('#employexperienceendposition').val()).then(data => {
         var html = '';
         data.forEach(function (experience,index) {
-            var deletecode = `<a data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+            var deletecode = `<a data-id="${experience.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployexperience">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -507,7 +507,7 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
     Employ.addEmployTraining($('#employid').val(),$('#employtrainingdate').val(),$('#employtrainingcourse').val(),$('#employtrainingowner').val()).then(data => {
         var html = '';
         data.forEach(function (training,index) {
-            var deletecode = `<a data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+            var deletecode = `<a data-id="${training.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemploytraining">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -559,7 +559,7 @@ $(document).on("click",".deleteemployeducation",function(e){
                 if(educationlevel == 'อื่นๆ'){
                     educationlevel = education.otheremployeducationlevel;
                 }
-                var deletecode = `<a data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+                var deletecode = `<a data-id="${education.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployeducation">ลบ</a>`;
                 if( $("#fulltbpstatus").val() > 1){
                     deletecode = ``;
                 }
@@ -595,7 +595,7 @@ $(document).on("click",".deleteemployexperience",function(e){
             Employ.deleteEmployExperience($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (experience,index) {
-                    var deletecode = `<a data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+                    var deletecode = `<a data-id="${experience.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployexperience">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -632,7 +632,7 @@ $(document).on("click",".deleteemploytraining",function(e){
             Employ.deleteEmployTraining($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (training,index) {
-                    var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+                    var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemploytraining">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -3100,7 +3100,7 @@ $(document).on('change', '#boardattachment', function(e) {
             success: function(data){
                 var html = ``;
                 data.forEach(function (attachment,index) {
-                    var deletecode = `<a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
+                    var deletecode = `<a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteboardattachment">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -3134,7 +3134,7 @@ $(document).on("click",".deleteboardattachment",function(e){
                 var html = ``;
                 var html = ``;
                 data.forEach(function (attachment,index) {
-                    var deletecode = `<a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
+                    var deletecode = `<a  data-id="${attachment.id}" data-name="" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteboardattachment">ลบ</a>`;
                     if( $("#fulltbpstatus").val() > 1){
                         deletecode = ``;
                     }
@@ -3525,7 +3525,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
             if(educationlevel == 'อื่นๆ'){
                 educationlevel = education.otheremployeducationlevel;
             }
-            var deletecode = `<a  data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+            var deletecode = `<a  data-id="${education.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployeducation">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3544,7 +3544,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
         var experiencetable = '';
         
         data.employexperiences.forEach(function (experience,index) {
-            var deletecode = `<a  data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+            var deletecode = `<a  data-id="${experience.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployexperience">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3561,7 +3561,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
 
          var trainingtable = '';
          data.employtrainings.forEach(function (training,index) {
-            var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+            var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemploytraining">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3575,7 +3575,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
           $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
         var attachment  = '';
           data.fullTbpboardattachments.forEach(function (boardattachment,index) {
-            var deletecode = `<a  data-id="${boardattachment.id}" class="btn btn-sm bg-danger deleteboardattachment">ลบ</a>`;
+            var deletecode = `<a  data-id="${boardattachment.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteboardattachment">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3675,7 +3675,7 @@ function modaltrigger(id) {
             if(educationlevel == 'อื่นๆ'){
                 educationlevel = education.otheremployeducationlevel;
             }
-            var deletecode = `<a  data-id="${education.id}" class="btn btn-sm bg-danger deleteemployeducation">ลบ</a>`;
+            var deletecode = `<a  data-id="${education.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployeducation">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3684,14 +3684,14 @@ function modaltrigger(id) {
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
                 <td> ${education.employeducationyearstart} - ${education.employeducationyearend} </td> 
-                <td > ${deletecode} </td> 
+                <td > ${deletecode}</td> 
             </tr>`
             });
         $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
 
         var experiencetable = '';
         data.employexperiences.forEach(function (experience,index) {
-            var deletecode = `<a  data-id="${experience.id}" class="btn btn-sm bg-danger deleteemployexperience">ลบ</a>`;
+            var deletecode = `<a  data-id="${experience.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemployexperience">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }
@@ -3708,7 +3708,7 @@ function modaltrigger(id) {
 
          var trainingtable = '';
          data.employtrainings.forEach(function (training,index) {
-            var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger deleteemploytraining">ลบ</a>`;
+            var deletecode = `<a  data-id="${training.id}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteemploytraining">ลบ</a>`;
             if( $("#fulltbpstatus").val() > 1){
                 deletecode = ``;
             }

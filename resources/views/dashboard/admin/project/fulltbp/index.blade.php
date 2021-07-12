@@ -24,14 +24,14 @@
                             <div class="col-md-12">
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-input-styled" name="result" value="1" checked data-fouc>
+                                        <input type="radio" class="form-input-styled" name="result" value="1" data-fouc>
                                         อนุมัติ
                                     </label>
                                 </div>
             
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-input-styled" name="result" value="2" data-fouc>
+                                        <input type="radio" class="form-input-styled" name="result" value="2" checked data-fouc>
                                         ให้แก้ไข
                                     </label>
                                 </div>

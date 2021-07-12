@@ -190,11 +190,13 @@ class FullTbpController extends Controller
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ;
+        $fulltbp_edit_note = "";
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
             $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project. 'ที่มีการแก้ไข' ;
+            $fulltbp_edit_note = ' โดยมีรายละเอียด ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>';
         }
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
@@ -223,7 +225,7 @@ class FullTbpController extends Controller
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 
-        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,User::find($projectassignment->leader_id)->id);
+        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,' บริษัท'. $company->name . ' ได้ส่ง'.$message . $fulltbp_edit_note .' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,User::find($projectassignment->leader_id)->id);
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
@@ -235,14 +237,13 @@ class FullTbpController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message. $fulltbp_edit_note.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         Ev::where('full_tbp_id',$request->id)->first()->update([
             'name' => $minitbp->project
         ]);
 
         CreateUserLog::createLog('ส่ง' . $message);
-
     }
     
     public function SubmitWithNoAttachement(Request $request){
@@ -265,13 +266,14 @@ class FullTbpController extends Controller
 
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ;
+        $fulltbp_edit_note = '';
         if($fulltbp->refixstatus == 1){
             $fulltbp->update([
                 'refixstatus' => 2  
             ]);
             $message = 'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project. 'ที่มีการแก้ไข' ;
+            $fulltbp_edit_note = ' โดยมีรายละเอียด ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>';
         }
-
         
         BusinessPlan::find($minitbp->business_plan_id)->update([
             'business_plan_status_id' => 5
@@ -297,7 +299,7 @@ class FullTbpController extends Controller
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 
-        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,' บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',$auth->id,User::find($projectassignment->leader_id)->id);
+        $messagebox = Message::sendMessage($message . ' บริษัท'. $company->name,' บริษัท'. $company->name . ' ได้ส่ง'.$message.$fulltbp_edit_note.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',$auth->id,User::find($projectassignment->leader_id)->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
@@ -310,7 +312,7 @@ class FullTbpController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:'.$message . ' บริษัท'. $company->name,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.$fulltbp_edit_note.' กรุณาตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
         
         Ev::where('full_tbp_id',$request->id)->first()->update([
             'name' => $minitbp->project
