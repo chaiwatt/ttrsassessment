@@ -1005,8 +1005,8 @@
                                                     </td>
                                                     <td style="white-space: nowrap"> 
                                                         @if ($fulltbp->expertassignments->count() > 0)
-                                                        {{$fulltbp->expertassignments->where('expert_assignment_status_id',1)->count()}}
-                                                                @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
+                                                        {{-- {{$fulltbp->expertassignments->where('expert_assignment_status_id',1)->count()}} --}}
+                                                                {{-- @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
                                                                         @if (Auth::user()->user_type_id >= 5)
                                                                                 <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">อยู่ระหว่าง Manager พิจารณา</a>
                                                                             @else
@@ -1020,7 +1020,44 @@
                                                                                     <span class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</span>
                                                                                 </a>
                                                                         @endif
-                                                                @endif  
+                                                                @endif   --}}
+
+
+                                                                @if ($fulltbp->expertassignments->where('expert_assignment_status_id',2)->count() > 0)
+                                                                        @if ($fulltbp->assignexpert !=2)
+                                                                            <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                        @else
+                                                                            <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" >
+                                                                                <span class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</span>
+                                                                            </a>
+                                                                        @endif
+                                                                    @else
+                                                                        @if (Auth::user()->user_type_id >= 5)
+                                                                                <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">อยู่ระหว่าง Manager พิจารณา</a>
+                                                                            @else
+                                                                                @if (Auth::user()->isProjectLeader($fulltbp->id) == 1)
+                                                                                        <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">อยู่ระหว่าง Manager พิจารณา</a>
+                                                                                    @else
+                                                                                        <span class="badge badge-flat border-danger text-danger-600">อยู่ระหว่าง Manager พิจารณา</span>
+                                                                                @endif
+                                                                                
+                                                                        @endif
+                                                                        {{-- @if (Auth::user()->user_type_id >= 5)
+                                                                                <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">อยู่ระหว่าง Manager พิจารณา</a>
+                                                                            @else
+                                                                                <span class="badge badge-flat border-danger text-danger-600">อยู่ระหว่าง Manager พิจารณา</span>
+                                                                        @endif
+                                                                    @elseif($fulltbp->expertassignments->where('expert_assignment_status_id',2)->count() > 0)
+                                                                        @if ($fulltbp->assignexpert !=2)
+                                                                                <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-pink">อยู่ระหว่างผู้เชียวชาญตอบรับ</a>
+                                                                            @else
+                                                                                <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" >
+                                                                                    <span class="badge badge-flat border-success text-success-600">มอบหมายแล้ว</span>
+                                                                                </a>
+                                                                        @endif --}}
+                                                                @endif
+
+
                                                             @else
                                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 0)
                                                                     <span class="badge badge-flat border-danger text-danger-600">ยังไม่ได้มอบหมาย</span>
