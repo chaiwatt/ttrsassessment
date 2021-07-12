@@ -64,7 +64,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
 
         $company_name = (!Empty($businessplan->company->name))?$businessplan->company->name:'';
-        $bussinesstype = $businessplan->business_type_id;
+        $bussinesstype = $businessplan->company->business_type_id;
 
         $fullcompanyname = $company_name;
         if($bussinesstype == 1){

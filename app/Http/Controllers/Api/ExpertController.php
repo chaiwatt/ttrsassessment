@@ -125,7 +125,7 @@ class ExpertController extends Controller
 
 
             $company_name = (!Empty($company->name))?$company->name:'';
-            $bussinesstype = $businessplan->business_type_id;
+            $bussinesstype = $businessplan->company->business_type_id;
 
             $fullcompanyname = $company_name;
             if($bussinesstype == 1){

@@ -114,7 +114,7 @@ class CronSendmail extends Command
                     $businessplan = BusinessPlan::find($minitbp->business_plan_id);
 
                     $company_name = (!Empty($businessplan->company->name))?$businessplan->company->name:'';
-                    $bussinesstype = $businessplan->business_type_id;
+                    $bussinesstype = $businessplan->company->business_type_id;
             
                     $fullcompanyname = $company_name;
                     if($bussinesstype == 1){
