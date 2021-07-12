@@ -615,7 +615,7 @@ class DashboardAdminProjectAssessmentController extends Controller
 
         // $path = public_path("storage/uploads/");
         // $randname = str_random(10);
-        // $shortpdf->save($path.$randname.'_shortdetail.pdf');
+        // $shortpdf->save($path.$randname.'st.pdf');
         // $pdf->save($path.$randname.'.pdf');
         return $pdf->stream('expertcomment.pdf',array('Attachment'=>0));
     }
