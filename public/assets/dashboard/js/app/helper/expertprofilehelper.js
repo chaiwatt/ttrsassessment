@@ -34,7 +34,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
              html += `<tr >                                        
                  <td> ${expertdoc.order} </td>                                            
                  <td> ${expertdoc.detail} </td> 
-                 <td> 
+                 <td style="width:1%;white-space: nowrap"> 
                  <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
                  <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                        
                  </td>
@@ -73,7 +73,7 @@ $(document).on("click",".deleteexpertfield",function(e){
                     html += `<tr >                                        
                         <td> ${expertdoc.order} </td>                                            
                         <td> ${expertdoc.detail} </td> 
-                        <td> 
+                        <td style="width:1%;white-space: nowrap"> 
                         <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
                         <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                       
                         </td>
@@ -135,7 +135,7 @@ $("#btn_modal_edit_expertfield").on('click', function() {
              html += `<tr >                                        
                  <td> ${expertdoc.order} </td>                                            
                  <td> ${expertdoc.detail} </td> 
-                 <td> 
+                 <td style="width:1%;white-space: nowrap"> 
                      <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
                      <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                                                              
                  </td>
@@ -190,7 +190,7 @@ $("#expertdoc").on('change', function() {
                 data.forEach(function (expertdoc,index) {
                     html += `<tr >                                        
                         <td> ${expertdoc.name} </td>                                            
-                        <td> 
+                        <td style="width:1%;white-space: nowrap"> 
                             <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             <a data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
                         </td>
@@ -221,7 +221,7 @@ $(document).on("click",".deleteexpertdoc",function(e){
                 data.forEach(function (expertdoc,index) {
                     html += `<tr >                                        
                         <td> ${expertdoc.name} </td>                                            
-                        <td> 
+                        <td style="width:1%;white-space: nowrap"> 
                             <a href="${route.url}/${expertdoc.path}" class=" btn btn-sm bg-primary" data-toggle="modal" target="_blank">ดูเอกสาร</a>
                             <a data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc" data-toggle="modal">ลบ</a>                                       
                         </td>

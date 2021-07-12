@@ -544,7 +544,7 @@
 																	<tr class="bg-info">
 																		<th style="width:10%">ลำดับ</th> 
 																		<th style="width:70%">รายละเอียด</th> 
-																		<th style="width:20%">เพิ่มเติม</th>                                                                                   
+																		<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                                                                     
 																	</tr>
 																</thead>
 																<tbody id="expertfield_wrapper_tr"> 
@@ -552,7 +552,7 @@
 																		<tr >                                        
 																			<td> {{$expertfield->order}}</td>                                            
 																			<td> {{$expertfield->detail}}</td>    
-																			<td> 
+																			<td style="width:1%;white-space: nowrap"> 
 																				<a href="#" data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>  
 																				<a href="#" data-id="{{$expertfield->id}}" data-toggle="modal" class="btn btn-sm bg-info editexpertfield">แก้ไข</a>                                                                            
 																			</td>
@@ -575,14 +575,14 @@
 																<thead>
 																	<tr class="bg-info">
 																		<th style="width:80%">ไฟล์</th> 
-																		<th style="width:20%">เพิ่มเติม</th>                                                                                   
+																		<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                                                                   
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_expertdoc_wrapper_tr"> 
 																	@foreach ($expertdocs as $expertdoc)
 																		<tr >                                        
 																			<td> {{$expertdoc->name}}</td>                                            
-																			<td> 
+																			<td style="width:1%;white-space: nowrap"> 
 																				<a href="{{asset($expertdoc->path)}}" class="btn btn-sm bg-primary"  target="_blank">ดูเอกสาร</a>
 																				<a  data-id="{{$expertdoc->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertdoc">ลบ</a>                                       
 																			</td>
