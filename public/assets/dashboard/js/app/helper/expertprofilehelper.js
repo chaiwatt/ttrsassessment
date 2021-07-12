@@ -306,6 +306,13 @@ $("#avatarimg").on('change', function() {
 });
 
 $("#sameaddress").on('change', function() {
+    if($("#province").val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ยังไม่ได้เพิ่มที่อยู่ตามบัตรประจำตัวประชาชน',
+            });
+        return ;
+    }
     if(this.checked) {
         $("#contact_address_wrapper").attr("hidden",true);
         $("#address1").val($('#address').val());
@@ -336,9 +343,19 @@ $(document).on('change', '#province1', function(e) {
     }
     Geo.amphur($('#province1').val()).then(data => {
         let  html = "<option value='0'>===เลือกอำเภอ===</option>";
-        data.forEach((amphur,index) => 
-            html += `<option value='${amphur.id}'>${amphur.name}</option>`
-        )
+        // data.forEach((amphur,index) => 
+        //     html += `<option value='${amphur.id}'>${amphur.name}</option>`
+        // )
+
+        var i;
+        for (i = 0; i < data.length; i++) {
+            var str = data[i]['name'];
+            var n = str.indexOf("*");
+            if(n == -1){
+                html += `<option value='${data[i]['id']}'>${data[i]['name']}</option>`
+            }
+        }
+
         $("#amphur1").html(html);
         // if(($("#amphur").val() !== '' || $("#amphur").val() !== 0) &&  $('#sameaddress').is(":checked") == true){
         //     console.log('ww');
