@@ -138,7 +138,12 @@ class ExpertController extends Controller
                 $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
             }
 
-            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' ของ' . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' ของ'.$fullcompanyname.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>ดำเนินการ</a>',Auth::user()->id,$request->id);
+            $routename = route('dashboard.expert.report');
+            if($expert->user_type_id >= 4){
+                $routename = route('dashboard.admin.report');
+            }
+
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' ของ' . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' ของ'.$fullcompanyname.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.$routename.'>ดำเนินการ</a>',Auth::user()->id,$request->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -159,7 +164,7 @@ class ExpertController extends Controller
             $projectlog->action = 'Manager มอบหมายผูเชี่ยวชาญ (รายละเอียด: คุณ' . $expert->name . ' ' .$expert->lastname . ')';
             $projectlog->save();
 
-            EmailBox::send($expert->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' ของ'.$fullcompanyname,'เรียนคุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' ของ'.$fullcompanyname.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($expert->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .' ของ'.$fullcompanyname,'เรียนคุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' ของ'.$fullcompanyname.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.$routename.'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     }
 
     public function ExpertReject(Request $request){
