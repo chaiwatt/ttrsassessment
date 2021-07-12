@@ -908,7 +908,13 @@
                                                                 <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                                 <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                             @else
-                                                                {{$fulltbp->minitbp->project}}
+                                                            @if (Auth::user()->isColeader($fulltbp->id) > 0 )
+                                                                    <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
+                                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                                @else
+                                                                    {{$fulltbp->minitbp->project}}
+                                                            @endif
+                                                                
                                                             @endif
                                                     @endif          
                                                 </td>   
