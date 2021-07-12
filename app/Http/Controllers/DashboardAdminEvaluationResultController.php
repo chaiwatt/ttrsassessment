@@ -362,4 +362,38 @@ class DashboardAdminEvaluationResultController extends Controller
         $segment = new \Segment();
         return $segment->get_segment_array($data);
     } 
+
+    public static function FixBreak2($data){
+        $segment = new \Segment();
+        return $segment->get_segment_array_org($data);
+    } 
+
+    public static function FixBreak3($data){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://api.aiforthai.in.th/tlexplus?text=".$data,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_HTTPHEADER => array(
+            "Apikey: YG6FG6ur6kI58eDdKwYNBkQavGeaaVBX"
+          )
+        ));
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        
+        curl_close($curl);
+        
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+            echo implode("|",json_decode($response)->tokens);
+        }
+        
+    } 
 }

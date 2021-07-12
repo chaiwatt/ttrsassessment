@@ -1,4 +1,68 @@
 @inject('provider', 'App\Http\Controllers\DashboardAdminEvaluationResultController')
+
+@php
+    function splitText($string,$len)
+    {
+   
+        $myArray = explode('|', $string);
+        $new_string = "";
+        $tmp_string = "";
+        $i=0;
+        foreach($myArray as $key => $word){
+            $tmp_string .= $word;
+            $strlen =  getStrLenTH($tmp_string);
+            if($strlen > $len ){
+                $tmp_string  = "";
+                    $new_string .=  $word . '<br>';
+                $i++;
+               
+            }else{
+                $new_string .= $word;
+            }
+        }
+        $check = substr($new_string, -5);
+        if($check  == '<br>'){
+            return (substr($new_string, 0, -4));
+        }
+        else{
+            return ($new_string);
+        }
+    }
+
+    function getStrLenTH($string)
+    {
+        $array = getMBStrSplit($string);
+        $count = 0;
+        foreach($array as $value)
+        {
+            $ascii = ord(iconv("UTF-8", "TIS-620", $value ));
+            
+            if( !( $ascii == 209 ||  ($ascii >= 212 && $ascii <= 218 ) || ($ascii >= 231 && $ascii <= 238 )) )
+            {
+                $count += 1;
+            }
+        }
+        return $count;
+    }
+
+    function getMBStrSplit($string, $split_length = 1){
+        mb_internal_encoding('UTF-8');
+        mb_regex_encoding('UTF-8'); 
+        
+        $split_length = ($split_length <= 0) ? 1 : $split_length;
+        $mb_strlen = mb_strlen($string, 'utf-8');
+        $array = array();
+        $i = 0; 
+        
+        while($i < $mb_strlen)
+        {
+            $array[] = mb_substr($string, $i, $split_length);
+            $i = $i+$split_length;
+        }  
+        return $array;
+    }
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,6 +97,11 @@
             }
             div{
                 font-size:12px !important;
+            }
+            .specifixpre{
+                font-family: "THSarabunNew";
+                margin-top: 50px !important;
+                padding: 50px !important;
             }
         </style>
     </head>
@@ -159,10 +228,10 @@
                                 <table class="mt5  border tbwrap" >
                                     <thead>
                                         <tr>
-                                            <th style="font-size:13px;width:100px">ระดับ</th>
-                                            <th style="width:35%;font-size:13px">ชื่อสถานศึกษา</th>
-                                            <th style="width:20%;font-size:13px">สาขาวิชาเอก</th>
-                                            <th style="width:150px;font-size:12px;text-align:center">ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)</th>
+                                            <th style="font-size:13px">ระดับ</th>
+                                            <th style="width:30%;font-size:13px">ชื่อสถานศึกษา</th>
+                                            <th style="width:30%;font-size:13px">สาขาวิชาเอก</th>
+                                            <th style="font-size:12px;text-align:center">ปีที่ศึกษา<pre style="font-family: THSarabunNew">(เริ่มต้น-สิ้นสุด)</pre></th>
                                         <tr>
                                     </thead>
                                     <tbody>
@@ -176,9 +245,9 @@
                                                                 {{$employeducation->employeducationlevel}} 
                                                         @endif
                                                     </td>
-                                                    <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
-                                                    <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
-                                                    <td style="font-size:13px;text-align:center">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
+                                                    <td style="font-size:13px">{!!splitText($provider::FixBreak2($employeducation->employeducationinstitute),15)!!}</td>
+                                                    <td style="font-size:13px">{!!splitText($provider::FixBreak2($employeducation->employeducationmajor),15)!!}</td>
+                                                    <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                 </tr>   
                                             @endforeach   
                                         @endif
@@ -191,11 +260,11 @@
                                 <table class="mt5  tbwrap" >
                                     <thead>
                                         <tr>
-                                            <th style="width:20%;font-size:13px;" colspan="2">ช่วงเวลาการทำงาน</th>
-                                            <th style="width:15%;font-size:13px;" rowspan="2">บริษัท</th>
-                                            <th style="width:15%;font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
-                                            <th style="width:15%;font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
-                                            <th style="width:15%;font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
+                                            <th style="font-size:13px;" colspan="2">ช่วงเวลาการทำงาน</th>
+                                            <th style="width:30%;font-size:13px;" rowspan="2">บริษัท</th>
+                                            <th style="width:20%;font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
+                                            <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
+                                            <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
                                         </tr>
                                         <tr>
                                             <th style="font-size:13px;width:10%" >เริ่มต้น</th>
@@ -209,10 +278,11 @@
                                                 <tr>
                                                     <td style="font-size:13px">{{$employexperience->startdate}}</td>
                                                     <td style="font-size:13px">{{$employexperience->enddate}}</td>
-                                                    <td style="font-size:13px">{{$employexperience->company}}</td>
-                                                    <td style="font-size:13px">{{$employexperience->businesstype}}</td>
-                                                    <td style="font-size:13px">{{$employexperience->startposition}}</td>
-                                                    <td style="font-size:13px">{{$employexperience->endposition}}</td>
+                                                    <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->company),20)!!}</td>
+                                                    <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->businesstype),10)!!}</td>
+                                                    <td style="font-size:13px">{!!splitText($provider::FixBreak2($employexperience->startposition),7)!!}</td>
+                                                    <td style="font-size:13px">{!!splitText($provider::FixBreak2($employexperience->endposition),7)!!}</td>
+
                                                 </tr>   
                                             @endforeach
                                         @endif
@@ -225,8 +295,8 @@
                                 <table class="mt5  border tbwrap" >
                                     <thead>
                                         <tr>
-                                            <th style="font-size:13px;width:100px">วัน เดือน ปี</th>
-                                            <th style="font-size:13px">หลักสูตร</th>
+                                            <th style="font-size:13px">วัน เดือน ปี</th>
+                                            <th style="width:50%;font-size:13px">หลักสูตร</th>
                                             <th style="font-size:13px">หน่วยงานผู้จัด</th>
                                         <tr>
                                     </thead>
@@ -235,8 +305,8 @@
                                             @foreach ($fulltbp->employtraining as $employtraining)
                                                 <tr>
                                                     <td style="font-size:13px">{{$employtraining->trainingdateth}}</td>
-                                                    <td style="font-size:13px">{{$employtraining->course}}</td>
-                                                    <td style="font-size:13px">{{$employtraining->owner}}</td>
+                                                    <td style="font-size:13px">{!!splitText($provider::FixBreak2($employtraining->course),25)!!}</td>
+                                                    <td style="font-size:13px">{!!splitText($provider::FixBreak2($employtraining->owner),20)!!}</td>
                                                 </tr>   
                                             @endforeach
                                         @endif
@@ -275,10 +345,10 @@
                                         <table class="mt5  border tbwrap" >
                                             <thead>
                                                 <tr>
-                                                    <th style="font-size:13px;width:100px">ระดับ</th>
-                                                    <th style="width:35%;font-size:13px">ชื่อสถานศึกษา</th>
-                                                    <th style="width:20%;font-size:13px">สาขาวิชาเอก</th>
-                                                    <th style="width:150px;font-size:12px;text-align:center">ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)</th>
+                                                    <th style="font-size:13px">ระดับ</th>
+                                                    <th style="width:30%;font-size:13px">ชื่อสถานศึกษา</th>
+                                                    <th style="width:30%;font-size:13px">สาขาวิชาเอก</th>
+                                                    <th style="font-size:12px;text-align:center">ปีที่ศึกษา<pre style="font-family: THSarabunNew">(เริ่มต้น-สิ้นสุด)</pre></th>
                                                 <tr>
                                             </thead>
                                             <tbody>
@@ -294,8 +364,8 @@
                                                                 @endif
                                                             
                                                             </td>
-                                                            <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
-                                                            <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employeducation->employeducationinstitute),15)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employeducation->employeducationmajor),15)!!}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                         </tr>   
                                                     @endforeach
@@ -306,14 +376,14 @@
                                 @endif
                                 @if ($companyemboard->employexperience->count() > 0)
                                     <div class="ml30 mt20" style="page-break-inside: avoid;"><strong>ประวัติการทำงาน</strong>
-                                        <table class="mt5  tbwrap" >
+                                        <table class="mt5 border tbwrap">
                                             <thead>
                                                 <tr>
-                                                    <th style="width:20%;font-size:13px;" colspan="2">ช่วงเวลาการทำงาน</th>
-                                                    <th style="width:15%;font-size:13px;" rowspan="2">บริษัท</th>
-                                                    <th style="width:15%;font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
-                                                    <th style="width:15%;font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
-                                                    <th style="width:15%;font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
+                                                    <th style="font-size:13px;" colspan="2">ช่วงเวลาการทำงาน</th>
+                                                    <th style="width:30%;font-size:13px;" rowspan="2">บริษัท</th>
+                                                    <th style="width:20%;font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
+                                                    <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
+                                                    <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-size:13px;width:10%" >เริ่มต้น</th>
@@ -327,10 +397,10 @@
                                                         <tr>
                                                             <td style="font-size:13px">{{$employexperience->startdate}}</td>
                                                             <td style="font-size:13px">{{$employexperience->enddate}}</td>
-                                                            <td style="font-size:13px">{!!$provider::FixBreak($employexperience->company)!!}</td>
-                                                            <td style="font-size:13px">{!!$provider::FixBreak($employexperience->businesstype)!!}</td>
-                                                            <td style="font-size:13px">{{$employexperience->startposition}}</td>
-                                                            <td style="font-size:13px">{{$employexperience->endposition}}</td>
+                                                            <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->company),20)!!}</td>
+                                                            <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->businesstype),10)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employexperience->startposition),7)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employexperience->endposition),7)!!}</td>
                                                         </tr>   
                                                     @endforeach 
                                                 @endif
@@ -340,12 +410,12 @@
                                 @endif
                                 @if ($companyemboard->employtraining->count() > 0)
                                     <div class="ml30 mt20" style="page-break-inside: avoid;"><strong>ประวัติการฝึกอบรม</strong>
-                                        <table class="mt5  border tbwrap" >
+                                        <table class="mt5 border tbwrap" >
                                             <thead>
                                                 <tr>
-                                                    <th style="width:25%">วัน เดือน ปี</th>
-                                                    <th style="font-size:13px">หลักสูตร</th>
-                                                    <th style="width:20%">หน่วยงานผู้จัด</th>
+                                                    <th style="font-size:13px">วัน เดือน ปี</th>
+                                                    <th style="width:50%;font-size:13px">หลักสูตร</th>
+                                                    <th style="font-size:13px">หน่วยงานผู้จัด</th>
                                                 <tr>
                                             </thead>
                                             <tbody>
@@ -353,8 +423,8 @@
                                                     @foreach ($companyemboard->employtraining as $employtraining)
                                                         <tr>
                                                             <td style="font-size:13px">{{$employtraining->trainingdateth}}</td>
-                                                            <td style="font-size:13px">{{$employtraining->course}}</td>
-                                                            <td style="font-size:13px">{{$employtraining->owner}}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employtraining->course),25)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employtraining->owner),20)!!}</td>
                                                         </tr>   
                                                     @endforeach
                                                 @endif
@@ -404,10 +474,10 @@
                                             <thead>
                                                 <tr>
                                                     <tr>
-                                                        <th style="font-size:13px;width:100px">ระดับ</th>
-                                                        <th style="width:35%;font-size:13px">ชื่อสถานศึกษา</th>
-                                                        <th style="width:20%;font-size:13px">สาขาวิชาเอก</th>
-                                                        <th style="width:150px;font-size:12px;text-align:center">ปีที่ศึกษา (เริ่มต้น-สิ้นสุด)</th>
+                                                        <th style="font-size:13px">ระดับ</th>
+                                                        <th style="width:30%;font-size:13px">ชื่อสถานศึกษา</th>
+                                                        <th style="width:30%;font-size:13px">สาขาวิชาเอก</th>
+                                                        <th style="font-size:12px;text-align:center">ปีที่ศึกษา<pre style="font-family: THSarabunNew">(เริ่มต้น-สิ้นสุด)</pre></th>
                                                     <tr>
                                                 <tr>
                                             </thead>
@@ -423,8 +493,8 @@
                                                                 @endif
                                                             
                                                             </td>
-                                                            <td style="font-size:13px">{{$employeducation->employeducationinstitute}}</td>
-                                                            <td style="font-size:13px">{!!$provider::FixBreak($employeducation->employeducationmajor)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employeducation->employeducationinstitute),15)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employeducation->employeducationmajor),15)!!}</td>
                                                             <td style="font-size:13px">{{$employeducation->employeducationyearstart}} - {{$employeducation->employeducationyearend}}</td>
                                                         </tr>   
                                                     @endforeach
@@ -439,11 +509,11 @@
                                         <table class="mt5  tbwrap" >
                                             <thead>
                                                 <tr>
-                                                    <th style="font-size:13px;width:100px" colspan="2">ช่วงเวลาการทำงาน</th>
-                                                    <th style="font-size:13px;" rowspan="2">บริษัท</th>
-                                                    <th style="font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
-                                                    <th style="width:20%;font-size:13px" rowspan="2">ตำแหน่งแรกเข้า</th>
-                                                    <th style="width:20%;font-size:13px" rowspan="2">ตำแหน่งล่าสุด</th>
+                                                    <th style="font-size:13px;" colspan="2">ช่วงเวลาการทำงาน</th>
+                                                    <th style="width:30%;font-size:13px;" rowspan="2">บริษัท</th>
+                                                    <th style="width:20%;font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
+                                                    <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
+                                                    <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-size:13px;width:50px" >เริ่มต้น</th>
@@ -455,12 +525,19 @@
                                                 @if ($companyemploy->employexperience->count() > 0)
                                                     @foreach ($companyemploy->employexperience as $employexperience)
                                                         <tr>
-                                                            <td style="font-size:13px">{{$employexperience->startdate}}</td>
+                                                            {{-- <td style="font-size:13px">{{$employexperience->startdate}}</td>
                                                             <td style="font-size:13px">{{$employexperience->enddate}}</td>
                                                             <td style="font-size:13px">{!!$provider::FixBreak($employexperience->company)!!}</td>
                                                             <td style="font-size:13px">{{$employexperience->businesstype}}</td>
                                                             <td style="font-size:13px">{{$employexperience->startposition}}</td>
-                                                            <td style="font-size:13px">{{$employexperience->endposition}}</td>
+                                                            <td style="font-size:13px">{{$employexperience->endposition}}</td> --}}
+
+                                                            <td style="font-size:13px">{{$employexperience->startdate}}</td>
+                                                            <td style="font-size:13px">{{$employexperience->enddate}}</td>
+                                                            <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->company),20)!!}</td>
+                                                            <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->businesstype),10)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employexperience->startposition),7)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employexperience->endposition),7)!!}</td>
                                                         </tr>   
                                                     @endforeach  
                                                 @endif
@@ -474,9 +551,9 @@
                                         <table class="mt5  border tbwrap" >
                                             <thead>
                                                 <tr>
-                                                    <th style="width:25%;font-size:13px">วัน เดือน ปี</th>
-                                                    <th style="font-size:13px">หลักสูตร</th>
-                                                    <th style="width:20%;font-size:13px">หน่วยงานผู้จัด</th>
+                                                    <th style="font-size:13px">วัน เดือน ปี</th>
+                                                    <th style="width:50%;font-size:13px">หลักสูตร</th>
+                                                    <th style="font-size:13px">หน่วยงานผู้จัด</th>
                                                 <tr>
                                             </thead>
                                             <tbody>
@@ -484,8 +561,8 @@
                                                     @foreach ($companyemploy->employtraining as $employtraining)
                                                         <tr>
                                                             <td style="font-size:13px">{{$employtraining->trainingdateth}}</td>
-                                                            <td style="font-size:13px">{{$employtraining->course}}</td>
-                                                            <td style="font-size:13px">{{$employtraining->owner}}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employtraining->course),25)!!}</td>
+                                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($employtraining->owner),20)!!}</td>
                                                         </tr>   
                                                     @endforeach
                                                 @endif
@@ -522,7 +599,7 @@
                     <div class="ml30 mt0" style="font-size:13px;margin-buttom:-20px"> <strong>2.6 ข้อมูลเทคโนโลยี</strong>
                         <div class="ml30 mt0" style="font-size:13px"> <strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {!!$provider::FixBreak($fulltbp->techdev)!!}</div>
                     </div>
-                    <div class="ml30" style="font-size:13px;margin-top:-50px">    
+                    <div class="ml30" style="font-size:13px;margin-top:-20px">    
                         <div class="mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
                             <table class="mt5  border tbwrap" >
                                 <thead>
@@ -536,9 +613,9 @@
                                     @if ($fulltbp->fulltbpprojecttechdevlevel->count() > 0)
                                         @foreach ($fulltbp->fulltbpprojecttechdevlevel as $fulltbpprojecttechdevlevel)
                                             <tr>
-                                                <td style="font-size:13px">{{$fulltbpprojecttechdevlevel->technology}}</td>
-                                                <td style="font-size:13px">{{$fulltbpprojecttechdevlevel->presenttechnology}}</td>
-                                                <td style="font-size:13px">{{$fulltbpprojecttechdevlevel->projecttechnology}}</td>
+                                                <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpprojecttechdevlevel->technology),20)!!}</td>
+                                                <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpprojecttechdevlevel->presenttechnology),20)!!}</td>
+                                                <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpprojecttechdevlevel->projecttechnology),20)!!}</td>
                                             </tr>   
                                         @endforeach
                                     @endif
@@ -717,7 +794,7 @@
                     <div class="ml30 " style="font-size:13px"><strong>3.1 ข้อมูลด้านการตลาด</strong></div>
                     <div class="ml50" style="font-size:13px"><strong>Market analysis</strong></div>
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div>
-                    <div class="ml50" style="font-size:13px"><strong>Business model canvas</strong></div>
+                    <div class="ml50" style="font-size:13px;margin-top:-20px"><strong>Business model canvas</strong></div>
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div>
                     <div class="ml50" style="font-size:13px"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
@@ -737,7 +814,7 @@
                             @if ($fulltbp->fulltbpsell->count() > 0)
                                 @foreach ($fulltbp->fulltbpsell as $fulltbpsell)
                                     <tr>
-                                        <td style="font-size:13px"> {{$fulltbpsell->name}}</td> 
+                                        <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpsell->name),25)!!}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past3,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past2,2)}}</td>  
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past1,2)}} </td> 
@@ -769,7 +846,7 @@
                             @if ($fulltbp->fulltbpsellstatus->count() > 0)
                                 @foreach ($fulltbp->fulltbpsellstatus as $fulltbpsellstatus)
                                     <tr>
-                                        <td style="font-size:13px">{!!$provider::FixBreak($fulltbpsellstatus->name)!!}</td>
+                                        <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpsellstatus->name),30)!!}</td>
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past3,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past2,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past1,2)}} </td> 
@@ -796,14 +873,14 @@
                                     <th style="width:15%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
                                     <th style="width:10%;font-size:12px">ยอดขายต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
                                     <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดขาย (%)</pre></th>  
-                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
+                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน (ปี)</pre></th> 
                                 <tr>
                             </thead>
                             <tbody>
                                 @if ($fulltbp->fulltbpdebtpartner->count() > 0)
                                     @foreach ($fulltbp->fulltbpdebtpartner as $fulltbpdebtpartner)
                                         <tr>
-                                            <td style="font-size:13px"> {{$fulltbpdebtpartner->debtpartner}}</td> 
+                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpdebtpartner->debtpartner),20)!!}</td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->numproject}} </td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->totalyearsell,2)}}</td>                                            															
@@ -821,17 +898,17 @@
                             <thead>
                                 <tr>
                                     <th style="width:30%;font-size:12px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
-                                    <th style="width:20%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
-                                    <th style="width:20%;font-size:12px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
-                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับยอดซื้อ<pre style="font-family: THSarabunNew">(%)</pre></th>  
-                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
+                                    <th style="width:15%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
+                                    <th style="width:15%;font-size:12px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
+                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดซื้อ (%)</pre></th>  
+                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน (ปี)</pre></th> 
                                 <tr>
                             </thead>
                             <tbody>
                                 @if ($fulltbp->fulltbpcreditpartner->count() > 0)
                                     @foreach ($fulltbp->fulltbpcreditpartner as $fulltbpcreditpartner)
                                         <tr>
-                                            <td style="font-size:13px"> {{$fulltbpcreditpartner->creditpartner}}</td> 
+                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpcreditpartner->creditpartner),30)!!}</td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->totalyearpurchase,2)}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->percenttopurchase,2)}}</td> 
@@ -854,22 +931,22 @@
                         <table class="mt0  border tbwrap">
                             <thead>
                                 <tr>
-                                    <th style="width:30%;font-size:13px">รายการ</th>  
+                                    <th style="width:24%;font-size:13px">รายการ</th>  
                                     <th style="width:15%;font-size:13px">จำนวนเงิน <pre style="font-family: THSarabunNew">(บาท)</pre></th>                                                                                    
-                                    <th style="width:15%;font-size:13px">จำนวน(หน่วย)</th>       
-                                    <th style="width:15%;font-size:13px">ราคาต่อหน่วย<pre style="font-family: THSarabunNew">(บาท)</pre></th>  
-                                    <th style="width:25%;font-size:13px">ข้อมูลจำเพาะทางเทคนิค</th> 
+                                    <th style="width:12%;font-size:13px">จำนวน<pre style="font-family: THSarabunNew">(หน่วย)</pre></th>       
+                                    <th style="width:13%;font-size:13px">ราคาต่อหน่วย<pre style="font-family: THSarabunNew">(บาท)</pre></th>  
+                                    <th style="width:35%;font-size:13px">ข้อมูลจำเพาะทางเทคนิค</th> 
                                 <tr>
                             </thead>
                             <tbody>
                                 @if ($fulltbp->fulltbpasset->count() > 0)
                                     @foreach ($fulltbp->fulltbpasset as $fulltbpasset)
                                         <tr>
-                                            <td style="font-size:13px"> {{$fulltbpasset->asset}}</td> 
+                                            <td style="font-size:13px"> {!!splitText($provider::FixBreak2($fulltbpasset->asset),12)!!}</td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpasset->cost,2)}}</td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpasset->quantity}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpasset->price,2)}}</td> 
-                                            <td style="font-size:13px"> {{$fulltbpasset->specification}}</td> 
+                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpasset->specification),25)!!}</td> 
                                         </tr>   
                                     @endforeach
                                     <tr>
@@ -889,8 +966,8 @@
                         <table class="mt0  border tbwrap">
                             <thead>
                                 <tr>
-                                    <th style="width:80%;font-size:13px">รายการ </th>  
-                                    <th style="width:20%;font-size:13px">จำนวนเงิน (บาท)</th>  
+                                    <th style="width:75%;font-size:13px">รายการ </th>  
+                                    <th style="width:25%;font-size:13px">จำนวนเงิน (บาท)</th>  
                                 <tr>
                             </thead>
                             <tbody>
@@ -913,18 +990,18 @@
                         <table class="mt0  border">
                             <thead>
                                 <tr>
-                                    <th style="width:40%;font-size:13px">รายการ</th>  
-                                    <th style="width:15%;font-size:13px">เงินทุนที่มีอยู่แล้ว</th>                                                                                    
-                                    <th style="width:15%;font-size:13px">เงินทุนที่เสนอ<pre style="font-family: THSarabunNew">ขออนุมัติ</pre> </th>   
-                                    <th style="width:15%;font-size:13px">เงินทุนที่ได้รับ<pre style="font-family: THSarabunNew">การอนุมัติแล้ว</pre></th>   
-                                    <th style="width:15%;font-size:13px">แผนการหา <pre style="font-family: THSarabunNew">เงินทุนเพิ่ม</pre></th>   
+                                    <th style="width:26%;font-size:13px">รายการ</th>  
+                                    <th style="width:16%;font-size:13px">เงินทุนที่มีอยู่แล้ว</th>                                                                                    
+                                    <th style="width:16%;font-size:13px">เงินทุนที่เสนอ<pre style="font-family: THSarabunNew">ขออนุมัติ</pre> </th>   
+                                    <th style="width:16%;font-size:13px">เงินทุนที่ได้รับ<pre style="font-family: THSarabunNew">การอนุมัติแล้ว</pre></th>   
+                                    <th style="width:16%;font-size:13px">แผนการหา <pre style="font-family: THSarabunNew">เงินทุนเพิ่ม</pre></th>   
                                 <tr>
                             </thead>
                             <tbody>
                                 @if ($fulltbp->fulltbpcost->count() > 0)
                                     @foreach ($fulltbp->fulltbpcost as $fulltbpcost)
                                         <tr>
-                                            <td style="font-size:13px"> {{$fulltbpcost->costname}}</td> 
+                                            <td style="font-size:13px"> {!!splitText($provider::FixBreak2($fulltbpcost->costname),20)!!}</td> 
                                             <td style="font-size:13px;text-align: right">{{number_format(intval($fulltbpcost->existing),2)}}</td> 
                                             <td style="font-size:13px;text-align: right">{{number_format(intval($fulltbpcost->need),2)}}</td> 
                                             <td style="font-size:13px;text-align: right">{{number_format(intval($fulltbpcost->approved),2)}}</td> 

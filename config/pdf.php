@@ -16,6 +16,8 @@ return [
 	'watermark'            => '',
 	'show_watermark'       => false,
 	'watermark_font'       => 'thsarabunnew',
+	'keep_table_proportions'       => true,
+	'shrink_tables_to_fit'       => 1,
 	'display_mode'         => 'fullpage',
 	// 'SetCompression'         => 'false',
 	'watermark_text_alpha' => 0.1,

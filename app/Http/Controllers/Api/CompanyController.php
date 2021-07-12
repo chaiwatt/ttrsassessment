@@ -131,7 +131,7 @@ class CompanyController extends Controller
 
         if(!Empty($request->signaturebase64)){
             if(!Empty($employ->signature_id)){
-                unlink(Signature::find($employ->signature_id)->path);
+                @unlink(Signature::find($employ->signature_id)->path);
                 Signature::find($employ->signature_id)->delete();
             }
             // $signature = $request->signature;
