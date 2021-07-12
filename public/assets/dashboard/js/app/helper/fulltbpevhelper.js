@@ -192,13 +192,15 @@ function callDataTableExtra(){
 }
 
 $("#btnOnExcel").on('click', function() {
-    if (!$('#evextraexporttable').DataTable().data().any() ) {
+    if (!$('#evexporttable').DataTable().data().any() ) {
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
         });
+    }else{
+        $('#evexporttable').DataTable().buttons(0,0).trigger();
     }
-    $('#evexporttable').DataTable().buttons(0,0).trigger();
+
 });
 
 $("#btnOnPdf").on('click', function() {
@@ -207,8 +209,10 @@ $("#btnOnPdf").on('click', function() {
             title: 'ผิดพลาด...',
             text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
         });
+    }else{
+        $('#evexporttable').DataTable().buttons(0,1).trigger();
     }
-    $('#evexporttable').DataTable().buttons(0,1).trigger();
+   
 });
 
 $("#btnOnExcelExtra").on('click', function() {
@@ -218,8 +222,10 @@ $("#btnOnExcelExtra").on('click', function() {
             title: 'ผิดพลาด...',
             text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
         });
+    }else{
+        $('#evextraexporttable').DataTable().buttons(0,0).trigger();
     }
-    $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+    
 
 });
 
@@ -229,8 +235,10 @@ $("#btnOnPdfExtra").on('click', function() {
             title: 'ผิดพลาด...',
             text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
         });
+    }else{
+        $('#evextraexporttable').DataTable().buttons(0,1).trigger();
     }
-    $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+    
 });
 
 $(document).on('click', '#btnaddclustergroup', function(e) {
