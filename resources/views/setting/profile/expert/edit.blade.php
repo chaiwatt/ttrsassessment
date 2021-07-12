@@ -488,13 +488,15 @@
 												<div class="form-group">
 													<label>วุฒิการศึกษาสูงสุด<span class="text-danger">*</span></label>
 													<select name="educationlevel" id="educationlevel" data-placeholder="วุฒิการศึกษาสูงสุด" class="form-control form-control-lg form-control-select2">
-														@foreach ($educationlevels as $educationlevel)                                                                
-															<option value="{{$educationlevel->id}}" 
-																@if ($educationlevel->id == $expert->education_level_id) 
-																		selected 
-																	@else	
-																		@if (old('educationlevel') == $educationlevel->id) selected @endif
-																@endif > {{$educationlevel->name}} </option>
+														@foreach ($educationlevels as $educationlevel)   
+															@if ($educationlevel->name !="อื่นๆ")                                                             
+																<option value="{{$educationlevel->id}}" 
+																	@if ($educationlevel->id == $expert->education_level_id) 
+																			selected 
+																		@else	
+																			@if (old('educationlevel') == $educationlevel->id) selected @endif
+																	@endif > {{$educationlevel->name}} </option>
+															@endif
 														@endforeach     
 													</select>
 												</div>
