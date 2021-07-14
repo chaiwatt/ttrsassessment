@@ -163,8 +163,6 @@ class DashboardAdminCalendarController extends Controller
   }
     public function CreateSave(CreateCalendarRequest $request){
       $auth = Auth::user();
-      // $check = EventCalendar()->where('full_tbp_id',$request->fulltbp)
-
       EventCalendar::find($request->eventcalendarid)->update([
           'calendar_type_id' => $request->calendartype,
           'eventdate' => DateConversion::thaiToEngDate($request->eventdate),
@@ -176,16 +174,6 @@ class DashboardAdminCalendarController extends Controller
           'isnotify_id' => $request->isnotify
       ]);
       $eventcalendar = EventCalendar::find($request->eventcalendarid);
-      // $eventcalendar->full_tbp_id = $request->fulltbp;
-      // $eventcalendar->calendar_type_id = $request->calendartype;
-      // $eventcalendar->eventdate = DateConversion::thaiToEngDate($request->eventdate);
-      // $eventcalendar->starttime = $request->eventtimestart;
-      // $eventcalendar->endtime = $request->eventtimeend;
-      // $eventcalendar->place = $request->place;
-      // // $eventcalendar->room = $request->room;
-      // $eventcalendar->summary = $request->summary;
-      // $eventcalendar->isnotify_id = $request->isnotify;
-      // $eventcalendar->save();
 
       if($request->isnotify == 2){
         $meetingdate = new MeetingDate();
@@ -210,6 +198,20 @@ class DashboardAdminCalendarController extends Controller
       $businessplan = BusinessPlan::find($minitbp->business_plan_id);
       $company = Company::find($businessplan->company_id);
 
+      $company_name = (!Empty($company->name))?$company->name:'';
+      $bussinesstype = $company->business_type_id;
+
+      $fullcompanyname = $company_name;
+      if($bussinesstype == 1){
+          $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+      }else if($bussinesstype == 2){
+          $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+      }else if($bussinesstype == 3){
+          $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+      }else if($bussinesstype == 4){
+          $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+      }
+
       $calendarattachements = CalendarAttachement::where('event_calendar_id',$eventcalendar->id)->get();
       $attachmentfiles = '';
       if($calendarattachements->count() > 0){
@@ -220,62 +222,104 @@ class DashboardAdminCalendarController extends Controller
         $attachmentfiles = '<br><br><strong>เอกสารแนบ:</strong><br>' . $html . '</ul>';
       }
 
-      $messageheader = "ประชุมและสรุปผลการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
-      $logname = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน";
+      $messageheader = "" ;
+      $logname = "";
       if ($request->calendartype == 1) {
-        $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+        $logname = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน";
+        $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . $fullcompanyname;
       }
       else if ($request->calendartype == 2){
         $logname = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ";
-         $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+         $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project .$fullcompanyname;
+       }else if($request->calendartype == 3){
+        $messageheader = "ประชุมและสรุปผลการประเมิน และลงคะแนนโครงการ" . $minitbp->project .$fullcompanyname;
+        $logname = "ประชุมและสรุปผลการประเมิน";
        }
-      EmailBox::send($mails,'TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. 'มีรายละเอียดดังนี้' .
-      '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
-      '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-      '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-      '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-      '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-      $attachmentfiles.
-      '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+      
+       EmailBox::send($mails,'TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. 'มีรายละเอียดดังนี้' .
+       '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+       '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+       '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
+       '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+       '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
+       $attachmentfiles.
+       '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
+      if ($request->calendartype == 1 ) {
+        foreach($request->users as $user){
+            $_user = User::find($user);
+            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+            '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+            '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+            '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
+            '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+            '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
+            $attachmentfiles,Auth::user()->id,$_user->id);
+  
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $_user->id;
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' นัด'. $messageheader;
+            $alertmessage->save();
+  
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+      
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+            $notificationbubble->notification_category_id = 2;
+            $notificationbubble->notification_sub_category_id = 8;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $_user->id;
+            $notificationbubble->save();
+        }
+      }elseif($request->calendartype == 2){
+        foreach($request->users as $user){
+            $_user = User::find($user);
+            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+            '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+            '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+            '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
+            '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+            '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
+            $attachmentfiles,Auth::user()->id,$_user->id);
+  
+            $alertmessage = new AlertMessage();
+            $alertmessage->user_id = $auth->id;
+            $alertmessage->target_user_id = $_user->id;
+            $alertmessage->messagebox_id = $messagebox->id;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' นัด'. $messageheader;
+            $alertmessage->save();
+  
+            MessageBox::find($messagebox->id)->update([
+                'alertmessage_id' => $alertmessage->id
+            ]);
+      
+            $notificationbubble = new NotificationBubble();
+            $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+            $notificationbubble->notification_category_id = 2;
+            $notificationbubble->notification_sub_category_id = 8;
+            $notificationbubble->user_id = $auth->id;
+            $notificationbubble->target_user_id = $_user->id;
+            $notificationbubble->save();
+        }
 
-      foreach($request->users as $user){
-          $_user = User::find($user);
-          $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
-          '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
-          '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-          '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-          '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
-          '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-          $attachmentfiles,Auth::user()->id,$_user->id);
+        $messagebox =  Message::sendMessage('นัดหมายเข้าประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project ,'นัดหมายเข้าประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project,$auth->id,$company->user_id);
 
-          $alertmessage = new AlertMessage();
-          $alertmessage->user_id = $auth->id;
-          $alertmessage->target_user_id = $_user->id;
-          $alertmessage->messagebox_id = $messagebox->id;
-          $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' นัด'. $messageheader;
-          $alertmessage->save();
-
-          MessageBox::find($messagebox->id)->update([
-              'alertmessage_id' => $alertmessage->id
-          ]);
-    
-          $notificationbubble = new NotificationBubble();
-          $notificationbubble->business_plan_id = $minitbp->business_plan_id;
-          $notificationbubble->notification_category_id = 2;
-          $notificationbubble->notification_sub_category_id = 8;
-          $notificationbubble->user_id = $auth->id;
-          $notificationbubble->target_user_id = $_user->id;
-          $notificationbubble->save();
-      }
-
-      if ($request->calendartype == 2) {
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $company->user_id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน สำหรับโครงการ'.$minitbp->project;
+        $alertmessage->messagebox_id = $messagebox->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project;
         $alertmessage->save();
  
+
+        MessageBox::find($messagebox->id)->update([
+          'alertmessage_id' => $alertmessage->id
+        ]);
+
         EmailBox::send(User::find($company->user_id)->email,'TTRS:นัดหมายการประเมิน ณ สถานประกอบการ','เรียน ผู้ขอรับการประเมิน <br><br> แจ้งนัดหมายการประเมิน ณ สถานประกอบการ มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
@@ -312,19 +356,26 @@ class DashboardAdminCalendarController extends Controller
             $notificationbubble->target_user_id = $projectmember->user_id;
             $notificationbubble->save();
 
-             $messagebox =  Message::sendMessage('ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . ' บริษัท' . $company->name ,'ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . ' บริษัท' . $company->name . 'สามารถลงคะแนนได้ตั้งแต่วันนี้จนถึงวันก่อนการสรุปผล',$auth->id,$projectmember->user_id);
+            //$messagebox =  Message::sendMessage('ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . $fullcompanyname ,'ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . $fullcompanyname. 'สามารถลงคะแนนได้ตั้งแต่วันนี้จนถึงวันก่อนการสรุปผล',$auth->id,$projectmember->user_id);
+
+            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+            '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+            '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+            '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
+            '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+            '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
+            $attachmentfiles,Auth::user()->id,$projectmember->user_id);
           
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =  $projectmember->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Leader ยืนยันการประเมิน ณ สถานประกอบการเสร็จเรียบร้อยแล้ว สำหรับโครงการ' . $minitbp->project . ' บริษัท' . $company->name ;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . $fullcompanyname ;
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-
         }
       }
 

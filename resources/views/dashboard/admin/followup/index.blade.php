@@ -1,5 +1,6 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+
 @stop
 @section('content')
     <!-- Page header -->
@@ -66,6 +67,7 @@
                                     <tr>
                                         <th>เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>    
+                                        <th>บริษัท</th>  
                                         <th>สถานะ</th>                             
                                         <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
@@ -76,6 +78,7 @@
                                             <tr>    
                                                 <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                                 <td> {{$fulltbp->minitbp->project}} </td> 
+                                                <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                                 <td>
                                                     @if ($fulltbp->success_objective == 0)
                                                             <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ติดตาม</span>

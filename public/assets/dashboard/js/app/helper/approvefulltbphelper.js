@@ -66,24 +66,7 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
 });
 
 $(document).on('click', '.projectmember', function(e) {
-  //   $('#fulltbpid').val($(this).data('id'));
-  //   getUsers($(this).data('id')).then(data => {
-  //       var html =``;
-  //       var html1 =``;
-  //       data.projectmembers.forEach(function (projectmember,index) {
-  //         var deleteaction = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>`;
-  //         if (route.businessplanstatus > 7) {
-  //           deleteaction ='';
-  //         }
-  //           html1 += `<tr >                                        
-  //                       <td> ${projectmember.user['name']}</td>                            
-  //                       <td> ${projectmember.user['lastname']} </td>     
-  //                   </tr>`
-  //           });
-       
-  //       $("#usermember_wrapper_tr").html(html1);
-  //       $('#modal_edit_projectmember').modal('show');
-  //  }).catch(error => {})
+
  var isleader =$(this).data('isprojectleader');
     $('#fulltbpid').val($(this).data('id'));
       getUsers($(this).data('id')).then(data => {
@@ -93,17 +76,29 @@ $(document).on('click', '.projectmember', function(e) {
           if (isleader == 0) {
             $("#selectothermember").attr("hidden",true);
             $("#thother").attr("hidden",true);
-            hiddenbtn = 'hidden';
+            // hiddenbtn = 'hidden';
           }
           data.users.forEach(function (user,index) {
               html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
           });
           data.projectmembers.forEach(function (projectmember,index) {
+
+            var check = data.scoringstatuses.filter(x => x.user_id == projectmember.user_id)[0]; 
+            var moreinfo = ``;
+            if(typeof(check) != "undefined"){
+              moreinfo = `<span class="badge badge-flat border-success text-success-600">ลงคะแนนแล้ว</span>`;
+            }else{
+              if (isleader == 0) {
+                moreinfo = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ลงคะแนน</span>`;
+              }else{
+                moreinfo = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember" >ลบ</button>`;
+              }
+            }
               html1 += `<tr >                                        
                           <td> ${projectmember.user['name']}</td>                            
                           <td> ${projectmember.user['lastname']} </td>     
                           <td ${hiddenbtn}>   
-                              <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember" >ลบ</button>
+                              ${moreinfo}
                           </td>
                       </tr>`
               });

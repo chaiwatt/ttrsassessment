@@ -100,35 +100,33 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                        @if (!Empty($fulltbp->finalassessmentdate) && $fulltbp->canceldate == null)
-                                        {{-- {{Auth::user()->isProjectLeader($fulltbp->id)}} --}}
-                                            @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
-                                                <tr>    
-                                                    {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
-                                                    <td> {{$fulltbp->minitbp->project}} </td>  
-                                                    <td> {{$fulltbp->minitbp->businessplan->company->name}} </td>
-                                                    
-                                                    <td style="white-space: nowrap">
-                                                            @if ($fulltbp->allscoring == 0)
-                                                                @if ($fulltbp->done_assessment != 0)
-                                                                        @if ($fulltbp->ev->status == 5)
-                                                                                <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn btn-sm bg-success">สรุปเกรด</a>
-                                                                            @else
-                                                                                <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปรับปรุงคะแนน</a>
-                                                                        @endif
-                                                                    @else
-                                                                    <span class="badge badge-flat border-warning text-warning-600">รอเวลาสรุปคะแนน ({{@$fulltbp->finalassessmentdate}})</span>
-                                                                        
-                                                                @endif     
-                                                            @else   
-                                                                    <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ยังไม่ได้ประเมิน {{$fulltbp->allscoring}} คน</button>
-                                                            @endif 
-                                                    </td>                                
-                                                </tr>
+                                        @if (Empty($fulltbp->canceldate))
+                                            @if (!Empty($fulltbp->finalassessmentdate) && $fulltbp->canceldate == null)
+                                                @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
+                                                    <tr>    
+                                                        <td> {{$fulltbp->minitbp->project}} </td>  
+                                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td>
+                                                        
+                                                        <td style="white-space: nowrap">
+                                                                @if ($fulltbp->allscoring == 0)
+                                                                    @if ($fulltbp->done_assessment != 0)
+                                                                            @if ($fulltbp->ev->status == 5)
+                                                                                    <a href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn btn-sm bg-success">สรุปเกรด</a>
+                                                                                @else
+                                                                                    <a href="{{route('dashboard.admin.assessment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ปรับปรุงคะแนน</a>
+                                                                            @endif
+                                                                        @else
+                                                                        <span class="badge badge-flat border-warning text-warning-600">รอเวลาสรุปคะแนน ({{@$fulltbp->finalassessmentdate}})</span>
+                                                                            
+                                                                    @endif     
+                                                                @else   
+                                                                        <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ยังไม่ได้ประเมิน {{$fulltbp->allscoring}} คน</button>
+                                                                @endif 
+                                                        </td>                                
+                                                    </tr>
+                                                @endif
                                             @endif
-
                                         @endif
-
                                     @endforeach
                                 </tbody>
                             </table>      

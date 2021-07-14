@@ -137,7 +137,7 @@
                                                     <a class="text-info" href="{{route('dashboard.company.project.minitbp.edit',['id' => $businessplan->minitbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
                                                 @elseif($businessplan->business_plan_status_id >= 4)
                                                     @if ($businessplan->minitbp->fulltbp->canceldate != null)
-                                                            {{$businessplan->minitbp->project}} <span class="badge badge-flat border-danger text-danger-400 rounded-0">โครงการถูกยกเลิก</span>
+                                                            {{$businessplan->minitbp->project}} 
                                                         @else
                                                             @if ($businessplan->business_plan_status_id >= 9)
                                                                     <a class="text-info" href="{{route('dashboard.company.report.singlereport',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}}</a>
@@ -170,11 +170,16 @@
                                         @endif
                                         </td>
                                         <td style="white-space: nowrap"> 
-                                            @if ($businessplan->business_plan_status_id > 3 && $businessplan->business_plan_status_id < 10)
-                                                <span class="badge badge-flat border-warning text-warning-400 rounded-0">อยู่ระหว่างการประเมิน</span>
-                                                @elseif($businessplan->business_plan_status_id >= 9)
-                                                <span class="badge badge-flat border-success text-success-400 rounded-0">ประเมินเสร็จสิ้น</span>
+                                            @if (!Empty($businessplan->minitbp->fulltbp->canceldate))
+                                                    <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
+                                                @else
+                                                    @if ($businessplan->business_plan_status_id > 3 && $businessplan->business_plan_status_id < 10)
+                                                        <span class="badge badge-flat border-warning text-warning-400 rounded-0">อยู่ระหว่างการประเมิน</span>
+                                                        @elseif($businessplan->business_plan_status_id >= 9)
+                                                        <span class="badge badge-flat border-success text-success-400 rounded-0">ประเมินเสร็จสิ้น</span>
+                                                    @endif
                                             @endif
+
                                         </td>                                       
                                     </tr>
                                     @endforeach

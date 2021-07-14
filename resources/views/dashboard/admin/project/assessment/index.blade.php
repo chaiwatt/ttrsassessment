@@ -3,7 +3,7 @@
 @stop
 @section('content')
     <div id="modal_edit_projectmember" class="modal fade" style="overflow:hidden;">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ทีมลงคะแนน</h5>
@@ -115,54 +115,56 @@
                                     <input type="text" id="fulltbpid" hidden>
                                    
                                     @foreach ($fulltbps as $key => $fulltbp)
-                                        @if ($fulltbp->finished_onsite != 1 && $fulltbp->canceldate == null)
-                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
-                                                <tr>    
-                                                    {{-- <td> {{$fulltbp->minitbp->businessplan->code}} </td>  --}}
-                                                    <td> {{$fulltbp->minitbp->project}} </td>  
-                                                    <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                                    <td style="white-space: nowrap">
-                                                        @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
-                                                        <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
-                                                        @endif
-                                                       
-                                                    </td>
-                                                    <td style="white-space: nowrap"> 
-                                                        <button type="button" id="projectmember{{$fulltbp->id}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
-                                                    </td>  
-                                                    
-                                                    <td style="white-space: nowrap"> 
-                                                        @if (!Empty($fulltbp->finalassessmentdate))
-                                                                @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
-                                                                        <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>
-                                                                    @else
-                                                                        <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
-                                                                @endif
-                                                            @else
-                                                            @if ($fulltbp->finished_onsite == 0)
-                                                                <span class="badge badge-flat border-warning text-warning-600">รอ Leader ยืนยันลงพื้นที่</span>
-                                                            @else
-                                                                
-                                                                @if (Auth::user()->user_type_id == 4)
-                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
-                                                                            @if (Auth::user()->isProjectLeader($fulltbp->id) == 0)
-                                                                                <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
-                                                                                @else
-                                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                        @if (Empty($fulltbp->canceldate))
+                                            @if ($fulltbp->finished_onsite != 1 && $fulltbp->canceldate == null)
+                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
+                                                    <tr>    
+                                                        <td> {{$fulltbp->minitbp->project}} </td>  
+                                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                                        <td style="white-space: nowrap">
+                                                            @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
+                                                            <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
+                                                            @endif
+                                                        
+                                                        </td>
+                                                        <td style="white-space: nowrap"> 
+                                                            <button type="button" id="projectmember{{$fulltbp->id}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
+                                                        </td>  
+                                                        
+                                                        <td style="white-space: nowrap"> 
+                                                            @if (!Empty($fulltbp->finalassessmentdate))
+                                                                    @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
+                                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>
+                                                                        @else
+                                                                            <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้ลงคะแนน</a>
+                                                                    @endif
+                                                                @else
+                                                                @if ($fulltbp->finished_onsite == 0)
+                                                                    <span class="badge badge-flat border-warning text-warning-600">รอ Leader ยืนยันลงพื้นที่</span>
+                                                                @else
+                                                                    
+                                                                    @if (Auth::user()->user_type_id == 4)
+                                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
+                                                                                @if (Auth::user()->isProjectLeader($fulltbp->id) == 0)
+                                                                                    <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
+                                                                                    @else
+                                                                                        <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                                                                @endif
+                                                                                
                                                                             @endif
-                                                                            
-                                                                        @endif
-                                                                    @else
-                                                                        <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
-                                                                @endif
+                                                                        @else
+                                                                            <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
+                                                                    @endif
 
-                                                            @endif        
-                                                        @endif
-                                                    </td>     
-                                                                             
-                                                </tr>
+                                                                @endif        
+                                                            @endif
+                                                        </td>     
+                                                                                
+                                                    </tr>
+                                                @endif
                                             @endif
-                                        @endif
+
+                                        @endif 
 
                                     @endforeach
                                 </tbody>

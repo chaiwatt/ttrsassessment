@@ -67,6 +67,7 @@
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
+                                        <th>บริษัท</th> 
                                         <th>ประเภทกิจกรรม</th>  
                                         <th>วัน-เวลา</th>
                                         <th>สถานะ</th> 
@@ -77,10 +78,14 @@
                                     @foreach ($eventcalendars->reverse() as $key => $eventcalendar)
                                     <tr>    
                                         <td> {{$eventcalendar->fulltbp->minitbp->project}} </td> 
+                                        <td> {{$eventcalendar->fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                         <td> {{$eventcalendar->calendartype->name}}</td> 
                                         <td> {{$eventcalendar->eventdateth}} {{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} </td> 
                                         <td>
-                                            <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            @if ($eventcalendar->fulltbp->minitbp->businessplan->business_plan_status_id <8 || !Empty($fulltbp->canceldate))
+                                                <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            @endif
+                                            
                                             {{-- <a href="{{route('dashboard.admin.calendar.delete',['id' => $eventcalendar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td> 
                                     </tr>

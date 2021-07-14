@@ -2,6 +2,7 @@
 namespace App\Helper;
 
 use App\Mail\EmailSystem;
+use App\Model\GeneralInfo;
 use Illuminate\Support\Facades\Mail;
 
 class EmailBox
@@ -13,7 +14,10 @@ class EmailBox
             'title' => $title,
             'message' => $message
             ];
-            Mail::to($mailto)->send(new EmailSystem($data));
+            $generalinfo = GeneralInfo::first();
+            if($generalinfo->sendemail == 1){
+                Mail::to($mailto)->send(new EmailSystem($data));
+            }     
     } 
 
     public static function emailSignature(){

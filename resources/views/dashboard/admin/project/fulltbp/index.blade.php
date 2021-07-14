@@ -419,7 +419,10 @@
                                                     @endif
                                                 </td>  
                                                 <td style="white-space: nowrap">
-                                                    @if (!Empty($fulltbp->assessmentdate))
+                                                    @if (!Empty($fulltbp->canceldate))
+                                                        <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
+                                                    @else
+                                                        @if (!Empty($fulltbp->assessmentdate))
                                                             @if ($fulltbp->finished_onsite == 1)
                                                                     @if (Auth::user()->user_type_id == 4)
                                                                         <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยันการลงพื้นที่</button>
@@ -443,54 +446,39 @@
                                                                         @endif
                                                                 @endif 
                                                             @endif
-                                                       @else
-                                                            @if (Auth::user()->user_type_id == 4)
-                                                                    @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
-                                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                                <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
+                                                        @else
+                                                                @if (Auth::user()->user_type_id == 4)
+                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
+                                                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
+                                                                                    {{-- <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a> --}}
+                                                                                    <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
+                                                                                @else
+                                                                                    <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
+                                                                                @endif  
                                                                             @else
-                                                                                <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
-                                                                            @endif  
-                                                                        @else
-                                                                        @if ($fulltbp->minitbp->flowstagefour == true)
-                                                                                <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
-                                                                        @endif
-                                                                            
-                                                                    @endif
-                                                                @else
-                                                                        @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                            {{-- <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a> --}}
-                                                                            <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
-                                                                        @else
                                                                             @if ($fulltbp->minitbp->flowstagefour == true)
-                                                                                <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                                    <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                            @endif
+                                                                                
+                                                                        @endif
+                                                                    @else
+                                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
+                                                                                {{-- <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a> --}}
+                                                                                <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
+                                                                            @else
+                                                                                @if ($fulltbp->minitbp->flowstagefour == true)
+                                                                                    <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                                @endif
+                                                                                
                                                                             @endif
                                                                             
-                                                                        @endif
-                                                                        
-                                                            @endif
+                                                                @endif
+                                                        @endif
                                                     @endif
+
+                                                  
                                                    
                                                 </td>
-                                                {{-- <td> 
-                                                    <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
-                                                </td> --}}
-                                                {{-- <td class="text-right">
-                                                    <div class="list-icons">
-                                                        <div class="list-icons-item dropdown">
-                                                            <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> PDF</a>
-                                                                <a href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbp->id])}}" data-id="{{$fulltbp->id}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลดเอกสารแนบ</a>
-                                                                <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-eye2"></i> รายละเอียด</a>
-                                                                <a href="{{route('dashboard.admin.project.fulltbp.delete',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-trash"></i> ลบ</a>
-                                                                <div class="dropdown-divider"></div>
-                                                                <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtouser"><i class="icon-mail5"></i> อีเมลถึงผู้ประกอบการ</a>
-                                                                <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtomember"><i class="icon-mail5"></i> อีเเมลถึงทีมประเมิน</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>                               --}}
                                             </tr>
                                         @endif
                                     @endforeach

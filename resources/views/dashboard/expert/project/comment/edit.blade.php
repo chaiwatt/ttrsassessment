@@ -1,5 +1,10 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <!-- Page header -->
@@ -56,6 +61,13 @@
                 </div>
             @endforeach
         @endif
+
+        @php
+            $disable = '';
+            if($businessplan->business_plan_status_id >= 8){
+                $disable = 'disabled';
+            }
+        @endphp
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -74,46 +86,60 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="left-icon-overview">
                                 <div class="form-group">
-                                    <textarea name="overview" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->overview}}</textarea>
+                                    @if ($businessplan->business_plan_status_id < 8)
+                                            <textarea name="overview" id="" cols="30" rows="15" class="form-control form-control-lg" {{$disable}}>{{@$expertcomment->overview}}</textarea>
+                                        @else
+                                            <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{{@$expertcomment->overview}}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-management">
                                 <div class="form-group">
-                                    <textarea name="management" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->management}}</textarea>
+                                    @if ($businessplan->business_plan_status_id < 8)
+                                            <textarea name="management" id="" cols="30" rows="15" class="form-control form-control-lg" {{$disable}}>{{@$expertcomment->management}}</textarea>
+                                        @else
+                                            <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{{@$expertcomment->management}}</div>
+                                    @endif
+                                    
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-technology">
                                 <div class="form-group">
-                                    <textarea name="technology" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->technology}}</textarea>
+                                    @if ($businessplan->business_plan_status_id < 8)
+                                            <textarea name="technology" id="" cols="30" rows="15" class="form-control form-control-lg" {{$disable}}>{{@$expertcomment->technology}}</textarea>
+                                        @else
+                                            <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{{@$expertcomment->technology}}</div>
+                                    @endif
+                                    
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-marketing">
                                 <div class="form-group">
-                                    <textarea name="marketing" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->marketing}}</textarea>
+                                    @if ($businessplan->business_plan_status_id < 8)
+                                            <textarea name="marketing" id="" cols="30" rows="15" class="form-control form-control-lg" {{$disable}}>{{@$expertcomment->marketing}}</textarea>
+                                        @else
+                                            <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{{@$expertcomment->marketing}}</div>
+                                    @endif
+                                    
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="left-icon-businessprospect">
                                 <div class="form-group">
-                                    <textarea name="businessprospect" id="" cols="30" rows="15" class="form-control form-control-lg">{{@$expertcomment->businessprospect}}</textarea>
+                                    @if ($businessplan->business_plan_status_id < 8)
+                                            <textarea name="businessprospect" id="" cols="30" rows="15" class="form-control form-control-lg" {{$disable}}>{{@$expertcomment->businessprospect}}</textarea>
+                                        @else
+                                            <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{{@$expertcomment->businessprospect}}</div>
+                                    @endif
                                 </div>
                             </div>
-                            {{-- <div class="tab-pane fade" id="left-icon-attachment">
-                               
-                            </div> --}}
-                            {{-- <div class="tab-pane fade" id="left-icon-share">
-                                <div class="form-group">
-                                    <label>เลือกผู้รับ</label><span class="text-danger">*</span>
-                                    <select id="users" data-placeholder="เลือกผู้รับ" class="form-control form-control-lg form-control-select2" multiple>
-                                        @foreach ($users as $user)
-                                            <option value="{{$user->id}}" >{{$user->name}} {{$user->lastname}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
+
                         </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                        </div>
+                        @if ($businessplan->business_plan_status_id < 8)
+                            <div class="text-right">
+                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                            </div>
+                        @endif
+                       
                     </div>
                     </form>
                 </div>

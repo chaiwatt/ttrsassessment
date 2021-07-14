@@ -84,13 +84,10 @@
                                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">เขียนบทวิเคราะห์</a>
                                                         @endif  
                                                         @if (!Empty(@$fulltbp->evaluationresult->management) && !Empty(@$fulltbp->evaluationresult->technoandinnovation) && !Empty(@$fulltbp->evaluationresult->marketability) && !Empty(@$fulltbp->evaluationresult->businessprospect))
-                                                            {{-- <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-primary" target="_blank">จดหมายแจ้งผล</a> --}}
                                                             <button type="button" class="btn btn-sm bg-info dropdown-toggle" data-toggle="dropdown">จดหมายแจ้งผล</button>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a href="{{route('dashboard.admin.evaluationresult.pdf',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ PDF</a>
                                                                 <a href="{{route('dashboard.admin.evaluationresult.word',['id' => $fulltbp->evaluationresult->id])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ไฟล์ WORD</a>
-                                                                {{-- <a href="{{route('dashboard.admin.evaluationresult.certificate',['id' => $fulltbp->evaluationresult->id, 'type' => '2'])}}" class="dropdown-item" target="_blank"><i class="icon-download"></i> ดาวน์โหลด PDF</a> --}}
-                                                              
                                                             </div>
                                                         @endif
                                                         

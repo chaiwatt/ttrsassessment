@@ -100,6 +100,7 @@ class DashboardAdminEvaluationResultController extends Controller
         ]);
         $fulltbp = FullTbp::find(EvaluationResult::find($id)->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = Auth::user()->id;

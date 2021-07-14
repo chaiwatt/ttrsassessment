@@ -83,6 +83,11 @@ class DashboardCompanyReportController extends Controller
         $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$auth->id)->first()->id)->get();
         $timelinehistories = TimeLineHistory::where('business_plan_id',$id)->orderBy('id','desc')->paginate(5);
         $businessplan = BusinessPlan::find($id);
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+        if(!Empty($fulltbp->canceldate)){
+            return redirect()->route('dashboard.company.report')->withError('โครงการถูกยกเลิกแล้ว');
+        }
         return view('dashboard.company.report.singlereport')->withBusinessplans($businessplans)
                                                 ->withAlertmessages($alertmessages)
                                                 ->withTimelinehistories($timelinehistories)

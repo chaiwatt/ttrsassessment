@@ -4,6 +4,11 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/daygrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
 <div id="modal_get_calendar" class="modal fade" style="overflow:hidden;">
@@ -58,6 +63,12 @@
                                     <label>การเข้าร่วม<span class="text-danger">*</span></label>
                                     <select id="attendevent" class="form-control form-control-lg form-control-select2">
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="rej_meeting_note_wrapper" hidden>
+                                <div class="form-group">
+                                    <label>เหตุผลการไม่เข้าร่วม</label>
+                                    <textarea type="text" rows="5"  id="rej_meeting_note" placeholder="กรุณาระบุเหตุผลการไม่เข้าร่วมการประชุม" class="form-control form-control-lg" ></textarea>
                                 </div>
                             </div>
                         </div> 
@@ -206,12 +217,12 @@
                                         {{-- <th>เลขที่โครงการ</th>  --}}
                                         {{-- <th>ชื่อโครงการ</th>  --}}
                                         <th>โครงการ</th>
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
                                         <th style="width:1%;white-space: nowrap">แสดงความเห็น</th>
                                         <th style="width:1%;white-space: nowrap">วันนัดประชุมก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap">วันที่ประเมิน</th>
                                         <th style="width:1%;white-space: nowrap">วันที่สรุปผลประเมิน</th>
                                         <th style="width:1%;white-space: nowrap">เพิ่มเติม</th> 
+                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -227,9 +238,7 @@
                                                     @endif
                                                     
                                                 </td>  
-                                                <td style="white-space: nowrap">  
-                                                    <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
-                                                </td>  
+
                                                 <td style="white-space: nowrap"> 
                                                     @if($fulltbp->expertassignment->accepted == 1)
                                                             @if (Empty($fulltbp->expertcomment))
@@ -253,6 +262,9 @@
                                                     @endif
                                                     
                                                 </td> 
+                                                <td style="white-space: nowrap">  
+                                                    <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
+                                                </td>  
                                             </tr>
                                         @endif
 

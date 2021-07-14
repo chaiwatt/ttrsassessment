@@ -1,5 +1,10 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<style>
+    textarea{
+        font-size: 16px !important;
+    }
+</style>
 @stop
 @section('content')
     <!-- Page header -->

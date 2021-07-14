@@ -52,25 +52,25 @@ class DashboardAdminFollowUpController extends Controller
         }else if($bussinesstype == 2){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
-            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
-            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
 
         foreach ($projectmembers as $key => $projectmember) {
             $_user = User::find($projectmember->user_id);
-            $messagebox = Message::sendMessage('เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project .' ของ' . $fullcompanyname,'เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname.' เสร็จเรียบร้อยแล้ว',$auth->id,$projectmember->user_id);
+            $messagebox = Message::sendMessage('เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project  . $fullcompanyname,'เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project . $fullcompanyname,$auth->id,$projectmember->user_id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $projectmember->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project .' เสร็จเรียบร้อยแล้ว';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project . $fullcompanyname;
             $alertmessage->save();
     
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-            EmailBox::send($_user->email,'TTRS:เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project  .' ของ' . $fullcompanyname,'เรียน ทีมประเมิน <br><br> คุณ'.$auth->name. ' '.$auth->lastname.' ได้เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name. ' '.$auth->lastname.' ได้เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project. $fullcompanyname.' <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
         $result = 'บรรลุตามจุดประสงค์';

@@ -491,9 +491,9 @@ class DashboardAdminAssessmentController extends Controller
         }else if($bussinesstype == 2){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
-            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
-            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
 
         $projectmembers = ProjectMember::where('full_tbp_id',$ev->full_tbp_id)->get();
@@ -513,21 +513,40 @@ class DashboardAdminAssessmentController extends Controller
             $notificationbubble->target_user_id = $projectmember->user_id;
             $notificationbubble->save();
 
-            $messagebox = Message::sendMessage('สรุปผลการประเมิน โครงการ'.$minitbp->project .' ของ' . $fullcompanyname,'ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . ' ของ' . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult').'>ดำเนินการ</a>',Auth::user()->id,$projectmember->user_id);
+            $isleader = ProjectAssignment::where('full_tbp_id',$ev->full_tbp_id)->where('leader_id',$projectmember->user_id)->first();
+            if(!(Empty($isleader)) || $_user->user_type_id >=5){
+                $messagebox = Message::sendMessage('สรุปผลการประเมิน โครงการ'.$minitbp->project . $fullcompanyname,'ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult').'>ดำเนินการ</a>',Auth::user()->id,$projectmember->user_id);
 
-            $alertmessage = new AlertMessage();
-            $alertmessage->user_id = $auth->id;
-            $alertmessage->target_user_id = $projectmember->user_id;
-            $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project .' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.evaluationresult').'>ดำเนินการ</a>';
-            $alertmessage->save();
-    
-            MessageBox::find($messagebox->id)->update([
-                'alertmessage_id' => $alertmessage->id
-            ]);
-    
-            EmailBox::send($_user->email,'TTRS:สรุปผลการประเมิน โครงการ'.$minitbp->project  .' ของ' . $fullcompanyname,'เรียน ทีมประเมิน <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-    
+                $alertmessage = new AlertMessage();
+                $alertmessage->user_id = $auth->id;
+                $alertmessage->target_user_id = $projectmember->user_id;
+                $alertmessage->messagebox_id = $messagebox->id;
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.evaluationresult').'>ดำเนินการ</a>';
+                $alertmessage->save();
+        
+                MessageBox::find($messagebox->id)->update([
+                    'alertmessage_id' => $alertmessage->id
+                ]);
+        
+                EmailBox::send($_user->email,'TTRS:สรุปผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        
+            }else{
+                $messagebox = Message::sendMessage('สรุปผลการประเมิน โครงการ'.$minitbp->project . $fullcompanyname,'ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว',Auth::user()->id,$projectmember->user_id);
+
+                $alertmessage = new AlertMessage();
+                $alertmessage->user_id = $auth->id;
+                $alertmessage->target_user_id = $projectmember->user_id;
+                $alertmessage->messagebox_id = $messagebox->id;
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว ';
+                $alertmessage->save();
+        
+                MessageBox::find($messagebox->id)->update([
+                    'alertmessage_id' => $alertmessage->id
+                ]);
+        
+                EmailBox::send($_user->email,'TTRS:สรุปผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        
+            }
         }
 
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',5)->first();
