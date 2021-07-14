@@ -358,16 +358,34 @@ $(document).on('change', '#employemail_edit', function(e) {
                 });
             $('#employemail_edit').val('') ;
         }
-        //   alert("You have entered an invalid email address!")
-        //   return (false)
+    }
+ });
 
-        // if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200) || parseInt($('#employeducationyearstart').val()) > parseInt(currentyear)){
-        //     Swal.fire({
-        //         title: 'ผิดพลาด...',
-        //         text: 'กรอกปีเริ่มต้นไม่ถูกต้อง!',
-        //         });
-        //     $('#employeducationyearstart').val('') ;
-        // }
+ $(document).on('change', '#employemail_ceo', function(e) {
+    if($('#employemail_ceo').val() != ''){
+
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_ceo').val())== false)
+        {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+                });
+            $('#employemail_ceo').val('') ;
+        }
+    }
+ });
+
+ $(document).on('change', '#employemail', function(e) {
+    if($('#employemail').val() != ''){
+
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail').val())== false)
+        {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+                });
+            $('#employemail').val('') ;
+        }
     }
  });
 
