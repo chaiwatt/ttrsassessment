@@ -389,6 +389,21 @@ $(document).on('change', '#employemail_edit', function(e) {
     }
  });
 
+ $(document).on('change', '#employemail_research', function(e) {
+    if($('#employemail_research').val() != ''){
+
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_research').val())== false)
+        {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+                });
+            $('#employemail_research').val('') ;
+        }
+    }
+ });
+ 
+
 $(document).on('change', '#employeducationyearstart', function(e) {
     if($('#employeducationyearstart').val() != ''){
         if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200) || parseInt($('#employeducationyearstart').val()) > parseInt(currentyear)){
