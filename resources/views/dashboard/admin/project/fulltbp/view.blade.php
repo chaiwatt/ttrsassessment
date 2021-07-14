@@ -1613,10 +1613,17 @@
 															<label><u>คนที่ {{$count}}</u> : 
 																
 																{{-- {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label> --}}
+																@php
+																	$companyemploypos = $companyemploy->employposition->name;
+																	if($companyemploypos == 'อื่นๆ'){
+																		$companyemploypos = $companyemploy->otherposition;
+																	}
+																@endphp
+
 																@if ($companyemploy->prefix->name == 'อื่นๆ')
-																		{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}
+																		{{$companyemploy->otherprefix}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploypos}}
 																	@else
-																		{{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}
+																		{{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploypos}}
 																@endif		
 																</label>
 														</div>

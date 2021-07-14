@@ -24,6 +24,7 @@ Route::get('generate','PDFController@Generate')->name('generate');
 
 Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
 Route::get('demottrsuser', 'HomeController@DemoTTRSUser')->name('demottrsuser');
+Route::get('demousertest', 'HomeController@DemoUserTEST')->name('demousertest');
 
 // Route::get('test', 'HomeController@Test')->name('test');
 Route::get('landing', 'HomeController@Index')->name('landing.index');
