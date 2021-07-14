@@ -1042,7 +1042,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'ttrsuser2020@gmail.com',
             'organizeimg' => 'storage/uploads/company/attachment/pvcF1ywxsA.png',
             'companyhistory' => '<p>aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>',
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:09:49',
             'updated_at' => '2021-05-25 14:39:02'
             ],
@@ -1066,7 +1066,7 @@ class UsersTableSeeder extends Seeder
             'email' => NULL,
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:19:46',
             'updated_at' => '2021-06-11 09:03:57'
             ],
@@ -1090,7 +1090,7 @@ class UsersTableSeeder extends Seeder
             'email' => NULL,
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:21:10',
             'updated_at' => '2021-06-18 08:11:05'
             ],
@@ -1138,7 +1138,7 @@ class UsersTableSeeder extends Seeder
             'email' => NULL,
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:24:13',
             'updated_at' => '2021-06-18 14:17:24'
             ],
@@ -1162,7 +1162,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'ttrsusertwo2020@gmail.com',
             'organizeimg' => 'storage/uploads/company/attachment/xAQqfngRob.png',
             'companyhistory' => '<p>dddddddddddddddddddddd</p>',
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:25:56',
             'updated_at' => '2021-05-25 15:20:44'
             ],
@@ -1210,7 +1210,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'ttrscolead2020@gmail.com',
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:28:56',
             'updated_at' => '2021-06-18 13:29:37'
             ],
@@ -1234,7 +1234,7 @@ class UsersTableSeeder extends Seeder
             'email' => NULL,
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:31:04',
             'updated_at' => '2021-06-11 10:00:04'
             ],
@@ -1306,7 +1306,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'pimpisa@nstda.or.th',
             'organizeimg' => 'storage/uploads/company/attachment/HL2hJNH0au.jpg',
             'companyhistory' => '<p>ประวัติบริษัทยาวนานมากบรรยายไม่หมดภายในหนึ่งหน้ากระดาษ A4</p>',
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:37:33',
             'updated_at' => '2021-06-18 13:25:48'
             ],
@@ -1354,7 +1354,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'nunu12nana12@gmail.com',
             'organizeimg' => 'storage/uploads/company/attachment/jPgYkAKCOY.png',
             'companyhistory' => '<p>สวยงามตามท้องเรื่อง</p>',
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:39:59',
             'updated_at' => '2021-06-11 10:41:05'
             ],
@@ -1378,7 +1378,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'tvcompany35@gmail.com',
             'organizeimg' => 'storage/uploads/company/attachment/FyUWp7qQ0x.jpg',
             'companyhistory' => '<p><i style="color: rgb(51, 51, 51);">การก่อตั้ง 3 5 2560</i></p><p><i style="color: rgb(51, 51, 51);">การเพิ่มทุน ปี 2564 จำนวน 9,000,000 บาท</i></p><p><i style="color: rgb(51, 51, 51);">การเปลี่ยนแปลงทางธุรกิจ เดิมประกอบกิจการร้านกาแฟ และพัฒนามาเป็นที่พักและกำลังพัฒนาให้อยู่ในรูปของ Wellness</i><i style="color: rgb(51, 51, 51);"><br></i><i style="color: rgb(51, 51, 51);"><br></i><br></p>',
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:41:04',
             'updated_at' => '2021-06-11 10:35:31'
             ],
@@ -1402,7 +1402,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'rtyuiop[]@nstda.or.th',
             'organizeimg' => 'storage/uploads/company/attachment/sGQ12MCils.jpg',
             'companyhistory' => 'บริษัทเราก่อตั้งขึ้นเมื่อชาติที่แล้วค่ะ ส่งต่อมายังรุ่นสู่รุ่น เพราะถนัดสืบทอดอำนาจมากกว่า ตอนนี้ก็รักษาการณ์ CEO มา 7 ปีแล้ว ขึ้นปีที่ 8 แล้ว ผมมองไปข้างนอกก็อยากให้ประชาชนของผมอยู่ดีกินดีโดยไม่ต้องการอะไรจากพวกเขาเลย',
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:42:09',
             'updated_at' => '2021-06-11 11:24:12'
             ],
@@ -1426,7 +1426,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'chamaiporn.sud@nstda.or.th',
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:43:12',
             'updated_at' => '2021-06-11 10:30:43'
             ],
@@ -1450,7 +1450,7 @@ class UsersTableSeeder extends Seeder
             'email' => NULL,
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:44:24',
             'updated_at' => '2021-05-27 13:18:45'
             ],
@@ -1474,7 +1474,7 @@ class UsersTableSeeder extends Seeder
             'email' => NULL,
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:45:45',
             'updated_at' => '2021-05-28 15:48:32'
             ],
@@ -1498,7 +1498,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'ttrstrial2021@gmail.com',
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-25 13:47:03',
             'updated_at' => '2021-06-11 11:39:16'
             ],
@@ -1546,7 +1546,7 @@ class UsersTableSeeder extends Seeder
             'email' => NULL,
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-05-28 10:28:23',
             'updated_at' => '2021-05-28 10:33:55'
             ],
@@ -1594,7 +1594,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'm_u_ka23@yahoo.com',
             'organizeimg' => NULL,
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-06-11 10:51:04',
             'updated_at' => '2021-06-11 14:10:24'
             ],
@@ -1618,7 +1618,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'tungmay140@hotmail.com',
             'organizeimg' => 'storage/uploads/company/attachment/gkj9DMlMy2.jpg',
             'companyhistory' => NULL,
-            'saveprofile' => '1',
+            'saveprofile' => '0',
             'created_at' => '2021-06-11 13:13:21',
             'updated_at' => '2021-06-18 10:42:22'
             ]
