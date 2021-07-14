@@ -715,6 +715,42 @@ $(document).on('click', '#btnstckholder', function(e) {
     $('#modal_add_stockholder').modal('show');
 });
 
+$(document).on('click', '#add_debtpartner', function(e) {
+    $('#debtpartner').val('');
+    $('#numproject').val('');
+    $('#debtpartnertaxid').val('');
+    $('#debttotalyearsell').val('');
+    $('#debtpercenttosale').val('');
+    $('#debtpartneryear').val('');
+    $('#modal_add_debtpartner').modal('show');
+});
+
+$(document).on('click', '#add_creditpartner', function(e) {
+    $('#creditpartner').val('');
+    $('#creditpartnertaxid').val('');
+    $('#credittotalyearsell').val('');
+    $('#creditpercenttosale').val('');
+    $('#creditpartneryear').val('');
+    $('#modal_add_creditpartner').modal('show');
+});
+
+$(document).on('click', '#add_tectdevlevel', function(e) {
+    $('#tectdevleveltechnology').val('');
+    $('#tectdevleveltechnologypresent').val('');
+    $('#tectdevleveltechnologyproject').val('');
+    $('#modal_add_tectdevlevel').modal('show');
+});
+
+$(document).on('click', '#add_sell', function(e) {
+    $('#productname').val('');
+    $('#sellpresent').val('');
+    $('#sellpast1').val('');
+    $('#sellpast2').val('');
+    $('#sellpast3').val('');
+    $('#modal_add_sell').modal('show');
+});
+
+
 $(document).on('click', '#btn_modal_add_stockholder', function(e) {
     if($('#employsearch').val() == '' || $('#relationwithceo').val() == ''){
         Swal.fire({

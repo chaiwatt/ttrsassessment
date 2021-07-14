@@ -2217,7 +2217,7 @@ th {
 															</div>
 															<div class="col-md-12">
 																{{-- <div class="form-group">	 --}}
-																	<label for="">ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" data-target="#modal_add_tectdevlevel"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for="">ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์<button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	
 																{{-- </div> --}}
 																
@@ -2808,7 +2808,7 @@ th {
 															
 															<div class="col-md-12">	
 																<div class="form-group">	
-																	<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" data-target="#modal_add_sell"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" id="add_sell" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
 																</div>
 																<div class="table-responsive" id="fulltbp_sell_wrapper"
@@ -2889,7 +2889,7 @@ th {
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">	
-																	<label for=""><u>ลูกหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" data-target="#modal_add_debtpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><u>ลูกหนี้การค้า</u><button type="button" id="add_debtpartner" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	{{-- <p><small><i>ลูกหนี้การค้า</i> </small></p> --}}
 																</div>
 																<div class="table-responsive" id="fulltbp_debtpartner_wrapper"
@@ -2930,7 +2930,7 @@ th {
 															</div>
 															<div class="col-md-12 mt-4">
 																<div class="form-group">	
-																	<label for=""><u>เจ้าหนี้การค้า</u><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" data-target="#modal_add_creditpartner"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><u>เจ้าหนี้การค้า</u><button type="button" id="add_creditpartner" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	{{-- <p><small><i>เจ้าหนี้การค้า</i> </small></p> --}}
 																</div>
 																<div class="table-responsive" id="fulltbp_creditpartner_wrapper"
