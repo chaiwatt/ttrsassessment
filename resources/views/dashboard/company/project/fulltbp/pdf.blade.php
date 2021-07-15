@@ -795,7 +795,7 @@
                     <div class="ml50" style="font-size:13px"><strong>Market analysis</strong></div>
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div>
                     <div class="ml50" style="font-size:13px;margin-top:-20px"><strong>Business model canvas</strong></div>
-                    <div class="ml50" style="font-size:13px">{{$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)}}</div>
+                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div>
                     <div class="ml50" style="font-size:13px"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
                     <div class="ml30" style="font-size:13px" ><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></div>
