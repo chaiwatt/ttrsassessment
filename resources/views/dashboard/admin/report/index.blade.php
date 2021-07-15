@@ -1190,6 +1190,8 @@
                                                                                 @else
                                                                                 @if ($fulltbp->minitbp->flowstagefour == true)
                                                                                 <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
+                                                                                @else
+                                                                                <span class="badge badge-flat border-pink text-pink-600">รออนุมัติ Full TBP/ผู้เชี่ยวชาญ/EV</span>
                                                                                 @endif
                                                                                 
                                                                             @endif
