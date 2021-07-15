@@ -419,55 +419,7 @@
                                                     @endif
                                                 </td>  
                                                 <td style="white-space: nowrap">
-
-                                                    @if (!Empty($fulltbp->assessmentdate))
-                                                    @if ($fulltbp->finished_onsite == 1)
-                                                            @if (Auth::user()->user_type_id == 4)
-                                                                <button type="button" href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-warning finishonsite"><i class="icon-spinner spinner mr-2" id="spiniconfinishonsite{{$fulltbp->id}}" hidden></i>ยังไม่ได้ยืนยันการลงพื้นที่</button>
-                                                            @else
-                                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ยืนยันการลงพื้นที่</span>
-                                                            @endif
-                                                        @else
-
-                                                        @if (Auth::user()->user_type_id == 4)
-                                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
-                                                                        <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
-                                                                    @elseif($fulltbp->minitbp->businessplan->business_plan_status_id == 7) 
-                                                                        <span class="badge badge-flat border-info text-info-600">ลงคะแนนการประเมิน</span>
-                                                                @endif
-
-                                                            @else
-                                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 7)
-                                                                        <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
-                                                                    @elseif($fulltbp->minitbp->businessplan->business_plan_status_id == 7) 
-                                                                        <span class="badge badge-flat border-info text-info-600">ลงคะแนนการประเมิน</span>
-                                                                @endif
-                                                        @endif 
-                                                    @endif
-                                               @else
-                                                    @if (Auth::user()->user_type_id == 4)
-                                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 7)
-                                                                    @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                        <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
-                                                                    @else
-                                                                        <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">ลงพื้นที่แล้ว</a>
-                                                                    @endif  
-                                                                @else
-                                                                    <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินลงพื้นที่</a>
-                                                            @endif
-                                                        @else
-                                                                @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 9)
-                                                                    <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</a>
-                                                                @else
-                                                                    <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
-                                                                @endif
-                                                                
-                                                    @endif
-                                            @endif
-
-
-
-                                                    {{-- @if (!Empty($fulltbp->canceldate))
+                                                    @if (!Empty($fulltbp->canceldate))
                                                         <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
                                                     @else
                                                         @if (!Empty($fulltbp->assessmentdate))
@@ -515,14 +467,16 @@
                                                                                 <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
                                                                             @else
                                                                                 @if ($fulltbp->minitbp->flowstagefour == true)
-                                                                                    <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                                        <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
+                                                                                    @else
+                                                                                        <span class="badge badge-flat border-pink text-pink-600">อนุมัติ FUll TBP/มอบหมายผู้เชี่ยวชาญ/EV</span>
                                                                                 @endif
                                                                                 
                                                                             @endif
                                                                             
                                                                 @endif
                                                         @endif
-                                                    @endif --}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endif
