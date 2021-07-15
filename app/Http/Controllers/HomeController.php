@@ -2295,9 +2295,9 @@ class HomeController extends Controller
         $this->createOfficer(2,'เคเค','เปลี่ยนมั่วได้ไง','khemratha@nstda.or.th','8543430945462','0851547196');
         $this->createOfficer(2,'ใครไม่เชี่ยวชาญ','ผู้เชี่ยวชาญแอลแอล','sumlong.tn@gmail.com','9848838655100','0894133662');
 
-        $this->createExpert(2,'ป่าเขา','ลำเนาไพร','ttrsmemberone2020@gmail.com','3024196717858','635323995',2);
+        $this->createExpert(2,'ป่าเขา','ลำเนาไพร','ttrsmemberone2020@gmail.com','3024196717858','635323995',1);
         $this->createExpert(2,'ฉันคือผู้เชี่ยวชาญ','กลับมายืนที่เดิม','ttrsexperttwo2020@gmail.com','3904383603978','2111111111',2);
-        $this->createExpert(2,'Expert PP','Three','ttrsexpertthree2020@gmail.com','8364247498269','811234555',2);
+        $this->createExpert(2,'Expert PP','Three','ttrsexpertthree2020@gmail.com','8364247498269','811234555',1);
         
     }
 
