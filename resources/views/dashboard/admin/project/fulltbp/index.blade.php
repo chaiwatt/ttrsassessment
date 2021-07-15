@@ -419,9 +419,9 @@
                                                     @endif
                                                 </td>  
                                                 <td style="white-space: nowrap">
-                                                    @if (!Empty($fulltbp->canceldate))
+                                                    {{-- @if (!Empty($fulltbp->canceldate))
                                                         <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
-                                                    @else
+                                                    @else --}}
                                                         @if (!Empty($fulltbp->assessmentdate))
                                                             @if ($fulltbp->finished_onsite == 1)
                                                                     @if (Auth::user()->user_type_id == 4)
@@ -474,10 +474,7 @@
                                                                             
                                                                 @endif
                                                         @endif
-                                                    @endif
-
-                                                  
-                                                   
+                                                    {{-- @endif --}}
                                                 </td>
                                             </tr>
                                         @endif
