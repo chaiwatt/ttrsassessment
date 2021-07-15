@@ -1201,8 +1201,7 @@
                                                                                 @if ($fulltbp->minitbp->flowstagefour == true)
                                                                                     <span class="badge badge-flat border-pink text-pink-600">รอ Leader สร้างปฏิทินลงพื้นที่</span>
                                                                                     @else
-                                                                                    @else
-                                                                                    <span class="badge badge-flat border-pink text-pink-600">รออนุมัติ Full TBP/ผู้เชี่ยวชาญ/EV</span>
+                                                                                        <span class="badge badge-flat border-pink text-pink-600">รออนุมัติ Full TBP/ผู้เชี่ยวชาญ/EV</span>
                                                                                 @endif
                                                                                 
                                                                                 @endif
