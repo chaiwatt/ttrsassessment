@@ -436,7 +436,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h1>
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนโครงการขอรับการประเมิน</a>  
+                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">โครงการขอรับการประเมิน</a>  
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -451,7 +451,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
                         </div>
                         <div>
-                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนโครงการที่ยื่น Mini Tbp</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">โครงการที่ยื่น Mini Tbp</a>  
                             
                         </div>
                     </div>
@@ -465,7 +465,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
                         </div>
                         <div>  
-                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนโครงการที่ยื่น Full TBP</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">โครงการที่ยื่น Full TBP</a>  
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -478,7 +478,7 @@
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',8)->count()}}</h1>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">จำนวนโครงการเสร็จสิ้นการประเมิน</a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">โครงการเสร็จสิ้นการประเมิน</a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
