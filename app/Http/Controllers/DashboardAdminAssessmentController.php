@@ -42,8 +42,17 @@ class DashboardAdminAssessmentController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
+
+
+        NotificationBubble::where('target_user_id',$auth->id)
+                        ->where('notification_category_id',3) // notification_category_id 1 = โครงการ
+                        ->where('notification_sub_category_id',9) // notification_sub_category_id 7 = การลงคะแนน
+                        ->where('status',0)->delete();
+
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
+
+
         return view('dashboard.admin.assessment.index')->withFulltbps($fulltbps);
     }
    public function Edit($id){
