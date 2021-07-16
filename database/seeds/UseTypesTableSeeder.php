@@ -13,11 +13,11 @@ class UseTypesTableSeeder extends Seeder
     {
         DB::table('user_types')->insert([
             [
-                'name' => 'ผู้ใช้งานทั่วไป',   
+                'name' => 'ผู้ขอรับการประเมินนิติบุคคล',   
                 'group' => 'A'
             ],
             [
-                'name' => 'ผู้ใช้งานนิติบุคคล',
+                'name' => 'ผู้ขอรับการประเมินบุคคลธรรมดา',
                 'group' => 'A'
             ],
             [
@@ -29,11 +29,11 @@ class UseTypesTableSeeder extends Seeder
                 'group' => 'B'
             ],
             [
-                'name' => 'admin',
+                'name' => 'Admin',
                 'group' => 'B'
             ],
             [
-                'name' => 'JD',
+                'name' => 'Manager',
                 'group' => 'C'
             ]
         ]);

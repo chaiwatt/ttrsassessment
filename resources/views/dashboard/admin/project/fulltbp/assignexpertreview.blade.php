@@ -267,7 +267,7 @@
                                             <td>
                                                 {{$user->usertype->name}} {{$user->expertType}}
                                             </td> 
-                                            <td style="white-space: nowrap"">
+                                            <td style="white-space: nowrap">
                                                 @if (!Empty($check))
                                                     @if ($check->expert_assignment_status_id == 1)
                                                         @if (Auth::user()->user_type_id == 6)

@@ -60,6 +60,7 @@
                                     <tr>
                                         {{-- <th>#</th> --}}
                                         <th>ชื่อ-นามสกุล</th> 
+                                        <th>อีเมล</th> 
                                         <th>กลุ่ม</th>    
                                         {{-- <th style="width:1%;white-space: nowrap">ออนไลน์</th>   --}}
                                         <th style="width:1%;white-space: nowrap">Verify</th>    
@@ -78,7 +79,26 @@
                                             }
                                         @endphp
                                         <td> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
-                                        <td> {{$user->usertype->name}} </td> 
+                                        <td> {{$user->email}}</td>    
+                                        <td> 
+                                            @if ($user->user_type_id == 1 )
+                                                @if ($user->user_group_id == 1)
+                                                        ผู้ขอรับการประเมินนิติบุคคล
+                                                    @else
+                                                        ผู้ขอรับการประเมินบุคคลธรรมดา
+                                                @endif
+                                            @elseif($user->user_type_id == 3)
+                                                @if ($user->expertdetail->expert_type_id == 1)
+                                                        {{$user->usertype->name}} (ภายใน)
+                                                    @else
+                                                        {{$user->usertype->name}} (ภายนอก)
+                                                @endif
+                                            @else 
+                                                {{$user->usertype->name}} 
+                                            @endif
+                                            
+                
+                                            </td> 
                                         {{-- @if ($user->isonline() == 1)
                                             <td> <span class="badge badge-mark border-success mr-1"></span> <span class="badge badge-flat border-success text-success-600">ออนไลน์</span> </td>  
                                             @else
@@ -131,7 +151,7 @@
             "paging":   true,
             "ordering": true,
             "info":     false,
-            "pageLength" : 50,
+            "pageLength" : 20,
             "language": {
                 "zeroRecords": " ",
                 "search": "ค้นหา: ",  
