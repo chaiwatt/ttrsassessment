@@ -270,7 +270,7 @@
                     <div class="card-body">
                         <input type="text" id="fulltbpid"  hidden>
                         <div class="table-responsive" style="min-height: 230px">
-                            <table class="table table-bordered" id="maintable">
+                            <table class="table table-bordered mb-2" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
