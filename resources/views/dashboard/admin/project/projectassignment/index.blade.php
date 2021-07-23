@@ -286,12 +286,12 @@
         }
 
         var countitemtable =  "{{$projectassignments->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 10) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
                 "info":     false,
-                "pageLength" : 20,
+                "pageLength" : 10,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  
