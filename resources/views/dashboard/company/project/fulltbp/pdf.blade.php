@@ -604,9 +604,9 @@
                             <table class="mt5  border tbwrap" >
                                 <thead>
                                     <tr>
-                                        <th style="width:30%;font-size:13px">รายการ</th>
-                                        <th style="width:35%;font-size:13px">เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
-                                        <th style="width:35%;font-size:13px">เทคโนโลยีในโครงการ</th>
+                                        <th style="width:8%;font-size:13px">รายการ</th>
+                                        <th style="width:46%;font-size:13px">เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
+                                        <th style="width:46%;font-size:13px">เทคโนโลยีในโครงการ</th>
                                     <tr>
                                 </thead>
                                 <tbody>

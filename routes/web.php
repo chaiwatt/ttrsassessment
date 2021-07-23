@@ -386,7 +386,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('add','Api\FullTbpProjectTechDevController@Add')->name('api.fulltbp.project.techdev.add');           
                 });
                 Route::group(['prefix' => 'techdevlevel'], function(){
-                    Route::post('add','Api\FullTbpProjectTechDevLevelController@Add')->name('api.fulltbp.project.techdevlevel.add');           
+                    Route::post('get','Api\FullTbpProjectTechDevLevelController@Get')->name('api.fulltbp.project.techdevlevel.get');           
+                    Route::post('edit','Api\FullTbpProjectTechDevLevelController@Edit')->name('api.fulltbp.project.techdevlevel.edit');   
+                    Route::post('add','Api\FullTbpProjectTechDevLevelController@Add')->name('api.fulltbp.project.techdevlevel.add');   
                     Route::post('delete','Api\FullTbpProjectTechDevLevelController@Delete')->name('api.fulltbp.project.techdevlevel.delete');           
                 });
                 Route::group(['prefix' => 'techdevproblem'], function(){

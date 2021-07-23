@@ -8,6 +8,11 @@ use App\Model\FullTbpProjectTechDevLevel;
 
 class FullTbpProjectTechDevLevelController extends Controller
 {
+    public function Get(Request $request){
+        $fulltbpprojecttechdevlevel = FullTbpProjectTechDevLevel::find($request->id);
+
+        return response()->json($fulltbpprojecttechdevlevel);  
+    }
     public function Add(Request $request){
         $fulltbpprojecttechdevlevel = new FullTbpProjectTechDevLevel();
         $fulltbpprojecttechdevlevel->full_tbp_id = $request->id;
@@ -16,6 +21,16 @@ class FullTbpProjectTechDevLevelController extends Controller
         $fulltbpprojecttechdevlevel->projecttechnology = $request->projecttechnology;
         $fulltbpprojecttechdevlevel->save();
         $fulltbpprojecttechdevlevels = FullTbpProjectTechDevLevel::where('full_tbp_id',$request->id)->get();
+        return response()->json($fulltbpprojecttechdevlevels);  
+    }
+
+    public function Edit(Request $request){
+        FullTbpProjectTechDevLevel::find($request->id)->update([
+            'technology' =>  $request->technology,
+            'presenttechnology' =>  $request->presenttechnology,
+            'projecttechnology' =>  $request->projecttechnology,
+        ]);
+        $fulltbpprojecttechdevlevels = FullTbpProjectTechDevLevel::where('full_tbp_id',FullTbpProjectTechDevLevel::find($request->id)->full_tbp_id)->get();
         return response()->json($fulltbpprojecttechdevlevels);  
     }
 

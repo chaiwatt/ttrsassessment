@@ -72,7 +72,17 @@ class SettingAdminUserController extends Controller
                                     ->withUser($user);
     }
     public function EditSave(CreateUserRequest $request,$id){
+        // return $request->userstatus;
         $user = User::find($id);
+        if($user->user_type_id == 5 && $request->usertype !=5){
+            return redirect()->route('setting.admin.user')->withError('ไม่สามารถแก้ไขกลุ่มผู้ใช้งาน Admin');
+        }
+
+        if($user->user_type_id == 6 && $request->usertype !=6){
+            return redirect()->route('setting.admin.user')->withError('ไม่สามารถแก้ไขกลุ่มผู้ใช้งาน Manager');
+        }
+
+       
         if($user->user_type_id == 1){
             if($request->usertype < 3){
                 if($request->usertype == 1){ //นิติบุคคล
@@ -209,7 +219,8 @@ class SettingAdminUserController extends Controller
                     Company::where('user_id',$id)->first()->update([
                         'business_type_id' => 5
                     ]);
-               }else if($request->usertype > 3){
+               }else if($request->usertype > 3){  //change officer -> office
+                
                     if($request->usertype == 5){ 
                         $_user = User::where('user_type_id',5)->update([
                             'user_type_id' => 4
@@ -225,7 +236,11 @@ class SettingAdminUserController extends Controller
         if( $usertype < 3){
             $usertype  = 1;
         }
-
+        $_userstatus = $request->userstatus;
+        if(Empty($_userstatus)){
+            $_userstatus = 1;
+        }
+       
         User::find($id)->update([
             'user_type_id' => $usertype,
             'user_status_id' => $request->userstatus,

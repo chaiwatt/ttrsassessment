@@ -99,6 +99,49 @@ function addTechDevLevel(id,technology,presenttechnology,projecttechnology){
     })
 }
 
+function getTechDevLevel(id,full_tbp_id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/techdevlevel/get`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id,
+          'full_tbp_id': full_tbp_id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+
+function editTechDevLevel(id,technology,presenttechnology,projecttechnology){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/techdevlevel/edit`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id,
+          'technology': technology,
+          'presenttechnology': presenttechnology,
+          'projecttechnology': projecttechnology
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 function deleteTechDevLevel(id){
   return new Promise((resolve, reject) => {
       $.ajax({
@@ -355,5 +398,5 @@ function getMonth(fulltbpid){
     })
 }
 
-export {addAbtract,addProduct,addProductDetail,addTechDev,addTechDevLevel,deleteTechDevLevel,addTechDevProblem,
+export {addAbtract,addProduct,addProductDetail,getTechDevLevel,addTechDev,addTechDevLevel,editTechDevLevel,deleteTechDevLevel,addTechDevProblem,
   editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc,getMonth}

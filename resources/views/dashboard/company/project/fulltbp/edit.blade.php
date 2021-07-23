@@ -714,6 +714,41 @@ th {
 	</div>
 </div>
 
+{{-- modal_edit_tectdevlevel --}}
+<div id="modal_edit_tectdevlevel" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<input type="text" name="" id="tectdevleveltechnology_id" hidden>
+						<div class="form-group">
+							<label>รายละเอียดเทคโนโลยี</label><span class="text-danger">*</span>
+							<input type="text" id="tectdevleveltechnology_edit" placeholder="รายการ" class="form-control form-control-lg stringformat60">
+						</div>
+						<div class="form-group">
+							<label>เทคโนโลยีที่มีอยู่ในปัจจุบัน</label><span class="text-danger">*</span>
+							<input type="text" id="tectdevleveltechnologypresent_edit" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control form-control-lg stringformat200">
+						</div>
+						<div class="form-group">
+							<label>เทคโนโลยีในโครงการ</label><span class="text-danger">*</span>
+							<input type="text" id="tectdevleveltechnologyproject_edit" placeholder="เทคโนโลยีในโครงการ" class="form-control form-control-lg stringformat200">
+						</div>
+					</div>
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_edit_tectdevlevel" data-id="" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_edit_tectdevlevel" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 {{-- modal_add_certify --}}
 <div id="modal_add_certify" class="modal fade" style="overflow:hidden;">
 	<div class="modal-dialog">
@@ -2226,19 +2261,22 @@ th {
 																	<table class="table table-bordered">
 																		<thead>
 																			<tr class="bg-info">
-																				<th>รายการ</th>  
+																				<th style="width:1%;white-space: nowrap">รายการ</th>  
 																				<th>เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
 																				<th>เทคโนโลยีในโครงการ</th>
 																				<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																			</tr>
 																		</thead>
 																		<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
-																			@foreach ($fulltbpprojecttechdevlevels->reverse() as $fulltbpprojecttechdevlevel)
+																			@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
 																				<tr >                                        
 																					<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
-																					<td style="white-space: nowrap"> <a  data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteprojectechdevlevel">ลบ</a> </td> 
+																					<td style="white-space: nowrap"> 
+																						<a  data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-info hiddenelement_fulltbp editprojectechdevlevel">แก้ไข</a> 
+																						<a  data-id="{{$fulltbpprojecttechdevlevel->id}}" class="btn btn-sm bg-danger hiddenelement_fulltbp deleteprojectechdevlevel">ลบ</a> 
+																					</td> 
 																				</tr>
 																			@endforeach                            
 																		</tbody>
@@ -2603,22 +2641,23 @@ th {
 																		
 																	</div>
 																	<div class="col-md-12">			
-																		<table class="table-bordered" style="width: 100%" id="table_gantt_wrapper">
+																		<table class="table-bordered" style="width: 100%;" id="table_gantt_wrapper">
 																			<thead>
 																				<tr>
 																					<tr>
-																						<th rowspan="2" style="width:1%;white-space: nowrap;padding:5px">รายละเอียดการดำเนินงาน</th> 
-																						@foreach ($allyears as $key => $item)
-																							@if ($item != 0)
-																								<th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
-																							@endif
-																						@endforeach
-																						<th rowspan="2" class="text-center hiddenelement_fulltbp" style="width: 140px;">เพิ่มเติม</th> 
+																						<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+																							@foreach ($allyears as $key => $item)
+																								@if ($item != 0)
+																									<th colspan="{{$item}}" class="text-center" style="width:1%;white-space: nowrap; !important;font-size:12px">{{$fulltbpgantt->startyear + $key}}</th> 
+																								@endif
+																							@endforeach
+																						<th rowspan="2" class="text-center hiddenelement_fulltbp" style="width:1%;white-space: nowrap; !important">เพิ่มเติม</th> 
 																					</tr>
 																					@if ($minmonth != 0 && $maxmonth !=0)
 																						<tr >
 																							@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																								<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">
+																								{{-- <th class="text-center" > --}}
+																								<th class="text-center" style="max-width: 50px !important;font-size:12px">
 																									@php
 																										$full = 12;
 																										if($i%12 == 0){
@@ -2638,7 +2677,7 @@ th {
 																				@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
 																				
 																					<tr id= "{{$fulltbpprojectplan->id}}" >                                        
-																						<td style="width:1%;white-space: nowrap;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
+																						<td style="width:5%;white-space: nowrap;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
 																						@php
 																							$_count = 1;
 																						@endphp
@@ -2659,7 +2698,7 @@ th {
 																								$_count++;
 																							@endphp
 																						@endfor															
-																						<td class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap"> 
+																						<td class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap !"> 
 																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
 																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a> 
 																						</td> 

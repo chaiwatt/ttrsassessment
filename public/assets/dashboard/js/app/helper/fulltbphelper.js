@@ -904,6 +904,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td style="white-space: nowrap"> 
+                <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-info editprojectechdevlevel">แก้ไข</a> 
                 <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
             });
@@ -935,7 +936,8 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
                         <td> ${techdevlevel.technology} </td>                                            
                         <td> ${techdevlevel.presenttechnology} </td> 
                         <td> ${techdevlevel.projecttechnology} </td>                                            
-                        <td> 
+                        <td style="white-space: nowrap"> 
+                        <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-info editprojectechdevlevel">แก้ไข</a>  
                         <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
                     </tr>`
                     });
@@ -945,6 +947,40 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
         }
     });
 }); 
+
+$(document).on("click",".editprojectechdevlevel",function(e){
+    $('#tectdevleveltechnology_id').val($(this).data('id'));
+    Project.getTechDevLevel($(this).data('id')).then(data => {
+        $('#tectdevleveltechnology_edit').val(data.technology);
+        $('#tectdevleveltechnologypresent_edit').val(data.presenttechnology);
+        $('#tectdevleveltechnologyproject_edit').val(data.projecttechnology);
+        $('#modal_edit_tectdevlevel').modal('show');
+    })
+    .catch(error => {})
+
+}); 
+
+$(document).on("click","#btn_modal_edit_tectdevlevel",function(e){
+    Project.editTechDevLevel($('#tectdevleveltechnology_id').val(),$('#tectdevleveltechnology_edit').val(),$('#tectdevleveltechnologypresent_edit').val(),$('#tectdevleveltechnologyproject_edit').val()).then(data => {
+        var html = ``;
+        data.forEach(function (techdevlevel,index) {
+            html += `<tr >                                        
+                <td> ${techdevlevel.technology} </td>                                            
+                <td> ${techdevlevel.presenttechnology} </td> 
+                <td> ${techdevlevel.projecttechnology} </td>                                            
+                <td style="white-space: nowrap"> 
+                <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-info editprojectechdevlevel">แก้ไข</a> 
+                <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
+            </tr>`
+            });
+         $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
+
+        $('#modal_edit_tectdevlevel').modal('hide');
+    })
+    .catch(error => {})
+
+}); 
+
 
 $(document).on('keyup', '.projectechdevproblemclass', function(e) {
     $('#projectechdevproblemtextlength').html((90-ThaiWord.countCharTh($(this).val())));
@@ -1372,7 +1408,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                 var th = ``;
                 data.allyears.forEach(function (year,i) {      
                     if(year != 0){
-                        th += `<th colspan="${year}" class="text-center" style="width:50px !important;font-size:12px">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                        th += `<th colspan="${year}" class="text-center" style="width:50px !important;font-size:12px">${parseInt($('#ganttyear').val()) + i} </th>`;
                     }
                 });
                 var tr = ``;

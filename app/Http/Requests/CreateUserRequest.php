@@ -25,7 +25,7 @@ class CreateUserRequest extends FormRequest
             'usertype' => 'required',
             // 'email' => 'required',
             // 'password' => 'required',
-            'userstatus' => 'required'
+            // 'userstatus' => 'required'
         ];
     }
     public function messages()
@@ -37,7 +37,7 @@ class CreateUserRequest extends FormRequest
             'usertype.required' => 'ยังไม่ได้เลือกกลุ่มผู้ใช้',
             // 'email.required' => 'ยังไม่ได้กรอกอีเมล',
             // 'password.required' => 'ยังไม่ได้กรอกรหัสผ่าน',
-            'userstatus.required' => 'ยังไม่ได้เลือกสถานะการใช้งาน',
+            // 'userstatus.required' => 'ยังไม่ได้เลือกสถานะการใช้งาน',
       ]; 
     }
 }

@@ -55,7 +55,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="userlogtable">
+                            <table class="table table-bordered mb-2" id="userlogtable">
                                 <thead>
                                     <tr>
                                         <th style="width:25%">วันที่</th>

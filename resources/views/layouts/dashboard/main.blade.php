@@ -72,7 +72,11 @@
 			<ul class="navbar-nav ml-auto">	
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
+						<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}
+					@if (Auth::user()->user_type_id >= 3)
+						({{Auth::user()->UserType->name}})
+					@endif
+					</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						@if (Auth::user()->user_type_id ==1 || Auth::user()->user_type_id ==2)

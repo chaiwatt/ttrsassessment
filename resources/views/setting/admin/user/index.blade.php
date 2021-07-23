@@ -10,9 +10,9 @@
                 <h4> <span class="font-weight-semibold">ผู้ใช้งาน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            <div class="header-elements d-none">
+            {{-- <div class="header-elements d-none">
                 <a href="{{route('setting.admin.user.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มผู้ใช้งานระบบ<b><i class="icon-plus3"></i></b></a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -55,23 +55,23 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="testtopictable">
+                            <table class="table table-bordered mb-2" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        {{-- <th>#</th> --}}
+                                        <th>#</th>
                                         <th>ชื่อ-นามสกุล</th> 
                                         <th>อีเมล</th> 
-                                        <th>กลุ่ม</th>    
+                                        <th>กลุ่มผู้ใช้งาน</th>    
                                         {{-- <th style="width:1%;white-space: nowrap">ออนไลน์</th>   --}}
-                                        <th style="width:1%;white-space: nowrap">Verify</th>    
+                                        <th style="width:1%;white-space: nowrap">ยืนยันการใช้งาน</th>    
                                         <th style="width:1%;white-space: nowrap">สถานะ</th>                          
                                         <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody >
                                     @foreach ($users as $key => $user)
                                     <tr>    
-                                        {{-- <td> {{$key+1}} </td> --}}
+                                        <td> {{$key+1}} </td>
                                         @php
                                             $userprefix = $user->prefix->name;
                                                 if($userprefix == 'อื่นๆ'){
@@ -104,10 +104,11 @@
                                             @else
                                             <td> <span class="badge badge-mark border-danger mr-1"></span> {{$user->isonline()}} </td>  
                                         @endif   --}}
-                                        <td style="white-space: nowrap">
+                                        <td style="white-space: nowrap;text-align:center">
                                             @if ($user->user_type_id == 3 || $user->user_type_id == 4)
                                                 @if ($user->verify_expert == 2)
-                                                        <button type="button" data-id="{{$user->id}}" data-status="{{$user->verify_expert}}" class="btn btn-sm bg-success user">ยืนยันแล้ว</button>
+                                                        {{-- <span class="badge badge-flat border-success text-success-600">ยืนยันแล้ว</span> --}}
+                                                        {{-- <button type="button" data-id="{{$user->id}}" data-status="{{$user->verify_expert}}" class="btn btn-sm bg-success user">ยืนยันแล้ว</button> --}}
                                                    @else 
                                                         <button type="button" data-id="{{$user->id}}" data-status="{{$user->verify_expert}}" class="btn btn-sm bg-warning user">ไม่ได้ยืนยัน</button>
                                                 @endif
@@ -115,13 +116,16 @@
                                             @endif 
                                         </td>
                                         @if ($user->user_status_id == 1)
-                                                <td style="white-space: nowrap"><span class="badge badge-flat border-info text-info-600 rounded-0">{{$user->userstatus->name}}</span></td> 
+                                                <td style="white-space: nowrap"><span class="badge badge-flat border-info text-info-600 rounded-0">{{@$user->userstatus->name}}</span></td> 
                                            @else 
-                                                <td style="white-space: nowrap"><span class="badge badge-flat border-danger text-danger-600 rounded-0">{{$user->userstatus->name}}</span></td> 
+                                                <td style="white-space: nowrap"><span class="badge badge-flat border-danger text-danger-600 rounded-0">{{@$user->userstatus->name}}</span></td> 
                                         @endif                                     
                                         
-                                        <td style="white-space: nowrap"> 
+                                        <td style="white-space: nowrap;text-align:center"> 
+                                            @if ($user->user_type_id < 5)
                                             <a href="{{route('setting.admin.user.edit',['id' => $user->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            @endif
+                                            
                                             {{-- <a href="{{route('setting.admin.user.delete',['id' => $user->id])}}" data-name="" onclick="confirmation(event)" class=" btn btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>
                                     </tr>
