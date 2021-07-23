@@ -108,7 +108,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="maintable">
+                            <table class="table table-bordered mb-2" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
