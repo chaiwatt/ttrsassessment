@@ -66,7 +66,7 @@
         <div class="menu-area menu-sticky">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <div class="logo-part">
                             <a href="{{url('')}}">
                                 <img class="normal-logo" src="{{asset($generalinfo->logo2)}}" alt="logo">  
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-9 text-right"> 
+                    <div class="col-lg-10 text-right"> 
                         <div class="rs-menu-area">
                             <div class="main-menu">
                                 <nav class="rs-menu pr-0 md-pr-0">

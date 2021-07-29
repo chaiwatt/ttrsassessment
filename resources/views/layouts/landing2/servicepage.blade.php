@@ -4,7 +4,7 @@
 <head>
         <!-- meta tag -->
         <meta charset="utf-8">
-        <title>TTRS - TTRS rating</title>
+        <title>TTRS - {{$page->name}}</title>
         <meta name="description" content="">
         <!-- responsive tag -->
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -187,10 +187,10 @@
             <nav class="right_menu_togle hidden-md">
                 <div class="close-btn"><span id="nav-close" class="text-center"><i class="fa fa-close"></i></span></div>
                 <div class="canvas-logo">
-                    <a href="index.html"><img src="assets/images/logo-dark.png" alt="logo"></a>
+                    {{-- <a href="index.html"><img src="assets/images/logo-dark.png" alt="logo"></a> --}}
                 </div>
                 <div class="offcanvas-text">
-                    <p>111 อุทยานวิทยาศาสตร์ประเทศไทย ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120</p>
+                    <p>{{$page->name}}</p>
                 </div>
                 {{-- <div class="canvas-contact">
                     <h5 class="canvas-contact-title">Contact Info</h5>
@@ -228,74 +228,49 @@
         <div class="rs-inner-blog pt-120 pb-120 md-pt-90 md-pb-90">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 pr-35 md-pr-15">
+                    <div class="col-lg-12 pr-35 md-pr-15">
                         <div class="row">
-                            @foreach ($pages as $page)
-                            <div class="col-lg-12 mb-50">
-                                <div class="blog-item">
-                                    <div class="blog-img">
-                                        <a href="{{route('landing.page',['slug' => $page->slug])}}"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
-                                        <ul class="post-categories">
-                                            <li><a href="{{route('landing.page',['slug' => $page->slug])}}">{{@$page->pageCategory->name}}</a></li>
+                            <div class="col-lg-12">
+                                <div class="blog-details">
+                                   
+                                    <div class="blog-full">
+                                        <h2>{{$page->name}}</h2>
+                                        <ul class="single-post-meta">
+                                            <li>
+                                                <span class="p-date"><i class="fa fa-calendar-check-o"></i>โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}  </span>
+                                            </li> 
+                                            {{-- <li>
+                                                <span class="p-date"> <i class="fa fa-user-o"></i> admin </span>
+                                            </li>  --}}
+                                            <li class="Post-cate">
+                                                <div class="tag-line">
+                                                    <i class="fa fa-book"></i>
+                                                    <a href="#">{{@$page->pageCategory->name}}</a>
+                                                </div>
+                                            </li>
+                                            <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
+
+                                            <li class="Post-cate" style="margin-left: 10px;">
+                                                <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a>
+                                                {{-- <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 'http://goo.gl/dS52U', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a> --}} 
+                                            </li>
+                                            
                                         </ul>
                                     </div>
-                                    <div class="blog-content">
-                                        <h3 class="blog-title"><a href="{{route('landing.page',['slug' => $page->slug])}}">{{$page->name}}</a></h3>
-                                        <div class="blog-meta">
-                                            <ul class="btm-cate">
-                                                <li>
-                                                    <div class="blog-date">
-                                                        <i class="fa fa-calendar-check-o"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}                                                        
-                                                    </div>
-                                                </li>
-                                                <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-desc">   
-                                            {{$page->header}}
-                                        </div>
-                                        <div class="blog-button inner-blog">
-                                            <a class="blog-btn" href="{{route('landing.page',['slug' => $page->slug])}}" style="font-family: kanit">อ่านต่อ</a>
-                                        </div>
+                                    <div class="bs-img mb-35">
+                                        {{-- <a href="#"><img src="{{asset($page->featureimage->name)}}" alt=""></a> --}}
+                                    </div>
+                                    <div class="blog-full">
+                                        <p>
+                                            {!!$page->content!!}
+                                            
+                                        </p>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-
                         </div>
-                        {{$pages->links()}}
-                    </div>
-                    <div class="col-lg-4 col-md-12 order-last">
-                        <div class="widget-area">
-                            {{-- <div class="search-widget mb-50">
-                                <div class="search-wrap">
-                                    <input type="search" placeholder="ค้นหา..." name="s" class="search-input" value="">
-                                    <button type="submit" value="Search"><i class="flaticon-search"></i></button>
-                                </div>
-                            </div> --}}
-                            <div class="recent-posts mb-50">
-                                <div class="widget-title">
-                                    <h3 class="title">ข่าวสารและข้อมูล</h3>
-                                </div>
-                                @foreach ($pages as $page)
-                                    <div class="recent-post-widget">
-                                        <div class="post-img">
-                                            <a href="{{route('landing.page',['slug' => $page->slug])}}"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
-                                        </div>
-                                        <div class="post-desc">
-                                            <a href="{{route('landing.page',['slug' => $page->slug])}}">{{$page->name}}</a>
-                                            <div class="blog-desc">   
-                                                {{$page->header}}
-                                            </div>
-                                            <span class="date">
-                                                <i class="fa fa-calendar"></i>
-                                                โพสต์เมื่อ: {{$page->day}} {{$page->month}} {{$page->year}} 
-                                            </span>
-                                        </div>
-                                    </div>   
-                                @endforeach
-                            </div>
-                        </div>
+                      
                     </div>
                 </div> 
             </div>
@@ -339,6 +314,14 @@
         {{-- {{asset('assets/landing2/css/responsive.css')}} --}}
          <!-- modernizr js -->
          @include('layouts.landing2.js')
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script>
+            function fbShare(url, title, descr, winWidth, winHeight) {
+                var winTop = (screen.height / 2) - (winHeight / 2);
+                var winLeft = (screen.width / 2) - (winWidth / 2);
+                window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url , 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            }
+        </script>
     </body>
 
 </html>
