@@ -43,10 +43,11 @@
                     <p class="widget-desc">
                         @if (Config::get('app.locale') == 'th')
                         จันทร์-ศุกร์:
+                        {{$generalinfo->workdaytime}} น.
                         @else
                         Mon-Fri:
-                        @endif
-                        {{$generalinfo->workdaytime}}</p>
+                        {{$generalinfo->workdaytime}}
+                        @endif</p>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 md-mb-30">
                     <h3 class="widget-title">
