@@ -263,9 +263,7 @@
                                     <div class="blog-full">
                                         <p>
                                             {!!$page->content!!}
-                                            
                                         </p>
-                                        
                                     </div>
                                 </div>
                             </div>
