@@ -238,7 +238,7 @@ th {
 			</div>           
 			<div class="modal-footer">
 				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-				<button id="btn_modal_add_employ_research" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_add_employ_research" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+				<button id="btn_modal_add_employ_research" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon_add_employ_research" hidden></i><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 			</div>
 		</div>
 	</div>
@@ -2307,7 +2307,7 @@ th {
 																				<div class="row" id="cer1qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer1) || Empty(@$fulltbpprojectcertify->cer1_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer1_qty ?? 0}}">
+																							<input type="text" id="cer1qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer1_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2322,7 +2322,7 @@ th {
 																				<div class="row" id="cer2qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer2) || Empty(@$fulltbpprojectcertify->cer2_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer2_qty ?? 0}}">
+																							<input type="text" id="cer2qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer2_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2339,7 +2339,7 @@ th {
 																				<div class="row" id="cer3qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer3) || Empty(@$fulltbpprojectcertify->cer3_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer3_qty ?? 0}}">
+																							<input type="text" id="cer3qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer3_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2354,7 +2354,7 @@ th {
 																				<div class="row" id="cer4qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer4) || Empty(@$fulltbpprojectcertify->cer4_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer4_qty ?? 0}}">
+																							<input type="text" id="cer4qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer4_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2371,7 +2371,7 @@ th {
 																				<div class="row" id="cer5qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer5) || Empty(@$fulltbpprojectcertify->cer5_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer5_qty ?? 0}}">
+																							<input type="text" id="cer5qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer5_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2386,7 +2386,7 @@ th {
 																				<div class="row" id="cer6qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer6) || Empty(@$fulltbpprojectcertify->cer6_qty) ) hidden @endif>
 																					<div class="col-md-9">
 																						<div class="form-group">
-																							<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer6_qty ?? 0}}">
+																							<input type="text" id="cer6qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer6_qty ?? 0}}">
 																						</div>
 																					</div>
 																				</div>
@@ -2408,7 +2408,7 @@ th {
 																			<div class="row" id="cer7qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer7) || Empty(@$fulltbpprojectcertify->cer7_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer7_qty ?? 0}}">
+																						<input type="text" id="cer7qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer7_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2423,7 +2423,7 @@ th {
 																			<div class="row" id="cer9qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer9) || Empty(@$fulltbpprojectcertify->cer9_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer9_qty ?? 0}}">
+																						<input type="text" id="cer9qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer9_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2440,7 +2440,7 @@ th {
 																			<div class="row" id="cer8qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer8) || Empty(@$fulltbpprojectcertify->cer8_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer8_qty ?? 0}}">
+																						<input type="text" id="cer8qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer8_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2465,7 +2465,7 @@ th {
 																			<div class="row" id="cer11qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer11) || Empty(@$fulltbpprojectcertify->cer11_qty) ) hidden @endif>
 																				<div class="col-md-9">
 																					<div class="form-group">
-																						<input type="text" id="cer11qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat2" value="{{$fulltbpprojectcertify->cer11_qty ?? 0}}">
+																						<input type="text" id="cer11qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer11_qty ?? 0}}">
 																					</div>
 																				</div>
 																			</div>
@@ -2645,7 +2645,7 @@ th {
 																			<thead>
 																				<tr>
 																					<tr>
-																						<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+																						<th rowspan="2" style="width:1%;white-space: nowrap;padding:5px">รายละเอียดการดำเนินงาน</th> 
 																							@foreach ($allyears as $key => $item)
 																								@if ($item != 0)
 																									<th colspan="{{$item}}" class="text-center" style="width:1%;white-space: nowrap; !important;font-size:12px">{{$fulltbpgantt->startyear + $key}}</th> 

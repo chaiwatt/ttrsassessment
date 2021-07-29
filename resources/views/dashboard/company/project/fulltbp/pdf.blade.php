@@ -182,12 +182,12 @@
                             <img src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" class="bw500 bh300" alt="">
                         </div>
                     </div>
-                    <div class="ml20 mt0" style="font-size:13px">1.7 จำนวนบุคลากรทั้งหมด&emsp;{{$fulltbp->fulltbpemployee->department_qty}}&emsp;คน
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายบริหาร&emsp;{{$fulltbp->fulltbpemployee->department1_qty}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายวิจัยและพัฒนา&emsp;{{$fulltbp->fulltbpemployee->department2_qty}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายผลิต/วิศวกรรม&emsp;{{$fulltbp->fulltbpemployee->department3_qty}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายการตลาด&emsp;{{$fulltbp->fulltbpemployee->department4_qty}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- พนักงานทั่วไป&emsp;{{$fulltbp->fulltbpemployee->department5_qty}}&emsp;คน</div>
+                    <div class="ml20 mt0" style="font-size:13px">1.7 จำนวนบุคลากรทั้งหมด&emsp;{{number_format($fulltbp->fulltbpemployee->department_qty)}}&emsp;คน
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายบริหาร&emsp;{{number_format($fulltbp->fulltbpemployee->department1_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายวิจัยและพัฒนา&emsp;{{number_format($fulltbp->fulltbpemployee->department2_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายผลิต/วิศวกรรม&emsp;{{number_format($fulltbp->fulltbpemployee->department3_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายการตลาด&emsp;{{number_format($fulltbp->fulltbpemployee->department4_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- พนักงานทั่วไป&emsp;{{number_format($fulltbp->fulltbpemployee->department5_qty)}}&emsp;คน</div>
                     </div>
                     <div class="ml20 mt0" style="font-size:13px"><strong>1.8 ประเภทของธุรกิจ</strong>
                         <div class="ml50 mt0" style="font-size:13px"><strong>1.8.1 ธุรกิจนิติบุคคล</strong>

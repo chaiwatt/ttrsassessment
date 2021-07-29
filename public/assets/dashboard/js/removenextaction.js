@@ -18,10 +18,10 @@
             });
             $(this).val('');
        }else{
-           if(parseInt(year) < 2500 || parseInt(year) > 3000){
+           if(parseInt(year) < 2400 || parseInt(year) > 3000){
             Swal.fire({
                 title: 'ผิดพลาด',
-                text: 'กรุณากรอกปี พ.ศ. ระหว่าง 2500 - 3000',
+                text: 'กรุณากรอกปี พ.ศ. ระหว่าง 2400 - 3000',
                 });
                 $(this).val('');
            }

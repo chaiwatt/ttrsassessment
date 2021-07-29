@@ -284,7 +284,7 @@
                             </div> --}}
                             <div class="recent-posts mb-50">
                                 <div class="widget-title">
-                                    <h3 class="title">ข่าวล่าสุด</h3>
+                                    <h3 class="title">ข่าวสารและข้อมูล</h3>
                                 </div>
                                 @foreach ($pages as $page)
                                     <div class="recent-post-widget">

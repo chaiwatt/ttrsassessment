@@ -347,61 +347,61 @@ $(document).on("click",".deletecompanyceo",function(e){
 });
 
 
-$(document).on('change', '#employemail_edit', function(e) {
-    if($('#employemail_edit').val() != ''){
+// $(document).on('change', '#employemail_edit', function(e) {
+//     if($('#employemail_edit').val() != ''){
 
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_edit').val())== false)
-        {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-                });
-            $('#employemail_edit').val('') ;
-        }
-    }
- });
+//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_edit').val())== false)
+//         {
+//             Swal.fire({
+//                 title: 'ผิดพลาด...',
+//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+//                 });
+//             $('#employemail_edit').val('') ;
+//         }
+//     }
+//  });
 
- $(document).on('change', '#employemail_ceo', function(e) {
-    if($('#employemail_ceo').val() != ''){
+//  $(document).on('change', '#employemail_ceo', function(e) {
+//     if($('#employemail_ceo').val() != ''){
 
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_ceo').val())== false)
-        {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-                });
-            $('#employemail_ceo').val('') ;
-        }
-    }
- });
+//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_ceo').val())== false)
+//         {
+//             Swal.fire({
+//                 title: 'ผิดพลาด...',
+//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+//                 });
+//             $('#employemail_ceo').val('') ;
+//         }
+//     }
+//  });
 
- $(document).on('change', '#employemail', function(e) {
-    if($('#employemail').val() != ''){
+//  $(document).on('change', '#employemail', function(e) {
+//     if($('#employemail').val() != ''){
 
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail').val())== false)
-        {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-                });
-            $('#employemail').val('') ;
-        }
-    }
- });
+//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail').val())== false)
+//         {
+//             Swal.fire({
+//                 title: 'ผิดพลาด...',
+//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+//                 });
+//             $('#employemail').val('') ;
+//         }
+//     }
+//  });
 
- $(document).on('change', '#employemail_research', function(e) {
-    if($('#employemail_research').val() != ''){
+//  $(document).on('change', '#employemail_research', function(e) {
+//     if($('#employemail_research').val() != ''){
 
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_research').val())== false)
-        {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-                });
-            $('#employemail_research').val('') ;
-        }
-    }
- });
+//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_research').val())== false)
+//         {
+//             Swal.fire({
+//                 title: 'ผิดพลาด...',
+//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+//                 });
+//             $('#employemail_research').val('') ;
+//         }
+//     }
+//  });
  
 
 $(document).on('change', '#employeducationyearstart', function(e) {
@@ -733,6 +733,19 @@ $(document).on('click', '#add_creditpartner', function(e) {
     $('#creditpartneryear').val('');
     $('#modal_add_creditpartner').modal('show');
 });
+
+
+$(document).on('change', '#tectdevleveltechnology', function(e) {
+    $('#tectdevleveltechnology').val( $('#tectdevleveltechnology').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+ });
+
+ $(document).on('change', '#tectdevleveltechnologypresent', function(e) {
+    $('#tectdevleveltechnologypresent').val( $('#tectdevleveltechnologypresent').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+ });
+
+ $(document).on('change', '#tectdevleveltechnologyproject', function(e) {
+    $('#tectdevleveltechnologyproject').val( $('#tectdevleveltechnologyproject').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+ });
 
 $(document).on('click', '#add_tectdevlevel', function(e) {
     $('#tectdevleveltechnology').val('');
@@ -1429,7 +1442,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                 html += `<thead>
                             <tr>
                                 <tr>
-                                    <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                    <th rowspan="2" style="padding:5px;width:1%;white-space: nowrap">รายละเอียดการดำเนินงาน</th> 
                                      ${th}
                                     <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
                                 </tr>
@@ -2661,7 +2674,7 @@ $('.steps-basic').steps({
     },
     onStepChanged:function (event, currentIndex, newIndex) {
         if(currentIndex == 1){
-            // console.log($('#responsibleprefix').val());
+            // console.log($('#department_qty').val());
             $(".actions").find(".libtn").remove();
             FullTbp.editGeneral($('#fulltbpid').val(),$('#businesstype').val(),$('#department_qty').val(),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val(),
             $('#companyhistory').val(),$('#responsibleprefix').val(),$('#responsiblename').val(),$('#responsiblelastname').val(),$('#responsibleposition').val(),$('#responsibleemail').val(),$('#responsiblephone').val(),$('#responsibleworkphone').val(),$('#responsibleeducationhistory').val(),$('#responsibleexperiencehistory').val(),$('#responsibletraininghistory').val()).then(data => {
@@ -3011,23 +3024,23 @@ $(".chkauthorizeddirector").on('change', function() {
 });
 
 $(document).on("change","#department_qty",function(e){
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')));
 });
 
 $(document).on("change","#department1_qty",function(e){
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')));
 });
 $(document).on("change","#department2_qty",function(e){
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')));
 });
 $(document).on("change","#department3_qty",function(e){
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')));
 });
 $(document).on("change","#department4_qty",function(e){
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')));
 });
 $(document).on("change","#department5_qty",function(e){
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')));
 });
 
 
@@ -3910,6 +3923,35 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
         });
         return;
     }
+
+    if($("#employphone").val().length != 10 || $("#employphone").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#employphone').val('')
+        return;
+    }
+
+    if( $("#employworkphone").val().length != 10 || $("#employworkphone").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#employworkphone').val('')
+        return;
+    }
+
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail').val())== false)
+    {
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+            });
+        $('#employemail').val('') ;
+        return;
+    }
+
     $("#spinicon_add_employ").attr("hidden",false);
     Employ.saveEmploy($('#employprefix').val(),$('#otherprefix').val(),$('#employname').val(),$('#employlastname').val(),$('#employposition').val(),$('#otherboardposition').val(),$('#employphone').val(),$('#employworkphone').val(),$('#employemail').val()).then(data => {
        var dataid = 0;
@@ -3972,6 +4014,39 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
         });
         return;
     }
+
+    if($("#employphone_ceo").val().length != 10 || $("#employphone_ceo").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#employphone_ceo').val('')
+        return;
+    }
+
+    if( $("#employworkphone_ceo").val().length != 10 || $("#employworkphone_ceo").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#employworkphone_ceo').val('')
+        return;
+    }
+
+
+
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_ceo').val())== false)
+    {
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+            });
+        $('#employemail_ceo').val('') ;
+        return
+    }
+
+
+
     Employ.saveEmploy($('#employprefix_ceo').val(),$('#otherprefix_ceo').val(),$('#employname_ceo').val(),$('#employlastname_ceo').val(),1,null,$('#employphone_ceo').val(),$('#employworkphone_ceo').val(),$('#employemail_ceo').val()).then(data => {
        var dataid = 0;
         var html = ``;
@@ -4025,10 +4100,46 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
 });
 
 $(document).on('click', '#btn_modal_add_employ_research', function(e) {
+
+    if($('#employname_research').val() == '' || $('#employlastname_research').val() == '' || $('#employphone_research').val() == '' || $('#employworkphone_research').val() == '' || $('#employemail_research').val() == ''){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกข้อมูลให้ครบ!',
+        });
+        return;
+    }
+
+    if($("#employphone_research").val().length != 10 || $("#employphone_research").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#employphone_research').val('')
+        return;
+    }else if( $("#employworkphone_research").val().length != 10 || $("#employworkphone_research").val().charAt(0) != '0' ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#employworkphone_research').val('')
+        return;
+    }else if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_research').val())== false)
+        {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+                });
+            $('#employemail_research').val('') ;
+            return;
+        }
+        
+
+    //;
     $("#spinicon_add_employ_research").attr("hidden",false);
     Employ.saveEmploy($('#employprefix_research').val(),$('#otherprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),"",$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
         var dataid = 0;
         var html = ``;
+        console.log(data);
         data.forEach(function (employ,index) {
                 if(employ.employ_position_id >= 6){
                     dataid = employ.id;
@@ -4065,7 +4176,8 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                     </tr>`
                 }
             });
-            $("#spinicon_add_employ_research").attr("hidden",true);
+           
+            $('#modal_add_employ_research').modal('hide')
          $("#fulltbp_researcher_wrapper_tr").html(html);
          if(data.length > 0){
             $("#fulltbp_researcher_wrapper").attr("hidden",false);

@@ -94,7 +94,7 @@ $(function() {
     $('.numeralformathphone').toArray().forEach(function(field){
         new Cleave(field, {
             numericOnly: true,
-            blocks: [13]
+            blocks: [10]
         })
     });
     $('.numeralformat2').toArray().forEach(function(field){

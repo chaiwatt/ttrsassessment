@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-
 class LoginController extends Controller
 {
     use AuthenticatesUsers;

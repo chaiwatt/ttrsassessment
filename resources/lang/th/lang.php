@@ -14,10 +14,10 @@ return [
     'openhour' => 'เวลาทำการ',
     'copyright' => 'สงวนลิขสิทธิ์',
     'dashboard' => 'แดชบอร์ด',
-    'registrationprocess' => 'ขั้นตอนการบริการ',
+    'registrationprocess' => 'แนะนำบริการ',
     'submitanapplication' => 'ยื่นใบสมัคร',
     'fillouttheform' => 'กรอกแบบฟอร์ม',
     'preliminaryconsideration' => 'พิจารณาเบื้องต้น',
     'assessment' => 'ตรวจประเมิน',
-    'news' => 'ข่าวล่าสุด',
+    'news' => 'ข่าวสารและข้อมูล',
 ];

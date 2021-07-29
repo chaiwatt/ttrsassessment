@@ -236,6 +236,7 @@
 												}
 											@endphp
 											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $phone}}" class="form-control form-control-lg required">
+											<span id="contactphone_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> เบอร์โทรศัพท์ไม่ถูกต้อง</span>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -718,6 +719,15 @@
 					return false;
 				}
 			}
+			if(newIndex == 1){
+				if($("#contactphone").val().length != 10){
+					$("#contactphone_error").attr("hidden",false);
+					return false;
+				}else{
+					$("#contactphone_error").attr("hidden",true);
+				}
+			}	
+
 			if(newIndex == 2){
 				if($("#finance1").is(":checked") == false && $("#finance2").is(":checked") == false 
 				&& $("#nonefinance1").is(":checked") == false && $("#nonefinance2").is(":checked") == false && $("#nonefinance3").is(":checked") == false 
@@ -981,10 +991,7 @@
 			},			
 			contactlastname: {
 				required: 'กรุณากรอกนามสกุล'
-			},			
-			contactphone: {
-				required: 'กรุณากรอกเบอร์โทรศัพท์'
-			},			
+			},						
 			contactemail: {
 				required: 'กรุณากรอกอีเมล'
 			}

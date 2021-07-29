@@ -13,10 +13,10 @@ class HomepageIndustryGroupTextsSeeder extends Seeder
     {
         DB::table('homepage_industry_group_texts')->insert([
             [
-                'titleth' => 'กลุ่มอุตสาหกรรมที่ขอรับการประเมิน',
-                'titleeng' => 'Industry group',
-                'subtitleth' => 'กลุ่มอุตสาหกรรมที่ขอรับการประเมิน',
-                'subtitleeng' => 'Industry group description',
+                'titleth' => 'ผลการดำเนินงาน',
+                'titleeng' => 'Project Assessment',
+                'subtitleth' => 'ผลการดำเนินงานโครงการตามกลุ่มอุตสาหกรรม',
+                'subtitleeng' => 'Project Assessment by Industry group',
                 'picture' => 'assets/landing2/images/about/group.png',
                 'url' => 'register'
             ]

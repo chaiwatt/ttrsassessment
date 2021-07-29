@@ -19,24 +19,33 @@
                         @endif
                     </p>
                     <ul class="banner-btn">
-                        <li><a class="readon started" href="{{route('register')}}">
+                        <li><a class="readon started text-center" style="width:150px"  href="{{route('register')}}">
+                            
+                                @if (Config::get('app.locale') == 'th')
+                                    สมัคร
+                                @else
+                                    Apply
+                                @endif
+                            </a>
+                        </li>
+                        <li><a class="readon started" style="width:150px ; margin-left:25px" href="{{route('login')}}">
                             
                             @if (Config::get('app.locale') == 'th')
-                                สมัคร
+                                เข้าสู่ระบบ
                             @else
-                                Apply
+                                Login
                             @endif
-                        </a></li>
-                        <li>
-                            <div class="rs-videos">
-                                <div class="animate-border white-color">
-                                    <a class="popup-border popup-videos" href=" {{$shareheadertext->youtube}}">
-                                        <i class="fa fa-play"></i>
-                                    </a>
-                                </div>
-                            </div> 
-                        </li>
+                        </a>
+                    </li>
+
                     </ul>
+                    <div class="rs-videos" >
+                        <div class="animate-border white-color" style="height:100px" >
+                            <a class="popup-border popup-videos" style="text-align:center" href=" {{$shareheadertext->youtube}}">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
