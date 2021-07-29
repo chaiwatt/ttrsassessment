@@ -9,7 +9,7 @@
                       <div class="textwidget pb-30">
                           
                           @if (Config::get('app.locale') == 'th')
-                          <p>111 อุทยานวิทยาศาสตร์ประเทศไทย <br>ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120 </p>
+                          <p>111 อุทยานวิทยาศาสตร์ประเทศไทย <br>ถ.พหลโยธิน ตำบลคลองหนึ่ง <br>อำเภอคลองหลวง จังหวัดปทุมธานี <br>12120 </p>
                           @else
                           <p>111 Thailand Science Park <br>Phahonyothin Rd, Khlong Luang District, Pathum Thani 12120 </p>
                           @endif
