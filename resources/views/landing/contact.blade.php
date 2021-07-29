@@ -36,7 +36,7 @@
           <div class="info-box ">
             <i class="bx bx-phone-call"></i>
             <h3>ติดต่อ</h3>
-            <p>โทรศัพท์: {{$generalinfo->phone1}} <br>
+            <p>โทรศัพท์: {{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}} <br>
               แฟ็กซ์: {{$generalinfo->fax}}
               <br>
               อีเมล: {{$generalinfo->email}}</p>

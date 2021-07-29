@@ -65,7 +65,7 @@
                         <li>
                             <i class="flaticon-call"></i>
                             <div class="desc">
-                               <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}}</a>
+                               <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a>
                             </div>
                         </li>
                         <li>

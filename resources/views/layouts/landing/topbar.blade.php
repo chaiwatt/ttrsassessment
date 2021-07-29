@@ -3,7 +3,7 @@
         <div class="container clearfix">
           <div class="contact-info float-left" id="color">
             <i class="icofont-envelope"></i>{{$generalinfo->email}}
-            <i class="icofont-phone"></i>{{$generalinfo->phone1}}
+            <i class="icofont-phone"></i>{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}
     
              <!-- ======= Social-Links ======= -->
             {{-- <a class="ml-4" href="{{$generalinfo->twitter}}" class="twitter"><i class="icofont-twitter"></i></a>

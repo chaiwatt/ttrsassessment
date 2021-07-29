@@ -32,7 +32,7 @@
 
         <div class="col-lg-3 col-md-6 footer-newsletter">
           <h4 style="font-family: Sarabun; font-weight:200">ติดต่อ</h4>
-          โทรศัพท์: {{$generalinfo->phone1}}
+          โทรศัพท์: {{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}
           <br>
           แฟ็กซ์: {{$generalinfo->fax}}
           <br>

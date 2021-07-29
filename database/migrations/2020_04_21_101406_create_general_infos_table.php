@@ -20,6 +20,7 @@ class CreateGeneralInfosTable extends Migration
             $table->string('logo',250)->nullable();
             $table->string('logo2',250)->nullable();
             $table->string('phone1',50)->default('0-2564-7000');
+            $table->string('phone1_ext',50)->default('1411-1417');
             $table->string('phone1_default',50)->default('0-2564-7000');
             $table->string('phone2',50)->default('0-2564-8000');
             $table->string('phone2_default',50)->default('0-2564-8000');
