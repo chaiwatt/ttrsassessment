@@ -51,12 +51,12 @@
         </div>
         <div class="getStart text-right" >
 
-            <a class="readon started" href="{{route('login')}}">
+            <a class="readon started" href="{{route('landing.servicepage')}}">
                 
                 @if (Config::get('app.locale') == 'th')
-                    สมัคร
+                    เพิ่มเติม
                 @else
-                    Get Started
+                    More ...
                 @endif
             </a>
         </div>

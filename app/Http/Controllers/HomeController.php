@@ -14,6 +14,7 @@ use App\Model\PageView;
 use App\Model\PageImage;
 use App\Model\DirectMenu;
 use App\Model\GeneralInfo;
+use App\Model\ServicePage;
 use App\Model\ExpertDetail;
 use App\Model\FeatureImage;
 use App\Model\IntroSection;
@@ -2491,6 +2492,12 @@ class HomeController extends Controller
         $company = Company::with('industrygroup')->find(3);
         return  $company;
     }
+
+    public function ServicePage(){
+        $servicepage = ServicePage::first();
+        return $servicepage ;
+    }
+    
 
 }
 

@@ -32,6 +32,7 @@ Route::get('', 'HomeController@Index2')->name('landing2.index');
 Route::get('front', 'HomeController@Front')->name('landing.front');
 Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
 Route::get('blog', 'HomeController@Blog')->name('landing.blog');
+Route::get('servicepage', 'HomeController@ServicePage')->name('landing.servicepage');
 Route::get('news', 'HomeController@News')->name('landing.news');
 Route::get('announce', 'HomeController@announce')->name('landing.announce');
 Route::get('announcenews/{slug}', 'HomeController@announcenews')->name('landing.announcenews');
