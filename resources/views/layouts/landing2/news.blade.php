@@ -289,7 +289,7 @@
                                             </div>
                                             <span class="date">
                                                 <i class="fa fa-calendar"></i>
-                                                โพสต์: {{$page->day}} {{$page->month}} {{$page->year}} 
+                                                โพสต์เมื่อ: {{$page->day}} {{$page->month}} {{$page->year}} 
                                             </span>
                                         </div>
                                     </div>   
