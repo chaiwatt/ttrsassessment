@@ -87,6 +87,7 @@ class SettingAdminSystemController extends Controller
                 'showalert_id' => $request->showalert,
                 'watermark' => $request->watermark,
                 'use_invoice_status_id' => $request->useinvoicestatus,
+                'phone1_ext' => $request->phone1_ext,
                 // 'show_finished_project_id' => $request->showfinishedproject,
                 'watermarktext' => $request->watermarktext
             ]);

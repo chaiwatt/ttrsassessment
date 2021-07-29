@@ -109,6 +109,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>ต่อ</label>
+                                        <input type="text" name="phone1_ext" value="{{$generalinfo->phone1_ext}}" data-placeholder="ต่อ" class="form-control form-control-lg">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>Call Center</label>
                                         <input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="Call Center" class="form-control form-control-lg">
                                     </div>
