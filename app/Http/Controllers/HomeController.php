@@ -2495,7 +2495,8 @@ class HomeController extends Controller
 
     public function ServicePage(){
         $servicepage = ServicePage::first();
-        return $servicepage ;
+        return view('layouts.landing2.servicepage')->withServicepage($servicepage);
+        // return $servicepage ;
     }
     
 

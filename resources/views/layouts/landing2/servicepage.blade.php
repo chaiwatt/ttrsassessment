@@ -4,7 +4,7 @@
 <head>
         <!-- meta tag -->
         <meta charset="utf-8">
-        <title>TTRS - {{$page->name}}</title>
+        <title>TTRS - {{$servicepage->titleth}}</title>
         <meta name="description" content="">
         <!-- responsive tag -->
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -190,7 +190,7 @@
                     {{-- <a href="index.html"><img src="assets/images/logo-dark.png" alt="logo"></a> --}}
                 </div>
                 <div class="offcanvas-text">
-                    <p>{{$page->name}}</p>
+                    <p>{{$servicepage->titleth}}</p>
                 </div>
                 {{-- <div class="canvas-contact">
                     <h5 class="canvas-contact-title">Contact Info</h5>
@@ -214,12 +214,12 @@
         <!-- Breadcrumbs Start -->
         <div class="rs-breadcrumbs img5 ">
             <div class="breadcrumbs-inner text-center">
-                <h1 class="page-title">ข่าว</h1>
+                <h1 class="page-title">แนะนำบริการ</h1>
                 <ul>
                     <li title="Braintech - IT Solutions and Technology Startup HTML Template">
                         <a class="active" href="{{url('')}}" style="font-size: 16px">หน้าแรก</a>
                     </li>
-                   <li style="font-size: 16px">ข่าว</li>
+                   <li style="font-size: 16px">แนะนำบริการ</li>
                 </ul>
             </div>
         </div>
@@ -234,21 +234,21 @@
                                 <div class="blog-details">
                                    
                                     <div class="blog-full">
-                                        <h2>{{$page->name}}</h2>
+                                        <h2>{{$servicepage->titleth}}</h2>
                                         <ul class="single-post-meta">
                                             <li>
-                                                <span class="p-date"><i class="fa fa-calendar-check-o"></i>โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}  </span>
+                                                <span class="p-date"><i class="fa fa-calendar-check-o"></i>โพสต์: {{$servicepage->day}} {{$servicepage->month}} {{$servicepage->year}}  </span>
                                             </li> 
                                             {{-- <li>
                                                 <span class="p-date"> <i class="fa fa-user-o"></i> admin </span>
                                             </li>  --}}
-                                            <li class="Post-cate">
+                                            {{-- <li class="Post-cate">
                                                 <div class="tag-line">
                                                     <i class="fa fa-book"></i>
                                                     <a href="#">{{@$page->pageCategory->name}}</a>
                                                 </div>
-                                            </li>
-                                            <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
+                                            </li> --}}
+                                            {{-- <li class="post-comment"> <i class="fa fa-eye"></i> xxx </li> --}}
 
                                             <li class="Post-cate" style="margin-left: 10px;">
                                                 <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a>
@@ -262,7 +262,7 @@
                                     </div>
                                     <div class="blog-full">
                                         <p>
-                                            {!!$page->content!!}
+                                            {!!$servicepage->bodyth!!}
                                         </p>
                                     </div>
                                 </div>
