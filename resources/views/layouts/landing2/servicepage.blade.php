@@ -257,9 +257,9 @@
                                             
                                         </ul>
                                     </div>
-                                    <div class="bs-img mb-35">
+                                    {{-- <div class="bs-img mb-35"> --}}
                                         {{-- <a href="#"><img src="{{asset($page->featureimage->name)}}" alt=""></a> --}}
-                                    </div>
+                                    {{-- </div> --}}
                                     <div class="blog-full">
                                         <p>
                                             {!!$servicepage->bodyth!!}
