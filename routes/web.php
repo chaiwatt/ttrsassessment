@@ -34,6 +34,7 @@ Route::get('page/{slug}', 'HomeController@Page')->name('landing.page');
 Route::get('blog', 'HomeController@Blog')->name('landing.blog');
 Route::get('servicepage', 'HomeController@ServicePage')->name('landing.servicepage');
 Route::get('performance', 'HomeController@Performance')->name('landing.performance');
+Route::get('pillars', 'HomeController@Pillars')->name('landing.pillars');
 Route::get('news', 'HomeController@News')->name('landing.news');
 Route::get('announce', 'HomeController@announce')->name('landing.announce');
 Route::get('announcenews/{slug}', 'HomeController@announcenews')->name('landing.announcenews');

@@ -30,6 +30,7 @@ use App\Model\CompanyAddress;
 use App\Model\AnnounceCategory;
 use App\Model\AnnounceAttachment;
 use Illuminate\Support\Facades\DB;
+use App\Model\HomepagePillarSection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
@@ -2503,14 +2504,14 @@ class HomeController extends Controller
     }
 
     public function Performance(){
-         return view('layouts.landing2.performance');
-        $industrygroups = IndustryGroup::pluck('id')->toArray();
-        $companies = Company::whereIn('industry_group_id',$industrygroups)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
-        return  $fulltbps ;
+        return view('layouts.landing2.performance');
+
     }
+
+    public function Pillars(){
+        $homepagepillarsection = HomepagePillarSection::first();
+        return view('layouts.landing2.pillarpage')->withHomepagepillarsection($homepagepillarsection);
+   }
     
 }
 

@@ -15,10 +15,14 @@ class CreateHomepagePillarSectionsTable extends Migration
     {
         Schema::create('homepage_pillar_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('textth1',250)->nullable();
-            $table->string('texteng1',250)->nullable();
-            $table->string('textth2',250)->nullable();
-            $table->string('texteng2',250)->nullable();
+            $table->string('textth1')->nullable();
+            $table->string('texteng1')->nullable();
+            $table->string('textth2')->nullable();
+            $table->string('texteng2')->nullable();
+            $table->string('titleth')->nullable();
+            $table->string('titleen')->nullable();
+            $table->longText('detailth')->nullable();
+            $table->longText('detailen')->nullable();
             $table->string('pillartitleth1',250)->nullable();
             $table->string('pillartitleeng1',250)->nullable();
             $table->string('pillartitleth2',250)->nullable();

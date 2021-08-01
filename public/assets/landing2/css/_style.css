@@ -4221,6 +4221,14 @@ body .search-modal .close:hover {
 .rs-skillbar.style1.modify3 .cl-skill-bar .skillbar.blue-style .skillbar-bar {
   background: #0073FF;
 }
+
+.rs-skillbar.style1.modify3 .cl-skill-bar .skillbar.pink-style {
+  border-color: #f954a1;
+}
+.rs-skillbar.style1.modify3 .cl-skill-bar .skillbar.pink-style .skillbar-bar {
+  background: #f954a1;
+}
+
 .rs-skillbar.style1.home4 .skillbar .skillbar-bar {
   background-color: #FD6509;
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
