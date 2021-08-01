@@ -68,7 +68,7 @@
                                         <th>วันที่</th>
                                         <th>บริษัท</th>
                                         <th>เลขที่เอกสาร</th>    
-                                        <th>สถานะ</th> 
+                                        <th>สถานภาพ</th> 
                                         <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                       
                                     </tr>
                                 </thead>

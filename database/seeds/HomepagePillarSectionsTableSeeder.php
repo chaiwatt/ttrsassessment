@@ -13,7 +13,7 @@ class HomepagePillarSectionsTableSeeder extends Seeder
     {
         DB::table('homepage_pillar_sections')->insert([
             [
-                'textth1' => 'ประเมินโครงการด้วยเกณฑ์ 4 เสา',
+                'textth1' => 'หลักเกณฑ์การประเมิน',
                 'texteng1' => '4 PILLARS',
                 'textth2' => 'ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS',
                 'texteng2' => 'this the description about 4 pillar this the description about 4 pillar this the description about 4 pillar this the description about 4 pillar this the description about 4 pillar this the description about 4 pillar this the description about 4 pillar this the description about 4 pillar this the description about 4 pillar',

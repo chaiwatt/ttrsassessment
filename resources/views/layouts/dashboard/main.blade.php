@@ -33,7 +33,7 @@
 </head>
 
 {{-- <body class="sidebar-xs"> --}}
-<body 
+<body id="html_body" 
 	@if ($generalinfo->togglebar == 1)
 		class="sidebar-xs"
 	@endif
@@ -58,8 +58,13 @@
 		<div class="collapse navbar-collapse" id="navbar-mobile">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					{{-- <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block"> --}}
+					{{-- @if ($generalinfo->togglebar == 1)
 					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block" data-popup="tooltip-demo" title="คลิกเพื่อขยาย" data-placement="left" data-container="body" data-trigger="hover">
+					@else
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block" data-placement="left" data-container="body" data-trigger="hover">
+					@endif --}}
+					{{-- <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block" data-popup="tooltip-demo" title="คลิกเพื่อขยาย" data-placement="left" data-container="body" data-trigger="hover"> --}}
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block" data-placement="left" data-container="body" data-trigger="hover">
 						<i class="icon-paragraph-justify3 togglebar"></i>
 					</a>
 				</li>

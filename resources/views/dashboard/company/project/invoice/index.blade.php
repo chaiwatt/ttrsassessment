@@ -67,7 +67,7 @@
                                         <th>วันที่</th>
                                         <th>เลขที่เอกสาร</th>    
                                         <th>รายละเอียด</th>   
-                                        <th>สถานะ</th>                             
+                                        <th>สถานภาพ</th>                             
                                         <th style="text-align: right">เพิ่มเติม</th>
                                     </tr>
                                 </thead>

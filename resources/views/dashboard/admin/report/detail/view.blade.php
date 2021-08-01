@@ -66,7 +66,7 @@
                                         <th >รายการ</th> 
                                         <th >วันที่กำหนด</th>
                                         <th >วันที่ Action</th>
-                                        <th>สถานะ</th> 
+                                        <th>สถานภาพ</th> 
                                     </tr>
                                 </thead>
                                 <tbody >

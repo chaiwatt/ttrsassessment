@@ -724,25 +724,25 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbyobjective(Request $request){
         $minitbparray = MiniTBP::whereNotNull('finance1')
-                                ->orWhereNotNull('finance2')
-                                ->orWhereNotNull('finance3')
-                                ->orWhereNotNull('finance4')
+                                // ->orWhereNotNull('finance2')
+                                // ->orWhereNotNull('finance3')
+                                // ->orWhereNotNull('finance4')
                                 ->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
         return view('dashboard.admin.realtimereport.project.projectbyobjective')->withFulltbps($fulltbps);
     }
     public function getprojectbyobjective(Request $request){
             $minitbparray = MiniTBP::whereNotNull('finance1')
-                                ->orWhereNotNull('finance2')
-                                ->orWhereNotNull('finance3')
-                                ->orWhereNotNull('finance4')
+                                // ->orWhereNotNull('finance2')
+                                // ->orWhereNotNull('finance3')
+                                // ->orWhereNotNull('finance4')
                                 ->pluck('id')->toArray();
 
         if($request->objecttivetype != 1){
             $minitbparray = MiniTBP::whereNotNull('nonefinance1')
                                     ->orWhereNotNull('nonefinance2')
                                     ->orWhereNotNull('nonefinance3')
-                                    ->orWhereNotNull('nonefinance4')
+                                    // ->orWhereNotNull('nonefinance4')
                                     ->orWhereNotNull('nonefinance5')
                                     ->orWhereNotNull('nonefinance6')
                                     ->pluck('id')->toArray();
@@ -759,9 +759,9 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbyobjectiveapprove(Request $request){
         $minitbparray = MiniTBP::whereNotNull('finance1')
-                                ->orWhereNotNull('finance2')
-                                ->orWhereNotNull('finance3')
-                                ->orWhereNotNull('finance4')
+                                // ->orWhereNotNull('finance2')
+                                // ->orWhereNotNull('finance3')
+                                // ->orWhereNotNull('finance4')
                                 ->pluck('id')->toArray();
                             
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->where('success_objective',1)->get(); 
@@ -769,16 +769,16 @@ class DashboardAdminRealtimeReportProjectController extends Controller
     }
     public function getprojectbyobjectiveapprove(Request $request){
             $minitbparray = MiniTBP::whereNotNull('finance1')
-                                ->orWhereNotNull('finance2')
-                                ->orWhereNotNull('finance3')
-                                ->orWhereNotNull('finance4')
+                                // ->orWhereNotNull('finance2')
+                                // ->orWhereNotNull('finance3')
+                                // ->orWhereNotNull('finance4')
                                 ->pluck('id')->toArray();
 
         if($request->objecttivetype != 1){
             $minitbparray = MiniTBP::whereNotNull('nonefinance1')
                                     ->orWhereNotNull('nonefinance2')
                                     ->orWhereNotNull('nonefinance3')
-                                    ->orWhereNotNull('nonefinance4')
+                                    // ->orWhereNotNull('nonefinance4')
                                     ->orWhereNotNull('nonefinance5')
                                     ->orWhereNotNull('nonefinance6')
                                     ->pluck('id')->toArray();

@@ -88,6 +88,12 @@ class SettingAdminSystemController extends Controller
                 'watermark' => $request->watermark,
                 'use_invoice_status_id' => $request->useinvoicestatus,
                 'phone1_ext' => $request->phone1_ext,
+                'showgradeperpillar' => $request->showgradeperpillar,
+                'showgradeperbusinesssize' => $request->showgradeperbusinesssize,
+                'showgradepersection' => $request->showgradepersection,
+                'showgradeperbusinesstype' => $request->showgradeperbusinesstype,
+                'showgradeperindustrygroup' => $request->showgradeperindustrygroup,
+                'showgradeperisic' => $request->showgradeperisic,
                 // 'show_finished_project_id' => $request->showfinishedproject,
                 'watermarktext' => $request->watermarktext
             ]);

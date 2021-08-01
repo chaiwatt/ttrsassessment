@@ -72,6 +72,12 @@ class CreateGeneralInfosTable extends Migration
             $table->unsignedBigInteger('use_invoice_status_default_id')->default(2); 
             $table->unsignedBigInteger('show_finished_project_id')->default(1);
             $table->char('sendemail',1)->default(1);
+            $table->char('showgradeperpillar',1)->default(1);
+            $table->char('showgradeperbusinesssize',1)->default(1);
+            $table->char('showgradepersection',1)->default(1);
+            $table->char('showgradeperbusinesstype',1)->default(1);
+            $table->char('showgradeperindustrygroup',1)->default(1);
+            $table->char('showgradeperisic',1)->default(1);
             $table->timestamps();
         });
     }

@@ -68,7 +68,7 @@
                                         <th>เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>    
                                         <th>บริษัท</th>  
-                                        <th>สถานะ</th>                             
+                                        <th>สถานภาพ</th>                             
                                         <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
                                     </tr>
                                 </thead>

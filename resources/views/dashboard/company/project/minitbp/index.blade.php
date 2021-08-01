@@ -63,7 +63,7 @@
                                     <tr>
                                         <th>เลขที่โครงการ</th>
                                         <th>ชื่อโครงการ</th>    
-                                        <th>สถานะ</th>                               
+                                        <th>สถานภาพ</th>                               
                                         <th style="text-align: right">เพิ่มเติม</th>
                                     </tr>
                                 </thead>

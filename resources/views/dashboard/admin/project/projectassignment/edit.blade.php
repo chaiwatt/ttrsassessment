@@ -60,7 +60,7 @@
                                     <tr>
                                         <th >รายการ</th> 
                                         <th >วันที่กำหนด</th>
-                                        <th>สถานะ</th> 
+                                        <th>สถานภาพ</th> 
                                     </tr>
                                 </thead>
                                 <tbody >
@@ -210,7 +210,7 @@
                                             <th>เลขที่โครงการ</th> 
                                             <th>ชื่อโครงการ</th> 
                                             <th>บริษัท</th>
-                                            <th>สถานะ</th>
+                                            <th>สถานภาพ</th>
                                         </tr>
                                     </thead>
                                     <tbody id="fulltbp_wrapper_tr">

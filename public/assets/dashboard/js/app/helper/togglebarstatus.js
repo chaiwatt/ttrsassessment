@@ -1,10 +1,13 @@
-
+// console.log($("body").hasClass("sidebar-xs"));
+var realstatus = $("body").hasClass("sidebar-xs");
 $(document).on('click', '.togglebar', function(e) {
     var status = 1;
-    if ($("body").hasClass("sidebar-xs")) {
+    if (realstatus == false) {
         status = 1
+        realstatus == true
     }else{
         status = 0;
+        realstatus == false
     }
 
     saveToggleStatus(status).then(data => {

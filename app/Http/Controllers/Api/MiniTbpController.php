@@ -91,7 +91,7 @@ class MiniTbpController extends Controller
             'finance1_1_loan' => $request->finance1_1_loan,
             'finance1_2_loan' => $request->finance1_2_loan,
 
-            'finance2' => $request->finance2,
+            // 'finance2' => $request->finance2,
             'finance3_other' => $request->finance3_other,
             'finance3_other_detail' => $request->finance3_other_detail,
 

@@ -27,16 +27,16 @@ class ReportProjectExportByObjective implements FromView,ShouldAutoSize,WithTitl
     public function view(): View
     {
         $minitbparray = MiniTBP::whereNotNull('finance1')
-                ->orWhereNotNull('finance2')
-                ->orWhereNotNull('finance3')
-                ->orWhereNotNull('finance4')
+                // ->orWhereNotNull('finance2')
+                // ->orWhereNotNull('finance3')
+                // ->orWhereNotNull('finance4')
                 ->pluck('id')->toArray();
 
         if($this->objecttivetype != 1){
         $minitbparray = MiniTBP::whereNotNull('nonefinance1')
                     ->orWhereNotNull('nonefinance2')
                     ->orWhereNotNull('nonefinance3')
-                    ->orWhereNotNull('nonefinance4')
+                    // ->orWhereNotNull('nonefinance4')
                     ->orWhereNotNull('nonefinance5')
                     ->orWhereNotNull('nonefinance6')
                     ->pluck('id')->toArray();

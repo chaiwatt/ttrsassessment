@@ -80,7 +80,7 @@
                                 <thead>
                                     <tr>
                                         <th>ชื่อ-นามสกุล</th>    
-                                        <th>สถานะ</th>                                                                               
+                                        <th>สถานภาพ</th>                                                                               
                                     </tr>
                                 </thead>
                                 <tbody id="attendee_modal_wrapper_tr"> 

@@ -243,7 +243,7 @@
                                     <thead>
                                         <tr>
                                             <th>ชื่อ-นามสกุล</th>    
-                                            <th>สถานะ</th>                                                                               
+                                            <th>สถานภาพ</th>                                                                               
                                         </tr>
                                     </thead>
                                     <tbody id="attendee_modal_wrapper_tr"> 
@@ -429,14 +429,14 @@
         @endif
         @if (Auth::user()->user_type_id >= 5)
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col">
                 <div class="card bg-teal-400">
                     <div class="card-body">
                         <div class="d-flex">
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h1>
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">โครงการขอรับการประเมิน</a>  
+                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนผู้สมัคร</a>  
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -444,41 +444,54 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col">
                 <div class="card bg-blue-400">
                     <div class="card-body">
                         <div class="d-flex">
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
                         </div>
                         <div>
-                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">โครงการที่ยื่น Mini Tbp</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนยื่น Mini Tbp</a>  
                             
                         </div>
                     </div>
                     <div id="today-revenue"></div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col">
                 <div class="card bg-pink-400">
                     <div class="card-body">
                         <div class="d-flex">
                             <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
                         </div>
                         <div>  
-                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">โครงการที่ยื่น Full TBP</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนยื่น Full TBP</a>  
                         </div>
                     </div>
                     <div id="today-revenue"></div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col">
                 <div class="card bg-orange-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',8)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',5)->where('business_plan_status_id','<',9)->count()}}</h1>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">โครงการเสร็จสิ้นการประเมิน</a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">อยู่ระหว่างการประเมิน</a>
+                        </div>
+                    </div>
+                    <div id="today-revenue"></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-green-400">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',9)->count()}}</h1>
+                        </div>
+                        <div> 
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">โครงการที่ประเมินเสร็จสิ้น</a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -491,7 +504,7 @@
  
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ร้อยละเกรดแยกตาม Pillar</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">แยกตาม Pillar</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -648,7 +661,7 @@
                                         <div class="row">
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-6"> 
-                                                <h2><span style="font-weight: bold"> 01</span></h2>
+                                                {{-- <h2><span style="font-weight: bold"> 01</span></h2> --}}
                                                 <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
@@ -666,7 +679,7 @@
                                         <div class="row">
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-6"> 
-                                                <h2><span style="font-weight: bold"> 02</span></h2>
+                                                {{-- <h2><span style="font-weight: bold"> 02</span></h2> --}}
                                                 <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
@@ -684,7 +697,7 @@
                                     <div class="row">
                                         <div class="col-sm-6"></div>
                                         <div class="col-sm-6"> 
-                                            <h2><span style="font-weight: bold"> 03</span></h2>
+                                            {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
                                             <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
@@ -701,7 +714,7 @@
                                     <div class="row">
                                         <div class="col-sm-6"></div>
                                         <div class="col-sm-6"> 
-                                            <h2><span style="font-weight: bold"> 04</span></h2>
+                                            {{-- <h2><span style="font-weight: bold"> 04</span></h2> --}}
                                             <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
@@ -719,7 +732,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6" @if ($generalinfo->showgradeperpillar != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
@@ -743,7 +756,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" @if ($generalinfo->showgradeperbusinesssize != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามขนาดธุรกิจ</h6>
@@ -769,7 +782,7 @@
             </div>
 
 
-            <div class="col-lg-6">
+            <div class="col-lg-6" @if ($generalinfo->showgradepersection != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามภูมิภาค</h6>
@@ -793,7 +806,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" @if ($generalinfo->showgradeperbusinesstype != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามประเภทธุรกิจ</h6>
@@ -817,7 +830,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" @if ($generalinfo->showgradeperindustrygroup != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามกลุ่มอุตสาหกรรม</h6>
@@ -841,7 +854,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" @if ($generalinfo->showgradeperisic != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Isic</h6>
@@ -874,7 +887,7 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการโครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
                         <div class="header-elements">
                         </div>
                     </div>
@@ -888,7 +901,7 @@
                                         <th style="width:1%;white-space: nowrap">วันที่ประเมิน</th>
                                         <th style="width:1%;white-space: nowrap">วันที่สรุปผลประเมิน</th>
                                         <th style="width:1%;white-space: nowrap">เข้าร่วม(เฉพาะผู้เชี่ยวชาญ)</th>
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
+                                        <th style="width:1%;white-space: nowrap">สถานภาพ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -973,7 +986,7 @@
                                             <th style="width:1%;white-space: nowrap">ผู้เชี่ยวชาญ</th> 
                                             <th style="width:1%;white-space: nowrap">EV</th> 
                                             <th style="width:1%;white-space: nowrap">BOL</th> 
-                                            <th style="width:1%;white-space: nowrap">สถานะ</th>                               
+                                            <th style="width:1%;white-space: nowrap">สถานภาพ</th>                               
                                         </tr>
                                     </thead>
                                     <tbody>

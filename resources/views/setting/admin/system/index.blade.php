@@ -151,6 +151,66 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>สถานะภาพเกรดแยกตาม Pillar</label>
+                                        <select name="showgradeperpillar" data-placeholder="สถานะภาพเกรดแยกตาม Pillar" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showalerts as $showalert)                                                                
+                                                <option value="{{$showalert->id}}" @if ($generalinfo->showgradeperpillar == $showalert->id) selected @endif> {{$showalert->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สถานะภาพเกรดแยกตามขนาดธุรกิจ</label>
+                                        <select name="showgradeperbusinesssize" data-placeholder="สถานะภาพเกรดแยกตามขนาดธุรกิจ" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showalerts as $showalert)                                                                
+                                                <option value="{{$showalert->id}}" @if ($generalinfo->showgradeperbusinesssize == $showalert->id) selected @endif> {{$showalert->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สถานะภาพเกรดแยกตามภูมิภาค</label>
+                                        <select name="showgradepersection" data-placeholder="สถานะภาพเกรดแยกตามภูมิภาค" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showalerts as $showalert)                                                                
+                                                <option value="{{$showalert->id}}" @if ($generalinfo->showgradepersection == $showalert->id) selected @endif> {{$showalert->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สถานะภาพเกรดแยกตามประเภทธุรกิจ</label>
+                                        <select name="showgradeperbusinesstype" data-placeholder="สถานะภาพเกรดแยกตามประเภทธุรกิจ" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showalerts as $showalert)                                                                
+                                                <option value="{{$showalert->id}}" @if ($generalinfo->showgradeperbusinesstype == $showalert->id) selected @endif> {{$showalert->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สถานะภาพเกรดแยกตามกลุ่มอุตสาหกรรม</label>
+                                        <select name="showgradeperindustrygroup" data-placeholder="สถานะภาพเกรดแยกตามกลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showalerts as $showalert)                                                                
+                                                <option value="{{$showalert->id}}" @if ($generalinfo->showgradeperindustrygroup == $showalert->id) selected @endif> {{$showalert->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>สถานะภาพเกรดแยกตาม Isic</label>
+                                        <select name="showgradeperisic" data-placeholder="สถานะภาพเกรดแยกตาม Isic" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($showalerts as $showalert)                                                                
+                                                <option value="{{$showalert->id}}" @if ($generalinfo->showgradeperisic == $showalert->id) selected @endif> {{$showalert->name}} </option>
+                                            @endforeach   
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>Front page (Bill board)</label>
                                         <select name="frontpage" data-placeholder="Front page (Bill board)" class="form-control form-control-lg form-control-select2">
                                             @foreach ($frontpagestatuses as $frontpagestatus)                                                                
