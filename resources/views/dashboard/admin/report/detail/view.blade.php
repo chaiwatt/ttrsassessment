@@ -60,7 +60,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th >รายการ</th> 
@@ -97,7 +97,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>วันที่</th> 
@@ -127,7 +127,7 @@
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารของโครงการ</h6>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="width:150px">Mini TBP</th> 
@@ -161,7 +161,7 @@
                                 </tbody>
                             </table>
                             <div class="table-responsive mt-4">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="width:150px">Full TBP</th> 
@@ -231,7 +231,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width:600px">ตำแหน่งรับผิดชอบ</th> 
@@ -278,7 +278,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width:600px">ชื่อ EV</th> 
@@ -323,7 +323,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th >ชื่อเอกสาร</th> 
@@ -357,7 +357,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="width:600px">ชื่อ-นามสกุล</th> 
@@ -405,7 +405,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" style="min-height: 150px">
-                            <table class="table table-bordered"  >
+                            <table class="table table-bordered table-striped"  >
                                 <thead>
                                     <tr class="bg-info">
                                         <th >คะแนน</th> 
@@ -491,7 +491,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead >
                                     <tr class="bg-info">
                                         <th>วันที่</th> 

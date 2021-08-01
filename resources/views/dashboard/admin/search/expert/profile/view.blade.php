@@ -369,7 +369,7 @@
 								<div class="tab-content">
 									<div class="tab-pane fade show active" id="left-icon-friend">
 										<div class="table-responsive">
-											<table class="table table-bordered">
+											<table class="table table-bordered table-striped">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -399,7 +399,7 @@
 											<div class="col-md-12">	
 						
 												<div class="table-responsive">
-													<table class="table table-bordered">
+													<table class="table table-bordered table-striped">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -433,7 +433,7 @@
 											<div class="col-md-12">	
 						
 												<div class="table-responsive">
-													<table class="table table-bordered">
+													<table class="table table-bordered table-striped">
 														<thead>
 															<tr>
 																<th>#</th>

@@ -163,7 +163,7 @@
                                         </div> 
                                         <div class="col-md-12" id="attachmenttable_wrapper" hidden>
                                             <div class="form-group">
-                                            <table class="table table-bordered" id="attachmenttable">
+                                            <table class="table table-bordered table-striped" id="attachmenttable">
                                                 <thead>
                                                     <tr>
                                                         <th>เอกสารแนบ</th> 

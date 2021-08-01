@@ -62,7 +62,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="maintable">
+                            <table class="table table-bordered table-striped" id="maintable">
                                 <thead>
                                     <tr>
                                         <th>เลขที่โครงการ</th>

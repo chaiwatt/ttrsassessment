@@ -29,7 +29,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="attendee_modal">
+                                        <table class="table table-bordered table-striped" id="attendee_modal">
                                                 <tr>
                                                     <td><strong>ประเภท</strong> </td>  
                                                     <td id="eventtype"></td>
@@ -211,7 +211,7 @@
                     <div class="card-body">
                         <input id="attendeventid" type="text" hidden >
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="testtopictable">
+                            <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
                                         {{-- <th>เลขที่โครงการ</th>  --}}

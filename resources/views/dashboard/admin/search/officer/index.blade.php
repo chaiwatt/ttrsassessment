@@ -101,7 +101,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
-                            <table class="table table-bordered" id="officertable">
+                            <table class="table table-bordered table-striped" id="officertable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อ-นามสกุล</th>

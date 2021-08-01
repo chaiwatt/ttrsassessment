@@ -11,7 +11,7 @@ $(document).on('change', '#expert', function(e) {
             html = `
             <div class="table-responsive">
             <strong>Work Load</strong>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>โครงการ</th>
@@ -445,7 +445,7 @@ function notifyJD(users,fulltbpid){
             html = `
             <div class="table-responsive">
             <strong>Work Load</strong>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>โครงการ</th>

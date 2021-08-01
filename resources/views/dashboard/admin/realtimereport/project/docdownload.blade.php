@@ -70,7 +70,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="searchtable">
+                                    <table class="table table-bordered table-striped" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th>เอกสาร</th> 

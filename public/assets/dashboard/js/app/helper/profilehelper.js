@@ -112,7 +112,7 @@ $(document).on("click",".messagelink",function(e){
         let html2= '';
         if(data.attachment.length > 0){
             html=`<hr><div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>ไฟล์</th>                                                                           

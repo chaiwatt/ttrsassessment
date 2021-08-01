@@ -117,7 +117,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             @if (@$businessplans->first()->business_plan_status_id > 2)
-                            <table class="table table-bordered" id="testtopictable">
+                            <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
                                         <th >ชื่อโครงการ</th> 
@@ -226,7 +226,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>วันที่</th> 

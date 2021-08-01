@@ -56,7 +56,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="testtopictable">
+                            <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
                                         {{-- <th>วันที่ขอส่ง</th>  --}}

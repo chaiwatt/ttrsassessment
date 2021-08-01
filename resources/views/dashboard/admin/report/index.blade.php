@@ -192,7 +192,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered" id="attendee_modal">
+                                            <table class="table table-bordered table-striped" id="attendee_modal">
                                                     <tr>
                                                         <td><strong>ประเภท</strong> </td>  
                                                         <td id="eventtype"></td>
@@ -893,7 +893,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered mb-2" id="maintable" >
+                            <table class="table table-bordered table-striped mb-2" id="maintable" >
                                 <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th> 
@@ -978,7 +978,7 @@
                         <div class="card-body">
                             <input type="text" id="fulltbpid"  hidden>
                             <div class="table-responsive">
-                                <table class="table table-bordered mb-2" id="fulltbptable" >
+                                <table class="table table-bordered table-striped mb-2" id="fulltbptable" >
                                     <thead>
                                         <tr>
                                             <th>ชื่อโครงการ</th> 
@@ -1412,7 +1412,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="testtopictable">
+                                        <table class="table table-bordered table-striped" id="testtopictable">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width: 25%">ปีโครงการ</th> 
@@ -1470,7 +1470,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="testtopictable">
+                                    <table class="table table-bordered table-striped" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width: 10%">ปี</th> 
@@ -1543,7 +1543,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="testtopictable">
+                                    <table class="table table-bordered table-striped" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width: 10%">ปี</th> 
@@ -1622,7 +1622,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="testtopictable">
+                                        <table class="table table-bordered table-striped" id="testtopictable">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width: 10%">ปี</th> 

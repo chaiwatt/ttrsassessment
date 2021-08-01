@@ -263,7 +263,7 @@
                                             {{-- {{$shareindustrygroups}} --}}
                                             
                                             <div class="table-responsive">
-                                                <table class="table table-bordered">
+                                                <table class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr class="bg-info text-white">
                                                             <th>กลุ่มอุตสาหกรรม</th> 

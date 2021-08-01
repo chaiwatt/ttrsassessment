@@ -52,7 +52,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="experttable">
+                            <table class="table table-bordered table-striped" id="experttable">
                                 <thead>
                                     <tr>
                                         <th>ชื่อ-นามสกุล</th>
