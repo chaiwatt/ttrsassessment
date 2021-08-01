@@ -215,12 +215,24 @@
         <!-- Breadcrumbs Start -->
         <div class="rs-breadcrumbs img5 ">
             <div class="breadcrumbs-inner text-center">
-                <h1 class="page-title">ผลการดำเนินงาน</h1>
+                <h1 class="page-title">@if (Config::get('app.locale') == 'th')
+                    ผลการดำเนินงาน
+                @else
+                    Performance
+                @endif</h1>
                 <ul>
-                    <li title="Braintech - IT Solutions and Technology Startup HTML Template">
-                        <a class="active" href="{{url('')}}" style="font-size: 16px">หน้าแรก</a>
+                    <li>
+                        <a class="active" href="{{url('')}}" style="font-size: 16px"> @if (Config::get('app.locale') == 'th')
+                            หน้าแรก
+                        @else
+                            Home
+                        @endif</a>
                     </li>
-                   <li style="font-size: 16px">ผลการดำเนินงาน</li>
+                   <li style="font-size: 16px">@if (Config::get('app.locale') == 'th')
+                    ผลการดำเนินงาน
+                @else
+                    Performance
+                @endif</li>
                 </ul>
             </div>
         </div>
@@ -235,7 +247,11 @@
                                 <div class="blog-details">
                                    
                                     <div class="blog-full">
-                                        <h2>ผลการดำเนินงาน</h2>
+                                        <h2>@if (Config::get('app.locale') == 'th')
+                                            ผลการดำเนินงาน
+                                        @else
+                                            Performance
+                                        @endif</h2>
                                 
                                     </div>
                                     {{-- <div class="bs-img mb-35"> --}}

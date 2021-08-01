@@ -215,12 +215,26 @@
         <!-- Breadcrumbs Start -->
         <div class="rs-breadcrumbs img5 ">
             <div class="breadcrumbs-inner text-center">
-                <h1 class="page-title">ข่าว</h1>
+                <h1 class="page-title">
+                    @if (Config::get('app.locale') == 'th')
+                        ข่าวสารและข้อมูล
+                    @else
+                        News
+                    @endif
+                </h1>
                 <ul>
                     <li title="Braintech - IT Solutions and Technology Startup HTML Template">
-                        <a class="active" href="{{url('')}}" style="font-size: 16px">หน้าแรก</a>
+                        <a class="active" href="{{url('')}}" style="font-size: 16px"> @if (Config::get('app.locale') == 'th')
+                            หน้าแรก
+                        @else
+                            Home
+                        @endif</a>
                     </li>
-                   <li style="font-size: 16px">ข่าว</li>
+                   <li style="font-size: 16px"> @if (Config::get('app.locale') == 'th')
+                    ข่าวสารและข้อมูล
+                @else
+                    News
+                @endif</li>
                 </ul>
             </div>
         </div>
