@@ -8,6 +8,8 @@ use App\Model\Tag;
 use Carbon\Carbon;
 use App\Model\Page;
 use App\Model\Company;
+use App\Model\FullTbp;
+use App\Model\MiniTBP;
 use App\Model\PageTag;
 use App\Model\Announce;
 use App\Model\PageView;
@@ -15,6 +17,7 @@ use App\Model\PageImage;
 use App\Model\DirectMenu;
 use App\Model\GeneralInfo;
 use App\Model\ServicePage;
+use App\Model\BusinessPlan;
 use App\Model\ExpertDetail;
 use App\Model\FeatureImage;
 use App\Model\IntroSection;
@@ -2498,8 +2501,17 @@ class HomeController extends Controller
         return view('layouts.landing2.servicepage')->withServicepage($servicepage);
         // return $servicepage ;
     }
-    
 
+    public function Performance(){
+         return view('layouts.landing2.performance');
+        $industrygroups = IndustryGroup::pluck('id')->toArray();
+        $companies = Company::whereIn('industry_group_id',$industrygroups)->pluck('id')->toArray();
+        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        return  $fulltbps ;
+    }
+    
 }
 
 

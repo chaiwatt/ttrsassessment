@@ -56,7 +56,7 @@
                 @if (Config::get('app.locale') == 'th')
                     เพิ่มเติม
                 @else
-                    More ...
+                    More
                 @endif
             </a>
         </div>

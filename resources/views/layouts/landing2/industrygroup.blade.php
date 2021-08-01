@@ -103,7 +103,7 @@
                       </div>
 
                       <div class="btn-part mt-55">
-                          <a class="readon started" href="{{url('').'/'.$sharehomepageindustrygrouptext->url}}">
+                          <a class="readon started" href="{{route('landing.performance')}}">
                             @if (Config::get('app.locale') == 'th')
                                 เพิ่มเติม
                             @else

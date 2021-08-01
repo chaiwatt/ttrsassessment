@@ -65,7 +65,12 @@
                         <li>
                             <i class="flaticon-call"></i>
                             <div class="desc">
-                               <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a>
+                                @if (Config::get('app.locale') == 'th')
+                                    <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a>
+                                @else
+                                    <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} Ext {{$generalinfo->phone1_ext}}</a>
+                                @endif
+                               {{-- <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a> --}}
                             </div>
                         </li>
                         <li>

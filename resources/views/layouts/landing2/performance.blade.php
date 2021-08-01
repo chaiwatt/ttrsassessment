@@ -4,7 +4,7 @@
 <head>
         <!-- meta tag -->
         <meta charset="utf-8">
-        <title>TTRS - {{$servicepage->titleth}}</title>
+        <title>TTRS - ผลการดำเนินงาน</title>
         <meta name="description" content="">
         <!-- responsive tag -->
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -57,12 +57,12 @@
                                        </li>
                                        <li>
                                            <i class="flaticon-call"></i>
+                                           {{-- <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a> --}}
                                            @if (Config::get('app.locale') == 'th')
                                                 <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a>
                                             @else
                                                 <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} Ext {{$generalinfo->phone1_ext}}</a>
                                             @endif
-                                           
                                        </li>
                                        {{-- <li>
                                            <i class="flaticon-location"></i>
@@ -195,12 +195,7 @@
                     {{-- <a href="index.html"><img src="assets/images/logo-dark.png" alt="logo"></a> --}}
                 </div>
                 <div class="offcanvas-text">
-                    @if (Config::get('app.locale') == 'th')
-                        <p>{{$servicepage->titleth}}</p>
-                    @else
-                        <p>{{$servicepage->titleen}}</p>
-                    @endif
-                    
+                    {{-- <p>{{$servicepage->titleth}}</p> --}}
                 </div>
                 {{-- <div class="canvas-contact">
                     <h5 class="canvas-contact-title">Contact Info</h5>
@@ -224,27 +219,12 @@
         <!-- Breadcrumbs Start -->
         <div class="rs-breadcrumbs img5 ">
             <div class="breadcrumbs-inner text-center">
-                
-                @if (Config::get('app.locale') == 'th')
-                    <h1 class="page-title">แนะนำบริการ</h1>
-                @else
-                    <h1 class="page-title">Service</h1>
-                @endif
+                <h1 class="page-title">ผลการดำเนินงาน</h1>
                 <ul>
                     <li title="Braintech - IT Solutions and Technology Startup HTML Template">
-                        @if (Config::get('app.locale') == 'th')
-                            <a class="active" href="{{url('')}}" style="font-size: 16px">หน้าแรก</a>
-                        @else
-                            <a class="active" href="{{url('')}}" style="font-size: 16px">Home</a>
-                        @endif
-                       
+                        <a class="active" href="{{url('')}}" style="font-size: 16px">หน้าแรก</a>
                     </li>
-                    @if (Config::get('app.locale') == 'th')
-                        <li style="font-size: 16px">แนะนำบริการ</li>
-                    @else
-                        <li style="font-size: 16px">Service</li>
-                    @endif
-                   
+                   <li style="font-size: 16px">ผลการดำเนินงาน</li>
                 </ul>
             </div>
         </div>
@@ -259,53 +239,47 @@
                                 <div class="blog-details">
                                    
                                     <div class="blog-full">
-                                        
-                                        @if (Config::get('app.locale') == 'th')
-                                            <h2>{{$servicepage->titleth}}</h2>
-                                        @else
-                                             <h2>{{$servicepage->titleen}}</h2>
-                                        @endif
-                                        {{-- <ul class="single-post-meta"> --}}
-                                            {{-- <li>
-                                                <span class="p-date"><i class="fa fa-calendar-check-o"></i>
-                                                    
-                                                    @if (Config::get('app.locale') == 'th')
-                                                    โพสต์:
-                                                    @else
-                                                    Post:
-                                                    @endif
-                                                    
-                                                    {{$servicepage->day}} {{$servicepage->month}} {{$servicepage->year}}  </span>
-                                            </li>  --}}
-                                            {{-- <li>
-                                                <span class="p-date"> <i class="fa fa-user-o"></i> admin </span>
-                                            </li>  --}}
-                                            {{-- <li class="Post-cate">
-                                                <div class="tag-line">
-                                                    <i class="fa fa-book"></i>
-                                                    <a href="#">{{@$page->pageCategory->name}}</a>
-                                                </div>
-                                            </li> --}}
-                                            {{-- <li class="post-comment"> <i class="fa fa-eye"></i> xxx </li> --}}
-
-                                            {{-- <li class="Post-cate" style="margin-left: 10px;">
-                                                <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a>
-                                               
-                                            </li> --}}
-                                            
-                                        {{-- </ul> --}}
+                                        <h2>ผลการดำเนินงาน</h2>
+                                
                                     </div>
                                     {{-- <div class="bs-img mb-35"> --}}
                                         {{-- <a href="#"><img src="{{asset($page->featureimage->name)}}" alt=""></a> --}}
                                     {{-- </div> --}}
                                     <div class="blog-full">
                                         <p>
-                                            @if (Config::get('app.locale') == 'th')
-                                                {!!$servicepage->bodyth!!}
-                                            @else
-                                                {!!$servicepage->bodyen!!}
-                                            @endif
+                                            {{-- {!!$servicepage->bodyth!!} --}}
+                                            {{-- {{$shareindustrygroups}} --}}
                                             
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr class="bg-info text-white">
+                                                            <th>กลุ่มอุตสาหกรรม</th> 
+                                                            <th>จำนวนโครงการที่รับการประเมิน</th> 
+                                                            {{-- <th>ร้อยละประเมิน</th>   --}}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $total = $shareindustrygroups->sum('companybelong');
+                                                        @endphp
+                                                        @foreach ($shareindustrygroups as $industrygroup)
+
+                                                        @php
+                                                            $percent = 0;
+                                                            if($total != 0){
+                                                                $percent = round($industrygroup->companybelong/$total*100);
+                                                            }
+                                                        @endphp
+                                                        <tr>    
+                                                            <td> {{$industrygroup->name}} </td>  
+                                                            <td> {{$industrygroup->projectbelong}} </td> 
+                                                            {{-- <td> {{$percent}} </td>    --}}
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>      
+                                            </div>
                                         </p>
                                     </div>
                                 </div>
