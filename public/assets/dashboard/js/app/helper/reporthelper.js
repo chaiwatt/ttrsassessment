@@ -99,15 +99,30 @@ import * as Attendee from './eventcalendarattendee.js';
 
                                 var html =``;
                                
+                                // data.eventcalendarattendeestatuses.forEach(function (status,index) {
+                                //     var chk = ``;
+                                //     if(status['id'] == data.attendeecalendar.eventcalendarattendeestatus['id']){
+                                //         chk = `selected`;
+                                //     }
+                                //     html += `<option value="${status['id']}" ${chk} >${status['name']}</option>`
+                                // });
+
                                 data.eventcalendarattendeestatuses.forEach(function (status,index) {
                                     var chk = ``;
+                                    $('#jointype').val(data.attendeecalendar.eventcalendarattendeestatus['id']);
                                     if(status['id'] == data.attendeecalendar.eventcalendarattendeestatus['id']){
-                                        chk = `selected`;
+                                        chk = `checked`;
                                     }
-                                    html += `<option value="${status['id']}" ${chk} >${status['name']}</option>`
+                                    html += `
+                                    <input style="vertical-align:middle !important;" type="radio" name="flexRadioDefault" class="confirm" value="${status['id']}" id="chk" ${chk}><label for="chk" style="margin-left:5px;margin-right:10px">${status['name']}</label>
+                                  `
+                                  
                                 });
+
                                 $("#attendevent").html(html);
                                 $('#modal_get_calendar').modal('show');
+
+
 
 
 
@@ -488,26 +503,26 @@ $('#chkjoinmetting').on('change.bootstrapSwitch', function(e) {
 });
 
 
-$(document).on('change', '#attendevent', function(e) { 
-    if($(this).val() == 3){
+var event_val =  $('#jointype').val();
+$(document).on('change', '.confirm', function(e) { 
+    console.log($(this).val());
+    event_val = $(this).val();
+    if(typeof($(this).val()) === "undefined" || $(this).val() === null || $(this).val() === ''){
+        event_val = 1;
+    }
+    if(event_val == 3){
+        console.log('yes');
         $("#rej_meeting_note_wrapper").attr("hidden",false);   
     }else{
         $("#rej_meeting_note_wrapper").attr("hidden",true); 
     }
-    
-//    $("#spinicon").attr("hidden",false);
-//    Attendee.updateJoinEvent($('#attendeventid').val(),$(this).val()).then(data => {
-//        $("#spinicon").attr("hidden",true);
-//        document.location.reload();
-//    }).catch(error => {})
+    $('#jointype').val(event_val);
 });
-
-
 
 
 $(document).on('click', '#btn_modal_get_calendar', function(e) {
    $("#spinicon").attr("hidden",false);
-   Attendee.updateJoinEvent($('#attendeventid').val(),$('#attendevent').val(),$('#rej_meeting_note').val()).then(data => {
+   Attendee.updateJoinEvent($('#attendeventid').val(),$('#jointype').val(),$('#rej_meeting_note').val()).then(data => {
        $("#spinicon").attr("hidden",true);
        document.location.reload();
    }).catch(error => {})

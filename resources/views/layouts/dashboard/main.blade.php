@@ -77,6 +77,7 @@
 			<ul class="navbar-nav ml-auto">	
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+						<img src="{{asset(Auth::user()->company->logo)}}" class="rounded-circle mr-2" height="34" alt="">
 						<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}
 					@if (Auth::user()->user_type_id >= 3)
 						({{Auth::user()->UserType->name}})
@@ -85,13 +86,13 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						@if (Auth::user()->user_type_id ==1 || Auth::user()->user_type_id ==2)
-								<a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โพรไฟล์</a>
+								<a href="{{route('setting.profile.user.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> Profile</a>
 							{{-- @elseif(Auth::user()->user_type_id == 2) --}}
 								
 							@elseif(Auth::user()->user_type_id == 3)
-								<a href="{{route('setting.profile.expert.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โพรไฟล์</a>
+								<a href="{{route('setting.profile.expert.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> Profile</a>
 								@elseif(Auth::user()->user_type_id >= 4)
-								<a href="{{route('setting.profile.officer.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> โพรไฟล์</a>
+								<a href="{{route('setting.profile.officer.edit',['userid' => Auth::user()->id])}}" class="dropdown-item"><i class="icon-user-plus"></i> Profile</a>
 							{{-- @elseif(Auth::user()->user_type_id == 4) --}}
 						@endif
 						

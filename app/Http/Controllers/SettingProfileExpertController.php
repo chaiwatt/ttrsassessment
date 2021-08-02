@@ -68,10 +68,12 @@ class SettingProfileExpertController extends Controller
             ]);
         }
         $file = $request->picture; 
-        $filelocation = $user->picture;
+        $filelocation = $auth->company->logo;
         if(!Empty($file)){         
-            if(!Empty($user->picture)){
-                @unlink($user->picture);
+            if(!Empty($auth->company->logo)){
+                if(strpos($auth->company->logo, 'assets\dashboard\images') !== true){
+                    @unlink($auth->company->logo);
+                }
             }
             $name = $file->getClientOriginalName();
             $file = $request->picture;
@@ -138,9 +140,10 @@ class SettingProfileExpertController extends Controller
             'expereincemonth' => $request->expereincemonth
         ]);
         Company::where('user_id',$auth->id)->first()->update([
-            'saveprofile' => 1
+            'saveprofile' => 1,
+            'logo' => $filelocation
         ]);
-        CreateUserLog::createLog('แก้ไขข้อมูลโพรไฟล์');
+        CreateUserLog::createLog('แก้ไขข้อมูลProfile');
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 
     }
 }

@@ -13,7 +13,7 @@ class BusinessPlanStatusSeeder extends Seeder
     {
         DB::table('business_plan_statuses')->insert([
             [
-                'name' => 'ยังไม่ได้ตั้งค่าโพรไฟล์',
+                'name' => 'ยังไม่ได้ตั้งค่า Profile',
                 'progress' => 0
             ],
             [

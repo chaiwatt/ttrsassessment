@@ -190,6 +190,7 @@
                         <div class="tab-pane fade show active" id="left-icon-tab1">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <input type="text" id="jointype" hidden>
                                     <div class="form-group">
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped" id="attendee_modal">
@@ -221,17 +222,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>การเข้าร่วม<span class="text-danger">*</span></label>
-                                        <select id="attendevent" class="form-control form-control-lg form-control-select2">
-                                        </select>
+
+                                <div class="col-md-12 mt-2" >
+                                    <label><strong>การเข้าร่วม</strong> </label>
+                                    <div class="col-md-12" class="confirm" id="attendevent">
+    
                                     </div>
                                 </div>
-                                <div class="col-md-12" id="rej_meeting_note_wrapper" hidden>
+
+
+                                <div class="col-md-12 mt-2" id="rej_meeting_note_wrapper" hidden>
                                     <div class="form-group">
-                                        <label>เหตุผลการไม่เข้าร่วม</label>
-                                        <textarea type="text" rows="5"  id="rej_meeting_note" placeholder="กรุณาระบุเหตุผลการไม่เข้าร่วมการประชุม" class="form-control form-control-lg" ></textarea>
+                                        <label><u>โปรดระบุเหตุผล</u></label>
+                                        <textarea type="text" rows="5"  id="rej_meeting_note" placeholder="โปรดระบุเหตุผลการไม่เข้าร่วมประชุม" class="form-control form-control-lg" ></textarea>
                                     </div>
                                 </div>
                             </div> 
@@ -379,7 +382,7 @@
             </div>
             @if (Auth::user()->company->saveprofile == 0)
                 <div class="header-elements d-none">
-                    <a href="{{route('setting.profile.officer.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">โปรดตั้งค่าโพรไฟล์</span></a>
+                    <a href="{{route('setting.profile.officer.edit',['userid' => Auth::user()->id])}}" class="btn btn-labeled bg-warning" ><span class="blink">โปรดตั้งค่า Profile</span></a>
                 </div>
             @endif
         </div>

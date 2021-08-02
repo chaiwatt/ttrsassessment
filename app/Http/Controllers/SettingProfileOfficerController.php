@@ -52,7 +52,9 @@ class SettingProfileOfficerController extends Controller
                                             ->withOfficerdocs($officerdocs);
     }
     public function EditSave(EditOfficerProfile $request, $id){
+       
         $auth = Auth::user();
+        
         if(!Empty($request->password)){
             $auth->update([
                 'password' => Hash::make($request->password)
@@ -60,11 +62,17 @@ class SettingProfileOfficerController extends Controller
         }
         $user = User::find($auth->id);
         $file = $request->picture; 
-        $filelocation = $user->picture;
+        $filelocation = $auth->company->logo;
         if(!Empty($file)){         
-            if(!Empty($user->picture)){
-                @unlink($user->picture);
+            if(!Empty($auth->company->logo)){
+                if(strpos($auth->company->logo, 'assets/dashboard/images/user.png') != false){
+                //     return $auth->company->logo; 
+                    @unlink($auth->company->logo);
+                // }else{
+          
+                }
             }
+        
             $name = $file->getClientOriginalName();
             $file = $request->picture;
             $img = Image::make($file);  
@@ -132,9 +140,10 @@ class SettingProfileOfficerController extends Controller
             'expereincemonth' => $request->expereincemonth
         ]);
         Company::where('user_id',$auth->id)->first()->update([
-            'saveprofile' => 1
+            'saveprofile' => 1,
+            'logo' => $filelocation,
         ]);
-        CreateUserLog::createLog('แก้ไขข้อมูลโพรไฟล์');
+        CreateUserLog::createLog('แก้ไขข้อมูลProfile');
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 
     }
 }

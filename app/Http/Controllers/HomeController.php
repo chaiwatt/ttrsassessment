@@ -2324,6 +2324,7 @@ class HomeController extends Controller
         $company->name = $companyname;
         $company->user_id = $user->id;
         $company->vatno = $hid;
+        $company->logo = 'assets/dashboard/images/user.png';
         $company->business_type_id = 2;
         $company->save();
 
@@ -2355,6 +2356,7 @@ class HomeController extends Controller
         $company->name = $companyname;
         $company->user_id = $user->id;
         $company->vatno = $hid;
+        $company->logo = 'assets/dashboard/images/user.png';
         $company->business_type_id = 5;
         $company->save();
 
@@ -2385,6 +2387,7 @@ class HomeController extends Controller
         $company = new Company();
         $company->user_id = $user->id;
         $company->vatno = $hid;
+        $company->logo = 'assets/dashboard/images/user.png';
         $company->business_type_id = 5;
         $company->save();
 
@@ -2418,6 +2421,7 @@ class HomeController extends Controller
         $company = new Company();
         $company->user_id = $user->id;
         $company->vatno = $hid;
+        $company->logo = 'assets/dashboard/images/user.png';
         $company->business_type_id = 5;
         $company->save();
 

@@ -87,15 +87,31 @@ class SettingProfileUserController extends Controller
                                             ->withBusinesstypes($businesstypes);
     }
     public function EditSave(EditProfileRequest $request, $id){
+        $auth = Auth::user();
+        $file = $request->picture; 
+        $filelocation = $auth->company->logo;
+        if(!Empty($file)){         
+            if(!Empty($auth->company->logo)){
+                if(strpos($auth->company->logo, 'assets\dashboard\images') !== true){
+                    @unlink($auth->company->logo);
+                }
+            }
+            $name = $file->getClientOriginalName();
+            $file = $request->picture;
+            $img = Image::make($file);  
+            $fname=str_random(10).".".$file->getClientOriginalExtension();
+            $filelocation = "storage/uploads/company/".$fname;
+            Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+        }
         
-        if($request->registeredcapital == 0 && Auth::user()->user_group_id == 1){
+        if($request->registeredcapital == 0 && $auth->user_group_id == 1){
             return redirect()->back()->withError('ทุนจดทะเบียนไม่ถูกต้อง');  
         }
-        if($request->paidupcapital == 0 && Auth::user()->user_group_id == 1){
+        if($request->paidupcapital == 0 && $auth->user_group_id == 1){
             return redirect()->back()->withError('ทุนจดทะเบียนที่เรียกชำระแล้วไม่ถูกต้อง');  
         }
-        CreateUserLog::createLog('แก้ไขข้อมูลโพรไฟล์');
-        $auth = Auth::user();
+        CreateUserLog::createLog('แก้ไขข้อมูลProfile');
+        // $auth = Auth::user();
         if(!Empty($request->password)){
             $auth->update([
                 'password' => Hash::make($request->password)
@@ -103,8 +119,8 @@ class SettingProfileUserController extends Controller
         }
         $company = Company::where('user_id',$auth->id)->first();
         
-        $file = $request->picture; 
-        $filelocation = $company->logo;
+        // $file = $request->picture; 
+        // $filelocation = $company->logo;
          
         $paidupcapitaldate=null;
         if(!Empty($request->paidupcapitaldate)){
@@ -302,7 +318,7 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
-            return redirect()->back()->withSuccess('แก้ไขข้อมูลโพรไฟล์สำเร็จ'); 
+            return redirect()->back()->withSuccess('แก้ไขข้อมูลProfileสำเร็จ'); 
         }
     }
 }

@@ -27,7 +27,7 @@ class ProjectStatus extends Model
     public function getProjectdatediffAttribute(){
         
         if(!Empty($this->actual_startdate)){
-                $projectflowtransaction = ProjectStatusTransaction::find($this->project_flow_id);
+                $projectflowtransaction = ProjectStatusTransaction::where('mini_tbp_id',$this->mini_tbp_id)->where('project_flow_id',$this->project_flow_id)->first();
                 if($projectflowtransaction->status == 2){
                     $plandate = Carbon::createFromFormat('Y-m-d', $this->enddate);
                     $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);

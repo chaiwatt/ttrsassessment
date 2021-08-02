@@ -1117,6 +1117,22 @@
 											</div>
 										</div>
 									</div>
+									<div class="col-md-12">  
+										<div class="form-group">
+											<label>โลโก้บริษัท (ขนาด 500x500) พิกเซล</label>
+											<div class="input-group">													
+												<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
+												<span class="input-group-append">
+													<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																																						
+												</span>
+											</div>
+											<input type="file" style="display:none;" id="file" name="picture" accept="image/*"/>
+											@if (!Empty($user->company->logo))
+											<br>
+												<img src="{{asset($user->company->logo)}}" width="300" height="300" alt="">
+											@endif
+										</div>
+									</div>
 								<div class="col-md-12 text-right">
 									<button type="submit" name="action" id="submitform" value="personal" onclick="confirmsubmit(event);" class="btn bg-teal">บันทึก <i class="icon-floppy-disk mr-2"></i></button>
 								</div>
