@@ -85,7 +85,12 @@
                                             <td>{{$projectstatus->projectflow}}</td>
                                             <td>{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
                                             <td>{{$projectstatus->actualdateth}}</td>
-                                            <td style="text-align:center">{{$projectstatus->projectdatediff}}</td>
+                                            <td style="text-align:center">
+                                                {{-- @if ()
+                                                    
+                                                @endif --}}
+                                                {{$projectstatus->projectdatediff}}
+                                            </td>
                                             <td>
                                                {!!$projectstatus->projectstatustransaction($projectstatus->project_flow_id,$minitbp->id)!!}
                                             </td>
